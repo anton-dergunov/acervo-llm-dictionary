@@ -4,6 +4,10 @@ Spikes, benchmarks and measured iterations, one directory each. Every directory 
 and its write-up: the question, the method and the numbers. The design document or plan it serves
 keeps only the decision, with a link back here.
 
+**Results are committed.** An experiment's raw results — labels, scores, reports, model replies —
+are tracked when they hold no personal data, credentials or private paths and come to a few MB of
+text. Media and caches that can be regenerated stay ignored.
+
 Nothing here ships or is imported by the service (`tests/unit/server/test_layering.py`). An
 experiment with heavy dependencies keeps them in its own environment, never in `requirements/`.
 
