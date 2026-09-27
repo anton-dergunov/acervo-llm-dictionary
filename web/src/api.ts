@@ -6,7 +6,7 @@ type Envelope<T> = { data?: T; error?: { code?: string; message?: string } };
 type LoginResponse = { token: string; user: { id: string; email: string } };
 
 /** Shared with the server hook. A mismatch stops synchronisation until the app is updated. */
-export const SCHEMA_VERSION = 17;
+export const SCHEMA_VERSION = 18;
 
 interface SyncEnvelope {
   schemaVersion: number;
@@ -161,8 +161,13 @@ export interface PronunciationSettings {
   delivery: Record<PronunciationUse, PronunciationOrder>;
   /** {provider: {model: {language: voice}}}. Absent means the model's first voice. */
   voices: Record<string, Record<string, Record<string, string>>>;
+  /** Who says a loop's guide lines, in the same shape. Absent means the voice above says them. */
+  guideVoices: Record<string, Record<string, Record<string, string>>>;
   chosen: boolean;
   languages: string[];
+  /** What a loop's guide speaks: each vocabulary's first gloss language. Each model's `voices`
+   *  lists these too, so a guide voice can be chosen. */
+  guideLanguages: string[];
   orders: { plain: PronunciationModel[]; expressive: PronunciationModel[] };
 }
 
@@ -634,8 +639,8 @@ export interface ScheduleSettings {
 
 /* ── loops ──
    What the generator can be asked for, as `GET /loops/schema` reports it. Its catalogues are its
-   own and are never copied here: a family or a second pattern added in a later version of it
-   appears in the dialog with nothing changing on this side. */
+   own and are never copied here: a family or a format added in a later version of it appears in
+   the dialog with nothing changing on this side. */
 /* The meaning map of one language, as the server draws it (docs/features/meaning-map.md).
    Positions, ids and region labels — never vectors and never a sense's text, which the device joins
    from its own replica. */
@@ -687,12 +692,36 @@ export interface LoopFamily {
   description: string;
 }
 
+/** A choice a format offers: on or off, or one of its named `choices`. */
+export interface LoopSwitch {
+  label: string;
+  default: boolean | string;
+  choices?: string[];
+}
+
+/** One kind of loop — a drill, a radio lesson, a story — in the generator's own words. */
+export interface LoopFormat {
+  id: string;
+  label: string;
+  description: string;
+  switches: Record<string, LoopSwitch>;
+  /** `writer` (a model that writes its lines) and `multilingual_voice` (a voice that can say two
+   *  languages in one line). */
+  requires: string[];
+  /** What is made instead when a requirement is missing, or null when it is then refused. */
+  fallback: string | null;
+}
+
 export interface LoopSchema {
   apiVersion: string;
   engineVersion: string;
   /** False means the pinned sample bundle is not installed, or not all of it: no loop can be made. */
   productionBundle: boolean;
-  patterns: string[];
+  formats: LoopFormat[];
+  /** Whether this server has a text model to write a format's lines with. */
+  writerAvailable: boolean;
+  /** Whether the voice chosen for loops can say two languages in one line. */
+  mixesLanguages: boolean;
   /** Every kind of music there is. "Surprise me" is not one of them — it is asking for none. */
   families: LoopFamily[];
   maxItems: number;
@@ -709,7 +738,8 @@ export interface LoopRequest {
   language: string;
   /** Word ids, sampled from the scope on screen. The server never re-derives that scope. */
   lexemeIds: string[];
-  pattern?: string;
+  format?: string;
+  switches?: Record<string, boolean | string>;
   family?: string;
   /** A kept bed's seed, given only with its family: the pair is what replays it. */
   seed?: number;
@@ -1199,6 +1229,7 @@ export const backendSession = {
       pregenerate: Partial<PronunciationPregenerate>;
       delivery: Partial<Record<PronunciationUse, PronunciationOrder>>;
       voices: PronunciationSettings["voices"];
+      guideVoices: PronunciationSettings["guideVoices"];
     }>
   ): Promise<PronunciationSettings> {
     return client.call<PronunciationSettings>("/pronunciations/settings", {

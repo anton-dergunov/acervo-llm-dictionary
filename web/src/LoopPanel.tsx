@@ -1,10 +1,10 @@
 /**
- * Settings ▸ Loops: which voice speaks one, whether tracks are kept on this device, and what the
- * generator can do.
+ * Settings ▸ Loops: which voice speaks one, who says its guide lines, whether tracks are kept on this
+ * device, and what the generator can do.
  *
  * Three kinds of thing, kept apart on the page as `PronunciationPanel` keeps its two apart. The
- * voice is **owner** state, stored beside the other two pronunciation uses and read by the server
- * when it renders — a phone that has never opened this screen gets the voice chosen here. Keeping a
+ * voices are **owner** state, stored beside the other two pronunciation uses and read by the server
+ * when it renders — a phone that has never opened this screen gets the voices chosen here. Keeping a
  * track is a **device** fact — a laptop with room and a phone without want different answers, and it
  * never leaves the device. What the generator is and whether it has its sample pack is the
  * **deployment's**, read from the server and not settable here.
@@ -19,6 +19,7 @@ import {
   AcervoApiError, backendSession, type LoopSchema, type PronunciationOrder, type PronunciationSettings
 } from "./api";
 import { setLoopCacheEnabled, useLoopCache } from "./editorPreferences";
+import { languageOf } from "./languages";
 import { forgetLoops, keptLoopBytes } from "./loops";
 
 /* The same two orders Settings ▸ Pronunciation offers, said in terms of what each does to a loop.
@@ -72,6 +73,31 @@ export default function LoopPanel({ onNotify }: { onNotify(message: string): voi
     }
   };
 
+  /* The guide's voice for one model and language: the same record as the voices, the same shape. */
+  const chooseGuide = async (provider: string, model: string, language: string, choice: string) => {
+    const before = voice;
+    if (!before) return;
+    const guideVoices = structuredClone(before.guideVoices);
+    const forModel = { ...(guideVoices[provider]?.[model] ?? {}) };
+    if (choice) forModel[language] = choice; else delete forModel[language];
+    guideVoices[provider] = { ...(guideVoices[provider] ?? {}), [model]: forModel };
+    setVoice({ ...before, guideVoices, chosen: true });
+    try {
+      setVoice(await backendSession.savePronunciationSettings({ guideVoices }));
+    } catch (error) {
+      setVoice(before);
+      onNotify(error instanceof AcervoApiError ? error.message : "That could not be saved.");
+    }
+  };
+
+  /* The models that read loops, in the order chosen above, that have voices in a language the guide
+     speaks. The one chosen for that language on Settings ▸ Pronunciation is what "the same voice"
+     is. */
+  const guideModels = voice
+    ? voice.orders[voice.delivery.loops].filter((model) =>
+      voice.guideLanguages.some((language) => (model.voices[language] ?? []).length > 0))
+    : [];
+
   const keep = async (on: boolean) => {
     setLoopCacheEnabled(on);
     if (!on) { await forgetLoops(); setKept(0); }
@@ -81,7 +107,8 @@ export default function LoopPanel({ onNotify }: { onNotify(message: string): voi
     <h3>Loops</h3>
     <p className="config-help">
       A loop takes a handful of your words and sets them to music, so they are learned while you are
-      doing something else. Each word is said, then its translation, then that pair twice more.
+      doing something else. Each is made in a format you choose when you make it — a drill, a radio
+      lesson, a story.
     </p>
 
     <h4 className="provider-heading">The voice</h4>
@@ -97,6 +124,29 @@ export default function LoopPanel({ onNotify }: { onNotify(message: string): voi
       />
       <span><strong>{order.title}</strong><span>{order.help}</span></span>
     </label>)}
+
+    <h4 className="provider-heading">The guide’s voice</h4>
+    <p className="config-help">
+      Who says the translations, remarks and announcements — the lines in your own language. Unset,
+      the same voice says every line.
+    </p>
+    {voice && guideModels.length === 0 && <p className="config-help">
+      No model that reads loops has voices in the language your translations are in.
+    </p>}
+    {voice && guideModels.map((model) => <div key={`${model.provider}/${model.model}`} className="voice-model">
+      <strong>{model.providerLabel} · {model.model}{!model.available && <span className="label"> not configured</span>}</strong>
+      {voice.guideLanguages.filter((language) => (model.voices[language] ?? []).length > 0).map((language) =>
+        <label key={language} className="config-field">
+          <span>{languageOf(language).name}</span>
+          <select
+            value={voice.guideVoices[model.provider]?.[model.model]?.[language] ?? ""}
+            onChange={(event) => void chooseGuide(model.provider, model.model, language, event.target.value)}
+          >
+            <option value="">The same voice</option>
+            {model.voices[language].map((one) => <option key={one} value={one}>{one}</option>)}
+          </select>
+        </label>)}
+    </div>)}
 
     <h4 className="provider-heading">The generator</h4>
     {trouble && <p className="config-help warn">{trouble}</p>}

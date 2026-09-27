@@ -370,7 +370,9 @@ def _project_loop(row: Mapping[str, Any]) -> dict[str, Any]:
         "seed": to_int(row["seed"]),
         "engineVersion": text_or_none(row["engine_version"]),
         "bedFingerprint": text_or_none(row["bed_fingerprint"]),
-        "pattern": text_or_none(row["pattern"]),
+        "format": row["format"],
+        "switches": _project_switches(row["switches"]),
+        "fallbackFrom": text_or_none(row["fallback_from"]),
         # An absent reference is what "not rendered yet" looks like, so the mime and the duration are
         # hidden with it rather than projected as an empty string and a zero that read like facts.
         "audioRef": text_or_none(row["audio_ref"]),
@@ -387,12 +389,32 @@ def _assign_loop(value: Mapping[str, Any]) -> dict[str, Any]:
         "seed": to_int(value.get("seed")),
         "engine_version": trimmed(value.get("engineVersion")),
         "bed_fingerprint": trimmed(value.get("bedFingerprint")),
-        "pattern": trimmed(value.get("pattern")),
+        "format": trimmed(value.get("format")),
+        "switches": _assign_switches(value.get("switches")),
+        "fallback_from": trimmed(value.get("fallbackFrom")),
         "audio_ref": trimmed(value.get("audioRef")),
         "audio_mime": trimmed(value.get("audioMime")),
         "duration_seconds": to_float(value.get("durationSeconds")),
         "loop_order": to_int(value.get("position")),
     }
+
+
+def _project_switches(value: Any) -> dict[str, bool | str]:
+    return {str(name): choice for name, choice in (value or {}).items()
+            if isinstance(choice, (bool, str))} if isinstance(value, Mapping) else {}
+
+
+def _assign_switches(value: Any) -> dict[str, bool | str]:
+    # Not filtered for meaning beyond its shape: which switches a format offers is the generator's,
+    # checked against its schema when the loop is asked for.
+    if not isinstance(value, Mapping):
+        return {}
+    return {trimmed(name): choice if isinstance(choice, bool) else trimmed(choice)
+            for name, choice in value.items()}
+
+
+def to_optional_float(value: Any) -> float | None:
+    return None if value is None else to_float(value)
 
 
 def _project_bed(row: Mapping[str, Any]) -> dict[str, Any]:
@@ -424,11 +446,9 @@ def _project_loop_item(row: Mapping[str, Any]) -> dict[str, Any]:
         "targetText": row["target_text"],
         "emotion": text_or_none(row["emotion"]),
         "startSeconds": to_float(row["start_seconds"]),
-        "sourceRevealSeconds": to_float(row["source_reveal_seconds"]),
-        "targetRevealSeconds": to_float(row["target_reveal_seconds"]),
+        "sourceRevealSeconds": to_optional_float(row["source_reveal_seconds"]),
+        "targetRevealSeconds": to_optional_float(row["target_reveal_seconds"]),
         "endSeconds": to_float(row["end_seconds"]),
-        "repeats": to_int(row["repeats"]),
-        "repeatSeconds": to_float(row["repeat_seconds"]),
     }
 
 
@@ -443,11 +463,46 @@ def _assign_loop_item(value: Mapping[str, Any]) -> dict[str, Any]:
         "target_text": "" if value.get("targetText") is None else str(value.get("targetText")),
         "emotion": trimmed(value.get("emotion")),
         "start_seconds": to_float(value.get("startSeconds")),
-        "source_reveal_seconds": to_float(value.get("sourceRevealSeconds")),
-        "target_reveal_seconds": to_float(value.get("targetRevealSeconds")),
+        "source_reveal_seconds": to_optional_float(value.get("sourceRevealSeconds")),
+        "target_reveal_seconds": to_optional_float(value.get("targetRevealSeconds")),
         "end_seconds": to_float(value.get("endSeconds")),
-        "repeats": to_int(value.get("repeats")),
-        "repeat_seconds": to_float(value.get("repeatSeconds")),
+    }
+
+
+def _project_loop_cue(row: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "loopId": row["loop"],
+        "position": to_int(row["cue_order"]),
+        "group": to_int(row["cue_group"]),
+        "kind": row["kind"],
+        "section": row["section"],
+        "loopItemId": text_or_none(row["loop_item"]),
+        "side": text_or_none(row["side"]),
+        "role": row["role"],
+        "language": row["language"],
+        "text": row["text"],
+        "take": to_int(row["take"]),
+        "startSeconds": to_float(row["start_seconds"]),
+        "endSeconds": to_float(row["end_seconds"]),
+    }
+
+
+def _assign_loop_cue(value: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        "loop": trimmed(value.get("loopId")),
+        "cue_order": to_int(value.get("position")),
+        "cue_group": to_int(value.get("group")),
+        "kind": trimmed(value.get("kind")),
+        "section": trimmed(value.get("section")),
+        "loop_item": trimmed(value.get("loopItemId")) or None,
+        "side": trimmed(value.get("side")),
+        "role": trimmed(value.get("role")),
+        "language": trimmed(value.get("language")),
+        # Verbatim, for `loop_items.source_text`'s reason: what was said.
+        "text": "" if value.get("text") is None else str(value.get("text")),
+        "take": to_int(value.get("take")),
+        "start_seconds": to_float(value.get("startSeconds")),
+        "end_seconds": to_float(value.get("endSeconds")),
     }
 
 
@@ -588,6 +643,7 @@ COLLECTIONS: tuple[Collection, ...] = (
     Collection("studyStates", tables.study_states, _project_study_state, _assign_study_state),
     Collection("loops", tables.loops, _project_loop, _assign_loop),
     Collection("loopItems", tables.loop_items, _project_loop_item, _assign_loop_item),
+    Collection("loopCues", tables.loop_cues, _project_loop_cue, _assign_loop_cue),
     Collection("stories", tables.stories, _project_story, _assign_story),
     Collection("storyParts", tables.story_parts, _project_story_part, _assign_story_part),
     Collection("storyWords", tables.story_words, _project_story_word, _assign_story_word),

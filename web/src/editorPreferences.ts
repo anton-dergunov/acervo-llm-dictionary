@@ -161,3 +161,32 @@ function usePreference(read: () => boolean): boolean {
 export function useLoopCache(): boolean { return usePreference(loopCacheEnabled); }
 export function useLoopRepeat(): boolean { return usePreference(loopRepeatEnabled); }
 export function useLoopAutoplay(): boolean { return usePreference(loopAutoplayEnabled); }
+
+/* ── the make dialog ──
+   The format last made on this device, and each format's switches as they were last set. A device
+   fact for the loop player's reason: which kind of loop suits a morning walk is not the account's
+   question. A format or switch the generator no longer offers is simply not found, and its default
+   stands. */
+
+const LOOP_FORMAT_KEY = "acervo-loop-format";
+const LOOP_SWITCHES_KEY = "acervo-loop-switches";
+
+export function lastLoopFormat(): string | null {
+  try { return localStorage.getItem(LOOP_FORMAT_KEY); } catch { return null; }
+}
+
+export function loopSwitchesFor(format: string): Record<string, boolean | string> {
+  try {
+    const stored = JSON.parse(localStorage.getItem(LOOP_SWITCHES_KEY) || "{}") as Record<string, unknown>;
+    const mine = stored[format];
+    return mine && typeof mine === "object" && !Array.isArray(mine) ? mine as Record<string, boolean | string> : {};
+  } catch { return {}; }
+}
+
+export function rememberLoopFormat(format: string, switches: Record<string, boolean | string>): void {
+  try {
+    const stored = JSON.parse(localStorage.getItem(LOOP_SWITCHES_KEY) || "{}") as Record<string, unknown>;
+    localStorage.setItem(LOOP_SWITCHES_KEY, JSON.stringify({ ...stored, [format]: switches }));
+    localStorage.setItem(LOOP_FORMAT_KEY, format);
+  } catch { /* a preference, not data */ }
+}

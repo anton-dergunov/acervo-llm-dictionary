@@ -20,6 +20,7 @@ from acervo.tokens import (
     ALGORITHM,
     RENDER_LIFETIME,
     TAKE_AUDIENCE,
+    WRITE_AUDIENCE,
     mint_render,
     resolve_secret,
     signing_key,
@@ -29,9 +30,9 @@ from acervo.tokens import (
 # The signing itself lives in `acervo.tokens`, a leaf both this and `services/loops.py` can reach —
 # `work/` may not import `api/`, and a render mints its own token.
 __all__ = [
-    "ALGORITHM", "RENDER_LIFETIME", "TAKE_AUDIENCE", "UNAUTHENTICATED",
+    "ALGORITHM", "RENDER_LIFETIME", "TAKE_AUDIENCE", "UNAUTHENTICATED", "WRITE_AUDIENCE",
     "account_for", "bearer_token", "mint", "mint_render", "owner", "owner_id",
-    "resolve_secret", "take_owner",
+    "resolve_secret", "take_owner", "write_owner",
 ]
 
 UNAUTHENTICATED = ApiError(401, "unauthenticated", "Sign in to continue.")
@@ -74,7 +75,10 @@ def account_for(secret: str, token: str, audience: str | None = None) -> Mapping
         if user is None:
             raise UNAUTHENTICATED
         carried = claimed.get("aud")
-        if carried is not None and carried != audience:
+        # One audience or several — a render's token names both routes it calls home to — and the
+        # route asking must be among them.
+        named = carried if isinstance(carried, list) else [carried]
+        if carried is not None and audience not in named:
             raise UNAUTHENTICATED
         jwt.decode(
             token, signing_key(secret, user["token_key"]), algorithms=[ALGORITHM],
@@ -100,6 +104,11 @@ def take_owner(request: Request) -> Mapping[str, Any]:
     token by hand. What the audience buys is the other direction: a render token is *only* this.
     """
     return account_for(request.app.state.jwt_secret, bearer_token(request), audience=TAKE_AUDIENCE)
+
+
+def write_owner(request: Request) -> Mapping[str, Any]:
+    """The account behind a writer request: a session, or a render-scoped token, as `take_owner`."""
+    return account_for(request.app.state.jwt_secret, bearer_token(request), audience=WRITE_AUDIENCE)
 
 
 def owner_id(request: Request) -> str:

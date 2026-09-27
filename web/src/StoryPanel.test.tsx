@@ -16,7 +16,8 @@ function settings(overrides: Partial<PronunciationSettings> = {}): Pronunciation
   return {
     pregenerate: { headword: false, definitions: false, examples: false, stories: true },
     delivery: { words: "plain", examples: "expressive", loops: "expressive", stories: "expressive" },
-    voices: {}, chosen: false, languages: ["es"], orders: { plain: [], expressive: [] },
+    voices: {}, guideVoices: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
+    orders: { plain: [], expressive: [] },
     ...overrides
   };
 }

@@ -139,7 +139,7 @@ export default function PronunciationPanel({ onNotify }: { onNotify(message: str
   /* One model appears in both orders more often than not, and its voice is one choice, not two. */
   const models = [...settings.orders.plain, ...settings.orders.expressive]
     .filter((model, index, all) => all.findIndex((other) => other.provider === model.provider && other.model === model.model) === index)
-    .filter((model) => Object.keys(model.voices).length > 0);
+    .filter((model) => Object.keys(model.voices).some((language) => settings.languages.includes(language)));
 
   return <section className="config-section">
     <h3>Pronunciation</h3>
@@ -197,7 +197,7 @@ export default function PronunciationPanel({ onNotify }: { onNotify(message: str
     {models.length === 0 && <p className="config-help">No model in your pronunciation orders speaks your vocabularies’ languages.</p>}
     {models.map((model) => <div key={`${model.provider}/${model.model}`} className="voice-model">
       <strong>{model.providerLabel} · {model.model}{!model.available && <span className="label"> not configured</span>}</strong>
-      {Object.entries(model.voices).map(([language, voices]) => <label key={language} className="config-field">
+      {Object.entries(model.voices).filter(([language]) => settings.languages.includes(language)).map(([language, voices]) => <label key={language} className="config-field">
         <span>{languageOf(language).name}</span>
         <select
           value={settings.voices[model.provider]?.[model.model]?.[language] ?? ""}

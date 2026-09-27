@@ -4,15 +4,17 @@
 separate project that Acervo runs as one pinned service. This is how the two meet.
 
 A word's article can say what a word means, show a picture of it, play a native speaker using it, and
-read every field aloud. What none of that does is get a word *stuck in your head*. A loop does: the
-word and one translation, each spoken three times on a bar grid over a procedurally synthesised bed,
-with a silence in the middle to recall the answer in. Twelve words from whatever you are looking at —
-or the ones you marked — become a four-minute track you can put on in the kitchen. It plays with the
-screen locked, shows each word as it arrives, and is made by a server job you can walk away from.
+read every field aloud. What none of that does is get a word *stuck in your head*. A loop does: in
+its plainest format, the word and one translation, each spoken three times on a bar grid over a
+procedurally synthesised bed, with a silence in the middle to recall the answer in; in a richer one, a
+presenter between the words with an example, a remark, a quick quiz, or a short story told a line at
+a time. Twelve words from whatever you are looking at — or the ones you marked — become a
+four-minute track you can put on in the kitchen. It plays with the screen locked, shows every line as
+it arrives, and is made by a server job you can walk away from.
 
-LexiBeat keeps everything that makes a loop sound like anything — the pattern, the number of takes,
-how each take differs, the bed, the ducking. Acervo lends it words, one direction per word, and a
-voice. It is the **second** companion service, after the spoken-usage corpus
+LexiBeat keeps everything that makes a loop sound like anything — the formats, the number of takes,
+how each take differs, the bed, the ducking, what a writer is asked for. Acervo lends it words, one
+direction per word, a voice, and a writing model. It is the **second** companion service, after the spoken-usage corpus
 ([`spoken-clips.md`](spoken-clips.md)); where it departs from that template it says why.
 
 ---
@@ -28,15 +30,18 @@ detail; in short:
   the NAS at all.**
 - **A deterministic bed description.** A family plus a seed replays exactly, down to each sample's
   digest, and `bedFingerprint` proves it did.
-- **An arrangement engine.** A pattern maps a name to one-bar slots — a language, a `"gap"` to recall
-  in, or a `"rest"`. `retrieval` is the preset: word, gap, answer, twice more, then a rest. Every
-  utterance starts on a downbeat, stretched to fit with the ratio capped at 1.35; measured onset
-  error is a median of 15 ms.
+- **Programme formats.** A format — `classic`, `alternating`, `echo`, `review`, `radio-lesson`,
+  `story` — is a recipe of sections and steps with a few switches (its `docs/programme-format.md`).
+  `classic` is word, gap, answer, twice more, then a rest. Every line starts on a downbeat; a written
+  line takes the bars it needs.
+- **A writer seam.** A format that speaks written lines — examples, remarks, a story, an intro — asks
+  an injected writer once per render, and parses the reply itself. The host owns the model call.
 - **Three takes per line, each delivered differently** — and **how** depends on what the voice can
   do, which §2.6 is about.
 - **A mix that ducks** each stem from the speech envelope, speech at −16 LUFS and music at −26.
-- **A per-item timeline** — start, when the source and the answer are revealed, end, and every
-  utterance's span — which is the player's cue data.
+- **Two views of what was said**: `items`, one row per word with where its block starts and ends and
+  when each side is first heard, and `cues`, every line in the order heard, each with its `group` — the
+  lines a player shows together — its role, language, text and span. That is the player's data.
 - **A sample bundle of about 3.1 GB**, content-addressed with a SHA-256 per asset, fetched once onto
   the server (§2.15).
 - **One injection seam that matters**: the speech backend is supplied per render by the host, which
@@ -82,14 +87,14 @@ refusal belongs on the one route that needs them.
 
 ### 3 · LexiBeat synthesises; Acervo lends it a voice
 
-**The service receives words, not audio.** `{items: [{source, target, emotion}], pattern, family,
-seed}`. It decides how many takes, how each differs, where the downbeats fall, how the bed resolves
-and how the mix ducks.
+**The service receives words, not audio.** `{items: [{source, target, emotion}], format, switches,
+script, family, seed}`. It decides how many takes, how each differs, where the downbeats fall, what a
+writer is asked for, how the bed resolves and how the mix ducks.
 
 An earlier draft had Acervo record the lines and post the audio. It was wrong three ways, and the
 reasons are worth keeping:
 
-- **It split the pattern across two repositories.** Changing three repetitions to four would have
+- **It split the arrangement across two repositories.** Changing three repetitions to four would have
   meant changing both, which is the opposite of letting that project be iterated on alone.
 - **It contradicted that project's own interface**, which takes a word and decides delivery itself. A
   second, audio-shaped entry point would have been a second way in, permanently.
@@ -122,8 +127,9 @@ class Backend(Protocol):
     def synth(self, request: SpeechRequest) -> SynthesisResult: ...
 ```
 
-`SpeechRequest` carries `text`, a `Language(code, name)`, a `Delivery(take, direction, prosody)`,
-`target_seconds` and `seed`. Three things about it are load-bearing here.
+`SpeechRequest` carries `text`, a `Language(code, name)`, a `Delivery(take, direction, prosody,
+pace, quotes)`, `target_seconds`, `seed` and a `role` — `native` for a line in the language being
+learned, `guide` for one in the listener's own. Four things about it are load-bearing here.
 
 **Dispatch reads `capabilities`, never a name.** `Speaker` used to look its post-processing flags up
 by the backend's name string, so an injected backend raised `KeyError` before it spoke a word. Acervo's backend declares
@@ -134,6 +140,16 @@ repository.
 **`take` is on the request**, which is what makes §2.5's cache key implementable at all: the index
 would otherwise have to be re-derived from the prosody, and two takes can carry identical prosody at
 low strength.
+
+**`role` goes home with every take**, and the take route reads it: a guide line — a translation, a
+remark, an announcement — is said by the owner's guide voice where one is chosen (§2.4). The backend
+declares `mixes_languages` exactly when the owner's loop order takes a direction, because only then
+does a line's director note reach the voice. That matters for a guide line that quotes the language
+being learned — "Anhelar is poetic; for everyday wanting, say *tener ganas de*": LexiBeat names the
+quoted spans in the note ("Say “Anhelar” and “tener ganas de” in Spanish, with a native Spanish
+pronunciation, and everything else in English"), which is what made an English voice say them right,
+and a format that needs it requires `multilingual_voice`. The sentence travels inside `direction`, so
+the take route needed no field for it.
 
 **`backend_factory` is the seam**, not a module-level object: `create_service(backend_factory=…)`
 takes a callable given a `RenderContext(operation_id, request, credentials)` and returns a `Backend`.
@@ -154,7 +170,7 @@ server, so the server is up whenever a call comes home.
 
 ### 4 · `POST /pronunciations/take`, and why it is not `utterance()`
 
-`{text, language, direction | null, take}` → the **uncompressed master**, plus
+`{text, language, direction | null, take, role}` → the **uncompressed master**, plus
 `X-Acervo-Provider`, `X-Acervo-Model`, `X-Acervo-Voice` and `X-Acervo-Direction: sent | dropped`.
 
 - **Not `utterance()`**, which exists for a selection and compresses to Opus because the bytes are
@@ -165,6 +181,9 @@ server, so the server is up whenever a call comes home.
   answer, not a failure**: LexiBeat falls back to its own pitch and speed variation, so a deployment
   with no instruction-following voice still gets loops — with three distinguishable takes and no
   emotion — and that requirement is met by the contract rather than by a branch on either side.
+- **Not one voice for every line.** `role: guide` reads the owner's *guide voice* for that model and
+  language (`pronunciation_settings.guide_voices`, chosen in Settings ▸ Loops), merged over the usual
+  voices; unset, the usual voice says it. A role that is neither is refused.
 - **Not uncached.** §2.5.
 
 **The field is called `direction` on the wire**, not `emotion`. `emotion` is the *record's* field
@@ -190,7 +209,8 @@ reports `X-Acervo-Direction: sent`, `dropped` or `none`.
 ### 5 · The take cache, and why `take` is in the key
 
 Behind the route sits a content-addressed store of **FLAC masters**, keyed by a digest of
-`(text, language, direction, take, provider, model, voice)`. The digest *is* the filename, so there is
+`(text, language, direction, take, provider, model, voice)` — so a guide voice's take and the usual
+voice's are two recordings, never one. The digest *is* the filename, so there is
 no table and no schema. FLAC because it is lossless and about half of WAV: this is the one place in
 Acervo where FLAC is the right answer, and the delivery format is not it.
 
@@ -322,24 +342,36 @@ fields. Article quality itself is untouched by this run and has its own register
 [`../plans/article-quality.md`](../plans/article-quality.md) — both arms wrote `/ˈaska/` for `el asco`, which is simply
 wrong, and a comparison of two arms is blind to a defect they share.
 
-### 9 · A loop is two collections, and its state is derived
+### 9 · A loop is three collections, and its state is derived
 
-`loops` — `language`, `styleId`, `seed`, `engineVersion`, `bedFingerprint`, `pattern`, `audioRef`,
-`audioMime`, `durationSeconds`, `position`. `loopItems` — `loopId`, `lexemeId`, `position`,
-`sourceText`, `targetText`, `emotion`, `startSeconds`, `sourceRevealSeconds`, `targetRevealSeconds`,
+`loops` — `language`, `format`, `switches`, `fallbackFrom`, `styleId`, `seed`, `engineVersion`,
+`bedFingerprint`, `audioRef`, `audioMime`, `durationSeconds`, `position`. `loopItems` — `loopId`,
+`lexemeId`, `position`, `sourceText`, `targetText`, `emotion`, `startSeconds`,
+`sourceRevealSeconds`, `targetRevealSeconds`, `endSeconds`. `loopCues` — `loopId`, `position`,
+`group`, `kind`, `section`, `loopItemId`, `side`, `role`, `language`, `text`, `take`, `startSeconds`,
 `endSeconds`.
 
 - **No status column.** An empty `audioRef` is *not rendered yet*; the job says the rest. `ImagePrompt`
   already lives by this — four facts say all of it, and a fifth would be a thing to keep in step.
 - **No BedSpec blob.** Style, seed and engine version replay the bed byte-identically, and
-  `bedFingerprint` is what proves it did. Nothing else in the model stores opaque JSON.
-- **The item text is denormalised on purpose.** A `loopItem` records what was *said*, so editing the
-  word afterwards must not make the player caption a recording that no longer matches. Identical
-  reasoning to `pronunciations.text`, and the reason both are safe.
-- **Per-utterance spans are not stored**, only the four per-item times and two numbers saying how the
-  pair repeats — `repeats` and `repeatSeconds` — so the player can mark *which* of the pair is being
-  said. Two facts rather than six spans, so the day three repetitions become four, Acervo's schema
-  does not move; `loops/client.py` is where the render's spans become the two numbers.
+  `bedFingerprint` is what proves it did.
+- **`format` is the generator's catalogue id and `switches` the listener's choices** — a small map of
+  on/off and named values, sent with every render of the loop. Neither is opaque: Acervo checks both
+  against the generator's schema when a loop is asked for. `fallbackFrom` names the format asked for
+  when the render lacked something it requires and made its fallback; `format` then says what the
+  track is.
+- **The text is denormalised on purpose**, in items and lines alike. They record what was *said*, so
+  editing the word afterwards must not make the player caption a recording that no longer matches.
+  Identical reasoning to `pronunciations.text`.
+- **Every line is stored, as the render reported it.** A radio lesson says an intro, examples,
+  remarks and a quiz that no per-word shape could describe, so the render's cue list becomes
+  `loopCues` row for row, with its `item` index mapped to the `loopItemId` it names and its `group`
+  kept as the generator numbered it. The lines are written by the render and only by it: new music
+  tombstones a loop's lines and writes the new ones. A word's reveal on `loopItems` is null for a side
+  its block never says.
+- **What the writer wrote is kept, and not replicated.** `loop_scripts` — one row per loop, the
+  generator's own shape, read by nothing but the next render — is server-only, exempt from the
+  replicated rules like `jobs`. It exists so new music says the same lines (§2.18).
 - **No title.** `selectors.ts` derives one from the source words that fit, as `effectiveShortGloss`
   derives a gloss.
 - **`position` orders them**, sparse and renumbered on reorder, with no uniqueness constraint — that
@@ -374,7 +406,7 @@ the restart is cheap.
 | Route | Answers |
 |---|---|
 | `GET /api/v1/health` | `{status, api_version, engine_version, production_bundle}` — liveness only |
-| `GET /api/v1/schema` | patterns, profiles, families, energy, rhythm, palette, limits, audio |
+| `GET /api/v1/schema` | formats, profiles, families, energy, rhythm, palette, limits, audio |
 | `POST /api/v1/loops` | `202` with an operation |
 | `GET /api/v1/operations/{id}` | the operation, with `result` once it completes |
 | `DELETE /api/v1/operations/{id}` | cancels between utterances |
@@ -389,8 +421,10 @@ instance of a pattern rather than a second pattern, and `work/loop.py` is `work/
 different noun.
 
 The completed `result` carries `audio_url`, `audio_mime`, `bitrate_kbps`, `duration_seconds`,
-`pattern`, `style_id`, `seed`, `engine_version`, `profile_version`, `bed_fingerprint`, `total_bars`,
-`bpm` and `timeline` — which is exactly §2.9's two collections and nothing else. **The resolved
+`format`, `fallback_from`, `style_id`, `seed`, `engine_version`, `profile_version`,
+`bed_fingerprint`, `total_bars`, `bpm`, `items`, `cues` and `script` — which is exactly §2.9's three
+collections and the kept script, and nothing else. A cue naming a word the loop does not have is
+refused rather than stored. **The resolved
 BedSpec is deliberately not in it**, on that service's side as well as this one, so there is nothing
 for a host to be tempted into storing.
 
@@ -426,13 +460,15 @@ That is what made the next step cheap: **choosing words by hand is the same rout
 list** — the device's word selection ([`word-selection.md`](word-selection.md)), built with no
 server change.
 
-**The style and pattern catalogues are LexiBeat's**, read from its `schema` route and never copied here
+**The style and format catalogues are LexiBeat's**, read from its `schema` route and never copied here
 — the rule [`spoken-clips.md`](spoken-clips.md) §2.10 settled for channels. The dialog offers *Surprise me* or a family
-the service advertises, so a new family or a second pattern appears here with no change at all.
-`GET /api/v1/schema` is that route: it reports `patterns` (each with its bars and utterances per item
-and whether it has a recall gap), `families`, `energy`, `rhythm`, `palette`, the request `limits` and
-the `audio` format, plus `production_bundle`. A pattern's shape is described there rather than
-assumed here, which is what keeps three repetitions becoming four from being a change on this side.
+the service advertises, and each format with its own label, sentence and switches, so a new family or
+a new format appears here with no change at all. `GET /api/v1/schema` is that route: it reports
+`formats` (each with its `switches`, what it `requires` and its `fallback`), `families`, `energy`,
+`rhythm`, `palette`, the request `limits` and the `audio` format, plus `production_bundle`. Acervo's
+`GET /loops/schema` passes the formats through and adds the two facts only it knows —
+`writerAvailable`, whether the owner's text chain can answer, and `mixesLanguages`, whether the loop
+order takes a direction — so the dialog can say what a format needs before it is chosen (§2.19).
 
 ### 13 · The way in, and no second bar over an article
 
@@ -463,11 +499,18 @@ one back arrow, search, ⌘K and Escape all leave it.
 **The player is an ordinary music player with its controls at the foot** — of the three layouts drawn
 in the prototype, the only one where the thing you reach for never moves. They are the footer of a
 column that owns its height, not a sticky element inside a scroller, which still drifts at the ends
-of a scroll. **A translation is never drawn before it has been spoken**: a word not yet reached shows
-a fixed-width bar, and `loopMomentAt` derives all of it from the clock, which is what makes dragging
-backwards put an answer away again. **Which of the pair is sounding is marked in colour and nothing
-else** — no weight, size, offset or motion — because this is the one surface meant to be left
-running and glanced at.
+of a scroll. **Every line is drawn, as cards**: one per `group` of `loopCues`, so a word and its
+translation are one card, an example and its meaning another, a remark or a line of a story a card
+of its own, and a line said three times is one row. A quiet divider names the quiz or the review
+where the loop enters it; each line carries its language. **Within a card, nothing after its first
+line is drawn before it has been said** — a translation not before it is spoken, a quiz's answer not
+before it is given, an example's meaning not before it is heard; a fixed-width bar stands in its
+place, and each line keeps a fixed least height so nothing moves when it arrives. `loopCards`,
+`loopMomentAt` and `loopLineShown` derive all of it from the clock, which is what makes dragging
+backwards put an answer away again. **Which line is sounding is marked in colour and nothing else** —
+no weight, size, offset or motion — because this is the one surface meant to be left running and
+glanced at. Previous and Next step card by card; the seek line keeps one tick per word. A long line
+is set smaller on the card being played, fixed per line so it never changes under the eye.
 
 ### 14 · The track plays from memory
 
@@ -477,8 +520,8 @@ picture is fetched as a blob.
 The constraint is the better design. A whole track in memory means **nothing touches the network during
 playback**, which is what a locked screen and a lift need. `mediaStore.ts` keeps loops as a kind of their own,
 so a device can keep or forget loops without touching a picture or a pronunciation; `loops.ts` sets
-MediaSession metadata and action handlers, and drives the word display
-from `loopItems`.
+MediaSession metadata — the format's name among it — and action handlers, and the display is
+driven from `loopCues`.
 
 One rule: **players stop each other.** Each registers its pause with
 `pronunciation.registerPlayer` and calls `silencePlayers` before it plays — a story's is the third.
@@ -548,8 +591,11 @@ second kind of lesson exists, and a loop is a thing that repeats, which is both 
 `POST /loops/{id}/music` takes a family, a seed, both (a kept favourite) or neither (the same style
 afresh), refuses with `loop_busy` while a render for that loop is open, and queues `loop` with
 `{family, seed}` as its input. The row's `styleId` and `seed` go on describing the track it holds
-until the store step replaces both with the new track, so a render that fails changes nothing. The
-takes are in the cache, so new music costs render time and no provider spend. The dialog offers the
+until the store step replaces both with the new track, so a render that fails changes nothing.
+**New music keeps the lines**: the render sends back the script the last one returned
+(`loop_scripts`), which LexiBeat reads exactly as a fresh reply and calls no writer for. So a radio
+lesson's examples and remarks survive a change of music word for word, every take is found in the
+cache, and new music costs render time and no provider spend. The dialog offers the
 generator's own styles without `auto`, which is the absence of a choice and is called *Surprise me*.
 
 **A kept bed is a `beds` record**, not a flag on the loop: `styleId` and `seed` replay it for any
@@ -566,6 +612,31 @@ does not survive JSON into a browser, where a number is a double — the first r
 as storing was thrown away over one. The generator echoes back what it is given, so the stored seed
 is provably the one that made the bed, and Try again reproduces it. The stored bound is JavaScript's
 safe integer, which is the real constraint.
+
+### 19 · Formats: chosen in the dialog, written by the owner's text model
+
+**The make dialog offers the formats as cards**, the generator's label in bold and its sentence
+beneath, and the chosen one's switches under it — an on/off switch as a checkbox row, a choice as a
+row of segments ("Times each word is said: 2 3 4"). It opens on the format last made on this device,
+with that format's switches as they were last set: a device fact, like the player's switches. The
+request carries `format` and `switches`, and the server checks both against the schema and refuses a
+format or a switch the generator does not offer by name.
+
+**A format that needs what this server lacks says so before it is chosen.** A radio lesson requires a
+writer and a loop voice that can mix languages, and falls back to the classic drill without either;
+its card says "Falls back to Classic drill here" and names what to set up and where. A story requires
+a writer and has no fallback, so without one its card is disabled and says why. A loop that fell back
+anyway — the state changed between asking and rendering — says so beside the player.
+
+**The writer calls home, like the voice.** LexiBeat's injected `Writer` is `AcervoWriter` in
+`serve.py`, posting `{prompt, purpose}` to `POST /loops/write`, which walks the owner's **text** chain
+— the stories' chain, every call in the call log — and answers `{text, provider, model}`. The render
+token's audience is widened from the take route to both loop routes and nothing else. The prompt, the
+parser and what a good line is are LexiBeat's; the model, its credentials and its retries are
+Acervo's. **The reply is plain text**, never JSON mode or a schema ([`models.md`](../architecture/models.md)
+on constrained decoding): LexiBeat's parser checks every part it relies on and refuses the reply
+naming the first fault, and a refusal's sentence survives every hand-off. One writer call per render,
+and none for new music.
 
 ---
 
@@ -614,7 +685,13 @@ By hand, and worth doing after any change to this path:
 - **On the NAS, end to end** — make a twelve-word loop, watch its steps, then make a second sharing
   several words and confirm from the call log that the shared takes cost nothing.
 - **A plain-voice loop** — set loop delivery to the clear voice and confirm the render succeeds,
-  `X-Acervo-Direction: dropped` comes back, and the three takes still differ audibly.
+  `X-Acervo-Direction: dropped` comes back, and the three takes still differ audibly. A radio lesson
+  asked for then is made as a classic drill, and the player says so.
+- **A radio lesson and a story, end to end** — every line is on screen as it is said, an example's
+  meaning and a quiz's answer only once heard; a quoted Spanish word in an English remark is said in
+  Spanish; with a guide voice chosen, the guide lines are audibly the other voice.
+- **New music keeps the lines** — change a radio lesson's music and confirm the same examples and
+  remarks come back, the call log shows no writer call, and the takes are cache hits.
 - **On the phone, which is the only test that matters** — the words track the audio; it keeps playing
   with the screen locked, with lock-screen controls; a kept loop plays with no connection; a word's
   play button stops the loop rather than overlapping it.

@@ -14,10 +14,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { Loop, LoopItem } from "./domain";
 import { MemoryMediaStore } from "./mediaStore";
+import { drillCues } from "./testGraph";
 
 const loop: Loop = {
   id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
-  engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", pattern: "retrieval",
+  engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
   durationSeconds: 90, position: 1,
   ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-16T00:00:00.000Z",
@@ -28,7 +29,6 @@ const word = (over: Partial<LoopItem>): LoopItem => ({
   id: "loopitem0000001", loopId: loop.id, lexemeId: "lexeme000000001", position: 0,
   sourceText: "asco", targetText: "disgust", emotion: "repulsed",
   startSeconds: 8.82, sourceRevealSeconds: 8.82, targetRevealSeconds: 17.65, endSeconds: 44.12,
-  repeats: 3, repeatSeconds: 4.41,
   ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-16T00:00:00.000Z",
   editedAt: "2026-09-16T00:00:00.000Z", editedBy: "device000000001", revision: 1, ...over
 });
@@ -38,6 +38,8 @@ const items = [
   word({ id: "loopitem0000002", position: 1, sourceText: "la balsa", targetText: "raft",
          startSeconds: 44.12, sourceRevealSeconds: 44.12, targetRevealSeconds: 52.94, endSeconds: 79.41 })
 ];
+
+const track = { loop, items, cues: drillCues(loop.id, items, 4.41) };
 
 /* The element, as a browser behaves rather than as jsdom does: `currentTime` is written by the
    player and read back only once the seek has *landed*, which `land()` is. jsdom's own accessor
@@ -101,14 +103,25 @@ afterEach(() => {
 });
 
 describe("moving within a loop", () => {
+  it("steps card by card: back to the top of this one, then to the one before", async () => {
+    await player.play(track);
+    player.seek(50);                            // six seconds into the second word
+    player.stepCard(-1);
+    expect(player.playback().at).toBe(44.12);
+    player.stepCard(-1);
+    expect(player.playback().at).toBe(8.82);
+    player.stepCard(1);
+    expect(player.playback().at).toBe(44.12);
+  });
+
   it("does not reload the track to move within it", async () => {
     // Not just "does not fetch": the bytes are held for the session either way. What must not happen
     // is the `src` being replaced, which is what leaves the element playing the old position.
     const url = vi.spyOn(URL, "createObjectURL");
-    await player.play(loop, items);
+    await player.play(track);
     expect(url).toHaveBeenCalledTimes(1);
 
-    await player.play(loop, items, { at: items[1].startSeconds });
+    await player.play(track, { at: items[1].startSeconds });
 
     expect(url).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -116,12 +129,12 @@ describe("moving within a loop", () => {
   });
 
   it("keeps the line on the word asked for while the element is still catching up", async () => {
-    await player.play(loop, items);
+    await player.play(track);
     paused = false;
     reported = 30;                              // somewhere in the first word
     made!.dispatchEvent(new Event("play"));     // the clock starts
 
-    await player.play(loop, items, { at: items[1].startSeconds });
+    await player.play(track, { at: items[1].startSeconds });
     tick();
 
     // The element still says 30, which is the first word. Nothing may put the line back there.
@@ -130,7 +143,7 @@ describe("moving within a loop", () => {
   });
 
   it("follows the element again once the seek has landed", async () => {
-    await player.play(loop, items);
+    await player.play(track);
     paused = false;
     reported = 30;
     made!.dispatchEvent(new Event("play"));

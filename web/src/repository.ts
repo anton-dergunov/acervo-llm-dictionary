@@ -2,7 +2,7 @@ import {
   validateChanges, validateGraph, type GraphIndex,
   type Attestation, type AttestationInput, type Bed, type BedInput, type EntityKind, type Example, type ExampleInput,
   type ImagePrompt, type ImagePromptInput, type Lexeme, type LexemeInput, type Loop, type LoopInput,
-  type LoopItem, type LoopItemInput, type Pronunciation, type Sense, type SenseInput,
+  type LoopCue, type LoopItem, type LoopItemInput, type Pronunciation, type Sense, type SenseInput,
   type OwnedFields, type Story, type StoryInput, type StoryPart, type StoryPartInput,
   type StoryWord, type StoryWordInput,
   type StudyState, type StudyStateInput, type SyncFields, type Topic, type TopicInput,
@@ -20,15 +20,15 @@ import type { ArticleDraft } from "./yaml";
  * `durationSeconds`) instead of times into one joined file, and nothing bumped this. 17: `beds`,
  * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`.
  */
-export const LOCAL_SCHEMA_VERSION = 19;
+export const LOCAL_SCHEMA_VERSION = 20;
 
 export const EMPTY_GRAPH = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],
-  pronunciations: [], studyStates: [], loops: [], loopItems: [], stories: [], storyParts: [],
+  pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [],
   storyWords: [], beds: []
 });
 
-export type Entity = Vocabulary | Topic | Lexeme | Sense | Attestation | Example | ImagePrompt | Pronunciation | StudyState | Loop | LoopItem | Story | StoryPart | StoryWord | Bed;
+export type Entity = Vocabulary | Topic | Lexeme | Sense | Attestation | Example | ImagePrompt | Pronunciation | StudyState | Loop | LoopItem | LoopCue | Story | StoryPart | StoryWord | Bed;
 type EntityInput = VocabularyInput | TopicInput | LexemeInput | SenseInput | AttestationInput | ExampleInput | ImagePromptInput | StudyStateInput | LoopInput | LoopItemInput | StoryInput | StoryPartInput | StoryWordInput | BedInput;
 
 /** What the server returns for a batch of applied records. */
@@ -188,6 +188,7 @@ export class LocalAcervoRepository implements AcervoRepository {
       studyStates: contents.studyStates,
       loops: contents.loops,
       loopItems: contents.loopItems,
+      loopCues: contents.loopCues,
       stories: contents.stories,
       storyParts: contents.storyParts,
       storyWords: contents.storyWords,
@@ -516,13 +517,14 @@ export class LocalAcervoRepository implements AcervoRepository {
       // written: both stay truthful about what they said, and their rows simply point at a
       // tombstone from here on.
     } else if (kind === "loops") {
-      // A loop's items go with it, and nothing else does: the words it named are untouched.
+      // A loop's items and lines go with it, and nothing else does: the words it named are untouched.
       //
       // The interface deletes a loop through `DELETE /loops/{id}` rather than here, because the
       // track has to go with the rows and only the server can unlink it. This branch stays so the
       // cascade is the same wherever it is written from — but a deletion that comes through it
       // leaves megabytes on the server naming nothing.
       this.graph.loopItems.filter((record) => record.loopId === id && !record.deleted).forEach((record) => tombstone("loopItems", record));
+      this.graph.loopCues.filter((record) => record.loopId === id && !record.deleted).forEach((record) => tombstone("loopCues", record));
     } else if (kind === "stories") {
       // A story's parts and words go with it, and nothing else does: the words it taught are
       // untouched. Deleted through `DELETE /stories/{id}` rather than here for the reason a loop

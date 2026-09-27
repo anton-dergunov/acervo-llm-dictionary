@@ -54,7 +54,7 @@ DELIVERY_DEFAULT = {
 class PronunciationSettings(Mapping):
     """The owner's answer, or the default when they have not given one. A `Mapping`, like `ImageSettings`."""
 
-    __slots__ = ("pregenerate", "delivery", "voices", "chosen")
+    __slots__ = ("pregenerate", "delivery", "voices", "guide_voices", "chosen")
 
     def __init__(
         self,
@@ -62,6 +62,7 @@ class PronunciationSettings(Mapping):
         pregenerate: Mapping[str, Any] | None = None,
         delivery: Mapping[str, Any] | None = None,
         voices: Mapping[str, Any] | None = None,
+        guide_voices: Mapping[str, Any] | None = None,
         chosen: bool = False,
     ) -> None:
         given = pregenerate if isinstance(pregenerate, Mapping) else {}
@@ -70,6 +71,9 @@ class PronunciationSettings(Mapping):
         self.pregenerate = {name: given.get(name, SWITCH_DEFAULT[name]) is True for name in SWITCHES}
         self.delivery = _delivery(delivery)
         self.voices = _voices(voices)
+        # Who says a loop's guide lines — its translations, remarks and announcements — where the
+        # owner chose someone other than the voice above. Same shape; absent means the same voice.
+        self.guide_voices = _voices(guide_voices)
         self.chosen = bool(chosen)
 
     def __getitem__(self, key: str) -> Any:
@@ -77,14 +81,27 @@ class PronunciationSettings(Mapping):
             "pregenerate": dict(self.pregenerate),
             "delivery": dict(self.delivery),
             "voices": self.voices,
+            "guideVoices": self.guide_voices,
             "chosen": self.chosen,
         }[key]
 
     def __iter__(self):
-        return iter(("pregenerate", "delivery", "voices", "chosen"))
+        return iter(("pregenerate", "delivery", "voices", "guideVoices", "chosen"))
 
     def __len__(self) -> int:
-        return 4
+        return 5
+
+    def for_guide(self) -> "PronunciationSettings":
+        """These settings as a loop's guide lines read them: the guide voice wherever one is chosen,
+        and the usual voice everywhere else."""
+        merged = {provider: {model: dict(languages) for model, languages in models.items()}
+                  for provider, models in self.voices.items()}
+        for provider, models in self.guide_voices.items():
+            for model, languages in models.items():
+                merged.setdefault(provider, {}).setdefault(model, {}).update(languages)
+        return PronunciationSettings(pregenerate=self.pregenerate, delivery=self.delivery,
+                                     voices=merged, guide_voices=self.guide_voices,
+                                     chosen=self.chosen)
 
     @property
     def words_in_advance(self) -> bool:
@@ -139,7 +156,8 @@ def _read(row: Any) -> PronunciationSettings:
     if row is None:
         return PronunciationSettings()
     return PronunciationSettings(
-        pregenerate=row["pregenerate"], delivery=row["delivery"], voices=row["voices"], chosen=True
+        pregenerate=row["pregenerate"], delivery=row["delivery"], voices=row["voices"],
+        guide_voices=row["guide_voices"], chosen=True
     )
 
 
@@ -157,6 +175,7 @@ def save(
     pregenerate: Mapping[str, bool] | None = None,
     delivery: Mapping[str, str] | None = None,
     voices: Mapping[str, Any] | None = None,
+    guide_voices: Mapping[str, Any] | None = None,
 ) -> PronunciationSettings:
     """Change only what is named, inside one `BEGIN IMMEDIATE`. Returns the whole stored document."""
     table = tables.pronunciation_settings
@@ -167,12 +186,14 @@ def save(
             pregenerate={**current.pregenerate, **(pregenerate or {})},
             delivery={**current.delivery, **(delivery or {})},
             voices=current.voices if voices is None else voices,
+            guide_voices=current.guide_voices if guide_voices is None else guide_voices,
             chosen=True,
         )
         values = {
             "pregenerate": dict(wanted.pregenerate),
             "delivery": dict(wanted.delivery),
             "voices": wanted.voices,
+            "guide_voices": wanted.guide_voices,
             "edited_at": now_instant(),
         }
         if row is None:

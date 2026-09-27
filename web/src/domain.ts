@@ -12,7 +12,7 @@ export type Register = typeof REGISTERS[number];
 export type LexemeStatus = typeof LEXEME_STATUSES[number];
 export type SourceKind = typeof SOURCE_KINDS[number];
 export type ExampleOrigin = typeof EXAMPLE_ORIGINS[number];
-export type EntityKind = "vocabularies" | "topics" | "lexemes" | "senses" | "attestations" | "examples" | "imagePrompts" | "pronunciations" | "studyStates" | "loops" | "loopItems" | "stories" | "storyParts" | "storyWords" | "beds";
+export type EntityKind = "vocabularies" | "topics" | "lexemes" | "senses" | "attestations" | "examples" | "imagePrompts" | "pronunciations" | "studyStates" | "loops" | "loopItems" | "loopCues" | "stories" | "storyParts" | "storyWords" | "beds";
 /** What a pronunciation reads: a lexeme's headword, a sense's definition, an example's or an attestation's text. */
 export const PRONUNCIATION_TARGETS = ["lexeme", "sense", "example", "attestation"] as const;
 export type PronunciationTarget = typeof PRONUNCIATION_TARGETS[number];
@@ -265,7 +265,13 @@ export interface Loop extends SyncFields, OwnedFields {
   seed: number;
   engineVersion: string | null;
   bedFingerprint: string | null;
-  pattern: string | null;
+  /** Which of the generator's formats this loop is (`classic`, `radio-lesson`, …): its catalogue id. */
+  format: string;
+  /** The listener's choices for the switches that format offers, sent with every render of it. */
+  switches: Record<string, boolean | string>;
+  /** The format asked for, when the render lacked something it requires and made its fallback —
+   *  `format` then names what the track is. Null otherwise. */
+  fallbackFrom: string | null;
   /** Null until it has been rendered, which is the whole of what "not ready" means here. */
   audioRef: string | null;
   audioMime: string | null;
@@ -275,21 +281,16 @@ export interface Loop extends SyncFields, OwnedFields {
 }
 
 /**
- * One word inside a loop, and when it is heard.
+ * One word inside a loop, and when its own block is heard.
  *
  * `sourceText` and `targetText` are denormalised on purpose: they record what was *said*, so editing
  * the word afterwards cannot make the player caption a recording that no longer matches. Identical
  * reasoning to `Pronunciation.text`, and the reason deleting the word leaves this row alone — the
  * caption stays truthful and `lexemeId` simply points at a tombstone.
  *
- * Four times, and deliberately not the span of every utterance — plus two numbers that say the rest
- * of it. A word is spoken, then its translation, and then that pair again `repeats` times in all,
- * evenly `repeatSeconds` apart from the first translation. That is what lets the player mark *which*
- * of the pair is sounding, and it is two facts about the item rather than a serialised list of six
- * spans: the day three repetitions become four, these values change and this shape does not.
- *
- * Zero means a render that did not report them, and the player then marks only the first pass —
- * which is the one the exercise turns on — rather than marking the wrong thing.
+ * `startSeconds` and `endSeconds` bound the word's block in the words section; the reveals are when
+ * each side is first heard there, and null for a side the format never says in it. Every line, the
+ * word's own and everything else, is a `LoopCue`.
  */
 export interface LoopItem extends SyncFields, OwnedFields {
   id: string;
@@ -300,11 +301,36 @@ export interface LoopItem extends SyncFields, OwnedFields {
   targetText: string;
   emotion: string | null;
   startSeconds: number;
-  sourceRevealSeconds: number;
-  targetRevealSeconds: number;
+  sourceRevealSeconds: number | null;
+  targetRevealSeconds: number | null;
   endSeconds: number;
-  repeats: number;
-  repeatSeconds: number;
+}
+
+/**
+ * One line of a loop, in the order it is heard: a word, its translation, an example, a remark, a
+ * line of a story, an announcement.
+ *
+ * Written by the render and only by it: new music tombstones a loop's lines and writes new ones.
+ * `group` is what the player shows together — a word's own lines, a line and its translation — as
+ * the generator numbered it, so the player never guesses which line translates which. `text` is
+ * denormalised for `LoopItem.sourceText`'s reason. `loopItemId` names the word a line belongs to,
+ * and is null for a line of no word; `side` says which half of the pair a word's own line is.
+ */
+export interface LoopCue extends SyncFields, OwnedFields {
+  id: string;
+  loopId: string;
+  position: number;
+  group: number;
+  kind: string;
+  section: string;
+  loopItemId: string | null;
+  side: "source" | "target" | null;
+  role: "native" | "guide";
+  language: string;
+  text: string;
+  take: number;
+  startSeconds: number;
+  endSeconds: number;
 }
 
 /**
@@ -446,6 +472,7 @@ export interface VocabularyGraph {
   studyStates: StudyState[];
   loops: Loop[];
   loopItems: LoopItem[];
+  loopCues: LoopCue[];
   stories: Story[];
   storyParts: StoryPart[];
   storyWords: StoryWord[];
@@ -462,6 +489,7 @@ export type ImagePromptInput = Omit<ImagePrompt, "id" | keyof SyncFields | keyof
 export type StudyStateInput = Omit<StudyState, "id" | keyof SyncFields | keyof OwnedFields>;
 export type LoopInput = Omit<Loop, "id" | keyof SyncFields | keyof OwnedFields>;
 export type LoopItemInput = Omit<LoopItem, "id" | keyof SyncFields | keyof OwnedFields>;
+export type LoopCueInput = Omit<LoopCue, "id" | keyof SyncFields | keyof OwnedFields>;
 export type StoryInput = Omit<Story, "id" | keyof SyncFields | keyof OwnedFields>;
 export type StoryPartInput = Omit<StoryPart, "id" | keyof SyncFields | keyof OwnedFields>;
 export type StoryWordInput = Omit<StoryWord, "id" | keyof SyncFields | keyof OwnedFields>;
@@ -543,6 +571,7 @@ interface Find {
   attestations(id: string): Attestation | undefined;
   examples(id: string): Example | undefined;
   loops(id: string): Loop | undefined;
+  loopItems(id: string): LoopItem | undefined;
   stories(id: string): Story | undefined;
 }
 
@@ -719,8 +748,13 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
   },
   loops(record: Loop): void {
     language(record.language, "Loop language");
-    [record.styleId, record.engineVersion, record.bedFingerprint, record.pattern]
+    [record.styleId, record.engineVersion, record.bedFingerprint]
       .forEach((value) => optionalString(value, "Loop bed field"));
+    invariant(typeof record.format === "string" && record.format.trim().length > 0, "A loop names its format.");
+    optionalString(record.fallbackFrom, "Loop fallback");
+    invariant(typeof record.switches === "object" && record.switches !== null && !Array.isArray(record.switches)
+      && Object.values(record.switches).every((value) => typeof value === "boolean" || typeof value === "string"),
+    "A loop's switches are on/off or one of their choices.");
     /* `isSafeInteger` is the whole bound, not 2^31: a JSON number is a double here, so the largest
        seed that can reach this replica intact is 2^53 − 1. The generator mints 64-bit seeds when it
        is not given one, which is why Acervo sends it one. */
@@ -747,13 +781,34 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     invariant(Number.isSafeInteger(record.position) && record.position >= 0, "Loop item position is invalid.");
     invariant(record.sourceText.length > 0 && record.targetText.length > 0, "A loop item records both words it spoke.");
     optionalString(record.emotion, "Loop item emotion");
-    const times = [record.startSeconds, record.sourceRevealSeconds, record.targetRevealSeconds, record.endSeconds];
-    times.forEach((value) => invariant(Number.isFinite(value) && value >= 0, "Loop item timing is invalid."));
-    // What a retrieval display turns on: the answer must not be on screen before the recall gap it
-    // exists to leave has passed.
-    invariant(times.every((value, index) => index === 0 || value >= times[index - 1]), "A loop item's times must not run backwards.");
-    invariant(Number.isSafeInteger(record.repeats) && record.repeats >= 0, "Loop item repeat count is invalid.");
-    invariant(Number.isFinite(record.repeatSeconds) && record.repeatSeconds >= 0, "Loop item repeat interval is invalid.");
+    [record.startSeconds, record.endSeconds].forEach((value) =>
+      invariant(Number.isFinite(value) && value >= 0, "Loop item timing is invalid."));
+    invariant(record.endSeconds >= record.startSeconds, "A loop item's times must not run backwards.");
+    // Either side may come first — a format may ask for the translation before the word — but each
+    // is heard inside the word's own block.
+    [record.sourceRevealSeconds, record.targetRevealSeconds].forEach((value) => invariant(
+      value === null || (Number.isFinite(value) && value >= record.startSeconds && value <= record.endSeconds),
+      "A loop item's reveal lies within its block."));
+  },
+  loopCues(record: LoopCue, find: Find): void {
+    const loop = find.loops(record.loopId);
+    invariant(loop, "Loop line references a missing loop.");
+    invariant(record.ownerId === loop.ownerId, "Loop line and loop must have the same owner.");
+    if (record.loopItemId !== null) {
+      const item = find.loopItems(record.loopItemId);
+      invariant(item, "Loop line references a missing word.");
+      invariant(item.ownerId === record.ownerId, "Loop line and word must have the same owner.");
+    }
+    invariant(record.side === null || record.loopItemId !== null, "Only a word's own line has a side.");
+    invariant(record.side === null || record.side === "source" || record.side === "target", "Loop line side is invalid.");
+    invariant(record.role === "native" || record.role === "guide", "Loop line role is invalid.");
+    language(record.language, "Loop line language");
+    invariant(record.kind.trim().length > 0 && record.section.trim().length > 0, "A loop line says what it is.");
+    invariant(record.text.length > 0, "A loop line records what it said.");
+    [record.position, record.group, record.take].forEach((value) =>
+      invariant(Number.isSafeInteger(value) && value >= 0, "Loop line number is invalid."));
+    invariant(Number.isFinite(record.startSeconds) && record.startSeconds >= 0
+      && Number.isFinite(record.endSeconds) && record.endSeconds >= record.startSeconds, "A loop line's times must not run backwards.");
   },
   stories(record: Story): void {
     language(record.language, "Story language");
@@ -847,6 +902,7 @@ function findIn(index: GraphIndex): Find {
     attestations: (id) => index.get("attestations", id),
     examples: (id) => index.get("examples", id),
     loops: (id) => index.get("loops", id),
+    loopItems: (id) => index.get("loopItems", id),
     stories: (id) => index.get("stories", id)
   };
 }
@@ -946,7 +1002,7 @@ export function validateChanges(
 
 const EMPTY_KINDS = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],
-  pronunciations: [], studyStates: [], loops: [], loopItems: [], stories: [], storyParts: [], storyWords: [],
+  pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [], storyWords: [],
   beds: []
 });
 

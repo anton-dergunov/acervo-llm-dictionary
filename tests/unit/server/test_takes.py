@@ -238,3 +238,47 @@ def test_an_unsigned_or_absent_token_is_refused(server):
 
 def test_the_audience_is_the_route_it_names(server):
     assert TAKE_AUDIENCE == "acervo:pronunciations/take"
+
+
+# ── the guide's voice ───────────────────────────────────────────────────────
+
+GEMINI = "gemini-3.1-flash-tts-preview"
+
+
+def test_a_guide_line_is_said_by_the_guide_voice_and_a_native_one_is_not(server):
+    server.put("/pronunciations/settings", {
+        "voices": {"google-tts": {GEMINI: {"es": "Kore", "en": "Kore"}}},
+        "guideVoices": {"google-tts": {GEMINI: {"en": "Charon"}}},
+    })
+    guide = ask(server, text="disgust", language="en", role="guide")
+    assert guide.headers["x-acervo-voice"] == "Charon"
+    assert server.speech.calls[-1]["voice"] == "Charon"
+    # The same English words as a native line — an English vocabulary's own word — keep the voice
+    # chosen for English, and are a recording of their own rather than the guide's take.
+    native = ask(server, text="disgust", language="en", role="native")
+    assert native.headers["x-acervo-voice"] == "Kore"
+    assert server.speech.calls[-1]["voice"] == "Kore"
+    assert ask(server, text="asco").headers["x-acervo-voice"] == "Kore"
+
+
+def test_without_a_guide_voice_every_line_is_said_by_the_one_voice(server):
+    server.put("/pronunciations/settings", {
+        "voices": {"google-tts": {GEMINI: {"en": "Puck"}}}})
+    assert ask(server, text="disgust", language="en", role="guide").headers["x-acervo-voice"] == "Puck"
+
+
+def test_a_role_that_is_neither_is_refused(server):
+    answer = ask(server, role="narrator")
+    assert answer.status_code == 400
+    assert "native or guide" in answer.json()["error"]["message"]
+
+
+def test_the_settings_offer_voices_in_the_language_the_guide_speaks(server):
+    view = server.get("/pronunciations/settings").json()["data"]
+    assert view["languages"] == ["es"] and view["guideLanguages"] == ["en"]
+    gemini = next(entry for entry in view["orders"]["expressive"] if entry["model"] == GEMINI)
+    assert "Charon" in gemini["voices"]["en"]
+    assert view["guideVoices"] == {}
+    refused = server.put("/pronunciations/settings", {
+        "guideVoices": {"google-tts": {GEMINI: {"en": "Nobody"}}}})
+    assert refused.json()["error"]["code"] == "unknown_voice"

@@ -18,18 +18,17 @@
  * player before it plays, and registers its own pause with it, so a word read aloud, or a story,
  * silences the loop. The dependency runs one way: this imports that, and nothing imports this back.
  *
- * Which word is being taught, which of its two lines was last spoken and whether the answer has been
- * given are all `selectors.ts`'s, derived from the clock every frame. Nothing about the reveal is
- * decided here, and nothing about it is remembered — which is what makes dragging backwards put an
- * answer away again.
+ * Which card is showing, which of its lines was last said and which may be drawn yet are all
+ * `selectors.ts`'s, derived from the clock every frame. Nothing about the reveal is decided here, and
+ * nothing about it is remembered — which is what makes dragging backwards put an answer away again.
  */
 
 import { useSyncExternalStore } from "react";
 import { AcervoApiError, backendSession } from "./api";
-import type { Loop, LoopItem } from "./domain";
 import { loopAutoplayEnabled, loopCacheEnabled, loopRepeatEnabled } from "./editorPreferences";
 import { createMediaStore, type MediaStore } from "./mediaStore";
 import { registerPlayer, silencePlayers, stop as stopSpeech } from "./pronunciation";
+import { formatLabel, loopCards, type LoopTrack } from "./selectors";
 
 let store: MediaStore = createMediaStore("loops");
 
@@ -134,18 +133,24 @@ function stopClock(): void {
    The list the player moves through when Next, or Play the next one, asks for another. Set by
    whoever is showing the loops; the player keeps it so that leaving the surface does not end the
    queue — a loop goes on playing while you read a word, which is the point of it. */
-let queue: { loop: Loop; items: LoopItem[] }[] = [];
-let current: { loop: Loop; items: LoopItem[] } | null = null;
+let queue: LoopTrack[] = [];
+let current: LoopTrack | null = null;
 
-export function setQueue(entries: { loop: Loop; items: LoopItem[] }[]): void {
+export function setQueue(entries: LoopTrack[]): void {
   queue = entries.filter((entry) => Boolean(entry.loop.audioRef));
 }
 
-export function queued(): { loop: Loop; items: LoopItem[] }[] { return queue; }
+export function queued(): LoopTrack[] { return queue; }
 
-export function nowPlaying(): { loop: Loop; items: LoopItem[] } | null { return current; }
+export function nowPlaying(): LoopTrack | null { return current; }
 
-function neighbour(by: 1 | -1): { loop: Loop; items: LoopItem[] } | null {
+/* The formats' names, for the lock screen, as the generator gave them. Told by whoever asked for
+   the schema; until then a format is named from its id. */
+let formatNames: { id: string; label: string }[] = [];
+
+export function nameFormats(formats: { id: string; label: string }[]): void { formatNames = formats; }
+
+function neighbour(by: 1 | -1): LoopTrack | null {
   if (!current) return null;
   const at = queue.findIndex((entry) => entry.loop.id === current!.loop.id);
   if (at < 0) return null;
@@ -178,14 +183,15 @@ async function trackFor(reference: string): Promise<Blob> {
 
 /* ── playing ─────────────────────────────────────────────────────────── */
 
-export async function play(loop: Loop, items: LoopItem[], { at }: { at?: number } = {}): Promise<void> {
+export async function play(track: LoopTrack, { at }: { at?: number } = {}): Promise<void> {
+  const { loop } = track;
   if (!loop.audioRef) return;
   stopSpeech();
   silencePlayers(pause);
   // Read before `prime()`, which replaces `src` with silence when the element is paused: a word
   // tapped while the loop is paused is still a move within a track this device already holds.
   const resuming = current?.loop.id === loop.id && element?.src === held && held !== null;
-  current = { loop, items };
+  current = track;
   if (resuming) {
     /* Nothing to fetch and no `src` to replace, so moving is one assignment to `currentTime` and the
        store moves with it in the same tick. Fetching the blob again — which is what this used to do
@@ -208,7 +214,7 @@ export async function play(loop: Loop, items: LoopItem[], { at }: { at?: number 
     player.src = held;
     player.currentTime = at ?? 0;
     update({ loading: false });
-    describe(loop, items);
+    describe(track);
     await player.play().catch(failWith);
   } catch (error) {
     // Nothing is going to arrive at that position now, so the clock stops being overruled by it.
@@ -249,22 +255,22 @@ export function seek(seconds: number): void {
   update({ at: bound });
 }
 
-/** Back to the top of this word, unless it only just started — then to the one before. */
-export function stepWord(by: 1 | -1): void {
+/** Back to the top of this card, unless it only just started — then to the one before. */
+export function stepCard(by: 1 | -1): void {
   if (!current) return;
-  const { items } = current;
+  const starts = loopCards(current.cues).map((card) => card.start);
   let index = -1;
-  items.forEach((item, position) => { if (state.at >= item.startSeconds) index = position; });
-  if (by < 0 && index >= 0 && state.at - items[index].startSeconds > 3) { seek(items[index].startSeconds); return; }
+  starts.forEach((start, position) => { if (state.at >= start) index = position; });
+  if (by < 0 && index >= 0 && state.at - starts[index] > 3) { seek(starts[index]); return; }
   const want = index + by;
   if (want < 0) { seek(0); return; }
-  if (want >= items.length) { seek(state.duration); return; }
-  seek(items[want].startSeconds);
+  if (want >= starts.length) { seek(state.duration); return; }
+  seek(starts[want]);
 }
 
 export function stepLoop(by: 1 | -1): void {
   const next = neighbour(by);
-  if (next) void play(next.loop, next.items);
+  if (next) void play(next);
 }
 
 /* What happens at the end is the owner's two switches, in this order: play it again, else play the
@@ -274,7 +280,7 @@ function ended(): void {
   if (repeat && current) { seek(0); void audio().play().catch(failWith); return; }
   if (loopAutoplayEnabled()) {
     const next = neighbour(1);
-    if (next) { void play(next.loop, next.items); return; }
+    if (next) { void play(next); return; }
   }
   update({ playing: false, at: state.duration });
   stopClock();
@@ -283,20 +289,20 @@ function ended(): void {
 /* ── the lock screen ──
    What the phone shows, and the buttons on the headphones. The first use of MediaSession here, and
    worth it: this is the one surface in Acervo you are meant to leave running. */
-function describe(loop: Loop, items: LoopItem[]): void {
+function describe(track: LoopTrack): void {
   const media = navigator.mediaSession;
   if (!media) return;
-  const title = items.slice(0, 3).map((item) => item.sourceText).join(", ");
+  const title = track.items.slice(0, 3).map((item) => item.sourceText).join(", ");
   try {
     media.metadata = new MediaMetadata({
       title: title || "Loop",
-      artist: `${items.length} words`,
+      artist: `${formatLabel(formatNames, track.loop.format)} · ${track.items.length} words`,
       album: "Acervo"
     });
-    media.setActionHandler("play", () => { void play(loop, items); });
+    media.setActionHandler("play", () => { void play(track); });
     media.setActionHandler("pause", () => pause());
-    media.setActionHandler("previoustrack", () => stepWord(-1));
-    media.setActionHandler("nexttrack", () => stepWord(1));
+    media.setActionHandler("previoustrack", () => stepCard(-1));
+    media.setActionHandler("nexttrack", () => stepCard(1));
     media.setActionHandler("seekto", (event) => { if (event.seekTime !== undefined) seek(event.seekTime); });
   } catch { /* an older browser, or one that refuses a handler it does not implement */ }
 }

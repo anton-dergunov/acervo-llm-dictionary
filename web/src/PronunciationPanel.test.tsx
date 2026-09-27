@@ -22,7 +22,7 @@ function settings(overrides: Partial<PronunciationSettings> = {}): Pronunciation
   return {
     pregenerate: { headword: false, definitions: false, examples: false, stories: true },
     delivery: { words: "plain", examples: "expressive", loops: "expressive", stories: "expressive" },
-    voices: {}, chosen: false, languages: ["es"],
+    voices: {}, guideVoices: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
     orders: { plain: [WAVENET], expressive: [{ ...WAVENET, model: "gemini-3.1-flash-tts-preview", style: "instruction", voices: { es: ["Kore"] } }] },
     ...overrides
   };

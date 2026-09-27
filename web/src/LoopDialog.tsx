@@ -1,11 +1,14 @@
 /**
- * Make a loop: how many words, and what it should sound like.
+ * Make a loop: how many words, what kind of loop, and what it should sound like.
  *
  * **The words are the selection, or a draw from what you are looking at.** Either way they are
  * posted as a list of ids and the server never re-derives them, which is what let words chosen by
  * hand use the same route with no server change at all (`MakeFrom.tsx`). The scope on screen — this
  * language, this topic, this search — is sampled here; the selection is sent as chosen, less any
  * word a loop cannot say.
+ *
+ * The kind of loop is chosen from `FormatChoices`: the generator's formats — a drill, a radio lesson,
+ * a story — each with its switches, opening on the one last made on this device.
  *
  * The music is chosen from `MusicChoices`: Surprise me, a favourite the owner kept, or one of the
  * generator's styles with the sentence it gives to choose it by. The styles are its own catalogue,
@@ -23,8 +26,10 @@
 import { useEffect, useState } from "react";
 import { AcervoApiError, backendSession } from "./api";
 import type { VocabularyGraph } from "./domain";
+import { lastLoopFormat, loopSwitchesFor, rememberLoopFormat } from "./editorPreferences";
 import { BookIcon } from "./icons";
 import { languageOf } from "./languages";
+import { FormatChoices, formatUsable, switchesFor } from "./LoopFormat";
 import { MusicChoices, musicOf, useLoopSchema, type MusicChoice } from "./LoopMusic";
 import { ChosenWords, SourceSwitch, wordsCount, type WordSource } from "./MakeFrom";
 import {
@@ -60,6 +65,14 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
     eligible: loopEligible, why: "no single term to say", max: schema?.maxItems ?? 24, noun: "loop"
   });
   const usable = chosen.filter((word) => !word.skip).map((word) => word.id);
+  /* The format last made here, while the generator still offers it and this server can make it;
+     else the first it offers, which is the drill. */
+  const [picked, setPicked] = useState<string | null>(lastLoopFormat);
+  const formats = schema?.formats ?? [];
+  const format = formats.find((one) => one.id === picked && formatUsable(one, schema!))
+    ?? formats.find((one) => formatUsable(one, schema!)) ?? null;
+  const [switches, setSwitches] = useState<Record<string, boolean | string>>({});
+  const values = format ? switchesFor(format, { ...loopSwitchesFor(format.id), ...switches }) : {};
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
@@ -73,8 +86,10 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
       const answer = await backendSession.makeLoop({
         deviceId, language: query.language,
         lexemeIds: fromSelection ? usable : sampleLexemeIds(graph, query, Math.min(words, eligible), Date.now()),
+        ...(format ? { format: format.id, switches: values } : {}),
         ...musicOf(music)
       });
+      if (format) rememberLoopFormat(format.id, values);
       onMade(answer.loop.id);
       onClose();
     } catch (error) {
@@ -117,6 +132,15 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
             </span>
           </label>
         </>}
+
+        {schema && format && <div className="config-field">
+          <span>Kind of loop</span>
+          <FormatChoices
+            schema={schema} value={format.id} switches={values}
+            onChoose={(id) => { setPicked(id); setSwitches({}); }}
+            onSwitch={(name, value) => setSwitches({ ...switches, [name]: value })}
+          />
+        </div>}
 
         <div className="config-field">
           <span>Music</span>

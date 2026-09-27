@@ -3,20 +3,27 @@
  *
  * `selectors.test.ts` pins the arithmetic; this pins that the component obeys it — that a
  * translation which has not been spoken is a bar and not text, that winding back puts it away
- * again, and that the mark following the utterances is the only thing that moves. Those are the
+ * again, and that the mark following the lines is the only thing that moves. Those are the
  * three ways this screen could quietly stop being an exercise and become a caption.
  */
 
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { backendSession, type LoopSchema } from "./api";
-import type { Bed, Loop, LoopItem, VocabularyGraph } from "./domain";
+import type { Bed, Loop, LoopCue, LoopItem, VocabularyGraph } from "./domain";
 import { resetLoopSchemaForTests } from "./LoopMusic";
 import * as playerModule from "./loops";
 import LoopPlayer from "./LoopPlayer";
+import { drillCues } from "./testGraph";
 
 const SCHEMA: LoopSchema = {
-  apiVersion: "1.0.0", engineVersion: "1.4.0", maxItems: 24, patterns: ["retrieval"],
+  apiVersion: "2.0.0", engineVersion: "0.7.0", maxItems: 24,
+  formats: [
+    { id: "classic", label: "Classic drill", description: "Word, gap, answer.", switches: {}, requires: [], fallback: null },
+    { id: "radio-lesson", label: "Radio lesson", description: "Examples and remarks.", switches: {},
+      requires: ["writer", "multilingual_voice"], fallback: "classic" }
+  ],
+  writerAvailable: true, mixesLanguages: true,
   productionBundle: true,
   families: [
     { id: "gentle-game", label: "Gentle game", description: "Quick, cheerful arpeggios." },
@@ -26,7 +33,7 @@ const SCHEMA: LoopSchema = {
 
 const loop: Loop = {
   id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
-  engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", pattern: "retrieval",
+  engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
   durationSeconds: 90, position: 1,
   ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-16T00:00:00.000Z",
@@ -37,7 +44,6 @@ const word = (over: Partial<LoopItem>): LoopItem => ({
   id: "loopitem0000001", loopId: loop.id, lexemeId: "lexeme000000001", position: 0,
   sourceText: "asco", targetText: "disgust", emotion: "repulsed",
   startSeconds: 8.82, sourceRevealSeconds: 8.82, targetRevealSeconds: 17.65, endSeconds: 44.12,
-  repeats: 3, repeatSeconds: 4.41,
   ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-16T00:00:00.000Z",
   editedAt: "2026-09-16T00:00:00.000Z", editedBy: "device000000001", revision: 1, ...over
 });
@@ -55,10 +61,12 @@ const kept: Bed = {
   editedAt: "2026-09-17T00:00:00.000Z", editedBy: "device000000001", revision: 2
 };
 
+const cues = drillCues(loop.id, items, 4.41);
+
 function graphWith(beds: Bed[] = []): VocabularyGraph {
   return {
     vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [],
-    imagePrompts: [], pronunciations: [], studyStates: [], loops: [loop], loopItems: items,
+    imagePrompts: [], pronunciations: [], studyStates: [], loops: [loop], loopItems: items, loopCues: cues,
     stories: [], storyParts: [], storyWords: [], beds
   };
 }
@@ -66,12 +74,12 @@ function graphWith(beds: Bed[] = []): VocabularyGraph {
 const onChangeMusic = vi.fn();
 const onToggleKeep = vi.fn();
 
-function at(seconds: number, beds: Bed[] = []) {
+function at(seconds: number, beds: Bed[] = [], track = { loop, items, cues }) {
   vi.spyOn(playerModule, "usePlayback").mockReturnValue({
-    loopId: loop.id, at: seconds, duration: 90, playing: true, loading: false, failed: null
+    loopId: track.loop.id, at: seconds, duration: 90, playing: true, loading: false, failed: null
   });
   return render(<LoopPlayer
-    loop={loop} items={items} graph={graphWith(beds)}
+    track={track} graph={graphWith(beds)}
     onChangeMusic={onChangeMusic} onToggleKeep={onToggleKeep}
   />);
 }
@@ -154,7 +162,7 @@ describe("playing a loop", () => {
 
   it("marks whichever of the pair was spoken most recently, and nothing else", () => {
     const early = at(12).container;
-    expect(early.querySelector(".lyric-source.saying")?.textContent).toBe("asco");
+    expect(early.querySelector(".lyric-source.saying .lyric-said")?.textContent).toBe("asco");
     expect(early.querySelector(".lyric-target.saying")).toBeNull();
 
     const later = at(27).container;
@@ -167,7 +175,7 @@ describe("playing a loop", () => {
     expect(screen.getByText("asco")).toBeInTheDocument();
     expect(screen.getByText("la balsa")).toBeInTheDocument();
     expect(container.querySelectorAll(".lyric-row.now")).toHaveLength(1);
-    expect(container.querySelector(".lyric-row.now .lyric-source")?.textContent).toBe("la balsa");
+    expect(container.querySelector(".lyric-row.now .lyric-source .lyric-said")?.textContent).toBe("la balsa");
     // A word already heard keeps its answer; one still to come does not have it yet.
     expect(screen.getByText("disgust")).toBeInTheDocument();
     expect(screen.queryByText("raft")).not.toBeInTheDocument();
@@ -182,6 +190,64 @@ describe("playing a loop", () => {
     const play = vi.spyOn(playerModule, "play").mockResolvedValue(undefined);
     at(12);
     fireEvent.click(screen.getByText("la balsa"));
-    expect(play).toHaveBeenCalledWith(loop, items, { at: 44.12 });
+    expect(play).toHaveBeenCalledWith(expect.objectContaining({ loop }), { at: 44.12 });
+  });
+
+  it("says each line's language beside it", () => {
+    const { container } = at(18);
+    const now = container.querySelector(".lyric-row.now")!;
+    expect([...now.querySelectorAll(".lyric-lang")].map((chip) => chip.textContent)).toEqual(["ES", "EN"]);
+  });
+});
+
+describe("a format's lines", () => {
+  const line = (over: Partial<LoopCue>): LoopCue => ({
+    ...cues[0], id: `cueradio${String(over.position).padStart(7, "0")}`, loopItemId: null, side: null,
+    take: 0, ...over
+  });
+  const radio: Loop = { ...loop, id: "loop00000000002", format: "radio-lesson" };
+  const lines = [
+    line({ position: 0, group: 0, kind: "intro", section: "intro", role: "guide", language: "en",
+           text: "Two words today, one of them disgusting.", startSeconds: 2, endSeconds: 5 }),
+    ...cues.slice(0, 6).map((cue, index) => ({ ...cue, loopId: radio.id, position: index + 1, group: 1 })),
+    line({ position: 7, group: 2, kind: "example", section: "words", role: "native", language: "es",
+           text: "Me da asco.", startSeconds: 40, endSeconds: 42, loopItemId: items[0].id }),
+    line({ position: 8, group: 2, kind: "translation", section: "words", role: "guide", language: "en",
+           text: "It disgusts me.", startSeconds: 43, endSeconds: 45, loopItemId: items[0].id }),
+    line({ position: 9, group: 3, kind: "say", section: "quiz", role: "guide", language: "en", side: "target",
+           text: "disgust", startSeconds: 60, endSeconds: 61, loopItemId: items[0].id }),
+    line({ position: 10, group: 3, kind: "say", section: "quiz", role: "native", language: "es", side: "source",
+           text: "asco", startSeconds: 63, endSeconds: 64, loopItemId: items[0].id })
+  ];
+  const track = { loop: radio, items: items.slice(0, 1), cues: lines };
+
+  it("draws every line, card by card, and names the section a card enters", () => {
+    const { container } = at(3, [], track);
+    expect(container.querySelectorAll(".lyric-row")).toHaveLength(4);
+    expect(screen.getByText("Two words today, one of them disgusting.")).toBeInTheDocument();
+    expect(container.querySelector(".lyric-divider")?.textContent).toBe("Quiz");
+  });
+
+  it("keeps an example's meaning and a quiz's answer back until they are said", () => {
+    const early = at(41, [], track).container;
+    expect(screen.getByText("Me da asco.")).toBeInTheDocument();
+    expect(screen.queryByText("It disgusts me.")).not.toBeInTheDocument();
+    const quiz = early.querySelectorAll(".lyric-row")[3];
+    expect(quiz.querySelector(".lyric-target .lyric-said")?.textContent).toBe("disgust");
+    expect(quiz.querySelector(".lyric-source .lyric-held")).toBeInTheDocument();
+  });
+
+  it("sets a long line smaller, whatever the clock says", () => {
+    const { container } = at(3, [], track);
+    expect(container.querySelector(".lyric-row.now .lyric-target")).toHaveClass("long");
+  });
+
+  it("names its format, and says so when it fell back", async () => {
+    at(3, [], { ...track, loop: { ...radio, format: "classic", fallbackFrom: "radio-lesson" } });
+    await act(async () => undefined);
+    expect(screen.getByText(/Classic drill · 1 words/)).toBeInTheDocument();
+    expect(screen.getByText(
+      "Classic drill instead of Radio lesson — it needs a writing model and a loop voice that can mix languages"
+    )).toBeInTheDocument();
   });
 });

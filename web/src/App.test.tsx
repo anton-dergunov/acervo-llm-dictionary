@@ -1316,7 +1316,8 @@ describe("Acervo application", () => {
     localStorage.removeItem("acervo-word-selection");
     reloadSelectionForTests();
     vi.spyOn(backendSession, "loopSchema").mockResolvedValue({
-      apiVersion: "1.0.0", engineVersion: "1.4.0", maxItems: 24, patterns: ["retrieval"], productionBundle: true, families: []
+      apiVersion: "2.0.0", engineVersion: "0.7.0", maxItems: 24, formats: [], writerAvailable: true,
+      mixesLanguages: true, productionBundle: true, families: []
     });
     signedIn();
     await openList();

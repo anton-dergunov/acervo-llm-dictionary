@@ -29,7 +29,7 @@ from typing import Any
 from acervo.domain.ids import is_record_id, new_record_id, now_instant
 from acervo.errors import ApiError
 from acervo.loops.client import Item, Loop, LoopError, LoopService, Operation
-from acervo.repository import accounts, graph, pronunciation_settings
+from acervo.repository import accounts, graph, loop_scripts, pronunciation_settings
 from acervo.settings import Settings
 from acervo.tokens import mint_render, resolve_secret
 
@@ -98,8 +98,11 @@ def refusal(error: LoopError) -> ApiError:
     return ApiError(status, code, f"{message} {said}"[:500].strip() if said else message)
 
 
-def schema(settings: Settings) -> dict[str, Any]:
-    """What the generator can be asked for, for the dialog. Its catalogues, never copied here."""
+def schema(settings: Settings, owner: str | None = None) -> dict[str, Any]:
+    """What the generator can be asked for, for the dialog. Its catalogues, never copied here —
+    plus the two things only Acervo knows: whether a writing model is set up, and whether the voice
+    the owner chose for loops can mix languages in one line. A format that needs either says so in
+    the dialog before it is asked for, instead of falling back without a word."""
     try:
         found = service(settings).schema()
     except LoopError as error:
@@ -110,7 +113,19 @@ def schema(settings: Settings) -> dict[str, Any]:
         # False means the pinned sample bundle is not installed, or not all of it: `create` refuses
         # with `loops_no_samples` rather than render beds from whatever part of it is there.
         "productionBundle": found.production_bundle,
-        "patterns": list(found.patterns),
+        # Each kind of loop, with the generator's own label and sentence, the switches it offers,
+        # what it requires and what it falls back to. Classic first when it is there: it needs
+        # nothing and is the default.
+        "formats": [
+            {"id": one.id, "label": one.label, "description": one.description,
+             "switches": {name: {"label": switch.label, "default": switch.default,
+                                 **({"choices": list(switch.choices)} if switch.choices else {})}
+                          for name, switch in one.switches.items()},
+             "requires": list(one.requires), "fallback": one.fallback}
+            for one in sorted(found.formats, key=lambda one: one.id != "classic")
+        ],
+        "writerAvailable": _writer_available(settings, owner),
+        "mixesLanguages": owner is not None and delivery(owner) != "plain",
         # Each with the generator's own label and sentence, so the dialog can say what a kind of
         # music *is*. "Surprise me" is the dialog's, and not one of these.
         "families": [{"id": one.id, "label": one.label, "description": one.description}
@@ -119,13 +134,36 @@ def schema(settings: Settings) -> dict[str, Any]:
     }
 
 
-def _offered(settings: Settings, family: str) -> None:
-    """Refuse before anything is written: no samples, or a family the generator does not have."""
-    offered = schema(settings)
-    if not offered.get("productionBundle"):
+def _writer_available(settings: Settings, owner: str | None) -> bool:
+    from acervo.services.models import chain_readout
+
+    return bool(chain_readout(settings, owner, "text").get("available"))
+
+
+def _offered(settings: Settings, family: str, format_id: str | None = None,
+             switches: dict[str, Any] | None = None) -> None:
+    """Refuse before anything is written: no samples, a family or format the generator does not
+    have, or a switch its format does not offer."""
+    try:
+        found = service(settings).schema()
+    except LoopError as error:
+        raise refusal(error) from None
+    if not found.production_bundle:
         raise ApiError(409, "loops_no_samples", NO_SAMPLES)
-    if family and family not in {one["id"] for one in offered.get("families", [])}:
+    if family and family not in {one.id for one in found.families}:
         raise ApiError(400, "invalid_input", f"The generator has no “{family}” music.")
+    if format_id is None:
+        return
+    chosen = next((one for one in found.formats if one.id == format_id), None)
+    if chosen is None:
+        raise ApiError(400, "invalid_input", f"The generator makes no “{format_id}” loop.")
+    for name, value in (switches or {}).items():
+        switch = chosen.switches.get(name)
+        if switch is None:
+            raise ApiError(400, "invalid_input", f"A “{chosen.label}” loop has no “{name}” choice.")
+        if not switch.accepts(value):
+            offered = ", ".join(switch.choices) if switch.choices else "on or off"
+            raise ApiError(400, "invalid_input", f"“{switch.label}” is {offered}.")
 
 
 def _seed(value: Any) -> int:
@@ -159,7 +197,11 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
     # than writing rows, queueing a job and failing minutes later with the generator's own wording
     # about a missing `salamander`. One extra call on an operation that already takes minutes.
     family = str(body.get("family") or "").strip()
-    _offered(settings, family)
+    format_id = str(body.get("format") or "classic").strip()
+    switches = body.get("switches") or {}
+    if not isinstance(switches, dict):
+        raise ApiError(400, "invalid_input", "A loop's choices are a set of named values.")
+    _offered(settings, family, format_id, switches)
     # A favourite is a family *and* a seed, and only the pair replays it: a seed alone would be
     # read with `auto`, which may pick a different family for it.
     if body.get("seed") is not None and not family:
@@ -197,7 +239,7 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
             # of what "not made yet" means.
             "styleId": None, "seed": seed, "engineVersion": None,
             "bedFingerprint": None,
-            "pattern": str(body.get("pattern") or "retrieval"),
+            "format": format_id, "switches": switches, "fallbackFrom": None,
             "audioRef": None, "audioMime": None, "durationSeconds": None,
             "position": graph.next_loop_position(owner, language),
             **stamp,
@@ -212,8 +254,8 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
             "emotion": (entry["lexeme"].get("emotion") or "").strip() or None,
             # Filled in by the render. Zero is not "the start of the track": it is "not timed yet",
             # and the loop's own empty `audioRef` is what says so.
-            "startSeconds": 0.0, "sourceRevealSeconds": 0.0,
-            "targetRevealSeconds": 0.0, "endSeconds": 0.0,
+            "startSeconds": 0.0, "sourceRevealSeconds": None,
+            "targetRevealSeconds": None, "endSeconds": 0.0,
             **stamp,
         } for index, entry in enumerate(items)],
     }
@@ -283,6 +325,12 @@ def render_request(settings: Settings, owner: str, loop_id: str,
         # The loop's own seed, so the bed is reproducible and the number that comes back is one this
         # side can store — or the one a change of music asked for. See `SEED_LIMIT` and `music`.
         "seed": int(seed if seed is not None else loop.get("seed") or 0),
+        # What the loop is and the listener's choices for it, asked for again on every render.
+        "format": loop.get("format") or "classic",
+        "switches": dict(loop.get("switches") or {}),
+        # The lines its last render said, for a format with a writer: sent back so new music keeps
+        # them, with no writing call and every take in the cache. None the first time.
+        "script": loop_scripts.script(owner, loop_id),
     }
 
 
@@ -295,7 +343,9 @@ def start(settings: Settings, request: dict[str, Any], **overrides: Any) -> Oper
             target_language=request["target_language"],
             token=request["token"],
             delivery=request["delivery"],
-            pattern=loop.get("pattern") or "retrieval",
+            format=request["format"],
+            switches=request["switches"],
+            script=request["script"],
             seed=request.get("seed"),
             **overrides,
         )
@@ -337,30 +387,50 @@ def store(settings: Settings, owner: str, device: str, loop_id: str, rendered: L
     os.replace(partial, destination)
 
     at = now_instant()
-    timeline = {int(row.get("index", index)): row for index, row in enumerate(rendered.timeline)}
+    timed = {int(row.get("index", index)): row for index, row in enumerate(rendered.items)}
+    item_ids = [row["id"] for row in rows]
+    if any(cue["item"] is not None and not 0 <= cue["item"] < len(item_ids)
+           for cue in rendered.cues):
+        raise ApiError(502, "loops_failed",
+                       "The render spoke a word this loop does not have, so it was not stored.")
+    stamp = {"ownerId": owner, "deleted": False, "createdAt": at, "editedAt": at,
+             "editedBy": device, "revision": 0}
+    stale = [row for row in graph.loop_cues(owner, loop_id) if not row.get("deleted")]
     changes = {
         "loops": [{
             **loop, "audioRef": reference, "audioMime": mime or "audio/mpeg",
             "durationSeconds": rendered.duration_seconds, "styleId": rendered.style_id or None,
             "seed": rendered.seed, "engineVersion": rendered.engine_version or None,
             "bedFingerprint": rendered.bed_fingerprint or None,
-            "pattern": rendered.pattern or loop.get("pattern"),
+            "format": rendered.format or loop.get("format"),
+            "fallbackFrom": rendered.fallback_from,
             "editedAt": at, "editedBy": device,
         }],
         "loopItems": [
             {
                 **row,
-                "startSeconds": float(timeline.get(index, {}).get("start") or 0.0),
-                "sourceRevealSeconds": float(timeline.get(index, {}).get("source_reveal") or 0.0),
-                "targetRevealSeconds": float(timeline.get(index, {}).get("target_reveal") or 0.0),
-                "endSeconds": float(timeline.get(index, {}).get("end") or 0.0),
-                # Two numbers that say how the word repeats, so the player can mark which of the
-                # pair is being said rather than only which word is being taught.
-                "repeats": int(timeline.get(index, {}).get("repeats") or 0),
-                "repeatSeconds": float(timeline.get(index, {}).get("repeat_seconds") or 0.0),
+                "startSeconds": float(timed.get(index, {}).get("start") or 0.0),
+                "sourceRevealSeconds": timed.get(index, {}).get("source_reveal"),
+                "targetRevealSeconds": timed.get(index, {}).get("target_reveal"),
+                "endSeconds": float(timed.get(index, {}).get("end") or 0.0),
                 "editedAt": at, "editedBy": device,
             }
             for index, row in enumerate(rows)
+        ],
+        # A render's lines replace the last render's whole: the old ones become tombstones in the
+        # same write, so a device never holds two recordings' worth of lines for one loop.
+        "loopCues": [{**row, "deleted": True, "editedAt": at, "editedBy": device}
+                     for row in stale] + [
+            {
+                "id": new_record_id(), "loopId": loop_id, "position": position,
+                "group": cue["group"], "kind": cue["kind"], "section": cue["section"],
+                "loopItemId": item_ids[cue["item"]] if cue["item"] is not None else None,
+                "side": cue["side"], "role": cue["role"], "language": cue["language"],
+                "text": cue["text"], "take": cue["take"],
+                "startSeconds": cue["start"], "endSeconds": cue["end"],
+                **stamp,
+            }
+            for position, cue in enumerate(rendered.cues)
         ],
     }
     try:
@@ -368,6 +438,8 @@ def store(settings: Settings, owner: str, device: str, loop_id: str, rendered: L
     except Exception:
         destination.unlink(missing_ok=True)
         raise
+    # Kept for the next render of this loop, after the rows it belongs to have landed.
+    loop_scripts.keep(owner, loop_id, rendered.format or loop.get("format") or "", rendered.script)
     previous = loop.get("audioRef")
     if previous and previous != reference:
         Path(settings.media_path).joinpath(previous).unlink(missing_ok=True)
@@ -394,16 +466,45 @@ def remove(settings: Settings, owner: str, device: str, loop_id: str) -> dict[st
     at = now_instant()
     stamp = {"deleted": True, "editedAt": at, "editedBy": device}
     rows = [row for row in graph.loop_items(owner, loop_id) if not row.get("deleted")]
+    lines = [row for row in graph.loop_cues(owner, loop_id) if not row.get("deleted")]
     graph.merge_graph(owner, device, {
         "loops": [{**loop, **stamp}],
         "loopItems": [{**row, **stamp} for row in rows],
+        "loopCues": [{**row, **stamp} for row in lines],
     }, enqueue=None)
+    loop_scripts.forget(owner, loop_id)
 
     reference = loop.get("audioRef")
     if reference:
         # `missing_ok`: a track already gone is not a reason to refuse a deletion that has happened.
         Path(settings.media_path).joinpath(reference).unlink(missing_ok=True)
     return graph.owned_records(owner, "loops", [loop_id])[loop_id]
+
+
+# A writer's prompt is the generator's, assembled from what a format needs; a real one is a few
+# thousand characters. This bounds a malformed request, not a prompt.
+PROMPT_LIMIT = 60_000
+
+
+def write(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, str]:
+    """The lines of one render, from the owner's text chain: the generator's writer, calling home.
+
+    The generator holds no credential, so a format that takes its lines from a writer — a radio
+    lesson, a story — asks here, with its render's token, exactly as every take does. It sends a
+    prompt it assembled and gets the model's text back; it reads that text itself, which is why this
+    asks for text and not for JSON (`services/models.llm_text`). A chain that cannot answer is
+    refused with its own sentence, which the render keeps and the job's progress shows.
+    """
+    prompt = body.get("prompt")
+    if not isinstance(prompt, str) or not prompt.strip():
+        raise ApiError(400, "invalid_input", "A writer is asked with a prompt.")
+    if len(prompt) > PROMPT_LIMIT:
+        raise ApiError(400, "invalid_input", "That prompt is longer than any loop needs.")
+    purpose = str(body.get("purpose") or "programme").strip()[:40] or "programme"
+    from acervo.services.models import llm_text
+
+    text, answer = llm_text(settings, owner, prompt, caller=f"loop-{purpose}")
+    return {"text": text, "provider": answer.provider_id, "model": answer.model}
 
 
 def delivery(owner: str) -> str:

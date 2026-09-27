@@ -1466,10 +1466,13 @@ function toast(msg, action) {
    and two switches: play it again, and go on to the next one. The words stand where the artwork or
    the lyrics would.
 
-   THE ONE RULE THAT IS NOT A MUSIC PLAYER'S: a translation is never drawn before it has been
-   spoken. A word not yet reached shows its source and a short bar where its translation will be.
-   The reveal is a pure function of the clock, so dragging backwards withholds it again — there is
-   no latch to fall out of step with where the track actually is.
+   Where the lyrics would be is every line the loop says, as cards: one per group of lines, as the
+   generator grouped them — a word and its translation, an example and what it means, a remark.
+
+   THE ONE RULE THAT IS NOT A MUSIC PLAYER'S: within a card, nothing after its first line is drawn
+   before it has been said — a translation, a quiz's answer, an example's meaning. A short bar stands
+   where the line will be. The reveal is a pure function of the clock, so dragging backwards
+   withholds it again — there is no latch to fall out of step with where the track actually is.
 
    The controls are a footer of a column that owns its height, never a sticky element inside a
    scroller: the words scroll and the player cannot move, so pause is always where you left it.
@@ -1480,13 +1483,23 @@ function toast(msg, action) {
    drawing this at all — how the reveal *feels* is not a question a still picture can answer.
 
    The application's counterparts are `LoopView.tsx`, `LoopPlayer.tsx`, `MadeBar.tsx` and
-   `LoopDialog.tsx`, and `loopMomentAt` in `selectors.ts` is the derivation this repeats. */
+   `LoopDialog.tsx`, and `loopCards` / `loopMomentAt` in `selectors.ts` are the derivation this
+   repeats. */
 
 const player = { loopId: null, at: 0, playing: false, speed: 1, frame: null, last: 0, scrubbing: false,
                  repeat: false, autoplay: false };
 
 function loopsIn(lang) { return LOOPS.filter((l) => l.language === lang).sort((a, b) => a.position - b.position); }
 function loopItemsOf(id) { return LOOP_ITEMS.filter((r) => r.loopId === id).sort((a, b) => a.position - b.position); }
+function loopCuesOf(id) { return LOOP_CUES.filter((r) => r.loopId === id).sort((a, b) => a.position - b.position); }
+
+/* A format in words, the generator's where it gave them — `selectors.ts` `formatLabel`. */
+function formatLabel(id) {
+  const named = LOOP_SCHEMA.formats.find((format) => format.id === id);
+  if (named) return named.label;
+  const words = id.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
 const loopIsReady = (loop) => Boolean(loop.audioRef);
 const loopOf = (id) => LOOPS.find((l) => l.id === id) || null;
 
@@ -1505,35 +1518,47 @@ const clock = (s) => {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 };
 
-/* When each of a word's utterances begins. A word is spoken, then its translation, then that pair
-   again — `repeats` times in all, evenly `repeatSeconds` apart from the first translation. The gap
-   from a word to its own translation is the recall gap and is deliberately longer, which is why it
-   is stored rather than derived. `utteranceStarts` in `selectors.ts` is the same arithmetic. */
-function utteranceStarts(item) {
-  const known = item.repeats > 0 && item.repeatSeconds > 0 ? item.repeats * 2 : 2;
-  const starts = [item.startSeconds, item.targetRevealSeconds];
-  for (let index = 2; index < known; index += 1) {
-    starts.push(item.targetRevealSeconds + (index - 1) * item.repeatSeconds);
-  }
-  return starts;
+/* A loop's lines as the cards the player draws: one per group, and a line said several times — a
+   drill's word — is one row of it. `loopCards` in `selectors.ts`. */
+function loopCards(cues) {
+  const cards = [];
+  cues.forEach((cue) => {
+    let card = cards[cards.length - 1];
+    if (!card || card.group !== cue.group) {
+      card = { group: cue.group, section: cue.section, kind: cue.kind, loopItemId: cue.loopItemId, start: cue.startSeconds, lines: [] };
+      cards.push(card);
+    }
+    const same = card.lines.find((one) => one.text === cue.text && one.language === cue.language);
+    if (same) same.starts.push(cue.startSeconds);
+    else card.lines.push({ text: cue.text, language: cue.language, role: cue.role, heard: cue.startSeconds, starts: [cue.startSeconds] });
+  });
+  return cards;
 }
 
-/* Everything the player draws at one instant. The gap after a word belongs to the word just heard,
-   so a line does not go dark while its bed plays on; and `sounding` is the line most recently
-   spoken rather than the one making sound this millisecond, because an utterance is about half a
-   second long every four and a mark that blinked for half a second would be unreadable. */
-function loopMomentAt(items, at) {
-  let index = -1;
-  items.forEach((item, position) => { if (at >= item.startSeconds) index = position; });
-  const item = index >= 0 ? items[index] : null;
-  if (!item) return { index, item: null, sounding: null, revealed: false };
-  let spoken = -1;
-  utteranceStarts(item).forEach((start, position) => { if (at >= start) spoken = position; });
-  return {
-    index, item,
-    sounding: spoken < 0 ? null : spoken % 2 === 0 ? "source" : "target",
-    revealed: at >= item.targetRevealSeconds
-  };
+/* What the player marks at one instant. The gap after a card belongs to it until the next begins,
+   so a card does not go dark while its bed plays on; and `sounding` is the line most recently said
+   rather than the one making sound this millisecond, because a word is half a second long every
+   few and a mark that blinked for half a second would be unreadable. */
+function loopMomentAt(cards, at) {
+  let card = -1;
+  cards.forEach((one, index) => { if (at >= one.start) card = index; });
+  if (card < 0) return { card, sounding: -1 };
+  let sounding = -1;
+  let latest = -Infinity;
+  cards[card].lines.forEach((line, index) => {
+    line.starts.forEach((start) => { if (start <= at && start >= latest) { latest = start; sounding = index; } });
+  });
+  return { card, sounding };
+}
+
+/* The word a loop is on, for the bar: the card's, else the last word whose block has begun. */
+function loopWordAt(rows, cards, at) {
+  const card = cards[loopMomentAt(cards, at).card];
+  const own = card && card.loopItemId ? rows.find((row) => row.id === card.loopItemId) : null;
+  if (own) return own;
+  let latest = null;
+  rows.forEach((row) => { if (at >= row.startSeconds) latest = row; });
+  return latest;
 }
 
 /* ── the fake transport ── */
@@ -1592,18 +1617,18 @@ function loopSeek(seconds) {
   paintLoops();
 }
 
-/* Previous behaves the way every player's does: back to the top of this word unless you press it
+/* Previous behaves the way every player's does: back to the top of this card unless you press it
    just after one started, which means you meant the one before. */
 function loopStep(by) {
   const loop = loopOf(player.loopId);
   if (!loop) return;
-  const rows = loopItemsOf(loop.id);
-  const index = loopMomentAt(rows, player.at).index;
-  if (by < 0 && index >= 0 && player.at - rows[index].startSeconds > 3) { loopSeek(rows[index].startSeconds); return; }
+  const cards = loopCards(loopCuesOf(loop.id));
+  const index = loopMomentAt(cards, player.at).card;
+  if (by < 0 && index >= 0 && player.at - cards[index].start > 3) { loopSeek(cards[index].start); return; }
   const want = index + by;
   if (want < 0) { loopSeek(0); return; }
-  if (want >= rows.length) { loopSeek(loop.durationSeconds); return; }
-  loopSeek(rows[want].startSeconds);
+  if (want >= cards.length) { loopSeek(loop.durationSeconds); return; }
+  loopSeek(cards[want].start);
 }
 
 /* ── drawing ── */
@@ -1657,40 +1682,60 @@ function playerBlock(loop) {
     <div class="transport">
       <button class="switch${player.repeat ? " on" : ""}" data-switch="repeat"
               aria-pressed="${player.repeat}" aria-label="Play this loop again when it ends">${ICON.repeat}</button>
-      <button data-step="-1" aria-label="Previous word">${ICON.prev}</button>
+      <button data-step="-1" aria-label="Previous line">${ICON.prev}</button>
       <button class="big" id="playPause" aria-label="Play">${ICON.play}</button>
-      <button data-step="1" aria-label="Next word">${ICON.next}</button>
+      <button data-step="1" aria-label="Next line">${ICON.next}</button>
       <button class="switch${player.autoplay ? " on" : ""}" data-switch="autoplay"
               aria-pressed="${player.autoplay}" aria-label="Go on to the next loop when this one ends">${ICON.continue}</button>
     </div>
     <div class="player-bed">
-      ${state.remaking === loop.id ? '<span class="bed-status label">Making new music · 38% · Rendering the music bed</span>' : ""}
+      ${state.remaking === loop.id ? '<span class="bed-status label">Making new music · 38% · Rendering the music bed</span>'
+        : loop.fallbackFrom ? `<span class="bed-status label">${esc(fallbackNote(loop))}</span>` : ""}
       <span class="bed-line">
         <button class="bed-name label" id="bedName" aria-haspopup="menu" aria-expanded="${Boolean(state.musicMenu)}"
                 ${state.remaking === loop.id ? "disabled" : ""}>${esc(styleLabel(loop.styleId))}${ICON.down}</button>
         <button class="bed-star${kept ? " on" : ""}" id="bedStar" aria-pressed="${kept}"
                 aria-label="${kept ? "No longer keep this music" : "Keep this music as a favourite"}">${kept ? ICON.starOn : ICON.star}</button>
-        <span class="label">· ${rows.length} words</span>
+        <span class="label">· ${esc(formatLabel(loop.format))} · ${rows.length} words</span>
         ${musicMenu(loop)}
       </span>
     </div>
   </div>`;
 }
 
-/* One row per word. The row being taught *is* the big word — there is no second, larger copy of it
-   above, so there is one thing to look at and one column to read down. */
+/* What a format needs, said as what the owner would set up, and where — `LoopFormat.tsx`. */
+const NEEDS = {
+  writer: { what: "a writing model", where: "Settings ▸ Providers" },
+  multilingual_voice: { what: "a loop voice that can mix languages", where: "Settings ▸ Loops" }
+};
+
+function fallbackNote(loop) {
+  const asked = LOOP_SCHEMA.formats.find((format) => format.id === loop.fallbackFrom);
+  const needs = (asked ? asked.requires : []).map((need) => NEEDS[need].what);
+  return `${formatLabel(loop.format)} instead of ${formatLabel(loop.fallbackFrom)}${needs.length ? ` — it needs ${needs.join(" and ")}` : ""}`;
+}
+
+const SECTIONS = { quiz: "Quiz", review: "Review" };
+
+/* One card per group of lines. The card being played *is* the big type — there is no second, larger
+   copy of it above, so there is one thing to look at and one column to read down. */
 function lyricBlock(loop) {
-  return `<div class="lyric" id="lyric">${loopItemsOf(loop.id).map((row) => `
-    <button class="lyric-row" data-seek="${row.startSeconds}"
-            data-target="${esc(row.targetText)}">
-      <span class="lyric-source">${esc(row.sourceText)}</span>
-      <span class="lyric-target"><span class="lyric-held"></span></span>
-    </button>`).join("")}</div>`;
+  const cards = loopCards(loopCuesOf(loop.id));
+  return `<div class="lyric" id="lyric">${cards.map((card, index) => {
+    const entering = SECTIONS[card.section] && (index === 0 || cards[index - 1].section !== card.section);
+    return `${entering ? `<div class="lyric-divider label">${SECTIONS[card.section]}</div>` : ""}
+    <button class="lyric-row" data-seek="${card.start}" data-card="${index}">${card.lines.map((line, number) => `
+      <span class="lyric-line ${line.role === "native" ? "lyric-source" : "lyric-target"}${line.text.length > 28 ? " long" : ""}"
+            data-heard="${number === 0 ? -1 : line.heard}" data-text="${esc(line.text)}">
+        <span class="lyric-lang" aria-hidden="true">${esc(line.language.split("-")[0].toUpperCase())}</span>${number === 0
+          ? `<span class="lyric-said">${esc(line.text)}</span>` : '<span class="lyric-held"></span>'}</span>`).join("")}
+    </button>`;
+  }).join("")}</div>`;
 }
 
 function loopSub(loop) {
   if (!loopIsReady(loop)) return '<span class="doing">Being made…</span>';
-  return `${loopItemsOf(loop.id).length} words · ${clock(loop.durationSeconds)}`;
+  return `${esc(formatLabel(loop.format))} · ${loopItemsOf(loop.id).length} words · ${clock(loop.durationSeconds)}`;
 }
 
 /* A loop is a `swipeRow` whose one action is Delete. The row is never `disabled`: a loop that was
@@ -2370,32 +2415,34 @@ function paintLoops() {
   const line = $(".loopbar-line"); if (line) line.style.width = percent;
 
   const rows = loopItemsOf(loop.id);
-  const moment = loopMomentAt(rows, player.at);
+  const cards = loopCards(loopCuesOf(loop.id));
+  const moment = loopMomentAt(cards, player.at);
   document.querySelectorAll(".lyric-row").forEach((element, i) => {
-    const want = i === moment.index ? "now" : i < moment.index ? "past" : "next";
+    const want = i === moment.card ? "now" : i < moment.card ? "past" : "next";
     if (element.dataset.state !== want) {
       element.dataset.state = want;
       element.classList.toggle("now", want === "now");
       element.classList.toggle("past", want === "past");
       if (want === "now") element.scrollIntoView({ block: "center", behavior: "smooth" });
     }
-    /* Said or not said, asked of the clock every frame — which is what makes a backwards drag put
-       the answer away again rather than leaving it up because it was once shown. */
-    const said = i < moment.index || (i === moment.index && moment.revealed);
-    if (element.dataset.said !== String(said)) {
-      element.dataset.said = String(said);
-      element.querySelector(".lyric-target").innerHTML = said
-        ? `<span class="lyric-said">${esc(element.dataset.target)}</span>`
-        : '<span class="lyric-held"></span>';
-    }
-    /* Which of the pair is sounding: colour, and nothing else. No weight, no size, no offset — so a
-       screen left running for four minutes never reflows under the eye that glances at it. */
-    const saying = i === moment.index ? moment.sounding : null;
-    element.querySelector(".lyric-source").classList.toggle("saying", saying === "source");
-    element.querySelector(".lyric-target").classList.toggle("saying", saying === "target");
+    element.querySelectorAll(".lyric-line").forEach((line, number) => {
+      /* Said or not said, asked of the clock every frame — which is what makes a backwards drag put
+         the answer away again rather than leaving it up because it was once shown. */
+      const said = player.at >= Number(line.dataset.heard);
+      if (line.dataset.said !== String(said)) {
+        line.dataset.said = String(said);
+        line.lastElementChild.outerHTML = said
+          ? `<span class="lyric-said">${esc(line.dataset.text)}</span>`
+          : '<span class="lyric-held"></span>';
+      }
+      /* Which line is sounding: colour, and nothing else. No weight, no size, no offset — so a
+         screen left running for four minutes never reflows under the eye that glances at it. */
+      line.classList.toggle("saying", i === moment.card && number === moment.sounding);
+    });
   });
 
-  const word = moment.item ? moment.item.sourceText : loopTitle(loop, 2);
+  const current = loopWordAt(rows, cards, player.at);
+  const word = current ? current.sourceText : loopTitle(loop, 2);
   [".loopbar-title", ".loop-chip-word"].forEach((sel) => {
     const node = $(sel); if (node && node.textContent !== word) node.textContent = word;
   });
@@ -2412,6 +2459,40 @@ function paintLoops() {
 function loopEligible() {
   return LEXEMES.filter((x) => x.language === state.lang && x.status !== "inbox" && x.primaryGloss
     && (state.topic === "all" || x.topics.includes(state.topic))).length;
+}
+
+/* The kind of loop — `LoopFormat.tsx` `FormatChoices`: the generator's formats as radio cards, the
+   chosen one's switches beneath, and a card that this server cannot make saying why. */
+function formatMissing(format) {
+  return format.requires.filter((need) =>
+    (need === "writer" && !LOOP_SCHEMA.writerAvailable) || (need === "multilingual_voice" && !LOOP_SCHEMA.mixesLanguages));
+}
+
+function formatSwitches(format) {
+  const entries = Object.entries(format.switches);
+  if (!entries.length) return "";
+  return `<div class="format-switches">${entries.map(([name, spec]) => spec.choices
+    ? `<div class="format-switch"><span>${esc(spec.label)}</span>
+        <span class="seg" role="radiogroup" aria-label="${esc(spec.label)}">${spec.choices.map((choice) =>
+          `<button type="button" role="radio" aria-checked="${choice === spec.default}" class="${choice === spec.default ? "on" : ""}">${esc(choice)}</button>`).join("")}</span></div>`
+    : `<label class="format-switch"><input type="checkbox" name="switch-${name}"${spec.default ? " checked" : ""}><span>${esc(spec.label)}</span></label>`).join("")}</div>`;
+}
+
+function formatChoices(chosen = "classic") {
+  return `<div class="format-choices">${LOOP_SCHEMA.formats.map((format) => {
+    const missing = formatMissing(format);
+    const usable = !missing.length || Boolean(format.fallback);
+    const needs = missing.map((need) => NEEDS[need].what).join(" and ");
+    const where = [...new Set(missing.map((need) => NEEDS[need].where))].join(" and ");
+    const note = !missing.length ? "" : format.fallback
+      ? `Falls back to ${formatLabel(format.fallback)} here: it needs ${needs} (${where}).`
+      : `Needs ${needs} — set one up in ${where}.`;
+    return `<label class="config-switch format-card${format.id === chosen ? " on" : ""}${usable ? "" : " off"}">
+      <input type="radio" name="loop-format" value="${format.id}"${format.id === chosen ? " checked" : ""}${usable ? "" : " disabled"}>
+      <span><strong>${esc(format.label)}</strong><span>${esc(format.description)}</span>${note
+        ? `<span class="format-note warn">${esc(note)}</span>` : ""}</span>
+    </label>`;
+  }).join("")}${formatSwitches(LOOP_SCHEMA.formats.find((format) => format.id === chosen))}</div>`;
 }
 
 /* One choice in the dialog's list — `LoopMusic.tsx` `MusicChoices`. */
@@ -2499,6 +2580,7 @@ function renderLoopDialog(from) {
       <div class="settings-body">
         <p class="config-help">Your words, set to music with their translations.</p>
         ${sourceBlock("loop", from, scope)}
+        <div class="config-field"><span>Kind of loop</span>${formatChoices(state.loopFormat || "classic")}</div>
         <div class="config-field"><span>Music</span>
           <div class="music-choices" role="radiogroup" aria-label="Music">
             ${musicChoice("surprise", "Surprise me", "New music, in any style", true)}
@@ -2547,6 +2629,23 @@ function openLoopDialog(from = "scope") {
       one.querySelector("[data-choice]").setAttribute("aria-checked", String(on));
     });
   };
+  const wireFormats = () => {
+    $(".format-choices", node).onchange = (ev) => {
+      if (ev.target.name !== "loop-format") return;
+      state.loopFormat = ev.target.value;
+      $(".format-choices", node).outerHTML = formatChoices(state.loopFormat);
+      wireFormats();
+    };
+    $(".format-choices", node).onclick = (ev) => {
+      const segment = ev.target.closest(".seg button");
+      if (!segment) return;
+      segment.parentElement.querySelectorAll("button").forEach((one) => {
+        one.classList.toggle("on", one === segment);
+        one.setAttribute("aria-checked", String(one === segment));
+      });
+    };
+  };
+  wireFormats();
   wireSource(node, "loop", "Make the loop");
   $("#loopGo", node).onclick = () => { shut(); toast("Asked for a loop — prototype only, nothing was made"); };
 }

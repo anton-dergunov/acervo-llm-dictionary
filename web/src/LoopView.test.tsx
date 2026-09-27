@@ -19,7 +19,7 @@ const stamp = {
 
 const loop = (over: Partial<Loop>): Loop => ({
   id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
-  engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", pattern: "retrieval",
+  engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
   durationSeconds: 90, position: 1, ...stamp, ...over
 });
@@ -27,15 +27,14 @@ const loop = (over: Partial<Loop>): Loop => ({
 const item = (loopId: string): LoopItem => ({
   id: `loopitem${loopId.slice(-5)}`, loopId, lexemeId: "lexeme000000001", position: 0,
   sourceText: "asco", targetText: "disgust", emotion: "repulsed",
-  startSeconds: 0, sourceRevealSeconds: 0, targetRevealSeconds: 8, endSeconds: 20,
-  repeats: 3, repeatSeconds: 4, ...stamp
+  startSeconds: 0, sourceRevealSeconds: 0, targetRevealSeconds: 8, endSeconds: 20, ...stamp
 });
 
 function view(loops: Loop[]) {
   const graph: VocabularyGraph = {
     vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [],
     imagePrompts: [], pronunciations: [], studyStates: [],
-    loops, loopItems: loops.map((one) => item(one.id)),
+    loops, loopItems: loops.map((one) => item(one.id)), loopCues: [],
     stories: [], storyParts: [], storyWords: [], beds: []
   };
   const onDelete = vi.fn();

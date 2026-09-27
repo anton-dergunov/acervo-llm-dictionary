@@ -98,7 +98,18 @@ def test_the_generators_catalogues_are_read_rather_than_copied(server, generator
     answer = server.get("/loops/schema")
     assert answer.status_code == 200, answer.text
     body = answer.json()["data"]
-    assert set(body["patterns"]) == {"retrieval", "alternating"}
+    # The generator's formats, Classic first, each with its own words, switches and requirements.
+    formats = {one["id"]: one for one in body["formats"]}
+    assert body["formats"][0]["id"] == "classic"
+    assert {"classic", "radio-lesson", "story"} <= set(formats)
+    assert formats["radio-lesson"]["requires"] == ["writer", "multilingual_voice"]
+    assert (formats["radio-lesson"]["fallback"], formats["story"]["fallback"]) == ("classic", None)
+    assert formats["radio-lesson"]["switches"]["repetitions"] == {
+        "label": "Times each word is said", "default": "3", "choices": ["2", "3", "4"]}
+    # And what only Acervo knows: whether a writing model is set up, and whether the loop voice —
+    # the directed order, by default — can mix languages.
+    assert isinstance(body["writerAvailable"], bool)
+    assert body["mixesLanguages"] is True
     # Each kind of music with the generator's own words for it — and never "auto", which is the
     # absence of a choice and the dialog's to name ("Surprise me").
     ids = [family["id"] for family in body["families"]]
@@ -127,7 +138,8 @@ def test_a_loop_is_written_with_its_words_and_no_track_yet(server, generator):
     # status column to disagree with it.
     assert loop["audioRef"] is None and loop["audioMime"] is None
     assert loop["durationSeconds"] is None
-    assert loop["language"] == "es" and loop["pattern"] == "retrieval"
+    assert loop["language"] == "es" and loop["format"] == "classic"
+    assert loop["switches"] == {} and loop["fallbackFrom"] is None
     assert body["job"]["kind"] == "loop" and body["job"]["subject"]["id"] == loop["id"]
 
     items = server.pull().json()["data"]["changes"]["loopItems"]
@@ -330,6 +342,87 @@ def test_a_seed_a_browser_could_not_hold_is_refused_rather_than_stored(server, g
     assert "seed" in refused.json()["error"]["message"].lower()
     # …and one just inside it is kept, which 2^31 would have refused.
     assert server.push({"loops": [{**loop, "seed": 2 ** 53 - 1}]}).status_code == 200
+
+
+# ── the format ──────────────────────────────────────────────────────────────
+
+
+def test_a_format_and_its_choices_are_kept_on_the_loop_and_sent_to_the_render(server, generator):
+    made = words(server, 2)
+    answer = ask(server, [one["id"] for one in made], format="radio-lesson",
+                 switches={"repetitions": "4", "remarks": False})
+    assert answer.status_code == 202, answer.text
+    loop = answer.json()["data"]["loop"]
+    assert loop["format"] == "radio-lesson"
+    assert loop["switches"] == {"repetitions": "4", "remarks": False}
+
+
+@pytest.mark.parametrize("given, said", [
+    ({"format": "karaoke"}, "karaoke"),
+    ({"format": "radio-lesson", "switches": {"volume": True}}, "volume"),
+    ({"format": "radio-lesson", "switches": {"repetitions": "9"}}, "2, 3, 4"),
+    ({"format": "radio-lesson", "switches": {"remarks": "yes"}}, "on or off"),
+    ({"format": "classic", "switches": ["repetitions"]}, "choices"),
+])
+def test_a_format_or_choice_the_generator_does_not_offer_is_refused_by_name(server, generator, given, said):
+    made = words(server, 1)
+    answer = ask(server, [made[0]["id"]], **given)
+    assert answer.status_code == 400
+    assert said in answer.json()["error"]["message"]
+    assert not server.pull().json()["data"]["changes"]["loops"]
+
+
+# ── the writer calling home ─────────────────────────────────────────────────
+
+
+def test_the_writer_route_answers_with_the_owner_s_text_chain(server, monkeypatch):
+    from acervo.models.results import Answer
+
+    asked = []
+
+    def text(settings, owner, prompt, caller="text", **kwargs):
+        asked.append((owner, prompt, caller))
+        return '{"order": [0]}', Answer(provider_id="gemini-free", model="gemini-3.8-flash",
+                                        seconds=1.0, cost_usd=None)
+
+    monkeypatch.setattr("acervo.services.models.llm_text", text)
+    answer = server.post("/loops/write", {"prompt": "Write the lines.", "purpose": "programme"})
+    assert answer.status_code == 200, answer.text
+    assert answer.json()["data"] == {"text": '{"order": [0]}', "provider": "gemini-free",
+                                     "model": "gemini-3.8-flash"}
+    assert asked == [(server.owner, "Write the lines.", "loop-programme")]
+
+
+def test_a_render_token_may_write_and_take_but_do_nothing_else(server, monkeypatch):
+    from acervo.models.results import Answer
+    from acervo.repository import accounts
+    from acervo.tokens import mint_render, resolve_secret
+
+    monkeypatch.setattr("acervo.services.models.llm_text",
+                        lambda *a, **k: ("lines", Answer("p", "m", 0.0, None)))
+    token = mint_render(resolve_secret(server.settings), accounts.by_id(server.owner), "render1")
+    headers = {"Authorization": f"Bearer {token}"}
+    wrote = server.client.post("/api/acervo/v1/loops/write", json={"prompt": "x"}, headers=headers)
+    assert wrote.status_code == 200, wrote.text
+    # A render's token is not a session: it opens the two routes it calls home to and no other.
+    assert server.client.get("/api/acervo/v1/loops/schema", headers=headers).status_code == 401
+
+
+def test_a_writer_asked_nothing_is_refused(server):
+    assert server.post("/loops/write", {"prompt": "  "}).status_code == 400
+    assert server.post("/loops/write", {"prompt": "x" * 70_000}).status_code == 400
+
+
+def test_a_refusing_chain_keeps_its_own_sentence(server, monkeypatch):
+    from acervo.errors import ApiError
+
+    def refuse(*args, **kwargs):
+        raise ApiError(503, "llm_unavailable", "Gemini is overloaded, and Cloudflare is out of allowance.")
+
+    monkeypatch.setattr("acervo.services.models.llm_text", refuse)
+    answer = server.post("/loops/write", {"prompt": "Write the lines."})
+    assert answer.status_code == 503
+    assert "Cloudflare is out of allowance" in answer.json()["error"]["message"]
 
 
 # ── deleting one ────────────────────────────────────────────────────────────

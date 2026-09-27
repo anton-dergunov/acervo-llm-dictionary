@@ -4,7 +4,7 @@
    `lexemeespolv001` deliberately has no `primaryGloss`, so the loop selectors have a word that is
    not eligible to exclude. */
 
-import type { VocabularyGraph } from "./domain";
+import type { LoopCue, LoopItem, VocabularyGraph } from "./domain";
 
 const OWNER = "owner0000000001";
 const stamp = (day: string) => `2026-${day}T12:00:00.000Z`;
@@ -15,7 +15,40 @@ const sync = (created: string, edited = created) => ({
 
 export const TEST_OWNER = OWNER;
 
+/**
+ * A drill's lines for its words, as a render reports them: each word, its translation after the
+ * recall gap, then the pair twice more, `spacing` apart. One card per word.
+ */
+export function drillCues(loopId: string, items: readonly LoopItem[], spacing: number,
+  { source = "es", target = "en" }: { source?: string; target?: string } = {}): LoopCue[] {
+  const cues: LoopCue[] = [];
+  items.forEach((item, group) => {
+    const starts = [item.startSeconds, item.targetRevealSeconds!,
+      item.targetRevealSeconds! + spacing, item.targetRevealSeconds! + 2 * spacing,
+      item.targetRevealSeconds! + 3 * spacing, item.targetRevealSeconds! + 4 * spacing];
+    starts.forEach((start, index) => {
+      const side = index % 2 === 0 ? "source" : "target";
+      cues.push({
+        id: `c${loopId.slice(0, 8)}${String(cues.length).padStart(6, "0")}`, loopId,
+        position: cues.length, group, kind: "say", section: "words", loopItemId: item.id, side,
+        role: side === "source" ? "native" : "guide", language: side === "source" ? source : target,
+        text: side === "source" ? item.sourceText : item.targetText, take: Math.floor(index / 2),
+        startSeconds: start, endSeconds: starts[index + 1] ?? item.endSeconds,
+        ownerId: item.ownerId, deleted: false, createdAt: item.createdAt, editedAt: item.editedAt,
+        editedBy: item.editedBy, revision: item.revision
+      });
+    });
+  });
+  return cues;
+}
+
 export function testGraph(): VocabularyGraph {
+  const graph = recorded();
+  // The rendered loop's lines, as its render reported them.
+  return { ...graph, loopCues: drillCues("loopmorning0001", graph.loopItems, 4.41) };
+}
+
+function recorded(): Omit<VocabularyGraph, "loopCues"> {
   return {
     vocabularies: [
       {
@@ -160,14 +193,14 @@ export function testGraph(): VocabularyGraph {
     loops: [
       {
         id: "loopmorning0001", language: "es", styleId: "sunlit-acoustic", seed: 104740,
-        engineVersion: "1.4.0", bedFingerprint: "90c6ad267d159b0e", pattern: "retrieval",
+        engineVersion: "1.4.0", bedFingerprint: "90c6ad267d159b0e", format: "classic", switches: {}, fallbackFrom: null,
         audioRef: "loops/es/90c6ad267d159b0e.mp3", audioMime: "audio/mpeg",
         durationSeconds: 124.5, position: 0, ...sync("09-01")
       },
       {
         // Queued but not rendered: an absent reference is the whole of what says so.
         id: "loopqueued00001", language: "es", styleId: null, seed: 0, engineVersion: null,
-        bedFingerprint: null, pattern: "retrieval", audioRef: null, audioMime: null,
+        bedFingerprint: null, format: "classic", switches: {}, fallbackFrom: null, audioRef: null, audioMime: null,
         durationSeconds: null, position: 1, ...sync("09-02")
       }
     ],
@@ -177,13 +210,13 @@ export function testGraph(): VocabularyGraph {
         sourceText: "picar", targetText: "to sting",
         emotion: "wincing slightly, as if something just bit you",
         startSeconds: 8.82, sourceRevealSeconds: 8.82, targetRevealSeconds: 17.65,
-        endSeconds: 44.12, repeats: 3, repeatSeconds: 4.41, ...sync("09-01")
+        endSeconds: 44.12, ...sync("09-01")
       },
       {
         id: "loopitembalsa01", loopId: "loopmorning0001", lexemeId: "lexemebalsa0001", position: 1,
         sourceText: "la balsa", targetText: "raft", emotion: null,
         startSeconds: 44.12, sourceRevealSeconds: 44.12, targetRevealSeconds: 52.94,
-        endSeconds: 79.41, repeats: 3, repeatSeconds: 4.41, ...sync("09-01")
+        endSeconds: 79.41, ...sync("09-01")
       }
     ],
     stories: [

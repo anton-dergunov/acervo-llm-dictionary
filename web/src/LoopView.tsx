@@ -21,9 +21,10 @@ import { stripOf } from "./ProgressStrip";
 import type { Loop, VocabularyGraph } from "./domain";
 import { BackIcon, HourglassIcon, PauseIcon, PlayIcon, PlusIcon } from "./icons";
 import * as player from "./loops";
+import { useLoopSchema } from "./LoopMusic";
 import LoopPlayer from "./LoopPlayer";
 import SwipeRow from "./SwipeRow";
-import { loopIsReady, loopItemsOf, loopTitle, loopsIn } from "./selectors";
+import { formatLabel, loopIsReady, loopItemsOf, loopTitle, loopTrackOf, loopsIn } from "./selectors";
 
 function clock(seconds: number | null): string {
   const whole = Math.max(0, Math.floor(seconds || 0));
@@ -47,16 +48,16 @@ export default function LoopView({ graph, language, onMake, onClose, onDelete, o
   const loops = loopsIn(graph, language);
   const [openId, setOpenId] = useState<string | null>(playback.loopId);
   const open = loops.find((loop) => loop.id === openId) ?? null;
+  const { schema } = useLoopSchema();
 
   /* The queue the player moves through when Next, or Play the next one, asks for another. Kept in
      the player rather than here, so leaving this surface does not end it: a loop goes on playing
      while you read a word, which is most of the point of having one. */
   useEffect(() => {
-    player.setQueue(loops.map((loop) => ({ loop, items: loopItemsOf(graph, loop.id) })));
+    player.setQueue(loops.map((loop) => loopTrackOf(graph, loop)));
   }, [graph, loops.map((loop) => loop.id).join()]);
 
   if (open) {
-    const items = loopItemsOf(graph, open.id);
     return <section className="loops">
       <div className="loops-back">
         <button className="icon-btn" onClick={() => setOpenId(null)} aria-label="Back to the loops"><BackIcon /></button>
@@ -64,7 +65,7 @@ export default function LoopView({ graph, language, onMake, onClose, onDelete, o
         <span className="spacer" />
       </div>
       <LoopPlayer
-        loop={open} items={items} graph={graph}
+        track={loopTrackOf(graph, open)} graph={graph}
         onChangeMusic={(music) => onChangeMusic(open.id, music)}
         onToggleKeep={() => onToggleKeep(open)}
       />
@@ -112,7 +113,7 @@ export default function LoopView({ graph, language, onMake, onClose, onDelete, o
             onClick={() => {
               if (!ready) return;
               setOpenId(loop.id);
-              if (!here) void player.play(loop, items);
+              if (!here) void player.play(loopTrackOf(graph, loop));
             }}
           >
             <span className={`loop-go${ready ? "" : " pending"}`}>
@@ -126,7 +127,7 @@ export default function LoopView({ graph, language, onMake, onClose, onDelete, o
                      old track until this finishes, so the row says both. */
                   ? <span className="doing">New music · {stripOf(job)?.phases.map((phase) => phase.text).join(" · ") || "queued"}</span>
                   : ready
-                  ? `${items.length} words · ${clock(loop.durationSeconds)}`
+                  ? `${formatLabel(schema?.formats, loop.format)} · ${items.length} words · ${clock(loop.durationSeconds)}`
                   : making
                     /* What it is *doing*, in the generator's own words — this is a four-minute
                        operation and "being made" says nothing you could not already see. */

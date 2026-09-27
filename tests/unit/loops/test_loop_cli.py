@@ -10,7 +10,7 @@ from __future__ import annotations
 import pytest
 
 from acervo.loops import cli
-from acervo.loops.client import Loop, Operation, Schema
+from acervo.loops.client import Format, Loop, Operation, Schema
 
 
 class FakeService:
@@ -18,9 +18,9 @@ class FakeService:
         self.started: dict = {}
 
     def schema(self) -> Schema:
-        return Schema(api_version="1.0.0", engine_version="1.4.0", production_bundle=True,
-                      bundle_version="3", patterns=("retrieval",), families=(),
-                      max_items=24)
+        return Schema(api_version="2.0.0", engine_version="1.5.0", production_bundle=True,
+                      bundle_version="3", formats=(Format("classic", "Classic drill", "…"),),
+                      families=(), max_items=24)
 
     def start(self, **kwargs) -> Operation:
         self.started.update(kwargs)
@@ -29,8 +29,9 @@ class FakeService:
 
     def operation(self, operation_id: str) -> Operation:
         result = Loop(audio_url="/audio", audio_mime="audio/mpeg", duration_seconds=10.0,
-                      pattern="retrieval", style_id="meditative", seed=7, engine_version="1.4.0",
-                      bed_fingerprint="0" * 16, bpm=80.0, timeline=())
+                      format="classic", fallback_from=None, style_id="meditative", seed=7,
+                      engine_version="1.5.0", bed_fingerprint="0" * 16, bpm=80.0, items=(),
+                      cues=())
         return Operation(id=operation_id, status="completed", successful=True, fraction=1.0,
                          message="Loop ready", error=None, result=result)
 

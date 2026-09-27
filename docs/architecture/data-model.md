@@ -24,7 +24,7 @@ order always resolves, and tombstones cascade in the reverse order.
 | `imagePrompts` | one sense's picture and how it came to exist | id derived from the sense |
 | `pronunciations` | one spoken field's recording | id derived from what it reads |
 | `studyStates` | a word's review state in one learning system | written back from Anki |
-| `loops`, `loopItems` | a rendered track, and each word in it with its timings | hang off no word |
+| `loops`, `loopItems`, `loopCues` | a rendered track, each word in it, and every line it says | hang off no word |
 | `stories`, `storyParts`, `storyWords` | an illustrated story, its parts, and the words it was asked to teach | |
 | `beds` | a loop's music, kept to be asked for again | outlives the loop it came from |
 
@@ -153,9 +153,11 @@ sign has no sentence ([`../features/photo-capture.md`](../features/photo-capture
 
 ## Things made from words
 
-**A loop** is the bed's identity (`styleId`, `seed`, `engineVersion`, `bedFingerprint`), the track
-(`audioRef`, `audioMime`, `durationSeconds`) and a `position`; **its items** record what was *said*
-and when. **A story** is its kind, style, title and the note the owner gave the writer; **its parts**
+**A loop** is its format and the listener's switches for it, the bed's identity (`styleId`, `seed`,
+`engineVersion`, `bedFingerprint`), the track (`audioRef`, `audioMime`, `durationSeconds`) and a
+`position`; **its items** record each word it teaches and when its block is heard, and **its lines**
+(`loopCues`) every line it says — words, translations, examples, remarks — as the render reported
+them, grouped as the player shows them. **A story** is its kind, style, title and the note the owner gave the writer; **its parts**
 are a paragraph, its translation, a picture and a recording per passage; **its words** are the words
 it was asked to teach and the forms it actually used. **A bed** is a loop's music kept to be asked for
 again. The designs are [`../features/loops.md`](../features/loops.md) and
@@ -169,8 +171,10 @@ Three rules they share:
 - **What was said is denormalised on purpose.** A loop item's and a story word's `sourceText` record
   what was spoken or asked for, so editing the word afterwards cannot make a caption describe a
   recording it does not match. Deleting the word leaves these rows alone, pointing at a tombstone.
-- **Opaque blobs are not stored.** A loop's bed is replayed from `styleId`, `seed` and `engineVersion`
-  rather than kept as a resolved description.
+- **Opaque blobs are not replicated.** A loop's bed is replayed from `styleId`, `seed` and
+  `engineVersion` rather than kept as a resolved description. The one blob kept is server-only: what
+  the generator's writer wrote for a loop (`loop_scripts`), sent back with new music so the lines
+  stay the same, and read by nothing else.
 
 ---
 
@@ -195,7 +199,7 @@ Three rules they share:
   attestation, or an image prompt's sense, must also belong to the same lexeme. An id already held by
   another owner is refused as `id_conflict`, never overwritten.
 - **No uniqueness constraints on replicated collections.** Server-only tables that never replicate —
-  `sync_state`, `model_selection`, `jobs` — are exempt.
+  `sync_state`, `model_selection`, `jobs`, `loop_scripts` — are exempt.
 - **A vocabulary language is a record, not a table in the code.** `languages.ts` supplies only the
   defaults a record falls back on.
 - **Any change to a replicated record's shape bumps `LOCAL_SCHEMA_VERSION`** in `repository.ts`, and a

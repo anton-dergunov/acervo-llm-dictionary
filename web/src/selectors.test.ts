@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { validateGraph, type LoopItem } from "./domain";
+import { validateGraph, type LoopCue, type LoopItem } from "./domain";
 import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
-  loopItemsOf, loopMomentAt, loopTitle, loopsIn, sampleLexemeIds, shortGlossOf, utteranceStarts,
+  formatLabel, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
   strengthOf, topicOptions, visibleRows
 } from "./selectors";
-import { testGraph } from "./testGraph";
+import { drillCues, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
 
 const query = { language: "es", topic: "all" as const, query: "", sort: "recent" as const };
@@ -288,50 +288,85 @@ describe("playing a loop", () => {
     id: "loopitem0000001", loopId: "loop00000000001", lexemeId: "lexeme000000001", position: 0,
     sourceText: "asco", targetText: "disgust", emotion: "repulsed",
     startSeconds: 8.82, sourceRevealSeconds: 8.82, targetRevealSeconds: 17.65, endSeconds: 44.12,
-    repeats: 3, repeatSeconds: 4.41,
     ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-16T00:00:00.000Z",
     editedAt: "2026-09-16T00:00:00.000Z", editedBy: "device000000001", revision: 1, ...over
   });
+  const line = (over: Partial<LoopCue>): LoopCue => ({
+    id: `cue${String(over.position ?? 0).padStart(12, "0")}`, loopId: "loop00000000001", position: 0,
+    group: 0, kind: "say", section: "words", loopItemId: null, side: null, role: "native",
+    language: "es", text: "", take: 0, startSeconds: 0, endSeconds: 0,
+    ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-16T00:00:00.000Z",
+    editedAt: "2026-09-16T00:00:00.000Z", editedBy: "device000000001", revision: 1, ...over
+  });
+  const drill = drillCues("loop00000000001", [word()], 4.41);
 
-  it("puts every utterance back where the render had it", () => {
-    expect(utteranceStarts(word())).toEqual([8.82, 17.65, 22.06, 26.47, 30.88, 35.29]);
+  it("draws a drill as one card whose word and translation are each one row", () => {
+    const [card] = loopCards(drill);
+    expect(card.lines.map((one) => [one.text, one.language, one.starts.length])).toEqual([
+      ["asco", "es", 3], ["disgust", "en", 3]
+    ]);
+    expect(card.lines[1].starts).toEqual([17.65, 26.47, 35.29].map((at) => expect.closeTo(at, 5)));
   });
 
-  it("gives only the two it was told when the render reported no cadence", () => {
-    expect(utteranceStarts(word({ repeats: 0, repeatSeconds: 0 }))).toEqual([8.82, 17.65]);
+  it("follows which line was said most recently", () => {
+    const cards = loopCards(drill);
+    const sounding = (at: number) => loopMomentAt(cards, at).sounding;
+    expect(sounding(5)).toBe(-1);                 // the bed, before the first word
+    expect(sounding(9)).toBe(0);
+    expect(sounding(17)).toBe(0);                 // still the word: the answer has not been said
+    expect(sounding(18)).toBe(1);
+    expect(sounding(23)).toBe(0);
+    expect(sounding(27)).toBe(1);
+    expect(sounding(31)).toBe(0);
+    expect(sounding(36)).toBe(1);
+    expect(sounding(43)).toBe(1);                 // held through the tail, being the last heard
   });
 
-  it("follows which line was spoken most recently", () => {
-    const items = [word()];
-    const sounding = (at: number) => loopMomentAt(items, at).sounding;
-    expect(sounding(5)).toBeNull();               // the bed, before the first word
-    expect(sounding(9)).toBe("source");
-    expect(sounding(17)).toBe("source");          // still the word: the answer has not been said
-    expect(sounding(18)).toBe("target");
-    expect(sounding(23)).toBe("source");
-    expect(sounding(27)).toBe("target");
-    expect(sounding(31)).toBe("source");
-    expect(sounding(36)).toBe("target");
-    expect(sounding(43)).toBe("target");          // held through the tail, being the last heard
+  it("withholds everything after a card's first line until it is said, and again if you wind back", () => {
+    const [card] = loopCards(drill);
+    expect(loopLineShown(card, 0, 0)).toBe(true);  // the question is always there
+    expect(loopLineShown(card, 1, 12)).toBe(false);
+    expect(loopLineShown(card, 1, 18)).toBe(true);
+    // A function of the clock and not a latch, so this is the same question again.
+    expect(loopLineShown(card, 1, 12)).toBe(false);
   });
 
-  it("withholds the answer until it has been spoken, and withholds it again if you wind back", () => {
-    const items = [word()];
-    expect(loopMomentAt(items, 12).revealed).toBe(false);
-    expect(loopMomentAt(items, 18).revealed).toBe(true);
-    // The reveal is a function of the clock and not a latch, so this is the same question again.
-    expect(loopMomentAt(items, 12).revealed).toBe(false);
+  it("keeps a quiz's answer back, since there the translation comes first", () => {
+    const [card] = loopCards([
+      line({ position: 0, section: "quiz", side: "target", role: "guide", language: "en", text: "disgust", startSeconds: 100, loopItemId: "loopitem0000001" }),
+      line({ position: 1, section: "quiz", side: "source", text: "asco", startSeconds: 104, loopItemId: "loopitem0000001" })
+    ]);
+    expect(card.lines.map((one) => one.text)).toEqual(["disgust", "asco"]);
+    expect(loopLineShown(card, 1, 102)).toBe(false);
+    expect(loopLineShown(card, 1, 104)).toBe(true);
   });
 
-  it("gives the gap after a word to the word just heard rather than to the next one", () => {
-    const items = [word(), word({ id: "loopitem0000002", position: 1, sourceText: "la balsa",
-                                  startSeconds: 60, sourceRevealSeconds: 60, targetRevealSeconds: 68.8,
-                                  endSeconds: 95 })];
+  it("gives every other line its own card, and an example's meaning after it is heard", () => {
+    const cards = loopCards([
+      line({ position: 0, group: 0, kind: "intro", section: "intro", role: "guide", language: "en", text: "Two words today.", startSeconds: 2 }),
+      line({ position: 1, group: 1, kind: "example", text: "Me da asco.", startSeconds: 10 }),
+      line({ position: 2, group: 1, kind: "translation", role: "guide", language: "en", text: "It disgusts me.", startSeconds: 13 })
+    ]);
+    expect(cards.map((card) => card.kind)).toEqual(["intro", "example"]);
+    expect(loopLineShown(cards[1], 1, 12)).toBe(false);
+    expect(loopLineShown(cards[1], 1, 13)).toBe(true);
+  });
+
+  it("gives the gap after a card to the card just heard rather than to the next one", () => {
+    const second = word({ id: "loopitem0000002", position: 1, sourceText: "la balsa", targetText: "raft",
+                          startSeconds: 60, sourceRevealSeconds: 60, targetRevealSeconds: 68.8, endSeconds: 95 });
+    const cards = loopCards(drillCues("loop00000000001", [word(), second], 4.41));
     // 44.12 is where the first word ends and 60 is where the second begins: the bed in between
-    // belongs to the first, so the line does not go dark while its music plays on.
-    expect(loopMomentAt(items, 50).index).toBe(0);
-    expect(loopMomentAt(items, 60).index).toBe(1);
-    expect(loopMomentAt(items, 0).index).toBe(-1);
-    expect(loopMomentAt(items, 0).item).toBeNull();
+    // belongs to the first, so the card does not go dark while its music plays on.
+    expect(loopMomentAt(cards, 50).card).toBe(0);
+    expect(loopMomentAt(cards, 60).card).toBe(1);
+    expect(loopMomentAt(cards, 0).card).toBe(-1);
+    expect(loopWordAt([word(), second], cards, 61)?.sourceText).toBe("la balsa");
+    expect(loopWordAt([word(), second], cards, 0)).toBeNull();
+  });
+
+  it("names a format by the generator's label, else by its id made readable", () => {
+    expect(formatLabel([{ id: "radio-lesson", label: "Radio lesson" }], "radio-lesson")).toBe("Radio lesson");
+    expect(formatLabel(undefined, "radio-lesson")).toBe("Radio lesson");
   });
 });

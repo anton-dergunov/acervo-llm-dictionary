@@ -3,11 +3,12 @@
 `lexibeat.service.create_service` takes a `backend_factory` — a public entry point of that package —
 so the speech a loop is made of runs on the **owner's** chain without this container holding a
 provider credential, a model catalogue, a rate limiter or a cooldown store. It calls home instead,
-to `POST /pronunciations/take`, with a render-scoped token that arrives in the request and lives in
-the process and nowhere else (docs/features/loops.md §2.3).
+to `POST /pronunciations/take` for every line and to `POST /loops/write` for a format whose lines a
+writer model writes, with a render-scoped token that arrives in the request and lives in the process
+and nowhere else (docs/features/loops.md §2.3).
 
 This file is the only place the two projects' vocabularies meet, and it is deliberately thin.
-LexiBeat sees a `Backend`; Acervo sees an authenticated HTTP client. If the balance ever changes —
+LexiBeat sees a `Backend` and a `Writer`; Acervo sees an authenticated HTTP client. If the balance ever changes —
 if it became worth running LiteLLM in here — it is this file that changes and nothing else.
 
 There is no startup dependency in either direction. Render requests arrive *from* the server, so the
@@ -34,6 +35,7 @@ from lexibeat.voice import (
     delivery_instruction,
     register_secret,
 )
+from lexibeat.writer import WriteRequest
 
 # How Acervo describes a take on the wire, and what the two answers mean here.
 DIRECTED, PLAIN = "directed", "plain"
@@ -41,6 +43,8 @@ DIRECTED, PLAIN = "directed", "plain"
 # One line of a loop, over a chain that may be resting. Generous, because nobody is watching it
 # arrive — the job polls an operation — and a take that times out costs the whole render.
 TAKE_TIMEOUT = 180.0
+# A whole programme's lines in one model call, over a chain that may walk several pairs.
+WRITE_TIMEOUT = 300.0
 
 
 def _capabilities(delivery: str) -> BackendCapabilities:
@@ -60,10 +64,15 @@ def _capabilities(delivery: str) -> BackendCapabilities:
 
     `languages=()` means "any": which languages can be spoken is the owner's chain's answer, and a
     table in here would be a second, wrong copy of it.
+
+    **Mixing languages** in one line — a remark in English that quotes the Spanish word — is what an
+    instruction-following voice does and a plain one does not, so it follows the same answer. A
+    format that needs it renders its plainer fallback on a plain voice, and says so.
     """
     if delivery == PLAIN:
         return BackendCapabilities("post-process", "post-process", "preset", languages=())
-    return BackendCapabilities("instruction", "instruction", "preset", languages=())
+    return BackendCapabilities("instruction", "instruction", "preset", languages=(),
+                               mixes_languages=True)
 
 
 class AcervoVoice:
@@ -93,6 +102,8 @@ class AcervoVoice:
             "language": request.language.code,
             "direction": delivery_instruction(request.delivery) if directed else None,
             "take": request.delivery.take if directed else 0,
+            # Who says it. Acervo answers a guide line in the owner's guide voice, where one is set.
+            "role": request.role,
         }
         answer = self._http.post(
             self._url, json=body, headers={"Authorization": f"Bearer {self._token}"}
@@ -126,6 +137,30 @@ class AcervoVoice:
         self._http.close()
 
 
+class AcervoWriter:
+    """LexiBeat's `Writer`, satisfied structurally, over `POST /loops/write`.
+
+    One call per render, for a format whose lines a model writes. The owner's text chain answers —
+    its rate limits, its cooldowns, its call log — and the generator reads the text itself.
+    """
+
+    def __init__(self, base_url: str, token: str) -> None:
+        self._url = base_url.rstrip("/") + "/loops/write"
+        self._token = token
+
+    def write(self, request: WriteRequest) -> str:
+        with httpx.Client(timeout=WRITE_TIMEOUT) as http:
+            answer = http.post(self._url, json={"prompt": request.prompt, "purpose": request.purpose},
+                               headers={"Authorization": f"Bearer {self._token}"})
+        if answer.status_code != 200:
+            # Acervo's own sentence — which provider refused, and why — kept whole for the job.
+            raise RuntimeError(f"Acervo could not write the lines ({answer.status_code}): "
+                               f"{_message(answer)}")
+        body = answer.json()
+        data = body.get("data") if isinstance(body, dict) else None
+        return str((data or {}).get("text") or "")
+
+
 def _message(answer: httpx.Response) -> str:
     """Acervo's error shape is `{"error": {"code", "message"}}`; anything else is said as it came."""
     try:
@@ -156,6 +191,15 @@ def backend_for(context: RenderContext) -> AcervoVoice:
     return AcervoVoice(base_url, context.credentials, _delivery_of(context))
 
 
+def writer_for(context: RenderContext) -> AcervoWriter:
+    """One writer per render, around the same credential as its voice."""
+    base_url = os.environ.get("ACERVO_API_URL", "").strip()
+    if not base_url or not context.credentials:
+        raise RuntimeError("A render that needs its lines written came with nowhere to ask.")
+    register_secret(context.credentials)
+    return AcervoWriter(base_url, context.credentials)
+
+
 def _delivery_of(context: RenderContext) -> str:
     """Which order the owner chose for loops, as Acervo resolved it and sent it.
 
@@ -176,7 +220,7 @@ def main() -> None:
     port = int(os.environ.get("LEXIBEAT_SERVICE_PORT", "8000"))
     print(f"lexibeat: takes come from {os.environ.get('ACERVO_API_URL', '<ACERVO_API_URL unset>')}",
           file=sys.stderr, flush=True)
-    app = create_service(config=config, backend_factory=backend_for)
+    app = create_service(config=config, backend_factory=backend_for, writer_factory=writer_for)
     uvicorn.run(app, host=host, port=port, log_level="info")
 
 

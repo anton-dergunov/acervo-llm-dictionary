@@ -7,7 +7,7 @@ import { TEST_OWNER, testGraph } from "./testGraph";
 
 const DATASET = "dataset00000001";
 const EMPTY = (): VocabularyGraph => ({
-  vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [], pronunciations: [], studyStates: [], loops: [], loopItems: [], stories: [], storyParts: [], storyWords: [], beds: []
+  vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [], pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [], storyWords: [], beds: []
 });
 
 /** The server numbers every row it hands back; the cursor is the highest of them. */

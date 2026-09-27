@@ -24,7 +24,7 @@
 import type { VocabularyGraph } from "./domain";
 import { MapIcon, NoteIcon, PauseIcon, PlayIcon } from "./icons";
 import * as player from "./loops";
-import { lexemesIn, loopItemsOf, loopMomentAt, loopsIn, loopTitle, storiesIn } from "./selectors";
+import { lexemesIn, loopCards, loopsIn, loopTitle, loopTrackOf, loopWordAt, storiesIn } from "./selectors";
 
 function clock(seconds: number): string {
   const whole = Math.max(0, Math.floor(seconds || 0));
@@ -47,15 +47,15 @@ export default function MadeBar({ graph, language, chip, playerOnly = false, onL
   const playback = player.usePlayback();
   const loops = loopsIn(graph, language);
   const loop = playback.loopId ? loops.find((one) => one.id === playback.loopId) ?? null : null;
-  const items = loop ? loopItemsOf(graph, loop.id) : [];
+  const track = loop ? loopTrackOf(graph, loop) : null;
   // The word being taught, so the bar says what you are hearing rather than which file is open.
-  const word = loop ? loopMomentAt(items, playback.at).item?.sourceText : null;
+  const word = track ? loopWordAt(track.items, loopCards(track.cues), playback.at)?.sourceText : null;
   const fraction = loop && playback.duration ? playback.at / playback.duration : 0;
 
   const toggle = () => {
-    if (!loop) return;
+    if (!track) return;
     if (playback.playing) player.pause();
-    else void player.play(loop, items, { at: playback.at });
+    else void player.play(track, { at: playback.at });
   };
 
   if (chip) {

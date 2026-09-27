@@ -36,6 +36,8 @@ SESSION_LIFETIME = timedelta(days=30)
 # container is worth little. Measured against a real render: three words took 65 s, so twelve take
 # about four and a half minutes and an hour is ample even with a chain resting between calls.
 TAKE_AUDIENCE = "acervo:pronunciations/take"
+# The other route a render calls home to: the writer, for a format that takes its lines from one.
+WRITE_AUDIENCE = "acervo:loops/write"
 RENDER_LIFETIME = timedelta(hours=1)
 
 
@@ -78,12 +80,13 @@ def mint_session(secret: str, user: Mapping[str, Any]) -> str:
 
 
 def mint_render(secret: str, user: Mapping[str, Any], render: str) -> str:
-    """A token good for one render's takes and nothing else."""
+    """A token good for one render's takes and lines, and nothing else."""
     now = datetime.now(timezone.utc)
     return jwt.encode(
         {
             "sub": user["id"],
-            "aud": TAKE_AUDIENCE,
+            # Both routes a render calls home to, and nothing else: its takes, and its lines.
+            "aud": [TAKE_AUDIENCE, WRITE_AUDIENCE],
             # Which render it was minted for. Not checked — the take route does not know what
             # renders exist — but it is what makes a token in a log traceable to the work that asked
             # for it.

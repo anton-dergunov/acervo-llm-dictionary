@@ -54,11 +54,45 @@ class Family:
 
 
 @dataclass(frozen=True)
+class Switch:
+    """A choice a format offers the listener: on or off, or one of named `choices`."""
+
+    label: str
+    default: bool | str
+    choices: tuple[str, ...] = ()
+
+    def accepts(self, value: Any) -> bool:
+        if self.choices:
+            return isinstance(value, str) and value in self.choices
+        return isinstance(value, bool)
+
+
+@dataclass(frozen=True)
+class Format:
+    """One kind of loop the generator can make, with the words it gives a listener to choose it by.
+
+    What a format *is made of* is the generator's (its `docs/programme-format.md`) and is never read
+    here; Acervo names one, sets its switches, and says what it requires.
+    """
+
+    id: str
+    label: str
+    description: str
+    switches: dict[str, Switch] = field(default_factory=dict)
+    # What a render needs: `writer` (a model that writes the lines) and `multilingual_voice` (a voice
+    # that can say words of two languages in one line). A missing one renders the fallback.
+    requires: tuple[str, ...] = ()
+    # What a render makes instead when a requirement is missing, or None when it is refused.
+    fallback: str | None = None
+    bars_per_item: int = 0
+
+
+@dataclass(frozen=True)
 class Schema:
     """What this deployment of the generator can be asked for.
 
-    The catalogues are **its**, never copied here: a family or a second pattern added in a later
-    version appears in the dialog with nothing changing on this side.
+    The catalogues are **its**, never copied here: a family or a format added in a later version
+    appears in the dialog with nothing changing on this side.
     """
 
     api_version: str
@@ -68,7 +102,7 @@ class Schema:
     # Which bundle, from its own manifest. The generator's container looks for the one `pin.json`
     # names, so a stale volume reads as no bundle at all; this is for saying which one answered.
     bundle_version: str
-    patterns: tuple[str, ...]
+    formats: tuple[Format, ...]
     # The kinds of music there are. `auto` is not one of them: it is the absence of a choice, and
     # the generator leaves it out of these for that reason.
     families: tuple[Family, ...]
@@ -99,18 +133,26 @@ class Item:
 
 @dataclass(frozen=True)
 class Loop:
-    """A finished render, as far as Acervo needs to know it. Exactly §2.9's two collections."""
+    """A finished render, as far as Acervo needs to know it: the loop, its words, its lines.
+
+    `format` is the one rendered, and `fallback_from` the one asked for when a requirement was
+    missing. `script` is the writer's text as the generator read it, kept to render the same lines
+    again; it is the generator's shape and is stored, never read, on this side.
+    """
 
     audio_url: str
     audio_mime: str
     duration_seconds: float
-    pattern: str
+    format: str
+    fallback_from: str | None
     style_id: str
     seed: int
     engine_version: str
     bed_fingerprint: str
     bpm: float
-    timeline: tuple[dict[str, Any], ...]
+    items: tuple[dict[str, Any], ...]
+    cues: tuple[dict[str, Any], ...]
+    script: dict[str, Any] | None = None
 
 
 @dataclass(frozen=True)
@@ -146,13 +188,13 @@ class LoopService:
 
     def schema(self) -> Schema:
         payload = self._send("GET", "/schema")
-        patterns = payload.get("patterns")
         return Schema(
             api_version=_text(payload.get("api_version")),
             engine_version=_text(payload.get("engine_version")),
             production_bundle=payload.get("production_bundle") is True,
             bundle_version=_text((payload.get("bundle") or {}).get("version")),
-            patterns=tuple(_text(row.get("id")) for row in patterns or [] if isinstance(row, dict)),
+            formats=tuple(_format(row) for row in payload.get("formats") or []
+                          if isinstance(row, dict) and _text(row.get("id"))),
             families=tuple(
                 Family(_text(row.get("id")), _text(row.get("label")), _text(row.get("description")))
                 for row in payload.get("family_details") or [] if isinstance(row, dict)
@@ -168,8 +210,9 @@ class LoopService:
 
     def start(self, *, items: Iterable[Item], source_language: dict[str, str],
               target_language: dict[str, str], token: str, delivery: str,
-              pattern: str = "retrieval", family: str = "auto", seed: int | None = None,
-              palette: str = "hybrid") -> Operation:
+              format: str = "classic", switches: dict[str, bool | str] | None = None,
+              script: dict[str, Any] | None = None, family: str = "auto",
+              seed: int | None = None, palette: str = "hybrid") -> Operation:
         """Ask for one loop. `token` is the render-scoped credential the generator calls home with.
 
         It is the *whole* of what the generator is given to speak with: no provider key reaches that
@@ -179,18 +222,24 @@ class LoopService:
         `delivery` goes with it because the generator cannot find it out: only this side knows which
         order the owner chose, and that is what decides whether a repetition is its own recording
         with its own director note or one recording varied there by pitch and speed.
+
+        `script` is a previous render's, sent back so the same lines are said again — new music for
+        a radio lesson — with no writer call.
         """
         body: dict[str, Any] = {
             "items": [item.to_wire() for item in items],
             "source_language": source_language,
             "target_language": target_language,
-            "pattern": pattern,
+            "format": format,
+            "switches": dict(switches or {}),
             "family": family,
             "palette": palette,
             "speech": {"token": token, "delivery": delivery},
         }
         if seed is not None:
             body["seed"] = seed
+        if script is not None:
+            body["script"] = script
         return _operation(self._send("POST", "/loops", body=body))
 
     def operation(self, operation_id: str) -> Operation:
@@ -247,72 +296,90 @@ def _operation(payload: Any) -> Operation:
     )
 
 
+def _format(row: dict[str, Any]) -> Format:
+    switches: dict[str, Switch] = {}
+    for name, spec in (row.get("switches") or {}).items():
+        if not isinstance(spec, dict):
+            continue
+        choices = tuple(_text(choice) for choice in spec.get("choices") or [])
+        default = spec.get("default")
+        switches[_text(name)] = Switch(
+            label=_text(spec.get("label")),
+            default=_text(default) if choices else default is True,
+            choices=choices)
+    return Format(
+        id=_text(row.get("id")), label=_text(row.get("label")),
+        description=_text(row.get("description")), switches=switches,
+        requires=tuple(_text(need) for need in row.get("requires") or []),
+        fallback=_text(row.get("fallback")) or None,
+        bars_per_item=_int(row.get("bars_per_item")))
+
+
 def _loop(payload: Any) -> Loop | None:
     if not isinstance(payload, dict) or not _text(payload.get("audio_url")):
         return None
-    timeline = payload.get("timeline")
+    script = payload.get("script")
     return Loop(
         audio_url=_text(payload.get("audio_url")),
         audio_mime=_text(payload.get("audio_mime")) or "audio/mpeg",
         duration_seconds=_float(payload.get("duration_seconds")),
-        pattern=_text(payload.get("pattern")),
+        format=_text(payload.get("format")),
+        fallback_from=_text(payload.get("fallback_from")) or None,
         style_id=_text(payload.get("style_id")),
         seed=_int(payload.get("seed")),
         engine_version=_text(payload.get("engine_version")),
         bed_fingerprint=_text(payload.get("bed_fingerprint")),
         bpm=_float(payload.get("bpm")),
-        timeline=_timeline(timeline),
+        items=_items(payload.get("items")),
+        cues=_cues(payload.get("cues")),
+        script=script if isinstance(script, dict) else None,
     )
 
 
-def _timeline(payload: Any) -> tuple[dict[str, Any], ...]:
-    """One row per word, built key by key rather than passed through.
-
-    The service's rows carry a span for every utterance; Acervo stores two numbers instead, and this
-    is where the many become the two — the one place its wire shape is read, which is the rule the
-    module header states. Nothing of the service's own shape leaves here.
-    """
-    rows = payload if isinstance(payload, list) else []
+def _items(payload: Any) -> tuple[dict[str, Any], ...]:
+    """One row per word, built key by key rather than passed through: nothing of the service's own
+    shape leaves this module. A side the format never says in its words section has no reveal."""
     built: list[dict[str, Any]] = []
-    for index, row in enumerate(rows):
+    for index, row in enumerate(payload if isinstance(payload, list) else []):
         if not isinstance(row, dict):
             continue
-        repeats, step = _cadence(row.get("utterances"))
         built.append({
             "index": _int(row.get("index")) if row.get("index") is not None else index,
             # What the render says it said, which the caller checks against what it asked for.
             "source": _text(row.get("source")),
             "target": _text(row.get("target")),
-            "direction": _text(row.get("direction")),
             "start": _float(row.get("start")),
-            "source_reveal": _float(row.get("source_reveal")),
-            "target_reveal": _float(row.get("target_reveal")),
             "end": _float(row.get("end")),
-            "repeats": repeats,
-            "repeat_seconds": step,
+            "source_reveal": _optional_float(row.get("source_reveal")),
+            "target_reveal": _optional_float(row.get("target_reveal")),
         })
     return tuple(built)
 
 
-def _cadence(utterances: Any) -> tuple[int, float]:
-    """How many times a word's pair is said, and how far apart.
+def _cues(payload: Any) -> tuple[dict[str, Any], ...]:
+    """Every line of the loop in the order it is heard, key by key.
 
-    A word is spoken, then its translation, then that pair again — so `repeats` is the number of
-    source utterances, and `repeat_seconds` is the step between consecutive utterances *after* the
-    first translation, which is where the even part of the pattern begins. The gap from a word to
-    its own translation is the recall gap and is deliberately longer, so it is not the step and is
-    already stored as `target_reveal` anyway.
-
-    Zero for a render that reported no spans: the player then marks the first pass and nothing else,
-    rather than marking the wrong thing.
+    `group` is what a player shows together: a word's own lines, a line and its translation.
+    `item` is the word a line belongs to, as an index into the request's items, or None.
     """
-    rows = [row for row in utterances or [] if isinstance(row, dict)]
-    if not rows:
-        return 0, 0.0
-    starts = sorted(_float(row.get("start")) for row in rows)
-    repeats = sum(1 for row in rows if _text(row.get("role")) == "source")
-    step = round(starts[2] - starts[1], 3) if len(starts) > 2 else 0.0
-    return repeats, max(0.0, step)
+    built: list[dict[str, Any]] = []
+    for row in payload if isinstance(payload, list) else []:
+        if not isinstance(row, dict) or not _text(row.get("text")):
+            continue
+        built.append({
+            "kind": _text(row.get("kind")),
+            "section": _text(row.get("section")),
+            "group": _int(row.get("group")),
+            "item": _int(row.get("item")) if row.get("item") is not None else None,
+            "side": _text(row.get("side")) or None,
+            "role": _text(row.get("role")) or "native",
+            "language": _text(row.get("language")),
+            "text": _text(row.get("text")),
+            "take": _int(row.get("take")),
+            "start": _float(row.get("start")),
+            "end": _float(row.get("end")),
+        })
+    return tuple(built)
 
 
 def _message(answer: httpx.Response) -> str:
@@ -353,3 +420,7 @@ def _float(value: Any) -> float:
         return float(value)
     except (TypeError, ValueError):
         return 0.0
+
+
+def _optional_float(value: Any) -> float | None:
+    return None if value is None else _float(value)

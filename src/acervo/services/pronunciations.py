@@ -86,7 +86,13 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
     """
     catalogue = load_catalogue()
     chosen = pronunciation_settings.settings(owner)
-    languages = [vocabulary["language"] for vocabulary in graph.owner_vocabularies(owner)]
+    vocabularies = graph.owner_vocabularies(owner)
+    languages = [vocabulary["language"] for vocabulary in vocabularies]
+    # What a loop's guide says its lines in: each vocabulary's first gloss language, as a render
+    # asks for its translations. The guide voice is chosen per one of these.
+    guide_languages = list(dict.fromkeys(
+        (vocabulary.get("glossLangs") or ["en"])[0] for vocabulary in vocabularies))
+    offered = list(dict.fromkeys([*languages, *guide_languages]))
     orders: dict[str, list[dict[str, Any]]] = {}
     for reading, chain_name in CHAINS.items():
         entries = []
@@ -100,11 +106,11 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
                 "style": row.style_for(model),
                 "voices": {
                     language: list(row.voices_for(model, language))
-                    for language in languages if row.speaks(model, language)
+                    for language in offered if row.speaks(model, language)
                 },
             })
         orders[reading] = entries
-    return {**chosen, "languages": languages, "orders": orders}
+    return {**chosen, "languages": languages, "guideLanguages": guide_languages, "orders": orders}
 
 
 def _pairs(settings: Settings, owner: str, chain_name: str, catalogue) -> list[tuple[Any, str]]:
@@ -151,6 +157,8 @@ def apply_settings(settings: Settings, owner: str, body: dict[str, Any]) -> dict
         changes["delivery"] = submitted
     if "voices" in body:
         changes["voices"] = _voices(body["voices"])
+    if "guideVoices" in body:
+        changes["guide_voices"] = _voices(body["guideVoices"])
     pronunciation_settings.save(owner, **changes)
     return settings_view(settings, owner)
 
@@ -330,6 +338,13 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
         raise ApiError(400, "invalid_input", f"take must be between 0 and {TAKES - 1}.")
 
     preferences = pronunciation_settings.settings(owner)
+    # A loop's guide lines — translations, remarks, announcements — in the owner's guide voice where
+    # one is chosen. The voice is in the cache key, so the two voices never share a take.
+    role = str(body.get("role") or "native")
+    if role not in ("native", "guide"):
+        raise ApiError(400, "invalid_input", "role is native or guide.")
+    if role == "guide":
+        preferences = preferences.for_guide()
     order = preferences.order_for("loops")
     style = None
     if direction_text and order == "expressive":

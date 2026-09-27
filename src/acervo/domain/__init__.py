@@ -11,4 +11,4 @@ and `ids.py` the three shapes — a record id, an instant, a language tag — th
 
 # Bumped when the wire model changes shape. Declared here for the server, in `web/src/api.ts` for the
 # interface, and in the scripts that speak this API; a mismatch is a 409 by design.
-SCHEMA_VERSION = 17
+SCHEMA_VERSION = 18

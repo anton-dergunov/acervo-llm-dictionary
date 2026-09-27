@@ -72,7 +72,7 @@ def render(args: argparse.Namespace) -> int:
         print(f"The loop generator said no: {failure.message}", file=sys.stderr)
         return 2
     print(f"generator  api {schema.api_version}  engine {schema.engine_version}")
-    print(f"patterns   {', '.join(schema.patterns)}")
+    print(f"formats    {', '.join(one.id for one in schema.formats)}")
     if schema.sample_free:
         # Said loudly. Rendering goes ahead — that is the decision — but a track made on the
         # sample-free palette is not a slightly plainer version of the same thing.
@@ -106,7 +106,8 @@ def render(args: argparse.Namespace) -> int:
             items=words,
             source_language={"code": args.language, "name": args.language_name or args.language},
             target_language={"code": args.gloss_language, "name": args.gloss_language_name or args.gloss_language},
-            token=token, delivery=args.delivery, pattern=args.pattern, family=args.family,
+            token=token, delivery=args.delivery, format=args.format,
+            switches=dict(_switch(one) for one in args.switch or []), family=args.family,
             seed=args.seed,
         )
     except LoopError as failure:
@@ -143,7 +144,8 @@ def render(args: argparse.Namespace) -> int:
           f"fingerprint {loop.bed_fingerprint}")
     print(f"track      {mime}  {len(audio) / 1_000_000:.1f} MB  "
           f"{len(audio) * 8 / max(loop.duration_seconds, 1) / 1000:.0f} kbps")
-    print(f"timeline   {len(loop.timeline)} items")
+    print(f"lines      {len(loop.cues)} over {len(loop.items)} words, format {loop.format}"
+          + (f" (fell back from {loop.fallback_from})" if loop.fallback_from else ""))
     if args.out:
         with open(args.out, "wb") as handle:
             handle.write(audio)
@@ -165,7 +167,9 @@ def main(argv: list[str] | None = None) -> int:
     one.add_argument("--gloss-language", default="en")
     one.add_argument("--gloss-language-name", default="English")
     one.add_argument("--words", type=int, default=12)
-    one.add_argument("--pattern", default="retrieval")
+    one.add_argument("--format", default="classic", help="one of the generator's formats")
+    one.add_argument("--switch", action="append", metavar="NAME=VALUE",
+                     help="a choice the format offers, e.g. repetitions=4 or remarks=false")
     one.add_argument("--family", default="auto")
     one.add_argument("--seed", type=int, default=None)
     # Plain by default because it is the cheap one: one recording a line, varied by the generator.
@@ -175,6 +179,13 @@ def main(argv: list[str] | None = None) -> int:
 
     args = parser.parse_args(argv)
     return render(args)
+
+
+def _switch(given: str) -> tuple[str, bool | str]:
+    """`name=value`, with true and false read as the on/off switches they are."""
+    name, _, value = given.partition("=")
+    lowered = value.strip().lower()
+    return name.strip(), (lowered == "true") if lowered in ("true", "false") else value.strip()
 
 
 if __name__ == "__main__":

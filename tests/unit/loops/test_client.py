@@ -47,11 +47,21 @@ def service(handler) -> LoopService:
 
 
 def test_the_catalogues_are_read_from_the_service_and_never_copied_here():
-    """A family or a second pattern added in a later version must appear with nothing changing on
-    this side, which is only true while nothing here lists them."""
+    """A family or a format added in a later version must appear with nothing changing on this
+    side, which is only true while nothing here lists them."""
     schema = service(answering(recorded("schema"))).schema()
-    assert schema.api_version == "1.0.0"
-    assert set(schema.patterns) == {"retrieval", "alternating"}
+    assert schema.api_version == "2.0.0"
+    formats = {one.id: one for one in schema.formats}
+    assert {"classic", "radio-lesson", "story"} <= set(formats)
+    assert all(one.label and one.description for one in schema.formats)
+    radio = formats["radio-lesson"]
+    assert radio.requires == ("writer", "multilingual_voice")
+    assert radio.fallback == "classic"
+    assert formats["story"].fallback is None
+    assert radio.switches["repetitions"].choices == ("2", "3", "4")
+    assert radio.switches["repetitions"].default == "3"
+    assert radio.switches["remarks"].default is True
+    assert radio.switches["remarks"].accepts(False) and not radio.switches["remarks"].accepts("no")
     assert len(schema.families) > 5 and "auto" not in [one.id for one in schema.families]
     assert all(one.label and one.description for one in schema.families)
     assert schema.max_items > 0
@@ -81,8 +91,12 @@ def test_starting_a_render_sends_the_words_and_the_render_token():
         source_language={"code": "es", "name": "Spanish"},
         target_language={"code": "en", "name": "English"},
         token="a-render-scoped-token", delivery="plain", seed=11,
+        format="radio-lesson", switches={"repetitions": "4"}, script={"order": [0]},
     )
     body = json.loads(seen[0].content)
+    assert body["format"] == "radio-lesson" and body["switches"] == {"repetitions": "4"}
+    # A previous render's lines, sent back so new music says the same ones.
+    assert body["script"] == {"order": [0]}
     assert body["items"] == [{"source": "asco", "target": "disgust",
                               "direction": "repulsed, recoiling slightly"}]
     assert body["source_language"] == {"code": "es", "name": "Spanish"}
@@ -92,20 +106,26 @@ def test_starting_a_render_sends_the_words_and_the_render_token():
     assert operation.status == "queued" and not operation.finished
 
 
-def test_a_completed_operation_carries_exactly_the_two_collections():
+def test_a_completed_operation_carries_the_loop_its_words_and_its_lines():
     operation = service(answering(recorded("completed"))).operation("whatever")
     assert operation.finished and operation.successful is True
     loop = operation.result
     assert loop is not None
     # §2.9's `loops` row...
     assert loop.style_id and loop.seed and loop.engine_version and loop.bed_fingerprint
-    assert loop.pattern == "retrieval" and loop.duration_seconds > 0 and loop.bpm > 0
-    assert loop.audio_mime == "audio/mpeg"
-    # ...and its `loopItems`, with what was *said* and the four times.
-    assert len(loop.timeline) == 2
-    first = loop.timeline[0]
+    assert loop.format == "classic" and loop.fallback_from is None and loop.script is None
+    assert loop.duration_seconds > 0 and loop.bpm > 0 and loop.audio_mime == "audio/mpeg"
+    # ...its `loopItems`, with what was *said* and when each side is first heard...
+    assert len(loop.items) == 2
+    first = loop.items[0]
     assert first["source"] == "asco" and first["target"] == "disgust"
     assert first["start"] <= first["source_reveal"] <= first["target_reveal"] <= first["end"]
+    # ...and its `loopCues`: every line, a word's drill one group, in the order heard.
+    assert len(loop.cues) == 12
+    assert [cue["group"] for cue in loop.cues] == [0] * 6 + [1] * 6
+    assert [cue["side"] for cue in loop.cues[:6]] == ["source", "target"] * 3
+    assert {cue["role"] for cue in loop.cues} == {"native", "guide"}
+    assert loop.cues == tuple(sorted(loop.cues, key=lambda cue: cue["start"]))
 
 
 def test_the_resolved_bed_is_not_in_the_answer_and_is_not_wanted():
@@ -175,34 +195,30 @@ def test_an_answer_that_describes_no_operation_is_refused_rather_than_half_read(
             service(answering(payload)).operation("x")
 
 
-def test_the_six_utterance_spans_become_the_two_numbers_acervo_stores():
-    """A word is said, then its translation, then that pair twice more.
+def test_a_written_loop_carries_its_lines_and_the_script_to_say_them_again():
+    loop = service(answering(recorded("completed-radio"))).operation("whatever").result
+    assert loop is not None
+    assert loop.format == "radio-lesson" and loop.fallback_from is None
+    kinds = {cue["kind"] for cue in loop.cues}
+    assert {"intro", "header", "example", "translation", "announce", "outro"} <= kinds
+    # A line of no word says so, and a word's own line names the word by its index.
+    intro = next(cue for cue in loop.cues if cue["kind"] == "intro")
+    assert intro["item"] is None and intro["side"] is None and intro["role"] == "guide"
+    assert {cue["item"] for cue in loop.cues if cue["kind"] == "say"} == {0, 1}
+    # Kept whole and unread, to send back with the next render.
+    assert isinstance(loop.script, dict) and loop.script.get("order") == [1, 0]
 
-    Acervo keeps two numbers rather than six spans — how many times the pair is said and how far
-    apart — which is what lets the player mark *which* of the pair is sounding without the schema
-    moving the day three repetitions become four. This is the arithmetic that turns one into the
-    other, pinned against a render the real service produced.
-    """
+
+def test_a_render_that_fell_back_says_what_was_asked_for():
+    loop = service(answering(recorded("completed-fallback"))).operation("whatever").result
+    assert loop is not None
+    assert (loop.format, loop.fallback_from) == ("classic", "radio-lesson")
+
+
+def test_nothing_of_the_service_s_own_shape_escapes():
     loop = service(answering(recorded("completed"))).operation("whatever").result
     assert loop is not None
-    row = loop.timeline[0]
-    # The recorded render says `asco` at 8.82, `disgust` at 17.65, then the pair again at 22.06 /
-    # 26.47 and at 30.88 / 35.29 — evenly 4.41 apart, three times in all.
-    assert row["repeats"] == 3
-    assert row["repeat_seconds"] == pytest.approx(4.41, abs=0.01)
-    # And the two numbers put every utterance back where the render had it.
-    spoken = [row["start"]] + [row["target_reveal"] + step * row["repeat_seconds"]
-                               for step in range(2 * row["repeats"] - 1)]
-    assert spoken == pytest.approx([8.82, 17.65, 22.06, 26.47, 30.88, 35.29], abs=0.02)
-    # Nothing of the service's own shape escapes: the spans it sent are not in what came back.
-    assert "utterances" not in row
-
-
-def test_a_render_that_reported_no_spans_says_so_rather_than_guessing():
-    """Zero is "unknown", and the player then marks only the first pass rather than the wrong one."""
-    payload = recorded("completed")
-    for row in payload["result"]["timeline"]:
-        row.pop("utterances", None)
-    result = service(answering(payload)).operation("whatever").result
-    assert result is not None
-    assert result.timeline[0]["repeats"] == 0 and result.timeline[0]["repeat_seconds"] == 0.0
+    assert set(loop.items[0]) == {"index", "source", "target", "start", "end",
+                                  "source_reveal", "target_reveal"}
+    assert set(loop.cues[0]) == {"kind", "section", "group", "item", "side", "role", "language",
+                                 "text", "take", "start", "end"}

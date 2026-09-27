@@ -87,11 +87,15 @@ TEXT_RULES: dict[str, dict[str, tuple[bool, int]]] = {
     "study_states": {"system": (True, 80)},
     "loops": {
         "language": (True, 35), "style_id": (False, 120), "engine_version": (False, 64),
-        "bed_fingerprint": (False, 64), "pattern": (False, 64), "audio_ref": (False, 500),
-        "audio_mime": (False, 80),
+        "bed_fingerprint": (False, 64), "format": (True, 64), "fallback_from": (False, 64),
+        "audio_ref": (False, 500), "audio_mime": (False, 80),
     },
     "loop_items": {
         "source_text": (True, 240), "target_text": (True, 240), "emotion": (False, 300),
+    },
+    "loop_cues": {
+        "kind": (True, 32), "section": (True, 16), "side": (False, 16), "role": (True, 16),
+        "language": (True, 35), "text": (True, 600),
     },
     "stories": {
         "language": (True, 35), "type_id": (False, 64), "style_id": (False, 120),
@@ -121,6 +125,10 @@ SELECT_RULES: dict[str, dict[str, tuple[tuple[str, ...], bool]]] = {
     "attestations": {"source_kind": (SOURCE_KIND_VALUES, True)},
     "examples": {"origin": (ORIGIN_VALUES, True)},
     "pronunciations": {"target_kind": (tuple(PRONUNCIATION_TARGETS), True)},
+    # Who says a line and which half of a word's pair it is are what a player colours and holds
+    # back, so they are closed; a line's `kind` and `section` are the generator's vocabulary and grow
+    # with its formats, so they are only bounded.
+    "loop_cues": {"role": (("native", "guide"), True), "side": (("source", "target"), False)},
 }
 
 # field -> (minimum, maximum or None)
@@ -145,6 +153,10 @@ NUMBER_RULES: dict[str, dict[str, tuple[float, float | None]]] = {
     "loop_items": {
         "item_order": (0, None), "start_seconds": (0, None), "source_reveal_seconds": (0, None),
         "target_reveal_seconds": (0, None), "end_seconds": (0, None),
+    },
+    "loop_cues": {
+        "cue_order": (0, None), "cue_group": (0, None), "take": (0, None),
+        "start_seconds": (0, None), "end_seconds": (0, None),
     },
     "stories": {"story_order": (0, None)},
     "story_parts": {"part_order": (0, None), "attempts": (0, None)},
@@ -474,16 +486,27 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         # deleting a word leaves the loops it appears in playing, captioned with what was actually
         # said. The reference then points at a tombstone, which is the honest state.
         _same_owner(row, _related(lookup, "lexemes", _text(row, "lexeme"), "Lexeme"), "Loop item")
-        times = [
-            ("start_seconds", "source_reveal_seconds"),
-            ("source_reveal_seconds", "target_reveal_seconds"),
-            ("target_reveal_seconds", "end_seconds"),
-        ]
-        for earlier, later in times:
-            if (row.get(later) or 0.0) < (row.get(earlier) or 0.0):
-                # What a retrieval display turns on: the answer must not be on screen before the
-                # recall gap it exists to leave has passed.
-                refuse("A loop item's times must not run backwards.")
+        start, end = row.get("start_seconds") or 0.0, row.get("end_seconds") or 0.0
+        if end < start:
+            refuse("A loop item's times must not run backwards.")
+        for field in ("source_reveal_seconds", "target_reveal_seconds"):
+            # Either side may come first — a review format asks the meaning before the word — but
+            # each is heard within the word's own block, or not at all.
+            reveal = row.get(field)
+            if reveal is not None and not start <= reveal <= end:
+                refuse("A loop item's sides are heard within its own block.")
+        return
+
+    if name == "loop_cues":
+        loop = _related(lookup, "loops", _text(row, "loop"), "Loop")
+        _same_owner(row, loop, "Loop line")
+        item = _text(row, "loop_item")
+        if item:
+            _same_owner(row, _related(lookup, "loop_items", item, "Loop item"), "Loop line")
+        if (row.get("end_seconds") or 0.0) < (row.get("start_seconds") or 0.0):
+            refuse("A loop line's times must not run backwards.")
+        if bool(_text(row, "side")) and not item:
+            refuse("Only a word's own line says one side of it.")
         return
 
     if name == "stories":

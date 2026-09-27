@@ -13,6 +13,10 @@
 - `GET /loops/schema` is an **allow-listed passthrough**, and one route rather than a prefix: each is
   written out, so a route the generator grows never silently becomes an Acervo route, and no path a
   client sends is concatenated into a URL. That is the rule `api/routes/speech.py` already lives by.
+  It adds the two things only Acervo knows: whether a writing model is set up, and whether the loop
+  voice can mix languages.
+- `POST /loops/write` is the generator's writer calling home, with its render's token, for a format
+  that takes its lines from a model. It answers the owner's text chain's text, and nothing else.
 
 It answers Acervo's own `{"data": …}` envelope rather than the generator's body verbatim. The speech
 proxy is the one exception in this API, and it exists to keep a packaged typed client working; there
@@ -32,21 +36,29 @@ from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
 
-from acervo.api.auth import owner_id
+from acervo.api.auth import owner_id, write_owner
 from acervo.api.errors import data
 from acervo.api.payload import json_body
 from acervo.errors import ApiError
 from acervo.repository import graph, jobs
-from acervo.services.loops import create, music, remove, schema
+from acervo.services.loops import create, music, remove, schema, write
 
 router = APIRouter()
 
 
 @router.get("/loops/schema")
 async def read_schema(request: Request) -> JSONResponse:
-    """What the generator offers: its patterns, its families, and whether it has its samples."""
-    owner_id(request)
-    return data(await run_in_threadpool(schema, request.app.state.settings))
+    """What the generator offers: its formats, its families, and whether it has its samples."""
+    owner = owner_id(request)
+    return data(await run_in_threadpool(schema, request.app.state.settings, owner))
+
+
+@router.post("/loops/write")
+async def write_lines(request: Request) -> JSONResponse:
+    """A render's lines, written by the owner's text chain. Accepts a render token or a session."""
+    owner = write_owner(request)["id"]
+    body = await json_body(request)
+    return data(await run_in_threadpool(write, request.app.state.settings, owner, body))
 
 
 @router.post("/loops")

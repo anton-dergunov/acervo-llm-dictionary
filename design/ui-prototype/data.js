@@ -623,8 +623,8 @@ const EXTERNAL = [
   }
 ];
 
-/* Loops — a rendered track over some of your words, and the words it says (design
-   `docs/features/loops.md` §2.9). Two flat arrays, exactly the two collections
+/* Loops — a rendered track over some of your words, the words it teaches, and every line it says
+   (design `docs/features/loops.md` §2.9). Three flat arrays, exactly the three collections
    `web/src/domain.ts` declares: there is no title column, no status column and no stored bed, so
    the prototype derives all three the way `selectors.ts` does.
 
@@ -649,10 +649,7 @@ function loopTimeline(prefix, loopId, words, from = 8.8) {
       loopId, lexemeId: word.lexemeId, position,
       sourceText: word.source, targetText: word.target, emotion: word.emotion,
       startSeconds: round(at), sourceRevealSeconds: round(at),
-      targetRevealSeconds: round(at + span * 0.25), endSeconds: round(at + span),
-      // A word is said, then its translation, then that pair twice more — evenly apart from the
-      // first translation. Two numbers rather than six spans; `selectors.ts` puts them back.
-      repeats: 3, repeatSeconds: round(span * 0.125)
+      targetRevealSeconds: round(at + span * 0.25), endSeconds: round(at + span)
     };
     at += span;
     return row;
@@ -684,11 +681,109 @@ const LOOP_WORDS = {
   lp2h63vxr8ns1g4: [W.sobremesa, W.mejoren, W.panza, W.balsa, W.malo, W.atasco]
 };
 
+/* A drill's lines, as its render reports them: each word, its translation after the recall gap,
+   then the pair twice more, an eighth of the turn apart. One card per word. */
+function drillLines(prefix, rows) {
+  const round = (n) => Math.round(n * 100) / 100;
+  const lines = [];
+  rows.forEach((row, group) => {
+    const spacing = (row.endSeconds - row.startSeconds) * 0.125;
+    const starts = [row.startSeconds, ...[0, 1, 2, 3, 4].map((n) => round(row.targetRevealSeconds + n * spacing))];
+    starts.forEach((start, index) => {
+      const source = index % 2 === 0;
+      lines.push({
+        id: `${prefix}${String(lines.length).padStart(15 - prefix.length, "0")}`, loopId: row.loopId,
+        position: lines.length, group, kind: "say", section: "words", loopItemId: row.id,
+        side: source ? "source" : "target", role: source ? "native" : "guide", language: source ? "es" : "en",
+        text: source ? row.sourceText : row.targetText, take: Math.floor(index / 2),
+        startSeconds: start, endSeconds: starts[index + 1] ?? row.endSeconds
+      });
+    });
+  });
+  return lines;
+}
+
+/* A radio lesson: the drill, and between the words what a writer wrote for them — an intro, a remark
+   where one helps, an example with its meaning, a quick quiz halfway (the translation first, the word
+   as its answer), and a goodbye. Laid out line by line, each taking the time it needs, which is what
+   a render does with written lines. */
+function radioLesson(prefix, loopId, words, written) {
+  const round = (n) => Math.round(n * 100) / 100;
+  const items = [];
+  const lines = [];
+  let at = 6.4;
+  let group = 0;
+  const line = (kind, section, item, side, role, text, seconds) => {
+    lines.push({
+      id: `${prefix}c${String(lines.length).padStart(14 - prefix.length, "0")}`, loopId, position: lines.length,
+      group, kind, section, loopItemId: item ? item.id : null, side, role, language: role === "native" ? "es" : "en",
+      text, take: 0, startSeconds: round(at), endSeconds: round(at + seconds * 0.7)
+    });
+    at += seconds;
+  };
+  line("intro", "intro", null, null, "guide", written.intro, 5.6); group += 1;
+  const half = Math.ceil(words.length / 2);
+  words.forEach((word, position) => {
+    const item = {
+      id: `${prefix}i${String(position).padStart(14 - prefix.length, "0")}`, loopId, lexemeId: word.lexemeId,
+      position, sourceText: word.source, targetText: word.target, emotion: word.emotion,
+      startSeconds: round(at), sourceRevealSeconds: round(at)
+    };
+    items.push(item);
+    for (let take = 0; take < 3; take += 1) {
+      line("say", "words", item, "source", "native", word.source, take ? 3.2 : 6.4);
+      if (!take) item.targetRevealSeconds = round(at);
+      line("say", "words", item, "target", "guide", word.target, 3.2);
+    }
+    lines.slice(-6).forEach((one, index) => { one.take = Math.floor(index / 2); });
+    item.endSeconds = round(at);
+    group += 1;
+    const remark = written.remarks[word.source];
+    if (remark) { line("remark", "words", item, null, "guide", remark, 7.2); group += 1; }
+    const example = written.examples[word.source];
+    if (example) {
+      line("example", "words", item, null, "native", example[0], 4.4);
+      line("translation", "words", item, null, "guide", example[1], 4);
+      group += 1;
+    }
+    if (position + 1 === half) {
+      words.slice(0, half).forEach((one, index) => {
+        line("say", "quiz", items[index], "target", "guide", one.target, 3.2);
+        line("say", "quiz", items[index], "source", "native", one.source, 3.2);
+        group += 1;
+      });
+    }
+  });
+  line("outro", "outro", null, null, "guide", written.outro, 4.8);
+  return { items, lines, duration: round(at + 6) };
+}
+
+const RADIO = radioLesson("lr2", "lp3f81nzc6yh5t2", LOOP_WORDS.lp3f81nzc6yh5t2, {
+  intro: "Ten words today, from a long lunch to a traffic jam — and one word for the moment you faint.",
+  outro: "That's the lot. Next time you're stuck in el atasco, say them all again.",
+  remarks: {
+    "la sobremesa": "English has no word for la sobremesa: the talk that goes on at the table long after the plates are cleared.",
+    "currar": "Currar is what you say to friends. Trabajar is what you write on a form."
+  },
+  examples: {
+    "la obra": ["La obra duró tres horas y me dormí.", "The play lasted three hours and I fell asleep."],
+    "el atasco": ["Llevo una hora en este atasco.", "I've been in this traffic jam for an hour."],
+    "el tobillo": ["Me torcí el tobillo bailando.", "I twisted my ankle dancing."]
+  }
+});
+
 const LOOP_ITEMS = [
   ...loopTimeline("li1", "lp7k2md90xqv4b1", LOOP_WORDS.lp7k2md90xqv4b1),
-  ...loopTimeline("li2", "lp3f81nzc6yh5t2", LOOP_WORDS.lp3f81nzc6yh5t2),
+  ...RADIO.items,
   ...loopTimeline("li3", "lp9w45bqj2mk7d3", LOOP_WORDS.lp9w45bqj2mk7d3),
   ...loopTimeline("li4", "lp2h63vxr8ns1g4", LOOP_WORDS.lp2h63vxr8ns1g4)
+];
+
+/* The lines of every rendered loop. The one being made has none yet: they arrive with its track. */
+const LOOP_CUES = [
+  ...drillLines("lc1", LOOP_ITEMS.filter((row) => row.loopId === "lp7k2md90xqv4b1")),
+  ...RADIO.lines,
+  ...drillLines("lc4", LOOP_ITEMS.filter((row) => row.loopId === "lp2h63vxr8ns1g4"))
 ];
 
 const endOf = (loopId) => {
@@ -699,28 +794,30 @@ const endOf = (loopId) => {
 const LOOPS = [
   {
     id: "lp7k2md90xqv4b1", language: "es", position: 1,
-    styleId: "gentle-game", seed: 104740, engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245",
-    pattern: "retrieval", audioRef: "loops/es/lp7k2md90xqv4b1-6ad2f019.mp3", audioMime: "audio/mpeg",
+    styleId: "gentle-game", seed: 104740, engineVersion: "0.7.0", bedFingerprint: "f35282aaf3c40245",
+    format: "classic", switches: {}, fallbackFrom: null, audioRef: "loops/es/lp7k2md90xqv4b1-6ad2f019.mp3", audioMime: "audio/mpeg",
     durationSeconds: endOf("lp7k2md90xqv4b1"), createdAt: "2026-09-16", editedAt: "2026-09-16"
   },
   {
     id: "lp3f81nzc6yh5t2", language: "es", position: 2,
-    styleId: "acoustic-flow", seed: 88213, engineVersion: "1.4.0", bedFingerprint: "b1d9042ce7f3aa88",
-    pattern: "retrieval", audioRef: "loops/es/lp3f81nzc6yh5t2-91c47b3e.mp3", audioMime: "audio/mpeg",
-    durationSeconds: endOf("lp3f81nzc6yh5t2"), createdAt: "2026-09-12", editedAt: "2026-09-12"
+    styleId: "acoustic-flow", seed: 88213, engineVersion: "0.7.0", bedFingerprint: "b1d9042ce7f3aa88",
+    format: "radio-lesson", switches: { repetitions: "3", remarks: true, quiz: true, review: false }, fallbackFrom: null,
+    audioRef: "loops/es/lp3f81nzc6yh5t2-91c47b3e.mp3", audioMime: "audio/mpeg",
+    durationSeconds: RADIO.duration, createdAt: "2026-09-12", editedAt: "2026-09-12"
   },
   /* Asked for and not made: no reference, so no duration and no bed either — all three arrive
      together when the render lands. The job is what says how far along it is. */
   {
     id: "lp9w45bqj2mk7d3", language: "es", position: 3,
     styleId: null, seed: 41207, engineVersion: null, bedFingerprint: null,
-    pattern: "retrieval", audioRef: null, audioMime: null,
+    format: "story", switches: {}, fallbackFrom: null, audioRef: null, audioMime: null,
     durationSeconds: null, createdAt: "2026-09-18", editedAt: "2026-09-18"
   },
   {
     id: "lp2h63vxr8ns1g4", language: "es", position: 4,
-    styleId: "bright-pastoral", seed: 22910, engineVersion: "1.4.0", bedFingerprint: "44aa1c0b9e21f7d6",
-    pattern: "retrieval", audioRef: "loops/es/lp2h63vxr8ns1g4-2f70d4aa.mp3", audioMime: "audio/mpeg",
+    styleId: "bright-pastoral", seed: 22910, engineVersion: "0.7.0", bedFingerprint: "44aa1c0b9e21f7d6",
+    // Asked for as a radio lesson on a day the loop voice was the clear, even one: made as a drill.
+    format: "classic", switches: {}, fallbackFrom: "radio-lesson", audioRef: "loops/es/lp2h63vxr8ns1g4-2f70d4aa.mp3", audioMime: "audio/mpeg",
     durationSeconds: endOf("lp2h63vxr8ns1g4"), createdAt: "2026-08-30", editedAt: "2026-08-30"
   }
 ];
@@ -728,8 +825,28 @@ const LOOPS = [
 /* What `GET /loops/schema` reports: the generator's own catalogues, never copied into Acervo.
    `productionBundle: false` would mean every bed is the synthesised palette. */
 const LOOP_SCHEMA = {
-  apiVersion: "1", engineVersion: "1.4.0", productionBundle: true,
-  patterns: ["retrieval"], maxItems: 40,
+  apiVersion: "2.0.0", engineVersion: "0.7.0", productionBundle: true, maxItems: 40,
+  /* Each kind of loop, with the generator's own words for it, its switches, what it needs and what it
+     becomes without it. Whether this server has a writing model, and a loop voice that can mix
+     languages, is Acervo's to say. */
+  formats: [
+    { id: "classic", label: "Classic drill", description: "Each word, a pause to recall it, its translation, and the pair twice more.",
+      switches: {}, requires: [], fallback: null },
+    { id: "alternating", label: "Alternating", description: "Word and translation back to back, with no pause to recall.",
+      switches: {}, requires: [], fallback: null },
+    { id: "echo", label: "Say it back", description: "Each word, then a moment for you to say it before the translation.",
+      switches: {}, requires: [], fallback: null },
+    { id: "radio-lesson", label: "Radio lesson", description: "The drill with a presenter: examples, a remark where one helps, a quiz halfway.",
+      switches: {
+        repetitions: { label: "Times each word is said", default: "3", choices: ["2", "3", "4"] },
+        remarks: { label: "Remarks about words", default: true },
+        quiz: { label: "Quiz halfway", default: true },
+        review: { label: "Final review", default: true }
+      }, requires: ["writer", "multilingual_voice"], fallback: "classic" },
+    { id: "story", label: "Story", description: "A very short story told a line at a time between the words.",
+      switches: {}, requires: ["writer"], fallback: null }
+  ],
+  writerAvailable: true, mixesLanguages: true,
   /* Each kind of music with the generator's own words for it. "Surprise me" is not among them: it
      is the absence of a choice, and the dialog's to name. */
   families: [

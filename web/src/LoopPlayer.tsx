@@ -1,21 +1,24 @@
 /**
- * One loop, playing: its words above and its controls below.
+ * One loop, playing: its lines above and its controls below.
  *
  * **It is an ordinary music player.** A seekable line with the elapsed and total time, the three
  * transport buttons everyone already knows, and two switches — play it again, and go on to the next
- * one. Where the artwork or the lyrics would be are the words themselves.
+ * one. Where the artwork or the lyrics would be is every line the loop says, as cards: a word and its
+ * translation, an example and what it means, a remark, a line of a story. A card is one `group` of
+ * the loop's lines, as the generator grouped them, and a line said several times is one row of it.
  *
- * **The one rule that is not a music player's: a translation is never drawn before it has been
- * spoken.** A word not yet reached shows its source and, where its translation will be, a short bar
- * of the same width for every word — fixed, so it leaks nothing about the length of the answer;
- * present, so the line does not jump when the answer arrives; visible, so you know one is coming.
+ * **The one rule that is not a music player's: within a card, nothing after its first line is drawn
+ * before it has been said.** A translation is not drawn before it is spoken, a quiz's answer not
+ * before it is given, an example's meaning not before it is heard. Where the line will be is a short
+ * bar of the same width for every line — fixed, so it leaks nothing about the length of the answer;
+ * present, so the card does not jump when the answer arrives; visible, so you know one is coming.
  * Seeing "the raft" while you are still being asked what `la balsa` means is not a lesson, it is a
  * caption.
  *
  * Everything drawn here is a function of the clock, and nothing about the reveal is remembered —
  * which is what makes dragging the line backwards put an answer away again rather than leaving it
- * up because it was once shown. `loopMomentAt` is that function and it lives in `selectors.ts`,
- * so the whole rule is tested without an audio element.
+ * up because it was once shown. `loopMomentAt` and `loopLineShown` are that function and they live
+ * in `selectors.ts`, so the whole rule is tested without an audio element.
  *
  * **The controls do not scroll.** This surface owns its height: the words scroll inside it and the
  * controls are a footer that cannot move. A player that drifts as you scroll is one you have to
@@ -31,23 +34,37 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { LoopMusic } from "./api";
-import type { Loop, LoopItem, VocabularyGraph } from "./domain";
+import type { VocabularyGraph } from "./domain";
 import { setLoopAutoplay, setLoopRepeat, useLoopAutoplay, useLoopRepeat } from "./editorPreferences";
 import { ContinueIcon, DownIcon, NextIcon, PauseIcon, PlayIcon, PreviousIcon, RepeatIcon, StarIcon } from "./icons";
 import { isOpen as jobIsOpen, jobFor, jobStream } from "./jobs";
+import { fallbackNote } from "./LoopFormat";
 import { MusicMenu, useLoopSchema } from "./LoopMusic";
 import * as player from "./loops";
 import { stripOf } from "./ProgressStrip";
-import { bedOfLoop, favouriteBeds, loopIsReady, loopMomentAt, styleLabel } from "./selectors";
+import {
+  bedOfLoop, favouriteBeds, formatLabel, loopCards, loopIsReady, loopLineShown, loopMomentAt, styleLabel,
+  type LoopCard, type LoopTrack
+} from "./selectors";
 
 function clock(seconds: number): string {
   const whole = Math.max(0, Math.floor(seconds || 0));
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggleKeep }: {
-  loop: Loop;
-  items: LoopItem[];
+/* A section's name where the loop enters it. The words need none: they are what a loop is. */
+const SECTIONS: Record<string, string> = { quiz: "Quiz", review: "Review" };
+
+/* A long line is set smaller on the card being played, so a remark is not four lines of display type.
+   Fixed per line, so it never changes while the line is on screen. */
+const LONG_LINE = 28;
+
+function languageCode(language: string): string {
+  return language.split("-")[0].toUpperCase();
+}
+
+export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }: {
+  track: LoopTrack;
   graph: VocabularyGraph;
   /** Online-only and loud when it fails, like every other write. */
   onChangeMusic(music: LoopMusic): void;
@@ -57,10 +74,12 @@ export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggle
   const repeat = useLoopRepeat();
   const autoplay = useLoopAutoplay();
   const lyric = useRef<HTMLDivElement>(null);
+  const { loop, items, cues } = track;
   const here = playback.loopId === loop.id;
   const at = here ? playback.at : 0;
   const total = (here && playback.duration) || loop.durationSeconds || 0;
-  const moment = loopMomentAt(items, at);
+  const cards = loopCards(cues);
+  const moment = loopMomentAt(cards, at);
   const { schema } = useLoopSchema();
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
   const job = jobFor(live, "loop", loop.id);
@@ -79,7 +98,7 @@ export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggle
     const wasPlaying = player.nowPlaying()?.loop.id === loop.id && player.playback().playing;
     if (player.nowPlaying()?.loop.id === loop.id) player.stop();
     void player.forget(previous);
-    if (wasPlaying) void player.play(loop, items);
+    if (wasPlaying) void player.play(track);
   }, [loop.audioRef]);
 
   useEffect(() => {
@@ -97,13 +116,13 @@ export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggle
     };
   }, [choosing]);
 
-  /* Keep the word being taught in the middle of the column. `scrollIntoView` rather than arithmetic
+  /* Keep the card being played in the middle of the column. `scrollIntoView` rather than arithmetic
      on `offsetTop`, which is measured from the offset parent and not from the scroller. */
   useEffect(() => {
-    if (moment.index < 0) return;
-    lyric.current?.querySelector(`[data-word="${moment.index}"]`)
+    if (moment.card < 0) return;
+    lyric.current?.querySelector(`[data-card="${moment.card}"]`)
       ?.scrollIntoView({ block: "center", behavior: "smooth" });
-  }, [moment.index]);
+  }, [moment.card]);
 
   const scrub = (event: React.PointerEvent<HTMLDivElement>) => {
     const box = event.currentTarget.getBoundingClientRect();
@@ -113,32 +132,39 @@ export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggle
 
   const toggle = () => {
     if (here && playback.playing) player.pause();
-    else void player.play(loop, items, here ? { at: playback.at } : undefined);
+    else void player.play(track, here ? { at: playback.at } : undefined);
+  };
+
+  const cardOf = (card: LoopCard, index: number) => {
+    const current = index === moment.card;
+    const entering = SECTIONS[card.section] && (index === 0 || cards[index - 1].section !== card.section);
+    return [
+      entering ? <div key={`section-${card.group}`} className="lyric-divider label">{SECTIONS[card.section]}</div> : null,
+      <button
+        key={card.group} data-card={index}
+        className={`lyric-row${current ? " now" : ""}${index < moment.card ? " past" : ""}`}
+        onClick={() => void player.play(track, { at: card.start })}
+      >
+        {/* The line last said is the one at full strength; the others step back. No movement and
+            no weight change, so nothing on this screen ever reflows — which is the same rule the
+            article's change marks live by, and the reason it is calm enough to leave running. The
+            language being learned is set as the word is, and the listener's own as its translation. */}
+        {card.lines.map((line, number) => <span
+          key={`${line.language}:${line.text}`}
+          className={`lyric-line ${line.role === "native" ? "lyric-source" : "lyric-target"}${line.text.length > LONG_LINE ? " long" : ""}${current && moment.sounding === number ? " saying" : ""}`}
+        >
+          <span className="lyric-lang" aria-hidden="true">{languageCode(line.language)}</span>
+          {loopLineShown(card, number, at)
+            ? <span className="lyric-said">{line.text}</span>
+            : <span className="lyric-held" aria-label="Not said yet" />}
+        </span>)}
+      </button>
+    ];
   };
 
   return <div className="loop-play">
     <div className="lyric" ref={lyric}>
-      {items.map((item, index) => {
-        const current = index === moment.index;
-        const said = current && moment.revealed;
-        return <button
-          key={item.id} data-word={index}
-          className={`lyric-row${current ? " now" : ""}${index < moment.index ? " past" : ""}`}
-          onClick={() => void player.play(loop, items, { at: item.startSeconds })}
-        >
-          {/* The line last spoken is the one at full strength; the other steps back. No movement
-              and no weight change, so nothing on this screen ever reflows — which is the same rule
-              the article's change marks live by, and the reason it is calm enough to leave running. */}
-          <span className={`lyric-source${current && moment.sounding === "source" ? " saying" : ""}`}>
-            {item.sourceText}
-          </span>
-          <span className={`lyric-target${current && moment.sounding === "target" ? " saying" : ""}`}>
-            {said || index < moment.index
-              ? <span className="lyric-said">{item.targetText}</span>
-              : <span className="lyric-held" aria-label="Not said yet" />}
-          </span>
-        </button>;
-      })}
+      {cards.map(cardOf)}
     </div>
 
     <div className="player">
@@ -170,12 +196,12 @@ export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggle
           aria-pressed={repeat} title="Play this loop again when it ends"
           aria-label="Play this loop again when it ends"
         ><RepeatIcon /></button>
-        <button onClick={() => player.stepWord(-1)} aria-label="Previous word"><PreviousIcon /></button>
+        <button onClick={() => player.stepCard(-1)} aria-label="Previous line"><PreviousIcon /></button>
         <button
           className="big" onClick={toggle} disabled={playback.loading}
           aria-label={here && playback.playing ? "Pause" : "Play"}
         >{here && playback.playing ? <PauseIcon /> : <PlayIcon />}</button>
-        <button onClick={() => player.stepWord(1)} aria-label="Next word"><NextIcon /></button>
+        <button onClick={() => player.stepCard(1)} aria-label="Next line"><NextIcon /></button>
         <button
           className={`switch${autoplay ? " on" : ""}`} onClick={() => setLoopAutoplay(!autoplay)}
           aria-pressed={autoplay} title="Go on to the next loop when this one ends"
@@ -194,7 +220,9 @@ export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggle
               ? <span className="bed-status warn">New music could not be made · {job.message || job.error || "no reason given"}</span>
               : playback.loading && here
                 ? <span className="bed-status label">Fetching the track…</span>
-                : null}
+                : loop.fallbackFrom
+                  ? <span className="bed-status label">{fallbackNote(schema?.formats, loop.fallbackFrom, loop.format)}</span>
+                  : null}
         <span className="bed-line">
           {/* The bed's own name, as the generator's catalogue writes it. Whether this deployment has
               the sample pack is a question about the server rather than about one loop, and it is
@@ -212,7 +240,7 @@ export default function LoopPlayer({ loop, items, graph, onChangeMusic, onToggle
             title={kept ? "Kept as a favourite" : "Keep this music as a favourite"}
             onClick={onToggleKeep}
           ><StarIcon filled={kept} /></button>
-          <span className="label">· {items.length} words</span>
+          <span className="label">· {formatLabel(schema?.formats, loop.format)} · {items.length} words</span>
           {choosing && <MusicMenu
             graph={graph} loop={loop} families={schema?.families ?? []}
             favourites={favouriteBeds(graph)}

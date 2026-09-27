@@ -51,6 +51,7 @@ REPLICATED = (
     "study_states",
     "loops",
     "loop_items",
+    "loop_cues",
     "stories",
     "story_parts",
     "story_words",
@@ -180,6 +181,9 @@ pronunciation_settings = Table(
     # The owner's voice per model per language: {provider: {model: {language: voice}}}. Absent means
     # the first voice the catalogue declares, so a voice list that grows never changes a choice.
     Column("voices", JSON, nullable=False, default=dict),
+    # Who says a loop's guide lines — translations, remarks, announcements — in the same shape, where
+    # the owner chose a second voice for them. Absent means the voice above says every line.
+    Column("guide_voices", JSON, nullable=False, default=dict),
     Column("edited_at", String(24), nullable=False),
     Index("idx_pronunciation_settings_owner", "owner", unique=True),
 )
@@ -520,7 +524,14 @@ loops = Table(
     Column("seed", Integer, nullable=False, default=0),
     Column("engine_version", String(64), nullable=False, default=""),
     Column("bed_fingerprint", String(64), nullable=False, default=""),
-    Column("pattern", String(64), nullable=False, default=""),
+    # Which of the generator's formats this loop is (`classic`, `radio-lesson`, …), and the values
+    # of the switches it offers. Not opaque: the format is the generator's catalogue id and the
+    # switches are the listener's own choices, both sent with every render of this loop.
+    Column("format", String(64), nullable=False, default=""),
+    Column("switches", JSON, nullable=False, default=dict),
+    # The format asked for, when the render lacked something it requires and made its fallback
+    # instead — `format` then names what the track actually is. Empty otherwise.
+    Column("fallback_from", String(64), nullable=False, default=""),
     # There is no status column. An empty `audio_ref` is *not rendered yet*, and the job says the
     # rest; a fifth fact would be a thing to keep in step with four that already say all of it.
     Column("audio_ref", String(500), nullable=False, default=""),
@@ -548,25 +559,61 @@ loop_items = Table(
     Column("source_text", String(240), nullable=False),
     Column("target_text", String(240), nullable=False),
     Column("emotion", String(300), nullable=False, default=""),
-    # Four times per item, and deliberately not the span of every utterance: the day three
-    # repetitions become four, this schema does not move.
+    # Where the word's own block in the words section starts and ends, and when each side is first
+    # heard in it — what a retrieval display turns on. A side the format never says there has no
+    # reveal. Every line, and when it is said, is `loop_cues`.
     Column("start_seconds", Float, nullable=False, default=0.0),
-    Column("source_reveal_seconds", Float, nullable=False, default=0.0),
-    Column("target_reveal_seconds", Float, nullable=False, default=0.0),
+    Column("source_reveal_seconds", Float, nullable=True),
+    Column("target_reveal_seconds", Float, nullable=True),
     Column("end_seconds", Float, nullable=False, default=0.0),
-    # …and two numbers that say the rest of it, so the player can mark *which* of the pair is being
-    # said rather than only which word is being taught. A word is spoken, then its translation, and
-    # then that pair again `repeats` times in all, evenly `repeat_seconds` apart from the first
-    # translation. Two facts about the item rather than a serialised list of six spans — which is
-    # what keeps the comment above true: three repetitions becoming four changes these values and
-    # not this schema. Zero means a render that did not report them, and the player then marks only
-    # the first pass, which is the one the exercise turns on.
-    Column("repeats", Integer, nullable=False, default=0),
-    Column("repeat_seconds", Float, nullable=False, default=0.0),
     *_sync_fields(),
     Index("idx_loop_items_owner_revision", "owner", "revision"),
     Index("idx_loop_items_owner_loop_order", "owner", "loop", "item_order"),
     Index("idx_loop_items_owner_lexeme", "owner", "lexeme"),
+)
+
+# Every line of a loop, in the order it is heard: the words, their translations, and whatever else
+# the format says — an example, a remark, a line of a story, an announcement. `cue_group` is what a
+# player shows together (a word's own lines, a line and its translation), numbered as the generator
+# numbers it. The text is denormalised for `loop_items.source_text`'s reason: it records what was
+# said. Written by the render and only by it, so a re-render tombstones the old lines and writes new
+# ones; a line has no identity worth keeping across two recordings.
+loop_cues = Table(
+    "loop_cues",
+    metadata,
+    Column("id", String(15), primary_key=True),
+    _owner(),
+    Column("loop", String(15), ForeignKey("loops.id", ondelete="CASCADE"), nullable=False),
+    Column("cue_order", Integer, nullable=False, default=0),
+    Column("cue_group", Integer, nullable=False, default=0),
+    Column("kind", String(32), nullable=False),
+    Column("section", String(16), nullable=False),
+    # The word the line belongs to, or none for a line of no word (an intro, a story line).
+    Column("loop_item", String(15), ForeignKey("loop_items.id", ondelete="CASCADE"), nullable=True),
+    Column("side", String(16), nullable=False, default=""),
+    Column("role", String(16), nullable=False),
+    Column("language", String(35), nullable=False),
+    Column("text", String(600), nullable=False),
+    Column("take", Integer, nullable=False, default=0),
+    Column("start_seconds", Float, nullable=False, default=0.0),
+    Column("end_seconds", Float, nullable=False, default=0.0),
+    *_sync_fields(),
+    Index("idx_loop_cues_owner_revision", "owner", "revision"),
+    Index("idx_loop_cues_owner_loop_order", "owner", "loop", "cue_order"),
+)
+
+# What the writer wrote for a loop, kept on the server and never replicated: it exists only to be
+# sent back with a re-render, so new music says the same lines — and finds their takes in the cache
+# — rather than asking for new ones. It is the generator's own shape and nothing here reads it.
+# Exempt from the replicated rules, like `jobs`: one row per loop, keyed by it.
+loop_scripts = Table(
+    "loop_scripts",
+    metadata,
+    Column("loop", String(15), ForeignKey("loops.id", ondelete="CASCADE"), primary_key=True),
+    _owner(),
+    Column("format", String(64), nullable=False),
+    Column("script", JSON, nullable=False),
+    Column("written_at", String(24), nullable=False),
 )
 
 # A bed the owner kept: the music of one loop, to be asked for again for another. Style and seed

@@ -276,6 +276,39 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
     return result.parsed, result.answer
 
 
+def llm_text(settings: Settings, owner: str, user: str, caller: str = "text",
+             params: Mapping[str, Any] | None = None, timeout: float | None = None,
+             ) -> tuple[str, Answer]:
+    """One call for **text**, with no JSON asked of it: the words, and the model that wrote them.
+
+    For a caller that reads the reply itself — the loop generator's writer, whose parser is in the
+    other repository and deliberately reads a plain reply rather than a JSON-mode one. An empty reply
+    passes to the next pair, as it does in `llm_json`; anything else is the caller's to judge.
+    """
+    def ask(candidate: chain.Candidate) -> TextResult:
+        result = provider.text(
+            user, row=candidate.row, model=candidate.model, params=params,
+            **({"timeout": timeout} if timeout is not None else {}),
+        )
+        if not result.text.strip():
+            raise ProviderUnavailable(
+                "empty", "the model returned nothing",
+                provider_id=candidate.row.id, model=candidate.model,
+            )
+        return result
+
+    try:
+        result: TextResult = chain.walk(
+            catalogue_kind("text"), chain_for(settings, owner, "text"), load_catalogue(), ask,
+            chain.stamped, caller=caller,
+        )
+    except ChainExhausted as exhausted:
+        raise refusal(exhausted, "text") from None
+    except ProviderError as error:
+        raise refusal(error, "text") from None
+    return result.text, result.answer
+
+
 # What each passing reason means to the owner, said of a provider. Ordered by how much it tells:
 # when two of one provider's models refused differently, the first reason here is the one said.
 WAITING_ON: dict[str, str] = {

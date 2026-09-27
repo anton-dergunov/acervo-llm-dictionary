@@ -8,7 +8,7 @@
 import {
   effectiveShortGloss,
   type Attestation, type Example, type ImagePrompt, type Lexeme, type LexemeStatus,
-  type AudioSegment, type Bed, type Loop, type LoopItem, type OwnedFields, type Sense, type Story, type StoryPart,
+  type AudioSegment, type Bed, type Loop, type LoopCue, type LoopItem, type OwnedFields, type Sense, type Story, type StoryPart,
   type StoryWord, type StudyState, type SyncFields,
   type Topic, type Vocabulary, type VocabularyGraph
 } from "./domain";
@@ -545,6 +545,24 @@ export function loopItemsOf(graph: VocabularyGraph, loopId: string): LoopItem[] 
     .sort((left, right) => left.position - right.position || left.id.localeCompare(right.id));
 }
 
+/** One loop's lines, in the order they are heard. */
+export function loopCuesOf(graph: VocabularyGraph, loopId: string): LoopCue[] {
+  return live(graph.loopCues)
+    .filter((cue) => cue.loopId === loopId)
+    .sort((left, right) => left.position - right.position || left.id.localeCompare(right.id));
+}
+
+/** What a player needs to play one loop: the loop, its words and its lines. */
+export interface LoopTrack {
+  loop: Loop;
+  items: LoopItem[];
+  cues: LoopCue[];
+}
+
+export function loopTrackOf(graph: VocabularyGraph, loop: Loop): LoopTrack {
+  return { loop, items: loopItemsOf(graph, loop.id), cues: loopCuesOf(graph, loop.id) };
+}
+
 /** Whether a loop has been rendered. The absence of a reference is the whole of what says so. */
 export function loopIsReady(loop: Loop): boolean {
   return Boolean(loop.audioRef);
@@ -650,57 +668,97 @@ export function sampleLexemeIds(
    reveal rule can be tested without an audio element — and so that dragging the line backwards
    withholds an answer again rather than leaving it up because it was once shown. */
 
-/** When each of a word's utterances begins, in the order they are heard.
- *
- * A word is spoken, then its translation, then that pair again — `repeats` times in all, evenly
- * `repeatSeconds` apart from the first translation. The gap from a word to its own translation is
- * the recall gap and is deliberately longer, which is why it is stored rather than derived.
- *
- * A render that reported no cadence gives the two that are stored outright, and nothing is invented
- * past them: marking the first pass and stopping beats marking the wrong line.
- */
-export function utteranceStarts(item: LoopItem): number[] {
-  const known = item.repeats > 0 && item.repeatSeconds > 0 ? item.repeats * 2 : 2;
-  const starts = [item.startSeconds, item.targetRevealSeconds];
-  for (let index = 2; index < known; index += 1) {
-    starts.push(item.targetRevealSeconds + (index - 1) * item.repeatSeconds);
+/** One line as a card shows it: a line said several times — a drill's word — is one row. */
+export interface LoopCardLine {
+  text: string;
+  language: string;
+  role: "native" | "guide";
+  side: "source" | "target" | null;
+  /** When it is first said, which is when it may be drawn. */
+  heard: number;
+  /** Every time it is said, for the mark. */
+  starts: number[];
+}
+
+/** What the player shows together: one `group` of a loop's lines. */
+export interface LoopCard {
+  group: number;
+  section: string;
+  kind: string;
+  /** The word the card belongs to, or null for a card of no word — an intro, a story line. */
+  loopItemId: string | null;
+  start: number;
+  lines: LoopCardLine[];
+}
+
+/** A loop's lines, as the cards the player draws — one per group, in the order heard. */
+export function loopCards(cues: readonly LoopCue[]): LoopCard[] {
+  const cards: LoopCard[] = [];
+  for (const cue of cues) {
+    let card = cards[cards.length - 1];
+    if (!card || card.group !== cue.group) {
+      card = { group: cue.group, section: cue.section, kind: cue.kind, loopItemId: cue.loopItemId, start: cue.startSeconds, lines: [] };
+      cards.push(card);
+    }
+    const same = card.lines.find((line) => line.text === cue.text && line.language === cue.language);
+    if (same) same.starts.push(cue.startSeconds);
+    else card.lines.push({ text: cue.text, language: cue.language, role: cue.role, side: cue.side, heard: cue.startSeconds, starts: [cue.startSeconds] });
   }
-  return starts;
+  return cards;
 }
 
 export interface LoopMoment {
-  /** Which word is being taught, or -1 before the first one begins. */
-  index: number;
-  item: LoopItem | null;
-  /** Which line was spoken most recently — what the mark follows. */
-  sounding: "source" | "target" | null;
-  /** Whether the translation has been spoken. Until it has, it is not drawn at all. */
-  revealed: boolean;
+  /** Which card is showing, or -1 before the first line. */
+  card: number;
+  /** Which of its lines was said most recently — what the mark follows — or -1. */
+  sounding: number;
 }
 
 /**
- * Everything the player needs at one instant.
+ * What the player marks at one instant.
  *
- * The gap between one word ending and the next beginning belongs to the word just heard, so a line
- * does not go dark while its bed plays on. `sounding` is the line most recently spoken rather than
- * the one making sound this millisecond: an utterance is about half a second long every four, and a
- * mark that blinked for half a second would be unreadable at a glance — which is the whole way this
- * screen is used.
+ * The gap after a card belongs to it until the next begins, so a card does not go dark while its bed
+ * plays on. `sounding` is the line most recently said rather than the one making sound this
+ * millisecond: a word is half a second long every few, and a mark that blinked for half a second
+ * would be unreadable at a glance — which is the whole way this screen is used.
  */
-export function loopMomentAt(items: readonly LoopItem[], at: number): LoopMoment {
-  let index = -1;
-  items.forEach((item, position) => { if (at >= item.startSeconds) index = position; });
-  const item = index >= 0 ? items[index] : null;
-  if (!item) return { index, item: null, sounding: null, revealed: false };
-  const starts = utteranceStarts(item);
-  let spoken = -1;
-  starts.forEach((start, position) => { if (at >= start) spoken = position; });
-  return {
-    index,
-    item,
-    sounding: spoken < 0 ? null : spoken % 2 === 0 ? "source" : "target",
-    revealed: at >= item.targetRevealSeconds
-  };
+export function loopMomentAt(cards: readonly LoopCard[], at: number): LoopMoment {
+  let card = -1;
+  cards.forEach((one, index) => { if (at >= one.start) card = index; });
+  if (card < 0) return { card, sounding: -1 };
+  let sounding = -1;
+  let latest = -Infinity;
+  cards[card].lines.forEach((line, index) => {
+    for (const start of line.starts) if (start <= at && start >= latest) { latest = start; sounding = index; }
+  });
+  return { card, sounding };
+}
+
+/**
+ * Whether a line may be drawn yet. **Within a card, nothing after its first line is drawn before it
+ * has been said**: a translation not before it is spoken, a quiz's answer not before it is given, an
+ * example's meaning not before it is heard. The first line is the question, and is always there.
+ */
+export function loopLineShown(card: LoopCard, index: number, at: number): boolean {
+  return index === 0 || at >= card.lines[index].heard;
+}
+
+/** The word a loop is on at one instant: the card's, else the last word whose block has begun. */
+export function loopWordAt(items: readonly LoopItem[], cards: readonly LoopCard[], at: number): LoopItem | null {
+  const card = cards[loopMomentAt(cards, at).card];
+  const own = card?.loopItemId ? items.find((item) => item.id === card.loopItemId) : undefined;
+  if (own) return own;
+  let latest: LoopItem | null = null;
+  for (const item of items) if (at >= item.startSeconds) latest = item;
+  return latest;
+}
+
+/** A format's name in words: the generator's label where it gave one, else the id made readable. */
+export function formatLabel(formats: readonly { id: string; label: string }[] | undefined, formatId: string): string {
+  const named = formats?.find((format) => format.id === formatId)?.label;
+  if (named) return named;
+  const words = formatId.replace(/-/g, " ");
+  return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
 /* ── stories ────────────────────────────────────────────────────────────

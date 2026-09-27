@@ -676,6 +676,19 @@ def loop_items(owner: str, loop_id: str) -> list[dict[str, Any]]:
         return [projected(collection, row) for row in rows]
 
 
+def loop_cues(owner: str, loop_id: str) -> list[dict[str, Any]]:
+    """The lines of one loop this owner holds, in the wire shape, in the order they are heard."""
+    collection = COLLECTION_BY_KEY["loopCues"]
+    table = collection.table
+    with reading() as connection:
+        rows = connection.execute(
+            select(table)
+            .where(table.c.owner == owner, table.c.loop == loop_id)
+            .order_by(table.c.cue_order, table.c.id)
+        ).mappings()
+        return [projected(collection, row) for row in rows]
+
+
 def next_loop_position(owner: str, language: str) -> int:
     """Where a new loop goes: after the last one in this language.
 

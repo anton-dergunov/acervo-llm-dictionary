@@ -340,7 +340,7 @@ describe("loops", () => {
 
   const loopInput = {
     language: "es", styleId: "sunlit-acoustic", seed: 104740, engineVersion: "1.4.0",
-    bedFingerprint: "90c6ad267d159b0e", pattern: "retrieval",
+    bedFingerprint: "90c6ad267d159b0e", format: "classic", switches: {}, fallbackFrom: null,
     audioRef: "loops/es/90c6ad267d159b0e.mp3", audioMime: "audio/mpeg",
     durationSeconds: 124.5, position: 0
   };
@@ -348,8 +348,7 @@ describe("loops", () => {
   const itemInput = {
     loopId: "loop00000000001", lexemeId: "lexeme000000001", position: 0,
     sourceText: "desmayarse", targetText: "to faint", emotion: "alarmed",
-    startSeconds: 8.82, sourceRevealSeconds: 8.82, targetRevealSeconds: 17.65, endSeconds: 44.12,
-    repeats: 3, repeatSeconds: 4.41
+    startSeconds: 8.82, sourceRevealSeconds: 8.82, targetRevealSeconds: 17.65, endSeconds: 44.12
   };
 
   it("round-trips a loop and its item through the server and into the replica", async () => {
@@ -367,17 +366,22 @@ describe("loops", () => {
     expect(snapshot.loopItems[0].revision).toBeGreaterThan(0);
   });
 
-  it("tombstones a loop's items with it, and nothing else", async () => {
+  it("tombstones a loop's items and lines with it, and nothing else", async () => {
     const repository = await seeded();
     const loop = await repository.saveLoop(loopInput, "loop00000000001");
+    const stamp = { ownerId: "owner0000000001", deleted: false, createdAt: loop.createdAt,
+      editedAt: loop.editedAt, editedBy: loop.editedBy, revision: 0 };
     await repository.writeGraph({
-      loopItems: [{ id: "loopitem0000001", ...itemInput, ownerId: "owner0000000001", deleted: false,
-        createdAt: loop.createdAt, editedAt: loop.editedAt, editedBy: loop.editedBy, revision: 0 }]
+      loopItems: [{ id: "loopitem0000001", ...itemInput, ...stamp }],
+      loopCues: [{ id: "loopcue00000001", loopId: "loop00000000001", position: 0, group: 0, kind: "say",
+        section: "words", loopItemId: "loopitem0000001", side: "source", role: "native", language: "es",
+        text: "desmayarse", take: 0, startSeconds: 8.82, endSeconds: 9.5, ...stamp }]
     });
     await repository.delete("loops", "loop00000000001");
     const snapshot = repository.snapshot();
     expect(snapshot.loops[0].deleted).toBe(true);
     expect(snapshot.loopItems[0].deleted).toBe(true);
+    expect(snapshot.loopCues[0].deleted).toBe(true);
     // The word it named is untouched: deleting a loop deletes a recording, not vocabulary.
     expect(snapshot.lexemes[0].deleted).toBe(false);
   });

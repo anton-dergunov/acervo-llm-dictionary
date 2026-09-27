@@ -59,9 +59,21 @@ class GeneratorStub:
             return httpx.Response(202, json=recorded("queued"))
         self.polls += 1
         if self.polls > self.finish_after:
-            return httpx.Response(200, json=self.completed)
+            return httpx.Response(200, json=self._for_words_asked())
         return httpx.Response(200, json={**recorded("queued"), "status": "running",
                                          "progress": {"fraction": 0.3, "message": "Synthesizing"}})
+
+    def _for_words_asked(self) -> dict:
+        """The recorded render, cut to as many words as the loop asked for, as the real one is."""
+        asked = len((self.started[-1] if self.started else {}).get("items") or [])
+        result = self.completed.get("result")
+        if not asked or not isinstance(result, dict):
+            return self.completed
+        return {**self.completed, "result": {
+            **result,
+            "items": [row for row in result["items"] if row["index"] < asked],
+            "cues": [cue for cue in result["cues"] if cue["item"] is None or cue["item"] < asked],
+        }}
 
     def get(self, url: str, **kwargs):
         self.tracks += 1
@@ -261,7 +273,8 @@ def test_new_music_in_the_same_style_keeps_the_family_and_draws_a_new_seed(serve
     answer = server.post(f"/loops/{loop['id']}/music", {})
     assert answer.status_code == 202, answer.text
     given = answer.json()["data"]["job"]["input"]
-    assert given["family"] == "acoustic-flow" and given["seed"].isdigit()
+    assert given["family"] == recorded("completed")["result"]["style_id"]
+    assert given["seed"].isdigit()
 
 
 def test_new_music_waits_for_the_render_already_under_way(server, generator, runner, clock):
@@ -288,3 +301,95 @@ def test_try_again_on_a_change_of_music_asks_for_the_same_music(server, generato
                                   "input": {"family": "meditative", "seed": "31"}})
     assert again.status_code == 202, again.text
     assert again.json()["data"]["input"] == {"family": "meditative", "seed": "31"}
+
+
+# ── lines, scripts and fallbacks ────────────────────────────────────────────
+
+
+def a_radio_lesson(server) -> dict:
+    server.push({"vocabularies": [vocabulary()]})
+    ids = []
+    for index in range(2):
+        entry = lexeme(headword=f"palabra{index}", lemma=f"palabra{index}", status="active",
+                       primaryGloss=f"word {index}", emotion="plainly")
+        server.push({"lexemes": [entry], "senses": [sense(entry["id"])]})
+        ids.append(entry["id"])
+    answer = server.post("/loops", {"deviceId": "device000000001", "language": "es",
+                                    "lexemeIds": ids, "format": "radio-lesson"})
+    assert answer.status_code == 202, answer.text
+    return answer.json()["data"]["loop"]
+
+
+def test_every_line_is_stored_with_the_word_it_belongs_to(server, generator, runner, clock):
+    generator.completed = recorded("completed-radio")
+    loop = a_radio_lesson(server)
+    drive(runner, clock)
+
+    items = {row["id"]: row for row in stored(server, "loopItems")}
+    cues = sorted((row for row in stored(server, "loopCues") if not row["deleted"]),
+                  key=lambda row: row["position"])
+    heard = recorded("completed-radio")["result"]["cues"]
+    assert [row["text"] for row in cues] == [cue["text"] for cue in heard]
+    assert [row["group"] for row in cues] == [cue["group"] for cue in heard]
+    assert all(row["loopId"] == loop["id"] for row in cues)
+    # A word's own line names its word by id; a line of no word names none.
+    for row, cue in zip(cues, heard):
+        if cue["item"] is None:
+            assert row["loopItemId"] is None
+        else:
+            assert items[row["loopItemId"]]["position"] == cue["item"]
+    written = [row for row in stored(server, "loops") if row["id"] == loop["id"]][0]
+    assert (written["format"], written["fallbackFrom"]) == ("radio-lesson", None)
+
+
+def test_new_music_sends_the_lines_back_so_they_are_said_again(server, generator, runner, clock):
+    generator.completed = recorded("completed-radio")
+    loop = a_radio_lesson(server)
+    drive(runner, clock)
+    assert "script" not in generator.started[0]
+
+    server.post(f"/loops/{loop['id']}/music", {})
+    drive(runner, clock)
+    # The script the first render returned, whole: no writing call, and every take in the cache.
+    assert generator.started[-1]["script"] == recorded("completed-radio")["result"]["script"]
+    # And the second render's lines replace the first's rather than joining them.
+    live = [row for row in stored(server, "loopCues") if not row["deleted"]]
+    assert len(live) == len(recorded("completed-radio")["result"]["cues"])
+
+
+def test_a_render_that_fell_back_is_recorded_as_what_it_is(server, generator, runner, clock):
+    generator.completed = recorded("completed-fallback")
+    loop = a_radio_lesson(server)
+    drive(runner, clock)
+    written = [row for row in stored(server, "loops") if row["id"] == loop["id"]][0]
+    assert (written["format"], written["fallbackFrom"]) == ("classic", "radio-lesson")
+    # The loop still asks for what the listener chose; the track says what it got.
+    assert written["switches"] == {}
+
+
+def test_deleting_a_loop_takes_its_lines_and_its_script(server, generator, runner, clock):
+    from acervo.repository import loop_scripts
+
+    generator.completed = recorded("completed-radio")
+    loop = a_radio_lesson(server)
+    drive(runner, clock)
+    assert loop_scripts.script(server.owner, loop["id"]) is not None
+
+    assert server.delete(f"/loops/{loop['id']}").status_code == 200
+    assert all(row["deleted"] for row in stored(server, "loopCues"))
+    assert loop_scripts.script(server.owner, loop["id"]) is None
+
+
+def test_a_render_that_speaks_a_word_the_loop_does_not_have_is_not_stored(server, generator, runner, clock):
+    generator.completed = recorded("completed-radio")
+    loop = a_radio_lesson(server)
+    # Answer for more words than were asked, as a mismatched render would.
+    generator._for_words_asked = lambda: recorded("completed-radio") | {
+        "result": {**recorded("completed-radio")["result"],
+                   "cues": recorded("completed-radio")["result"]["cues"]
+                   + [{**recorded("completed-radio")["result"]["cues"][-1], "item": 7}]}}
+    drive(runner, clock)
+    done = [job for job in jobs.recent(server.owner, 50) if job["kind"] == "loop"][0]
+    assert done["state"] == "failed"
+    assert "does not have" in (done.get("message") or done["steps"][-1].get("message") or "")
+    assert [row for row in stored(server, "loops") if row["id"] == loop["id"]][0]["audioRef"] is None

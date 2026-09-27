@@ -16,7 +16,7 @@ import { backendSession, type LoopFamily, type LoopMusic, type LoopSchema } from
 import type { Bed, Loop, VocabularyGraph } from "./domain";
 import { PauseIcon, PlayIcon, StarIcon } from "./icons";
 import * as player from "./loops";
-import { loopIsReady, loopItemsOf, loopTitle, styleLabel } from "./selectors";
+import { loopIsReady, loopTitle, loopTrackOf, styleLabel } from "./selectors";
 
 let asked: Promise<LoopSchema> | null = null;
 
@@ -34,7 +34,10 @@ export function useLoopSchema(fresh = false): { schema: LoopSchema | null; troub
     let live = true;
     if (fresh) asked = null;
     asked ??= backendSession.loopSchema();
-    asked.then((found) => { if (live) setSchema(found); }).catch((error: unknown) => {
+    asked.then((found) => {
+      player.nameFormats(found.formats);
+      if (live) setSchema(found);
+    }).catch((error: unknown) => {
       asked = null;
       if (live) setTrouble(error instanceof Error && error.message ? error.message : "The loop generator could not be reached.");
     });
@@ -82,7 +85,7 @@ function Preview({ graph, bed }: { graph: VocabularyGraph; bed: Bed }) {
   return <button
     type="button" className="music-preview"
     aria-label={playing ? "Stop listening" : "Hear this music"}
-    onClick={() => (playing ? player.pause() : void player.play(loop, loopItemsOf(graph, loop.id)))}
+    onClick={() => (playing ? player.pause() : void player.play(loopTrackOf(graph, loop)))}
   >{playing ? <PauseIcon /> : <PlayIcon />}</button>;
 }
 

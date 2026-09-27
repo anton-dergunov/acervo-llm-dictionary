@@ -1,12 +1,12 @@
 {
   "note": "The one version of lexibeat this deployment runs. Acervo names a version and upgrades deliberately; the two repositories do not share a release cadence. See docs/features/loops.md §2.1.",
   "repository": "https://github.com/anton-dergunov/lexibeat",
-  "version": "0.6.1",
-  "tag": "v0.6.1",
+  "version": "0.7.0",
+  "tag": "v0.7.0",
   "artifacts": {
     "wheel": {
-      "file": "lexibeat-0.6.1-py3-none-any.whl",
-      "sha256": "5729e3952783f8573173cea73e5806b8a4abb5c0fb0245762d8f45258f90a376"
+      "file": "lexibeat-0.7.0-py3-none-any.whl",
+      "sha256": "1c5f555035d5cff0fd0081cfe82829c205e2698320c62566303d48409dc6885a"
     }
   },
   "bundleNote": "The sample bundle is in its own block because it goes somewhere else. `artifacts` is what scripts/fetch_lexibeat.sh puts in vendor/lexibeat/ for the image build; this is ~3.1 GB of audio that is fetched ONCE, on the server, into a volume, and never enters a build context or the release archive. `release` is the release it is attached to, which is not necessarily `tag`: the bundle changes far less often than the wheel and is not re-uploaded to every release. It is published as numbered parts because GitHub refuses a release asset of 2 GiB or more; `sha256` and `bytes` are the whole archive's once the parts are joined in order, which is what the fetch checks. Its digest is inline rather than read from the release's SHA256SUMS, because that asset is written by the release workflow and the workflow does not build the bundle - `lexibeat-bundle publish` does, on a workstation, and prints this. `root` is not only a description: the lexibeat image copies this file in and looks for the bundle at /var/lib/lexibeat/bundle/<root>, so a volume still holding an older bundle reads as no bundle at all and Acervo refuses with loops_no_samples until --install-samples has run. This is the listener-approved Wave 3 library; its manifest carries the expansion policy that switches on the sustained strings, contrabasses and Wave 3 leads. A bundle without that policy renders the plainer control behaviour, and nothing about it looks wrong except the music.",
