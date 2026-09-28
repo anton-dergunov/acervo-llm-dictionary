@@ -1,7 +1,7 @@
 # Story generation: does the pipeline hold its shape?
 
 **Question.** Not "are the stories good" — that needs a method this does not have, and it is
-[`docs/plans/story-quality.md`](../../docs/plans/story-quality.md). This asks the cheaper questions
+[`docs/plans/quality/story-quality.md`](../../docs/plans/quality/story-quality.md). This asks the cheaper questions
 that had to be settled before any of it could ship, and that no stubbed test can reach:
 
 1. Does the model hold the reply shape, and how often does `parse_reply` have to refuse it?
@@ -87,7 +87,7 @@ the boxes, large and in focus.
 ## What is left, and deliberately not done here
 
 - **Whether the stories are actually good.** Seven stories read by one person is not a measurement.
-  `docs/plans/story-quality.md` is the stub for doing it properly.
+  `docs/plans/quality/story-quality.md` is the stub for doing it properly.
 - **Forcing a word can bend the prose.** Round 3 produced `empezar a susurrar un gruñido bajo` —
   "to whisper a low growl", which is odd Spanish. Expected when a word must appear, worth watching,
   not worth a prompt rule yet.

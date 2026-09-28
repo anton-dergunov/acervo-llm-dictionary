@@ -125,4 +125,4 @@ Not built, deliberately: speech-to-text, pronunciation assessment (recording the
 is a product of its own), a second media store, and voices running on the device. Voices running on the
 NAS, other providers and human recordings are
 [`../plans/provider-management.md`](../plans/provider-management.md); the expressive order offering
-voices that cannot take a direction is [`../plans/expressive-voice-chain.md`](../plans/expressive-voice-chain.md).
+voices that cannot take a direction is [`../plans/issues.md`](../plans/issues.md) §1.

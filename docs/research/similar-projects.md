@@ -91,7 +91,7 @@ languages, to what the learner knows well and badly, or to what is missing.
 **Planned, as ideas rather than specifications**: some forty views — a concept grid across languages,
 word families, clines, a character network, a strength map and more — under one idea, that **every view
 with slots is a recommender**, drawing a proposed word where a place is empty. The map's version of that
-is its ghosts. The catalogue is [`../plans/vocabulary-views.md`](../plans/vocabulary-views.md).
+is its ghosts. The catalogue is [`../plans/word-discovery.md`](../plans/word-discovery.md).
 
 ### Heavy to maintain, and hard for anyone else to run
 
@@ -103,7 +103,7 @@ Acceptable for one owner; a ceiling on its value as a public project.
 - **A standalone macOS application**: download, open, use, with the data kept on the machine and no
   server at all. This is a real design change rather than packaging — today every write is a round
   trip to the server, by design — and it has its own plan,
-  [`../plans/standalone-mac-app.md`](../plans/standalone-mac-app.md).
+  [`../plans/first-use/standalone-mac-app.md`](../plans/first-use/standalone-mac-app.md).
 - **A simpler self-hosted path** for anyone who wants sync across devices.
 - **A hosted service** with downloadable desktop and mobile applications is a possibility if the
   project succeeds, and is not planned now: it needs a server somewhere and the resources to run it.

@@ -2,7 +2,7 @@
 
 **Built.** How the tuning went is [`clip-selection-rounds.md`](../research/clip-selection-rounds.md) and
 [`experiments/clip-translation/`](../../experiments/clip-translation/README.md); what might come next
-is [`../plans/clip-curation.md`](../plans/clip-curation.md).
+is [`../plans/quality/clip-selection.md`](../plans/quality/clip-selection.md).
 
 A word's article can show what a word means, how it is used, and a picture of it. This is how it
 also shows a native speaker saying it. The corpus is
@@ -231,7 +231,7 @@ The prompt itself is a research question of its own. Five informal readings of i
 [`clip-selection-rounds.md`](../research/clip-selection-rounds.md), the translation rewrite is measured in
 [`experiments/clip-translation/`](../../experiments/clip-translation/README.md), and a labelled
 experiment is designed and not yet run
-([`../plans/clip-selection-experiment.md`](../plans/clip-selection-experiment.md)).
+([`../plans/quality/clip-selection.md`](../plans/quality/clip-selection.md)).
 
 ### 8 · The marker is a date, not a flag
 

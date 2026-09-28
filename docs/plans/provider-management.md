@@ -34,11 +34,11 @@ rather than a branch; this plan makes a row something the interface can create.
 - **Keys arrive by deploy.** `--configure-llm --llm-key NAME --llm-api-key-stdin` writes `llm.env`;
   Vertex additionally needs a credentials *file* mounted and named by `authEnv`
   ([`../operations/vertex-setup.md`](../operations/vertex-setup.md)).
-- **Related open defect:** [`expressive-voice-chain.md`](expressive-voice-chain.md) — the expressive
+- **Related open defect:** [`issues.md`](issues.md) §1 — the expressive
   order offers voices that cannot take a direction. Whatever the Settings form for audio looks like,
   it should make that impossible to configure.
 
-## Three pieces of work
+## Four pieces of work
 
 ### 1 · Audit the providers
 
@@ -138,7 +138,9 @@ Questions to answer before building:
 - **Where rows live.** An owner-scoped, never-replicated server table like `model_selection` is the
   obvious home. The tracked catalogue would then be the list of presets, the way
   `dictionaries/catalogue.json` is a list and not data. There must be one source of truth for a row,
-  not the file *and* the table.
+  not the file *and* the table. **The owner wants the JSON kept as a way to define rows**, not only
+  the form — so the likely shape is that a row can be written as JSON in the form or imported from a
+  file, and becomes a table row either way, rather than the server reading two sources.
 - **Where keys live, and how they are protected at rest.** Today they are an env file only root can
   read. A table in the same SQLite file as the vocabulary is backed up with it; that is either a
   feature or a leak, and needs deciding.
@@ -159,8 +161,21 @@ it. A recommended starter set — the fewest accounts that cover every kind — 
 first. [`../operations/vertex-setup.md`](../operations/vertex-setup.md) is the existing example of one provider's page;
 the guide should read like that, for someone who has never deployed Acervo.
 
+### 4 · How much each model is used, and how often it fails
+
+Settings ▸ Providers shows, per provider and model, how many calls were made and how many failed — by
+day, week, month and in total — so the owner can see which free tier is being spent and which model
+is unreliable, without a shell on the server.
+
+The numbers already exist. Every model call is a line in the call log beside the database, and
+`python -m acervo.admin calls` reads it back per job and per provider:model — succeeded, failed,
+median and p95 time. What is missing is a route that serves the same reading and the panel that
+draws it. The log rotates, so "in total" is either as far back as the log reaches, or a small
+counter the server keeps; which is part of building it.
+
 ## Order
 
 The audit first, because it decides which presets the Settings form needs and which providers the
 guide covers. Then Settings, then the guide. The audit can start any time and does not wait on the
-trial ending — the point is to know the answer before it does.
+trial ending — the point is to know the answer before it does. The usage figures depend on none of
+it and can come first.

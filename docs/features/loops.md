@@ -339,7 +339,7 @@ So **the fields ship as worded and `acervo_compose.md` is not split.** Two bars 
 neither bears on it: note characters at 89.4% on a metric whose difference is a quarter of its noise,
 and the gloss-language rule, failed only by `llama-3.3-70b` and only on a rule that predates these
 fields. Article quality itself is untouched by this run and has its own register,
-[`../plans/article-quality.md`](../plans/article-quality.md) — both arms wrote `/ˈaska/` for `el asco`, which is simply
+[`../plans/quality/article-quality.md`](../plans/quality/article-quality.md) — both arms wrote `/ˈaska/` for `el asco`, which is simply
 wrong, and a comparison of two arms is blind to a defect they share.
 
 ### 9 · A loop is three collections, and its state is derived

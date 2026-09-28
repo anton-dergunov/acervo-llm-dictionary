@@ -1,7 +1,7 @@
 # Clip selection · first readings
 
 **Status:** first readings, not a measurement. Five runs of the real pipeline against the real corpus
-and a real provider, read by eye. The method `docs/plans/clip-selection-experiment.md` calls
+and a real provider, read by eye. The method `docs/plans/quality/clip-selection.md` calls
 for — 25–40 lexemes, a labelled rubric, precision and recall with stated denominators — has **not**
 been carried out. What is here is the smaller thing worth doing before it: does v1 of the prompt
 work at all, and is anything obviously broken.
@@ -88,7 +88,7 @@ Round 3 is the same prompt as round 2.
 
 ## What to do next
 
-Carry out the real loop in `docs/plans/clip-selection-experiment.md` — 25–40 saved lexemes, labels
+Carry out the real loop in `docs/plans/quality/clip-selection.md` — 25–40 saved lexemes, labels
 on both selections *and* refusals, and one knob at a time starting with candidate count. This round
 supplies the starting point and one fix, not a baseline to stop at.
 
@@ -151,6 +151,6 @@ channels took **30–45%** of the selections — including round 1, before any c
 round 4a with the rule off.
 
 So the model prefers cleanly captioned, more scripted sources on its own. That is a finding for
-`clip-selection-experiment.md` to measure properly, not something to correct by prompt here. It is
+`docs/plans/quality/clip-selection.md` to measure properly, not something to correct by prompt here. It is
 also the strongest argument for shipping the passage rule off: it would have pushed the same
 direction the model already leans.

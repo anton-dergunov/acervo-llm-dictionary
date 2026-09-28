@@ -68,7 +68,7 @@ senses a model silently drops: asked cold, a model gives the two obvious meaning
 the other five. A reference is grounding and nothing else: it never becomes an attestation, because a
 dictionary's examples are not places the owner met the word. Whether grounding makes better articles
 than no grounding is unmeasured, and the evaluation is planned in
-[`../plans/article-quality.md`](../plans/article-quality.md) §6.
+[`../plans/quality/article-quality.md`](../plans/quality/article-quality.md) §6.
 
 ## A proposal, reviewed as the article it will become
 

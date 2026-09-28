@@ -40,7 +40,7 @@ Whole prompt files, so the comparison stays reproducible after the rewrite ships
 
 Both are rendered through the shipped reader, `acervo.services.prompts.sections`, with the shipped
 default `selfContainedOnly: false`. That knob belongs to
-[`clip-selection-experiment.md`](../../docs/plans/clip-selection-experiment.md) and is not varied
+[`clip-selection.md`](../../docs/plans/quality/clip-selection.md) and is not varied
 here.
 
 ## Method
@@ -339,7 +339,7 @@ measurements above should be re-run once the free tiers reset: the request shape
 examples, and `copiedSource` is a column this run could not report.
 
 What this run does **not** support is a code-level completeness check: see
-[`docs/plans/translation-completeness-check.md`](../../docs/plans/translation-completeness-check.md).
+[`docs/plans/quality/translation-completeness-check.md`](../../docs/plans/quality/translation-completeness-check.md).
 The reference ratios here — en 1.05, ru 1.02, ja 0.48, zh 0.36 — are each from one or two passages,
 which is enough to show that a single absolute floor cannot serve every script and nowhere near
 enough to set one per script.

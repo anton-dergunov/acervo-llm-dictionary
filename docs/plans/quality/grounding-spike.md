@@ -3,6 +3,11 @@
 **Status:** the spike is unrun, but **grounding shipped without it** — so the question this document
 asks has moved from *should we?* to *what does the one we built actually do?*
 
+**When, and how big.** After the dictionary survey ([`../dictionaries.md`](../dictionaries.md) §1),
+since the sources it would ground on are the ones that survey is replacing — and small: twenty words
+at most. The likeliest outcome is that grounding is switched off, and a quick spike is the honest way
+to reach that rather than a slow one.
+
 `services/capture/coerce.py:reference_of` carries an external dictionary's entry into the compose
 request, and `prompts/acervo_compose.md` governs it under two treatments, **STAY CLOSE TO THE
 REFERENCE** and **FILL IN THE GAPS**. It is reached from "Add to my words" on an external article.

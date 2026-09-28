@@ -19,7 +19,7 @@ and the experiments behind them are in [`../experiments/`](../experiments/README
 - **An unusable answer falls through to the next model.** A model that cannot hold a shape has revealed
   a fact about itself, so the caller raises `unusable` inside the chain and the next pair is asked —
   quality-triggered routing with no second call and no vote. Compose does not yet do this for its own
-  field checks. ([`architecture/models.md`](architecture/models.md), [`plans/article-quality.md`](plans/article-quality.md))
+  field checks. ([`architecture/models.md`](architecture/models.md), [`plans/quality/article-quality.md`](plans/quality/article-quality.md))
 - **Hedging for latency.** A caller with a person waiting races the next pair when the first is silent
   past a delay set from measured healthy answers; the first usable answer wins.
 - **The model is named by the record.** Every generated record carries the model that *answered*, which
@@ -34,7 +34,7 @@ and the experiments behind them are in [`../experiments/`](../experiments/README
 - **Grounding on a dictionary entry** demotes the model from knowledge source to selector and formatter,
   and recovers the senses a model drops when asked cold. Whether it makes better articles is unmeasured,
   and the owner's impression is that it does not — so it is an experiment waiting to run.
-  ([`plans/grounding-spike.md`](plans/grounding-spike.md))
+  ([`plans/quality/grounding-spike.md`](plans/quality/grounding-spike.md))
 - **Adding fields to a prompt without thinning the rest** was measured before trusting it: ten substance
   metrics each moved less than their own run-to-run variance across 315 calls.
   ([`features/loops.md`](features/loops.md) §2.8)
@@ -63,7 +63,7 @@ and the experiments behind them are in [`../experiments/`](../experiments/README
   measuring something. ([`features/spoken-clips.md`](features/spoken-clips.md))
 - **Translating the whole passage**, demanded in the prompt, took severe truncation from 8 to 0
   (McNemar p = 0.004). Whether code should also refuse an incomplete translation waits on data across
-  enough scripts to set a threshold honestly. ([`plans/translation-completeness-check.md`](plans/translation-completeness-check.md))
+  enough scripts to set a threshold honestly. ([`plans/quality/translation-completeness-check.md`](plans/quality/translation-completeness-check.md))
 
 ## Voices
 
@@ -115,11 +115,11 @@ and the experiments behind them are in [`../experiments/`](../experiments/README
 
 - **Pairwise "which is better" cannot resolve small differences** — human or model. Same-arm controls
   could not reliably return "no preference", agreement with a judge was at chance, and the verdict had to
-  rest on metrics. A judge must be re-established on each task. ([`plans/story-quality.md`](plans/story-quality.md))
+  rest on metrics. A judge must be re-established on each task. ([`plans/quality/story-quality.md`](plans/quality/story-quality.md))
 - **Blind comparison where the question is perceptual** — audio encodings, picture references — with
   the arm hidden and position randomised, because reading position alone produced a 14-to-4 lean.
 - **Ground truth before quality claims.** A comparison of two prompt arms is blind to a defect both
   share: both wrote the same wrong IPA. The ground-truth harness is the first thing the article-quality
-  programme builds. ([`plans/article-quality.md`](plans/article-quality.md))
+  programme builds. ([`plans/quality/article-quality.md`](plans/quality/article-quality.md))
 - **Measure at the largest input the caller produces.** The alignment schema worked at sixty tokens and
   failed at a hundred and five.

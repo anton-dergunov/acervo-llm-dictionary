@@ -117,4 +117,4 @@ Even **10,000 fully structured words** with no media are only tens of megabytes.
 [`research/clip-selection-rounds.md`](research/clip-selection-rounds.md). Experiments with their
 apparatus and results are in [`../experiments/`](../experiments/README.md).
 
-**Plans** — what is still to do, including experiments not yet run: [`plans/`](plans/).
+**Plans** — what is still to do, including experiments not yet run: [`plans/`](plans/README.md).

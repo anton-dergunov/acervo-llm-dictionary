@@ -45,4 +45,5 @@ The alternative is a growing panel of settings — a level, a register, excluded
 and a branch in every prompt that reads it. Free text costs no schema per preference, reads the way the
 owner thinks about it, and applies to every call at once. It is also the first answer to taste questions
 that would otherwise become per-feature knobs: how tidy a clip's speech should be is a sentence here
-before it is a setting there ([`../plans/clip-curation.md`](../plans/clip-curation.md)).
+before it is a setting there ([`../plans/quality/clip-selection.md`](../plans/quality/clip-selection.md)
+Part 2).

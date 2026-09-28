@@ -1,6 +1,6 @@
 """Write stories with the real prompts against a real model, and print them to be read.
 
-The question this answers is not "is the story good" — that is `docs/plans/story-quality.md`, and it
+The question this answers is not "is the story good" — that is `docs/plans/quality/story-quality.md`, and it
 needs a method this does not have. It answers the cheaper questions that have to be settled first,
 and that a stub test cannot reach:
 

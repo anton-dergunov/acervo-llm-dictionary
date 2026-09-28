@@ -166,7 +166,7 @@ none of it.
 
 It stays on the table for two reasons. Orchestrating ML pipelines is a skill worth practising, and
 this project is a natural place to do it. And a second machine, or pipelines that outgrow one lane,
-would change the arithmetic ([`../plans/jobs.md`](../plans/jobs.md)). If it is adopted, the cautions written for it still hold:
+would change the arithmetic. If it is adopted, the cautions written for it still hold:
 
 - **It wraps the same functions.** Stages are ordinary Python in `services/`, already idempotent by
   derivation; Prefect would schedule them and never own their logic.

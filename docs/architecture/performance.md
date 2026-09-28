@@ -1,9 +1,8 @@
 # Performance · the write path, measured
 
-What a save, a pull, an import and a cold start cost. Four further optimisations, each worth doing only
-once a measurement says so, are [`../plans/write-path-performance.md`](../plans/write-path-performance.md). The replica's own rules — immutable and shared, validated by the
-incoming records rather than the whole graph — are why the device side is cheap; see
-[`sync.md`](sync.md).
+What a save, a pull, an import and a cold start cost. The replica's own rules — immutable and
+shared, validated by the incoming records rather than the whole graph — are why the device side is
+cheap; see [`sync.md`](sync.md).
 
 ## Measured
 

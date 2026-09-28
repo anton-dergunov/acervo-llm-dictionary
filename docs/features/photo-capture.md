@@ -214,5 +214,7 @@ beyond `acervo.models`; `services/photo.py` is the binding layer, and `test_laye
 
 ## Not built
 
-An image share target, keeping the photo when a sentence is folded into a held word, a second OCR reader,
-and Chinese and Japanese are [`../plans/photo-capture.md`](../plans/photo-capture.md).
+An image share target is one of the capture transports
+([`../plans/capture-transports.md`](../plans/capture-transports.md), A2); Chinese and Japanese are
+[`../plans/languages/chinese.md`](../plans/languages/chinese.md); a photo sentence folded into a held
+word losing its photo is [`../plans/issues.md`](../plans/issues.md) §4.

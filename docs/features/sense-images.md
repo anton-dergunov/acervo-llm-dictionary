@@ -592,5 +592,3 @@ shape and the job step.
 - **No lexeme-level card images.** `Article.images` is still derived by `selectors.ts` and still
   rendered nowhere, because §02 decided nothing generates it. Left alone rather than removed: it is
   the shape a card image would take if one is ever wanted.
-- No Anki cards yet: a card per example with its sense's picture is part of
-  [`../plans/anki-loop.md`](../plans/anki-loop.md).

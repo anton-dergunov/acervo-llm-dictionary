@@ -279,7 +279,7 @@ def score_call(record: Mapping[str, Any], passages: Mapping[str, dataset.Passage
         # **The passage handed back instead of translated.** Added after a rewrite of this prompt
         # shipped and did exactly that in production: it is exact, costs nothing, and had it been
         # here from the start the class could not have been invisible. It is *not* the completeness
-        # check deferred to docs/plans/translation-completeness-check.md — that one needs a
+        # check deferred to docs/plans/quality/translation-completeness-check.md — that one needs a
         # threshold and this one needs none.
         "copiedSource": translation.strip() == passage.sentence.strip(),
     })

@@ -11,7 +11,7 @@ that question is open rather than settled.
 
 **It is also deliberately the project's research track.** An engineering fix teaches little and
 transfers nowhere. A designed experiment that returns a null result — as
-[`compose-lesson-line`](../../experiments/compose-lesson-line/README.md) did — is a reusable output:
+[`compose-lesson-line`](../../../experiments/compose-lesson-line/README.md) did — is a reusable output:
 an instrument, a measured claim, and a finding that survives the codebase it came from. That framing
 decides how this file is written: every section below names a question, an instrument and what a
 negative answer would still be worth.
@@ -402,7 +402,7 @@ half the price, keeping the cheap model's 1.8 s median.
 
 ## §6 · Grounding — shipped, disliked, and unevaluated
 
-Grounding shipped as the user-initiated reference path (`docs/plans/grounding-spike.md` records it):
+Grounding shipped as the user-initiated reference path (`docs/plans/quality/grounding-spike.md` records it):
 
 - `services/capture/coerce.py:reference_of` — `REFERENCE_LIMIT = 8000`, and a docstring that states
   the modelling rule: *"Grounding, and nothing else. It never reaches `resolution.sentences`, so it

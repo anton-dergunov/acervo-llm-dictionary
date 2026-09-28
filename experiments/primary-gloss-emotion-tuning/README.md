@@ -1,6 +1,6 @@
 # Experiment · tuning `primaryGloss` and `emotion`'s wording
 
-Spike for [`docs/plans/article-quality.md`](../../docs/plans/article-quality.md) §8 row 11 and the
+Spike for [`docs/plans/quality/article-quality.md`](../../docs/plans/quality/article-quality.md) §8 row 11 and the
 defect register's "The `emotion: null` boundary is conservative" section. `experiments/
 compose-lesson-line/` shipped these two fields on 18 September 2026 after measuring they don't thin
 the rest of the article, and explicitly flagged wording quality as a separate, later pass — this is

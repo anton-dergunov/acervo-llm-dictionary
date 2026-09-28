@@ -832,7 +832,7 @@ Chat is a **consumer of the core** ([`../README.md`](../README.md). Concretely, 
   every write is undoable with a third.
 - **The whole vocabulary.** *"Which of my words are like this one"* across the entire store is a
   different feature with a different shape — the set difference against what you actually hold
-  ([`../plans/learning-modes.md`](../plans/learning-modes.md)). Chat sends at most
+  ([`../plans/word-discovery.md`](../plans/word-discovery.md)). Chat sends at most
   twenty neighbours and says so.
 - **Offline anything.** A turn is a server round trip; reading the article never is. The dock is the
   only part of the article view that ever reports the server being down.
@@ -895,7 +895,3 @@ Manual, on the devices this is for:
 - Sync the same entry from a second device mid-conversation, then save: refused, plainly, and the
   proposal is dropped.
 - Save, then Undo: the removed example comes back with its original id.
-
----
-
-What is still open is [`../plans/article-chat.md`](../plans/article-chat.md).

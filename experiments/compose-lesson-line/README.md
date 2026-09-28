@@ -330,7 +330,7 @@ a metric whose paired difference is a quarter of its own noise; and the gloss-la
 ### What this experiment says to do next, and does not do
 
 - **Article quality is the real open question, and it now has its own register:**
-  [`docs/plans/article-quality.md`](../../docs/plans/article-quality.md). Three defects went in from
+  [`docs/plans/quality/article-quality.md`](../../docs/plans/quality/article-quality.md). Three defects went in from
   this run — a reproducibly wrong IPA vowel from `gemini-3.5-flash-lite` (6 of 6 calls, while the
   other two pairs were correct every time), the `emotion: null` boundary, and one pinyin tone error —
   along with what the run showed is already reliable, so it is not re-litigated. Every one of them is

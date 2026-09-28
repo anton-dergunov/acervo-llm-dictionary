@@ -7,7 +7,7 @@ the words and then what each means. Tapping a word peeks at it, and the peek ope
 The package is `src/acervo/meaning/`, drawn by `GET /map/{language}`; the look and the interaction are
 the prototype's (`design/ui-prototype/README.md`, "The map"); the measurements are
 [`experiments/meaning-space/`](../../experiments/meaning-space/README.md). What the map might become
-— ghosts, other layers — is [`../plans/vocabulary-views.md`](../plans/vocabulary-views.md).
+— ghosts, other layers — is [`../plans/word-discovery.md`](../plans/word-discovery.md).
 
 ---
 

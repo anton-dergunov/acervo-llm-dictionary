@@ -45,7 +45,7 @@ RUNS = HERE / "runs"
 ARMS = HERE / "arms"
 
 # The shipped default. `selfContainedOnly` is the other experiment's knob
-# (`docs/plans/clip-selection-experiment.md`) and is deliberately not varied here.
+# (`docs/plans/quality/clip-selection.md`) and is deliberately not varied here.
 OPTIONS = {"selfContainedOnly": False}
 
 

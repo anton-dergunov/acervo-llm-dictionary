@@ -6,7 +6,7 @@ read aloud in one voice. It is read as a deck. The package is `src/acervo/storie
 alone on `acervo.models` like `images/`; `services/stories.py` is the binding layer; the job is
 `work/story.py`. Whether the pipeline holds its shape was settled in
 [`experiments/story-quality/`](../../experiments/story-quality/README.md); whether the stories are
-*good* is the open question in [`../plans/story-quality.md`](../plans/story-quality.md).
+*good* is the open question in [`../plans/quality/story-quality.md`](../plans/quality/story-quality.md).
 
 ---
 

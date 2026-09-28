@@ -5,7 +5,7 @@ both could only be made from words drawn at random from whatever the list showed
 "give me something to listen to" and useless for "these eight words I keep getting wrong". The store
 is `web/src/wordSelection.ts`; the bar is `SelectionBar.tsx`; the row is `SwipeRow.tsx`; the dialogs'
 word source is `MakeFrom.tsx`; the design of record is the prototype (`design/ui-prototype/`,
-`?select=1`). What selection might become is [`../plans/word-selection.md`](../plans/word-selection.md).
+`?select=1`).
 
 ---
 
@@ -33,9 +33,8 @@ most of the design:
   deleted since simply stops appearing and nothing ever repairs the store.
 
 **It is not a topic.** A topic files a word permanently, is synced, and is the owner's curation. A
-selection is transient, device-local, and exists to be consumed. Making one into the other is an open
-question ([`../plans/word-selection.md`](../plans/word-selection.md)); keeping them apart now keeps a
-throwaway pile from becoming a second, half-synced filing system.
+selection is transient, device-local, and exists to be consumed. Keeping them apart keeps a throwaway
+pile from becoming a second, half-synced filing system, and a selection never syncs.
 
 ## Marking a word
 

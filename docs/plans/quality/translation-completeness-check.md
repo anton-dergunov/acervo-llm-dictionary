@@ -1,9 +1,9 @@
 # Experiment · catching a translation that stopped early
 
 **Status:** Unstarted, and deliberately so. The prompt half of this shipped first — the translation
-section of [`../../prompts/acervo_clip_select.md`](../../prompts/acervo_clip_select.md) was rewritten to
+section of [`../../../prompts/acervo_clip_select.md`](../../../prompts/acervo_clip_select.md) was rewritten to
 demand every clause, and the rewrite is measured in
-[`experiments/clip-translation/`](../../experiments/clip-translation/README.md). What has **not**
+[`experiments/clip-translation/`](../../../experiments/clip-translation/README.md). What has **not**
 shipped is any code that refuses an incomplete translation, and this document exists because the
 data to set such a check honestly does not exist yet in this deployment.
 
@@ -93,7 +93,7 @@ does not try it again:
 
 ## What would have to be true to ship it
 
-Written down before the numbers, as `docs/plans/clip-selection-experiment.md` does:
+Written down before the numbers, as `docs/plans/quality/clip-selection.md` does:
 
 - **Zero false rejections** over complete translations at the chosen threshold, with N stated.
 - A catch rate worth having on the simulated truncations — a check that fires on nothing is a check
@@ -116,7 +116,7 @@ learning yet. Decide that here rather than by default.
 
 ## Where the check would go, if it ships
 
-`parse_reply` in [`src/acervo/clips/select.py`](../../src/acervo/clips/select.py), beside the
+`parse_reply` in [`src/acervo/clips/select.py`](../../../src/acervo/clips/select.py), beside the
 existing upper bound — `len(translation) > max(240, 3 × len(source))`, "the model did not stop
 writing". A lower bound is the same kind of fact about a pair and is handled the same way: raise,
 `_select_once` turns it into `ProviderUnavailable("unusable")`, and the chain passes that pair over.

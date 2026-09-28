@@ -9,11 +9,11 @@ instant the account was made.
 Two fields, and deliberately not more. Which channels the corpus harvests is the retrieval
 service's own catalogue (`docs/features/spoken-clips.md` §2.10) and Acervo ships no copy of it; how
 many candidates a call sees is a research knob that belongs in
-`docs/plans/clip-selection-experiment.md`, not in a settings screen.
+`docs/plans/quality/clip-selection.md`, not in a settings screen.
 
 `self_contained_only` is the first boolean that is really a *taste* — how authentic, how tidy — and
-a growing list of those is the wrong shape for that question. `docs/plans/clip-curation.md` is where
-that goes next.
+a growing list of those is the wrong shape for that question. Part 2 of
+`docs/plans/quality/clip-selection.md` is where that goes next.
 
 This module stores what it is given, exactly as `image_settings` does.
 """

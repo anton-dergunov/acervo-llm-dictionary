@@ -79,7 +79,7 @@ def _candidate_payload(candidate: Candidate) -> dict[str, Any]:
     """What the model is told about one segment.
 
     Every field here is prompt weight, so every one has to earn its place —
-    `docs/plans/clip-selection-experiment.md` names this set as the first thing to vary. The
+    `docs/plans/quality/clip-selection.md` names this set as the first thing to vary. The
     provenance fields are here because a learner judging *naturalness* would want them: an
     automatic caption of streamed Rioplatense conversation is a different kind of evidence from an
     authored subtitle on a scripted lesson.
@@ -209,7 +209,7 @@ def parse_reply(payload: Any, article: ArticleView,
         # Exact rather than approximate, so it needs no threshold and no per-language table, and it
         # is the whole of what can be checked without ground truth: that a translation is *missing
         # part* of its passage is the open question in
-        # `docs/plans/translation-completeness-check.md`; that it is *not a translation at all* is
+        # `docs/plans/quality/translation-completeness-check.md`; that it is *not a translation at all* is
         # decidable here and now. Guarded on the two languages actually differing, because asking
         # for a translation into the passage's own language is a different mistake made somewhere
         # else, and on a length that a proper noun standing alone cannot reach.

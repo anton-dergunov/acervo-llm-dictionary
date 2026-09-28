@@ -1,13 +1,31 @@
-# Vocabulary views · ways to see the word list
+# Word discovery · finding the words worth knowing next
 
 **Status:** a list of ideas. The meaning map is built
 ([`../features/meaning-map.md`](../features/meaning-map.md)); none of the others is specified yet, and
 each needs defining before it is planned.
 
+**The point of all of it is to find words I do not have and should.** A view is worth building when it
+shows a gap — a missing rung, an empty cell, an unheld neighbour — and turns it into a word one tap
+from capture. Seeing the vocabulary a new way is the means; a word added is the result.
+
+Three sources of candidates come before any view:
+
+- **Synonyms, antonyms and related words.** Shown beside a sense they help it be understood; as
+  discovery they are the unheld neighbours of words already held. The compiled dictionaries carry
+  them and the converters currently drop them ([`dictionaries.md`](dictionaries.md) §2), and a model
+  can write them where a dictionary is silent.
+- **Suggested words.** One model call conditioned on the words already held — their topics, their
+  level, what was suppressed — asked for the words that would be most useful next. Cheap to try, and
+  the thing every other source here is measured against.
+- **"Which words in this text are new to me?"** Asking a model for "the interesting words" in an
+  article fails: it estimates the *average* learner's gaps, and the missing information is not in the
+  article. Against a store of a couple of thousand words, plus what was suppressed, plus Anki's
+  difficulty, the question becomes a set difference rather than a guess — the payoff that makes a
+  curated store worth keeping.
+
 Today the vocabulary is a list, sortable several ways and grouped into topics, and the meaning map.
 Both stay. What it cannot do is show how words relate — to each other, across languages,
 to what the learner knows well and badly, and to what is missing.
-
 ## The unifying idea: every view with slots is a recommender
 
 Most of the views below have a structure with places in it: a row per concept and a column per

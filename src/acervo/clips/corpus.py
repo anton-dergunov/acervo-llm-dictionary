@@ -30,7 +30,7 @@ import httpx
 TIMEOUT_SECONDS = 20.0
 
 # The API caps at 50 and defaults to 20. Twenty is what `spoken-clips.md` §2.7 fixes as the bounded
-# candidate set, and `docs/plans/clip-selection-experiment.md` names the count as the first knob to
+# candidate set, and `docs/plans/quality/clip-selection.md` names the count as the first knob to
 # vary — so it is a default here rather than a constant buried in a call.
 CANDIDATE_LIMIT = 20
 

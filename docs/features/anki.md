@@ -5,8 +5,8 @@ here, so the vocabulary goes out to Anki as cards and Anki's memory state comes 
 consumer is `src/acervo/consumers/anki/`, bound to the server by `services/anki.py`; setting it up is
 [`../operations/anki-sync.md`](../operations/anki-sync.md). `build.py` turns the vocabulary into
 notes, and the server pushes them after the vocabulary changes and reads the review state back every
-hour. What is not built yet — acting on what comes back — is
-[`../plans/anki-loop.md`](../plans/anki-loop.md).
+hour. What is still to do — reviewing the cards, showing how hard a word is, and making Anki
+optional — is [`../plans/anki.md`](../plans/anki.md).
 
 ---
 
@@ -174,9 +174,8 @@ into `reviews`, a server-side table that is never replicated and only ever added
   reviews, the share not answered Again; learning steps, cram sessions and reschedules are not tests
   of memory.
 
-What it is for beyond figures is the question the loop exists to answer: whether a loop, a story or
-a picture made a word stick. That is a before and after of one word's answers, which a snapshot can
-never show ([`../plans/anki-loop.md`](../plans/anki-loop.md)).
+It is kept rather than summarised because a question the snapshot cannot answer — whether a loop, a
+story or a picture made a word stick — is a before and after of one word's answers.
 
 **Review history is as irreplaceable as the vocabulary** — years of FSRS state cannot be regenerated —
 so the Anki collection is backed up with every deploy ([`../architecture/durability.md`](../architecture/durability.md)).

@@ -11,7 +11,7 @@ Two separate needs push toward published dictionaries:
    independently valuable to check a generated article against a human-compiled one. **This is the
    need that justifies the feature.**
 2. **Grounding** — conditioning composition on a real entry.
-   [grounding-spike.md](../plans/grounding-spike.md) owns that experiment and it is
+   [grounding-spike.md](../plans/quality/grounding-spike.md) owns that experiment and it is
    **postponed** — too much else is unbuilt, and §1 below argues the expected benefit is narrower
    than §09 assumes. Grounding is a later, optional consumer of whatever this document produces, not
    its motivation.
@@ -486,7 +486,7 @@ the decision in §7 is a hypothesis, not a commitment.
   headword up only when opened; and "Add to my words" on a dictionary entry. §12 records what was
   built and the three findings that changed the plan.
 - **Stage 4 · grounding.** Postponed indefinitely, gated on
-  [grounding-spike.md](../plans/grounding-spike.md), and re-scoped by §1: the question is
+  [grounding-spike.md](../plans/quality/grounding-spike.md), and re-scoped by §1: the question is
   whether the *shown* senses improve, not whether coverage increases.
 
 ### The interface may flex to fit the data
@@ -501,7 +501,7 @@ tiering affordable:
 
 ### Explicitly out of scope
 
-The Chinese subsystem ([`../plans/chinese-subsystem.md`](../plans/chinese-subsystem.md)); any scraper; bundling BKRS or anything else of unclear provenance;
+The Chinese subsystem ([`../plans/languages/chinese.md`](../plans/languages/chinese.md)); any scraper; bundling BKRS or anything else of unclear provenance;
 per-entry caching of dictionary data; bespoke connectors for APIs beyond the two Wiktionary-shaped
 ones; and anything that puts a dictionary row in the database.
 
