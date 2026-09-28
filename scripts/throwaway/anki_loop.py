@@ -1,8 +1,8 @@
 """**A throwaway script. Delete it once it has run.**
 
-It carries one Acervo database across one specific schema change — the one that gave a study state
-the sense its cards test — so that the owner's words, pictures, recordings and loops are not rebuilt
-along with the schema.
+It carries one Acervo database across one specific schema change — the Anki loop's: a study state
+gains the sense its cards test, and the review history gets a table of its own — so that the owner's
+words, pictures, recordings and loops are not rebuilt along with the schema.
 
 Nothing that ships imports this. It is the way out named in AGENTS.md, "Backward compatibility stays
 out of the shipped code": a converter outside the application, written for one transition, run by
@@ -10,12 +10,14 @@ out of the shipped code": a converter outside the application, written for one t
 has become the compatibility layer the rule forbids — and `FROM_REVISION` below will by then match no
 database at all, which is how a stale one announces itself.
 
-What changes, and what this does about it:
+What changes, and what this does about each:
 
   * `study_states` gains `sense`, a nullable reference to `senses`. Anki now holds a note per sense
     and per example as well as one per word, and what comes back is reported per meaning. SQLite
     cannot add a column with a foreign key in the declared position, so the table is rebuilt from
     the code's own declaration with every row copied, each one's `sense` left empty.
+  * `reviews` is new and starts empty. The first `pull-state` fills it with every review the
+    collection holds.
 
 **Rows already held are kept as they are, reporting on the word as a whole.** They describe the Anki
 collection that is about to be wiped and recreated, and the first `pull-state` against the new one
@@ -28,7 +30,7 @@ checked again afterwards.
 `transition.py` picks this script by `FROM_REVISION`, runs it once with `--dry-run` and then for real.
 To run it alone, on a copy you have taken first, with the server stopped:
 
-    python scripts/throwaway/study_state_senses.py --database PATH --dry-run
+    python scripts/throwaway/anki_loop.py --database PATH --dry-run
 """
 
 from __future__ import annotations
@@ -52,6 +54,7 @@ FROM_REVISION = "bootstrap_ec17081afc02"
 
 CHANGED = "study_states"
 ADDED = "sense"
+CREATED = ("reviews",)
 
 
 def _rebuild(connection, name: str, kept: list[str]) -> None:
@@ -99,7 +102,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
 
-    others = sorted(name for name in metadata.tables if name != CHANGED)
+    others = sorted(name for name in metadata.tables if name != CHANGED and name not in CREATED)
     problems = schemacheck.compare(engine, metadata, others)
     held = [column["name"] for column in inspect(engine).get_columns(CHANGED)]
     wanted = [column.name for column in metadata.tables[CHANGED].columns]
@@ -107,6 +110,7 @@ def main(argv: list[str] | None = None) -> int:
         problems.append(f"{CHANGED}: already has {ADDED}")
     if sorted(held) != sorted(name for name in wanted if name != ADDED):
         problems.append(f"{CHANGED}: holds {', '.join(held)}; expected everything but {ADDED}")
+    problems += [f"{name}: already exists" for name in CREATED if inspect(engine).has_table(name)]
     if problems:
         print(
             "This database is not the one this script was written for:\n  "
@@ -121,6 +125,7 @@ def main(argv: list[str] | None = None) -> int:
 
     print(f"{len(others)} other tables match the code exactly.")
     print(f"Study states: {rows} kept, each reporting on its word as a whole ({ADDED} empty)")
+    print(f"Creating: {', '.join(CREATED)}")
     print(f"Stamp:  {stamped} → {HEAD}")
     if args.dry_run:
         print("\n--dry-run: nothing was written.")
@@ -128,6 +133,8 @@ def main(argv: list[str] | None = None) -> int:
 
     with engine.begin() as connection:
         _rebuild(connection, CHANGED, held)
+        for name in CREATED:
+            metadata.tables[name].create(connection)
         connection.execute(text("UPDATE alembic_version SET version_num = :head"), {"head": HEAD})
 
     # Verified against the *whole* new schema and the rows copied, so the script proves what it

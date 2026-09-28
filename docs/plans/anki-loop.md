@@ -1,7 +1,8 @@
 # The Anki loop · closing it in both directions
 
 **Status:** half built. Cards go out: the vocabulary becomes notes and `push-vocabulary` sends them,
-and review state comes back per sense ([`../features/anki.md`](../features/anki.md)). What is missing
+and review state comes back per sense, with every review kept as history
+([`../features/anki.md`](../features/anki.md)). What is missing
 is acting on what comes back, and running both halves nightly. Without that, Acervo cannot say whether
 anything it does helps a word stick — the thing every competitor sells
 ([`../research/similar-projects.md`](../research/similar-projects.md), "The learning loop is not
@@ -48,9 +49,9 @@ the two halves above exist.
 - **Where the daily review happens.** Anki is a better scheduler; Acervo is a better place for LLM
   grading and clip playback. Likely both — but which one owns the daily session should be decided
   before building either side further. See also [`learning-modes.md`](learning-modes.md).
-- **Review history, not only the snapshot.** The robot holds a full copy of the collection, so Anki's
-  `revlog` — every review, its button, interval and time taken — can come back too, into an
-  append-only table of a few megabytes per hundred thousand reviews. It is what answers "did the loop,
-  the story or the picture help": a before and after, which a snapshot cannot show. Retrievability
-  would then be computed when shown, from stability and days since the last review, rather than read
-  once at pull time and left to go stale.
+- **What the history should show, and where.** The review history is kept and `GET /stats` reads it
+  ([`../features/anki.md`](../features/anki.md), "The review history"); nothing in the interface shows
+  it yet. The view to design is statistics and, above all, the before and after of a word that went
+  into a loop, a story or a new picture. With the history in hand, retrievability can also be
+  computed when shown — from stability and days since the last review — rather than read once at pull
+  time and left to go stale.

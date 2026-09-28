@@ -1,6 +1,6 @@
-"""The one-off converter that gave a study state the sense its cards test.
+"""The one-off converter for the Anki loop: a study state's sense, and the review history's table.
 
-**Delete this file together with `scripts/throwaway/study_state_senses.py`**, once that has run. It is
+**Delete this file together with `scripts/throwaway/anki_loop.py`**, once that has run. It is
 tested against a database built the way the owner's was — `study_states` exactly as the previous
 schema created it, stamped with the head from before — because the point of a converter is that what
 is held survives it, and a test that started from an empty database would prove nothing about that.
@@ -23,7 +23,7 @@ from acervo.db.alembic.versions.bootstrap import revision as HEAD  # noqa: E402
 from acervo.db.tables import metadata  # noqa: E402
 
 _spec = importlib.util.spec_from_file_location(
-    "study_state_senses", ROOT / "scripts" / "throwaway" / "study_state_senses.py")
+    "anki_loop", ROOT / "scripts" / "throwaway" / "anki_loop.py")
 converter = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(converter)
 
@@ -84,7 +84,8 @@ def old(tmp_path) -> Path:
     """The owner's database as it was: one word with a live report and a tombstoned one."""
     path = tmp_path / "acervo.db"
     engine = create_engine(f"sqlite+pysqlite:///{path}")
-    untouched = [table for name, table in metadata.tables.items() if name != converter.CHANGED]
+    untouched = [table for name, table in metadata.tables.items()
+                 if name != converter.CHANGED and name not in converter.CREATED]
     metadata.create_all(engine, tables=untouched)
     with engine.begin() as connection:
         for statement in BEFORE.split(";"):
@@ -123,6 +124,7 @@ def test_every_study_state_survives_reporting_on_its_word(old: Path) -> None:
     assert after == before
     assert schemacheck.compare(_engine(old), metadata, sorted(metadata.tables)) == []
     assert schemacheck.stamped(_engine(old)) == HEAD
+    assert _rows(old, "SELECT * FROM reviews") == []
 
 
 def test_a_dry_run_writes_nothing(old: Path, capsys) -> None:
@@ -151,3 +153,10 @@ def test_a_table_it_was_not_written_for_is_refused(old: Path) -> None:
         connection.execute(text("ALTER TABLE study_states ADD COLUMN surprise INTEGER"))
     assert converter.main(["--database", str(old)]) == 2
     assert schemacheck.stamped(engine) == converter.FROM_REVISION
+
+
+def test_a_history_table_already_there_is_refused(old: Path) -> None:
+    engine = _engine(old)
+    with engine.begin() as connection:
+        metadata.tables["reviews"].create(connection)
+    assert converter.main(["--database", str(old)]) == 2

@@ -168,6 +168,21 @@ class AcervoClient:
             body={"schemaVersion": SCHEMA_VERSION, "deviceId": device_id, "changes": changes},
         )
 
+    def latest_review(self, system: str) -> int | None:
+        """Where the review history the server holds for this system ends: the newest review id."""
+        return self.call("GET", f"{API_PATH}/reviews/latest", params={"system": system})["reviewId"]
+
+    def push_reviews(self, system: str, reviews: list[dict[str, Any]], *, batch: int = 2000) -> dict[str, int]:
+        """Add reviews to the history, a batch at a time. One already held adds nothing, so sending
+        a window that overlaps the last one is safe."""
+        totals = {"received": 0, "added": 0, "known": 0, "skipped": 0}
+        for start in range(0, len(reviews), batch):
+            answer = self.call("POST", f"{API_PATH}/reviews",
+                               body={"system": system, "reviews": reviews[start:start + batch]})
+            for key in totals:
+                totals[key] += int(answer.get(key, 0))
+        return totals
+
     def submit_capture(self, *, device_id: str, **request: Any) -> dict[str, Any]:
         """Queue a headless capture. Answers at once with the job; the words are its output."""
         return self.call(

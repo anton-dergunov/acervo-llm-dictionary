@@ -145,6 +145,10 @@ sign has no sentence ([`../features/photo-capture.md`](../features/photo-capture
   words actually spoken, the language, the emotion the voice was actually given, the file, and the
   provider, model and **voice**. Stale means the record no longer says those words
   ([`../features/pronunciation.md`](../features/pronunciation.md)).
+- **The review history is not a collection.** Every answer Anki recorded is kept in `reviews` on the
+  server alone — years of it are hundreds of thousands of rows no device needs whole — append-only
+  and keyed by Anki's own review id, so the same review sent twice adds nothing. It is read as
+  figures through `GET /stats` ([`../features/anki.md`](../features/anki.md), "The review history").
 - **`studyState`** — one row per word, sense and learning system: `system`, an optional `senseId`,
   Anki's `noteId` and `cardIds`, and the scheduler's own reps, lapses, stability, difficulty,
   retrievability and last review. **A row with a sense reports on that meaning's cards; a row without

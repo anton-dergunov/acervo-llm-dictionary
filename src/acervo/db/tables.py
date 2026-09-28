@@ -13,6 +13,7 @@ from __future__ import annotations
 
 from sqlalchemy import (
     JSON,
+    BigInteger,
     Boolean,
     Column,
     Float,
@@ -20,6 +21,7 @@ from sqlalchemy import (
     Index,
     Integer,
     MetaData,
+    PrimaryKeyConstraint,
     String,
     Table,
     Text,
@@ -511,6 +513,34 @@ study_states = Table(
     *_sync_fields(),
     Index("idx_study_states_owner_revision", "owner", "revision"),
     Index("idx_study_states_owner_lexeme_system", "owner", "lexeme", "system"),
+)
+
+# Every review Anki recorded, as it recorded it: server-side and never replicated, because a
+# history of years is hundreds of thousands of rows no device needs whole. Append-only and keyed by
+# Anki's own review id — the review's time in milliseconds — so a batch sent twice adds nothing.
+# What it is for is `services/reviews.py`: statistics, and the before and after of anything Acervo
+# does to a word. Exempt from the replicated rules, like `jobs`.
+reviews = Table(
+    "reviews",
+    metadata,
+    _owner(),
+    Column("system", String(80), nullable=False),
+    Column("review_id", BigInteger, nullable=False),
+    Column("card_id", BigInteger, nullable=False),
+    Column("note_id", BigInteger, nullable=False),
+    Column("lexeme", String(15), ForeignKey("lexemes.id", ondelete="CASCADE"), nullable=False),
+    Column("sense", String(15), ForeignKey("senses.id", ondelete="CASCADE"), nullable=True),
+    Column("card_type", String(32), nullable=False),
+    Column("reviewed_at", String(24), nullable=False),
+    Column("kind", String(16), nullable=False),
+    Column("button", Integer, nullable=False),
+    Column("interval_days", Float, nullable=False),
+    Column("last_interval_days", Float, nullable=False),
+    Column("duration_ms", Integer, nullable=False),
+    Column("received_at", String(24), nullable=False),
+    PrimaryKeyConstraint("owner", "system", "review_id"),
+    Index("idx_reviews_owner_reviewed_at", "owner", "reviewed_at"),
+    Index("idx_reviews_owner_lexeme", "owner", "lexeme"),
 )
 
 loops = Table(

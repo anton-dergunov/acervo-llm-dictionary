@@ -20,6 +20,15 @@ from .model import (
 )
 
 
+# Anki's `revlog.type`, by value.
+REVIEW_KINDS = {0: "learn", 1: "review", 2: "relearn", 3: "filtered", 4: "manual", 5: "rescheduled"}
+
+
+def _days(interval: int) -> float:
+    """Anki's interval as days: positive values are days already, negative ones are seconds."""
+    return float(interval) if interval >= 0 else round(-interval / 86400, 6)
+
+
 class SyncSafetyError(RuntimeError):
     """An operation was refused to protect collection/review data."""
 
@@ -246,8 +255,9 @@ class AnkiRobot:
             finally:
                 self._close(collection)
 
-    def export_state(self) -> dict[str, Any]:
-        """Sync down and export review state without mutating card content."""
+    def export_state(self, *, reviews_since: int | None = None) -> dict[str, Any]:
+        """Sync down and export review state without mutating card content. With `reviews_since`,
+        also every review of an Acervo card after that review id."""
         with self._exclusive_collection():
             collection = self._open_collection()
             try:
@@ -255,13 +265,63 @@ class AnkiRobot:
                 self._normal_sync(collection, auth, stage="state-export sync")
                 notes = self._notes_state(collection)
                 notes.sort(key=lambda item: item["note_id"])
-                return {
+                exported = {
                     "operation": "export-state",
                     "sync": "complete",
                     "notes": notes,
                 }
+                if reviews_since is not None:
+                    exported["reviews"] = self._reviews_since(collection, reviews_since)
+                return exported
             finally:
                 self._close(collection)
+
+    @staticmethod
+    def _reviews_since(collection: Any, since: int) -> list[dict[str, Any]]:
+        """Every review Anki logged for an Acervo card after review id `since`, oldest first.
+
+        Read straight from `revlog`, which is Anki's own record of every answer: its id is the
+        review's time in milliseconds, its interval is in days when positive and in seconds when
+        negative, and its type says what kind of review it was. A review of a card that no longer
+        exists, or of a note Acervo did not make, has no word to belong to and is left out.
+        """
+        owners: dict[int, tuple[str, str | None, dict[int, str]]] = {}
+        for kind in KINDS.values():
+            notetype = collection.models.by_name(kind.name)
+            if notetype is None:
+                continue
+            names = {int(template["ord"]): str(template["name"]) for template in notetype["tmpls"]}
+            lexeme_at = kind.fields.index("AcervoLexemeId")
+            sense_at = kind.fields.index("AcervoSenseId")
+            for note_id, fields in collection.db.all(
+                    "select id, flds from notes where mid = ?", notetype["id"]):
+                values = fields.split("\x1f")
+                owners[int(note_id)] = (values[lexeme_at], values[sense_at] or None, names)
+        reviews = []
+        for review_id, card_id, button, interval, last_interval, taken, kind, note_id, ordinal in \
+                collection.db.all(
+                    "select r.id, r.cid, r.ease, r.ivl, r.lastIvl, r.time, r.type, c.nid, c.ord "
+                    "from revlog r join cards c on c.id = r.cid where r.id > ? order by r.id",
+                    int(since)):
+            owner = owners.get(int(note_id))
+            if owner is None or not owner[0] or int(kind) not in REVIEW_KINDS:
+                continue
+            lexeme_id, sense_id, names = owner
+            reviews.append({
+                "reviewId": int(review_id),
+                "cardId": int(card_id),
+                "noteId": int(note_id),
+                "lexemeId": lexeme_id,
+                "senseId": sense_id,
+                "cardType": names.get(int(ordinal), "Unknown"),
+                "reviewedAt": instant_of(datetime.fromtimestamp(int(review_id) / 1000, tz=UTC)),
+                "kind": REVIEW_KINDS[int(kind)],
+                "button": int(button),
+                "intervalDays": _days(interval),
+                "lastIntervalDays": _days(last_interval),
+                "durationMs": max(0, int(taken)),
+            })
+        return reviews
 
     @classmethod
     def _notes_state(cls, collection: Any) -> list[dict[str, Any]]:

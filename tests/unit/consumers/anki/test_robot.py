@@ -232,3 +232,34 @@ def test_robot_collection_lock_refuses_concurrent_process(robot):
         with pytest.raises(SyncSafetyError, match="already running"):
             with robot._exclusive_collection():
                 pass
+
+
+def test_the_review_log_comes_back_as_acervo_reviews(robot, collection, tmp_path):
+    """Anki's `revlog` as Anki writes it: an id that is the time in ms, an interval in days when
+    positive and seconds when negative, a type number. Reviews of cards Acervo did not make, and of
+    cards since deleted, belong to no word and are left out."""
+    report = robot._upsert(collection, manifest(), tmp_path)
+    card = report["notes"][0]["card_ids"][0]
+    stranger = collection.new_note(collection.models.by_name("Basic"))
+    stranger["Front"] = "not ours"
+    collection.add_note(stranger, collection.decks.id("Default"))
+    for review_id, card_id, button, interval, last, kind in (
+        (1_788_000_000_000, card, 3, -600, 0, 0),        # a learning step, ten minutes
+        (1_788_086_400_000, card, 1, 1, 3, 1),           # a scheduled review, forgotten
+        (1_788_172_800_000, stranger.card_ids()[0], 3, 1, 0, 1),
+        (1_788_259_200_000, 424242, 3, 1, 0, 1),         # a card no longer there
+    ):
+        collection.db.execute(
+            "insert into revlog (id, cid, usn, ease, ivl, lastIvl, factor, time, type) "
+            "values (?, ?, -1, ?, ?, ?, 2500, 6000, ?)",
+            review_id, card_id, button, interval, last, kind)
+
+    reviews = robot._reviews_since(collection, 0)
+    assert [(item["kind"], item["button"], item["intervalDays"]) for item in reviews] == [
+        ("learn", 3, round(600 / 86400, 6)), ("review", 1, 1.0)]
+    first = reviews[0]
+    assert (first["lexemeId"], first["senseId"], first["cardType"]) == (LEXEME_ID, SENSE_ID, "Recognise")
+    assert first["reviewedAt"] == "2026-08-29T10:40:00.000Z"
+    assert first["durationMs"] == 6000
+    assert [item["reviewId"] for item in robot._reviews_since(collection, 1_788_000_000_000)] == [
+        1_788_086_400_000]

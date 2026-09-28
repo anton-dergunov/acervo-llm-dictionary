@@ -11,7 +11,9 @@ from typing import Sequence
 from .build import DEFAULT_DECK, build, write_payload
 from .manifest import SyncManifest
 from .robot import AnkiRobot, RobotSettings, result_json
-from .state import held_by_key, study_states
+from .state import SYSTEM, held_by_key, study_states
+
+REVIEW_LOOKBACK_MS = 30 * 86_400_000
 
 
 def _repository_root() -> Path:
@@ -64,7 +66,9 @@ def build_parser() -> argparse.ArgumentParser:
     adopt.add_argument("--confirm-no-other-clients", action="store_true")
     push = commands.add_parser("push")
     push.add_argument("manifest", type=Path)
-    commands.add_parser("export-state")
+    exported = commands.add_parser("export-state")
+    exported.add_argument("--reviews-since", type=int, default=None,
+                          help="Also print every review after this review id (0 for all)")
     # The write half. `export-state` stays the read-only diagnostic it has always been; this is the
     # one that puts the answer where the interface can show it.
     pull = commands.add_parser(
@@ -183,9 +187,13 @@ def pull_state(args: argparse.Namespace, robot: AnkiRobot) -> dict:
         raise ValueError(
             "Set --server-url, --owner-email and ACERVO_OWNER_PASSWORD to write study state"
         )
-    exported = robot.export_state()
     with AcervoClient(args.server_url) as client:
         client.sign_in(args.owner_email, password)
+        # The history is sent from a month before where the server's ends: a review made offline
+        # reaches the collection days after reviews made since, and one already held adds nothing.
+        latest = client.latest_review(SYSTEM)
+        exported = robot.export_state(
+            reviews_since=max(0, latest - REVIEW_LOOKBACK_MS) if latest else 0)
         changes = client.pull_graph().get("changes") or {}
         live = {
             str(lexeme["id"]) for lexeme in changes.get("lexemes") or [] if not lexeme.get("deleted")
@@ -198,13 +206,16 @@ def pull_state(args: argparse.Namespace, robot: AnkiRobot) -> dict:
             exported, held_by_key(changes), live, senses, device_id=args.device_id
         )
         retired = sum(1 for row in rows if row["deleted"])
+        reviews = exported.get("reviews") or []
         if args.dry_run:
             return {"operation": "pull-state", "written": 0, "would_write": len(rows) - retired,
-                    "would_retire": retired, "skipped": skipped, "dry_run": True}
+                    "would_retire": retired, "skipped": skipped, "reviews_read": len(reviews),
+                    "dry_run": True}
         if rows:
             client.push_graph({"studyStates": rows}, device_id=args.device_id)
+        history = client.push_reviews(SYSTEM, reviews) if reviews else {"added": 0}
     return {"operation": "pull-state", "written": len(rows) - retired, "retired": retired,
-            "skipped": skipped}
+            "skipped": skipped, "reviews_read": len(reviews), "reviews_added": history["added"]}
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -231,7 +242,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         elif args.command == "push-vocabulary":
             result = push_vocabulary(args, robot)
         else:
-            result = robot.export_state()
+            result = robot.export_state(reviews_since=args.reviews_since)
         print(result_json(result))
         return 0
     except Exception as exc:

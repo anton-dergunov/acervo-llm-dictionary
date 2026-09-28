@@ -127,5 +127,28 @@ reading without writing it.
   correct: nothing in the interface edits it, the YAML projection shows it only as comments, and it is
   deliberately left out of the export bundle.
 
+## The review history
+
+A study state is a snapshot: where each meaning stands now. **The history is every answer that got
+it there** — Anki's `revlog`, which records each review's time, the button pressed, the interval
+before and after, and how long the answer took. `pull-state` brings it across with the snapshot,
+into `reviews`, a server-side table that is never replicated and only ever added to.
+
+- **Keyed by Anki's review id**, which is the review's time in milliseconds, so a review sent twice
+  adds nothing. Each pull sends everything from a month before the newest review already held, because
+  a review made offline reaches the collection days after reviews made since.
+- **Joined to Acervo by note**: each review names the word, the sense (none for a Listen card) and
+  the card type. A review of a card Acervo did not make, or of one since deleted, belongs to no word
+  and is left out. A word deleted in Acervo keeps its history: it happened.
+- **`GET /stats` reads it as figures**, the way Anki's own statistics screen does, in the owner's
+  days: totals and a streak, a count for every day (a heatmap's worth), and retention overall, by
+  week, by card type and by topic. **Retention is true retention** — of the answers to scheduled
+  reviews, the share not answered Again; learning steps, cram sessions and reschedules are not tests
+  of memory.
+
+What it is for beyond figures is the question the loop exists to answer: whether a loop, a story or
+a picture made a word stick. That is a before and after of one word's answers, which a snapshot can
+never show ([`../plans/anki-loop.md`](../plans/anki-loop.md)).
+
 **Review history is as irreplaceable as the vocabulary** — years of FSRS state cannot be regenerated —
 so the Anki collection is backed up with every deploy ([`../architecture/durability.md`](../architecture/durability.md)).

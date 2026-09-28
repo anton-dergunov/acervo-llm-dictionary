@@ -332,6 +332,11 @@ Four things about the mapping are decisions rather than mechanics:
 - **A row no note reports on any more is tombstoned.** The collection is read whole, so a row without
   cards describes notes that are gone: a collection wiped and rebuilt, or cards deleted by hand.
 
+The same pull brings the **review history** across: every review Anki logged for an Acervo card, from
+a month before the newest one the server already holds, into the server-side `reviews` table. A
+review already held adds nothing, so the overlap is free. `export-state --reviews-since 0` prints it
+instead. The design is [`../features/anki.md`](../features/anki.md), "The review history".
+
 `queue`, `suspended` and `flag` are exported and deliberately not stored: there are no columns for
 them, and adding some means rebuilding the database for information nothing reads.
 

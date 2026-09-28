@@ -185,6 +185,7 @@ The routes, under `/api/acervo/v1` unless shown:
 | Pronunciation | `POST /pronunciations/utterance`, `POST /pronunciations/take`, `POST /pronunciations/{collection}/{id}`, `PUT …/{id}/audio`, `GET`/`PUT /pronunciations/settings` |
 | Loops and stories | `POST /loops`, `GET /loops/schema`, `POST /loops/{id}/music`, `DELETE /loops/{id}`, `POST /stories`, `GET /stories/types`, `DELETE /stories/{id}`, `POST /stories/{id}/parts/{part}/audio` |
 | The map | `GET /map/{language}` |
+| Review history | `POST /reviews` (a batch, append-only), `GET /reviews/latest?system=`, `GET /stats?language=&days=&weeks=` |
 | Clips and the corpus | `GET`/`PUT /clips/settings`, and the allow-listed proxy under `/speech/…` |
 | Dictionaries | `GET /dictionaries`, `GET /dictionaries/online/{source}` |
 | Settings | `GET /models`, `PUT /models/selection`, `GET`/`PUT /rules`, `GET`/`PUT /schedule/settings` |
