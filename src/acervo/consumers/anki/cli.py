@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
+import tempfile
 from pathlib import Path
 from typing import Sequence
 
+from .build import DEFAULT_DECK, build, write_payload
 from .manifest import SyncManifest
 from .robot import AnkiRobot, RobotSettings, result_json
 from .state import held_by_lexeme, study_states
@@ -71,6 +74,31 @@ def build_parser() -> argparse.ArgumentParser:
     pull.add_argument("--owner-email", default=os.environ.get("ACERVO_OWNER_EMAIL", ""))
     pull.add_argument("--device-id", default="ankiworker0001")
     pull.add_argument("--dry-run", action="store_true", help="Report what would be written.")
+
+    # Cards out. `build-manifest` writes the payload to look at; `push-vocabulary` builds it and
+    # pushes it in one step, inside the worker, which is where the pictures and recordings are.
+    written = commands.add_parser(
+        "build-manifest", help="Write the vocabulary's cards as a manifest and the files it names"
+    )
+    written.add_argument("output", type=Path)
+    written.add_argument("--graph", type=Path, help="A saved graph pull to read instead of the server")
+    pushed = commands.add_parser(
+        "push-vocabulary", help="Build the vocabulary's cards and push them to Anki"
+    )
+    pushed.add_argument("--bootstrap", action="store_true",
+                        help="Create the first server collection instead (an empty account only)")
+    pushed.add_argument("--dry-run", action="store_true", help="Build and report, push nothing.")
+    for command in (written, pushed):
+        command.add_argument("--language", action="append", default=[],
+                             help="A language to include (repeatable); every language by default")
+        command.add_argument("--deck", default=DEFAULT_DECK,
+                             help="Deck name; {language} is the language's name")
+        command.add_argument("--picture-size", type=int, default=768,
+                             help="Longest side of a picture in pixels; 0 keeps the master")
+        command.add_argument("--media-root", type=Path,
+                             default=os.environ.get("ACERVO_MEDIA_PATH") or None)
+        command.add_argument("--server-url", default=os.environ.get("ACERVO_SERVER_URL", ""))
+        command.add_argument("--owner-email", default=os.environ.get("ACERVO_OWNER_EMAIL", ""))
     return parser
 
 
@@ -87,6 +115,58 @@ def _settings(args: argparse.Namespace) -> RobotSettings:
         template_dir=args.template_dir.expanduser().resolve(),
         media_timeout_seconds=args.media_timeout,
     )
+
+
+def _signed_in(args: argparse.Namespace):
+    from acervo.client import AcervoClient
+
+    password = os.environ.get("ACERVO_OWNER_PASSWORD", "")
+    if not args.server_url or not args.owner_email or not password:
+        raise ValueError(
+            "Set --server-url, --owner-email and ACERVO_OWNER_PASSWORD to reach the vocabulary"
+        )
+    client = AcervoClient(args.server_url)
+    client.sign_in(args.owner_email, password)
+    return client
+
+
+def _graph(args: argparse.Namespace) -> dict:
+    if getattr(args, "graph", None):
+        payload = json.loads(args.graph.read_text(encoding="utf-8"))
+        return payload.get("changes", payload)
+    with _signed_in(args) as client:
+        return client.pull_graph().get("changes") or {}
+
+
+def build_payload(args: argparse.Namespace, output: Path) -> dict:
+    """The vocabulary's cards, written under `output`, and what went into them."""
+    changes = _graph(args)
+    built = build(
+        changes,
+        languages=args.language or None,
+        media_root=args.media_root,
+        deck=args.deck,
+    )
+    if not built.notes:
+        raise ValueError("There are no active words to make cards from")
+    path = write_payload(built, output, picture_size=args.picture_size or None)
+    kinds: dict[str, int] = {}
+    for note in built.notes:
+        key = "words" if note["kind"] == "word" else ("senses" if note["note_id"] == note["sense_id"] else "examples")
+        kinds[key] = kinds.get(key, 0) + 1
+    return {"manifest": str(path), "notes": len(built.notes), **kinds, "media": len(built.media),
+            "missing_media": built.missing}
+
+
+def push_vocabulary(args: argparse.Namespace, robot: AnkiRobot) -> dict:
+    with tempfile.TemporaryDirectory(prefix="acervo-anki-") as scratch:
+        built = build_payload(args, Path(scratch))
+        if args.dry_run:
+            return {"operation": "push-vocabulary", "dry_run": True, **built}
+        manifest, manifest_dir = SyncManifest.load(built["manifest"])
+        result = (robot.bootstrap_upload(manifest, manifest_dir) if args.bootstrap
+                  else robot.push(manifest, manifest_dir))
+        return {**result, "built": {key: value for key, value in built.items() if key != "manifest"}}
 
 
 def pull_state(args: argparse.Namespace, robot: AnkiRobot) -> dict:
@@ -124,6 +204,10 @@ def pull_state(args: argparse.Namespace, robot: AnkiRobot) -> dict:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "build-manifest":
+            print(result_json({"operation": "build-manifest",
+                               **build_payload(args, args.output.expanduser().resolve())}))
+            return 0
         robot = AnkiRobot(_settings(args))
         if args.command in ("bootstrap-upload", "push"):
             manifest, manifest_dir = SyncManifest.load(args.manifest)
@@ -138,6 +222,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
         elif args.command == "pull-state":
             result = pull_state(args, robot)
+        elif args.command == "push-vocabulary":
+            result = push_vocabulary(args, robot)
         else:
             result = robot.export_state()
         print(result_json(result))

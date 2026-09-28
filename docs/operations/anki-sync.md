@@ -280,6 +280,33 @@ or duplicate collection `AcervoNoteId` values fail before any mutation. Notes
 absent from a manifest remain untouched. Notes are added in manifest order,
 which is the order Anki introduces their new cards in.
 
+## Cards from the vocabulary
+
+`push-vocabulary` builds the manifest from the vocabulary and pushes it, in one step inside the
+worker — which reads the graph as the owner and has the pictures and recordings on its media
+volume, so there is no archive to carry:
+
+```bash
+./deploy.sh --worker push-vocabulary          # routine: sync down, update, sync up
+./deploy.sh --worker bootstrap-vocabulary     # an empty account: the first collection, uploaded whole
+```
+
+Every word that is `active` or `learned` becomes notes, in one deck per language
+(`Spanish::Vocabulary`) with its topics as `acervo::topic::…` tags; a word still in the inbox, or put
+away, has none. Pictures go at 768 px rather than the 1024 master. Notes are listed in rounds — every
+word's first note, then every word's second — so a first push of many words does not bring one
+word's cards all on the same morning.
+
+To look at what would be pushed, write it out instead, from the server or from a saved graph pull,
+and render it:
+
+```bash
+python scripts/acervo_worker.py anki build-manifest OUT --graph graph.json --media-root MEDIA
+python scripts/preview_anki_cards.py OUT/manifest.json OUT/preview
+```
+
+`--language es` limits either command to one language; `--picture-size 0` keeps the masters.
+
 ## FSRS state back into Acervo
 
 Content goes out through the manifest; scheduling comes back through `run-worker.sh pull-state`. It

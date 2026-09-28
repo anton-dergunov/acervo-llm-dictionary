@@ -3,9 +3,9 @@
 Acervo does not schedule reviews. Anki with FSRS is a better scheduler than anything worth building
 here, so the vocabulary goes out to Anki as cards and Anki's memory state comes back as a report. The
 consumer is `src/acervo/consumers/anki/`; setting it up is
-[`../operations/anki-sync.md`](../operations/anki-sync.md); what is not built yet — turning the
-vocabulary into cards automatically, and acting on what comes back — is
-[`../plans/anki-loop.md`](../plans/anki-loop.md).
+[`../operations/anki-sync.md`](../operations/anki-sync.md). `build.py` turns the vocabulary into
+notes and `push-vocabulary` sends them; what is not built yet — acting on what comes back, and
+running both halves nightly — is [`../plans/anki-loop.md`](../plans/anki-loop.md).
 
 ---
 

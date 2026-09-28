@@ -7,6 +7,7 @@ export PATH
 usage() {
   echo "usage: run-worker.sh [--root PATH] [--input-archive FILE]" >&2
   echo "         {bootstrap-upload|push|export-state|pull-state|adopt-server}" >&2
+  echo "       run-worker.sh [--root PATH] {push-vocabulary|bootstrap-vocabulary}" >&2
   echo "       run-worker.sh [--root PATH] build-dictionary <compiler arguments...>" >&2
   echo "         e.g. build-dictionary --id cc-cedict" >&2
   echo "              build-dictionary --all --language es,en,zh" >&2
@@ -22,7 +23,7 @@ while [ "$#" -gt 0 ]; do
   case "$1" in
     --root) [ "$#" -ge 2 ] || usage; acervo_root=$2; shift 2 ;;
     --input-archive) [ "$#" -ge 2 ] || usage; input_archive=$2; shift 2 ;;
-    bootstrap-upload|push|export-state|pull-state|adopt-server|build-dictionary|backfill) operation=$1; shift; break ;;
+    bootstrap-upload|push|export-state|pull-state|adopt-server|push-vocabulary|bootstrap-vocabulary|build-dictionary|backfill) operation=$1; shift; break ;;
     *) usage ;;
   esac
 done
@@ -97,6 +98,18 @@ case "$operation" in
     # graph where the interface can show it.
     # shellcheck disable=SC2086
     compose $common_args --profile tools run --rm --build acervo-worker anki pull-state
+    ;;
+  push-vocabulary)
+    # Cards out, built where the pictures and recordings are: the worker reads the graph as the
+    # owner, writes the manifest into its own scratch space and pushes it. No archive to carry.
+    # shellcheck disable=SC2086
+    compose $common_args --profile tools run --rm --build acervo-worker anki push-vocabulary
+    ;;
+  bootstrap-vocabulary)
+    # The same, for an empty account: the first collection, uploaded whole.
+    # shellcheck disable=SC2086
+    compose $common_args --profile tools run --rm --build acervo-worker \
+      anki push-vocabulary --bootstrap
     ;;
   adopt-server)
     # shellcheck disable=SC2086
