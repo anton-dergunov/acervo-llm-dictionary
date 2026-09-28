@@ -83,3 +83,20 @@ def test_fonts_are_installed_once_under_names_check_media_keeps(collection, desi
     assert install_fonts(collection, design) == 0
     assert all(font.name.startswith("_") for font in design.fonts)
     assert list(collection.media.check().unused) == []
+
+
+def test_a_card_names_no_sound_it_does_not_have(collection, design):
+    """Anki reads sound tags anywhere in a card's HTML, a script's comments included: one comment that
+    showed the tag by example made every card ask to play a file called "…", and AnkiDroid said so on
+    every card. A note with no recording must render with no sound at all."""
+    notetypes = create_notetypes(collection, design)
+    for key, gates in (("meaning", {"Recognise": "y", "Produce": "y"}), ("word", {})):
+        note = collection.new_note(notetypes[key])
+        for name, value in {"AcervoNoteId": f"{key}0000000001", "AcervoLexemeId": "lexeme000000001",
+                            "Headword": "asco", **gates}.items():
+            note[name] = value
+        if key == "word":
+            note["HeadwordAudio"] = '<audio src="acervo-asco.ogg" preload="auto"></audio>'
+        collection.add_note(note, collection.decks.id("Spanish::Vocabulary"))
+        for card in note.cards():
+            assert card.question_av_tags() == [] and card.answer_av_tags() == [], card.template()["name"]

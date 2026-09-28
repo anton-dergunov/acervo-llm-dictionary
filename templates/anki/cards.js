@@ -1,9 +1,11 @@
 /* Acervo cards: dress each recording as a player, and play the word on a listening card.
 
-   A field holds a plain <audio src="…">, which is what Anki's Check Media recognises as a reference;
-   `[sound:…]` would bring Anki's own button, which cannot be styled the same in every client. Anki
-   runs a card's scripts again for every card it shows, sometimes into the same page, so this marks
-   what it has done and does nothing twice. */
+   A field holds a plain HTML audio element naming its file, which is what Anki's Check Media
+   recognises as a reference. Anki's own sound tag would bring Anki's own button, which cannot be
+   styled the same in every client. Never write that tag here, not even in a comment: Anki finds it
+   anywhere in a card, and every card would then ask to play a file that does not exist. Anki runs a
+   card's scripts again for every card it shows, sometimes into the same page, so this marks what it
+   has done and does nothing twice. */
 (function () {
   var PLAY = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M0 0l10 5-10 5z"/></svg>';
   var BARS = [40, 70, 55, 95, 60, 85, 45, 75, 50, 30, 60, 35];
