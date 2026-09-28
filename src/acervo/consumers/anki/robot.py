@@ -472,10 +472,16 @@ class AnkiRobot:
                     f"AcervoNoteId {item.note_id} belongs to an unexpected note type"
                 )
 
+        from anki.collection import AddNoteRequest
+
         created = updated = unchanged = media_added = 0
-        results = []
+        rows: list[tuple[str, Any, str, list[int]]] = []
+        additions: list[Any] = []
+        changes: list[Any] = []
+        moves: list[tuple[Any, int]] = []
         touched: set[int] = set()
-        counter = self.progress.count("Anki: writing notes", len(manifest.notes))
+        imported: dict[tuple[Path, str], str] = {}
+        counter = self.progress.count("Anki: preparing notes", len(manifest.notes))
         for item in manifest.notes:
             identity = str(item.note_id)
             kind = KINDS[item.kind]
@@ -484,7 +490,7 @@ class AnkiRobot:
             if is_new:
                 note = collection.new_note(notetypes[item.kind])
 
-            media, added = self._render_media(collection, item, manifest_dir)
+            media, added = self._render_media(collection, item, manifest_dir, imported)
             media_added += added
             fields = {
                 "AcervoNoteId": identity,
@@ -511,30 +517,44 @@ class AnkiRobot:
                 note[name] = value
             note.tags = desired_tags
             if is_new:
-                # Added in manifest order, which is the order Anki introduces new cards in.
-                collection.add_note(note, deck_id)
+                additions.append(AddNoteRequest(note=note, deck_id=deck_id))
                 created += 1
             elif changed:
-                collection.update_note(note)
-                # A gate filled since the last push makes its card now; Anki does that on update.
+                changes.append(note)
                 if deck_changed:
-                    collection.set_deck(note.card_ids(), deck_id)
+                    moves.append((note, deck_id))
                 updated += 1
                 touched.add(int(note.id))
             else:
                 unchanged += 1
-            results.append(
-                {
-                    "note_id": identity,
-                    "anki_note_id": int(note.id),
-                    "card_ids": [int(card_id) for card_id in note.card_ids()],
-                    "previous_card_ids": card_ids_before,
-                    "status": "created" if is_new else ("updated" if changed else "unchanged"),
-                }
-            )
+            rows.append((identity, note,
+                         "created" if is_new else ("updated" if changed else "unchanged"),
+                         card_ids_before))
             counter.step()
-        self.progress.say(f"Anki: {created} created, {updated} updated, {unchanged} unchanged, "
-                          f"{media_added} new media files")
+
+        # One operation each rather than one per note. Every Anki operation is its own transaction,
+        # and the collection writes each one through to the disk, so a first push of thousands of
+        # notes one at a time spent nearly all its time waiting on the NAS's disk. Added in manifest
+        # order, which is the order Anki introduces new cards in.
+        self.progress.say(f"Anki: saving {created} new and {updated} changed notes "
+                          f"({unchanged} unchanged, {media_added} new media files)")
+        if additions:
+            collection.add_notes(additions)
+        if changes:
+            # A gate filled since the last push makes its card now; Anki does that on update.
+            collection.update_notes(changes)
+        for note, deck_id in moves:
+            collection.set_deck(note.card_ids(), deck_id)
+        results = [
+            {
+                "note_id": identity,
+                "anki_note_id": int(note.id),
+                "card_ids": [int(card_id) for card_id in note.card_ids()],
+                "previous_card_ids": card_ids_before,
+                "status": status,
+            }
+            for identity, note, status, card_ids_before in rows
+        ]
         removed = self._remove_closed_cards(collection, touched)
         if removed:
             for result in results:
@@ -572,28 +592,39 @@ class AnkiRobot:
 
     @staticmethod
     def _render_media(
-        collection: Any, item: SyncManifestNote, manifest_dir: Path
+        collection: Any, item: SyncManifestNote, manifest_dir: Path,
+        seen: dict[tuple[Path, str], str] | None = None,
     ) -> tuple[dict[str, str], int]:
         """Each media field's file, imported under a content-addressed name, as the tag that shows
-        or plays it. Returns the fields and how many files were new to the collection."""
+        or plays it. Returns the fields and how many files were new to the collection.
+
+        `seen` carries the names already worked out in this push. A word's pictures appear on every
+        one of its notes — each card's back shows all its senses — so without it the same files are
+        read, hashed and handed to Anki again for every note that shows them."""
         rendered: dict[str, str] = {}
         added = 0
+        seen = {} if seen is None else seen
 
         def imported(source: Path, fallback: str) -> str:
             nonlocal added
+            known = seen.get((source, fallback))
+            if known is not None:
+                return known
             data = source.read_bytes()
             digest = hashlib.sha256(data).hexdigest()[:20]
             suffix = source.suffix.lower()
             stem = slugify_filename(source.stem) or fallback
             desired_name = f"acervo-{digest}-{stem}{suffix}"
-            existed = collection.media.have(desired_name)
-            actual_name = collection.media.write_data(desired_name, data)
-            if actual_name != desired_name:
-                raise RuntimeError(
-                    f"Unexpected Anki media collision: {desired_name} became {actual_name}"
-                )
-            added += not existed
-            return html.escape(actual_name, quote=True)
+            # The name carries a digest of the bytes, so a file already held under it holds these.
+            if not collection.media.have(desired_name):
+                actual_name = collection.media.write_data(desired_name, data)
+                if actual_name != desired_name:
+                    raise RuntimeError(
+                        f"Unexpected Anki media collision: {desired_name} became {actual_name}"
+                    )
+                added += 1
+            seen[(source, fallback)] = html.escape(desired_name, quote=True)
+            return seen[(source, fallback)]
 
         for field, source in item.media_sources(manifest_dir).items():
             name = imported(source, field.lower())
