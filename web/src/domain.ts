@@ -232,9 +232,14 @@ export interface Pronunciation extends SyncFields, OwnedFields {
   voice: string | null;
 }
 
+/**
+ * What one learning system reports about a word. A row with a `senseId` is one meaning's cards; a
+ * row without is what the word itself is tested on — hearing it, which no single meaning owns.
+ */
 export interface StudyState extends SyncFields, OwnedFields {
   id: string;
   lexemeId: string;
+  senseId: string | null;
   system: string;
   noteId: number | null;
   cardIds: number[];
@@ -737,6 +742,12 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     const lexeme = find.lexemes(record.lexemeId);
     invariant(lexeme, "Study state references a missing lexeme.");
     invariant(record.ownerId === lexeme.ownerId, "Study state and lexeme must have the same owner.");
+    optionalString(record.senseId, "Study state sense id");
+    if (record.senseId) {
+      const sense = find.senses(record.senseId);
+      invariant(sense?.lexemeId === record.lexemeId, "Study state sense belongs to another lexeme.");
+      invariant(sense.ownerId === record.ownerId, "Study state and sense must have the same owner.");
+    }
     invariant(record.system.trim().length > 0, "Study system is required.");
     invariant(record.noteId === null || (Number.isSafeInteger(record.noteId) && record.noteId >= 0), "Study note id is invalid.");
     invariant(Array.isArray(record.cardIds) && record.cardIds.every((id) => Number.isSafeInteger(id) && id >= 0), "Study card ids are invalid.");

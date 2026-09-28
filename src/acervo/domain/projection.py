@@ -332,6 +332,7 @@ def _assign_pronunciation(value: Mapping[str, Any]) -> dict[str, Any]:
 def _project_study_state(row: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "lexemeId": row["lexeme"],
+        "senseId": text_or_none(row["sense"]),
         "system": row["system"],
         # Alone among the numbers, zero projects as null: there is no Anki note 0, so a stored zero
         # means "not pushed yet" rather than "note zero".
@@ -350,6 +351,7 @@ def _project_study_state(row: Mapping[str, Any]) -> dict[str, Any]:
 def _assign_study_state(value: Mapping[str, Any]) -> dict[str, Any]:
     return {
         "lexeme": trimmed(value.get("lexemeId")),
+        "sense": trimmed(value.get("senseId")) or None,
         "system": trimmed(value.get("system")),
         "note_id": to_int(value.get("noteId")),
         "card_ids": to_list(value.get("cardIds")),

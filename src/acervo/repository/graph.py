@@ -544,6 +544,7 @@ def article_records(owner: str, lexeme_id: str) -> dict[str, list[dict[str, Any]
         "attestations": tables.attestations.c.lexeme,
         "imagePrompts": tables.image_prompts.c.lexeme,
         "pronunciations": tables.pronunciations.c.lexeme,
+        "studyStates": tables.study_states.c.lexeme,
     }
     changes: dict[str, list[dict[str, Any]]] = {collection.key: [] for collection in COLLECTIONS}
     with reading() as connection:

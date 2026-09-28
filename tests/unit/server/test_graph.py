@@ -475,6 +475,20 @@ def test_a_study_state_note_of_zero_reads_back_as_no_note(server):
     assert numbered.json()["data"]["records"]["studyStates"][0]["noteId"] == 1234
 
 
+def test_a_study_state_may_name_a_sense_of_its_own_word_only(server):
+    changes, word, meaning, *_ = article()
+    other, *_ = article()
+    server.push(changes)
+    server.push(other)
+    foreign = other["senses"][0]["id"]
+    assert server.push({"studyStates": [study_state(word["id"], senseId=foreign)]}).status_code == 400
+    written = server.push({"studyStates": [study_state(word["id"], senseId=meaning["id"])]})
+    assert written.status_code == 200
+    assert written.json()["data"]["records"]["studyStates"][0]["senseId"] == meaning["id"]
+    whole = server.push({"studyStates": [study_state(word["id"])]})
+    assert whole.json()["data"]["records"]["studyStates"][0]["senseId"] is None
+
+
 # ── the reset ───────────────────────────────────────────────────────────────
 
 

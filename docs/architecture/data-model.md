@@ -23,7 +23,7 @@ order always resolves, and tombstones cascade in the reverse order.
 | `examples` | an illustrative sentence under a sense | generated, curated, drawn from an attestation, or a recorded clip |
 | `imagePrompts` | one sense's picture and how it came to exist | id derived from the sense |
 | `pronunciations` | one spoken field's recording | id derived from what it reads |
-| `studyStates` | a word's review state in one learning system | written back from Anki |
+| `studyStates` | a word's, or one of its senses', review state in one learning system | written back from Anki |
 | `loops`, `loopItems`, `loopCues` | a rendered track, each word in it, and every line it says | hang off no word |
 | `stories`, `storyParts`, `storyWords` | an illustrated story, its parts, and the words it was asked to teach | |
 | `beds` | a loop's music, kept to be asked for again | outlives the loop it came from |
@@ -145,9 +145,12 @@ sign has no sentence ([`../features/photo-capture.md`](../features/photo-capture
   words actually spoken, the language, the emotion the voice was actually given, the file, and the
   provider, model and **voice**. Stale means the record no longer says those words
   ([`../features/pronunciation.md`](../features/pronunciation.md)).
-- **`studyState`** — one row per word and learning system: `system`, Anki's `noteId` and `cardIds`,
-  and the scheduler's own reps, lapses, stability, difficulty, retrievability and last review. Keyed by
-  system so a second learning tool never collides with Anki.
+- **`studyState`** — one row per word, sense and learning system: `system`, an optional `senseId`,
+  Anki's `noteId` and `cardIds`, and the scheduler's own reps, lapses, stability, difficulty,
+  retrievability and last review. **A row with a sense reports on that meaning's cards; a row without
+  reports on the word's own**, hearing it, which no single meaning owns. A list shows a word by its
+  least stable row. Keyed by system so a second learning tool never collides with Anki, and removed
+  with its sense.
 
 ---
 

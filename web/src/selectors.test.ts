@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { validateGraph, type LoopCue, type LoopItem } from "./domain";
+import { validateGraph, type LoopCue, type LoopItem, type StudyState } from "./domain";
 import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
   formatLabel, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
-  strengthOf, topicOptions, visibleRows
+  strengthOf, topicOptions, visibleRows, weakestOf
 } from "./selectors";
 import { drillCues, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
@@ -149,6 +149,26 @@ describe("vocabulary selectors", () => {
   });
 });
 
+
+describe("a word's study state", () => {
+  const graph = testGraph();
+  const [meaning] = graph.studyStates;
+  const row = (id: string, overrides: Partial<StudyState>): StudyState => ({ ...meaning, id, ...overrides });
+
+  it("is the least stable of the rows reviewed, whichever meaning or sound it is", () => {
+    const weak = row("studyweak000001", { senseId: null, stability: 2.5 });
+    const strong = row("studystrong0001", { stability: 90 });
+    expect(weakestOf([strong, weak])?.id).toBe("studyweak000001");
+  });
+
+  it("ignores a row never reviewed while another has been", () => {
+    const fresh = row("studyfresh00001", { reps: 0, stability: 0 });
+    const reviewed = row("studyseen000001", { stability: 12 });
+    expect(weakestOf([fresh, reviewed])?.id).toBe("studyseen000001");
+    expect(weakestOf([fresh])?.id).toBe("studyfresh00001");
+    expect(weakestOf([])).toBeNull();
+  });
+});
 
 describe("how many pictures a sense shows", () => {
   it("shows one, keeping the drawn one over a bare brief", () => {

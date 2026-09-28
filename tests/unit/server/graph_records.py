@@ -82,7 +82,7 @@ def image_prompt(lexeme_id: str, **overrides: Any) -> dict[str, Any]:
 
 def study_state(lexeme_id: str, **overrides: Any) -> dict[str, Any]:
     return {
-        "id": new_record_id(), "lexemeId": lexeme_id, "system": "anki", "noteId": None,
+        "id": new_record_id(), "lexemeId": lexeme_id, "senseId": None, "system": "anki", "noteId": None,
         "cardIds": [], "reps": 0, "lapses": 0, "stability": 0, "difficulty": 0,
         "retrievability": 0, "lastReview": None, "syncedAt": None, **stamp(), **overrides,
     }

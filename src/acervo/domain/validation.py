@@ -546,7 +546,14 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         return
 
     if name == "study_states":
-        _same_owner(row, _related(lookup, "lexemes", _text(row, "lexeme"), "Lexeme"), "Study state")
+        lexeme = _related(lookup, "lexemes", _text(row, "lexeme"), "Lexeme")
+        _same_owner(row, lexeme, "Study state")
+        sense_id = _text(row, "sense")
+        if sense_id:
+            sense = _related(lookup, "senses", sense_id, "Sense")
+            _same_owner(row, sense, "Study state sense")
+            if sense.get("lexeme") != lexeme.get("id"):
+                refuse("Study state sense must belong to its lexeme.")
         card_ids = row.get("card_ids")
         if not isinstance(card_ids, list) or any(
             not isinstance(identifier, int) or isinstance(identifier, bool) or identifier < 0

@@ -347,6 +347,12 @@ def save_article(
     for row in live("pronunciations"):
         if row["targetKind"] in targets and row["targetId"] not in targets[row["targetKind"]]:
             tombstone("pronunciations", row)
+    # A meaning the document removed takes its study state with it; the word's own row stays. Not
+    # through `live()`: no document mentions a study state, so the author never "knew" one.
+    removed = stored_senses - kept["senses"]
+    for row in stored.get("studyStates", []):
+        if not row["deleted"] and row["senseId"] in removed:
+            tombstone("studyStates", row)
 
     written = graph.merge_graph(
         owner, device, work.changes, enqueue=enqueue, place_photo=place_photo

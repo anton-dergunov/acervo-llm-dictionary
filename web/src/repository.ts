@@ -18,9 +18,10 @@ import type { ArticleDraft } from "./yaml";
  * it**, so a copy stored under the old shape is wiped and pulled again rather than refused at every
  * open. 16: a story part's passages became one recording each (`audioRef`, `audioMime`,
  * `durationSeconds`) instead of times into one joined file, and nothing bumped this. 17: `beds`,
- * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`.
+ * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`. 21: a study
+ * state's `senseId`.
  */
-export const LOCAL_SCHEMA_VERSION = 20;
+export const LOCAL_SCHEMA_VERSION = 21;
 
 export const EMPTY_GRAPH = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],
@@ -539,6 +540,7 @@ export class LocalAcervoRepository implements AcervoRepository {
         .filter((record) => !record.deleted && ((record.targetKind === "sense" && record.targetId === id)
           || (record.targetKind === "example" && examples.has(record.targetId))))
         .forEach((record) => tombstone("pronunciations", record));
+      this.graph.studyStates.filter((record) => record.senseId === id && !record.deleted).forEach((record) => tombstone("studyStates", record));
     }
     await this.commit(changed);
   }

@@ -19,7 +19,7 @@ from acervo.pronunciation.ids import pronunciation_id
 from acervo.repository import jobs
 
 from graph_records import (
-    DEVICE, example, image_prompt, lexeme, sense, stamp, topic, vocabulary,
+    DEVICE, example, image_prompt, lexeme, sense, stamp, study_state, topic, vocabulary,
 )
 
 LEXEME = "lexeme000000001"
@@ -199,6 +199,22 @@ def test_a_removed_sense_carries_its_examples_away(seeded):
     assert one(seeded, "senses", SENSE)["deleted"] is True
     assert one(seeded, "examples", EXAMPLE)["deleted"] is True
     assert len(held(seeded, "examples")) == 1
+
+
+def test_a_removed_sense_takes_its_study_state_and_leaves_the_words(seeded):
+    article = draft_of(seeded)
+    article["senses"].append(new_sense())
+    saved(seeded, article)
+    meaning = study_state(LEXEME, senseId=SENSE)
+    word = study_state(LEXEME)
+    assert seeded.push({"studyStates": [meaning, word]}).status_code == 200
+
+    trimmed = draft_of(seeded)
+    trimmed["senses"] = [item for item in trimmed["senses"] if item["id"] != SENSE]
+    saved(seeded, trimmed)
+
+    assert one(seeded, "studyStates", meaning["id"])["deleted"] is True
+    assert one(seeded, "studyStates", word["id"])["deleted"] is False
 
 
 def test_an_example_moved_to_another_sense_keeps_its_id(seeded):

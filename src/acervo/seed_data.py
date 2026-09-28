@@ -553,8 +553,8 @@ def demo_records(owner_id: str) -> list[tuple[str, dict]]:
         study = entry.get("study")
         if study:
             records.append(("study_states", {
-                "id": rid("study_states", f"{key}-anki"), **base, "lexeme": lexeme_id, "system": "anki",
-                "note_id": 0, "card_ids": [], "reps": study["reps"], "lapses": study["lapses"],
+                "id": rid("study_states", f"{key}-anki"), **base, "lexeme": lexeme_id, "sense": None,
+                "system": "anki", "note_id": 0, "card_ids": [], "reps": study["reps"], "lapses": study["lapses"],
                 "stability": study["stability"], "difficulty": study["difficulty"],
                 "retrievability": study["retrievability"], "last_review": study["last_review"],
                 "synced_at": STAMP,

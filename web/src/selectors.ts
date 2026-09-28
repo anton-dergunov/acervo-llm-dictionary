@@ -218,7 +218,18 @@ export function visibleRows(graph: VocabularyGraph, { language, topic, query, so
 }
 
 export function studyStateOf(graph: VocabularyGraph, lexemeId: string): StudyState | null {
-  return live(graph.studyStates).find((state) => state.lexemeId === lexemeId) ?? null;
+  return weakestOf(live(graph.studyStates).filter((state) => state.lexemeId === lexemeId));
+}
+
+/**
+ * A word's rows as the one a list shows: the least stable of those reviewed at least once, since
+ * that is the meaning (or the sound) that will come up first and says how well the word is known.
+ * A word none of whose cards has been reviewed shows its first row, which reads as unscheduled.
+ */
+export function weakestOf(states: StudyState[]): StudyState | null {
+  const reviewed = states.filter((state) => state.reps > 0);
+  if (!reviewed.length) return states[0] ?? null;
+  return reviewed.reduce((weakest, state) => (state.stability < weakest.stability ? state : weakest));
 }
 
 /**
@@ -360,7 +371,7 @@ export function articleReader(graph: VocabularyGraph): (lexemeId: string) => Art
       attestations: byAge(attestations.get(lexemeId) ?? []),
       // Without these the card image is invisible in the projection, so saving would orphan it.
       images: byAge(own.filter((image) => image.senseId === null)),
-      study: study.get(lexemeId)?.[0] ?? null,
+      study: weakestOf(study.get(lexemeId) ?? []),
       glossLangs: glossLanguagesFor(lexeme.language, graph.vocabularies),
       notesLang: notesLanguageFor(lexeme.language, graph.vocabularies)
     };

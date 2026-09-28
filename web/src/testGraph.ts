@@ -180,12 +180,12 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
     ],
     studyStates: [
       {
-        id: "studypicar00010", lexemeId: "lexemepicar0001", system: "anki", noteId: 12, cardIds: [1, 2],
+        id: "studypicar00010", lexemeId: "lexemepicar0001", senseId: "sensepicaritch0", system: "anki", noteId: 12, cardIds: [1, 2],
         reps: 21, lapses: 4, stability: 18.3, difficulty: 8.4, retrievability: 0.71,
         lastReview: stamp("08-22"), syncedAt: null, ...sync("02-11")
       },
       {
-        id: "studybalsa00010", lexemeId: "lexemebalsa0001", system: "anki", noteId: null, cardIds: [],
+        id: "studybalsa00010", lexemeId: "lexemebalsa0001", senseId: null, system: "anki", noteId: null, cardIds: [],
         reps: 11, lapses: 0, stability: 74.2, difficulty: 3.9, retrievability: 0.95,
         lastReview: stamp("08-08"), syncedAt: null, ...sync("01-22")
       }

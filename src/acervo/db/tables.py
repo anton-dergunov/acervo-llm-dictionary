@@ -496,6 +496,8 @@ study_states = Table(
     Column("id", String(15), primary_key=True),
     _owner(),
     Column("lexeme", String(15), ForeignKey("lexemes.id", ondelete="CASCADE"), nullable=False),
+    # Empty for what the word itself is tested on (hearing it); set for what one meaning is.
+    Column("sense", String(15), ForeignKey("senses.id", ondelete="CASCADE"), nullable=True),
     Column("system", String(80), nullable=False),
     Column("note_id", Integer, nullable=False, default=0),
     Column("card_ids", JSON, nullable=False, default=list),
