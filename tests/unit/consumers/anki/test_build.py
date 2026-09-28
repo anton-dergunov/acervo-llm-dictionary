@@ -1,5 +1,6 @@
 """The vocabulary as Anki notes, from one real word with three senses (`fixtures/obra-graph.json`)."""
 
+import io
 import json
 from pathlib import Path
 
@@ -7,9 +8,10 @@ import pytest
 from anki.collection import Collection
 from PIL import Image
 
-from acervo.consumers.anki.build import build, marked, split_article, write_payload
+from acervo.consumers.anki.build import BuiltManifest, build, marked, split_article, write_payload
 from acervo.consumers.anki.cli import main
 from acervo.consumers.anki.manifest import SyncManifest
+from acervo.consumers.anki.progress import Progress
 from acervo.consumers.anki.model import create_notetypes
 from acervo.consumers.anki.robot import AnkiRobot, RobotSettings
 
@@ -146,6 +148,25 @@ def test_the_payload_is_a_manifest_the_robot_takes_as_it_is(graph, media_root, t
         collection.close()
 
 
+def test_pictures_shrink_in_parallel_and_say_how_far_they_got(tmp_path):
+    built = BuiltManifest()
+    for name, side in (("a.webp", 1024), ("b.png", 1536), ("small.webp", 300)):
+        source = tmp_path / "masters" / name
+        source.parent.mkdir(exist_ok=True)
+        Image.new("RGB", (side, side), (40, 90, 80)).save(source)
+        built.media[f"media/{name}"] = source
+    said = io.StringIO()
+
+    write_payload(built, tmp_path / "payload", progress=Progress(said), workers=2)
+
+    sizes = {}
+    for name in ("a.webp", "b.png", "small.webp"):
+        with Image.open(tmp_path / "payload" / "media" / name) as picture:
+            sizes[name] = max(picture.size)
+    assert sizes == {"a.webp": 768, "b.png": 768, "small.webp": 300}
+    assert said.getvalue().splitlines()[-1].endswith("Shrinking pictures to 768 px: 3/3")
+
+
 def test_build_manifest_reads_a_saved_graph(graph, media_root, tmp_path, capsys):
     saved = tmp_path / "graph.json"
     saved.write_text(json.dumps({"changes": graph}), encoding="utf-8")
@@ -154,3 +175,20 @@ def test_build_manifest_reads_a_saved_graph(graph, media_root, tmp_path, capsys)
     report = json.loads(capsys.readouterr().out)
     assert (report["examples"], report["senses"], report["words"]) == (3, 3, 1)
     assert (tmp_path / "out" / "manifest.json").is_file()
+
+
+def test_a_bootstrap_the_server_would_refuse_is_refused_before_any_card_is_built(monkeypatch):
+    from acervo.consumers.anki import cli
+    from acervo.consumers.anki.robot import SyncSafetyError
+
+    class Refusing:
+        def check_bootstrap(self):
+            raise SyncSafetyError("this one holds a collection")
+
+    def built(*_):
+        raise AssertionError("the cards were built for a bootstrap that could not happen")
+
+    monkeypatch.setattr(cli, "build_payload", built)
+    args = cli.build_parser().parse_args(["push-vocabulary", "--bootstrap"])
+    with pytest.raises(SyncSafetyError, match="holds a collection"):
+        cli.push_vocabulary(args, Refusing())

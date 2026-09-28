@@ -368,8 +368,15 @@ stylesheet and the fonts — is brought up to date by every push, since an
 ordinary sync carries it.
 
 **When there is nothing in Anki worth keeping, wipe and start again** rather than
-adopt: `./deploy.sh --reset-data`, then `bootstrap-upload` with a full manifest.
+adopt: `./deploy.sh --reset-data`, then `./deploy.sh --worker bootstrap-vocabulary`.
 Each phone then asks for a direction on its next sync; choose download.
+
+**Keep Anki closed on every device from the reset until the bootstrap has finished.**
+A device that syncs to an empty server uploads its own collection without asking,
+and the bootstrap then refuses the server as not empty. It checks before building
+anything, so the refusal comes in seconds. A first bootstrap shrinks every picture
+and uploads the lot, which takes a while; it says what it is doing as it goes, on
+stderr, and ends with the JSON result on stdout.
 
 ## Reference: adopting an existing mobile collection
 

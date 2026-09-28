@@ -10,6 +10,7 @@ from typing import Sequence
 
 from .build import DEFAULT_DECK, build, write_payload
 from .manifest import SyncManifest
+from .progress import Progress
 from .robot import AnkiRobot, RobotSettings, result_json
 from .state import SYSTEM, held_by_key, study_states
 
@@ -58,6 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--media-timeout",
         type=float,
         default=float(os.environ.get("ACERVO_ANKI_MEDIA_TIMEOUT", "120")),
+        help="Seconds media sync may go without progress before giving up",
     )
     commands = parser.add_subparsers(dest="command", required=True)
     bootstrap = commands.add_parser("bootstrap-upload")
@@ -134,17 +136,19 @@ def _signed_in(args: argparse.Namespace):
     return client
 
 
-def _graph(args: argparse.Namespace) -> dict:
+def _graph(args: argparse.Namespace, progress: Progress) -> dict:
     if getattr(args, "graph", None):
         payload = json.loads(args.graph.read_text(encoding="utf-8"))
         return payload.get("changes", payload)
+    progress.say(f"Signing in to Acervo as {args.owner_email}")
     with _signed_in(args) as client:
+        progress.say("Reading the vocabulary")
         return client.pull_graph().get("changes") or {}
 
 
-def build_payload(args: argparse.Namespace, output: Path) -> dict:
+def build_payload(args: argparse.Namespace, output: Path, progress: Progress) -> dict:
     """The vocabulary's cards, written under `output`, and what went into them."""
-    changes = _graph(args)
+    changes = _graph(args, progress)
     built = build(
         changes,
         languages=args.language or None,
@@ -153,18 +157,24 @@ def build_payload(args: argparse.Namespace, output: Path) -> dict:
     )
     if not built.notes:
         raise ValueError("There are no active words to make cards from")
-    path = write_payload(built, output, picture_size=args.picture_size or None)
     kinds: dict[str, int] = {}
     for note in built.notes:
         key = "words" if note["kind"] == "word" else ("senses" if note["note_id"] == note["sense_id"] else "examples")
         kinds[key] = kinds.get(key, 0) + 1
+    progress.say(f"Built {len(built.notes)} notes ("
+                 + ", ".join(f"{count} {key}" for key, count in sorted(kinds.items()))
+                 + f") naming {len(built.media)} media files"
+                 + (f"; {len(built.missing)} files are missing" if built.missing else ""))
+    path = write_payload(built, output, picture_size=args.picture_size or None, progress=progress)
     return {"manifest": str(path), "notes": len(built.notes), **kinds, "media": len(built.media),
             "missing_media": built.missing}
 
 
 def push_vocabulary(args: argparse.Namespace, robot: AnkiRobot) -> dict:
+    if args.bootstrap and not args.dry_run:
+        robot.check_bootstrap()
     with tempfile.TemporaryDirectory(prefix="acervo-anki-") as scratch:
-        built = build_payload(args, Path(scratch))
+        built = build_payload(args, Path(scratch), robot.progress)
         if args.dry_run:
             return {"operation": "push-vocabulary", "dry_run": True, **built}
         manifest, manifest_dir = SyncManifest.load(built["manifest"])
@@ -187,13 +197,17 @@ def pull_state(args: argparse.Namespace, robot: AnkiRobot) -> dict:
         raise ValueError(
             "Set --server-url, --owner-email and ACERVO_OWNER_PASSWORD to write study state"
         )
+    progress = robot.progress
     with AcervoClient(args.server_url) as client:
+        progress.say(f"Signing in to Acervo as {args.owner_email}")
         client.sign_in(args.owner_email, password)
         # The history is sent from a month before where the server's ends: a review made offline
         # reaches the collection days after reviews made since, and one already held adds nothing.
         latest = client.latest_review(SYSTEM)
         exported = robot.export_state(
             reviews_since=max(0, latest - REVIEW_LOOKBACK_MS) if latest else 0)
+        progress.say(f"Read {len(exported.get('notes') or [])} notes and "
+                     f"{len(exported.get('reviews') or [])} reviews from Anki; reading the vocabulary")
         changes = client.pull_graph().get("changes") or {}
         live = {
             str(lexeme["id"]) for lexeme in changes.get("lexemes") or [] if not lexeme.get("deleted")
@@ -211,6 +225,8 @@ def pull_state(args: argparse.Namespace, robot: AnkiRobot) -> dict:
             return {"operation": "pull-state", "written": 0, "would_write": len(rows) - retired,
                     "would_retire": retired, "skipped": skipped, "reviews_read": len(reviews),
                     "dry_run": True}
+        progress.say(f"Writing {len(rows) - retired} study states, retiring {retired}, "
+                     f"sending {len(reviews)} reviews")
         if rows:
             client.push_graph({"studyStates": rows}, device_id=args.device_id)
         history = client.push_reviews(SYSTEM, reviews) if reviews else {"added": 0}
@@ -223,7 +239,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         if args.command == "build-manifest":
             print(result_json({"operation": "build-manifest",
-                               **build_payload(args, args.output.expanduser().resolve())}))
+                               **build_payload(args, args.output.expanduser().resolve(),
+                                               Progress())}))
             return 0
         robot = AnkiRobot(_settings(args))
         if args.command in ("bootstrap-upload", "push"):

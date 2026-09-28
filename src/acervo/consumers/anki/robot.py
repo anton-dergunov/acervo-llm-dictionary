@@ -14,6 +14,7 @@ from typing import Any, Iterator
 from acervo.domain.ids import instant_of
 
 from .naming import slugify_filename
+from .progress import Progress
 from .manifest import EMBEDDED, SyncManifest, SyncManifestNote
 from .model import (
     KINDS, MEDIA_FIELDS, CardDesign, create_notetypes, install_fonts, require_notetype,
@@ -45,6 +46,8 @@ class RobotSettings:
     collection_path: Path
     backup_dir: Path
     template_dir: Path
+    # How long media sync may go without moving before the robot gives up. Not a bound on the whole
+    # upload: a first push sends thousands of files and takes as long as that takes.
     media_timeout_seconds: float = 120.0
 
     def __post_init__(self) -> None:
@@ -68,9 +71,10 @@ def _sync_requirement_name(output: Any) -> str:
 class AnkiRobot:
     """A persistent headless Anki client that synchronizes before it mutates."""
 
-    def __init__(self, settings: RobotSettings):
+    def __init__(self, settings: RobotSettings, progress: Progress | None = None):
         self.settings = settings
         self.design = CardDesign.load(settings.template_dir)
+        self.progress = progress or Progress()
 
     @contextmanager
     def _exclusive_collection(self) -> Iterator[None]:
@@ -99,17 +103,36 @@ class AnkiRobot:
         )
 
     def _wait_for_media(self, collection: Any) -> None:
-        deadline = time.monotonic() + self.settings.media_timeout_seconds
+        """Until media sync is done, saying how far it has got. Gives up only when it stops moving."""
+        stall = self.settings.media_timeout_seconds
+        deadline = time.monotonic() + stall
+        seen = said = None
         while True:
             status = collection.media_sync_status()
             if not status.active:
+                if said is not None:
+                    self.progress.say("Media sync finished")
                 return
-            if time.monotonic() >= deadline:
+            report = ", ".join(
+                part for part in (status.progress.checked, status.progress.added,
+                                  status.progress.removed) if part
+            )
+            now = time.monotonic()
+            if report != seen:
+                seen, deadline = report, now + stall
+            if report and (said is None or now - said >= self.progress.every):
+                self.progress.say(f"Media sync: {report}")
+                said = now
+            if now >= deadline:
                 collection.abort_media_sync()
-                raise TimeoutError("Anki media synchronization did not finish in time")
+                raise TimeoutError(
+                    f"Anki media synchronization made no progress for {int(stall)} seconds"
+                    + (f" (last: {seen})" if seen else "")
+                )
             time.sleep(0.1)
 
     def _normal_sync(self, collection: Any, auth: Any, *, stage: str) -> Any:
+        self.progress.say(f"Anki: {stage}")
         output = collection.sync_collection(auth, sync_media=True)
         if output.required != output.NO_CHANGES:
             raise SyncSafetyError(
@@ -134,6 +157,33 @@ class AnkiRobot:
         if getattr(collection, "db", None) is not None:
             collection.close()
 
+    def _require_empty(self, collection: Any) -> Any:
+        """Signed in, with both the robot's collection and the server's empty; else refused."""
+        self.progress.say("Anki: signing in and checking the server is empty")
+        auth = self._login(collection)
+        if not collection.is_empty():
+            raise SyncSafetyError(
+                "bootstrap-upload requires an empty robot collection, and this one holds notes"
+            )
+        initial = collection.sync_collection(auth, sync_media=False)
+        if initial.required != initial.NO_CHANGES:
+            raise SyncSafetyError(
+                "bootstrap-upload requires an empty Anki sync server, and this one holds a "
+                "collection. A device that syncs to an empty server uploads its own, so if one "
+                "synced since the reset, that is what is there: reset the Anki data again with "
+                "Anki closed on every device, and open it only once the bootstrap has finished"
+            )
+        return auth
+
+    def check_bootstrap(self) -> None:
+        """Refuse a bootstrap now, before minutes are spent building cards it could not upload."""
+        with self._exclusive_collection():
+            collection = self._open_collection()
+            try:
+                self._require_empty(collection)
+            finally:
+                self._close(collection)
+
     def bootstrap_upload(
         self, manifest: SyncManifest, manifest_dir: Path
     ) -> dict[str, Any]:
@@ -142,12 +192,9 @@ class AnkiRobot:
         with self._exclusive_collection():
             collection = self._open_collection()
             try:
-                auth = self._login(collection)
-                initial = collection.sync_collection(auth, sync_media=False)
-                if initial.required != initial.NO_CHANGES or not collection.is_empty():
-                    raise SyncSafetyError(
-                        "bootstrap-upload requires an empty local collection and empty server"
-                    )
+                # Asked again, not trusted from `check_bootstrap`: a device may have uploaded while
+                # the cards were being built.
+                auth = self._require_empty(collection)
                 create_notetypes(collection, self.design)
                 fonts = install_fonts(collection, self.design)
                 report = self._upsert(collection, manifest, manifest_dir)
@@ -157,6 +204,7 @@ class AnkiRobot:
                         "bootstrap-upload expected Anki to require FULL_UPLOAD, got "
                         + _sync_requirement_name(output)
                     )
+                self.progress.say("Anki: uploading the collection")
                 collection.close_for_full_sync()
                 collection.full_upload_or_download(
                     auth=auth,
@@ -164,6 +212,7 @@ class AnkiRobot:
                     upload=True,
                 )
                 collection.reopen(after_full_sync=True)
+                self.progress.say("Anki: collection uploaded; uploading its media")
                 self._wait_for_media(collection)
                 return {
                     "operation": "bootstrap-upload",
@@ -236,8 +285,10 @@ class AnkiRobot:
         with self._exclusive_collection():
             collection = self._open_collection()
             try:
+                self.progress.say("Anki: signing in")
                 auth = self._login(collection)
                 self._normal_sync(collection, auth, stage="pre-mutation sync")
+                self.progress.say("Anki: backing up the robot's collection")
                 self._backup(collection)
                 # A note type of the wrong shape is refused here, before anything is written. One of
                 # the right shape but an older look is brought up to date: that is an ordinary change.
@@ -424,6 +475,7 @@ class AnkiRobot:
         created = updated = unchanged = media_added = 0
         results = []
         touched: set[int] = set()
+        counter = self.progress.count("Anki: writing notes", len(manifest.notes))
         for item in manifest.notes:
             identity = str(item.note_id)
             kind = KINDS[item.kind]
@@ -480,6 +532,9 @@ class AnkiRobot:
                     "status": "created" if is_new else ("updated" if changed else "unchanged"),
                 }
             )
+            counter.step()
+        self.progress.say(f"Anki: {created} created, {updated} updated, {unchanged} unchanged, "
+                          f"{media_added} new media files")
         removed = self._remove_closed_cards(collection, touched)
         if removed:
             for result in results:

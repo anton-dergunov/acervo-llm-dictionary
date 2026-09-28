@@ -25,8 +25,10 @@ This reads the wire-shaped graph and nothing else, like every enrichment: it can
 from __future__ import annotations
 
 import html
+import os
 import re
 import shutil
+from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable
@@ -34,6 +36,7 @@ from typing import Any, Iterable
 from acervo.article import ArticleView, build_articles, live
 
 from .naming import slugify_filename
+from .progress import Progress
 
 # A word put away, or not yet taken in, has no cards.
 CARD_STATUSES = ("active", "learned")
@@ -365,27 +368,47 @@ def _sense_list(senses: list[dict], pictures: dict[str, str | None], gloss_langs
     return '<div class="slist">' + "".join(items) + "</div>"
 
 
-def write_payload(built: BuiltManifest, output: Path, *, picture_size: int | None = 768) -> Path:
+PICTURES = (".webp", ".png", ".jpg", ".jpeg")
+
+
+def write_payload(built: BuiltManifest, output: Path, *, picture_size: int | None = 768,
+                  progress: Progress | None = None, workers: int | None = None) -> Path:
     """Write `manifest.json` and its media under `output`, pictures scaled down to `picture_size`
-    pixels on the long side (None keeps the master). Returns the manifest's path."""
+    pixels on the long side (None keeps the master). Returns the manifest's path.
+
+    Scaling is most of a first push — thousands of pictures, each re-encoded — so it runs on every
+    core but one, leaving that one to the server on the same machine."""
     import json
 
+    progress = progress or Progress()
     output.mkdir(parents=True, exist_ok=True)
     (output / "media").mkdir(exist_ok=True)
+    pictures = []
     for relative, source in built.media.items():
         destination = output / relative
-        if picture_size and source.suffix.lower() in (".webp", ".png", ".jpg", ".jpeg"):
-            _scaled(source, destination, picture_size)
+        if picture_size and source.suffix.lower() in PICTURES:
+            pictures.append((source, destination, picture_size))
         else:
             shutil.copy2(source, destination)
+    counter = progress.count(f"Shrinking pictures to {picture_size} px", len(pictures))
+    workers = workers or max(1, (os.cpu_count() or 1) - 1)
+    if workers == 1 or len(pictures) < 2:
+        for picture in pictures:
+            _scaled(picture)
+            counter.step()
+    else:
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            for _ in pool.map(_scaled, pictures, chunksize=4):
+                counter.step()
     path = output / "manifest.json"
     path.write_text(json.dumps(built.manifest(), ensure_ascii=False, indent=2), encoding="utf-8")
     return path
 
 
-def _scaled(source: Path, destination: Path, size: int) -> None:
+def _scaled(picture: tuple[Path, Path, int]) -> None:
     from PIL import Image
 
+    source, destination, size = picture
     with Image.open(source) as image:
         if max(image.size) <= size:
             shutil.copy2(source, destination)
