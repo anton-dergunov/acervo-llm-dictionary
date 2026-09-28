@@ -11,7 +11,7 @@ from typing import Sequence
 from .build import DEFAULT_DECK, build, write_payload
 from .manifest import SyncManifest
 from .robot import AnkiRobot, RobotSettings, result_json
-from .state import held_by_lexeme, study_states
+from .state import held_by_key, study_states
 
 
 def _repository_root() -> Path:
@@ -190,15 +190,21 @@ def pull_state(args: argparse.Namespace, robot: AnkiRobot) -> dict:
         live = {
             str(lexeme["id"]) for lexeme in changes.get("lexemes") or [] if not lexeme.get("deleted")
         }
+        senses = {
+            str(sense["id"]): str(sense["lexemeId"])
+            for sense in changes.get("senses") or [] if not sense.get("deleted")
+        }
         rows, skipped = study_states(
-            exported, held_by_lexeme(changes), live, device_id=args.device_id
+            exported, held_by_key(changes), live, senses, device_id=args.device_id
         )
+        retired = sum(1 for row in rows if row["deleted"])
         if args.dry_run:
-            return {"operation": "pull-state", "written": 0, "would_write": len(rows),
-                    "skipped": skipped, "dry_run": True}
+            return {"operation": "pull-state", "written": 0, "would_write": len(rows) - retired,
+                    "would_retire": retired, "skipped": skipped, "dry_run": True}
         if rows:
             client.push_graph({"studyStates": rows}, device_id=args.device_id)
-    return {"operation": "pull-state", "written": len(rows), "skipped": skipped}
+    return {"operation": "pull-state", "written": len(rows) - retired, "retired": retired,
+            "skipped": skipped}
 
 
 def main(argv: Sequence[str] | None = None) -> int:

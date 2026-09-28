@@ -310,24 +310,27 @@ python scripts/preview_anki_cards.py OUT/manifest.json OUT/preview
 ## FSRS state back into Acervo
 
 Content goes out through the manifest; scheduling comes back through `run-worker.sh pull-state`. It
-syncs down, reads each card, and writes one `studyState` per *(lexeme, `anki`)* through
+syncs down, reads each card, and writes one `studyState` per *(lexeme, sense, `anki`)* through
 `POST /api/acervo/v1/graph` — the same route, validation and revision allocation a phone gets, so
 there is no second write path to keep in step. `export-state` is the same reading printed rather than
 stored, which is what to run when you want to look.
 
-Three things about the mapping are decisions rather than mechanics:
+Four things about the mapping are decisions rather than mechanics:
 
 - **Retrievability is Anki's own number**, asked for only when the card has a memory state. Anki
   answers `0.0` for a card FSRS knows nothing about, and stored as-is that would read as "certainly
   forgotten"; re-deriving the forgetting curve here would be a second implementation of something
   that changes with the FSRS version, wrong in a way that looks right.
-- **A note's cards collapse into one row.** The note type has one template, so in practice that is
-  one card. The rule for when it is not: counts add up, because every review was a review of this
-  word; the memory state comes from the least stable card, because that is the one coming up next;
-  the last review is the most recent of any of them.
-- **A note whose word Acervo no longer holds is skipped, not refused.** That is ordinary — a word
-  removed in Acervo keeps its card until someone deletes it in Anki — and one such note must not stop
-  the rest from being written. A batch is all-or-nothing, so the filtering happens before the write.
+- **A sense's cards collapse into one row**: its own note's Recognise and Produce and every example
+  note's Recognise. Counts add up, because every review was a review of this meaning; the memory
+  state comes from the least stable card, because that is the one coming up next; the last review is
+  the most recent of any of them. The word's Listen card is a row of its own, with no sense.
+- **A note whose word or sense Acervo no longer holds is skipped, not refused.** That is ordinary — a
+  word removed in Acervo keeps its cards until someone deletes them in Anki — and one such note must
+  not stop the rest from being written. A batch is all-or-nothing, so the filtering happens before
+  the write.
+- **A row no note reports on any more is tombstoned.** The collection is read whole, so a row without
+  cards describes notes that are gone: a collection wiped and rebuilt, or cards deleted by hand.
 
 `queue`, `suspended` and `flag` are exported and deliberately not stored: there are no columns for
 them, and adding some means rebuilding the database for information nothing reads.

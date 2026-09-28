@@ -1,27 +1,25 @@
 # The Anki loop · closing it in both directions
 
-**Status:** planned. The robot, the manifest contract and the state pull are built
-([`../features/anki.md`](../features/anki.md)). What is missing is the loop itself: nothing turns the
-vocabulary into a manifest, and nothing acts on the review state that comes back. Without both, Acervo
-cannot say whether anything it does helps a word stick — the thing every competitor sells
+**Status:** half built. Cards go out: the vocabulary becomes notes and `push-vocabulary` sends them,
+and review state comes back per sense ([`../features/anki.md`](../features/anki.md)). What is missing
+is acting on what comes back, and running both halves nightly. Without that, Acervo cannot say whether
+anything it does helps a word stick — the thing every competitor sells
 ([`../research/similar-projects.md`](../research/similar-projects.md), "The learning loop is not
 closed").
 
-## 1 · Cards out: a manifest from the vocabulary
+## 1 · Cards out: built
 
-A job that builds the manifest from the graph and hands it to the robot's `push`.
+Decided and built; the design is [`../features/anki.md`](../features/anki.md), "The cards".
 
-- **One deck per language**, `Spanish::Vocabulary`, with topics as `acervo::topic::…` tags. A split
-  per topic stays possible as configuration (`Spanish::%topic`), but is not the default.
-- **What a card carries**: the word, its gloss, the sentence worth keeping (the owner's own first, as
-  the Obsidian mirror chooses), the sense's picture and the headword's recording.
-- **Pictures at 768 px** (~70 KB) rather than the 1024 master, if deck size bites; check that WebP
-  renders on AnkiMobile before committing thousands of files to it.
-- **Open: sense-level or lexeme-level cards.** Sense-level cards are more correct and produce more
-  cards; lexeme-level cards mean fewer reviews but blur polysemy. The choice decides the study-state
-  join, so it comes first.
+- **Both levels, split by skill.** Meaning is tested per sense — a Recognise card per example and a
+  Produce card per sense — and sound per word, with a Listen card. So the study-state join is per
+  sense, with the word's own row beside it.
+- **Sentences by trust**: the owner's own, then generated, then dictionaries', clips last.
+- **One deck per language, topics as tags**; pictures at 768 px.
+- **Still to check on the tablet**: WebP pictures and `<audio>` playback on AnkiMobile, and whether
+  it lets the Listen card play by itself.
 - Keep `.apkg` export for bootstrapping and disaster recovery: it is the only export that works when
-  nothing else does.
+  nothing else does. Not built.
 
 ## 2 · Statistics in: acting on FSRS
 
@@ -50,3 +48,9 @@ the two halves above exist.
 - **Where the daily review happens.** Anki is a better scheduler; Acervo is a better place for LLM
   grading and clip playback. Likely both — but which one owns the daily session should be decided
   before building either side further. See also [`learning-modes.md`](learning-modes.md).
+- **Review history, not only the snapshot.** The robot holds a full copy of the collection, so Anki's
+  `revlog` — every review, its button, interval and time taken — can come back too, into an
+  append-only table of a few megabytes per hundred thousand reviews. It is what answers "did the loop,
+  the story or the picture help": a before and after, which a snapshot cannot show. Retrievability
+  would then be computed when shown, from stability and days since the last review, rather than read
+  once at pull time and left to go stale.

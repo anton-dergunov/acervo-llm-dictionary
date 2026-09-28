@@ -109,10 +109,14 @@ in a collection shares one media folder.
 
 ## Review state back
 
-`anki pull-state` writes one `studyStates` row per word and system: Anki's note and card ids and the
-scheduler's reps, lapses, stability, difficulty, retrievability and last review, written through
-`POST /graph` like any other client write. Rows are keyed by system so a second learning tool never
-collides with Anki. `export-state` prints the same reading without writing it.
+`anki pull-state` writes one `studyStates` row per sense, and one per word, for each system: Anki's
+note and card ids and the scheduler's reps, lapses, stability, difficulty, retrievability and last
+review, written through `POST /graph` like any other client write. **A sense's row gathers its own
+note's cards and those of every example under it**, since all of them ask about that one meaning;
+the word's row, with no sense, holds its Listen card. A row whose notes are no longer in the
+collection is tombstoned, so a collection wiped and rebuilt leaves no stale memory behind. Rows are
+keyed by system so a second learning tool never collides with Anki. `export-state` prints the same
+reading without writing it.
 
 - **Retrievability is Anki's own number**, asked for only when there is a memory state to compute it
   from — an unset protobuf float reads as `0.0`, and a card FSRS knows nothing about would otherwise

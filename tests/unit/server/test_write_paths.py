@@ -12,7 +12,7 @@ import re
 import pytest
 from graph_records import DEVICE, lexeme, sense, vocabulary
 
-from acervo.consumers.anki.state import held_by_lexeme, study_states
+from acervo.consumers.anki.state import held_by_key, study_states
 from acervo.images.ids import image_prompt_id, image_reference, seed_for
 from acervo.jobs.images.publish import plan_publish, publish
 from acervo.jobs.images.run import Store
@@ -178,20 +178,24 @@ def test_an_inconsistent_run_directory_is_refused_before_the_graph_is_touched(se
 # ── study state ─────────────────────────────────────────────────────────────
 
 
-def exported_for(entry, *, reps=4, stability=12.5, retrievability=0.9):
-    """What `robot.export_state()` returns for one note, in its own shape."""
+def exported_for(entry, *, reps=4, stability=12.5, retrievability=0.9, sense_id=None):
+    """What `robot.export_state()` returns for one note, in its own shape: the word's own note, or
+    with `sense_id` a sense's."""
     return {
         "operation": "export-state",
         "sync": "complete",
         "notes": [
             {
-                "note_id": "note00000000001",
+                "note_id": sense_id or entry["id"],
+                "kind": "meaning" if sense_id else "word",
                 "lexeme_id": entry["id"],
+                "sense_id": sense_id,
                 "anki_note_id": 17,
                 "card_ids": [91],
                 "cards": [
                     {
-                        "anki_card_id": 91, "reps": reps, "lapses": 1, "queue": 2,
+                        "anki_card_id": 91, "card_type": "Produce" if sense_id else "Listen",
+                        "reps": reps, "lapses": 1, "queue": 2,
                         "suspended": False, "flag": 3, "stability": stability,
                         "difficulty": 5.2, "retrievability": retrievability,
                         "last_review": "2026-09-01T00:00:00.000Z",
@@ -202,12 +206,15 @@ def exported_for(entry, *, reps=4, stability=12.5, retrievability=0.9):
     }
 
 
-def push_state(server, entry, **overrides):
+def state_rows(server, exported):
     changes = server.pull().json()["data"]["changes"]
     live = {row["id"] for row in changes["lexemes"] if not row["deleted"]}
-    rows, skipped = study_states(
-        exported_for(entry, **overrides), held_by_lexeme(changes), live, device_id="ankiworker0001"
-    )
+    senses = {row["id"]: row["lexemeId"] for row in changes["senses"] if not row["deleted"]}
+    return study_states(exported, held_by_key(changes), live, senses, device_id="ankiworker0001")
+
+
+def push_state(server, entry, **overrides):
+    rows, skipped = state_rows(server, exported_for(entry, **overrides))
     with server.api() as client:
         answer = client.push_graph({"studyStates": rows}, device_id="ankiworker0001")
     return answer, skipped
@@ -249,12 +256,36 @@ def test_a_review_timestamp_anki_would_have_produced_is_refused_by_the_route(ser
     """`.isoformat()` gives `+00:00` and six fractional digits. This is the shape the route wants,
     and the reason `instant_of` exists."""
     entry, _senses = word
-    changes = server.pull().json()["data"]["changes"]
-    live = {row["id"] for row in changes["lexemes"] if not row["deleted"]}
-    rows, _ = study_states(
-        exported_for(entry), held_by_lexeme(changes), live, device_id="ankiworker0001"
-    )
+    rows, _ = state_rows(server, exported_for(entry))
     rows[0]["lastReview"] = "2026-09-01T00:00:00+00:00"
     answer = server.push({"studyStates": rows})
     assert answer.status_code == 400
     assert answer.json()["error"]["code"] == "invalid_record"
+
+
+def test_a_senses_cards_and_the_words_own_are_two_rows(server, word):
+    entry, senses = word
+    sense_id = senses[0]["id"]
+    exported = exported_for(entry)
+    exported["notes"] += exported_for(entry, sense_id=sense_id, stability=2.0)["notes"]
+    rows, _ = state_rows(server, exported)
+    with server.api() as client:
+        client.push_graph({"studyStates": rows}, device_id="ankiworker0001")
+
+    held = server.pull().json()["data"]["changes"]["studyStates"]
+    assert sorted((row["senseId"] or "", row["stability"]) for row in held) == \
+        sorted([("", 12.5), (sense_id, 2.0)])
+
+
+def test_a_row_whose_note_is_gone_is_tombstoned_through_the_route(server, word):
+    """A collection wiped and rebuilt reports nothing for the notes it lost."""
+    entry, senses = word
+    push_state(server, entry, sense_id=senses[0]["id"])
+    rows, _ = state_rows(server, {"notes": []})
+    assert [row["deleted"] for row in rows] == [True]
+    with server.api() as client:
+        client.push_graph({"studyStates": rows}, device_id="ankiworker0001")
+
+    (row,) = server.pull().json()["data"]["changes"]["studyStates"]
+    assert row["deleted"] is True
+    assert state_rows(server, {"notes": []})[0] == []
