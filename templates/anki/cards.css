@@ -53,12 +53,25 @@
 .acv {
   --u: clamp(16px, calc(12.5px + 0.9cqi), 22px);
   font-size: var(--u);
-  max-width: calc(var(--u) * 54); min-height: 100vh; min-height: 100svh; margin: 0 auto;
+  --chrome: 0px;
+  max-width: calc(var(--u) * 54); margin: 0 auto;
+  min-height: calc(100vh - var(--chrome)); min-height: calc(100svh - var(--chrome));
   padding: calc(var(--u) * 1.25) clamp(var(--u), 4cqi, calc(var(--u) * 2.5));
   display: flex; flex-direction: column; gap: calc(var(--u) * 1.1);
 }
-/* What the card asks sits in the middle of the screen, between its label and its hint. */
-.acv-body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: calc(var(--u) * 1.1); }
+/* AnkiMobile's web view covers the whole screen and its bars sit over it: the page starts below the
+   top bar, yet 100vh is the whole screen, so a card one screen tall runs on under the bottom toolbar
+   and its middle sits low. `--chrome` is what the bars take. The iPad's is measured in the Browse
+   preview (83px above, 72px below); the iPhone's is the usual bar heights, not yet measured. */
+.ipad .acv { --chrome: 155px; }
+.iphone .acv { --chrome: 180px; }
+/* What the card asks sits between its label and its hint, a golden section above the middle: the
+   space below it is 1.618 times the space above, which reads as centred where exact centring looks
+   low. */
+.acv-body { flex: 1; display: flex; flex-direction: column; gap: calc(var(--u) * 1.1); }
+.acv-body::before, .acv-body::after { content: ""; flex: 1 1 0; }
+.acv-body::before { margin-bottom: calc(var(--u) * -1.1); }
+.acv-body::after { flex-grow: 1.618; margin-top: calc(var(--u) * -1.1); }
 .acv-body.focus { width: 100%; max-width: calc(var(--u) * 34); margin: 0 auto; }
 .acv p, .acv h1, .acv figure { margin: 0; }
 .k-rec  { --k: var(--core);   --k-soft: var(--core-soft); }
