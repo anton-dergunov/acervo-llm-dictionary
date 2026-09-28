@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { AcervoApiError, backendSession, type AnkiStatus, type Job } from "./api";
+import { jobFor, jobStream } from "./jobs";
 
 /**
  * Settings ▸ Anki: whether the server keeps Anki up to date, and how that last went.
@@ -7,7 +8,17 @@ import { AcervoApiError, backendSession, type AnkiStatus, type Job } from "./api
  * Two switches, because they are two directions (`docs/features/anki.md`): the vocabulary goes out a
  * minute after it changes, and review state comes back every hour. Both are the server's own work;
  * Anki on a device sees a push the next time it syncs.
+ *
+ * What the panel says follows the job stream, so "Running now" becomes the outcome when it lands,
+ * without the panel being opened again.
  */
+
+/** The newer of what the panel was told when it opened and what the stream has heard since. */
+function newest(read: Job | null, heard: Job | undefined): Job | null {
+  if (!heard) return read;
+  if (!read || heard.id === read.id || heard.createdAt >= read.createdAt) return heard;
+  return read;
+}
 
 function when(instant: string | null | undefined): string {
   if (!instant) return "";
@@ -38,6 +49,7 @@ export default function AnkiPanel({ onNotify }: { onNotify(message: string): voi
   const [status, setStatus] = useState<AnkiStatus | null>(null);
   const [failed, setFailed] = useState("");
   const [asking, setAsking] = useState<"push" | "pull" | null>(null);
+  const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
 
   const read = () => backendSession.ankiStatus()
     .then(setStatus)
@@ -61,8 +73,7 @@ export default function AnkiPanel({ onNotify }: { onNotify(message: string): voi
   const now = async (what: "push" | "pull") => {
     setAsking(what);
     try {
-      await backendSession.ankiNow(what);
-      await read();
+      jobStream.apply(await backendSession.ankiNow(what));
     } catch (error) {
       onNotify(error instanceof AcervoApiError ? error.message : "Anki could not be asked just now.");
     } finally {
@@ -80,6 +91,8 @@ export default function AnkiPanel({ onNotify }: { onNotify(message: string): voi
     <p className="config-help" role="status">Reading how Anki is kept up to date…</p>
   </section>;
 
+  const lastPush = newest(status.lastPush, jobFor(live, "anki.push", "push"));
+  const lastPull = newest(status.lastPull, jobFor(live, "anki.pull", "pull"));
   return <section className="config-section">
     <h3>Anki</h3>
     <p className="config-help">
@@ -102,7 +115,7 @@ export default function AnkiPanel({ onNotify }: { onNotify(message: string): voi
           touched.</span>
       </span>
     </label>
-    <p className="config-help">Last push: {outcome(status.lastPush, "none yet.")}</p>
+    <p className="config-help">Last push: {outcome(lastPush, "none yet.")}</p>
     <div className="sync-actions">
       <button className="tb-btn" disabled={!status.configured || asking !== null}
         onClick={() => void now("push")}>
@@ -121,7 +134,7 @@ export default function AnkiPanel({ onNotify }: { onNotify(message: string): voi
           too.</span>
       </span>
     </label>
-    <p className="config-help">Last hourly read: {outcome(status.lastPull, "none yet.")}</p>
+    <p className="config-help">Last hourly read: {outcome(lastPull, "none yet.")}</p>
     <div className="sync-actions">
       <button className="tb-btn" disabled={!status.configured || asking !== null}
         onClick={() => void now("pull")}>

@@ -1,7 +1,8 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { AcervoApiError, backendSession, type AnkiStatus, type Job } from "./api";
 import AnkiPanel from "./AnkiPanel";
+import { jobStream } from "./jobs";
 
 const job = (over: Partial<Job> = {}): Job => ({
   id: "job000000000001", ownerId: "owner0000000001", parentId: null, kind: "anki.push",
@@ -17,7 +18,7 @@ const status = (over: Partial<AnkiStatus> = {}): AnkiStatus => ({
   configured: true, push: true, pull: false, lastPush: null, lastPull: null, ...over
 });
 
-afterEach(() => { vi.restoreAllMocks(); });
+afterEach(() => { vi.restoreAllMocks(); jobStream.stop(); });
 
 describe("Settings ▸ Anki", () => {
   it("shows the switches and saves one", async () => {
@@ -41,13 +42,22 @@ describe("Settings ▸ Anki", () => {
     expect(screen.getByText(/Failed.*requires FULL_SYNC/)).toBeInTheDocument();
   });
 
-  it("pushes now, and reads the state again afterwards", async () => {
-    const reading = vi.spyOn(backendSession, "ankiStatus").mockResolvedValue(status());
-    const pushed = vi.spyOn(backendSession, "ankiNow").mockResolvedValue(job({ state: "queued" }));
+  it("pushes now, and follows the push to its outcome without being opened again", async () => {
+    vi.spyOn(backendSession, "ankiStatus").mockResolvedValue(status({ lastPush: job({ id: "job000000000000",
+      createdAt: "2026-09-27T20:00:00.000Z", steps: [{ name: "anki.push", state: "done",
+        detail: { created: 9, updated: 9 } }] }) }));
+    const queued = job({ id: "job000000000002", state: "queued", steps: [], finishedAt: null,
+                         createdAt: "2026-09-28T21:00:00.000Z" });
+    const pushed = vi.spyOn(backendSession, "ankiNow").mockResolvedValue(queued);
     render(<AnkiPanel onNotify={vi.fn()} />);
     fireEvent.click(await screen.findByRole("button", { name: "Push now" }));
     await waitFor(() => expect(pushed).toHaveBeenCalledWith("push"));
-    await waitFor(() => expect(reading).toHaveBeenCalledTimes(2));
+    expect(await screen.findByText(/Last push: Waiting to start/)).toBeInTheDocument();
+
+    act(() => { jobStream.apply({ ...queued, state: "running" }); });
+    expect(screen.getByText(/Last push: Running now/)).toBeInTheDocument();
+    act(() => { jobStream.apply({ ...job(), id: queued.id, createdAt: queued.createdAt }); });
+    expect(screen.getByText(/Last push: Finished.*2 new, 5 changed/)).toBeInTheDocument();
   });
 
   it("offers nothing to switch on where the server has no Anki", async () => {
