@@ -199,9 +199,11 @@ def test_a_new_layout_is_drawn_in_the_frame_of_the_last(server, encoder):
     second = server.get("/map/es").json()["data"]
     shared = [p for p in second["points"] if p["sense"] in first]
     shift = np.median([np.hypot(p["x"] - first[p["sense"]][0], p["y"] - first[p["sense"]][1]) for p in shared])
-    # The fake encoder's vectors are noise, so this checks the frame — a mirrored map moves about half
-    # its width — and `test_meaning.py` measures the warm start on vectors with structure.
-    assert shift < 250, f"the map moved {shift:.0f} of 1000 for one new word"
+    # The fake encoder's vectors are noise, so warm start and alignment have no real manifold to agree
+    # on and this only checks the frame — a mirrored map moves about half its width (~500). Sampled
+    # over 200 unrelated word sets, a correctly aligned noise map still moved as much as 338 of 1000;
+    # `test_meaning.py` measures the warm start itself, on vectors with structure, far more tightly.
+    assert shift < 400, f"the map moved {shift:.0f} of 1000 for one new word"
 
 
 def test_the_export_for_the_discovery_experiment_is_every_sense_its_text_and_its_vector(server, encoder):
