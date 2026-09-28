@@ -1,14 +1,15 @@
 {{#Recognise}}<span class="gate" hidden>{{Recognise}}</span>
 <div class="acv-frame"><div class="acv k-rec">
   <div class="acv-top"><span class="kind">Recognise</span><span class="lang">{{Language}}</span></div>
-  <h1 class="hw"><span>{{#Article}}<span class="art">{{Article}}</span> {{/Article}}{{Headword}}</span>{{HeadwordAudio}}</h1>
-  {{#Reading}}<div class="reading">{{Reading}}</div>{{/Reading}}
-  {{#Sentence}}
-  <p class="ctx">{{Sentence}}</p>
-  <div class="src">{{Source}}{{SentenceAudio}}</div>
-  {{/Sentence}}
-  {{^Sentence}}{{#SenseLabel}}<div class="cue">{{Domain}} · {{SenseLabel}}</div>{{/SenseLabel}}{{/Sentence}}
-  <div class="spacer"></div>
+  <div class="acv-body focus">
+    <h1 class="hw"><span>{{#Article}}<span class="art">{{Article}}</span> {{/Article}}{{Headword}}</span>{{HeadwordAudio}}</h1>
+    {{#Reading}}<div class="reading">{{Reading}}</div>{{/Reading}}
+    {{#Sentence}}
+    <p class="ctx">{{Sentence}}</p>
+    <div class="src">{{Source}}{{SentenceAudio}}</div>
+    {{/Sentence}}
+    {{^Sentence}}{{#SenseLabel}}<div class="cue">{{Domain}} · {{SenseLabel}}</div>{{/SenseLabel}}{{/Sentence}}
+  </div>
   <div class="hint">What does <i>{{Headword}}</i> mean{{#Sentence}} here{{/Sentence}}?</div>
 </div></div>
 <!-- acervo:script -->

@@ -47,147 +47,162 @@
 
 .acv-frame { container-type: inline-size; container-name: card; }
 .acv, .acv * { box-sizing: border-box; }
+
+/* One unit sets every size on the card: 16px on a phone, growing with the card's width to 22px on a
+   tablet, so type, spacing and pictures scale together and stay in proportion. */
 .acv {
-  max-width: 900px; min-height: 100vh; margin: 0 auto;
-  padding: clamp(18px, 5cqi, 34px);
-  display: flex; flex-direction: column; gap: 18px;
+  --u: clamp(16px, calc(12.5px + 0.9cqi), 22px);
+  font-size: var(--u);
+  max-width: calc(var(--u) * 54); min-height: 100vh; min-height: 100svh; margin: 0 auto;
+  padding: calc(var(--u) * 1.25) clamp(var(--u), 4cqi, calc(var(--u) * 2.5));
+  display: flex; flex-direction: column; gap: calc(var(--u) * 1.1);
 }
+/* What the card asks sits in the middle of the screen, between its label and its hint. */
+.acv-body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: calc(var(--u) * 1.1); }
+.acv-body.focus { width: 100%; max-width: calc(var(--u) * 34); margin: 0 auto; }
 .acv p, .acv h1, .acv figure { margin: 0; }
 .k-rec  { --k: var(--core);   --k-soft: var(--core-soft); }
 .k-prod { --k: var(--corpus); --k-soft: var(--corpus-soft); }
 .k-lis  { --k: var(--listen); --k-soft: var(--listen-soft); }
 
-.acv-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.acv-top { display: flex; justify-content: space-between; align-items: center; gap: .5em; }
 .kind {
-  display: inline-flex; gap: 7px; align-items: center;
-  font: 500 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
-  padding: 6px 10px; border-radius: 999px; color: var(--k); background: var(--k-soft);
+  display: inline-flex; gap: .6em; align-items: center;
+  font: 500 calc(var(--u) * .7)/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+  padding: .55em .9em; border-radius: 999px; color: var(--k); background: var(--k-soft);
 }
-.kind::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.lang { font: 500 11px/1 var(--mono); color: var(--ink-3); letter-spacing: .08em; text-transform: uppercase; }
+.kind::before { content: ""; width: .55em; height: .55em; border-radius: 50%; background: currentColor; }
+.lang { font: 500 calc(var(--u) * .7)/1 var(--mono); color: var(--ink-3); letter-spacing: .08em; text-transform: uppercase; }
 
 /* the word */
 .hw {
-  font: 500 clamp(34px, 11cqi, 58px)/1.05 var(--serif); letter-spacing: -.015em;
-  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  font: 500 min(calc(var(--u) * 2.9), 11cqi)/1.05 var(--serif); letter-spacing: -.015em;
+  display: flex; align-items: center; gap: calc(var(--u) * .85); flex-wrap: wrap;
 }
-.hw.sm { font-size: clamp(26px, 7cqi, 36px); }
 .art { color: var(--ink-3); font-weight: 400; }
-.reading { font: 400 18px/1.3 var(--sans); color: var(--ink-2); margin-top: -8px; }
-.meta { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 13px; color: var(--ink-3); }
+.reading { font: 400 calc(var(--u) * 1.15)/1.3 var(--sans); color: var(--ink-2); margin-top: calc(var(--u) * -.5); }
+.meta {
+  display: flex; flex-wrap: wrap; gap: calc(var(--u) * .4) calc(var(--u) * .75); align-items: center;
+  font-size: calc(var(--u) * .82); color: var(--ink-3);
+}
+.meta.under { margin-top: calc(var(--u) * .5); }
 .meta b { color: var(--ink); font-weight: 600; }
-.ipa { font: 400 13px/1.3 var(--sans); color: var(--ink-2); }
+.ipa { font: 400 calc(var(--u) * .82)/1.3 var(--sans); color: var(--ink-2); }
 .gchip {
-  font: 500 11px/1 var(--mono); padding: 4px 7px; border-radius: 6px;
+  font: 500 calc(var(--u) * .68)/1 var(--mono); padding: .4em .65em; border-radius: .5em;
   background: var(--surface-2); color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase;
 }
 
 /* sentences */
-.ctx { font: 400 clamp(18px, 4.6cqi, 23px)/1.5 var(--serif); color: var(--ink); text-wrap: pretty; }
-.ctx.sm { font-size: 17px; }
+.ctx { font: 400 calc(var(--u) * 1.35)/1.5 var(--serif); color: var(--ink); text-wrap: pretty; }
+.ctx.sm { font-size: calc(var(--u) * 1.08); }
 .ctx mark { background: linear-gradient(transparent 58%, var(--mark) 58%); color: inherit; font-weight: 600; padding: 0 1px; }
 .ctx .gap { display: inline-block; min-width: 4.2em; border-bottom: 2px solid var(--k); transform: translateY(-2px); }
-.tr { color: var(--ink-2); font-size: 14.5px; }
+.tr { color: var(--ink-2); font-size: calc(var(--u) * .9); }
 .tr mark { background: none; color: var(--ink); font-weight: 600; }
-.src { display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-3); flex-wrap: wrap; }
-.tag { font: 500 10.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 4px 7px; border-radius: 5px; }
+.src { display: flex; align-items: center; gap: calc(var(--u) * .5); font-size: calc(var(--u) * .8); color: var(--ink-3); flex-wrap: wrap; }
+.tag { font: 500 calc(var(--u) * .66)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: .4em .65em; border-radius: .45em; }
 .tag.you { color: var(--corpus); background: var(--corpus-soft); }
 .tag.made { color: var(--core); background: var(--core-soft); }
 .tag.clip { color: var(--listen); background: var(--listen-soft); }
-.cue { font: 500 12px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.cue { font: 500 calc(var(--u) * .75)/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
 
-.spacer { flex: 1; }
-.hint { text-align: center; font-size: 12.5px; color: var(--ink-3); }
+.hint { text-align: center; font-size: calc(var(--u) * .8); color: var(--ink-3); }
 
 /* the answer */
-.ans { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.ans { display: flex; flex-direction: column; gap: calc(var(--u) * 1.1); min-width: 0; }
 .gloss {
-  font: 500 clamp(26px, 8cqi, 40px)/1.1 var(--sans); letter-spacing: -.02em; color: var(--k);
-  display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap;
+  font: 500 min(calc(var(--u) * 2.2), 8.5cqi)/1.1 var(--sans); letter-spacing: -.02em; color: var(--k);
+  display: flex; gap: calc(var(--u) * .75); align-items: baseline; flex-wrap: wrap;
 }
 .gloss .alt { font-size: .55em; color: var(--ink-3); font-weight: 400; letter-spacing: 0; }
-.dom { font: 500 11px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
-.def { font: italic 400 16.5px/1.5 var(--serif); color: var(--ink-2); display: flex; gap: 6px; align-items: flex-start; }
+.dom { font: 500 calc(var(--u) * .7)/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.def { font: italic 400 calc(var(--u) * 1.03)/1.5 var(--serif); color: var(--ink-2); display: flex; gap: .4em; align-items: flex-start; }
 .rule { height: 1px; background: var(--rule-soft); border: 0; margin: 0; }
 .note {
-  font-size: 13.5px; color: var(--ink-2); background: var(--surface); border-radius: 12px;
-  padding: 12px 14px; border: 1px solid var(--rule-soft);
+  font-size: calc(var(--u) * .85); color: var(--ink-2); background: var(--surface);
+  border-radius: calc(var(--u) * .75); padding: .9em 1.05em; border: 1px solid var(--rule-soft);
 }
 
 /* the sense's picture: square, as the pictures are drawn */
-.pic { position: relative; aspect-ratio: 1; width: 100%; border-radius: 18px; overflow: hidden; background: var(--surface-2); }
+.pic {
+  position: relative; aspect-ratio: 1; width: 100%; border-radius: calc(var(--u) * 1.1);
+  overflow: hidden; background: var(--surface-2);
+}
 .pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 /* the whole word: every sense, the current one lit */
-.senses { display: flex; flex-direction: column; gap: 8px; }
-.senses h4 { margin: 0; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
-.srow { display: flex; gap: 6px; flex-wrap: wrap; }
+.senses { display: flex; flex-direction: column; gap: calc(var(--u) * .5); }
+.senses h4 { margin: 0; font: 500 calc(var(--u) * .7)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.srow { display: flex; gap: calc(var(--u) * .4); flex-wrap: wrap; }
 .schip {
-  display: inline-flex; gap: 6px; align-items: center; font-size: 13px; color: var(--ink-2);
-  border: 1px solid var(--rule-soft); border-radius: 10px; padding: 6px 10px; background: var(--surface);
+  display: inline-flex; gap: .45em; align-items: center; font-size: calc(var(--u) * .82); color: var(--ink-2);
+  border: 1px solid var(--rule-soft); border-radius: .75em; padding: .45em .75em; background: var(--surface);
 }
-.schip .n { font: 500 10.5px/1 var(--mono); color: var(--ink-3); }
+.schip .n { font: 500 .8em/1 var(--mono); color: var(--ink-3); }
 .schip.on { border-color: var(--k); color: var(--ink); box-shadow: inset 0 0 0 1px var(--k); }
 
-.slist { display: grid; gap: 10px; }
+.slist { display: grid; gap: calc(var(--u) * .65); }
 .sitem {
-  display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center;
-  padding: 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--rule-soft);
+  display: grid; grid-template-columns: calc(var(--u) * 3.5) 1fr; gap: calc(var(--u) * .75); align-items: center;
+  padding: calc(var(--u) * .65); border-radius: calc(var(--u) * .9); background: var(--surface); border: 1px solid var(--rule-soft);
 }
 .sitem .thumb {
-  aspect-ratio: 1; border-radius: 10px; overflow: hidden; display: grid; place-items: center; font-size: 24px;
-  background: var(--surface-2);
+  aspect-ratio: 1; border-radius: calc(var(--u) * .6); overflow: hidden; display: grid; place-items: center;
+  font-size: calc(var(--u) * 1.5); background: var(--surface-2);
 }
 .sitem .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .sitem b { font-weight: 600; display: block; }
-.sitem span { font: italic 400 13.5px/1.4 var(--serif); color: var(--ink-3); }
+.sitem span { font: italic 400 calc(var(--u) * .85)/1.4 var(--serif); color: var(--ink-3); }
 
 /* sound. A field holds a plain <audio>; the card script dresses it as one of these. */
 .acv audio { display: none; }
 .audio {
-  display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--rule); background: var(--surface);
-  color: var(--ink-2); border-radius: 999px; padding: 6px 12px 6px 6px; cursor: pointer;
-  font: 500 12px/1 var(--mono); vertical-align: middle; -webkit-tap-highlight-color: transparent;
+  display: inline-flex; align-items: center; gap: .75em; border: 1px solid var(--rule); background: var(--surface);
+  color: var(--ink-2); border-radius: 999px; padding: .5em 1em .5em .5em; cursor: pointer;
+  font: 500 calc(var(--u) * .75)/1 var(--mono); vertical-align: middle; -webkit-tap-highlight-color: transparent;
 }
-.audio .pi { width: 26px; height: 26px; border-radius: 50%; background: var(--k, var(--core)); display: grid; place-items: center; flex: none; }
-.audio .pi svg { width: 10px; height: 10px; fill: var(--surface); margin-left: 2px; }
-.wave { display: inline-flex; gap: 2px; align-items: center; height: 16px; }
+.audio .pi { width: 2.2em; height: 2.2em; border-radius: 50%; background: var(--k, var(--core)); display: grid; place-items: center; flex: none; }
+.audio .pi svg { width: .85em; height: .85em; fill: var(--surface); margin-left: .15em; }
+.wave { display: inline-flex; gap: 2px; align-items: center; height: 1.35em; }
 .wave i { width: 2px; border-radius: 2px; background: var(--ink-3); }
 .audio.playing .wave i { animation: acv-bar .9s ease-in-out infinite alternate; background: var(--k, var(--core)); }
-.audio.mini { padding: 4px; border: 0; background: transparent; }
-.audio.mini .pi { width: 22px; height: 22px; background: var(--surface-2); }
+.audio.mini { padding: .3em; border: 0; background: transparent; }
+.audio.mini .pi { width: 1.85em; height: 1.85em; background: var(--surface-2); }
 .audio.mini .pi svg { fill: var(--ink-2); }
 .audio.mini.playing .pi { background: var(--k); }
 .audio.mini.playing .pi svg { fill: var(--surface); }
 @keyframes acv-bar { to { height: 22%; } }
 
 /* hearing the word */
-.listen-stage { flex: 1; display: grid; place-items: center; align-content: center; gap: 22px; text-align: center; }
+.listen-stage { align-items: center; text-align: center; gap: calc(var(--u) * 1.4); }
 .play-big {
-  width: clamp(96px, 30cqi, 148px); aspect-ratio: 1; border-radius: 50%; border: 0; cursor: pointer;
-  background: var(--listen); display: grid; place-items: center;
-  box-shadow: 0 0 0 10px var(--listen-soft), 0 0 0 22px color-mix(in srgb, var(--listen-soft) 50%, transparent);
+  width: min(calc(var(--u) * 7.5), 32cqi); aspect-ratio: 1; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--listen); display: grid; place-items: center; margin-bottom: calc(var(--u) * .6);
+  box-shadow: 0 0 0 calc(var(--u) * .65) var(--listen-soft),
+              0 0 0 calc(var(--u) * 1.4) color-mix(in srgb, var(--listen-soft) 50%, transparent);
   -webkit-tap-highlight-color: transparent;
 }
 .play-big svg { width: 34%; fill: var(--surface); margin-left: 6%; }
 .play-big.playing { animation: acv-pulse 1.2s ease-out infinite; }
 @keyframes acv-pulse {
-  50% { box-shadow: 0 0 0 16px var(--listen-soft), 0 0 0 34px color-mix(in srgb, var(--listen-soft) 30%, transparent); }
+  50% { box-shadow: 0 0 0 calc(var(--u) * 1) var(--listen-soft),
+                    0 0 0 calc(var(--u) * 2.1) color-mix(in srgb, var(--listen-soft) 30%, transparent); }
 }
-.listen-stage p { font: 400 20px/1.3 var(--serif); color: var(--ink-2); }
-.listen-stage .small { font-size: 13px; color: var(--ink-3); }
+.listen-stage p { font: 400 calc(var(--u) * 1.3)/1.3 var(--serif); color: var(--ink-2); }
+.listen-stage .small { font-size: calc(var(--u) * .8); color: var(--ink-3); }
 
-.split, .prod { display: flex; flex-direction: column; gap: 22px; }
-.split .pic { max-width: 420px; }
-.prod .pic { max-width: 360px; }
+.split, .prod { display: flex; flex-direction: column; gap: calc(var(--u) * 1.4); }
+.split .pic { max-width: calc(var(--u) * 26); }
+.prod .pic { max-width: calc(var(--u) * 22); }
 
 /* A tablet puts the answer beside the picture; a phone stacks them. Chosen by the card's own width,
    so it is the same decision in every Anki client. */
 @container card (min-width: 560px) {
-  .split { flex-direction: row; align-items: flex-start; gap: 28px; }
+  .split { flex-direction: row; align-items: center; gap: calc(var(--u) * 1.75); }
   .split > .ans { flex: 1.1; }
   .split > .pic { flex: .9; }
-  .prod { flex-direction: row; align-items: center; gap: 28px; flex: 1; }
+  .prod { flex-direction: row; align-items: center; gap: calc(var(--u) * 1.75); }
   .prod > .pic { flex: .85; }
   .prod > .ans { flex: 1.15; }
   .slist { grid-template-columns: 1fr 1fr; }
