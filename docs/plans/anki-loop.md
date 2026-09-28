@@ -1,9 +1,8 @@
 # The Anki loop · closing it in both directions
 
-**Status:** half built. Cards go out: the vocabulary becomes notes and `push-vocabulary` sends them,
-and review state comes back per sense, with every review kept as history
-([`../features/anki.md`](../features/anki.md)). What is missing
-is acting on what comes back, and running both halves nightly. Without that, Acervo cannot say whether
+**Status:** half built. Cards go out by themselves, a minute after the vocabulary changes, and review
+state comes back per sense every hour, with every review kept as history
+([`../features/anki.md`](../features/anki.md)). What is missing is acting on what comes back. Without that, Acervo cannot say whether
 anything it does helps a word stick — the thing every competitor sells
 ([`../research/similar-projects.md`](../research/similar-projects.md), "The learning loop is not
 closed").
@@ -37,12 +36,6 @@ Decided and built; the design is [`../features/anki.md`](../features/anki.md), "
 Flags and suspension would need the robot to report them — today they are exported and deliberately
 not stored. FSRS difficulty is the free answer to "which words deserve the expensive treatment",
 with no marking discipline required.
-
-## 3 · Running it
-
-The nightly run already declares an `anki.pull` step and refuses to switch it on
-([`../architecture/jobs.md`](../architecture/jobs.md)). Pull and push become nightly steps once
-the two halves above exist.
 
 ## Open
 

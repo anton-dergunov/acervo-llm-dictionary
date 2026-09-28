@@ -8,13 +8,12 @@ acervo_root=
 usage() {
   cat >&2 <<'EOF'
 usage:
-  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] bootstrap-upload MANIFEST
-  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] push MANIFEST
-  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] export-state
-  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] pull-state
-  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] adopt-server
-  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] push-vocabulary
-  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] bootstrap-vocabulary
+  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] anki-bootstrap-upload MANIFEST
+  scripts/acervo_anki_remote.sh [--target USER@HOST] [--root PATH] anki-push MANIFEST
+
+A manifest made on this machine, carried to the server and pushed. The vocabulary's own Anki work
+is ./deploy.sh --worker anki-push-vocabulary and its siblings, or nothing at all: the server pushes
+after every change and reads Anki back every hour.
 EOF
   exit 2
 }
@@ -23,14 +22,17 @@ while [ "$#" -gt 0 ]; do
   case "$1" in
     --target) [ "$#" -ge 2 ] || usage; target=$2; shift 2 ;;
     --root) [ "$#" -ge 2 ] || usage; acervo_root=$2; shift 2 ;;
-    bootstrap-upload|push|export-state|pull-state|adopt-server|push-vocabulary|bootstrap-vocabulary) operation=$1; shift; break ;;
+    anki-bootstrap-upload|anki-push) operation=$1; shift; break ;;
     *) usage ;;
   esac
 done
 [ "${operation:-}" ] || usage
 
+# The profile deploy.sh remembers: `DEPLOY_TARGET=` among its settings, or a bare target alone on
+# its first line.
 if [ -z "$target" ] && [ -f "$repo_root/.acervo-deploy" ]; then
-  IFS= read -r target <"$repo_root/.acervo-deploy"
+  target=$(sed -n 's/^DEPLOY_TARGET=//p' "$repo_root/.acervo-deploy" | head -n 1)
+  [ -n "$target" ] || IFS= read -r target <"$repo_root/.acervo-deploy"
 fi
 [ -n "$target" ] || usage
 case "$target" in *[!A-Za-z0-9_.@:-]*) echo "Unsafe SSH target" >&2; exit 2 ;; esac
@@ -39,15 +41,9 @@ if [ -n "$acervo_root" ]; then
   case "$acervo_root" in *[!A-Za-z0-9_./-]*) echo "Unsafe Acervo root" >&2; exit 2 ;; esac
 fi
 
-manifest=
-case "$operation" in
-  bootstrap-upload|push)
-    [ "$#" -eq 1 ] || usage
-    manifest=$1
-    [ -f "$manifest" ] || { echo "Manifest not found: $manifest" >&2; exit 2; }
-    ;;
-  *) [ "$#" -eq 0 ] || usage ;;
-esac
+[ "$#" -eq 1 ] || usage
+manifest=$1
+[ -f "$manifest" ] || { echo "Manifest not found: $manifest" >&2; exit 2; }
 
 temporary_dir=$(mktemp -d "${TMPDIR:-/tmp}/acervo-anki-remote.XXXXXX")
 remote_helper="/tmp/acervo-run-worker-$$.sh"
@@ -68,17 +64,15 @@ helper_arguments=
 if [ -n "$acervo_root" ]; then
   helper_arguments="--root $acervo_root"
 fi
-if [ -n "$manifest" ]; then
-  input_archive="$temporary_dir/input.tar.gz"
-  python_runner=${PYTHON:-python3}
-  if [ -x "$repo_root/.venv/bin/python" ]; then
-    python_runner="$repo_root/.venv/bin/python"
-  fi
-  "$python_runner" "$repo_root/scripts/package_anki_sync_input.py" \
-    "$manifest" "$input_archive"
-  ssh -T "$target" "umask 077 && cat > $remote_input" <"$input_archive"
-  helper_arguments="$helper_arguments --input-archive $remote_input"
+input_archive="$temporary_dir/input.tar.gz"
+python_runner=${PYTHON:-python3}
+if [ -x "$repo_root/.venv/bin/python" ]; then
+  python_runner="$repo_root/.venv/bin/python"
 fi
+"$python_runner" "$repo_root/scripts/package_anki_sync_input.py" \
+  "$manifest" "$input_archive"
+ssh -T "$target" "umask 077 && cat > $remote_input" <"$input_archive"
+helper_arguments="$helper_arguments --input-archive $remote_input"
 
 echo "Running Acervo Anki $operation on the remote server..."
 ssh -t "$target" \

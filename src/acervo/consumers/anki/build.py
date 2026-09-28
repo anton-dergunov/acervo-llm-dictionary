@@ -368,7 +368,9 @@ def _sense_list(senses: list[dict], pictures: dict[str, str | None], gloss_langs
     return '<div class="slist">' + "".join(items) + "</div>"
 
 
-PICTURES = (".webp", ".png", ".jpg", ".jpeg")
+PICTURES = {".webp": "WEBP", ".png": "PNG", ".jpg": "JPEG", ".jpeg": "JPEG"}
+# Fewer pictures than this are scaled in the calling process: starting a pool costs more than it saves.
+POOLED = 16
 
 
 def write_payload(built: BuiltManifest, output: Path, *, picture_size: int | None = 768,
@@ -376,33 +378,58 @@ def write_payload(built: BuiltManifest, output: Path, *, picture_size: int | Non
     """Write `manifest.json` and its media under `output`, pictures scaled down to `picture_size`
     pixels on the long side (None keeps the master). Returns the manifest's path.
 
-    Scaling is most of a first push — thousands of pictures, each re-encoded — so it runs on every
-    core but one, leaving that one to the server on the same machine."""
+    `output` may be kept from one push to the next, and the server keeps it: **a file already there
+    is not made again**, and a file the manifest no longer names is removed. A master's name carries
+    a digest of its bytes, so the name alone says whether what is there is still right, and nothing
+    is ever invalidated. Each file is written under a temporary name and renamed into place, so an
+    interrupted push never leaves a half-written file to be taken for a finished one.
+
+    Scaling is most of a first push — thousands of pictures, each re-encoded — so a large batch runs
+    on every core but one, leaving that one to the server on the same machine. The pool is started
+    fresh (`spawn`), because forking a server process that has threads is not safe."""
     import json
+    import multiprocessing
 
     progress = progress or Progress()
-    output.mkdir(parents=True, exist_ok=True)
-    (output / "media").mkdir(exist_ok=True)
+    media = output / "media"
+    media.mkdir(parents=True, exist_ok=True)
+    wanted = {output / relative for relative in built.media}
+    for stale in media.iterdir():
+        if stale.is_file() and stale not in wanted:
+            stale.unlink()
     pictures = []
     for relative, source in built.media.items():
         destination = output / relative
+        if destination.exists():
+            continue
         if picture_size and source.suffix.lower() in PICTURES:
             pictures.append((source, destination, picture_size))
         else:
-            shutil.copy2(source, destination)
+            _copied(source, destination)
     counter = progress.count(f"Shrinking pictures to {picture_size} px", len(pictures))
     workers = workers or max(1, (os.cpu_count() or 1) - 1)
-    if workers == 1 or len(pictures) < 2:
+    if workers == 1 or len(pictures) < POOLED:
         for picture in pictures:
             _scaled(picture)
             counter.step()
     else:
-        with ProcessPoolExecutor(max_workers=workers) as pool:
+        with ProcessPoolExecutor(max_workers=workers,
+                                 mp_context=multiprocessing.get_context("spawn")) as pool:
             for _ in pool.map(_scaled, pictures, chunksize=4):
                 counter.step()
     path = output / "manifest.json"
     path.write_text(json.dumps(built.manifest(), ensure_ascii=False, indent=2), encoding="utf-8")
     return path
+
+
+def _partial(destination: Path) -> Path:
+    return destination.with_name(f".partial-{destination.name}")
+
+
+def _copied(source: Path, destination: Path) -> None:
+    partial = _partial(destination)
+    shutil.copy2(source, partial)
+    os.replace(partial, destination)
 
 
 def _scaled(picture: tuple[Path, Path, int]) -> None:
@@ -411,8 +438,11 @@ def _scaled(picture: tuple[Path, Path, int]) -> None:
     source, destination, size = picture
     with Image.open(source) as image:
         if max(image.size) <= size:
-            shutil.copy2(source, destination)
+            _copied(source, destination)
             return
         image.thumbnail((size, size), Image.Resampling.LANCZOS)
-        options = {"method": 6} if destination.suffix.lower() == ".webp" else {}
-        image.save(destination, quality=82, **options)
+        suffix = destination.suffix.lower()
+        options = {"method": 6} if suffix == ".webp" else {}
+        partial = _partial(destination)
+        image.save(partial, format=PICTURES[suffix], quality=82, **options)
+    os.replace(partial, destination)

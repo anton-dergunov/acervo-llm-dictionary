@@ -326,6 +326,12 @@ build repopulates; they are never committed.
 ./deploy.sh --status        # what is running, and whether it is healthy
 ```
 
+**Every deploy sets the server's timezone**, which is what its days — the review statistics' — and
+the nightly hour are read in. It is the deploying machine's own zone (`TZ`, else `/etc/localtime`),
+or `--timezone Europe/London` to name one; a deploy that can find neither keeps the zone the server
+already has. `deployment.env` is rewritten whole on every deploy, so a zone added to it by hand would
+not survive the next one.
+
 **A deploy refuses while the server has open jobs**, because it never carries a job across a version.
 `--cancel-jobs` cancels them first and then deploys; `--jobs open` and `--jobs cancel` ask or cancel
 without deploying — the way out when a database waiting for a transition cannot start, so the server
@@ -336,7 +342,7 @@ with a different schema, by name, rather than half-working.
 
 - **`--reset-database`** rebuilds it from scratch. It asks for `RESET ACERVO VOCABULARY` to be typed,
   keeps a copy under `backups/`, and discards every account and word on the server; Anki data is left
-  alone (`--reset-data` is the separate flag for that). Recreate the account with `--create-account`.
+  alone (`--reset-anki` is the separate flag for that). Recreate the account with `--create-account`.
   Device replicas notice the new dataset identity and stop rather than overwrite themselves.
 - **`--transition`** carries the database across instead, when the release ships a one-off converter
   for it. It takes no argument: it reads the revision the database is stamped with and runs the
@@ -398,19 +404,22 @@ what the server can call and as whom, spending nothing.
 
 ## Worker operations
 
-`acervo-worker` is one-shot work in its own container — Anki push and pull, compiling a dictionary, a
-backfill — started for one job and then gone. On Synology the Docker socket is root-owned, so reaching
+`acervo-worker` is one-shot work in its own container — a manifest pushed to Anki, compiling a
+dictionary, a by-hand loop render — started for one job and then gone. The same launcher runs the
+vocabulary's Anki operations and a backfill inside the running server instead, which is where the
+vocabulary is; the server also runs the Anki push and the hourly read by itself. On Synology the Docker socket is root-owned, so reaching
 it means reaching root; the question is how narrow the path is, which the **launcher's fixed operation
 list** answers. Install it once with `./deploy.sh --install-helper` (it is also how the launcher is
 refreshed when its protocol changes), then run operations without a password:
 
 ```bash
-./deploy.sh --worker pull-state
+./deploy.sh --worker anki-pull-state
 ./deploy.sh --worker backfill --owner-email learner@account.example.com --dry-run
 ./deploy.sh --worker build-dictionary --id cc-cedict
 ```
 
 On the server itself the same operations are `sudo -n /usr/local/sbin/deploy-acervo worker …`, which is
-what a cron line or DSM Task Scheduler runs. The operations are `bootstrap-upload`, `push`,
-`export-state`, `pull-state`, `adopt-server`, `build-dictionary` and `backfill`
+what a cron line or DSM Task Scheduler runs. The operations are `anki-bootstrap-vocabulary`,
+`anki-push-vocabulary`, `anki-pull-state`, `anki-export-state`, `anki-adopt-server`,
+`anki-bootstrap-upload`, `anki-push`, `build-dictionary` and `backfill`
 (`deploy/acervo/run-worker.sh`).

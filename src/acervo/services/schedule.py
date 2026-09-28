@@ -19,14 +19,6 @@ from acervo.repository import schedule_settings
 from acervo.repository.schedule_settings import STEPS
 from acervo.settings import Settings
 
-# Steps that are declared but cannot run from here yet. Refused when switched on, rather than
-# accepted and then failed every night.
-UNAVAILABLE = {
-    "anki.pull": "Pulling Anki's review state still runs from the worker "
-                 "(run-worker.sh pull-state), so it cannot be scheduled here yet.",
-}
-
-
 def zone(settings: Settings) -> tzinfo:
     if settings.timezone:
         try:
@@ -62,7 +54,6 @@ def settings_view(settings: Settings, owner: str, now: datetime | None = None) -
         **chosen,
         "timezone": zone_name(settings),
         "nextRunAt": instant_of(next_scheduled(settings, chosen.hour, now)),
-        "unavailable": dict(UNAVAILABLE),
     }
 
 
@@ -78,8 +69,5 @@ def apply_settings(settings: Settings, owner: str, body: dict[str, Any]) -> dict
             raise ApiError(
                 400, "invalid_input", f"The nightly steps are {', '.join(STEPS)}, each on or off."
             )
-        for name, value in steps.items():
-            if value and name in UNAVAILABLE:
-                raise ApiError(409, "step_unavailable", UNAVAILABLE[name])
     schedule_settings.save(owner, hour=hour, steps=steps)
     return settings_view(settings, owner)

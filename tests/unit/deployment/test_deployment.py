@@ -143,7 +143,7 @@ def deployment_env(tmp_path: Path) -> tuple[dict[str, str], Path]:
 def run_local(env: dict[str, str], *, stdin: str = "", reset: bool = False):
     command = [str(REPO_ROOT / "deploy.sh"), "--local"]
     if reset:
-        command.append("--reset-data")
+        command.append("--reset-anki")
     return subprocess.run(
         command,
         cwd=REPO_ROOT,
@@ -253,7 +253,7 @@ def test_reset_requires_exact_confirmation_and_backs_up_first(tmp_path: Path) ->
     assert refused.returncode == 2
     assert database.exists()
 
-    accepted = run_local(env, stdin="RESET ACERVO DATA\n", reset=True)
+    accepted = run_local(env, stdin="RESET ACERVO ANKI\n", reset=True)
     assert accepted.returncode == 0, accepted.stderr
     assert not database.exists()
     assert any(path.read_bytes() == b"important" for path in root.rglob("collection.anki2"))
@@ -614,8 +614,7 @@ def test_reconfiguring_credentials_does_not_sign_every_device_out(tmp_path: Path
     secrets.write_text(
         "ACERVO_ANKI_SYNC_USERNAME=old\nACERVO_ANKI_SYNC_PASSWORD=old-password\n"
         "ACERVO_JWT_SECRET='the-secret-every-device-holds-a-token-from'\n"
-        "ACERVO_OWNER_EMAIL=learner@account.example.com\n"
-        "ACERVO_OWNER_PASSWORD=the-account-batch-jobs-write-through\n",
+        "ACERVO_SPEECH_OPERATOR_TOKEN=the-token-the-corpus-knows\n",
         encoding="utf-8",
     )
     credentials = tmp_path / "credentials"
@@ -636,8 +635,8 @@ def test_reconfiguring_credentials_does_not_sign_every_device_out(tmp_path: Path
     assert "ACERVO_ANKI_SYNC_PASSWORD='new-password'" in written
     assert "ACERVO_JWT_SECRET='the-secret-every-device-holds-a-token-from'" in written
     assert written.count("ACERVO_JWT_SECRET") == 1
-    # The account batch jobs write through survives too, for the same reason.
-    assert "ACERVO_OWNER_PASSWORD=the-account-batch-jobs-write-through" in written
+    # The corpus's operator token survives too, for the same reason.
+    assert "ACERVO_SPEECH_OPERATOR_TOKEN=the-token-the-corpus-knows" in written
     assert written.count("ACERVO_ANKI_SYNC_PASSWORD") == 1
 
 
@@ -695,6 +694,42 @@ def run_installer(
         ],
         cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False,
     )
+
+
+def test_the_installer_writes_the_zone_it_is_given_and_keeps_it_when_given_none(tmp_path: Path) -> None:
+    """deployment.env is rewritten whole on every deploy, so a zone that arrived once must not be
+    lost by the next deploy that does not name one: every day boundary would move to UTC."""
+    env, root = deployment_env(tmp_path)
+    assert run_installer(root, env, "--timezone", "Europe/London").returncode == 0
+    assert "ACERVO_TIMEZONE=Europe/London\n" in (root / "deployment.env").read_text(encoding="utf-8")
+
+    assert run_installer(root, env).returncode == 0
+    assert "ACERVO_TIMEZONE=Europe/London\n" in (root / "deployment.env").read_text(encoding="utf-8")
+
+    assert run_installer(root, env, "--timezone", "America/Argentina/Buenos_Aires").returncode == 0
+    assert "ACERVO_TIMEZONE=America/Argentina/Buenos_Aires\n" in (
+        root / "deployment.env").read_text(encoding="utf-8")
+
+
+@pytest.mark.parametrize("zone", ["../etc/passwd", "Europe/London; rm", "/etc/localtime", "Europe/"])
+def test_the_installer_refuses_a_zone_that_is_not_a_zone_name(tmp_path: Path, zone: str) -> None:
+    env, root = deployment_env(tmp_path)
+    assert run_installer(root, env, "--timezone", zone).returncode == 2
+
+
+def test_a_deploy_names_this_machines_zone(tmp_path: Path) -> None:
+    env, root = deployment_env(tmp_path)
+    env["TZ"] = "Asia/Tokyo"
+    assert run_local(env).returncode == 0
+    assert "ACERVO_TIMEZONE=Asia/Tokyo\n" in (root / "deployment.env").read_text(encoding="utf-8")
+
+
+def test_a_deploy_does_not_pass_on_a_posix_rule_as_a_zone(tmp_path: Path) -> None:
+    env, root = deployment_env(tmp_path)
+    (root / "deployment.env").write_text("ACERVO_TIMEZONE=Europe/Madrid\n", encoding="utf-8")
+    env["TZ"] = "<+03>-3"
+    assert run_local(env).returncode == 0
+    assert "ACERVO_TIMEZONE=Europe/Madrid\n" in (root / "deployment.env").read_text(encoding="utf-8")
 
 
 def _commands(log: Path) -> list[str]:
@@ -1697,7 +1732,7 @@ def test_remote_robot_wrapper_streams_validated_input_without_scp(tmp_path: Path
             "deployer@server.example.test",
             "--root",
             "/volume1/docker/acervo",
-            "bootstrap-upload",
+            "anki-bootstrap-upload",
             str(REPO_ROOT / "examples/anki-sync-smoke/manifest.json"),
         ],
         cwd=REPO_ROOT,
@@ -1713,7 +1748,7 @@ def test_remote_robot_wrapper_streams_validated_input_without_scp(tmp_path: Path
         assert package.getnames() == ["manifest.json"]
     commands = ssh_log.read_text(encoding="utf-8")
     assert "--input-archive /tmp/acervo-anki-input-" in commands
-    assert "bootstrap-upload" in commands
+    assert "--input-archive /tmp/acervo-anki-input-" in commands.split("anki-bootstrap-upload")[0]
 
 
 def test_acervo_wide_defaults_are_not_anki_named() -> None:
@@ -1975,14 +2010,14 @@ def test_the_launcher_runs_the_worker_from_the_current_release(tmp_path: Path) -
     (root / "current-release").write_text(f"{release}\n", encoding="utf-8")
 
     result = subprocess.run(
-        [str(helper), "worker", "--root", str(root), "pull-state"],
+        [str(helper), "worker", "--root", str(root), "anki-pull-state"],
         text=True, capture_output=True, check=False,
     )
 
     assert result.returncode == 0, result.stderr
     # The root is passed on, so the worker script does not have to resolve it a second time and
     # cannot disagree with the launcher about which deployment this is.
-    assert recorded.read_text(encoding="utf-8").strip() == f"--root {root} pull-state"
+    assert recorded.read_text(encoding="utf-8").strip() == f"--root {root} anki-pull-state"
 
 
 def test_the_launcher_passes_worker_arguments_through(tmp_path: Path) -> None:
@@ -2032,7 +2067,7 @@ def test_the_launcher_refuses_a_worker_run_with_no_deployment(tmp_path: Path) ->
     root.mkdir()
 
     result = subprocess.run(
-        [str(helper), "worker", "--root", str(root), "pull-state"],
+        [str(helper), "worker", "--root", str(root), "anki-pull-state"],
         text=True, capture_output=True, check=False,
     )
 
@@ -2046,7 +2081,7 @@ def test_the_launcher_refuses_an_unexpected_acervo_root(tmp_path: Path) -> None:
     helper = runnable_remote_helper(tmp_path)
 
     result = subprocess.run(
-        [str(helper), "worker", "--root", str(tmp_path / "elsewhere"), "pull-state"],
+        [str(helper), "worker", "--root", str(tmp_path / "elsewhere"), "anki-pull-state"],
         text=True, capture_output=True, check=False,
     )
 
@@ -2089,11 +2124,11 @@ def test_the_loop_sample_bundle_is_never_deleted_by_a_reset() -> None:
     """~3.1 GB fetched once, and the dictionaries arrangement for the dictionaries' reason: it is the
     owner's own data moved between the owner's own machines, not something a reset should cost them.
 
-    `--reset-data` clears the Anki collections and the worker's, and nothing else — so this asserts
+    `--reset-anki` clears the Anki collections and the worker's, and nothing else — so this asserts
     the bundle directory is not named there rather than that some exclusion list contains it.
     """
     installer = (REPO_ROOT / "deploy/acervo/install.sh").read_text(encoding="utf-8")
-    reset = installer.split("if [ \"$reset_data\" = true ]; then", 1)[1].split("fi", 1)[0]
+    reset = installer.split("if [ \"$reset_anki\" = true ]; then", 1)[1].split("fi", 1)[0]
     assert "lexibeat" not in reset
     assert "data/lexibeat-bundle" in installer, "the installer must still create the bundle directory"
 

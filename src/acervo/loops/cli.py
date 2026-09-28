@@ -7,8 +7,8 @@ read from a measurement rather than picked from feel, which is the same rule
 
 It runs in the **worker** container because that is where a by-hand job belongs — one entry point,
 a new subcommand and never a new service — and because the generator publishes no port, so only
-something on the compose network can reach it. The worker signs in with the owner's password, as
-`anki pull-state` does, and hands its *session* token to the generator as the render credential:
+something on the compose network can reach it. The worker signs in with the owner's password, over
+`POST /session` like any other client, and hands its *session* token to the generator as the render credential:
 `POST /pronunciations/take` accepts a session as well as a render-scoped token, precisely so this is
 possible without minting one by hand.
 

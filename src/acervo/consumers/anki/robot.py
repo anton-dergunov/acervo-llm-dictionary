@@ -34,6 +34,10 @@ class SyncSafetyError(RuntimeError):
     """An operation was refused to protect collection/review data."""
 
 
+class RobotBusy(SyncSafetyError):
+    """The collection is in use by another run of the robot; nothing was touched."""
+
+
 class DuplicateIdentityError(RuntimeError):
     """An immutable Acervo note identity occurs more than once in Anki."""
 
@@ -84,7 +88,7 @@ class AnkiRobot:
             try:
                 fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
             except BlockingIOError as exc:
-                raise SyncSafetyError("Another Anki robot process is already running") from exc
+                raise RobotBusy("The Anki robot is already running; try again when it has finished") from exc
             try:
                 yield
             finally:
@@ -142,12 +146,14 @@ class AnkiRobot:
         self._wait_for_media(collection)
         return output
 
-    def _backup(self, collection: Any) -> bool:
+    def _backup(self, collection: Any, *, force: bool = True) -> bool:
+        """A backup of the robot's collection. Unforced, Anki makes one only when its own interval
+        has passed since the last, which is what a push every few minutes wants."""
         self.settings.backup_dir.mkdir(parents=True, exist_ok=True)
         return bool(
             collection.create_backup(
                 backup_folder=str(self.settings.backup_dir),
-                force=True,
+                force=force,
                 wait_for_completion=True,
             )
         )
@@ -279,8 +285,9 @@ class AnkiRobot:
             finally:
                 self._close(collection)
 
-    def push(self, manifest: SyncManifest, manifest_dir: Path) -> dict[str, Any]:
-        """Sync down, update Acervo-owned notes, and sync up normally."""
+    def push(self, manifest: SyncManifest, manifest_dir: Path, *, backup: bool = True) -> dict[str, Any]:
+        """Sync down, update Acervo-owned notes, and sync up normally. `backup=False` leaves the
+        backup to Anki's own interval rather than forcing one."""
         manifest.validate_media(manifest_dir)
         with self._exclusive_collection():
             collection = self._open_collection()
@@ -289,7 +296,7 @@ class AnkiRobot:
                 auth = self._login(collection)
                 self._normal_sync(collection, auth, stage="pre-mutation sync")
                 self.progress.say("Anki: backing up the robot's collection")
-                self._backup(collection)
+                self._backup(collection, force=backup)
                 # A note type of the wrong shape is refused here, before anything is written. One of
                 # the right shape but an older look is brought up to date: that is an ordinary change.
                 redesigned = [

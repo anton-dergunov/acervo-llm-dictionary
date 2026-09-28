@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-PROTOCOL=12
+PROTOCOL=13
 HELPER_PATH=/usr/local/sbin/deploy-acervo
 SUDOERS_PATH=/etc/sudoers.d/deploy-acervo
 PATH="$PATH:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/var/packages/ContainerManager/target/usr/bin:/var/packages/Docker/target/usr/bin"
@@ -239,9 +239,10 @@ deploy_release() {
   credentials_file=
   llm_credentials_file=
   google_credentials_file=
-  reset_data=false
+  reset_anki=false
   reset_database=false
   transition=false
+  timezone=
   bind_address=
   anki_port=
   app_bind_address=
@@ -256,7 +257,8 @@ deploy_release() {
       --port) [ "$#" -ge 2 ] || exit 2; anki_port=$2; shift 2 ;;
       --app-bind-address) [ "$#" -ge 2 ] || exit 2; app_bind_address=$2; shift 2 ;;
       --app-port) [ "$#" -ge 2 ] || exit 2; app_port=$2; shift 2 ;;
-      --reset-data) reset_data=true; shift ;;
+      --reset-anki) reset_anki=true; shift ;;
+      --timezone) [ "$#" -ge 2 ] || exit 2; timezone=$2; shift 2 ;;
       --reset-database) reset_database=true; shift ;;
       --transition) transition=true; shift ;;
       *) echo "Unsupported deploy argument: $1" >&2; exit 2 ;;
@@ -264,6 +266,7 @@ deploy_release() {
   done
   case "$acervo_root" in ''|/*/acervo) ;; *) echo "Acervo root must be an absolute path ending in /acervo" >&2; exit 2 ;; esac
   case "$bind_address$app_bind_address" in *[!A-Za-z0-9:._-]*) echo "Unsafe bind address" >&2; exit 2 ;; esac
+  case "$timezone" in /*|*/|*[!A-Za-z0-9/_+-]*) echo "Unsafe timezone" >&2; exit 2 ;; esac
   validate_port "Anki port" "$anki_port"
   validate_port "App port" "$app_port"
   [ "$anki_port" != "$app_port" ] || {
@@ -329,7 +332,8 @@ deploy_release() {
     chmod 600 "$google_credentials_copy"
     set -- "$@" --google-credentials-file "$google_credentials_copy"
   fi
-  [ "$reset_data" = false ] || set -- "$@" --reset-data
+  [ "$reset_anki" = false ] || set -- "$@" --reset-anki
+  [ -z "$timezone" ] || set -- "$@" --timezone "$timezone"
   [ "$reset_database" = false ] || set -- "$@" --reset-database
   [ "$transition" = false ] || set -- "$@" --transition
   sh "$installer" "$@"
@@ -460,7 +464,7 @@ run_worker() {
 
   operation=${1:-}
   case "$operation" in
-    "") echo "worker needs an operation, for example pull-state" >&2; exit 2 ;;
+    "") echo "worker needs an operation, for example anki-pull-state" >&2; exit 2 ;;
     *[!a-z-]*|-*|*-) echo "worker operations are bare words; got: $operation" >&2; exit 2 ;;
   esac
 

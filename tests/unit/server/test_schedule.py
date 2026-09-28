@@ -190,8 +190,8 @@ def test_a_runner_built_outside_the_application_queues_no_nights(server):
 
 
 def test_the_served_application_carries_the_timer(server):
-    """The nightly timer, and the sweep of photos nobody added."""
-    assert len(server.client.app.state.runner.ticks) == 2
+    """The nightly timer, the hourly Anki read, and the sweep of photos nobody added."""
+    assert len(server.client.app.state.runner.ticks) == 3
 
 
 # ── the nightly run ─────────────────────────────────────────────────────────
@@ -214,16 +214,15 @@ def test_the_nightly_run_updates_the_corpus_and_skips_what_is_off(server, corpus
     finished = jobs.get(server.owner, job["id"])
     assert finished["state"] == "done"
     assert [(step["name"], step["state"]) for step in finished["steps"]] == [
-        ("corpus.update", "done"), ("anki.pull", "skipped")
+        ("corpus.update", "done")
     ]
     assert corpus.started == 1
     # The operator token goes to the corpus and nowhere else.
     assert all(headers.get("Authorization") == "Bearer operator-token" for headers in corpus.headers)
 
 
-def test_a_failed_step_does_not_stop_the_next(server, corpus, madrid):
+def test_a_failed_step_fails_the_run_and_says_why(server, corpus, madrid):
     corpus.states = ["failed"]
-    schedule_settings.save(server.owner, steps={"anki.pull": True})  # as a stale row might hold it
     job = jobs.enqueue(server.owner, "nightly", trigger="schedule",
                        subject_kind="schedule", subject_id="nightly")
     clock = Clock()
@@ -232,7 +231,6 @@ def test_a_failed_step_does_not_stop_the_next(server, corpus, madrid):
     assert finished["state"] == "failed"
     assert [(step["name"], step["state"], step.get("error")) for step in finished["steps"]] == [
         ("corpus.update", "failed", "corpus_failed"),
-        ("anki.pull", "failed", "step_unavailable"),
     ]
 
 
@@ -293,12 +291,11 @@ def test_update_now_is_one_job_however_often_it_is_pressed(server, corpus):
 def test_the_schedule_follows_the_defaults_until_chosen(server, madrid):
     view = server.get("/schedule/settings").json()["data"]
     assert (view["hour"], view["steps"], view["chosen"]) == (
-        2, {"corpus.update": True, "anki.pull": False}, False
+        2, {"corpus.update": True}, False
     )
     assert view["timezone"] == "Europe/Madrid"
     assert view["nextRunAt"].endswith("Z")
     assert view["lastRun"] is None
-    assert "anki.pull" in view["unavailable"]
 
 
 def test_the_hour_and_the_switches_are_saved(server, madrid):
@@ -315,12 +312,6 @@ def test_the_hour_and_the_switches_are_saved(server, madrid):
 ])
 def test_a_schedule_that_is_not_one_is_refused(server, body):
     assert server.put("/schedule/settings", body).status_code == 400
-
-
-def test_a_step_that_cannot_run_here_cannot_be_switched_on(server):
-    answer = server.put("/schedule/settings", {"steps": {"anki.pull": True}})
-    assert answer.status_code == 409
-    assert answer.json()["error"]["code"] == "step_unavailable"
 
 
 def test_the_last_run_is_reported(server, madrid):

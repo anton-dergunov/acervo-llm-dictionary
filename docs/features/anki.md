@@ -2,10 +2,11 @@
 
 Acervo does not schedule reviews. Anki with FSRS is a better scheduler than anything worth building
 here, so the vocabulary goes out to Anki as cards and Anki's memory state comes back as a report. The
-consumer is `src/acervo/consumers/anki/`; setting it up is
+consumer is `src/acervo/consumers/anki/`, bound to the server by `services/anki.py`; setting it up is
 [`../operations/anki-sync.md`](../operations/anki-sync.md). `build.py` turns the vocabulary into
-notes and `push-vocabulary` sends them; what is not built yet — acting on what comes back, and
-running both halves nightly — is [`../plans/anki-loop.md`](../plans/anki-loop.md).
+notes, and the server pushes them after the vocabulary changes and reads the review state back every
+hour. What is not built yet — acting on what comes back — is
+[`../plans/anki-loop.md`](../plans/anki-loop.md).
 
 ---
 
@@ -32,17 +33,19 @@ the server for the same SQLite, so the robot keeps its own collection on the NAS
 like the tablet:
 
 ```text
-robot (acervo-worker, one-shot)
+robot (inside the Acervo server)
   ├─ open its local collection
   ├─ sync DOWN from the server
   ├─ add / update notes from a manifest
-  ├─ read back FSRS state            → studyStates, through POST /graph
+  ├─ read back FSRS state            → studyStates, through merge_graph
   └─ sync UP
 ```
 
-From the server's side this is indistinguishable from the iPad syncing, so conflict resolution is
-Anki's own. It runs in the one-shot `acervo-worker` container — `run-worker.sh push`, `pull-state`,
-`export-state` — through the reviewed launcher, and writes through the owner's own account.
+From the sync server's side this is indistinguishable from the iPad syncing, so conflict resolution
+is Anki's own. It runs inside the Acervo server, which holds the vocabulary, the pictures and the
+recordings, and writes through the same `merge_graph` the graph route calls. Its collection lives in
+the directory the one-shot worker mounts too, behind one lock, so a command run by hand in either
+container never uses it at the same time as a job.
 
 **Four risks it is built around:**
 
@@ -54,6 +57,28 @@ Anki's own. It runs in the one-shot `acervo-worker` container — `run-worker.sh
 3. **Always sync down before changing anything; never force an upload.** Edits made mid-review merge
    correctly only if the robot behaves as a client, not an authority.
 4. **Reachability.** The tablet reaches the NAS from outside the house over Tailscale.
+
+## Keeping it up to date
+
+Both halves run by themselves, each behind its own switch in Settings ▸ Anki, and the panel says how
+each last went — in the robot's own words when it refused.
+
+- **A push follows a change.** A write to anything the cards are made from — a word, a sense, an
+  example, a picture, a recording, a topic — queues a push in the same transaction, to run a minute
+  after the writes stop. A burst of edits is one push; each write moves it a minute later, but never
+  more than ten minutes after it was first asked for, so a long session still reaches Anki. The
+  enrichment's picture of a new word is itself such a write, so the word is pushed once it has its
+  picture. A device sees the change the next time it syncs.
+- **A read follows every push, and runs every hour** besides, so reviews reach Acervo within an hour
+  of the tablet syncing even on a day nothing is edited. A study state's write is not a change to the
+  cards and queues nothing, or every read would queue a push.
+- **Seconds, not minutes, after the first.** The runner does one job at a time, so a push must not
+  hold it long. Pictures are scaled once into a payload kept beside the collection, named by their
+  master's digest so a file there is never stale; notes are compared and only what differs is
+  written, in one transaction rather than one per note; and an automatic push leaves the backup of
+  the robot's collection to Anki's own interval.
+- **The first collection is made by hand**, on an empty Anki, and bootstrapping it switches both
+  halves on. A server with no Anki sync server behind it offers neither switch.
 
 ## The cards
 
@@ -109,14 +134,17 @@ in a collection shares one media folder.
 
 ## Review state back
 
-`anki pull-state` writes one `studyStates` row per sense, and one per word, for each system: Anki's
-note and card ids and the scheduler's reps, lapses, stability, difficulty, retrievability and last
-review, written through `POST /graph` like any other client write. **A sense's row gathers its own
+A read writes one `studyStates` row per sense, and one per word, for each system: Anki's note and
+card ids and the scheduler's reps, lapses, stability, difficulty, retrievability and last review,
+written through `merge_graph` with the same validation and revision allocation as any other write. **A sense's row gathers its own
 note's cards and those of every example under it**, since all of them ask about that one meaning;
 the word's row, with no sense, holds its Listen card. A row whose notes are no longer in the
 collection is tombstoned, so a collection wiped and rebuilt leaves no stale memory behind. Rows are
-keyed by system so a second learning tool never collides with Anki. `export-state` prints the same
-reading without writing it.
+keyed by system so a second learning tool never collides with Anki. **Only a row whose report
+changed is written**: its cards, reviews and memory state are compared with what is held, and
+retrievability is not, because it decays by the hour on its own. An hourly read of a quiet day writes
+nothing, and `syncedAt` is when a row last changed. `anki-export-state` prints the same reading
+without writing it.
 
 - **Retrievability is Anki's own number**, asked for only when there is a memory state to compute it
   from — an unset protobuf float reads as `0.0`, and a card FSRS knows nothing about would otherwise
@@ -131,7 +159,7 @@ reading without writing it.
 
 A study state is a snapshot: where each meaning stands now. **The history is every answer that got
 it there** — Anki's `revlog`, which records each review's time, the button pressed, the interval
-before and after, and how long the answer took. `pull-state` brings it across with the snapshot,
+before and after, and how long the answer took. Each read brings it across with the snapshot,
 into `reviews`, a server-side table that is never replicated and only ever added to.
 
 - **Keyed by Anki's review id**, which is the review's time in milliseconds, so a review sent twice

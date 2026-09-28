@@ -116,6 +116,29 @@ def test_a_second_write_updates_the_row_it_already_has():
     assert rows[0]["createdAt"] == "2026-08-01T00:00:00.000Z"
 
 
+def test_a_row_whose_report_has_not_changed_is_not_written_again():
+    """An hourly pull must not make every device download every row again."""
+    first, _ = study_states({"notes": [note()]}, {}, {LEXEME}, SENSES, device_id="ankiworker0001")
+    held = {(LEXEME, None): {**first[0], "revision": 42}}
+
+    same, _ = study_states({"notes": [note()]}, held, {LEXEME}, SENSES, device_id="ankiworker0001")
+    decayed, _ = study_states({"notes": [note(cards=[card(retrievability=0.7)])]}, held, {LEXEME},
+                              SENSES, device_id="ankiworker0001")
+    reviewed, _ = study_states({"notes": [note(cards=[card(reps=5)])]}, held, {LEXEME}, SENSES,
+                               device_id="ankiworker0001")
+
+    assert same == []
+    assert decayed == [], "retrievability decays on its own; it alone is not a change"
+    assert [(row["reps"], row["revision"]) for row in reviewed] == [(5, 42)]
+
+
+def test_a_tombstoned_row_whose_note_is_back_is_written_even_with_the_same_numbers():
+    first, _ = study_states({"notes": [note()]}, {}, {LEXEME}, SENSES, device_id="ankiworker0001")
+    held = {(LEXEME, None): {**first[0], "deleted": True, "revision": 42}}
+    rows, _ = study_states({"notes": [note()]}, held, {LEXEME}, SENSES, device_id="ankiworker0001")
+    assert [(row["deleted"], row["revision"]) for row in rows] == [(False, 42)]
+
+
 def test_a_note_whose_word_is_gone_is_skipped_rather_than_refused():
     """An ordinary state, not a mismatch: a word removed in Acervo keeps its card in the collection
     until someone deletes it there, and one such note must not stop the rest from being written."""

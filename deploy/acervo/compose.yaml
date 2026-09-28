@@ -5,6 +5,10 @@ services:
     build:
       context: ../..
       dockerfile: deploy/acervo/server/Dockerfile
+      args:
+        # The robot runs in here now, and its sync protocol is version-locked to the sync server's:
+        # the same pin, upgraded as a pair.
+        ANKI_VERSION: "${ACERVO_ANKI_VERSION:-26.8.1}"
     restart: unless-stopped
     user: "${ACERVO_UID:-1000}:${ACERVO_GID:-1000}"
     environment:
@@ -31,8 +35,16 @@ services:
       # nothing here. The keys themselves are named by their catalogue rows, and every value comes
       # from llm.env, which the installer writes mode 600 and compose passes last.
       ACERVO_TEXT_CHAIN: "${ACERVO_TEXT_CHAIN:-}"
-      # The zone Settings ▸ Schedule's nightly hour is read in; unset means the container's UTC.
+      # The zone days and Settings ▸ Schedule's nightly hour are read in; unset means UTC.
       ACERVO_TIMEZONE: "${ACERVO_TIMEZONE:-}"
+      # The Anki robot: another sync client of the sync server beside it, pushing the vocabulary
+      # after it changes and reading review state back every hour. Its collection is in the worker's
+      # directory, mounted below, so a command run by hand in the worker uses the same one and the
+      # same lock. Unset credentials mean no Anki here, and nothing Anki runs.
+      ACERVO_ANKI_SYNC_ENDPOINT: "http://anki-sync-server:8080/"
+      ACERVO_ANKI_SYNC_USERNAME: "${ACERVO_ANKI_SYNC_USERNAME:-}"
+      ACERVO_ANKI_SYNC_PASSWORD: "${ACERVO_ANKI_SYNC_PASSWORD:-}"
+      ACERVO_ANKI_DATA_PATH: /var/lib/acervo/worker
       GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
       OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
       OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
@@ -56,6 +68,9 @@ services:
       # file and the row that names it have to be written by the same party. Dictionaries stay
       # read-only because nothing but the worker ever compiles one.
       - "${ACERVO_MEDIA:-acervo-media}:/var/lib/acervo/media"
+      # The robot's Anki collection, its backups and the cards' kept payload. Not under the server's
+      # own data directory, so --reset-database never takes Anki with it; --reset-anki does.
+      - "${ACERVO_WORKER_DATA:-acervo-worker-data}:/var/lib/acervo/worker"
       # Google will not authenticate from an environment variable: Vertex wants a credentials
       # file, and LiteLLM has no express-key path. The directory is mounted rather than the
       # file so the mount is valid whether or not one has been configured.
@@ -233,15 +248,10 @@ services:
       ACERVO_DICTIONARIES_PATH: /var/lib/acervo/dictionaries
       ACERVO_MEDIA_PATH: /var/lib/acervo/media
       ACERVO_DICTIONARY_CACHE: /var/lib/acervo/worker/dictionary-sources
-      # A job's write path is a client's write path: it signs in over POST /session like any other
-      # client and goes through the graph route, so it gets the same validation and the same revision
-      # allocation as a phone. The credential is the owner's *own* account, not a service account —
-      # every record is owner-scoped and a cross-owner reference is refused, so a second account
-      # could not write against the owner's lexemes at all. Deliberately not ACERVO_JWT_SECRET:
-      # that signs every account's tokens, and a batch job has no business holding it.
+      # Where a by-hand loop render signs in, over POST /session like any other client, with a
+      # password it asks for. Deliberately not ACERVO_JWT_SECRET: that signs every account's
+      # tokens, and a batch job has no business holding it.
       ACERVO_SERVER_URL: "${ACERVO_SERVER_URL:-http://server:8000}"
-      ACERVO_OWNER_EMAIL: "${ACERVO_OWNER_EMAIL:-}"
-      ACERVO_OWNER_PASSWORD: "${ACERVO_OWNER_PASSWORD:-}"
       # Which providers answer, in order, as ids from models/catalogue.json. Unset means every one
       # this deployment has credentials for, in catalogue order — so a server with one key needs
       # nothing here. The keys themselves are named by their catalogue rows, and every value comes
@@ -269,7 +279,7 @@ services:
     depends_on:
       anki-sync-server:
         condition: service_healthy
-    # Deliberately *not* depending on `server`. Only `anki pull-state` writes through it, and a
+    # Deliberately *not* depending on `server`. Only a by-hand loop render talks to it, and a
     # dependency here applies to every `run --rm` — it would build and start the whole API service to
     # compile a dictionary, and drag it into tests that have nothing to do with it. In production the
     # server is `restart: unless-stopped` and already up; when it is not, the client says so in
@@ -277,6 +287,7 @@ services:
 
 volumes:
   acervo-server-data:
+  acervo-worker-data:
   acervo-downloads:
   acervo-dictionaries:
   acervo-media:

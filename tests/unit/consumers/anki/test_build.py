@@ -148,7 +148,10 @@ def test_the_payload_is_a_manifest_the_robot_takes_as_it_is(graph, media_root, t
         collection.close()
 
 
-def test_pictures_shrink_in_parallel_and_say_how_far_they_got(tmp_path):
+def test_pictures_shrink_in_parallel_and_say_how_far_they_got(tmp_path, monkeypatch):
+    from acervo.consumers.anki import build as building
+
+    monkeypatch.setattr(building, "POOLED", 2)
     built = BuiltManifest()
     for name, side in (("a.webp", 1024), ("b.png", 1536), ("small.webp", 300)):
         source = tmp_path / "masters" / name
@@ -167,6 +170,28 @@ def test_pictures_shrink_in_parallel_and_say_how_far_they_got(tmp_path):
     assert said.getvalue().splitlines()[-1].endswith("Shrinking pictures to 768 px: 3/3")
 
 
+def test_a_kept_payload_makes_only_what_is_new_and_drops_what_is_gone(tmp_path):
+    def picture(name):
+        source = tmp_path / "masters" / name
+        source.parent.mkdir(exist_ok=True)
+        Image.new("RGB", (1024, 1024), (40, 90, 80)).save(source)
+        return source
+
+    payload = tmp_path / "payload"
+    first = BuiltManifest(media={"media/a.webp": picture("a.webp"), "media/b.webp": picture("b.webp")})
+    write_payload(first, payload, progress=Progress(io.StringIO()))
+    made = (payload / "media" / "a.webp").stat().st_mtime_ns
+
+    said = io.StringIO()
+    second = BuiltManifest(media={"media/a.webp": first.media["media/a.webp"],
+                                  "media/c.webp": picture("c.webp")})
+    write_payload(second, payload, progress=Progress(said))
+
+    assert sorted(path.name for path in (payload / "media").iterdir()) == ["a.webp", "c.webp"]
+    assert (payload / "media" / "a.webp").stat().st_mtime_ns == made
+    assert said.getvalue().splitlines()[-1].endswith("Shrinking pictures to 768 px: 1/1")
+
+
 def test_build_manifest_reads_a_saved_graph(graph, media_root, tmp_path, capsys):
     saved = tmp_path / "graph.json"
     saved.write_text(json.dumps({"changes": graph}), encoding="utf-8")
@@ -176,19 +201,3 @@ def test_build_manifest_reads_a_saved_graph(graph, media_root, tmp_path, capsys)
     assert (report["examples"], report["senses"], report["words"]) == (3, 3, 1)
     assert (tmp_path / "out" / "manifest.json").is_file()
 
-
-def test_a_bootstrap_the_server_would_refuse_is_refused_before_any_card_is_built(monkeypatch):
-    from acervo.consumers.anki import cli
-    from acervo.consumers.anki.robot import SyncSafetyError
-
-    class Refusing:
-        def check_bootstrap(self):
-            raise SyncSafetyError("this one holds a collection")
-
-    def built(*_):
-        raise AssertionError("the cards were built for a bootstrap that could not happen")
-
-    monkeypatch.setattr(cli, "build_payload", built)
-    args = cli.build_parser().parse_args(["push-vocabulary", "--bootstrap"])
-    with pytest.raises(SyncSafetyError, match="holds a collection"):
-        cli.push_vocabulary(args, Refusing())

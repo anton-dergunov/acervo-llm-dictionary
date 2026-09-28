@@ -3,9 +3,12 @@
 Setting up and running the Anki side. The design — why Anki's own sync server and a robot client, the
 manifest, and what comes back — is [`../features/anki.md`](../features/anki.md).
 
-This deployment slice runs Anki's official sync server and a separate headless
-Acervo robot. Anki Desktop is not required. Server and robot use the same pinned
-`anki==26.8.1` image so their sync protocol versions stay aligned.
+This deployment slice runs Anki's official sync server and a headless Acervo
+robot, which lives inside the Acervo server and keeps Anki up to date by itself:
+it pushes the vocabulary a minute after it changes and reads review state back
+every hour (Settings ▸ Anki). Anki Desktop is not required. The sync server and
+the robot use the same pinned `anki==26.8.1`, so their sync protocol versions stay
+aligned.
 
 ## Start here: new empty account
 
@@ -70,7 +73,7 @@ once, while the account is empty. This command uploads the included harmless
 connection-test card and runs the headless robot on the server:
 
 ```bash
-scripts/acervo_anki_remote.sh bootstrap-upload \
+scripts/acervo_anki_remote.sh anki-bootstrap-upload \
   examples/anki-sync-smoke/manifest.json
 ```
 
@@ -81,11 +84,14 @@ It may ask for the server's sudo password. Success includes:
 "sync": "full-upload-complete"
 ```
 
-For later content changes, use `push` instead:
+For later content changes, use `anki-push` instead:
 
 ```bash
-scripts/acervo_anki_remote.sh push path/to/manifest.json
+scripts/acervo_anki_remote.sh anki-push path/to/manifest.json
 ```
+
+For your own vocabulary rather than a test card, skip this step and run
+`./deploy.sh --worker anki-bootstrap-vocabulary` instead ("Cards from the vocabulary", below).
 
 ### 5. Connect the mobile app
 
@@ -159,11 +165,10 @@ docker compose -p acervo \
   bootstrap-upload /input/manifest.json
 ```
 
-Use `push /input/manifest.json` for routine updates, `export-state` to emit
-review state as JSON, and `pull-state` to write that same reading into Acervo
-as `studyState` records. A routine push syncs down first, refuses a required full
-sync in either direction, updates by immutable `AcervoNoteId`, and syncs media
-to completion. It preserves card IDs, scheduling, and non-`acervo::` tags.
+Use `push /input/manifest.json` for routine updates. A routine push syncs down
+first, refuses a required full sync in either direction, updates by immutable
+`AcervoNoteId`, and syncs media to completion. It preserves card IDs, scheduling,
+and non-`acervo::` tags.
 
 ## Remote deployment
 
@@ -183,12 +188,12 @@ override the profile for one invocation. Legacy profiles containing only `user@h
 accepted and are upgraded the next time `--remember-target` is used. Release archives contain code
 and configuration, never `secrets.env`.
 
-The launcher also runs the batch worker: `sudo -n /usr/local/sbin/deploy-acervo worker pull-state`
-on the NAS, or `./deploy.sh --worker pull-state` from the laptop. That path exists because the
-Docker socket on Synology is root-owned with no docker group, so reaching the worker at all means
-reaching root; a named operation on a reviewed script is a narrower way to do that than a blanket
-`NOPASSWD` on `docker`. `pull-state` needs `ACERVO_OWNER_EMAIL` and `ACERVO_OWNER_PASSWORD` in
-`secrets.env` — it writes through the owner's own account like any other client.
+The launcher also runs the batch worker: `sudo -n /usr/local/sbin/deploy-acervo worker
+anki-pull-state` on the NAS, or `./deploy.sh --worker anki-pull-state` from the laptop. That path
+exists because the Docker socket on Synology is root-owned with no docker group, so reaching the
+worker at all means reaching root; a named operation on a reviewed script is a narrower way to do
+that than a blanket `NOPASSWD` on `docker`. The vocabulary's Anki operations run inside the server
+container, which holds the vocabulary, so they need no password of the owner's.
 
 The launcher setup operation may ask for the NAS sudo password. Routine `./deploy.sh` and
 `./deploy.sh --status` calls subsequently use only the reviewed launcher through `sudo -n`; changes
@@ -216,17 +221,28 @@ command after updating this checkout; there is no partial release to clean up.
 
 ### Remote robot commands
 
-Use `scripts/acervo_anki_remote.sh`; it validates the manifest, packages only
-the manifest and referenced media, streams them over SSH, and invokes the robot.
-It remembers the same target as `deploy.sh` and detects the standard remote root.
-Pass `--target` or `--root` only when overriding those values.
+The vocabulary's own operations go through the launcher, from the laptop:
 
 ```bash
-scripts/acervo_anki_remote.sh bootstrap-upload path/to/manifest.json
-scripts/acervo_anki_remote.sh push path/to/manifest.json
-scripts/acervo_anki_remote.sh export-state
-scripts/acervo_anki_remote.sh pull-state
-scripts/acervo_anki_remote.sh adopt-server
+./deploy.sh --worker anki-bootstrap-vocabulary   # an empty Anki: the first collection, uploaded whole
+./deploy.sh --worker anki-push-vocabulary        # push now, rather than a minute after an edit
+./deploy.sh --worker anki-pull-state             # read review state now, rather than on the hour
+./deploy.sh --worker anki-export-state           # print what a read would store, storing nothing
+./deploy.sh --worker anki-adopt-server           # take over a server a device uploaded to first
+```
+
+They run the same functions as the server's own push and hourly read, inside the server container,
+and print what they are doing as they go. The robot's collection has one lock, so a command run
+while a push is running is told the robot is busy rather than getting in its way.
+
+A manifest made on the laptop goes through `scripts/acervo_anki_remote.sh`, which validates it,
+packages only the manifest and the media it names, streams them over SSH and runs the robot. It
+remembers the same target as `deploy.sh` and detects the standard remote root; pass `--target` or
+`--root` only to override those.
+
+```bash
+scripts/acervo_anki_remote.sh anki-bootstrap-upload path/to/manifest.json
+scripts/acervo_anki_remote.sh anki-push path/to/manifest.json
 ```
 
 Each replacement first copies collection databases and media indexes into a
@@ -235,10 +251,11 @@ are a separate operational backup tier and should be handled by NAS snapshots or
 another backup system. Server data, robot data, backups, and inputs live outside
 release directories and survive upgrades.
 
-`--reset-data` is destructive and requires typing `RESET ACERVO DATA`. It is not
-needed for upgrades. It covers the Anki collections only; the separate
-`--reset-database` rebuilds the vocabulary database and leaves review history
-alone.
+`--reset-anki` is destructive and requires typing `RESET ACERVO ANKI`. It is not
+needed for upgrades. It empties the Anki sync server's collection and the robot's,
+with the robot's kept payload of scaled pictures; the vocabulary, its pictures,
+recordings and review history are untouched. The separate `--reset-database`
+rebuilds the vocabulary database and leaves Anki alone.
 
 ## Manifest contract
 
@@ -282,13 +299,15 @@ which is the order Anki introduces their new cards in.
 
 ## Cards from the vocabulary
 
-`push-vocabulary` builds the manifest from the vocabulary and pushes it, in one step inside the
-worker — which reads the graph as the owner and has the pictures and recordings on its media
-volume, so there is no archive to carry:
+The server builds the manifest from the vocabulary and pushes it by itself, a minute after the
+vocabulary stops changing, once Settings ▸ Anki's **Send changes to Anki** is on. A burst of edits is
+one push, and a long editing session is pushed at most ten minutes after its first change. Pictures
+are scaled once and kept beside the robot's collection, so a push after the first spends seconds,
+not minutes. The first collection is made by hand, on an empty Anki, and switches both halves on:
 
 ```bash
-./deploy.sh --worker push-vocabulary          # routine: sync down, update, sync up
-./deploy.sh --worker bootstrap-vocabulary     # an empty account: the first collection, uploaded whole
+./deploy.sh --worker anki-bootstrap-vocabulary   # an empty account: the first collection, uploaded whole
+./deploy.sh --worker anki-push-vocabulary        # the same push the server runs, now
 ```
 
 Every word that is `active` or `learned` becomes notes, in one deck per language
@@ -297,8 +316,7 @@ away, has none. Pictures go at 768 px rather than the 1024 master. Notes are lis
 word's first note, then every word's second — so a first push of many words does not bring one
 word's cards all on the same morning.
 
-To look at what would be pushed, write it out instead, from the server or from a saved graph pull,
-and render it:
+To look at what would be pushed, write it out instead from a saved graph pull, and render it:
 
 ```bash
 python scripts/acervo_worker.py anki build-manifest OUT --graph graph.json --media-root MEDIA
@@ -309,13 +327,14 @@ python scripts/preview_anki_cards.py OUT/manifest.json OUT/preview
 
 ## FSRS state back into Acervo
 
-Content goes out through the manifest; scheduling comes back through `run-worker.sh pull-state`. It
-syncs down, reads each card, and writes one `studyState` per *(lexeme, sense, `anki`)* through
-`POST /api/acervo/v1/graph` — the same route, validation and revision allocation a phone gets, so
-there is no second write path to keep in step. `export-state` is the same reading printed rather than
-stored, which is what to run when you want to look.
+Content goes out through the manifest; scheduling comes back every hour, and after every push, once
+Settings ▸ Anki's **Read your reviews every hour** is on. The read syncs down, reads each card, and
+writes one `studyState` per *(lexeme, sense, `anki`)* through the same `merge_graph` the graph route
+calls — the same validation and revision allocation a phone gets, so there is no second write path
+to keep in step. `anki-export-state` is the same reading printed rather than stored, which is what to
+run when you want to look.
 
-Four things about the mapping are decisions rather than mechanics:
+Five things about the mapping are decisions rather than mechanics:
 
 - **Retrievability is Anki's own number**, asked for only when the card has a memory state. Anki
   answers `0.0` for a card FSRS knows nothing about, and stored as-is that would read as "certainly
@@ -331,33 +350,30 @@ Four things about the mapping are decisions rather than mechanics:
   the write.
 - **A row no note reports on any more is tombstoned.** The collection is read whole, so a row without
   cards describes notes that are gone: a collection wiped and rebuilt, or cards deleted by hand.
+- **Only a row whose report changed is written.** Its cards, reviews and memory state are compared
+  with what is held; retrievability is not, because it decays by the hour on its own. An hourly read
+  of a quiet day therefore writes nothing, and no device downloads anything.
 
 The same pull brings the **review history** across: every review Anki logged for an Acervo card, from
 a month before the newest one the server already holds, into the server-side `reviews` table. A
-review already held adds nothing, so the overlap is free. `export-state --reviews-since 0` prints it
-instead. The design is [`../features/anki.md`](../features/anki.md), "The review history".
+review already held adds nothing, so the overlap is free. `anki-export-state` prints it instead. The design is [`../features/anki.md`](../features/anki.md), "The review history".
 
 `queue`, `suspended` and `flag` are exported and deliberately not stored: there are no columns for
 them, and adding some means rebuilding the database for information nothing reads.
 
-The credential is the **owner's own account**, not a service account. Every record is owner-scoped and
-a cross-owner reference is refused, so a second account could not write against the owner's words at
-all.
+It writes as the owner whose vocabulary it is, in the server, so there is no credential to hold:
+the robot's only credential is the Anki sync server's.
 
 ## Bootstrap and adoption
 
-Use `bootstrap-upload` only for a genuinely empty sync account. It authorizes
-only Anki's `FULL_UPLOAD` result.
+Bootstrap only a genuinely empty sync account. It authorizes only Anki's
+`FULL_UPLOAD` result.
 
 For a collection created on mobile first, stop all other syncing, ensure the
 robot has no local collection, then run:
 
 ```bash
-docker compose -p acervo \
-  --env-file "$HOME/.acervo/deployment.env" \
-  --env-file "$HOME/.acervo/secrets.env" \
-  -f deploy/acervo/compose.yaml --profile tools run --rm acervo-worker anki \
-  adopt-server --confirm-no-other-clients
+./deploy.sh --worker anki-adopt-server
 ```
 
 This downloads the existing collection, installs the Acervo note types and
@@ -368,7 +384,7 @@ stylesheet and the fonts — is brought up to date by every push, since an
 ordinary sync carries it.
 
 **When there is nothing in Anki worth keeping, wipe and start again** rather than
-adopt: `./deploy.sh --reset-data`, then `./deploy.sh --worker bootstrap-vocabulary`.
+adopt: `./deploy.sh --reset-anki`, then `./deploy.sh --worker anki-bootstrap-vocabulary`.
 Each phone then asks for a direction on its next sync; choose download.
 
 **Keep Anki closed on every device from the reset until the bootstrap has finished.**
@@ -389,7 +405,7 @@ quick start instead. When a mobile collection must be preserved:
 4. Ensure the robot collection does not exist, then run:
 
    ```bash
-   scripts/acervo_anki_remote.sh adopt-server
+   ./deploy.sh --worker anki-adopt-server
    ```
 
 5. Wait for the reported full download and schema upload, then sync mobile.
@@ -397,9 +413,9 @@ quick start instead. When a mobile collection must be preserved:
 ## Reference: scheduling-preservation acceptance
 
 1. On mobile, open an Acervo card, answer it once, optionally flag it, and sync.
-2. Run `scripts/acervo_anki_remote.sh export-state`. Verify that card has a
+2. Run `./deploy.sh --worker anki-export-state`. Verify that card has a
    non-zero `reps` value and the expected flag.
-3. Change the same note's sentence or note in the manifest and run `push`.
+3. Change the same note's sentence or note in the manifest and run `anki-push`.
    The robot output must say `updated`, not `created`, for that note.
 4. Sync mobile again. Confirm the new content and image/audio appear, the card
    remains reviewed rather than new, and its flag is unchanged.

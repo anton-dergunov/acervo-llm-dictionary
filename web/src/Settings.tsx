@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { CaptureHealth } from "./api";
 import ActivitySettings from "./ActivitySettings";
 import SchedulePanel from "./SchedulePanel";
+import AnkiPanel from "./AnkiPanel";
 import { TopicEditor, VocabularyEditor } from "./Configuration";
 import DictionaryPanel from "./DictionaryPanel";
 import ClipPanel from "./ClipPanel";
@@ -28,7 +29,7 @@ const CONFIRMATION = "DELETE";
 
 export type Page =
   | "general" | "vocabularies" | "topics" | "models" | "rules" | "images" | "pronunciation" | "loops" | "stories" | "clips" | "dictionaries" | "editor"
-  | "activity" | "schedule" | "sync" | "data";
+  | "activity" | "schedule" | "anki" | "sync" | "data";
 
 export default function Settings({ update, email, status, snapshot, language, captureHealth, page: opensOn, arm, onSignOut, onClose, onNotify, onChanged }: {
   update?: UpdateStage;
@@ -130,6 +131,7 @@ export default function Settings({ update, email, status, snapshot, language, ca
     { id: "editor", label: "Reading" },
     { id: "activity", label: "Activity" },
     { id: "schedule", label: "Schedule" },
+    { id: "anki", label: "Anki" },
     { id: "sync", label: "Sync" },
     { id: "data", label: "Data" }
   ];
@@ -245,6 +247,8 @@ export default function Settings({ update, email, status, snapshot, language, ca
         {page === "activity" && <ActivitySettings snapshot={snapshot} onNotify={onNotify} />}
 
         {page === "schedule" && <SchedulePanel onNotify={onNotify} />}
+
+        {page === "anki" && <AnkiPanel onNotify={onNotify} />}
 
         {page === "vocabularies" && snapshot && <VocabularyEditor snapshot={snapshot} onNotify={onNotify} onChanged={onChanged} />}
         {page === "topics" && snapshot && <TopicEditor snapshot={snapshot} language={language} onNotify={onNotify} onChanged={onChanged} />}

@@ -632,9 +632,19 @@ export interface ScheduleSettings {
   chosen: boolean;
   timezone: string;
   nextRunAt: string;
-  /** Steps that are declared but cannot run from the server yet, and why. */
-  unavailable: Record<string, string>;
   lastRun: Job | null;
+}
+
+/** Settings ▸ Anki: whether Anki is kept up to date by the server, and how it last went. */
+export interface AnkiStatus {
+  /** False on a server with no Anki sync server behind it; then neither switch can be turned on. */
+  configured: boolean;
+  /** Push the vocabulary to Anki a minute after it changes. */
+  push: boolean;
+  /** Read Anki's review state back every hour. */
+  pull: boolean;
+  lastPush: Job | null;
+  lastPull: Job | null;
 }
 
 /* ── loops ──
@@ -958,6 +968,18 @@ export const backendSession = {
     return client.call<ScheduleSettings>("/schedule/settings", {
       method: "PUT", body: JSON.stringify(changes)
     });
+  },
+
+  /** Whether the server keeps Anki up to date, and how the last push and read went. */
+  ankiStatus(): Promise<AnkiStatus> {
+    return client.call<AnkiStatus>("/anki");
+  },
+  saveAnkiSettings(changes: { push?: boolean; pull?: boolean }): Promise<AnkiStatus> {
+    return client.call<AnkiStatus>("/anki/settings", { method: "PUT", body: JSON.stringify(changes) });
+  },
+  /** Push now, or Read now: due at once, even if a push was waiting for edits to stop. */
+  ankiNow(what: "push" | "pull"): Promise<Job> {
+    return client.call<Job>(`/anki/${what}`, { method: "POST", body: "{}" });
   },
 
   /** The server's open jobs — what a client rebuilds its map from — or its recent ones. */

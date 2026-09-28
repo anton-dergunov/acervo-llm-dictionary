@@ -2,7 +2,8 @@
 """Acervo's own server-side work, in one place.
 
 The Anki sync server is Anki's and the Acervo server answers requests; this is the batch part.
-Today that is the Anki robot, the dictionary compiler and a by-hand loop render. Keeping it one entry point rather than a
+Today that is the Anki robot fed a manifest from outside, the dictionary compiler and a by-hand loop
+render. Keeping Anki up to date with the vocabulary is the server's own work, not this. Keeping it one entry point rather than a
 service per job is deliberate: these are one-shot commands run through `docker compose run --rm`, so
 a new job is a new subcommand and never a new container.
 
@@ -10,7 +11,6 @@ Enrichment is **not** here. A word's clips, pictures and audio are the server's 
 the write that created the word and run by `acervo/work/` — there is no sweep to call.
 
     acervo_worker.py anki push /input/runs/<id>/manifest.json
-    acervo_worker.py anki pull-state
     acervo_worker.py dictionary build --id cc-cedict
     acervo_worker.py loop render --owner-email learner@account.example.com --words 12
 """

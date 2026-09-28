@@ -3,7 +3,7 @@
 Everything runs in one server process on the NAS, against hosted providers. A save queues its
 enrichment in the same transaction as the word, a runner inside the server does the work, and the
 interface shows it and never does it. The same holds for headless capture, redraws, loops, stories,
-naming the map's regions and the nightly corpus update.
+naming the map's regions, the nightly corpus update, and keeping Anki up to date.
 
 ## Synchronous and asynchronous
 
@@ -13,10 +13,10 @@ The server is the unit that works, and the package layout draws the line.
   session, health, dictionary lookups, pressing play. Must work with everything else down.
 - **`work/` — asynchronous, in the same process.** A durable `jobs` row per piece of work, and a
   runner that takes one at a time: a saved word's enrichment, a headless capture, a redraw, the
-  nightly corpus update. It calls the same `services/` functions the routes call, so a job and a
+  nightly corpus update, a push to Anki and the hourly read back. It calls the same `services/` functions the routes call, so a job and a
   request are one pipeline entered from two places.
-- **`jobs/` — batch work that runs somewhere else.** The Anki consumer, the dictionary compiler and
-  the laptop image run, one-shot through `acervo-worker`, writing the graph through `client.py`.
+- **`jobs/` — batch work that runs somewhere else.** The dictionary compiler and the laptop image
+  run, one-shot through `acervo-worker` or on the laptop, writing the graph through `client.py`.
 
 > **DECISION: the request waits only while the owner is waiting on its answer to continue.
 > Anything that lands on a stored record while the owner may walk away is a job.**
@@ -26,7 +26,7 @@ The server is the unit that works, and the package layout draws the line.
 | `POST /capture`: resolve and compose for review | the enrichment of a saved word |
 | `POST /chat` | a headless capture |
 | pressing play on a pronunciation | a redraw, a new brief, edit-and-draw |
-| dictionary lookups | the nightly corpus update; loops and stories |
+| dictionary lookups | the nightly corpus update; loops and stories; Anki's push and read |
 
 A redraw is a job even though the owner asked for it: the point was being able to leave the word
 while it fills in, and a request that dies when the article closes is not that. **There are no
@@ -39,7 +39,13 @@ chain's fall-through still happens inside the request.
 sense to one, queues an `enrich` job inside `repository.graph`, in the same transaction as the
 record — so every writer is covered (`POST /articles`, `POST /graph`, a capture job's save, an
 approved chat edit) and a client never asks for enrichment. A job's own writes create no lexemes or
-senses, so they queue nothing. **Inbox words are enriched on arrival**, before anyone has reviewed
+senses, so they queue no enrichment.
+
+**A push to Anki is queued the same way, and waits for the writes to stop.** Any write to what the
+cards are made from — a job's picture or recording as much as an edit — queues `anki.push` in the same
+transaction when the owner has it on, due a minute later (`jobs.enqueue_later`). A write while one
+waits moves it on a minute, never past ten minutes from the first; a write while one runs queues one
+more behind it. Study states, which a read writes, queue nothing, or every read would queue a push. **Inbox words are enriched on arrival**, before anyone has reviewed
 them, so the owner opens a complete entry; the calls spent on a word later rejected are the accepted
 cost. Editing a sense's text does not re-enrich: a picture that no longer
 fits is the owner's call, through Redraw. A bundle import saves without enrichment, restores its
@@ -117,7 +123,8 @@ it.
 step; at that hour one
 `nightly` job runs its steps in order, so they can never compete for an allowance. A failed step does
 not stop the next, a night the server missed runs once when it comes back, and missed nights do not
-accumulate. There is no cron and no host scheduler.
+accumulate. There is no cron and no host scheduler. Reading Anki back is not a nightly step: it is
+queued every hour, for an owner who has it on, by a tick of the runner the way the nightly run is.
 
 **A new capability is a new job kind, and nothing else.** A kind declares a name, a subject (a
 lexeme, a set of ids, or none), its steps and its output — always a record or a media file written

@@ -22,6 +22,11 @@ SYSTEM = "anki"
 # for information Acervo does not read.
 UNSTORED = ("queue", "suspended", "flag")
 
+# What makes a row changed. Retrievability is written but does not count: it decays by the hour
+# whether or not anything happened, so counting it would rewrite every reviewed row on every pull,
+# and every device would download them all again each time.
+REPORTED = ("noteId", "cardIds", "reps", "lapses", "stability", "difficulty", "lastReview")
+
 
 def _number(value: Any) -> float:
     try:
@@ -71,6 +76,10 @@ def study_states(
 ) -> tuple[list[dict[str, Any]], list[str]]:
     """The `studyStates` change set for one `export-state`, and the notes left out of it.
 
+    **Only rows whose report changed are in it** (`REPORTED`). The collection is read whole on every
+    pull, hourly, and a row rewritten with the same numbers is still a new revision every device
+    downloads. So `syncedAt` is when a row's report last changed, not when Anki was last read.
+
     `held` is what the account already has, by *(lexeme, sense)*, and it is what makes this an
     update rather than a first write: a record the graph holds must state the revision it was edited
     from, and must keep the id and `createdAt` it already has. `live_senses` maps each live sense to
@@ -105,15 +114,22 @@ def study_states(
         own = sense_id or lexeme_id
         notes.sort(key=lambda note: (str(note.get("note_id")) != own, str(note.get("note_id"))))
         cards = [card for note in notes for card in note.get("cards") or []]
+        report = {
+            "noteId": int(notes[0].get("anki_note_id") or 0),
+            "cardIds": [int(identifier) for note in notes for identifier in note.get("card_ids") or []],
+            **collapse(cards),
+        }
+        if stored and not stored.get("deleted") and all(
+            stored.get(name) == report[name] for name in REPORTED
+        ):
+            continue
         changes.append(
             {
                 "id": stored["id"] if stored else new_record_id(),
                 "lexemeId": lexeme_id,
                 "senseId": sense_id,
                 "system": SYSTEM,
-                "noteId": int(notes[0].get("anki_note_id") or 0),
-                "cardIds": [int(identifier) for note in notes for identifier in note.get("card_ids") or []],
-                **collapse(cards),
+                **report,
                 "syncedAt": at,
                 "deleted": False,
                 "createdAt": stored["createdAt"] if stored else at,

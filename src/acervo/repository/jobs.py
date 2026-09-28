@@ -1,8 +1,8 @@
 """The job record: what the server has been asked to do, and how far it has got.
 
 Owner-scoped server state, never replicated (`docs/architecture/jobs.md`). Every function
-here is a transaction of its own, except `enqueue_enrich`, which takes the caller's connection on
-purpose: a word and the job that enriches it are written together or not at all.
+here is a transaction of its own, except `enqueue_enrich` and `enqueue_later`, which take the
+caller's connection on purpose: a word and the job it calls for are written together or not at all.
 
 A job says *which word*. What that word still lacks is read from the graph when each step runs, so a
 job run twice does nothing the second time and a job lost to a restart costs latency, not work.
@@ -11,13 +11,14 @@ job run twice does nothing the second time and a job lost to a restart costs lat
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+from datetime import datetime, timedelta, timezone
 from typing import Any
 
 from sqlalchemy import Connection, delete, or_, select, update
 
 from acervo import notify
 from acervo.db import tables
-from acervo.domain.ids import new_record_id, now_instant
+from acervo.domain.ids import instant_of, new_record_id, now_instant
 from acervo.repository.session import reading, transaction
 
 OPEN = ("queued", "running")
@@ -76,6 +77,7 @@ def _insert(
     subject_id: str = "",
     input: Mapping[str, Any] | None = None,
     parent: str | None = None,
+    not_before: str = "",
 ) -> dict[str, Any]:
     if trigger not in TRIGGERS:
         raise ValueError(f"Unknown job trigger {trigger!r}.")
@@ -95,11 +97,52 @@ def _insert(
             rerun=False,
             cancel_requested=False,
             dismissed=False,
-            not_before="",
+            not_before=not_before,
             created_at=now_instant(),
         )
     )
     return project(_row(connection, identifier))  # type: ignore[arg-type]
+
+
+def _moment(instant: str) -> datetime:
+    return datetime.strptime(instant, "%Y-%m-%dT%H:%M:%S.%fZ").replace(tzinfo=timezone.utc)
+
+
+def enqueue_later(
+    connection: Connection,
+    owner: str,
+    kind: str,
+    *,
+    trigger: str,
+    subject_kind: str,
+    subject_id: str,
+    delay: float = 60.0,
+    cap: float = 600.0,
+    now: datetime | None = None,
+) -> dict[str, Any] | None:
+    """Ask for work to happen once the writes calling for it have stopped, inside the caller's
+    transaction. Returns a job to publish after commit, or None when nothing new was queued.
+
+    A burst of edits is one request: each write moves the queued job `delay` seconds later, but never
+    more than `cap` after it was first asked for, so a long session still reaches the work. A running
+    job may have read the vocabulary before this write, so it is left alone and a new one queued
+    behind it — at most one waits.
+    """
+    now = now or datetime.now(timezone.utc)
+    queued = connection.execute(
+        select(_jobs).where(
+            _jobs.c.owner == owner, _jobs.c.kind == kind, _jobs.c.subject_id == subject_id,
+            _jobs.c.state == "queued",
+        )
+    ).mappings().first()
+    if queued is None:
+        return _insert(connection, owner, kind, trigger=trigger, subject_kind=subject_kind,
+                       subject_id=subject_id, not_before=instant_of(now + timedelta(seconds=delay)))
+    latest = _moment(queued["created_at"]) + timedelta(seconds=cap)
+    moved = instant_of(min(now + timedelta(seconds=delay), latest))
+    if moved > (queued["not_before"] or ""):
+        connection.execute(update(_jobs).where(_jobs.c.id == queued["id"]).values(not_before=moved))
+    return None
 
 
 def _open_enrich(connection: Connection, owner: str, lexeme_id: str) -> Mapping[str, Any] | None:
@@ -259,6 +302,20 @@ def save_steps(job_id: str, steps: Sequence[Mapping[str, Any]]) -> dict[str, Any
         )
         row = _row(connection, job_id)
     return project(row) if row is not None else None
+
+
+def hasten(job_id: str) -> dict[str, Any] | None:
+    """Make a queued job due now: what a press of Push now means for a push still waiting for the
+    writes to stop. A job already running, or finished, is left as it is."""
+    with transaction() as connection:
+        connection.execute(
+            update(_jobs).where(_jobs.c.id == job_id, _jobs.c.state == "queued").values(not_before="")
+        )
+        row = _row(connection, job_id)
+    job = project(row) if row is not None else None
+    if job is not None and job["state"] == "queued":
+        notify.queued(job["ownerId"], job)
+    return job
 
 
 def requeue(

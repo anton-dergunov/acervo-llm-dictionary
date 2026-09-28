@@ -18,6 +18,12 @@ RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 
 COPY requirements /app/requirements
 RUN pip install --no-cache-dir -r requirements/server.txt
 
+# The Anki robot, which pushes the vocabulary to the sync server and reads review state back. The
+# sync protocol is version-locked, so this carries the sync server's own pin as the same build
+# argument, and the two are upgraded as a pair.
+ARG ANKI_VERSION=26.8.1
+RUN pip install --no-cache-dir "anki==${ANKI_VERSION}"
+
 # The encoder's weights, at the revision `models/encoder.json` pins, fetched once at build time and
 # before `src` is copied, so a code change never downloads them again. Only the files
 # sentence-transformers reads: the repository also carries ONNX and OpenVINO copies nobody here uses.
@@ -57,11 +63,14 @@ COPY prompts /app/prompts
 # environment variable.
 COPY config/image-styles.yaml /app/config/image-styles.yaml
 COPY config/story-types.yaml /app/config/story-types.yaml
+# The Anki cards' faces, stylesheet, script and fonts, which every push brings up to date.
+COPY templates /app/templates
 # The built interface. `.dockerignore` excludes `web/dist`, so `scripts/stage-web.sh` is what puts it
 # somewhere a build context can see.
 COPY deploy/acervo/server/web /app/web
 
 RUN mkdir -p /var/lib/acervo/server /var/lib/acervo/downloads /var/lib/acervo/dictionaries \
+    /var/lib/acervo/worker \
     && chmod -R a+rX /app \
     && chmod -R a+rwX /var/lib/acervo
 

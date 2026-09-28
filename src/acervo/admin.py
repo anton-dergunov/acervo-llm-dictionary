@@ -122,6 +122,49 @@ def prune_takes(settings: Settings, older_than_days: float, dry_run: bool) -> in
     return 0
 
 
+def _owner(email: str | None) -> str | None:
+    """The account a command is about: the one named, or the only one there is. None, having said
+    why, when there is no such account or more than one to choose from."""
+    if email:
+        account = accounts.by_email(email)
+        if account is None:
+            print(f"There is no account for {email}.", file=sys.stderr)
+            return None
+        return account["id"]
+    held = accounts.all_ids()
+    if len(held) != 1:
+        print("This server holds more than one account; name one with --owner-email.", file=sys.stderr)
+        return None
+    return held[0]
+
+
+def anki_command(settings: Settings, command: str, email: str | None) -> int:
+    """Anki by hand: the same functions the push and pull jobs run (`services/anki.py`), printing
+    what they do on stderr and the result on stdout.
+
+    A job and a command never use the robot's collection at once — whichever comes second is told the
+    robot is busy — so running one of these while the server is up is safe."""
+    from acervo.services import anki
+
+    open_database(settings.database_path)
+    try:
+        if command == "export-state":
+            result = anki.export_state(settings)
+        elif command == "adopt-server":
+            result = anki.adopt_server(settings)
+        else:
+            owner = _owner(email)
+            if owner is None:
+                return 2
+            result = {"bootstrap": anki.bootstrap, "push": anki.push, "pull": anki.pull}[command](
+                settings, owner)
+    except Exception as failure:  # noqa: BLE001 - every refusal is reported in its own words
+        print(f"Anki {command} failed: {getattr(failure, 'message', '') or failure}", file=sys.stderr)
+        return 2
+    print(json.dumps({"operation": command, **result}, indent=2, ensure_ascii=False, default=str))
+    return 0
+
+
 def show_story(settings: Settings, story_id: str, email: str | None) -> int:
     """A story's parts as they are stored: the text, the passages, and what each was read as.
 
@@ -130,21 +173,9 @@ def show_story(settings: Settings, story_id: str, email: str | None) -> int:
     the writer wrote, or an empty one because the voice that answered could not take it, and where
     each passage sits in the recording.
     """
-    from acervo.repository import accounts, graph
-
-    owner = None
-    if email:
-        account = accounts.by_email(email)
-        if account is None:
-            print(f"There is no account for {email}.", file=sys.stderr)
-            return 2
-        owner = account["id"]
-    else:
-        held = accounts.all_ids()
-        if len(held) != 1:
-            print("This server holds more than one account; name one with --owner-email.", file=sys.stderr)
-            return 2
-        owner = held[0]
+    owner = _owner(email)
+    if owner is None:
+        return 2
 
     story = graph.owned_records(owner, "stories", [story_id]).get(story_id)
     if story is None:
@@ -405,6 +436,19 @@ def main(argv: list[str] | None = None) -> int:
 
     commands.add_parser("providers", help="what this machine can call, and as whom")
 
+    anki_parser = commands.add_parser("anki", help="Anki by hand: what the push and pull jobs do")
+    anki_commands = anki_parser.add_subparsers(dest="anki_command", required=True)
+    for name, text in (
+        ("bootstrap", "make the first collection on an empty Anki server, and switch the loop on"),
+        ("push", "bring Anki up to date with the vocabulary now"),
+        ("pull", "read Anki's review state and history now"),
+        ("export-state", "print what a pull would read, storing nothing"),
+        ("adopt-server", "take over an Anki server a device has already uploaded to"),
+    ):
+        one = anki_commands.add_parser(name, help=text)
+        one.add_argument("--owner-email", default=None,
+                         help="whose vocabulary, where the server holds more than one account")
+
     commands.add_parser("calls", help="how long each job takes per model, from the call log")
 
     jobs_parser = commands.add_parser("jobs", help="the work the server is doing")
@@ -467,6 +511,8 @@ def main(argv: list[str] | None = None) -> int:
         return seed(settings, arguments.owner_email)
     if arguments.command == "providers":
         return providers()
+    if arguments.command == "anki":
+        return anki_command(settings, arguments.anki_command, arguments.owner_email)
     if arguments.command == "stories":
         return show_story(settings, arguments.story_id, arguments.owner_email)
     if arguments.command == "map":

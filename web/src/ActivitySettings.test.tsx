@@ -22,7 +22,7 @@ describe("Settings ▸ Activity", () => {
   beforeEach(() => {
     vi.spyOn(backendSession, "scheduleSettings").mockResolvedValue({
       hour: 2, steps: { "corpus.update": true }, chosen: false, timezone: "UTC",
-      nextRunAt: "2026-09-18T02:00:00.000Z", unavailable: {}, lastRun: null
+      nextRunAt: "2026-09-18T02:00:00.000Z", lastRun: null
     });
   });
 

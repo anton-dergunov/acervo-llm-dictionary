@@ -60,4 +60,4 @@ def _load() -> None:
     if _loaded:
         return
     _loaded = True
-    from acervo.work import capture, corpus, enrich, images, loop, meaning, nightly, story  # noqa: F401 - each registers itself
+    from acervo.work import anki, capture, corpus, enrich, images, loop, meaning, nightly, story  # noqa: F401 - each registers itself

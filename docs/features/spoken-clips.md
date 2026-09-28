@@ -107,7 +107,7 @@ politely re-fetched at will. The index built from them is derived and rebuildabl
 > **DECISION: two directories, mounted at two subpaths of the service's one data directory.**
 >
 > - `$acervo_root/data/speech-cache` → `…/data/raw` — immutable acquired input. **Nothing in either
->   repository deletes this.** Not `deploy.sh --reset-database`, not `--reset-data`, not `reindex`,
+>   repository deletes this.** Not `deploy.sh --reset-database`, not `--reset-anki`, not `reindex`,
 >   not a version bump, not an image rebuild.
 > - `$acervo_root/data/speech-index` → `…/data/index` and `…/data/derived` — rebuildable. Throwing
 >   it away costs CPU and no traffic.

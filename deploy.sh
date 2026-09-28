@@ -4,7 +4,7 @@ set -eu
 repo_root=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 profile=${ACERVO_DEPLOY_PROFILE:-"$repo_root/.acervo-deploy"}
 helper_path=/usr/local/sbin/deploy-acervo
-helper_protocol=12
+helper_protocol=13
 worker_arguments=
 
 mode=
@@ -17,7 +17,8 @@ llm_settings=
 llm_key_name=
 llm_api_key_stdin=false
 google_credentials=
-reset_data=false
+reset_anki=false
+timezone=
 reset_database=false
 transition=false
 cancel_jobs=false
@@ -36,15 +37,15 @@ usage() {
 usage:
   ./deploy.sh --local [--root PATH] [--bind-address ADDRESS] [--port PORT]
               [--app-bind-address ADDRESS] [--app-port PORT]
-              [--configure-credentials] [--reset-data] [--reset-database | --transition]
-              [--cancel-jobs]
+              [--configure-credentials] [--reset-anki] [--reset-database | --transition]
+              [--cancel-jobs] [--timezone ZONE]
               [--configure-llm [--llm-chain IDS] [--llm-set NAME=VALUE]...
                [--llm-key NAME --llm-api-key-stdin]]
   ./deploy.sh [--target USER@HOST] [--root PATH] [--configure-credentials]
               [--bind-address ADDRESS] [--port PORT] [--remember-target]
               [--app-bind-address ADDRESS] [--app-port PORT]
-              [--https-port PORT] [--service NAME] [--reset-data]
-              [--reset-database | --transition] [--cancel-jobs]
+              [--https-port PORT] [--service NAME] [--reset-anki]
+              [--reset-database | --transition] [--cancel-jobs] [--timezone ZONE]
        deploy.sh --jobs open | cancel
               [--configure-llm [--llm-chain IDS] [--llm-set NAME=VALUE]...
                [--llm-key NAME --llm-api-key-stdin]]
@@ -58,7 +59,11 @@ usage:
                       hostname and its own 443, instead of a host port. Needed
                       for Android to install this app alongside another PWA on
                       the same machine; takes precedence over --https-port
-  --reset-data        replace the Anki sync server and robot collections
+  --reset-anki        replace the Anki sync server's collection and the robot's with empty
+                      ones. The vocabulary, its pictures and recordings are untouched
+  --timezone ZONE     the zone the server reads days and the nightly hour in, such as
+                      Europe/London. Without it, this machine's own zone is used, and
+                      failing that the one the server already has
   --reset-database    replace the vocabulary database from scratch; accounts go with
                       it and are recreated with --create-account. Anki data is untouched
   --transition        carry the vocabulary database across a schema change instead of
@@ -154,7 +159,8 @@ while [ "$#" -gt 0 ]; do
     --jobs) choose_action jobs; shift; jobs_arguments=$*; break ;;
     --create-account) choose_action create-account; shift ;;
     --install-samples) choose_action install-samples; shift ;;
-    --reset-data) reset_data=true; shift ;;
+    --reset-anki) reset_anki=true; shift ;;
+    --timezone) [ "$#" -ge 2 ] || usage; timezone=$2; shift 2 ;;
     --reset-database) reset_database=true; shift ;;
     --transition) transition=true; shift ;;
     --cancel-jobs) cancel_jobs=true; shift ;;
@@ -272,11 +278,38 @@ if [ "$mode" = local ] && { [ "$action" = install-helper ] || [ "$action" = conf
 fi
 if [ "$configure" = true ] && [ "$action" != deploy ]; then usage; fi
 if [ "$configure_llm" = true ] && [ "$action" != deploy ]; then usage; fi
-if [ "$reset_data" = true ] && [ "$action" != deploy ]; then usage; fi
+if [ "$reset_anki" = true ] && [ "$action" != deploy ]; then usage; fi
+if [ -n "$timezone" ] && [ "$action" != deploy ]; then usage; fi
 if [ "$reset_database" = true ] && [ "$action" != deploy ]; then usage; fi
 if [ "$transition" = true ] && [ "$action" != deploy ]; then usage; fi
 # Opposite answers to the same schema change: rebuild it, or carry it across.
 if [ "$transition" = true ] && [ "$reset_database" = true ]; then usage; fi
+
+# The zone the server reads days and the nightly hour in, which is the owner's and so this machine's:
+# `--timezone`, else `TZ`, else what /etc/localtime links to. Written into deployment.env on every
+# deploy, because the installer rewrites that file whole; empty leaves the server's zone as it was.
+local_timezone() {
+  zone=${TZ:-}
+  zone=${zone#:}
+  if [ -z "$zone" ] && link=$(readlink /etc/localtime 2>/dev/null); then
+    case "$link" in *zoneinfo/*) zone=${link#*zoneinfo/} ;; esac
+  fi
+  if [ -z "$zone" ] && [ -r /etc/timezone ]; then
+    IFS= read -r zone </etc/timezone || true
+  fi
+  printf '%s' "$zone"
+}
+is_timezone() {
+  case "$1" in ''|/*|*/|*[!A-Za-z0-9/_+-]*) return 1 ;; esac
+}
+effective_timezone=$timezone
+if [ -n "$effective_timezone" ]; then
+  is_timezone "$effective_timezone" || { echo "Not a timezone name: $effective_timezone" >&2; exit 2; }
+elif [ "$action" = deploy ]; then
+  effective_timezone=$(local_timezone)
+  # A POSIX rule in TZ (`<+03>-3`) is not a zone name the server can look up; leave the server's.
+  is_timezone "$effective_timezone" || effective_timezone=
+fi
 
 if [ "$configure_llm" = false ]; then
   [ -z "$llm_chain$llm_settings$llm_key_name$google_credentials" ] \
@@ -355,10 +388,12 @@ else
   fi
 fi
 
-if [ "$reset_data" = true ]; then
-  printf '%s' 'Type RESET ACERVO DATA to permanently replace server and robot data: '
+if [ "$reset_anki" = true ]; then
+  echo "This empties Anki: the sync server's collection and the robot's. Your words, pictures and"
+  echo "recordings are not touched. Keep Anki closed on every device until the bootstrap has run."
+  printf '%s' 'Type RESET ACERVO ANKI to continue: '
   IFS= read -r reset_confirmation
-  [ "$reset_confirmation" = 'RESET ACERVO DATA' ] || {
+  [ "$reset_confirmation" = 'RESET ACERVO ANKI' ] || {
     echo "Reset cancelled" >&2
     exit 2
   }
@@ -566,7 +601,8 @@ if [ "$action" = install-samples ]; then
   [ -z "$credential_args" ] || set -- "$@" "$credential_args"
   [ -z "$llm_credentials" ] || set -- "$@" --llm-credentials-file "$llm_credentials"
   [ -z "$google_credentials" ] || set -- "$@" --google-credentials-file "$google_credentials"
-  [ "$reset_data" = false ] || set -- "$@" --reset-data
+  [ "$reset_anki" = false ] || set -- "$@" --reset-anki
+  [ -z "$effective_timezone" ] || set -- "$@" --timezone "$effective_timezone"
   [ "$reset_database" = false ] || set -- "$@" --reset-database
   [ "$transition" = false ] || set -- "$@" --transition
   if [ -n "$credential_args" ]; then
@@ -764,7 +800,8 @@ installer_arguments=
 [ -z "$llm_credential_args" ] || installer_arguments="$installer_arguments $llm_credential_args"
 installer_arguments="$installer_arguments --bind-address $effective_bind_address --port $effective_anki_port"
 installer_arguments="$installer_arguments --app-bind-address $effective_app_bind_address --app-port $effective_app_port"
-[ "$reset_data" = false ] || installer_arguments="$installer_arguments --reset-data"
+[ "$reset_anki" = false ] || installer_arguments="$installer_arguments --reset-anki"
+[ -z "$effective_timezone" ] || installer_arguments="$installer_arguments --timezone $effective_timezone"
 [ "$reset_database" = false ] || installer_arguments="$installer_arguments --reset-database"
 [ "$transition" = false ] || installer_arguments="$installer_arguments --transition"
 

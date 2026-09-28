@@ -36,7 +36,7 @@ src/acervo/
   speech/            the corpus's translation seam, running on the owner's chain
   dictionaries/      the external-dictionary artifact compiler
   jobs/              one-shot batch work, run by acervo-worker
-  consumers/anki/    the headless Anki robot
+  consumers/anki/    the headless Anki robot, bound to the server by services/anki.py
   tokens.py          signing Acervo's own tokens
   client.py          the one HTTP client against the service
   admin.py           the management CLI
@@ -73,8 +73,11 @@ API work with batch work absent. A route reaches jobs only through `repository/j
 transaction as the record it numbers.** Never a per-table sequence. A record left at revision zero is
 invisible to every `revision > cursor` pull, permanently and silently.
 
-**5 · Batch jobs write through `client.py`, against the service's own graph route.** Same route, same
-validation, same revision allocation as a phone. `client.py` carries no retries: a retry layer in the
+**5 · Batch work outside the server writes through `client.py`, against the service's own graph
+route.** Same route, same validation, same revision allocation as a phone. Work inside it — the
+runner's jobs, and the Anki loop they run — writes through `merge_graph`, the function that route
+calls, so the rule holds there by construction; `consumers/anki/` itself still never touches the
+repository, and `services/anki.py` hands it plain data. `client.py` carries no retries: a retry layer in the
 transport would change the file ingestion's retry behaviour without changing its retry code.
 
 **6 · The pipeline packages stand alone.** `models/` imports no settings, graph, database or Acervo
@@ -186,6 +189,7 @@ The routes, under `/api/acervo/v1` unless shown:
 | Loops and stories | `POST /loops`, `GET /loops/schema`, `POST /loops/{id}/music`, `DELETE /loops/{id}`, `POST /stories`, `GET /stories/types`, `DELETE /stories/{id}`, `POST /stories/{id}/parts/{part}/audio` |
 | The map | `GET /map/{language}` |
 | Review history | `POST /reviews` (a batch, append-only), `GET /reviews/latest?system=`, `GET /stats?language=&days=&weeks=` |
+| Anki | `GET /anki`, `PUT /anki/settings`, `POST /anki/push`, `POST /anki/pull` (due at once) |
 | Clips and the corpus | `GET`/`PUT /clips/settings`, and the allow-listed proxy under `/speech/…` |
 | Dictionaries | `GET /dictionaries`, `GET /dictionaries/online/{source}` |
 | Settings | `GET /models`, `PUT /models/selection`, `GET`/`PUT /rules`, `GET`/`PUT /schedule/settings` |

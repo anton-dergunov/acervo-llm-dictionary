@@ -551,7 +551,7 @@ Wave 3 leads: the 1.96 GB library an earlier pin named served perfectly and rend
 music, with nothing anywhere saying so.
 
 It is the dictionaries arrangement — the owner's own data, moved between the owner's own machines,
-populated once and rarely again — and it is never deleted by `--reset-data`.
+populated once and rarely again — and it is never deleted by `--reset-anki`.
 
 **Licensing is not a reason for any of this**, and an earlier draft of this document said it was. The
 bundle's one attribution-bearing source is CC-BY 3.0, which permits redistribution and commercial use;

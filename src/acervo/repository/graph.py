@@ -31,7 +31,7 @@ from acervo.domain.projection import (
     projected,
 )
 from acervo.errors import ApiError, RecordRefused
-from acervo.repository import jobs
+from acervo.repository import anki_settings, jobs
 from acervo.repository.session import reading, transaction
 from acervo.domain import SCHEMA_VERSION
 
@@ -327,6 +327,10 @@ def merge_graph(
 
     `place_photo` is what lets an attestation name a newly taken photo; without it such a write is
     refused. Whatever it moved is moved back if the transaction does not commit.
+
+    A write to anything the Anki cards are made from also queues a push, when the owner has that on,
+    in the same transaction and whatever `enqueue` says: a picture an enrichment draws changes a card
+    as surely as an edit does. The push waits for the writes to stop (`jobs.enqueue_later`).
     """
     queued: list[dict[str, Any]] = []
     undo: list[Callable[[], None]] = []
@@ -368,6 +372,12 @@ def _merged(
                 elif arrived and collection.key == "senses":
                     words[record["lexemeId"]] = None
             written[collection.key] = rows
+        if any(written.get(key) for key in anki_settings.READ_BY_CARDS) and \
+                anki_settings.pushing(connection, owner):
+            push = jobs.enqueue_later(connection, owner, anki_settings.PUSH, trigger="save",
+                                      subject_kind=anki_settings.SUBJECT, subject_id="push")
+        else:
+            push = None
         if enqueue is not None:
             queued = [
                 jobs.enqueue_enrich(
@@ -383,7 +393,7 @@ def _merged(
             # Which job will enrich each word this write created, so the caller can follow it.
             "enrich": {job["subject"]["id"]: job["id"] for job in queued},
         }
-    return result, queued
+    return result, queued + ([push] if push else [])
 
 
 def tombstone_all_words(owner: str, device: str) -> dict[str, Any]:

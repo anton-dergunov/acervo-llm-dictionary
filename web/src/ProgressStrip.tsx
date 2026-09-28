@@ -52,6 +52,8 @@ function phase(step: JobStep, job?: Job): string | null {
       return `Drawing${waiting}`;
     case "corpus.update":
       return `Updating recorded speech${waiting}`;
+    case "anki.push":
+      return `Sending changes to Anki${waiting}`;
     case "anki.pull":
       return `Reading Anki's review state${waiting}`;
     case "brief":

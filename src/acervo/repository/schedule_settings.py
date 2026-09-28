@@ -19,9 +19,8 @@ from acervo.repository.session import reading, transaction
 
 DEFAULT_HOUR = 2
 # The nightly steps, in the order they run, and whether each is on until the owner says otherwise.
-# The Anki pull is declared and off: it runs from the worker today, and whether it moves here waits
-# on the Anki loop being revisited.
-STEPS: dict[str, bool] = {"corpus.update": True, "anki.pull": False}
+# Reading Anki back is not one of them: it runs every hour, on its own switch (`anki_settings`).
+STEPS: dict[str, bool] = {"corpus.update": True}
 
 
 class ScheduleSettings(Mapping):

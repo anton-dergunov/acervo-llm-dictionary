@@ -236,6 +236,20 @@ schedule_settings = Table(
     Index("idx_schedule_settings_owner", "owner", unique=True),
 )
 
+# Whether this owner's Anki is kept up to date by the server: pushed after the vocabulary changes,
+# and read back every hour. Server state for `sync_state`'s reason. No row means both off, which is
+# right for a server with no Anki behind it; bootstrapping the collection turns both on.
+anki_settings = Table(
+    "anki_settings",
+    metadata,
+    Column("id", String(15), primary_key=True),
+    _owner(),
+    Column("push", Boolean, nullable=False, default=False),
+    Column("pull", Boolean, nullable=False, default=False),
+    Column("edited_at", String(24), nullable=False),
+    Index("idx_anki_settings_owner", "owner", unique=True),
+)
+
 # Work the server does on this owner's behalf, one row per request for it. Server state for
 # `sync_state`'s reason — never replicated, no `revision`/`deleted`/`edited_by` — and the durable
 # record the runner in `acervo/work/` reads (`docs/architecture/jobs.md`).

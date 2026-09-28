@@ -97,6 +97,22 @@ class Settings(BaseSettings):
     # server's own local zone — which in a container is usually UTC, so a deployment sets this.
     timezone: str = Field(default="", alias="ACERVO_TIMEZONE")
 
+    # The Anki sync server and the robot's own collection (`docs/features/anki.md`). The robot is
+    # just another sync client, so it holds a collection of its own: here, in the directory the
+    # one-shot worker mounts too, so the two share one collection and one lock. Unset endpoint or
+    # credentials mean this server has no Anki behind it, and nothing Anki runs.
+    anki_sync_endpoint: str = Field(default="", alias="ACERVO_ANKI_SYNC_ENDPOINT")
+    anki_sync_username: str = Field(default="", alias="ACERVO_ANKI_SYNC_USERNAME")
+    anki_sync_password: str = Field(default="", alias="ACERVO_ANKI_SYNC_PASSWORD")
+    anki_data_path: Path = Field(default=Path("/var/lib/acervo/worker"), alias="ACERVO_ANKI_DATA_PATH")
+    anki_template_path: Path = Field(default=Path("/app/templates"), alias="ACERVO_ANKI_TEMPLATE_DIR")
+    # Seconds media sync may go without progress before the robot gives up on it.
+    anki_media_timeout: float = Field(default=120.0, alias="ACERVO_ANKI_MEDIA_TIMEOUT")
+
+    @property
+    def anki_configured(self) -> bool:
+        return bool(self.anki_sync_endpoint and self.anki_sync_username and self.anki_sync_password)
+
     # Whether this process runs the job runner (`acervo/work/`). Always on in a deployment; off only
     # for a process that must serve without working, which is none today.
     runner_enabled: bool = Field(default=True, alias="ACERVO_RUNNER")

@@ -15,10 +15,6 @@ const STEP_LABELS: Record<string, { title: string; help: string }> = {
     title: "Update recorded speech",
     help: "Fetch what your enabled channels have published and rebuild the clip index. Words you "
       + "already have are never re-searched."
-  },
-  "anki.pull": {
-    title: "Read Anki's review state",
-    help: "Bring your review history back into Acervo as study state."
   }
 };
 
@@ -87,15 +83,14 @@ export default function SchedulePanel({ onNotify }: { onNotify(message: string):
 
     {Object.entries(settings.steps).map(([name, on]) => {
       const label = STEP_LABELS[name] ?? { title: name, help: "" };
-      const unavailable = settings.unavailable[name];
       return <label key={name} className="config-switch">
         <input
-          type="checkbox" checked={on} disabled={Boolean(unavailable)}
+          type="checkbox" checked={on}
           onChange={(event) => void apply({ steps: { [name]: event.target.checked } })}
         />
         <span>
           <strong>{label.title}</strong>
-          <span>{unavailable || label.help}</span>
+          <span>{label.help}</span>
         </span>
       </label>;
     })}

@@ -7,7 +7,7 @@ PATH="$PATH:/usr/local/bin:/var/packages/ContainerManager/target/usr/bin:/var/pa
 export PATH
 
 usage() {
-  echo "usage: install.sh [--root PATH] [--archive FILE] [--credentials-stdin | --credentials-file FILE] [--llm-credentials-file FILE] [--google-credentials-file FILE] [--bind-address ADDRESS] [--port PORT] [--app-bind-address ADDRESS] [--app-port PORT] [--reset-data] [--reset-database | --transition]" >&2
+  echo "usage: install.sh [--root PATH] [--archive FILE] [--credentials-stdin | --credentials-file FILE] [--llm-credentials-file FILE] [--google-credentials-file FILE] [--bind-address ADDRESS] [--port PORT] [--app-bind-address ADDRESS] [--app-port PORT] [--timezone ZONE] [--reset-anki] [--reset-database | --transition]" >&2
   exit 2
 }
 
@@ -36,9 +36,10 @@ credentials_stdin=false
 credentials_file=
 llm_credentials_file=
 google_credentials_file=
-reset_data=false
+reset_anki=false
 reset_database=false
 transition=false
+requested_timezone=
 requested_bind_address=
 requested_anki_port=
 requested_app_bind_address=
@@ -55,7 +56,8 @@ while [ "$#" -gt 0 ]; do
     --port) [ "$#" -ge 2 ] || usage; requested_anki_port=$2; shift 2 ;;
     --app-bind-address) [ "$#" -ge 2 ] || usage; requested_app_bind_address=$2; shift 2 ;;
     --app-port) [ "$#" -ge 2 ] || usage; requested_app_port=$2; shift 2 ;;
-    --reset-data) reset_data=true; shift ;;
+    --reset-anki) reset_anki=true; shift ;;
+    --timezone) [ "$#" -ge 2 ] || usage; requested_timezone=$2; shift 2 ;;
     --reset-database) reset_database=true; shift ;;
     --transition) transition=true; shift ;;
     *) usage ;;
@@ -66,6 +68,7 @@ done
 [ "$reset_database" = false ] || [ "$transition" = false ] || usage
 case "$requested_bind_address" in *[!A-Za-z0-9:._-]*) usage ;; esac
 case "$requested_app_bind_address" in *[!A-Za-z0-9:._-]*) usage ;; esac
+case "$requested_timezone" in /*|*/|*[!A-Za-z0-9/_+-]*) usage ;; esac
 case "$requested_anki_port" in ""|*[!0-9]*) [ -z "$requested_anki_port" ] || usage ;; esac
 case "$requested_app_port" in ""|*[!0-9]*) [ -z "$requested_app_port" ] || usage ;; esac
 if [ -n "$requested_anki_port" ] && { [ "$requested_anki_port" -lt 1 ] || [ "$requested_anki_port" -gt 65535 ]; }; then
@@ -270,7 +273,7 @@ while [ "$backup_count" -gt 10 ]; do
   backup_count=$((backup_count - 1))
 done
 
-if [ "$reset_data" = true ]; then
+if [ "$reset_anki" = true ]; then
   rm -rf -- "$acervo_root/data/anki-server" "$acervo_root/data/acervo-worker"
   mkdir -p "$acervo_root/data/anki-server" "$acervo_root/data/acervo-worker"
 fi
@@ -335,6 +338,12 @@ bind_address=${requested_bind_address:-${ACERVO_BIND_ADDRESS:-127.0.0.1}}
 anki_port=${requested_anki_port:-${ACERVO_ANKI_PORT:-27701}}
 app_bind_address=${requested_app_bind_address:-${ACERVO_APP_BIND_ADDRESS:-127.0.0.1}}
 app_port=${requested_app_port:-${ACERVO_APP_PORT:-27702}}
+# The zone the deployer asked for, else the one this deployment already had: the file is rewritten
+# whole below, and a zone lost on redeploy would move every day boundary and the nightly hour to UTC.
+timezone=$requested_timezone
+if [ -z "$timezone" ] && [ -f "$acervo_root/deployment.env" ]; then
+  timezone=$(sed -n 's/^ACERVO_TIMEZONE=//p' "$acervo_root/deployment.env" | head -n 1)
+fi
 app_version=0.0.0
 app_build=0
 if [ -f "$release_dir/version.json" ]; then
@@ -350,6 +359,7 @@ ACERVO_APP_BIND_ADDRESS=$app_bind_address
 ACERVO_APP_PORT=$app_port
 ACERVO_APP_VERSION=$app_version
 ACERVO_APP_BUILD=$app_build
+ACERVO_TIMEZONE=$timezone
 ACERVO_ANKI_SERVER_DATA=$acervo_root/data/anki-server
 ACERVO_WORKER_DATA=$acervo_root/data/acervo-worker
 ACERVO_DICTIONARIES=$acervo_root/data/dictionaries
@@ -388,7 +398,7 @@ compose_file="$release_dir/deploy/acervo/compose.yaml"
 
 # There is one schema and no upgrade path: a schema change is deployed by rebuilding the database,
 # which is the doctrine AGENTS.md already records, and this is it. Accounts go with it and are
-# recreated afterwards with `--create-account`. Anki review history lives under --reset-data
+# recreated afterwards with `--create-account`. Anki review history lives under --reset-anki
 # instead: it is irreplaceable, and a schema rebuild must not take it out.
 if [ "$reset_database" = true ]; then
   echo "Stopping the server to replace its database..."

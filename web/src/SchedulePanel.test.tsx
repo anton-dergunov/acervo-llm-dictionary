@@ -4,9 +4,8 @@ import { AcervoApiError, backendSession, type ScheduleSettings } from "./api";
 import SchedulePanel from "./SchedulePanel";
 
 const settings = (over: Partial<ScheduleSettings> = {}): ScheduleSettings => ({
-  hour: 2, steps: { "corpus.update": true, "anki.pull": false }, chosen: false,
+  hour: 2, steps: { "corpus.update": true }, chosen: false,
   timezone: "Europe/Madrid", nextRunAt: "2026-09-18T00:00:00.000Z",
-  unavailable: { "anki.pull": "Pulling Anki's review state still runs from the worker." },
   lastRun: null, ...over
 });
 
@@ -25,17 +24,13 @@ describe("Settings ▸ Schedule", () => {
     await waitFor(() => expect(saved).toHaveBeenCalledWith({ hour: 5 }));
   });
 
-  it("switches a step, and leaves one that cannot run here alone", async () => {
+  it("switches a step", async () => {
     vi.spyOn(backendSession, "scheduleSettings").mockResolvedValue(settings());
     const saved = vi.spyOn(backendSession, "saveScheduleSettings").mockResolvedValue(settings());
     render(<SchedulePanel onNotify={vi.fn()} />);
 
     fireEvent.click(await screen.findByRole("checkbox", { name: /Update recorded speech/ }));
     await waitFor(() => expect(saved).toHaveBeenCalledWith({ steps: { "corpus.update": false } }));
-
-    const anki = screen.getByRole("checkbox", { name: /Read Anki's review state/ });
-    expect(anki).toBeDisabled();
-    expect(screen.getByText(/still runs from the worker/)).toBeInTheDocument();
   });
 
   it("says how the last run went, and when nothing has run", async () => {

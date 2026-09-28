@@ -5,9 +5,9 @@ PATH="$PATH:/usr/local/bin:/var/packages/ContainerManager/target/usr/bin:/var/pa
 export PATH
 
 usage() {
-  echo "usage: run-worker.sh [--root PATH] [--input-archive FILE]" >&2
-  echo "         {bootstrap-upload|push|export-state|pull-state|adopt-server}" >&2
-  echo "       run-worker.sh [--root PATH] {push-vocabulary|bootstrap-vocabulary}" >&2
+  echo "usage: run-worker.sh [--root PATH] {anki-bootstrap-vocabulary|anki-push-vocabulary|anki-pull-state" >&2
+  echo "         |anki-export-state|anki-adopt-server}" >&2
+  echo "       run-worker.sh [--root PATH] --input-archive FILE {anki-bootstrap-upload|anki-push}" >&2
   echo "       run-worker.sh [--root PATH] build-dictionary <compiler arguments...>" >&2
   echo "         e.g. build-dictionary --id cc-cedict" >&2
   echo "              build-dictionary --all --language es,en,zh" >&2
@@ -23,7 +23,7 @@ while [ "$#" -gt 0 ]; do
   case "$1" in
     --root) [ "$#" -ge 2 ] || usage; acervo_root=$2; shift 2 ;;
     --input-archive) [ "$#" -ge 2 ] || usage; input_archive=$2; shift 2 ;;
-    bootstrap-upload|push|export-state|pull-state|adopt-server|push-vocabulary|bootstrap-vocabulary|build-dictionary|backfill) operation=$1; shift; break ;;
+    anki-bootstrap-vocabulary|anki-push-vocabulary|anki-pull-state|anki-export-state|anki-adopt-server|anki-bootstrap-upload|anki-push|build-dictionary|backfill) operation=$1; shift; break ;;
     *) usage ;;
   esac
 done
@@ -79,7 +79,9 @@ cleanup() {
 trap cleanup EXIT HUP INT TERM
 
 case "$operation" in
-  bootstrap-upload|push)
+  anki-bootstrap-upload|anki-push)
+    # A manifest carried in from outside, which is what the sync smoke test drives. The robot runs
+    # in the worker for these, against the same collection and lock the server uses.
     [ -f "$input_archive" ] || { echo "$operation requires an input archive" >&2; exit 2; }
     run_id=$(date -u +%Y%m%dT%H%M%SZ)-$$
     input_dir="$acervo_root/input/runs/$run_id"
@@ -87,34 +89,21 @@ case "$operation" in
     tar -xzf "$input_archive" -C "$input_dir"
     # shellcheck disable=SC2086
     compose $common_args --profile tools run --rm --build acervo-worker \
-      anki "$operation" "/input/runs/$run_id/manifest.json"
+      anki "${operation#anki-}" "/input/runs/$run_id/manifest.json"
     ;;
-  export-state)
+  anki-bootstrap-vocabulary|anki-push-vocabulary|anki-pull-state|anki-export-state|anki-adopt-server)
+    # The vocabulary's own Anki work runs in the server, which holds the vocabulary, the pictures and
+    # the robot's collection, and which runs the same push and read by itself: after a change, and
+    # every hour. These do it now, by hand, and print what they do.
+    case "$operation" in
+      anki-bootstrap-vocabulary) command=bootstrap ;;
+      anki-push-vocabulary) command=push ;;
+      anki-pull-state) command=pull ;;
+      anki-export-state) command=export-state ;;
+      anki-adopt-server) command=adopt-server ;;
+    esac
     # shellcheck disable=SC2086
-    compose $common_args --profile tools run --rm --build acervo-worker anki export-state
-    ;;
-  pull-state)
-    # The write half of the same read: `export-state` prints the scheduling, this puts it in the
-    # graph where the interface can show it.
-    # shellcheck disable=SC2086
-    compose $common_args --profile tools run --rm --build acervo-worker anki pull-state
-    ;;
-  push-vocabulary)
-    # Cards out, built where the pictures and recordings are: the worker reads the graph as the
-    # owner, writes the manifest into its own scratch space and pushes it. No archive to carry.
-    # shellcheck disable=SC2086
-    compose $common_args --profile tools run --rm --build acervo-worker anki push-vocabulary
-    ;;
-  bootstrap-vocabulary)
-    # The same, for an empty account: the first collection, uploaded whole.
-    # shellcheck disable=SC2086
-    compose $common_args --profile tools run --rm --build acervo-worker \
-      anki push-vocabulary --bootstrap
-    ;;
-  adopt-server)
-    # shellcheck disable=SC2086
-    compose $common_args --profile tools run --rm --build acervo-worker \
-      anki adopt-server --confirm-no-other-clients
+    compose $common_args exec -T server python -m acervo.admin anki "$command"
     ;;
   build-dictionary)
     # Compiling streams sources that run to gigabytes, so this is deliberately a command the owner

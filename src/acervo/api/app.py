@@ -10,6 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from acervo.api import auth, errors, static
 from acervo.api.routes import (
+    anki,
     articles,
     capture,
     chat,
@@ -37,6 +38,7 @@ from acervo.repository.session import open_database
 from acervo.services.models import open_call_log
 from acervo.settings import Settings
 from acervo.settings import settings as read_settings
+from acervo.work import anki as anki_jobs
 from acervo.work import nightly, photos
 from acervo.work.runner import Runner
 
@@ -49,6 +51,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # The one timed thing the server does for the owner. Only the served application ticks it: a runner built by a
     # test or a script runs jobs without queuing nights.
     runner.ticks.append(nightly.timer(settings, runner.clock))
+    # And the hourly read of Anki's review state, for an owner who has it on.
+    runner.ticks.append(anki_jobs.timer(settings, runner.clock))
     # Not timed work in that sense: file housekeeping for the photos nobody added.
     runner.ticks.append(photos.timer(settings, runner.clock))
 
@@ -89,7 +93,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     errors.install(app)
 
     api = APIRouter(prefix=API_ROOT)
-    for module in (health, session, graph, articles, capture, chat, clips, dictionaries, events, images,
+    for module in (health, session, graph, anki, articles, capture, chat, clips, dictionaries, events, images,
                    jobs, loops, mac_release, meaning, models, photo, pronunciations, reviews, rules,
                    schedule, speech, stories):
         api.include_router(module.router)

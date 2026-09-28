@@ -19,6 +19,8 @@ const KIND_LABELS: Record<string, string> = {
   "image.rebrief": "Rewriting picture briefs",
   nightly: "Nightly run",
   "corpus.update": "Updating recorded speech",
+  "anki.push": "Sending changes to Anki",
+  "anki.pull": "Reading Anki's review state",
   loop: "Making a loop",
   story: "Making a story",
   "map.name": "Naming the map's regions"
