@@ -49,11 +49,12 @@ def normal_sync(collection: Collection, auth) -> None:
 
 def snapshot(collection: Collection) -> dict:
     notes = []
-    notetype = collection.models.by_name("Acervo Vocabulary")
+    notetype = collection.models.by_name("Acervo Meaning")
     if notetype:
         for note_id in collection.models.nids(notetype["id"]):
             note = collection.get_note(note_id)
             cards = note.cards()
+            shown = "".join(note[name] for name in ("Picture", "HeadwordAudio", "SentenceAudio"))
             notes.append(
                 {
                     "note_id": note["AcervoNoteId"],
@@ -65,7 +66,7 @@ def snapshot(collection: Collection) -> dict:
                     "reps": [int(card.reps) for card in cards],
                     "lapses": [int(card.lapses) for card in cards],
                     "flags": [int(card.user_flag()) for card in cards],
-                    "media": sorted(collection.media.files_in_str(note.mid, note["Comment"])),
+                    "media": sorted(collection.media.files_in_str(note.mid, shown)),
                 }
             )
     return {"notes": sorted(notes, key=lambda item: item["note_id"])}
@@ -91,7 +92,7 @@ def main() -> int:
             normal_sync(collection, auth)
         elif args.command == "review-state":
             normal_sync(collection, auth)
-            notetype = collection.models.by_name("Acervo Vocabulary")
+            notetype = collection.models.by_name("Acervo Meaning")
             note_id = collection.models.nids(notetype["id"])[0]
             card = collection.get_note(note_id).cards()[0]
             card.reps = 9
@@ -101,8 +102,10 @@ def main() -> int:
             normal_sync(collection, auth)
         else:
             normal_sync(collection, auth)
-            notetype = collection.models.by_name("Acervo Vocabulary")
-            notetype["tmpls"][0]["qfmt"] += "<!-- drift -->"
+            # A change of shape, not of look: a push brings an older look up to date by itself,
+            # and only a field or card type it did not make is what it must refuse.
+            notetype = collection.models.by_name("Acervo Meaning")
+            collection.models.add_field(notetype, collection.models.new_field("Drift"))
             collection.models.update_dict(notetype)
             collection.set_schema_modified()
             output = collection.sync_collection(auth, sync_media=False)

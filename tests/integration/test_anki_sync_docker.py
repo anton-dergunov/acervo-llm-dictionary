@@ -41,28 +41,34 @@ def write_manifest(input_dir: Path, *, updated: bool = False) -> None:
     )
     (media / "balsa.mp3").write_bytes(b"ID3-acervo-audio")
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "notes": [
             {
+                "kind": "meaning",
                 "note_id": NOTE_IDS[0],
                 "lexeme_id": "lexeme000000001",
+                "sense_id": "sense0000000001",
                 "deck": "Spanish::Vocabulary",
-                "sentence": "La balsa actualizada" if updated else "La balsa",
-                "translation": "The raft",
-                "comment_html": "<p>Updated.</p>" if updated else "<p>A vessel.</p>",
+                "fields": {
+                    "Recognise": "y",
+                    "Headword": "balsa",
+                    "Sentence": "La balsa actualizada" if updated else "La balsa",
+                    "Translation": "The raft",
+                    "Note": "Updated." if updated else "A vessel.",
+                },
                 "tags": [
                     "acervo::topic::nature" if updated else "acervo::topic::travel"
                 ],
-                "image_path": "media/balsa.webp",
-                "audio_path": "media/balsa.mp3",
+                "media": {"Picture": "media/balsa.webp", "HeadwordAudio": "media/balsa.mp3"},
             },
             {
+                "kind": "meaning",
                 "note_id": NOTE_IDS[1],
                 "lexeme_id": "lexeme000000002",
+                "sense_id": "sense0000000002",
                 "deck": "Spanish::Vocabulary",
-                "sentence": "El arroyo",
-                "translation": "The stream",
-                "comment_html": "<p>Second note.</p>",
+                "fields": {"Recognise": "y", "Headword": "arroyo", "Sentence": "El arroyo",
+                           "Translation": "The stream"},
                 "tags": ["acervo::topic::nature"],
             },
         ],

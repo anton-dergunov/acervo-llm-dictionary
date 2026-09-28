@@ -15,22 +15,23 @@ def test_input_bundle_contains_only_manifest_and_referenced_media(tmp_path: Path
     media.mkdir()
     (media / "image.webp").write_bytes(b"image")
     (media / "audio.mp3").write_bytes(b"audio")
+    (media / "thumb.webp").write_bytes(b"thumb")
     (tmp_path / "unrelated-private-file.txt").write_text("exclude", encoding="utf-8")
     manifest = tmp_path / "source.json"
     manifest.write_text(
         json.dumps(
             {
-                "schema_version": 1,
+                "schema_version": 2,
                 "notes": [
                     {
+                        "kind": "meaning",
                         "note_id": "note00000000001",
                         "lexeme_id": "lexeme000000001",
+                        "sense_id": "sense0000000001",
                         "deck": "Test",
-                        "sentence": "Test",
-                        "translation": "Test",
+                        "fields": {"Recognise": "y", "Senses": '<img src="media/thumb.webp">'},
                         "tags": ["acervo::test"],
-                        "image_path": "media/image.webp",
-                        "audio_path": "media/audio.mp3",
+                        "media": {"Picture": "media/image.webp", "HeadwordAudio": "media/audio.mp3"},
                     }
                 ],
             }
@@ -58,6 +59,7 @@ def test_input_bundle_contains_only_manifest_and_referenced_media(tmp_path: Path
         "manifest.json",
         "media/audio.mp3",
         "media/image.webp",
+        "media/thumb.webp",
     ]
     assert all(member.uid == 0 and member.gid == 0 for member in members)
     assert all(member.uname == "" and member.gname == "" for member in members)

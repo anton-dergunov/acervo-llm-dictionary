@@ -24,10 +24,9 @@ def build_archive(manifest_path: Path, output_path: Path) -> None:
     manifest, manifest_dir = SyncManifest.load(manifest_path)
     media: dict[Path, Path] = {}
     for note in manifest.notes:
-        for kind in ("image", "audio"):
-            source = note.media_source(kind, manifest_dir)
-            if source is not None:
-                media[source] = source.relative_to(manifest_dir.resolve())
+        for source in [*note.media_sources(manifest_dir).values(),
+                       *note.embedded_sources(manifest_dir).values()]:
+            media[source] = source.relative_to(manifest_dir.resolve())
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with tarfile.open(output_path, "w:gz", format=tarfile.PAX_FORMAT) as archive:

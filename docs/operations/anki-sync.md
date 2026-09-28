@@ -242,29 +242,43 @@ alone.
 
 ## Manifest contract
 
-The accepted version-one shape is:
+The accepted version-two shape is:
 
 ```json
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "notes": [{
-    "note_id": "note00000000001",
+    "kind": "meaning",
+    "note_id": "example00000001",
     "lexeme_id": "lexeme000000001",
+    "sense_id": "sense0000000001",
     "deck": "Spanish::Vocabulary",
-    "sentence": "La balsa",
-    "translation": "The raft",
-    "comment_html": "<p>A vessel.</p>",
-    "tags": ["acervo::topic::travel"],
-    "image_path": "media/balsa.webp",
-    "audio_path": "media/balsa.mp3"
+    "fields": {
+      "Recognise": "y",
+      "Article": "la", "Headword": "balsa",
+      "Sentence": "Cruzamos el río en una <mark>balsa</mark>.",
+      "Gloss": "raft",
+      "Senses": "<div class=\"slist\"><img src=\"media/balsa.webp\"> …</div>"
+    },
+    "media": {"Picture": "media/balsa.webp", "HeadwordAudio": "media/balsa.mp3"},
+    "tags": ["acervo::topic::travel"]
   }]
 }
 ```
 
+`kind` is `meaning` (an example's or a sense's note, which names its `sense_id`) or `word` (a word's,
+which does not). `fields` are HTML by field name, and a field left out is written empty; the identity
+fields come from the ids and cannot be given. `media` maps a media field to a file. A content field
+may show a file too, as `src="media/…"`, and it is imported and renamed the same way. A note that
+fills none of its gates — `Recognise` or `Produce` for a meaning, a `HeadwordAudio` file for a word —
+would make no card and is refused. The fields each note type has are in
+`src/acervo/consumers/anki/model.py`.
+
 Media paths must be relative to the manifest and cannot escape its directory.
 Media are imported under content-addressed names. Duplicate manifest identities
 or duplicate collection `AcervoNoteId` values fail before any mutation. Notes
-absent from a manifest remain untouched.
+absent from a manifest remain untouched. Notes are added in manifest order,
+which is the order Anki introduces their new cards in.
 
 ## FSRS state back into Acervo
 
@@ -311,10 +325,16 @@ docker compose -p acervo \
   adopt-server --confirm-no-other-clients
 ```
 
-This downloads the existing collection, installs the Acervo note type, and
-performs the one manually confirmed full upload. Routine commands never change
-the note type. A template or schema mismatch stops and requires a future explicit
-migration workflow.
+This downloads the existing collection, installs the Acervo note types and
+fonts, and performs the one manually confirmed full upload. Routine commands
+never change a note type's shape: a field or card type that differs stops the
+push, because changing it needs a full sync. Its look — the card HTML, the
+stylesheet and the fonts — is brought up to date by every push, since an
+ordinary sync carries it.
+
+**When there is nothing in Anki worth keeping, wipe and start again** rather than
+adopt: `./deploy.sh --reset-data`, then `bootstrap-upload` with a full manifest.
+Each phone then asks for a direction on its next sync; choose download.
 
 ## Reference: adopting an existing mobile collection
 
@@ -337,7 +357,7 @@ quick start instead. When a mobile collection must be preserved:
 1. On mobile, open an Acervo card, answer it once, optionally flag it, and sync.
 2. Run `scripts/acervo_anki_remote.sh export-state`. Verify that card has a
    non-zero `reps` value and the expected flag.
-3. Change the same note's sentence or comment in the manifest and run `push`.
+3. Change the same note's sentence or note in the manifest and run `push`.
    The robot output must say `updated`, not `created`, for that note.
 4. Sync mobile again. Confirm the new content and image/audio appear, the card
    remains reviewed rather than new, and its flag is unchanged.

@@ -14,8 +14,10 @@ from typing import Any, Iterator
 from acervo.domain.ids import instant_of
 
 from .naming import slugify_filename
-from .manifest import SyncManifest, SyncManifestNote
-from .model import MODEL_NAME, create_notetype, load_css, require_notetype
+from .manifest import EMBEDDED, SyncManifest, SyncManifestNote
+from .model import (
+    KINDS, MEDIA_FIELDS, CardDesign, create_notetypes, install_fonts, require_notetype,
+)
 
 
 class SyncSafetyError(RuntimeError):
@@ -59,7 +61,7 @@ class AnkiRobot:
 
     def __init__(self, settings: RobotSettings):
         self.settings = settings
-        self.css = load_css(settings.template_dir)
+        self.design = CardDesign.load(settings.template_dir)
 
     @contextmanager
     def _exclusive_collection(self) -> Iterator[None]:
@@ -137,7 +139,8 @@ class AnkiRobot:
                     raise SyncSafetyError(
                         "bootstrap-upload requires an empty local collection and empty server"
                     )
-                create_notetype(collection, self.css)
+                create_notetypes(collection, self.design)
+                fonts = install_fonts(collection, self.design)
                 report = self._upsert(collection, manifest, manifest_dir)
                 output = collection.sync_collection(auth, sync_media=False)
                 if output.required != output.FULL_UPLOAD:
@@ -156,6 +159,7 @@ class AnkiRobot:
                 return {
                     "operation": "bootstrap-upload",
                     "sync": "full-upload-complete",
+                    "fonts_added": fonts,
                     **report,
                 }
             finally:
@@ -190,7 +194,8 @@ class AnkiRobot:
                 collection.reopen(after_full_sync=True)
                 self._wait_for_media(collection)
                 self._backup(collection)
-                create_notetype(collection, self.css)
+                create_notetypes(collection, self.design)
+                install_fonts(collection, self.design)
                 schema_output = collection.sync_collection(auth, sync_media=False)
                 if schema_output.required not in (
                     schema_output.FULL_SYNC,
@@ -198,7 +203,7 @@ class AnkiRobot:
                 ):
                     raise SyncSafetyError(
                         "adopt-server expected a full upload choice after installing the "
-                        f"Acervo note type, got {_sync_requirement_name(schema_output)}"
+                        f"Acervo note types, got {_sync_requirement_name(schema_output)}"
                     )
                 collection.close_for_full_sync()
                 collection.full_upload_or_download(
@@ -224,11 +229,20 @@ class AnkiRobot:
             try:
                 auth = self._login(collection)
                 self._normal_sync(collection, auth, stage="pre-mutation sync")
-                require_notetype(collection, self.css)
                 self._backup(collection)
+                # A note type of the wrong shape is refused here, before anything is written. One of
+                # the right shape but an older look is brought up to date: that is an ordinary change.
+                redesigned = [
+                    kind.name for kind in KINDS.values()
+                    if require_notetype(collection, kind, self.design, update_design=True)[1]
+                ]
+                fonts = install_fonts(collection, self.design)
                 report = self._upsert(collection, manifest, manifest_dir)
                 self._normal_sync(collection, auth, stage="post-mutation sync")
-                return {"operation": "push", "sync": "complete", **report}
+                return {
+                    "operation": "push", "sync": "complete", "redesigned": redesigned,
+                    "fonts_added": fonts, **report,
+                }
             finally:
                 self._close(collection)
 
@@ -239,20 +253,7 @@ class AnkiRobot:
             try:
                 auth = self._login(collection)
                 self._normal_sync(collection, auth, stage="state-export sync")
-                notetype = require_notetype(collection, self.css)
-                notes = []
-                for anki_note_id in collection.models.nids(notetype["id"]):
-                    note = collection.get_note(anki_note_id)
-                    cards = [self._card_state(collection, card) for card in note.cards()]
-                    notes.append(
-                        {
-                            "note_id": note["AcervoNoteId"],
-                            "lexeme_id": note["AcervoLexemeId"],
-                            "anki_note_id": int(note.id),
-                            "card_ids": [card["anki_card_id"] for card in cards],
-                            "cards": cards,
-                        }
-                    )
+                notes = self._notes_state(collection)
                 notes.sort(key=lambda item: item["note_id"])
                 return {
                     "operation": "export-state",
@@ -261,6 +262,31 @@ class AnkiRobot:
                 }
             finally:
                 self._close(collection)
+
+    @classmethod
+    def _notes_state(cls, collection: Any) -> list[dict[str, Any]]:
+        """Every Acervo note's cards and what the scheduler knows about each, by note."""
+        notes = []
+        for kind in KINDS.values():
+            # Read-only: a collection whose cards look older is still read, not refused.
+            notetype = collection.models.by_name(kind.name)
+            if notetype is None:
+                continue
+            for anki_note_id in collection.models.nids(notetype["id"]):
+                note = collection.get_note(anki_note_id)
+                cards = [cls._card_state(collection, card) for card in note.cards()]
+                notes.append(
+                    {
+                        "note_id": note["AcervoNoteId"],
+                        "kind": kind.key,
+                        "lexeme_id": note["AcervoLexemeId"],
+                        "sense_id": note["AcervoSenseId"] or None,
+                        "anki_note_id": int(note.id),
+                        "card_ids": [card["anki_card_id"] for card in cards],
+                        "cards": cards,
+                    }
+                )
+        return notes
 
     @staticmethod
     def _card_state(collection: Any, card: Any) -> dict[str, Any]:
@@ -297,6 +323,7 @@ class AnkiRobot:
         )
         return {
             "anki_card_id": int(card.id),
+            "card_type": str(card.template()["name"]),
             "reps": int(card.reps),
             "lapses": int(card.lapses),
             "queue": int(card.queue),
@@ -311,48 +338,48 @@ class AnkiRobot:
     def _upsert(
         self, collection: Any, manifest: SyncManifest, manifest_dir: Path
     ) -> dict[str, Any]:
-        notetype = require_notetype(collection, self.css)
+        notetypes = {
+            key: require_notetype(collection, kind, self.design, update_design=False)[0]
+            for key, kind in KINDS.items()
+        }
+        # Every Acervo note in the collection, of either type, by its identity. Read once, and
+        # refused before anything is written if an identity occurs twice.
         existing: dict[str, Any] = {}
-        for anki_note_id in collection.models.nids(notetype["id"]):
-            note = collection.get_note(anki_note_id)
-            identity = note["AcervoNoteId"]
-            if identity in existing:
-                raise DuplicateIdentityError(
-                    f"AcervoNoteId {identity!r} occurs more than once in Anki"
-                )
-            existing[identity] = note
-
-        selected: dict[str, Any | None] = {}
+        for notetype in notetypes.values():
+            for anki_note_id in collection.models.nids(notetype["id"]):
+                note = collection.get_note(anki_note_id)
+                identity = note["AcervoNoteId"]
+                if identity in existing:
+                    raise DuplicateIdentityError(
+                        f"AcervoNoteId {identity!r} occurs more than once in Anki"
+                    )
+                existing[identity] = note
         for item in manifest.notes:
-            identity = str(item.note_id)
-            note_ids = collection.find_notes(f"AcervoNoteId:{identity}")
-            if len(note_ids) > 1:
+            held = existing.get(str(item.note_id))
+            if held is not None and held.mid != notetypes[item.kind]["id"]:
                 raise DuplicateIdentityError(
-                    f"AcervoNoteId {identity} occurs {len(note_ids)} times in Anki"
+                    f"AcervoNoteId {item.note_id} belongs to an unexpected note type"
                 )
-            selected[identity] = collection.get_note(note_ids[0]) if note_ids else None
 
         created = updated = unchanged = media_added = 0
         results = []
+        touched: set[int] = set()
         for item in manifest.notes:
             identity = str(item.note_id)
-            note = selected[identity]
+            kind = KINDS[item.kind]
+            note = existing.get(identity)
             is_new = note is None
             if is_new:
-                note = collection.new_note(notetype)
-            elif note.mid != notetype["id"]:
-                raise DuplicateIdentityError(
-                    f"AcervoNoteId {identity} belongs to an unexpected note type"
-                )
+                note = collection.new_note(notetypes[item.kind])
 
-            comment, added = self._render_comment(collection, item, manifest_dir)
+            media, added = self._render_media(collection, item, manifest_dir)
             media_added += added
             fields = {
                 "AcervoNoteId": identity,
                 "AcervoLexemeId": str(item.lexeme_id),
-                "Sentence": item.sentence,
-                "Translation": item.translation,
-                "Comment": comment,
+                "AcervoSenseId": str(item.sense_id or ""),
+                **{name: media.get(name, item.fields.get(name, "")) for name in kind.content_fields},
+                **{name: media.get(name, "") for name in kind.media_fields},
             }
             managed_tags = set(item.tags)
             preserved_tags = {
@@ -372,13 +399,16 @@ class AnkiRobot:
                 note[name] = value
             note.tags = desired_tags
             if is_new:
+                # Added in manifest order, which is the order Anki introduces new cards in.
                 collection.add_note(note, deck_id)
                 created += 1
             elif changed:
                 collection.update_note(note)
+                # A gate filled since the last push makes its card now; Anki does that on update.
                 if deck_changed:
                     collection.set_deck(note.card_ids(), deck_id)
                 updated += 1
+                touched.add(int(note.id))
             else:
                 unchanged += 1
             results.append(
@@ -390,28 +420,56 @@ class AnkiRobot:
                     "status": "created" if is_new else ("updated" if changed else "unchanged"),
                 }
             )
+        removed = self._remove_closed_cards(collection, touched)
+        if removed:
+            for result in results:
+                result["card_ids"] = [card for card in result["card_ids"] if card not in removed]
         return {
             "created": created,
             "updated": updated,
             "unchanged": unchanged,
             "media_added": media_added,
+            "cards_removed": len(removed),
             "notes": results,
         }
 
     @staticmethod
-    def _render_comment(
+    def _remove_closed_cards(collection: Any, note_ids: set[int]) -> set[int]:
+        """Cards of these notes whose gate has since been emptied.
+
+        A sense's `Recognise` closes when it gains its first example, whose own note now asks that
+        question. Anki keeps such a card, showing a blank front, until someone runs Empty Cards; it
+        can no longer be answered, so its history has nothing left to describe. Only the notes this
+        push updated are looked at, so nothing outside Acervo's own is ever removed.
+        """
+        if not note_ids:
+            return set()
+        report = collection.get_empty_cards()
+        doomed = {
+            int(card_id)
+            for note in report.notes
+            if int(note.note_id) in note_ids
+            for card_id in note.card_ids
+        }
+        if doomed:
+            collection.remove_cards_and_orphaned_notes(sorted(doomed))
+        return doomed
+
+    @staticmethod
+    def _render_media(
         collection: Any, item: SyncManifestNote, manifest_dir: Path
-    ) -> tuple[str, int]:
-        blocks: list[str] = []
+    ) -> tuple[dict[str, str], int]:
+        """Each media field's file, imported under a content-addressed name, as the tag that shows
+        or plays it. Returns the fields and how many files were new to the collection."""
+        rendered: dict[str, str] = {}
         added = 0
-        for kind in ("image", "audio"):
-            source = item.media_source(kind, manifest_dir)
-            if source is None:
-                continue
+
+        def imported(source: Path, fallback: str) -> str:
+            nonlocal added
             data = source.read_bytes()
             digest = hashlib.sha256(data).hexdigest()[:20]
             suffix = source.suffix.lower()
-            stem = slugify_filename(source.stem) or kind
+            stem = slugify_filename(source.stem) or fallback
             desired_name = f"acervo-{digest}-{stem}{suffix}"
             existed = collection.media.have(desired_name)
             actual_name = collection.media.write_data(desired_name, data)
@@ -420,16 +478,24 @@ class AnkiRobot:
                     f"Unexpected Anki media collision: {desired_name} became {actual_name}"
                 )
             added += not existed
-            escaped = html.escape(actual_name, quote=True)
-            if kind == "image":
-                blocks.append(f'<div class="image"><img src="{escaped}"></div>')
-            else:
-                blocks.append(
-                    f'<div class="audio">[sound:{actual_name}] Listen to pronunciation</div>'
-                )
-        if item.comment_html:
-            blocks.append(item.comment_html)
-        return "\n".join(blocks), added
+            return html.escape(actual_name, quote=True)
+
+        for field, source in item.media_sources(manifest_dir).items():
+            name = imported(source, field.lower())
+            rendered[field] = (
+                f'<img src="{name}" alt="">'
+                if MEDIA_FIELDS[field] == "image"
+                else f'<audio src="{name}" preload="auto"></audio>'
+            )
+        names = {
+            path: imported(source, "media")
+            for path, source in item.embedded_sources(manifest_dir).items()
+        }
+        for field, text in item.fields.items():
+            if names:
+                rendered[field] = EMBEDDED.sub(
+                    lambda found: f'src="{names.get(found.group(1), found.group(1))}"', text)
+        return rendered, added
 
 
 def result_json(result: dict[str, Any]) -> str:

@@ -1,0 +1,27 @@
+<div class="acv-frame"><div class="acv k-rec">
+  <div class="acv-top"><span class="kind">Recognise</span><span class="lang">{{Language}}</span></div>
+  <div class="split">
+    <div class="ans">
+      <div>
+        <span class="dom">{{Domain}}{{#SenseLabel}} · {{SenseLabel}}{{/SenseLabel}}</span>
+        <p class="gloss">{{Gloss}}{{#GlossMore}} <span class="alt">{{GlossMore}}</span>{{/GlossMore}}</p>
+      </div>
+      {{#Definition}}<p class="def"><span>{{Definition}}</span>{{DefinitionAudio}}</p>{{/Definition}}
+      {{#Sentence}}
+      <hr class="rule">
+      <p class="ctx sm">{{Sentence}}</p>
+      {{#Translation}}<p class="tr">{{Translation}}</p>{{/Translation}}
+      {{/Sentence}}
+      <div class="meta">
+        <span>{{#Article}}<span class="art">{{Article}}</span> {{/Article}}<b>{{Headword}}</b></span>
+        {{#IPA}}<span class="ipa">{{IPA}}</span>{{/IPA}}
+        {{#Grammar}}<span class="gchip">{{Grammar}}</span>{{/Grammar}}
+        {{HeadwordAudio}}
+      </div>
+      {{#Note}}<p class="note">{{Note}}</p>{{/Note}}
+    </div>
+    {{#Picture}}<figure class="pic">{{Picture}}</figure>{{/Picture}}
+  </div>
+  {{#Senses}}<div class="senses"><h4>The whole word</h4>{{Senses}}</div>{{/Senses}}
+</div></div>
+<!-- acervo:script -->
