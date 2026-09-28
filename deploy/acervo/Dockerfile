@@ -7,14 +7,16 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONPATH=/app/src
 
 # PyGlossary is pinned and lxml is explicit: without lxml it silently disables seven plugins,
-# including the CC-CEDICT reader, warning rather than failing (docs §11.4).
+# including the CC-CEDICT reader, warning rather than failing (docs §11.4). Pillow scales pictures
+# down for the Anki cards; it is imported only when a push writes them, so nothing fails earlier.
 RUN python -m pip install --no-cache-dir \
     "anki==${ANKI_VERSION}" \
     "httpx>=0.28" \
     "pydantic>=2,<3" \
     "python-slugify>=8,<9" \
     "pyglossary==5.4.2" \
-    "lxml"
+    "lxml" \
+    "pillow>=12.3"
 
 WORKDIR /app
 COPY src /app/src
