@@ -60,6 +60,8 @@ const state = {
   map: false,
   mapSel: -1,
   mapReturn: false,
+  /* Where Back from an article goes when it was opened from a word tapped in a story or a loop. */
+  readingReturn: null,
   mapStyle: "atlas",
   mapLabels: "model",
   mapState: null,
@@ -1780,8 +1782,11 @@ function markWords(text, words, field = "forms") {
   words.forEach((word) => (word[field] || []).forEach((form) => { if (form.trim()) forms.push(form.trim()); }));
   if (!forms.length) return esc(text);
   forms.sort((a, b) => b.length - a.length);
+  /* Each mark says which word it is, so a tap on it is answered from the words you hold. */
+  const owner = new Map();
+  words.forEach((word) => (word[field] || []).forEach((form) => owner.set(form.trim().toLowerCase(), word.lexemeId)));
   const pattern = new RegExp("(" + forms.map((f) => f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")", "gi");
-  return esc(text).replace(pattern, '<b class="story-mark">$1</b>');
+  return esc(text).replace(pattern, (form) => `<b class="story-mark" data-lexeme="${owner.get(form.toLowerCase()) || ""}">${form}</b>`);
 }
 
 function storyRow(story) {
@@ -1822,8 +1827,8 @@ function renderStories() {
     const passages = (part, words, language, playing) => {
       if (!playing) return `<p class="story-text" lang="${language}">${markWords(part.text, words)}</p>`;
       const cut = part.text.search(/[.!?]\s/) + 2;
-      const seg = (text, on) => `<span class="story-seg${on ? " on" : ""}">${markWords(text, words)}</span>`;
-      return `<p class="story-text tappable" lang="${language}">${seg(part.text.slice(0, cut), true)}${seg(part.text.slice(cut), false)}</p>`;
+      const seg = (text, on, index) => `<span class="story-seg${on ? " on" : ""}" data-passage="${index}">${markWords(text, words)}</span>`;
+      return `<p class="story-text tappable" lang="${language}">${seg(part.text.slice(0, cut), true, 0)}${seg(part.text.slice(cut), false, 1)}</p>`;
     };
     const partPage = (part, index) => {
       const shown = Boolean(state.storyShown[part.id]);
@@ -2861,6 +2866,8 @@ wireLoopControls($("#loopChip"));
 /* ── render ──────────────────────────────────────────────────────────── */
 
 function render() {
+  // The sheet belongs to the text it was opened over, and that text is about to be drawn again.
+  forgetLook();
   /* Reading a word on a phone or tablet does not need the topic strip, and it cost a whole row. A
      loop does not need it either: a topic files a *word*, and nothing on that surface is filed. */
   $("#main").classList.remove("cards-on");
@@ -3147,6 +3154,7 @@ document.addEventListener("click", (ev) => {
     state.openId = null; state.openExt = null;
     // Opened from the map: Back goes back to it, where it was left, with the peek still open.
     if (state.mapReturn) { state.mapReturn = false; state.map = true; }
+    backToReading();
     render(); return;
   }
 
@@ -3229,6 +3237,7 @@ document.addEventListener("keydown", (ev) => {
   }
   // Innermost first: leave what you are composing before leaving the entry it belongs to.
   if (ev.key === "Escape") {
+    if (look) { closeLook(); return; }
     if (state.rowMenu || state.selList) { state.rowMenu = null; state.selList = false; render(); return; }
     if (state.add) closeSheet();
     else if (state.mode === "edit") { state.mode = "read"; render(); }
@@ -3236,6 +3245,7 @@ document.addEventListener("keydown", (ev) => {
     else if (state.openId) {
       state.openId = null;
       if (state.mapReturn) { state.mapReturn = false; state.map = true; }
+      backToReading();
       render();
     }
     /* Innermost first here too: put the peek away, then leave the map. */
@@ -3308,27 +3318,428 @@ $("#harness").addEventListener("click", (ev) => {
   render();
 });
 
-/* Listen to whatever is selected, in the language the article is in. A floating button above the
-   selection, because a play button on every phrase would be noise and a selection is already the
-   gesture for "this bit". */
-const selectionSay = el(`<button class="sel-say" aria-label="Listen to the selection">${ICON.play}<span>Listen</span></button>`);
+/* ── look a word up ──────────────────────────────────────────────────────
+   A tap on a word in the language being learned — in a story, on a loop's card, in an article —
+   says what it means in that sentence, in a sheet at the foot of the surface. **The tap moves
+   nothing**: a story does not start reading and a loop does not seek, because the owner tapped a
+   word to understand it, and whatever the tap used to do is a button on the sheet instead. Anything
+   that is not such a word keeps its tap, so a loop's translation line and a card's edge still seek.
+
+   A word you hold is answered from your own words, at once and offline, with the way to its
+   article; any other is asked of the server's quick look-up, as a photographed word is, and Add
+   files it in the Inbox without leaving what you are reading. Every answer here is a stub. */
+
+/* Where a tap may look up, per surface: text in the language being learned, and nothing else. */
+const LOOK_BLOCKS = {
+  story: ".story-text",
+  loop: ".lyric-source .lyric-said",
+  article: "#pane .t, #pane .sense-def"
+};
+
+/* What the quick look-up would answer, by the tapped word. The tap is a pointer, not the answer:
+   *punto* in "a las ocho en punto" is `en punto`, and *paso* in "con paso firme" is the phrase. */
+const LOOK_STUBS = {
+  martes: ["el martes", "Tuesday"],
+  punto: ["en punto", "sharp, on the dot"],
+  perro: ["el perro", "dog"],
+  marrón: ["marrón", "brown"],
+  pequeña: ["pequeño", "small, little"],
+  esquina: ["la esquina", "corner"],
+  migajas: ["la migaja", "crumb"],
+  buscar: ["buscar", "to look for"],
+  calle: ["la calle", "street"],
+  paso: ["con paso firme", "with a firm step"],
+  firme: ["con paso firme", "with a firm step"],
+  "paso firme": ["con paso firme", "with a firm step"],
+  espera: ["esperar", "waits"],
+  turno: ["el turno", "turn (in a queue)"],
+  saca: ["sacar", "takes out"],
+  barra: ["la barra de pan", "a loaf, a baguette"],
+  horno: ["el horno", "oven"],
+  despacio: ["despacio", "slowly"],
+  huele: ["oler", "smells"],
+  corteza: ["la corteza", "crust"],
+  inmediato: ["de inmediato", "at once"],
+  cartera: ["la cartera", "wallet"],
+  billetes: ["el billete", "banknote"],
+  comprendió: ["comprender", "understood"],
+  dueño: ["el dueño", "owner"],
+  duró: ["durar", "lasted"],
+  dormí: ["dormirse", "fell asleep"],
+  llevo: ["llevar", "have been (for a time)"],
+  torcí: ["torcerse", "twisted (a joint)"],
+  bailando: ["bailar", "dancing"],
+  nariz: ["la nariz", "nose"],
+  estornudar: ["estornudar", "to sneeze"],
+  pica: ["picar", "itches", "k3m91xq7d0a2vbe"]
+};
+
+/* `?lookup=slow` answers in three seconds, `?lookup=offline` never does. */
+const LOOK_MODE = new URLSearchParams(location.search).get("lookup") || "";
+
+let look = null;
+let lookTimer = 0;
+
+const ARTICLES = /^(el|la|los|las|un|una|lo)\s+/i;
+
+function lookSurface() {
+  if (state.stories && state.storyOpen) return "story";
+  if (state.loops && state.loopOpen) return "loop";
+  if (state.openId && state.mode === "read" && !state.add) return "article";
+  return null;
+}
+
+function caretAt(x, y) {
+  if (document.caretPositionFromPoint) {
+    const at = document.caretPositionFromPoint(x, y);
+    return at ? { node: at.offsetNode, offset: at.offset } : null;
+  }
+  if (document.caretRangeFromPoint) {
+    const at = document.caretRangeFromPoint(x, y);
+    return at ? { node: at.startContainer, offset: at.startOffset } : null;
+  }
+  return null;
+}
+
+function textNodesOf(block) {
+  const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  return nodes;
+}
+
+/* The word around a character offset, by the language's own idea of a word — which is also what
+   chooses a unit around the tapped character where there are no spaces. */
+function wordIn(text, offset, lang) {
+  const words = new Intl.Segmenter(lang, { granularity: "word" }).segment(text);
+  let before = null;
+  for (const piece of words) {
+    if (!piece.isWordLike) continue;
+    const end = piece.index + piece.segment.length;
+    if (piece.index <= offset && offset < end) return { start: piece.index, end };
+    if (end === offset) before = { start: piece.index, end };
+  }
+  return before;
+}
+
+/* The sentence a span sits in, and the span measured from the sentence's start — the shape the
+   quick look-up takes. */
+function sentenceIn(text, start, end, lang) {
+  for (const piece of new Intl.Segmenter(lang, { granularity: "sentence" }).segment(text)) {
+    const stop = piece.index + piece.segment.length;
+    if (piece.index <= start && end <= stop) {
+      const lead = piece.segment.length - piece.segment.trimStart().length;
+      return { text: piece.segment.trim(), start: start - piece.index - lead, end: end - piece.index - lead };
+    }
+  }
+  return { text, start, end };
+}
+
+function rangeOver(nodes, start, end) {
+  const range = document.createRange();
+  let seen = 0;
+  for (const node of nodes) {
+    const length = node.data.length;
+    if (start >= seen && start <= seen + length) range.setStart(node, start - seen);
+    if (end >= seen && end <= seen + length) { range.setEnd(node, end - seen); break; }
+    seen += length;
+  }
+  return range;
+}
+
+function offsetIn(nodes, node, offset) {
+  let seen = 0;
+  for (const one of nodes) {
+    if (one === node) return seen + offset;
+    seen += one.data.length;
+  }
+  return -1;
+}
+
+/* The word under a tap, or nothing. **A tap near nothing selects nothing**: the caret lands on the
+   nearest letter wherever the finger is, so the point must fall on the word itself, give or take a
+   fifth of a line — the rule photo capture's tap already keeps. */
+function wordAtPoint(ev) {
+  const surface = lookSurface();
+  if (!surface) return null;
+  const caret = caretAt(ev.clientX, ev.clientY);
+  if (!caret || caret.node.nodeType !== Node.TEXT_NODE) return null;
+  const block = caret.node.parentElement && caret.node.parentElement.closest(LOOK_BLOCKS[surface]);
+  if (!block) return null;
+  const nodes = textNodesOf(block);
+  const text = nodes.map((node) => node.data).join("");
+  const offset = offsetIn(nodes, caret.node, caret.offset);
+  const word = offset < 0 ? null : wordIn(text, offset, state.lang);
+  if (!word) return null;
+  const range = rangeOver(nodes, word.start, word.end);
+  const onWord = [...range.getClientRects()].some((box) => {
+    const give = box.height * 0.2;
+    return ev.clientX >= box.left - give && ev.clientX <= box.right + give
+      && ev.clientY >= box.top - give && ev.clientY <= box.bottom + give;
+  });
+  if (!onWord) return null;
+  const mark = caret.node.parentElement.closest("[data-lexeme]");
+  return { surface, block, text, range, start: word.start, end: word.end, lexemeId: mark ? mark.dataset.lexeme : null };
+}
+
+/* A word you hold, from your own words: a story's mark names it, and otherwise the tapped form is
+   compared with each headword — with and without its article — and lemma. An inflected form this
+   misses is found by the server, which answers with the word you have. */
+function heldWord(hit, surface) {
+  if (hit.lexemeId) {
+    const own = LEXEMES.find((x) => x.id === hit.lexemeId);
+    if (own) return { id: own.id, headword: own.headword, gloss: own.shortGloss };
+    const told = STORY_WORDS.find((word) => word.lexemeId === hit.lexemeId);
+    if (told) return { id: told.lexemeId, headword: told.sourceText, gloss: told.gloss, noArticle: true };
+  }
+  const want = fold(hit.word);
+  const own = LEXEMES.find((x) => x.language === state.lang
+    && [x.lemma, x.headword, x.headword.replace(ARTICLES, "")].some((form) => fold(form) === want));
+  return own ? { id: own.id, headword: own.headword, gloss: own.shortGloss } : null;
+}
+
+/* What the sheet's play button does, per surface: the job the tap used to have. */
+function playFor(hit) {
+  if (hit.surface === "story") {
+    const passage = hit.range.startContainer.parentElement.closest("[data-passage]");
+    if (!passage) return null;   // a part read whole has no passages; its ▷ reads it
+    return { label: "From here", run: () => {
+      document.querySelectorAll(".story-seg.on").forEach((one) => one.classList.remove("on"));
+      passage.classList.add("on");
+      toast("♪ Reading on from this passage");
+    } };
+  }
+  if (hit.surface === "loop") {
+    const row = hit.block.closest(".lyric-row");
+    return { label: "Play from this line", run: () => { loopSeek(Number(row.dataset.seek)); if (!player.playing) loopPlay(); } };
+  }
+  return null;
+}
+
+function openLook(hit) {
+  clearTimeout(lookTimer);
+  const word = hit.text.slice(hit.start, hit.end);
+  const sentence = sentenceIn(hit.text, hit.start, hit.end, state.lang);
+  const full = { ...hit, word, sentence };
+  const held = heldWord(full, hit.surface);
+  look = { ...full, held, play: playFor(full), stage: held ? "done" : "asking", answer: null, added: false };
+  if (window.CSS && CSS.highlights && typeof Highlight === "function") CSS.highlights.set("look-up", new Highlight(hit.range));
+  if (!held) ask();
+  paintLook();
+}
+
+function ask() {
+  const asked = look;
+  asked.stage = "asking";
+  if (LOOK_MODE === "offline") {
+    lookTimer = setTimeout(() => {
+      if (look !== asked) return;
+      asked.stage = "failed";
+      asked.message = "Looking a word up needs the server, and it can't be reached right now.";
+      paintLook();
+    }, 700);
+    return;
+  }
+  lookTimer = setTimeout(() => {
+    if (look !== asked) return;
+    const stub = LOOK_STUBS[asked.word.toLowerCase()] || [asked.word.toLowerCase(), "what it means in this sentence"];
+    const own = stub[2] ? LEXEMES.find((x) => x.id === stub[2]) : null;
+    asked.answer = { headword: stub[0], gloss: stub[1] };
+    if (own) asked.held = { id: own.id, headword: own.headword, gloss: stub[1] };
+    asked.stage = "done";
+    paintLook();
+  }, LOOK_MODE === "slow" ? 3000 : 900);
+}
+
+/* Dropped without a trace, for a redraw that takes the text it named with it. */
+function forgetLook() {
+  clearTimeout(lookTimer);
+  look = null;
+  if (window.CSS && CSS.highlights) CSS.highlights.delete("look-up");
+  const sheet = document.getElementById("lookSheet");
+  if (sheet) sheet.remove();
+}
+
+function closeLook() { forgetLook(); }
+
+function sheetHtml() {
+  const l = look;
+  const lang = `lang="${state.lang}"`;
+  const self = l.held && l.held.id === state.openId;
+  let meaning;
+  if (l.held) {
+    meaning = `<strong ${lang}>${esc(l.held.headword)}</strong><span> — ${esc(l.held.gloss)}</span>`
+      + `<span class="photo-held"> · ${self ? "this word" : "in your words"}</span>`;
+  } else if (l.stage === "failed") {
+    meaning = `<span class="photo-meaning-failed">${esc(l.message)}</span>`;
+  } else if (l.answer) {
+    meaning = `<strong ${lang}>${esc(l.answer.headword)}</strong><span> — ${esc(l.answer.gloss)}</span>`;
+  } else {
+    meaning = `<span class="photo-meaning-pending"><strong ${lang}>${esc(l.word)}</strong> — looking it up…</span>`;
+  }
+  const s = l.sentence;
+  const context = l.held ? "" : `<p class="look-sentence" ${lang}>${esc(s.text.slice(0, s.start))}<mark>${esc(s.text.slice(s.start, s.end))}</mark>${esc(s.text.slice(s.end))}</p>`;
+  const actions = [];
+  if (l.held && !self) actions.push(`<button class="tb-btn primary" data-look="open">${ICON.open}<span>Open ${esc(l.held.headword)}</span></button>`);
+  else if (!l.held && l.added) actions.push(`<span class="look-added">${ICON.check}<span>Added to your Inbox</span></span>`);
+  else if (!l.held && l.stage === "failed") actions.push('<button class="tb-btn" data-look="retry">Try again</button>');
+  else if (!l.held) actions.push(`<button class="tb-btn primary" data-look="add"${l.stage === "done" ? "" : " disabled"}>${ICON.plus}<span>Add</span></button>`);
+  if (l.play) actions.push(`<button class="tb-btn" data-look="play">${ICON.play}<span>${esc(l.play.label)}</span></button>`);
+  return `<div class="look-head">
+      <div class="photo-meaning look-meaning" aria-live="polite">${meaning}</div>
+      <button class="icon-btn look-close" data-look="close" aria-label="Close">${ICON.close}</button>
+    </div>
+    ${context}
+    ${actions.length ? `<div class="look-actions">${actions.join("")}</div>` : ""}`;
+}
+
+/* Where the sheet goes. Over the foot of a story's page; between a loop's cards and its controls,
+   which it never covers; and in an article on top of the ask dock, which already owns the foot of
+   the column and stays there as the page scrolls. */
+function paintLook() {
+  let sheet = document.getElementById("lookSheet");
+  if (!look) { if (sheet) sheet.remove(); return; }
+  if (!sheet) {
+    sheet = el('<aside class="look-sheet" id="lookSheet" role="dialog" aria-label="Look up a word"></aside>');
+    if (look.surface === "story") { sheet.classList.add("over"); $(".story-read").appendChild(sheet); }
+    else if (look.surface === "loop") $(".loop-play").insertBefore(sheet, $(".loop-play .player"));
+    else if ($(".ask")) $(".ask").prepend(sheet);
+    else { sheet.classList.add("stuck"); $("#paneWrap").appendChild(sheet); }
+    sheet.addEventListener("click", onSheet);
+  }
+  sheet.innerHTML = sheetHtml();
+  if (look.surface === "story") {
+    sheet.classList.remove("top");
+    const word = look.range.getBoundingClientRect();
+    if (word.bottom > sheet.getBoundingClientRect().top - 8) sheet.classList.add("top");
+  }
+}
+
+function onSheet(ev) {
+  const button = ev.target.closest("[data-look]");
+  if (!button || !look) return;
+  const what = button.dataset.look;
+  if (what === "close") { closeLook(); return; }
+  if (what === "retry") { ask(); paintLook(); return; }
+  if (what === "play") { look.play.run(); return; }
+  if (what === "add") { look.added = true; paintLook(); return; }
+  if (what === "open") openHeld(look.held);
+}
+
+/* Open goes to the article, and Back from it comes back here: the same page of the story, or the
+   loop still playing — the way Back from an article opened on the map goes back to the map. */
+function openHeld(held) {
+  if (!LEXEMES.some((x) => x.id === held.id)) {
+    toast(`Opens ${held.headword} — the prototype has no article for it`);
+    return;
+  }
+  if (state.stories) state.readingReturn = { stories: true, storyOpen: state.storyOpen, storyAt: state.storyAt };
+  else if (state.loops) state.readingReturn = { loops: true, loopOpen: state.loopOpen };
+  else state.readingReturn = null;
+  state.stories = false; state.loops = false;
+  state.openId = held.id; state.openExt = null; state.mode = "read"; state.card = 0;
+  render();
+  $("#main").scrollTop = 0;
+}
+
+function backToReading() {
+  const back = state.readingReturn;
+  state.readingReturn = null;
+  if (!back) return;
+  if (back.stories) { state.stories = true; state.storyOpen = back.storyOpen; state.storyAt = back.storyAt; }
+  if (back.loops) { state.loops = true; state.loopOpen = back.loopOpen; }
+}
+
+/* Ahead of every other handler on the surfaces, so a word tap on a loop's card never reaches the
+   seek. A tap that is not on a word closes the sheet and carries on to do what it always did. */
+$("#main").addEventListener("click", (ev) => {
+  if (ev.target.closest(".look-sheet")) return;
+  // A drag that selected text is a selection, not a tap — the pill answers it.
+  if (getSelection() && getSelection().toString()) return;
+  const control = ev.target.closest("button, a, input, [data-say]");
+  if (control && !control.classList.contains("lyric-row")) return;
+  const hit = wordAtPoint(ev);
+  if (hit) {
+    ev.stopPropagation();
+    ev.preventDefault();
+    openLook(hit);
+    return;
+  }
+  if (look) closeLook();
+}, true);
+
+/* Whatever is selected, in the language the article is in: listen to it, or look it up. A floating
+   pill above the selection, because a play button on every phrase would be noise and a selection is
+   already the gesture for "this bit" — the way to look up a phrase the tap did not widen to. */
+const selectionSay = el(`<div class="sel-say" role="toolbar" aria-label="The selection">
+  <button class="sel-act" data-sel="listen" aria-label="Listen to the selection">${ICON.play}<span>Listen</span></button>
+  <button class="sel-act" data-sel="look" aria-label="Look the selection up">${ICON.search}<span>Look up</span></button>
+</div>`);
 selectionSay.hidden = true;
 document.body.appendChild(selectionSay);
 // Pressing it must not collapse the selection it is about to read.
 selectionSay.addEventListener("mousedown", (ev) => ev.preventDefault());
+selectionSay.addEventListener("click", (ev) => {
+  const act = ev.target.closest("[data-sel]");
+  if (!act || act.dataset.sel !== "look") return;
+  ev.stopPropagation();
+  const selection = getSelection();
+  if (!selection || !selection.rangeCount) return;
+  const range = selection.getRangeAt(0);
+  const surface = lookSurface();
+  const start = range.startContainer.nodeType === Node.TEXT_NODE ? range.startContainer.parentElement : range.startContainer;
+  const block = surface && start.closest(LOOK_BLOCKS[surface]);
+  if (!block) { toast("Look up works on text in the language you are learning"); return; }
+  const nodes = textNodesOf(block);
+  const text = nodes.map((node) => node.data).join("");
+  const from = offsetIn(nodes, range.startContainer, range.startOffset);
+  const to = block.contains(range.endContainer) ? offsetIn(nodes, range.endContainer, range.endOffset) : text.length;
+  if (from < 0 || to <= from) return;
+  const trimmed = text.slice(from, to);
+  const lead = trimmed.length - trimmed.trimStart().length;
+  const tail = trimmed.length - trimmed.trimEnd().length;
+  const hit = { surface, block, text, start: from + lead, end: to - tail, lexemeId: null };
+  hit.range = rangeOver(nodes, hit.start, hit.end);
+  selection.removeAllRanges();
+  selectionSay.hidden = true;
+  openLook(hit);
+});
 document.addEventListener("selectionchange", () => {
   const selection = getSelection();
   const text = selection && !selection.isCollapsed ? selection.toString().trim() : "";
-  if (!text || !state.openId || state.mode !== "read" || !$("#pane").contains(selection.anchorNode)) {
+  const surface = lookSurface();
+  const root = surface === "article" ? $("#pane") : surface ? $("#composer") : null;
+  if (!text || !root || !root.contains(selection.anchorNode)) {
     selectionSay.hidden = true;
     return;
   }
   const box = selection.getRangeAt(0).getBoundingClientRect();
   selectionSay.hidden = false;
-  selectionSay.style.left = `${Math.min(Math.max(box.left + box.width / 2, 60), innerWidth - 60)}px`;
+  selectionSay.style.left = `${Math.min(Math.max(box.left + box.width / 2, 100), innerWidth - 100)}px`;
   selectionSay.style.top = `${Math.max(box.top, 70)}px`;
-  selectionSay.dataset.say = text.length > 160 ? `${text.slice(0, 160)}…` : text;
+  selectionSay.querySelector("[data-sel=listen]").dataset.say = text.length > 160 ? `${text.slice(0, 160)}…` : text;
 });
+
+/* `?tap=<word>` taps the first shown occurrence of that word on the surface a deep link opened —
+   the story's page, the loop's cards or the article — so every state of the sheet can be shot again. */
+function tapByLink(word) {
+  const surface = lookSurface();
+  if (!surface) return;
+  const want = fold(word);
+  for (const block of document.querySelectorAll(LOOK_BLOCKS[surface])) {
+    const nodes = textNodesOf(block);
+    const text = nodes.map((node) => node.data).join("");
+    for (const piece of new Intl.Segmenter(state.lang, { granularity: "word" }).segment(text)) {
+      if (!piece.isWordLike || fold(piece.segment) !== want) continue;
+      const range = rangeOver(nodes, piece.index, piece.index + piece.segment.length);
+      const box = range.getBoundingClientRect();
+      if (!box.width) continue;
+      const mark = range.startContainer.parentElement.closest("[data-lexeme]");
+      openLook({ surface, block, text, range, start: piece.index, end: piece.index + piece.segment.length, lexemeId: mark ? mark.dataset.lexeme : null });
+      return;
+    }
+  }
+}
 
 /* deep link — ?open=<id|headword>&mode=read|yaml keeps screenshots reproducible */
 const params = new URLSearchParams(location.search);
@@ -3429,6 +3840,8 @@ if (params.get("map") === "1" || params.get("focus") || params.get("mapstate")) 
 
 paintSwitches();
 render();
+/* `tap=<word>` waits for the story's page to be scrolled to before it taps. */
+if (params.get("tap")) setTimeout(() => tapByLink(params.get("tap")), 250);
 
 if (state.map && meaningMap) {
   const d = mapData();

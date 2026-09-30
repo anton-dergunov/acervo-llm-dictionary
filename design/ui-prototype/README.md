@@ -48,6 +48,19 @@ Stories open the same way: `?story=1&part=0` reads the first written story from 
 translation over. The first part is drawn as if it were being read aloud: its button lit and its
 first sentence tinted, as the application tints the passage that is sounding.
 
+A word can be looked up by tapping it: in a story's text, in a loop's lines in the language being
+learned, and in an article's definitions and examples. The tap moves nothing — the story does not
+start reading and the loop does not seek — and a sheet at the foot says what the word means in that
+sentence. A word you hold is answered from your words, with Open, and Back from its article returns
+to the story's page or the loop; any other word waits about a second for a stubbed look-up and offers
+Add, which files it in the Inbox. What the tap used to do is the sheet's second button: From here in
+a story, Play from this line in a loop. Anything that is not such a word keeps its tap, so a loop's
+translation line and a card's edge still seek. Selecting text offers Look up beside Listen, which is
+how a phrase is looked up. `tap=<word>` taps the first shown occurrence of a word on the surface a
+deep link opened (`?story=1&part=0&tap=migajas`, `?open=picar&tap=nariz`, and a loop with `loop=`
+and `t=`), `lookup=slow` answers in three seconds and `lookup=offline` never does. Only words that
+also exist in `data.js` open a real article; the story's own words do not.
+
 Photo capture is the Add view's Photo tab, never where Add opens: `?add=photo` is the start, with
 nothing switched on. Every photo is shown in one square. `?add=photo&photo=read` is a camera photo,
 which *is* that square — "llevada a cabo" tapped, its sentence banded line by line, the sheet below.
