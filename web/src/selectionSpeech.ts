@@ -31,17 +31,55 @@ function segmenter(lang: string): Intl.Segmenter | null {
 
 /** The whole sentences of `text` that the span [start, end) touches. */
 export function sentencesAround(text: string, start: number, end: number, lang: string): string {
+  return sentenceAt(text, start, end, lang).text;
+}
+
+/**
+ * The whole sentences the span [start, end) touches, trimmed, and the span measured from their start —
+ * the `{ text, selection }` a quick look-up takes. Without a sentence splitter it is the span alone.
+ */
+export function sentenceAt(text: string, start: number, end: number, lang: string): {
+  text: string; selection: { start: number; end: number };
+} {
   const splitter = segmenter(lang);
-  if (!splitter) return text.slice(start, end);
   let from = start;
   let to = end;
-  for (const piece of splitter.segment(text)) {
-    const pieceEnd = piece.index + piece.segment.length;
-    if (pieceEnd <= start || piece.index >= end) continue;
-    from = Math.min(from, piece.index);
-    to = Math.max(to, pieceEnd);
+  if (splitter) {
+    for (const piece of splitter.segment(text)) {
+      const pieceEnd = piece.index + piece.segment.length;
+      if (pieceEnd <= start || piece.index >= end) continue;
+      from = Math.min(from, piece.index);
+      to = Math.max(to, pieceEnd);
+    }
   }
-  return text.slice(from, to);
+  const whole = text.slice(from, to);
+  const lead = whole.length - whole.trimStart().length;
+  const sentence = whole.trim();
+  return { text: sentence, selection: { start: start - from - lead, end: end - from - lead } };
+}
+
+/**
+ * The word the character at `offset` belongs to, by the language's own idea of a word — which is
+ * also what chooses a unit around a tapped character in a language written without spaces. A caret
+ * just after a word's last letter counts as on it, since that is where a tap on the letter's right
+ * half puts it. Null when the offset is on no word at all.
+ */
+export function wordAt(text: string, offset: number, lang: string): { start: number; end: number } | null {
+  let words: Intl.Segmenter | null = null;
+  try {
+    words = typeof Intl !== "undefined" && "Segmenter" in Intl ? new Intl.Segmenter(lang, { granularity: "word" }) : null;
+  } catch {
+    words = null;
+  }
+  if (!words) return null;
+  let before: { start: number; end: number } | null = null;
+  for (const piece of words.segment(text)) {
+    if (!piece.isWordLike) continue;
+    const end = piece.index + piece.segment.length;
+    if (piece.index <= offset && offset < end) return { start: piece.index, end };
+    if (end === offset) before = { start: piece.index, end };
+  }
+  return before;
 }
 
 /** How many characters of `block` come before the boundary (`node`, `offset`). */

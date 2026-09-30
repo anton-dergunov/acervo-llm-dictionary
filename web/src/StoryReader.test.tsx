@@ -1,10 +1,13 @@
-import { fireEvent, render, screen, within } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { QuickLookUp } from "./api";
 import type { VocabularyGraph } from "./domain";
+import { LookUpContext, type LookUpServices } from "./LookUpSheet";
 import StoryReader from "./StoryReader";
 import type { StoryPlayback } from "./storyAudio";
 import { storyPartsOf, storyWordEntries, storyWordsOf } from "./selectors";
 import { testGraph } from "./testGraph";
+import { aimAt, forgetTaps, TAP } from "./testTap";
 
 const picture = vi.fn((reference: string | null) => ({
   url: reference ? "blob:picture" : null, error: null
@@ -38,25 +41,51 @@ beforeEach(() => {
   } as typeof Element.prototype.scrollTo;
 });
 
+afterEach(forgetTaps);
+
+const ANSWER: QuickLookUp = {
+  resolution: {
+    language: "es", headword: "subir", lemma: "subir", pos: "verb",
+    sentences: [{ text: "Marcos subió a la balsa al amanecer.", translation: null }],
+    note: null, consumedLines: 1, consumedText: null, gloss: "climbed onto"
+  },
+  duplicates: [], foldable: null
+};
+
+function services(graph: VocabularyGraph): LookUpServices {
+  return {
+    graph,
+    lookUp: vi.fn(async () => ANSWER),
+    queue: vi.fn(async () => ({})),
+    open: vi.fn(),
+    notify: vi.fn()
+  };
+}
+
 function reader(
-  storyId = "storypicada0001", change: (graph: VocabularyGraph) => void = () => undefined, recording = false
+  storyId = "storypicada0001", change: (graph: VocabularyGraph) => void = () => undefined, recording = false,
+  startAt = 0
 ) {
   const graph = testGraph();
   change(graph);
   const story = graph.stories.find((one) => one.id === storyId)!;
   const onBack = vi.fn();
+  const looking = services(graph);
   const view = render(
-    <StoryReader
-      story={story}
-      title={story.title ?? "untitled"}
-      parts={storyPartsOf(graph, storyId)}
-      words={storyWordsOf(graph, storyId)}
-      entries={storyWordEntries(graph, storyId)}
-      recording={recording}
-      onBack={onBack}
-    />
+    <LookUpContext.Provider value={looking}>
+      <StoryReader
+        story={story}
+        title={story.title ?? "untitled"}
+        parts={storyPartsOf(graph, storyId)}
+        words={storyWordsOf(graph, storyId)}
+        entries={storyWordEntries(graph, storyId)}
+        recording={recording}
+        startAt={startAt}
+        onBack={onBack}
+      />
+    </LookUpContext.Provider>
   );
-  return { ...view, onBack };
+  return { ...view, onBack, looking };
 }
 
 const next = () => fireEvent.click(screen.getByRole("button", { name: "The next part" }));
@@ -361,7 +390,7 @@ describe("the passages of a part read aloud", () => {
     expect(playSegment.mock.calls[0][1]).toBe(1);
   });
 
-  it("finds the passage from a marked word inside it", () => {
+  it("plays the passage a tap off any word lands in", () => {
     reader();
     fireEvent.click(passages()[0].querySelector(".story-mark")!);
     expect(playSegment.mock.calls[0][1]).toBe(0);
@@ -375,6 +404,77 @@ describe("the passages of a part read aloud", () => {
 
     expect(playSegment).not.toHaveBeenCalled();
     selection.mockRestore();
+  });
+
+  it("looks up a word you hold from your words, and plays nothing until asked", () => {
+    const { looking } = reader();
+    const text = document.querySelector(".story-text")!;
+    aimAt(text, "balsa", 2);
+    fireEvent.click(text, TAP);
+
+    expect(playSegment).not.toHaveBeenCalled();
+    expect(looking.lookUp).not.toHaveBeenCalled();
+    const sheet = screen.getByRole("dialog", { name: "Look up a word" });
+    expect(sheet).toHaveTextContent("la balsa");
+    expect(sheet).toHaveTextContent("in your words");
+
+    fireEvent.click(within(sheet).getByRole("button", { name: "This passage" }));
+    expect(playSegment.mock.calls[0][1]).toBe(0);
+
+    fireEvent.click(within(sheet).getByRole("button", { name: "Open la balsa" }));
+    expect(looking.open).toHaveBeenCalledWith("lexemebalsa0001", { kind: "story", storyId: "storypicada0001", page: 0 });
+  });
+
+  it("asks about a word you do not hold, and Add files it in the Inbox", async () => {
+    const { looking } = reader();
+    const text = document.querySelector(".story-text")!;
+    aimAt(text, "subió");
+    fireEvent.click(text, TAP);
+
+    expect(looking.lookUp).toHaveBeenCalledWith(
+      { text: "Marcos subió a la balsa al amanecer.", selection: { start: 7, end: 12 }, source: "reading" },
+      expect.any(AbortSignal));
+    const sheet = screen.getByRole("dialog", { name: "Look up a word" });
+    expect(await within(sheet).findByText("subir")).toBeInTheDocument();
+    expect(sheet).toHaveTextContent("climbed onto");
+
+    fireEvent.click(within(sheet).getByRole("button", { name: "Add" }));
+    expect(looking.queue).toHaveBeenCalledWith({
+      text: "Marcos subió a la balsa al amanecer.", resolution: ANSWER.resolution,
+      sourceTitle: "Story · La balsa que picaba"
+    });
+    expect(await within(sheet).findByText("Added to your Inbox")).toBeInTheDocument();
+    expect(playSegment).not.toHaveBeenCalled();
+  });
+
+  it("says why a look-up failed, and offers to try again", async () => {
+    const { looking } = reader();
+    vi.mocked(looking.lookUp).mockRejectedValueOnce(new Error("The server can't be reached."));
+    const text = document.querySelector(".story-text")!;
+    aimAt(text, "amanecer");
+    fireEvent.click(text, TAP);
+    const sheet = screen.getByRole("dialog", { name: "Look up a word" });
+    expect(await within(sheet).findByText("The server can't be reached.")).toBeInTheDocument();
+    fireEvent.click(within(sheet).getByRole("button", { name: "Try again" }));
+    await waitFor(() => expect(looking.lookUp).toHaveBeenCalledTimes(2));
+  });
+
+  it("puts the sheet away on a tap that is not on a word, which then plays as before", () => {
+    reader();
+    const text = document.querySelector(".story-text")!;
+    aimAt(text, "balsa");
+    fireEvent.click(text, TAP);
+    expect(screen.getByRole("dialog", { name: "Look up a word" })).toBeInTheDocument();
+
+    forgetTaps();
+    fireEvent.click(passages()[1]);
+    expect(screen.queryByRole("dialog", { name: "Look up a word" })).toBeNull();
+    expect(playSegment.mock.calls[0][1]).toBe(1);
+  });
+
+  it("opens on the page it is asked to", () => {
+    reader("storypicada0001", () => undefined, false, 1);
+    expect(position()).toBe("2 / 3");
   });
 
   it("falls back to plain text when the passages no longer join to the text", () => {

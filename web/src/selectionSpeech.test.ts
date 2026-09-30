@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { SayTarget } from "./pronunciation";
-import { runsOf, sentencesAround } from "./selectionSpeech";
+import { runsOf, sentenceAt, sentencesAround, wordAt } from "./selectionSpeech";
 
 /**
  * A selection crosses languages, and the markup says which is which. These build the same shapes the
@@ -81,7 +81,36 @@ describe("reading a selection aloud", () => {
 
   it("keeps the whole sentence a span touches, at either end", () => {
     const text = "Uno. Dos. Tres.";
-    expect(sentencesAround(text, 6, 8, "es")).toBe("Dos. ");
-    expect(sentencesAround(text, 2, 7, "es")).toBe("Uno. Dos. ");
+    expect(sentencesAround(text, 6, 8, "es")).toBe("Dos.");
+    expect(sentencesAround(text, 2, 7, "es")).toBe("Uno. Dos.");
+  });
+});
+
+describe("the word and sentence a tap asks about", () => {
+  it("measures the tapped word from the start of its own sentence", () => {
+    const text = "No viene a buscar migajas. Camina con paso firme.";
+    const at = text.indexOf("paso");
+    expect(sentenceAt(text, at, at + 4, "es")).toEqual({
+      text: "Camina con paso firme.", selection: { start: 11, end: 15 }
+    });
+  });
+
+  it("takes the word under a character, and a caret just after its last letter", () => {
+    const text = "Camina con paso firme.";
+    expect(wordAt(text, 12, "es")).toEqual({ start: 11, end: 15 });
+    expect(wordAt(text, 15, "es")).toEqual({ start: 11, end: 15 });
+    expect(wordAt(text, 11, "es")).toEqual({ start: 11, end: 15 });
+  });
+
+  it("finds no word on punctuation or a gap", () => {
+    expect(wordAt("firme.  Y", 6, "es")).toBeNull();
+  });
+
+  it("chooses a unit around a character in a language written without spaces", () => {
+    const text = "我在图书馆看书";
+    const found = wordAt(text, text.indexOf("书"), "zh");
+    expect(found).not.toBeNull();
+    expect(found!.start).toBeLessThanOrEqual(text.indexOf("书"));
+    expect(found!.end).toBeGreaterThan(text.indexOf("书"));
   });
 });

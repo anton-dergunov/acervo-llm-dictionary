@@ -23,22 +23,31 @@
  * and pressing it again carries on; there is no scrubber, because swiping to another part and back is
  * the way to begin again — a page that stops being the one on screen stops its audio and forgets the
  * position. A part read by a directed voice also knows where its passages are, and each is then a
- * place to start: touched while nothing plays it plays that passage alone, touched while it plays it
+ * place to start: started while nothing plays it plays that passage alone, started while it plays it
  * moves there. The passage that is sounding is tinted, and **nothing about it moves the text** — the
  * tint is a background, never padding, weight or size. See `storyAudio.ts`.
+ *
+ * **A tap on a word looks it up and plays nothing** (`LookUpSheet.tsx`): the passage it is in is the
+ * sheet's button instead, and a tap on anything else in a passage — its punctuation, a gap — starts
+ * it as a tap always did.
  *
  * Only a page and its neighbours fetch their picture. Every page is mounted — that is what lets a
  * swipe show the next one under the finger — but a picture is a blob behind bearer auth, and a
  * story of six should not ask for six at once to read the first.
  */
 
-import { useEffect, useMemo, useState, type MouseEvent } from "react";
+import { useContext, useEffect, useLayoutEffect, useMemo, useState, type MouseEvent } from "react";
 import { DeckEdges, Hedera, useDeck } from "./deck";
 import type { Story, StoryPart, StoryWord } from "./domain";
 import { BackIcon, PauseIcon, PlayIcon } from "./icons";
+import { LookUpContext, LookUpSheet, useLookUp, type LookUpAction } from "./LookUpSheet";
 import { usePicture } from "./picture";
+import { playRuns } from "./pronunciation";
+import { SelectionPill } from "./SelectionPill";
+import { runsOf } from "./selectionSpeech";
 import { segmentSpans, storySpans, type StorySpan, type StoryWordEntry } from "./selectors";
 import { playSegment, stopPart, toggle, useStoryAudio } from "./storyAudio";
+import { wordAtPoint, wordInSelection, type TappedWord } from "./tapWord";
 
 function Picture({ part, title, near }: { part: StoryPart; title: string; near: boolean }) {
   const { url, error } = usePicture(near ? part.imageRef : null);
@@ -56,16 +65,17 @@ function Picture({ part, title, near }: { part: StoryPart; title: string; near: 
   </div>;
 }
 
-/** One run of a part's text: the word marked, or plain. */
+/** One run of a part's text: the word marked, or plain. A mark says which word it is, so a tap on
+    it is answered from the words you hold. */
 function Runs({ spans }: { spans: StorySpan[] }) {
   return <>{spans.map((span, position) => (
     span.lexemeId
-      ? <b key={position} className="story-mark">{span.text}</b>
+      ? <b key={position} className="story-mark" data-lexeme={span.lexemeId}>{span.text}</b>
       : <span key={position}>{span.text}</span>
   ))}</>;
 }
 
-function PartPage({ story, part, number, words, near, active, recording, revealed, onReveal, onHide }: {
+function PartPage({ story, part, number, words, near, active, recording, revealed, onReveal, onHide, onLook, onLookAway }: {
   story: Story;
   part: StoryPart;
   number: number;
@@ -78,6 +88,10 @@ function PartPage({ story, part, number, words, near, active, recording, reveale
   revealed: boolean;
   onReveal(): void;
   onHide(): void;
+  /** A word was tapped, with what the tap would otherwise have played. */
+  onLook(tapped: TappedWord, play: LookUpAction | null): void;
+  /** Something that is not a word was tapped. */
+  onLookAway(): void;
 }) {
   const runs = useMemo(
     () => segmentSpans(part.text, words, part.audioSegments), [part.text, words, part.audioSegments]);
@@ -97,12 +111,23 @@ function PartPage({ story, part, number, words, near, active, recording, reveale
   const label = status === "busy" ? (part.audioSegments.length ? "Loading the recording" : "Recording this part — press to cancel")
     : status === "playing" ? "Pause" : status === "paused" ? "Carry on"
       : queued ? "Waiting to be recorded — press to record it now" : "Read this part aloud";
+  /* A tap on a word looks it up and plays nothing; the passage it is in is the sheet's button. A tap
+     on anything else in a passage — its punctuation, a gap — plays it, as a tap always did. */
   const touch = (event: MouseEvent<HTMLParagraphElement>) => {
-    if (!tappable) return;
     // A drag that selected text is a selection, not a touch on a passage.
     if (window.getSelection()?.toString()) return;
-    const target = event.target instanceof Element ? event.target.closest("[data-segment]") : null;
-    if (target) playSegment(part, Number(target.getAttribute("data-segment")));
+    const tapped = wordAtPoint(event, event.currentTarget, story.language);
+    const from = tapped ? tapped.range.startContainer.parentElement : event.target instanceof Element ? event.target : null;
+    const passage = tappable ? from?.closest("[data-segment]") : null;
+    const index = passage ? Number(passage.getAttribute("data-segment")) : null;
+    if (tapped) {
+      const sounding = status === "playing" || status === "paused";
+      onLook(tapped, index === null ? null
+        : { label: sounding ? "From here" : "This passage", run: () => playSegment(part, index) });
+      return;
+    }
+    onLookAway();
+    if (index !== null) playSegment(part, index);
   };
   // The same word in the reader's own language, where the translator said what it became.
   const translated = useMemo(
@@ -183,7 +208,7 @@ function WordsPage({ entries }: { entries: StoryWordEntry[] }) {
   </article>;
 }
 
-export default function StoryReader({ story, title, parts, words, entries, recording = false, onBack }: {
+export default function StoryReader({ story, title, parts, words, entries, recording = false, startAt = 0, onBack }: {
   story: Story;
   /** What the header calls it: its own title, or the words it was asked to teach. */
   title: string;
@@ -192,10 +217,31 @@ export default function StoryReader({ story, title, parts, words, entries, recor
   entries: StoryWordEntry[];
   /** The story's job is still going and has its recording still to do. */
   recording?: boolean;
+  /** The page to open on: where the owner was, coming back from a word opened from this story. */
+  startAt?: number;
   onBack(): void;
 }) {
   const pages = parts.length ? parts.length + 1 : 0;
-  const { root, track, at, go, beside, onScroll } = useDeck(story.id);
+  const { root, track, at, go, jump, beside, onScroll } = useDeck(story.id);
+  useLayoutEffect(() => { if (startAt) jump(startAt); }, [story.id]);
+  const services = useContext(LookUpContext);
+  const lookUp = useLookUp(services);
+  const { open: look, close: lookAway } = lookUp;
+  // The sheet belongs to the page it was opened on.
+  useEffect(() => lookAway(), [at, lookAway]);
+  const lookAt = (tapped: TappedWord, play: LookUpAction | null) => look({
+    tapped, play, language: story.language, sourceTitle: `Story · ${title}`,
+    from: { kind: "story", storyId: story.id, page: at }
+  });
+  const listenToSelection = (range: Range) => {
+    if (!root.current) return;
+    void playRuns(runsOf(range, root.current, new Map(), story.language)).catch((error: unknown) =>
+      services?.notify(error instanceof Error ? error.message : "That selection could not be read aloud."));
+  };
+  const lookUpSelection = (range: Range) => {
+    const tapped = root.current ? wordInSelection(range, root.current, story.language) : null;
+    if (tapped) lookAt(tapped, null);
+  };
   /* Which parts have been turned over. Per part rather than one switch for the story, because
      revealing one answer must not reveal the next — and it is deliberately *not* remembered
      between visits: coming back to a story you have read is reading it again. */
@@ -231,6 +277,8 @@ export default function StoryReader({ story, title, parts, words, entries, recor
             key={part.id} story={story} part={part} number={index + 1} words={words}
             near={Math.abs(index - at) <= 1} active={index === at} recording={recording}
             revealed={shown.has(part.id)} onReveal={() => reveal(part.id)} onHide={() => hide(part.id)}
+            onLook={lookAt}
+            onLookAway={lookAway}
           />)}
           <WordsPage entries={entries} />
         </div>
@@ -238,5 +286,7 @@ export default function StoryReader({ story, title, parts, words, entries, recor
 
     {parts.length > 0
       && <DeckEdges at={at} count={pages} go={go} previous="The part before" next="The next part" />}
+    <SelectionPill root={root} onListen={listenToSelection} onLookUp={lookUpSelection} />
+    <LookUpSheet state={lookUp} placement="over" />
   </div>;
 }

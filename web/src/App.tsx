@@ -9,6 +9,7 @@ import type { WordSource } from "./MakeFrom";
 import { clearSelected, restoreSelected, toggleSelected, useSelectedIds } from "./wordSelection";
 import LoopDialog from "./LoopDialog";
 import LoopView from "./LoopView";
+import { LookUpContext, LookUpSheet, useLookUp, type LookUpServices, type ReadingPlace } from "./LookUpSheet";
 import StoryDialog from "./StoryDialog";
 import StoryView from "./StoryView";
 import { MapView } from "./MapView";
@@ -288,9 +289,17 @@ export default function App() {
      sense and with it selected, as Find would leave it — and Back from that map is Back to the word. */
   const [mapFly, setMapFly] = useState<string | null>(null);
   const articleReturn = useRef<{ lexeme: string; sense: string } | null>(null);
+  /* Where a word tapped while reading was opened from — a story's page, a loop — so Back from its
+     article goes back there, as Back from a word opened on the map goes back to the map. The two
+     places are what the story and loop surfaces open on when they are put back. */
+  const readingReturn = useRef<ReadingPlace | null>(null);
+  const [storyPlace, setStoryPlace] = useState<{ storyId: string; page: number } | null>(null);
+  const [loopPlace, setLoopPlace] = useState<string | null>(null);
   /* One door in, so everything that opens it also closes whatever it replaces — the same shape
      `openCapture` has. */
   const openLoops = useCallback(() => {
+    readingReturn.current = null;
+    setLoopPlace(null);
     setLoops(true);
     setStories(false);
     setMap(false);
@@ -299,6 +308,8 @@ export default function App() {
     setAddTab(null);
   }, []);
   const openStories = useCallback(() => {
+    readingReturn.current = null;
+    setStoryPlace(null);
     setStories(true);
     setLoops(false);
     setMap(false);
@@ -314,6 +325,7 @@ export default function App() {
     setExternal(null);
     setAddTab(null);
     mapReturn.current = false;
+    readingReturn.current = null;
     // Every way in starts fresh; "show on the map" says where it came from after coming in.
     articleReturn.current = null;
   }, []);
@@ -323,7 +335,16 @@ export default function App() {
     setProposal(null);
     setFoldPhoto(null);
     setFocusSense(null);
+    const reading = readingReturn.current;
+    readingReturn.current = null;
     if (mapReturn.current) { mapReturn.current = false; setMap(true); }
+    else if (reading?.kind === "story") {
+      setStoryPlace({ storyId: reading.storyId, page: reading.page });
+      setStories(true);
+    } else if (reading?.kind === "loop") {
+      setLoopPlace(reading.loopId);
+      setLoops(true);
+    }
   }, []);
   const [settings, setSettings] = useState<SettingsPage | null>(null);
   const [armed, setArmed] = useState<"delete" | null>(null);
@@ -1115,6 +1136,28 @@ export default function App() {
     backendSession.resolveCapture(repository.state().deviceId, request, signal), []);
   const warmPhoto = useCallback(() => { void backendSession.warmPhoto().catch(() => undefined); }, []);
 
+  /* A word tapped while reading (`LookUpSheet.tsx`): the same quick look-up, an Add that queues the
+     headless capture into the Inbox, and an Open that leaves the story or loop for the article and
+     remembers where it was. */
+  const openFromReading = useCallback((lexemeId: string, from: ReadingPlace | null) => {
+    if (from) {
+      readingReturn.current = from;
+      setStories(false);
+      setLoops(false);
+    }
+    openLexeme(lexemeId);
+  }, [openLexeme]);
+  const lookUpServices = useMemo<LookUpServices>(() => ({
+    graph: snapshot,
+    lookUp,
+    queue: (request) => backendSession.queueCapture(repository.state().deviceId, request),
+    open: openFromReading,
+    notify: (message) => notify(message)
+  }), [snapshot, lookUp, openFromReading, notify]);
+  const articleLook = useLookUp(lookUpServices);
+  const { close: closeArticleLook } = articleLook;
+  useEffect(() => closeArticleLook(), [openId, mode, view, closeArticleLook]);
+
   /* Asked once for the session, here rather than in the two views that show it: AddView is keyed
      and remounts for every seeded composition, so an effect of its own would re-ask on each one.
      Nothing awaits this and every failure is silence — startup must not depend on the server. */
@@ -1320,7 +1363,12 @@ export default function App() {
   const topicLabel = topic === "all" ? "All words" : topic === "inbox" ? "Inbox" : currentTopic?.name ?? "Topic";
   const topicIcon = topic === "all" ? "📖" : topic === "inbox" ? "📥" : currentTopic?.icon ?? "📌";
 
-  return <>
+  /* Whether the article's look-up sheet goes into the ask dock, which is drawn under exactly these
+     conditions; otherwise the article places it itself. */
+  const docked = Boolean(snapshot && article && view === "page" && mode === "read"
+    && captureHealth?.available !== false);
+
+  return <LookUpContext.Provider value={lookUpServices}>
     <div className="viewport" onClick={() => { setLangMenu(false); setScopeMenu(false); setArticleMenu(false); }}>
       {/* Reading a word on a phone or a tablet does not need the topic rail beside it. */}
       {/* Reading a word on a phone or a tablet does not need the topic rail beside it. The loops
@@ -1480,11 +1528,11 @@ export default function App() {
             if (back) openLexeme(back.lexeme, back.sense);
           }}
         /> : stories && snapshot && language ? <StoryView
-          graph={snapshot} language={language} onMake={() => setMakingStory("scope")}
+          graph={snapshot} language={language} opening={storyPlace} onMake={() => setMakingStory("scope")}
           onClose={() => setStories(false)}
           onDelete={removeStory}
         /> : loops && snapshot && language ? <LoopView
-          graph={snapshot} language={language} onMake={() => setMakingLoop("scope")}
+          graph={snapshot} language={language} opening={loopPlace} onMake={() => setMakingLoop("scope")}
           onClose={() => setLoops(false)}
           onDelete={removeLoop}
           onChangeMusic={(loopId, music) => void changeLoopMusic(loopId, music)}
@@ -1632,6 +1680,13 @@ export default function App() {
                   article={article} view={view} onNotify={notify} pictures={pictures} clips={clips}
                   marks={markSlot} ask={askSlot} onReference={setReference}
                   focusSense={focusSense}
+                  onWordTap={(tapped) => articleLook.open({
+                    tapped, language: article.lexeme.language, sourceTitle: `Entry · ${article.lexeme.headword}`,
+                    self: proposal ? null : article.lexeme.id
+                  })}
+                  onTapAway={closeArticleLook}
+                  lookSheet={docked ? null
+                    : <LookUpSheet state={articleLook} placement={view === "cards" ? "over" : "stuck"} />}
                   onMap={proposal ? null : (senseId) => {
                     if (article.lexeme.language !== language) setLanguage(article.lexeme.language);
                     setMapSense(senseId);
@@ -1658,6 +1713,7 @@ export default function App() {
             {/* Not in Cards: a conversation edits the whole entry, and needs the whole entry in view. */}
             {snapshot && (external || (article && view === "page")) && mode === "read" && captureHealth?.available !== false
               && <AskDock
+                above={docked ? <LookUpSheet state={articleLook} placement="docked" /> : null}
                 key={subjectKey ?? "none"}
                 headword={article ? article.lexeme.headword : external!.word}
                 emoji={article ? article.lexeme.emoji : null}
@@ -1768,5 +1824,5 @@ export default function App() {
         run();
       }}>{toastAction.label}</button>}
     </div>
-  </>;
+  </LookUpContext.Provider>;
 }

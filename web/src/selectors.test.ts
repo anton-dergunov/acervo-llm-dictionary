@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { validateGraph, type LoopCue, type LoopItem, type StudyState } from "./domain";
 import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
-  formatLabel, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
+  formatLabel, heldWord, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
   strengthOf, topicOptions, visibleRows, weakestOf
 } from "./selectors";
 import { drillCues, testGraph } from "./testGraph";
@@ -149,6 +149,29 @@ describe("vocabulary selectors", () => {
   });
 });
 
+
+describe("a word you hold, found from a tapped form", () => {
+  it("matches a headword without its article, a lemma, and accents or case", () => {
+    const graph = testGraph();
+    expect(heldWord(graph, "es", "balsa")?.id).toBe("lexemebalsa0001");
+    expect(heldWord(graph, "es", "La Balsa")?.id).toBe("lexemebalsa0001");
+    expect(heldWord(graph, "es", "Espolvoreár")?.id).toBe("lexemeespolv001");
+    expect(heldWord(graph, "es", "picar")).toMatchObject({ headword: "picar", gloss: expect.any(String) });
+  });
+
+  it("takes the word a mark names, and only in the language being read", () => {
+    const graph = testGraph();
+    expect(heldWord(graph, "es", "pica", "lexemepicar0001")?.id).toBe("lexemepicar0001");
+    expect(heldWord(graph, "es", "pica")).toBeNull();
+    expect(heldWord(graph, "es", "turmoil")).toBeNull();
+  });
+
+  it("leaves out a word that has been deleted", () => {
+    const graph = testGraph();
+    graph.lexemes = graph.lexemes.map((one) => one.id === "lexemebalsa0001" ? { ...one, deleted: true } : one);
+    expect(heldWord(graph, "es", "balsa")).toBeNull();
+  });
+});
 
 describe("a word's study state", () => {
   const graph = testGraph();

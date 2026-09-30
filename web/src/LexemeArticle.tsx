@@ -30,6 +30,8 @@ import type { Article, ArticleSense } from "./selectors";
 import { CardPicture, EmptySenseImage, SenseImage, imageStateOf } from "./SenseImage";
 import { keyOf, play, playRuns, useSpeechState, type SayTarget } from "./pronunciation";
 import { runsOf } from "./selectionSpeech";
+import { SelectionPill } from "./SelectionPill";
+import { wordAtPoint, wordInSelection, type TappedWord } from "./tapWord";
 import { DeckEdges, Hedera, isTyping, useDeck } from "./deck";
 
 /* Plain words rather than a grammarian's abbreviations: "noun, feminine", not "n. · f.". */
@@ -750,45 +752,6 @@ function cardOnScreen(root: HTMLElement): HTMLElement | null {
   return track.children[index] as HTMLElement | undefined ?? null;
 }
 
-/**
- * Listen to whatever is selected, in the language the article is in.
- *
- * A floating button above the selection, because a play button on every phrase would be noise and a
- * selection is already the gesture for "this bit".
- */
-function SelectionListen({ root, onListen }: { root: React.RefObject<HTMLElement | null>; onListen(range: Range): void }) {
-  const [at, setAt] = useState<{ left: number; top: number } | null>(null);
-  useEffect(() => {
-    const onChange = () => {
-      const selection = window.getSelection();
-      const text = selection && !selection.isCollapsed ? selection.toString().trim() : "";
-      if (!text || !root.current || !selection?.anchorNode || !root.current.contains(selection.anchorNode)
-          || selection.rangeCount === 0) {
-        setAt(null);
-        return;
-      }
-      const box = selection.getRangeAt(0).getBoundingClientRect?.();
-      if (!box) { setAt(null); return; }
-      setAt({
-        left: Math.min(Math.max(box.left + box.width / 2, 60), window.innerWidth - 60),
-        top: Math.max(box.top, 70)
-      });
-    };
-    document.addEventListener("selectionchange", onChange);
-    return () => document.removeEventListener("selectionchange", onChange);
-  }, [root]);
-  if (!at) return null;
-  return <button
-    type="button" className="sel-say" style={{ left: at.left, top: at.top }}
-    // Pressing it must not collapse the selection it is about to read.
-    onMouseDown={(event) => event.preventDefault()}
-    onClick={() => {
-      const selection = window.getSelection();
-      if (selection && selection.rangeCount > 0) onListen(selection.getRangeAt(0));
-    }}
-  ><PlayIcon /><span>Listen</span></button>;
-}
-
 /* ── slots the caller supplies ──────────────────────────────────────────── */
 
 /**
@@ -873,7 +836,8 @@ export interface PictureSlot {
  */
 export default function LexemeArticle({ article, onNotify, meta = true, view = "page", pictures = null,
                                        clips = null, marks = null, ask = null,
-                                       onReference, focusSense = null, onMap = null }: {
+                                       onReference, focusSense = null, onMap = null,
+                                       onWordTap = null, onTapAway, lookSheet = null }: {
   article: Article;
   /** A toast, with at most one action — "Record again" after a stored pronunciation plays. */
   onNotify: Notify;
@@ -890,6 +854,16 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
   focusSense?: string | null;
   /** Show a sense on the map. Absent where a sense is not stored yet — a proposal, a preview. */
   onMap?: ((senseId: string) => void) | null;
+  /**
+   * A word tapped, or selected and looked up, in text in the article's language — an example, a clip,
+   * a definition, where you met it — but never the headword, which is this word. Absent where nothing
+   * is looked up: the Add view's preview (`docs/features/look-up.md`).
+   */
+  onWordTap?: ((tapped: TappedWord) => void) | null;
+  /** A tap on the article that was not on such a word. */
+  onTapAway?(): void;
+  /** The look-up sheet, where the article is to place it: over its cards, or at the page's foot. */
+  lookSheet?: React.ReactNode;
 }) {
   const { lexeme, senses } = article;
   const root = useRef<HTMLDivElement | null>(null);
@@ -922,6 +896,23 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
       onNotify(error instanceof Error ? error.message : "That selection could not be read aloud."));
   }, [article, stored, lexeme.language, onNotify]);
   useSelectAll(root, view);
+
+  const lookable = useCallback((block: Element) => !block.closest('[data-say^="lexeme:"]'), []);
+  /* A tap on a control is the control's; one that ends a drag is a selection, which the pill answers. */
+  const tap = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!onWordTap || !root.current) return;
+    if (window.getSelection()?.toString()) return;
+    if (event.target instanceof Element
+        && event.target.closest("button, a, input, textarea, select, label, summary, [role='button'], [role='dialog']")) return;
+    const tapped = wordAtPoint(event, root.current, lexeme.language, lookable);
+    if (tapped) onWordTap(tapped);
+    else onTapAway?.();
+  };
+  const lookUpSelection = useMemo(() => onWordTap ? (range: Range) => {
+    const tapped = root.current ? wordInSelection(range, root.current, lexeme.language, lookable) : null;
+    if (tapped) onWordTap(tapped);
+    else onNotify("Look up works on text in the language you are learning.");
+  } : null, [onWordTap, lexeme.language, lookable, onNotify]);
 
   const key = (part: string) => `${lexeme.id}:${part}`;
   const isFolded = (part: string, byDefault: boolean) => folds[key(part)] ?? byDefault;
@@ -957,16 +948,17 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
   }, [lexeme.id, focusSense, view]);
 
   if (view === "cards") {
-    return <Photos.Provider value={photos}><div className="article-root cards-root" ref={root}>
+    return <Photos.Provider value={photos}><div className="article-root cards-root" ref={root} onClick={tap}>
       <ArticleCards article={article} pictures={pictures} onListen={listen} onPlayClip={setPlaying} onReference={onReference}
         focusSense={focusSense} onMap={stored ? onMap : null} />
-      <SelectionListen root={root} onListen={listenToSelection} />
+      <SelectionPill root={root} onListen={listenToSelection} onLookUp={lookUpSelection} />
+      {lookSheet}
       {dialog}
       {photoDialog}
     </div></Photos.Provider>;
   }
 
-  return <Photos.Provider value={photos}><div className="article-root" ref={root}>
+  return <Photos.Provider value={photos}><div className="article-root" ref={root} onClick={tap}>
     <div className="masthead" data-record={lexeme.id}>
       <div className="head-row">
         <div className={`emoji-plate${tint(head("emoji"))}`}>{lexeme.emoji || "📄"}</div>
@@ -1043,7 +1035,8 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
       rail={<><span className="num"><InfoIcon /></span><span className="label">Details</span></>}
     ><Details article={article} /></FoldingSection>}
 
-    <SelectionListen root={root} onListen={listenToSelection} />
+    <SelectionPill root={root} onListen={listenToSelection} onLookUp={lookUpSelection} />
+    {lookSheet}
     {dialog}
     {photoDialog}
   </div></Photos.Provider>;

@@ -14,7 +14,7 @@
    knowing how to assemble a request, so the document is re-serialised on every turn and the model
    sees the saved article after a save rather than the one it was asked about. */
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type { ChatCapture, ChatProposal, ChatResult, ChatTurn } from "./api";
 import { AskIcon, ChevronIcon, CloseIcon, PlusIcon, SendIcon } from "./icons";
 import { useKeyboardInset } from "./visualViewport";
@@ -82,6 +82,11 @@ export interface AskDockProps {
    * resolves against *that* scroller and the sheet floats over the article instead of below it.
    */
   inline?: boolean;
+  /**
+   * What sits on top of the dock: the article's look-up sheet (`LookUpSheet.tsx`). The dock already
+   * owns the foot of the column, so a sheet of its own there would be under it.
+   */
+  above?: ReactNode;
 }
 
 const OFFLINE = "Chat needs the server. Your words are all still here.";
@@ -89,7 +94,7 @@ const OFFLINE = "Chat needs the server. Your words are all still here.";
 export default function AskDock({
   headword, emoji = null, turns, onTurns, ask, offline,
   focus = null, onClearFocus, onPropose, onCapture, seeded = null, onSeedUsed,
-  onDetent, expandable = true, inline = false
+  onDetent, expandable = true, inline = false, above = null
 }: AskDockProps) {
   const [detent, setDetent] = useState<Detent>("dock");
   const [draft, setDraft] = useState("");
@@ -184,6 +189,7 @@ export default function AskDock({
     style={{ "--kb": `${keyboard}px` } as CSSProperties}
     aria-label={`Conversation about ${headword}`}
   >
+    {above}
     {detent !== "dock" && <header className="ask-head">
       <button
         className="ask-grab" onClick={() => step(detent === "full" ? -1 : 1)}

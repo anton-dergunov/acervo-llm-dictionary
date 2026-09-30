@@ -4,6 +4,7 @@ import LexemeArticle, { looseAttestations, quietTitle, type PictureSlot } from "
 import { play } from "./pronunciation";
 import { articleFor } from "./selectors";
 import { testGraph } from "./testGraph";
+import { aimAt, forgetTaps, TAP } from "./testTap";
 
 /* The bytes come from an authenticated route; what the article does with them is what is tested. */
 vi.mock("./media", () => ({
@@ -24,7 +25,7 @@ const pictures = (): PictureSlot => ({ open: vi.fn(), retry: vi.fn(), busy: () =
 const reads = (text: string, root: ParentNode = document) =>
   [...root.querySelectorAll("p")].some((paragraph) => paragraph.textContent === text);
 
-afterEach(() => { vi.clearAllMocks(); });
+afterEach(() => { vi.clearAllMocks(); forgetTaps(); });
 
 describe("a clip's title", () => {
   it("is made quiet by rule: no hashtags, no emoji, all lower case", () => {
@@ -287,5 +288,65 @@ describe("a sense's name, and opening on a sense", () => {
   it("offers no map for a proposal, whose senses are not stored", () => {
     render(<LexemeArticle article={picar()} meta={false} onNotify={() => undefined} onMap={vi.fn()} />);
     expect(screen.queryByRole("button", { name: "Show on the map" })).not.toBeInTheDocument();
+  });
+});
+
+describe("looking a word up", () => {
+  const exampleText = () => [...document.querySelectorAll<HTMLElement>("[lang='es']")]
+    .find((block) => block.textContent === "Me pica la nariz.")!;
+
+  it("hands a word tapped in an example to the caller, with its sentence", () => {
+    const onWordTap = vi.fn();
+    render(<LexemeArticle article={picar()} onNotify={() => undefined} onWordTap={onWordTap} />);
+    const block = exampleText();
+    aimAt(block, "nariz");
+    fireEvent.click(block, TAP);
+    expect(onWordTap).toHaveBeenCalledTimes(1);
+    expect(onWordTap.mock.calls[0][0]).toMatchObject({
+      word: "nariz", sentence: { text: "Me pica la nariz.", selection: { start: 11, end: 16 } }
+    });
+  });
+
+  it("does not look up the headword, which is this word", () => {
+    const onWordTap = vi.fn();
+    const onTapAway = vi.fn();
+    render(<LexemeArticle article={picar()} onNotify={() => undefined} onWordTap={onWordTap} onTapAway={onTapAway} />);
+    const headword = document.querySelector('[data-say="lexeme:lexemepicar0001"]')!;
+    aimAt(headword, "picar");
+    fireEvent.click(headword, TAP);
+    expect(onWordTap).not.toHaveBeenCalled();
+    expect(onTapAway).toHaveBeenCalled();
+  });
+
+  it("offers Look up beside Listen for a selection, and not where nothing is looked up", async () => {
+    const box = Range.prototype.getBoundingClientRect;
+    Range.prototype.getBoundingClientRect = () => ({ left: 10, top: 100, width: 40, height: 20 }) as DOMRect;
+    /* The first two letters of the example, selected. */
+    const select = () => {
+      const range = document.createRange();
+      range.setStart(exampleText().firstChild!, 0);
+      range.setEnd(exampleText().firstChild!, 2);
+      window.getSelection()!.removeAllRanges();
+      window.getSelection()!.addRange(range);
+      fireEvent(document, new Event("selectionchange"));
+    };
+    try {
+      const onWordTap = vi.fn();
+      const { unmount } = render(<LexemeArticle article={picar()} onNotify={() => undefined} onWordTap={onWordTap} />);
+      select();
+      const pill = await screen.findByRole("toolbar", { name: "The selection" });
+      expect(within(pill).getByRole("button", { name: "Listen" })).toBeInTheDocument();
+      fireEvent.click(within(pill).getByRole("button", { name: "Look up" }));
+      expect(onWordTap.mock.calls[0][0]).toMatchObject({ word: "Me" });
+      unmount();
+
+      render(<LexemeArticle article={picar()} onNotify={() => undefined} />);
+      select();
+      const alone = await screen.findByRole("toolbar", { name: "The selection" });
+      expect(within(alone).queryByRole("button", { name: "Look up" })).toBeNull();
+    } finally {
+      Range.prototype.getBoundingClientRect = box;
+      window.getSelection()!.removeAllRanges();
+    }
   });
 });

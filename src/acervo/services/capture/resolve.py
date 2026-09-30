@@ -5,6 +5,10 @@ asks it alone, as the **quick look-up** (`POST /capture/resolve`), on the `quick
 tight budget, because a finger is still on the glass: the same question, plus what the word means in
 this sentence, answered by a model ordered for speed. `/capture` can then take that resolution
 rather than pay for resolve a second time (`pipeline.given_resolution`).
+
+A word tapped while reading in Acervo — a story, a loop's line, an example — is the same quick
+look-up with `source: "reading"`: the sentence is somebody's finished text, not the learner's notes to
+be corrected, and it has to come back verbatim for the capture that follows to accept it.
 """
 
 from __future__ import annotations
@@ -61,7 +65,9 @@ def resolve(
     quick: bool = False,
 ) -> tuple[dict[str, Any], Answer]:
     stream = trimmed(request.get("mode")) == "stream" and not quick
-    photo = quick and trimmed(request.get("source")) == "photo"
+    source = trimmed(request.get("source")) if quick else ""
+    photo = source == "photo"
+    reading = source == "reading"
     reference = reference_of(request)
     known = [
         entry["language"]
@@ -91,6 +97,7 @@ def resolve(
             else "",
             "",
             "The input is text read from a photograph by OCR, one sentence of it." if photo else "",
+            "The input is one sentence of something the learner was reading." if reading else "",
             f"Input ({len(lines)} lines):",
             "```",
             shown,
@@ -99,7 +106,9 @@ def resolve(
         if line != ""
     )
 
-    system = prompt_text(settings.prompts_path, "acervo_resolve", {"quick": quick, "photo": photo})
+    system = prompt_text(
+        settings.prompts_path, "acervo_resolve", {"quick": quick, "photo": photo, "reading": reading}
+    )
     if quick:
         answer, call = llm_json(
             settings, owner, system, user, caller="resolve-quick", kind="quick",

@@ -20,6 +20,7 @@ intelligence on the server means a new transport is an afternoon and losing one 
 |---|---|---|
 | **Add ▸ Text**, in the app | `POST /capture`, then the ordinary save | the floor — a word you *heard* has no source to share from |
 | **Add ▸ Photo** | `POST /photo/read`, `POST /capture/resolve`, then `/capture` | a word met on a printed page or a sign ([`photo-capture.md`](photo-capture.md)) |
+| **A word tapped while reading** | `POST /capture/resolve`, then `POST /captures` into the Inbox | a word met in a story, a loop or an article ([`look-up.md`](look-up.md)) |
 | **"Add to my words"** on a dictionary entry | `/capture` with the entry as `reference` | promoting an external entry ([`dictionaries.md`](dictionaries.md)) |
 | **A notes file**, `scripts/ingest_vocabulary_file.py` | `POST /captures`, a job | walking a messy vocabulary file into the Inbox |
 
@@ -51,7 +52,8 @@ Two model calls, assembled on the server from tracked prompts (`prompts/acervo_r
 
 The model answers in JSON mode and the shape is checked by Acervo's own parser — no schema is ever
 sent ([`../architecture/models.md`](../architecture/models.md)). Resolve and compose run on the
-owner's `text` chain; the photo tap's resolve runs alone on the faster `quick` chain.
+owner's `text` chain; a tapped word's resolve — on a photo, or in something being read — runs alone on
+the faster `quick` chain.
 
 **Provenance is carried by the records, not a flag.** The learner's sentence is kept verbatim as an
 `attestation`, and the example drawn from it says so and names it; an example the model invented

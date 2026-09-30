@@ -122,7 +122,7 @@ describe("the Photo tab", () => {
 
     tap(frame, 290, 60);
     await waitFor(() => expect(props.onLookUp).toHaveBeenCalledTimes(1));
-    expect(vi.mocked(props.onLookUp).mock.calls[0][0]).toEqual({ text: "Lo llevó a cabo.", selection: { start: 3, end: 8 } });
+    expect(vi.mocked(props.onLookUp).mock.calls[0][0]).toEqual({ text: "Lo llevó a cabo.", selection: { start: 3, end: 8 }, source: "photo" });
     expect(await screen.findByText("llevar a cabo")).toBeInTheDocument();
     expect(screen.getByText(/to carry out/)).toBeInTheDocument();
     expect(screen.getByLabelText("The sentence, as it will be kept")).toHaveValue("Lo llevó a cabo.");

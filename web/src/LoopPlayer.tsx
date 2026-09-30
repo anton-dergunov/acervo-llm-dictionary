@@ -20,6 +20,9 @@
  * up because it was once shown. `loopMomentAt` and `loopLineShown` are that function and they live
  * in `selectors.ts`, so the whole rule is tested without an audio element.
  *
+ * **A tap on a card seeks to it, unless it is on a word in the language being learned**, which is
+ * looked up while the loop plays on (`LookUpSheet.tsx`); the sheet's Play from this line is the seek.
+ *
  * **The controls do not scroll.** This surface owns its height: the words scroll inside it and the
  * controls are a footer that cannot move. A player that drifts as you scroll is one you have to
  * chase to press pause.
@@ -32,7 +35,7 @@
  * are replacing, because replacing it is usually the reason you did not.
  */
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useContext, useEffect, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
 import type { LoopMusic } from "./api";
 import type { VocabularyGraph } from "./domain";
 import { setLoopAutoplay, setLoopRepeat, useLoopAutoplay, useLoopRepeat } from "./editorPreferences";
@@ -41,11 +44,13 @@ import { isOpen as jobIsOpen, jobFor, jobStream } from "./jobs";
 import { fallbackNote } from "./LoopFormat";
 import { MusicMenu, useLoopSchema } from "./LoopMusic";
 import * as player from "./loops";
+import { LookUpContext, LookUpSheet, useLookUp } from "./LookUpSheet";
 import { stripOf } from "./ProgressStrip";
 import {
-  bedOfLoop, favouriteBeds, formatLabel, loopCards, loopIsReady, loopLineShown, loopMomentAt, styleLabel,
+  bedOfLoop, favouriteBeds, formatLabel, loopCards, loopIsReady, loopLineShown, loopMomentAt, loopTitle, styleLabel,
   type LoopCard, type LoopTrack
 } from "./selectors";
+import { wordAtPoint } from "./tapWord";
 
 function clock(seconds: number): string {
   const whole = Math.max(0, Math.floor(seconds || 0));
@@ -87,6 +92,7 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
   const kept = Boolean(bedOfLoop(graph, loop));
   const [choosing, setChoosing] = useState(false);
   const heard = useRef(loop.audioRef);
+  const lookUp = useLookUp(useContext(LookUpContext));
 
   /* A new track has landed for this loop. The old one is what the element holds, so it is stopped,
      its bytes forgotten — nothing names them any more — and the new one started from the top if the
@@ -135,6 +141,23 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
     else void player.play(track, here ? { at: playback.at } : undefined);
   };
 
+  /* A tap on a word in the language being learned looks it up and the loop plays on, unmoved; what
+     the tap used to do is the sheet's button. Anything else on a card — the translation, the
+     language chip, the card's edge — seeks to it, as a tap always did. */
+  const touch = (event: MouseEvent<HTMLButtonElement>, card: LoopCard) => {
+    const tapped = wordAtPoint(event, event.currentTarget, loop.language);
+    if (tapped) {
+      lookUp.open({
+        tapped, language: loop.language, sourceTitle: `Loop · ${loopTitle(graph, loop)}`,
+        play: { label: "Play from this line", run: () => void player.play(track, { at: card.start }) },
+        from: { kind: "loop", loopId: loop.id }
+      });
+      return;
+    }
+    lookUp.close();
+    void player.play(track, { at: card.start });
+  };
+
   const cardOf = (card: LoopCard, index: number) => {
     const current = index === moment.card;
     const entering = SECTIONS[card.section] && (index === 0 || cards[index - 1].section !== card.section);
@@ -143,7 +166,7 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
       <button
         key={card.group} data-card={index}
         className={`lyric-row${current ? " now" : ""}${index < moment.card ? " past" : ""}`}
-        onClick={() => void player.play(track, { at: card.start })}
+        onClick={(event) => touch(event, card)}
       >
         {/* The line last said is the one at full strength; the others step back. No movement and
             no weight change, so nothing on this screen ever reflows — which is the same rule the
@@ -155,7 +178,7 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
         >
           <span className="lyric-lang" aria-hidden="true">{languageCode(line.language)}</span>
           {loopLineShown(card, number, at)
-            ? <span className="lyric-said">{line.text}</span>
+            ? <span className="lyric-said" lang={line.language}>{line.text}</span>
             : <span className="lyric-held" aria-label="Not said yet" />}
         </span>)}
       </button>
@@ -166,6 +189,9 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
     <div className="lyric" ref={lyric}>
       {cards.map(cardOf)}
     </div>
+
+    {/* Between the words and the controls, and never over the controls. */}
+    <LookUpSheet state={lookUp} placement="flow" />
 
     <div className="player">
       <div

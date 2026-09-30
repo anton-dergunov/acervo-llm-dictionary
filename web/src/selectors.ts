@@ -92,6 +92,31 @@ export function lexemesIn(graph: VocabularyGraph, language: string): Lexeme[] {
   return live(graph.lexemes).filter((lexeme) => lexeme.language === language);
 }
 
+/** What a look-up sheet says about a word the owner already has. */
+export interface HeldWord {
+  id: string;
+  headword: string;
+  gloss: string;
+}
+
+const bare = (form: string) => form.normalize("NFD").replace(/\p{Mn}/gu, "").toLowerCase().trim();
+
+/**
+ * The word the owner holds that a tapped form names, read from the replica — so a word you have is
+ * answered at once and offline (`docs/features/look-up.md`). A story's mark says which word it is;
+ * otherwise the form is compared with each headword, with and without its article, and each lemma.
+ * An inflected form this misses is found by the server's look-up, which answers with the word held.
+ */
+export function heldWord(graph: VocabularyGraph, language: string, form: string,
+                         lexemeId: string | null = null): HeldWord | null {
+  const words = lexemesIn(graph, language);
+  const want = bare(form);
+  const found = (lexemeId ? words.find((lexeme) => lexeme.id === lexemeId) : undefined)
+    ?? words.find((lexeme) => [lexeme.headword, lexeme.lemma, lexeme.headword.replace(LEADING_ARTICLE, "")]
+      .some((candidate) => bare(candidate) === want));
+  return found ? { id: found.id, headword: found.headword, gloss: shortGlossOf(graph, found) } : null;
+}
+
 export function vocabularies(graph: VocabularyGraph): Vocabulary[] {
   return live(graph.vocabularies)
     .slice()

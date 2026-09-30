@@ -3,8 +3,8 @@
 Shared by the interactive route, which returns the proposal for review, and the headless capture
 job, which saves it to the Inbox. Nothing here writes.
 
-It is two halves, split at the duplicate check: `understand` and then compose. A photo tap asks for
-the first half alone (`look_up`) and brings its answer back to `/capture`, so the quick call is not a
+It is two halves, split at the duplicate check: `understand` and then compose. A tapped word — on a
+photo, or in something being read — asks for the first half alone (`look_up`) and brings its answer back to `/capture`, so the quick call is not a
 second pipeline and compose does not pay for resolve twice.
 """
 
@@ -181,7 +181,7 @@ def given_resolution(body: dict[str, Any]) -> dict[str, Any] | None:
 
 
 def look_up(settings: Settings, account: str, body: dict[str, Any]) -> dict[str, Any]:
-    """The quick look-up a photo tap makes: the first half of a capture, on the `quick` chain.
+    """The quick look-up a tapped word makes: the first half of a capture, on the `quick` chain.
 
     One model call. It returns what the interface needs while the finger is still down — which word
     was meant and what it means here — and whether the owner already holds it, with the same

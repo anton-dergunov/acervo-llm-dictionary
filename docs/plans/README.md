@@ -7,7 +7,6 @@ what it said.
 **Core**
 
 - [`capture-transports.md`](capture-transports.md) — getting a word in from every device.
-- [`tap-to-look-up.md`](tap-to-look-up.md) — tap a word in a story, an example or a clip, and add it.
 - [`backups.md`](backups.md) — scheduled snapshots, an off-machine export, restore drills.
 - [`observability.md`](observability.md) — when something does not happen, finding out why.
 - [`provider-management.md`](provider-management.md) — providers in Settings, usage figures, an audit, a setup guide.

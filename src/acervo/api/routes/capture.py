@@ -1,7 +1,7 @@
 """Capture: text in, an entry to review out — or, headless, a job that files entries in the Inbox.
 
 `POST /capture` is synchronous because a person is waiting to review the result. `POST
-/capture/resolve` is its first half alone, for a photo tap, and `/capture` accepts what it returned. `POST /captures`
+/capture/resolve` is its first half alone, for a tapped word, and `/capture` accepts what it returned. `POST /captures`
 is the headless transports' door: it queues a `capture` job and answers at once. Both run
 `services/capture/pipeline.propose`, so there is one pipeline.
 
@@ -44,8 +44,8 @@ async def capture(request: Request) -> JSONResponse:
 
 @router.post("/capture/resolve")
 async def quick(request: Request) -> JSONResponse:
-    """The quick look-up a photo tap makes: which word was meant, what it means here, and whether it
-    is already held. One model call on the `quick` chain; writes nothing."""
+    """The quick look-up a tap makes — on a photo, or on a word being read: which word was meant,
+    what it means here, and whether it is already held. One model call on the `quick` chain; writes nothing."""
     account = owner_id(request)
     body = await json_body(request)
     graph.require_schema_version(body.get("schemaVersion"))
@@ -63,10 +63,12 @@ def _require_text(body: dict[str, Any]) -> str:
     return text
 
 
-# What a headless capture may carry into its job. Everything else in a request is ignored.
+# What a headless capture may carry into its job. Everything else in a request is ignored. A
+# `resolution` is a quick look-up's answer, carried by Add on a word tapped while reading, and checked
+# again by the job exactly as `/capture` checks it (`pipeline.given_resolution`).
 CAPTURE_FIELDS = (
     "text", "mode", "headword", "language", "topics", "sourceKind", "sourceUrl", "sourceTitle",
-    "note", "reference", "referenceMode", "window", "complete", "limit",
+    "note", "reference", "referenceMode", "window", "complete", "limit", "resolution",
 )
 
 

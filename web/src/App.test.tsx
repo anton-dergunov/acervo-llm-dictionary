@@ -10,6 +10,7 @@ import { LocalAcervoRepository, repository } from "./repository";
 import type { LocalDatabase } from "./localDatabase";
 import { articleChanges } from "./testArticles";
 import { TEST_OWNER, testGraph } from "./testGraph";
+import { aimAt, forgetTaps, TAP } from "./testTap";
 import { reloadSelectionForTests } from "./wordSelection";
 
 vi.mock("virtual:pwa-register", () => ({ registerSW: vi.fn() }));
@@ -1040,6 +1041,45 @@ describe("Acervo application", () => {
       await openMap();
       fireEvent.keyDown(document, { key: "Escape" });
       expect(await screen.findByRole("heading", { name: /All words/ })).toBeInTheDocument();
+    });
+  });
+
+  describe("a word opened from a story", () => {
+    /* A deck that snaps under the finger, faked as `StoryReader.test.tsx` fakes it. */
+    const width = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "clientWidth");
+    const scrollTo = Element.prototype.scrollTo;
+    beforeEach(() => {
+      Object.defineProperty(HTMLElement.prototype, "clientWidth", { configurable: true, value: 100 });
+      Element.prototype.scrollTo = function (this: Element, options?: ScrollToOptions | number) {
+        this.scrollLeft = typeof options === "object" ? options.left ?? 0 : 0;
+        this.dispatchEvent(new Event("scroll"));
+      } as typeof Element.prototype.scrollTo;
+    });
+    afterEach(() => {
+      if (width) Object.defineProperty(HTMLElement.prototype, "clientWidth", width);
+      else delete (HTMLElement.prototype as { clientWidth?: number }).clientWidth;
+      Element.prototype.scrollTo = scrollTo;
+      forgetTaps();
+    });
+
+    it("comes back to the page it was opened from", async () => {
+      signedIn();
+      await openList();
+      fireEvent.click(screen.getByRole("button", { name: "Stories" }));
+      fireEvent.click(await screen.findByText("La balsa que picaba"));
+      fireEvent.click(await screen.findByRole("button", { name: "The next part" }));
+      await waitFor(() => expect(document.querySelector(".story-bar-count")).toHaveTextContent("2 / 3"));
+
+      const text = document.querySelectorAll(".story-text")[1];
+      aimAt(text, "picar");
+      fireEvent.click(text, TAP);
+      fireEvent.click(await screen.findByRole("button", { name: "Open picar" }));
+      const back = await screen.findByRole("button", { name: "Back to the list" });
+      expect(document.querySelector(".story-read")).toBeNull();
+
+      fireEvent.click(back);
+      await waitFor(() => expect(document.querySelector(".story-bar-count")).toHaveTextContent("2 / 3"));
+      expect(document.querySelector(".story-bar-title")).toHaveTextContent("La balsa que picaba");
     });
   });
 

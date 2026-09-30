@@ -3503,7 +3503,8 @@ function playFor(hit) {
   if (hit.surface === "story") {
     const passage = hit.range.startContainer.parentElement.closest("[data-passage]");
     if (!passage) return null;   // a part read whole has no passages; its ▷ reads it
-    return { label: "From here", run: () => {
+    const sounding = passage.closest(".story-card") === document.querySelector(".story-card");   // the first part plays
+    return { label: sounding ? "From here" : "This passage", run: () => {
       document.querySelectorAll(".story-seg.on").forEach((one) => one.classList.remove("on"));
       passage.classList.add("on");
       toast("♪ Reading on from this passage");
@@ -3593,17 +3594,18 @@ function sheetHtml() {
     ${actions.length ? `<div class="look-actions">${actions.join("")}</div>` : ""}`;
 }
 
-/* Where the sheet goes. Over the foot of a story's page; between a loop's cards and its controls,
-   which it never covers; and in an article on top of the ask dock, which already owns the foot of
-   the column and stays there as the page scrolls. */
+/* Where the sheet goes. Over the foot of a story's page, or an article's cards; between a loop's
+   cards and its controls, which it never covers; and in an article's page on top of the ask dock,
+   which already owns the foot of the column and stays there as the page scrolls. */
 function paintLook() {
   let sheet = document.getElementById("lookSheet");
   if (!look) { if (sheet) sheet.remove(); return; }
   if (!sheet) {
     sheet = el('<aside class="look-sheet" id="lookSheet" role="dialog" aria-label="Look up a word"></aside>');
     if (look.surface === "story") { sheet.classList.add("over"); $(".story-read").appendChild(sheet); }
-    else if (look.surface === "loop") $(".loop-play").insertBefore(sheet, $(".loop-play .player"));
-    else if ($(".ask")) $(".ask").prepend(sheet);
+    else if (look.surface === "loop") { sheet.classList.add("flow"); $(".loop-play").insertBefore(sheet, $(".loop-play .player")); }
+    else if ($(".ask")) { sheet.classList.add("docked"); $(".ask").prepend(sheet); }
+    else if ($("#pane .cards")) { sheet.classList.add("over"); $("#pane .cards").appendChild(sheet); }
     else { sheet.classList.add("stuck"); $("#paneWrap").appendChild(sheet); }
     sheet.addEventListener("click", onSheet);
   }

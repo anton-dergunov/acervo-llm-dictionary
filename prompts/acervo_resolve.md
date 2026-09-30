@@ -164,3 +164,15 @@ it.** Do not correct the author's spelling or grammar and do not make it more na
   `sentences` is `[]`. The photo is kept as the place the word was met; a sign is not a usage
   example.
 <!-- end -->
+
+<!-- if: reading -->
+## A sentence the learner was reading (this request)
+
+The input is one sentence of something the learner was reading — a story, a line of a lesson, an
+example sentence — and they tapped a word in it. It is finished text, not the learner's notes, so
+**"Fixing the input" above does not apply to it.**
+
+- Do not correct, reword, shorten or complete the sentence, and do not make it more natural. It goes
+  in `sentences` exactly as it is written, character for character.
+- Give it a `translation` as you would for any sentence the learner supplied.
+<!-- end -->

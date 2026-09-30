@@ -515,7 +515,9 @@ place, and each line keeps a fixed least height so nothing moves when it arrives
 backwards put an answer away again. **Which line is sounding is marked in colour and nothing else** —
 no weight, size, offset or motion — because this is the one surface meant to be left running and
 glanced at. Previous and Next step card by card; the seek line keeps one tick per word. A long line
-is set smaller on the card being played, fixed per line so it never changes under the eye.
+is set smaller on the card being played, fixed per line so it never changes under the eye. **A tap on
+a card seeks to it, unless it is on a word in the language being learned**, which is looked up while
+the loop plays on ([`look-up.md`](look-up.md)); the sheet's *Play from this line* is the seek.
 
 ### 14 · The track plays from memory
 

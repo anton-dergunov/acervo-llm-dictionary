@@ -677,10 +677,10 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .sel-act.playing { background: var(--core); color: var(--on-core); }
 
 /* ── look a word up ──
-   A sheet at the foot of the surface: over the foot of a story's page, between a loop's cards and its
-   controls (which it never covers), at the foot of an article's column. Its meaning line is photo
-   capture's. The tapped word is tinted with a highlight, which paints the text where it already is
-   and so cannot move a line of it. */
+   A sheet at the foot of the surface: over the foot of a story's page (`over`), between a loop's cards
+   and its controls, which it never covers (`flow`), on top of an article's ask dock (`docked`), or at
+   the foot of a column that scrolls (`stuck`). Its meaning line is photo capture's. The tapped word
+   is tinted with a highlight, which paints the text where it already is and so cannot move it. */
 .look-sheet {
   /* Its own type, whatever it is put inside: a story's page sets the label face on what it holds. */
   font-family: var(--sans); letter-spacing: normal; text-transform: none;
@@ -696,10 +696,10 @@ details.fold .fold-body { padding: 4px 0 18px; }
 /* A word low on the page would be under the sheet, so the sheet goes to the top of it instead —
    over the picture, never over the word it is about. */
 .look-sheet.over.top { top: 52px; bottom: auto; }
+.look-sheet.flow { flex: none; margin-bottom: 8px; }
 .look-sheet.stuck { position: sticky; bottom: 12px; }
 /* In an article the ask dock owns the foot of the column, so the sheet goes on top of it, inside it. */
-.ask > .look-sheet { flex: none; margin: 12px auto 0; width: min(600px, calc(100% - 52px)); box-shadow: none; }
-.loop-play > .look-sheet { flex: none; margin-bottom: 8px; }
+.look-sheet.docked { flex: none; margin: 12px auto 0; width: min(600px, calc(100% - 52px)); box-shadow: none; }
 .look-head { display: flex; align-items: flex-start; gap: 8px; }
 .look-meaning { flex: 1; min-width: 0; margin: 0; }
 .look-close { flex: none; margin: -5px -7px 0 0; }
@@ -710,6 +710,7 @@ details.fold .fold-body { padding: 4px 0 18px; }
 }
 .look-sentence mark { background: none; color: var(--ink-2); font-weight: 600; }
 .look-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.look-actions:empty { display: none; }
 .look-added { display: inline-flex; align-items: center; gap: 6px; height: 34px; color: var(--core); font-size: 14px; }
 .look-added svg { width: 16px; height: 16px; }
 /* Stronger than `--core-soft`, because the word may sit in a passage or on a card already tinted with it. */

@@ -29,9 +29,11 @@ function count(amount: number, noun: string): string {
   return `${amount} ${noun}${amount === 1 ? "" : "s"}`;
 }
 
-export default function StoryView({ graph, language, onMake, onClose, onDelete }: {
+export default function StoryView({ graph, language, opening = null, onMake, onClose, onDelete }: {
   graph: VocabularyGraph;
   language: string;
+  /** The story and page to open on: where the owner was, coming back from a word opened from it. */
+  opening?: { storyId: string; page: number } | null;
   onMake(): void;
   /** Back to the words. */
   onClose(): void;
@@ -40,7 +42,7 @@ export default function StoryView({ graph, language, onMake, onClose, onDelete }
 }) {
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
   const stories = storiesIn(graph, language);
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(opening?.storyId ?? null);
   const open = stories.find((story) => story.id === openId) ?? null;
 
   if (open) {
@@ -54,6 +56,7 @@ export default function StoryView({ graph, language, onMake, onClose, onDelete }
         words={storyWordsOf(graph, open.id)}
         entries={storyWordEntries(graph, open.id)}
         recording={isRecording(jobFor(live, "story", open.id))}
+        startAt={open.id === opening?.storyId ? opening.page : 0}
         onBack={() => setOpenId(null)}
       />
     </section>;

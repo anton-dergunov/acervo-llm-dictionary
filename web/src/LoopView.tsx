@@ -31,9 +31,11 @@ function clock(seconds: number | null): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-export default function LoopView({ graph, language, onMake, onClose, onDelete, onChangeMusic, onToggleKeep }: {
+export default function LoopView({ graph, language, opening = null, onMake, onClose, onDelete, onChangeMusic, onToggleKeep }: {
   graph: VocabularyGraph;
   language: string;
+  /** The loop to open on: the one a word was opened from. Otherwise the one playing, if any. */
+  opening?: string | null;
   onMake(): void;
   /** Back to the words. The loop keeps playing; the bar and the chip are what it plays behind. */
   onClose(): void;
@@ -46,7 +48,7 @@ export default function LoopView({ graph, language, onMake, onClose, onDelete, o
   const playback = player.usePlayback();
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
   const loops = loopsIn(graph, language);
-  const [openId, setOpenId] = useState<string | null>(playback.loopId);
+  const [openId, setOpenId] = useState<string | null>(opening ?? playback.loopId);
   const open = loops.find((loop) => loop.id === openId) ?? null;
   const { schema } = useLoopSchema();
 

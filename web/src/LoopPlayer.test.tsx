@@ -7,14 +7,16 @@
  * three ways this screen could quietly stop being an exercise and become a caption.
  */
 
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { backendSession, type LoopSchema } from "./api";
+import { backendSession, type LoopSchema, type QuickLookUp } from "./api";
 import type { Bed, Loop, LoopCue, LoopItem, VocabularyGraph } from "./domain";
 import { resetLoopSchemaForTests } from "./LoopMusic";
 import * as playerModule from "./loops";
 import LoopPlayer from "./LoopPlayer";
+import { LookUpContext, type LookUpServices } from "./LookUpSheet";
 import { drillCues } from "./testGraph";
+import { aimAt, forgetTaps, TAP } from "./testTap";
 
 const SCHEMA: LoopSchema = {
   apiVersion: "2.0.0", engineVersion: "0.7.0", maxItems: 24,
@@ -74,14 +76,26 @@ function graphWith(beds: Bed[] = []): VocabularyGraph {
 const onChangeMusic = vi.fn();
 const onToggleKeep = vi.fn();
 
+const looking: LookUpServices = {
+  graph: null,
+  lookUp: vi.fn(async (): Promise<QuickLookUp> => ({
+    resolution: { language: "es", headword: "el asco", lemma: "asco", pos: "noun", sentences: [], note: null,
+                  consumedLines: 1, consumedText: null, gloss: "disgust" },
+    duplicates: [], foldable: null
+  })),
+  queue: vi.fn(async () => ({})),
+  open: vi.fn(),
+  notify: vi.fn()
+};
+
 function at(seconds: number, beds: Bed[] = [], track = { loop, items, cues }) {
   vi.spyOn(playerModule, "usePlayback").mockReturnValue({
     loopId: track.loop.id, at: seconds, duration: 90, playing: true, loading: false, failed: null
   });
-  return render(<LoopPlayer
+  return render(<LookUpContext.Provider value={looking}><LoopPlayer
     track={track} graph={graphWith(beds)}
     onChangeMusic={onChangeMusic} onToggleKeep={onToggleKeep}
-  />);
+  /></LookUpContext.Provider>);
 }
 
 beforeEach(() => {
@@ -91,7 +105,11 @@ beforeEach(() => {
 
 /* Unmounted before the mocks are restored: the schema arrives asynchronously, and a player still on
    screen when `usePlayback` stops being mocked would re-render with a different number of hooks. */
-afterEach(() => { cleanup(); vi.restoreAllMocks(); onChangeMusic.mockReset(); onToggleKeep.mockReset(); });
+afterEach(() => {
+  cleanup(); vi.restoreAllMocks(); onChangeMusic.mockReset(); onToggleKeep.mockReset();
+  vi.mocked(looking.lookUp).mockClear();
+  forgetTaps();
+});
 
 describe("the loop's music", () => {
   it("is named in words and opens a menu of other music", async () => {
@@ -191,6 +209,33 @@ describe("playing a loop", () => {
     at(12);
     fireEvent.click(screen.getByText("la balsa"));
     expect(play).toHaveBeenCalledWith(expect.objectContaining({ loop }), { at: 44.12 });
+  });
+
+  it("looks up a word on a card and plays on, unmoved, until the sheet is asked to", async () => {
+    const play = vi.spyOn(playerModule, "play").mockResolvedValue(undefined);
+    const { container } = at(18);
+    const now = container.querySelector(".lyric-row.now")!;
+    aimAt(now.querySelector(".lyric-source .lyric-said")!, "asco");
+    fireEvent.click(now, TAP);
+
+    expect(play).not.toHaveBeenCalled();
+    expect(looking.lookUp).toHaveBeenCalledWith(
+      { text: "asco", selection: { start: 0, end: 4 }, source: "reading" }, expect.any(AbortSignal));
+    const sheet = screen.getByRole("dialog", { name: "Look up a word" });
+    expect(await within(sheet).findByText("el asco")).toBeInTheDocument();
+    fireEvent.click(within(sheet).getByRole("button", { name: "Play from this line" }));
+    expect(play).toHaveBeenCalledWith(expect.objectContaining({ loop }), { at: 8.82 });
+  });
+
+  it("still seeks from a line in the listener's own language", () => {
+    const play = vi.spyOn(playerModule, "play").mockResolvedValue(undefined);
+    const { container } = at(18);
+    const now = container.querySelector(".lyric-row.now")!;
+    aimAt(now.querySelector(".lyric-target .lyric-said")!, "disgust");
+    fireEvent.click(now, TAP);
+    expect(play).toHaveBeenCalledWith(expect.objectContaining({ loop }), { at: 8.82 });
+    expect(looking.lookUp).not.toHaveBeenCalled();
+    expect(screen.queryByRole("dialog", { name: "Look up a word" })).toBeNull();
   });
 
   it("says each line's language beside it", () => {

@@ -260,7 +260,7 @@ export default function PhotoCapture({
       const controller = new AbortController();
       asking.current = controller;
       setLookUps((was) => new Map(was).set(key, { state: "loading" }));
-      onLookUp({ text: asked.text, selection: asked.selection }, controller.signal)
+      onLookUp({ text: asked.text, selection: asked.selection, source: "photo" }, controller.signal)
         .then((result) => {
           setLookUps((was) => new Map(was).set(key, { state: "done", result }));
           // OCR damage the look-up repaired becomes the sentence in the box, and is not asked again.

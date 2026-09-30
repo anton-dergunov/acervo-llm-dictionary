@@ -408,6 +408,21 @@ export interface QuickLookUpRequest {
   text: string;
   /** The tapped span within it. */
   selection: { start: number; end: number };
+  /**
+   * Where the sentence was met: read by OCR from a photo, which may repair it, or read in Acervo —
+   * a story, a loop, an article — which is finished text and comes back exactly as it was.
+   */
+  source: "photo" | "reading";
+}
+
+/** A word tapped while reading, filed in the Inbox by the headless capture job. */
+export interface InboxCapture {
+  /** The sentence it was met in, which becomes its attestation. */
+  text: string;
+  /** What the quick look-up answered for it, so the job writes the word the owner saw. */
+  resolution: CaptureResolution;
+  /** What the owner was reading: a story, a loop, a word's entry. */
+  sourceTitle: string | null;
 }
 
 export interface QuickLookUp {
@@ -1165,11 +1180,30 @@ export const backendSession = {
         schemaVersion: SCHEMA_VERSION,
         deviceId,
         mode: "single",
-        source: "photo",
+        source: request.source,
         text: request.text,
         selection: request.selection
       })
     }, false, QUICK_TIMEOUT);
+  },
+  /**
+   * Add, for a word tapped while reading: the headless capture job (`POST /captures`), which files
+   * the word in the Inbox while the owner goes on reading. Online-only and loud when it fails.
+   */
+  queueCapture(deviceId: string, request: InboxCapture): Promise<Job> {
+    return client.call<Job>("/captures", {
+      method: "POST",
+      body: JSON.stringify({
+        schemaVersion: SCHEMA_VERSION,
+        deviceId,
+        mode: "single",
+        text: request.text,
+        headword: request.resolution.headword,
+        language: request.resolution.language,
+        resolution: request.resolution,
+        sourceTitle: request.sourceTitle
+      })
+    });
   },
   /* ── external dictionaries ────────────────────────────────────────────
      Two calls and two addresses. The list and an online lookup are ordinary JSON; the artifact

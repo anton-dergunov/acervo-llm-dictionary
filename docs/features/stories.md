@@ -144,9 +144,10 @@ that waited on the network would not be a reveal.
 
 **Playback** is `storyAudio.ts`, the third audio element, registered with the others so they stop each
 other. **Pause is pause and leaving is stop**: there is no scrubber, and a page that stops being the one
-on screen stops its part and forgets the position, so swiping away and back begins it again. A passage
-touched while nothing plays is played alone; touched while the part plays, the recording moves there and
-carries on. `segmentSpans` cuts the marks at the passages and refuses passages that do not join to the
+on screen stops its part and forgets the position, so swiping away and back begins it again. **A tap on a
+word looks it up and plays nothing** ([`look-up.md`](look-up.md)); the passage it is in is the sheet's
+button, and a tap on anything else in a passage plays it. A passage started while nothing plays is played
+alone; started while the part plays, the recording moves there and carries on. `segmentSpans` cuts the marks at the passages and refuses passages that do not join to the
 text, so a recording made from words since changed paints nothing. The sounding passage is tinted with a
 background, never padding, weight or size. Recordings are kept on the device with the other clips, so a
 story plays on a plane.
