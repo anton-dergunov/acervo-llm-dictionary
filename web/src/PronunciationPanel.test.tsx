@@ -10,7 +10,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { backendSession, type PronunciationSettings } from "./api";
 import { pronunciationCacheEnabled, setPronunciationCacheEnabled } from "./editorPreferences";
 import { MemoryMediaStore } from "./mediaStore";
-import PronunciationPanel from "./PronunciationPanel";
+import PronunciationPanel, { offeredVoices } from "./PronunciationPanel";
 import { replaceStoreForTests } from "./pronunciation";
 
 const WAVENET = {
@@ -103,5 +103,18 @@ describe("Settings ▸ Pronunciation", () => {
     vi.spyOn(backendSession, "pronunciationSettings").mockRejectedValue(new Error("away"));
     render(<PronunciationPanel onNotify={() => undefined} />);
     expect(await screen.findByRole("button", { name: /Forget pronunciations/ })).toBeInTheDocument();
+  });
+});
+
+describe("the voice document a change sends", () => {
+  it("lets go of a voice chosen for a model no order offers any more, and keeps the rest", () => {
+    const stored = {
+      "google-tts": { wavenet: { es: "es-ES-Wavenet-E" }, "gemini-3.1-flash-tts-preview": { es: "Kore" } },
+      // Retired from speech: the whole document would otherwise be refused on every later change.
+      "gemini-free": { "gemini/gemini-3.1-flash-tts-preview": { es: "Kore" } }
+    };
+    expect(offeredVoices(stored, settings())).toEqual({
+      "google-tts": { wavenet: { es: "es-ES-Wavenet-E" }, "gemini-3.1-flash-tts-preview": { es: "Kore" } }
+    });
   });
 });

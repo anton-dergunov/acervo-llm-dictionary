@@ -15,7 +15,7 @@ import wave
 
 import pytest
 
-from acervo.models.errors import ProviderUnavailable
+from acervo.models.errors import ProviderRefused, ProviderUnavailable
 from acervo.pronunciation.ids import pronunciation_id
 
 from graph_records import attestation, example, lexeme, sense, vocabulary
@@ -54,6 +54,8 @@ def a_voice(server, monkeypatch, tmp_path):
 
     def speech(row, model, words, **kwargs):
         calls.append({"provider": row.id, "model": model, "words": words, **kwargs})
+        if model in speech.refusing:
+            raise speech.refusing[model]
         failure = getattr(speech, "failure", None)
         if failure is not None:
             raise failure
@@ -64,6 +66,8 @@ def a_voice(server, monkeypatch, tmp_path):
 
     monkeypatch.setattr("acervo.models.google_tts.speech", speech)
     speech.calls = calls
+    # {model: error}: that model alone refuses, and the rest answer.
+    speech.refusing = {}
     server.speech = speech
     return speech
 
@@ -184,12 +188,44 @@ def test_delivery_takes_only_the_two_orders_and_the_three_uses(server):
         assert server.put("/pronunciations/settings", body).status_code == 400
 
 
-def test_an_emotion_is_not_recorded_when_the_voice_that_answered_could_not_take_it(server):
+def test_an_expressive_order_with_no_directed_voice_is_read_by_the_clear_one(server, caplog):
+    """A voice that cannot take a direction is skipped rather than asked, so it can never record a
+    clip as though no emotion had been asked for — and when that leaves nobody, the clear order
+    reads, plainly, and the log says so."""
     entry, itch, sentence, _ = word(server)
-    server.put("/models/selection", {"chains": {"audioExpressive": [{"provider": "google-tts", "model": "wavenet"}]}})
-    clip = say(server, "examples", sentence["id"]).json()["data"]
+    server.put("/models/selection", {"chains": {
+        "audioExpressive": [{"provider": "google-tts", "model": "standard"}],
+        "audioPlain": [{"provider": "google-tts", "model": "wavenet"}],
+    }})
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        clip = say(server, "examples", sentence["id"]).json()["data"]
+    assert [call["model"] for call in server.speech.calls] == ["wavenet"], "the saved plain voice was skipped"
     assert server.speech.calls[-1]["style"] is None
     assert clip["modelId"] == "wavenet" and clip["emotion"] is None
+    assert any("result=undirected" in record.getMessage() and "reason=no_directed_voice" in record.getMessage()
+               for record in caplog.records)
+
+
+def test_directed_voices_that_are_all_out_of_reach_hand_over_to_the_clear_order(server, caplog):
+    entry, itch, sentence, _ = word(server)
+    for model in ("gemini-3.1-flash-tts-preview", "gemini-2.5-flash-tts"):
+        server.speech.refusing[model] = ProviderUnavailable("rate_limited", "quota", provider_id="google-tts", model=model)
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        clip = say(server, "examples", sentence["id"]).json()["data"]
+    assert clip["modelId"] == "wavenet" and clip["emotion"] is None
+    assert server.speech.calls[-1]["style"] is None
+    assert any("result=undirected" in record.getMessage() and "reason=rate_limited" in record.getMessage()
+               for record in caplog.records)
+
+
+def test_a_rejected_credential_is_not_routed_around(server):
+    """Falling through a rejected key would only spend another allowance on the same mistake."""
+    entry, itch, sentence, _ = word(server)
+    server.speech.refusing["gemini-3.1-flash-tts-preview"] = ProviderRefused(
+        "authentication", "bad key", provider_id="google-tts", model="gemini-3.1-flash-tts-preview")
+    answer = say(server, "examples", sentence["id"])
+    assert answer.status_code >= 400
+    assert "wavenet" not in {call["model"] for call in server.speech.calls}
 
 
 def test_a_language_no_model_in_the_order_speaks_is_its_own_refusal(server):

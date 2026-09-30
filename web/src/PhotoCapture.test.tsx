@@ -166,10 +166,29 @@ describe("the Photo tab", () => {
     const frame = await choose(view);
     tap(frame, 290, 60);
     fireEvent.click(await screen.findByRole("button", { name: "Fold this sentence in" }));
-    expect(props.onFoldIn).toHaveBeenCalledWith("lexeme000000001", foldable);
+    // The photo goes with it, as Add would keep it: the device attaches it, not the conversation.
+    await waitFor(() => expect(props.onFoldIn).toHaveBeenCalledWith(
+      "lexeme000000001", foldable,
+      expect.objectContaining({ photoRef: READING.photoRef, photo: expect.anything() })
+    ));
+    expect(vi.mocked(props.onFoldIn).mock.calls[0][2]!.photoRegion).not.toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Open llevar a cabo" }));
     expect(props.onOpenLexeme).toHaveBeenCalledWith("lexeme000000001");
     expect(screen.queryByRole("button", { name: "Add" })).toBeNull();
+  });
+
+  it("folds in without the photo when it is not to be kept", async () => {
+    const foldable = { sentences: [{ text: "Lo llevó a cabo.", translation: null }], reference: false, note: null };
+    const { props, view } = setUp({
+      onLookUp: vi.fn(async () => ({
+        ...FOUND, duplicates: [{ id: "lexeme000000001", headword: "llevar a cabo", shortGloss: "to carry out" }], foldable
+      }))
+    });
+    const frame = await choose(view);
+    tap(frame, 290, 60);
+    fireEvent.click(screen.getByLabelText(/Keep the photo/));
+    fireEvent.click(await screen.findByRole("button", { name: "Fold this sentence in" }));
+    await waitFor(() => expect(props.onFoldIn).toHaveBeenCalledWith("lexeme000000001", foldable, null));
   });
 
   it("says so when the photo could not be read, and can try again", async () => {

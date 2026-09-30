@@ -49,4 +49,4 @@ The use is walking with the phone in a pocket: tap once, and loops and stories p
 - **A queue across loops and stories**, with next and previous, as loops already have.
 - **One player per device shape**, designed rather than inherited: the phone first, then the
   tablet. On the desktop the now-playing chip leaves the top bar; where it goes instead is part of
-  this design. The phone's bar that cannot be dismissed is [`issues.md`](issues.md) §3.
+  this design.

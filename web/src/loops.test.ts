@@ -156,3 +156,28 @@ describe("moving within a loop", () => {
     expect(player.playback().at).toBe(items[1].startSeconds + 1.5);
   });
 });
+
+describe("stopping", () => {
+  it("forgets the loop as the one playing, and takes it off the lock screen", async () => {
+    const handlers = new Map<string, unknown>();
+    const session = {
+      metadata: null as unknown,
+      setActionHandler: (action: string, run: unknown) => {
+        if (run) handlers.set(action, run); else handlers.delete(action);
+      }
+    };
+    vi.stubGlobal("navigator", { ...navigator, mediaSession: session });
+    vi.stubGlobal("MediaMetadata", class { constructor(readonly init: unknown) {} });
+
+    await player.play(track);
+    expect(player.playback().loopId).toBe(loop.id);
+    expect(session.metadata).not.toBeNull();
+    expect(handlers.has("play")).toBe(true);
+
+    player.stop();
+    expect(player.playback().loopId).toBeNull();
+    expect(player.nowPlaying()).toBeNull();
+    expect(session.metadata).toBeNull();
+    expect(handlers.size).toBe(0);
+  });
+});

@@ -5,7 +5,7 @@
 
 import { describe, expect, it } from "vitest";
 import {
-  applyOps, diffDrafts, EditRefused, SETTABLE, type EditOp
+  applyOps, diffDrafts, EditRefused, SETTABLE, type EditOp, type FoldedPhoto
 } from "./articleEdit";
 import { articleFor, articleFromDraft } from "./selectors";
 import { testGraph } from "./testGraph";
@@ -162,6 +162,63 @@ describe("provenance, which the applier derives and the model never sets", () =>
       { op: "add", target: "example", in: ITCH, fromAttestation: ATTESTATION, value: { text: "Esa salsa pica." } }
     ]);
     expect(after.senses[0].examples.at(-1)!.sourceAttestationId).toBe(ATTESTATION);
+  });
+});
+
+describe("a photo folded in with the conversation", () => {
+  const photo: FoldedPhoto = {
+    sentence: "Me pica mucho la picadura del mosquito.",
+    photoRef: "photos/owner0000000001/0123456789abcdef.jpg",
+    photoRegion: { words: [[[0.1, 0.2], [0.3, 0.2], [0.3, 0.25]]], sentence: [[[0.1, 0.2], [0.9, 0.2], [0.9, 0.3]]] },
+    sourceKind: "book"
+  };
+  const withPhoto = (ops: EditOp[], folded: FoldedPhoto = photo, from = draft()) =>
+    applyOps(from, ops, { ...context, photo: folded });
+  const addSentence = (text: string, ref = "a1"): EditOp =>
+    ({ op: "add", target: "attestation", ref, value: { text } });
+
+  it("goes with the sentence that was photographed, quotes and spacing aside", () => {
+    const { draft: after } = withPhoto([
+      addSentence("Otra frase."),
+      addSentence("«Me pica  mucho la picadura del mosquito.»", "a2")
+    ]);
+    const [other, photographed] = after.attestations.slice(-2);
+    expect(photographed.photoRef).toBe(photo.photoRef);
+    expect(photographed.photoRegion).toEqual(photo.photoRegion);
+    expect(photographed.sourceKind).toBe("book");
+    expect(other.photoRef).toBeNull();
+  });
+
+  it("goes with the one sentence added when the model reworded it", () => {
+    const { draft: after } = withPhoto([addSentence("Me pica la picadura.")]);
+    expect(after.attestations.at(-1)!.photoRef).toBe(photo.photoRef);
+  });
+
+  it("is attached to nothing when no sentence is added, or when it cannot tell which", () => {
+    const { draft: edited } = withPhoto([
+      { op: "set", target: `sense:${ITCH}`, field: "definition", value: "Sentir picor." }
+    ]);
+    expect(edited.attestations.some((one) => one.photoRef)).toBe(false);
+    const { draft: two } = withPhoto([addSentence("Una."), addSentence("Dos.", "a2")]);
+    expect(two.attestations.some((one) => one.photoRef)).toBe(false);
+  });
+
+  it("keeps a sign as an attestation of its own, proposed with nothing from the model", () => {
+    const sign = { ...photo, sentence: null, sourceKind: "sign" as const };
+    const { draft: after, minted: ids } = withPhoto([], sign);
+    const kept = after.attestations.at(-1)!;
+    expect(kept).toMatchObject({ text: "", photoRef: sign.photoRef, sourceKind: "sign" });
+    expect([...ids]).toEqual([kept.id]);
+    // Readable as a document: a sign is the one attestation with no text.
+    expect(parseArticle(yamlForDraft(after)).attestations.at(-1)!.photoRef).toBe(sign.photoRef);
+  });
+
+  it("is attached once, however many turns build on the draft", () => {
+    const sign = { ...photo, sentence: null };
+    const { draft: first } = withPhoto([], sign);
+    const { draft: second } = withPhoto([addSentence("Otra frase.")], sign, first);
+    expect(second.attestations.filter((one) => one.photoRef === sign.photoRef)).toHaveLength(1);
+    expect(() => withPhoto([], sign, first)).toThrow(/changes nothing/);
   });
 });
 

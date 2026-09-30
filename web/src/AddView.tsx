@@ -14,7 +14,7 @@ import { CaretIcon, CloseIcon } from "./icons";
 import LexemeArticle, { type MarkSlot } from "./LexemeArticle";
 import { newId } from "./ids";
 import { seed as seedPicture } from "./media";
-import PhotoCapture, { type PhotoAdd } from "./PhotoCapture";
+import PhotoCapture, { type KeptPhoto, type PhotoAdd } from "./PhotoCapture";
 import { articleFromDraft, type Article } from "./selectors";
 import { ValidationPanel } from "./ValidationPanel";
 import {
@@ -94,7 +94,7 @@ export default function AddView({
   onCapture(request: CaptureRequest): Promise<CaptureResult>;
   onOpenLexeme(id: string): void;
   /** Open the word already held and ask one question against it, seeded with what was captured. */
-  onFoldIn?(lexemeId: string, foldable: CaptureFoldable): void;
+  onFoldIn?(lexemeId: string, foldable: CaptureFoldable, photo: KeptPhoto | null): void;
   /** One turn about the unsaved document. Absent when the server has no model, like Capture itself. */
   onChat?(document: string, turns: ChatTurn[]): Promise<ChatResult>;
   /** Photo capture's three round trips. Without them there is no Photo tab. */
@@ -117,6 +117,8 @@ export default function AddView({
   const [duplicates, setDuplicates] = useState<CaptureResult["duplicates"]>([]);
   /** What this capture carried that the word already held may not have. Null when it carried nothing. */
   const [foldable, setFoldable] = useState<CaptureFoldable | null>(null);
+  /** The photo the last capture carried, so folding it into a word already held keeps it too. */
+  const [capturedPhoto, setCapturedPhoto] = useState<KeptPhoto | null>(null);
   const [passedOver, setPassedOver] = useState<CaptureResult["passedOver"]>([]);
   /**
    * What the last chat turn changed in this unsaved proposal, so it can be marked.
@@ -231,6 +233,7 @@ export default function AddView({
   }
 
   function process() {
+    setCapturedPhoto(null);
     return submit({
       // The word alone is a complete capture. Sending it as the text too keeps that from needing
       // its own request shape — the server resolves what it is given, and here that is the word.
@@ -254,6 +257,9 @@ export default function AddView({
    */
   async function addFromPhoto(add: PhotoAdd) {
     if (add.photoRef && add.photo) await seedPicture(add.photoRef, add.photo);
+    setCapturedPhoto(add.photoRef && add.photo ? {
+      photoRef: add.photoRef, photoRegion: add.photoRegion, sourceKind: add.sourceKind, photo: add.photo
+    } : null);
     await submit({
       text: add.text,
       resolution: add.resolution,
@@ -261,6 +267,15 @@ export default function AddView({
       photoRegion: add.photoRegion,
       sourceKind: add.sourceKind
     });
+  }
+
+  /**
+   * Fold into a word already held, with the photo when one is kept. Its bytes go into the picture
+   * cache for `addFromPhoto`'s reason: the proposal under review shows the photo before the save.
+   */
+  async function foldIn(lexemeId: string, carried: CaptureFoldable, photo: KeptPhoto | null) {
+    if (photo) await seedPicture(photo.photoRef, photo.photo);
+    onFoldIn?.(lexemeId, carried, photo);
   }
 
   /* A seeded composition processes itself. The decision was taken on the article — which word,
@@ -309,7 +324,7 @@ export default function AddView({
           of the article conversation producing one ordinary proposal — no merge path, no second
           writer, and nothing the chat could not already do. */}
       {foldable && duplicates.length === 1 && <div className="fold-in">
-        <button className="tb-btn primary" onClick={() => onFoldIn?.(duplicates[0].id, foldable)}>
+        <button className="tb-btn primary" onClick={() => void foldIn(duplicates[0].id, foldable, capturedPhoto)}>
           Fold in
         </button>
       </div>}
@@ -348,7 +363,7 @@ export default function AddView({
       onLookUp={onLookUp}
       onAdd={(add) => void addFromPhoto(add)}
       onOpenLexeme={onOpenLexeme}
-      onFoldIn={(lexemeId, carried) => onFoldIn?.(lexemeId, carried)}
+      onFoldIn={(lexemeId, carried, photo) => void foldIn(lexemeId, carried, photo)}
       onWarm={onWarmPhoto ?? noop}
     />;
   }

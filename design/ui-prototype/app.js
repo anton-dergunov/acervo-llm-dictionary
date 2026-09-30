@@ -2261,7 +2261,8 @@ function renderLoopBar() {
     <button class="loopbar-main" id="openLoops">
       <span class="loopbar-title"></span>
       <span class="loopbar-sub"></span>
-    </button>`;
+    </button>
+    <button class="icon-btn loopbar-close" id="barClose" aria-label="Stop and close" title="Stop and close">${ICON.close}</button>`;
 }
 
 /* The selection bar. It says how many words are selected and which, as many whole words as fit and
@@ -2836,6 +2837,14 @@ function wireLoopControls(root) {
   root.addEventListener("click", (ev) => {
     if (ev.target.closest("#barPlay") || ev.target.closest("#chipPlay")) {
       player.playing ? loopPause() : loopPlay();
+      return;
+    }
+    /* Stops the loop and forgets it as the one playing; the loop itself is untouched. */
+    if (ev.target.closest("#barClose")) {
+      loopPause();
+      player.loopId = null;
+      player.at = 0;
+      render();
       return;
     }
     if (ev.target.closest("#openStories")) { openStories(); return; }

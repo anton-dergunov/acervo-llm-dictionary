@@ -70,9 +70,9 @@ const KINDS: { id: string; offers: string; label: string; help: string }[] = [
     id: "audioExpressive",
     offers: "audio",
     label: "Pronunciation — a voice that takes a direction",
-    help: "For anything that should sound like somebody saying it. A model here that declares it "
-      + "takes directions is given the emotion; one that does not reads plainly, so an order of "
-      + "both is a preference rather than a requirement."
+    help: "For anything that should sound like somebody saying it. Only voices that take a "
+      + "direction are listed: any other would read without the emotion and look as though it had "
+      + "worked. When none of these can answer, the clear voice reads instead, plainly."
   },
   {
     id: "ocr",
@@ -86,10 +86,18 @@ const KINDS: { id: string; offers: string; label: string; help: string }[] = [
 const same = (one: ModelPair, other: ModelPair) =>
   one.provider === other.provider && one.model === other.model;
 
-/** Every pair a kind can offer, in catalogue order, with the chosen ones lifted to the front. */
-function orderedPairs(providers: ModelProvider[], chosen: ModelPair[], kind: string): ModelPair[] {
-  const offered = providers.flatMap((provider) =>
-    (provider.models[kind] ?? []).map((model) => ({ provider: provider.id, model })));
+/** The order that exists to carry a direction, and so offers only voices that take one. */
+const DIRECTED = "audioExpressive";
+
+/** Every pair a kind can offer, in catalogue order. */
+function offeredPairs(providers: ModelProvider[], kind: string, offers: string): ModelPair[] {
+  return providers.flatMap((provider) => (provider.models[offers] ?? [])
+    .filter((model) => kind !== DIRECTED || provider.styles?.[model] === "instruction")
+    .map((model) => ({ provider: provider.id, model })));
+}
+
+/** The offered pairs with the chosen ones lifted to the front. */
+function orderedPairs(offered: ModelPair[], chosen: ModelPair[]): ModelPair[] {
   const picked = chosen.filter((pair) => offered.some((one) => same(one, pair)));
   return [...picked, ...offered.filter((one) => !picked.some((pair) => same(pair, one)))];
 }
@@ -154,9 +162,15 @@ function KindSection({ kind, offers, label, help, catalogue, onChange }: {
      the last model looked like turning capture off, and the server carried on building entries with
      the model at the head of its own order. The pane must show what will happen, so an inherited
      order arrives ticked and says whose it is. Changing anything makes the order yours. */
-  const live = chain.pairs;
+  const offered = offeredPairs(catalogue.providers, kind, offers);
+  /* A saved expressive order is kept as it was saved, and the server walks only its directed
+     voices. What is shown is what will be asked, so a pair this order cannot use is not drawn —
+     and the next change you make saves the order without it. */
+  const live = kind === DIRECTED
+    ? chain.pairs.filter((pair) => offered.some((one) => same(one, pair)))
+    : chain.pairs;
   const inherited = chain.source === "deployment";
-  const pairs = orderedPairs(catalogue.providers, live, offers);
+  const pairs = orderedPairs(offered, live);
 
   /* Three states, and unticking the last box reaches the third rather than bouncing off it:
      an order of your own, nothing at all, or "whatever the server does". Switching everything off
@@ -176,9 +190,13 @@ function KindSection({ kind, offers, label, help, catalogue, onChange }: {
         : "You have not chosen, and this server has nothing it can use."}
       {chain.reason ? ` Right now it cannot build: ${chain.reason}.` : ""}
     </p>}
-    {!inherited && live.length === 0 && <p className="config-help model-warning">
-      Switched off. Nothing here will be generated, and the rest of Acervo works as usual.
-    </p>}
+    {!inherited && live.length === 0 && (chain.pairs.length
+      ? <p className="config-help model-warning">
+          Nothing you chose here takes a direction, so the clear voice reads instead.
+        </p>
+      : <p className="config-help model-warning">
+          Switched off. Nothing here will be generated, and the rest of Acervo works as usual.
+        </p>)}
     {!inherited && live.length > 0 && chain.reason && <p className="config-help model-warning">
       Nothing you have chosen can be asked right now — {chain.reason}.
     </p>}

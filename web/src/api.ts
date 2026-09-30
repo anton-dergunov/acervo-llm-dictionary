@@ -43,6 +43,8 @@ export interface ModelProvider {
   kinds: string[];
   /** The models it offers, per kind. A chain entry is one of these, not a whole provider. */
   models: Record<string, string[]>;
+  /** What each speech model does with a direction. Only `instruction` reads the expressive order. */
+  styles?: Record<string, "instruction" | "none">;
   available: boolean;
   /** Names an environment variable and never a value, so it is safe to show. */
   reason: string | null;

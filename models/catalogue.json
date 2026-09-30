@@ -6,44 +6,30 @@
       "id": "gemini-free",
       "label": "Gemini (free tier)",
       "kinds": [
-        "text",
-        "audio"
+        "text"
       ],
       "litellm": {
         "text": [
           "gemini/gemini-3.5-flash-lite",
           "gemini/gemini-3.1-flash-lite"
-        ],
-        "audio": [
-          "gemini/gemini-3.1-flash-tts-preview"
         ]
       },
       "keyEnv": "GEMINI_API_KEY",
       "usageUrl": "https://aistudio.google.com/rate-limit?timeRange=last-28-days",
       "capabilities": {
-        "jsonMode": "native",
-        "audio": {
-          "style": "none",
-          "languages": "any",
-          "voices": {
-            "*": [
-              "Kore"
-            ]
-          }
-        }
+        "jsonMode": "native"
       },
       "params": {
         "text": {}
       },
-      "notes": "Two text models at 500 requests a day each, which is why both are listed rather than one: they are separate buckets, so the second is a genuine thousand-a-day rather than a spare. 3.5 Flash Lite is listed first because it was measured steadier: on 2026-09-15 it answered every resolve in under a second and every compose in about 2.5 s, while 3.1 Flash Lite answered one call in three with a 503 \"high demand\" and took 23 s over a 90-token resolve. Speech is one model at 10 a day — enough for a handful of words, not for a batch. The tier allows a second speech model, `gemini-2.5-flash-preview-tts`, and it is deliberately not listed: it answers a short word with generated *text* often enough to be useless, which Gemini then refuses with a 400, and LiteLLM's speech bridge surfaces that as an IndexError rather than as a refusal — so the chain would read it as terminal and stop rather than falling through. Prompting it as a transcript instruction does not help. Worth revisiting when audio gets a caller. There is deliberately no `image` kind: on this tier every image model, Nano Banana included, is allowed 0 requests, so listing one would put a row in the chain that can only 429. Voice names do not carry across providers, so the row names one Gemini accepts; a caller that asks for a specific voice overrides it. Temperature is deliberately unset: LiteLLM recommends leaving Gemini 3+ at its default."
+      "notes": "Two text models at 500 requests a day each, which is why both are listed rather than one: they are separate buckets, so the second is a genuine thousand-a-day rather than a spare. 3.5 Flash Lite is listed first because it was measured steadier: on 2026-09-15 it answered every resolve in under a second and every compose in about 2.5 s, while 3.1 Flash Lite answered one call in three with a 503 \"high demand\" and took 23 s over a 90-token resolve. There is deliberately no `audio` kind. The tier's one speech model, Gemini 3.1 Flash TTS, is ten requests a day, and reached through LiteLLM it cannot take a delivery direction — LiteLLM's Gemini speech transformation has no field for an instruction, so the direction is dropped before the request is built and the clip is recorded as though none had been asked for. A speech row that cannot do what the expressive order exists for, on ten a day, is worth less than the confusion it caused; the same model takes a direction through `google-tts`. There is deliberately no `image` kind: on this tier every image model, Nano Banana included, is allowed 0 requests, so listing one would put a row in the chain that can only 429. Temperature is deliberately unset: LiteLLM recommends leaving Gemini 3+ at its default."
     },
     {
       "id": "vertex",
       "label": "Vertex AI",
       "kinds": [
         "text",
-        "image",
-        "audio"
+        "image"
       ],
       "litellm": {
         "text": [
@@ -52,9 +38,6 @@
         ],
         "image": [
           "vertex_ai/gemini-3.1-flash-lite-image"
-        ],
-        "audio": [
-          "vertex_ai/gemini-3.1-flash-tts-preview"
         ]
       },
       "auth": "adc",
@@ -74,15 +57,6 @@
           "size": "fixed",
           "seed": "ignored",
           "references": 14
-        },
-        "audio": {
-          "style": "none",
-          "languages": "any",
-          "voices": {
-            "*": [
-              "Sulafat"
-            ]
-          }
         }
       },
       "params": {
@@ -94,16 +68,12 @@
           "imageConfig": {
             "imageSize": "1K"
           }
-        },
-        "audio": {
-          "vertex_location": "global"
         }
       },
-      "notes": "Application default credentials, not an API key: LiteLLM has no Vertex express-key path (BerriAI/litellm#21036). Present on a workstation that has run `gcloud auth application-default login`; on a server it needs a service-account JSON and GOOGLE_APPLICATION_CREDENTIALS. This is the only row that can generate an image today, the free tier having no image allowance at all. The image model is a Gemini one rather than Imagen, no Imagen id being reachable in this project, and it is also what the sense-image pipeline already uses. Location stays `global`; the Gemini image models 404 in a named region. The text models are the ones this project actually has: `gemini-3-flash` and `gemini-3.1-flash` both 404 here, and `gemini-3.8-flash` is what the sense-image pipeline already asks for briefs. Being paid rather than metered, the second model is availability cover rather than a second quota. Set `ACERVO_VERTEX_ACCOUNT` to the service account this row is allowed to spend and it will refuse to run as anything else — application default credentials are whichever Google login was last signed in, so on a machine that holds a work account as well as a personal one that is the difference between noticing afterwards and it not happening. Speech is the same model the free tier offers and the best-sounding one tried across a separate prototype, but paid and so without the free tier's ten-a-day cap — which is the whole reason to reach it here. `Sulafat` is a Gemini voice name and a per-language table would be better still; that is audio's own plan, along with everything else about speech. Two image parameters are declarations rather than hopes, both measured against the installed LiteLLM: `size` reaches this row only as an aspect ratio, `image_size` falling through both of LiteLLM's parameter gates, so the resolution travels in `params.image.imageConfig` — the one channel that survives into `generationConfig`. And `seed` never reaches the request at all, the Vertex transformer not reading it, so the row says `ignored` and a caller is told its picture is not reproducible rather than recording a seed that does nothing. There is no `reasoning_effort`: the REST call this replaced sent `thinkingLevel: MEDIUM`, but LiteLLM refuses the parameter for `gemini-3-flash` outright, and `params` is where it goes back if that changes. `references: 14` is Google's documented limit of object reference images for Gemini 3.1 Flash Lite Image; a call that sends any goes through LiteLLM's chat path with `modalities`, because `image_generation` takes no image for Vertex Gemini. Measured in experiments/story-picture-reference: 52 pictures, every one returned at 1024x1024 with `imageConfig` carried on that path, and a reference priced at about 1% of the picture.",
+      "notes": "Application default credentials, not an API key: LiteLLM has no Vertex express-key path (BerriAI/litellm#21036). Present on a workstation that has run `gcloud auth application-default login`; on a server it needs a service-account JSON and GOOGLE_APPLICATION_CREDENTIALS. This is the only row that can generate an image today, the free tier having no image allowance at all. The image model is a Gemini one rather than Imagen, no Imagen id being reachable in this project, and it is also what the sense-image pipeline already uses. Location stays `global`; the Gemini image models 404 in a named region. The text models are the ones this project actually has: `gemini-3-flash` and `gemini-3.1-flash` both 404 here, and `gemini-3.8-flash` is what the sense-image pipeline already asks for briefs. Being paid rather than metered, the second model is availability cover rather than a second quota. Set `ACERVO_VERTEX_ACCOUNT` to the service account this row is allowed to spend and it will refuse to run as anything else — application default credentials are whichever Google login was last signed in, so on a machine that holds a work account as well as a personal one that is the difference between noticing afterwards and it not happening. There is deliberately no `audio` kind: reached through LiteLLM, Vertex's Gemini speech drops a delivery direction before the request is built, for the free tier's reason. The same models, paid on the same project, take a direction through `google-tts`. Two image parameters are declarations rather than hopes, both measured against the installed LiteLLM: `size` reaches this row only as an aspect ratio, `image_size` falling through both of LiteLLM's parameter gates, so the resolution travels in `params.image.imageConfig` — the one channel that survives into `generationConfig`. And `seed` never reaches the request at all, the Vertex transformer not reading it, so the row says `ignored` and a caller is told its picture is not reproducible rather than recording a seed that does nothing. There is no `reasoning_effort`: the REST call this replaced sent `thinkingLevel: MEDIUM`, but LiteLLM refuses the parameter for `gemini-3-flash` outright, and `params` is where it goes back if that changes. `references: 14` is Google's documented limit of object reference images for Gemini 3.1 Flash Lite Image; a call that sends any goes through LiteLLM's chat path with `modalities`, because `image_generation` takes no image for Vertex Gemini. Measured in experiments/story-picture-reference: 52 pictures, every one returned at 1024x1024 with `imageConfig` carried on that path, and a reference priced at about 1% of the picture.",
       "timeouts": {
         "text": 90,
-        "image": 180,
-        "audio": 90
+        "image": 180
       }
     },
     {
@@ -282,7 +252,7 @@
       "timeouts": {
         "audio": 30
       },
-      "notes": "The Cloud Text-to-Speech API, which is not the Gemini API and not Vertex's generateContent: one route, `text:synthesize`, metered in characters, with a permanent free allowance of 4 M characters a month on Standard voices and 1 M on WaveNet — two orders of magnitude above what pronouncing a vocabulary needs. It authenticates with the same Google credentials as the `vertex` row once `texttospeech.googleapis.com` is enabled on the project, and a user login additionally needs a quota project, which is why the project travels as `x-goog-user-project` (`docs/operations/vertex-setup.md`). LiteLLM does not cover this API, so it has its own adapter. The \"models\" `standard` and `wavenet` are voice families rather than model ids: the voice name carries the language and the family (`es-ES-Wavenet-F`), exist per language, and take no style. The Gemini models on the same route are named with `voice.modelName`, speak any language with the same named voices, and take a free-text delivery direction in `input.prompt` — the only field that can carry an example's emotion without it being read aloud. Voice lists were read from `voices.list` on 2026-09-15, female first where a language offers both; the first is the default. The `encoding` each model declares is `LINEAR16` — the uncompressed master — because the compression is Acervo's business rather than Google's: measured blind in `experiments/pronunciation-encoding/`, its `MP3` is 32 kbps for a Gemini voice and 64 for a WaveNet one, and the 32 kbps was the one thing a listener could pick out every time. Asking for the master and encoding Opus in `pronunciation/encode.py` costs nothing here — this API meters characters, never bytes — and puts the bitrate in our hands, which `OGG_OPUS` would not: it comes back at 28-35 kbps take it or leave it. `M4A` is not an option and is not a mistake to repeat: for the voices that accept it at all the answer is byte-identical MP3, and the Gemini voices refuse it outright."
+      "notes": "The Cloud Text-to-Speech API, which is not the Gemini API and not Vertex's generateContent: one route, `text:synthesize`, metered in characters, with a permanent free allowance of 4 M characters a month on Standard voices and 1 M on WaveNet — two orders of magnitude above what pronouncing a vocabulary needs. It authenticates with the same Google credentials as the `vertex` row once `texttospeech.googleapis.com` is enabled on the project, and a user login additionally needs a quota project, which is why the project travels as `x-goog-user-project` (`docs/operations/vertex-setup.md`). LiteLLM does not cover this API, so it has its own adapter. The \"models\" `standard` and `wavenet` are voice families rather than model ids: the voice name carries the language and the family (`es-ES-Wavenet-F`), exist per language, and take no style. The Gemini models on the same route are named with `voice.modelName`, speak any language with the same named voices, and take a free-text delivery direction in `input.prompt` — the only field that can carry an example's emotion without it being read aloud. This route is why Gemini speech is here and on no other row: through LiteLLM the Gemini API and Vertex have no field for an instruction at all, so a direction sent that way was silently dropped. Voice lists were read from `voices.list` on 2026-09-15, female first where a language offers both; the first is the default. The `encoding` each model declares is `LINEAR16` — the uncompressed master — because the compression is Acervo's business rather than Google's: measured blind in `experiments/pronunciation-encoding/`, its `MP3` is 32 kbps for a Gemini voice and 64 for a WaveNet one, and the 32 kbps was the one thing a listener could pick out every time. Asking for the master and encoding Opus in `pronunciation/encode.py` costs nothing here — this API meters characters, never bytes — and puts the bitrate in our hands, which `OGG_OPUS` would not: it comes back at 28-35 kbps take it or leave it. `M4A` is not an option and is not a mistake to repeat: for the voices that accept it at all the answer is byte-identical MP3, and the Gemini voices refuse it outright."
     },
     {
       "id": "google-vision",
@@ -483,10 +453,6 @@
       {
         "provider": "google-tts",
         "model": "gemini-2.5-flash-tts"
-      },
-      {
-        "provider": "google-tts",
-        "model": "wavenet"
       }
     ]
   }

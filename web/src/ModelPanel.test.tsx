@@ -6,6 +6,8 @@ import ModelPanel from "./ModelPanel";
 const GEMINI = "gemini/gemini-3.1-flash-lite";
 const GEMINI_SECOND = "gemini/gemini-3.5-flash-lite";
 const CLOUDFLARE = "cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast";
+const WAVENET = "wavenet";
+const GEMINI_VOICE = "gemini-3.1-flash-tts-preview";
 
 const pair = (provider: string, model: string): ModelPair => ({ provider, model });
 
@@ -13,8 +15,8 @@ function catalogue(overrides: Partial<ModelCatalogue> = {}): ModelCatalogue {
   return {
     providers: [
       {
-        id: "gemini-free", label: "Gemini (free tier)", kinds: ["text", "audio"],
-        models: { text: [GEMINI, GEMINI_SECOND], audio: ["gemini/gemini-3.1-flash-tts-preview"] },
+        id: "gemini-free", label: "Gemini (free tier)", kinds: ["text"],
+        models: { text: [GEMINI, GEMINI_SECOND] }, styles: {},
         available: true, reason: null,
         usageUrl: "https://aistudio.google.com/rate-limit", notes: "500 a day at no cost.",
         credential: {
@@ -31,6 +33,12 @@ function catalogue(overrides: Partial<ModelCatalogue> = {}): ModelCatalogue {
           kind: "key", variable: "CLOUDFLARE_API_TOKEN", present: false, hint: null
         },
         settings: [{ name: "CLOUDFLARE_ACCOUNT_ID", value: "abc" }]
+      },
+      {
+        id: "google-tts", label: "Google Cloud Text-to-Speech", kinds: ["audio"],
+        models: { audio: [WAVENET, GEMINI_VOICE] },
+        styles: { [WAVENET]: "none", [GEMINI_VOICE]: "instruction" },
+        available: true, reason: null, usageUrl: null, notes: null, settings: []
       }
     ],
     chains: {
@@ -295,5 +303,39 @@ describe("the credentials table", () => {
     expect(within(shown).getByText("a credentials file")).toBeTruthy();
     expect(within(shown).getByText("acervo-vertex@PROJECT_ID.iam.gserviceaccount.com")).toBeTruthy();
     expect(within(shown).getByText("a-project")).toBeTruthy();
+  });
+
+  describe("the voice that takes a direction", () => {
+    const section = async (label: RegExp) =>
+      (await screen.findByRole("heading", { name: label })).closest(".model-kind") as HTMLElement;
+
+    it("offers only voices that take one, and says why", async () => {
+      vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
+      panel();
+      const expressive = await section(/a voice that takes a direction/);
+      expect(within(expressive).getByText(GEMINI_VOICE)).toBeInTheDocument();
+      expect(within(expressive).queryByText(WAVENET)).toBeNull();
+      expect(within(expressive).getByText(/Only voices that take a direction are listed/)).toBeInTheDocument();
+      // The clear order is any voice: none of them is asked for a direction there.
+      const plain = await section(/a clear, even voice/);
+      expect(within(plain).getByText(WAVENET)).toBeInTheDocument();
+      expect(within(plain).getByText(GEMINI_VOICE)).toBeInTheDocument();
+    });
+
+    it("keeps a saved voice that cannot take one out of sight, and out of the next save", async () => {
+      const saved = catalogue({ chains: {
+        ...catalogue().chains,
+        audioExpressive: { source: "owner", reason: null, pairs: [pair("google-tts", WAVENET)] }
+      } });
+      vi.spyOn(backendSession, "fetchModels").mockResolvedValue(saved);
+      const save = vi.spyOn(backendSession, "saveModelSelection").mockResolvedValue(saved);
+      panel();
+      const expressive = await section(/a voice that takes a direction/);
+      expect(within(expressive).getByText(/Nothing you chose here takes a direction/)).toBeInTheDocument();
+      fireEvent.click(within(rowOf(within(expressive).getByText(GEMINI_VOICE))).getByRole("checkbox"));
+      await waitFor(() => expect(save).toHaveBeenCalledWith({
+        audioExpressive: [pair("google-tts", GEMINI_VOICE)]
+      }));
+    });
   });
 });

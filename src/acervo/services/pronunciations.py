@@ -94,9 +94,9 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
         (vocabulary.get("glossLangs") or ["en"])[0] for vocabulary in vocabularies))
     offered = list(dict.fromkeys([*languages, *guide_languages]))
     orders: dict[str, list[dict[str, Any]]] = {}
-    for reading, chain_name in CHAINS.items():
+    for reading in CHAINS:
         entries = []
-        for candidate in _pairs(settings, owner, chain_name, catalogue):
+        for candidate in _pairs(settings, owner, reading, catalogue):
             row, model = candidate
             entries.append({
                 "provider": row.id,
@@ -113,10 +113,11 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
     return {**chosen, "languages": languages, "guideLanguages": guide_languages, "orders": orders}
 
 
-def _pairs(settings: Settings, owner: str, chain_name: str, catalogue) -> list[tuple[Any, str]]:
-    """Every pair in an order, credentialed or not, so a voice can be chosen before a key is set."""
+def _pairs(settings: Settings, owner: str, order: str, catalogue) -> list[tuple[Any, str]]:
+    """Every pair that may read an order, credentialed or not, so a voice can be chosen before a key
+    is set. For the expressive order that is only the pairs that take a direction (`readers`)."""
     found = []
-    for choice in chain_for(settings, owner, chain_name) or [
+    for choice in chain_for(settings, owner, CHAINS[order]) or [
         (row.id, model) for row in catalogue.serving("audio") for model in row.models_for("audio")
     ]:
         identifier, model = (choice, None) if isinstance(choice, str) else choice
@@ -127,8 +128,11 @@ def _pairs(settings: Settings, owner: str, chain_name: str, catalogue) -> list[t
         if not row.serves("audio"):
             continue
         for one in ([model] if model else row.models_for("audio")):
-            if one in row.models_for("audio"):
-                found.append((row, one))
+            if one not in row.models_for("audio"):
+                continue
+            if order == "expressive" and row.style_for(one) != "instruction":
+                continue
+            found.append((row, one))
     return found
 
 
@@ -360,16 +364,21 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
         )
 
     cache = Path(settings.takes_path)
-    # Which pair answers is not known until it has, so every pair the order offers is tried. A
-    # fall-through yesterday still answers today, which is most of what makes the cache worth having.
+    # Which pair answers is not known until it has, so every pair that may read this is tried — the
+    # directed ones with the direction, then, for the expressive order, the plain ones without it,
+    # since that is who reads when no directed voice can. A fall-through yesterday still answers
+    # today, which is most of what makes the cache worth having.
     catalogue = load_catalogue()
-    for row, model in _pairs(settings, owner, CHAINS[order], catalogue):
+    probes = [(row, model, style) for row, model in _pairs(settings, owner, order, catalogue)]
+    if order == "expressive":
+        probes += [(row, model, None) for row, model in _pairs(settings, owner, "plain", catalogue)]
+    for row, model, asked_style in probes:
         if not row.speaks(model, language):
             continue
         # Keyed on what this pair would be *sent*, by the same function the call itself uses — so a
         # pair that cannot take a direction looks the same up as it stores down, and a take recorded
         # under the provider's own default voice is found again.
-        asked_voice, would_send = speaking.asked_of(row, model, language, style, preferences.voice)
+        asked_voice, would_send = speaking.asked_of(row, model, language, asked_style, preferences.voice)
         found = take_store.find(cache, take_store.key(
             text=words, language=language, direction=would_send, take=index,
             provider=row.id, model=model, voice=asked_voice,
@@ -438,20 +447,45 @@ def _target(owner: str, route_kind: str, target_id: str) -> tuple[Target, dict[s
     return target, records
 
 
+def readers(settings: Settings, owner: str, order: str, language: str) -> tuple[str, Any]:
+    """Who reads `order` in `language`: the order that actually reads, and the choices to walk.
+
+    **The expressive order is read only by voices that take a direction.** It exists to carry one,
+    and a pair that cannot — a row declaring `style: none` — records the clip as though no direction
+    had been asked for, silently: that is how a whole deployment's examples, loops and stories lost
+    their emotion with nothing failing and nothing logged. So the owner's expressive order is walked
+    with its `none` pairs left out. The order itself is a preference and is kept as saved; only the
+    walk skips them. **When no directed voice can be reached, the plain order reads instead**, and
+    the caller records without a direction — the answer is still worth hearing.
+
+    Raises `ProviderError` for a stored order the catalogue no longer honours, as `speak` would.
+    """
+    chosen = chain_for(settings, owner, CHAINS[order])
+    if order != "expressive":
+        return order, chosen
+    directed = [
+        candidate.named for candidate in speaking.speakers(chosen, load_catalogue(), language)
+        if candidate.row.style_for(candidate.model) == "instruction"
+    ]
+    if directed:
+        return order, directed
+    return "plain", chain_for(settings, owner, CHAINS["plain"])
+
+
 def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
            style: str | None, caller: str, on_failure,
-           preferences=None, pinned: tuple[str, str, str | None] | None = None,
-           chosen: Any = None) -> speaking.Spoken:
-    """`pinned` is `(provider, model, voice)`: ask exactly that pair and that voice, and never another.
+           preferences=None, pinned: tuple[str, str, str | None] | None = None) -> speaking.Spoken:
+    """Say `text` in `order`, by the rule `readers` states. `Spoken.direction` says what was sent.
 
+    `pinned` is `(provider, model, voice)`: ask exactly that pair and that voice, and never another.
     For a caller that has to hear one voice throughout a passage — a story keeps the voice that read
     its first part. The chain is then a chain of one, so there is nothing to hedge onto, and a caller
     that would rather change voice than stall asks again **without** the pin when it refuses; that
     judgement belongs to the caller and not here.
 
-    `chosen` narrows the chain to a list this caller built — the pairs that can take a direction, for
-    a story that is being read one directed passage at a time. Without it the owner's own order for
-    this use is walked, which is the ordinary case.
+    Directed voices that are all out of reach — every one refused for a quota, a busy provider or an
+    unusable answer — are the same case as none being configured: the plain order is walked once
+    more, without the direction. A rejected credential is not, and is raised.
     """
     preferences = preferences or pronunciation_settings.settings(owner)
     chain_name = CHAINS[order]
@@ -464,12 +498,27 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
                 style=style, voice=lambda provider, model_id, lang: voice_name,
                 caller=caller, hedge_after=None,
             )
-        return speaking.speak(
-            text, language,
-            chosen=chain_for(settings, owner, chain_name) if chosen is None else chosen,
-            catalogue=load_catalogue(),
-            style=style, voice=preferences.voice, caller=caller, hedge_after=HEDGE[order],
-        )
+        reading, chosen = readers(settings, owner, order, language)
+        chain_name = CHAINS[reading]
+        if reading != order:
+            journal.outcome(caller, False, lang=language, result="undirected", reason="no_directed_voice")
+            style = None
+        try:
+            return speaking.speak(
+                text, language, chosen=chosen, catalogue=load_catalogue(),
+                style=style, voice=preferences.voice, caller=caller, hedge_after=HEDGE[reading],
+            )
+        except ChainExhausted as exhausted:
+            if reading == "plain":
+                raise
+            journal.outcome(caller, True, lang=language, result="undirected",
+                            reason=",".join(exhausted.reasons))
+            chain_name = CHAINS["plain"]
+            return speaking.speak(
+                text, language, chosen=chain_for(settings, owner, chain_name),
+                catalogue=load_catalogue(), style=None, voice=preferences.voice, caller=caller,
+                hedge_after=HEDGE["plain"],
+            )
     except speaking.NoVoice:
         on_failure("no_model_for_language")
         raise ApiError(

@@ -349,10 +349,9 @@ Vertex should read:
 
 ```
 yes  Vertex AI
-     kinds     text, image, audio
+     kinds     text, image
      text      vertex_ai/gemini-3.8-flash, vertex_ai/gemini-3.5-flash
      image     vertex_ai/gemini-3.1-flash-lite-image
-     audio     vertex_ai/gemini-3.1-flash-tts-preview
      account   acervo-vertex@PROJECT_ID.iam.gserviceaccount.com
 ```
 

@@ -21,6 +21,7 @@ import {
 import { setLoopCacheEnabled, useLoopCache } from "./editorPreferences";
 import { languageOf } from "./languages";
 import { forgetLoops, keptLoopBytes } from "./loops";
+import { offeredVoices } from "./PronunciationPanel";
 
 /* The same two orders Settings ▸ Pronunciation offers, said in terms of what each does to a loop.
    Both facts are measured rather than felt: a directed take is its own model call per repetition,
@@ -77,7 +78,7 @@ export default function LoopPanel({ onNotify }: { onNotify(message: string): voi
   const chooseGuide = async (provider: string, model: string, language: string, choice: string) => {
     const before = voice;
     if (!before) return;
-    const guideVoices = structuredClone(before.guideVoices);
+    const guideVoices = offeredVoices(structuredClone(before.guideVoices), before);
     const forModel = { ...(guideVoices[provider]?.[model] ?? {}) };
     if (choice) forModel[language] = choice; else delete forModel[language];
     guideVoices[provider] = { ...(guideVoices[provider] ?? {}), [model]: forModel };

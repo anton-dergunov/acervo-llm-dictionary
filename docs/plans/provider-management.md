@@ -34,9 +34,12 @@ rather than a branch; this plan makes a row something the interface can create.
 - **Keys arrive by deploy.** `--configure-llm --llm-key NAME --llm-api-key-stdin` writes `llm.env`;
   Vertex additionally needs a credentials *file* mounted and named by `authEnv`
   ([`../operations/vertex-setup.md`](../operations/vertex-setup.md)).
-- **Related open defect:** [`issues.md`](issues.md) §1 — the expressive
-  order offers voices that cannot take a direction. Whatever the Settings form for audio looks like,
-  it should make that impossible to configure.
+- **The expressive voice order holds only voices that take a direction.** Settings ▸ Providers offers
+  no other, the catalogue refuses a default that names one, and the walk skips one saved before
+  ([`../features/pronunciation.md`](../features/pronunciation.md)). Whatever the Settings form for
+  audio becomes, it keeps that impossible to configure. It is also why neither `gemini-free` nor
+  `vertex` speaks: through LiteLLM both drop a direction, so Gemini speech is reached only through
+  `google-tts`.
 
 ## Four pieces of work
 

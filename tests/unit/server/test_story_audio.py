@@ -173,9 +173,26 @@ def test_only_a_voice_that_can_take_a_direction_reads_a_directed_story(server, m
     assert all(one["direction"] for one in row["audioSegments"])
 
 
-def test_a_part_no_directed_voice_can_reach_is_read_whole_and_plainly(server, models, runner):
-    """The fallback, and the reason it is one call and not four: a part nobody can read expressively
-    is going to be read plainly, so it is read plainly *once*, and offers no passages to tap."""
+def test_a_part_no_directed_voice_can_read_is_read_whole_and_plainly(server, models, runner):
+    """The reason it is one call and not four: a part nobody can read expressively is going to be
+    read plainly, so it is read plainly *once*, offers no passages to tap, and no model is asked
+    where to cut it."""
+    story = written(server, models, runner, parts=3)
+    part = parts_of(server, story)[0]
+    server.put("/models/selection", {"chains": {"audioExpressive": [{"provider": "google-tts", "model": "standard"}]}})
+    before = len(models.prompts)
+
+    row = read(server, story, part)
+
+    assert row["audioModelId"] == "wavenet", "the clear order read it"
+    assert len(row["audioSegments"]) == 1, "one passage, so there is nothing to tap"
+    assert [call["words"] for call in server.speech.calls] == [part["text"]], "the whole part, in one call"
+    assert len(models.prompts) == before, "no model was asked where to cut it"
+
+
+def test_a_part_whose_directed_voices_run_out_is_read_on_by_the_clear_voice(server, models, runner):
+    """Out of reach at the moment of asking rather than by configuration: the passages were already
+    cut, so each is read plainly in turn, and none claims a direction it was not given."""
     story = written(server, models, runner, parts=3)
     part = parts_of(server, story)[0]
     for model in (FIRST, SECOND):
@@ -184,9 +201,9 @@ def test_a_part_no_directed_voice_can_reach_is_read_whole_and_plainly(server, mo
 
     row = read(server, story, part)
 
-    assert row["audioModelId"] == "wavenet", "the plain voice read it"
-    assert len(row["audioSegments"]) == 1, "one passage, so there is nothing to tap"
-    assert [call["words"] for call in server.speech.calls][-1] == part["text"], "the whole part, in one call"
+    assert row["audioModelId"] == "wavenet", "the clear voice read it"
+    assert "".join(one["text"] for one in row["audioSegments"]) == part["text"]
+    assert not any(one["direction"] for one in row["audioSegments"])
 
 
 def test_a_clear_voice_is_never_asked_where_to_cut_a_part(server, models, runner):

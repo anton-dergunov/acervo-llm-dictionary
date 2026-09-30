@@ -278,9 +278,9 @@ def test_a_model_the_row_does_not_offer_is_refused_rather_than_skipped():
 
 
 def test_a_model_the_row_offers_for_another_kind_is_still_refused_for_this_one():
-    audio = SHIPPED.find("gemini-free").models_for("audio")[0]
+    image = SHIPPED.find("vertex").models_for("image")[0]
     with pytest.raises(ProviderRefused, match="does not offer"):
-        chain.resolve("text", [("gemini-free", audio)], SHIPPED)
+        chain.resolve("text", [("vertex", image)], SHIPPED)
 
 
 def test_an_unknown_model_is_refused_even_when_that_rows_key_is_also_missing(monkeypatch):

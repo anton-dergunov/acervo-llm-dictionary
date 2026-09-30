@@ -25,7 +25,7 @@ sentence**. From there it is one tap to one of two actions:
 - **Add**, for a word the owner does not have. It builds an entry with the sentence as its
   attestation and the photo kept beside it.
 - **Open / fold in**, for a word the owner already has. It opens the stored article and offers to
-  add this sentence to it.
+  add this sentence to it, with the photo kept beside it just as Add keeps it.
 
 On a desktop, or a tablet on its stand, it is the same screen with a file picker, paste and drop.
 
@@ -58,7 +58,13 @@ capture flow, letting the platform's own OCR do the reading.
   exactly as a pasted one does; the chosen unit goes in as `headword`, a hint resolve may still
   correct. A camera is a transport, and adding a transport must not add a second pipeline.
 - **The duplicate path is reused unchanged.** `/capture` already returns `duplicates` and
-  `foldable`, and folding a sentence into a held word goes through the article conversation.
+  `foldable`, and folding a sentence into a held word goes through the article conversation. The
+  conversation carries text and a model may not name a photo, so **the device attaches the photo**:
+  to the sentence the proposal adds that is the one photographed (or the only one it adds), and for
+  a sign, which has no sentence, as a photo-only attestation proposed as soon as the word opens.
+  It is attached once however many turns follow, and kept exactly as Add keeps it — whole, or the
+  square that was on screen — so the save that names it takes it out of `pending/` as any other
+  does.
 - **Geometry comes from an OCR engine, never from a language model.** A multimodal model's boxes are
   approximate and its transcription can be invented, and constrained decoding is not used anywhere
   in Acervo. The model is used only where judgement is needed: which unit was meant and what it means
@@ -216,5 +222,4 @@ beyond `acervo.models`; `services/photo.py` is the binding layer, and `test_laye
 
 An image share target is one of the capture transports
 ([`../plans/capture-transports.md`](../plans/capture-transports.md), A2); Chinese and Japanese are
-[`../plans/languages/chinese.md`](../plans/languages/chinese.md); a photo sentence folded into a held
-word losing its photo is [`../plans/issues.md`](../plans/issues.md) §4.
+[`../plans/languages/chinese.md`](../plans/languages/chinese.md).

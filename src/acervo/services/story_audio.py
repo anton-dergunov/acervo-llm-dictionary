@@ -16,13 +16,13 @@ moves**, so a paragraph is never read by two voices. The pin is read back off th
 part already recorded — and never remembered, which is what lets a retry, a route and a job agree
 without coordinating.
 
-**Only a voice that can take a direction reads a directed story.** The passages exist to carry one, so
-a pair that cannot take one turns four calls a part into four times the cost of one, for nothing: on
-the deployment this was found on, every stored passage read `direction=""` because the row at the head
-of the order goes through LiteLLM, whose Vertex speech transformation has no field for a prompt at all.
-So the expressive order is filtered to the pairs that declare `style: instruction`, and **when none of
-them can be reached the part is read whole, in one call, with no passages** — a plain reading of the
-whole paragraph rather than an expensive one that is plain anyway.
+**A directed story is read by whoever reads the expressive order**, which is only voices that take a
+direction (`pronunciations.readers`) — the rule every spoken thing follows, not one of the story's
+own. The passages exist to carry a direction, so **when no directed voice can be reached the part is
+read whole, in one call, with no passages**: a plain reading of the whole paragraph rather than an
+expensive one that is plain anyway. If the directed voices run out partway through a part, the
+passages still to record are read by the plain order one at a time; they keep their breaks, and carry
+no direction.
 
 **A part is one file per passage, and never one joined file.** A directed voice is asked for one
 passage at a time, each with its own direction (`stories/narrate.py` decides where they break), and
@@ -53,7 +53,7 @@ from acervo.models.errors import ChainExhausted, ProviderError
 from acervo.pronunciation import encode, speak as speaking, takes as take_store
 from acervo.repository import graph, pronunciation_settings
 from acervo.services import pronunciations, stories
-from acervo.services.models import chain_for, refusal
+from acervo.services.models import refusal
 from acervo.settings import Settings
 from acervo.stories import narrate
 
@@ -117,24 +117,12 @@ def narrate_part(
 
     preferences = pronunciation_settings.settings(owner)
     order = preferences.order_for("stories")
-    directed, every = _candidates(settings, owner, language, order)
+    reading, voices = _readers(settings, owner, language, order)
 
-    segments = _segments(settings, owner, part["text"], language, order, bool(directed))
+    segments = _segments(settings, owner, part["text"], language, reading)
     pin = _pin(parts, language)
-    try:
-        recordings, pin = _record(settings, owner, segments, language, order, preferences, pin,
-                                  directed, every, gate)
-    except ApiError as refused:
-        # Every directed pair is out of reach. The part is still worth hearing, so it is read whole
-        # and plainly instead — the fallback this design names — rather than left silent. One call,
-        # because a part nobody can read expressively is going to be read plainly either way.
-        if not directed or not every or refused.code not in PASSING:
-            raise
-        journal.outcome("story-audio", True, story=story_id, part=part_id,
-                        result="undirected", reason=refused.code)
-        segments = narrate.chunks(part["text"])
-        recordings, pin = _record(settings, owner, segments, language, order, preferences, None,
-                                  (), every, gate)
+    recordings, pin = _record(settings, owner, segments, language, order, reading, preferences, pin,
+                              voices, gate)
 
     row = _place_and_store(settings, owner, device, story_id, part_id, segments, recordings, pin)
     journal.outcome(
@@ -148,8 +136,8 @@ def narrate_part(
     return row
 
 
-def _record(settings: Settings, owner: str, segments, language: str, order: str, preferences,
-            pin: Pin | None, directed, every, gate) -> tuple[list[tuple[bytes, str]], Pin | None]:
+def _record(settings: Settings, owner: str, segments, language: str, order: str, reading: str,
+            preferences, pin: Pin | None, voices, gate) -> tuple[list[tuple[bytes, str]], Pin | None]:
     """Say every passage, in one voice. The pair that answers the first is asked for the rest.
 
     **A passage already recorded is not recorded again.** A part is written only once every one of
@@ -166,24 +154,22 @@ def _record(settings: Settings, owner: str, segments, language: str, order: str,
             gate()
         text = segment.text.strip()
         style = None
-        if directed and segment.direction:
+        if reading == "expressive" and segment.direction:
             style = speaking.direction(
                 stories._template(settings, SPEAK_TEMPLATE), segment.direction, language)
-        # A direction is recorded on the row only where one was really sent, and a directed story
-        # asks only pairs that can take one — so `style` says both what was sent and what to key on.
-        said = segment.direction if style else ""
-        kept = _remembered(cache, text, language, style, pin, directed if style else every)
+        # A direction is recorded on the row only where one was really sent. A passage found in the
+        # cache was keyed on what was sent; a fresh one says so on its answer.
+        kept = _remembered(cache, text, language, style, pin, voices)
         if kept is not None:
             data, pin = kept
-            recordings.append((data, said))
+            recordings.append((data, segment.direction if style else ""))
             continue
-        spoken = _say(settings, owner, text, language, order, style,
-                      preferences, pin, directed if style else every)
+        spoken = _say(settings, owner, text, language, order, style, preferences, pin, voices)
         answered = spoken.result.answer
         pin = (answered.provider_id, answered.model, spoken.result.voice)
         master, mime = encode.master(spoken.result.data, spoken.result.mime)
-        take_store.store(cache, _take_key(text, language, style, pin), master, mime)
-        recordings.append((spoken.result.data, said))
+        take_store.store(cache, _take_key(text, language, spoken.direction, pin), master, mime)
+        recordings.append((spoken.result.data, segment.direction if spoken.direction else ""))
     return recordings, pin
 
 
@@ -216,7 +202,7 @@ def _remembered(cache: Path, text: str, language: str, style: str | None, pin: P
 
 
 def _say(settings: Settings, owner: str, text: str, language: str, order: str, style: str | None,
-         preferences, pin: Pin | None, candidates) -> speaking.Spoken:
+         preferences, pin: Pin | None, voices) -> speaking.Spoken:
     """One passage, in the story's own voice where that voice will still answer.
 
     A pinned pair that refuses for a reason that passes — a quota, a busy provider, a dropped
@@ -224,8 +210,7 @@ def _say(settings: Settings, owner: str, text: str, language: str, order: str, s
     Anything else is the deployment's own mistake and is raised, because falling through a rejected
     credential would only spend somebody else's allowance on it.
     """
-    chosen = [(one.row.id, one.model) for one in candidates] or None
-    if pin is not None and any(pin[:2] == pair for pair in (chosen or [])):
+    if pin is not None and any(pin[:2] == one.named for one in voices):
         try:
             return pronunciations._speak(
                 settings, owner, text, language, order, style, speaking.CALLERS["stories"],
@@ -238,24 +223,19 @@ def _say(settings: Settings, owner: str, text: str, language: str, order: str, s
                             pair=f"{pin[0]}:{pin[1]}")
     return pronunciations._speak(
         settings, owner, text, language, order, style, speaking.CALLERS["stories"],
-        lambda reason: None, preferences=preferences, chosen=chosen,
+        lambda reason: None, preferences=preferences,
     )
 
 
-def _candidates(settings: Settings, owner: str, language: str, order: str):
-    """The pairs that may read this story: the direction-capable ones, and all of them.
-
-    Both are in the owner's own order, which is where the order is chosen; this only asks each pair
-    what it can do. A pair that does not speak the language is already left out by `speakers`.
-    """
+def _readers(settings: Settings, owner: str, language: str, order: str):
+    """The order that reads this story and its voices, in the owner's order, by the rule
+    `pronunciations.readers` states. A stored order the catalogue no longer honours reads as no
+    voices here, and `_speak` then says why in the refusal it raises."""
     try:
-        every = speaking.speakers(
-            chain_for(settings, owner, pronunciations.CHAINS[order]), load_catalogue(), language)
+        reading, chosen = pronunciations.readers(settings, owner, order, language)
+        return reading, speaking.speakers(chosen, load_catalogue(), language)
     except ProviderError:
-        return (), ()
-    if order != "expressive":
-        return (), every
-    return tuple(one for one in every if one.row.style_for(one.model) == "instruction"), every
+        return order, ()
 
 
 def _pin(parts: list[dict[str, Any]], language: str) -> Pin | None:
@@ -273,8 +253,8 @@ def _pin(parts: list[dict[str, Any]], language: str) -> Pin | None:
     return None
 
 
-def _segments(settings: Settings, owner: str, text: str, language: str, order: str,
-              directed: bool) -> tuple[narrate.Segment, ...]:
+def _segments(settings: Settings, owner: str, text: str, language: str,
+              reading: str) -> tuple[narrate.Segment, ...]:
     """What is said, in order, and how each is directed. Joined, always exactly `text`.
 
     One passage and no text call at all unless a direction can actually be sent: the clear voice reads
@@ -282,7 +262,7 @@ def _segments(settings: Settings, owner: str, text: str, language: str, order: s
     the same thing in practice. Asking a model where to cut a part nobody can read expressively is a
     call spent on nothing.
     """
-    if order != "expressive" or not directed:
+    if reading != "expressive":
         return narrate.chunks(text)
     candidates = stories._candidates(settings, owner, "text")
     stories._require(candidates, settings, owner, "text")

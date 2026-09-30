@@ -10,6 +10,14 @@ import {
   sentenceOutlines, span, tapped, UNCERTAIN, wordOutlines
 } from "./photoText";
 
+/** The photo as it will be kept, with the bytes behind it so the article under review can show it. */
+export interface KeptPhoto {
+  photoRef: string;
+  photoRegion: PhotoRegion | null;
+  sourceKind: SourceKind;
+  photo: Blob;
+}
+
 /** What Add sends: the sentence as it stands in the sheet, and what was learned about it. */
 export interface PhotoAdd {
   text: string;
@@ -93,7 +101,8 @@ export default function PhotoCapture({
   onLookUp(request: QuickLookUpRequest, signal: AbortSignal): Promise<QuickLookUp>;
   onAdd(add: PhotoAdd): void;
   onOpenLexeme(id: string): void;
-  onFoldIn(lexemeId: string, foldable: CaptureFoldable): void;
+  /** `photo` is null when the owner chose not to keep it. The device attaches it, never the model. */
+  onFoldIn(lexemeId: string, foldable: CaptureFoldable, photo: KeptPhoto | null): void;
   onWarm(): void;
 }) {
   const [stage, setStage] = useState<Stage>({ kind: "idle" });
@@ -338,40 +347,46 @@ export default function PhotoCapture({
   }
 
   /**
-   * Add, with the photo as it will be kept. A square photo is kept whole. A taller one is kept as
-   * the square that is on screen now: cropped here, sent to be stored, and its region moved onto
-   * the crop — so what the article shows later is what was looked at while choosing the word.
+   * The photo as it will be kept, for Add and for Fold in alike, handed to `use`. A square photo is
+   * kept whole. A taller one is kept as the square that is on screen now: cropped here, sent to be
+   * stored, and its region moved onto the crop — so what the article shows later is what was looked
+   * at while choosing the word. Null when the owner chose not to keep it; `use` is not called at all
+   * when it could not be kept, and the problem is on screen instead.
    */
-  async function add() {
-    if (!reading || !photo) return;
-    const found = lookUp?.state === "done" ? lookUp.result : null;
-    const resolution = found && !found.duplicates.length ? found.resolution : null;
+  async function withKeptPhoto(use: (kept: KeptPhoto | null) => void) {
+    if (!reading || !photo || !keep) { use(null); return; }
     const region = photoRegionFor(reading, selection, typed ? null : current);
     const box = viewport.current;
-    if (!keep) {
-      onAdd({ text: sentence.trim(), resolution, photoRef: null, photoRegion: null, sourceKind: source, photo: null });
-      return;
-    }
     if (!box || box.scrollHeight <= box.clientHeight + 2) {
-      onAdd({ text: sentence.trim(), resolution, photoRef: reading.photoRef, photoRegion: region, sourceKind: source, photo: photo.blob });
+      use({ photoRef: reading.photoRef, photoRegion: region, sourceKind: source, photo: photo.blob });
       return;
     }
     const top = box.scrollTop / box.scrollHeight;
     const size = box.clientHeight / box.scrollHeight;
     setKeeping(true);
     setProblem(null);
+    let kept: KeptPhoto;
     try {
       const square = await cropSquare(photo.blob, top, size);
       const { photoRef } = await onStore(square);
-      onAdd({
-        text: sentence.trim(), resolution, photoRef, photoRegion: cropRegion(region, top, size),
-        sourceKind: source, photo: square
-      });
+      kept = { photoRef, photoRegion: cropRegion(region, top, size), sourceKind: source, photo: square };
     } catch (error) {
       setProblem(error instanceof Error ? error.message : "The photo could not be kept.");
+      return;
     } finally {
       setKeeping(false);
     }
+    use(kept);
+  }
+
+  function add() {
+    if (!reading || !photo) return;
+    const found = lookUp?.state === "done" ? lookUp.result : null;
+    const resolution = found && !found.duplicates.length ? found.resolution : null;
+    void withKeptPhoto((kept) => onAdd({
+      text: sentence.trim(), resolution, photoRef: kept?.photoRef ?? null,
+      photoRegion: kept?.photoRegion ?? null, sourceKind: source, photo: kept?.photo ?? null
+    }));
   }
 
   const outlines = useMemo(() => {
@@ -390,14 +405,15 @@ export default function PhotoCapture({
     {stage.kind !== "idle" && stage.kind !== "camera" && <button className="tb-btn" onClick={another}>Another photo</button>}
     <span className="spacer" />
     {held.length === 1 && found?.foldable && <button
-      className="tb-btn" aria-label="Fold this sentence in" onClick={() => onFoldIn(held[0].id, found.foldable!)}
+      className="tb-btn" aria-label="Fold this sentence in" disabled={keeping}
+      onClick={() => void withKeptPhoto((kept) => onFoldIn(held[0].id, found.foldable!, kept))}
     >Fold in</button>}
     {held.length > 0
       ? <button className="tb-btn primary" aria-label={`Open ${held[0].headword}`} onClick={() => onOpenLexeme(held[0].id)}>Open</button>
       : <button
           className="tb-btn primary"
           disabled={!reading || !selection.length || !sentence.trim() || working || keeping || blocked}
-          onClick={() => void add()}
+          onClick={add}
         >{keeping ? "Keeping…" : working ? "Building…" : "Add"}</button>}
   </div>;
 

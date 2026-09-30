@@ -400,6 +400,10 @@ def _provider_view(row: Row) -> dict[str, Any]:
         "label": row.label,
         "kinds": list(row.kinds),
         "models": {kind: list(row.models_for(kind)) for kind in row.kinds},
+        # What each speech model does with a direction, so the expressive order offers only the ones
+        # that take it (`pronunciations.readers`).
+        "styles": {model: row.style_for(model) for model in row.models_for("audio")}
+        if row.serves("audio") else {},
         "available": available(row),
         "reason": reason(row),
         "usageUrl": usage_url(row),

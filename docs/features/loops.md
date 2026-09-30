@@ -276,8 +276,10 @@ Loops, stories in Settings ▸ Stories. **Choosing the directed order is asking 
 the old `expressive` switch was deleted rather than left beside the new control: one mechanism
 where there were two, and the cheap voice finally reachable for examples as well as loops.
 
-No third chain. Any voice is a legitimate answer to either question, which is exactly why the catalogue
-has one `audio` kind and `defaultChains` has two orders over it.
+No third chain. Any voice may read the clear order and any voice that takes a direction the other, which
+is why the catalogue has one `audio` kind and `defaultChains` has two orders over it. A voice that cannot
+take a direction never reads the directed order: it would record every line as though none had been
+asked for ([`pronunciation.md`](pronunciation.md)).
 
 ### 8 · `primaryGloss` and `emotion`, written by the compose prompt
 
@@ -489,7 +491,10 @@ is not. The bar has no **+**: each surface carries its own Make button in its ow
 job is to be a way in should not also be a way to start something.
 
 A loop keeps playing while you read a word — the audio element is not the surface — and the now-playing
-row is on the bar when you come back. **There is no mini-player over an article.**
+row is on the bar when you come back. **There is no mini-player over an article.** The phone's
+now-playing row has a close control: it stops the loop and forgets it as the one playing, deleting
+nothing, and the bar is the way in again. Without it a loop heard once held the foot of the list for
+the rest of the session.
 
 The word selection's bar is the one deliberate exception to the no-second-bar rule, and only on a wide
 window while the ask dock rests. The topic rail stays wherever there is room for it and goes only on a phone,

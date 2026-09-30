@@ -18,11 +18,15 @@
  * bar was already carrying as much as it can and a third learning method would have made that
  * worse. So on a wide window this renders nothing at all until a loop plays.
  *
+ * **The phone's bar can be closed.** Close stops the loop and forgets it as the one playing — it
+ * deletes nothing — and the bar goes back to being the way in. Without it a loop heard once held the
+ * foot of the list for the rest of the session.
+ *
  * Both are the same component in two skins, so what they say can never disagree.
  */
 
 import type { VocabularyGraph } from "./domain";
-import { MapIcon, NoteIcon, PauseIcon, PlayIcon } from "./icons";
+import { CloseIcon, MapIcon, NoteIcon, PauseIcon, PlayIcon } from "./icons";
 import * as player from "./loops";
 import { lexemesIn, loopCards, loopsIn, loopTitle, loopTrackOf, loopWordAt, storiesIn } from "./selectors";
 
@@ -102,5 +106,7 @@ export default function MadeBar({ graph, language, chip, playerOnly = false, onL
       <span className="loopbar-title">{word ?? loopTitle(graph, loop, 2)}</span>
       <span className="loopbar-sub">{clock(playback.at)} / {clock(playback.duration)}</span>
     </button>
+    <button className="icon-btn loopbar-close" aria-label="Stop and close" title="Stop and close"
+      onClick={() => player.stop()}><CloseIcon /></button>
   </div>;
 }

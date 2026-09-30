@@ -38,9 +38,12 @@ KINDS = ("text", "image", "audio", "ocr")
 JSON_MODES = ("native", "prompt", "unsupported")
 # What a speech model does with a delivery direction. `instruction` takes free natural language in a
 # field of its own — Gemini-TTS's `prompt`, OpenAI's `instructions` — so it is never read aloud;
-# `none` has nowhere to put one, and a style sent to it is dropped with a warning. A provider whose
+# `none` has nowhere to put one. Only `instruction` reads the expressive order, and a style that
+# reaches `none` anyway is dropped with a warning. A provider whose
 # styles are a fixed list (Azure's SSML `express-as`) would be a third value, not a special case.
 AUDIO_STYLES = ("instruction", "none")
+# The speech order that exists to carry a direction, and so may hold only `instruction` voices.
+EXPRESSIVE_CHAIN = "audioExpressive"
 
 _PLACEHOLDER = re.compile(r"\{([A-Za-z_][A-Za-z0-9_]*)\}")
 _ADC_FILE = Path.home() / ".config" / "gcloud" / "application_default_credentials.json"
@@ -188,7 +191,8 @@ class Catalogue:
     # one: {chain: ((provider, model), ...)}. Absent for a chain means catalogue order. It exists for
     # the two speech chains, where catalogue order is wrong in an interesting way — it would read a
     # headword with a paid expressive voice and an emotional sentence with one that cannot take a
-    # style — while every row involved is still a legitimate choice.
+    # style — while every row involved is still a legitimate choice. The expressive order names only
+    # voices that take a direction; `load_catalogue` refuses a file whose default breaks that.
     default_chains: dict[str, tuple[tuple[str, str], ...]] = field(default_factory=dict)
 
     def __iter__(self):
@@ -319,6 +323,10 @@ def load_catalogue(path: Path | None = None) -> Catalogue:
             offered = {model for kind in (row.kinds if row else ()) for model in row.models_for(kind)}
             if row is None or pair.get("model") not in offered:
                 raise CatalogueError(f"defaultChains.{chain_name} names {pair!r}, which no row offers")
+            if chain_name == EXPRESSIVE_CHAIN and row.style_for(pair["model"]) != "instruction":
+                raise CatalogueError(
+                    f"defaultChains.{chain_name} names {pair!r}, which cannot take a direction"
+                )
             named.append((row.id, pair["model"]))
         defaults[chain_name] = tuple(named)
     return Catalogue(

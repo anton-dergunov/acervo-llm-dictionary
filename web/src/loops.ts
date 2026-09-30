@@ -244,6 +244,7 @@ export function stop(): void {
   if (held) { URL.revokeObjectURL(held); held = null; }
   if (element) element.removeAttribute("src");
   update(EMPTY);
+  forgetLockScreen();
 }
 
 export function seek(seconds: number): void {
@@ -304,6 +305,18 @@ function describe(track: LoopTrack): void {
     media.setActionHandler("previoustrack", () => stepCard(-1));
     media.setActionHandler("nexttrack", () => stepCard(1));
     media.setActionHandler("seekto", (event) => { if (event.seekTime !== undefined) seek(event.seekTime); });
+  } catch { /* an older browser, or one that refuses a handler it does not implement */ }
+}
+
+/* A stopped loop leaves nothing on the lock screen: its play button would start the track again. */
+function forgetLockScreen(): void {
+  const media = navigator.mediaSession;
+  if (!media) return;
+  try {
+    media.metadata = null;
+    for (const action of ["play", "pause", "previoustrack", "nexttrack", "seekto"] as const) {
+      media.setActionHandler(action, null);
+    }
   } catch { /* an older browser, or one that refuses a handler it does not implement */ }
 }
 

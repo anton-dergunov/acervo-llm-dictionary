@@ -62,7 +62,8 @@ Two voice orders are chosen in Settings ▸ Providers, named for their capabilit
 
 - **`audioPlain`** — a clear, even voice. The default is Cloud TTS WaveNet, then Standard.
 - **`audioExpressive`** — a voice that takes a direction. The default is Gemini voices on Cloud TTS,
-  which take the emotion in a field of their own, so it is never read aloud.
+  which take the emotion in a field of their own, so it is never read aloud. **Only such voices read
+  it** — see below.
 
 Which one reads each **use** is a separate choice, `pronunciation_settings.delivery`: *words and
 definitions* (default plain), *example sentences*, *loops* and *stories* (default directed).
@@ -84,7 +85,25 @@ capabilities are declared **per model** (`capabilities.audio.models`: style, lan
 voices), since one Google endpoint serves per-language WaveNet voices that take no direction and
 Gemini voices that speak anything and do. A direction is a short English phrase the compose prompt
 writes, sent only to a model whose row declares `style: instruction`, and recorded on the row only
-when it was actually sent. A pair that does not speak the language is left out of the walk; a chain
+when it was actually sent.
+
+**The expressive order is read only by voices that take a direction** (`pronunciations.readers`, the
+one place this is decided, for examples, loops and stories alike). A voice that cannot take one used
+to sit anywhere in the order and, when it answered, record the clip as though no emotion had been
+asked for — nothing failed and nothing was logged, and on one deployment every expressive clip lost
+its direction that way. Now:
+
+- Settings ▸ Providers offers only `instruction` voices for the expressive order, and says why; the
+  catalogue refuses an expressive default that names any other.
+- A saved order is a preference and is kept as saved. The walk skips a voice that cannot take a
+  direction; the pane does not draw it, so the next change the owner makes saves the order without it.
+- **When no directed voice can answer** — none left in the order, or every one refusing for a quota,
+  a busy provider or an unusable answer — the plain order reads, without the direction, and the call
+  log carries `result=undirected` with the reason. A rejected credential is raised, not routed around.
+- Gemini speech is reached only through Cloud TTS. Through LiteLLM the Gemini API and Vertex have no
+  field for an instruction, so neither the free tier nor Vertex offers speech.
+
+A pair that does not speak the language is left out of the walk; a chain
 where none does answers `no_voice_for_language`, naming what to fix. `pronunciation/targets.py` decides
 the *use* and never the order, because that package may not read settings.
 
@@ -124,5 +143,4 @@ register their pause, and each silences the others before it plays.
 Not built, deliberately: speech-to-text, pronunciation assessment (recording the owner and scoring it
 is a product of its own), a second media store, and voices running on the device. Voices running on the
 NAS, other providers and human recordings are
-[`../plans/provider-management.md`](../plans/provider-management.md); the expressive order offering
-voices that cannot take a direction is [`../plans/issues.md`](../plans/issues.md) §1.
+[`../plans/provider-management.md`](../plans/provider-management.md).

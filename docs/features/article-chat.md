@@ -739,7 +739,9 @@ already knows whether the capture carried anything the stored entry does not hav
 ```
 
 The capture response carries `foldable: { sentences, reference }` or null, and the duplicate panel in
-`AddView` has one button for it. Two model calls in all, exactly what composing a new entry costs. *A
+`AddView` has one button for it. A photographed sentence keeps its photo: the device holds it and
+`applyOps` attaches it to the sentence the proposal adds, since the model never names a photo
+([`photo-capture.md`](photo-capture.md)). Two model calls in all, exactly what composing a new entry costs. *A
 repeat capture is an addition, not an entry* ([`capture.md`](capture.md)), and it needs no merge path,
 no second writer, and nothing the chat does not already do.
 

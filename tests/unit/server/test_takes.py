@@ -139,6 +139,21 @@ def test_a_dropped_direction_is_an_answer_rather_than_a_failure(server):
     assert server.speech.calls[-1]["style"] is None
 
 
+def test_an_expressive_order_with_no_directed_voice_drops_the_direction_and_is_found_again(server):
+    """The clear order reads for it, and the take it records is keyed on what was sent — nothing —
+    so the second request for the same line is served from disk rather than paid for again."""
+    server.put("/models/selection", {"chains": {
+        "audioExpressive": [{"provider": "google-tts", "model": "standard"}],
+        "audioPlain": [{"provider": "google-tts", "model": "wavenet"}],
+    }})
+    first = ask(server)
+    assert first.headers["x-acervo-direction"] == "dropped"
+    assert first.headers["x-acervo-model"] == "wavenet"
+    calls = len(server.speech.calls)
+    again = ask(server)
+    assert again.content == first.content and len(server.speech.calls) == calls
+
+
 def test_an_answer_that_arrived_compressed_is_passed_through_untouched(server):
     server.speech.answer = (MP3, "audio/mpeg")
     answer = ask(server)

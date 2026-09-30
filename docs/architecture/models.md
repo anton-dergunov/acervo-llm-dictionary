@@ -80,7 +80,11 @@ out of changing it.
 **The kinds are `text`, `quick`, `image`, `ocr`, and two voice orders.** `quick` is the text models in a
 second order, for a call made while a finger is still on the glass (photo capture's tap). The voice
 orders, `audioPlain` and `audioExpressive`, both draw from the one `audio` kind
-([`../features/pronunciation.md`](../features/pronunciation.md)).
+([`../features/pronunciation.md`](../features/pronunciation.md)). **Only a voice whose model declares
+`style: instruction` reads the expressive order**: that order exists to carry a direction, and a voice
+that cannot take one recorded as though none had been asked for, silently. A saved order is kept as
+saved and the walk skips such voices; the catalogue refuses an expressive default that names one; and
+when no directed voice can answer, the plain order reads instead, with a log line saying so.
 
 ## Credentials
 

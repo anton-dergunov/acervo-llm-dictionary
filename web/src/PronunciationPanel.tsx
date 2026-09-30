@@ -47,6 +47,25 @@ const ADVANCE: { id: keyof PronunciationPregenerate; title: string; help: string
   { id: "examples", title: "Example sentences", help: "In the language you are learning, with their emotion where the voice can take it." }
 ];
 
+type VoiceDocument = PronunciationSettings["voices"];
+
+/**
+ * A voice document held to the models the two orders offer now. A change sends the whole document,
+ * and the server refuses one naming a model the catalogue no longer offers for speech — so a choice
+ * for a voice nobody can be asked for any more is let go here rather than refusing every later save.
+ */
+export function offeredVoices(document: VoiceDocument, settings: PronunciationSettings): VoiceDocument {
+  const offered = [...settings.orders.plain, ...settings.orders.expressive];
+  const kept: VoiceDocument = {};
+  for (const [provider, models] of Object.entries(document)) {
+    for (const [model, languages] of Object.entries(models)) {
+      if (!offered.some((one) => one.provider === provider && one.model === model)) continue;
+      kept[provider] = { ...(kept[provider] ?? {}), [model]: languages };
+    }
+  }
+  return kept;
+}
+
 function megabytes(bytes: number): string {
   return bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
@@ -129,7 +148,7 @@ export default function PronunciationPanel({ onNotify }: { onNotify(message: str
   </section>;
 
   const chooseVoice = (model: PronunciationModel, language: string, voice: string) => {
-    const voices = structuredClone(intended.current?.voices ?? {});
+    const voices = offeredVoices(structuredClone(intended.current?.voices ?? {}), intended.current!);
     const forModel = { ...(voices[model.provider]?.[model.model] ?? {}) };
     if (voice) forModel[language] = voice; else delete forModel[language];
     voices[model.provider] = { ...(voices[model.provider] ?? {}), [model.model]: forModel };

@@ -255,7 +255,7 @@ def test_a_refusal_leaves_the_stored_chain_untouched(server, cloudflare):
     choose(server, {"text": [pair("cloudflare", CLOUDFLARE)]})
     answer = choose(server, {
         "text": [pair("gemini-free", GEMINI)],
-        "audioPlain": [pair("gemini-free", "gemini/retired-last-year")],
+        "audioPlain": [pair("google-tts", "retired-last-year")],
     })
     assert answer.json()["error"]["code"] == "unknown_model"
     assert models(server)["chains"]["text"]["pairs"] == [pair("cloudflare", CLOUDFLARE)]
@@ -268,15 +268,28 @@ def test_the_two_speech_chains_start_from_the_catalogues_recommended_orders(serv
 
     assert deployment_chain(server.settings, "audioPlain")[0] == ("google-tts", "wavenet")
     assert deployment_chain(server.settings, "audioExpressive")[0] == ("google-tts", "gemini-3.1-flash-tts-preview")
-    choose(server, {"audioExpressive": [pair("google-tts", "wavenet"), pair("gemini-free", "gemini/gemini-3.1-flash-tts-preview")]})
+    # A voice that cannot take a direction is a preference the walk skips, not a mistake to refuse:
+    # the order is kept exactly as saved.
+    choose(server, {"audioExpressive": [pair("google-tts", "wavenet"), pair("google-tts", "gemini-2.5-flash-tts")]})
     stored = models(server)["chains"]["audioExpressive"]
     assert stored["source"] == "owner"
-    assert stored["pairs"][1] == pair("gemini-free", "gemini/gemini-3.1-flash-tts-preview")
+    assert stored["pairs"] == [pair("google-tts", "wavenet"), pair("google-tts", "gemini-2.5-flash-tts")]
+
+
+def test_each_speech_model_says_whether_it_takes_a_direction(server):
+    """What Settings ▸ Providers offers for the expressive order is read from this."""
+    providers = {provider["id"]: provider for provider in models(server)["providers"]}
+    assert providers["google-tts"]["styles"]["wavenet"] == "none"
+    assert providers["google-tts"]["styles"]["gemini-3.1-flash-tts-preview"] == "instruction"
+    assert providers["gemini-free"]["styles"] == {}
 
 
 def test_a_speech_chain_takes_only_speech_models(server):
-    answer = choose(server, {"audioPlain": [pair("gemini-free", GEMINI)]})
+    answer = choose(server, {"audioPlain": [pair("openai", "openai/gpt-5.1")]})
     assert answer.json()["error"]["code"] == "unknown_model"
+    # And a row that no longer speaks at all is refused for the kind.
+    answer = choose(server, {"audioPlain": [pair("gemini-free", GEMINI)]})
+    assert answer.json()["error"]["code"] == "unsupported_kind"
 
 
 def test_one_owners_chain_is_invisible_to_another(server, other):

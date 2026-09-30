@@ -217,9 +217,7 @@ def test_vertex_asks_for_application_default_credentials_rather_than_a_key(monke
 def test_serving_keeps_catalogue_order():
     """Row order is the default preference order, so it is load-bearing rather than cosmetic."""
     assert [row.id for row in SHIPPED.serving("text")][:3] == ["gemini-free", "vertex", "cloudflare"]
-    assert [row.id for row in SHIPPED.serving("audio")] == [
-        "gemini-free", "vertex", "google-tts", "cloudflare", "openai"
-    ]
+    assert [row.id for row in SHIPPED.serving("audio")] == ["google-tts", "cloudflare", "openai"]
 
 
 def test_speech_capabilities_are_declared_per_model_and_widen_from_the_most_specific_tag():
@@ -238,6 +236,24 @@ def test_speech_capabilities_are_declared_per_model_and_widen_from_the_most_spec
 def test_the_speech_chains_have_recommended_orders_that_name_real_pairs():
     assert SHIPPED.default_chains["audioPlain"][0] == ("google-tts", "wavenet")
     assert SHIPPED.default_chains["audioExpressive"][0] == ("google-tts", "gemini-3.1-flash-tts-preview")
+
+
+def test_gemini_speech_is_reached_only_where_it_can_take_a_direction():
+    """Through LiteLLM the Gemini API and Vertex drop a direction before the request is built, so
+    neither row speaks; the same models take one through `google-tts`."""
+    assert not SHIPPED.find("gemini-free").serves("audio")
+    assert not SHIPPED.find("vertex").serves("audio")
+    for provider, model in SHIPPED.default_chains["audioExpressive"]:
+        assert SHIPPED.find(provider).style_for(model) == "instruction"
+
+
+def test_an_expressive_default_that_cannot_take_a_direction_is_refused(tmp_path):
+    document = json.loads(CATALOGUE_PATH.read_text(encoding="utf-8"))
+    document["defaultChains"]["audioExpressive"].append({"provider": "google-tts", "model": "wavenet"})
+    path = tmp_path / "catalogue.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    with pytest.raises(CatalogueError, match="cannot take a direction"):
+        load_catalogue(path)
 
 
 def test_an_audio_declaration_for_a_model_the_row_does_not_offer_is_refused(tmp_path):

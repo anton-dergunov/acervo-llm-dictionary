@@ -97,9 +97,13 @@ is not a word. No passages is *not recorded*.
 cuts it into passages with a direction each, and one call to the voice per passage
 (`prompts/acervo_pronounce_story.md`: a narrator, not "in the moment"). **With a clear voice**, one
 passage covers the whole part, so the shape is the same either way and there is simply nothing to tap
-below it. Only a pair declaring `style: instruction` reads a directed story, because passages exist to
-carry a direction and a row that cannot take one would turn four calls a part into four times the cost of
-one; where none can be reached, the part is read whole in one call and no segmentation call is made.
+below it. A directed story is read by whoever reads the expressive order, which is only pairs declaring
+`style: instruction` — the rule every spoken thing follows
+([`pronunciation.md`](pronunciation.md)), not one of the story's own. Where none can be reached, the
+part is read whole in one call and no segmentation call is made: passages exist to carry a direction,
+and four plain calls would cost four times one. If the directed voices run out partway through a part,
+the passages still to record are read by the plain order one at a time, keeping their breaks and
+carrying no direction; that is simpler than throwing the passages away and re-reading the part.
 
 - **The model is never trusted with the words.** `narrate.tile` finds each returned passage in the
   original, in order, and whatever it left out, changed or reworded stays in the story as a passage with

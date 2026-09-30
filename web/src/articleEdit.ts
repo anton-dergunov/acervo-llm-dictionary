@@ -19,7 +19,8 @@
 
 import {
   GENDERS, LEXEME_STATUSES, PARTS_OF_SPEECH, REGISTERS, SOURCE_KINDS,
-  type Gender, type Gloss, type LexemeStatus, type PartOfSpeech, type Register, type SourceKind
+  type Gender, type Gloss, type LexemeStatus, type PartOfSpeech, type Register, type PhotoRegion,
+  type SourceKind
 } from "./domain";
 import { draftKeys } from "./selectors";
 import { lcs, similarity, wordDiff, words, type DiffPart } from "./wordDiff";
@@ -58,6 +59,24 @@ export interface EditContext {
   glossLang: string | null;
   /** `ids.newId` at the call site. Injected so this module stays pure. */
   mintId(): string;
+  /** A photo folded in with this conversation, which the device attaches and the model never sees. */
+  photo?: FoldedPhoto | null;
+}
+
+/**
+ * The photo a sentence was read from, when that sentence is folded into a word already held.
+ *
+ * The conversation carries text, and a model may not write a reference, so the photo is attached
+ * here rather than asked for: to the sentence the conversation adds that is the one photographed,
+ * or — a sign, which has no sentence — as an attestation of its own, the shape a new word's capture
+ * gives it. Attached at most once, however many turns build on the draft.
+ */
+export interface FoldedPhoto {
+  /** The photographed sentence as it was sent, or null for a sign. */
+  sentence: string | null;
+  photoRef: string;
+  photoRegion: PhotoRegion | null;
+  sourceKind: SourceKind;
 }
 
 export interface AppliedEdit {
@@ -192,7 +211,9 @@ function splitTarget(target: string): { kind: string; id: string } {
  * every operation applied, so no partial edit is reachable even in principle.
  */
 export function applyOps(draft: ArticleDraft, ops: EditOp[], context: EditContext): AppliedEdit {
-  if (!ops.length) refuse("That proposal changes nothing, so nothing was changed.");
+  // A sign's photo is a change of its own, so it may be proposed with nothing from the model.
+  const sign = context.photo?.sentence === null && !holdsPhoto(draft, context.photo);
+  if (!ops.length && !sign) refuse("That proposal changes nothing, so nothing was changed.");
   if (ops.length > OP_LIMIT) refuse(REWRITE);
 
   const next: ArticleDraft = structuredClone(draft);
@@ -314,7 +335,34 @@ export function applyOps(draft: ArticleDraft, ops: EditOp[], context: EditContex
     + draft.attestations.length;
   if (touched.size > 2 && touched.size * 2 > total) refuse(REWRITE);
 
+  // After the half rule: the photo is the device's addition, not the model's rewrite.
+  if (context.photo) attachPhoto(next, context.photo, minted, context);
   return { draft: next, minted };
+}
+
+function holdsPhoto(draft: ArticleDraft, photo: FoldedPhoto): boolean {
+  return draft.attestations.some((attestation) => attestation.photoRef === photo.photoRef);
+}
+
+/** Quotes and spacing aside: the sentence goes to the model in «», and may come back without them. */
+function sameSentence(one: string, other: string): boolean {
+  const plain = (text: string) => text.replace(/[«»"“”]/g, "").replace(/\s+/g, " ").trim().toLowerCase();
+  return plain(one) === plain(other);
+}
+
+function attachPhoto(next: ArticleDraft, photo: FoldedPhoto, minted: Set<string>, context: EditContext): void {
+  if (holdsPhoto(next, photo)) return;
+  const kept = { photoRef: photo.photoRef, photoRegion: photo.photoRegion, sourceKind: photo.sourceKind };
+  if (photo.sentence === null) {
+    const id = context.mintId();
+    minted.add(id);
+    next.attestations.push({ ...newAttestation({}, id, true), ...kept });
+    return;
+  }
+  const added = next.attestations.filter((attestation) => attestation.id !== null && minted.has(attestation.id));
+  const target = added.find((attestation) => sameSentence(attestation.text, photo.sentence!))
+    ?? (added.length === 1 ? added[0] : null);
+  if (target) Object.assign(target, kept);
 }
 
 function setField(
@@ -426,9 +474,9 @@ function newExample(
   return example;
 }
 
-function newAttestation(raw: Record<string, unknown>, id: string): AttestationDraft {
+function newAttestation(raw: Record<string, unknown>, id: string, sign = false): AttestationDraft {
   const fields = read(raw, ATTESTATION_FIELDS);
-  const text = required(fields.text, "A new sentence needs some text, so nothing was changed.");
+  const text = sign ? "" : required(fields.text, "A new sentence needs some text, so nothing was changed.");
   return {
     id,
     text,
@@ -440,7 +488,7 @@ function newAttestation(raw: Record<string, unknown>, id: string): AttestationDr
        must; `capturedAt` is the one field a draft carries that has to say something, so it says
        the epoch and the save replaces it. */
     capturedAt: new Date(0).toISOString().replace(/\.\d+Z$/, ".000Z"),
-    // A sentence a conversation adds was never photographed.
+    // The model never names a photo; `attachPhoto` adds the one the device folded in.
     photoRef: null,
     photoRegion: null
   };

@@ -15,8 +15,9 @@ import { MapView } from "./MapView";
 import type { MapCamera } from "./meaningMap";
 import * as loopPlayer from "./loops";
 import {
-  applyOps, diffDrafts, EditRefused, type DraftDiff, type EditOp
+  applyOps, diffDrafts, EditRefused, type DraftDiff, type EditOp, type FoldedPhoto
 } from "./articleEdit";
+import type { KeptPhoto } from "./PhotoCapture";
 import { newId } from "./ids";
 import {
   backendSession, type CaptureFoldable, type CaptureHealth, type CaptureRequest, type QuickLookUpRequest,
@@ -187,6 +188,9 @@ export default function App() {
   /** What the dictionary fold has open beneath the article, if anything. Read-only context. */
   const [reference, setReference] = useState<ExternalEntry | null>(null);
   const [seededTurn, setSeededTurn] = useState<string | null>(null);
+  /** The photo a fold-in carried, for the word it was folded into, until a proposal carrying it is
+   *  saved or discarded or the word is left. Attached on the device; the conversation never sees it. */
+  const [foldPhoto, setFoldPhoto] = useState<{ lexemeId: string; photo: FoldedPhoto } | null>(null);
   /**
    * How far open the conversation is, mirrored from the dock.
    *
@@ -317,6 +321,7 @@ export default function App() {
   const closeArticle = useCallback(() => {
     setOpenId(null);
     setProposal(null);
+    setFoldPhoto(null);
     setFocusSense(null);
     if (mapReturn.current) { mapReturn.current = false; setMap(true); }
   }, []);
@@ -793,6 +798,7 @@ export default function App() {
     // A proposal belongs to the entry it was written against, and is a suggestion rather than a
     // state: leaving the article drops it.
     setProposal(null);
+    setFoldPhoto(null);
     setExternal(null);
     setProblems([]);
     setMode("read");
@@ -984,7 +990,8 @@ export default function App() {
       const applied = applyOps(base, ops, {
         modelId,
         glossLang: article.glossLangs[0] ?? null,
-        mintId: newId
+        mintId: newId,
+        photo: foldPhoto?.lexemeId === article.lexeme.id ? foldPhoto.photo : null
       });
       setProposal({
         before: origin, after: applied.draft, diff: diffDrafts(origin, applied.draft),
@@ -998,7 +1005,15 @@ export default function App() {
       notify(error instanceof EditRefused ? error.message
         : "That proposal could not be applied, so nothing was changed.");
     }
-  }, [article, snapshot, proposal, notify]);
+  }, [article, snapshot, proposal, foldPhoto, notify]);
+
+  /* A sign has no sentence for the conversation to add, so its photo is proposed by itself as soon
+     as the word is open; anything the conversation then proposes builds on top of it. */
+  useEffect(() => {
+    if (!foldPhoto || foldPhoto.photo.sentence !== null || proposal) return;
+    if (article?.lexeme.id !== foldPhoto.lexemeId) return;
+    reviewProposal([], "Keeps the photo of where you met it.", "");
+  }, [foldPhoto, proposal, article, reviewProposal]);
 
   const saveProposal = useCallback(async () => {
     if (!proposal || !openId) return;
@@ -1014,6 +1029,7 @@ export default function App() {
       return;
     }
     undoable.current = { id, text: previous };
+    setFoldPhoto(null);
     // A sense the proposal added is enriched on the server, and filled in on the page.
     const known = new Set(proposal.before.senses.map((sense) => sense.id));
     if (proposal.after.senses.some((sense) => !known.has(sense.id))) setViewChoice("page");
@@ -1060,12 +1076,23 @@ export default function App() {
    * composer — following `AddView`'s own precedent for a seeded composition. Nothing about this
    * reaches the prompt as a special mode: it is one ordinary question producing one ordinary
    * proposal, reviewed and saved like any other.
+   *
+   * A photo it carried is held here, not sent: the conversation carries text and a model may not
+   * name a photo, so `applyOps` attaches it to the sentence the proposal adds — or, for a sign, as an
+   * attestation of its own.
    */
-  const foldIn = useCallback((lexemeId: string, foldable: CaptureFoldable) => {
+  const foldIn = useCallback((lexemeId: string, foldable: CaptureFoldable, photo: KeptPhoto | null) => {
     const quoted = foldable.sentences.map((sentence) => `«${sentence.text}»`).join(" ");
     const note = foldable.note ? ` ${foldable.note}` : "";
     closeCapture();
     openLexeme(lexemeId);
+    // After `openLexeme`, which forgets any photo carried into another word.
+    if (photo) {
+      setFoldPhoto({ lexemeId, photo: {
+        sentence: foldable.sentences[0]?.text ?? null,
+        photoRef: photo.photoRef, photoRegion: photo.photoRegion, sourceKind: photo.sourceKind
+      } });
+    }
     setSeededTurn(quoted
       ? `Fold this in: ${quoted}.${note}`
       : `I met this word again.${note || " Is there anything worth adding?"}`);
@@ -1505,7 +1532,7 @@ export default function App() {
               order={proposal.diff.order}
               saving={saving}
               scroller={main}
-              onDiscard={() => setProposal(null)}
+              onDiscard={() => { setProposal(null); setFoldPhoto(null); }}
               onSave={() => void saveProposal()}
             />}
             {article && <div className={`art-bar${carding ? " carding" : ""}`}>

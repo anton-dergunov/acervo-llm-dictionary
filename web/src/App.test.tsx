@@ -13,6 +13,13 @@ import { TEST_OWNER, testGraph } from "./testGraph";
 import { reloadSelectionForTests } from "./wordSelection";
 
 vi.mock("virtual:pwa-register", () => ({ registerSW: vi.fn() }));
+
+// A photo is read without a canvas: the Photo tab needs only the blobs these return.
+vi.mock("./photoImage", () => ({
+  encodePhoto: vi.fn(async () => new Blob(["jpeg"], { type: "image/jpeg" })),
+  still: vi.fn(() => document.createElement("canvas")),
+  cropSquare: vi.fn(async () => new Blob(["square"], { type: "image/jpeg" }))
+}));
 /* jsdom has no canvas: the map's drawing is stood in for by its points as buttons. */
 vi.mock("./meaningMap", async () => {
   const { forwardRef, useImperativeHandle } = await import("react");
@@ -1847,5 +1854,69 @@ describe("a conversation that edits what it just proposed", () => {
     // Its id does survive, as the anchor of the picture that illustrates it — which is a fact about
     // the picture, not a resurrection of the sentence.
     expect(document_).toContain("exampleId: examplepicar010");
+  });
+});
+
+/* ── a photographed sentence folded into a word already held (`docs/features/photo-capture.md`) ──
+   The conversation carries text and a model may not name a photo, so the device attaches it. */
+describe("folding a photographed sentence into a word already held", () => {
+  const PHOTO = "photos/owner0000000001/0123456789abcdef.jpg";
+  const box = (x: number): [number, number][] => [[x, 0.1], [x + 0.1, 0.1], [x + 0.1, 0.14], [x, 0.14]];
+
+  it("keeps the photo with the sentence the conversation adds", async () => {
+    signedIn();
+    acceptWrites();
+    // A spy made again keeps the earlier tests' calls; only this test's save is asserted on.
+    vi.mocked(backendSession.saveArticle).mockClear();
+    if (!("PointerEvent" in window)) Object.defineProperty(window, "PointerEvent", { value: MouseEvent, configurable: true });
+    URL.createObjectURL = vi.fn(() => "blob:photo");
+    URL.revokeObjectURL = vi.fn();
+    vi.spyOn(backendSession, "warmPhoto").mockResolvedValue({});
+    vi.spyOn(backendSession, "readPhoto").mockResolvedValue({
+      photoRef: PHOTO, width: 1000, height: 500, language: "es", vocabulary: true,
+      readBy: { provider: "google-vision", model: "document-text-detection" },
+      text: "Me pica mucho.",
+      words: [
+        { id: "w0", text: "Me", polygons: [box(0.1)], confidence: 0.95, lineId: "l0", start: 0, end: 2 },
+        { id: "w1", text: "pica", polygons: [box(0.25)], confidence: 0.95, lineId: "l0", start: 3, end: 7 },
+        { id: "w2", text: "mucho.", polygons: [box(0.4)], confidence: 0.95, lineId: "l0", start: 8, end: 14 }
+      ],
+      lines: [{ id: "l0", polygon: [[0.1, 0.1], [0.5, 0.1], [0.5, 0.14], [0.1, 0.14]], wordIds: ["w0", "w1", "w2"] }],
+      sentences: [{ id: "s0", text: "Me pica mucho.", wordIds: ["w0", "w1", "w2"], start: 0, end: 14,
+        truncatedStart: false, truncatedEnd: false }]
+    });
+    vi.spyOn(backendSession, "resolveCapture").mockResolvedValue({
+      resolution: {
+        language: "es", headword: "picar", lemma: "picar", pos: "verb",
+        sentences: [{ text: "Me pica mucho.", translation: null }], note: null, consumedLines: 1,
+        consumedText: null, gloss: "to itch"
+      },
+      duplicates: [{ id: "lexemepicar0001", headword: "picar", shortGloss: "to itch; to chop" }],
+      foldable: { sentences: [{ text: "Me pica mucho.", translation: null }], reference: false, note: null }
+    });
+    mockChat("Worth keeping.", {
+      summary: "Adds the sentence.",
+      ops: [{ op: "add", target: "attestation", ref: "a1", value: { text: "Me pica mucho." } }]
+    });
+    await openList();
+
+    fireEvent.click(screen.getByRole("button", { name: "Add" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Photo" }));
+    const input = document.querySelector<HTMLInputElement>("input[type=file]")!;
+    fireEvent.change(input, { target: { files: [new File(["x"], "page.png", { type: "image/png" })] } });
+    await screen.findByAltText("The photo being read");
+    const frame = document.querySelector<HTMLElement>(".photo-frame")!;
+    frame.getBoundingClientRect = () => ({ left: 0, top: 0, width: 1000, height: 500, right: 1000, bottom: 500, x: 0, y: 0, toJSON: () => ({}) });
+    fireEvent.pointerDown(frame, { clientX: 290, clientY: 60, pointerId: 1 });
+    fireEvent.pointerUp(frame, { clientX: 290, clientY: 60, pointerId: 1 });
+    fireEvent.click(await screen.findByRole("button", { name: "Fold this sentence in" }));
+
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+    fireEvent.click(await screen.findByRole("button", { name: /^Save/ }));
+    await waitFor(() => expect(backendSession.saveArticle).toHaveBeenCalledTimes(1));
+    const [, draft] = vi.mocked(backendSession.saveArticle).mock.calls[0];
+    const kept = draft.attestations.find((one) => one.text === "Me pica mucho.")!;
+    expect(kept.photoRef).toBe(PHOTO);
+    expect(kept.photoRegion).not.toBeNull();
   });
 });
