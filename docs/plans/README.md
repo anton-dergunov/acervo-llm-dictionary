@@ -11,7 +11,6 @@ what it said.
 - [`backups.md`](backups.md) — scheduled snapshots, an off-machine export, restore drills.
 - [`observability.md`](observability.md) — when something does not happen, finding out why.
 - [`provider-management.md`](provider-management.md) — providers in Settings, usage figures, an audit, a setup guide.
-- [`issues.md`](issues.md) — known defects, each fixed on its own.
 
 **Study material**
 
