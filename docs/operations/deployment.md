@@ -339,6 +339,11 @@ or `--timezone Europe/London` to name one; a deploy that can find neither keeps 
 already has. `deployment.env` is rewritten whole on every deploy, so a zone added to it by hand would
 not survive the next one.
 
+**A healthy deploy cleans up after itself**: it keeps the current release tree and the two before it,
+and removes the images the rebuild superseded. Only Acervo's images are removed, picked by the project
+label compose puts on what it builds, because the host's Docker belongs to other applications too. A
+failed deploy removes nothing, so the previous release is still there to be looked at.
+
 **A deploy refuses while the server has open jobs**, because it never carries a job across a version.
 `--cancel-jobs` cancels them first and then deploys; `--jobs open` and `--jobs cancel` ask or cancel
 without deploying — the way out when a database waiting for a transition cannot start, so the server

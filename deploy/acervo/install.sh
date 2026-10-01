@@ -600,6 +600,22 @@ if [ -d "$acervo_root/releases" ]; then
   fi
   rm -f "$stale_releases"
 fi
+
+# Every deploy rebuilds the images, and the ones they replace stay behind untagged: 308 of them had
+# accumulated before this existed. Only this project's are removed — compose labels what it builds
+# with the project — because the host's Docker is shared with unrelated applications. Tagged images
+# stay, the worker's included, though no running container uses it. Reached only after a healthy
+# deployment, like the release pruning above, and a failure here is reported rather than fatal: the
+# deployment has already succeeded.
+stale_images=$(docker images --quiet --filter dangling=true \
+  --filter "label=com.docker.compose.project=$compose_project" | wc -l | tr -d " ")
+if [ "$stale_images" -gt 0 ]; then
+  if docker image prune --force --filter "label=com.docker.compose.project=$compose_project" >/dev/null 2>&1; then
+    echo "Removed $stale_images superseded image(s)"
+  else
+    echo "Could not remove superseded images; the deployment is unaffected" >&2
+  fi
+fi
 echo "Acervo Anki sync server is healthy at $bind_address:$anki_port"
 echo "Acervo internal HTTP backend is healthy at http://$app_bind_address:$app_port"
 # Said again here because the line above it scrolled past in the build output: this is the copy to

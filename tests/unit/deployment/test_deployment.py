@@ -104,6 +104,9 @@ def fake_docker_path(
         '[ -z "${ACERVO_TEST_DOCKER_LOG:-}" ] || echo "$*" >>"$ACERVO_TEST_DOCKER_LOG"\n'
         'case " $* " in\n'
         "  *Healthcheck.Test*) printf '%s\\n' " + " ".join(f"'{arg}'" for arg in PROBE) + "; exit 0 ;;\n"
+        # As many superseded images as `ACERVO_TEST_DOCKER_STALE_IMAGES` says, by id.
+        '  *" images "*dangling=true*) i=0; while [ "$i" -lt "${ACERVO_TEST_DOCKER_STALE_IMAGES:-0}" ]; do\n'
+        '    echo "sha256:$i"; i=$((i + 1)); done; exit 0 ;;\n'
         # `exec`, the container, then the probe less its "CMD": any other count is a word split wrong.
         f'  *" exec "*) [ "$#" -eq {len(PROBE) + 1} ] || exit 3\n'
         '    [ "$2" != "${ACERVO_TEST_DOCKER_FAIL_PROBE:-}" ] || exit 1; exit 0 ;;\n'
@@ -986,6 +989,40 @@ def test_installer_gives_up_on_a_service_that_never_answers_its_probe(tmp_path: 
     assert any(command.endswith(" logs lexibeat") for command in commands), "its logs, for the owner"
     assert not any(command.startswith("exec acervo-server-1 ") for command in commands)
     assert not (root / "current-release").exists()
+
+
+def test_a_healthy_deploy_removes_only_this_projects_superseded_images(tmp_path: Path) -> None:
+    """Every deploy rebuilds the images and leaves the ones it replaced untagged; 308 had piled up.
+    The host's Docker is shared, so the prune is scoped to the label compose puts on what it builds
+    rather than taking every dangling image on the machine."""
+    env, root = deployment_env(tmp_path)
+    log = tmp_path / "docker.log"
+    env["ACERVO_TEST_DOCKER_LOG"] = str(log)
+    env["ACERVO_TEST_DOCKER_STALE_IMAGES"] = "2"
+
+    result = run_installer(root, env)
+
+    assert result.returncode == 0, result.stderr
+    assert "Removed 2 superseded image(s)" in result.stdout
+    commands = _commands(log)
+    prune = _index(commands, "image prune")
+    assert commands[prune] == "image prune --force --filter label=com.docker.compose.project=acervo"
+    assert prune > _index(commands, " up -d")
+
+
+def test_a_failed_deploy_removes_no_images(tmp_path: Path) -> None:
+    """The images it would remove are the previous release's, which is what a failed deploy might be
+    diagnosed against."""
+    env, root = deployment_env(tmp_path)
+    log = tmp_path / "docker.log"
+    env["ACERVO_TEST_DOCKER_LOG"] = str(log)
+    env["ACERVO_TEST_DOCKER_STALE_IMAGES"] = "2"
+    env["ACERVO_TEST_DOCKER_FAIL_PROBE"] = "acervo-server-1"
+
+    result = run_installer(root, env)
+
+    assert result.returncode == 1
+    assert not any("image prune" in command for command in _commands(log))
 
 
 def test_every_long_running_service_probes_once_a_minute() -> None:
