@@ -80,11 +80,17 @@ services:
       # request is not healthy. `wget` is deliberately not used — the alpine image had it and
       # python:3.12-slim does not, and a container whose healthcheck binary is missing reports
       # unhealthy forever while serving perfectly.
+      #
+      # A minute apart, here and in every service below, because a probe is not free: each one makes
+      # Docker rewrite the container's state with an fsync, which on the NAS's mirrored disks was a
+      # constant ~200 small writes a second at 5 s. Nothing restarts on "unhealthy" — it is a readout
+      # for DSM and `deploy.sh --status` — so three missed probes is soon enough. The installer does
+      # not wait on this cadence: it runs the same command itself (install.sh, wait_until_serving).
       test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/acervo/v1/health', timeout=3).status == 200 else 1)"]
-      interval: 5s
+      interval: 60s
       timeout: 3s
-      retries: 20
-      start_period: 5s
+      retries: 3
+      start_period: 30s
 
   # The spoken-usage-retrieval corpus: a foreign service deployed beside Acervo, like the Anki sync
   # server, and reached over HTTP only. Acervo's server never imports it and never opens its SQLite
@@ -148,10 +154,10 @@ services:
       # perfectly good service as failed and fail the install. Whether the corpus is ready is a
       # question for Settings ▸ Clips, which reads /status.
       test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health/live', timeout=3).status == 200 else 1)"]
-      interval: 5s
+      interval: 60s
       timeout: 3s
-      retries: 20
-      start_period: 5s
+      retries: 3
+      start_period: 30s
 
   # The loop generator. Procedural music plus speech it does not synthesise itself: numpy and
   # scipy over CC0 samples, no GPU, no network and byte-identical from a seed, which is what makes
@@ -193,10 +199,10 @@ services:
       # deployment has no bundle and still serves; gating on it would fail the install of a working
       # service, which is the lesson the corpus healthcheck beside this one paid for.
       test: ["CMD", "python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health', timeout=3).status == 200 else 1)"]
-      interval: 5s
+      interval: 60s
       timeout: 3s
-      retries: 20
-      start_period: 5s
+      retries: 3
+      start_period: 30s
 
   anki-sync-server:
     build:
@@ -219,10 +225,10 @@ services:
       - "${ACERVO_ANKI_SERVER_DATA:?Set ACERVO_ANKI_SERVER_DATA}:/var/lib/acervo/anki-server"
     healthcheck:
       test: ["CMD", "python", "-c", "import socket; socket.create_connection(('127.0.0.1', 8080), 2).close()"]
-      interval: 5s
+      interval: 60s
       timeout: 3s
-      retries: 20
-      start_period: 5s
+      retries: 3
+      start_period: 30s
 
   # Acervo's own server-side work. Not a running service: `profiles: ["tools"]` means it exists to
   # be started by `docker compose run --rm`, do one job, and exit. A new job is a new subcommand of

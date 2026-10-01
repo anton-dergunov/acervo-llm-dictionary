@@ -39,6 +39,7 @@ from speech_retrieval.translations import (
     TranslationProviderError,
 )
 
+from acervo.access_log import quiet_health_probes
 from acervo.speech.provider import ChainGenerator, GenerationFailed
 
 
@@ -179,7 +180,9 @@ def main() -> None:
     settings = Settings.from_env()
     translation, alignment = providers()
     app = create_app(settings, translation_provider=translation, alignment_provider=alignment)
-    uvicorn.run(app, host=settings.host, port=settings.port, log_level="info")
+    config = uvicorn.Config(app, host=settings.host, port=settings.port, log_level="info")
+    quiet_health_probes("/api/v1/health/live")
+    uvicorn.Server(config).run()
 
 
 if __name__ == "__main__":

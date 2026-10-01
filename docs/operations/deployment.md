@@ -313,6 +313,13 @@ build repopulates; they are never committed.
   installed. Whether they are ready is a question for Settings, not for the installer. The loop generator
   holds **no provider credential at all**; it is handed a voice per render instead
   ([`../features/loops.md`](../features/loops.md) §2.3).
+- **Every healthcheck runs once a minute**, three misses to "unhealthy". A probe is not free: each
+  makes Docker rewrite the container's state with an fsync, and at five seconds across four services
+  that kept the NAS's disks at ~200 small writes a second around the clock. Nothing restarts on
+  "unhealthy" — it is a readout for DSM and `--status` — so a minute is soon enough. **The installer
+  does not wait on that cadence**: Docker's first probe comes a whole interval after start, so it runs
+  each container's own healthcheck command itself with `docker exec`. A probe that answers 200 is
+  also kept out of the access log; one that fails is still logged.
 - **`acervo-worker` is not a service.** It is `profiles: ["tools"]`, with no ports, started by
   `docker compose run --rm` for one job, so a new job is a new subcommand of `scripts/acervo_worker.py`,
   never a new compose service. It writes through the owner's own account, is deliberately not given

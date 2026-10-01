@@ -207,9 +207,12 @@ def show_story(settings: Settings, story_id: str, email: str | None) -> int:
 def serve(settings: Settings, host: str, port: int) -> int:
     import uvicorn
 
-    from acervo.api.app import create_app
+    from acervo.access_log import quiet_health_probes
+    from acervo.api.app import API_ROOT, create_app
 
-    uvicorn.run(create_app(settings), host=host, port=port, log_level="info")
+    config = uvicorn.Config(create_app(settings), host=host, port=port, log_level="info")
+    quiet_health_probes(f"{API_ROOT}/health")
+    uvicorn.Server(config).run()
     return 0
 
 

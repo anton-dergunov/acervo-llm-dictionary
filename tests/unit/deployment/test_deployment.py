@@ -11,6 +11,9 @@ import pytest
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+# What the fake `docker` reports as every container's healthcheck. One argument holds spaces, because
+# the real ones do, and the installer has to hand it over as one word.
+PROBE = ("CMD", "python", "-c", "import sys; sys.exit(0)")
 
 
 def runnable_remote_helper(tmp_path: Path) -> Path:
@@ -80,22 +83,30 @@ def fake_docker_path(
     existing: tuple[str, ...] = (),
     published: bool = True,
 ) -> Path:
-    """A `docker` that answers the four questions the installer asks it.
+    """A `docker` that answers the questions the installer asks it.
 
     `existing` names containers `inspect` should find, and finds them stopped — which is the state a
     create that could not bind its port leaves behind. `published` is whether `port` reports a host
     binding; without one a container can be healthy and still unreachable, which is the failure the
-    installer now refuses to report as success.
+    installer now refuses to report as success. Every container's healthcheck is `PROBE`, and it
+    passes unless `ACERVO_TEST_DOCKER_FAIL_PROBE` names the container. `sleep` is a no-op, so a wait
+    that never ends gives up at once rather than a minute later.
     """
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir(exist_ok=True)
+    sleep = bin_dir / "sleep"
+    sleep.write_text("#!/bin/sh\nexit 0\n", encoding="utf-8")
+    sleep.chmod(0o755)
     docker = bin_dir / "docker"
     docker.write_text(
         "#!/bin/sh\n"
         'known_containers="' + " ".join(existing) + '"\n'
         '[ -z "${ACERVO_TEST_DOCKER_LOG:-}" ] || echo "$*" >>"$ACERVO_TEST_DOCKER_LOG"\n'
         'case " $* " in\n'
-        '  *" ps --format json "*) echo \'{"Health":"healthy"}\'; exit 0 ;;\n'
+        "  *Healthcheck.Test*) printf '%s\\n' " + " ".join(f"'{arg}'" for arg in PROBE) + "; exit 0 ;;\n"
+        # `exec`, the container, then the probe less its "CMD": any other count is a word split wrong.
+        f'  *" exec "*) [ "$#" -eq {len(PROBE) + 1} ] || exit 3\n'
+        '    [ "$2" != "${ACERVO_TEST_DOCKER_FAIL_PROBE:-}" ] || exit 1; exit 0 ;;\n'
         # A one-shot `compose run` that fails, which is how a converter that refuses looks from here.
         '  *" run "*) [ -z "${ACERVO_TEST_DOCKER_FAIL_RUN:-}" ] || exit 7 ;;\n'
         '  *" port "*) ' + ('echo 127.0.0.1:27702' if published else ':') + '; exit 0 ;;\n'
@@ -939,6 +950,58 @@ def test_installer_refuses_to_call_an_unpublished_server_healthy(tmp_path: Path)
     assert "docker rm -f acervo-server-1" in result.stderr
     # The claim it used to make regardless.
     assert "internal HTTP backend is healthy" not in result.stdout
+
+
+def test_installer_runs_each_containers_own_healthcheck_rather_than_waiting_for_docker(
+    tmp_path: Path,
+) -> None:
+    """Docker's first probe comes a whole interval after start, and the interval is a minute, so
+    waiting on its "healthy" would add that minute to every deploy. The installer asks the container
+    now, with the command the container was configured with, so compose.yaml is the one place a probe
+    is written."""
+    env, root = deployment_env(tmp_path)
+    log = tmp_path / "docker.log"
+    env["ACERVO_TEST_DOCKER_LOG"] = str(log)
+
+    result = run_installer(root, env)
+
+    assert result.returncode == 0, result.stderr
+    commands = _commands(log)
+    for service in ("anki-sync-server", "speech-retrieval", "lexibeat", "server"):
+        assert f"exec acervo-{service}-1 {' '.join(PROBE[1:])}" in commands
+    assert not any(" ps " in command for command in commands)
+
+
+def test_installer_gives_up_on_a_service_that_never_answers_its_probe(tmp_path: Path) -> None:
+    env, root = deployment_env(tmp_path)
+    log = tmp_path / "docker.log"
+    env["ACERVO_TEST_DOCKER_LOG"] = str(log)
+    env["ACERVO_TEST_DOCKER_FAIL_PROBE"] = "acervo-lexibeat-1"
+
+    result = run_installer(root, env)
+
+    assert result.returncode == 1
+    commands = _commands(log)
+    assert sum(command.startswith("exec acervo-lexibeat-1 ") for command in commands) == 30
+    assert any(command.endswith(" logs lexibeat") for command in commands), "its logs, for the owner"
+    assert not any(command.startswith("exec acervo-server-1 ") for command in commands)
+    assert not (root / "current-release").exists()
+
+
+def test_every_long_running_service_probes_once_a_minute() -> None:
+    """Each probe makes Docker rewrite the container's state with an fsync; at 5 s across four
+    services that was a constant ~200 small writes a second on the NAS's disks. Nothing restarts on
+    "unhealthy", so a minute apart and three misses is soon enough, and nothing slower is needed."""
+    import yaml
+
+    compose = yaml.safe_load(
+        (REPO_ROOT / "deploy/acervo/compose.yaml").read_text(encoding="utf-8")
+    )
+    probed = {name: service["healthcheck"] for name, service in compose["services"].items()
+              if "healthcheck" in service}
+    assert set(probed) == {"server", "speech-retrieval", "lexibeat", "anki-sync-server"}
+    for name, healthcheck in probed.items():
+        assert (healthcheck["interval"], healthcheck["retries"]) == ("60s", 3), name
 
 
 def test_creating_an_account_goes_through_the_launcher_and_keeps_the_password_off_the_wire(
@@ -2176,3 +2239,15 @@ def test_the_speech_image_can_authenticate_to_vertex() -> None:
     """
     dockerfile = (REPO_ROOT / "deploy/acervo/speech/Dockerfile").read_text(encoding="utf-8")
     assert "google-auth[requests]" in dockerfile
+
+
+def test_the_speech_image_carries_every_acervo_module_its_launcher_imports() -> None:
+    """The image copies Acervo's modules one by one rather than installing the package, so an import
+    added to `serve.py` without a `COPY` beside it builds cleanly and dies on start."""
+    serve = (REPO_ROOT / "deploy/acervo/speech/serve.py").read_text(encoding="utf-8")
+    dockerfile = (REPO_ROOT / "deploy/acervo/speech/Dockerfile").read_text(encoding="utf-8")
+    imported = set(re.findall(r"^from acervo\.(\w+)", serve, re.MULTILINE))
+    assert imported
+    for module in imported:
+        assert (f"COPY src/acervo/{module} " in dockerfile
+                or f"COPY src/acervo/{module}.py " in dockerfile), f"acervo.{module} is not in the image"

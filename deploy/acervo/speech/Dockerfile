@@ -42,6 +42,7 @@ RUN pip install --no-cache-dir /tmp/wheels/*.whl && rm -rf /tmp/wheels
 # put the catalogue somewhere that does not exist, and the only symptom was no provider being
 # injected, silently.
 COPY src/acervo/__init__.py /app/src/acervo/__init__.py
+COPY src/acervo/access_log.py /app/src/acervo/access_log.py
 COPY src/acervo/models /app/src/acervo/models
 COPY src/acervo/speech /app/src/acervo/speech
 COPY models /app/models

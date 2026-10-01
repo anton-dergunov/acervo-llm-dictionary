@@ -18,6 +18,7 @@ server is up whenever a call comes home.
 from __future__ import annotations
 
 import io
+import logging
 import os
 import sys
 import time
@@ -214,6 +215,18 @@ def _delivery_of(context: RenderContext) -> str:
     return PLAIN if str(wanted).lower() == PLAIN else DIRECTED
 
 
+def _quiet_health_probe(record: logging.LogRecord) -> bool:
+    """Drop the container's own healthcheck from the access log when it answers 200.
+
+    `acervo.access_log` does this for the server and the corpus; this image carries no `acervo`
+    package, so the same rule is written out here. uvicorn's access record is (client, method, path
+    with query string, HTTP version, status).
+    """
+    args = record.args
+    return not (isinstance(args, tuple) and len(args) >= 5
+                and args[2] == "/api/v1/health" and args[4] == 200)
+
+
 def main() -> None:
     config = ServiceConfig.from_environment()
     host = os.environ.get("LEXIBEAT_SERVICE_HOST", "0.0.0.0")  # noqa: S104 — the container's own port
@@ -221,7 +234,9 @@ def main() -> None:
     print(f"lexibeat: takes come from {os.environ.get('ACERVO_API_URL', '<ACERVO_API_URL unset>')}",
           file=sys.stderr, flush=True)
     app = create_service(config=config, backend_factory=backend_for, writer_factory=writer_for)
-    uvicorn.run(app, host=host, port=port, log_level="info")
+    server = uvicorn.Config(app, host=host, port=port, log_level="info")
+    logging.getLogger("uvicorn.access").addFilter(_quiet_health_probe)
+    uvicorn.Server(server).run()
 
 
 if __name__ == "__main__":

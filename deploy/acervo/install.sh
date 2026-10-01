@@ -510,56 +510,52 @@ run_quietly "Building and starting containers" compose -p "$compose_project" \
   --env-file "$acervo_root/llm.env" \
   -f "$compose_file" up -d --build anki-sync-server speech-retrieval lexibeat server
 
-echo "Waiting for anki-sync-server to become healthy..."
-attempt=0
-until [ "$(compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" ps --format json anki-sync-server 2>/dev/null | grep -c '"Health":"healthy"' || true)" -gt 0 ]; do
-  attempt=$((attempt + 1))
-  if [ "$attempt" -ge 30 ]; then
-    compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" logs anki-sync-server >&2
-    exit 1
-  fi
-  sleep 2
-done
+# Runs the container's own healthcheck now, rather than waiting for Docker to. Docker's first probe
+# comes a whole interval after start, and the interval is a minute on purpose (compose.yaml), so
+# waiting on its "healthy" would make every deploy a minute slower. The command is read back from the
+# container, so compose.yaml stays the one place each probe is written.
+probe_now() {
+  probe_container=$1
+  set --
+  while IFS= read -r probe_arg; do
+    [ -z "$probe_arg" ] || set -- "$@" "$probe_arg"
+  done <<EOF
+$(docker inspect -f '{{range .Config.Healthcheck.Test}}{{println .}}{{end}}' "$probe_container" 2>/dev/null)
+EOF
+  case "${1:-}" in
+    CMD) shift; docker exec "$probe_container" "$@" >/dev/null 2>&1 ;;
+    CMD-SHELL) docker exec "$probe_container" sh -c "$2" >/dev/null 2>&1 ;;
+    *) return 1 ;;
+  esac
+}
+
+wait_until_serving() {
+  echo "Waiting for $1 to become healthy..."
+  attempt=0
+  until probe_now "$compose_project-$1-1"; do
+    attempt=$((attempt + 1))
+    if [ "$attempt" -ge 30 ]; then
+      compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" logs "$1" >&2
+      exit 1
+    fi
+    sleep 2
+  done
+}
+
+wait_until_serving anki-sync-server
 
 # Liveness, not readiness: the corpus service answers 503 on /health/ready until an index has been
 # built, which is the correct state on a first deployment. Its healthcheck therefore asks whether it
 # is serving, and Settings ▸ Clips is where "does it have a corpus yet" is answered.
-echo "Waiting for speech-retrieval to become healthy..."
-attempt=0
-until [ "$(compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" ps --format json speech-retrieval 2>/dev/null | grep -c '"Health":"healthy"' || true)" -gt 0 ]; do
-  attempt=$((attempt + 1))
-  if [ "$attempt" -ge 30 ]; then
-    compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" logs speech-retrieval >&2
-    exit 1
-  fi
-  sleep 2
-done
+wait_until_serving speech-retrieval
 
 # Liveness, not readiness, and specifically not "has it got its samples": a fresh deployment has no
 # sample bundle and serves perfectly well without one, offering the sample-free palette. Gating here
 # would fail the install of a working service. The container says which state it is in on its first
 # log line, and /api/v1/schema answers it for the interface.
-echo "Waiting for lexibeat to become healthy..."
-attempt=0
-until [ "$(compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" ps --format json lexibeat 2>/dev/null | grep -c '"Health":"healthy"' || true)" -gt 0 ]; do
-  attempt=$((attempt + 1))
-  if [ "$attempt" -ge 30 ]; then
-    compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" logs lexibeat >&2
-    exit 1
-  fi
-  sleep 2
-done
+wait_until_serving lexibeat
 
-echo "Waiting for the server to become healthy..."
-attempt=0
-until [ "$(compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" ps --format json server 2>/dev/null | grep -c '"Health":"healthy"' || true)" -gt 0 ]; do
-  attempt=$((attempt + 1))
-  if [ "$attempt" -ge 30 ]; then
-    compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" logs server >&2
-    exit 1
-  fi
-  sleep 2
-done
+wait_until_serving server
 
 # Asking the container whether it is healthy is not the same question as asking whether anyone can
 # reach it: the healthcheck runs inside the container and knows nothing about publishing. This is the
