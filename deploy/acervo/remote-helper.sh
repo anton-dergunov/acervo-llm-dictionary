@@ -89,9 +89,11 @@ server_jobs() {
   esac
 }
 
+# Spelled out rather than `a-z`: a bracket range follows the locale's collation, and under
+# en_GB.UTF-8 `[a-z]` matches capitals too.
 validate_service() {
   case "$1" in
-    ''|*[!a-z0-9-]*)
+    ''|*[!abcdefghijklmnopqrstuvwxyz0123456789-]*)
       echo "Service name must use lowercase letters, digits and hyphens" >&2
       exit 2
       ;;
@@ -465,7 +467,7 @@ run_worker() {
   operation=${1:-}
   case "$operation" in
     "") echo "worker needs an operation, for example anki-pull-state" >&2; exit 2 ;;
-    *[!a-z-]*|-*|*-) echo "worker operations are bare words; got: $operation" >&2; exit 2 ;;
+    *[!abcdefghijklmnopqrstuvwxyz-]*|-*|*-) echo "worker operations are bare words; got: $operation" >&2; exit 2 ;;
   esac
 
   [ -f "$acervo_root/current-release" ] || {

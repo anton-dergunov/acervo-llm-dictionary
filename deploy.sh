@@ -261,8 +261,10 @@ validate_port "HTTPS port" "$effective_https_port"
 # collide with another application. Android only mints a WebAPK for a default port, so a service is
 # what lets Acervo install alongside another self-hosted PWA rather than replacing it.
 if [ -n "$service" ]; then
+  # Spelled out rather than `a-z`: a bracket range follows the locale's collation, and under
+  # en_GB.UTF-8 `[a-z]` matches capitals too.
   case "$service" in
-    ''|*[!a-z0-9-]*)
+    ''|*[!abcdefghijklmnopqrstuvwxyz0123456789-]*)
       echo "The service name must use lowercase letters, digits and hyphens" >&2
       exit 2
       ;;

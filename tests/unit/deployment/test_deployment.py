@@ -2116,12 +2116,26 @@ def test_the_launcher_refuses_a_worker_operation_that_is_not_a_bare_word(tmp_pat
     worker.chmod(0o755)
     (root / "current-release").write_text(f"{release}\n", encoding="utf-8")
 
-    for rejected in ("../../etc/shadow", "/bin/sh", "-rf", "index clips", "index;clips"):
+    for rejected in ("../../etc/shadow", "/bin/sh", "-rf", "index clips", "index;clips", "Anki-pull-state"):
         result = subprocess.run(
             [str(helper), "worker", "--root", str(root), rejected],
             text=True, capture_output=True, check=False,
         )
         assert result.returncode == 2, f"{rejected!r} was accepted: {result.stdout}{result.stderr}"
+
+
+def test_no_shell_allow_list_spells_a_lowercase_range() -> None:
+    """A bracket range follows the locale's collation: under en_GB.UTF-8 `[!a-z0-9-]` lets "Acervo"
+    through, while under C it is refused, so the check passed on the server and failed on a laptop.
+    An allow-list spells its letters out instead."""
+    scripts = [REPO_ROOT / "deploy.sh", *sorted((REPO_ROOT / "deploy").rglob("*.sh"))]
+    offenders = [
+        f"{script.relative_to(REPO_ROOT)}:{number}"
+        for script in scripts
+        for number, line in enumerate(script.read_text(encoding="utf-8").splitlines(), 1)
+        if re.search(r"\[![^]]*a-z", line) and "A-Z" not in line
+    ]
+    assert not offenders, offenders
 
 
 def test_the_launcher_refuses_a_worker_run_with_no_deployment(tmp_path: Path) -> None:
