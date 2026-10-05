@@ -671,7 +671,7 @@ What the first deployment found, each a fault worth not repeating:
 - **A failure's sentence was thrown away three times** — by `services/loops.refusal`, by the runner's
   rollup, and by `ProgressStrip` — and between them they turned "No samples cached for 'salamander'"
   into "the loop could not be made". Each keeps the message now, and `work/journal.py` logs it
-  ([`../plans/observability.md`](../plans/observability.md) is the wider question).
+  ([`../architecture/observability.md`](../architecture/observability.md) is the wider answer).
 - **The Loops surface could not be left.** Every obvious exit was a dead end; §2.13's rules are the
   fix.
 - **The Music selector was a no-op** until the family was validated, carried on the job and passed to

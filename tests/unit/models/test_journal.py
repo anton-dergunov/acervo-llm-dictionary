@@ -96,7 +96,7 @@ def test_the_file_is_opened_once_and_creates_its_directory(tmp_path, monkeypatch
     try:
         open_call_log(settings)
         open_call_log(settings)
-        assert sum(getattr(h, "acervo_call_log", False) for h in logger.handlers) == 1
+        assert sum(getattr(h, "acervo_log_file", False) for h in logger.handlers) == 1
 
         journal.passed("brief", "gemini-free", "m", "unusable",
                        'got {"senses":[{"senseId":"s1"}]} AIzaSy-not-a-real-key-000', 1.5)

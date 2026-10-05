@@ -79,7 +79,7 @@ def mint_session(secret: str, user: Mapping[str, Any]) -> str:
     )
 
 
-def mint_render(secret: str, user: Mapping[str, Any], render: str) -> str:
+def mint_render(secret: str, user: Mapping[str, Any], render: str, rid: str = "") -> str:
     """A token good for one render's takes and lines, and nothing else."""
     now = datetime.now(timezone.utc)
     return jwt.encode(
@@ -91,6 +91,10 @@ def mint_render(secret: str, user: Mapping[str, Any], render: str) -> str:
             # renders exist — but it is what makes a token in a log traceable to the work that asked
             # for it.
             "render": render,
+            # The id the work that asked is logged under (`acervo/trace.py`). The routes a render
+            # calls home to take it up, so each take is filed with the job rather than as a request
+            # from nowhere — with nothing for the generator to carry or to know about.
+            **({"rid": rid} if rid else {}),
             "iat": int(now.timestamp()),
             "exp": int((now + RENDER_LIFETIME).timestamp()),
         },

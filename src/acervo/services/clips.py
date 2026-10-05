@@ -18,6 +18,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from acervo import trace
 from acervo.article import ArticleView, article_for
 from acervo.clips.corpus import Candidate, Corpus, CorpusError
 from acervo.clips.ids import clip_example_id
@@ -53,7 +54,7 @@ def _corpus(settings: Settings) -> Corpus:
             503, "corpus_unconfigured",
             "This Acervo server has no spoken-usage corpus configured, so it cannot find clips.",
         )
-    return Corpus(settings.speech_url)
+    return Corpus(settings.speech_url, request_id=trace.current())
 
 
 def _corpus_refusal(error: CorpusError) -> ApiError:
@@ -91,7 +92,7 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
     corpus: dict[str, Any] = {"configured": bool(settings.speech_url), "reachable": False}
     if settings.speech_url:
         try:
-            corpus = {"configured": True, "reachable": True, **Corpus(settings.speech_url).status()}
+            corpus = {"configured": True, "reachable": True, **Corpus(settings.speech_url, request_id=trace.current()).status()}
         except CorpusError as error:
             # A corpus that is down is a fact to show, not an error to raise: Settings must open and
             # say so, the way it does for a dictionary source that cannot be reached.

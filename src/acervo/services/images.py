@@ -38,6 +38,7 @@ from acervo.images.render import Renderer, as_master
 from acervo.images.styles import StyleTable, load_styles
 from acervo.models import ChainExhausted, ProviderError, ProviderRefused, chain, load_catalogue
 from acervo.repository import graph, image_settings
+from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal
 from acervo.services.rules import with_rules
 from acervo.settings import Settings
@@ -293,7 +294,7 @@ def _place(media: Path, reference: str, data: bytes) -> None:
     os.replace(partial, destination)
 
 
-def _discard(media: Path, reference: str | None, *, keep: str | None) -> None:
+def _discard(media: Path, reference: str | None, *, keep: str | None, reason: str) -> None:
     """Remove a file no row names any more.
 
     `keep` is not defensive: a redraw that comes out byte-for-byte identical lands on the same
@@ -301,7 +302,7 @@ def _discard(media: Path, reference: str | None, *, keep: str | None) -> None:
     after being written and the article would break.
     """
     if reference and reference != keep:
-        media.joinpath(reference).unlink(missing_ok=True)
+        media_files.remove(media, reference, reason)
 
 
 def render_prompt(settings: Settings, owner: str, device: str, prompt_id: str,
@@ -391,9 +392,9 @@ def render_prompt(settings: Settings, owner: str, device: str, prompt_id: str,
     except Exception:
         # The row never landed, so the picture the owner is looking at is still the old one and this
         # file is the orphan. `keep` covers the redraw that changed nothing: then they are one file.
-        _discard(media, reference, keep=previous)
+        _discard(media, reference, keep=previous, reason="rollback")
         raise
-    _discard(media, previous, keep=reference)
+    _discard(media, previous, keep=reference, reason="replaced")
     return written
 
 
@@ -478,9 +479,9 @@ def attach_picture(settings: Settings, owner: str, device: str, sense_id: str,
             "suppressed": not restoring,
         }, _styles())
     except Exception:
-        _discard(media, reference, keep=previous)
+        _discard(media, reference, keep=previous, reason="rollback")
         raise
-    _discard(media, previous, keep=reference)
+    _discard(media, previous, keep=reference, reason="replaced")
     return written
 
 
@@ -512,7 +513,7 @@ def suppress_prompt(settings: Settings, owner: str, device: str, prompt_id: str)
     if record["imageRef"]:
         # `missing_ok`: the file may already be gone, and refusing to record the owner's decision
         # because of that would leave the sweep drawing it again.
-        Path(settings.media_path).joinpath(record["imageRef"]).unlink(missing_ok=True)
+        media_files.remove(settings.media_path, record["imageRef"], "deleted")
 
     return _write(owner, device, {
         **_state(record),

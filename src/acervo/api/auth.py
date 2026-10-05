@@ -13,6 +13,7 @@ from typing import Any
 import jwt
 from fastapi import Request
 
+from acervo import trace
 from acervo.errors import ApiError
 from acervo.repository import accounts
 from acervo.settings import Settings
@@ -36,6 +37,14 @@ __all__ = [
 ]
 
 UNAUTHENTICATED = ApiError(401, "unauthenticated", "Sign in to continue.")
+
+
+def _unauthenticated(reason: str) -> ApiError:
+    """The same 401 and the same sentence whatever went wrong, because a caller without a valid
+    token is told nothing about why. The reason goes to the activity log instead: an expired
+    session, a changed password and a deleted account are otherwise one message with three causes."""
+    return ApiError(UNAUTHENTICATED.status, UNAUTHENTICATED.code, UNAUTHENTICATED.message,
+                    noted={"reason": reason})
 
 
 def mint(secret: str, user: Mapping[str, Any]) -> str:
@@ -66,28 +75,37 @@ def account_for(secret: str, token: str, audience: str | None = None) -> Mapping
     it is not named, which is what keeps a render token from becoming a session.
     """
     if not token:
-        raise UNAUTHENTICATED
+        raise _unauthenticated("missing")
     try:
         # The signing key depends on the account, so the subject has to be read before the signature
         # can be checked. Nothing is trusted from this first pass but the id it points at.
         claimed = jwt.decode(token, options={"verify_signature": False})
         user = accounts.by_id(str(claimed.get("sub") or ""))
         if user is None:
-            raise UNAUTHENTICATED
+            raise _unauthenticated("no_account")
         carried = claimed.get("aud")
         # One audience or several — a render's token names both routes it calls home to — and the
         # route asking must be among them.
         named = carried if isinstance(carried, list) else [carried]
         if carried is not None and audience not in named:
-            raise UNAUTHENTICATED
+            raise _unauthenticated("wrong_audience")
         jwt.decode(
             token, signing_key(secret, user["token_key"]), algorithms=[ALGORITHM],
             audience=audience, options={"verify_aud": carried is not None},
         )
     except ApiError:
         raise
+    except jwt.ExpiredSignatureError:
+        raise _unauthenticated("expired") from None
+    except jwt.InvalidSignatureError:
+        # The account's key or the server's secret is no longer the one that signed this: a changed
+        # password, or a secret that was rotated or lost.
+        raise _unauthenticated("bad_signature") from None
     except jwt.PyJWTError:
-        raise UNAUTHENTICATED from None
+        raise _unauthenticated("malformed") from None
+    # A render's token says which piece of work it was minted for. Only now, with the signature
+    # checked, is that taken up — so the takes a render asks for are filed under the job that asked.
+    trace.adopt(claimed.get("rid"))
     return user
 
 

@@ -26,9 +26,9 @@ deployment keeps its files, so this module is where the handler is attached.
 from __future__ import annotations
 
 import logging
-from logging.handlers import RotatingFileHandler
 from typing import Any, Mapping
 
+from acervo import logfiles
 from acervo.errors import ApiError
 from acervo.models import (
     Answer, ChainExhausted, ProviderError, TextResult, chain, journal, load_catalogue
@@ -558,25 +558,13 @@ def open_call_log(settings: Settings) -> None:
     """
     if not settings.call_log_path:
         return
-    logger = logging.getLogger(journal.LOGGER)
-    if any(getattr(handler, "acervo_call_log", False) for handler in logger.handlers):
-        return
     try:
-        settings.call_log_path.parent.mkdir(parents=True, exist_ok=True)
-        handler = RotatingFileHandler(
-            settings.call_log_path, maxBytes=settings.call_log_bytes,
-            backupCount=settings.call_log_keep, encoding="utf-8",
-        )
+        # Stamped with the request id where the file is opened, because the package that writes the
+        # lines may not know one exists (`acervo/trace.py`).
+        logfiles.open_rotating(journal.LOGGER, settings.call_log_path, settings.call_log_bytes,
+                               settings.call_log_keep)
     except OSError as unwritable:   # noqa: BLE001 — a log nobody can write must not stop the server
         logging.getLogger("acervo.api").warning(
             "Acervo: the model call log could not be opened (%s); calls will not be recorded",
             unwritable,
         )
-        return
-    handler.acervo_call_log = True   # type: ignore[attr-defined]
-    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
-    # It has its own file; letting it also climb to the root handler would put every model call in
-    # the container's stdout beside the request log, which is the noise this exists to replace.
-    logger.propagate = False

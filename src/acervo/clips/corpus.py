@@ -29,6 +29,8 @@ import httpx
 
 TIMEOUT_SECONDS = 20.0
 
+REQUEST_ID_HEADER = "X-Request-ID"
+
 # The API caps at 50 and defaults to 20. Twenty is what `spoken-clips.md` §2.7 fixes as the bounded
 # candidate set, and `docs/plans/quality/clip-selection.md` names the count as the first knob to
 # vary — so it is a default here rather than a constant buried in a call.
@@ -166,13 +168,17 @@ class Corpus:
     """
 
     def __init__(self, base_url: str, *, timeout: float = TIMEOUT_SECONDS,
-                 http: httpx.Client | None = None, operator_token: str = "") -> None:
+                 http: httpx.Client | None = None, operator_token: str = "",
+                 request_id: str = "") -> None:
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
         # The seam `AcervoClient` uses, and how the fake corpus is injected in tests.
         self._http = http
         # Sent only on the operator routes. It never leaves this process.
         self._operator_token = operator_token
+        # Whose work this is, as the caller's own logs name it. The corpus logs under it and says
+        # it back in an error, so a refusal there can be matched to the search that caused it.
+        self._request_id = request_id
 
     def _get(self, path: str, params: dict[str, Any] | None = None, *,
              operator: bool = False) -> Any:
@@ -181,7 +187,10 @@ class Corpus:
     def _send(self, method: str, path: str, *, params: dict[str, Any] | None = None,
               body: Any = None, operator: bool = False) -> Any:
         url = f"{self.base_url}{path}"
-        headers = {"Authorization": f"Bearer {self._operator_token}"} if operator else None
+        headers = {
+            **({"Authorization": f"Bearer {self._operator_token}"} if operator else {}),
+            **({REQUEST_ID_HEADER: self._request_id} if self._request_id else {}),
+        }
         try:
             if method == "GET":
                 sender = self._http.get if self._http is not None else httpx.get

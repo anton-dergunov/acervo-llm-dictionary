@@ -138,15 +138,17 @@ work, an encode or a composite; anything heavy is out of scope for the runner.
 when a job starts, one per step outcome and one when it ends, with the error and its sentence, to a
 rotating file beside the database (`ACERVO_JOB_LOG_PATH`) — shaped like the model-call log, never
 configured by the package that emits it, and dropped with a warning if it cannot be opened. It carries
-`operationId`, the one id shared with the loop generator's container and the only thing that joins the
-two trails. It exists because a failure recorded only in a job row's JSON is invisible from the command
-line; `admin jobs list` shows recent jobs with their error and message.
+`operationId`, the loop generator's own handle for a render, and **a job's id is the request id of
+everything done on its behalf**: every model call it makes, and every take a render calls home for, is
+filed under it in the call log ([`observability.md`](observability.md) §2). It exists because a failure
+recorded only in a job row's JSON is invisible from the command line; `admin jobs list` shows recent
+jobs with their error and message.
 
 **A failure's sentence must survive every hand-off.** The service keeps a provider's or generator's own
 words beside Acervo's code, the runner copies the failed step's message onto the job, and the progress
 line appends it rather than replacing it with a constant. Each of those three once threw it away, and
-between them turned *"No samples cached for 'salamander'"* into *"the loop could not be made"*. What is
-still silent is [`../plans/observability.md`](../plans/observability.md).
+between them turned *"No samples cached for 'salamander'"* into *"the loop could not be made"*. How the
+logs join, and what else is written down, is [`observability.md`](observability.md).
 
 ## A second machine
 

@@ -25,6 +25,7 @@ from typing import Any, Mapping
 
 import httpx
 
+from acervo import trace
 from acervo.errors import ApiError
 from acervo.settings import Settings
 
@@ -66,6 +67,10 @@ def forward(settings: Settings, method: str, path: str, *,
     """
     url = f"{_base(settings)}{path}"
     headers: dict[str, str] = {"Accept": "application/json"}
+    # The corpus logs under the id it is sent and says it back in an error, so what it refused can
+    # be matched to the request that asked.
+    if trace.current():
+        headers[trace.HEADER] = trace.current()
     if operator:
         if not settings.speech_operator_token:
             raise ApiError(

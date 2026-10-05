@@ -35,6 +35,7 @@ from acervo.pronunciation.targets import COLLECTION, Target, current, target_in
 from acervo.pronunciation import takes as take_store
 from acervo.repository import graph, pronunciation_settings
 from acervo.repository.pronunciation_settings import ORDERS, SWITCHES, USES
+from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal
 from acervo.services.prompts import prompt_text
 from acervo.settings import Settings
@@ -576,12 +577,12 @@ def _store(settings: Settings, owner: str, device: str, target: Target, existing
         graph.merge_graph(owner, device, {"pronunciations": [row]}, enqueue=None)
     except Exception:
         if reference != (existing or {}).get("audioRef"):
-            destination.unlink(missing_ok=True)
+            media_files.remove(settings.media_path, reference, "rollback")
         on_logged(row, "write_failed")
         raise
     previous = (existing or {}).get("audioRef")
     if previous and previous != reference:
-        Path(settings.media_path).joinpath(previous).unlink(missing_ok=True)
+        media_files.remove(settings.media_path, previous, "replaced")
     stored = graph.pronunciation(owner, clip_id) or row
     on_logged(stored, "stored")
     return stored

@@ -18,7 +18,7 @@ from collections.abc import Callable
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
-from acervo import notify
+from acervo import notify, trace
 from acervo.domain.ids import instant_of
 from acervo.errors import ApiError
 from acervo.repository import jobs
@@ -206,9 +206,9 @@ class JobContext:
     def _note(self) -> dict[str, Any]:
         """The identifiers that join this log to somebody else's.
 
-        `operationId` is the only id shared with the loop generator's container, and until this line
-        existed it lived in the database and in no log at all — so a failed render here could not be
-        matched to its cause there.
+        `operationId` is the loop generator's own handle for a render, and until this line existed
+        it lived in the database and in no log at all — so a failed render here could not be matched
+        to its cause there.
         """
         detail = (self.record("loop.render").get("detail") or {}) if self.kind.name == "loop" else {}
         return {"operationId": detail.get("operationId")}
@@ -310,6 +310,12 @@ class Runner:
         return count
 
     def execute(self, job: dict[str, Any]) -> None:
+        # A job is its own request id: every model call it makes, and every call a companion makes
+        # home on its behalf, is filed under the job (`acervo/trace.py`).
+        with trace.scope(job["id"]):
+            self._execute(job)
+
+    def _execute(self, job: dict[str, Any]) -> None:
         owner = job["ownerId"]
         self.current = job["id"]
         self._began = self.clock()

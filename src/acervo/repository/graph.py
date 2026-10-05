@@ -212,12 +212,18 @@ def merge_record(
                 "stale_record",
                 "This entry was changed somewhere else. Refresh to see the current version, then "
                 "try again.",
+                # Which record, and the two revisions that disagreed: the sentence is right for the
+                # owner and useless for finding out which device was behind.
+                noted={"collection": collection.key, "id": identifier, "claimed": claimed,
+                       "stored": int(stored["revision"]), "device": device},
             )
     elif claimed != 0:
         # The client believes it is editing a record this database has never held. Nothing is ever
         # hard-deleted, so this means its cursor belongs to a different database.
         raise ApiError(
-            409, "stale_record", "This entry no longer exists on the server. Refresh and try again."
+            409, "stale_record", "This entry no longer exists on the server. Refresh and try again.",
+            noted={"collection": collection.key, "id": identifier, "claimed": claimed,
+                   "stored": "none", "device": device},
         )
 
     row: dict[str, Any] = {

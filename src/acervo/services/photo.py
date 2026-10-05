@@ -37,6 +37,7 @@ from acervo.models import call as provider
 from acervo.models.results import OcrResult
 from acervo.ocr import layout, segment
 from acervo.repository import graph
+from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal
 from acervo.settings import Settings
 
@@ -235,8 +236,8 @@ def sweep(settings: Settings, *, older_than: float = PENDING_SECONDS, now: float
     for path in root.glob("*/pending/*"):
         try:
             if path.is_file() and path.stat().st_mtime < cutoff:
-                path.unlink()
-                removed += 1
+                removed += media_files.remove(
+                    settings.media_path, str(path.relative_to(settings.media_path)), "unclaimed")
         except OSError:
             continue
     return removed

@@ -19,6 +19,7 @@ from typing import Any, Self
 
 import httpx
 
+from acervo import trace
 from acervo.domain import SCHEMA_VERSION
 
 API_PATH = "/api/acervo/v1"
@@ -63,6 +64,9 @@ class AcervoClient:
         # over the real routes with no server to start. A borrowed client is not ours to close.
         self._http = http or httpx.Client(timeout=timeout, follow_redirects=False)
         self._owns_http = http is None
+        # One id for everything this client asks, so a batch run reads as one piece of work in the
+        # server's logs rather than as a thousand unrelated requests (`acervo/trace.py`).
+        self.request_id = trace.mint()
 
     def __enter__(self) -> Self:
         return self
@@ -90,7 +94,7 @@ class AcervoClient:
         anonymous: bool = False,
     ) -> httpx.Response:
         """The response, whatever it is. For a byte range, or a body that is not JSON."""
-        sent = {"Accept": "application/json", **(headers or {})}
+        sent = {"Accept": "application/json", trace.HEADER: self.request_id, **(headers or {})}
         if self.token and not anonymous:
             sent["Authorization"] = f"Bearer {self.token}"
         # Only when overridden: the client already carries a default, and a borrowed one refuses a

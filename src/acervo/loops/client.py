@@ -34,6 +34,8 @@ import httpx
 TIMEOUT_SECONDS = 30.0
 TRACK_TIMEOUT_SECONDS = 120.0
 
+REQUEST_ID_HEADER = "X-Request-ID"
+
 
 class LoopError(Exception):
     """Something the loop service did that was not an answer."""
@@ -178,9 +180,12 @@ class LoopService:
     changing a line of the job."""
 
     def __init__(self, base_url: str, *, timeout: float = TIMEOUT_SECONDS,
-                 http: httpx.Client | None = None) -> None:
+                 http: httpx.Client | None = None, request_id: str = "") -> None:
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
+        # Whose work this is, as the caller's own logs name it. Sent on every request so the
+        # service can file its side under the same id; this module does not know what mints one.
+        self._headers = {REQUEST_ID_HEADER: request_id} if request_id else {}
         # The seam a test injects a fake service through, as `Corpus` takes one.
         self._http = http
 
@@ -252,7 +257,7 @@ class LoopService:
         """The finished MP3, stored exactly as it arrives. Acervo re-encodes nothing."""
         client = self._http or httpx.Client(timeout=TRACK_TIMEOUT_SECONDS)
         try:
-            answer = client.get(_join(self.base_url, audio_url))
+            answer = client.get(_join(self.base_url, audio_url), headers=self._headers)
         except httpx.HTTPError as failure:
             raise LoopError("unreachable", f"The loop generator could not be reached: {failure}") from None
         if answer.status_code != 200:
@@ -264,7 +269,8 @@ class LoopService:
     def _send(self, method: str, path: str, body: Any = None) -> dict[str, Any]:
         client = self._http or httpx.Client(timeout=self.timeout)
         try:
-            answer = client.request(method, self.base_url + path, json=body, timeout=self.timeout)
+            answer = client.request(method, self.base_url + path, json=body,
+                                    timeout=self.timeout, headers=self._headers)
         except httpx.HTTPError as failure:
             raise LoopError("unreachable", f"The loop generator could not be reached: {failure}") from None
         if answer.status_code == 429:

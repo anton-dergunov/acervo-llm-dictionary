@@ -15,7 +15,7 @@ import time
 from collections import defaultdict
 from typing import Any
 
-from acervo import seed_data
+from acervo import activity, seed_data
 from acervo.domain.projection import COLLECTION_BY_NAME, projected
 from acervo.models import journal
 from acervo.repository import accounts, graph, jobs
@@ -262,9 +262,8 @@ def call_timings(settings: Settings) -> int:
         return 1
     # Rotated files too, oldest first, so a summary is not silently a summary of the last few hours.
     lines: list[str] = []
-    for backup in sorted(path.parent.glob(f"{path.name}.*"), reverse=True):
-        lines.extend(backup.read_text(encoding="utf-8", errors="replace").splitlines())
-    lines.extend(path.read_text(encoding="utf-8", errors="replace").splitlines())
+    for file in activity.rotated(path):
+        lines.extend(file.read_text(encoding="utf-8", errors="replace").splitlines())
 
     rows = journal.summarise(lines)
     if not rows:
@@ -278,6 +277,32 @@ def call_timings(settings: Settings) -> int:
     slowest = max(row.at(1.0) for row in rows)
     print(f"\nSlowest answer seen: {slowest:.2f}s. A timeout wants headroom over that, not over a "
           f"guess — and a call past it is not slow, it is gone.")
+    return 0
+
+
+def show_log(settings: Settings, identifier: str, failed: bool, lines: int) -> int:
+    """The three logs as one account of what happened, in the order it happened.
+
+    The model-call log, the job log and the activity log are each written for their own question,
+    and "why did that not happen" usually crosses all three: a job that failed, the provider that
+    refused it, the request that was told no. Each line says which file it came from.
+
+    With an id, everything filed under it — a job's id shows the job, its steps and every model call
+    and take made on its behalf; a request's shows what it was refused and what it had asked of a
+    model; an operation's, read off the loop generator's own log, leads back to the job. Without
+    one, the most recent lines; `--failed` keeps only the ones that went wrong.
+    """
+    sources = {"call": settings.call_log_path, "job": settings.job_log_path,
+               "act": settings.activity_log_path}
+    found = activity.select(activity.entries(sources), identifier=identifier, failed=failed)
+    if not found:
+        what = f"filed under {identifier}" if identifier else "to show"
+        print(f"Nothing {what}{' that failed' if failed else ''} in "
+              f"{', '.join(str(path) for path in sources.values() if path)}.")
+        return 1
+    # Everything about one id is the point of asking for it; otherwise the newest are.
+    for when, level, source, text in (found if identifier else found[-lines:]):
+        print(f"{when} {source:<4} {level:<7} {text}")
     return 0
 
 
@@ -454,6 +479,13 @@ def main(argv: list[str] | None = None) -> int:
 
     commands.add_parser("calls", help="how long each job takes per model, from the call log")
 
+    log_parser = commands.add_parser("log", help="the three logs as one, in the order it happened")
+    log_parser.add_argument("id", nargs="?", default="",
+                            help="a job, request or operation id: everything filed under it")
+    log_parser.add_argument("--failed", action="store_true", help="only what went wrong")
+    log_parser.add_argument("--lines", type=int, default=60,
+                            help="how many of the newest lines, when no id is given")
+
     jobs_parser = commands.add_parser("jobs", help="the work the server is doing")
     job_commands = jobs_parser.add_subparsers(dest="job_command", required=True)
     open_parser = job_commands.add_parser("open", help="how many jobs are open")
@@ -508,6 +540,8 @@ def main(argv: list[str] | None = None) -> int:
     settings = read_settings()
     if arguments.command == "calls":
         return call_timings(settings)
+    if arguments.command == "log":
+        return show_log(settings, arguments.id, arguments.failed, arguments.lines)
     if arguments.command == "accounts":
         return create_account(settings, arguments.email)
     if arguments.command == "seed":

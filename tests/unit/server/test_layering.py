@@ -21,6 +21,10 @@ Four rules, each of which stops being true silently:
 - `repository/` stores; it does not know the catalogue.
 - `work/` runs jobs by calling `services/`, never `api/`; `services/` knows nothing of jobs; and a
   route reaches jobs only through `repository.jobs`.
+- The three modules every layer logs through — the request id, the log opener, the activity log —
+  are leaves, which is what lets a repository, a service and a route all hold them.
+- A companion service is told whose work a request is; a media file is removed in one place, which
+  says so; and an error response is built in one place, which writes it down.
 """
 
 from __future__ import annotations
@@ -409,4 +413,79 @@ def test_only_the_client_speaks_http_to_the_acervo_api(path):
     )
     assert not (opens_a_connection and "/api/acervo" in source), (
         f"{path} names the Acervo API and opens its own connection; go through acervo.client"
+    )
+
+
+# ── observability: the rules that stop being true with one line ─────────────
+
+LEAVES = ("trace.py", "activity.py", "logfiles.py")
+
+
+@pytest.mark.parametrize("name", LEAVES)
+def test_what_every_layer_logs_through_imports_nothing_else_of_acervos(name):
+    """A repository, a service and a route all write to these. The moment one of them imports
+    upward, something that may not import that layer cannot log."""
+    allowed = {f"acervo.{leaf[:-3]}" for leaf in LEAVES} | {"acervo"}
+    offenders = {
+        found for found in imports_of(PACKAGE / name)
+        if found.split(".")[0] == "acervo" and found not in allowed
+    }
+    assert not offenders, f"{name} imports {sorted(offenders)}"
+
+
+# Modules that open a connection to somewhere that is not one of Acervo's own services: a model
+# provider, a third-party dictionary. There is nobody on the other end to file anything under an id.
+NOT_A_COMPANION = {
+    "models/cloudflare.py",
+    "models/google_auth.py",
+    "services/dictionaries/online.py",
+}
+
+
+@pytest.mark.parametrize("path", modules_under(), ids=identify)
+def test_a_companion_service_is_told_whose_work_it_is(path):
+    """Every client of one of Acervo's own services sends the request id.
+
+    A loop render failed on the deployed server with its cause in another container's log and
+    nothing to match the two by. A new companion is a new module that imports `httpx`, and this is
+    what makes it carry the id rather than relying on somebody remembering.
+    """
+    relative = path.relative_to(PACKAGE).as_posix()
+    if relative in NOT_A_COMPANION or not any(name.split(".")[0] == "httpx" for name in imports_of(path)):
+        return
+    source = path.read_text(encoding="utf-8")
+    assert "X-Request-ID" in source or "trace.HEADER" in source, (
+        f"{relative} speaks HTTP and never sends the request id; see docs/architecture/observability.md"
+    )
+
+
+def test_the_companion_rule_is_not_vacuous():
+    speakers = {
+        path.relative_to(PACKAGE).as_posix() for path in modules_under()
+        if any(name.split(".")[0] == "httpx" for name in imports_of(path))
+    }
+    assert {"loops/client.py", "clips/corpus.py", "services/speech.py", "client.py"} <= speakers
+    assert NOT_A_COMPANION <= speakers, "an exemption names a module that no longer speaks HTTP"
+
+
+@pytest.mark.parametrize("path", modules_under("services") + modules_under("api"), ids=identify)
+def test_a_media_file_is_removed_in_one_place(path):
+    """`services/media.remove` unlinks and says so. A bare `unlink` beside it is a file that
+    vanishes with no line saying which or why."""
+    if path == PACKAGE / "services" / "media.py":
+        return
+    assert ".unlink(" not in path.read_text(encoding="utf-8"), (
+        f"{path.relative_to(PACKAGE)} unlinks a file itself; go through acervo.services.media.remove"
+    )
+
+
+@pytest.mark.parametrize("path", modules_under("api"), ids=identify)
+def test_an_error_response_is_built_in_one_place(path):
+    """The envelope's handlers are where a refusal is written down, so a route that answers an
+    error itself is a failure the owner sees and the log does not."""
+    if path == PACKAGE / "api" / "errors.py":
+        return
+    source = path.read_text(encoding="utf-8")
+    assert '{"error"' not in source and "errors.error(" not in source and "import error" not in source, (
+        f"{path.relative_to(PACKAGE)} builds an error response; raise ApiError instead"
     )

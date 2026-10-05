@@ -140,4 +140,6 @@ import `repository/`, so it is *given* a chain rather than looking one up.
 Every model call is one `key=value` line in a rotating file beside the database
 (`ACERVO_CALL_LOG_PATH`), naming the pair that answered, how long it took and what the caller did with
 the answer. `python -m acervo.admin calls` reads it back per job and per model, and it is where every
-timeout here is set from: a bound is read from the log rather than guessed.
+timeout here is set from: a bound is read from the log rather than guessed. Each line ends with the id
+of the request or job that made the call, added where the file is opened — the package itself emits
+and knows nothing of it ([`observability.md`](observability.md) §2).

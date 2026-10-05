@@ -16,46 +16,25 @@ Shaped exactly like the model-call journal, deliberately:
 - `open_job_log` is idempotent and a log that cannot be opened warns and is dropped — a server that
   cannot write its log should still do its work.
 
-**`operationId` is here for one reason**: it is the only id shared between Acervo's containers and
-the generator's. Until this line existed it lived in the database and in no log, so a failed render
-in one container's log could not be joined to its cause in the other's.
+**`operationId` is here for one reason**: it is the generator's own handle for a render, and the
+only id its container's log knows. Until this line existed it lived in the database and in no log,
+so a failed render in one container's log could not be joined to its cause in the other's. In the
+other direction the join is the job's own id, which every call made on a job's behalf is filed
+under (`acervo/trace.py`).
 """
 
 from __future__ import annotations
 
-import json
 import logging
-from logging.handlers import RotatingFileHandler
 from typing import Any, Mapping
+
+from acervo import logfiles
+from acervo.activity import fields as _render
 
 # Its own logger, not `acervo.work`, so the runner's exception traces and this record can be routed
 # apart: one belongs in the container's stderr and the other in a file beside the database.
 LOGGER = "acervo.work.jobs"
 logger = logging.getLogger(LOGGER)
-
-# Long enough for a provider's own sentence, short enough that one bad message cannot fill the file.
-EXCERPT = 400
-
-
-def excerpt(value: str) -> str:
-    text = " ".join(str(value).split())
-    return text if len(text) <= EXCERPT else text[: EXCERPT - 1] + "…"
-
-
-def _render(fields: Mapping[str, Any]) -> str:
-    parts = []
-    for name, value in fields.items():
-        if value is None or value == "":
-            continue
-        if isinstance(value, float):
-            rendered = f"{value:.2f}"
-        elif isinstance(value, str) and (not value.isprintable() or any(c in value for c in ' "=')):
-            rendered = json.dumps(excerpt(value), ensure_ascii=False)
-        else:
-            rendered = str(value)
-        parts.append(f"{name}={rendered}")
-    return " ".join(parts)
-
 
 def started(job: Mapping[str, Any]) -> None:
     subject = job.get("subject") or {}
@@ -95,22 +74,10 @@ def open_job_log(settings: Any) -> None:
     path = getattr(settings, "job_log_path", None)
     if not path:
         return
-    if any(getattr(handler, "acervo_job_log", False) for handler in logger.handlers):
-        return
     try:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        handler = RotatingFileHandler(
-            path, maxBytes=settings.job_log_bytes, backupCount=settings.job_log_keep,
-            encoding="utf-8",
-        )
+        # Unstamped: every line here already names its job, and a job's id *is* its request id.
+        logfiles.open_rotating(LOGGER, path, settings.job_log_bytes, settings.job_log_keep,
+                               stamp=False)
     except OSError as unwritable:   # noqa: BLE001 — a log nobody can write must not stop the work
         logging.getLogger("acervo.work").warning(
             "Acervo: the job log could not be opened (%s); jobs will not be recorded", unwritable)
-        return
-    handler.acervo_job_log = True   # type: ignore[attr-defined]
-    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(message)s"))
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
-    # Its own file. Letting it climb to the root handler too would put every step in the container's
-    # stdout beside the request log, which is the noise this exists to replace.
-    logger.propagate = False

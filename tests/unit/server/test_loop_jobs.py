@@ -152,6 +152,28 @@ def test_a_render_is_started_with_the_words_and_a_render_scoped_token(server, ge
     assert body["speech"]["token"] and body["speech"]["token"].count(".") == 2
 
 
+def test_a_render_and_every_call_home_it_causes_are_filed_under_the_job(server, generator, runner, clock, monkeypatch):
+    """The join the two containers lacked. The job's id goes out as the request's id, and comes
+    home inside the token every take is asked with — so the generator carries nothing it has to
+    know about, and a take is filed under the job that asked for the render."""
+    import jwt
+
+    from acervo.repository import jobs
+
+    sent: list[dict] = []
+    real = generator.request
+    monkeypatch.setattr(generator, "request",
+                        lambda method, url, **kwargs: sent.append(kwargs.get("headers") or {})
+                        or real(method, url, **kwargs))
+    a_loop(server, 2)
+    drive(runner, clock)
+
+    (job,) = [one for one in jobs.latest(5) if one["kind"] == "loop"]
+    assert sent and all(headers.get("X-Request-ID") == job["id"] for headers in sent[1:]), sent
+    claims = jwt.decode(generator.started[0]["speech"]["token"], options={"verify_signature": False})
+    assert claims["rid"] == job["id"]
+
+
 def test_the_track_and_the_times_land_together_when_it_finishes(server, generator, runner, clock):
     loop = a_loop(server, 2)
     drive(runner, clock)

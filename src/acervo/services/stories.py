@@ -36,6 +36,7 @@ from acervo.pronunciation.speak import language_name
 from acervo.repository import image_settings
 from acervo.repository import graph
 from acervo.repository.graph import article_records
+from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal
 from acervo.services.prompts import prompt_text
 from acervo.services.rules import with_rules
@@ -521,9 +522,9 @@ def draw_pictures(settings: Settings, owner: str, device: str, story_id: str,
         try:
             graph.merge_graph(owner, device, {"storyParts": [stored]}, enqueue=None)
         except Exception:
-            _discard(media, reference, keep=previous)
+            _discard(media, reference, keep=previous, reason="rollback")
             raise
-        _discard(media, previous, keep=reference)
+        _discard(media, previous, keep=reference, reason="replaced")
         # Held for the rest of this run: a later part is drawn from this picture, and the pin reads
         # which pair drew it.
         rows[index] = stored
@@ -611,9 +612,9 @@ def _place(media: Path, reference: str, data: bytes) -> None:
     os.replace(partial, destination)
 
 
-def _discard(media: Path, reference: str | None, *, keep: str | None) -> None:
+def _discard(media: Path, reference: str | None, *, keep: str | None, reason: str) -> None:
     if reference and reference != keep:
-        media.joinpath(reference).unlink(missing_ok=True)
+        media_files.remove(media, reference, reason)
 
 
 # ── removing one ────────────────────────────────────────────────────────────
@@ -647,6 +648,5 @@ def remove(settings: Settings, owner: str, device: str, story_id: str) -> dict[s
             one.get("audioRef") for one in (row.get("audioSegments") or []) if isinstance(one, dict)
         ]
         for reference in references:
-            if reference:
-                media.joinpath(reference).unlink(missing_ok=True)
+            media_files.remove(media, reference, "deleted")
     return graph.owned_records(owner, "stories", [story_id])[story_id]

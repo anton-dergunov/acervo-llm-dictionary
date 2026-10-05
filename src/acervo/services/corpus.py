@@ -8,6 +8,7 @@ one place that token is attached to an update request. What the corpus says goes
 from __future__ import annotations
 
 from acervo.clips.corpus import Corpus, CorpusError, Operation
+from acervo import trace
 from acervo.errors import ApiError
 from acervo.services.clips import CORPUS_REFUSALS
 from acervo.settings import Settings
@@ -29,7 +30,8 @@ def _corpus(settings: Settings) -> Corpus:
             "This Acervo server holds no operator token for the spoken-usage corpus, "
             "so it cannot ask for an update.",
         )
-    return Corpus(settings.speech_url, operator_token=settings.speech_operator_token)
+    return Corpus(settings.speech_url, operator_token=settings.speech_operator_token,
+                  request_id=trace.current())
 
 
 def _refusal(error: CorpusError) -> ApiError:

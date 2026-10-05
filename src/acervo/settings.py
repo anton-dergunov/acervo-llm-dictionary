@@ -54,6 +54,15 @@ class Settings(BaseSettings):
     job_log_bytes: int = Field(default=2_000_000, alias="ACERVO_JOB_LOG_BYTES")
     job_log_keep: int = Field(default=3, alias="ACERVO_JOB_LOG_KEEP")
 
+    # And what the server did that was neither: a request refused, a file removed, a start on a new
+    # version (`acervo/activity.py`). A third file for the reason the second is not the first — it
+    # is read to answer a different question, "why was I told no".
+    activity_log_path: Path = Field(
+        default=Path("/var/lib/acervo/server/activity.log"), alias="ACERVO_ACTIVITY_LOG_PATH"
+    )
+    activity_log_bytes: int = Field(default=2_000_000, alias="ACERVO_ACTIVITY_LOG_BYTES")
+    activity_log_keep: int = Field(default=3, alias="ACERVO_ACTIVITY_LOG_KEEP")
+
     @property
     def takes_path(self) -> Path:
         """The take cache, beside the database and the call log rather than on the media volume.

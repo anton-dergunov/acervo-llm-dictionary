@@ -26,10 +26,12 @@ import secrets
 from pathlib import Path
 from typing import Any
 
+from acervo import trace
 from acervo.domain.ids import is_record_id, new_record_id, now_instant
 from acervo.errors import ApiError
 from acervo.loops.client import Item, Loop, LoopError, LoopService, Operation
 from acervo.repository import accounts, graph, loop_scripts, pronunciation_settings
+from acervo.services import media as media_files
 from acervo.settings import Settings
 from acervo.tokens import mint_render, resolve_secret
 
@@ -82,7 +84,7 @@ def service(settings: Settings) -> LoopService:
             503, "loops_unconfigured",
             "This Acervo server has no loop generator configured, so it cannot make loops.",
         )
-    return LoopService(settings.lexibeat_url)
+    return LoopService(settings.lexibeat_url, request_id=trace.current())
 
 
 def refusal(error: LoopError) -> ApiError:
@@ -317,7 +319,7 @@ def render_request(settings: Settings, owner: str, loop_id: str,
         "target_language": {"code": gloss_language[0], "name": _language_name(gloss_language[0])},
         # One render, one token, audienced to the take route and good for an hour. It is the whole of
         # what the generator is given to speak with: no provider credential reaches that container.
-        "token": mint_render(resolve_secret(settings), account, loop_id),
+        "token": mint_render(resolve_secret(settings), account, loop_id, rid=trace.current()),
         # Which order the owner chose for loops. The generator builds its backend around this and
         # declares what that backend can do, so it has to travel with the request rather than be
         # asked for later — see `delivery`.
@@ -436,13 +438,13 @@ def store(settings: Settings, owner: str, device: str, loop_id: str, rendered: L
     try:
         graph.merge_graph(owner, device, changes, enqueue=None)
     except Exception:
-        destination.unlink(missing_ok=True)
+        media_files.remove(settings.media_path, reference, "rollback")
         raise
     # Kept for the next render of this loop, after the rows it belongs to have landed.
     loop_scripts.keep(owner, loop_id, rendered.format or loop.get("format") or "", rendered.script)
     previous = loop.get("audioRef")
     if previous and previous != reference:
-        Path(settings.media_path).joinpath(previous).unlink(missing_ok=True)
+        media_files.remove(settings.media_path, previous, "replaced")
     return graph.owned_records(owner, "loops", [loop_id])[loop_id]
 
 
@@ -477,7 +479,7 @@ def remove(settings: Settings, owner: str, device: str, loop_id: str) -> dict[st
     reference = loop.get("audioRef")
     if reference:
         # `missing_ok`: a track already gone is not a reason to refuse a deletion that has happened.
-        Path(settings.media_path).joinpath(reference).unlink(missing_ok=True)
+        media_files.remove(settings.media_path, reference, "deleted")
     return graph.owned_records(owner, "loops", [loop_id])[loop_id]
 
 

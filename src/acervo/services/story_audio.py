@@ -52,6 +52,7 @@ from acervo.models.call import audio_mime
 from acervo.models.errors import ChainExhausted, ProviderError
 from acervo.pronunciation import encode, speak as speaking, takes as take_store
 from acervo.repository import graph, pronunciation_settings
+from acervo.services import media as media_files
 from acervo.services import pronunciations, stories
 from acervo.services.models import refusal
 from acervo.settings import Settings
@@ -303,11 +304,11 @@ def _place_and_store(
         try:
             compact, mime = encode.compact(data, audio_mime(data))
         except encode.CannotEncode as unwritable:
-            _discard_all(media, written, keep=())
+            _discard_all(media, written, keep=(), reason="rollback")
             raise ApiError(500, "audio_unencodable",
                            f"That recording could not be stored: {unwritable}") from None
         if len(compact) > pronunciations.CLIP_LIMIT:
-            _discard_all(media, written, keep=())
+            _discard_all(media, written, keep=(), reason="rollback")
             raise ApiError(400, "invalid_input", "That recording is too large to keep.")
         reference = (f"stories/{story_id}/{part_id}-{index:02d}"
                      f"-{hashlib.sha256(compact).hexdigest()[:8]}.{speaking.extension_for(mime)}")
@@ -323,7 +324,7 @@ def _place_and_store(
     fresh = graph.owned_records(owner, "storyParts", [part_id]).get(part_id)
     if fresh is None or fresh.get("deleted"):
         # The story was deleted while this was being recorded; its files go with it.
-        _discard_all(media, written, keep=())
+        _discard_all(media, written, keep=(), reason="rollback")
         raise ApiError(404, "not_found", "That part is not in this story any more.")
     previous = fresh.get("audioSegments") or []
     at = now_instant()
@@ -334,18 +335,19 @@ def _place_and_store(
             "editedAt": at, "editedBy": device,
         }]}, enqueue=None)
     except Exception:
-        _discard_all(media, written, keep=[one["audioRef"] for one in previous])
+        _discard_all(media, written, keep=[one["audioRef"] for one in previous],
+                     reason="rollback")
         raise
-    _discard_all(media, previous, keep=[one["audioRef"] for one in written])
+    _discard_all(media, previous, keep=[one["audioRef"] for one in written], reason="replaced")
     return graph.owned_records(owner, "storyParts", [part_id])[part_id]
 
 
-def _discard_all(media: Path, passages, keep) -> None:
+def _discard_all(media: Path, passages, keep, reason: str) -> None:
     kept = set(keep)
     for one in passages:
         reference = one.get("audioRef") if isinstance(one, dict) else None
         if reference and reference not in kept:
-            media.joinpath(reference).unlink(missing_ok=True)
+            media_files.remove(media, reference, reason)
 
 
 def _seconds(data: bytes) -> float:

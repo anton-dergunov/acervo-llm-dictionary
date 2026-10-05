@@ -38,6 +38,9 @@ src/acervo/
   jobs/              one-shot batch work, run by acervo-worker
   consumers/anki/    the headless Anki robot, bound to the server by services/anki.py
   tokens.py          signing Acervo's own tokens
+  trace.py           the request id that joins the logs
+  activity.py        the activity log, and the reader for all three
+  logfiles.py        opening a log file, the one way it is done
   client.py          the one HTTP client against the service
   admin.py           the management CLI
 experiments/         experiments and benchmark tooling; never imported by the service
