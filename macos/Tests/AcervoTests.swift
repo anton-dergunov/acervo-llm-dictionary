@@ -1,3 +1,4 @@
+import Carbon
 import CryptoKit
 import WebKit
 import XCTest
@@ -63,6 +64,105 @@ final class AcervoTests: XCTestCase {
         XCTAssertEqual(menu.items[0].keyEquivalentModifierMask, [.command, .shift])
         XCTAssertEqual(menu.items[1].keyEquivalent, "i")
         XCTAssertEqual(menu.items[3].keyEquivalent, "")
+    }
+
+    /// Opening the app is a request to see it. Being started at login is not, and the system says
+    /// which this is in the event that opens the application.
+    func testALoginLaunchStaysInTheMenuBarAndOpeningTheAppDoesNot() {
+        func openEvent(asLoginItem: Bool) -> NSAppleEventDescriptor {
+            let event = NSAppleEventDescriptor(
+                eventClass: AEEventClass(kCoreEventClass),
+                eventID: AEEventID(kAEOpenApplication),
+                targetDescriptor: nil,
+                returnID: AEReturnID(kAutoGenerateReturnID),
+                transactionID: AETransactionID(kAnyTransactionID)
+            )
+            if asLoginItem {
+                event.setParam(
+                    NSAppleEventDescriptor(enumCode: OSType(keyAELaunchedAsLogInItem)),
+                    forKeyword: AEKeyword(keyAEPropData)
+                )
+            }
+            return event
+        }
+
+        XCTAssertTrue(LaunchContext.startsInMenuBarOnly(
+            launchEvent: openEvent(asLoginItem: true), showWindowAtLogin: false))
+        XCTAssertFalse(LaunchContext.startsInMenuBarOnly(
+            launchEvent: openEvent(asLoginItem: false), showWindowAtLogin: false))
+        // Someone who would rather see the window at login says so, and that answer wins.
+        XCTAssertFalse(LaunchContext.startsInMenuBarOnly(
+            launchEvent: openEvent(asLoginItem: true), showWindowAtLogin: true))
+        // No evidence at all means someone opened it, which is the only safe way to be wrong.
+        XCTAssertFalse(LaunchContext.startsInMenuBarOnly(launchEvent: nil, showWindowAtLogin: false))
+    }
+
+    /// Closing the main window used to drop straight back to the menu bar, which took the Dock icon
+    /// and the menu bar out from under the Settings window standing beside it.
+    @MainActor
+    func testTheMenuBarIsKeptWhileAnyAcervoWindowIsStillOnScreen() {
+        func testWindow() -> NSWindow {
+            let window = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 200, height: 120),
+                styleMask: [.titled, .closable],
+                backing: .buffered,
+                defer: false
+            )
+            window.isReleasedWhenClosed = false
+            return window
+        }
+        let main = testWindow()
+        let settings = testWindow()
+        defer { main.orderOut(nil); settings.orderOut(nil) }
+
+        settings.orderFront(nil)
+        XCTAssertFalse(AppActivation.shouldReturnToMenuBar(owning: [main, settings]),
+                       "the Dock icon was given up with Settings still open")
+
+        settings.orderOut(nil)
+        XCTAssertTrue(AppActivation.shouldReturnToMenuBar(owning: [main, settings]))
+        XCTAssertTrue(AppActivation.shouldReturnToMenuBar(owning: [nil, nil]))
+    }
+
+    /// The menu bar follows activation rather than the activation policy, so coming forward has to
+    /// put Acervo's own menu back even when the application already believes it is active.
+    @MainActor
+    func testComingForwardRestoresAcervosOwnMenuBar() async {
+        let ours = NSApp.mainMenu
+        let held = AppActivation.mainMenu
+        defer { AppActivation.mainMenu = held; NSApp.mainMenu = ours }
+        let menu = NSMenu(title: "Acervo")
+        AppActivation.mainMenu = menu
+        NSApp.mainMenu = NSMenu(title: "Another application")
+
+        AppActivation.bringForward(nil)
+        let settled = expectation(description: "the deferred pass has run")
+        DispatchQueue.main.async { settled.fulfill() }
+        await fulfillment(of: [settled], timeout: 2)
+
+        XCTAssertTrue(NSApp.mainMenu === menu, "coming forward left another application's menu on show")
+    }
+
+    @MainActor
+    func testShowingTheWindowAtLoginIsRememberedAndOffUntilAsked() throws {
+        let suite = "AcervoTests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+
+        XCTAssertFalse(AppSettings(defaults: defaults).showWindowAtLogin)
+        AppSettings(defaults: defaults).showWindowAtLogin = true
+        XCTAssertTrue(AppSettings(defaults: defaults).showWindowAtLogin)
+    }
+
+    /// A development build and the test host share the installed application's preferences, so
+    /// neither may spend the one attempt at registering.
+    func testOnlyAnInstalledBuildRegistersItselfAtFirstLaunch() throws {
+        let suite = "AcervoTests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+
+        LoginItem.enableOnFirstLaunch(defaults: defaults, isInstalledBuild: false)
+        XCTAssertNil(defaults.object(forKey: "AcervoLoginItemInitialised"))
     }
 
     func testReleaseComparisonUsesBuildStamp() {

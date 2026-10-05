@@ -252,6 +252,14 @@ bridge stores session state; it holds no vocabulary model and no operations of i
 its Settings window asks for the HTTPS Acervo address, which stays in local macOS preferences and is
 never placed in source code, documentation or release metadata.
 
+**Acervo opens at login**, because the update mark is only seen while it is running. A copy in an
+Applications folder registers itself once, on its first launch; **Settings ▸ General ▸ Open Acervo at
+login** turns it off, and off stays off. The switch reads the system's own answer, so removing Acervo
+under System Settings ▸ Login Items shows there too. **A login launch stays in the menu bar** — no window, and no
+request for a missing server address — unless **Show the window when opened at login** is on; opening
+Acervo yourself always shows the window. A login launch is recognised from the event that opens the
+application, not from the launchd service name, which every launch carries.
+
 Running `deploy.sh` on macOS packages the PWA, the server image and the matching native release under
 one version and build identity; a deploy from another machine updates the server and PWA and keeps the
 native archive already published.

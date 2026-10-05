@@ -69,15 +69,28 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
             restartToUpdate: { [weak self] in self?.updates.restartNow() },
             checkForUpdates: { [weak self] in self?.checkForUpdates() }
         )
-        showWindow()
+        // Started at login, Acervo is here for the menu bar; a window over whatever someone is doing
+        // as they log in is an interruption nobody asked for. Opening it yourself always shows the
+        // window. The interface is loaded either way.
+        let startsQuietly = LaunchContext.startsInMenuBarOnly(
+            launchEvent: NSAppleEventManager.shared().currentAppleEvent,
+            showWindowAtLogin: AppSettings.shared.showWindowAtLogin
+        )
+        if startsQuietly {
+            NSApp.setActivationPolicy(.accessory)
+        } else {
+            showWindow()
+        }
+        LoginItem.enableOnFirstLaunch()
 
         // An update never opens a window or takes focus; the menu bar carries it until it is wanted.
         updates.onUpdateMarkChanged = { [weak self] mark in self?.menuBar.setUpdateMark(mark) }
         menuBar.setUpdateMark(updates.currentMark)
         updates.start()
 
-        if !updates.hasServerURL {
-            DispatchQueue.main.async { [weak self] in self?.showSettings() }
+        // Asking for the address is a window too, so a quiet start leaves it for the next opening.
+        if !updates.hasServerURL, !startsQuietly {
+            DispatchQueue.main.async { [weak self] in self?.showSettings(.general) }
         }
     }
 
@@ -88,8 +101,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
         return true
     }
 
+    /// Hides the Dock icon once nothing of Acervo's is left on screen; the status item stays. Both
+    /// the main window and the Settings window report their closing here, and neither of them going
+    /// away is on its own a reason to give up the menu bar.
     func windowWillClose(_ notification: Notification) {
-        NSApp.setActivationPolicy(.accessory)
+        AppActivation.returnToMenuBar(owning: [window, settings.openWindow])
     }
 
     private func createWindow() {
@@ -150,9 +166,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
     }
 
     private func showWindow() {
-        NSApp.setActivationPolicy(.regular)
-        window?.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
+        AppActivation.bringForward(window)
     }
 
     func webView(
@@ -279,6 +293,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
         windowItem.submenu = windowMenu
         main.addItem(windowItem)
         NSApp.mainMenu = main
+        // Held so coming forward from the menu bar can put it back: the bar is rebuilt for whichever
+        // application is frontmost, and a policy change alone does not make that happen.
+        AppActivation.mainMenu = main
         NSApp.windowsMenu = windowMenu
     }
 
@@ -291,11 +308,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
     }
 
     @objc private func checkForUpdates() {
-        showSettings()
+        showSettings(.updates)
         Task { [weak self] in await self?.updates.check(force: true) }
     }
 
-    @objc private func showSettingsMenu() { showSettings() }
+    @objc private func showSettingsMenu() { showSettings(.general) }
 
     @objc fileprivate func exportVocabulary() { open("export") }
     @objc fileprivate func importVocabulary() { open("import") }
@@ -321,12 +338,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
         )
     }
 
-    private func showSettings() {
+    private func showSettings(_ pane: SettingsView.Pane) {
         settings.show(
             updates: updates,
+            pane: pane,
             checkNow: { [weak self] in Task { await self?.updates.check(force: true) } },
             installUpdate: { [weak self] in Task { await self?.updates.install(thenRestart: true) } },
             restartNow: { [weak self] in self?.updates.restartNow() }
         )
+        settings.openWindow?.delegate = self
     }
 }

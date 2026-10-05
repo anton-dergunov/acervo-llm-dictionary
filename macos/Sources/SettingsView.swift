@@ -1,8 +1,17 @@
+import AppKit
 import SwiftUI
 
+/// Settings for this copy of Acervo on this Mac: whether it starts with the session, which server
+/// it belongs to, and how it takes new versions of itself.
+///
+/// Nothing about the vocabulary is here. That lives in the owner's records, which only the
+/// interface reads and writes.
 struct SettingsView: View {
     @ObservedObject var updates: UpdateService
+    @EnvironmentObject private var settings: AppSettings
+    @EnvironmentObject private var router: SettingsRouter
     @FocusState private var serverFieldIsFocused: Bool
+    @State private var openAtLogin = LoginItem.isEnabled
     @State private var serverURL: String
     @State private var serverMessage: String?
     @State private var pendingSave: Task<Void, Never>?
@@ -10,6 +19,26 @@ struct SettingsView: View {
     let checkNow: () -> Void
     let installUpdate: () -> Void
     let restartNow: () -> Void
+
+    enum Pane: Hashable, CaseIterable, Identifiable {
+        case general, updates
+
+        var id: Self { self }
+
+        var title: String {
+            switch self {
+            case .general: "General"
+            case .updates: "Updates"
+            }
+        }
+
+        var icon: String {
+            switch self {
+            case .general: "gearshape"
+            case .updates: "arrow.down.circle"
+            }
+        }
+    }
 
     init(
         updates: UpdateService,
@@ -25,29 +54,79 @@ struct SettingsView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 30) {
-                serverSection
-                updatesSection
+        HStack(spacing: 0) {
+            List(Pane.allCases, selection: $router.pane) { pane in
+                Label(pane.title, systemImage: pane.icon).tag(pane)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(28)
+            .listStyle(.sidebar)
+            .frame(width: 160)
+
+            Divider()
+
+            ScrollView {
+                pane
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .padding(24)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(minWidth: 500, minHeight: 360)
-        .onDisappear {
-            pendingSave?.cancel()
-            saveServerURL(normalizeField: false)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        // Leaving the pane and closing the window both keep what was typed.
+        .onChange(of: router.pane) { _, _ in flushServerURL() }
+        .onDisappear { flushServerURL() }
+    }
+
+    @ViewBuilder
+    private var pane: some View {
+        switch router.pane {
+        case .general: general
+        case .updates: updatesPane
         }
     }
 
-    private var serverSection: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text("Server")
-                .font(.title3.weight(.semibold))
+    // MARK: - General
+
+    private var general: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Toggle(isOn: $openAtLogin) {
+                settingLabel(
+                    "Open Acervo at login",
+                    "The menu bar marks a waiting update only while Acervo is running."
+                )
+            }
+            .toggleStyle(.switch)
+            .onChange(of: openAtLogin) { _, value in
+                LoginItem.setEnabled(value)
+                openAtLogin = LoginItem.isEnabled
+            }
+
+            Toggle(isOn: $settings.showWindowAtLogin) {
+                settingLabel(
+                    "Show the window when opened at login",
+                    "Off, Acervo starts quietly in the menu bar. Opening it yourself always shows the window."
+                )
+            }
+            .toggleStyle(.switch)
+            .disabled(!openAtLogin)
+
+            Divider()
+
+            server
+
+            Spacer(minLength: 0)
+        }
+    }
+
+    private var server: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            settingLabel(
+                "Server",
+                "Use the same HTTPS address that opens Acervo in your browser. This Mac uses it to find and download updates."
+            )
+            .fixedSize(horizontal: false, vertical: true)
 
             TextField("https://acervo.example.com", text: $serverURL)
                 .textFieldStyle(.roundedBorder)
-                .controlSize(.large)
                 .focused($serverFieldIsFocused)
                 .accessibilityLabel("Acervo server address")
                 .onSubmit { saveServerURL() }
@@ -55,11 +134,6 @@ struct SettingsView: View {
                 .onChange(of: serverFieldIsFocused) { wasFocused, isFocused in
                     if wasFocused, !isFocused { saveServerURL() }
                 }
-
-            Text("Use the same HTTPS address that opens Acervo in your browser. This Mac uses it to find and download updates.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
 
             if let serverMessage {
                 Text(serverMessage)
@@ -70,23 +144,26 @@ struct SettingsView: View {
         }
     }
 
-    private var updatesSection: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("Updates")
-                .font(.title3.weight(.semibold))
+    // MARK: - Updates
 
-            Toggle("Check for updates automatically", isOn: Binding(
-                get: { updates.automaticChecks }, set: { updates.automaticChecks = $0 }
-            ))
-            Toggle("Install updates automatically", isOn: Binding(
-                get: { updates.automaticInstall }, set: { updates.automaticInstall = $0 }
-            ))
+    private var updatesPane: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Toggle(isOn: Binding(get: { updates.automaticChecks }, set: { updates.automaticChecks = $0 })) {
+                settingLabel(
+                    "Check for updates automatically",
+                    "Looks for a new release on your Acervo server every few hours."
+                )
+            }
+            .toggleStyle(.switch)
+
+            Toggle(isOn: Binding(get: { updates.automaticInstall }, set: { updates.automaticInstall = $0 })) {
+                settingLabel(
+                    "Install updates automatically",
+                    "Updates install quietly in the background and start the next time Acervo opens. Acervo never restarts itself."
+                )
+            }
+            .toggleStyle(.switch)
             .disabled(!updates.automaticChecks)
-
-            Text("Updates install quietly in the background and start the next time Acervo opens. Acervo never restarts itself.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
 
             Divider()
 
@@ -95,10 +172,13 @@ struct SettingsView: View {
                     .disabled(updates.isBusy || !updates.hasServerURL)
                 status
             }
+            .font(.callout)
 
             Text("Version \(AppVersion.label)")
                 .font(.caption)
                 .foregroundStyle(.secondary)
+
+            Spacer(minLength: 0)
         }
     }
 
@@ -130,6 +210,23 @@ struct SettingsView: View {
                     .font(.caption).foregroundStyle(.secondary)
             }
         }
+    }
+
+    @ViewBuilder
+    private func settingLabel(_ title: String, _ detail: String) -> some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(title)
+            Text(detail)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    // MARK: - Server address
+
+    private func flushServerURL() {
+        pendingSave?.cancel()
+        saveServerURL(normalizeField: false)
     }
 
     private func saveServerURL(normalizeField: Bool = true) {

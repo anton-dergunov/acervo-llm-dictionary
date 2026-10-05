@@ -11,6 +11,9 @@ targets:
       - path: Sources
       - path: Resources
         buildPhase: resources
+    dependencies:
+      # "Open at login", registered through SMAppService rather than a launch agent plist.
+      - sdk: ServiceManagement.framework
     preBuildScripts:
       - name: Build web interface
         script: |
