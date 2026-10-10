@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
-  Source of word.png. shots/word-window.png is the application on one of the owner's words, in a window narrower than the application's wide layout expects, with
-  the picture drawn a little smaller than the application draws it which is the layout a narrow window gets, without the search row;
+  Source of word.png. shots/word-window.png is the application on one of the owner's words, in a narrow window, with
+  the picture drawn a little smaller than the application draws it and the search row cropped off;
   shots/word-list.png is the list behind it. The tiles are the pictures of the word's three senses
   with the emoji the entry gives each, the style each was drawn in, and a one-word label added
   here (the entry has none for this word). The experiment counts are the rows of
@@ -16,15 +16,15 @@
 <title>A dictionary of your own words</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.stack { flex: none; position: relative; width: 478px; }
+.stack { flex: none; position: relative; width: 540px; }
 .langs { display: flex; align-items: center; gap: 7px; margin-bottom: 7px; }
 .langs b { color: var(--core); }
 .langs span { background: var(--surface); border: 1px solid #B5D6CF; border-radius: 20px; padding: 1px 7px; font-size: 10.4px; white-space: nowrap; color: #083E38; }
 .stack .back { position: absolute; left: 0; top: 30px; width: 300px; height: 300px; }
 .stack .back img { width: 440px; max-width: none; }
-.stack .front { position: absolute; left: 126px; top: 0; width: 352px; box-shadow: 0 2px 4px rgba(19,34,32,.10), 0 16px 34px -14px rgba(19,34,32,.55); }
-.stack .front .clip { height: 409px; overflow: hidden; }
-.stack .front .clip img { width: 352px; margin-top: 0; }
+.stack .front { position: absolute; left: 126px; top: 0; width: 414px; box-shadow: 0 2px 4px rgba(19,34,32,.10), 0 16px 34px -14px rgba(19,34,32,.55); }
+.stack .front .clip { height: 378px; overflow: hidden; }
+.stack .front .clip img { width: 414px; margin-top: -31px; }
 .m3 { flex: 1 1 0; min-width: 0; }
 .m3 .sense { margin-top: 5px; font-size: 8.8px; white-space: nowrap; }
 .m3 .g { font: 400 10.6px/1.3 var(--serif); color: var(--ink); margin-top: 2px; }
