@@ -1,7 +1,10 @@
 <!doctype html>
 <!--
-  Source of capture.png. shots/capture-text.png and shots/capture.png are the Add view before and after Process, on a
-  sentence the vocabulary did not hold. The 315 calls are experiments/compose-lesson-line.
+  Source of capture.png. shots/capture-text.png, shots/capture.png and shots/capture-chat.png are the Add view on a
+  sentence the vocabulary did not hold: before Process, after it, and after one request typed under
+  the draft. The three were taken separately, so the draft's wording differs a little between the
+  second and the third. The mark under the phrase in the first is drawn here, not by the
+  application. The 315 calls are experiments/compose-lesson-line.
   Render with capture.mjs --compose capture.
 -->
 <html lang="en">
@@ -10,26 +13,38 @@
 <meta name="picture-size" content="960x600">
 <title>Getting a word in</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.note { font-size: 12.4px; }
+.mark { position: absolute; height: 13px; border-bottom: 2px solid var(--core); background: rgba(14,110,100,.13); border-radius: 2px; }
+</style>
 </head>
 <body>
 <div class="frame">
   <div class="head">
+    <span class="kicker">Capture</span>
     <h1>Paste the sentence; read the entry before it is saved</h1>
-    <span class="sub">The word is picked out of the sentence, the entry is written, and nothing is stored until you press Save. A word you already hold is recognised, not added twice.</span>
+    <span class="sub">The word is picked out of the sentence you met, the entry is written, and nothing is stored until you press Save.</span>
   </div>
   <div class="main">
-    <div class="col" style="width: 439px">
-      <span class="label">1 · The sentence you met</span>
-      <div class="win crop" style="height: 262px"><img src="shots/capture-text.png" style="width: 617px; margin: -34px 0 0 -111px" alt=""></div>
-      <div class="note grow"><span class="label">Two model calls</span><b>Resolve</b> decides what the text is about: which word, which language, which sentences are yours. <b>Compose</b> writes the entry. A duplicate or an unknown language stops after the first call.</div>
+    <div class="col" style="width: 250px">
+      <span class="label">1 · Paste what you read</span>
+      <div class="win crop" style="height: 232px; position: relative"><img src="shots/capture-text.png" style="width: 317px; margin: -23px 0 0 -37px" alt=""><i class="mark" style="left: 170px; top: 57px; width: 76px"></i></div>
+      <div class="note grow">Paste a word or a whole sentence. The word or phrase is worked out for you; name it only to settle a doubt. The sentence is kept as your own example.</div>
     </div>
+    <span class="arrow">→</span>
+    <div class="col" style="width: 290px">
+      <span class="label">2 · Read the generated entry</span>
+      <div class="win crop" style="height: 232px"><img src="shots/capture.png" style="width: 334px; margin: -24px 0 0 -39px" alt=""></div>
+      <div class="note grow">Definition, translations, pronunciation and notes, written in two model calls. Pictures, clips and recordings are added in the background after you save.</div>
+    </div>
+    <span class="arrow">→</span>
     <div class="col grow">
-      <span class="label">2 · The entry, for review</span>
-      <div class="win crop" style="height: 262px"><img src="shots/capture.png" style="width: 617px; margin: -40px 0 0 -111px" alt=""></div>
-      <div class="note fact grow"><span class="label">Measured</span>Two fields were added to the compose prompt for the loops. Over <b>315 calls</b>, each of ten measures of the entry's substance moved less than its own run-to-run noise, so the prompt was not split.<span class="exp">experiments/compose-lesson-line</span></div>
+      <span class="label">3 · Ask for changes</span>
+      <div class="win crop" style="height: 232px"><img src="shots/capture-chat.png" style="width: 309px; margin: -154px 0 0 -46px" alt=""></div>
+      <div class="note grow">Talk to the draft: add or drop an example, question a translation. Each answer is a proposed edit to review.</div>
     </div>
   </div>
-  <div class="foot">The same pipeline takes a photographed page, a file of notes, and a word tapped in a story. An entry from a headless capture waits in the Inbox until it is approved.</div>
+  <div class="foot">The same pipeline takes a photographed page, a file of notes, and a word tapped in a story. <span style="color: var(--ink-3)">Measured: two fields added to the compose prompt did not thin the entry over 315 calls (<span class="exp">experiments/compose-lesson-line</span>).</span></div>
 </div>
 </body>
 </html>

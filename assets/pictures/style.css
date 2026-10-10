@@ -66,3 +66,31 @@ body { width: 960px; height: 600px; overflow: hidden; padding: 14px; font: 12px/
 .code { font: 9.6px/1.62 var(--mono); white-space: pre; overflow: hidden; color: var(--ink-2); }
 .code b { color: var(--core); font-weight: 500; }
 .code i { font-style: normal; color: var(--corpus); }
+
+/* The name of the feature, above the heading. */
+.kicker { display: block; margin-bottom: 3px; font: 500 9.6px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--core); }
+
+/* A macOS window: the same outline with a title bar drawn on it. */
+.win .bar { height: 20px; display: flex; align-items: center; gap: 5px; padding: 0 8px; background: #E1E7E5; border-bottom: 1px solid var(--rule); }
+.win .bar i { width: 8px; height: 8px; border-radius: 50%; background: #B4C0BD; }
+.win .bar i:nth-child(1) { background: #EC6A5E; } .win .bar i:nth-child(2) { background: #F4BF4F; } .win .bar i:nth-child(3) { background: #61C554; }
+.win .bar span { margin: 0 auto; padding-right: 34px; font: 500 9.6px var(--sans); color: var(--ink-3); }
+
+/* The style a picture was drawn in. */
+.tag { display: inline-block; font: 500 9.2px/1 var(--mono); letter-spacing: .03em; color: var(--corpus); background: var(--corpus-soft); border-radius: 4px; padding: 3px 5px; white-space: nowrap; }
+.tag::before { content: "style · "; opacity: .7; }
+.sense { font: 500 9.6px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.sense .num { letter-spacing: 0; }
+.arrow { flex: none; align-self: center; font: 400 22px/1 var(--sans); color: var(--core); }
+.steps { display: flex; flex-direction: column; gap: 7px; }
+.steps > div { display: flex; gap: 8px; font-size: 11.6px; line-height: 1.4; color: var(--ink-2); }
+.steps > div > i { flex: none; width: 17px; height: 17px; border-radius: 50%; background: var(--core); color: #fff; font: 600 10px/17px var(--sans); text-align: center; font-style: normal; }
+.steps b { color: var(--ink); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.chips span { border: 1px solid var(--rule); border-radius: 20px; padding: 2px 8px; font-size: 10.8px; color: var(--ink-2); background: var(--paper); white-space: nowrap; }
+.chips .label { border: 0; background: none; padding: 0 2px 0 0; }
+table.m { width: 100%; border-collapse: collapse; font-size: 11px; line-height: 1.35; }
+table.m th { text-align: left; font: 500 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--core); padding: 0 6px 4px 0; }
+table.m td { padding: 5px 6px 5px 0; border-top: 1px solid #B5D6CF; vertical-align: top; }
+table.m td:first-child { font-weight: 600; color: #083E38; }
+table.m .win-cell { font-weight: 600; color: #083E38; }

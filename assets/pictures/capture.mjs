@@ -236,4 +236,6 @@ const shotList = option("--shots", join(here, "shots.json"));
 const outDir = option("--out", join(here, "shots"));
 const names = args.filter((arg) => !arg.startsWith("--"));
 if (!args.includes("--compose")) await capture(names);
-await compose(args.includes("--compose") ? names : names.filter((name) => existsSync(join(here, `${name}.html`))));
+// After named shots, only the pictures of those names; a shot with no picture of its name renders none.
+const pictures = args.includes("--compose") ? names : names.filter((name) => existsSync(join(here, `${name}.html`)));
+if (args.includes("--compose") || names.length === 0 || pictures.length > 0) await compose(pictures);
