@@ -21,14 +21,15 @@
   </div>
   <div class="main">
     <div class="win" style="width: 560px; align-self: flex-start"><img src="shots/map.png" alt=""></div>
-    <div class="col grow" style="gap: 8px">
+    <div class="col grow" style="gap: 10px">
       <span class="label">The whole map: 1,457 meanings in named regions</span>
-      <div class="win crop" style="height: 224px"><img src="shots/map-whole.png" style="width: 800px; margin: -148px 0 0 -262px" alt=""></div>
-      <span class="label" style="margin-top: 2px">How it is made</span>
-      <div class="steps" style="gap: 4px">
-        <div><i>1</i><span><b>Embed each meaning</b>, not each word, with a multilingual encoder (multilingual-e5-small).</span></div>
+      <div class="win crop" style="height: 186px"><img src="shots/map-whole.png" style="width: 800px; margin: -178px 0 0 -262px" alt=""></div>
+      <span class="label" style="margin-top: 4px">How it is made</span>
+      <div class="steps" style="gap: 8px">
+        <div><i>1</i><span><b>Embed each meaning</b>, not each word: its definition and translations, with a multilingual encoder (multilingual-e5-small).</span></div>
         <div><i>2</i><span><b>Lay out</b> in two dimensions with UMAP.</span></div>
-        <div><i>3</i><span><b>Group</b> into about 8 regions and 30 neighbourhoods; a language model <b>names</b> them.</span></div>
+        <div><i>3</i><span><b>Group</b> the layout into about 8 regions and 30 neighbourhoods (Ward clustering).</span></div>
+        <div><i>4</i><span><b>Name</b> them with one language-model call.</span></div>
       </div>
     </div>
   </div>

@@ -70,7 +70,7 @@ Needs Google Chrome (Playwright's own Chromium cannot decode the clips' video) a
 | `photo.png` | A photographed page with a word tapped, and the same sentence drawn as an entry shows it | `photo`, `photo-thumb.jpg` (cut from the test photo) |
 | `devices.png` | One word on a phone, a tablet and a desktop | `word-phone`, `word-tablet`, `word` |
 | `pipeline.png` | How an entry is made, as a diagram, with the Activity page and one real job's log lines | `activity` |
-| `anki.png` | One Anki card, front and back, and how cards and reviews travel | `anki-front`, `anki-back`, `anki-settings` |
+| `anki.png` | One Anki card, front and back, and how cards and reviews travel | `anki-front`, `anki-back` |
 | `sync.png` | The server, what runs beside it, and the devices: a drawn diagram | none |
 | `experiments.png` | Eight experiments, three of them from the two related repositories | none |
 
