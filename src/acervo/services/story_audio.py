@@ -215,7 +215,7 @@ def _say(settings: Settings, owner: str, text: str, language: str, order: str, s
         try:
             return pronunciations._speak(
                 settings, owner, text, language, order, style, speaking.CALLERS["stories"],
-                lambda reason: None, preferences=preferences, pinned=pin,
+                lambda reason, **noted: None, preferences=preferences, pinned=pin,
             )
         except ApiError as refused:
             if refused.code not in PASSING:
@@ -224,14 +224,14 @@ def _say(settings: Settings, owner: str, text: str, language: str, order: str, s
                             pair=f"{pin[0]}:{pin[1]}")
     return pronunciations._speak(
         settings, owner, text, language, order, style, speaking.CALLERS["stories"],
-        lambda reason: None, preferences=preferences,
+        lambda reason, **noted: None, preferences=preferences,
     )
 
 
 def _readers(settings: Settings, owner: str, language: str, order: str):
     """The order that reads this story and its voices, in the owner's order, by the rule
-    `pronunciations.readers` states. A stored order the catalogue no longer honours reads as no
-    voices here, and `_speak` then says why in the refusal it raises."""
+    `pronunciations.readers` states. An order that cannot be resolved reads as no voices here, and
+    `_speak` then says why in the refusal it raises."""
     try:
         reading, chosen = pronunciations.readers(settings, owner, order, language)
         return reading, speaking.speakers(chosen, load_catalogue(), language)

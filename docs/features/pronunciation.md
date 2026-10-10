@@ -103,6 +103,19 @@ its direction that way. Now:
 - Gemini speech is reached only through Cloud TTS. Through LiteLLM the Gemini API and Vertex have no
   field for an instruction, so neither the free tier nor Vertex offers speech.
 
+**A saved order outlives the rows it names** (`pronunciations.order_of`). A pair the catalogue no
+longer offers for speech — a row that stopped offering it, a model that was withdrawn — is stepped
+over rather than refused, for either order, because the voices behind it can still read. The order is
+kept as saved, the pane does not draw the pair, and each read that steps over one writes
+`result=skipped reason=retired` with the pair to the call log. An order left with nothing reads as
+though none had been chosen; one saved empty is still every voice switched off. This is a rule about
+speech orders only: for every other chain a withdrawn model is refused
+([`../architecture/models.md`](../architecture/models.md)).
+
+**A refusal keeps the provider's own sentence**, in the activity log and on the `pronounce-*` outcome
+line as `detail=`, and never in what the owner is shown: "configuration" is a dozen different
+mistakes, and the log is where they are told apart.
+
 A pair that does not speak the language is left out of the walk; a chain
 where none does answers `no_voice_for_language`, naming what to fix. `pronunciation/targets.py` decides
 the *use* and never the order, because that package may not read settings.
@@ -115,7 +128,9 @@ because a take is about to be stretched, pitched and mixed into a track that is 
 only lossy generation in a loop is the final MP3. Masters are kept in a content-addressed store beside
 the database (`pronunciation/takes.py`) where the digest is the filename, and **`take` is in the key**:
 two takes of one line can carry byte-identical directions, and without the index the cache would serve
-one recording three times. The design is [`loops.md`](loops.md) §2.4–§2.5.
+one recording three times. **A take recorded without its direction is looked for only once no
+directed voice can read the line**, so a day without one does not leave those lines flat in every
+later loop. The design is [`loops.md`](loops.md) §2.4–§2.5.
 
 ## The interface
 

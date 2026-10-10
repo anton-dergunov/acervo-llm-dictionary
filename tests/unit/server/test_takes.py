@@ -45,6 +45,9 @@ def a_voice(server, monkeypatch, tmp_path):
 
     def speech(row, model, words, **kwargs):
         calls.append({"provider": row.id, "model": model, "words": words, **kwargs})
+        failure = getattr(speech, "failure", None)
+        if failure is not None:
+            raise failure
         answer = getattr(speech, "answer", None)
         return answer if answer is not None else (wav(words), "audio/wav")
 
@@ -152,6 +155,38 @@ def test_an_expressive_order_with_no_directed_voice_drops_the_direction_and_is_f
     calls = len(server.speech.calls)
     again = ask(server)
     assert again.content == first.content and len(server.speech.calls) == calls
+
+
+def test_a_take_recorded_plainly_is_not_served_once_a_directed_voice_answers_again(server):
+    """One day without a directed voice must not leave a line flat in every later loop that uses the
+    same words: the plain take is looked for only when no directed voice can read."""
+    directed = server.put("/models/selection", {"chains": {
+        "audioExpressive": [{"provider": "google-tts", "model": "standard"}],
+        "audioPlain": [{"provider": "google-tts", "model": "wavenet"}],
+    }})
+    assert directed.status_code == 200
+    assert ask(server).headers["x-acervo-direction"] == "dropped"
+    server.put("/models/selection", {"chains": {"audioExpressive": None}})
+    calls = len(server.speech.calls)
+    again = ask(server)
+    assert again.headers["x-acervo-direction"] == "sent"
+    assert again.headers["x-acervo-model"] == "gemini-3.1-flash-tts-preview"
+    assert len(server.speech.calls) == calls + 1
+
+
+def test_directed_voices_out_of_reach_serve_the_plain_take_already_recorded(server):
+    from acervo.models.errors import ProviderUnavailable
+
+    server.put("/pronunciations/settings", {"delivery": {"loops": "plain"}})
+    plain = ask(server)
+    server.put("/pronunciations/settings", {"delivery": {"loops": "expressive"}})
+    server.speech.failure = ProviderUnavailable("rate_limited", "quota", provider_id="google-tts", model="any")
+    calls = len(server.speech.calls)
+    answer = ask(server)
+    assert answer.status_code == 200 and answer.content == plain.content
+    assert answer.headers["x-acervo-direction"] == "dropped"
+    assert {call["model"] for call in server.speech.calls[calls:]} == {
+        "gemini-3.1-flash-tts-preview", "gemini-2.5-flash-tts"}, "only the directed voices were asked"
 
 
 def test_an_answer_that_arrived_compressed_is_passed_through_untouched(server):

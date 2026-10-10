@@ -59,7 +59,9 @@ connection, and an answer the caller declares unusable — and on nothing else.*
   that long is raced by the next one, the first usable answer wins, and the loser's late outcome is only
   logged. The delays live beside the timeouts in `call.py`, set from measured healthy answers.
 - **A pair naming a model the catalogue no longer offers is refused**, because nothing is supposed to
-  produce it and skipping it would walk half the chain forever with no symptom.
+  produce it and skipping it would walk half the chain forever with no symptom. The speech orders are
+  the one exception, and theirs is logged on every read
+  ([`../features/pronunciation.md`](../features/pronunciation.md)).
 
 ## Whose chain it is
 

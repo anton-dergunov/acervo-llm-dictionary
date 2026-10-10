@@ -226,6 +226,13 @@ mechanical, not less. A provider that ignores seeds hides this without a cache, 
 prompts happen to give two different readings; a cache turns that accident into a guarantee in the wrong
 direction.
 
+**The order of the look-up is the order of the reading.** For the directed order: the takes the
+directed voices recorded, then the directed voices themselves, and only when none of them can read —
+none in the order, or every one out of reach — the takes the clear order recorded, then the clear
+order. A take recorded without its direction is a stand-in for a day the directed voice was away, and
+looking for it before asking that voice would make it permanent: every later loop using the same
+words would get the flat reading, with the directed voice back and never asked.
+
 **A stored pronunciation is deliberately not read through.** It is tempting: a plain headword take has
 the same text, language, model and voice as the clip the article already holds. But that clip is Opus
 at about 51 kbps, compressed for a phone, and stretching and mixing it would put a second lossy

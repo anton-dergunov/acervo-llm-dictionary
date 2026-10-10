@@ -36,7 +36,7 @@ from acervo.pronunciation import takes as take_store
 from acervo.repository import graph, pronunciation_settings
 from acervo.repository.pronunciation_settings import ORDERS, SWITCHES, USES
 from acervo.services import media as media_files
-from acervo.services.models import chain_for, refusal
+from acervo.services.models import chain_for, deployment_chain, refusal
 from acervo.services.prompts import prompt_text
 from acervo.settings import Settings
 
@@ -118,19 +118,12 @@ def _pairs(settings: Settings, owner: str, order: str, catalogue) -> list[tuple[
     """Every pair that may read an order, credentialed or not, so a voice can be chosen before a key
     is set. For the expressive order that is only the pairs that take a direction (`readers`)."""
     found = []
-    for choice in chain_for(settings, owner, CHAINS[order]) or [
+    for choice in order_of(settings, owner, order) or [
         (row.id, model) for row in catalogue.serving("audio") for model in row.models_for("audio")
     ]:
         identifier, model = (choice, None) if isinstance(choice, str) else choice
-        try:
-            row = catalogue.find(identifier)
-        except KeyError:
-            continue
-        if not row.serves("audio"):
-            continue
+        row = catalogue.find(identifier)
         for one in ([model] if model else row.models_for("audio")):
-            if one not in row.models_for("audio"):
-                continue
             if order == "expressive" and row.style_for(one) != "instruction":
                 continue
             found.append((row, one))
@@ -228,7 +221,7 @@ def pronounce(settings: Settings, owner: str, device: str, route_kind: str, targ
         )
     spoken = _speak(
         settings, owner, target.text, target.language, order, style, caller,
-        lambda error: log(started, source=source, result=error, failed=True),
+        lambda error, **noted: log(started, source=source, result=error, failed=True, **noted),
         preferences=preferences,
     )
     result = spoken.result
@@ -287,9 +280,9 @@ def utterance(settings: Settings, owner: str, text: str, language: str) -> tuple
     if not is_language(language or ""):
         raise ApiError(400, "invalid_input", "language must be a BCP-47 language tag.")
 
-    def failed(error: str) -> None:
+    def failed(error: str, **noted: Any) -> None:
         journal.outcome("pronounce-selection", True, lang=language, chars=len(words), text=words,
-                        result=error, seconds=time.monotonic() - started)
+                        result=error, seconds=time.monotonic() - started, **noted)
 
     order = pronunciation_settings.settings(owner).order_for("words")
     spoken = _speak(settings, owner, words, language, order, None, "pronounce-selection", failed)
@@ -365,36 +358,55 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
         )
 
     cache = Path(settings.takes_path)
-    # Which pair answers is not known until it has, so every pair that may read this is tried — the
-    # directed ones with the direction, then, for the expressive order, the plain ones without it,
-    # since that is who reads when no directed voice can. A fall-through yesterday still answers
-    # today, which is most of what makes the cache worth having.
     catalogue = load_catalogue()
-    probes = [(row, model, style) for row, model in _pairs(settings, owner, order, catalogue)]
-    if order == "expressive":
-        probes += [(row, model, None) for row, model in _pairs(settings, owner, "plain", catalogue)]
-    for row, model, asked_style in probes:
-        if not row.speaks(model, language):
-            continue
-        # Keyed on what this pair would be *sent*, by the same function the call itself uses — so a
-        # pair that cannot take a direction looks the same up as it stores down, and a take recorded
-        # under the provider's own default voice is found again.
-        asked_voice, would_send = speaking.asked_of(row, model, language, asked_style, preferences.voice)
-        found = take_store.find(cache, take_store.key(
-            text=words, language=language, direction=would_send, take=index,
-            provider=row.id, model=model, voice=asked_voice,
-        ))
-        if found is None:
-            continue
-        data, mime = found
-        log(result="cached", pair=f"{row.id}:{model}", bytes=len(data), mime=mime)
-        return data, mime, _spoken_headers(row.id, model, asked_voice, direction_text,
-                                           sent=bool(would_send))
 
-    spoken = _speak(
-        settings, owner, words, language, order, style, speaking.CALLERS["loops"],
-        lambda error: log(result=error, failed=True), preferences=preferences,
-    )
+    def kept(reading: str, asked_style: str | None) -> tuple[bytes, str, dict[str, str]] | None:
+        """The take already recorded for this line by a pair of `reading`, if there is one.
+
+        Which pair answers is not known until it has, so every pair of the order is tried: a
+        fall-through yesterday still answers today, which is most of what makes the cache worth
+        having.
+        """
+        for row, model in _pairs(settings, owner, reading, catalogue):
+            if not row.speaks(model, language):
+                continue
+            # Keyed on what this pair would be *sent*, by the same function the call itself uses —
+            # so a pair that cannot take a direction looks the same up as it stores down, and a take
+            # recorded under the provider's own default voice is found again.
+            asked_voice, would_send = speaking.asked_of(row, model, language, asked_style, preferences.voice)
+            found = take_store.find(cache, take_store.key(
+                text=words, language=language, direction=would_send, take=index,
+                provider=row.id, model=model, voice=asked_voice,
+            ))
+            if found is None:
+                continue
+            data, mime = found
+            log(result="cached", pair=f"{row.id}:{model}", bytes=len(data), mime=mime)
+            return data, mime, _spoken_headers(row.id, model, asked_voice, direction_text,
+                                               sent=bool(would_send))
+        return None
+
+    def failed(error: str, **noted: Any) -> None:
+        log(result=error, failed=True, **noted)
+
+    if (found := kept(order, style)) is not None:
+        return found
+    try:
+        spoken = _speak(
+            settings, owner, words, language, order, style, speaking.CALLERS["loops"], failed,
+            preferences=preferences, directed_only=True,
+        )
+    except Undirected:
+        # **A take recorded without its direction is looked for only here**, once no directed voice
+        # can read the line. Looked for before the directed voices were asked, it answered for ever:
+        # one day without a directed voice left every line it recorded flat in each later loop that
+        # used the same words, with the directed voice back and never asked.
+        if (found := kept("plain", None)) is not None:
+            return found
+        spoken = _speak(
+            settings, owner, words, language, "plain", None, speaking.CALLERS["loops"], failed,
+            preferences=preferences,
+        )
     result = spoken.result
     # The master, not Opus: this is the one place in Acervo that keeps audio uncompressed on purpose.
     data, mime = encode.master(result.data, result.mime)
@@ -448,7 +460,46 @@ def _target(owner: str, route_kind: str, target_id: str) -> tuple[Target, dict[s
     return target, records
 
 
-def readers(settings: Settings, owner: str, order: str, language: str) -> tuple[str, Any]:
+class Undirected(Exception):
+    """No voice that takes a direction could read this: none is in the order, or none answered."""
+
+
+def order_of(settings: Settings, owner: str, order: str, caller: str | None = None) -> Any:
+    """The owner's order for a speech chain, as far as the catalogue still offers it.
+
+    **A pair the catalogue no longer offers for speech is left out rather than refused.** A saved
+    order is a preference and outlives the rows it names: when a row stops offering speech, an order
+    still naming it used to refuse every word and definition before any voice was asked, while the
+    voices behind it in the same order could have read them. The order is kept as saved — the pane
+    does not draw the pair, so the next change the owner makes saves it without — and each read that
+    steps over one says so in the call log, under `caller`.
+
+    An order left with nothing reads as though none had been chosen, which is the catalogue's own.
+    One the owner saved empty is still every voice switched off.
+    """
+    chain_name = CHAINS[order]
+    chosen = chain_for(settings, owner, chain_name)
+    if not chosen:
+        return chosen
+    catalogue = load_catalogue()
+    offered = []
+    for choice in chosen:
+        identifier, model = (choice, None) if isinstance(choice, str) else choice
+        try:
+            row = catalogue.find(identifier)
+        except KeyError:
+            row = None
+        if row is None or not row.serves("audio") or (model and model not in row.models_for("audio")):
+            if caller:
+                journal.outcome(caller, True, result="skipped", reason="retired", order=chain_name,
+                                pair=f"{identifier}:{model or '*'}")
+            continue
+        offered.append(choice)
+    return offered or deployment_chain(settings, chain_name)
+
+
+def readers(settings: Settings, owner: str, order: str, language: str,
+            caller: str | None = None) -> tuple[str, Any]:
     """Who reads `order` in `language`: the order that actually reads, and the choices to walk.
 
     **The expressive order is read only by voices that take a direction.** It exists to carry one,
@@ -459,9 +510,10 @@ def readers(settings: Settings, owner: str, order: str, language: str) -> tuple[
     walk skips them. **When no directed voice can be reached, the plain order reads instead**, and
     the caller records without a direction — the answer is still worth hearing.
 
-    Raises `ProviderError` for a stored order the catalogue no longer honours, as `speak` would.
+    A pair the catalogue no longer offers is left out of either order (`order_of`), with `caller`
+    naming whose line says so.
     """
-    chosen = chain_for(settings, owner, CHAINS[order])
+    chosen = order_of(settings, owner, order, caller)
     if order != "expressive":
         return order, chosen
     directed = [
@@ -470,12 +522,13 @@ def readers(settings: Settings, owner: str, order: str, language: str) -> tuple[
     ]
     if directed:
         return order, directed
-    return "plain", chain_for(settings, owner, CHAINS["plain"])
+    return "plain", order_of(settings, owner, "plain", caller)
 
 
 def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
            style: str | None, caller: str, on_failure,
-           preferences=None, pinned: tuple[str, str, str | None] | None = None) -> speaking.Spoken:
+           preferences=None, pinned: tuple[str, str, str | None] | None = None,
+           directed_only: bool = False) -> speaking.Spoken:
     """Say `text` in `order`, by the rule `readers` states. `Spoken.direction` says what was sent.
 
     `pinned` is `(provider, model, voice)`: ask exactly that pair and that voice, and never another.
@@ -487,6 +540,10 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
     Directed voices that are all out of reach — every one refused for a quota, a busy provider or an
     unusable answer — are the same case as none being configured: the plain order is walked once
     more, without the direction. A rejected credential is not, and is raised.
+
+    `directed_only` stops at that hand-over and raises `Undirected` in its place, for a caller with
+    something of its own to try before the plain order reads — a loop's take, which looks for the
+    line already recorded plainly. It changes nothing when `order` is the plain one.
     """
     preferences = preferences or pronunciation_settings.settings(owner)
     chain_name = CHAINS[order]
@@ -499,10 +556,12 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
                 style=style, voice=lambda provider, model_id, lang: voice_name,
                 caller=caller, hedge_after=None,
             )
-        reading, chosen = readers(settings, owner, order, language)
+        reading, chosen = readers(settings, owner, order, language, caller)
         chain_name = CHAINS[reading]
         if reading != order:
             journal.outcome(caller, False, lang=language, result="undirected", reason="no_directed_voice")
+            if directed_only:
+                raise Undirected
             style = None
         try:
             return speaking.speak(
@@ -514,9 +573,11 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
                 raise
             journal.outcome(caller, True, lang=language, result="undirected",
                             reason=",".join(exhausted.reasons))
+            if directed_only:
+                raise Undirected from None
             chain_name = CHAINS["plain"]
             return speaking.speak(
-                text, language, chosen=chain_for(settings, owner, chain_name),
+                text, language, chosen=order_of(settings, owner, "plain", caller),
                 catalogue=load_catalogue(), style=None, voice=preferences.voice, caller=caller,
                 hedge_after=HEDGE["plain"],
             )
@@ -529,11 +590,11 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
         ) from None
     except ChainExhausted as exhausted:
         error = refusal(exhausted, chain_name)
-        on_failure(f"refused:{error.code}")
+        on_failure(f"refused:{error.code}", **error.noted)
         raise error from None
     except ProviderError as failure:
         error = refusal(failure, chain_name)
-        on_failure(f"refused:{error.code}")
+        on_failure(f"refused:{error.code}", **error.noted)
         raise error from None
 
 

@@ -364,7 +364,8 @@ def refusal(error: ProviderError | ChainExhausted, kind: str = "text") -> ApiErr
         summary = waiting_on(error)
         if not summary:
             return refused
-        return ApiError(refused.status, refused.code, f"{refused.message} {summary}.", summary)
+        return ApiError(refused.status, refused.code, f"{refused.message} {summary}.", summary,
+                        refused.noted)
     status, code, message = REFUSALS[error.reason]
     if kind == "image":
         message = message.replace("The language model", "The image model")
@@ -377,7 +378,13 @@ def refusal(error: ProviderError | ChainExhausted, kind: str = "text") -> ApiErr
     # "Unconfigured" is the one refusal whose *particular* cause the owner can act on, and it is
     # already safe to show: it names an environment variable or says every model is switched off,
     # never a value. `/health` has shown exactly this string since the route existed.
-    return ApiError(status, code, error.detail or message if error.reason == "unconfigured" else message)
+    # What the provider package itself said — which pair, which field — goes to the log and never to
+    # the owner. Without it a refusal was written down as its code alone, and "configuration" names
+    # a dozen different mistakes. It is redacted where the error is made (`models/errors.py`).
+    return ApiError(
+        status, code, error.detail or message if error.reason == "unconfigured" else message,
+        noted={"detail": error.detail} if error.detail else None,
+    )
 
 
 # ── what the owner is shown, and what they may choose ───────────────────────

@@ -218,6 +218,60 @@ def test_directed_voices_that_are_all_out_of_reach_hand_over_to_the_clear_order(
                for record in caplog.records)
 
 
+def test_a_pair_the_catalogue_stopped_offering_is_stepped_over_and_the_rest_of_the_order_reads(server, caplog):
+    """A saved order outlives the rows it names. When one of them stopped offering speech, the order
+    still naming it refused every word before any voice was asked — with the voice behind it able to
+    read them. The pair is stepped over, and the call log says which."""
+    from acervo.repository import model_selection
+
+    entry, *_ = word(server)
+    model_selection.save(server.owner, {"audioPlain": [
+        ("gemini-free", "gemini/gemini-3.1-flash-tts-preview"), ("google-tts", "standard"),
+    ]})
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        answer = say(server, "lexemes", entry["id"])
+    assert answer.status_code == 200, answer.json()
+    assert answer.json()["data"]["modelId"] == "standard"
+    skipped = [record.getMessage() for record in caplog.records if "result=skipped" in record.getMessage()]
+    assert skipped and "reason=retired" in skipped[0] and "order=audioPlain" in skipped[0]
+    assert "pair=gemini-free:gemini/gemini-3.1-flash-tts-preview" in skipped[0]
+    assert model_selection.chains(server.owner)["audioPlain"][0][0] == "gemini-free", "kept as saved"
+
+
+def test_an_order_naming_only_pairs_no_longer_offered_reads_as_though_none_were_chosen(server):
+    from acervo.repository import model_selection
+
+    entry, itch, sentence, _ = word(server)
+    model_selection.save(server.owner, {
+        "audioPlain": [("vertex", "gemini-2.5-flash-preview-tts")],
+        "audioExpressive": [("gemini-free", "gemini/gemini-3.1-flash-tts-preview")],
+    })
+    assert say(server, "lexemes", entry["id"]).json()["data"]["modelId"] == "wavenet"
+    clip = say(server, "examples", sentence["id"]).json()["data"]
+    assert clip["modelId"] == "gemini-3.1-flash-tts-preview" and clip["emotion"]
+
+
+def test_an_order_saved_empty_is_still_every_voice_switched_off(server):
+    entry, *_ = word(server)
+    server.put("/models/selection", {"chains": {"audioPlain": []}})
+    answer = say(server, "lexemes", entry["id"])
+    assert answer.status_code == 503 and not server.speech.calls
+
+
+def test_a_refusal_keeps_what_the_provider_said_for_the_log_and_not_for_the_owner(server, caplog):
+    entry, *_ = word(server)
+    server.speech.failure = ProviderRefused(
+        "configuration", "es-ES-Wavenet-Z is not a voice", provider_id="google-tts", model="wavenet")
+    with caplog.at_level(logging.INFO):
+        answer = say(server, "lexemes", entry["id"])
+    assert answer.json()["error"]["code"] == "llm_configuration"
+    assert "Wavenet-Z" not in answer.json()["error"]["message"]
+    lines = [record.getMessage() for record in caplog.records]
+    assert any("pronounce-word outcome" in line and 'detail="es-ES-Wavenet-Z is not a voice"' in line
+               for line in lines)
+    assert any(line.startswith("refused ") and "Wavenet-Z" in line for line in lines), "the activity log too"
+
+
 def test_a_rejected_credential_is_not_routed_around(server):
     """Falling through a rejected key would only spend another allowance on the same mistake."""
     entry, itch, sentence, _ = word(server)
