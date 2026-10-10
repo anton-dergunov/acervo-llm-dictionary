@@ -130,6 +130,8 @@ async function step(page, action) {
     case "wait": await page.waitForTimeout(value); break;
     case "scrollTo": await page.locator(value).first().scrollIntoViewIfNeeded(); break;
     case "scrollBy": await page.locator(value.in).first().evaluate((node, top) => { node.scrollTop += top; }, value.top); break;
+    // Text added to the end of an element's own, for a label the picture needs and the record lacks.
+    case "append": await page.locator(value.in).first().evaluate((node, text) => { node.textContent += text; }, value.text); break;
     case "hide": await page.addStyleTag({ content: `${value} { visibility: hidden !important; }` }); break;
     case "style": await page.addStyleTag({ content: value }); break;
     default: throw new Error(`Unknown step "${kind}".`);
