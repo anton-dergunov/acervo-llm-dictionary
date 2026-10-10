@@ -14,7 +14,9 @@
 .b1 { background: var(--surface); border: 1px solid var(--rule); border-radius: 7px; padding: 6px 9px 7px; font-size: 10.8px; line-height: 1.34; color: var(--ink-2); }
 .b1 b { display: block; font-size: 11.8px; color: var(--ink); font-weight: 600; }
 .b1.main1 { width: 200px; border-color: var(--core); }
-.wires { display: flex; justify-content: space-around; font: 500 10.4px var(--mono); letter-spacing: .04em; color: var(--core); padding: 2px 0; }
+.wires { display: flex; justify-content: center; align-items: center; gap: 16px; font-size: 11.6px; color: var(--ink-2); }
+.wires span:first-child { width: 250px; text-align: right; }
+.wires span:last-child { width: 250px; }
 .dev { flex: 1 1 0; min-width: 0; min-height: 150px; border: 1px solid var(--rule); border-radius: 12px; background: var(--paper); padding: 12px 11px 11px; font-size: 10.8px; line-height: 1.34; color: var(--ink-2); display: flex; flex-direction: column; gap: 2px; }
 .dev b { font-size: 12.4px; color: var(--ink); font-weight: 600; }
 .dev .ic { font-size: 20px; line-height: 1.1; }
@@ -31,7 +33,7 @@
     <span class="sub">The server keeps the dictionary and does the generating. Each device holds a complete copy, so everything opens with no connection.</span>
   </div>
   <div class="main">
-    <div class="col grow" style="gap: 18px">
+    <div class="col grow" style="gap: 14px">
       <div class="row" style="gap: 12px; align-items: stretch">
         <div class="lane" style="width: 190px"><span class="label">Called by the server</span><div class="col" style="gap: 6px">
           <div class="b1"><b>Model providers</b>language, image and speech models, in an order you set</div>
@@ -48,7 +50,7 @@
           </div>
         </div>
       </div>
-      <div class="wires"><span>changes pulled as they happen ↓</span><span>↑ a save is one request, online only</span></div>
+      <div class="wires"><span>changes are pulled as they happen</span><span class="arrow" style="transform: rotate(90deg)">⇄</span><span>a save is one request, online only</span></div>
       <div class="row" style="gap: 12px">
         <div class="dev"><span class="ic">📱</span><b>Phone</b>installed web app, Android or iOS<span class="copy">complete copy</span></div>
         <div class="dev"><span class="ic">📲</span><b>Tablet</b>installed web app<span class="copy">complete copy</span></div>
