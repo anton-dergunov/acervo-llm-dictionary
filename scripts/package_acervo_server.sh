@@ -49,14 +49,31 @@ fi
 # copy moving between the owner's own machines; the licensing rule in docs §9 is about publishing to
 # the world and does not apply.
 dictionary_artifacts=${ACERVO_DICTIONARY_ARTIFACTS:-"$repo_root/data/dictionaries/out"}
+# What the server will hold once this archive is installed, as one checksum line per file, written
+# beside the archive for the deployer to keep. `ACERVO_DICTIONARIES_SENT` names the one it kept last
+# time: a dictionary whose three lines are all in it is already on the server and is left out, which
+# is safe because the installer merges a release's dictionaries into the published ones rather than
+# replacing them. Unset, or naming nothing, every dictionary travels.
+dictionary_manifest="$archive.dictionaries"
+dictionaries_sent=${ACERVO_DICTIONARIES_SENT:-}
+rm -f "$dictionary_manifest"
 if [ "${ACERVO_INCLUDE_DICTIONARIES:-true}" = true ] && [ -d "$dictionary_artifacts" ] \
    && [ -n "$(find "$dictionary_artifacts" -maxdepth 1 -name '*.json' -print -quit)" ]; then
   mkdir -p "$bundle/dictionary-artifacts"
+  : >"$dictionary_manifest"
+  unchanged=0
   # Only complete triples: a `.json` with no payload beside it would be listed by the server and
   # then fail at the moment someone tried to store it.
   for metadata in "$dictionary_artifacts"/*.json; do
     id=$(basename "$metadata" .json)
     if [ -f "$dictionary_artifacts/$id.dict" ] && [ -f "$dictionary_artifacts/$id.idx" ]; then
+      checksums=$(cd "$dictionary_artifacts" && cksum "$id.json" "$id.dict" "$id.idx")
+      printf '%s\n' "$checksums" >>"$dictionary_manifest"
+      if [ -n "$dictionaries_sent" ] && [ -f "$dictionaries_sent" ] \
+         && [ -z "$(printf '%s\n' "$checksums" | grep -Fxv -f "$dictionaries_sent" || true)" ]; then
+        unchanged=$((unchanged + 1))
+        continue
+      fi
       cp "$metadata" "$dictionary_artifacts/$id.dict" "$dictionary_artifacts/$id.idx" \
         "$bundle/dictionary-artifacts/"
     else
@@ -64,9 +81,18 @@ if [ "${ACERVO_INCLUDE_DICTIONARIES:-true}" = true ] && [ -d "$dictionary_artifa
     fi
   done
   bundled=$(find "$bundle/dictionary-artifacts" -name '*.json' | wc -l | tr -d ' ')
-  size=$(du -sh "$bundle/dictionary-artifacts" | cut -f1)
   # stderr, not stdout: this script's stdout is the archive path and deploy.sh reads it.
-  echo "Bundling $bundled compiled dictionaries ($size). Set ACERVO_INCLUDE_DICTIONARIES=false to skip." >&2
+  if [ "$bundled" -eq 0 ]; then
+    rmdir "$bundle/dictionary-artifacts"
+    echo "All $unchanged compiled dictionaries are already on the server; sending none (--rebuild sends them again)." >&2
+  else
+    size=$(du -sh "$bundle/dictionary-artifacts" | cut -f1)
+    if [ "$unchanged" -gt 0 ]; then
+      echo "Bundling $bundled changed compiled dictionaries ($size); $unchanged are already on the server." >&2
+    else
+      echo "Bundling $bundled compiled dictionaries ($size). Set ACERVO_INCLUDE_DICTIONARIES=false to skip." >&2
+    fi
+  fi
 fi
 
 # The pinned spoken-usage-retrieval wheel. It is not in the repository — deploy/acervo/speech/pin.json

@@ -1,4 +1,8 @@
-FROM python:3.12-slim-bookworm
+# Pinned by digest, in all four Dockerfiles alike. The tag moves whenever upstream republishes it —
+# three times in three weeks — and a build that follows it throws away every layer below, reinstalling
+# what had not changed. Upgrading the base is editing this digest, in all four
+# (docs/operations/deployment.md, "What a deploy rebuilds").
+FROM python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -47,32 +51,40 @@ ENV HF_HUB_OFFLINE=1 \
     TRANSFORMERS_OFFLINE=1 \
     NUMBA_CACHE_DIR=/tmp/numba
 
-COPY pyproject.toml /app/pyproject.toml
-COPY README.md /app/README.md
-COPY src /app/src
+RUN mkdir -p /var/lib/acervo/server /var/lib/acervo/downloads /var/lib/acervo/dictionaries \
+    /var/lib/acervo/worker \
+    && chmod -R a+rwX /var/lib/acervo
+
+# **Everything below is ordered by how often it changes, rarest first**, and nothing runs after it.
+# A layer is rebuilt when anything above it changed, and on the NAS each rebuilt layer costs seconds
+# whatever its size — so a code change rebuilds the last two and a prompt change three. A step
+# placed after `src` would be rebuilt, and paid for, on every deploy.
+#
+# `--chmod` on every `COPY` rather than one `chmod -R` at the end, which would be such a step. It is
+# not optional: the installer extracts a release under `umask 077`, so the files this image is built
+# from are owner-only, and `COPY` makes them root-owned. The container runs as the deploying user,
+# which then cannot read its own code.
+
 # The provider catalogue, beside `src` the way `dictionaries/` is: the package resolves it
 # relative to itself, so it needs no environment variable and no staging step.
-COPY models /app/models
-RUN pip install --no-cache-dir --no-deps -e /app
-
-# The capture prompts are content, not code: tracked once at the repository root and read at request
-# time, so changing what an entry says never means changing the code that builds a request.
-COPY prompts /app/prompts
+COPY --chmod=755 models /app/models
 # The style table is content of the same kind, and `acervo.images.styles` resolves it relative to
 # the package exactly as the two catalogues above do — hence the matching path rather than a third
 # environment variable.
-COPY config/image-styles.yaml /app/config/image-styles.yaml
-COPY config/story-types.yaml /app/config/story-types.yaml
+COPY --chmod=755 config/image-styles.yaml /app/config/image-styles.yaml
+COPY --chmod=755 config/story-types.yaml /app/config/story-types.yaml
 # The Anki cards' faces, stylesheet, script and fonts, which every push brings up to date.
-COPY templates /app/templates
+COPY --chmod=755 templates /app/templates
+# The capture prompts are content, not code: tracked once at the repository root and read at request
+# time, so changing what an entry says never means changing the code that builds a request.
+COPY --chmod=755 prompts /app/prompts
+# On the path rather than installed, as in the worker and corpus images: an editable install is a
+# step after `src` that fetches a build backend from the network in order to write one path file.
+ENV PYTHONPATH=/app/src
+COPY --chmod=755 src /app/src
 # The built interface. `.dockerignore` excludes `web/dist`, so `scripts/stage-web.sh` is what puts it
 # somewhere a build context can see.
-COPY deploy/acervo/server/web /app/web
-
-RUN mkdir -p /var/lib/acervo/server /var/lib/acervo/downloads /var/lib/acervo/dictionaries \
-    /var/lib/acervo/worker \
-    && chmod -R a+rX /app \
-    && chmod -R a+rwX /var/lib/acervo
+COPY --chmod=755 deploy/acervo/server/web /app/web
 
 EXPOSE 8000
 CMD ["python", "-m", "acervo.admin", "serve", "--host", "0.0.0.0", "--port", "8000"]

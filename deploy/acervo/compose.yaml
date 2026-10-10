@@ -208,6 +208,9 @@ services:
     build:
       context: ../..
       dockerfile: deploy/acervo/Dockerfile
+      # The stage before any of Acervo's code, which this service never runs: a deploy that changes
+      # code finds this image unchanged and leaves the container running.
+      target: sync-server
       args:
         ANKI_VERSION: "${ACERVO_ANKI_VERSION:-26.8.1}"
     restart: unless-stopped
@@ -237,6 +240,7 @@ services:
     build:
       context: ../..
       dockerfile: deploy/acervo/Dockerfile
+      target: worker
       args:
         ANKI_VERSION: "${ACERVO_ANKI_VERSION:-26.8.1}"
     profiles: ["tools"]

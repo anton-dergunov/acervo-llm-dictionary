@@ -7,7 +7,7 @@ PATH="$PATH:/usr/local/bin:/var/packages/ContainerManager/target/usr/bin:/var/pa
 export PATH
 
 usage() {
-  echo "usage: install.sh [--root PATH] [--archive FILE] [--credentials-stdin | --credentials-file FILE] [--llm-credentials-file FILE] [--google-credentials-file FILE] [--bind-address ADDRESS] [--port PORT] [--app-bind-address ADDRESS] [--app-port PORT] [--timezone ZONE] [--reset-anki] [--reset-database | --transition]" >&2
+  echo "usage: install.sh [--root PATH] [--archive FILE] [--credentials-stdin | --credentials-file FILE] [--llm-credentials-file FILE] [--google-credentials-file FILE] [--bind-address ADDRESS] [--port PORT] [--app-bind-address ADDRESS] [--app-port PORT] [--timezone ZONE] [--reset-anki] [--reset-database | --transition] [--rebuild]" >&2
   exit 2
 }
 
@@ -39,6 +39,7 @@ google_credentials_file=
 reset_anki=false
 reset_database=false
 transition=false
+rebuild=false
 requested_timezone=
 requested_bind_address=
 requested_anki_port=
@@ -60,6 +61,7 @@ while [ "$#" -gt 0 ]; do
     --timezone) [ "$#" -ge 2 ] || usage; requested_timezone=$2; shift 2 ;;
     --reset-database) reset_database=true; shift ;;
     --transition) transition=true; shift ;;
+    --rebuild) rebuild=true; shift ;;
     *) usage ;;
   esac
 done
@@ -396,6 +398,21 @@ fi
 
 compose_file="$release_dir/deploy/acervo/compose.yaml"
 
+# **A deploy rebuilds only what changed**, and that is the builder's own layer cache rather than
+# anything decided here: the images are ordered so that what changes often comes last, and their
+# base is pinned by digest so that nothing upstream can empty the cache. `--rebuild` is the way to
+# empty it on purpose — every layer of every image, the base pulled again — for the day a cached
+# layer is suspected of being wrong. Done before anything is stopped or replaced, so a rebuild that
+# cannot finish leaves the running deployment exactly as it was.
+if [ "$rebuild" = true ]; then
+  echo "Rebuilding every image from scratch (around a quarter of an hour on a small server)..."
+  run_quietly "Rebuilding every image" compose -p "$compose_project" \
+    --env-file "$acervo_root/deployment.env" \
+    --env-file "$acervo_root/secrets.env" \
+    --env-file "$acervo_root/llm.env" \
+    -f "$compose_file" build --no-cache --pull anki-sync-server speech-retrieval lexibeat server
+fi
+
 # There is one schema and no upgrade path: a schema change is deployed by rebuilding the database,
 # which is the doctrine AGENTS.md already records, and this is it. Accounts go with it and are
 # recreated afterwards with `--create-account`. Anki review history lives under --reset-anki
@@ -503,7 +520,7 @@ if docker inspect "$compose_project-server-1" >/dev/null 2>&1 \
   run_quietly "Discarding a stopped server container" docker rm -f "$compose_project-server-1"
 fi
 
-echo "Building and starting containers..."
+echo "Building what changed and starting containers..."
 run_quietly "Building and starting containers" compose -p "$compose_project" \
   --env-file "$acervo_root/deployment.env" \
   --env-file "$acervo_root/secrets.env" \
@@ -601,7 +618,7 @@ if [ -d "$acervo_root/releases" ]; then
   rm -f "$stale_releases"
 fi
 
-# Every deploy rebuilds the images, and the ones they replace stay behind untagged: 308 of them had
+# An image a deploy rebuilds leaves the one it replaces behind untagged: 308 of them had
 # accumulated before this existed. Only this project's are removed — compose labels what it builds
 # with the project — because the host's Docker is shared with unrelated applications. Tagged images
 # stay, the worker's included, though no running container uses it. Reached only after a healthy

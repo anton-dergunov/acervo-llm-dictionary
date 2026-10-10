@@ -28,4 +28,8 @@ def package_into_the_tests_own_directory(tmp_path_factory, monkeypatch):
     # dictionary publishing point `ACERVO_DICTIONARY_ARTIFACTS` at a handful of fixture files, and
     # their own environment overrides this.
     monkeypatch.setenv("ACERVO_INCLUDE_DICTIONARIES", "false")
+    # What a deploy remembers having sent lives under `build/` too, and for the same reason must not
+    # be the real one: a test would otherwise teach this machine that its server holds dictionaries
+    # it was never sent, and read back what the last real deploy recorded.
+    monkeypatch.setenv("ACERVO_DEPLOY_STATE", str(tmp_path_factory.mktemp("deploy-state")))
     return archive

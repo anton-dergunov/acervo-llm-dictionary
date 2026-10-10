@@ -243,6 +243,75 @@ def test_compiled_dictionaries_travel_with_the_release_and_are_merged(tmp_path: 
     assert (served / "cc-cedict.dict").read_bytes() == b"payloads"
 
 
+def test_a_dictionary_already_on_the_server_is_not_sent_again(tmp_path: Path) -> None:
+    """The dictionaries are most of a release and change when one is recompiled, not when the code
+    does: sending them every time was a hundred seconds of an 800 MB upload per deploy. The installer
+    merges, so a release need only carry the ones that differ from what the last successful deploy
+    to the same place left there."""
+    env, root = deployment_env(tmp_path)
+    artifacts = tmp_path / "artifacts"
+    artifacts.mkdir()
+    for name in ("cc-cedict", "kaikki-es-es"):
+        (artifacts / f"{name}.json").write_text(f'{{"id": "{name}"}}', encoding="utf-8")
+        (artifacts / f"{name}.dict").write_bytes(b"payloads")
+        (artifacts / f"{name}.idx").write_bytes(b"index")
+    env["ACERVO_INCLUDE_DICTIONARIES"] = "true"
+    env["ACERVO_DICTIONARY_ARTIFACTS"] = str(artifacts)
+    served = root / "data" / "dictionaries"
+
+    def carried() -> set[str]:
+        newest = max((root / "releases").iterdir())
+        return {path.stem for path in (newest / "dictionary-artifacts").glob("*.json")}
+
+    first = run_local(env)
+    assert first.returncode == 0, first.stderr
+    assert carried() == {"cc-cedict", "kaikki-es-es"}
+
+    (artifacts / "cc-cedict.dict").write_bytes(b"recompiled")
+    second = run_local(env)
+    assert second.returncode == 0, second.stderr
+    assert carried() == {"cc-cedict"}, "an unchanged dictionary travelled again"
+    assert "1 are already on the server" in second.stderr
+    assert (served / "cc-cedict.dict").read_bytes() == b"recompiled"
+    assert (served / "kaikki-es-es.dict").read_bytes() == b"payloads"
+
+    third = run_local(env)
+    assert third.returncode == 0, third.stderr
+    assert "sending none" in third.stderr
+    assert not (max((root / "releases").iterdir()) / "dictionary-artifacts").exists()
+
+    # The way back when the record is wrong — the server lost them, or was replaced.
+    (served / "kaikki-es-es.dict").unlink()
+    everything = subprocess.run(
+        [str(REPO_ROOT / "deploy.sh"), "--local", "--rebuild"],
+        cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False,
+    )
+    assert everything.returncode == 0, everything.stderr
+    assert carried() == {"cc-cedict", "kaikki-es-es"}
+    assert (served / "kaikki-es-es.dict").read_bytes() == b"payloads"
+
+
+def test_a_deploy_that_fails_does_not_record_its_dictionaries_as_sent(tmp_path: Path) -> None:
+    """The record is of what the server holds, so it is written after the installer succeeds and
+    not before: a deploy that died half-way is sent again in full."""
+    env, root = deployment_env(tmp_path)
+    artifacts = tmp_path / "artifacts"
+    artifacts.mkdir()
+    for suffix in (".json", ".dict", ".idx"):
+        (artifacts / f"cc-cedict{suffix}").write_bytes(b"{}")
+    env["ACERVO_INCLUDE_DICTIONARIES"] = "true"
+    env["ACERVO_DICTIONARY_ARTIFACTS"] = str(artifacts)
+    env["ACERVO_TEST_DOCKER_FAIL_PROBE"] = "acervo-server-1"
+
+    assert run_local(env).returncode != 0
+    del env["ACERVO_TEST_DOCKER_FAIL_PROBE"]
+    again = run_local(env)
+
+    assert again.returncode == 0, again.stderr
+    newest = max((root / "releases").iterdir())
+    assert (newest / "dictionary-artifacts" / "cc-cedict.json").is_file()
+
+
 def test_a_release_without_dictionaries_leaves_the_published_ones_alone(tmp_path: Path) -> None:
     env, root = deployment_env(tmp_path)
     served = root / "data" / "dictionaries"
@@ -991,8 +1060,41 @@ def test_installer_gives_up_on_a_service_that_never_answers_its_probe(tmp_path: 
     assert not (root / "current-release").exists()
 
 
+def test_a_rebuild_builds_every_image_from_nothing_before_anything_is_replaced(tmp_path: Path) -> None:
+    """A deploy reuses every layer whose inputs are unchanged, which is the builder's cache and
+    needs no flag. `--rebuild` is how that cache is set aside on purpose, and it happens first: a
+    build that cannot finish must leave the running deployment as it was."""
+    env, root = deployment_env(tmp_path)
+    log = tmp_path / "docker.log"
+    env["ACERVO_TEST_DOCKER_LOG"] = str(log)
+
+    result = run_installer(root, env, "--rebuild")
+
+    assert result.returncode == 0, result.stderr
+    commands = _commands(log)
+    rebuild = _index(commands, " build --no-cache --pull ")
+    for service in ("anki-sync-server", "speech-retrieval", "lexibeat", "server"):
+        assert f" {service}" in commands[rebuild]
+    assert rebuild < _index(commands, " up -d")
+
+    log.unlink()
+    assert run_installer(root, env).returncode == 0
+    assert not any("--no-cache" in command for command in _commands(log)), \
+        "an ordinary deploy threw the layer cache away"
+
+
+def test_the_launcher_passes_a_rebuild_through(tmp_path: Path) -> None:
+    env, ssh_log = _jobs_ssh(tmp_path, '{"open": 0}')
+    result = _deploy_remotely(env, "--rebuild")
+    assert result.returncode == 0, result.stderr
+    deploy = next(c for c in ssh_log.read_text(encoding="utf-8").splitlines() if "deploy-acervo deploy" in c)
+    assert deploy.endswith(" --rebuild")
+    helper = (REPO_ROOT / "deploy/acervo/remote-helper.sh").read_text(encoding="utf-8")
+    assert "--rebuild) rebuild=true" in helper and 'set -- "$@" --rebuild' in helper
+
+
 def test_a_healthy_deploy_removes_only_this_projects_superseded_images(tmp_path: Path) -> None:
-    """Every deploy rebuilds the images and leaves the ones it replaced untagged; 308 had piled up.
+    """A deploy that rebuilds an image leaves the one it replaced untagged; 308 had piled up.
     The host's Docker is shared, so the prune is scoped to the label compose puts on what it builds
     rather than taking every dangling image on the machine."""
     env, root = deployment_env(tmp_path)
@@ -2300,5 +2402,5 @@ def test_the_speech_image_carries_every_acervo_module_its_launcher_imports() -> 
     imported = set(re.findall(r"^from acervo\.(\w+)", serve, re.MULTILINE))
     assert imported
     for module in imported:
-        assert (f"COPY src/acervo/{module} " in dockerfile
-                or f"COPY src/acervo/{module}.py " in dockerfile), f"acervo.{module} is not in the image"
+        assert re.search(rf"^COPY (?:--\S+ )*src/acervo/{module}(?:\.py)? ", dockerfile, re.MULTILINE), \
+            f"acervo.{module} is not in the image"

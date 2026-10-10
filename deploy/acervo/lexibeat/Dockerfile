@@ -14,7 +14,11 @@
 # The wheel reaches the build context through vendor/lexibeat/, which scripts/fetch_lexibeat.sh fills
 # and scripts/package_acervo_server.sh carries into the release archive — the server builds from the
 # extracted release, so an artifact that is not in the archive is not in the build context.
-FROM python:3.12-slim-bookworm
+# Pinned by digest, in all four Dockerfiles alike. The tag moves whenever upstream republishes it —
+# three times in three weeks — and a build that follows it throws away every layer below, reinstalling
+# what had not changed. Upgrading the base is editing this digest, in all four
+# (docs/operations/deployment.md, "What a deploy rebuilds").
+FROM python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -53,16 +57,15 @@ RUN pip install --no-cache-dir /tmp/wheels/lexibeat-*.whl && \
 RUN mkdir -p /var/lib/lexibeat/bundle /var/lib/lexibeat/out \
     && chmod -R a+rwX /var/lib/lexibeat
 
-COPY deploy/acervo/lexibeat/entrypoint.sh /usr/local/bin/lexibeat-entrypoint
-COPY deploy/acervo/lexibeat/serve.py /app/serve.py
+# `--chmod` on every `COPY`: the installer extracts a release under `umask 077`, so a copied file
+# arrives owner-only and root-owned. The container runs as the deploying user and cannot open its
+# own entry point — which reads as "Permission denied" from `/bin/sh` with nothing pointing at the
+# cause. Nothing runs after these, so changing one rebuilds only the layers from it down.
+COPY --chmod=755 deploy/acervo/lexibeat/entrypoint.sh /usr/local/bin/lexibeat-entrypoint
 # The entrypoint reads the bundle's root from the pin, so which bundle this image looks for is
 # written down once — beside the digest it was fetched against — rather than in three places.
-COPY deploy/acervo/lexibeat/pin.json /app/pin.json
-# `a+rx`, not `+x`: a bare `+x` is masked by the umask, and the installer extracts a release under
-# `umask 077`, so the copied file arrives owner-only and stays that way. The container runs as the
-# deploying user against a root-owned file and cannot open its own entry point — which reads as
-# "Permission denied" from `/bin/sh` with nothing pointing at the cause.
-RUN chmod a+rx /usr/local/bin/lexibeat-entrypoint && chmod -R a+rX /app
+COPY --chmod=755 deploy/acervo/lexibeat/pin.json /app/pin.json
+COPY --chmod=755 deploy/acervo/lexibeat/serve.py /app/serve.py
 
 EXPOSE 8000
 ENTRYPOINT ["/usr/local/bin/lexibeat-entrypoint"]

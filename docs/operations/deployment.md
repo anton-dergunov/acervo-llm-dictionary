@@ -338,8 +338,43 @@ build repopulates; they are never committed.
 
 ```bash
 ./deploy.sh                 # build, ship and install the current checkout
+./deploy.sh --rebuild       # the same, reusing nothing: every image layer and every dictionary
 ./deploy.sh --status        # what is running, and whether it is healthy
 ```
+
+### What a deploy rebuilds
+
+**Only what changed**, and `--rebuild` is the way to say otherwise. Three things make that true, and
+each was measured on the NAS before it was written down.
+
+- **The images are built on a base pinned by digest**, the same one in all four Dockerfiles. A tag is
+  a pointer upstream moves — `python:3.12-slim-bookworm` moved three times in three weeks — and a build
+  that follows it discards every layer below: torch, every requirement and 900 MB of model weights,
+  reinstalled over twelve minutes for a deploy that changed none of them. **Upgrading the base is
+  editing that digest**, in all four files (a test holds them to one), and it costs one such rebuild.
+  Nothing upgrades it unasked, so the base's security fixes arrive when the digest is edited and not
+  before.
+- **Inside an image, what changes most often comes last, and nothing runs after it.** A layer is
+  rebuilt when anything above it changed, and on the NAS's disks every rebuilt layer costs between
+  five and forty seconds whatever its size. So installs and directory set-up come first, then the
+  content in order of how rarely it changes, then `src`, then the built interface; files are made
+  readable by `COPY --chmod` rather than by a `chmod` step at the end. A code change rebuilds two
+  layers of the server image and a prompt change three.
+- **A container whose image did not change is left running.** The Anki sync server runs none of
+  Acervo's code, so its image stops at the build stage before the code is copied; the loop generator
+  copies three files of its own; the corpus service copies `acervo.models` and little else. A deploy
+  that touches none of those restarts only the server.
+
+**Compiled dictionaries travel only when they change.** They are most of a release — 800-odd MB
+against a few MB of everything else — and the installer merges a release's dictionaries into the
+published ones, so a release carries only those whose checksums differ from what this machine's last
+successful deploy to the same server left there. That record is `build/deploy-state/` on the deploying
+machine and is as disposable as the rest of `build/`: without it the next deploy sends them all.
+
+**`--rebuild` reuses nothing**: every image from its first layer with the base pulled again, and every
+dictionary sent again. It takes around a quarter of an hour, builds before anything is stopped, and is
+for the day a reused layer is suspected of being wrong or the server has lost its dictionaries. It is
+not how the base image is upgraded — the digest is.
 
 **Every deploy sets the server's timezone**, which is what its days — the review statistics' — and
 the nightly hour are read in. It is the deploying machine's own zone (`TZ`, else `/etc/localtime`),
@@ -348,7 +383,7 @@ already has. `deployment.env` is rewritten whole on every deploy, so a zone adde
 not survive the next one.
 
 **A healthy deploy cleans up after itself**: it keeps the current release tree and the two before it,
-and removes the images the rebuild superseded. Only Acervo's images are removed, picked by the project
+and removes the images its build superseded. Only Acervo's images are removed, picked by the project
 label compose puts on what it builds, because the host's Docker belongs to other applications too. A
 failed deploy removes nothing, so the previous release is still there to be looked at.
 

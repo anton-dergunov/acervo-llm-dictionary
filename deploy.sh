@@ -3,8 +3,11 @@ set -eu
 
 repo_root=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 profile=${ACERVO_DEPLOY_PROFILE:-"$repo_root/.acervo-deploy"}
+# What this machine remembers having sent, so a deploy can leave it out. Beside the build products
+# and as disposable: without it the next deploy sends everything, which is only slower.
+deploy_state=${ACERVO_DEPLOY_STATE:-"$repo_root/build/deploy-state"}
 helper_path=/usr/local/sbin/deploy-acervo
-helper_protocol=13
+helper_protocol=14
 worker_arguments=
 
 mode=
@@ -21,6 +24,7 @@ reset_anki=false
 timezone=
 reset_database=false
 transition=false
+rebuild=false
 cancel_jobs=false
 jobs_arguments=
 remember=false
@@ -38,14 +42,15 @@ usage:
   ./deploy.sh --local [--root PATH] [--bind-address ADDRESS] [--port PORT]
               [--app-bind-address ADDRESS] [--app-port PORT]
               [--configure-credentials] [--reset-anki] [--reset-database | --transition]
-              [--cancel-jobs] [--timezone ZONE]
+              [--cancel-jobs] [--rebuild] [--timezone ZONE]
               [--configure-llm [--llm-chain IDS] [--llm-set NAME=VALUE]...
                [--llm-key NAME --llm-api-key-stdin]]
   ./deploy.sh [--target USER@HOST] [--root PATH] [--configure-credentials]
               [--bind-address ADDRESS] [--port PORT] [--remember-target]
               [--app-bind-address ADDRESS] [--app-port PORT]
               [--https-port PORT] [--service NAME] [--reset-anki]
-              [--reset-database | --transition] [--cancel-jobs] [--timezone ZONE]
+              [--reset-database | --transition] [--cancel-jobs] [--rebuild]
+              [--timezone ZONE]
        deploy.sh --jobs open | cancel
               [--configure-llm [--llm-chain IDS] [--llm-set NAME=VALUE]...
                [--llm-key NAME --llm-api-key-stdin]]
@@ -73,6 +78,13 @@ usage:
                       left alone; one no converter fits is refused and nothing is deployed.
                       The backup goes in the dated directory under the deployment's
                       backups/, and its path is printed
+  --rebuild           rebuild everything instead of only what changed: every image from
+                      its first layer, with the base image pulled again, and every compiled
+                      dictionary sent again. A deploy otherwise reuses each image layer
+                      whose inputs are unchanged and sends only the dictionaries that
+                      changed since this machine's last deploy there. Around a quarter of
+                      an hour; for when a reused layer is suspected, or the server has lost
+                      its dictionaries
   --cancel-jobs       cancel the server's open jobs instead of refusing to deploy. It may be
                       given with --transition, which is the combination to reach for when a
                       schema change is waiting behind an open job: nothing is deployed until
@@ -163,6 +175,7 @@ while [ "$#" -gt 0 ]; do
     --timezone) [ "$#" -ge 2 ] || usage; timezone=$2; shift 2 ;;
     --reset-database) reset_database=true; shift ;;
     --transition) transition=true; shift ;;
+    --rebuild) rebuild=true; shift ;;
     --cancel-jobs) cancel_jobs=true; shift ;;
     *) usage ;;
   esac
@@ -284,6 +297,7 @@ if [ "$reset_anki" = true ] && [ "$action" != deploy ]; then usage; fi
 if [ -n "$timezone" ] && [ "$action" != deploy ]; then usage; fi
 if [ "$reset_database" = true ] && [ "$action" != deploy ]; then usage; fi
 if [ "$transition" = true ] && [ "$action" != deploy ]; then usage; fi
+if [ "$rebuild" = true ] && [ "$action" != deploy ]; then usage; fi
 # Opposite answers to the same schema change: rebuild it, or carry it across.
 if [ "$transition" = true ] && [ "$reset_database" = true ]; then usage; fi
 
@@ -466,7 +480,28 @@ prompt_account() {
   esac
 }
 
+# The compiled dictionaries are most of a release — 800-odd MB against a few MB of everything else —
+# and they change when one is recompiled, not when the code does. The installer merges whatever a
+# release carries into what the server already publishes, so a release may carry only the changed
+# ones: this is the record of what the last successful deploy to this destination left there, as
+# checksums, which the packager compares against. Written only after the installer has succeeded,
+# so a failed deploy is sent again in full. `--rebuild` ignores it.
+dictionaries_sent_file() {
+  printf '%s/dictionaries-%s\n' "$deploy_state" \
+    "$(printf '%s' "${target:-local}:$acervo_root" | cksum | cut -d ' ' -f 1)"
+}
+
+remember_sent_dictionaries() {
+  [ -f "$1.dictionaries" ] || return 0
+  mkdir -p "$deploy_state"
+  mv "$1.dictionaries" "$(dictionaries_sent_file)"
+}
+
 build_release_archive() {
+  if [ "$rebuild" = false ]; then
+    ACERVO_DICTIONARIES_SENT=$(dictionaries_sent_file)
+    export ACERVO_DICTIONARIES_SENT
+  fi
   eval "$("$repo_root/scripts/version.sh")"
   export ACERVO_APP_VERSION ACERVO_APP_BUILD
   if [ "$(uname -s)" = Darwin ] && [ "${ACERVO_SKIP_MACOS_RELEASE:-false}" != true ]; then
@@ -607,11 +642,13 @@ if [ "$action" = install-samples ]; then
   [ -z "$effective_timezone" ] || set -- "$@" --timezone "$effective_timezone"
   [ "$reset_database" = false ] || set -- "$@" --reset-database
   [ "$transition" = false ] || set -- "$@" --transition
+  [ "$rebuild" = false ] || set -- "$@" --rebuild
   if [ -n "$credential_args" ]; then
     printf '%s\n%s\n' "$sync_username" "$sync_password" | "$repo_root/deploy/acervo/install.sh" "$@"
   else
     "$repo_root/deploy/acervo/install.sh" "$@"
   fi
+  remember_sent_dictionaries "$local_archive"
   [ -z "$llm_credentials" ] || rm -f "$llm_credentials"
   llm_credentials=
   trap - EXIT HUP INT TERM
@@ -806,6 +843,7 @@ installer_arguments="$installer_arguments --app-bind-address $effective_app_bind
 [ -z "$effective_timezone" ] || installer_arguments="$installer_arguments --timezone $effective_timezone"
 [ "$reset_database" = false ] || installer_arguments="$installer_arguments --reset-database"
 [ "$transition" = false ] || installer_arguments="$installer_arguments --transition"
+[ "$rebuild" = false ] || installer_arguments="$installer_arguments --rebuild"
 
 if [ "$remote_mode" = helper ]; then
   echo "Streaming and installing with the passwordless Acervo launcher..."
@@ -818,6 +856,7 @@ else
     "sh $remote_installer --archive $remote_archive$installer_arguments; \
      result=\$?; rm -f $remote_installer $remote_archive $remote_credentials $remote_llm_credentials $remote_google_credentials; exit \$result" || remote_failed
 fi
+remember_sent_dictionaries "$archive"
 
 # The address to open, which is the one thing a deployment summary was not saying. The tailnet
 # suffix is a property of the tailnet, not of a machine, so this machine's answer is the server's

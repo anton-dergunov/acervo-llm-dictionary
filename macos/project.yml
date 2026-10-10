@@ -24,6 +24,10 @@ targets:
       - name: Bundle web interface
         script: |
           destination="$TARGET_BUILD_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH/dist"
+          # Replaced, not merged into. The build directory outlives a build and every asset is
+          # named by a digest of its contents, so merging keeps every asset of every earlier build
+          # — hundreds of megabytes around a 6 MB interface, in every release and every update.
+          rm -rf "$destination"
           mkdir -p "$destination"
           ditto "$SRCROOT/../web/dist" "$destination"
         basedOnDependencyAnalysis: false

@@ -45,14 +45,24 @@ def bundled_directories() -> set[str]:
     return entries
 
 
+def copies(dockerfile: Path) -> list[tuple[list[str], list[str]]]:
+    """Every `COPY` from the build context, as its flags and its sources."""
+    found = []
+    for line in re.findall(r"^COPY\s+(.+)$", dockerfile.read_text(encoding="utf-8"), flags=re.MULTILINE):
+        words = line.split()
+        flags = [word for word in words if word.startswith("--")]
+        paths = [word for word in words if not word.startswith("--")]
+        if any(flag.startswith("--from=") for flag in flags):
+            continue
+        found.append((flags, paths[:-1]))
+    return found
+
+
 def image_sources() -> set[str]:
     sources = set()
     for dockerfile in DOCKERFILES:
-        for source, _destination in re.findall(r"^COPY\s+(\S+)\s+(\S+)$", dockerfile.read_text(),
-                                               flags=re.MULTILINE):
-            if source.startswith("--"):
-                continue
-            sources.add(PurePosixPath(source).parts[0])
+        for _flags, paths in copies(dockerfile):
+            sources.update(PurePosixPath(source).parts[0] for source in paths)
     assert sources, "expected the Dockerfiles to copy something from the build context"
     return sources
 
@@ -174,15 +184,87 @@ def test_every_fallback_volume_is_declared():
     assert not missing, f"{missing} is mounted by name but not declared under `volumes:`"
 
 
-def test_both_images_leave_their_own_files_readable_by_the_user_they_run_as():
+# What a `COPY` may sit beside without being run again on every code change: instructions that only
+# describe the image. Anything else after the first copy of Acervo's own files is a step a deploy
+# pays for whenever those files change.
+DESCRIPTIVE = ("COPY", "ENV", "EXPOSE", "CMD", "ENTRYPOINT", "FROM", "WORKDIR", "ARG")
+# Pins and requirement lists, which change when a dependency does. A step after one of these is the
+# install it names, and is meant to run again when it changes.
+DEPENDENCY_INPUTS = ("vendor/", "requirements", "models/encoder.json", "models/segmenter.json")
+
+
+def test_every_image_leaves_its_own_files_readable_by_the_user_it_runs_as():
     """The installer extracts a release under `umask 077` and `COPY` makes the result root-owned, so
-    an image built from a release has owner-only files. Both containers run as the deploying user,
-    which would then be unable to read its own entry point."""
+    an image built from a release has owner-only files. Every container runs as the deploying user,
+    which would then be unable to read its own entry point.
+
+    On the `COPY` itself rather than a `chmod -R` at the end, which would be a step run again after
+    every code change (the test below).
+    """
     for dockerfile in DOCKERFILES:
-        source = dockerfile.read_text()
-        assert "chmod -R a+rX /app" in source, (
-            f"{dockerfile} copies files a non-root container could not read"
-        )
+        for flags, paths in copies(dockerfile):
+            if all(source.startswith(DEPENDENCY_INPUTS) for source in paths):
+                continue
+            assert "--chmod=755" in flags, (
+                f"{dockerfile}: COPY {' '.join(paths)} lands owner-only in an image built from a "
+                "release; say `--chmod=755`"
+            )
+
+
+def test_nothing_runs_after_an_image_has_copied_acervos_own_files():
+    """A layer is rebuilt when anything above it changed, and on the server every rebuilt layer costs
+    seconds whatever its size. Measured: a `pip install` below the corpus image's copy of
+    `acervo.models` reinstalled LiteLLM on every deploy that touched that package, and one code
+    change rebuilt twenty-nine layers across four images — seven minutes for a megabyte of Python.
+    So installs and directory set-up come first, and what a deploy changes comes last.
+    """
+    for dockerfile in DOCKERFILES:
+        copied = False
+        for line in dockerfile.read_text(encoding="utf-8").splitlines():
+            words = line.split()
+            if not words or words[0] not in ("RUN", *DESCRIPTIVE) or line[0].isspace():
+                continue
+            if words[0] == "COPY":
+                paths = [word for word in words[1:] if not word.startswith("--")][:-1]
+                copied = copied or not all(source.startswith(DEPENDENCY_INPUTS) for source in paths)
+            assert not (copied and words[0] == "RUN"), (
+                f"{dockerfile}: {line.strip()[:60]!r} runs after Acervo's own files are copied, so "
+                "every code change runs it again; move it above them"
+            )
+
+
+def test_every_image_is_built_on_the_same_pinned_base():
+    """A tag is a pointer upstream moves — three times in three weeks — and every move discarded the
+    whole layer cache: torch, every requirement and 900 MB of model weights, reinstalled for a deploy
+    that changed none of them. A digest does not move. One digest across all four, so the base
+    layers are stored once and upgraded together.
+    """
+    bases = set()
+    for dockerfile in DOCKERFILES:
+        text = dockerfile.read_text(encoding="utf-8")
+        external = [base for base in re.findall(r"^FROM\s+(\S+)", text, flags=re.MULTILINE)
+                    if base not in re.findall(r"\bAS\s+(\S+)$", text, flags=re.MULTILINE)]
+        assert external, f"{dockerfile} names no base image"
+        for base in external:
+            assert re.fullmatch(r"[\w./:-]+@sha256:[0-9a-f]{64}", base), (
+                f"{dockerfile}: {base} is not pinned by digest"
+            )
+        bases.update(external)
+    assert len(bases) == 1, f"the images are built on different bases: {sorted(bases)}"
+
+
+def test_the_sync_server_is_built_without_acervos_code():
+    """It runs `python -m anki.syncserver` and nothing of Acervo's, so its image stops at the stage
+    before the code is copied: a code change leaves the image as it was, and compose leaves a
+    container whose image has not changed running."""
+    import yaml
+
+    compose = yaml.safe_load((ROOT / "deploy" / "acervo" / "compose.yaml").read_text(encoding="utf-8"))
+    target = compose["services"]["anki-sync-server"]["build"]["target"]
+    dockerfile = (ROOT / "deploy" / "acervo" / "Dockerfile").read_text(encoding="utf-8")
+    stage = dockerfile.split(f" AS {target}\n", 1)[1].split("\nFROM ", 1)[0]
+    assert "COPY" not in stage, "the sync server's stage copies files a code change would alter"
+    assert compose["services"]["acervo-worker"]["build"]["target"] != target
 
 
 def test_the_suite_never_writes_the_archive_a_deployment_streams():
