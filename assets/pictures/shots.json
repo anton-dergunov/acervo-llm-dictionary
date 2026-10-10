@@ -98,7 +98,11 @@
     {
      "wait": 6000
     }
-   ]
+   ],
+   "viewport": {
+    "width": 760,
+    "height": 720
+   }
   },
   {
    "name": "loop",
@@ -179,14 +183,21 @@
      }
     },
     {
-     "wait": 7000
+     "wait": 6000
+    },
+    {
+     "style": ".photo-sentence-text { min-height: 172px !important; }"
     }
    ],
    "allow": [
     "/photo/read",
     "/photo/warm",
     "/capture/resolve"
-   ]
+   ],
+   "viewport": {
+    "width": 390,
+    "height": 760
+   }
   },
   {
    "name": "word-phone",
@@ -288,6 +299,10 @@
   },
   {
    "name": "capture-text",
+   "viewport": {
+    "width": 760,
+    "height": 600
+   },
    "steps": [
     {
      "click": ".tb-btn.primary"
@@ -305,6 +320,10 @@
   },
   {
    "name": "capture",
+   "viewport": {
+    "width": 760,
+    "height": 600
+   },
    "allow": [
     "/capture"
    ],
@@ -442,6 +461,109 @@
     },
     {
      "wait": 900
+    }
+   ]
+  },
+  {
+   "name": "word-window",
+   "viewport": {
+    "width": 800,
+    "height": 720
+   },
+   "steps": [
+    {
+     "word": "sonar"
+    },
+    {
+     "style": ".sense-image { max-width: 250px; } .ask { display: none; }"
+    }
+   ]
+  },
+  {
+   "name": "word-list",
+   "viewport": {
+    "width": 800,
+    "height": 720
+   },
+   "steps": []
+  },
+  {
+   "name": "capture-chat",
+   "viewport": {
+    "width": 760,
+    "height": 900
+   },
+   "allow": [
+    "/capture",
+    "/chat"
+   ],
+   "steps": [
+    {
+     "click": ".tb-btn.primary"
+    },
+    {
+     "fill": {
+      "in": ".composing textarea >> nth=0",
+      "text": "Ayer trasnoché para terminar el informe y hoy no puedo con mi alma."
+     }
+    },
+    {
+     "click": "button:text-is('Process')"
+    },
+    {
+     "waitFor": "button:has-text('Save')"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "fill": {
+      "in": "[aria-label^='Ask about']",
+      "text": "Add an example about Monday mornings."
+     }
+    },
+    {
+     "click": ".ask-send"
+    },
+    {
+     "waitFor": "button:text-is('Review')"
+    },
+    {
+     "scrollTo": "button:text-is('Review')"
+    },
+    {
+     "wait": 800
+    }
+   ]
+  },
+  {
+   "name": "photo-kept",
+   "viewport": {
+    "width": 800,
+    "height": 720
+   },
+   "steps": [
+    {
+     "word": "la orilla"
+    },
+    {
+     "click": ".att-photo"
+    },
+    {
+     "wait": 1500
+    }
+   ]
+  },
+  {
+   "name": "clip-example",
+   "viewport": {
+    "width": 800,
+    "height": 720
+   },
+   "element": ".ex.clip-ex >> nth=0",
+   "steps": [
+    {
+     "word": "sonar"
     }
    ]
   }
