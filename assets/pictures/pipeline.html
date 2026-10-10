@@ -1,61 +1,69 @@
 <!doctype html>
 <!--
-  Source of pipeline.png. The diagram follows docs/architecture/jobs.md and docs/architecture/models.md. The log lines are
-  one real job from the owner's server, shortened; shots/activity.png is Settings, Activity.
+  Source of pipeline.png. The diagram follows docs/features/capture.md, docs/architecture/jobs.md and
+  docs/architecture/models.md. shots/activity.png is Settings, Activity; the log lines are one real
+  job from the owner's server, shortened.
   Render with capture.mjs --compose pipeline.
 -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="picture-size" content="960x600">
-<title>Behind a saved word</title>
+<title>How an entry is made</title>
 <link rel="stylesheet" href="style.css">
-<style>
-.flow { display: flex; flex-direction: column; gap: 5px; }
-.step { border: 1px solid #B5D6CF; background: var(--core-soft); border-radius: 8px; padding: 6px 10px; display: flex; flex-direction: column; font-size: 11.2px; color: #0B4F48; }
-.step b { font-size: 12.2px; color: #083E38; }
-.step:first-child { background: var(--surface); border-color: var(--rule); color: var(--ink-2); }
-.step:first-child b { color: var(--ink); }
-code { font: 10.4px var(--mono); }
-</style>
 </head>
 <body>
 <div class="frame">
   <div class="head">
-    <h1>What happens after you press Save</h1>
-    <span class="sub">The save queues one job in the same transaction as the word. The job fills in clips, pictures and recordings in the background, and the entry is usable the whole time.</span>
+    <span class="kicker">How an entry is made</span>
+    <h1>From a pasted word to a finished entry, step by step</h1>
+    <span class="sub">Two model calls write the text while you wait. Everything else is done on your server afterwards, and carries on with the app closed.</span>
   </div>
   <div class="main">
-    <div class="col" style="width: 330px">
-      <div class="flow">
-        <div class="step"><b>Save</b><span>word + <code>enrich</code> job, one transaction</span></div>
-        <div class="step"><b>1 · Clips</b><span>the corpus retrieves, one model call selects and translates</span></div>
-        <div class="step"><b>2 · Pictures</b><span>one brief call for the word, one image call for each sense</span></div>
-        <div class="step"><b>3 · Recordings</b><span>the word and its sentences, kept as Opus</span></div>
+    <div class="col grow" style="gap: 9px">
+      <div class="lane">
+        <span class="label">While you wait · in the app</span>
+        <div class="flow">
+          <div class="b"><b>A word, a sentence or a photo</b>whatever you met</div><span class="a">→</span>
+          <div class="b llm"><span class="who">language model</span><b>Resolve</b>which word, which language, already in your dictionary?</div><span class="a">→</span>
+          <div class="b llm"><span class="who">language model</span><b>Compose</b>meanings, definitions, translations, examples, notes</div><span class="a">→</span>
+          <div class="b"><b>You review</b>edit, ask for changes in the chat, then Save</div>
+        </div>
       </div>
-      <div class="note"><span class="label">Run twice, writes nothing</span>A job names the word; each step works out what is still missing.</div>
-      <div class="note grow"><span class="label">A chain of providers</span>A call falls through to the next model on a rate limit, a server error, a timeout or an unusable answer; never on a bad credential.</div>
-    </div>
-    <div class="col grow">
-      <span class="label">One job in the server's logs, joined by its id</span>
-      <div class="note code">13:43:05 job start id=<b>zcvcdzd11sbfp17</b> kind=enrich trigger=ingest
-13:43:09 job step  id=<b>zcvcdzd11sbfp17</b> step=clips state=done
-13:43:11 <i>brief</i>   gemini-free:gemini-3.5-flash-lite ok in 1.59s  rid=<b>zcvcdzd11sbfp17</b>
-13:44:14 <i>picture</i> vertex:gemini-3.1-flash-lite-image ok in 5.26s rid=<b>zcvcdzd11sbfp17</b>
-13:45:14 <i>picture</i> vertex:gemini-3.1-flash-lite-image ok in 4.73s rid=<b>zcvcdzd11sbfp17</b>
-13:45:14 job step  id=<b>zcvcdzd11sbfp17</b> step=pictures state=done
-13:45:14 job step  id=<b>zcvcdzd11sbfp17</b> step=pronunciations state=skipped
-13:45:14 job end   id=<b>zcvcdzd11sbfp17</b> kind=enrich state=done</div>
-      <div class="row grow" style="min-height: 0">
-        <div class="win crop" style="width: 290px; height: 160px; align-self: flex-start"><img src="shots/activity.png" style="width: 550px; margin: -163px 0 0 -125px" alt=""></div>
-        <div class="col grow">
-          <div class="note">Pictures are paced at one a minute, the provider's known allowance, so the two above are a minute apart.</div>
-          <div class="note fact grow"><span class="label">Measured</span>No JSON Schema is sent to any model. With one, clip translations grew from 61 characters to over 1,000 and three calls in four timed out.</div>
+      <div class="lane server">
+        <span class="label">After Save · on your server, one background job per word</span>
+        <div class="col" style="gap: 6px">
+          <div class="flow"><span class="k">Clips</span>
+            <div class="b"><b>Search the caption index</b>passages where the word is said</div><span class="a">→</span>
+            <div class="b llm"><span class="who">language model</span><b>Select and translate</b>keep the passages that use this meaning</div><span class="a">→</span>
+            <div class="b out"><b>Clips in the entry</b>or none, if none is good</div></div>
+          <div class="flow"><span class="k">Pictures</span>
+            <div class="b llm"><span class="who">language model</span><b>Write the briefs</b>one scene for each meaning, all meanings at once</div><span class="a">→</span>
+            <div class="b llm"><span class="who">image model</span><b>Draw</b>one picture for each brief</div><span class="a">→</span>
+            <div class="b out"><b>A picture for each meaning</b></div></div>
+          <div class="flow"><span class="k">Recordings</span>
+            <div class="b llm"><span class="who">speech model</span><b>Record</b>the word, its definitions and its sentences</div><span class="a">→</span>
+            <div class="b"><b>Encode</b>kept as Opus on the server and on each device</div><span class="a">→</span>
+            <div class="b out"><b>Recordings</b>and updated Anki cards</div></div>
+        </div>
+      </div>
+      <div class="row grow" style="min-height: 0; gap: 12px">
+        <div class="col" style="width: 300px; gap: 5px">
+          <span class="label">Settings ▸ Activity: what the server is doing</span>
+          <div class="win crop" style="height: 70px"><img src="shots/activity.png" style="width: 560px; margin: -222px 0 0 -126px" alt=""></div>
+        </div>
+        <div class="col grow" style="gap: 5px">
+          <span class="label">The same job in the server's log, every line under one id</span>
+          <div class="note code" style="padding: 6px 9px; font-size: 8.8px; line-height: 1.55">13:43:05 job start id=<b>zcvcdzd11sbfp17</b> kind=enrich
+13:43:11 <i>brief</i>   gemini-3.5-flash-lite ok in 1.59s        rid=<b>zcvcdzd11sbfp17</b>
+13:44:14 <i>picture</i> gemini-3.1-flash-lite-image ok in 5.26s  rid=<b>zcvcdzd11sbfp17</b>
+13:45:14 <i>picture</i> gemini-3.1-flash-lite-image ok in 4.73s  rid=<b>zcvcdzd11sbfp17</b>
+13:45:14 job end   id=<b>zcvcdzd11sbfp17</b> state=done</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="foot">Every generated record names the model that answered. Three logs (model calls, jobs, refusals) share one request id, so <span class="exp">admin log &lt;id&gt;</span> shows a job with every call made for it.</div>
+  <div class="foot">A loop and a story are made the same way: a job on the server, step by step. Each model is one of a chain of providers; when one is rate limited or fails, the next answers.</div>
 </div>
 </body>
 </html>

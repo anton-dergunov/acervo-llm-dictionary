@@ -20,7 +20,7 @@
 .card .pic { width: 100%; margin-top: 3px; }
 .card .t3 { font: 400 13px/1.2 var(--serif); }
 .brief { margin-top: 10px; }
-.bt { font: italic 400 11.6px/1.42 var(--serif); color: var(--ink); }
+.bt { font: italic 400 12.2px/1.45 var(--serif); color: var(--ink); }
 </style>
 </head>
 <body>
@@ -31,9 +31,9 @@
     <span class="sub">Every meaning gets its own picture, made to be remembered: the idea is exaggerated, and the style is picked to suit it.</span>
   </div>
   <div class="main">
-    <div class="col" style="width: 570px; gap: 0">
+    <div class="col" style="width: 606px; gap: 0">
       <div class="root"><span>la trampa</span></div>
-      <svg class="tree" viewBox="0 0 570 20" width="570" height="20"><path d="M285 0 V10 M91 20 V10 H479 V20 M285 10 V20" fill="none" stroke="#9FB3AE" stroke-width="1.4"/></svg>
+      <svg class="tree" viewBox="0 0 606 20" width="606" height="20"><path d="M303 0 V10 M97 20 V10 H509 V20 M303 10 V20" fill="none" stroke="#9FB3AE" stroke-width="1.4"/></svg>
       <div class="row" style="gap: 12px">
         <div class="card"><div class="sense">🪤 <span class="num">01</span></div><div class="t3">trap, snare</div><span class="pic"><img src="shots/pictures-1.png" alt=""><span class="hash">watercolour-storybook</span></span></div>
         <div class="card"><div class="sense">🕸️ <span class="num">02</span></div><div class="t3">pitfall, trick</div><span class="pic"><img src="shots/pictures-2.png" alt=""><span class="hash">film-noir</span></span></div>
@@ -41,14 +41,14 @@
       </div>
       <div class="note brief"><span class="label">↑ The brief a language model wrote for 01</span><span class="bt">“In the clear, sunlit shallows of a winding river, a smiling young woman in rolled-up trousers crawls headfirst into a giant cone-shaped wicker fish trap resting on the sandy bottom. The ribbed, woven funnel of the trap encloses her torso while her legs kick out behind her, the textured willow reeds glowing warm amber against the rippling water.”</span></div>
     </div>
-    <div class="col grow" style="gap: 14px">
+    <div class="col grow" style="gap: 11px">
       <span class="label">How a picture is made</span>
-      <div class="steps" style="gap: 10px">
+      <div class="steps" style="gap: 7px">
         <div><i>1</i><span><b>The meanings of the word</b>, each with its definition and an example sentence.</span></div>
-        <div><i>2</i><span><b>A language model writes a brief for each</b>: one concrete scene that shows this meaning and not the others, exaggerated so it sticks, in one of 23 styles it picks for the idea.</span></div>
+        <div><i>2</i><span><b>A language model writes a brief for each</b>: one concrete scene that shows this meaning and not the others, exaggerated so it sticks. It picks one of 23 styles for the idea; you can choose another and redraw.</span></div>
         <div><i>3</i><span><b>An image model draws each brief.</b></span></div>
       </div>
-      <div class="note fact"><span class="label">Measured</span>The prompt that writes briefs was tuned by looking at its pictures: <b>eight rounds, 2,285 pictures</b>. In the first round <b>7 of 14</b> were rejected; in the last, <b>0 of 50</b>. Twenty kinds of failure were fixed in the prompt. The image model never changed.<span class="exp">experiments/sense-images</span></div>
+      <div class="note fact"><span class="label">Tuned by hand, over eight rounds</span>Each round, the author looked at every picture, kept or rejected it and wrote why; the brief prompt was changed and the round repeated: <b>2,285 pictures</b>. Round one rejected <b>7 of 14</b>; the last, <b>0 of 50</b>. Among the rules that came out of it:<ul class="feat one" style="margin-top: 4px; gap: 1px; color: #0B4F48"><li>show the meaning itself, never hint at it</li><li>exaggerate by adding to the subject</li><li>keep the cast small, one situation</li><li>what separates two meanings must be in the frame</li></ul><span class="exp">experiments/sense-images</span></div>
     </div>
   </div>
   <div class="foot">An entry also carries, for each meaning, a definition in the language you are learning, translations and examples; the picture is drawn from them.</div>
