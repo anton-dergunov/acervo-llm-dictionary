@@ -52,7 +52,7 @@ Needs Google Chrome (Playwright's own Chromium cannot decode the clips' video) a
 
 - **A shot may be drawn differently from the application where that makes the picture readable**: a
   window narrower or a screen shorter than a real one (`viewport`), a picture drawn smaller or a text
-  box taller (`style`). Each `.html` says so in its opening comment. Marks drawn on a capture by the
+  box taller (`style`), buttons that appear on hover shown, or a label added that the record lacks (`append`). Each `.html` says so in its opening comment. Marks drawn on a capture by the
   page, such as the underlined phrase on `capture.png`, are said there too.
 
 ## The pictures
