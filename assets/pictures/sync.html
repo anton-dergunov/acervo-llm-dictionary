@@ -1,0 +1,69 @@
+<!doctype html>
+<!--
+  Source of sync.png. A drawn diagram of the deployment, after docs/README.md, docs/architecture/sync.md and
+  docs/architecture/server.md. Nothing on it is a capture.
+  Render with capture.mjs --compose sync.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>One server, every device</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.b1 { background: var(--surface); border: 1px solid var(--rule); border-radius: 7px; padding: 6px 9px 7px; font-size: 10.8px; line-height: 1.34; color: var(--ink-2); }
+.b1 b { display: block; font-size: 11.8px; color: var(--ink); font-weight: 600; }
+.b1.main1 { width: 200px; border-color: var(--core); }
+.wires { display: flex; justify-content: space-around; font: 500 10.4px var(--mono); letter-spacing: .04em; color: var(--core); padding: 2px 0; }
+.dev { flex: 1 1 0; min-width: 0; min-height: 150px; border: 1px solid var(--rule); border-radius: 12px; background: var(--paper); padding: 12px 11px 11px; font-size: 10.8px; line-height: 1.34; color: var(--ink-2); display: flex; flex-direction: column; gap: 2px; }
+.dev b { font-size: 12.4px; color: var(--ink); font-weight: 600; }
+.dev .ic { font-size: 20px; line-height: 1.1; }
+.dev .copy { margin-top: auto; padding-top: 6px; font: 500 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--core); }
+.dev.off { border-style: dashed; background: none; }
+.lane .col .b1 { }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <span class="kicker">Self-hosted · offline-first</span>
+    <h1>One server of your own, and the whole dictionary on every device</h1>
+    <span class="sub">The server keeps the dictionary and does the generating. Each device holds a complete copy, so everything opens with no connection.</span>
+  </div>
+  <div class="main">
+    <div class="col grow" style="gap: 18px">
+      <div class="row" style="gap: 12px; align-items: stretch">
+        <div class="lane" style="width: 190px"><span class="label">Called by the server</span><div class="col" style="gap: 6px">
+          <div class="b1"><b>Model providers</b>language, image and speech models, in an order you set</div>
+          <div class="b1"><b>YouTube</b>clips play from there</div></div></div>
+        <span class="arrow">⇄</span>
+        <div class="lane server grow"><span class="label">Your server · one machine at home</span>
+          <div class="row" style="gap: 8px">
+            <div class="b1 main1"><b>Acervo</b>one Python service and one SQLite file: the dictionary, its pictures and recordings, the background jobs</div>
+            <div class="col grow" style="gap: 5px">
+              <div class="b1"><b>Spoken Usage Retrieval</b>the index of captions</div>
+              <div class="b1"><b>LexiBeat</b>makes the loops</div>
+              <div class="b1"><b>Anki sync server</b>carries the cards</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wires"><span>changes pulled as they happen ↓</span><span>↑ a save is one request, online only</span></div>
+      <div class="row" style="gap: 12px">
+        <div class="dev"><span class="ic">📱</span><b>Phone</b>installed web app, Android or iOS<span class="copy">complete copy</span></div>
+        <div class="dev"><span class="ic">📲</span><b>Tablet</b>installed web app<span class="copy">complete copy</span></div>
+        <div class="dev"><span class="ic">💻</span><b>Mac</b>native window, with a menu-bar item<span class="copy">complete copy</span></div>
+        <div class="dev off"><span class="ic">✈️</span><b>No connection</b>search, read, listen, play loops and stories you have opened before<span class="copy">still works</span></div>
+      </div>
+    </div>
+    <div class="col" style="width: 236px; gap: 10px">
+      <div class="note"><span class="label">Reads offline</span>The app answers every read from its own copy and starts with the server unreachable.</div>
+      <div class="note"><span class="label">Writes online</span>Only the server numbers a change, so devices never disagree and there is nothing to merge. Without the server a save fails visibly and changes nothing.</div>
+      <div class="note"><span class="label">Small enough to hold whole</span>A thousand words take a few megabytes. Pictures and recordings are fetched when first shown, then kept.</div>
+      <div class="note fact"><span class="label">Yours</span>Nothing is hosted for you. The dictionary, its media and the keys to the model providers stay on your machine.</div>
+    </div>
+  </div>
+  <div class="foot">A new version of the app is offered when the server has one, and a device whose copy is from an older version pulls a fresh one.</div>
+</div>
+</body>
+</html>

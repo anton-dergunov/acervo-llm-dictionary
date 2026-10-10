@@ -2,8 +2,9 @@
 <!--
   Source of photo.png. shots/photo.png is the Photo tab on tests/fixtures/photo-capture/camera-03.jpg with one word
   tapped, with the sentence box drawn tall enough to show the whole sentence;
-  shots/photo-example.png is an example in one of the owner's entries with the photo it came from.
-  Every number is from experiments/photo-capture/README.md.
+  the example under the steps is drawn here, after the way the application shows a sentence with
+  its photo, from the same test photo (shots/photo-thumb.jpg) and with a translation written for
+  the picture. Every number is from experiments/photo-capture/README.md.
   Render with capture.mjs --compose photo.
 -->
 <html lang="en">
@@ -12,6 +13,14 @@
 <meta name="picture-size" content="960x600">
 <title>Reading a photographed page</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.mock { display: flex; gap: 9px; padding: 9px 10px; border-left: 3px solid var(--core); }
+.mock img { flex: none; width: 62px !important; height: 62px; object-fit: cover; border-radius: 6px; border: 1px solid var(--rule); }
+.mock .t { font: 400 11.4px/1.4 var(--serif); color: var(--ink); }
+.mock .tr { font: italic 400 10.4px/1.4 var(--serif); color: var(--ink-3); margin-top: 3px; }
+.mock b { font-weight: 700; }
+.mock .own { display: inline-block; margin-top: 4px; font-size: 9px; color: var(--core); background: var(--core-soft); border-radius: 20px; padding: 1px 7px; }
+</style>
 </head>
 <body>
 <div class="frame">
@@ -22,7 +31,7 @@
   </div>
   <div class="main">
     <div class="device" style="width: 198px; align-self: flex-start"><img src="shots/photo.png" alt=""></div>
-    <div class="col" style="width: 322px; gap: 12px">
+    <div class="col" style="width: 352px; gap: 12px">
       <span class="label">How it works</span>
       <div class="steps">
         <div><i>1</i><span><b>Take a photo</b> of the page, a sign or a screen.</span></div>
@@ -31,7 +40,7 @@
         <div><i>4</i><span><b>The meaning in that sentence</b> appears in about a second. Add keeps the word, the sentence and the photo; or just read on.</span></div>
       </div>
       <span class="label" style="margin-top: 6px">The photo stays with the word</span>
-      <div class="win"><img src="shots/photo-example.png" alt=""></div>
+      <div class="win mock"><img src="shots/photo-thumb.jpg" alt=""><div><p class="t">Seis años más tarde, después de la batalla de Ravena […] el Papa le <b>otorgó</b> a la Guardia Suiza […] el título de “defensores de la libertad de la Iglesia”.</p><p class="tr">Six years later […] the Pope <b>granted</b> the Swiss Guard […] the title of “defenders of the freedom of the Church”.</p><span class="own">✳ your sentence</span></div></div>
       <div style="font-size: 11.4px; color: var(--ink-2)">In the entry the sentence carries the photo it came from. Seeing where you met a word is one more thing to remember it by.</div>
     </div>
     <div class="col grow" style="gap: 12px">

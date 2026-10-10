@@ -1,8 +1,9 @@
 <!doctype html>
 <!--
-  Source of experiments.png. Six rows, each from one write-up under experiments/, with the numbers as experiments/README.md
-  and docs/ml.md give them. Thirteen is the number of rows in experiments/README.md; seven and two
-  are the experiments indexed in spoken-usage-retrieval and listed in lexibeat.
+  Source of experiments.png. Eight rows, each from one write-up: five under experiments/ here (numbers as in
+  experiments/README.md and config/image-styles.yaml), two from experiments/index.md in
+  spoken-usage-retrieval and one from experiments/programme_blocks/report.md in lexibeat. The
+  counts in the footer are the rows of each repository's own index.
   Render with capture.mjs --compose experiments.
 -->
 <html lang="en">
@@ -12,11 +13,12 @@
 <title>Design choices were measured</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.t { flex: 1 1 auto; display: grid; grid-template-columns: 250px 1fr 232px; grid-template-rows: 24px repeat(6, 1fr); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
-.t > div { padding: 0 13px; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--rule-soft); font-size: 11.5px; line-height: 1.36; min-width: 0; color: var(--ink-2); }
-.t > .th { border-top: 0; background: var(--paper); font: 500 9.6px var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); }
-.t .q { font: 700 12.6px/1.3 var(--serif); color: var(--ink); }
-.t .q .exp { margin-top: 3px; font-weight: 400; }
+.t { flex: 1 1 auto; display: grid; grid-template-columns: 262px 1fr 218px; grid-template-rows: 22px repeat(8, 1fr); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.t > div { padding: 0 12px; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--rule-soft); font-size: 10.6px; line-height: 1.32; min-width: 0; color: var(--ink-2); }
+.t > .th { border-top: 0; background: var(--paper); font: 500 9.4px var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); }
+.t .q { font: 700 11.6px/1.25 var(--serif); color: var(--ink); }
+.t .q .exp { margin-top: 1px; font-weight: 400; font-size: 9.4px; }
+.t .q .who { display: inline; font-size: 8.4px; }
 .t .m b { color: var(--core); font-weight: 600; }
 .t .d { background: var(--core-soft); border-left: 1px solid #B5D6CF; font-weight: 600; color: #0B4F48; }
 .t .th.d { color: var(--core); }
@@ -25,33 +27,40 @@
 <body>
 <div class="frame">
   <div class="head">
+    <span class="kicker">Experiments</span>
     <h1>Design choices were measured</h1>
-    <span class="sub">Each prompt, model and pipeline step was tested on real words before it was kept, and some were dropped. Six of the 13 experiments:</span>
+    <span class="sub">Prompts, models and pipeline steps were tested on real words before they were kept. Eight experiments, here and in the two projects Acervo is built on:</span>
   </div>
   <div class="main">
     <div class="t">
       <div class="th">Question</div><div class="th">Measured</div><div class="th d">Decision</div>
-      <div class="q">What must the brief say for a picture to be kept?<span class="exp">experiments/sense-images</span></div>
-      <div class="m"><span>Eight review rounds over 2,285 pictures. Rejects went from <b>7 in 14</b> to <b>0 in 50</b> with the image model unchanged.</span></div>
-      <div class="d">Brief once for the word, draw each sense; rotate the style table</div>
-      <div class="q">Does the clip selector translate the whole passage?<span class="exp">experiments/clip-translation</span></div>
-      <div class="m"><span>With the demand in the prompt, badly cut-off translations fell from <b>8 to 0</b> and full coverage rose from 81% to <b>91%</b> (p = 0.004).</span></div>
-      <div class="d">Prompt shipped; a check in code waits for data in more scripts</div>
-      <div class="q">Do earlier pictures as references keep a story's characters?<span class="exp">experiments/story-picture-reference</span></div>
-      <div class="m"><span>Three blind runs. <b>8 to 0</b> in drawn styles and 0 to 4 in the photoreal one, then <b>9 to 0</b> with 3 ties once the prompt put the picture first.</span></div>
-      <div class="d">On for every style, anchored to a character's first picture</div>
-      <div class="q">Which OCR and sentence splitter for a tapped word?<span class="exp">experiments/photo-capture</span></div>
-      <div class="m"><span>The tap found the word <b>98%</b> of the time with Cloud Vision, 68% with a local engine. SaT found the sentence for <b>98%</b>, rules for 69 to 74%.</span></div>
-      <div class="d">Cloud Vision for geometry, SaT for sentences, a fast model for the tap</div>
-      <div class="q">Do two more fields in the prompt thin the entry?<span class="exp">experiments/compose-lesson-line</span></div>
-      <div class="m"><span>No: ten measures moved less than run-to-run noise over 315 calls. The blind pairwise read called a difference on <b>50%</b> of identical-arm controls.</span></div>
-      <div class="d">Fields shipped, prompt not split; pairwise judging not relied on</div>
-      <div class="q">Does the meaning map stay put when words are added?<span class="exp">experiments/meaning-space</span></div>
-      <div class="m"><span>Not with a fixed seed: it came back mirrored. A warm start and an alignment cut one edit's median move from <b>140 to 37</b> units.</span></div>
-      <div class="d">Warm start and Procrustes alignment on every rebuild</div>
+      <div class="q">Which style does the model pick from a list?<span class="exp"><span class="who">Pictures</span> · experiments/sense-images</span></div>
+      <div class="m"><span>Offered in file order it kept picking the first row. After the list was rotated, one round used 20 of the 23 styles and skipped three whose descriptions did not say what they are for.</span></div>
+      <div class="d">Rotate the list for each word; every style says what it suits</div>
+      <div class="q">Is the whole passage translated?<span class="exp"><span class="who">Clips</span> · experiments/clip-translation</span></div>
+      <div class="m"><span>Old prompt against a rewritten one, 343 calls on 3 models: badly cut-off translations fell from <b>8 to 0</b>, fully covered ones rose from 81% to <b>91%</b> (p = 0.004).</span></div>
+      <div class="d">The rewritten prompt is the one in use</div>
+      <div class="q">Do earlier pictures as references keep a character the same?<span class="exp"><span class="who">Stories</span> · experiments/story-picture-reference</span></div>
+      <div class="m"><span>Picture sets drawn with and without references, compared blind, side by side: with references preferred in <b>9 of 12</b>, 3 ties, none against.</span></div>
+      <div class="d">References are used for every picture style</div>
+      <div class="q">Do two more fields in the prompt make the rest of the entry thinner?<span class="exp"><span class="who">Entries</span> · experiments/compose-lesson-line</span></div>
+      <div class="m"><span>No. Ten measures of an entry's substance each moved less than their own run-to-run noise, over <b>315 calls</b>.</span></div>
+      <div class="d">The fields were added to the one prompt, with no second call</div>
+      <div class="q">Does the map stay put when a word is added?<span class="exp"><span class="who">Map</span> · experiments/meaning-space</span></div>
+      <div class="m"><span>You learn where things are, so it should. With a fixed seed it came back mirrored; starting from the last layout and aligning to it cut the median move from <b>140 to 37</b> units.</span></div>
+      <div class="d">Every rebuild starts from the previous map and is aligned to it</div>
+      <div class="q">Search by the form typed, or by the dictionary form?<span class="exp"><span class="who">Spoken Usage Retrieval</span> · experiments/morphological-retrieval</span></div>
+      <div class="m"><span>By dictionary form, the verb <i>estar</i> goes from <b>24</b> found uses to <b>499</b>.</span></div>
+      <div class="d">Search by dictionary form by default</div>
+      <div class="q">Do captions need re-aligning to the audio?<span class="exp"><span class="who">Spoken Usage Retrieval</span> · experiments/forced-alignment</span></div>
+      <div class="m"><span>On captions written by people, alignment cut word timing error from <b>333 ms to 59 ms</b>. Automatic captions were already as close as the aligners agree with each other.</span></div>
+      <div class="d">Align only captions written by people</div>
+      <div class="q">How should a voice be helped to say a hard word?<span class="exp"><span class="who">LexiBeat</span> · experiments/programme_blocks</span></div>
+      <div class="m"><span><b>687 clips</b> scored by ear. Said syllable by syllable, words came out wrong half the time; the whole word said slowly was right for <b>14 of 15</b>.</span></div>
+      <div class="d">The whole word, slowly; syllable by syllable was dropped</div>
     </div>
   </div>
-  <div class="foot"><b>13 experiments</b> are in this repository (<span class="exp">experiments/</span>), each with its method, scripts and results. The two projects Acervo is built on carry their own: <b>Spoken Usage Retrieval</b>, which finds the clips, has 7, and <b>LexiBeat</b>, which makes the loops, has 2.</div>
+  <div class="foot"><b>13 experiments</b> in this repository (<span class="exp">experiments/</span>), <b>7</b> in Spoken Usage Retrieval and <b>2</b> in LexiBeat, each with its method, scripts and results. More are on the pictures above: the picture prompt, reading a photographed page.</div>
 </div>
 </body>
 </html>

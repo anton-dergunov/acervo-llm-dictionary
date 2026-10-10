@@ -1,7 +1,7 @@
 <!doctype html>
 <!--
   Source of map.png. shots/map.png is the meaning map of the owner's Spanish vocabulary, zoomed to one word with its
-  peek open; the inset is the whole map from shots/map-whole.png. The method and the numbers are
+  peek open and its three meanings joined; the inset is the whole map from shots/map-whole.png. The method and the numbers are
   docs/features/meaning-map.md and experiments/meaning-space.
   Render with capture.mjs --compose map.
 -->
@@ -20,20 +20,19 @@
     <span class="sub">Words that mean similar things sit together, in regions named for you. Find a word, see its neighbours, open its entry, or pick words here for a loop or a story.</span>
   </div>
   <div class="main">
-    <div class="win" style="width: 610px; align-self: flex-start"><img src="shots/map.png" alt=""></div>
-    <div class="col grow" style="gap: 11px">
-      <span class="label">The whole map: 1,457 meanings</span>
-      <div class="win crop" style="height: 128px"><img src="shots/map-whole.png" style="width: 420px; margin: -86px 0 0 -100px" alt=""></div>
+    <div class="win" style="width: 560px; align-self: flex-start"><img src="shots/map.png" alt=""></div>
+    <div class="col grow" style="gap: 8px">
+      <span class="label">The whole map: 1,457 meanings in named regions</span>
+      <div class="win crop" style="height: 224px"><img src="shots/map-whole.png" style="width: 800px; margin: -148px 0 0 -262px" alt=""></div>
       <span class="label" style="margin-top: 2px">How it is made</span>
-      <div class="steps" style="gap: 7px">
-        <div><i>1</i><span><b>Embed each meaning</b>, not each word: its definition and translations, with a multilingual encoder (multilingual-e5-small).</span></div>
+      <div class="steps" style="gap: 4px">
+        <div><i>1</i><span><b>Embed each meaning</b>, not each word, with a multilingual encoder (multilingual-e5-small).</span></div>
         <div><i>2</i><span><b>Lay out</b> in two dimensions with UMAP.</span></div>
-        <div><i>3</i><span><b>Group</b> the layout into about 8 regions and 30 neighbourhoods (Ward clustering).</span></div>
-        <div><i>4</i><span><b>Name</b> them with one language-model call.</span></div>
+        <div><i>3</i><span><b>Group</b> into about 8 regions and 30 neighbourhoods; a language model <b>names</b> them.</span></div>
       </div>
     </div>
   </div>
-  <div class="foot">Measured: a fixed seed did not keep the map still when words were added. Starting from the last layout and aligning to it cut the median move after one edit from <b>140 to 37</b> units (<span class="exp">experiments/meaning-space</span>).</div>
+  <div class="foot">You learn where things are on a map, so adding a word should not move the rest. Measured: with a fixed seed it still moved; starting from the last layout and aligning to it cut the median move after one edit from <b>140 to 37</b> units (<span class="exp">experiments/meaning-space</span>).</div>
 </div>
 </body>
 </html>

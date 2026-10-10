@@ -1,0 +1,45 @@
+<!doctype html>
+<!--
+  Source of anki.png. shots/anki-front.png and shots/anki-back.png are one card rendered by
+  scripts/preview_anki_cards.py from anki/manifest.json, which holds one of the owner's words as
+  the server would send it. shots/anki-settings.png is Settings, Anki. The diagram follows
+  docs/features/anki.md.
+  Render with capture.mjs --compose anki.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>Anki cards</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <span class="kicker">Anki</span>
+    <h1>Your words as Anki cards, made and kept up to date for you</h1>
+    <span class="sub">Cards are built from your entries and sent to Anki a minute after you stop editing. You review in any Anki app; how well you know each word comes back.</span>
+  </div>
+  <div class="main">
+    <div class="col" style="gap: 6px; width: 190px"><span class="label">Front</span><div class="device" style="width: 190px"><img src="shots/anki-front.png" alt=""></div></div>
+    <div class="col" style="gap: 6px; width: 190px"><span class="label">Back</span><div class="device" style="width: 190px"><img src="shots/anki-back.png" alt=""></div></div>
+    <div class="col grow" style="gap: 11px">
+      <span class="label">How the cards travel</span>
+      <div class="lane server">
+        <div class="flow">
+          <div class="b"><b>Acervo</b>your entries, pictures and recordings</div>
+          <span class="a">→<br>←</span>
+          <div class="b"><b>Anki sync server</b>Anki's own, running beside Acervo on your machine</div>
+          <span class="a">⇄</span>
+          <div class="b"><b>Anki on your phone or tablet</b>syncs as it always does</div>
+        </div>
+        <div style="margin-top: 7px; font-size: 11.2px; color: #0B4F48"><b>→ Cards out:</b> a card for each meaning, with its sentence, picture and recordings, updated when the entry changes.<br><b>← Reviews back:</b> every hour, Anki's memory state for each card, so the word list can show which words are hardest.</div>
+      </div>
+      <div class="win crop" style="height: 176px"><img src="shots/anki-settings.png" style="width: 560px; margin: -122px 0 0 -30px" alt=""></div>
+      <div class="note">Content goes one way and statistics the other, never both: your review progress is never touched, and Anki never edits an entry.</div>
+    </div>
+  </div>
+  <div class="foot">Scheduling stays with Anki and its FSRS scheduler. No desktop needs to be running: the server keeps the cards in step by itself.</div>
+</div>
+</body>
+</html>

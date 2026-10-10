@@ -67,12 +67,25 @@ Needs Google Chrome (Playwright's own Chromium cannot decode the clips' video) a
 | `loop.png` | A radio-lesson loop playing on a phone over the list of loops | `loop`, `loops` |
 | `map.png` | The meaning map at one word, and the whole map | `map`, `map-whole` |
 | `chat.png` | A question about an entry, and the proposed change under review | `chat`, `chat-review` |
-| `photo.png` | A photographed page with a word tapped, and an example in an entry with its photo | `photo`, `photo-example` |
+| `photo.png` | A photographed page with a word tapped, and the same sentence drawn as an entry shows it | `photo`, `photo-thumb.jpg` (cut from the test photo) |
 | `devices.png` | One word on a phone, a tablet and a desktop | `word-phone`, `word-tablet`, `word` |
-| `pipeline.png` | The job a save queues, with one real job's log lines | `activity` |
-| `experiments.png` | Six of the experiments: question, measurement, decision | none |
+| `pipeline.png` | How an entry is made, as a diagram, with the Activity page and one real job's log lines | `activity` |
+| `anki.png` | One Anki card, front and back, and how cards and reviews travel | `anki-front`, `anki-back`, `anki-settings` |
+| `sync.png` | The server, what runs beside it, and the devices: a drawn diagram | none |
+| `experiments.png` | Eight experiments, three of them from the two related repositories | none |
 
-Every number on a picture is from `experiments/README.md` or `docs/ml.md`, and each `.html` says in
+The two Anki card captures are not taken from the server. `anki/manifest.json` holds one word as
+the server would send it, and the project's own preview renders it:
+
+```bash
+.venv/bin/python scripts/preview_anki_cards.py assets/pictures/anki/manifest.json /tmp/anki-preview
+```
+
+It needs `media/sonar.png` beside the manifest (a copy of `shots/word-sense-1.png`); the front and
+back pages it writes are then captured at 390×760.
+
+Every number on a picture is from `experiments/README.md` or `docs/ml.md`, or, on `experiments.png`
+and `loop.png`, from the experiment write-ups of `spoken-usage-retrieval` and `lexibeat`, and each `.html` says in
 its opening comment where its numbers come from. The log lines on `pipeline.png` are one job's lines
 from the server's `jobs.log` and `model-calls.log`, shortened by hand; the timings on `photo.png` are
 that shot's own lines in the call log.
