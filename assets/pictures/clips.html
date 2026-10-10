@@ -1,8 +1,9 @@
 <!doctype html>
 <!--
   Source of clips.png. shots/clip-example.png is an example in one of the owner's entries that carries a clip, and
-  shots/clip.png is the player it opens. The numbers are experiments/clip-translation/README.md.
-  The channel list is the retrieval service's own (docs/features/spoken-clips.md).
+  shots/clip.png is the player it opens, three seconds into playing. The numbers are
+  experiments/clip-translation/README.md. The channel list is the retrieval service's own
+  (docs/features/spoken-clips.md).
   Render with capture.mjs --compose clips.
 -->
 <html lang="en">
@@ -20,21 +21,20 @@
     <span class="sub">Add the YouTube channels you like to watch. Acervo finds where your word is said in them and plays that moment, with the sentence and its translation.</span>
   </div>
   <div class="main">
-    <div class="col" style="width: 286px">
-      <span class="label">In the entry: an example that is a clip</span>
+    <div class="col" style="width: 284px; gap: 12px">
+      <span class="label">In the entry: an example that is a clip <span class="arrow">→</span></span>
       <div class="win"><img src="shots/clip-example.png" alt=""></div>
-      <span class="label" style="margin-top: 2px">How it works</span>
-      <div class="steps">
+      <span class="label" style="margin-top: 4px">How it works</span>
+      <div class="steps" style="gap: 9px">
         <div><i>1</i><span><b>An index, not a copy.</b> <b>Spoken Usage Retrieval</b>, a separate repository, reads the captions of your channels and indexes every word by its form and its dictionary form. The videos stay on YouTube.</span></div>
         <div><i>2</i><span><b>Retrieve, then judge.</b> When a word is saved the index returns candidate passages. One model call keeps those that use this meaning and translates them. Keeping none is a valid answer.</span></div>
-        <div><i>3</i><span><b>Play.</b> The clip plays from YouTube at that second.</span></div>
+        <div><i>3</i><span><b>Play and follow.</b> The clip plays from YouTube at that second, and the words light up as they are said. Words are aligned with the translation, so a word can be matched to its part of it.</span></div>
       </div>
     </div>
-    <span class="arrow">→</span>
-    <div class="win" style="width: 372px; align-self: flex-start"><img src="shots/clip.png" alt=""></div>
-    <div class="col grow">
+    <div class="win" style="width: 392px; align-self: flex-start"><img src="shots/clip.png" alt=""></div>
+    <div class="col grow" style="gap: 12px">
       <div class="note fact"><span class="label">Measured</span><b>Does the translation cover the whole passage?</b> One stored translation had silently dropped half of its passage. Old prompt against a rewritten one: 10 passages, 4 target languages, 3 models, 343 calls.<br>Badly cut off: <b>8 → 0</b><br>Fully covered: <b>81% → 91%</b><br>McNemar p = 0.004<span class="exp">experiments/clip-translation</span></div>
-      <div class="note grow"><span class="label">Your channels</span>A starter list is curated for Spanish; any channel can be added in Settings.</div>
+      <div class="note"><span class="label">Your channels</span>A starter list is curated for Spanish; any channel can be added in Settings.</div>
     </div>
   </div>
   <div class="foot">The retrieval project carries its own experiments: aligning speech to captions, retrieval by dictionary form in ten languages, word-level translation alignment.</div>

@@ -232,10 +232,11 @@ const option = (name, fallback) => {
   const at = args.indexOf(name);
   return at < 0 ? fallback : resolve(args.splice(at, 2)[1]);
 };
+const trial = args.includes("--shots");
 const shotList = option("--shots", join(here, "shots.json"));
 const outDir = option("--out", join(here, "shots"));
 const names = args.filter((arg) => !arg.startsWith("--"));
 if (!args.includes("--compose")) await capture(names);
 // After named shots, only the pictures of those names; a shot with no picture of its name renders none.
 const pictures = args.includes("--compose") ? names : names.filter((name) => existsSync(join(here, `${name}.html`)));
-if (args.includes("--compose") || names.length === 0 || pictures.length > 0) await compose(pictures);
+if (args.includes("--compose") || (!trial && (names.length === 0 || pictures.length > 0))) await compose(pictures);

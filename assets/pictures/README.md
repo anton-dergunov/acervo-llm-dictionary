@@ -33,6 +33,9 @@ Needs Google Chrome (Playwright's own Chromium cannot decode the clips' video) a
   the browser, except signing in and the routes a shot lists under `allow`. Those are `/chat`,
   `/capture` and `/capture/resolve`, which the server documents as writing nothing, and
   `/photo/read`, which keeps the uploaded test photo pending on the server and creates no record.
+  **Do not allow `/speech/clips/…/translations`**: it starts a word-alignment job in the retrieval
+  service, and the application then tries to save the result. That is why the clip shot shows no
+  highlighting in the translation.
   Four shots therefore cost model calls each time they are taken: `chat`, `chat-review`,
   `capture` and `capture-chat` (and `photo` costs one OCR call and one look-up).
 - The first run on each screen size pulls the whole vocabulary into a browser profile under
@@ -59,12 +62,12 @@ Needs Google Chrome (Playwright's own Chromium cannot decode the clips' video) a
 | `word.png` | The lead: one word's page in a window over the word list, and the picture of each of its three senses | `word-window`, `word-list`, `word-sense-1..3` |
 | `capture.png` | A pasted sentence, the entry drafted from it, and a change asked for in the chat under the draft | `capture-text`, `capture`, `capture-chat` |
 | `pictures.png` | Three senses of one word in three styles, with a brief | `pictures-1..3` |
-| `clips.png` | An example in an entry that carries a clip, and the player it opens | `clip-example`, `clip` |
-| `story.png` | A story part being read, and the story's four pictures | `story-3`, `story-picture-1..4` |
-| `loop.png` | A loop playing on a phone, the translation still held back, and the list of loops | `loop`, `loops` |
+| `clips.png` | An example in an entry that carries a clip, and the player it opens, playing | `clip-example`, `clip` |
+| `story.png` | A story part with its translation, and the story's four pictures | `story-part`, `story-picture-1..4` |
+| `loop.png` | A radio-lesson loop playing on a phone over the list of loops | `loop`, `loops` |
 | `map.png` | The meaning map at one word, and the whole map | `map`, `map-whole` |
 | `chat.png` | A question about an entry, and the proposed change under review | `chat`, `chat-review` |
-| `photo.png` | A photographed page with a word tapped, and the photo kept on a word | `photo`, `photo-kept` |
+| `photo.png` | A photographed page with a word tapped, and an example in an entry with its photo | `photo`, `photo-example` |
 | `devices.png` | One word on a phone, a tablet and a desktop | `word-phone`, `word-tablet`, `word` |
 | `pipeline.png` | The job a save queues, with one real job's log lines | `activity` |
 | `experiments.png` | Six of the experiments: question, measurement, decision | none |

@@ -10,26 +10,30 @@
 <meta name="picture-size" content="960x600">
 <title>Asking about an entry</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.main > .col { flex: 1 1 0; }
+</style>
 </head>
 <body>
 <div class="frame">
   <div class="head">
+    <span class="kicker">Chat</span>
     <h1>Ask about an entry; the answer can be a change you review</h1>
-    <span class="sub">A question is answered in prose. When the answer includes an edit, it arrives as a proposal: the entry is shown with the changes marked, and nothing is saved until you accept.</span>
+    <span class="sub">A question is answered in prose. When the answer includes an edit, the entry is shown with the change marked, and nothing is saved until you accept.</span>
   </div>
   <div class="main">
-    <div class="col" style="width: 439px">
-      <span class="label">1 · The question and the proposal</span>
-      <div class="win crop" style="height: 290px"><img src="shots/chat.png" style="width: 554px; margin: -39px 0 0 -78px" alt=""></div>
-      <div class="note grow"><span class="label">What the model returns</span>Operations against the ids of the entry's records, never a rewritten entry.</div>
+    <div class="col" style="gap: 7px">
+      <span class="label">1 · Ask, and get an answer with a proposed edit <span class="arrow">→</span></span>
+      <div class="win crop" style="height: 316px"><img src="shots/chat.png" style="width: 439px; margin-top: -64px" alt=""></div>
+      <div class="note grow">The edit is made to the real entry: an example added, a note rewritten, a translation corrected. The answer usually comes with follow-up questions to tap.</div>
     </div>
-    <div class="col grow">
-      <span class="label">2 · The entry with the change marked</span>
-      <div class="win crop" style="height: 290px"><img src="shots/chat-review.png" style="width: 554px; margin: -22px 0 0 -78px" alt=""></div>
-      <div class="note fact grow"><span class="label">Not trusted</span>The marks come from comparing the entry before and after, never from the model's own account of what it changed.</div>
+    <div class="col" style="gap: 7px">
+      <span class="label">2 · See exactly what would change</span>
+      <div class="win crop" style="height: 316px"><img src="shots/chat-review.png" style="width: 439px; margin-top: -26px" alt=""></div>
+      <div class="note grow">Every change is marked in place: here, a new example under the second meaning. Step through the changes, then save or discard.</div>
     </div>
   </div>
-  <div class="foot">A live test pins what a real model does: a question that needs no edit must come back with no proposal, and nothing that is already there is rewritten unasked.</div>
+  <div class="foot">The chat is on every device, phone and tablet included, and under a draft before it is saved.</div>
 </div>
 </body>
 </html>
