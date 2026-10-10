@@ -94,3 +94,21 @@ table.m th { text-align: left; font: 500 9px var(--mono); letter-spacing: .08em;
 table.m td { padding: 5px 6px 5px 0; border-top: 1px solid #B5D6CF; vertical-align: top; }
 table.m td:first-child { font-weight: 600; color: #083E38; }
 table.m .win-cell { font-weight: 600; color: #083E38; }
+
+/* A picture with the style it was drawn in written on it. */
+.pic { position: relative; display: block; border-radius: 7px; overflow: hidden; border: 1px solid var(--rule); }
+.pic img { display: block; width: 100%; }
+.pic .hash { position: absolute; left: 4px; bottom: 4px; font: 500 8.6px/1 var(--mono); color: #fff; background: rgba(19,34,32,.72); border-radius: 4px; padding: 3px 5px; white-space: nowrap; }
+.pic .hash::before { content: "#"; opacity: .7; }
+.pic .n { position: absolute; left: 4px; top: 4px; font: 600 9px/1 var(--mono); color: #fff; background: rgba(19,34,32,.72); border-radius: 4px; padding: 3px 5px; }
+ul.feat { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 10px; font-size: 11.4px; color: var(--ink-2); }
+ul.feat li::before { content: "•"; color: var(--core); margin-right: 6px; }
+ul.feat.one { grid-template-columns: 1fr; }
+.opt { margin-top: 7px; padding-top: 7px; border-top: 1px solid #B5D6CF; }
+.opt:first-of-type { border-top: 0; padding-top: 0; }
+.opt .q { font-weight: 600; color: #083E38; margin-bottom: 2px; }
+.opt p { padding-left: 15px; position: relative; }
+.opt p::before { content: "·"; position: absolute; left: 4px; }
+.opt p.yes { font-weight: 600; color: #083E38; }
+.opt p.yes::before { content: "✓"; left: 1px; color: var(--core); }
+.label .arrow { float: right; font-size: 15px; line-height: .7; }

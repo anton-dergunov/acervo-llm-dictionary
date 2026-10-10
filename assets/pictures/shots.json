@@ -88,42 +88,60 @@
   },
   {
    "name": "clip",
+   "viewport": {
+    "width": 760,
+    "height": 720
+   },
    "steps": [
     {
-     "word": "sonar"
+     "word": "atropellar"
     },
     {
      "click": ".clip-line"
     },
     {
-     "wait": 6000
+     "wait": 5000
+    },
+    {
+     "click": ".clip-dialog button >> nth=1"
+    },
+    {
+     "wait": 3200
     }
-   ],
-   "viewport": {
-    "width": 760,
-    "height": 720
-   }
+   ]
   },
   {
    "name": "loop",
    "device": "phone",
+   "viewport": {
+    "width": 390,
+    "height": 800
+   },
    "steps": [
     {
      "click": ".madebar-half >> nth=0"
     },
     {
-     "click": ".loop-row >> nth=1"
+     "click": ".loop-row:has-text('cheto')"
     },
     {
-     "wait": 14000
+     "wait": 45000
     }
    ]
   },
   {
    "name": "loops",
+   "device": "phone",
+   "viewport": {
+    "width": 390,
+    "height": 800
+   },
    "steps": [
     {
-     "rail": "Loops"
+     "click": ".madebar-half >> nth=0"
+    },
+    {
+     "wait": 800
     }
    ]
   },
@@ -151,7 +169,11 @@
     {
      "wait": 4000
     }
-   ]
+   ],
+   "viewport": {
+    "width": 960,
+    "height": 600
+   }
   },
   {
    "name": "photo",
@@ -196,7 +218,7 @@
    ],
    "viewport": {
     "width": 390,
-    "height": 760
+    "height": 860
    }
   },
   {
@@ -244,6 +266,10 @@
   },
   {
    "name": "chat",
+   "viewport": {
+    "width": 800,
+    "height": 760
+   },
    "allow": [
     "/chat"
    ],
@@ -270,6 +296,10 @@
   },
   {
    "name": "chat-review",
+   "viewport": {
+    "width": 800,
+    "height": 760
+   },
    "allow": [
     "/chat"
    ],
@@ -300,8 +330,8 @@
   {
    "name": "capture-text",
    "viewport": {
-    "width": 760,
-    "height": 600
+    "width": 560,
+    "height": 640
    },
    "steps": [
     {
@@ -321,8 +351,8 @@
   {
    "name": "capture",
    "viewport": {
-    "width": 760,
-    "height": 600
+    "width": 560,
+    "height": 640
    },
    "allow": [
     "/capture"
@@ -439,7 +469,11 @@
    ]
   },
   {
-   "name": "story-3",
+   "name": "story-part",
+   "viewport": {
+    "width": 1040,
+    "height": 730
+   },
    "steps": [
     {
      "rail": "Stories"
@@ -451,16 +485,10 @@
      "wait": 1500
     },
     {
-     "click": ".cards-edge.next"
+     "click": ".story-reveal >> nth=0"
     },
     {
-     "wait": 900
-    },
-    {
-     "click": ".cards-edge.next"
-    },
-    {
-     "wait": 900
+     "wait": 800
     }
    ]
   },
@@ -468,14 +496,14 @@
    "name": "word-window",
    "viewport": {
     "width": 800,
-    "height": 720
+    "height": 790
    },
    "steps": [
     {
      "word": "sonar"
     },
     {
-     "style": ".sense-image { max-width: 250px; } .ask { display: none; }"
+     "style": ".sense-image { max-width: 250px; }"
     }
    ]
   },
@@ -490,8 +518,8 @@
   {
    "name": "capture-chat",
    "viewport": {
-    "width": 760,
-    "height": 900
+    "width": 560,
+    "height": 640
    },
    "allow": [
     "/capture",
@@ -537,33 +565,34 @@
    ]
   },
   {
-   "name": "photo-kept",
-   "viewport": {
-    "width": 800,
-    "height": 720
-   },
-   "steps": [
-    {
-     "word": "la orilla"
-    },
-    {
-     "click": ".att-photo"
-    },
-    {
-     "wait": 1500
-    }
-   ]
-  },
-  {
    "name": "clip-example",
    "viewport": {
     "width": 800,
-    "height": 720
+    "height": 900
    },
    "element": ".ex.clip-ex >> nth=0",
    "steps": [
     {
-     "word": "sonar"
+     "word": "atropellar"
+    },
+    {
+     "style": ".ask { display: none; }"
+    }
+   ]
+  },
+  {
+   "name": "photo-example",
+   "viewport": {
+    "width": 800,
+    "height": 900
+   },
+   "element": ".ex.has-photo >> nth=0",
+   "steps": [
+    {
+     "word": "el pendorcho"
+    },
+    {
+     "style": ".ask { display: none; }"
     }
    ]
   }

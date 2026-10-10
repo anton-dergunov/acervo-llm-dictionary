@@ -1,10 +1,10 @@
 <!doctype html>
 <!--
-  Source of capture.png. shots/capture-text.png, shots/capture.png and shots/capture-chat.png are the Add view on a
-  sentence the vocabulary did not hold: before Process, after it, and after one request typed under
-  the draft. The three were taken separately, so the draft's wording differs a little between the
-  second and the third. The mark under the phrase in the first is drawn here, not by the
-  application. The 315 calls are experiments/compose-lesson-line.
+  Source of capture.png. shots/capture-text.png, shots/capture.png and shots/capture-chat.png are the Add view in a
+  narrow window, on a sentence the vocabulary did not hold: before Process, after it, and after one
+  request typed under the draft. The three were taken separately, so the draft's wording differs a
+  little between the second and the third. The mark under the phrase in the first is drawn here,
+  not by the application.
   Render with capture.mjs --compose capture.
 -->
 <html lang="en">
@@ -14,8 +14,8 @@
 <title>Getting a word in</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.note { font-size: 12.4px; }
-.mark { position: absolute; height: 13px; border-bottom: 2px solid var(--core); background: rgba(14,110,100,.13); border-radius: 2px; }
+.main > .col { flex: 1 1 0; }
+.mark { position: absolute; height: 12px; border-bottom: 2px solid var(--core); background: rgba(14,110,100,.13); border-radius: 2px; }
 </style>
 </head>
 <body>
@@ -26,25 +26,23 @@
     <span class="sub">The word is picked out of the sentence you met, the entry is written, and nothing is stored until you press Save.</span>
   </div>
   <div class="main">
-    <div class="col" style="width: 250px">
-      <span class="label">1 · Paste what you read</span>
-      <div class="win crop" style="height: 232px; position: relative"><img src="shots/capture-text.png" style="width: 317px; margin: -23px 0 0 -37px" alt=""><i class="mark" style="left: 170px; top: 57px; width: 76px"></i></div>
-      <div class="note grow">Paste a word or a whole sentence. The word or phrase is worked out for you; name it only to settle a doubt. The sentence is kept as your own example.</div>
+    <div class="col grow" style="gap: 7px">
+      <span class="label">1 · Paste what you read <span class="arrow">→</span></span>
+      <div class="win" style="position: relative"><img src="shots/capture-text.png" alt=""><i class="mark" style="left: 205px; top: 89px; width: 69px"></i><i class="mark" style="left: 16px; top: 100px; width: 24px"></i></div>
+      <div class="note grow">Paste a word or a whole sentence. The phrase is worked out for you; name it only to settle a doubt. The sentence is kept as your own example.</div>
     </div>
-    <span class="arrow">→</span>
-    <div class="col" style="width: 290px">
-      <span class="label">2 · Read the generated entry</span>
-      <div class="win crop" style="height: 232px"><img src="shots/capture.png" style="width: 334px; margin: -24px 0 0 -39px" alt=""></div>
-      <div class="note grow">Definition, translations, pronunciation and notes, written in two model calls. Pictures, clips and recordings are added in the background after you save.</div>
+    <div class="col grow" style="gap: 7px">
+      <span class="label">2 · Read the generated entry <span class="arrow">→</span></span>
+      <div class="win"><img src="shots/capture.png" alt=""></div>
+      <div class="note grow">Definition, translations, pronunciation and notes. Pictures, clips and recordings follow in the background once you save.</div>
     </div>
-    <span class="arrow">→</span>
-    <div class="col grow">
+    <div class="col grow" style="gap: 7px">
       <span class="label">3 · Ask for changes</span>
-      <div class="win crop" style="height: 232px"><img src="shots/capture-chat.png" style="width: 309px; margin: -154px 0 0 -46px" alt=""></div>
+      <div class="win"><img src="shots/capture-chat.png" alt=""></div>
       <div class="note grow">Talk to the draft: add or drop an example, question a translation. Each answer is a proposed edit to review.</div>
     </div>
   </div>
-  <div class="foot">The same pipeline takes a photographed page, a file of notes, and a word tapped in a story. <span style="color: var(--ink-3)">Measured: two fields added to the compose prompt did not thin the entry over 315 calls (<span class="exp">experiments/compose-lesson-line</span>).</span></div>
+  <div class="foot">The same pipeline takes a photographed page, a file of notes, and a word tapped in a story.</div>
 </div>
 </body>
 </html>

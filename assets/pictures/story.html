@@ -1,7 +1,8 @@
 <!doctype html>
 <!--
-  Source of story.png. shots/story-3.png is the third part of one of the owner's stories; the four tiles are its four
-  pictures in order. The numbers are experiments/story-picture-reference and
+  Source of story.png. shots/story-part.png is the first part of one of the owner's stories with its translation
+  shown; the four tiles are its four pictures in order. The direction quoted is the stored one for
+  that part's first passage. The numbers are experiments/story-picture-reference and
   experiments/story-audio-segmentation.
   Render with capture.mjs --compose story.
 -->
@@ -12,25 +13,31 @@
 <title>Stories from your words</title>
 <link rel="stylesheet" href="style.css">
 <style>
-.pic { width: 99px; height: 99px; border-radius: 7px; border: 1px solid var(--rule); display: block; }
+.row .pic { flex: 1 1 0; min-width: 0; }
 </style>
 </head>
 <body>
 <div class="frame">
   <div class="head">
+    <span class="kicker">Stories</span>
     <h1>A short illustrated story written around a handful of your words</h1>
-    <span class="sub">Pick a few words; a story is written in four parts, each with a picture, and read aloud. Your words are marked in the text, and any other word can be tapped to look it up.</span>
+    <span class="sub">Pick a few words; a story is written in four parts, each with a picture, a translation and a narration. Your words are marked, and any other word can be tapped.</span>
   </div>
   <div class="main">
-    <div class="win" style="width: 664px"><img src="shots/story-3.png" alt=""></div>
-    <div class="col grow">
-      <span class="label">One boy, parts 2 to 4</span>
-      <div class="row" style="gap: 8px"><img class="pic" src="shots/story-picture-1.png" alt=""><img class="pic" src="shots/story-picture-2.png" alt=""></div>
-      <div class="row" style="gap: 8px"><img class="pic" src="shots/story-picture-3.png" alt=""><img class="pic" src="shots/story-picture-4.png" alt=""></div>
-      <div class="note fact grow"><span class="label">Measured</span>A later picture is drawn with the first picture of each returning character as a reference. Blind, side by side, the referenced set won <b>9 to 0</b> with 3 ties.<span class="exp">experiments/story-picture-reference</span></div>
+    <div class="win" style="width: 572px; align-self: flex-start"><img src="shots/story-part.png" alt=""></div>
+    <div class="col grow" style="gap: 10px">
+      <span class="label">Four parts, each with its picture</span>
+      <div class="row" style="gap: 6px">
+        <span class="pic"><img src="shots/story-picture-1.png" alt=""><span class="n">1</span></span>
+        <span class="pic"><img src="shots/story-picture-2.png" alt=""><span class="n">2</span></span>
+        <span class="pic"><img src="shots/story-picture-3.png" alt=""><span class="n">3</span></span>
+        <span class="pic"><img src="shots/story-picture-4.png" alt=""><span class="n">4</span></span>
+      </div>
+      <div class="note"><span class="label">Read aloud, with direction</span>A language model cuts each part into passages and writes a direction for the voice for each. The first here: <i>“Mythical and grand, with a resonant, storytelling tone.”</i></div>
+      <div class="note fact"><span class="label">Measured</span><b>Does the boy stay the same boy?</b> A later picture is drawn with the first picture of each returning character as a reference. Blind, side by side, 12 pairs: with references preferred <b>9</b>, tie 3, without <b>0</b>.<span class="exp">experiments/story-picture-reference</span></div>
     </div>
   </div>
-  <div class="foot">For narration a model cuts each part into passages with a direction for the voice. In <b>25 of 25</b> calls the passages joined back into the exact text (<span class="exp">experiments/story-audio-segmentation</span>); the code still checks every time.</div>
+  <div class="foot">The model that cuts the text for narration may not change a word of it: in <b>25 of 25</b> calls the passages joined back into the exact text (<span class="exp">experiments/story-audio-segmentation</span>), and the code still checks every time.</div>
 </div>
 </body>
 </html>
