@@ -1,0 +1,449 @@
+{
+ "shots": [
+  {
+   "name": "word",
+   "steps": [
+    {
+     "word": "sonar"
+    }
+   ]
+  },
+  {
+   "name": "word-sense-1",
+   "viewport": {
+    "width": 1280,
+    "height": 3000
+   },
+   "element": ".sense-image img >> nth=0",
+   "steps": [
+    {
+     "word": "sonar"
+    }
+   ]
+  },
+  {
+   "name": "word-sense-2",
+   "viewport": {
+    "width": 1280,
+    "height": 3000
+   },
+   "element": ".sense-image img >> nth=1",
+   "steps": [
+    {
+     "word": "sonar"
+    }
+   ]
+  },
+  {
+   "name": "word-sense-3",
+   "viewport": {
+    "width": 1280,
+    "height": 3000
+   },
+   "element": ".sense-image img >> nth=2",
+   "steps": [
+    {
+     "word": "sonar"
+    }
+   ]
+  },
+  {
+   "name": "pictures-1",
+   "viewport": {
+    "width": 1280,
+    "height": 3000
+   },
+   "element": ".sense-image img >> nth=0",
+   "steps": [
+    {
+     "word": "la trampa"
+    }
+   ]
+  },
+  {
+   "name": "pictures-2",
+   "viewport": {
+    "width": 1280,
+    "height": 3000
+   },
+   "element": ".sense-image img >> nth=1",
+   "steps": [
+    {
+     "word": "la trampa"
+    }
+   ]
+  },
+  {
+   "name": "pictures-3",
+   "viewport": {
+    "width": 1280,
+    "height": 3000
+   },
+   "element": ".sense-image img >> nth=2",
+   "steps": [
+    {
+     "word": "la trampa"
+    }
+   ]
+  },
+  {
+   "name": "clip",
+   "steps": [
+    {
+     "word": "sonar"
+    },
+    {
+     "click": ".clip-line"
+    },
+    {
+     "wait": 6000
+    }
+   ]
+  },
+  {
+   "name": "loop",
+   "device": "phone",
+   "steps": [
+    {
+     "click": ".madebar-half >> nth=0"
+    },
+    {
+     "click": ".loop-row >> nth=1"
+    },
+    {
+     "wait": 14000
+    }
+   ]
+  },
+  {
+   "name": "loops",
+   "steps": [
+    {
+     "rail": "Loops"
+    }
+   ]
+  },
+  {
+   "name": "map",
+   "steps": [
+    {
+     "rail": "Map"
+    },
+    {
+     "waitFor": "button[aria-label='Show the whole map']"
+    },
+    {
+     "fill": {
+      "in": "input[aria-label='Find a word on the map']",
+      "text": "la orilla"
+     }
+    },
+    {
+     "wait": 800
+    },
+    {
+     "press": "Enter"
+    },
+    {
+     "wait": 4000
+    }
+   ]
+  },
+  {
+   "name": "photo",
+   "device": "phone",
+   "steps": [
+    {
+     "click": ".tb-btn.primary"
+    },
+    {
+     "click": "button:text-is('Photo')"
+    },
+    {
+     "upload": {
+      "in": "input[type=file]",
+      "file": "tests/fixtures/photo-capture/camera-03.jpg"
+     }
+    },
+    {
+     "waitFor": ".photo-sheet"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "tap": {
+      "in": ".photo-frame",
+      "x": 0.3,
+      "y": 0.365
+     }
+    },
+    {
+     "wait": 7000
+    }
+   ],
+   "allow": [
+    "/photo/read",
+    "/photo/warm",
+    "/capture/resolve"
+   ]
+  },
+  {
+   "name": "word-phone",
+   "device": "phone",
+   "steps": [
+    {
+     "word": "sonar"
+    }
+   ]
+  },
+  {
+   "name": "word-tablet",
+   "device": "tablet",
+   "steps": [
+    {
+     "word": "sonar"
+    }
+   ]
+  },
+  {
+   "name": "activity",
+   "steps": [
+    {
+     "settings": "Activity"
+    },
+    {
+     "wait": 1500
+    }
+   ]
+  },
+  {
+   "name": "map-whole",
+   "steps": [
+    {
+     "rail": "Map"
+    },
+    {
+     "waitFor": "button[aria-label='Show the whole map']"
+    },
+    {
+     "wait": 4000
+    }
+   ]
+  },
+  {
+   "name": "chat",
+   "allow": [
+    "/chat"
+   ],
+   "steps": [
+    {
+     "word": "sonar"
+    },
+    {
+     "fill": {
+      "in": "[aria-label='Ask about sonar']",
+      "text": "Is “me suena” used the same way in Mexico and in Spain? Add an example with a song."
+     }
+    },
+    {
+     "click": ".ask-send"
+    },
+    {
+     "waitFor": "button:text-is('Review')"
+    },
+    {
+     "wait": 800
+    }
+   ]
+  },
+  {
+   "name": "chat-review",
+   "allow": [
+    "/chat"
+   ],
+   "steps": [
+    {
+     "word": "sonar"
+    },
+    {
+     "fill": {
+      "in": "[aria-label='Ask about sonar']",
+      "text": "Is “me suena” used the same way in Mexico and in Spain? Add an example with a song."
+     }
+    },
+    {
+     "click": ".ask-send"
+    },
+    {
+     "waitFor": "button:text-is('Review')"
+    },
+    {
+     "click": "button:text-is('Review')"
+    },
+    {
+     "wait": 1500
+    }
+   ]
+  },
+  {
+   "name": "capture-text",
+   "steps": [
+    {
+     "click": ".tb-btn.primary"
+    },
+    {
+     "fill": {
+      "in": ".composing textarea >> nth=0",
+      "text": "Ayer trasnoché para terminar el informe y hoy no puedo con mi alma."
+     }
+    },
+    {
+     "wait": 500
+    }
+   ]
+  },
+  {
+   "name": "capture",
+   "allow": [
+    "/capture"
+   ],
+   "steps": [
+    {
+     "click": ".tb-btn.primary"
+    },
+    {
+     "fill": {
+      "in": ".composing textarea >> nth=0",
+      "text": "Ayer trasnoché para terminar el informe y hoy no puedo con mi alma."
+     }
+    },
+    {
+     "click": "button:text-is('Process')"
+    },
+    {
+     "waitFor": "button:has-text('Save')"
+    },
+    {
+     "wait": 1500
+    }
+   ]
+  },
+  {
+   "name": "story-picture-1",
+   "element": ".story-card img >> nth=0",
+   "steps": [
+    {
+     "rail": "Stories"
+    },
+    {
+     "click": ".loop-row:has-text('La leyenda de la laguna')"
+    },
+    {
+     "wait": 1500
+    }
+   ]
+  },
+  {
+   "name": "story-picture-2",
+   "element": ".story-card img >> nth=1",
+   "steps": [
+    {
+     "rail": "Stories"
+    },
+    {
+     "click": ".loop-row:has-text('La leyenda de la laguna')"
+    },
+    {
+     "wait": 1500
+    }
+   ]
+  },
+  {
+   "name": "story-picture-3",
+   "element": ".story-card img >> nth=1",
+   "steps": [
+    {
+     "rail": "Stories"
+    },
+    {
+     "click": ".loop-row:has-text('La leyenda de la laguna')"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": ".cards-edge.next"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": ".cards-edge.next"
+    },
+    {
+     "wait": 900
+    }
+   ]
+  },
+  {
+   "name": "story-picture-4",
+   "element": ".story-card img >> nth=-1",
+   "steps": [
+    {
+     "rail": "Stories"
+    },
+    {
+     "click": ".loop-row:has-text('La leyenda de la laguna')"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": ".cards-edge.next"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": ".cards-edge.next"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": ".cards-edge.next"
+    },
+    {
+     "wait": 900
+    }
+   ]
+  },
+  {
+   "name": "story-3",
+   "steps": [
+    {
+     "rail": "Stories"
+    },
+    {
+     "click": ".loop-row:has-text('La leyenda de la laguna')"
+    },
+    {
+     "wait": 1500
+    },
+    {
+     "click": ".cards-edge.next"
+    },
+    {
+     "wait": 900
+    },
+    {
+     "click": ".cards-edge.next"
+    },
+    {
+     "wait": 900
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+/* Shared by every picture in this directory. capture.mjs --compose turns each <name>.html into
+   <name>.png. The palette and the three typefaces are the application's own (web/src/styles.css),
+   read from web/node_modules, so `npm install --prefix web` comes first. */
+
+@font-face { font-family: "Literata"; font-weight: 400; src: url("../../web/node_modules/@fontsource/literata/files/literata-latin-400-normal.woff2"); }
+@font-face { font-family: "Literata"; font-weight: 400; font-style: italic; src: url("../../web/node_modules/@fontsource/literata/files/literata-latin-400-italic.woff2"); }
+@font-face { font-family: "Literata"; font-weight: 700; src: url("../../web/node_modules/@fontsource/literata/files/literata-latin-700-normal.woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 400; src: url("../../web/node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2"); }
+@font-face { font-family: "IBM Plex Sans"; font-weight: 600; src: url("../../web/node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 400; src: url("../../web/node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2"); }
+@font-face { font-family: "IBM Plex Mono"; font-weight: 500; src: url("../../web/node_modules/@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2"); }
+
+:root {
+  --paper: #EDF1F0; --surface: #FBFCFC; --ink: #132220; --ink-2: #40534E; --ink-3: #6D827C;
+  --rule: #C6D2CF; --rule-soft: #DCE4E2; --core: #0E6E64; --core-soft: #D5E8E4;
+  --corpus: #87591F; --corpus-soft: #EFE3CE;
+  --serif: "Literata", Georgia, serif;
+  --sans: "IBM Plex Sans", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #ffffff; }
+/* Every picture: 960×600, rendered at 2× to 1920×1200. */
+body { width: 960px; height: 600px; overflow: hidden; padding: 14px; font: 12px/1.42 var(--sans); color: var(--ink); }
+.frame {
+  height: 572px; border: 1px solid var(--rule); border-radius: 14px; background: var(--surface);
+  display: flex; flex-direction: column; padding: 15px 20px 12px;
+}
+.head { flex: none; margin-bottom: 11px; }
+.head h1 { font: 700 24px/1.2 var(--serif); letter-spacing: -.01em; }
+.head .sub { display: block; margin-top: 3px; font-size: 13.5px; line-height: 1.4; color: var(--ink-2); max-width: 870px; }
+.main { flex: 1 1 auto; min-height: 0; display: flex; gap: 14px; }
+.main > * { min-width: 0; }
+.col { display: flex; flex-direction: column; gap: 10px; }
+/* A column given a width keeps it. */
+.col[style*="width"] { flex: none; }
+.row { display: flex; gap: 14px; }
+.grow { flex: 1 1 auto; }
+.foot { flex: none; margin-top: 9px; font-size: 11.6px; color: var(--ink-2); }
+.foot b, .note b { color: var(--ink); font-weight: 600; }
+.exp { font: 10.4px var(--mono); color: var(--ink-3); white-space: nowrap; }
+.label { font: 500 9.6px/1.2 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); }
+
+/* A capture of the application, in a window's outline. `crop` shows part of one: the image is
+   placed inside by its own width and negative margins. */
+.win { flex: none; border: 1px solid var(--rule); border-radius: 9px; overflow: hidden; background: var(--paper); box-shadow: 0 1px 2px rgba(19,34,32,.06), 0 10px 22px -16px rgba(19,34,32,.4); }
+.win img { display: block; width: 100%; }
+.win.crop img { width: auto; max-width: none; }
+
+/* A phone or a tablet, drawn only as far as a bezel. */
+.device { flex: none; border: 5px solid #1c2826; border-radius: 22px; overflow: hidden; background: var(--paper); box-shadow: 0 10px 22px -14px rgba(19,34,32,.5); }
+.device img { display: block; width: 100%; }
+.device.tablet { border-width: 7px; border-radius: 16px; }
+
+.note { border: 1px solid var(--rule-soft); border-radius: 9px; background: var(--paper); padding: 9px 11px 10px; font-size: 11.6px; line-height: 1.42; color: var(--ink-2); }
+.note .label { display: block; margin-bottom: 4px; }
+.note.fact { background: var(--core-soft); border-color: #B5D6CF; color: #0B4F48; }
+.note.fact .label { color: var(--core); }
+.note.fact b { color: #083E38; }
+.note.fact .exp { color: #2F7A70; display: block; margin-top: 4px; white-space: normal; overflow-wrap: anywhere; }
+.num { font: 500 10.5px var(--mono); color: var(--core); }
+.tile { display: flex; gap: 9px; align-items: center; }
+.tile img { flex: none; border-radius: 7px; border: 1px solid var(--rule); display: block; }
+.tile .t { font: 400 12.5px/1.3 var(--serif); color: var(--ink); }
+.tile .g { font-size: 11px; color: var(--ink-2); margin-top: 2px; }
+.code { font: 9.6px/1.62 var(--mono); white-space: pre; overflow: hidden; color: var(--ink-2); }
+.code b { color: var(--core); font-weight: 500; }
+.code i { font-style: normal; color: var(--corpus); }

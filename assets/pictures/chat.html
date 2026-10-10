@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  Source of chat.png. shots/chat.png is a question asked of one of the owner's entries and the model's answer with a
+  proposal; shots/chat-review.png is that proposal under review. The answer differs between takes.
+  Render with capture.mjs --compose chat.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>Asking about an entry</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <h1>Ask about an entry; the answer can be a change you review</h1>
+    <span class="sub">A question is answered in prose. When the answer includes an edit, it arrives as a proposal: the entry is shown with the changes marked, and nothing is saved until you accept.</span>
+  </div>
+  <div class="main">
+    <div class="col" style="width: 439px">
+      <span class="label">1 · The question and the proposal</span>
+      <div class="win crop" style="height: 290px"><img src="shots/chat.png" style="width: 554px; margin: -39px 0 0 -78px" alt=""></div>
+      <div class="note grow"><span class="label">What the model returns</span>Operations against the ids of the entry's records, never a rewritten entry.</div>
+    </div>
+    <div class="col grow">
+      <span class="label">2 · The entry with the change marked</span>
+      <div class="win crop" style="height: 290px"><img src="shots/chat-review.png" style="width: 554px; margin: -22px 0 0 -78px" alt=""></div>
+      <div class="note fact grow"><span class="label">Not trusted</span>The marks come from comparing the entry before and after, never from the model's own account of what it changed.</div>
+    </div>
+  </div>
+  <div class="foot">A live test pins what a real model does: a question that needs no edit must come back with no proposal, and nothing that is already there is rewritten unasked.</div>
+</div>
+</body>
+</html>
