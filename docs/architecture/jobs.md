@@ -185,9 +185,10 @@ The rule is that the interface **shows** work and never **does** it.
 - **Cards are disabled while the word is enriching**, with the hint "Cards open when pictures and
   clips are ready", and re-enable however the job ends. There is no held snapshot and nothing
   re-flows under the reader.
-- **One quiet progress line** under the article header, driven by the word's open job. It collapses
-  when the job finishes; if a step failed it leaves one line — *2 of 3 pictures drawn · Try again* —
-  until dismissed.
+- **One quiet progress line** under the rule that closes the article header, driven by the word's
+  open job and shown on the page view. It lies over the space the first sense already keeps above
+  itself, so nothing moves when it appears. It collapses when the job finishes; if a step failed it
+  leaves one line — *2 of 3 pictures drawn · Try again* — until dismissed.
 - **A clip has a reserved slot** while the search is pending, drawn as a quiet skeleton row. Found,
   the clip takes its place; nothing found, it settles into *No recorded example* for as long as the
   word stays open, so nothing jumps, and is absent next time, because for most words no clip is the

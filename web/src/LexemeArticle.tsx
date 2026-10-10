@@ -837,7 +837,7 @@ export interface PictureSlot {
 export default function LexemeArticle({ article, onNotify, meta = true, view = "page", pictures = null,
                                        clips = null, marks = null, ask = null,
                                        onReference, focusSense = null, onMap = null,
-                                       onWordTap = null, onTapAway, lookSheet = null }: {
+                                       onWordTap = null, onTapAway, lookSheet = null, progress = null }: {
   article: Article;
   /** A toast, with at most one action — "Record again" after a stored pronunciation plays. */
   onNotify: Notify;
@@ -864,6 +864,8 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
   onTapAway?(): void;
   /** The look-up sheet, where the article is to place it: over its cards, or at the page's foot. */
   lookSheet?: React.ReactNode;
+  /** The line saying what the server is still doing to this word, placed under the header's rule. */
+  progress?: React.ReactNode;
 }) {
   const { lexeme, senses } = article;
   const root = useRef<HTMLDivElement | null>(null);
@@ -903,7 +905,7 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
     if (!onWordTap || !root.current) return;
     if (window.getSelection()?.toString()) return;
     if (event.target instanceof Element
-        && event.target.closest("button, a, input, textarea, select, label, summary, [role='button'], [role='dialog']")) return;
+        && event.target.closest("button, a, input, textarea, select, label, summary, [role='button'], [role='dialog'], [role='status']")) return;
     const tapped = wordAtPoint(event, root.current, lexeme.language, lookable);
     if (tapped) onWordTap(tapped);
     else onTapAway?.();
@@ -985,6 +987,7 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
         </div>
       </div>
     </div>
+    {progress}
 
     {senses.map((entry, index) =>
       <SenseSection

@@ -43,6 +43,18 @@ describe("the page", () => {
     expect(looseAttestations(picar())).toEqual([]);
   });
 
+  it("places the progress line between the header and the first sense, and only on the page", () => {
+    const line = <div role="status">Recording audio</div>;
+    const { container, unmount } = render(<LexemeArticle article={picar()} onNotify={() => undefined} progress={line} />);
+    const status = screen.getByRole("status");
+    expect(status.previousElementSibling).toBe(container.querySelector(".masthead"));
+    expect(status.nextElementSibling?.classList.contains("sec")).toBe(true);
+    unmount();
+
+    render(<LexemeArticle article={picar()} onNotify={() => undefined} view="cards" progress={line} />);
+    expect(screen.queryByRole("status")).toBeNull();
+  });
+
   it("folds each section on its own, and starts Details folded", () => {
     render(<LexemeArticle article={picar()} onNotify={() => undefined} />);
     const details = screen.getByText("Details").closest("button")!;

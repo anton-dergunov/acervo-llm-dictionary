@@ -2544,12 +2544,19 @@ body.tablet .viewport { width: 834px; height: 1000px; }
 .voice-model > strong .label { font-size: 10.5px; font-weight: 400; }
 
 /* ── the server's work, shown ───────────────────────────────────────────
-   One quiet line under the article bar while a word fills in. It lives inside the bar's own bottom
-   margin, so appearing and collapsing never moves the article under it. */
+   One quiet line under the header's rule while a word fills in. It is as tall as the first section's
+   top padding and lies over it, so appearing and collapsing never moves the article under it. */
 .progress-strip {
   display: flex; align-items: center; gap: 0 6px; flex-wrap: nowrap;
-  height: 22px; margin: -22px 0 0; overflow: hidden; white-space: nowrap;
+  position: relative; z-index: 1;
+  height: 34px; margin: 0 0 -34px; overflow: hidden; white-space: nowrap;
   font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+}
+/* A folded section keeps less room above it than the line needs. */
+.progress-strip + .sec.folded { padding-top: 34px; }
+@container vp (max-width: 720px) {
+  .progress-strip { height: 24px; margin-bottom: -24px; }
+  .progress-strip + .sec.folded { padding-top: 24px; }
 }
 .progress-strip .now { color: var(--core); }
 .progress-strip .sep, .clip-none .sep { color: var(--rule); margin: 0 6px; }

@@ -1666,11 +1666,6 @@ export default function App() {
                 </div>}
               </div>
             </div>}
-            {article && reading && !proposal && <ProgressStrip
-              job={enrichJob}
-              onRetry={() => retryEnrichment(article.lexeme.id)}
-              onDismiss={() => dismissEnrichment(article.lexeme.id)}
-            />}
 
             {/* An external entry replaces the list the way one of your own does, and reads in the
                 same column: a word being looked up is the work, wherever it came from. */}
@@ -1689,6 +1684,11 @@ export default function App() {
                   article={article} view={view} onNotify={notify} pictures={pictures} clips={clips}
                   marks={markSlot} ask={askSlot} onReference={setReference}
                   focusSense={focusSense}
+                  progress={proposal ? null : <ProgressStrip
+                    job={enrichJob}
+                    onRetry={() => retryEnrichment(article.lexeme.id)}
+                    onDismiss={() => dismissEnrichment(article.lexeme.id)}
+                  />}
                   onWordTap={(tapped) => articleLook.open({
                     tapped, language: article.lexeme.language, sourceTitle: `Entry · ${article.lexeme.headword}`,
                     self: proposal ? null : article.lexeme.id

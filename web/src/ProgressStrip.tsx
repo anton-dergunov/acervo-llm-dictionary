@@ -2,7 +2,7 @@ import type { Job, JobStep } from "./api";
 import { isOpen } from "./jobs";
 
 /**
- * One quiet line under an article's header, saying what the server is still doing to this word
+ * One quiet line under the rule of an article's header, saying what the server is still doing to this word
  * (`docs/architecture/jobs.md`, "What the interface shows"). It shows work and never does it: the
  * only thing it can ask for is a new job, through Try again.
  *

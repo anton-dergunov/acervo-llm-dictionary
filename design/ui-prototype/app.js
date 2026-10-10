@@ -828,6 +828,7 @@ function renderArticle(x, opts) {
   return `
     ${review}
     ${masthead(x)}
+    ${meta ? progressStrip(x) : ""}
     ${x.senses.map((s, i) => senseSection(s, i, x)).join("")}
     ${x.notes.length ? section(key("notes"), false,
       '<span class="num">✎</span><span class="label">Notes</span>', notesList(x)) : ""}
@@ -2981,7 +2982,7 @@ function render() {
     $("#artBar").classList.toggle("carding", view === "cards");
     // Editing is a composer above, so only reading and the read-only projection get here.
     main.innerHTML = view === "cards" ? renderCards(x)
-      : view === "page" ? progressStrip(x) + renderArticle(x) : renderYaml(x);
+      : view === "page" ? renderArticle(x) : renderYaml(x);
     // The conversation belongs to Page: an edit that reorders senses needs every sense in view.
     $("#askSlot").innerHTML = view === "page" ? renderAsk(x) : "";
     $("#main").classList.toggle("cards-on", view === "cards");
