@@ -1,0 +1,31 @@
+<!doctype html>
+<!--
+  Source of clips.png. shots/clip.png is the clip dialog on one of the owner's words, with the passage and its
+  translation. The numbers are experiments/clip-translation.
+  Render with capture.mjs --compose clips.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>Native speakers saying the word</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <h1>Hear the word from a native speaker, at the moment it is said</h1>
+    <span class="sub">A separate retrieval service searches the captions of curated YouTube channels. One model call per word then decides which passages really use this meaning, and translates them.</span>
+  </div>
+  <div class="main">
+    <div class="win" style="width: 672px"><img src="shots/clip.png" alt=""></div>
+    <div class="col grow">
+      <div class="note"><span class="label">Retrieval, then judgement</span><b>Spoken Usage Retrieval</b> finds candidates by surface form and by lemma. The model only chooses among them and never rewrites the passage.</div>
+      <div class="note"><span class="label">Refusing is the default</span>A word with no good clip gets none. A passage id the model invented is dropped and counted.</div>
+      <div class="note fact grow"><span class="label">Measured</span>Asking for the whole passage to be translated took badly cut-off translations from <b>8 to 0</b> and full coverage from <b>81% to 91%</b> (McNemar p = 0.004).<span class="exp">experiments/clip-translation</span></div>
+    </div>
+  </div>
+  <div class="foot">The corpus is its own project with its own experiments: forced alignment of speech to captions, lemma retrieval in ten languages, word-level translation alignment.</div>
+</div>
+</body>
+</html>

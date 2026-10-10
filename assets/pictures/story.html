@@ -1,0 +1,36 @@
+<!doctype html>
+<!--
+  Source of story.png. shots/story-3.png is the third part of one of the owner's stories; the four tiles are its four
+  pictures in order. The numbers are experiments/story-picture-reference and
+  experiments/story-audio-segmentation.
+  Render with capture.mjs --compose story.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>Stories from your words</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.pic { width: 99px; height: 99px; border-radius: 7px; border: 1px solid var(--rule); display: block; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <h1>A short illustrated story written around a handful of your words</h1>
+    <span class="sub">Pick a few words; a story is written in four parts, each with a picture, and read aloud. Your words are marked in the text, and any other word can be tapped to look it up.</span>
+  </div>
+  <div class="main">
+    <div class="win" style="width: 664px"><img src="shots/story-3.png" alt=""></div>
+    <div class="col grow">
+      <span class="label">One boy, parts 2 to 4</span>
+      <div class="row" style="gap: 8px"><img class="pic" src="shots/story-picture-1.png" alt=""><img class="pic" src="shots/story-picture-2.png" alt=""></div>
+      <div class="row" style="gap: 8px"><img class="pic" src="shots/story-picture-3.png" alt=""><img class="pic" src="shots/story-picture-4.png" alt=""></div>
+      <div class="note fact grow"><span class="label">Measured</span>A later picture is drawn with the first picture of each returning character as a reference. Blind, side by side, the referenced set won <b>9 to 0</b> with 3 ties.<span class="exp">experiments/story-picture-reference</span></div>
+    </div>
+  </div>
+  <div class="foot">For narration a model cuts each part into passages with a direction for the voice. In <b>25 of 25</b> calls the passages joined back into the exact text (<span class="exp">experiments/story-audio-segmentation</span>); the code still checks every time.</div>
+</div>
+</body>
+</html>

@@ -1,13 +1,70 @@
 # Acervo
 
-Acervo is a self-hosted, offline-first store for vocabulary chosen by one learner. One Python
-service holds the durable owner-scoped copy; the PWA and native macOS host keep a complete IndexedDB
-replica so vocabulary remains readable and editable without a network connection.
+Acervo is a personal dictionary of the words you chose to learn. Paste a word, or the sentence you met it in: the entry is written for you, with a picture for each meaning, a recording, and clips of native speakers saying it. You read it before it is saved. From the same words it makes audio loops, illustrated stories and a map of what you know. It is self-hosted, and every device keeps the whole vocabulary, so it reads offline.
 
-Words are added by pasting a word, or the sentence it was met in: the entry is written for you,
-shown for review, and kept in an inbox until you approve it. A word already in the store is
-recognised as one rather than added twice. The same route walks a file of unstructured notes into
-the inbox an entry at a time.
+![A dictionary of the words you chose, written and illustrated for you. The application open on the Spanish verb "sonar": its pronunciation, its first definition "Producir o emitir un sonido o ruido", the translations "to ring, to sound, to go off", a claymation picture of a ringing red telephone, and the sentence it was met in. Beside it, the pictures of its three meanings, each in a different style: to ring, to ring a bell, to seem. Where a model is trusted and where it is checked was measured in 13 experiments in this repository, and in the two projects it is built on: Spoken Usage Retrieval, which finds the clips, with 7, and LexiBeat, which makes the loops, with 2.](assets/pictures/word.png)
+
+No model is trained here. The work is in deciding where a model is trusted and where it is checked, and each of those decisions was measured: [`docs/ml.md`](docs/ml.md) is the tour, and [`experiments/`](experiments/README.md) holds the apparatus and the results.
+
+## Getting a word in
+
+Paste a sentence and the word is picked out of it; a word you already hold is recognised, not added twice. The entry is drafted in two model calls, one to decide what the text is about and one to write it, and nothing is stored until you save. The same pipeline walks a file of notes into an inbox, one entry at a time. See [capture](docs/features/capture.md).
+
+![Paste the sentence; read the entry before it is saved. On the left the Add view with the sentence "Ayer trasnoché para terminar el informe y hoy no puedo con mi alma". On the right the entry drafted from it, for the idiom "no poder con el alma": pronunciation, a definition in Spanish, the translations "be exhausted, be dead on one's feet, be dog-tired", and the pasted sentence marked as yours. Measured: after two fields were added to the compose prompt, each of ten measures of the entry's substance moved less than its own run-to-run noise over 315 calls, so the prompt was not split.](assets/pictures/capture.png)
+
+Or photograph a page and tap a word. An OCR engine says where the words are, a segmentation model says where the sentences end, and a fast language model says what the tapped word means in that sentence. See [photo capture](docs/features/photo-capture.md).
+
+![Photograph a page, tap a word, see what it means there. A phone showing a photographed book page with the word "otorgó" outlined and its sentence banded, and below it "otorgar: awarded, granted" with the sentence as it will be kept. For this tap: 219 words read in 0.7 seconds, 7 sentences, and the look-up answered in 1.05 seconds. Measured on photos of book pages and screens: the tap landed on the right word 98% of the time with Cloud Vision and 68% with a local engine; the SaT sentence splitter gave the right sentence for 98% of taps and punctuation rules for 69 to 74%; the fast model answers in 1.0 second at the median and a more accurate one in 4.4.](assets/pictures/photo.png)
+
+## What is made around a word
+
+**A picture for each meaning.** A language model sees every sense of the word at once and writes a brief for each, in a style it picks for each; an image model then draws them. See [sense images](docs/features/sense-images.md).
+
+![One word, three meanings, three pictures that look nothing alike. The three senses of "la trampa": a trap, as a watercolour of a wicker fish trap; a trick, as a film-noir office with a ledger left as bait; cheating, as a comic-book card game. Below, the brief written for the first. Measured: eight review rounds on the brief prompt took rejected pictures from 7 in 14 to 0 in 50, with the image model unchanged.](assets/pictures/pictures.png)
+
+**Native speakers saying it.** [Spoken Usage Retrieval](https://github.com/anton-dergunov/spoken-usage-retrieval), a separate project, searches the captions of curated YouTube channels. One model call per word decides which passages really use this meaning and translates them; a word with no good clip gets none. See [spoken clips](docs/features/spoken-clips.md).
+
+![Hear the word from a native speaker, at the moment it is said. The clip player open on "sonar": a video frame, the passage "El bote suena así" with the word marked, and its translation. Measured: asking in the prompt for the whole passage to be translated took badly cut-off translations from 8 to 0 and full coverage from 81% to 91%, McNemar p = 0.004.](assets/pictures/clips.png)
+
+**A conversation about the entry.** A question is answered in prose, and an edit arrives as a proposal you review. The change marks come from comparing the entry before and after, never from the model's own account of what it changed. See [article chat](docs/features/article-chat.md).
+
+![Ask about an entry; the answer can be a change you review. On the left a question about "me suena" and the answer, with a proposal to add an example. On the right the entry with the new example marked and the buttons Discard and Save changes.](assets/pictures/chat.png)
+
+## Loops and stories
+
+A loop says each word, leaves a beat to recall it, and then gives the translation, over music. It is made by [LexiBeat](https://github.com/anton-dergunov/lexibeat), a separate generator, from recordings Acervo directs. See [loops](docs/features/loops.md).
+
+![Your words over music, with the answer held back until it is spoken. A phone playing a loop: "el asco" is being said and its translation is still a bar. Beside it, the list of loops made so far. Measured: stored recordings sounded metallic; in blind listening the provider's 32 kbps MP3 was picked out every time, so the uncompressed master is requested and kept as Opus at about 60 kbps.](assets/pictures/loop.png)
+
+A story is written around a handful of words, in four parts, each with a picture, and read aloud. Any word in it can be tapped to look it up. See [stories](docs/features/stories.md).
+
+![A short illustrated story written around a handful of your words. The third part of "La leyenda de la laguna": a picture of a boy asleep in a ruined temple, the text with two of the owner's words marked, and beside it the story's four pictures, the same boy in three of them. Measured: with the first picture of each returning character given as a reference, the referenced set won a blind side-by-side comparison 9 to 0 with 3 ties; and in 25 of 25 calls the passages a model cut for narration joined back into the exact text.](assets/pictures/story.png)
+
+## The map
+
+Every meaning is embedded from its definition and translations, laid out in two dimensions, and grouped into regions that a model names. See [the meaning map](docs/features/meaning-map.md).
+
+![Every meaning you hold, laid out by what it means. The map zoomed in on "la orilla", with "la ola", "la oleada", "el arroyo" and "la balsa" joined to it and a card giving its definition; and the whole map of 1,457 meanings with its named regions. Measured: a fixed seed did not keep the map still; starting from the last layout and aligning to it cut the median move after one edit from 140 to 37 units.](assets/pictures/map.png)
+
+## On every device
+
+The interface is one web app: installed on Android and iOS, and in a native window on macOS. Each device holds a complete copy, so reading never waits for the server; a save is one round trip and fails visibly without it. See [sync](docs/architecture/sync.md).
+
+![The whole vocabulary on every device, readable with no connection. The word "sonar" on a phone and on a tablet, as cards to swipe, and in a desktop window as a page.](assets/pictures/devices.png)
+
+## Behind a saved word
+
+A save queues one job in the same transaction as the word. The job finds clips, draws pictures and makes recordings in the background, through a chain of model providers that falls through to the next on a rate limit, an error or an unusable answer. Every generated record names the model that answered, and one id joins the logs. See [jobs](docs/architecture/jobs.md), [models](docs/architecture/models.md) and [observability](docs/architecture/observability.md).
+
+![What happens after you press Save. The steps of the enrich job: clips, pictures, recordings. Beside them one real job in the server's logs, every line carrying the same id: the job starting, the clips step, a brief written in 1.59 seconds, two pictures drawn a minute apart, and the job ending. Measured: no JSON Schema is sent to any model; with one, clip translations grew from 61 characters to over 1,000 and three calls in four timed out.](assets/pictures/pipeline.png)
+
+## How it was measured
+
+Each prompt, model and pipeline step was tested on real words before it was kept. The write-ups, with their scripts and results, are in [`experiments/`](experiments/README.md); the two projects Acervo is built on carry their own, in [Spoken Usage Retrieval](https://github.com/anton-dergunov/spoken-usage-retrieval/blob/main/experiments/index.md) and [LexiBeat](https://github.com/anton-dergunov/lexibeat/tree/main/experiments). What is still open, including the quality programme for entries, stories and clip selection, is in [`docs/plans/`](docs/plans/README.md).
+
+![Design choices were measured. Six of the 13 experiments, each as question, measurement and decision. What the brief must say for a picture to be kept: eight review rounds over 2,285 pictures took rejects from 7 in 14 to 0 in 50, so the word is briefed once and each sense drawn. Whether the clip selector translates the whole passage: cut-off translations fell from 8 to 0 and coverage rose from 81% to 91%, so the prompt shipped. Whether earlier pictures as references keep a story's characters: 8 to 0 in drawn styles, 0 to 4 in the photoreal one, then 9 to 0 with 3 ties once the prompt put the picture first, so it is on for every style. Which OCR and sentence splitter for a tapped word: 98% against 68% and 98% against 69 to 74%, so Cloud Vision and SaT. Whether two more fields in the prompt thin the entry: no, and the blind pairwise read called a difference on 50% of identical-arm controls, so pairwise judging is not relied on. Whether the map stays put when words are added: not with a fixed seed, and an alignment cut the median move from 140 to 37 units.](assets/pictures/experiments.png)
+
+The pictures on this page are captures of the application on a real vocabulary; [`assets/pictures/`](assets/pictures/README.md) has their sources and the script that retakes them.
 
 ## Core model
 

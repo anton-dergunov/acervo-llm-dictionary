@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+  Source of loop.png. shots/loop.png is a loop playing on a phone-sized screen, fourteen seconds in; shots/loops.png is
+  the list. The listening test is experiments/pronunciation-encoding.
+  Render with capture.mjs --compose loop.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>Loops</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <h1>Your words over music, with the answer held back until it is spoken</h1>
+    <span class="sub">A loop says each word in the language you are learning, leaves a beat to recall it, then gives the translation. Made by LexiBeat, a separate generator, from recordings Acervo directs.</span>
+  </div>
+  <div class="main">
+    <div class="device" style="width: 203px"><img src="shots/loop.png" alt=""></div>
+    <div class="col" style="width: 250px">
+      <div class="note"><span class="label">On the screen</span><b>el asco</b> is being said. Its translation is still a bar: a translation is never drawn before it has been spoken, and dragging backwards puts it away again.</div>
+      <div class="note"><span class="label">Reproducible</span>Speech lands on a known beat grid and the music is procedural, so the same seed gives the same loop.</div>
+      <div class="note fact grow"><span class="label">Measured</span>Stored recordings sounded metallic. In blind listening the provider's 32 kbps MP3 was picked out every time, so the uncompressed master is requested and kept as Opus at about 60 kbps.<span class="exp">experiments/pronunciation-encoding</span></div>
+    </div>
+    <div class="col grow">
+      <span class="label">Every loop made so far</span>
+      <div class="win crop grow"><img src="shots/loops.png" style="width: 560px; margin: -38px 0 0 -62px" alt=""></div>
+    </div>
+  </div>
+  <div class="foot">Three takes of one line must differ, so the take cache is keyed on the repetition as well as the text and the direction.</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<!--
+  Source of pictures.png. shots/pictures-1..3.png are the pictures of the three senses of one of the owner's words. The
+  brief is the stored prompt of the first, as the picture dialog shows it. The review rounds are
+  experiments/sense-images.
+  Render with capture.mjs --compose pictures.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>A picture for each meaning</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.t3 { font: 400 13px var(--serif); } .g3 { font-size: 11px; color: var(--ink-3); margin-top: 1px; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <h1>One word, three meanings, three pictures that look nothing alike</h1>
+    <span class="sub">A language model sees every sense of the word at once and writes a brief for each, choosing a different style for each; an image model then draws them one by one.</span>
+  </div>
+  <div class="main">
+    <div class="col" style="width: 640px">
+      <div class="row">
+        <div class="col grow"><div class="win"><img src="shots/pictures-1.png" alt=""></div><div><span class="num">01</span> <span class="t3">trap, snare</span><div class="g3">watercolour storybook</div></div></div>
+        <div class="col grow"><div class="win"><img src="shots/pictures-2.png" alt=""></div><div><span class="num">02</span> <span class="t3">trap, pitfall, trick</span><div class="g3">film noir</div></div></div>
+        <div class="col grow"><div class="win"><img src="shots/pictures-3.png" alt=""></div><div><span class="num">03</span> <span class="t3">cheating</span><div class="g3">comic book</div></div></div>
+      </div>
+      <div class="note grow"><span class="label">The brief written for 01</span>“In the clear, sunlit shallows of a winding river, a smiling young woman in rolled-up trousers crawls headfirst into a giant cone-shaped wicker fish trap resting on the sandy bottom…”</div>
+    </div>
+    <div class="col grow">
+      <span class="label">la trampa · three senses</span>
+      <div class="note"><span class="label">Brief once, draw each</span>One text call sees all the senses, so it can make them deliberately different. Then one image call for each.</div>
+      <div class="note"><span class="label">Found in review</span>Offered the style table in file order, the writer took the first row as the default. The table is now rotated for each word.</div>
+      <div class="note fact grow"><span class="label">Measured</span>Eight review rounds on the brief prompt took rejected pictures from <b>7 in 14</b> to <b>0 in 50</b>, with the image model unchanged.<span class="exp">experiments/sense-images</span></div>
+    </div>
+  </div>
+  <div class="foot">An abstract meaning is drawn as something physically present in the scene: bitterness as a corrosive vapour, not as a person looking angry. 2,285 pictures were reviewed before the prompt was closed.</div>
+</div>
+</body>
+</html>

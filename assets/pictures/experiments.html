@@ -1,0 +1,57 @@
+<!doctype html>
+<!--
+  Source of experiments.png. Six rows, each from one write-up under experiments/, with the numbers as experiments/README.md
+  and docs/ml.md give them. Thirteen is the number of rows in experiments/README.md; seven and two
+  are the experiments indexed in spoken-usage-retrieval and listed in lexibeat.
+  Render with capture.mjs --compose experiments.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>Design choices were measured</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.t { flex: 1 1 auto; display: grid; grid-template-columns: 250px 1fr 232px; grid-template-rows: 24px repeat(6, 1fr); border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; }
+.t > div { padding: 0 13px; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid var(--rule-soft); font-size: 11.5px; line-height: 1.36; min-width: 0; color: var(--ink-2); }
+.t > .th { border-top: 0; background: var(--paper); font: 500 9.6px var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); }
+.t .q { font: 700 12.6px/1.3 var(--serif); color: var(--ink); }
+.t .q .exp { margin-top: 3px; font-weight: 400; }
+.t .m b { color: var(--core); font-weight: 600; }
+.t .d { background: var(--core-soft); border-left: 1px solid #B5D6CF; font-weight: 600; color: #0B4F48; }
+.t .th.d { color: var(--core); }
+</style>
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <h1>Design choices were measured</h1>
+    <span class="sub">Each prompt, model and pipeline step was tested on real words before it was kept, and some were dropped. Six of the 13 experiments:</span>
+  </div>
+  <div class="main">
+    <div class="t">
+      <div class="th">Question</div><div class="th">Measured</div><div class="th d">Decision</div>
+      <div class="q">What must the brief say for a picture to be kept?<span class="exp">experiments/sense-images</span></div>
+      <div class="m"><span>Eight review rounds over 2,285 pictures. Rejects went from <b>7 in 14</b> to <b>0 in 50</b> with the image model unchanged.</span></div>
+      <div class="d">Brief once for the word, draw each sense; rotate the style table</div>
+      <div class="q">Does the clip selector translate the whole passage?<span class="exp">experiments/clip-translation</span></div>
+      <div class="m"><span>With the demand in the prompt, badly cut-off translations fell from <b>8 to 0</b> and full coverage rose from 81% to <b>91%</b> (p = 0.004).</span></div>
+      <div class="d">Prompt shipped; a check in code waits for data in more scripts</div>
+      <div class="q">Do earlier pictures as references keep a story's characters?<span class="exp">experiments/story-picture-reference</span></div>
+      <div class="m"><span>Three blind runs. <b>8 to 0</b> in drawn styles and 0 to 4 in the photoreal one, then <b>9 to 0</b> with 3 ties once the prompt put the picture first.</span></div>
+      <div class="d">On for every style, anchored to a character's first picture</div>
+      <div class="q">Which OCR and sentence splitter for a tapped word?<span class="exp">experiments/photo-capture</span></div>
+      <div class="m"><span>The tap found the word <b>98%</b> of the time with Cloud Vision, 68% with a local engine. SaT found the sentence for <b>98%</b>, rules for 69 to 74%.</span></div>
+      <div class="d">Cloud Vision for geometry, SaT for sentences, a fast model for the tap</div>
+      <div class="q">Do two more fields in the prompt thin the entry?<span class="exp">experiments/compose-lesson-line</span></div>
+      <div class="m"><span>No: ten measures moved less than run-to-run noise over 315 calls. The blind pairwise read called a difference on <b>50%</b> of identical-arm controls.</span></div>
+      <div class="d">Fields shipped, prompt not split; pairwise judging not relied on</div>
+      <div class="q">Does the meaning map stay put when words are added?<span class="exp">experiments/meaning-space</span></div>
+      <div class="m"><span>Not with a fixed seed: it came back mirrored. A warm start and an alignment cut one edit's median move from <b>140 to 37</b> units.</span></div>
+      <div class="d">Warm start and Procrustes alignment on every rebuild</div>
+    </div>
+  </div>
+  <div class="foot"><b>13 experiments</b> are in this repository (<span class="exp">experiments/</span>), each with its method, scripts and results. The two projects Acervo is built on carry their own: <b>Spoken Usage Retrieval</b>, which finds the clips, has 7, and <b>LexiBeat</b>, which makes the loops, has 2.</div>
+</div>
+</body>
+</html>

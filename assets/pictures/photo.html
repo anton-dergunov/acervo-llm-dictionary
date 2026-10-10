@@ -1,0 +1,40 @@
+<!doctype html>
+<!--
+  Source of photo.png. shots/photo.png is the Photo tab on tests/fixtures/photo-capture/camera-03.jpg with one word
+  tapped. The timings are that request's own lines in the server's call log; the percentages are
+  experiments/photo-capture.
+  Render with capture.mjs --compose photo.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="picture-size" content="960x600">
+<title>Reading a photographed page</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="frame">
+  <div class="head">
+    <h1>Photograph a page, tap a word, see what it means there</h1>
+    <span class="sub">The word is outlined, its sentence is banded, and the meaning in that sentence appears below. Add files the word with the sentence and the photo.</span>
+  </div>
+  <div class="main">
+    <div class="device" style="width: 203px"><img src="shots/photo.png" alt=""></div>
+    <div class="col" style="width: 300px">
+      <span class="label">What happened for this tap</span>
+      <div class="note"><b>1 · Where the words are.</b> An OCR engine returns each word with its outline: 219 words in 0.7 s.</div>
+      <div class="note"><b>2 · Where the sentences end.</b> A segmentation model (SaT) splits the text: 7 sentences.</div>
+      <div class="note"><b>3 · Which word, and what it means here.</b> One call to a fast language model, with the tapped word and its sentence: “otorgar — awarded, granted” in 1.05 s.</div>
+      <div class="note grow"><span class="label">Geometry and judgement, kept apart</span>A multimodal model's boxes are approximate and its text can be invented, so it is given neither job.</div>
+    </div>
+    <div class="col grow">
+      <span class="label">Measured on photos of book pages and screens</span>
+      <div class="note fact"><b>Which OCR.</b> The tap landed on the right word <b>98%</b> of the time with Cloud Vision and <b>68%</b> with a local engine on the home server.</div>
+      <div class="note fact"><b>Which sentence splitter.</b> OCR text carries headings, a status bar, a URL. SaT gave the right sentence for <b>98%</b> of taps; punctuation rules, 69 to 74%.</div>
+      <div class="note fact grow"><b>Which model.</b> The fast one answers in <b>1.0 s</b> at the median, a more accurate one in 4.4 s. A tap cannot wait that long.<span class="exp">experiments/photo-capture</span></div>
+    </div>
+  </div>
+  <div class="foot">A photo is kept as exactly the square the viewfinder showed, with the tapped word and sentence marked on it.</div>
+</div>
+</body>
+</html>
