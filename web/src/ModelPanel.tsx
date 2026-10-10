@@ -163,12 +163,12 @@ function KindSection({ kind, offers, label, help, catalogue, onChange }: {
      the model at the head of its own order. The pane must show what will happen, so an inherited
      order arrives ticked and says whose it is. Changing anything makes the order yours. */
   const offered = offeredPairs(catalogue.providers, kind, offers);
-  /* A saved expressive order is kept as it was saved, and the server walks only its directed
-     voices. What is shown is what will be asked, so a pair this order cannot use is not drawn —
-     and the next change you make saves the order without it. */
-  const live = kind === DIRECTED
-    ? chain.pairs.filter((pair) => offered.some((one) => same(one, pair)))
-    : chain.pairs;
+  /* A saved order is kept as it was saved, and it can name a pair this kind no longer offers: a
+     voice that cannot take a direction, in the order that exists to carry one, or a model the
+     catalogue has since withdrawn. Such a pair is not drawn — and it is left out of the next change
+     you make, because the server refuses an order naming it, and one carried along unseen made
+     every change to that order fail. */
+  const live = chain.pairs.filter((pair) => offered.some((one) => same(one, pair)));
   const inherited = chain.source === "deployment";
   const pairs = orderedPairs(offered, live);
 

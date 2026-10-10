@@ -1459,7 +1459,9 @@ function toast(msg, action) {
     t.appendChild(b);
   }
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove("show"), action ? 7000 : 2200);
+  /* As long as the sentence takes to read, as the application's does: a refusal is a whole sentence. */
+  const reading = Math.min(12000, Math.max(2200, 1000 + 75 * msg.length));
+  toastTimer = setTimeout(() => t.classList.remove("show"), action ? Math.max(7000, reading) : reading);
 }
 
 /* ── loops ────────────────────────────────────────────────────────────────

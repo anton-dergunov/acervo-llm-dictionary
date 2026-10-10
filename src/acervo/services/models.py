@@ -166,6 +166,43 @@ def chain_for(
     return deployment_chain(settings, kind)
 
 
+def speech_chain(
+    settings: Settings, owner: str | None, kind: str
+) -> tuple[list[chain.Choice] | None, list[str]]:
+    """A speech chain as far as the catalogue still offers it, and the pairs that were left out.
+
+    **A pair the catalogue no longer offers for speech is left out rather than refused.** A saved
+    order is a preference and outlives the rows it names: when a row stops offering speech, an order
+    still naming it used to refuse every word and definition before any voice was asked, while the
+    voices behind it in the same order could have read them. The order is kept as saved; the pane
+    does not draw the pair, so the next change the owner makes saves it without.
+
+    An order left with nothing reads as though none had been chosen, which is the catalogue's own.
+    One the owner saved empty is still every voice switched off.
+
+    Here rather than beside its callers in `services/pronunciations.py` because the readout below
+    has to describe the same walk, and a pane saying "nothing you have chosen can be asked" over an
+    order that is reading every word is two answers to one question.
+    """
+    chosen = chain_for(settings, owner, kind)
+    if not chosen:
+        return chosen, []
+    catalogue = load_catalogue()
+    offered: list[chain.Choice] = []
+    skipped: list[str] = []
+    for choice in chosen:
+        identifier, model = (choice, None) if isinstance(choice, str) else choice
+        try:
+            row = catalogue.find(identifier)
+        except KeyError:
+            row = None
+        if row is None or not row.serves("audio") or (model and model not in row.models_for("audio")):
+            skipped.append(f"{identifier}:{model or '*'}")
+            continue
+        offered.append(choice)
+    return offered or deployment_chain(settings, kind), skipped
+
+
 def chain_readout(settings: Settings, owner: str | None, kind: str = "text") -> dict[str, Any]:
     """Which pair would be asked first for this kind, and why none can be.
 
@@ -182,7 +219,10 @@ def chain_readout(settings: Settings, owner: str | None, kind: str = "text") -> 
     only known after a call, and that is what lands in `modelId`.
     """
     catalogue = load_catalogue()
-    chosen = chain_for(settings, owner, kind)
+    if catalogue_kind(kind) == "audio":
+        chosen, _ = speech_chain(settings, owner, kind)
+    else:
+        chosen = chain_for(settings, owner, kind)
     try:
         candidates = chain.resolve(catalogue_kind(kind), chosen, catalogue)
     except ProviderError as error:

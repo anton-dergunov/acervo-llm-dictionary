@@ -87,6 +87,11 @@ const SCOPES: [keyof SearchScope, string, string][] = [
   ["online", "Online sources", "Asked only when you press ⏎"]
 ];
 
+/** How long a toast of this length stays: about one reading of it, from two seconds to twelve. */
+function readingTime(message: string): number {
+  return Math.min(12000, Math.max(2200, 1000 + 75 * message.length));
+}
+
 function scopeLabel(scope: SearchScope): string {
   const extra = SCOPES.filter(([key]) => scope[key]).length;
   return extra ? `yours +${extra}` : "yours";
@@ -370,9 +375,13 @@ export default function App() {
     setToast(message);
     setToastAction(action ?? null);
     clearTimeout(toastTimer.current);
-    // An action needs long enough to read the sentence and decide. Without one, nothing is lost by
-    // the toast going.
-    toastTimer.current = setTimeout(() => { setToast(""); setToastAction(null); }, action ? 7000 : 2200);
+    // An action needs long enough to read the sentence and decide. Without one the toast stays as
+    // long as it takes to read: a two-word confirmation can go at once, but a refusal is a whole
+    // sentence saying what went wrong, and at one fixed length it was gone before it was read.
+    toastTimer.current = setTimeout(
+      () => { setToast(""); setToastAction(null); },
+      action ? Math.max(7000, readingTime(message)) : readingTime(message)
+    );
   }, []);
 
   useEffect(() => {

@@ -103,11 +103,13 @@ its direction that way. Now:
 - Gemini speech is reached only through Cloud TTS. Through LiteLLM the Gemini API and Vertex have no
   field for an instruction, so neither the free tier nor Vertex offers speech.
 
-**A saved order outlives the rows it names** (`pronunciations.order_of`). A pair the catalogue no
+**A saved order outlives the rows it names** (`services.models.speech_chain`). A pair the catalogue no
 longer offers for speech — a row that stopped offering it, a model that was withdrawn — is stepped
 over rather than refused, for either order, because the voices behind it can still read. The order is
-kept as saved, the pane does not draw the pair, and each read that steps over one writes
-`result=skipped reason=retired` with the pair to the call log. An order left with nothing reads as
+kept as saved, and each read that steps over one writes `result=skipped reason=retired` with the
+pair to the call log. Settings ▸ Providers describes the same walk, so it does not report an order
+that is reading as unable to; it does not draw the pair, and leaves it out of the next change the
+owner saves, since an order naming it is refused on the way in. An order left with nothing reads as
 though none had been chosen; one saved empty is still every voice switched off. This is a rule about
 speech orders only: for every other chain a withdrawn model is refused
 ([`../architecture/models.md`](../architecture/models.md)).

@@ -236,6 +236,11 @@ def test_a_pair_the_catalogue_stopped_offering_is_stepped_over_and_the_rest_of_t
     assert skipped and "reason=retired" in skipped[0] and "order=audioPlain" in skipped[0]
     assert "pair=gemini-free:gemini/gemini-3.1-flash-tts-preview" in skipped[0]
     assert model_selection.chains(server.owner)["audioPlain"][0][0] == "gemini-free", "kept as saved"
+    # The pane is told what will happen — a voice answers — and may save the order without the pair.
+    assert server.get("/models").json()["data"]["chains"]["audioPlain"]["reason"] is None
+    saved = server.put("/models/selection", {"chains": {
+        "audioPlain": [{"provider": "google-tts", "model": "standard"}]}})
+    assert saved.status_code == 200
 
 
 def test_an_order_naming_only_pairs_no_longer_offered_reads_as_though_none_were_chosen(server):

@@ -36,7 +36,7 @@ from acervo.pronunciation import takes as take_store
 from acervo.repository import graph, pronunciation_settings
 from acervo.repository.pronunciation_settings import ORDERS, SWITCHES, USES
 from acervo.services import media as media_files
-from acervo.services.models import chain_for, deployment_chain, refusal
+from acervo.services.models import chain_for, refusal, speech_chain
 from acervo.services.prompts import prompt_text
 from acervo.settings import Settings
 
@@ -465,37 +465,14 @@ class Undirected(Exception):
 
 
 def order_of(settings: Settings, owner: str, order: str, caller: str | None = None) -> Any:
-    """The owner's order for a speech chain, as far as the catalogue still offers it.
-
-    **A pair the catalogue no longer offers for speech is left out rather than refused.** A saved
-    order is a preference and outlives the rows it names: when a row stops offering speech, an order
-    still naming it used to refuse every word and definition before any voice was asked, while the
-    voices behind it in the same order could have read them. The order is kept as saved — the pane
-    does not draw the pair, so the next change the owner makes saves it without — and each read that
-    steps over one says so in the call log, under `caller`.
-
-    An order left with nothing reads as though none had been chosen, which is the catalogue's own.
-    One the owner saved empty is still every voice switched off.
-    """
+    """The owner's order for a speech chain, as far as the catalogue still offers it — the rule is
+    `services.models.speech_chain`'s. Each read that steps over a pair says so in the call log, under
+    `caller`; a reader with no caller, such as the settings pane's, says nothing."""
     chain_name = CHAINS[order]
-    chosen = chain_for(settings, owner, chain_name)
-    if not chosen:
-        return chosen
-    catalogue = load_catalogue()
-    offered = []
-    for choice in chosen:
-        identifier, model = (choice, None) if isinstance(choice, str) else choice
-        try:
-            row = catalogue.find(identifier)
-        except KeyError:
-            row = None
-        if row is None or not row.serves("audio") or (model and model not in row.models_for("audio")):
-            if caller:
-                journal.outcome(caller, True, result="skipped", reason="retired", order=chain_name,
-                                pair=f"{identifier}:{model or '*'}")
-            continue
-        offered.append(choice)
-    return offered or deployment_chain(settings, chain_name)
+    chosen, skipped = speech_chain(settings, owner, chain_name)
+    for pair in skipped if caller else ():
+        journal.outcome(caller, True, result="skipped", reason="retired", order=chain_name, pair=pair)
+    return chosen
 
 
 def readers(settings: Settings, owner: str, order: str, language: str,

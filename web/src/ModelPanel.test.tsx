@@ -305,6 +305,25 @@ describe("the credentials table", () => {
     expect(within(shown).getByText("a-project")).toBeTruthy();
   });
 
+  it("leaves a saved pair the catalogue has withdrawn out of the next save, which would be refused", async () => {
+    const saved = catalogue({ chains: {
+      ...catalogue().chains,
+      audioPlain: { source: "owner", reason: null, pairs: [
+        pair("gemini-free", "gemini/retired-tts"), pair("google-tts", WAVENET)
+      ] }
+    } });
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(saved);
+    const save = vi.spyOn(backendSession, "saveModelSelection").mockResolvedValue(saved);
+    panel();
+    const plain = (await screen.findByRole("heading", { name: /a clear, even voice/ }))
+      .closest(".model-kind") as HTMLElement;
+    expect(within(plain).queryByText("gemini/retired-tts")).toBeNull();
+    fireEvent.click(within(rowOf(within(plain).getByText(GEMINI_VOICE))).getByRole("checkbox"));
+    await waitFor(() => expect(save).toHaveBeenCalledWith({
+      audioPlain: [pair("google-tts", WAVENET), pair("google-tts", GEMINI_VOICE)]
+    }));
+  });
+
   describe("the voice that takes a direction", () => {
     const section = async (label: RegExp) =>
       (await screen.findByRole("heading", { name: label })).closest(".model-kind") as HTMLElement;
