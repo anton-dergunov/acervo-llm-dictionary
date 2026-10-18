@@ -1755,6 +1755,125 @@ describe("asking about an article", () => {
   });
 });
 
+/* ── reviewing a proposal on the Add view (§8.4) ─────────────────────────
+   The complaint this pins: on an entry not yet saved, *Review* wrote the change straight into the
+   draft, so there was nothing to refuse it with. It is now reviewed as on a stored entry, with
+   Accept where Save changes is, and the Add view's own Save still the one writer. */
+
+async function openGarfioDraft() {
+  signedIn();
+  mockGarfioCapture();
+  await openList();
+  fireEvent.click(screen.getByRole("button", { name: /Add/ }));
+  fireEvent.change(await screen.findByLabelText(/Paste a word/), {
+    target: { value: "El disfraz de pirata viene con un garfio." }
+  });
+  fireEvent.click(screen.getByRole("button", { name: "Process" }));
+  await screen.findByRole("heading", { name: "el garfio" });
+}
+
+async function askDraft(question: string) {
+  const composer = screen.getByLabelText("Ask about el garfio");
+  fireEvent.change(composer, { target: { value: question } });
+  fireEvent.submit(composer.closest("form")!);
+}
+
+const NAUTICAL = {
+  summary: "Files the sense under nautical.",
+  ops: [{ op: "set", target: "sense:sense0000000091", field: "domain", value: "nautical" }]
+};
+
+describe("reviewing a proposal on the Add view", () => {
+  it("marks the change and holds Save until it is accepted or discarded", async () => {
+    mockChat("Done.", NAUTICAL);
+    await openGarfioDraft();
+    await askDraft("which domain is this?");
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+
+    expect(await screen.findByText(/1 change/)).toBeInTheDocument();
+    expect(document.querySelector(".mark-change")).not.toBeNull();
+    expect(screen.getByText(/nautical/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Save" })).toBeDisabled();
+  });
+
+  it("discards back to the draft, and tells the next turn so", async () => {
+    const chat = mockChat("Done.", NAUTICAL);
+    await openGarfioDraft();
+    await askDraft("which domain is this?");
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Discard" }));
+
+    expect(screen.queryByText(/nautical/i)).not.toBeInTheDocument();
+    expect(document.querySelector(".mark-change")).toBeNull();
+    expect(screen.getByRole("button", { name: "Save" })).toBeEnabled();
+
+    chat.mockResolvedValue({
+      reply: "Left as it was.", followUps: [], proposal: null, proposalProblem: null, rejected: null,
+      capture: null, modelId: "gemini-3.1-flash-lite"
+    });
+    await askDraft("why that domain?");
+    await waitFor(() => expect(chat).toHaveBeenCalledTimes(2));
+    const [, second] = chat.mock.calls[1];
+    expect(second.turns.find((turn) => turn.offered)?.offered).toMatchObject({ outcome: "discarded" });
+    expect((second.subject as { document: string }).document).not.toContain("nautical");
+  });
+
+  it("accepts into the draft, and Save writes what was accepted", async () => {
+    acceptWrites();
+    // A spy re-spied keeps the calls earlier tests made through it.
+    vi.mocked(backendSession.saveArticle).mockClear();
+    mockChat("Done.", NAUTICAL);
+    await openGarfioDraft();
+    await askDraft("which domain is this?");
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Accept" }));
+
+    // Taken in: still there, no longer marked, and nothing written yet.
+    expect(screen.getByText(/nautical/i)).toBeInTheDocument();
+    expect(document.querySelector(".mark-change")).toBeNull();
+    expect(backendSession.saveArticle).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(backendSession.saveArticle).toHaveBeenCalledTimes(1));
+    const [, saved] = vi.mocked(backendSession.saveArticle).mock.calls[0];
+    expect(saved.senses[0].domain).toBe("nautical");
+  });
+
+  it("asks the next turn about the proposed text, and counts both changes", async () => {
+    const chat = mockChat("Done.", NAUTICAL);
+    await openGarfioDraft();
+    await askDraft("which domain is this?");
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+    await screen.findByText(/1 change/);
+
+    chat.mockResolvedValue({
+      reply: "Tightened.", followUps: [], rejected: null, capture: null, proposalProblem: null,
+      proposal: {
+        summary: "Shortens the translation.",
+        ops: [{ op: "set", target: "example:example00000091", field: "translation", value: "The pirate costume has a hook." }]
+      },
+      modelId: "gemini-3.1-flash-lite"
+    } as never);
+    await askDraft("and the translation?");
+    await waitFor(() => expect(chat).toHaveBeenCalledTimes(2));
+    expect((chat.mock.calls[1][1].subject as { document: string }).document).toContain("nautical");
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+    expect(await screen.findByText(/2 changes/)).toBeInTheDocument();
+  });
+
+  it("draws what a proposal removes, struck through, before it is accepted", async () => {
+    mockChat("Done.", {
+      summary: "Drops the example.",
+      ops: [{ op: "remove", target: "example:example00000091", reason: "duplicate" }]
+    });
+    await openGarfioDraft();
+    await askDraft("drop the example");
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+    await screen.findByText(/1 change/);
+    expect(document.querySelector(".mark-cut")).not.toBeNull();
+  });
+});
+
 /* ── reviewing a proposal: what it marks, and how you get to it ──────────
    Round two. The complaints these pin: a proposal below the fold was invisible, a reworded sentence
    never said which words moved, and a reorder reported "0 changes proposed" over an article that
@@ -1773,9 +1892,12 @@ describe("stepping through a proposal", () => {
     await ask("tighten the second sense");
     fireEvent.click(await screen.findByRole("button", { name: "Review" }));
 
-    await waitFor(() => expect(seen).toHaveBeenCalled());
-    const target = seen.mock.instances[seen.mock.instances.length - 1] as Element;
-    expect(target.getAttribute("data-record")).toBe("sensepicarchop0");
+    /* Waited for rather than read once: the jump is a frame late, so a review in the test before
+       can land its own jump here first. */
+    await waitFor(() => {
+      const target = seen.mock.instances[seen.mock.instances.length - 1] as Element | undefined;
+      expect(target?.getAttribute("data-record")).toBe("sensepicarchop0");
+    });
   });
 
   it("walks the changes with next and previous, and clamps at both ends", async () => {

@@ -20,15 +20,23 @@ function elementFor(key: string, scroller: HTMLElement | null): Element | null {
   return (scroller ?? document).querySelector(selector);
 }
 
-export default function ReviewBar({ count, order, saving, scroller, onDiscard, onSave }: {
+export default function ReviewBar({
+  count, order, saving, scroller, onDiscard, onSave, primary = { short: "Save", long: " changes" }
+}: {
   count: number;
   /** Every change, in the order the article draws them, so next and previous move down the page. */
   order: readonly string[];
   saving: boolean;
-  /** `App`'s `main` ref — the scroll container the marks live in. */
+  /** An element the marks live inside: `App`'s `main`, or the Add view's preview. */
   scroller: RefObject<HTMLElement | null>;
   onDiscard(): void;
   onSave(): void;
+  /**
+   * What the primary button says. On a stored entry it writes; on the Add view it only takes the
+   * change into the unsaved document, and calling that "Save" would claim a write that never happens.
+   * `long` is dropped first on a narrow screen.
+   */
+  primary?: { short: string; long?: string };
 }) {
   const [at, setAt] = useState(0);
   const bar = useRef<HTMLDivElement>(null);
@@ -105,7 +113,7 @@ export default function ReviewBar({ count, order, saving, scroller, onDiscard, o
     <span className="spacer" />
     <button className="tb-btn" onClick={onDiscard}>Discard</button>
     <button className="tb-btn primary" disabled={saving} onClick={onSave}>
-      {saving ? "Saving…" : <>Save<span className="review-long"> changes</span></>}
+      {saving ? "Saving…" : <>{primary.short}{primary.long && <span className="review-long">{primary.long}</span>}</>}
     </button>
   </div>;
 }

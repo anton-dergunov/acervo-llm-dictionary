@@ -808,7 +808,9 @@ function renderAsk(x) {
 
 function renderArticle(x, opts) {
   const meta = !opts || opts.meta !== false;
-  const review = meta && state.review ? `
+  /* The Add view's preview (`meta: false`) carries the same bar over a chat proposal, with Accept
+     where Save changes is: nothing there is stored, so taking a change in is not yet a write. */
+  const review = state.review ? `
     <div class="review-bar">
       <span class="review-mark">✎</span>
       <span class="label">3 changes<span class="review-long"> proposed</span></span>
@@ -819,7 +821,9 @@ function renderArticle(x, opts) {
       </div>
       <span class="spacer"></span>
       <button class="tb-btn" id="discardBtn">Discard</button>
-      <button class="tb-btn primary" id="saveProposal">Save<span class="review-long"> changes</span></button>
+      ${meta
+        ? '<button class="tb-btn primary" id="saveProposal">Save<span class="review-long"> changes</span></button>'
+        : '<button class="tb-btn primary" id="acceptProposal">Accept</button>'}
     </div>` : "";
   const key = (part) => `${x.id}:${part}`;
   const met = looseAttestations(x);
@@ -1408,7 +1412,7 @@ function renderSheet() {
           <span class="spacer"></span>
           <button class="tb-btn" id="closeSheet2">Cancel</button>
           <button class="tb-btn" id="switchYaml">Edit YAML</button>
-          <button class="tb-btn primary" id="saveDraft" ${addDraft ? "" : "disabled"}>Save</button>
+          <button class="tb-btn primary" id="saveDraft" ${addDraft && !state.review ? "" : "disabled"}>Save</button>
         </div>
       </div>`
         : `
@@ -3107,6 +3111,7 @@ document.addEventListener("click", (ev) => {
   if (hit(".ask .icon-btn")) { state.ask = "dock"; render(); return; }
   if (hit(".ask-send")) { toast("One turn of conversation — not wired up in the prototype"); return; }
   if (hit("#discardBtn")) { state.review = false; render(); return; }
+  if (hit("#acceptProposal")) { state.review = false; render(); return; }
   if (hit("#saveProposal")) { state.review = false; toast("Saved to the server — not wired up in the prototype"); render(); return; }
   // The card's Review button is what puts the article into the marked state.
   if (hit(".ask-card .tb-btn")) { state.review = true; state.ask = "dock"; render(); $("#main").scrollTop = 0; return; }

@@ -724,7 +724,8 @@ lands under the keyboard on exactly the device this feature is for.
 - **failed** — offline is an ordinary state, phrased as one: *"Chat needs the server. Your words are
   all still here."* Reading never depends on it.
 - **marked** — the only state that changes what the article looks like, and it is always reversible
-  with one press.
+  with one press. On the Add view *accept* stands where *save* is: it takes the change into the
+  unsaved document, and saving the word is still its own press (`§8.4`).
 - The dock is disabled with that same sentence when the server is unreachable, and hidden entirely
   when the server reports no model configured — the capture surface already knows how to say this.
 
@@ -812,11 +813,25 @@ no second writer, and nothing the chat does not already do.
 ### §8.4 · A proposal under review, before it is saved
 
 The same dock on `AddView`'s Article tab. The draft carries the ids `draftFrom` minted, so the
-operations address it exactly as they address a stored one; the ops are applied to the draft, the
-YAML is regenerated, and the tab re-derives as it already does on every keystroke. Instead of
-re-running generation and losing what was right, one sentence changes one thing. It is the least
-valuable of the four entry points and the one most likely to want a different diff treatment, since
-everything in a fresh proposal is new.
+operations address it exactly as they address a stored one. Instead of re-running generation and
+losing what was right, one sentence changes one thing.
+
+*Review* here is what it is on a stored entry: the change is drawn with its marks under the review
+bar (`§6.2`), and the editor text is not touched until the owner decides. The bar reads **Discard ·
+Accept** rather than *Save changes*, because nothing here is stored: Accept takes the change into the
+unsaved document, and the Add view's own Save is still the one writer. Save waits while a change is
+under review, since saving then would settle it silently one way or the other. A second turn builds
+on the change under review and the bar counts both, as on a stored entry; the next turn is asked
+about the proposed text, which is what is on screen.
+
+*Rejected:* applying the operations straight into the editor text, with marks afterwards. The marks
+say what changed, but there is then no way to refuse it short of undoing it by hand or asking the
+model to put it back — and a model asked to put something back is one more edit to check.
+
+The YAML tab shows the proposed text while a change is under review, as on a stored entry. A hand
+edit there starts from that text, so it takes the change rather than throwing away what is being
+typed into; the marks go with it, since the comparison would be against something that no longer
+exists. Processing the capture again replaces the document and drops the review with it.
 
 ---
 

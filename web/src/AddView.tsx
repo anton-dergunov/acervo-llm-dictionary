@@ -15,6 +15,7 @@ import LexemeArticle, { type MarkSlot } from "./LexemeArticle";
 import { newId } from "./ids";
 import { seed as seedPicture } from "./media";
 import PhotoCapture, { type KeptPhoto, type PhotoAdd } from "./PhotoCapture";
+import ReviewBar from "./ReviewBar";
 import { articleFromDraft, type Article } from "./selectors";
 import { ValidationPanel } from "./ValidationPanel";
 import {
@@ -123,12 +124,18 @@ export default function AddView({
   const [capturedPhoto, setCapturedPhoto] = useState<KeptPhoto | null>(null);
   const [passedOver, setPassedOver] = useState<CaptureResult["passedOver"]>([]);
   /**
-   * What the last chat turn changed in this unsaved proposal, so it can be marked.
-   *
-   * Held rather than derived because the editor text is the document of record here: once you touch
-   * it by hand the comparison is against something that no longer exists, so it is dropped.
+   * A chat proposal under review, held beside the editor text and not yet in it — `App`'s
+   * `proposal`, on a document nobody has saved. `before` is the editor text it was made against,
+   * `after` and `text` are what *Accept* takes in, and `diff.shown` is what is drawn: `after` with
+   * removed records put back, so they can be seen going. Dropped the moment the editor text moves.
    */
-  const [edited, setEdited] = useState<{ before: ArticleDraft; diff: DraftDiff } | null>(null);
+  const [pending, setPending] = useState<{
+    before: ArticleDraft; after: ArticleDraft; diff: DraftDiff; text: string;
+  } | null>(null);
+  /** Where in the thread the pending proposal's offers start, so Discard can say which it threw away. */
+  const reviewFrom = useRef(0);
+  /** The preview the marks live in, for the review bar to find them by. */
+  const reviewed = useRef<HTMLDivElement>(null);
   /** In memory and gone with this composition, exactly as it is on a stored article. */
   const [chat, setChat] = useState<ChatTurn[]>([]);
   const { wrap, numbers } = useEditorPreferences();
@@ -149,38 +156,45 @@ export default function AddView({
   /** Nothing has been proposed or written yet, so there is nothing to render. */
   const untouched = draft === YAML_TEMPLATE;
 
-  /** Every write to the document goes through here, so nothing can move without the marks noticing. */
-  const rewrite = (text: string, diff: { before: ArticleDraft; diff: DraftDiff } | null = null) => {
+  /** Every write to the document goes through here, and any write ends a review: the proposal was
+   *  made against text that has now moved. A hand edit of the proposed text, on the YAML tab, starts
+   *  from that text — so it takes the proposal rather than throwing away what is being typed into. */
+  const rewrite = (text: string) => {
     setDraft(text);
-    setEdited(diff);
+    setPending(null);
   };
 
   const marks = useMemo<MarkSlot | null>(() => {
-    if (!edited) return null;
-    const { records, notes } = edited.diff;
+    if (!pending) return null;
+    const { records, notes } = pending.diff;
     return {
       of: (id) => records.get(id)?.mark ?? null,
       field: (id, field) => records.get(id)?.fields.get(field) ?? null,
       note: (index) => notes.get(index) ?? null,
       movedFrom: (id) => records.get(id)?.wasAt ?? null
     };
-  }, [edited]);
+  }, [pending]);
 
   /**
    * Asking about a proposal that has not been saved yet (§8.4).
    *
    * The document is the editor text, which already carries the ids the server minted for its
-   * children, so operations address it exactly as they address a stored entry. What comes back is
-   * written straight back into the editor, and the preview re-derives on the next render as it does
-   * on every keystroke — so one sentence changes one thing, instead of re-running generation and
-   * losing what was already right.
+   * children, so operations address it exactly as they address a stored entry — or, while a change is
+   * under review, the text it proposes, so the next turn is about what is on screen. One sentence
+   * changes one thing, instead of re-running generation and losing what was already right.
    */
-  const askAboutDraft = (turns: ChatTurn[], options: AskOptions) => onChat!(draft, turns, options);
+  const askAboutDraft = (turns: ChatTurn[], options: AskOptions) => onChat!(pending?.text ?? draft, turns, options);
 
-  /** The proposal applied to the editor text, without writing it back. Throws what `applyOps` throws. */
+  /**
+   * The proposal applied, without showing it. Throws what `applyOps` throws.
+   *
+   * A second turn during a review builds on what the first proposed and is compared against the
+   * editor text, as on a stored entry (`App.nextProposal`): the bar counts everything outstanding,
+   * and Discard has one thing to throw away however many turns it took.
+   */
   const appliedToDraft = (ops: EditOp[], modelId: string) => {
-    const before = parseArticle(draft);
-    const applied = applyOps(before, ops, {
+    const before = pending ? pending.before : parseArticle(draft);
+    const applied = applyOps(pending ? pending.after : before, ops, {
       modelId,
       glossLang: preview.article?.glossLangs[0] ?? null,
       // A document with no lexeme id mints freely on save, so nothing here needs a minted set.
@@ -199,10 +213,12 @@ export default function AddView({
     }
   };
 
-  const applyToDraft = (ops: EditOp[], modelId: string): string | null => {
+  /** Pressing *Review*: show the change, marked, and write nothing — not even into the editor. */
+  const reviewOnDraft = (ops: EditOp[], modelId: string): string | null => {
     try {
-      const { before, text, diff } = appliedToDraft(ops, modelId);
-      rewrite(text, { before, diff });
+      const next = appliedToDraft(ops, modelId);
+      if (!pending) reviewFrom.current = Math.max(0, chat.length - 1);
+      setPending(next);
       return null;
     } catch (error) {
       onNotify(error instanceof EditRefused ? error.message
@@ -211,19 +227,31 @@ export default function AddView({
     }
   };
 
+  /** Accept takes the change into the unsaved document; Save is still what writes it. */
+  const accept = () => { if (pending) rewrite(pending.text); };
+
+  /** Discarding: the offers it held were applied to the review, never to the document, and say so. */
+  const discard = () => {
+    setPending(null);
+    setChat(chat.map((turn, index) => index >= reviewFrom.current && turn.offered?.outcome === "applied"
+      ? { ...turn, offered: { ...turn.offered, outcome: "discarded" } }
+      : turn));
+  };
+
   /**
    * The preview is derived from the editor text rather than kept beside it. That is what makes
    * "read it, then go fix it in YAML, then read it again" work without the two ever disagreeing.
+   * A proposal under review is drawn from `diff.shown` instead, so what it removes is still seen.
    */
   const preview = useMemo<{ article: Article | null; problems: YamlProblem[] }>(() => {
     if (!graph || untouched) return { article: null, problems: [] };
     try {
-      return { article: articleFromDraft(graph, parseArticle(draft)), problems: [] };
+      return { article: articleFromDraft(graph, pending ? pending.diff.shown : parseArticle(draft)), problems: [] };
     } catch (error) {
       if (error instanceof YamlProblems) return { article: null, problems: error.problems };
       return { article: null, problems: [{ line: null, message: String(error) }] };
     }
-  }, [graph, draft, untouched]);
+  }, [graph, draft, untouched, pending]);
 
   async function submit(request: CaptureRequest) {
     setWorking(true);
@@ -486,8 +514,10 @@ export default function AddView({
           <span className="spacer" />
           <button className="tb-btn" onClick={onClose}>Cancel</button>
           <button className="tb-btn" onClick={() => onTab("yaml")}>Edit YAML</button>
+          {/* Not while a change waits to be accepted or discarded: saving then would decide it
+              silently, one way or the other. */}
           <button
-            className="tb-btn primary" disabled={busy || !preview.article}
+            className="tb-btn primary" disabled={busy || !preview.article || Boolean(pending)}
             onClick={() => onCreate(draft)}
           >
             {busy ? "Saving…" : "Save"}
@@ -496,14 +526,24 @@ export default function AddView({
       </>}
     >
       {preview.article
-        ? <div className="article-preview">
+        ? <div className="article-preview" ref={reviewed}>
+            {/* The stored article's bar, with Accept where Save changes is: nothing here is stored
+                yet, so taking a change in is not a write, and Save below still is. */}
+            {pending && <ReviewBar
+              count={pending.diff.count}
+              order={pending.diff.order}
+              saving={false}
+              scroller={reviewed}
+              onDiscard={discard}
+              onSave={accept}
+              primary={{ short: "Accept" }}
+            />}
             {/* No delete, and no storage footer: there is nothing stored to delete or describe. */}
             <LexemeArticle
               article={preview.article} onNotify={onNotify} meta={false} marks={marks}
             />
             {/* The same dock, over a proposal nobody has saved yet. `meta={false}` already says this
-                is not a stored word, and there is no review bar: the editor text *is* the proposal,
-                and Save is already on this surface. */}
+                is not a stored word. */}
             {onChat && <AskDock
               headword={preview.article.lexeme.headword}
               emoji={preview.article.lexeme.emoji}
@@ -513,7 +553,7 @@ export default function AddView({
               check={checkDraft}
               report={onChatRefused}
               offline={offline}
-              onPropose={(found, modelId) => applyToDraft(found.ops as EditOp[], modelId)}
+              onPropose={(found, modelId) => reviewOnDraft(found.ops as EditOp[], modelId)}
               /* No `full` here: this surface is itself a review, and its Composer already owns the
                  height. There is nothing for the sheet to take over. */
               expandable={false}
@@ -533,11 +573,14 @@ export default function AddView({
     head={head}
     fill
     actions={<>
-      <ValidationPanel problems={problems} notice={null} />
+      <ValidationPanel
+        problems={problems}
+        notice={pending ? "A proposed change is waiting on the Article tab. Accept or discard it there, or edit it here." : null}
+      />
       <div className="composer-buttons">
         <span className="spacer" />
         <button className="tb-btn" onClick={onClose}>Cancel</button>
-        <button className="tb-btn primary" disabled={busy} onClick={() => onCreate(draft)}>
+        <button className="tb-btn primary" disabled={busy || Boolean(pending)} onClick={() => onCreate(draft)}>
           {busy ? "Saving…" : "Validate & save"}
         </button>
       </div>
@@ -546,7 +589,13 @@ export default function AddView({
     <div className="code-wrap">
       <div className="code-head"><span className="label">new-entry.yaml</span></div>
       <Suspense fallback={<p className="empty">Loading the editor…</p>}>
-        <EditorSurface value={draft} onChange={(text) => rewrite(text)} wrap={wrap} numbers={numbers} />
+        {/* The proposed text while a change is under review, as on a stored entry (§6.2). The editor
+            reports its own catch-up to a new value as a change; only a real edit may end a review. */}
+        <EditorSurface
+          value={pending?.text ?? draft}
+          onChange={(text) => { if (text !== (pending?.text ?? draft)) rewrite(text); }}
+          wrap={wrap} numbers={numbers}
+        />
       </Suspense>
     </div>
   </Composer>;

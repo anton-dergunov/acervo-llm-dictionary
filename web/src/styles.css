@@ -1947,6 +1947,12 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .review-at { font-family: var(--mono); font-size: 11px; color: var(--core); flex: none; }
 .review-down { display: flex; transform: rotate(180deg); }
 .review-bar .spacer { flex: 1 1 auto; }
+/* The same bar over a proposal on the Add view. Its scroller is `.composer-body`, which pads 18px
+   above and nothing at the sides and clips what overflows, so the pane's bleed into 26px of side
+   padding would be cut off there: it only lifts to the top edge. `top` lifts too, because a sticky
+   offset is measured inside the scroller's padding — at 0 the bar stuck 18px down and the article
+   scrolled past in the strip above it. */
+.article-preview .review-bar { top: -18px; margin: -18px 0 18px; padding: 12px 14px; }
 
 .mark { position: relative; }
 /* Which change the review bar is pointing at. Stepping scrolls the right block into view, but on a
