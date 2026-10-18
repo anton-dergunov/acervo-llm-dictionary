@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "replay-t3",
+  "split": "replay",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've updated the primary gloss, short gloss, and notes to reflect «бездонный» as the main translation, while keeping the scientific sense intact.\",\n  \"followUps\": [\n    \"Add another example with бездонный\",\n    \"How is abyssal used in geology?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Changes the primary terms and glosses to use «бездонный» instead of «абиссальный» as requested.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"бездонный; глубоководный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Используется как в научных контекстах (абиссальный), так и в переносном или описательном значении (бездонный).\"\n        ]\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:lgksiv0a4adcaar\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"бездонный\",\n              \"глубоководный\",\n              \"абиссальный\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've updated the primary gloss, short gloss, and notes to reflect «бездонный» as the main translation, while keeping the scientific sense intact.",
+    "followUps": [
+      "Add another example with бездонный",
+      "How is abyssal used in geology?"
+    ],
+    "proposal": {
+      "summary": "Changes the primary terms and glosses to use «бездонный» instead of «абиссальный» as requested.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "бездонный; глубоководный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Используется как в научных контекстах (абиссальный), так и в переносном или описательном значении (бездонный)."
+          ]
+        },
+        {
+          "op": "set",
+          "target": "sense:lgksiv0a4adcaar",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "ru",
+              "terms": [
+                "бездонный",
+                "глубоководный",
+                "абиссальный"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.42,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've updated the primary gloss, short gloss, and notes to reflect «бездонный» as the main translation, while keeping the scientific sense intact.",
+      "followUps": [
+        "Add another example with бездонный",
+        "How is abyssal used in geology?"
+      ],
+      "proposal": {
+        "summary": "Changes the primary terms and glosses to use «бездонный» instead of «абиссальный» as requested.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "бездонный; глубоководный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Используется как в научных контекстах (абиссальный), так и в переносном или описательном значении (бездонный)."
+            ]
+          },
+          {
+            "op": "set",
+            "target": "sense:lgksiv0a4adcaar",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "ru",
+                "terms": [
+                  "бездонный",
+                  "глубоководный",
+                  "абиссальный"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 4,
+      "records": [
+        {
+          "key": "draft:lexeme",
+          "mark": "changed",
+          "fields": [
+            "shortGloss",
+            "primaryGloss"
+          ]
+        },
+        {
+          "key": "lgksiv0a4adcaar",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "mark": "removed"
+        },
+        {
+          "index": 1,
+          "mark": "added"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in notes[0], sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in notes[0], sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  }
+}

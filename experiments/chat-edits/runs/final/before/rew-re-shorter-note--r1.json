@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-re-shorter-note",
+  "split": "held",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can shorten the first note to focus on the key collocation «reckless driving» and where it appears.\",\n  \"followUps\": [\"One more example\", \"How do I remember it?\"],\n  \"proposal\": {\n    \"summary\": \"Shortens the first note.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Обычно о поведении, создающем опасность для других; особенно в сочетании reckless driving в новостях и юридических текстах.\",\n          \"Сильнее, чем careless: человек понимает риск, но игнорирует его.\"\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I can shorten the first note to focus on the key collocation «reckless driving» and where it appears.",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Shortens the first note.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Обычно о поведении, создающем опасность для других; особенно в сочетании reckless driving в новостях и юридических текстах.",
+            "Сильнее, чем careless: человек понимает риск, но игнорирует его."
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 0.99,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can shorten the first note to focus on the key collocation «reckless driving» and where it appears.",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Shortens the first note.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Обычно о поведении, создающем опасность для других; особенно в сочетании reckless driving в новостях и юридических текстах.",
+              "Сильнее, чем careless: человек понимает риск, но игнорирует его."
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [],
+      "notes": [
+        {
+          "index": 0,
+          "mark": "changed"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

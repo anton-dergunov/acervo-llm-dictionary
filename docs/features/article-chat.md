@@ -217,17 +217,29 @@ One JSON object. No prose outside it, same as every other prompt in `prompts/`.
 
 ```jsonc
 {
-  "reply": "«el traje» is any outfit or suit — a business suit, a regional costume …",
-  "followUps": ["Add that to the notes", "One more example", "How do I remember it?"],
+  "intent": "edit",
   "proposal": {
     "summary": "Adds the contrast with «el traje» to the notes, and one example under sense 1.",
     "ops": [ /* … */ ]
-  }
+  },
+  "reply": "Here is a change that adds the contrast with «el traje» to the notes …",
+  "followUps": ["One more example", "How do I remember it?"]
 }
 ```
 
+The keys come in that order on purpose, for a small model writing from the top: it decides first
+whether the turn asked for a change, writes the operations, and only then writes the sentence that
+describes them — so the reply describes what was proposed, rather than the proposal trying to match
+a reply that has already promised something. The measured default is `gemini-3.5-flash-lite`, and
+the prompt is written for it to follow literally: every field's language, type and allowed values,
+and one worked recipe per kind of request.
+
+- **`intent`** is `"edit"` exactly when `proposal` is not null. It is what lets the server tell "a
+  question, answered" from "a change promised and not delivered" — the second is a problem the device
+  sends back (`§5.5`).
 - **`reply`** is the answer, and most turns are only this. Short — it is read on a phone above a
-  keyboard. Capped at ~1200 characters server-side.
+  keyboard. Capped at ~1200 characters server-side. With a proposal it offers the change ("Here is a
+  change that…") and never claims it — nothing changes until the learner saves.
 - **`followUps`** are up to three one-tap next turns, ≤40 characters each. This is the single
   highest-value field on mobile: it is the difference between a feature you use standing on a train
   and one you use at a desk. Free — same call.
@@ -264,12 +276,17 @@ Settable fields, and nothing else:
 
 | Target | Fields |
 | --- | --- |
-| `lexeme` | `headword` `lemma` `reading` `ipa` `pos` `gender` `register` `dialect` `emoji` `shortGloss` `notes` `topics` `status` |
-| `sense:…` | `definition` `definitionLang` `domain` `glosses` |
+| `lexeme` | `headword` `lemma` `reading` `ipa` `pos` `gender` `register` `dialect` `emoji` `shortGloss` `primaryGloss` `emotion` `notes` `topics` `status` |
+| `sense:…` | `definition` `definitionLang` `domain` `emoji` `glosses` |
 | `example:…` | `text` `translation` `note` `matchedForm` `matchedTranslationForm` |
 | `attestation:…` | `text` `translation` `sourceTitle` `sourceUrl` `sourceKind` |
 
-`language` and `id` are not settable. `revision`, `editedAt`, `editedBy`, `deleted` and `ownerId` do
+`language` and `id` are not settable. The prompt gives each field its exact value — `shortGloss` is
+one string of terms separated by "; ", `notes` and `glosses` are whole lists, `register` is one of
+its five values — because a small model told only the field names guessed the rest (`register:
+"informal"`, `shortGloss` as a list) and was refused. It also says which fields are in the word's own
+language and which in the learner's: "use X instead of Y" about a translation must never reach the
+headword, and without the table it did. `revision`, `editedAt`, `editedBy`, `deleted` and `ownerId` do
 not appear in the projection at all and therefore cannot be addressed. Study state is written into
 the YAML as comments (`yaml.ts`) precisely so it cannot be saved back by accident, and it is
 likewise invisible here. Pictures are their own stage ([`sense-images.md`](sense-images.md)) and
@@ -310,22 +327,33 @@ no field meaning "a person wrote this", and chat does not get one.
 Verbatim from the prompt, because this is where the feature either stays trustworthy or stops
 being one:
 
-> An edit changes the smallest thing that is wrong or missing: one field, one example, one note.
-> You are not rewriting the article and you must not produce one.
->
-> - Never touch a record the turn did not ask about.
-> - Never restate an existing sense in your own words because you would have phrased it
->   differently. The learner's article is not a draft of yours.
-> - If the honest answer is "nothing needs to change" — including "no, that is not an error, it is
->   how the word works" — say so and return no proposal. That is a good answer and the most common
->   correct one.
-> - If what they want genuinely requires the article to be rebuilt, say so in `reply` and propose
->   nothing. That is a different action and they will choose it themselves.
+> - Change only what the last line asked for. Never touch a record or a field it did not ask about.
+>   Never reword a note, a definition or a sentence because you would phrase it differently: the
+>   learner's entry is not a draft of yours.
+> - If they ask for something that would rebuild the entry — rewrite all of it, remove all of it,
+>   translate it into another language, change its language — say in `reply` that this is a bigger
+>   change than chat makes and that they can rebuild the entry instead, with `intent: "answer"` and
+>   no proposal. `language` and `id` can never be changed.
 
-Enforced, not merely asked for: **at most twelve operations**, and a proposal touching more than
-half of the article's records is refused by the device with *"that was a rewrite rather than an
-edit, so nothing was changed"*. A cap the model cannot argue with is worth more than a paragraph it
-can.
+And the other half of the gate: **a request gets its proposal now.** "Do you want me to…?" in answer
+to "use X instead" costs the learner a turn and changes nothing; the proposal *is* the question,
+because it is reviewed before anything is saved.
+
+Enforced, not merely asked for, by two limits on the device:
+
+- **At most twenty-four operations** — a cap on runaway answers. Replacing one word through an entry
+  of three senses is a `set` per field plus one per emphasis mark, which is already more than twelve.
+- **The half rule**: a proposal that *rewrites* more than half of the entry's records is refused with
+  *"that was a rewrite rather than an edit, so nothing was changed"*. A record counts as rewritten
+  when it was added or removed, or when one of its prose fields — two words or more — keeps less than
+  half its words (`similarity`, the measure the diff uses). A one-word gloss or emphasis mark swapped
+  for another is the replacement asked for, not a rewrite, and a `set` that changes nothing counts
+  for nothing. *Rejected:* counting the records a proposal reaches. "Use X instead of Y everywhere"
+  reaches the primary gloss, a sense's glosses and an example's translation — three of an entry's
+  five records — and changes one word in each; counting reach refused every faithful replacement while
+  passing a headword turned into another language, which touches one.
+
+A proposal that changes nothing at all is refused too, so the dock can send it back (`§5.5`).
 
 ### §5.4 · The reference subject
 
@@ -347,6 +375,42 @@ knows what in the conversation mattered; shipping the raw thread would mean chan
 `CaptureRequest` and teaching `acervo_compose` to read a conversation. One sentence does the job.
 
 ---
+
+### §5.5 · When a proposal cannot be used
+
+A card whose *Review* fails is the worst thing chat can show: the learner asked, was offered, and
+was told no. So **a proposal is tried before it is offered.** When the answer arrives, the dock runs
+the same `applyOps` *Review* would (`check`); the server has already said whether it could read the
+proposal at all (`proposalProblem`, one sentence, with the proposal it `rejected`). Either problem
+sends the **same turn back** with the sentence that says why and what was sent, and the thread shows
+*Correcting the proposal…* meanwhile. **At most twice**; the server refuses a third. Only a proposal
+that applies becomes a card. One still refused after that is shown as its sentence, offered never,
+and reported — the refusal happens on the device, and `POST /chat/outcome` is how it reaches a log.
+
+This is the one place the device asks a model again on its own (`docs/architecture/jobs.md`): not a
+failed request retried, but the next turn of a conversation, carrying something the model did not
+know. It is a last resort and is measured as one — the prompt is what makes edits right, and on the
+measured set the repair fired twice in 138 turns.
+
+What cannot be caught is an edit that applies and is not what was asked: a replacement that misses a
+field looks, to the device, like success. That residual is the prompt's to shrink.
+
+**Every acervo turn carries what became of the change it offered** — `applied`, `refused` (with the
+sentence), `discarded` or `unreviewed` — and the prompt is told what the bracket means:
+
+```
+acervo: Here is a change that uses «бездонный» instead of «абиссальный» throughout.
+  [offered a change: Replaces «абиссальный» … — NOT applied, nothing changed: That was a rewrite …]
+you: Don't rewrite, update.
+```
+
+Without it the next turn reads its own "here is a change…", believes the entry changed, and cannot
+place "don't rewrite" — and a refused edit becomes a second failed turn.
+
+**The document says what its ids are.** An entry under review is not stored, so it has no lexeme id,
+but its senses and examples carry the ids the server minted for them, and a chat edit addresses
+them. Its header says *"Not saved yet. Every record keeps its id"*; *"No ids here"* is kept for an
+exported file, whose sense ids are stripped.
 
 ## §6 · Applying, showing, saving, undoing
 
@@ -761,7 +825,12 @@ everything in a fresh proposal is new.
 `POST /api/acervo/v1/chat` — authenticated, owner-scoped, online-only, **writes nothing**.
 
 ```ts
-export interface ChatTurn { role: "you" | "acervo"; text: string }
+export interface ChatTurn {
+  role: "you" | "acervo";
+  text: string;
+  /** On an `acervo` turn that offered a change: what became of it (§5.5). */
+  offered?: { summary: string; outcome: "applied" | "refused" | "discarded" | "unreviewed"; reason?: string | null };
+}
 
 export interface ChatRequest {
   schemaVersion: number;
@@ -775,12 +844,16 @@ export interface ChatRequest {
   /** From the replica: the owner's own neighbouring entries, headword and gloss only. */
   neighbours: { headword: string; shortGloss: string | null }[];
   turns: ChatTurn[];
+  /** The same turn sent back: why its answer could not be used, and what it was. Attempt 1 or 2. */
+  repair?: { problem: string; attempt: number; previous: unknown } | null;
 }
 
 export interface ChatResult {
   reply: string;
   followUps: string[];
   proposal: { summary: string; ops: EditOp[] } | null;   // article subjects only
+  proposalProblem: string | null;   // why a proposal the answer carried could not be used
+  rejected: unknown;                // that proposal, for a repair to show the model
   capture: { headword: string; note: string; referenceMode: "faithful" | "expand" | null } | null;
   modelId: string;
 }
@@ -789,8 +862,12 @@ export interface ChatResult {
 - Timeout `CAPTURE_TIMEOUT` (120 s) — one model call, but a slow one, and the sync timeout would
   abort a request that is working. Same reasoning that already applies to capture.
 - Limits, enforced server-side and stated in the prompt: `document` ≤ 32 KB, `reference` ≤ 8 KB
-  (`REFERENCE_LIMIT`, already defined), `turns` ≤ 8 after truncation, `neighbours` ≤ 20, `ops` ≤ 12,
+  (`REFERENCE_LIMIT`, already defined), `turns` ≤ 8 after truncation, `neighbours` ≤ 20, `ops` ≤ 24,
   `reply` ≤ 1200 characters, `followUps` ≤ 3 × 40 characters.
+- **One request id per turn**, minted by the device and sent as `X-Request-ID` on the first call, on
+  each repair and on `POST /chat/outcome` — the log-only report of a proposal still refused after the
+  repairs, which writes an `activity.log` line and nothing else. `admin log <id>` then reads as one
+  account of the turn ([`../architecture/observability.md`](../architecture/observability.md) §3).
 - Errors reuse the existing codes exactly: `capture_unavailable` when no model is configured,
   `llm_unreachable`, `llm_failed`, `llm_empty`, `llm_unusable`. Every message ends in *"so nothing
   was changed"*, matching the capture route's *"so nothing was created"*.
@@ -843,7 +920,7 @@ Chat is a **consumer of the core** ([`../README.md`](../README.md). Concretely, 
 
 ## §11 · What a real model does
 
-Three behaviours only a live run shows, each now handled in the prompt or the code:
+Four behaviours only a live run shows, each now handled in the prompt or the code:
 
 - **`fromAttestation` arrives in two shapes.** A real model puts it inside `example` about half the
   time. Missing it is *silent*: the applier would derive `origin: "llm"` for a sentence the learner
@@ -863,6 +940,16 @@ Three behaviours only a live run shows, each now handled in the prompt or the co
   `proposal` or none on the right — with volunteered sentences marked **yes**, *because they went to
   the trouble of typing it*.
 
+- **A small model edits literally, so the prompt has to be exact** — measured in
+  [`../../experiments/chat-edits/`](../../experiments/chat-edits/README.md). Asked to replace a
+  Russian gloss «everywhere» on an English word, the shipped prompt's model turned the English
+  headword Russian, rewrote untouched notes, sent `shortGloss` as a list, set fields that do not
+  exist, and answered requests with "Do you want me to…?". A field-language table, exact value types,
+  one recipe per request and a fixed walk through the document for replacements took first-attempt
+  success from 72% to 94% (held-out 70% → 90%). It also found a `set` written with its value under
+  the field's own name, which the server now reads from there rather than as `null` — that would
+  have erased the field.
+
 **Acknowledgements are banned as follow-ups**: *"Looks good"* spends the one one-tap slot a phone has on
 nothing. The prompt forbids them and `_shaped` drops one whose whole string, casefolded and stripped of
 punctuation, is in a fixed set — whole-string only, so *"Thanks, now add an example"* survives.
@@ -874,7 +961,7 @@ npm --prefix web run test         # articleEdit.test.ts is the new one that matt
                                   #  · ops applied in order; unknown id refuses the whole set
                                   #  · a `ref` resolves; the example gets origin "attestation"
                                   #  · an added example gets origin "llm" and the model id
-                                  #  · no op may set language or id; >12 ops refused
+                                  #  · no op may set language or id; >24 ops refused
                                   #  · a proposal touching over half the records refused
                                   #  · parseArticle(yamlForDraft(applyOps(…))) round-trips
                                   #  · diffDrafts marks added / changed / removed by id

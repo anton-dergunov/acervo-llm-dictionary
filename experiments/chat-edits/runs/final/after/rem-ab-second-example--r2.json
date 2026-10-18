@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rem-ab-second-example",
+  "split": "dev",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Drops the second example.\",\n    \"ops\": [\n      {\n        \"op\": \"remove\",\n        \"target\": \"example:pl491uiy3zasd85\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that drops the second example.\",\n  \"followUps\": [\n    \"Drop the first example too\",\n    \"Add another example to the first sense\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Drops the second example.",
+      "ops": [
+        {
+          "op": "remove",
+          "target": "example:pl491uiy3zasd85"
+        }
+      ]
+    },
+    "reply": "Here is a change that drops the second example.",
+    "followUps": [
+      "Drop the first example too",
+      "Add another example to the first sense"
+    ]
+  },
+  "seconds": 0.86,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that drops the second example.",
+      "followUps": [
+        "Drop the first example too",
+        "Add another example to the first sense"
+      ],
+      "proposal": {
+        "summary": "Drops the second example.",
+        "ops": [
+          {
+            "op": "remove",
+            "target": "example:pl491uiy3zasd85",
+            "reason": ""
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "pl491uiy3zasd85",
+          "mark": "removed",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

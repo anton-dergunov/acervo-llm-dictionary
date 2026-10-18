@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-es-sense",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can add a figurative sense for using «espolvorear» when scattering elements like jokes or quotes through a speech or text.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds a figurative sense for scattering elements like jokes or quotes.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"sense\",\n        \"after\": \"senseespolvor10\",\n        \"value\": {\n          \"definition\": \"Dispersar elementos como chistes o citas en un discurso o texto.\",\n          \"definitionLang\": \"es\",\n          \"domain\": \"figurative\",\n          \"glosses\": [\n            {\n              \"lang\": \"en\",\n              \"terms\": [\n                \"to sprinkle\",\n                \"to pepper\"\n              ]\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I can add a figurative sense for using «espolvorear» when scattering elements like jokes or quotes through a speech or text.",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Adds a figurative sense for scattering elements like jokes or quotes.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "sense",
+          "after": "senseespolvor10",
+          "value": {
+            "definition": "Dispersar elementos como chistes o citas en un discurso o texto.",
+            "definitionLang": "es",
+            "domain": "figurative",
+            "glosses": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to sprinkle",
+                  "to pepper"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.16,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can add a figurative sense for using «espolvorear» when scattering elements like jokes or quotes through a speech or text.",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Adds a figurative sense for scattering elements like jokes or quotes.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "sense",
+            "value": {
+              "definition": "Dispersar elementos como chistes o citas en un discurso o texto.",
+              "definitionLang": "es",
+              "domain": "figurative",
+              "glosses": [
+                {
+                  "lang": "en",
+                  "terms": [
+                    "to sprinkle",
+                    "to pepper"
+                  ]
+                }
+              ]
+            },
+            "after": "senseespolvor10"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

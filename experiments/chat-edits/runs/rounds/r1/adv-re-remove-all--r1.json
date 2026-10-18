@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r1",
+  "case": "adv-re-remove-all",
+  "split": "dev",
+  "category": "adversarial",
+  "expect": "either",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"answer\",\n  \"proposal\": null,\n  \"reply\": \"Если вы хотите удалить всю статью, вы можете сделать это в настройках словаря, но через чат можно вносить только отдельные изменения. Если нужно, я могу удалить отдельные примеры или смыслы.\",\n  \"followUps\": [\n    \"Удали третий пример\",\n    \"Удали второе значение\"\n  ]\n}",
+  "parsed": {
+    "intent": "answer",
+    "proposal": null,
+    "reply": "Если вы хотите удалить всю статью, вы можете сделать это в настройках словаря, но через чат можно вносить только отдельные изменения. Если нужно, я могу удалить отдельные примеры или смыслы.",
+    "followUps": [
+      "Удали третий пример",
+      "Удали второе значение"
+    ]
+  },
+  "seconds": 1.03,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Если вы хотите удалить всю статью, вы можете сделать это в настройках словаря, но через чат можно вносить только отдельные изменения. Если нужно, я могу удалить отдельные примеры или смыслы.",
+      "followUps": [
+        "Удали третий пример",
+        "Удали второе значение"
+      ],
+      "proposal": null,
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": true
+  },
+  "final": {
+    "pass": true
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "add-re-example-sense2",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds an example to the second sense.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"senserecklessb2\",\n        \"value\": {\n          \"text\": \"She made reckless guarantees she couldn't possibly fulfill.\",\n          \"translation\": \"Она дала необдуманные гарантии, которые никак не могла выполнить.\",\n          \"matchedForm\": \"reckless\",\n          \"matchedTranslationForm\": \"необдуманные\"\n        }\n      }\n    ]\n  },\n  \"reply\": \"Here is an added example for the second sense of reckless.\",\n  \"followUps\": [\n    \"Make the translation simpler\",\n    \"Add a note about promises\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds an example to the second sense.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "senserecklessb2",
+          "value": {
+            "text": "She made reckless guarantees she couldn't possibly fulfill.",
+            "translation": "Она дала необдуманные гарантии, которые никак не могла выполнить.",
+            "matchedForm": "reckless",
+            "matchedTranslationForm": "необдуманные"
+          }
+        }
+      ]
+    },
+    "reply": "Here is an added example for the second sense of reckless.",
+    "followUps": [
+      "Make the translation simpler",
+      "Add a note about promises"
+    ]
+  },
+  "seconds": 1.32,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is an added example for the second sense of reckless.",
+      "followUps": [
+        "Make the translation simpler",
+        "Add a note about promises"
+      ],
+      "proposal": {
+        "summary": "Adds an example to the second sense.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "senserecklessb2",
+            "value": {
+              "text": "She made reckless guarantees she couldn't possibly fulfill.",
+              "translation": "Она дала необдуманные гарантии, которые никак не могла выполнить.",
+              "matchedForm": "reckless",
+              "matchedTranslationForm": "необдуманные"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

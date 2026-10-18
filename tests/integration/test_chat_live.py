@@ -19,6 +19,7 @@ from pathlib import Path
 
 import pytest
 
+from acervo.repository.session import open_database
 from acervo.services.chat import run_chat
 from acervo.settings import settings as read_settings
 
@@ -68,13 +69,16 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 
 
 @pytest.fixture(scope="module", autouse=True)
-def gated():
+def gated(tmp_path_factory):
     if os.environ.get("RUN_LIVE_CHAT_TESTS") != "true":
         pytest.skip("live chat tests are gated; set RUN_LIVE_CHAT_TESTS=true to run them")
     if not os.environ.get("GEMINI_API_KEY"):
         pytest.skip("no GEMINI_API_KEY in the environment")
     # The default is the container's `/app/prompts`; on a workstation the tracked files are here.
     os.environ.setdefault("ACERVO_PROMPTS_PATH", str(REPOSITORY_ROOT / "prompts"))
+    # Every turn reads the owner's standing rules from the database. A fresh one holds none, so the
+    # model is sent exactly the tracked prompt.
+    open_database(tmp_path_factory.mktemp("live-chat") / "acervo.db")
 
 
 def ask(question: str, **overrides):
@@ -226,3 +230,28 @@ def test_no_follow_up_merely_agrees_with_the_answer():
                 "looks good", "thanks", "perfect", "great", "ok", "okay", "got it",
                 "sounds good", "no change needed", "nothing else",
             }, f"useless follow-up: {follow_up!r}"
+
+
+ABYSSAL = (REPOSITORY_ROOT / "experiments" / "chat-edits" / "documents" / "abyssal.yaml").read_text(encoding="utf-8")
+
+
+def test_it_replaces_a_translation_everywhere_and_nowhere_else():
+    """The owner's case: a word under review, English glossed into Russian. «абиссальный» sits in the
+    short and primary glosses, the first sense's glosses and the first example's translation, and
+    must leave all four without the English headword, lemma or sentences moving at all.
+    `experiments/chat-edits/` measures this at scale; here it is one call."""
+    answered = run_chat(read_settings(), owner=None, body={
+        "subject": {"kind": "article", "lexemeId": "", "document": ABYSSAL, "focus": None},
+        "neighbours": [],
+        "turns": [{"role": "you", "text": "use бездонный instead of абиссальный everywhere"}],
+    })
+    proposal = answered["proposal"]
+    assert proposal, f"a replacement is a request: {answered['reply']}"
+    assert answered["proposalProblem"] is None
+    fields = {(op["target"], op.get("field")) for op in proposal["ops"]}
+    assert not fields & {("lexeme", "headword"), ("lexeme", "lemma"), ("lexeme", "ipa")}
+    assert all(op.get("field") != "text" for op in proposal["ops"]), "a sentence is in the word's language"
+    for wanted in [("lexeme", "primaryGloss"), ("sense:lgksiv0a4adcaar", "glosses"),
+                   ("example:pvs056rz7zyuix1", "translation")]:
+        assert wanted in fields, f"missed {wanted}"
+    assert "абиссальн" not in str([op.get("value") for op in proposal["ops"]])

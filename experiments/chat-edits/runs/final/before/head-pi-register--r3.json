@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "head-pi-register",
+  "split": "held",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can change the register to informal if you'd like. Would you prefer «coloquial» or «informal»?\",\n  \"followUps\": [\n    \"Set the register to informal\",\n    \"How is it used in slang?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Sets the register of «picar» to informal.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"register\",\n        \"value\": \"informal\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I can change the register to informal if you'd like. Would you prefer «coloquial» or «informal»?",
+    "followUps": [
+      "Set the register to informal",
+      "How is it used in slang?"
+    ],
+    "proposal": {
+      "summary": "Sets the register of «picar» to informal.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "register",
+          "value": "informal"
+        }
+      ]
+    }
+  },
+  "seconds": 1.0,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can change the register to informal if you'd like. Would you prefer «coloquial» or «informal»?",
+      "followUps": [
+        "Set the register to informal",
+        "How is it used in slang?"
+      ],
+      "proposal": {
+        "summary": "Sets the register of «picar» to informal.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "register",
+            "value": "informal"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "refused",
+    "sentence": "`register` was given a value of the wrong kind, so nothing was changed."
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "refused",
+    "why": "`register` was given a value of the wrong kind, so nothing was changed."
+  },
+  "final": {
+    "pass": false,
+    "failure": "refused",
+    "why": "`register` was given a value of the wrong kind, so nothing was changed."
+  }
+}

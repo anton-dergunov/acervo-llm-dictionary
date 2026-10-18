@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rem-re-note",
+  "split": "dev",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've removed the second note about how it compares to careless.\",\n  \"followUps\": [\n    \"Restore the note\",\n    \"Give me one more example\",\n    \"What is the difference with rash?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Removes the second note comparing reckless to careless.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Чаще всего о поведении, которое создаёт опасность для других, особенно в сочетании reckless driving, которое встречается в новостях и в юридических текстах о дорожных происшествиях.\"\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've removed the second note about how it compares to careless.",
+    "followUps": [
+      "Restore the note",
+      "Give me one more example",
+      "What is the difference with rash?"
+    ],
+    "proposal": {
+      "summary": "Removes the second note comparing reckless to careless.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Чаще всего о поведении, которое создаёт опасность для других, особенно в сочетании reckless driving, которое встречается в новостях и в юридических текстах о дорожных происшествиях."
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.21,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've removed the second note about how it compares to careless.",
+      "followUps": [
+        "Restore the note",
+        "Give me one more example",
+        "What is the difference with rash?"
+      ],
+      "proposal": {
+        "summary": "Removes the second note comparing reckless to careless.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Чаще всего о поведении, которое создаёт опасность для других, особенно в сочетании reckless driving, которое встречается в новостях и в юридических текстах о дорожных происшествиях."
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [],
+      "notes": [
+        {
+          "index": 1,
+          "mark": "removed"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

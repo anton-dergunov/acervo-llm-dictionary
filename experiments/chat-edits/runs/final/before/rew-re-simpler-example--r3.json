@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-re-simpler-example",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've replaced the long second example with a simpler and shorter one about a reckless decision.\",\n  \"followUps\": [\n    \"Make it even shorter\",\n    \"Add another example\",\n    \"Translate it differently\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Simplifies the second example to make it shorter.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"text\",\n        \"value\": \"It was a reckless decision.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"translation\",\n        \"value\": \"Это было безрассудное решение.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedForm\",\n        \"value\": \"reckless\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"безрассудное\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've replaced the long second example with a simpler and shorter one about a reckless decision.",
+    "followUps": [
+      "Make it even shorter",
+      "Add another example",
+      "Translate it differently"
+    ],
+    "proposal": {
+      "summary": "Simplifies the second example to make it shorter.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "text",
+          "value": "It was a reckless decision."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "translation",
+          "value": "Это было безрассудное решение."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedForm",
+          "value": "reckless"
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedTranslationForm",
+          "value": "безрассудное"
+        }
+      ]
+    }
+  },
+  "seconds": 1.3,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've replaced the long second example with a simpler and shorter one about a reckless decision.",
+      "followUps": [
+        "Make it even shorter",
+        "Add another example",
+        "Translate it differently"
+      ],
+      "proposal": {
+        "summary": "Simplifies the second example to make it shorter.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "text",
+            "value": "It was a reckless decision."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "translation",
+            "value": "Это было безрассудное решение."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedForm",
+            "value": "reckless"
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedTranslationForm",
+            "value": "безрассудное"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "examplereckles2",
+          "mark": "changed",
+          "fields": [
+            "text",
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

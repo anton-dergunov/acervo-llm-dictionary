@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rew-re-wrong-translation",
+  "split": "held",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Fixes the mistranslation «Осторожные» in the third example to «Безрассудные».\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles3\",\n        \"field\": \"translation\",\n        \"translation\": \"Безрассудные траты оставили их ни с чем.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles3\",\n        \"field\": \"matchedTranslationForm\",\n        \"matchedTranslationForm\": \"Безрассудные\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that corrects the translation of the third example to use «Безрассудные» instead of «Осторожные».\",\n  \"followUps\": [\n    \"Fix that translation\",\n    \"Looks good\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Fixes the mistranslation «Осторожные» in the third example to «Безрассудные».",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:examplereckles3",
+          "field": "translation",
+          "translation": "Безрассудные траты оставили их ни с чем."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles3",
+          "field": "matchedTranslationForm",
+          "matchedTranslationForm": "Безрассудные"
+        }
+      ]
+    },
+    "reply": "Here is a change that corrects the translation of the third example to use «Безрассудные» instead of «Осторожные».",
+    "followUps": [
+      "Fix that translation",
+      "Looks good"
+    ]
+  },
+  "seconds": 1.26,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that corrects the translation of the third example to use «Безрассудные» instead of «Осторожные».",
+      "followUps": [
+        "Fix that translation"
+      ],
+      "proposal": {
+        "summary": "Fixes the mistranslation «Осторожные» in the third example to «Безрассудные».",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:examplereckles3",
+            "field": "translation",
+            "value": "Безрассудные траты оставили их ни с чем."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles3",
+            "field": "matchedTranslationForm",
+            "value": "Безрассудные"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "examplereckles3",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

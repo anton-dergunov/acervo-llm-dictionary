@@ -42,10 +42,14 @@ logger = logging.getLogger(LOGGER)
 EXCERPT = 400
 
 
-def excerpt(text: str) -> str:
-    """A bounded, single-line view of a reply, for the detail of a shape refusal."""
+def excerpt(text: str, limit: int = EXCERPT) -> str:
+    """A bounded, single-line view of a reply, for the detail of a shape refusal.
+
+    `limit` is for a caller whose failures are only legible whole — a chat proposal names the
+    operation that was wrong somewhere past the first four hundred characters.
+    """
     flattened = " ".join((text or "").split())
-    return flattened if len(flattened) <= EXCERPT else flattened[:EXCERPT] + "…"
+    return flattened if len(flattened) <= limit else flattened[:limit] + "…"
 
 
 def answered(caller: str, provider: str, model: str, seconds: float) -> None:

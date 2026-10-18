@@ -446,6 +446,29 @@ export interface QuickLookUp {
 export interface ChatTurn {
   role: "you" | "acervo";
   text: string;
+  /**
+   * What became of the change an `acervo` turn offered. Sent with the transcript, because without it
+   * the next turn reads its own "here is a change…" and believes the entry changed — and "don't
+   * rewrite" after a refusal is then a complaint it cannot place.
+   */
+  offered?: ChatOffered;
+}
+
+export interface ChatOffered {
+  summary: string;
+  outcome: "applied" | "refused" | "discarded" | "unreviewed";
+  /** The sentence it was refused with, for `refused`. */
+  reason?: string | null;
+}
+
+/**
+ * An answer sent back because it could not be used: the sentence that says why, and what it was.
+ * At most two per turn (`docs/features/article-chat.md` §5.5).
+ */
+export interface ChatRepair {
+  problem: string;
+  attempt: number;
+  previous: unknown;
 }
 
 export type ChatSubject =
@@ -466,6 +489,7 @@ export interface ChatRequest {
   neighbours?: ChatNeighbour[];
   /** The transcript, oldest first, including the question being asked as its final `you` turn. */
   turns: ChatTurn[];
+  repair?: ChatRepair | null;
 }
 
 /**
@@ -473,19 +497,16 @@ export interface ChatRequest {
  * whether an id exists or a field may be set is `articleEdit.ts`'s question, against the document.
  */
 export interface ChatEditOp {
-  op: "set" | "addSense" | "addExample" | "addAttestation" | "remove" | "orderSenses";
-  target?: string;
+  op: "set" | "add" | "remove" | "reorder";
+  target: string;
   field?: string;
   value?: unknown;
+  in?: string;
   after?: string | null;
-  senseId?: string;
   fromAttestation?: string | null;
   ref?: string;
   reason?: string;
   ids?: string[];
-  sense?: Record<string, unknown>;
-  example?: Record<string, unknown>;
-  attestation?: Record<string, unknown>;
 }
 
 export interface ChatProposal {
@@ -505,6 +526,10 @@ export interface ChatResult {
   followUps: string[];
   /** Article subjects only. A dictionary entry has nothing editable on screen. */
   proposal: ChatProposal | null;
+  /** Why the answer's proposal could not be used, when it carried one the server dropped. */
+  proposalProblem: string | null;
+  /** The proposal it dropped, so a repair can show the model what it sent. */
+  rejected: unknown;
   /** Reference subjects only. */
   capture: ChatCapture | null;
   modelId: string;
@@ -1109,9 +1134,14 @@ export const backendSession = {
    * On `CAPTURE_TIMEOUT` rather than the ordinary read timeout: this is one model call, but a slow
    * one, and the sync timeout would abort a request that is working.
    */
-  chat(deviceId: string, request: ChatRequest): Promise<ChatResult> {
+  /**
+   * One turn. `requestId` is minted by the device once per turn and sent on the first call, on each
+   * repair and on the outcome report, so `admin log <id>` shows the whole turn as one account.
+   */
+  chat(deviceId: string, request: ChatRequest, requestId?: string): Promise<ChatResult> {
     return client.call<ChatResult>("/chat", {
       method: "POST",
+      headers: requestId ? { "X-Request-ID": requestId } : {},
       body: JSON.stringify({
         schemaVersion: SCHEMA_VERSION,
         deviceId,
@@ -1119,9 +1149,23 @@ export const backendSession = {
         reference: request.reference?.trim() || null,
         referenceSources: request.referenceSources ?? [],
         neighbours: request.neighbours ?? [],
-        turns: request.turns
+        turns: request.turns,
+        repair: request.repair ?? null
       })
     }, false, CAPTURE_TIMEOUT);
+  },
+
+  /**
+   * Tells the server a proposal the device would not apply, after the repairs ran out. Writes a
+   * line and nothing else: the refusal happened here, and without this it happened nowhere a log
+   * could see.
+   */
+  chatOutcome(deviceId: string, requestId: string, report: { problem: string; proposal: unknown }): Promise<unknown> {
+    return client.call("/chat/outcome", {
+      method: "POST",
+      headers: { "X-Request-ID": requestId },
+      body: JSON.stringify({ schemaVersion: SCHEMA_VERSION, deviceId, ...report })
+    });
   },
 
   /**

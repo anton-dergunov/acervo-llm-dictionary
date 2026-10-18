@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "add-di-shop",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds a new example sentence set in a shop under the first sense.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"sense:kq2m7x1p4vd9r0s\",\n        \"value\": {\n          \"text\": \"Compré el disfraz en la tienda de bromas.\",\n          \"translation\": \"I bought the costume at the joke shop.\",\n          \"matchedForm\": \"disfraz\",\n          \"matchedTranslationForm\": \"costume\"\n        }\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds an example set in a shop.\",\n  \"followUps\": [\n    \"Translate the example to Russian\",\n    \"Change the example translation\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds a new example sentence set in a shop under the first sense.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "sense:kq2m7x1p4vd9r0s",
+          "value": {
+            "text": "Compré el disfraz en la tienda de bromas.",
+            "translation": "I bought the costume at the joke shop.",
+            "matchedForm": "disfraz",
+            "matchedTranslationForm": "costume"
+          }
+        }
+      ]
+    },
+    "reply": "Here is a change that adds an example set in a shop.",
+    "followUps": [
+      "Translate the example to Russian",
+      "Change the example translation"
+    ]
+  },
+  "seconds": 1.12,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds an example set in a shop.",
+      "followUps": [
+        "Translate the example to Russian",
+        "Change the example translation"
+      ],
+      "proposal": {
+        "summary": "Adds a new example sentence set in a shop under the first sense.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "sense:kq2m7x1p4vd9r0s",
+            "value": {
+              "text": "Compré el disfraz en la tienda de bromas.",
+              "translation": "I bought the costume at the joke shop.",
+              "matchedForm": "disfraz",
+              "matchedTranslationForm": "costume"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

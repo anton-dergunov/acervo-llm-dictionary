@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "head-re-ipa",
+  "split": "dev",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Вы правы, ударение в английском не меняется, но слабый гласный во втором слоге обычно редуцируется до шва: /ˈrɛkləs/. Давайте исправим транскрипцию.\",\n  \"followUps\": [\n    \"Исправить транскрипцию\",\n    \"Еще один пример\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Исправление IPA-транскрипции на /ˈrɛkləs/\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"ipa\",\n        \"value\": \"/ˈrɛkləs/\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Вы правы, ударение в английском не меняется, но слабый гласный во втором слоге обычно редуцируется до шва: /ˈrɛkləs/. Давайте исправим транскрипцию.",
+    "followUps": [
+      "Исправить транскрипцию",
+      "Еще один пример"
+    ],
+    "proposal": {
+      "summary": "Исправление IPA-транскрипции на /ˈrɛkləs/",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "ipa",
+          "value": "/ˈrɛkləs/"
+        }
+      ]
+    }
+  },
+  "seconds": 1.12,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Вы правы, ударение в английском не меняется, но слабый гласный во втором слоге обычно редуцируется до шва: /ˈrɛkləs/. Давайте исправим транскрипцию.",
+      "followUps": [
+        "Исправить транскрипцию",
+        "Еще один пример"
+      ],
+      "proposal": {
+        "summary": "Исправление IPA-транскрипции на /ˈrɛkləs/",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "ipa",
+            "value": "/ˈrɛkləs/"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemereckless1",
+          "mark": "changed",
+          "fields": [
+            "ipa"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "the IPA is not /ˈrekləs/",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "the IPA is not /ˈrekləs/",
+    "minor": []
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "multi-di-shorten-new",
+  "split": "dev",
+  "category": "multi",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Shortens the second example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"text\",\n        \"value\": \"Alquiló un disfraz de médico para la fiesta.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"translation\",\n        \"value\": \"He rented a doctor costume for the party.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"matchedForm\",\n        \"value\": \"disfraz\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"costume\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that makes the second example shorter.\",\n  \"followUps\": [\n    \"Make it even shorter\",\n    \"Keep the original sentence\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Shortens the second example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "text",
+          "value": "Alquiló un disfraz de médico para la fiesta."
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "translation",
+          "value": "He rented a doctor costume for the party."
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "matchedForm",
+          "value": "disfraz"
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "matchedTranslationForm",
+          "value": "costume"
+        }
+      ]
+    },
+    "reply": "Here is a change that makes the second example shorter.",
+    "followUps": [
+      "Make it even shorter",
+      "Keep the original sentence"
+    ]
+  },
+  "seconds": 1.2,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that makes the second example shorter.",
+      "followUps": [
+        "Make it even shorter",
+        "Keep the original sentence"
+      ],
+      "proposal": {
+        "summary": "Shortens the second example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "text",
+            "value": "Alquiló un disfraz de médico para la fiesta."
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "translation",
+            "value": "He rented a doctor costume for the party."
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "matchedForm",
+            "value": "disfraz"
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "matchedTranslationForm",
+            "value": "costume"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "k3x9p2m7q1w8z4a",
+          "mark": "changed",
+          "fields": [
+            "text",
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

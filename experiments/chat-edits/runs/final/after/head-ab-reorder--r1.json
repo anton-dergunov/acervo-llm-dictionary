@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "head-ab-reorder",
+  "split": "held",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Reorders the senses to put the second meaning first.\",\n    \"ops\": [\n      {\n        \"op\": \"reorder\",\n        \"target\": \"senses\",\n        \"ids\": [\"z5aouusz9u6bbj4\", \"lgksiv0a4adcaar\"]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that puts the second meaning first.\",\n  \"followUps\": [\n    \"Put the first meaning back first\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Reorders the senses to put the second meaning first.",
+      "ops": [
+        {
+          "op": "reorder",
+          "target": "senses",
+          "ids": [
+            "z5aouusz9u6bbj4",
+            "lgksiv0a4adcaar"
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that puts the second meaning first.",
+    "followUps": [
+      "Put the first meaning back first"
+    ]
+  },
+  "seconds": 1.09,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that puts the second meaning first.",
+      "followUps": [
+        "Put the first meaning back first"
+      ],
+      "proposal": {
+        "summary": "Reorders the senses to put the second meaning first.",
+        "ops": [
+          {
+            "op": "reorder",
+            "target": "senses",
+            "ids": [
+              "z5aouusz9u6bbj4",
+              "lgksiv0a4adcaar"
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "z5aouusz9u6bbj4",
+          "mark": "moved",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

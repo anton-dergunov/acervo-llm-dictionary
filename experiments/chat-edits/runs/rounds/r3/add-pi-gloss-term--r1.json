@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r3",
+  "case": "add-pi-gloss-term",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds «to sting» to the glosses of the first sense.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensepicaritch0\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"en\",\n            \"terms\": [\n              \"to itch\",\n              \"to sting\"\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds «to sting» to the glosses of the first sense.\",\n  \"followUps\": [\n    \"Add an example with sting\",\n    \"Change the primary gloss to to sting\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds «to sting» to the glosses of the first sense.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensepicaritch0",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "en",
+              "terms": [
+                "to itch",
+                "to sting"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that adds «to sting» to the glosses of the first sense.",
+    "followUps": [
+      "Add an example with sting",
+      "Change the primary gloss to to sting"
+    ]
+  },
+  "seconds": 2.12,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds «to sting» to the glosses of the first sense.",
+      "followUps": [
+        "Add an example with sting",
+        "Change the primary gloss to to sting"
+      ],
+      "proposal": {
+        "summary": "Adds «to sting» to the glosses of the first sense.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensepicaritch0",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to itch",
+                  "to sting"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "sensepicaritch0",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

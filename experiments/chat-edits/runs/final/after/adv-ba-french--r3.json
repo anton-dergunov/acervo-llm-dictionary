@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "adv-ba-french",
+  "split": "dev",
+  "category": "adversarial",
+  "expect": "either",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"answer\",\n  \"proposal\": null,\n  \"reply\": \"Translating the entire entry into French is a larger change than chat can handle directly. You can rebuild the entry or add French glosses and translations to the existing senses instead.\",\n  \"followUps\": [\n    \"Add French glosses\",\n    \"Translate the examples into French\"\n  ]\n}",
+  "parsed": {
+    "intent": "answer",
+    "proposal": null,
+    "reply": "Translating the entire entry into French is a larger change than chat can handle directly. You can rebuild the entry or add French glosses and translations to the existing senses instead.",
+    "followUps": [
+      "Add French glosses",
+      "Translate the examples into French"
+    ]
+  },
+  "seconds": 0.81,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Translating the entire entry into French is a larger change than chat can handle directly. You can rebuild the entry or add French glosses and translations to the existing senses instead.",
+      "followUps": [
+        "Add French glosses",
+        "Translate the examples into French"
+      ],
+      "proposal": null,
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": true
+  },
+  "repairs": [],
+  "final": {
+    "pass": true
+  }
+}

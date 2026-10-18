@@ -45,6 +45,16 @@ describe("the YAML projection", () => {
     expect(document).toContain('headword: "yes: really"');
     expect(parseArticle(document).headword).toBe("yes: really");
   });
+
+  it("tells the reader of a composed word under review that its ids are kept", () => {
+    // Not stored, so no lexeme id — but the senses carry the ids the server minted, and a chat edit
+    // addresses them. "No ids here" over a body full of ids is a contradiction a model reads literally.
+    const draft: ArticleDraft = { ...draftFor(articleFor(testGraph(), "lexemepicar0001")!), id: null };
+    const document = yamlForDraft(draft);
+    expect(document).toContain("# Not saved yet. Every record keeps its id");
+    expect(document).not.toContain("No ids here");
+    expect(document).toContain("id: sensepicaritch0");
+  });
 });
 
 describe("reading YAML back", () => {

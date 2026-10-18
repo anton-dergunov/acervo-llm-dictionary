@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-di-shop",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Here is an example of buying a costume in a shop.\",\n  \"followUps\": [\n    \"Add that to the examples\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds a new example set in a shop.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"sense:kq2m7x1p4vd9r0s\",\n        \"value\": {\n          \"text\": \"Compré el disfraz en la tienda de bromas.\",\n          \"textLang\": \"es\",\n          \"translation\": \"I bought the costume at the joke shop.\",\n          \"translationLang\": \"en\",\n          \"matchedForm\": \"disfraz\",\n          \"matchedTranslationForm\": \"costume\"\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Here is an example of buying a costume in a shop.",
+    "followUps": [
+      "Add that to the examples"
+    ],
+    "proposal": {
+      "summary": "Adds a new example set in a shop.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "sense:kq2m7x1p4vd9r0s",
+          "value": {
+            "text": "Compré el disfraz en la tienda de bromas.",
+            "textLang": "es",
+            "translation": "I bought the costume at the joke shop.",
+            "translationLang": "en",
+            "matchedForm": "disfraz",
+            "matchedTranslationForm": "costume"
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.03,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is an example of buying a costume in a shop.",
+      "followUps": [
+        "Add that to the examples"
+      ],
+      "proposal": {
+        "summary": "Adds a new example set in a shop.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "sense:kq2m7x1p4vd9r0s",
+            "value": {
+              "text": "Compré el disfraz en la tienda de bromas.",
+              "textLang": "es",
+              "translation": "I bought the costume at the joke shop.",
+              "translationLang": "en",
+              "matchedForm": "disfraz",
+              "matchedTranslationForm": "costume"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "head-re-ipa",
+  "split": "dev",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Вы правы, /ˈrek.lɪs/ — это устаревший или избыточный вариант для современной британской и американской нормы, где гласная в безударном суффиксе редуцируется в нейтральный шва. Давайте исправим транскрипцию.\",\n  \"followUps\": [\n    \"Apply this change\",\n    \"One more example\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Updates the IPA transcription to /ˈrek.ləs/.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"ipa\",\n        \"value\": \"/ˈrek.ləs/\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Вы правы, /ˈrek.lɪs/ — это устаревший или избыточный вариант для современной британской и американской нормы, где гласная в безударном суффиксе редуцируется в нейтральный шва. Давайте исправим транскрипцию.",
+    "followUps": [
+      "Apply this change",
+      "One more example"
+    ],
+    "proposal": {
+      "summary": "Updates the IPA transcription to /ˈrek.ləs/.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "ipa",
+          "value": "/ˈrek.ləs/"
+        }
+      ]
+    }
+  },
+  "seconds": 1.05,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Вы правы, /ˈrek.lɪs/ — это устаревший или избыточный вариант для современной британской и американской нормы, где гласная в безударном суффиксе редуцируется в нейтральный шва. Давайте исправим транскрипцию.",
+      "followUps": [
+        "Apply this change",
+        "One more example"
+      ],
+      "proposal": {
+        "summary": "Updates the IPA transcription to /ˈrek.ləs/.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "ipa",
+            "value": "/ˈrek.ləs/"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemereckless1",
+          "mark": "changed",
+          "fields": [
+            "ipa"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

@@ -371,12 +371,19 @@ export function yamlForDraft(draft: ArticleDraft, study: StudyState | null = nul
   }));
 
   // What the ids mean depends on whether the document names a stored entry. An edit keeps them; a
-  // document that names nothing — a proposal, or an exported file — has none to keep, and telling
-  // its reader to preserve ids it does not carry is worse than saying nothing.
+  // document that names nothing — an exported file — has none to keep, and telling its reader to
+  // preserve ids it does not carry is worse than saying nothing. A composed word under review is
+  // the third case: not stored, but its senses and examples already carry the ids the server minted
+  // for them, which a chat edit addresses. Telling that document's reader "no ids here" over four
+  // ids is a contradiction a model reads literally. Told apart by the sense ids, which an export
+  // strips (`transfer.ts`, `stripIds`) and a composed word carries.
+  const named = draft.senses.some((sense) => sense.id);
   document.commentBefore = ` ${draft.headword} — ${languageOf(draft.language).name}\n `
     + (draft.id
       ? "Every record keeps its id. Delete a block to remove it; omit an id to add something new."
-      : "No ids here: everything in this document is created when you save.");
+      : named
+        ? "Not saved yet. Every record keeps its id; omit an id to add something new."
+        : "No ids here: everything in this document is created when you save.");
 
   // Study state flows in from the scheduler and is never edited here (`docs/features/anki.md`), so
   // it is written as comments: visible where you would look for it, and impossible to save back by

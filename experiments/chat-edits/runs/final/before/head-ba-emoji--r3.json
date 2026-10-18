@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "head-ba-emoji",
+  "split": "dev",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've updated the emoji to 🌊 as you requested.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Changes the emoji to 🌊.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"emoji\",\n        \"value\": \"🌊\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've updated the emoji to 🌊 as you requested.",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Changes the emoji to 🌊.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "emoji",
+          "value": "🌊"
+        }
+      ]
+    }
+  },
+  "seconds": 1.53,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've updated the emoji to 🌊 as you requested.",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Changes the emoji to 🌊.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "emoji",
+            "value": "🌊"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemebalsa0001",
+          "mark": "changed",
+          "fields": [
+            "emoji"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

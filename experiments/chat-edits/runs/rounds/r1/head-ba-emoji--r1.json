@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r1",
+  "case": "head-ba-emoji",
+  "split": "dev",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces the emoji with 🌊.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"emoji\",\n        \"value\": \"🌊\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that sets the emoji to 🌊.\",\n  \"followUps\": [\n    \"Use 🛶 instead\",\n    \"Remove the emoji\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces the emoji with 🌊.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "emoji",
+          "value": "🌊"
+        }
+      ]
+    },
+    "reply": "Here is a change that sets the emoji to 🌊.",
+    "followUps": [
+      "Use 🛶 instead",
+      "Remove the emoji"
+    ]
+  },
+  "seconds": 0.89,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that sets the emoji to 🌊.",
+      "followUps": [
+        "Use 🛶 instead",
+        "Remove the emoji"
+      ],
+      "proposal": {
+        "summary": "Replaces the emoji with 🌊.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "emoji",
+            "value": "🌊"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemebalsa0001",
+          "mark": "changed",
+          "fields": [
+            "emoji"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

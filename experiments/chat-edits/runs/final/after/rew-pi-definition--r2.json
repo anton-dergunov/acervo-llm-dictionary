@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rew-pi-definition",
+  "split": "held",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Simplifies the definition of the chopping sense.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensepicarchop0\",\n        \"field\": \"definition\",\n        \"value\": \"Cortar en trozos pequeños.\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that simplifies the definition of the chopping sense.\",\n  \"followUps\": [\n    \"Make it even shorter\",\n    \"Add another example for chopping\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Simplifies the definition of the chopping sense.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensepicarchop0",
+          "field": "definition",
+          "value": "Cortar en trozos pequeños."
+        }
+      ]
+    },
+    "reply": "Here is a change that simplifies the definition of the chopping sense.",
+    "followUps": [
+      "Make it even shorter",
+      "Add another example for chopping"
+    ]
+  },
+  "seconds": 0.98,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that simplifies the definition of the chopping sense.",
+      "followUps": [
+        "Make it even shorter",
+        "Add another example for chopping"
+      ],
+      "proposal": {
+        "summary": "Simplifies the definition of the chopping sense.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensepicarchop0",
+            "field": "definition",
+            "value": "Cortar en trozos pequeños."
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "refused",
+    "sentence": "That proposal changes nothing, so nothing was changed."
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "refused",
+    "why": "That proposal changes nothing, so nothing was changed."
+  },
+  "repairs": [
+    {
+      "attempt": 1,
+      "problem": "That proposal changes nothing, so nothing was changed.",
+      "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Simplifies the definition of the chopping sense.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensepicarchop0\",\n        \"field\": \"definition\",\n        \"value\": \"Cortar en trozos.\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that makes the definition of the chopping sense simpler.\",\n  \"followUps\": [\n    \"Add another example for chopping\",\n    \"Change the primary gloss\"\n  ]\n}",
+      "parsed": {
+        "intent": "edit",
+        "proposal": {
+          "summary": "Simplifies the definition of the chopping sense.",
+          "ops": [
+            {
+              "op": "set",
+              "target": "sense:sensepicarchop0",
+              "field": "definition",
+              "value": "Cortar en trozos."
+            }
+          ]
+        },
+        "reply": "Here is a change that makes the definition of the chopping sense simpler.",
+        "followUps": [
+          "Add another example for chopping",
+          "Change the primary gloss"
+        ]
+      },
+      "seconds": 2.77,
+      "applied": {
+        "status": "applied",
+        "changes": {
+          "count": 1,
+          "records": [
+            {
+              "key": "sensepicarchop0",
+              "mark": "changed",
+              "fields": [
+                "definition"
+              ]
+            }
+          ],
+          "notes": []
+        }
+      },
+      "verdict": {
+        "pass": true,
+        "minor": []
+      }
+    }
+  ],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

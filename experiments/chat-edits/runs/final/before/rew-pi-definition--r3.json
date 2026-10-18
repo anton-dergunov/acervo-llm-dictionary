@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-pi-definition",
+  "split": "held",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can simplify the definition for the chopping sense to «Cortar en trozos pequeños».\",\n  \"followUps\": [\n    \"Simplify the chopping definition\",\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Simplifies the definition of the chopping sense.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensepicarchop0\",\n        \"field\": \"definition\",\n        \"value\": \"Cortar en trozos pequeños.\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I can simplify the definition for the chopping sense to «Cortar en trozos pequeños».",
+    "followUps": [
+      "Simplify the chopping definition",
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Simplifies the definition of the chopping sense.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensepicarchop0",
+          "field": "definition",
+          "value": "Cortar en trozos pequeños."
+        }
+      ]
+    }
+  },
+  "seconds": 0.84,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can simplify the definition for the chopping sense to «Cortar en trozos pequeños».",
+      "followUps": [
+        "Simplify the chopping definition",
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Simplifies the definition of the chopping sense.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensepicarchop0",
+            "field": "definition",
+            "value": "Cortar en trozos pequeños."
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 0,
+      "records": [],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "the definition did not change",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "the definition did not change",
+    "minor": []
+  }
+}

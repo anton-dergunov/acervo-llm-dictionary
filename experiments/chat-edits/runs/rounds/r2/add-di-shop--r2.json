@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "add-di-shop",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds a new example sentence set in a shop.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"sense:kq2m7x1p4vd9r0s\",\n        \"value\": {\n          \"text\": \"Compré este disfraz en la tienda de la esquina.\",\n          \"translation\": \"I bought this costume at the corner shop.\",\n          \"matchedForm\": \"disfraz\",\n          \"matchedTranslationForm\": \"costume\"\n        }\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds an example set in a shop.\",\n  \"followUps\": [\n    \"Make the translation «disguise»\",\n    \"Add a note about the shop\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds a new example sentence set in a shop.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "sense:kq2m7x1p4vd9r0s",
+          "value": {
+            "text": "Compré este disfraz en la tienda de la esquina.",
+            "translation": "I bought this costume at the corner shop.",
+            "matchedForm": "disfraz",
+            "matchedTranslationForm": "costume"
+          }
+        }
+      ]
+    },
+    "reply": "Here is a change that adds an example set in a shop.",
+    "followUps": [
+      "Make the translation «disguise»",
+      "Add a note about the shop"
+    ]
+  },
+  "seconds": 1.21,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds an example set in a shop.",
+      "followUps": [
+        "Make the translation «disguise»",
+        "Add a note about the shop"
+      ],
+      "proposal": {
+        "summary": "Adds a new example sentence set in a shop.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "sense:kq2m7x1p4vd9r0s",
+            "value": {
+              "text": "Compré este disfraz en la tienda de la esquina.",
+              "translation": "I bought this costume at the corner shop.",
+              "matchedForm": "disfraz",
+              "matchedTranslationForm": "costume"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

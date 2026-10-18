@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rep-ba-definition",
+  "split": "held",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I have updated the definition to «Embarcación de troncos» to better capture what a traditional balsa is.\",\n  \"followUps\": [\n    \"One more example\",\n    \"Add a note about materials\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Updates the definition of the first sense to specify that a balsa is made of logs («de troncos»).\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensebalsaraft0\",\n        \"field\": \"definition\",\n        \"value\": \"Embarcación de troncos.\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I have updated the definition to «Embarcación de troncos» to better capture what a traditional balsa is.",
+    "followUps": [
+      "One more example",
+      "Add a note about materials"
+    ],
+    "proposal": {
+      "summary": "Updates the definition of the first sense to specify that a balsa is made of logs («de troncos»).",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensebalsaraft0",
+          "field": "definition",
+          "value": "Embarcación de troncos."
+        }
+      ]
+    }
+  },
+  "seconds": 1.09,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I have updated the definition to «Embarcación de troncos» to better capture what a traditional balsa is.",
+      "followUps": [
+        "One more example",
+        "Add a note about materials"
+      ],
+      "proposal": {
+        "summary": "Updates the definition of the first sense to specify that a balsa is made of logs («de troncos»).",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensebalsaraft0",
+            "field": "definition",
+            "value": "Embarcación de troncos."
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "sensebalsaraft0",
+          "mark": "changed",
+          "fields": [
+            "definition"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema": 1,
+  "runId": "replay",
+  "arm": "before",
+  "case": "replay-t3",
+  "split": "replay",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I have updated the headword, lemma, primary gloss, and notes to reflect «бездонный» as the main term, while keeping the scientific sense accessible.\",\n  \"followUps\": [\n    \"One more example\",\n    \"Add a note about the scientific usage\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Changes the headword, lemma, and primary gloss to «бездонный» and updates the notes.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"headword\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"lemma\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"ipa\",\n        \"value\": \"/bʲɪzˈdon.nɨj/\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"бездонный; глубокий\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Используется для описания невообразимой глубины или пропасти, как в переносном, так и в прямом смысле.\"\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I have updated the headword, lemma, primary gloss, and notes to reflect «бездонный» as the main term, while keeping the scientific sense accessible.",
+    "followUps": [
+      "One more example",
+      "Add a note about the scientific usage"
+    ],
+    "proposal": {
+      "summary": "Changes the headword, lemma, and primary gloss to «бездонный» and updates the notes.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "headword",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "lemma",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "ipa",
+          "value": "/bʲɪzˈdon.nɨj/"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "бездонный; глубокий"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Используется для описания невообразимой глубины или пропасти, как в переносном, так и в прямом смысле."
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.73,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I have updated the headword, lemma, primary gloss, and notes to reflect «бездонный» as the main term, while keeping the scientific sense accessible.",
+      "followUps": [
+        "One more example",
+        "Add a note about the scientific usage"
+      ],
+      "proposal": {
+        "summary": "Changes the headword, lemma, and primary gloss to «бездонный» and updates the notes.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "headword",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "lemma",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "ipa",
+            "value": "/bʲɪzˈdon.nɨj/"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "бездонный; глубокий"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Используется для описания невообразимой глубины или пропасти, как в переносном, так и в прямом смысле."
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 3,
+      "records": [
+        {
+          "key": "draft:lexeme",
+          "mark": "changed",
+          "fields": [
+            "headword",
+            "lemma",
+            "ipa",
+            "shortGloss",
+            "primaryGloss"
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "index": 0,
+          "mark": "removed"
+        },
+        {
+          "index": 1,
+          "mark": "added"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "changed headword, lemma, which is in the word's own language; «абиссальн» is still in sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in sense:lgksiv0a4adcaar.glosses; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "changed headword, lemma, which is in the word's own language; «абиссальн» is still in sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in sense:lgksiv0a4adcaar.glosses; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  }
+}

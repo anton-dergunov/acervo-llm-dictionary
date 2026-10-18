@@ -1,0 +1,135 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "replay-t4",
+  "split": "replay",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I understand — you want to keep «abyssal» as the English headword and lemma, but update the Russian glosses, definitions, and examples so that «бездонный» replaces «абиссальный» as the primary translation throughout the entry. Here is the update to reflect that.\",\n  \"followUps\": [\n    \"Looks good\",\n    \"Keep абиссальный instead\",\n    \"Add another example\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Updates the Russian glosses and translations to use «бездонный» instead of «абиссальный» while keeping the English headword.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"бездонный; глубоководный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:lgksiv0a4adcaar\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"бездонный\",\n              \"глубоководный\"\n            ]\n          }\n        ]\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pvs056rz7zyuix1\",\n        \"field\": \"translation\",\n        \"value\": \"Подводная лодка исследовала бездонные равнины Тихого океана.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pvs056rz7zyuix1\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"бездонные\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I understand — you want to keep «abyssal» as the English headword and lemma, but update the Russian glosses, definitions, and examples so that «бездонный» replaces «абиссальный» as the primary translation throughout the entry. Here is the update to reflect that.",
+    "followUps": [
+      "Looks good",
+      "Keep абиссальный instead",
+      "Add another example"
+    ],
+    "proposal": {
+      "summary": "Updates the Russian glosses and translations to use «бездонный» instead of «абиссальный» while keeping the English headword.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "бездонный; глубоководный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "sense:lgksiv0a4adcaar",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "ru",
+              "terms": [
+                "бездонный",
+                "глубоководный"
+              ]
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "target": "example:pvs056rz7zyuix1",
+          "field": "translation",
+          "value": "Подводная лодка исследовала бездонные равнины Тихого океана."
+        },
+        {
+          "op": "set",
+          "target": "example:pvs056rz7zyuix1",
+          "field": "matchedTranslationForm",
+          "value": "бездонные"
+        }
+      ]
+    }
+  },
+  "seconds": 1.44,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I understand — you want to keep «abyssal» as the English headword and lemma, but update the Russian glosses, definitions, and examples so that «бездонный» replaces «абиссальный» as the primary translation throughout the entry. Here is the update to reflect that.",
+      "followUps": [
+        "Keep абиссальный instead",
+        "Add another example"
+      ],
+      "proposal": {
+        "summary": "Updates the Russian glosses and translations to use «бездонный» instead of «абиссальный» while keeping the English headword.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "бездонный; глубоководный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "sense:lgksiv0a4adcaar",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "ru",
+                "terms": [
+                  "бездонный",
+                  "глубоководный"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "set",
+            "target": "example:pvs056rz7zyuix1",
+            "field": "translation",
+            "value": "Подводная лодка исследовала бездонные равнины Тихого океана."
+          },
+          {
+            "op": "set",
+            "target": "example:pvs056rz7zyuix1",
+            "field": "matchedTranslationForm",
+            "value": "бездонные"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "refused",
+    "sentence": "That was a rewrite rather than an edit, so nothing was changed."
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "refused",
+    "why": "That was a rewrite rather than an edit, so nothing was changed."
+  },
+  "final": {
+    "pass": false,
+    "failure": "refused",
+    "why": "That was a rewrite rather than an edit, so nothing was changed."
+  }
+}

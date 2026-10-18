@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rem-ab-sense2",
+  "split": "held",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can remove the second meaning (\\\"Extremely deep or great; immeasurable\\\") and its example for you.\",\n  \"followUps\": [\n    \"Yes, remove it\",\n    \"Keep it instead\",\n    \"How common is the literal sense?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Removes the second sense and its example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"senses\",\n        \"value\": [\n          {\n            \"id\": \"lgksiv0a4adcaar\",\n            \"order\": 0,\n            \"definition\": \"Relating to the great depths of the ocean.\",\n            \"definitionLang\": \"en\",\n            \"domain\": \"ocean\",\n            \"emoji\": \"🌊\",\n            \"glosses\": [\n              {\n                \"lang\": \"ru\",\n                \"terms\": [\n                  \"абиссальный\",\n                  \"глубоководный\"\n                ]\n              }\n            ],\n            \"examples\": [\n              {\n                \"id\": \"pvs056rz7zyuix1\",\n                \"text\": \"The submarine explored the abyssal plains of the Pacific.\",\n                \"textLang\": \"en\",\n                \"translation\": \"Подводная лодка исследовала абиссальные равнины Тихого океана.\",\n                \"translationLang\": \"ru\",\n                \"origin\": \"llm\",\n                \"modelId\": \"gemini/gemini-3.5-flash-lite\",\n                \"matchedForm\": \"abyssal\",\n                \"matchedTranslationForm\": \"абиссальные\",\n                \"emotion\": \"scientific and fascinated, describing unknown depths\"\n              }\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I can remove the second meaning (\"Extremely deep or great; immeasurable\") and its example for you.",
+    "followUps": [
+      "Yes, remove it",
+      "Keep it instead",
+      "How common is the literal sense?"
+    ],
+    "proposal": {
+      "summary": "Removes the second sense and its example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "senses",
+          "value": [
+            {
+              "id": "lgksiv0a4adcaar",
+              "order": 0,
+              "definition": "Relating to the great depths of the ocean.",
+              "definitionLang": "en",
+              "domain": "ocean",
+              "emoji": "🌊",
+              "glosses": [
+                {
+                  "lang": "ru",
+                  "terms": [
+                    "абиссальный",
+                    "глубоководный"
+                  ]
+                }
+              ],
+              "examples": [
+                {
+                  "id": "pvs056rz7zyuix1",
+                  "text": "The submarine explored the abyssal plains of the Pacific.",
+                  "textLang": "en",
+                  "translation": "Подводная лодка исследовала абиссальные равнины Тихого океана.",
+                  "translationLang": "ru",
+                  "origin": "llm",
+                  "modelId": "gemini/gemini-3.5-flash-lite",
+                  "matchedForm": "abyssal",
+                  "matchedTranslationForm": "абиссальные",
+                  "emotion": "scientific and fascinated, describing unknown depths"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.46,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can remove the second meaning (\"Extremely deep or great; immeasurable\") and its example for you.",
+      "followUps": [
+        "Yes, remove it",
+        "Keep it instead",
+        "How common is the literal sense?"
+      ],
+      "proposal": {
+        "summary": "Removes the second sense and its example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "senses",
+            "value": [
+              {
+                "id": "lgksiv0a4adcaar",
+                "order": 0,
+                "definition": "Relating to the great depths of the ocean.",
+                "definitionLang": "en",
+                "domain": "ocean",
+                "emoji": "🌊",
+                "glosses": [
+                  {
+                    "lang": "ru",
+                    "terms": [
+                      "абиссальный",
+                      "глубоководный"
+                    ]
+                  }
+                ],
+                "examples": [
+                  {
+                    "id": "pvs056rz7zyuix1",
+                    "text": "The submarine explored the abyssal plains of the Pacific.",
+                    "textLang": "en",
+                    "translation": "Подводная лодка исследовала абиссальные равнины Тихого океана.",
+                    "translationLang": "ru",
+                    "origin": "llm",
+                    "modelId": "gemini/gemini-3.5-flash-lite",
+                    "matchedForm": "abyssal",
+                    "matchedTranslationForm": "абиссальные",
+                    "emotion": "scientific and fascinated, describing unknown depths"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "refused",
+    "sentence": "`senses` is not something chat can change on a lexeme, so nothing was changed."
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "refused",
+    "why": "`senses` is not something chat can change on a lexeme, so nothing was changed."
+  },
+  "final": {
+    "pass": false,
+    "failure": "refused",
+    "why": "`senses` is not something chat can change on a lexeme, so nothing was changed."
+  }
+}

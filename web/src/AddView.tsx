@@ -1,11 +1,11 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
 import type {
-  CaptureFoldable, CaptureHealth, CaptureRequest, CaptureResult, ChatResult, ChatTurn, PhotoReading,
+  CaptureFoldable, CaptureHealth, CaptureRequest, CaptureResult, ChatProposal, ChatResult, ChatTurn, PhotoReading,
   QuickLookUp, QuickLookUpRequest
 } from "./api";
-import AskDock from "./AskDock";
+import AskDock, { type AskOptions } from "./AskDock";
 import {
-  applyOps, diffDrafts, EditRefused, type DraftDiff, type EditOp
+  applyOps, diffDrafts, EditRefused, refusalOf, type DraftDiff, type EditOp
 } from "./articleEdit";
 import Composer from "./Composer";
 import type { VocabularyGraph } from "./domain";
@@ -72,7 +72,7 @@ export interface CaptureSeed {
  */
 export default function AddView({
   tab, onTab, graph, problems, busy, seed, captureHealth,
-  onClose, onCreate, onCapture, onOpenLexeme, onFoldIn, onChat, onReadPhoto, onStorePhoto, onLookUp, onWarmPhoto,
+  onClose, onCreate, onCapture, onOpenLexeme, onFoldIn, onChat, onChatRefused, onReadPhoto, onStorePhoto, onLookUp, onWarmPhoto,
   offline = false, onNotify
 }: {
   tab: AddTab;
@@ -96,7 +96,9 @@ export default function AddView({
   /** Open the word already held and ask one question against it, seeded with what was captured. */
   onFoldIn?(lexemeId: string, foldable: CaptureFoldable, photo: KeptPhoto | null): void;
   /** One turn about the unsaved document. Absent when the server has no model, like Capture itself. */
-  onChat?(document: string, turns: ChatTurn[]): Promise<ChatResult>;
+  onChat?(document: string, turns: ChatTurn[], options?: AskOptions): Promise<ChatResult>;
+  /** A proposal still refused once the dock's repairs ran out, for the server's log. */
+  onChatRefused?(requestId: string, problem: string, proposal: unknown): void;
   /** Photo capture's three round trips. Without them there is no Photo tab. */
   onReadPhoto?(photo: Blob): Promise<PhotoReading>;
   onStorePhoto?(photo: Blob): Promise<{ photoRef: string }>;
@@ -173,21 +175,39 @@ export default function AddView({
    * on every keystroke — so one sentence changes one thing, instead of re-running generation and
    * losing what was already right.
    */
-  const askAboutDraft = (turns: ChatTurn[]) => onChat!(draft, turns);
+  const askAboutDraft = (turns: ChatTurn[], options: AskOptions) => onChat!(draft, turns, options);
 
-  const applyToDraft = (ops: EditOp[], modelId: string) => {
+  /** The proposal applied to the editor text, without writing it back. Throws what `applyOps` throws. */
+  const appliedToDraft = (ops: EditOp[], modelId: string) => {
+    const before = parseArticle(draft);
+    const applied = applyOps(before, ops, {
+      modelId,
+      glossLang: preview.article?.glossLangs[0] ?? null,
+      // A document with no lexeme id mints freely on save, so nothing here needs a minted set.
+      mintId: newId
+    });
+    return { before, after: applied.draft, text: yamlForDraft(applied.draft), diff: diffDrafts(before, applied.draft) };
+  };
+
+  /** What *Review* would say, without doing it: the dock's `check`. */
+  const checkDraft = (found: ChatProposal, modelId: string) => {
     try {
-      const before = parseArticle(draft);
-      const applied = applyOps(before, ops, {
-        modelId,
-        glossLang: preview.article?.glossLangs[0] ?? null,
-        // A document with no lexeme id mints freely on save, so nothing here needs a minted set.
-        mintId: newId
-      });
-      rewrite(yamlForDraft(applied.draft), { before, diff: diffDrafts(before, applied.draft) });
+      appliedToDraft(found.ops as EditOp[], modelId);
+      return null;
+    } catch (error) {
+      return refusalOf(error);
+    }
+  };
+
+  const applyToDraft = (ops: EditOp[], modelId: string): string | null => {
+    try {
+      const { before, text, diff } = appliedToDraft(ops, modelId);
+      rewrite(text, { before, diff });
+      return null;
     } catch (error) {
       onNotify(error instanceof EditRefused ? error.message
         : "That proposal could not be applied, so nothing was changed.");
+      return refusalOf(error);
     }
   };
 
@@ -490,6 +510,8 @@ export default function AddView({
               turns={chat}
               onTurns={setChat}
               ask={askAboutDraft}
+              check={checkDraft}
+              report={onChatRefused}
               offline={offline}
               onPropose={(found, modelId) => applyToDraft(found.ops as EditOp[], modelId)}
               /* No `full` here: this surface is itself a review, and its Composer already owns the

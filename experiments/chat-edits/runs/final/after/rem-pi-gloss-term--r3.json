@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rem-pi-gloss-term",
+  "split": "held",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Removes «to dice» from the second sense glosses.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensepicarchop0\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"en\",\n            \"terms\": [\n              \"to chop\"\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that removes «to dice» from the glosses of the second sense.\",\n  \"followUps\": [\n    \"Add «to mince» instead\",\n    \"Keep «to dice»\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Removes «to dice» from the second sense glosses.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensepicarchop0",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "en",
+              "terms": [
+                "to chop"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that removes «to dice» from the glosses of the second sense.",
+    "followUps": [
+      "Add «to mince» instead",
+      "Keep «to dice»"
+    ]
+  },
+  "seconds": 1.45,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that removes «to dice» from the glosses of the second sense.",
+      "followUps": [
+        "Add «to mince» instead",
+        "Keep «to dice»"
+      ],
+      "proposal": {
+        "summary": "Removes «to dice» from the second sense glosses.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensepicarchop0",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to chop"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "sensepicarchop0",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

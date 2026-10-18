@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r3",
+  "case": "add-ap-missing-translation",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds a translation to the second example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove02\",\n        \"field\": \"translation\",\n        \"value\": \"We made the most of the good weather to go to the beach.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove02\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"made the most of\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds a translation to the second example.\",\n  \"followUps\": [\n    \"Translate it as «took advantage of» instead\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds a translation to the second example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:exampleaprove02",
+          "field": "translation",
+          "value": "We made the most of the good weather to go to the beach."
+        },
+        {
+          "op": "set",
+          "target": "example:exampleaprove02",
+          "field": "matchedTranslationForm",
+          "value": "made the most of"
+        }
+      ]
+    },
+    "reply": "Here is a change that adds a translation to the second example.",
+    "followUps": [
+      "Translate it as «took advantage of» instead"
+    ]
+  },
+  "seconds": 1.03,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds a translation to the second example.",
+      "followUps": [
+        "Translate it as «took advantage of» inst"
+      ],
+      "proposal": {
+        "summary": "Adds a translation to the second example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:exampleaprove02",
+            "field": "translation",
+            "value": "We made the most of the good weather to go to the beach."
+          },
+          {
+            "op": "set",
+            "target": "example:exampleaprove02",
+            "field": "matchedTranslationForm",
+            "value": "made the most of"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "exampleaprove02",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

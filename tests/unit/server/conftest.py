@@ -94,7 +94,7 @@ class ModelStub:
                 )
             elif "You decide what a learner" in system:
                 body = _dumped(self.resolution)
-            elif "You answer a learner's question" in system:
+            elif "You answer a learner's message" in system:
                 body = _dumped(self.chat)
             elif "You help a learner read" in system:
                 body = _dumped(self.chat_reference)

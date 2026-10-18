@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-ab-stiff",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll update the translation of that example to sound more natural in Russian.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I pronounce it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Updates the translation of the second example to sound more natural.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pl491uiy3zasd85\",\n        \"field\": \"translation\",\n        \"value\": \"Она вглядывалась в бездну темноты.\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll update the translation of that example to sound more natural in Russian.",
+    "followUps": [
+      "One more example",
+      "How do I pronounce it?"
+    ],
+    "proposal": {
+      "summary": "Updates the translation of the second example to sound more natural.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:pl491uiy3zasd85",
+          "field": "translation",
+          "value": "Она вглядывалась в бездну темноты."
+        }
+      ]
+    }
+  },
+  "seconds": 0.96,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll update the translation of that example to sound more natural in Russian.",
+      "followUps": [
+        "One more example",
+        "How do I pronounce it?"
+      ],
+      "proposal": {
+        "summary": "Updates the translation of the second example to sound more natural.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:pl491uiy3zasd85",
+            "field": "translation",
+            "value": "Она вглядывалась в бездну темноты."
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "pl491uiy3zasd85",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

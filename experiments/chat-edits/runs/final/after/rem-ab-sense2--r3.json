@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rem-ab-sense2",
+  "split": "held",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Removes the second sense of the word.\",\n    \"ops\": [\n      {\n        \"op\": \"remove\",\n        \"target\": \"sense:z5aouusz9u6bbj4\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that removes the second sense from your entry.\",\n  \"followUps\": [\n    \"Keep only the first sense\",\n    \"Add another example for the first sense\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Removes the second sense of the word.",
+      "ops": [
+        {
+          "op": "remove",
+          "target": "sense:z5aouusz9u6bbj4"
+        }
+      ]
+    },
+    "reply": "Here is a change that removes the second sense from your entry.",
+    "followUps": [
+      "Keep only the first sense",
+      "Add another example for the first sense"
+    ]
+  },
+  "seconds": 1.09,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that removes the second sense from your entry.",
+      "followUps": [
+        "Keep only the first sense",
+        "Add another example for the first sense"
+      ],
+      "proposal": {
+        "summary": "Removes the second sense of the word.",
+        "ops": [
+          {
+            "op": "remove",
+            "target": "sense:z5aouusz9u6bbj4",
+            "reason": ""
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 2,
+      "records": [
+        {
+          "key": "z5aouusz9u6bbj4",
+          "mark": "removed",
+          "fields": []
+        },
+        {
+          "key": "pl491uiy3zasd85",
+          "mark": "removed",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

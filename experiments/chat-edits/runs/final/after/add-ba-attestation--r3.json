@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "add-ba-attestation",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds an attestation and an example for the sentence from the book.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"attestation\",\n        \"ref\": \"a1\",\n        \"value\": {\n          \"text\": \"La balsa se hundió a mitad del lago.\",\n          \"translation\": \"The raft sank in the middle of the lake.\",\n          \"sourceKind\": \"book\",\n          \"sourceTitle\": null\n        }\n      },\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"sensebalsaraft0\",\n        \"fromAttestation\": \"a1\",\n        \"value\": {\n          \"text\": \"La balsa se hundió a mitad del lago.\",\n          \"translation\": \"The raft sank in the middle of the lake.\",\n          \"matchedForm\": \"balsa\",\n          \"matchedTranslationForm\": \"raft\"\n        }\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds the sentence you read as an example and attestation.\",\n  \"followUps\": [\n    \"Translate the example differently\",\n    \"Add a note about «hundirse»\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds an attestation and an example for the sentence from the book.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "attestation",
+          "ref": "a1",
+          "value": {
+            "text": "La balsa se hundió a mitad del lago.",
+            "translation": "The raft sank in the middle of the lake.",
+            "sourceKind": "book",
+            "sourceTitle": null
+          }
+        },
+        {
+          "op": "add",
+          "target": "example",
+          "in": "sensebalsaraft0",
+          "fromAttestation": "a1",
+          "value": {
+            "text": "La balsa se hundió a mitad del lago.",
+            "translation": "The raft sank in the middle of the lake.",
+            "matchedForm": "balsa",
+            "matchedTranslationForm": "raft"
+          }
+        }
+      ]
+    },
+    "reply": "Here is a change that adds the sentence you read as an example and attestation.",
+    "followUps": [
+      "Translate the example differently",
+      "Add a note about «hundirse»"
+    ]
+  },
+  "seconds": 1.21,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds the sentence you read as an example and attestation.",
+      "followUps": [
+        "Translate the example differently",
+        "Add a note about «hundirse»"
+      ],
+      "proposal": {
+        "summary": "Adds an attestation and an example for the sentence from the book.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "attestation",
+            "ref": "a1",
+            "value": {
+              "text": "La balsa se hundió a mitad del lago.",
+              "translation": "The raft sank in the middle of the lake.",
+              "sourceKind": "book",
+              "sourceTitle": null
+            }
+          },
+          {
+            "op": "add",
+            "target": "example",
+            "in": "sensebalsaraft0",
+            "value": {
+              "text": "La balsa se hundió a mitad del lago.",
+              "translation": "The raft sank in the middle of the lake.",
+              "matchedForm": "balsa",
+              "matchedTranslationForm": "raft"
+            },
+            "fromAttestation": "a1"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 2,
+      "records": [
+        {
+          "key": "mint00000000002",
+          "mark": "added",
+          "fields": []
+        },
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

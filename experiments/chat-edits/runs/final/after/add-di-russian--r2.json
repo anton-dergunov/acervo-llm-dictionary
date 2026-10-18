@@ -1,0 +1,114 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "add-di-russian",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds Russian translations to the glosses.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:kq2m7x1p4vd9r0s\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"en\",\n            \"terms\": [\n              \"costume\",\n              \"disguise\"\n            ]\n          },\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"костюм\",\n              \"маскарадный костюм\"\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds Russian translations to the glosses.\",\n  \"followUps\": [\n    \"Add another Russian translation\",\n    \"Add an example in Russian\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds Russian translations to the glosses.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:kq2m7x1p4vd9r0s",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "en",
+              "terms": [
+                "costume",
+                "disguise"
+              ]
+            },
+            {
+              "lang": "ru",
+              "terms": [
+                "костюм",
+                "маскарадный костюм"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that adds Russian translations to the glosses.",
+    "followUps": [
+      "Add another Russian translation",
+      "Add an example in Russian"
+    ]
+  },
+  "seconds": 0.99,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds Russian translations to the glosses.",
+      "followUps": [
+        "Add another Russian translation",
+        "Add an example in Russian"
+      ],
+      "proposal": {
+        "summary": "Adds Russian translations to the glosses.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:kq2m7x1p4vd9r0s",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "en",
+                "terms": [
+                  "costume",
+                  "disguise"
+                ]
+              },
+              {
+                "lang": "ru",
+                "terms": [
+                  "костюм",
+                  "маскарадный костюм"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "kq2m7x1p4vd9r0s",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

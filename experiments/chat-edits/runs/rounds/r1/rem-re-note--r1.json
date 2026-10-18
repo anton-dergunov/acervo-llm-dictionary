@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r1",
+  "case": "rem-re-note",
+  "split": "dev",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Deletes the second note from the entry.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Чаще всего о поведении, которое создаёт опасность для других, особенно в сочетании reckless driving, которое встречается в новостях и в юридических текстах о дорожных происшествиях.\"\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that removes the second note from your entry.\",\n  \"followUps\": [\n    \"Delete the first note instead\",\n    \"Add a note about careless\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Deletes the second note from the entry.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Чаще всего о поведении, которое создаёт опасность для других, особенно в сочетании reckless driving, которое встречается в новостях и в юридических текстах о дорожных происшествиях."
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that removes the second note from your entry.",
+    "followUps": [
+      "Delete the first note instead",
+      "Add a note about careless"
+    ]
+  },
+  "seconds": 1.15,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that removes the second note from your entry.",
+      "followUps": [
+        "Delete the first note instead",
+        "Add a note about careless"
+      ],
+      "proposal": {
+        "summary": "Deletes the second note from the entry.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Чаще всего о поведении, которое создаёт опасность для других, особенно в сочетании reckless driving, которое встречается в новостях и в юридических текстах о дорожных происшествиях."
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [],
+      "notes": [
+        {
+          "index": 1,
+          "mark": "removed"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

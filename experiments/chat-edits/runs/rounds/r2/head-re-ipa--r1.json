@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "head-re-ipa",
+  "split": "dev",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Updates the IPA pronunciation to /ˈrekləs/.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"ipa\",\n        \"value\": \"/ˈrekləs/\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that updates the IPA transcription to /ˈrekləs/.\",\n  \"followUps\": [\n    \"Check the translation in the third example\",\n    \"Add another example with reckless driving\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Updates the IPA pronunciation to /ˈrekləs/.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "ipa",
+          "value": "/ˈrekləs/"
+        }
+      ]
+    },
+    "reply": "Here is a change that updates the IPA transcription to /ˈrekləs/.",
+    "followUps": [
+      "Check the translation in the third example",
+      "Add another example with reckless driving"
+    ]
+  },
+  "seconds": 1.03,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that updates the IPA transcription to /ˈrekləs/.",
+      "followUps": [
+        "Check the translation in the third examp",
+        "Add another example with reckless drivin"
+      ],
+      "proposal": {
+        "summary": "Updates the IPA pronunciation to /ˈrekləs/.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "ipa",
+            "value": "/ˈrekləs/"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemereckless1",
+          "mark": "changed",
+          "fields": [
+            "ipa"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

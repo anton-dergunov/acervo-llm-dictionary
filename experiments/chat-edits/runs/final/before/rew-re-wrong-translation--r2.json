@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-re-wrong-translation",
+  "split": "held",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Вы абсолютно правы: в третьем примере переведено «Осторожные траты», что противоречит значению слова *reckless*. Верный перевод — «Безрассудные траты». Давайте исправим это.\",\n  \"followUps\": [\n    \"Fix the translation\",\n    \"One more example\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Исправляет перевод в третьем примере на «Безрассудные траты».\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles3\",\n        \"field\": \"translation\",\n        \"value\": \"Безрассудные траты оставили их ни с чем.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles3\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"Безрассудные\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Вы абсолютно правы: в третьем примере переведено «Осторожные траты», что противоречит значению слова *reckless*. Верный перевод — «Безрассудные траты». Давайте исправим это.",
+    "followUps": [
+      "Fix the translation",
+      "One more example"
+    ],
+    "proposal": {
+      "summary": "Исправляет перевод в третьем примере на «Безрассудные траты».",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:examplereckles3",
+          "field": "translation",
+          "value": "Безрассудные траты оставили их ни с чем."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles3",
+          "field": "matchedTranslationForm",
+          "value": "Безрассудные"
+        }
+      ]
+    }
+  },
+  "seconds": 1.22,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Вы абсолютно правы: в третьем примере переведено «Осторожные траты», что противоречит значению слова *reckless*. Верный перевод — «Безрассудные траты». Давайте исправим это.",
+      "followUps": [
+        "Fix the translation",
+        "One more example"
+      ],
+      "proposal": {
+        "summary": "Исправляет перевод в третьем примере на «Безрассудные траты».",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:examplereckles3",
+            "field": "translation",
+            "value": "Безрассудные траты оставили их ни с чем."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles3",
+            "field": "matchedTranslationForm",
+            "value": "Безрассудные"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "examplereckles3",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rep-ab-precise",
+  "split": "dev",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll update the Russian glosses and translations to prioritize «бездонный» where appropriate, while keeping the scientific sense intact.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Updates the primary gloss, sense glosses, and translation to reflect «бездонный».\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"бездонный; абиссальный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:lgksiv0a4adcaar\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"глубоководный\",\n              \"абиссальный\"\n            ]\n          }\n        ]\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:z5aouusz9u6bbj4\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"бездонный\",\n              \"пропащий\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll update the Russian glosses and translations to prioritize «бездонный» where appropriate, while keeping the scientific sense intact.",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Updates the primary gloss, sense glosses, and translation to reflect «бездонный».",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "бездонный; абиссальный"
+        },
+        {
+          "op": "set",
+          "target": "sense:lgksiv0a4adcaar",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "ru",
+              "terms": [
+                "глубоководный",
+                "абиссальный"
+              ]
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "target": "sense:z5aouusz9u6bbj4",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "ru",
+              "terms": [
+                "бездонный",
+                "пропащий"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.29,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll update the Russian glosses and translations to prioritize «бездонный» where appropriate, while keeping the scientific sense intact.",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Updates the primary gloss, sense glosses, and translation to reflect «бездонный».",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "бездонный; абиссальный"
+          },
+          {
+            "op": "set",
+            "target": "sense:lgksiv0a4adcaar",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "ru",
+                "terms": [
+                  "глубоководный",
+                  "абиссальный"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "set",
+            "target": "sense:z5aouusz9u6bbj4",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "ru",
+                "terms": [
+                  "бездонный",
+                  "пропащий"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "refused",
+    "sentence": "That was a rewrite rather than an edit, so nothing was changed."
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "refused",
+    "why": "That was a rewrite rather than an edit, so nothing was changed."
+  },
+  "final": {
+    "pass": false,
+    "failure": "refused",
+    "why": "That was a rewrite rather than an edit, so nothing was changed."
+  }
+}

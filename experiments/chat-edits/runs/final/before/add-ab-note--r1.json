@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-ab-note",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've added a note explaining that «бездонный» is used in everyday language while «абиссальный» is strictly scientific or technical.\",\n  \"followUps\": [\n    \"One more example for the second sense\",\n    \"How is it pronounced?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds a usage distinction note between everyday and scientific senses.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.\",\n          \"«бездонный» is the everyday word for immense depth, whereas «абиссальный» is scientific.\"\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've added a note explaining that «бездонный» is used in everyday language while «абиссальный» is strictly scientific or technical.",
+    "followUps": [
+      "One more example for the second sense",
+      "How is it pronounced?"
+    ],
+    "proposal": {
+      "summary": "Adds a usage distinction note between everyday and scientific senses.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.",
+            "«бездонный» is the everyday word for immense depth, whereas «абиссальный» is scientific."
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.14,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've added a note explaining that «бездонный» is used in everyday language while «абиссальный» is strictly scientific or technical.",
+      "followUps": [
+        "One more example for the second sense",
+        "How is it pronounced?"
+      ],
+      "proposal": {
+        "summary": "Adds a usage distinction note between everyday and scientific senses.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.",
+              "«бездонный» is the everyday word for immense depth, whereas «абиссальный» is scientific."
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [],
+      "notes": [
+        {
+          "index": 1,
+          "mark": "added"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

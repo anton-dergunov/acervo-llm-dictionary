@@ -21,7 +21,7 @@ docker exec acervo-server-1 python -m acervo.admin calls            # how long e
 |---|---|---|---|
 | `model-calls.log` | `models/journal.py` | attempt on a provider, and what the caller did with the answer | which provider refused, and how long a call really takes |
 | `jobs.log` | `work/journal.py` | job start, step outcome, job end | why a job failed |
-| `activity.log` | `activity.py` | request refused, media file removed, server start and stop | why was I told no, and what was running when |
+| `activity.log` | `activity.py` | request refused, chat proposal the device would not apply, media file removed, server start and stop | why was I told no, and what was running when |
 
 They are separate files because they are read for different questions and written at very different
 rates; mixing them makes every `grep` worse. All three keep the same shape:
@@ -60,6 +60,11 @@ emitted. It is set in three places:
   routes it calls take that up once the signature has verified. The generator carries nothing it has to
   know about, and each take is filed under the job rather than arriving as a request from nowhere.
 
+- **A chat turn brings its own.** The device mints one id per turn and sends it on the turn's first
+  call, on each time it sends the turn back (`docs/features/article-chat.md` §5.5) and on its report of
+  a proposal it would not apply — so `admin log <id>` shows the turn as one account: the answer, why it
+  went back, what came back, and what was finally refused.
+
 And it is sent out: **every client of a companion service sends `X-Request-ID`** — `loops/client.py`,
 `clips/corpus.py` and the corpus proxy in `services/speech.py`. The corpus logs under it and says it
 back in an error. The loop generator's own handle is its operation id, which `jobs.log` records as
@@ -85,6 +90,15 @@ An error may also carry `noted` — facts for the log that never reach the wire:
   secret that was rotated or lost), `no_account`, `wrong_audience`. The caller is still told one thing.
 
 An unhandled exception is logged in its own words and answered in none of them.
+
+**Every chat turn**, as one `chat outcome` line in `model-calls.log`: `result` (`answered`, `proposed`,
+`dropped`, `unusable`), the model's `intent`, the number of `ops`, and on a turn sent back `repair` and
+`repairFor`, the sentence that sent it. Whenever the answer could not be used, or the turn is a repair,
+the line is followed by the **whole answer** (`chat answer`, bounded at 8,000 characters rather than the
+journal's usual 400, because which operation was wrong is past the first four hundred) and, on a repair,
+the proposal the device refused (`chat sent back`). A proposal the device still refuses once it has sent
+the turn back twice is reported by it and written to `activity.log` as `chat proposal refused`, with the
+sentence: the refusal happens on the device, and without the report it would reach no log at all.
 
 **Every media file removed.** `services/media.remove` is the only code that unlinks one, and it says
 which file and why: `replaced`, `deleted`, `rollback` (written for a row that then failed to land) or

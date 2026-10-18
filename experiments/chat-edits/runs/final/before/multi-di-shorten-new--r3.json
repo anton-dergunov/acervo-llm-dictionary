@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "multi-di-shorten-new",
+  "split": "dev",
+  "category": "multi",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Here is the shorter version, keeping it focused on the party.\",\n  \"followUps\": [\n    \"Make it even simpler\",\n    \"Change the translation\",\n    \"One more example\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Shortens the example sentence about the party.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"text\",\n        \"value\": \"Llevaba un disfraz ridículo en la fiesta.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"translation\",\n        \"value\": \"He wore a ridiculous costume at the party.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"matchedForm\",\n        \"value\": \"disfraz\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"costume\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Here is the shorter version, keeping it focused on the party.",
+    "followUps": [
+      "Make it even simpler",
+      "Change the translation",
+      "One more example"
+    ],
+    "proposal": {
+      "summary": "Shortens the example sentence about the party.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "text",
+          "value": "Llevaba un disfraz ridículo en la fiesta."
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "translation",
+          "value": "He wore a ridiculous costume at the party."
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "matchedForm",
+          "value": "disfraz"
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "matchedTranslationForm",
+          "value": "costume"
+        }
+      ]
+    }
+  },
+  "seconds": 1.42,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is the shorter version, keeping it focused on the party.",
+      "followUps": [
+        "Make it even simpler",
+        "Change the translation",
+        "One more example"
+      ],
+      "proposal": {
+        "summary": "Shortens the example sentence about the party.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "text",
+            "value": "Llevaba un disfraz ridículo en la fiesta."
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "translation",
+            "value": "He wore a ridiculous costume at the party."
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "matchedForm",
+            "value": "disfraz"
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "matchedTranslationForm",
+            "value": "costume"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "k3x9p2m7q1w8z4a",
+          "mark": "changed",
+          "fields": [
+            "text",
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

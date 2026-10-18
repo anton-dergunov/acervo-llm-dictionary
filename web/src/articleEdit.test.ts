@@ -86,8 +86,14 @@ describe("applying", () => {
     expect(before.emoji).toEqual(draft().emoji);
   });
 
-  it("refuses more than twelve operations", () => {
-    const ops: EditOp[] = Array.from({ length: 13 }, () =>
+  it("refuses a proposal that changes nothing, so it can be sent back", () => {
+    const same = draft().senses[1].definition;
+    expect(() => apply([{ op: "set", target: `sense:${CHOP}`, field: "definition", value: same }]))
+      .toThrow(/changes nothing/);
+  });
+
+  it("refuses more than twenty-four operations", () => {
+    const ops: EditOp[] = Array.from({ length: 25 }, () =>
       ({ op: "set", target: "lexeme", field: "emoji", value: "🌶" }) as EditOp);
     expect(() => apply(ops)).toThrow(/rewrite rather than an edit/);
   });
@@ -97,7 +103,7 @@ describe("applying", () => {
       { op: "set", target: `sense:${ITCH}`, field: "definition", value: "Uno." },
       { op: "set", target: `sense:${CHOP}`, field: "definition", value: "Dos." },
       { op: "set", target: `example:${ITCH_EXAMPLE}`, field: "text", value: "Tres." },
-      { op: "set", target: `attestation:${ATTESTATION}`, field: "translation", value: "Cuatro." }
+      { op: "set", target: `attestation:${ATTESTATION}`, field: "text", value: "Cuatro." }
     ])).toThrow(/rewrite rather than an edit/);
   });
 
@@ -110,6 +116,94 @@ describe("applying", () => {
       { op: "add", target: "example", in: "sensebalsaraft0", value: { text: "La balsa flotaba." } }
     ], context);
     expect(after.senses[0].examples).toHaveLength(2);
+  });
+
+  /* The entry the owner was adding when chat could not make this edit at all: «абиссальный» sits in
+     the primary and short glosses, the first sense's glosses and the first example's translation —
+     three of five records, one word each. */
+  const ABYSSAL = `# abyssal — English
+
+language: en
+headword: abyssal
+lemma: abyssal
+pos: adj
+shortGloss: абиссальный; бездонный
+primaryGloss: абиссальный
+notes:
+  - Используется главным образом в научных или описательных контекстах.
+senses:
+  - id: lgksiv0a4adcaar
+    order: 0
+    definition: Relating to the great depths of the ocean.
+    definitionLang: en
+    glosses:
+      - {lang: ru, terms: [абиссальный, глубоководный]}
+    examples:
+      - id: pvs056rz7zyuix1
+        text: The submarine explored the abyssal plains of the Pacific.
+        translation: Подводная лодка исследовала абиссальные равнины Тихого океана.
+        translationLang: ru
+        origin: llm
+        matchedForm: abyssal
+        matchedTranslationForm: абиссальные
+  - id: z5aouusz9u6bbj4
+    order: 1
+    definition: Extremely deep or great; immeasurable.
+    definitionLang: en
+    glosses:
+      - {lang: ru, terms: [бездонный, пропащий]}
+    examples:
+      - id: pl491uiy3zasd85
+        text: She stared into an abyssal darkness.
+        translation: Она вглядывалась в бездонную темноту.
+        translationLang: ru
+        origin: llm
+        matchedForm: abyssal
+        matchedTranslationForm: бездонную
+`;
+  const everywhere: EditOp[] = [
+    { op: "set", target: "lexeme", field: "primaryGloss", value: "бездонный" },
+    { op: "set", target: "lexeme", field: "shortGloss", value: "бездонный; глубоководный" },
+    { op: "set", target: "sense:lgksiv0a4adcaar", field: "glosses",
+      value: [{ lang: "ru", terms: ["бездонный", "глубоководный"] }] },
+    { op: "set", target: "example:pvs056rz7zyuix1", field: "translation",
+      value: "Подводная лодка исследовала бездонные равнины Тихого океана." },
+    { op: "set", target: "example:pvs056rz7zyuix1", field: "matchedTranslationForm", value: "бездонные" }
+  ];
+
+  it("allows one word replaced everywhere, though it reaches three records of five", () => {
+    const { draft: after } = applyOps(parseArticle(ABYSSAL), everywhere, { ...context, glossLang: "ru" });
+    expect(after.primaryGloss).toBe("бездонный");
+    expect(after.senses[0].glosses[0].terms).toEqual(["бездонный", "глубоководный"]);
+    expect(after.senses[0].examples[0].matchedTranslationForm).toBe("бездонные");
+  });
+
+  it("counts nothing for a set that leaves a record as it was", () => {
+    const unchanged: EditOp = { op: "set", target: "sense:z5aouusz9u6bbj4", field: "glosses",
+      value: [{ lang: "ru", terms: ["бездонный", "пропащий"] }] };
+    expect(() => applyOps(parseArticle(ABYSSAL), [...everywhere, unchanged], { ...context, glossLang: "ru" }))
+      .not.toThrow();
+  });
+
+  it("allows one word replaced through seven records, inflected and marked", () => {
+    // Every example's emphasis mark is one word, all of it replaced: that is the edit, not a rewrite.
+    const ops: EditOp[] = [
+      { op: "set", target: "example:pvs056rz7zyuix1", field: "matchedTranslationForm", value: "бездонные" },
+      { op: "set", target: "example:pl491uiy3zasd85", field: "matchedTranslationForm", value: "бездонную" },
+      { op: "set", target: "sense:z5aouusz9u6bbj4", field: "glosses",
+        value: [{ lang: "ru", terms: ["бездонный"] }] },
+      ...everywhere
+    ];
+    expect(() => applyOps(parseArticle(ABYSSAL), ops, { ...context, glossLang: "ru" })).not.toThrow();
+  });
+
+  it("still refuses saying most of the entry over again", () => {
+    expect(() => applyOps(parseArticle(ABYSSAL), [
+      { op: "set", target: "lexeme", field: "notes", value: ["Совсем другая заметка о слове."] },
+      { op: "set", target: "sense:lgksiv0a4adcaar", field: "definition", value: "Of the sea floor." },
+      { op: "set", target: "sense:z5aouusz9u6bbj4", field: "definition", value: "Bottomless." },
+      { op: "set", target: "example:pvs056rz7zyuix1", field: "text", value: "Divers never reach it." }
+    ], { ...context, glossLang: "ru" })).toThrow(/rewrite rather than an edit/);
   });
 });
 

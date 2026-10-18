@@ -1,7 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import AddView, { type AddTab, type CaptureSeed } from "./AddView";
 import type { ImagePrompt, Loop } from "./domain";
-import AskDock, { type Detent } from "./AskDock";
+import AskDock, { type AskOptions, type Detent } from "./AskDock";
 import ReviewBar from "./ReviewBar";
 import MadeBar from "./MadeBar";
 import SelectionBar from "./SelectionBar";
@@ -16,7 +16,7 @@ import { MapView } from "./MapView";
 import type { MapCamera } from "./meaningMap";
 import * as loopPlayer from "./loops";
 import {
-  applyOps, diffDrafts, EditRefused, type DraftDiff, type EditOp, type FoldedPhoto
+  applyOps, diffDrafts, EditRefused, refusalOf, type DraftDiff, type EditOp, type FoldedPhoto
 } from "./articleEdit";
 import type { KeptPhoto } from "./PhotoCapture";
 import { newId } from "./ids";
@@ -947,7 +947,7 @@ export default function App() {
    * The document is serialised on this device because `yaml.ts` is the only place the projection is
    * understood; a server-side serialiser would be a second implementation of it (§06 REVISED).
    */
-  const askAbout = useCallback((turns: ChatTurn[]) => {
+  const askAbout = useCallback((turns: ChatTurn[], options?: AskOptions) => {
     const deviceId = repository.state().deviceId;
     let subject: ChatSubject;
     let neighbours: ChatNeighbour[] = [];
@@ -982,9 +982,17 @@ export default function App() {
       reference: open ? referenceTextOf(open) : null,
       referenceSources: open ? open.sections.map((section) => section.name) : [],
       neighbours,
-      turns
-    });
+      turns,
+      repair: options?.repair ?? null
+    }, options?.requestId);
   }, [article, askFocus, snapshot, external, reference, proposal]);
+
+  /** A proposal the device would not apply after the repairs, for the server's log. Writes nothing. */
+  const reportProposal = useCallback((requestId: string, problem: string, found: unknown) => {
+    backendSession.chatOutcome(repository.state().deviceId, requestId, { problem, proposal: found })
+      // A report that does not arrive loses a log line and nothing else; the reader has the sentence.
+      .catch(() => undefined);
+  }, []);
 
   /** Pressing *Add to my words* on a reference conversation: the existing capture, one field filled. */
   const captureFromChat = useCallback((capture: ChatCapture) => {
@@ -1007,35 +1015,68 @@ export default function App() {
    * document's *meaning* — whether an id exists, whether a field may be set on that kind of record —
    * and `yaml.ts` is the only place the projection is understood.
    */
-  const reviewProposal = useCallback((ops: EditOp[], summary: string, modelId: string) => {
-    if (!article || !snapshot) return;
-    /* A second turn builds on what the first one proposed, not on what is being *shown*.
-       `diff.shown` carries removed records back so they can be drawn struck through, so applying
-       to it would quietly resurrect everything the proposal takes away. The comparison stays
-       against the stored document, so the bar counts everything still outstanding and Undo has one
-       thing to put back however many turns it took to get here. */
+  /* A second turn builds on what the first one proposed, not on what is being *shown*.
+     `diff.shown` carries removed records back so they can be drawn struck through, so applying to it
+     would quietly resurrect everything the proposal takes away. The comparison stays against the
+     stored document, so the bar counts everything still outstanding and Undo has one thing to put
+     back however many turns it took to get here. Throws what `applyOps` throws. */
+  const nextProposal = useCallback((ops: EditOp[], summary: string, modelId: string) => {
+    if (!article) return null;
     const origin = proposal ? proposal.before : draftFor(article);
     const base = proposal ? proposal.after : origin;
+    const applied = applyOps(base, ops, {
+      modelId,
+      glossLang: article.glossLangs[0] ?? null,
+      mintId: newId,
+      photo: foldPhoto?.lexemeId === article.lexeme.id ? foldPhoto.photo : null
+    });
+    return {
+      before: origin, after: applied.draft, diff: diffDrafts(origin, applied.draft),
+      minted: new Set([...(proposal?.minted ?? []), ...applied.minted]),
+      summary
+    };
+  }, [article, proposal, foldPhoto]);
+
+  /** What *Review* would say to these operations, without showing anything: the dock's `check`. */
+  const checkProposal = useCallback((found: ChatProposal, modelId: string) => {
     try {
-      const applied = applyOps(base, ops, {
-        modelId,
-        glossLang: article.glossLangs[0] ?? null,
-        mintId: newId,
-        photo: foldPhoto?.lexemeId === article.lexeme.id ? foldPhoto.photo : null
-      });
-      setProposal({
-        before: origin, after: applied.draft, diff: diffDrafts(origin, applied.draft),
-        minted: new Set([...(proposal?.minted ?? []), ...applied.minted]),
-        summary
-      });
+      nextProposal(found.ops as EditOp[], found.summary, modelId);
+      return null;
+    } catch (error) {
+      return refusalOf(error);
+    }
+  }, [nextProposal]);
+
+  /** Where in the thread the live proposal's offers start, so Discard can say which it threw away. */
+  const reviewFrom = useRef(0);
+
+  const reviewProposal = useCallback((ops: EditOp[], summary: string, modelId: string): string | null => {
+    if (!article || !snapshot) return null;
+    try {
+      const next = nextProposal(ops, summary, modelId);
+      if (!next) return null;
+      if (!proposal) reviewFrom.current = Math.max(0, thread.length - 1);
+      setProposal(next);
       /* No scroll to the top: `ReviewBar` brings the *first change* into view instead, which is
          what article-chat §6.2 asks for and what makes an edit to the third sense of a long entry
          something you can see rather than something you have to go looking for. */
+      return null;
     } catch (error) {
-      notify(error instanceof EditRefused ? error.message
+      const refused = refusalOf(error);
+      notify(error instanceof EditRefused ? refused
         : "That proposal could not be applied, so nothing was changed.");
+      return refused;
     }
-  }, [article, snapshot, proposal, foldPhoto, notify]);
+  }, [article, snapshot, proposal, nextProposal, thread.length, notify]);
+
+  /** Discarding a live proposal: its offers, applied to the review but never saved, say so. */
+  const discardProposal = useCallback(() => {
+    setProposal(null);
+    setFoldPhoto(null);
+    rememberTurns(thread.map((turn, index) => index >= reviewFrom.current && turn.offered?.outcome === "applied"
+      ? { ...turn, offered: { ...turn.offered, outcome: "discarded" } }
+      : turn));
+  }, [thread, rememberTurns]);
 
   /* A sign has no sentence for the conversation to add, so its photo is proposed by itself as soon
      as the word is open; anything the conversation then proposes builds on top of it. */
@@ -1091,12 +1132,13 @@ export default function App() {
    * nothing to read it out of — and the neighbours are left empty: a word being added has no topics
    * chosen yet, and guessing at them would be conditioning on nothing.
    */
-  const askAboutDraft = useCallback((document: string, turns: ChatTurn[]) => {
+  const askAboutDraft = useCallback((document: string, turns: ChatTurn[], options?: AskOptions) => {
     const deviceId = repository.state().deviceId;
     return backendSession.chat(deviceId, {
       subject: { kind: "article", lexemeId: "", document, focus: null },
-      turns
-    });
+      turns,
+      repair: options?.repair ?? null
+    }, options?.requestId);
   }, []);
 
   /**
@@ -1561,6 +1603,7 @@ export default function App() {
             onOpenLexeme={(id) => { closeCapture(); openLexeme(id); }}
             onFoldIn={foldIn}
             onChat={captureHealth?.available === false ? undefined : askAboutDraft}
+            onChatRefused={reportProposal}
             onReadPhoto={readPhoto}
             onStorePhoto={storePhoto}
             onLookUp={lookUp}
@@ -1589,7 +1632,7 @@ export default function App() {
               order={proposal.diff.order}
               saving={saving}
               scroller={main}
-              onDiscard={() => { setProposal(null); setFoldPhoto(null); }}
+              onDiscard={discardProposal}
               onSave={() => void saveProposal()}
             />}
             {article && <div className={`art-bar${carding ? " carding" : ""}`}>
@@ -1729,6 +1772,8 @@ export default function App() {
                 turns={thread}
                 onTurns={rememberTurns}
                 ask={askAbout}
+                check={article ? checkProposal : undefined}
+                report={reportProposal}
                 offline={syncStatus.state === "offline"}
                 focus={askFocus ? { label: askFocus.label } : null}
                 onClearFocus={() => setAskFocus(null)}

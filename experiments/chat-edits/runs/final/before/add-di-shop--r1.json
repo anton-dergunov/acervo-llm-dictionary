@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-di-shop",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Here is an example of «el disfraz» in a shop setting.\",\n  \"followUps\": [\n    \"Add that to the examples\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds an example in a shop setting.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"sense:kq2m7x1p4vd9r0s\",\n        \"value\": {\n          \"text\": \"Fui a la tienda de disfraces a buscar una máscara de gato.\",\n          \"textLang\": \"es\",\n          \"translation\": \"I went to the costume shop to look for a cat mask.\",\n          \"translationLang\": \"en\",\n          \"matchedForm\": \"disfraces\",\n          \"matchedTranslationForm\": \"costume\"\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Here is an example of «el disfraz» in a shop setting.",
+    "followUps": [
+      "Add that to the examples"
+    ],
+    "proposal": {
+      "summary": "Adds an example in a shop setting.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "sense:kq2m7x1p4vd9r0s",
+          "value": {
+            "text": "Fui a la tienda de disfraces a buscar una máscara de gato.",
+            "textLang": "es",
+            "translation": "I went to the costume shop to look for a cat mask.",
+            "translationLang": "en",
+            "matchedForm": "disfraces",
+            "matchedTranslationForm": "costume"
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.05,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is an example of «el disfraz» in a shop setting.",
+      "followUps": [
+        "Add that to the examples"
+      ],
+      "proposal": {
+        "summary": "Adds an example in a shop setting.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "sense:kq2m7x1p4vd9r0s",
+            "value": {
+              "text": "Fui a la tienda de disfraces a buscar una máscara de gato.",
+              "textLang": "es",
+              "translation": "I went to the costume shop to look for a cat mask.",
+              "translationLang": "en",
+              "matchedForm": "disfraces",
+              "matchedTranslationForm": "costume"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

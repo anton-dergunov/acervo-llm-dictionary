@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rem-ab-second-example",
+  "split": "dev",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll remove the second example from the second sense so you're left with just the first one.\",\n  \"followUps\": [\n    \"One more example\",\n    \"Add a note about the etymology\",\n    \"How is it pronounced?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Removes the second example («She stared into an abyssal darkness.»).\",\n    \"ops\": [\n      {\n        \"op\": \"remove\",\n        \"target\": \"example:pl491uiy3zasd85\",\n        \"reason\": \"Removed per request\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll remove the second example from the second sense so you're left with just the first one.",
+    "followUps": [
+      "One more example",
+      "Add a note about the etymology",
+      "How is it pronounced?"
+    ],
+    "proposal": {
+      "summary": "Removes the second example («She stared into an abyssal darkness.»).",
+      "ops": [
+        {
+          "op": "remove",
+          "target": "example:pl491uiy3zasd85",
+          "reason": "Removed per request"
+        }
+      ]
+    }
+  },
+  "seconds": 1.16,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll remove the second example from the second sense so you're left with just the first one.",
+      "followUps": [
+        "One more example",
+        "Add a note about the etymology",
+        "How is it pronounced?"
+      ],
+      "proposal": {
+        "summary": "Removes the second example («She stared into an abyssal darkness.»).",
+        "ops": [
+          {
+            "op": "remove",
+            "target": "example:pl491uiy3zasd85",
+            "reason": "Removed per request"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "pl491uiy3zasd85",
+          "mark": "removed",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

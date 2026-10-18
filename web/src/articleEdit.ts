@@ -49,8 +49,13 @@ export type EditOp =
   | { op: "remove"; target: string; reason?: string }
   | { op: "reorder"; target: "senses"; ids: string[] };
 
-/** At most twelve. A cap the model cannot argue with is worth more than a paragraph it can. */
-export const OP_LIMIT = 12;
+/**
+ * At most twenty-four. A cap the model cannot argue with is worth more than a paragraph it can — but
+ * it is a cap on runaway answers, not the measure of a rewrite, which is the half rule's job. One word
+ * replaced through an entry of three senses is a `set` per field plus one per emphasis mark, and that
+ * is already more than twelve.
+ */
+export const OP_LIMIT = 24;
 
 export interface EditContext {
   /** The model that answered, for `modelId` on anything it wrote. */
@@ -99,6 +104,17 @@ export interface AppliedEdit {
 /** A refusal the reader sees, in one plain sentence. */
 export class EditRefused extends Error {}
 
+/**
+ * The sentence for whatever applying a proposal threw. A refusal says itself; anything else is a
+ * fault on this side, and keeps its own message rather than becoming "could not be applied" — that
+ * sentence is what reaches the model on a repair and the server's log, and it is useless to both.
+ */
+export function refusalOf(error: unknown): string {
+  if (error instanceof EditRefused) return error.message;
+  const detail = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+  return `Applying the proposal failed (${detail}), so nothing was changed.`;
+}
+
 const refuse = (message: string): never => {
   throw new EditRefused(message);
 };
@@ -114,6 +130,7 @@ function required(value: unknown, message: string): string {
 }
 
 const REWRITE = "That was a rewrite rather than an edit, so nothing was changed.";
+const NOTHING = "That proposal changes nothing, so nothing was changed.";
 const UNKNOWN = "The model referred to a part of the entry that is not there, so nothing was changed.";
 
 /* ── what may be set ────────────────────────────────────────────────────
@@ -213,7 +230,7 @@ function splitTarget(target: string): { kind: string; id: string } {
 export function applyOps(draft: ArticleDraft, ops: EditOp[], context: EditContext): AppliedEdit {
   // A sign's photo is a change of its own, so it may be proposed with nothing from the model.
   const sign = context.photo?.sentence === null && !holdsPhoto(draft, context.photo);
-  if (!ops.length && !sign) refuse("That proposal changes nothing, so nothing was changed.");
+  if (!ops.length && !sign) refuse(NOTHING);
   if (ops.length > OP_LIMIT) refuse(REWRITE);
 
   const next: ArticleDraft = structuredClone(draft);
@@ -326,18 +343,78 @@ export function applyOps(draft: ArticleDraft, ops: EditOp[], context: EditContex
     }
   }
 
-  /* The half rule. As §5.3 states it unconditionally it misfires on small entries — a one-sense
-     entry has two records, so "fix the definition and add an example" is already over half, and
-     that is an ordinary edit rather than a rewrite. Below three touched records the twelve-op cap
-     is the only limit, which is enough. */
+  /* The half rule, measured by how much each record says differently rather than by how many records
+     an operation reached. "Use X instead of Y everywhere" reaches the primary gloss, a sense's glosses
+     and an example's translation — three records of an entry that may hold five — and changes one
+     word in each: an edit, and the commonest kind. So a reached record counts as rewritten only when
+     it was added or removed, or when one of its fields keeps less than half its words (`similarity`,
+     the measure the diff already uses); a `set` that changes nothing counts for nothing. Below three
+     rewritten records the operation cap is the only limit: a one-sense entry has two records, so "fix
+     the definition and add an example" is already over half of it, and that is an ordinary edit. */
   const total = 1 + draft.senses.length
     + draft.senses.reduce((count, sense) => count + sense.examples.length, 0)
     + draft.attestations.length;
-  if (touched.size > 2 && touched.size * 2 > total) refuse(REWRITE);
+  const rewritten = rewrittenCount(draft, next, touched);
+  if (rewritten > 2 && rewritten * 2 > total) refuse(REWRITE);
+  /* A proposal whose every operation leaves its field as it was. Applied, it is a review bar
+     counting nothing over an article that did not move; refused, it is a sentence the dock can send
+     back. "Make the definition simpler" answered with the same definition is the case seen. */
+  if (ops.length && JSON.stringify(next) === JSON.stringify(draft)) refuse(NOTHING);
 
   // After the half rule: the photo is the device's addition, not the model's rewrite.
   if (context.photo) attachPhoto(next, context.photo, minted, context);
   return { draft: next, minted };
+}
+
+/** A field's words as one run of text: a string as it is, a list joined, a gloss group as its terms. */
+function wordsOf(value: unknown): string {
+  if (typeof value === "string") return value;
+  if (!Array.isArray(value)) return "";
+  return value.map((item) => typeof item === "string" ? item
+    : `${(item as Gloss).lang} ${(item as Gloss).terms.join(" ")}`).join(" ");
+}
+
+const REWRITTEN = 0.5;
+/** Below this many words a field is a term, not prose, and swapping it is the edit itself. */
+const PROSE_WORDS = 2;
+/** Marks that follow their sentence, so they move whenever it does and say nothing of their own. */
+const MARKS = new Set(["matchedForm", "matchedTranslationForm"]);
+
+/**
+ * How many of the records `touched` names were added, removed, or had a field said over.
+ *
+ * Field by field rather than over the whole record: a sense's language code and untouched glosses
+ * would otherwise outvote a definition replaced outright, and a rewrite would pass as an edit. Only
+ * prose that was there counts — a field of at least two words keeping less than half of them. A
+ * one-word primary gloss or emphasis mark swapped for another *is* the replacement asked for, and a
+ * translation written where there was none adds to the entry rather than saying it over.
+ */
+function rewrittenCount(before: ArticleDraft, after: ArticleDraft, touched: ReadonlySet<string>): number {
+  const kinds: [Record<string, Coerce>, (draft: ArticleDraft) => Map<string, object>][] = [
+    [LEXEME_FIELDS, (draft) => new Map([[draftKeys.lexeme(draft), draft]])],
+    [SENSE_FIELDS, (draft) => new Map(draft.senses.map((sense, index) => [draftKeys.sense(sense, index), sense]))],
+    [EXAMPLE_FIELDS, (draft) => new Map(draft.senses.flatMap((sense, senseIndex) =>
+      sense.examples.map((example, index) => [draftKeys.example(example, senseIndex, index), example] as const)))],
+    [ATTESTATION_FIELDS, (draft) => new Map(draft.attestations.map((item, index) =>
+      [draftKeys.attestation(item, index), item]))]
+  ];
+  let count = 0;
+  for (const key of touched) {
+    for (const [table, index] of kinds) {
+      const was = index(before).get(key);
+      const now = index(after).get(key);
+      if (!was && !now) continue;
+      const saidOver = !was || !now || Object.keys(table).some((field) => {
+        if (MARKS.has(field)) return false;
+        const one = wordsOf(fieldsOf(was)[field]);
+        const other = wordsOf(fieldsOf(now)[field]);
+        return one !== other && words(one).length >= PROSE_WORDS && similarity(one, other) < REWRITTEN;
+      });
+      if (saidOver) count += 1;
+      break;
+    }
+  }
+  return count;
 }
 
 function holdsPhoto(draft: ArticleDraft, photo: FoldedPhoto): boolean {

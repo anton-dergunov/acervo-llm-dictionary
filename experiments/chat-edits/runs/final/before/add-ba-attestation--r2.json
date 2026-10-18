@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-ba-attestation",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"That's a dramatic example, showing the word in its actual element. I've added it to your entry so you have the sentence you read right there alongside the definition.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How common is this word?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds the sentence from your reading as a new example.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"attestation\",\n        \"ref\": \"att1\",\n        \"value\": {\n          \"text\": \"La balsa se hundió a mitad del lago.\",\n          \"translation\": \"The raft sank in the middle of the lake.\",\n          \"sourceKind\": \"book\"\n        }\n      },\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"sensebalsaraft0\",\n        \"fromAttestation\": \"att1\",\n        \"value\": {\n          \"text\": \"La balsa se hundió a mitad del lago.\",\n          \"translation\": \"The raft sank in the middle of the lake.\",\n          \"matchedForm\": \"balsa\",\n          \"matchedTranslationForm\": \"raft\"\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "That's a dramatic example, showing the word in its actual element. I've added it to your entry so you have the sentence you read right there alongside the definition.",
+    "followUps": [
+      "One more example",
+      "How common is this word?"
+    ],
+    "proposal": {
+      "summary": "Adds the sentence from your reading as a new example.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "attestation",
+          "ref": "att1",
+          "value": {
+            "text": "La balsa se hundió a mitad del lago.",
+            "translation": "The raft sank in the middle of the lake.",
+            "sourceKind": "book"
+          }
+        },
+        {
+          "op": "add",
+          "target": "example",
+          "in": "sensebalsaraft0",
+          "fromAttestation": "att1",
+          "value": {
+            "text": "La balsa se hundió a mitad del lago.",
+            "translation": "The raft sank in the middle of the lake.",
+            "matchedForm": "balsa",
+            "matchedTranslationForm": "raft"
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.28,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "That's a dramatic example, showing the word in its actual element. I've added it to your entry so you have the sentence you read right there alongside the definition.",
+      "followUps": [
+        "One more example",
+        "How common is this word?"
+      ],
+      "proposal": {
+        "summary": "Adds the sentence from your reading as a new example.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "attestation",
+            "ref": "att1",
+            "value": {
+              "text": "La balsa se hundió a mitad del lago.",
+              "translation": "The raft sank in the middle of the lake.",
+              "sourceKind": "book"
+            }
+          },
+          {
+            "op": "add",
+            "target": "example",
+            "in": "sensebalsaraft0",
+            "value": {
+              "text": "La balsa se hundió a mitad del lago.",
+              "translation": "The raft sank in the middle of the lake.",
+              "matchedForm": "balsa",
+              "matchedTranslationForm": "raft"
+            },
+            "fromAttestation": "att1"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 2,
+      "records": [
+        {
+          "key": "mint00000000002",
+          "mark": "added",
+          "fields": []
+        },
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

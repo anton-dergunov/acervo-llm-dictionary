@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rem-pi-gloss-term",
+  "split": "held",
+  "category": "remove",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll remove «to dice» from the cooking sense glosses, leaving «to chop».\",\n  \"followUps\": [\n    \"One more example for the cooking sense\",\n    \"Add a note about the insect sting sense\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Removes «to dice» from the glosses of the chopping sense.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensepicarchop0\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"en\",\n            \"terms\": [\n              \"to chop\"\n            ]\n          }\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll remove «to dice» from the cooking sense glosses, leaving «to chop».",
+    "followUps": [
+      "One more example for the cooking sense",
+      "Add a note about the insect sting sense"
+    ],
+    "proposal": {
+      "summary": "Removes «to dice» from the glosses of the chopping sense.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensepicarchop0",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "en",
+              "terms": [
+                "to chop"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.08,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll remove «to dice» from the cooking sense glosses, leaving «to chop».",
+      "followUps": [
+        "One more example for the cooking sense",
+        "Add a note about the insect sting sense"
+      ],
+      "proposal": {
+        "summary": "Removes «to dice» from the glosses of the chopping sense.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensepicarchop0",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to chop"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "sensepicarchop0",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

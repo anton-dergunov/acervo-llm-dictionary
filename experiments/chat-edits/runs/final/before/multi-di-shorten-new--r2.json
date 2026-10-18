@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "multi-di-shorten-new",
+  "split": "dev",
+  "category": "multi",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've shortened the sentence so it focuses directly on the party.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I use it with «de»?\",\n    \"Add a note on regional terms\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Shortens the recent party example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"text\",\n        \"value\": \"Llegó a la fiesta con un disfraz de médico.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"translation\",\n        \"value\": \"He arrived at the party in a doctor costume.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"matchedForm\",\n        \"value\": \"disfraz\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:k3x9p2m7q1w8z4a\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"costume\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've shortened the sentence so it focuses directly on the party.",
+    "followUps": [
+      "One more example",
+      "How do I use it with «de»?",
+      "Add a note on regional terms"
+    ],
+    "proposal": {
+      "summary": "Shortens the recent party example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "text",
+          "value": "Llegó a la fiesta con un disfraz de médico."
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "translation",
+          "value": "He arrived at the party in a doctor costume."
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "matchedForm",
+          "value": "disfraz"
+        },
+        {
+          "op": "set",
+          "target": "example:k3x9p2m7q1w8z4a",
+          "field": "matchedTranslationForm",
+          "value": "costume"
+        }
+      ]
+    }
+  },
+  "seconds": 1.27,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've shortened the sentence so it focuses directly on the party.",
+      "followUps": [
+        "One more example",
+        "How do I use it with «de»?",
+        "Add a note on regional terms"
+      ],
+      "proposal": {
+        "summary": "Shortens the recent party example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "text",
+            "value": "Llegó a la fiesta con un disfraz de médico."
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "translation",
+            "value": "He arrived at the party in a doctor costume."
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "matchedForm",
+            "value": "disfraz"
+          },
+          {
+            "op": "set",
+            "target": "example:k3x9p2m7q1w8z4a",
+            "field": "matchedTranslationForm",
+            "value": "costume"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "k3x9p2m7q1w8z4a",
+          "mark": "changed",
+          "fields": [
+            "text",
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

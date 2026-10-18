@@ -1,0 +1,120 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r3",
+  "case": "rew-re-simpler-example",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Makes the second example simpler and shorter.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"text\",\n        \"value\": \"It was reckless to swim so far alone.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedForm\",\n        \"value\": \"reckless\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"translation\",\n        \"value\": \"Было безрассудно заплывать так далеко одной.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"безрассудно\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that makes the second example simpler and shorter.\",\n  \"followUps\": [\n    \"Make it even shorter\",\n    \"Change the third example too\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Makes the second example simpler and shorter.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "text",
+          "value": "It was reckless to swim so far alone."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedForm",
+          "value": "reckless"
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "translation",
+          "value": "Было безрассудно заплывать так далеко одной."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedTranslationForm",
+          "value": "безрассудно"
+        }
+      ]
+    },
+    "reply": "Here is a change that makes the second example simpler and shorter.",
+    "followUps": [
+      "Make it even shorter",
+      "Change the third example too"
+    ]
+  },
+  "seconds": 1.19,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that makes the second example simpler and shorter.",
+      "followUps": [
+        "Make it even shorter",
+        "Change the third example too"
+      ],
+      "proposal": {
+        "summary": "Makes the second example simpler and shorter.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "text",
+            "value": "It was reckless to swim so far alone."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedForm",
+            "value": "reckless"
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "translation",
+            "value": "Было безрассудно заплывать так далеко одной."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedTranslationForm",
+            "value": "безрассудно"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "examplereckles2",
+          "mark": "changed",
+          "fields": [
+            "text",
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

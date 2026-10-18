@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-ap-typo",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"You're completely right. It should be «tiempo» with an m.\",\n  \"followUps\": [\n    \"Fix the typo in the first example\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Fixes the spelling of «tiempo» in the first example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove01\",\n        \"field\": \"text\",\n        \"value\": \"Aprovecha el tiempo mientras puedas.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove01\",\n        \"field\": \"matchedForm\",\n        \"value\": \"Aprovecha\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "You're completely right. It should be «tiempo» with an m.",
+    "followUps": [
+      "Fix the typo in the first example"
+    ],
+    "proposal": {
+      "summary": "Fixes the spelling of «tiempo» in the first example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:exampleaprove01",
+          "field": "text",
+          "value": "Aprovecha el tiempo mientras puedas."
+        },
+        {
+          "op": "set",
+          "target": "example:exampleaprove01",
+          "field": "matchedForm",
+          "value": "Aprovecha"
+        }
+      ]
+    }
+  },
+  "seconds": 1.15,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "You're completely right. It should be «tiempo» with an m.",
+      "followUps": [
+        "Fix the typo in the first example"
+      ],
+      "proposal": {
+        "summary": "Fixes the spelling of «tiempo» in the first example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:exampleaprove01",
+            "field": "text",
+            "value": "Aprovecha el tiempo mientras puedas."
+          },
+          {
+            "op": "set",
+            "target": "example:exampleaprove01",
+            "field": "matchedForm",
+            "value": "Aprovecha"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "exampleaprove01",
+          "mark": "changed",
+          "fields": [
+            "text"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

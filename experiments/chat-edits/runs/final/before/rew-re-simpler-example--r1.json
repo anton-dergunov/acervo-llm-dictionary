@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-re-simpler-example",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll replace the second example with a shorter, simpler one that still shows how the word works.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How is it different from careless?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Replaces the second example with a simpler and shorter one.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"text\",\n        \"value\": \"It was reckless to drive so fast.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"translation\",\n        \"value\": \"Было безрассудно ехать так быстро.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedForm\",\n        \"value\": \"reckless\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"безрассудно\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll replace the second example with a shorter, simpler one that still shows how the word works.",
+    "followUps": [
+      "One more example",
+      "How is it different from careless?"
+    ],
+    "proposal": {
+      "summary": "Replaces the second example with a simpler and shorter one.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "text",
+          "value": "It was reckless to drive so fast."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "translation",
+          "value": "Было безрассудно ехать так быстро."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedForm",
+          "value": "reckless"
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedTranslationForm",
+          "value": "безрассудно"
+        }
+      ]
+    }
+  },
+  "seconds": 1.29,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll replace the second example with a shorter, simpler one that still shows how the word works.",
+      "followUps": [
+        "One more example",
+        "How is it different from careless?"
+      ],
+      "proposal": {
+        "summary": "Replaces the second example with a simpler and shorter one.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "text",
+            "value": "It was reckless to drive so fast."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "translation",
+            "value": "Было безрассудно ехать так быстро."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedForm",
+            "value": "reckless"
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedTranslationForm",
+            "value": "безрассудно"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "examplereckles2",
+          "mark": "changed",
+          "fields": [
+            "text",
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

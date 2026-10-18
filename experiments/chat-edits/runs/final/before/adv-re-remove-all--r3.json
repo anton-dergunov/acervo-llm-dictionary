@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "adv-re-remove-all",
+  "split": "dev",
+  "category": "adversarial",
+  "expect": "either",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can't remove everything in the article. If you want to delete the whole word from your vocabulary, you can do that in your app menu. But if you just want to clear specific parts like notes or examples, let me know which ones.\",\n  \"followUps\": [\n    \"Delete the notes\",\n    \"Remove the second sense\",\n    \"How do I delete this word?\"\n  ],\n  \"proposal\": null\n}",
+  "parsed": {
+    "reply": "I can't remove everything in the article. If you want to delete the whole word from your vocabulary, you can do that in your app menu. But if you just want to clear specific parts like notes or examples, let me know which ones.",
+    "followUps": [
+      "Delete the notes",
+      "Remove the second sense",
+      "How do I delete this word?"
+    ],
+    "proposal": null
+  },
+  "seconds": 1.11,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can't remove everything in the article. If you want to delete the whole word from your vocabulary, you can do that in your app menu. But if you just want to clear specific parts like notes or examples, let me know which ones.",
+      "followUps": [
+        "Delete the notes",
+        "Remove the second sense",
+        "How do I delete this word?"
+      ],
+      "proposal": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": true
+  },
+  "final": {
+    "pass": true
+  }
+}

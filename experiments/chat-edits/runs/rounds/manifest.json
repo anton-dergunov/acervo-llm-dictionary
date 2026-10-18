@@ -1,0 +1,40 @@
+{
+  "runId": "rounds",
+  "started": "2026-10-18T10:25:47.647013+00:00",
+  "provider": "gemini-free",
+  "model": "gemini/gemini-3.5-flash-lite",
+  "arms": {
+    "r1": {
+      "prompt": "arms/r1.md",
+      "code": "worktree",
+      "about": "Round 1: intent first, a field-language table, exact value types and enums, one recipe per request, no asking permission, offered-change markers.",
+      "promptSha256": "5474eb185a13b8d23f7f891b17286eff2149eb68e0b81a2b205b6a3d17d0f7c5",
+      "promptChars": 18408,
+      "checkerSha256": "2c9233a2dc6d76c22ac0170453a73c0f7cf44e5b72f063f8673033e92e975ce8"
+    },
+    "r2": {
+      "prompt": "arms/r2.md",
+      "code": "worktree",
+      "about": "Round 2: round 1, plus: a replacement that does not say where means everywhere, and one that leaves the old word in a gloss is not finished.",
+      "promptSha256": "c4d57837a6397256be014b2e12ddd29c92c0ee20b33cdca6143c77db1fd389a3",
+      "promptChars": 18697,
+      "checkerSha256": "b7753335f14a7323f9ca97987e702e4a88af639301223554ebe5e8e473c58cf4"
+    },
+    "r3": {
+      "prompt": "arms/r3.md",
+      "code": "worktree",
+      "about": "Round 3: round 2, plus: the three places a translation is written, no set that repeats a value, and the cap raised to 24 operations.",
+      "promptSha256": "8f4da022a8b660e4cc3913ac5be5076f61b403e42dcc7ccda949b729a3e8cb50",
+      "promptChars": 19199,
+      "checkerSha256": "5fdf649c4bd38abde228867c443fa7b683a61aed7d9908145f597d654e1ae34b"
+    },
+    "r4": {
+      "prompt": "arms/r4.md",
+      "code": "worktree",
+      "about": "Round 4: round 3, with the replacement written as a walk through the document in a fixed order, operations in the order of the walk.",
+      "promptSha256": "bc47630dba6aadb214be75dd02133cdd5b3bfcbc06dd2860b95b9776cf3563e2",
+      "promptChars": 19325,
+      "checkerSha256": "5fdf649c4bd38abde228867c443fa7b683a61aed7d9908145f597d654e1ae34b"
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r1",
+  "case": "add-es-sense",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds a figurative sense for espolvorear meaning to sprinkle a speech or text with jokes or quotes.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"sense\",\n        \"after\": \"senseespolvor10\",\n        \"value\": {\n          \"definition\": \"Esparcir o intercalar elementos en un discurso, texto o escrito.\",\n          \"definitionLang\": \"es\",\n          \"glosses\": [\n            {\n              \"lang\": \"en\",\n              \"terms\": [\n                \"to intersperse\",\n                \"to sprinkle\"\n              ]\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds a figurative sense for when you sprinkle a speech or text with things like jokes or quotes.\",\n  \"followUps\": [\n    \"Add an example for the new sense\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds a figurative sense for espolvorear meaning to sprinkle a speech or text with jokes or quotes.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "sense",
+          "after": "senseespolvor10",
+          "value": {
+            "definition": "Esparcir o intercalar elementos en un discurso, texto o escrito.",
+            "definitionLang": "es",
+            "glosses": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to intersperse",
+                  "to sprinkle"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "reply": "Here is a change that adds a figurative sense for when you sprinkle a speech or text with things like jokes or quotes.",
+    "followUps": [
+      "Add an example for the new sense"
+    ]
+  },
+  "seconds": 1.16,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds a figurative sense for when you sprinkle a speech or text with things like jokes or quotes.",
+      "followUps": [
+        "Add an example for the new sense"
+      ],
+      "proposal": {
+        "summary": "Adds a figurative sense for espolvorear meaning to sprinkle a speech or text with jokes or quotes.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "sense",
+            "value": {
+              "definition": "Esparcir o intercalar elementos en un discurso, texto o escrito.",
+              "definitionLang": "es",
+              "glosses": [
+                {
+                  "lang": "en",
+                  "terms": [
+                    "to intersperse",
+                    "to sprinkle"
+                  ]
+                }
+              ]
+            },
+            "after": "senseespolvor10"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

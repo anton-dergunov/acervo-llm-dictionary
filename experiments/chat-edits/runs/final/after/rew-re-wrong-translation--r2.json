@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rew-re-wrong-translation",
+  "split": "held",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Fixes the translation and matched translation form in the third example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles3\",\n        \"field\": \"translation\",\n        \"value\": \"Безрассудные траты оставили их ни с чем.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles3\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"Безрассудные\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that fixes the translation of the third example.\",\n  \"followUps\": [\n    \"Add another example with spending\",\n    \"Explain the difference with careless\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Fixes the translation and matched translation form in the third example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:examplereckles3",
+          "field": "translation",
+          "value": "Безрассудные траты оставили их ни с чем."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles3",
+          "field": "matchedTranslationForm",
+          "value": "Безрассудные"
+        }
+      ]
+    },
+    "reply": "Here is a change that fixes the translation of the third example.",
+    "followUps": [
+      "Add another example with spending",
+      "Explain the difference with careless"
+    ]
+  },
+  "seconds": 1.06,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that fixes the translation of the third example.",
+      "followUps": [
+        "Add another example with spending",
+        "Explain the difference with careless"
+      ],
+      "proposal": {
+        "summary": "Fixes the translation and matched translation form in the third example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:examplereckles3",
+            "field": "translation",
+            "value": "Безрассудные траты оставили их ни с чем."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles3",
+            "field": "matchedTranslationForm",
+            "value": "Безрассудные"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "examplereckles3",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

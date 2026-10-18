@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "head-re-ipa",
+  "split": "dev",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Вы правы, /ˈrekləs/ точнее передает реальное произношение, где второй слог редуцируется. Давайте исправим это в карточке.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Исправляет транскрипцию на /ˈrekləs/.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"ipa\",\n        \"value\": \"/ˈrekləs/\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Вы правы, /ˈrekləs/ точнее передает реальное произношение, где второй слог редуцируется. Давайте исправим это в карточке.",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Исправляет транскрипцию на /ˈrekləs/.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "ipa",
+          "value": "/ˈrekləs/"
+        }
+      ]
+    }
+  },
+  "seconds": 0.84,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Вы правы, /ˈrekləs/ точнее передает реальное произношение, где второй слог редуцируется. Давайте исправим это в карточке.",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Исправляет транскрипцию на /ˈrekləs/.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "ipa",
+            "value": "/ˈrekləs/"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemereckless1",
+          "mark": "changed",
+          "fields": [
+            "ipa"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-es-sense",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can add that sense for figurative sprinkling, with an example showing a speech or text sprinkled with jokes.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds a figurative sense for sprinkling text or speech.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"sense\",\n        \"after\": \"senseespolvor10\",\n        \"value\": {\n          \"definition\": \"Adornar o salpicar un texto, un discurso o una conversación con elementos como chistes o citas.\",\n          \"definitionLang\": \"es\",\n          \"domain\": \"figurative\",\n          \"glosses\": [\n            {\n              \"lang\": \"en\",\n              \"terms\": [\n                \"to sprinkle\",\n                \"to intersperse\"\n              ]\n            }\n          ]\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I can add that sense for figurative sprinkling, with an example showing a speech or text sprinkled with jokes.",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Adds a figurative sense for sprinkling text or speech.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "sense",
+          "after": "senseespolvor10",
+          "value": {
+            "definition": "Adornar o salpicar un texto, un discurso o una conversación con elementos como chistes o citas.",
+            "definitionLang": "es",
+            "domain": "figurative",
+            "glosses": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to sprinkle",
+                  "to intersperse"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.16,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can add that sense for figurative sprinkling, with an example showing a speech or text sprinkled with jokes.",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Adds a figurative sense for sprinkling text or speech.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "sense",
+            "value": {
+              "definition": "Adornar o salpicar un texto, un discurso o una conversación con elementos como chistes o citas.",
+              "definitionLang": "es",
+              "domain": "figurative",
+              "glosses": [
+                {
+                  "lang": "en",
+                  "terms": [
+                    "to sprinkle",
+                    "to intersperse"
+                  ]
+                }
+              ]
+            },
+            "after": "senseespolvor10"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

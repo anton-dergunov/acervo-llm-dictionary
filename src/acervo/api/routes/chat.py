@@ -18,7 +18,7 @@ from acervo.api.auth import owner_id
 from acervo.api.errors import data
 from acervo.api.payload import json_body
 from acervo.repository import graph
-from acervo.services.chat import run_chat
+from acervo.services.chat import report_refusal, run_chat
 
 router = APIRouter()
 
@@ -30,3 +30,13 @@ async def chat(request: Request) -> JSONResponse:
     graph.require_schema_version(body.get("schemaVersion"))
     graph.require_device(body.get("deviceId"))
     return data(await run_in_threadpool(run_chat, request.app.state.settings, account, body))
+
+
+@router.post("/chat/outcome")
+async def chat_outcome(request: Request) -> JSONResponse:
+    """A proposal the device refused once its repairs ran out. Logged, and nothing else."""
+    account = owner_id(request)
+    body = await json_body(request)
+    graph.require_schema_version(body.get("schemaVersion"))
+    graph.require_device(body.get("deviceId"))
+    return data(report_refusal(account, body))

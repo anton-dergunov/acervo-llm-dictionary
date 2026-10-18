@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "rew-ab-stiff",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Makes the translation of the second example more natural.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pl491uiy3zasd85\",\n        \"field\": \"translation\",\n        \"value\": \"Она вглядывалась в бездонную тьму.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pl491uiy3zasd85\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"бездонную\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that makes the translation of the second example sound a bit more natural.\",\n  \"followUps\": [\n    \"Make the first example more natural too\",\n    \"Add another example with darkness\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Makes the translation of the second example more natural.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:pl491uiy3zasd85",
+          "field": "translation",
+          "value": "Она вглядывалась в бездонную тьму."
+        },
+        {
+          "op": "set",
+          "target": "example:pl491uiy3zasd85",
+          "field": "matchedTranslationForm",
+          "value": "бездонную"
+        }
+      ]
+    },
+    "reply": "Here is a change that makes the translation of the second example sound a bit more natural.",
+    "followUps": [
+      "Make the first example more natural too",
+      "Add another example with darkness"
+    ]
+  },
+  "seconds": 1.1,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that makes the translation of the second example sound a bit more natural.",
+      "followUps": [
+        "Make the first example more natural too",
+        "Add another example with darkness"
+      ],
+      "proposal": {
+        "summary": "Makes the translation of the second example more natural.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:pl491uiy3zasd85",
+            "field": "translation",
+            "value": "Она вглядывалась в бездонную тьму."
+          },
+          {
+            "op": "set",
+            "target": "example:pl491uiy3zasd85",
+            "field": "matchedTranslationForm",
+            "value": "бездонную"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "pl491uiy3zasd85",
+          "mark": "changed",
+          "fields": [
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

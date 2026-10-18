@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rep-ap-first-example",
+  "split": "dev",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll update the translation in the first example to use «make the most of» instead of «take advantage of».\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Updates the translation of the first example to «make the most of».\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove01\",\n        \"field\": \"translation\",\n        \"value\": \"Make the most of the time while you can.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove01\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"Make the most of\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll update the translation in the first example to use «make the most of» instead of «take advantage of».",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Updates the translation of the first example to «make the most of».",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:exampleaprove01",
+          "field": "translation",
+          "value": "Make the most of the time while you can."
+        },
+        {
+          "op": "set",
+          "target": "example:exampleaprove01",
+          "field": "matchedTranslationForm",
+          "value": "Make the most of"
+        }
+      ]
+    }
+  },
+  "seconds": 1.02,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll update the translation in the first example to use «make the most of» instead of «take advantage of».",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Updates the translation of the first example to «make the most of».",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:exampleaprove01",
+            "field": "translation",
+            "value": "Make the most of the time while you can."
+          },
+          {
+            "op": "set",
+            "target": "example:exampleaprove01",
+            "field": "matchedTranslationForm",
+            "value": "Make the most of"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "exampleaprove01",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

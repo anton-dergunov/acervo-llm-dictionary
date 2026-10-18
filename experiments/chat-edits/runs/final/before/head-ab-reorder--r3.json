@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "head-ab-reorder",
+  "split": "held",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've reordered the senses so that the figurative meaning of extreme depth comes first.\",\n  \"followUps\": [\n    \"Put the ocean meaning first again\",\n    \"Add another example to the deep darkness sense\",\n    \"How is it pronounced?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Swaps the order of the senses, putting the figurative 'extremely deep' sense first.\",\n    \"ops\": [\n      {\n        \"op\": \"reorder\",\n        \"target\": \"senses\",\n        \"ids\": [\n          \"z5aouusz9u6bbj4\",\n          \"lgksiv0a4adcaar\"\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've reordered the senses so that the figurative meaning of extreme depth comes first.",
+    "followUps": [
+      "Put the ocean meaning first again",
+      "Add another example to the deep darkness sense",
+      "How is it pronounced?"
+    ],
+    "proposal": {
+      "summary": "Swaps the order of the senses, putting the figurative 'extremely deep' sense first.",
+      "ops": [
+        {
+          "op": "reorder",
+          "target": "senses",
+          "ids": [
+            "z5aouusz9u6bbj4",
+            "lgksiv0a4adcaar"
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.07,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've reordered the senses so that the figurative meaning of extreme depth comes first.",
+      "followUps": [
+        "Put the ocean meaning first again",
+        "Add another example to the deep darkness",
+        "How is it pronounced?"
+      ],
+      "proposal": {
+        "summary": "Swaps the order of the senses, putting the figurative 'extremely deep' sense first.",
+        "ops": [
+          {
+            "op": "reorder",
+            "target": "senses",
+            "ids": [
+              "z5aouusz9u6bbj4",
+              "lgksiv0a4adcaar"
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "z5aouusz9u6bbj4",
+          "mark": "moved",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

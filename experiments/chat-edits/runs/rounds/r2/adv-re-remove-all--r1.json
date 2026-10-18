@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "adv-re-remove-all",
+  "split": "dev",
+  "category": "adversarial",
+  "expect": "either",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"answer\",\n  \"proposal\": null,\n  \"reply\": \"I cannot remove everything in the article. If you want to delete or rebuild the word entirely, you can remove it from your vocabulary directly in Acervo.\",\n  \"followUps\": [\n    \"Delete this word from my list\",\n    \"Change the primary translation\"\n  ]\n}",
+  "parsed": {
+    "intent": "answer",
+    "proposal": null,
+    "reply": "I cannot remove everything in the article. If you want to delete or rebuild the word entirely, you can remove it from your vocabulary directly in Acervo.",
+    "followUps": [
+      "Delete this word from my list",
+      "Change the primary translation"
+    ]
+  },
+  "seconds": 1.19,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I cannot remove everything in the article. If you want to delete or rebuild the word entirely, you can remove it from your vocabulary directly in Acervo.",
+      "followUps": [
+        "Delete this word from my list",
+        "Change the primary translation"
+      ],
+      "proposal": null,
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": true
+  },
+  "final": {
+    "pass": true
+  }
+}

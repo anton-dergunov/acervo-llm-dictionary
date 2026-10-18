@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-ap-missing-translation",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll add the missing translation to the second example in your entry.\",\n  \"followUps\": [\n    \"One more example\",\n    \"Add a note on reflexive use\",\n    \"How is it different from usar?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds a translation to the second example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove02\",\n        \"field\": \"translation\",\n        \"value\": \"We made the most of the good weather to go to the beach.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove02\",\n        \"field\": \"translationLang\",\n        \"value\": \"en\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove02\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"made the most of\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll add the missing translation to the second example in your entry.",
+    "followUps": [
+      "One more example",
+      "Add a note on reflexive use",
+      "How is it different from usar?"
+    ],
+    "proposal": {
+      "summary": "Adds a translation to the second example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:exampleaprove02",
+          "field": "translation",
+          "value": "We made the most of the good weather to go to the beach."
+        },
+        {
+          "op": "set",
+          "target": "example:exampleaprove02",
+          "field": "translationLang",
+          "value": "en"
+        },
+        {
+          "op": "set",
+          "target": "example:exampleaprove02",
+          "field": "matchedTranslationForm",
+          "value": "made the most of"
+        }
+      ]
+    }
+  },
+  "seconds": 1.31,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll add the missing translation to the second example in your entry.",
+      "followUps": [
+        "One more example",
+        "Add a note on reflexive use",
+        "How is it different from usar?"
+      ],
+      "proposal": {
+        "summary": "Adds a translation to the second example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:exampleaprove02",
+            "field": "translation",
+            "value": "We made the most of the good weather to go to the beach."
+          },
+          {
+            "op": "set",
+            "target": "example:exampleaprove02",
+            "field": "translationLang",
+            "value": "en"
+          },
+          {
+            "op": "set",
+            "target": "example:exampleaprove02",
+            "field": "matchedTranslationForm",
+            "value": "made the most of"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "refused",
+    "sentence": "`translationLang` is not something chat can change on a example, so nothing was changed."
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "refused",
+    "why": "`translationLang` is not something chat can change on a example, so nothing was changed."
+  },
+  "final": {
+    "pass": false,
+    "failure": "refused",
+    "why": "`translationLang` is not something chat can change on a example, so nothing was changed."
+  }
+}

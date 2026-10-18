@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "replay-t4",
+  "split": "replay",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «абиссальный» with «бездонный» in the short gloss, primary gloss, sense glosses, and example translations.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:lgksiv0a4adcaar\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"бездонный\",\n              \"глубоководный\"\n            ]\n          }\n        ]\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pvs056rz7zyuix1\",\n        \"field\": \"translation\",\n        \"value\": \"Подводная лодка исследовала бездонные равнины Тихого океана.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pvs056rz7zyuix1\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"бездонные\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that replaces «абиссальный» with «бездонный» in the glosses and translations.\",\n  \"followUps\": [\n    \"Keep абиссальный instead\",\n    \"Add абиссальный back to notes\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «абиссальный» with «бездонный» in the short gloss, primary gloss, sense glosses, and example translations.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "sense:lgksiv0a4adcaar",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "ru",
+              "terms": [
+                "бездонный",
+                "глубоководный"
+              ]
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "target": "example:pvs056rz7zyuix1",
+          "field": "translation",
+          "value": "Подводная лодка исследовала бездонные равнины Тихого океана."
+        },
+        {
+          "op": "set",
+          "target": "example:pvs056rz7zyuix1",
+          "field": "matchedTranslationForm",
+          "value": "бездонные"
+        }
+      ]
+    },
+    "reply": "Here is a change that replaces «абиссальный» with «бездонный» in the glosses and translations.",
+    "followUps": [
+      "Keep абиссальный instead",
+      "Add абиссальный back to notes"
+    ]
+  },
+  "seconds": 1.98,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that replaces «абиссальный» with «бездонный» in the glosses and translations.",
+      "followUps": [
+        "Keep абиссальный instead",
+        "Add абиссальный back to notes"
+      ],
+      "proposal": {
+        "summary": "Replaces «абиссальный» with «бездонный» in the short gloss, primary gloss, sense glosses, and example translations.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "sense:lgksiv0a4adcaar",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "ru",
+                "terms": [
+                  "бездонный",
+                  "глубоководный"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "set",
+            "target": "example:pvs056rz7zyuix1",
+            "field": "translation",
+            "value": "Подводная лодка исследовала бездонные равнины Тихого океана."
+          },
+          {
+            "op": "set",
+            "target": "example:pvs056rz7zyuix1",
+            "field": "matchedTranslationForm",
+            "value": "бездонные"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 3,
+      "records": [
+        {
+          "key": "draft:lexeme",
+          "mark": "changed",
+          "fields": [
+            "shortGloss",
+            "primaryGloss"
+          ]
+        },
+        {
+          "key": "lgksiv0a4adcaar",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        },
+        {
+          "key": "pvs056rz7zyuix1",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

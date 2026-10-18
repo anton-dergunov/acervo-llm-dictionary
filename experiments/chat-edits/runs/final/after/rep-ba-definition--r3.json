@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rep-ba-definition",
+  "split": "held",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «plana» with «de troncos» in the definition of the first sense.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensebalsaraft0\",\n        \"field\": \"definition\",\n        \"value\": \"Embarcación de troncos.\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that updates the definition to describe it as made of logs rather than flat.\",\n  \"followUps\": [\n    \"Add another example sentence\",\n    \"Change the primary gloss to float\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «plana» with «de troncos» in the definition of the first sense.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensebalsaraft0",
+          "field": "definition",
+          "value": "Embarcación de troncos."
+        }
+      ]
+    },
+    "reply": "Here is a change that updates the definition to describe it as made of logs rather than flat.",
+    "followUps": [
+      "Add another example sentence",
+      "Change the primary gloss to float"
+    ]
+  },
+  "seconds": 0.99,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that updates the definition to describe it as made of logs rather than flat.",
+      "followUps": [
+        "Add another example sentence",
+        "Change the primary gloss to float"
+      ],
+      "proposal": {
+        "summary": "Replaces «plana» with «de troncos» in the definition of the first sense.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensebalsaraft0",
+            "field": "definition",
+            "value": "Embarcación de troncos."
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "sensebalsaraft0",
+          "mark": "changed",
+          "fields": [
+            "definition"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

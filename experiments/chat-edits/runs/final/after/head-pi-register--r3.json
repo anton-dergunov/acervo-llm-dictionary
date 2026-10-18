@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "head-pi-register",
+  "split": "held",
+  "category": "head",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Marks the register as colloquial (informal).\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"register\",\n        \"value\": \"colloquial\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that marks the word as informal.\",\n  \"followUps\": [\n    \"Mark it as neutral again\",\n    \"Add a note about register\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Marks the register as colloquial (informal).",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "register",
+          "value": "colloquial"
+        }
+      ]
+    },
+    "reply": "Here is a change that marks the word as informal.",
+    "followUps": [
+      "Mark it as neutral again",
+      "Add a note about register"
+    ]
+  },
+  "seconds": 0.93,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that marks the word as informal.",
+      "followUps": [
+        "Mark it as neutral again",
+        "Add a note about register"
+      ],
+      "proposal": {
+        "summary": "Marks the register as colloquial (informal).",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "register",
+            "value": "colloquial"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemepicar0001",
+          "mark": "changed",
+          "fields": [
+            "register"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

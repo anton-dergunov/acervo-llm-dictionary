@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rep-tu-primary",
+  "split": "held",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"You are completely right. The primary gloss should be in Russian, since that is your native language and how you use the rest of the entry.\",\n  \"followUps\": [\n    \"Fix the primary gloss\",\n    \"Change the primary gloss to суматоха\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Changes the primary gloss to Russian.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"суматоха\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "You are completely right. The primary gloss should be in Russian, since that is your native language and how you use the rest of the entry.",
+    "followUps": [
+      "Fix the primary gloss",
+      "Change the primary gloss to суматоха"
+    ],
+    "proposal": {
+      "summary": "Changes the primary gloss to Russian.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "суматоха"
+        }
+      ]
+    }
+  },
+  "seconds": 0.93,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "You are completely right. The primary gloss should be in Russian, since that is your native language and how you use the rest of the entry.",
+      "followUps": [
+        "Fix the primary gloss",
+        "Change the primary gloss to суматоха"
+      ],
+      "proposal": {
+        "summary": "Changes the primary gloss to Russian.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "суматоха"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemeturmoil01",
+          "mark": "changed",
+          "fields": [
+            "primaryGloss"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

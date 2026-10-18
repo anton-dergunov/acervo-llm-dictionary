@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rew-re-shorter-note",
+  "split": "held",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Shortens the first note about reckless driving.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Чаще всего о поведении, создающем опасность для других, особенно в сочетании reckless driving.\",\n          \"Сильнее, чем careless: человек понимает риск, но игнорирует его.\"\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that makes the first note shorter.\",\n  \"followUps\": [\n    \"Make the second note shorter too\",\n    \"Add another example\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Shortens the first note about reckless driving.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Чаще всего о поведении, создающем опасность для других, особенно в сочетании reckless driving.",
+            "Сильнее, чем careless: человек понимает риск, но игнорирует его."
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that makes the first note shorter.",
+    "followUps": [
+      "Make the second note shorter too",
+      "Add another example"
+    ]
+  },
+  "seconds": 0.96,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that makes the first note shorter.",
+      "followUps": [
+        "Make the second note shorter too",
+        "Add another example"
+      ],
+      "proposal": {
+        "summary": "Shortens the first note about reckless driving.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Чаще всего о поведении, создающем опасность для других, особенно в сочетании reckless driving.",
+              "Сильнее, чем careless: человек понимает риск, но игнорирует его."
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [],
+      "notes": [
+        {
+          "index": 0,
+          "mark": "changed"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

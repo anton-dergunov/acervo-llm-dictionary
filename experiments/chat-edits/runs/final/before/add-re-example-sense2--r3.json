@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-re-example-sense2",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Here is an example for the second sense, showing a reckless promise or claim made without thought:\",\n  \"followUps\": [\n    \"One more example\",\n    \"Change the translation\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds a new example to the second sense of «reckless».\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"senserecklessb2\",\n        \"value\": {\n          \"text\": \"Making such reckless guarantees is bound to backfire.\",\n          \"textLang\": \"en\",\n          \"translation\": \"Раздавать такие необдуманные гарантии обязательно обернется боком.\",\n          \"translationLang\": \"ru\",\n          \"matchedForm\": \"reckless\",\n          \"matchedTranslationForm\": \"необдуманные\"\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Here is an example for the second sense, showing a reckless promise or claim made without thought:",
+    "followUps": [
+      "One more example",
+      "Change the translation"
+    ],
+    "proposal": {
+      "summary": "Adds a new example to the second sense of «reckless».",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "senserecklessb2",
+          "value": {
+            "text": "Making such reckless guarantees is bound to backfire.",
+            "textLang": "en",
+            "translation": "Раздавать такие необдуманные гарантии обязательно обернется боком.",
+            "translationLang": "ru",
+            "matchedForm": "reckless",
+            "matchedTranslationForm": "необдуманные"
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.11,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is an example for the second sense, showing a reckless promise or claim made without thought:",
+      "followUps": [
+        "One more example",
+        "Change the translation"
+      ],
+      "proposal": {
+        "summary": "Adds a new example to the second sense of «reckless».",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "senserecklessb2",
+            "value": {
+              "text": "Making such reckless guarantees is bound to backfire.",
+              "textLang": "en",
+              "translation": "Раздавать такие необдуманные гарантии обязательно обернется боком.",
+              "translationLang": "ru",
+              "matchedForm": "reckless",
+              "matchedTranslationForm": "необдуманные"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

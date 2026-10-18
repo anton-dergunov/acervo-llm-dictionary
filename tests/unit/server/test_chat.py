@@ -10,7 +10,10 @@ from __future__ import annotations
 
 import litellm
 import pytest
+from conftest import DEVICE
 from graph_records import vocabulary
+
+from acervo.domain import SCHEMA_VERSION
 
 PRIVATE = "provider details that must stay private"
 
@@ -138,7 +141,7 @@ def test_it_drops_a_proposal_with_too_many_operations_and_keeps_the_reply(talkin
         **REPLY,
         "proposal": {
             "summary": "a rewrite",
-            "ops": [{"op": "set", "target": "lexeme", "field": "emoji", "value": "x"}] * 20,
+            "ops": [{"op": "set", "target": "lexeme", "field": "emoji", "value": "x"}] * 25,
         },
     }
     answered = talking.chat().json()["data"]
@@ -146,15 +149,102 @@ def test_it_drops_a_proposal_with_too_many_operations_and_keeps_the_reply(talkin
     assert answered["reply"].startswith("«el traje»")
 
 
-def test_one_malformed_operation_drops_the_whole_proposal(talking):
-    talking.model.chat = {
-        **REPLY,
-        "proposal": {"summary": "…", "ops": [
-            {"op": "set", "target": "lexeme", "field": "notes", "value": ["fine"]},
-            {"op": "set", "target": "lexeme"},
-        ]},
-    }
-    assert talking.chat().json()["data"]["proposal"] is None
+def test_one_malformed_operation_drops_the_whole_proposal_and_says_which(talking):
+    malformed = {"summary": "…", "ops": [
+        {"op": "set", "target": "lexeme", "field": "notes", "value": ["fine"]},
+        {"op": "set", "target": "lexeme"},
+    ]}
+    talking.model.chat = {**REPLY, "proposal": malformed}
+    answered = talking.chat().json()["data"]
+    assert answered["proposal"] is None
+    # Never silent: the sentence names the operation, so a repair can fix exactly that one.
+    assert answered["proposalProblem"].startswith("Operation 2 is a `set` with no `field`")
+    assert answered["rejected"] == malformed
+
+
+def test_a_set_never_reads_a_missing_value_as_null(talking):
+    # A shape a real model writes: the value under the field's name. Read as null it would erase the
+    # translation; read from where it was put, it is the edit that was asked for.
+    talking.model.chat = {**REPLY, "proposal": {"summary": "…", "ops": [
+        {"op": "set", "target": "example:b8n4k2j7w1q5z0c", "field": "translation",
+         "translation": "The pirate outfit comes with a hook."}]}}
+    assert talking.chat().json()["data"]["proposal"]["ops"][0]["value"] == "The pirate outfit comes with a hook."
+    talking.model.chat = {**REPLY, "proposal": {"summary": "…", "ops": [
+        {"op": "set", "target": "example:b8n4k2j7w1q5z0c", "field": "translation"}]}}
+    answered = talking.chat().json()["data"]
+    assert answered["proposal"] is None
+    assert "with no `value`" in answered["proposalProblem"]
+
+
+def test_an_answer_that_says_it_edits_and_carries_nothing_is_a_problem(talking):
+    talking.model.chat = {**REPLY, "intent": "edit", "proposal": None}
+    answered = talking.chat().json()["data"]
+    assert answered["proposal"] is None
+    assert "carried no `proposal`" in answered["proposalProblem"]
+
+
+def test_a_plain_answer_is_no_problem(talking):
+    talking.model.chat = {**REPLY, "intent": "answer", "proposal": None}
+    answered = talking.chat().json()["data"]
+    assert answered["proposal"] is None and answered["proposalProblem"] is None
+
+
+def test_a_turn_says_what_became_of_the_change_it_offered(talking):
+    talking.chat(turns=[
+        {"role": "you", "text": "use jacket instead of coat"},
+        {"role": "acervo", "text": "Here is a change.",
+         "offered": {"summary": "Replaces coat.", "outcome": "refused",
+                     "reason": "That was a rewrite rather than an edit, so nothing was changed."}},
+        {"role": "you", "text": "try again"},
+    ])
+    sent = prompts_of(talking)[-1]
+    assert ("acervo: Here is a change.\n  [offered a change: Replaces coat. — NOT applied, nothing "
+            "changed: That was a rewrite rather than an edit, so nothing was changed.]") in sent
+
+
+def test_a_discarded_change_does_not_read_as_a_request_still_standing(talking):
+    talking.chat(turns=[
+        {"role": "you", "text": "drop the example"},
+        {"role": "acervo", "text": "Here is a change.",
+         "offered": {"summary": "Removes it.", "outcome": "discarded"}},
+        {"role": "you", "text": "why is it there?"},
+    ])
+    sent = prompts_of(talking)[-1]
+    assert "[offered a change: Removes it. — discarded by the learner, nothing changed]" in sent
+    assert "NOT applied" not in sent
+
+
+def test_a_turn_sent_back_carries_the_sentence_and_what_was_sent(talking):
+    talking.chat(repair={"problem": "The model referred to a part of the entry that is not there.",
+                         "attempt": 1, "previous": {"summary": "x", "ops": [{"op": "remove",
+                                                                             "target": "example:nope"}]}})
+    sent = prompts_of(talking)[-1]
+    assert "COULD NOT BE USED" in sent
+    assert "a part of the entry that is not there" in sent
+    assert '"target": "example:nope"' in sent
+
+
+def test_a_turn_is_sent_back_at_most_twice(talking):
+    answered = talking.chat(repair={"problem": "still wrong", "attempt": 3, "previous": None})
+    assert answered.status_code == 400
+    assert talking.model.calls == []
+
+
+def test_the_device_reports_what_it_would_not_apply_and_nothing_is_written(talking):
+    before = talking.pull().json()["data"]["cursor"]
+    answered = talking.post("/chat/outcome", {
+        "schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE,
+        "problem": "That was a rewrite rather than an edit, so nothing was changed.",
+        "proposal": {"summary": "x", "ops": []},
+    })
+    assert answered.status_code == 200
+    assert talking.pull().json()["data"]["cursor"] == before
+    assert talking.model.calls == []
+
+
+def test_a_report_must_say_what_was_refused(talking):
+    answered = talking.post("/chat/outcome", {"schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE})
+    assert answered.status_code == 400
 
 
 def test_it_drops_an_operation_name_it_does_not_know(talking):
@@ -174,7 +264,7 @@ def test_it_carries_a_well_formed_proposal_through(talking):
 
 def test_an_article_subject_reads_the_article_prompt(talking):
     talking.chat()
-    assert "You answer a learner's question" in systems_of(talking)[0]
+    assert "You answer a learner's message" in systems_of(talking)[0]
 
 
 def test_a_reference_subject_reads_the_reference_prompt(talking):

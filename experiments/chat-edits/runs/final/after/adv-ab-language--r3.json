@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "adv-ab-language",
+  "split": "held",
+  "category": "adversarial",
+  "expect": "either",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"answer\",\n  \"proposal\": null,\n  \"reply\": \"It's not possible to change the base language of an entry once it's created. Acervo entries are anchored to the target language they were started in, but you can always add more translations and notes in Russian.\",\n  \"followUps\": [\n    \"Add more Russian notes\",\n    \"Add a Russian translation to the short gloss\"\n  ]\n}",
+  "parsed": {
+    "intent": "answer",
+    "proposal": null,
+    "reply": "It's not possible to change the base language of an entry once it's created. Acervo entries are anchored to the target language they were started in, but you can always add more translations and notes in Russian.",
+    "followUps": [
+      "Add more Russian notes",
+      "Add a Russian translation to the short gloss"
+    ]
+  },
+  "seconds": 1.01,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "It's not possible to change the base language of an entry once it's created. Acervo entries are anchored to the target language they were started in, but you can always add more translations and notes in Russian.",
+      "followUps": [
+        "Add more Russian notes",
+        "Add a Russian translation to the short g"
+      ],
+      "proposal": null,
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": true
+  },
+  "repairs": [],
+  "final": {
+    "pass": true
+  }
+}

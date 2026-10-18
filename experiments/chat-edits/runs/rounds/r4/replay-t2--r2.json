@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r4",
+  "case": "replay-t2",
+  "split": "replay",
+  "category": "replace",
+  "expect": "either",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «абиссальный» with «бездонный» in the primary gloss and short gloss.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"бездонный; глубоководный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that replaces «абиссальный» with «бездонный» as the primary and short gloss.\",\n  \"followUps\": [\n    \"Keep абиссальный instead\",\n    \"Add бездонный to the first sense too\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «абиссальный» with «бездонный» in the primary gloss and short gloss.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "бездонный; глубоководный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        }
+      ]
+    },
+    "reply": "Here is a change that replaces «абиссальный» with «бездонный» as the primary and short gloss.",
+    "followUps": [
+      "Keep абиссальный instead",
+      "Add бездонный to the first sense too"
+    ]
+  },
+  "seconds": 1.04,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that replaces «абиссальный» with «бездонный» as the primary and short gloss.",
+      "followUps": [
+        "Keep абиссальный instead",
+        "Add бездонный to the first sense too"
+      ],
+      "proposal": {
+        "summary": "Replaces «абиссальный» with «бездонный» in the primary gloss and short gloss.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "бездонный; глубоководный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "draft:lexeme",
+          "mark": "changed",
+          "fields": [
+            "shortGloss",
+            "primaryGloss"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in sense:lgksiv0a4adcaar.glosses; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in sense:lgksiv0a4adcaar.glosses; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  }
+}

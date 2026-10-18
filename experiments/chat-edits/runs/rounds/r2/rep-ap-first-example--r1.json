@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "rep-ap-first-example",
+  "split": "dev",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «take advantage of» with «make the most of» in the first example's translation and matched translation form.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove01\",\n        \"field\": \"translation\",\n        \"value\": \"Make the most of the time while you can.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove01\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"Make the most of\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that uses «make the most of» in the first example's translation.\",\n  \"followUps\": [\n    \"Also update the short gloss\",\n    \"Change the first sense glosses too\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «take advantage of» with «make the most of» in the first example's translation and matched translation form.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:exampleaprove01",
+          "field": "translation",
+          "value": "Make the most of the time while you can."
+        },
+        {
+          "op": "set",
+          "target": "example:exampleaprove01",
+          "field": "matchedTranslationForm",
+          "value": "Make the most of"
+        }
+      ]
+    },
+    "reply": "Here is a change that uses «make the most of» in the first example's translation.",
+    "followUps": [
+      "Also update the short gloss",
+      "Change the first sense glosses too"
+    ]
+  },
+  "seconds": 1.09,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that uses «make the most of» in the first example's translation.",
+      "followUps": [
+        "Also update the short gloss",
+        "Change the first sense glosses too"
+      ],
+      "proposal": {
+        "summary": "Replaces «take advantage of» with «make the most of» in the first example's translation and matched translation form.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:exampleaprove01",
+            "field": "translation",
+            "value": "Make the most of the time while you can."
+          },
+          {
+            "op": "set",
+            "target": "example:exampleaprove01",
+            "field": "matchedTranslationForm",
+            "value": "Make the most of"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "exampleaprove01",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

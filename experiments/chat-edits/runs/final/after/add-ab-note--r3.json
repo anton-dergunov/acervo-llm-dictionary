@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "add-ab-note",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds a note explaining the difference between «бездонный» and «абиссальный».\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.\",\n          \"«бездонный» — это повседневное слово, а «абиссальный» — научное.\"\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds a note explaining that «бездонный» is the everyday word and «абиссальный» is scientific.\",\n  \"followUps\": [\n    \"Add one more example\",\n    \"Change the primary gloss\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds a note explaining the difference between «бездонный» and «абиссальный».",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.",
+            "«бездонный» — это повседневное слово, а «абиссальный» — научное."
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that adds a note explaining that «бездонный» is the everyday word and «абиссальный» is scientific.",
+    "followUps": [
+      "Add one more example",
+      "Change the primary gloss"
+    ]
+  },
+  "seconds": 1.02,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds a note explaining that «бездонный» is the everyday word and «абиссальный» is scientific.",
+      "followUps": [
+        "Add one more example",
+        "Change the primary gloss"
+      ],
+      "proposal": {
+        "summary": "Adds a note explaining the difference between «бездонный» and «абиссальный».",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.",
+              "«бездонный» — это повседневное слово, а «абиссальный» — научное."
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [],
+      "notes": [
+        {
+          "index": 1,
+          "mark": "added"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

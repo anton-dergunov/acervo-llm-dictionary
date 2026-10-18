@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r1",
+  "case": "replay-t2",
+  "split": "replay",
+  "category": "replace",
+  "expect": "either",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «абиссальный» with «бездонный» in the primary gloss and the first example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pvs056rz7zyuix1\",\n        \"field\": \"translation\",\n        \"value\": \"Подводная лодка исследовала бездонные равнины Тихого океана.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pvs056rz7zyuix1\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"бездонные\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that uses «бездонный» as the primary gloss and updates the first example to match.\",\n  \"followUps\": [\n    \"Use бездонный everywhere\",\n    \"Keep абиссальный as primary\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «абиссальный» with «бездонный» in the primary gloss and the first example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "example:pvs056rz7zyuix1",
+          "field": "translation",
+          "value": "Подводная лодка исследовала бездонные равнины Тихого океана."
+        },
+        {
+          "op": "set",
+          "target": "example:pvs056rz7zyuix1",
+          "field": "matchedTranslationForm",
+          "value": "бездонные"
+        }
+      ]
+    },
+    "reply": "Here is a change that uses «бездонный» as the primary gloss and updates the first example to match.",
+    "followUps": [
+      "Use бездонный everywhere",
+      "Keep абиссальный as primary"
+    ]
+  },
+  "seconds": 1.18,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that uses «бездонный» as the primary gloss and updates the first example to match.",
+      "followUps": [
+        "Use бездонный everywhere",
+        "Keep абиссальный as primary"
+      ],
+      "proposal": {
+        "summary": "Replaces «абиссальный» with «бездонный» in the primary gloss and the first example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "example:pvs056rz7zyuix1",
+            "field": "translation",
+            "value": "Подводная лодка исследовала бездонные равнины Тихого океана."
+          },
+          {
+            "op": "set",
+            "target": "example:pvs056rz7zyuix1",
+            "field": "matchedTranslationForm",
+            "value": "бездонные"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 2,
+      "records": [
+        {
+          "key": "draft:lexeme",
+          "mark": "changed",
+          "fields": [
+            "primaryGloss"
+          ]
+        },
+        {
+          "key": "pvs056rz7zyuix1",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in shortGloss, sense:lgksiv0a4adcaar.glosses; «бездонн» is not in sense:lgksiv0a4adcaar.glosses",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in shortGloss, sense:lgksiv0a4adcaar.glosses; «бездонн» is not in sense:lgksiv0a4adcaar.glosses",
+    "minor": []
+  }
+}

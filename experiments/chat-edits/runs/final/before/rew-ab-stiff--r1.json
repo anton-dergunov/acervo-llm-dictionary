@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-ab-stiff",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I'll update the translation to sound more natural, using «бездонную тьму» instead.\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Makes the Russian translation of the example more natural.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pl491uiy3zasd85\",\n        \"field\": \"translation\",\n        \"value\": \"Она вглядывалась в бездонную тьму.\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I'll update the translation to sound more natural, using «бездонную тьму» instead.",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Makes the Russian translation of the example more natural.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:pl491uiy3zasd85",
+          "field": "translation",
+          "value": "Она вглядывалась в бездонную тьму."
+        }
+      ]
+    }
+  },
+  "seconds": 1.09,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I'll update the translation to sound more natural, using «бездонную тьму» instead.",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Makes the Russian translation of the example more natural.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:pl491uiy3zasd85",
+            "field": "translation",
+            "value": "Она вглядывалась в бездонную тьму."
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "pl491uiy3zasd85",
+          "mark": "changed",
+          "fields": [
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

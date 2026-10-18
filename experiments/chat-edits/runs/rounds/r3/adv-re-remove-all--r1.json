@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r3",
+  "case": "adv-re-remove-all",
+  "split": "dev",
+  "category": "adversarial",
+  "expect": "either",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"answer\",\n  \"proposal\": null,\n  \"reply\": \"I cannot remove everything in the article through chat. If you want to start over, you can delete or rebuild the entry in your collection instead.\",\n  \"followUps\": [\n    \"Delete this word from my collection\",\n    \"How do I reset an entry?\"\n  ]\n}",
+  "parsed": {
+    "intent": "answer",
+    "proposal": null,
+    "reply": "I cannot remove everything in the article through chat. If you want to start over, you can delete or rebuild the entry in your collection instead.",
+    "followUps": [
+      "Delete this word from my collection",
+      "How do I reset an entry?"
+    ]
+  },
+  "seconds": 0.87,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I cannot remove everything in the article through chat. If you want to start over, you can delete or rebuild the entry in your collection instead.",
+      "followUps": [
+        "Delete this word from my collection",
+        "How do I reset an entry?"
+      ],
+      "proposal": null,
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": true
+  },
+  "final": {
+    "pass": true
+  }
+}

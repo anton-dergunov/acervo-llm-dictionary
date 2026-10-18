@@ -12,10 +12,17 @@
 
    It knows nothing about the graph, the replica or the projection. `ask()` is handed down already
    knowing how to assemble a request, so the document is re-serialised on every turn and the model
-   sees the saved article after a save rather than the one it was asked about. */
+   sees the saved article after a save rather than the one it was asked about.
+
+   **A proposal is tried before it is offered.** `check()` runs the same `applyOps` *Review* would,
+   the moment the answer arrives; one it would refuse — or one the server could not read — goes back
+   with the sentence that says why, at most twice (`docs/features/article-chat.md` §5.5), and only
+   then is a card shown. A card whose *Review* fails was the whole complaint this exists for. What is
+   still refused after that is shown as its sentence and reported, never offered. */
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import type { ChatCapture, ChatProposal, ChatResult, ChatTurn } from "./api";
+import type { ChatCapture, ChatProposal, ChatRepair, ChatResult, ChatTurn } from "./api";
+import { newId } from "./ids";
 import { AskIcon, ChevronIcon, CloseIcon, PlusIcon, SendIcon } from "./icons";
 import { useKeyboardInset } from "./visualViewport";
 
@@ -30,8 +37,21 @@ export type Detent = "dock" | "open" | "full";
 
 type Phase =
   | { at: "idle" }
-  | { at: "thinking" }
+  | { at: "thinking"; correcting?: boolean }
   | { at: "failed"; message: string };
+
+/** How many times one turn may be sent back. The server refuses a third (`services/chat.py`). */
+export const REPAIR_LIMIT = 2;
+
+/** What `ask` is told besides the transcript. */
+export interface AskOptions {
+  /** One per turn, sent as `X-Request-ID` on every call it makes, so the log reads as one account. */
+  requestId: string;
+  repair?: ChatRepair;
+}
+
+/** Shown when the server could not read a proposal: its own sentence is addressed to the model. */
+const UNREADABLE = "The model's proposal could not be used, so nothing was changed.";
 
 /** The one card the latest answer may carry. Cleared by the next turn. */
 type Card =
@@ -46,14 +66,21 @@ export interface AskDockProps {
   turns: ChatTurn[];
   onTurns(next: ChatTurn[]): void;
   /** Assembled by the caller on every turn — subject, reference and neighbours, freshly read. */
-  ask(turns: ChatTurn[]): Promise<ChatResult>;
+  ask(turns: ChatTurn[], options: AskOptions): Promise<ChatResult>;
+  /**
+   * Article subjects only: the sentence *Review* would refuse this proposal with, or null when it
+   * would apply. Run on arrival, so a proposal that cannot be applied is never offered.
+   */
+  check?(proposal: ChatProposal, modelId: string): string | null;
+  /** A proposal still refused once the repairs ran out, for the server's log. Nothing is written. */
+  report?(requestId: string, problem: string, proposal: unknown): void;
   /** From `syncStatus`, never `navigator.onLine`. Reading never depends on the server; this does. */
   offline: boolean;
   /** The block that was tapped, when one was. Both prefixes the turn and bounds the edit. */
   focus?: { label: string } | null;
   onClearFocus?(): void;
-  /** Article subjects only: the reader pressed *Review*. */
-  onPropose?(proposal: ChatProposal, modelId: string): void;
+  /** Article subjects only: the reader pressed *Review*. Returns the sentence it was refused with. */
+  onPropose?(proposal: ChatProposal, modelId: string): string | null | void;
   /** Reference subjects only: the reader pressed *Add to my words*. */
   onCapture?(capture: ChatCapture): void;
   /**
@@ -92,7 +119,7 @@ export interface AskDockProps {
 const OFFLINE = "Chat needs the server. Your words are all still here.";
 
 export default function AskDock({
-  headword, emoji = null, turns, onTurns, ask, offline,
+  headword, emoji = null, turns, onTurns, ask, check, report, offline,
   focus = null, onClearFocus, onPropose, onCapture, seeded = null, onSeedUsed,
   onDetent, expandable = true, inline = false, above = null
 }: AskDockProps) {
@@ -126,12 +153,26 @@ export default function AskDock({
     setCard(null);
     setPhase({ at: "thinking" });
     setDetent((now) => (now === "dock" ? "open" : now));
+    const requestId = newId();
     try {
-      const answer = await ask(next);
-      onTurns([...next, { role: "acervo", text: answer.reply }]);
+      let answer = await ask(next, { requestId });
+      let problem = problemOf(answer);
+      for (let attempt = 1; problem && attempt <= REPAIR_LIMIT; attempt += 1) {
+        setPhase({ at: "thinking", correcting: true });
+        answer = await ask(next, {
+          requestId,
+          repair: { problem: problem.sentence, attempt, previous: answer.rejected ?? answer.proposal }
+        });
+        problem = problemOf(answer);
+      }
+      if (problem) report?.(requestId, problem.sentence, answer.rejected ?? answer.proposal);
+      const offered = problem
+        ? { summary: answer.proposal?.summary || "a change", outcome: "refused" as const, reason: problem.sentence }
+        : answer.proposal ? { summary: answer.proposal.summary, outcome: "unreviewed" as const } : null;
+      onTurns([...next, { role: "acervo", text: answer.reply, ...(offered ? { offered } : {}) }]);
       setFollowUps(answer.followUps);
-      setPhase({ at: "idle" });
-      if (answer.proposal && onPropose) setCard({ kind: "proposal", proposal: answer.proposal, modelId: answer.modelId });
+      setPhase(problem ? { at: "failed", message: problem.shown } : { at: "idle" });
+      if (answer.proposal && !problem && onPropose) setCard({ kind: "proposal", proposal: answer.proposal, modelId: answer.modelId });
       else if (answer.capture && onCapture) setCard({ kind: "capture", capture: answer.capture });
       onClearFocus?.();
     } catch (error) {
@@ -141,6 +182,24 @@ export default function AskDock({
     } finally {
       busy.current = false;
     }
+  };
+
+  /** Why this answer's proposal cannot be offered — for the model, and for the reader — or null. */
+  function problemOf(answer: ChatResult): { sentence: string; shown: string } | null {
+    if (answer.proposalProblem) return { sentence: answer.proposalProblem, shown: UNREADABLE };
+    if (!answer.proposal || !check) return null;
+    const refused = check(answer.proposal, answer.modelId);
+    return refused ? { sentence: refused, shown: refused } : null;
+  }
+
+  /** Records on the turn that offered it what became of the change, for the next turn to read. */
+  const settle = (refused: string | null) => {
+    const at = turns.map((turn) => turn.role).lastIndexOf("acervo");
+    if (at < 0 || !turns[at].offered) return;
+    onTurns(turns.map((turn, index) => index !== at ? turn : {
+      ...turn,
+      offered: { ...turn.offered!, outcome: refused ? "refused" : "applied", reason: refused }
+    }));
   };
 
   useEffect(() => {
@@ -221,7 +280,8 @@ export default function AskDock({
       {/* A quiet line in the thread, not a spinner over the article: the article stays readable and
           scrollable throughout, and nothing about a pending turn locks it (`§7.4`). */}
       {thinking && <div className="ask-turn acervo ask-thinking">
-        <span className="ask-who"><AskIcon /></span><p>Thinking…</p>
+        <span className="ask-who"><AskIcon /></span>
+        <p>{phase.at === "thinking" && phase.correcting ? "Correcting the proposal…" : "Thinking…"}</p>
       </div>}
 
       {phase.at === "failed" && <p className="ask-failed">{offline ? OFFLINE : phase.message}</p>}
@@ -235,9 +295,10 @@ export default function AskDock({
           <span className="spacer" />
           {/* Nothing is applied without this press, and nothing is written without a second. */}
           <button className="tb-btn primary" onClick={() => {
-            onPropose?.(card.proposal, card.modelId);
+            const refused = onPropose?.(card.proposal, card.modelId) ?? null;
+            settle(refused);
             setCard(null);
-            setDetent("dock");
+            if (!refused) setDetent("dock");
           }}>Review</button>
         </div>
       </div>}

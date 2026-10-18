@@ -1,0 +1,170 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r3",
+  "case": "rep-re-everywhere",
+  "split": "dev",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «безрассудный» with «опрометчивый» in the short gloss, primary gloss, and all sense glosses.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"опрометчивый; неосторожный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"опрометчивый\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:senserecklessa1\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"опрометчивый\",\n              \"неосторожный\"\n            ]\n          }\n        ]\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:senserecklessb2\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"ru\",\n            \"terms\": [\n              \"опрометчивый\",\n              \"необдуманный\"\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that replaces «безрассудный» with «опрометчивый» in the short gloss, primary gloss, and sense glosses.\",\n  \"followUps\": [\n    \"Also update the examples\",\n    \"Keep безрассудный in the notes\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «безрассудный» with «опрометчивый» in the short gloss, primary gloss, and all sense glosses.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "опрометчивый; неосторожный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "опрометчивый"
+        },
+        {
+          "op": "set",
+          "target": "sense:senserecklessa1",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "ru",
+              "terms": [
+                "опрометчивый",
+                "неосторожный"
+              ]
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "target": "sense:senserecklessb2",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "ru",
+              "terms": [
+                "опрометчивый",
+                "необдуманный"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that replaces «безрассудный» with «опрометчивый» in the short gloss, primary gloss, and sense glosses.",
+    "followUps": [
+      "Also update the examples",
+      "Keep безрассудный in the notes"
+    ]
+  },
+  "seconds": 1.58,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that replaces «безрассудный» with «опрометчивый» in the short gloss, primary gloss, and sense glosses.",
+      "followUps": [
+        "Also update the examples",
+        "Keep безрассудный in the notes"
+      ],
+      "proposal": {
+        "summary": "Replaces «безрассудный» with «опрометчивый» in the short gloss, primary gloss, and all sense glosses.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "опрометчивый; неосторожный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "опрометчивый"
+          },
+          {
+            "op": "set",
+            "target": "sense:senserecklessa1",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "ru",
+                "terms": [
+                  "опрометчивый",
+                  "неосторожный"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "set",
+            "target": "sense:senserecklessb2",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "ru",
+                "terms": [
+                  "опрометчивый",
+                  "необдуманный"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 3,
+      "records": [
+        {
+          "key": "lexemereckless1",
+          "mark": "changed",
+          "fields": [
+            "shortGloss",
+            "primaryGloss"
+          ]
+        },
+        {
+          "key": "senserecklessa1",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        },
+        {
+          "key": "senserecklessb2",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«безрассудн» is still in example:examplereckles1.translation, example:examplereckles1.matchedTranslationForm, example:examplereckles2.translation, example:examplereckles2.matchedTranslationForm, example:examplereckles4.translation, example:examplereckles4.matchedTranslationForm; «опрометчив» is not in example:examplereckles1.translation; «опрометчив» is not in example:examplereckles4.translation",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«безрассудн» is still in example:examplereckles1.translation, example:examplereckles1.matchedTranslationForm, example:examplereckles2.translation, example:examplereckles2.matchedTranslationForm, example:examplereckles4.translation, example:examplereckles4.matchedTranslationForm; «опрометчив» is not in example:examplereckles1.translation; «опрометчив» is not in example:examplereckles4.translation",
+    "minor": []
+  }
+}

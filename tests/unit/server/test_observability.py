@@ -222,3 +222,58 @@ def test_the_server_says_which_version_came_up(logs, server):
     started, stopped = [line for line in lines(logs["act"]) if " server " in line]
     assert "server start version=1.4.2 build=218" in started
     assert "server stop version=1.4.2 build=218" in stopped
+
+
+# ── chat: an edit that could not be made is on the record, whole ─────────────
+
+
+def _chat(server, turn_id: str, **overrides):
+    from conftest import DEVICE
+
+    from acervo.domain import SCHEMA_VERSION
+    body = {"schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE,
+            "subject": {"kind": "article", "lexemeId": "", "document": "headword: picar\nlanguage: es\n",
+                        "focus": None},
+            "turns": [{"role": "you", "text": "use mince instead of dice"}], **overrides}
+    return server.client.post(f"{API}{overrides.pop('path', '/chat')}",
+                              headers={**server.auth, "X-Request-ID": turn_id}, json=body)
+
+
+def test_a_chat_proposal_the_server_could_not_read_is_logged_whole_under_its_turn(logs, server):
+    server.push({"vocabularies": [vocabulary()]})
+    server.model.chat = {"intent": "edit", "reply": "Here is a change.", "proposal": {
+        "summary": "Swaps a gloss.", "ops": [{"op": "set", "target": "sense:sensepicarchop0",
+                                              "value": [{"lang": "en", "terms": ["to mince"]}]}]}}
+    assert _chat(server, "turnabcdefgh123").json()["data"]["proposalProblem"]
+    filed = [line for line in lines(logs["call"]) if "rid=turnabcdefgh123" in line]
+    outcome = next(line for line in filed if " chat outcome " in line)
+    assert "result=dropped" in outcome and "intent=edit" in outcome
+    assert 'problem="Operation 1 is a `set` with no `field`' in outcome
+    # The answer itself, past the point a 400-character excerpt would have cut it.
+    assert any(" chat answer " in line and "to mince" in line for line in filed)
+
+
+def test_a_proposal_the_device_refused_is_logged_under_the_same_turn(logs, server):
+    from conftest import DEVICE
+
+    from acervo.domain import SCHEMA_VERSION
+    server.push({"vocabularies": [vocabulary()]})
+    server.model.chat = {"intent": "edit", "reply": "Here is a change.", "proposal": {
+        "summary": "Removes it.", "ops": [{"op": "remove", "target": "example:nosuchexample01"}]}}
+    sentence = "The model referred to a part of the entry that is not there, so nothing was changed."
+    _chat(server, "turnzyxwvuts987", repair={"problem": sentence, "attempt": 1,
+                                             "previous": {"summary": "Removes it.", "ops": []}})
+    reported = server.client.post(f"{API}/chat/outcome",
+                                  headers={**server.auth, "X-Request-ID": "turnzyxwvuts987"},
+                                  json={"schemaVersion": SCHEMA_VERSION, "deviceId": DEVICE,
+                                        "problem": sentence, "proposal": {"summary": "Removes it.",
+                                                                          "ops": [{"op": "remove"}]}})
+    assert reported.status_code == 200
+    sent_back = [line for line in lines(logs["call"])
+                 if "rid=turnzyxwvuts987" in line and " chat outcome " in line]
+    assert len(sent_back) == 1 and "repair=1" in sent_back[0] and "that is not there" in sent_back[0]
+    assert any(" chat sent back " in line and "Removes it." in line and "rid=turnzyxwvuts987" in line
+               for line in lines(logs["call"]))
+    refused = [line for line in lines(logs["act"]) if " chat proposal refused " in line]
+    assert len(refused) == 1
+    assert "rid=turnzyxwvuts987" in refused[0] and "that is not there" in refused[0] and "ops=1" in refused[0]

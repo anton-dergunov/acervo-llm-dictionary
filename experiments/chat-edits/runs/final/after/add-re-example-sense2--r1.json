@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "add-re-example-sense2",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds an example to the second sense.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"senserecklessb2\",\n        \"value\": {\n          \"text\": \"Making reckless guarantees during negotiations can destroy trust.\",\n          \"translation\": \"Давать необдуманные гарантии во время переговоров может подорвать доверие.\",\n          \"matchedForm\": \"reckless\",\n          \"matchedTranslationForm\": \"необдуманные\"\n        }\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds an example to the second sense about making a reckless guarantee.\",\n  \"followUps\": [\n    \"One more example for the second sense\",\n    \"Add a note about this sense\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds an example to the second sense.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "senserecklessb2",
+          "value": {
+            "text": "Making reckless guarantees during negotiations can destroy trust.",
+            "translation": "Давать необдуманные гарантии во время переговоров может подорвать доверие.",
+            "matchedForm": "reckless",
+            "matchedTranslationForm": "необдуманные"
+          }
+        }
+      ]
+    },
+    "reply": "Here is a change that adds an example to the second sense about making a reckless guarantee.",
+    "followUps": [
+      "One more example for the second sense",
+      "Add a note about this sense"
+    ]
+  },
+  "seconds": 1.11,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds an example to the second sense about making a reckless guarantee.",
+      "followUps": [
+        "One more example for the second sense",
+        "Add a note about this sense"
+      ],
+      "proposal": {
+        "summary": "Adds an example to the second sense.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "senserecklessb2",
+            "value": {
+              "text": "Making reckless guarantees during negotiations can destroy trust.",
+              "translation": "Давать необдуманные гарантии во время переговоров может подорвать доверие.",
+              "matchedForm": "reckless",
+              "matchedTranslationForm": "необдуманные"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

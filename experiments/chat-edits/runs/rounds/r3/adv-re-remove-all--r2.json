@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r3",
+  "case": "adv-re-remove-all",
+  "split": "dev",
+  "category": "adversarial",
+  "expect": "either",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"answer\",\n  \"proposal\": null,\n  \"reply\": \"Deleting an entire entry cannot be done directly through chat. If you want to remove this word completely, you can delete the article from your library.\",\n  \"followUps\": [\n    \"Clear all notes\",\n    \"Remove the second sense\"\n  ]\n}",
+  "parsed": {
+    "intent": "answer",
+    "proposal": null,
+    "reply": "Deleting an entire entry cannot be done directly through chat. If you want to remove this word completely, you can delete the article from your library.",
+    "followUps": [
+      "Clear all notes",
+      "Remove the second sense"
+    ]
+  },
+  "seconds": 0.91,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Deleting an entire entry cannot be done directly through chat. If you want to remove this word completely, you can delete the article from your library.",
+      "followUps": [
+        "Clear all notes",
+        "Remove the second sense"
+      ],
+      "proposal": null,
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": true
+  },
+  "final": {
+    "pass": true
+  }
+}

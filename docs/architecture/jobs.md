@@ -30,8 +30,16 @@ The server is the unit that works, and the package layout draws the line.
 
 A redraw is a job even though the owner asked for it: the point was being able to leave the word
 while it fills in, and a request that dies when the article closes is not that. **There are no
-client retries anywhere.** A synchronous failure is shown and the owner presses again; the provider
-chain's fall-through still happens inside the request.
+client retries anywhere**, with one exception. A synchronous failure is shown and the owner presses
+again; the provider chain's fall-through still happens inside the request.
+
+The exception is chat ([`../features/article-chat.md`](../features/article-chat.md) §5.5). A turn
+whose proposal the device would refuse, or the server could not read, is sent back with the sentence
+that says why, at most twice, before anything is shown. That is not a failed request tried again — each
+request answered — but the next turn of an interactive conversation, carrying something the model did
+not know; and the device is the only place that can tell, because `articleEdit.ts` is the only place
+the edit language is understood. It stays the exception because chat is interactive and lives only in
+the interface, where somebody is waiting on the answer.
 
 ## How a job works
 

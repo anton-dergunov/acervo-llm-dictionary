@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r2",
+  "case": "add-es-sense",
+  "split": "dev",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Adds a figurative sense for sprinkling a speech or text with jokes or quotes.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"sense\",\n        \"after\": \"senseespolvor10\",\n        \"value\": {\n          \"definition\": \"Intercalar elementos como chistes o citas en un discurso o texto.\",\n          \"definitionLang\": \"es\",\n          \"domain\": \"figurative\",\n          \"glosses\": [\n            {\n              \"lang\": \"en\",\n              \"terms\": [\n                \"to sprinkle\",\n                \"to pepper\"\n              ]\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that adds a figurative sense for sprinkling a speech or text with jokes or quotes.\",\n  \"followUps\": [\n    \"Add an example for the new sense\",\n    \"Add another synonym\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Adds a figurative sense for sprinkling a speech or text with jokes or quotes.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "sense",
+          "after": "senseespolvor10",
+          "value": {
+            "definition": "Intercalar elementos como chistes o citas en un discurso o texto.",
+            "definitionLang": "es",
+            "domain": "figurative",
+            "glosses": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to sprinkle",
+                  "to pepper"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "reply": "Here is a change that adds a figurative sense for sprinkling a speech or text with jokes or quotes.",
+    "followUps": [
+      "Add an example for the new sense",
+      "Add another synonym"
+    ]
+  },
+  "seconds": 1.08,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that adds a figurative sense for sprinkling a speech or text with jokes or quotes.",
+      "followUps": [
+        "Add an example for the new sense",
+        "Add another synonym"
+      ],
+      "proposal": {
+        "summary": "Adds a figurative sense for sprinkling a speech or text with jokes or quotes.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "sense",
+            "value": {
+              "definition": "Intercalar elementos como chistes o citas en un discurso o texto.",
+              "definitionLang": "es",
+              "domain": "figurative",
+              "glosses": [
+                {
+                  "lang": "en",
+                  "terms": [
+                    "to sprinkle",
+                    "to pepper"
+                  ]
+                }
+              ]
+            },
+            "after": "senseespolvor10"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

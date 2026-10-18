@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-ap-typo",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"You're completely right. It should be «tiempo» with an m. Would you like me to fix that typo?\",\n  \"followUps\": [\n    \"Yes, fix the typo\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Fixes the typo «tienpo» to «tiempo» in the first example.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:exampleaprove01\",\n        \"field\": \"text\",\n        \"value\": \"Aprovecha el tiempo mientras puedas.\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "You're completely right. It should be «tiempo» with an m. Would you like me to fix that typo?",
+    "followUps": [
+      "Yes, fix the typo"
+    ],
+    "proposal": {
+      "summary": "Fixes the typo «tienpo» to «tiempo» in the first example.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:exampleaprove01",
+          "field": "text",
+          "value": "Aprovecha el tiempo mientras puedas."
+        }
+      ]
+    }
+  },
+  "seconds": 1.05,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "You're completely right. It should be «tiempo» with an m. Would you like me to fix that typo?",
+      "followUps": [
+        "Yes, fix the typo"
+      ],
+      "proposal": {
+        "summary": "Fixes the typo «tienpo» to «tiempo» in the first example.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:exampleaprove01",
+            "field": "text",
+            "value": "Aprovecha el tiempo mientras puedas."
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "exampleaprove01",
+          "mark": "changed",
+          "fields": [
+            "text"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

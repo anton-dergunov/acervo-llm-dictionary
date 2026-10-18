@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rew-ap-typo",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"You spotted «tienpo» in the first example. It should be «tiempo» with an m. Would you like me to fix it?\",\n  \"followUps\": [\n    \"Fix the typo in the example\"\n  ],\n  \"proposal\": null\n}",
+  "parsed": {
+    "reply": "You spotted «tienpo» in the first example. It should be «tiempo» with an m. Would you like me to fix it?",
+    "followUps": [
+      "Fix the typo in the example"
+    ],
+    "proposal": null
+  },
+  "seconds": 0.77,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "You spotted «tienpo» in the first example. It should be «tiempo» with an m. Would you like me to fix it?",
+      "followUps": [
+        "Fix the typo in the example"
+      ],
+      "proposal": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "none"
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "no-proposal",
+    "why": "the turn asked for a change"
+  },
+  "final": {
+    "pass": false,
+    "failure": "no-proposal",
+    "why": "the turn asked for a change"
+  }
+}

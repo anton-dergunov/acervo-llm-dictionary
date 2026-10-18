@@ -1546,7 +1546,8 @@ function mockChat(reply: string, proposal: unknown = null) {
   chat.mockReset();
   chat.mockResolvedValue({
     reply, followUps: ["One more example"],
-    proposal: proposal as never, capture: null, modelId: "gemini-3.1-flash-lite"
+    proposal: proposal as never, proposalProblem: null, rejected: null, capture: null,
+    modelId: "gemini-3.1-flash-lite"
   });
   return chat;
 }
@@ -1686,17 +1687,55 @@ describe("asking about an article", () => {
       repository.snapshot().examples.find((one) => one.id === "examplepicar010")!.deleted).toBe(false));
   });
 
-  it("drops a proposal rather than applying it when the model names something that is not there", async () => {
+  it("sends a proposal it would refuse back twice, then shows why instead of offering it", async () => {
     signedIn();
-    mockChat("Here you go.", {
+    const chat = mockChat("Here you go.", {
       summary: "Edits a sense that does not exist.",
       ops: [{ op: "set", target: "sense:nosuchsense001", field: "domain", value: "cooking" }]
     });
+    const report = vi.spyOn(backendSession, "chatOutcome").mockResolvedValue({});
     await openPicar();
     await ask("fix sense three");
-    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
     expect(await screen.findByText(/not there, so nothing was changed/)).toBeInTheDocument();
+    // A card whose Review fails is the thing this exists to prevent.
+    expect(screen.queryByRole("button", { name: "Review" })).not.toBeInTheDocument();
     expect(document.querySelector(".review-bar")).toBeNull();
+
+    expect(chat).toHaveBeenCalledTimes(3);
+    const [first, second, third] = chat.mock.calls;
+    expect(first[1].repair).toBeNull();
+    expect(second[1].repair).toMatchObject({ attempt: 1, problem: expect.stringMatching(/not there/) });
+    expect((second[1].repair!.previous as { summary: string }).summary).toBe("Edits a sense that does not exist.");
+    expect(third[1].repair).toMatchObject({ attempt: 2 });
+    // One request id for the whole turn, so the log reads as one account of it.
+    expect(new Set(chat.mock.calls.map((call) => call[2])).size).toBe(1);
+    expect(report).toHaveBeenCalledWith(expect.any(String), first[2],
+      expect.objectContaining({ problem: expect.stringMatching(/not there/) }));
+    report.mockRestore();
+  });
+
+  it("offers the corrected proposal when a repair fixes it, and tells the next turn it was refused before", async () => {
+    signedIn();
+    const chat = mockChat("Here you go.", {
+      summary: "Edits a sense that does not exist.",
+      ops: [{ op: "set", target: "sense:nosuchsense001", field: "domain", value: "cooking" }]
+    });
+    chat.mockResolvedValueOnce({
+      reply: "Here you go.", followUps: [], capture: null, modelId: "gemini-3.1-flash-lite",
+      proposal: { summary: "Edits a sense that does not exist.",
+        ops: [{ op: "set", target: "sense:nosuchsense001", field: "domain", value: "cooking" }] },
+      proposalProblem: null, rejected: null
+    }).mockResolvedValueOnce({
+      reply: "Here is a change to the chopping sense.", followUps: [], capture: null,
+      modelId: "gemini-3.1-flash-lite", proposalProblem: null, rejected: null,
+      proposal: { summary: "Sets the domain.",
+        ops: [{ op: "set", target: "sense:sensepicarchop0", field: "domain", value: "kitchen" }] }
+    });
+    await openPicar();
+    await ask("fix the domain");
+    expect(await screen.findByRole("button", { name: "Review" })).toBeInTheDocument();
+    expect(chat).toHaveBeenCalledTimes(2);
+    expect(screen.queryByText(/not there, so nothing was changed/)).not.toBeInTheDocument();
   });
 
   it("keeps the dock out of the Add view's own preview", async () => {
@@ -1871,6 +1910,26 @@ describe("a conversation that edits what it just proposed", () => {
     expect(await screen.findByRole("button", { name: "One more example" })).toBeInTheDocument();
   });
 
+  it("tells the next turn a change was discarded, not applied", async () => {
+    signedIn();
+    const chat = mockChat("Here is a change.", {
+      summary: "Removes the first example.",
+      ops: [{ op: "remove", target: "example:examplepicar010", reason: "duplicate" }]
+    });
+    await openPicar();
+    await ask("drop the first example");
+    fireEvent.click(await screen.findByRole("button", { name: "Review" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Discard" }));
+    chat.mockResolvedValue({
+      reply: "Kept as it is.", followUps: [], proposal: null, proposalProblem: null, rejected: null,
+      capture: null, modelId: "gemini-3.1-flash-lite"
+    });
+    await ask("why is it there?");
+    await waitFor(() => expect(chat).toHaveBeenCalledTimes(2));
+    expect(chat.mock.calls[1][1].turns.find((turn) => turn.offered)?.offered)
+      .toMatchObject({ outcome: "discarded" });
+  });
+
   it("builds a second turn on the first, and never on the ghosts drawn for the reader", async () => {
     signedIn();
     acceptWrites();
@@ -1883,8 +1942,15 @@ describe("a conversation that edits what it just proposed", () => {
     fireEvent.click(await screen.findByRole("button", { name: "Review" }));
     await screen.findByText(/1 change/);
 
+    chat.mockResolvedValue({
+      reply: "The note reads well as it is.", followUps: [], proposal: null, proposalProblem: null,
+      rejected: null, capture: null, modelId: "gemini-3.1-flash-lite"
+    });
     await ask("and tidy the note");
     await waitFor(() => expect(chat).toHaveBeenCalledTimes(2));
+    // The turn that offered the removal says it is under review, so the model does not offer it again.
+    expect(chat.mock.calls[1][1].turns.find((turn) => turn.offered)?.offered)
+      .toMatchObject({ summary: "Removes the first example.", outcome: "applied" });
     /* `diff.shown` puts the removed example back so it can be drawn struck through. Sending that
        would show the model a record the proposal has already taken away — and applying the next
        turn to it would quietly resurrect it. */

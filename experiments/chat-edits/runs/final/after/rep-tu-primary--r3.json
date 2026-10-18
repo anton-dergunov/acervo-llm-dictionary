@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rep-tu-primary",
+  "split": "held",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Sets the primary gloss to Russian («суматоха»).\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"суматоха\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that sets the primary gloss to Russian.\",\n  \"followUps\": [\n    \"Add more Russian glosses\",\n    \"Change the short gloss too\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Sets the primary gloss to Russian («суматоха»).",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "суматоха"
+        }
+      ]
+    },
+    "reply": "Here is a change that sets the primary gloss to Russian.",
+    "followUps": [
+      "Add more Russian glosses",
+      "Change the short gloss too"
+    ]
+  },
+  "seconds": 1.03,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that sets the primary gloss to Russian.",
+      "followUps": [
+        "Add more Russian glosses",
+        "Change the short gloss too"
+      ],
+      "proposal": {
+        "summary": "Sets the primary gloss to Russian («суматоха»).",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "суматоха"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "lexemeturmoil01",
+          "mark": "changed",
+          "fields": [
+            "primaryGloss"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

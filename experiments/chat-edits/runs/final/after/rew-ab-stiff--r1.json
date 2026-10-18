@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rew-ab-stiff",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Makes the translation of the second example more natural.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pl491uiy3zasd85\",\n        \"field\": \"translation\",\n        \"value\": \"Она вглядывалась в бездонную тьму.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:pl491uiy3zasd85\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"бездонную\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that makes the translation of the second example more natural by using «тьму» instead of «темноту».\",\n  \"followUps\": [\n    \"Add another example with darkness\",\n    \"Is «темноту» also correct?\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Makes the translation of the second example more natural.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:pl491uiy3zasd85",
+          "field": "translation",
+          "value": "Она вглядывалась в бездонную тьму."
+        },
+        {
+          "op": "set",
+          "target": "example:pl491uiy3zasd85",
+          "field": "matchedTranslationForm",
+          "value": "бездонную"
+        }
+      ]
+    },
+    "reply": "Here is a change that makes the translation of the second example more natural by using «тьму» instead of «темноту».",
+    "followUps": [
+      "Add another example with darkness",
+      "Is «темноту» also correct?"
+    ]
+  },
+  "seconds": 2.29,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that makes the translation of the second example more natural by using «тьму» instead of «темноту».",
+      "followUps": [
+        "Add another example with darkness",
+        "Is «темноту» also correct?"
+      ],
+      "proposal": {
+        "summary": "Makes the translation of the second example more natural.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:pl491uiy3zasd85",
+            "field": "translation",
+            "value": "Она вглядывалась в бездонную тьму."
+          },
+          {
+            "op": "set",
+            "target": "example:pl491uiy3zasd85",
+            "field": "matchedTranslationForm",
+            "value": "бездонную"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "pl491uiy3zasd85",
+          "mark": "changed",
+          "fields": [
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

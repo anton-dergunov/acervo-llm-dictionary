@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-re-example-sense2",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Here is an example for the second sense, showing a reckless statement or promise:\",\n  \"followUps\": [\n    \"One more example\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds an example to the second sense of reckless.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"senserecklessb2\",\n        \"value\": {\n          \"text\": \"She issued reckless guarantees that could never be fulfilled.\",\n          \"textLang\": \"en\",\n          \"translation\": \"Она дала безрассудные гарантии, которые невозможно было выполнить.\",\n          \"translationLang\": \"ru\",\n          \"matchedForm\": \"reckless\",\n          \"matchedTranslationForm\": \"безрассудные\"\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Here is an example for the second sense, showing a reckless statement or promise:",
+    "followUps": [
+      "One more example",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Adds an example to the second sense of reckless.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "senserecklessb2",
+          "value": {
+            "text": "She issued reckless guarantees that could never be fulfilled.",
+            "textLang": "en",
+            "translation": "Она дала безрассудные гарантии, которые невозможно было выполнить.",
+            "translationLang": "ru",
+            "matchedForm": "reckless",
+            "matchedTranslationForm": "безрассудные"
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.15,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is an example for the second sense, showing a reckless statement or promise:",
+      "followUps": [
+        "One more example",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Adds an example to the second sense of reckless.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "senserecklessb2",
+            "value": {
+              "text": "She issued reckless guarantees that could never be fulfilled.",
+              "textLang": "en",
+              "translation": "Она дала безрассудные гарантии, которые невозможно было выполнить.",
+              "translationLang": "ru",
+              "matchedForm": "reckless",
+              "matchedTranslationForm": "безрассудные"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

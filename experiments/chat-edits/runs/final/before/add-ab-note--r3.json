@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-ab-note",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 3,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I've added a note clarifying that «бездонный» is used in everyday contexts, while «абиссальный» is strictly scientific or descriptive.\",\n  \"followUps\": [\n    \"One more example\",\n    \"Change the emotion\",\n    \"Add a topic\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds a note about the stylistic difference between «бездонный» and «абиссальный».\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"notes\",\n        \"value\": [\n          \"Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.\",\n          \"«Бездонный» является более привычным, повседневным словом, в то время как «абиссальный» носит научный характер.\"\n        ]\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I've added a note clarifying that «бездонный» is used in everyday contexts, while «абиссальный» is strictly scientific or descriptive.",
+    "followUps": [
+      "One more example",
+      "Change the emotion",
+      "Add a topic"
+    ],
+    "proposal": {
+      "summary": "Adds a note about the stylistic difference between «бездонный» and «абиссальный».",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "notes",
+          "value": [
+            "Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.",
+            "«Бездонный» является более привычным, повседневным словом, в то время как «абиссальный» носит научный характер."
+          ]
+        }
+      ]
+    }
+  },
+  "seconds": 1.16,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I've added a note clarifying that «бездонный» is used in everyday contexts, while «абиссальный» is strictly scientific or descriptive.",
+      "followUps": [
+        "One more example",
+        "Change the emotion",
+        "Add a topic"
+      ],
+      "proposal": {
+        "summary": "Adds a note about the stylistic difference between «бездонный» and «абиссальный».",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "notes",
+            "value": [
+              "Используется главным образом в научных или описательных контекстах, связанных с глубоководными океаническими зонами.",
+              "«Бездонный» является более привычным, повседневным словом, в то время как «абиссальный» носит научный характер."
+            ]
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [],
+      "notes": [
+        {
+          "index": 1,
+          "mark": "added"
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

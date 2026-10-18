@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-re-example-sense2",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Here is an example for the second sense, showing a reckless statement or promise made without thinking about consequences.\",\n  \"followUps\": [\n    \"Give me another example\",\n    \"Change the translation\",\n    \"How do I remember it?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds an example to the second sense.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"senserecklessb2\",\n        \"value\": {\n          \"text\": \"She issued a reckless guarantee that the project would finish on time, despite having no team.\",\n          \"textLang\": \"en\",\n          \"translation\": \"Она дала безрассудную гарантию, что проект будет завершен вовремя, несмотря на отсутствие команды.\",\n          \"translationLang\": \"ru\",\n          \"matchedForm\": \"reckless\",\n          \"matchedTranslationForm\": \"безрассудную\"\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Here is an example for the second sense, showing a reckless statement or promise made without thinking about consequences.",
+    "followUps": [
+      "Give me another example",
+      "Change the translation",
+      "How do I remember it?"
+    ],
+    "proposal": {
+      "summary": "Adds an example to the second sense.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "example",
+          "in": "senserecklessb2",
+          "value": {
+            "text": "She issued a reckless guarantee that the project would finish on time, despite having no team.",
+            "textLang": "en",
+            "translation": "Она дала безрассудную гарантию, что проект будет завершен вовремя, несмотря на отсутствие команды.",
+            "translationLang": "ru",
+            "matchedForm": "reckless",
+            "matchedTranslationForm": "безрассудную"
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.22,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is an example for the second sense, showing a reckless statement or promise made without thinking about consequences.",
+      "followUps": [
+        "Give me another example",
+        "Change the translation",
+        "How do I remember it?"
+      ],
+      "proposal": {
+        "summary": "Adds an example to the second sense.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "example",
+            "in": "senserecklessb2",
+            "value": {
+              "text": "She issued a reckless guarantee that the project would finish on time, despite having no team.",
+              "textLang": "en",
+              "translation": "Она дала безрассудную гарантию, что проект будет завершен вовремя, несмотря на отсутствие команды.",
+              "translationLang": "ru",
+              "matchedForm": "reckless",
+              "matchedTranslationForm": "безрассудную"
+            },
+            "fromAttestation": null
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

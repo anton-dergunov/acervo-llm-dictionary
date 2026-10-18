@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "rep-di-outfit",
+  "split": "dev",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"I can update the glosses and the example translation to use «outfit» instead of «costume».\",\n  \"followUps\": [\n    \"Cancel that change\",\n    \"One more example\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Replaces «costume» with «outfit» in the glosses and example translation.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:kq2m7x1p4vd9r0s\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"en\",\n            \"terms\": [\n              \"outfit\",\n              \"disguise\"\n            ]\n          }\n        ]\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:b8n4k2j7w1q5z0c\",\n        \"field\": \"translation\",\n        \"value\": \"The pirate outfit comes with a hook.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:b8n4k2j7w1q5z0c\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"outfit\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "I can update the glosses and the example translation to use «outfit» instead of «costume».",
+    "followUps": [
+      "Cancel that change",
+      "One more example"
+    ],
+    "proposal": {
+      "summary": "Replaces «costume» with «outfit» in the glosses and example translation.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:kq2m7x1p4vd9r0s",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "en",
+              "terms": [
+                "outfit",
+                "disguise"
+              ]
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "target": "example:b8n4k2j7w1q5z0c",
+          "field": "translation",
+          "value": "The pirate outfit comes with a hook."
+        },
+        {
+          "op": "set",
+          "target": "example:b8n4k2j7w1q5z0c",
+          "field": "matchedTranslationForm",
+          "value": "outfit"
+        }
+      ]
+    }
+  },
+  "seconds": 1.16,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "I can update the glosses and the example translation to use «outfit» instead of «costume».",
+      "followUps": [
+        "Cancel that change",
+        "One more example"
+      ],
+      "proposal": {
+        "summary": "Replaces «costume» with «outfit» in the glosses and example translation.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:kq2m7x1p4vd9r0s",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "en",
+                "terms": [
+                  "outfit",
+                  "disguise"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "set",
+            "target": "example:b8n4k2j7w1q5z0c",
+            "field": "translation",
+            "value": "The pirate outfit comes with a hook."
+          },
+          {
+            "op": "set",
+            "target": "example:b8n4k2j7w1q5z0c",
+            "field": "matchedTranslationForm",
+            "value": "outfit"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 2,
+      "records": [
+        {
+          "key": "kq2m7x1p4vd9r0s",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        },
+        {
+          "key": "b8n4k2j7w1q5z0c",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«costume» is still in shortGloss; «outfit» is not in shortGloss",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«costume» is still in shortGloss; «outfit» is not in shortGloss",
+    "minor": []
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "add-ba-attestation",
+  "split": "held",
+  "category": "add",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"That is a great sentence to add — it shows a raft sinking halfway across the lake, which is a vivid context for «balsa». I have added it as a new example.\",\n  \"followUps\": [\n    \"One more example\",\n    \"What is the plural?\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Adds the sentence from the book as a new attestation and example.\",\n    \"ops\": [\n      {\n        \"op\": \"add\",\n        \"target\": \"attestation\",\n        \"ref\": \"a1\",\n        \"value\": {\n          \"text\": \"La balsa se hundió a mitad del lago.\",\n          \"translation\": \"The raft sank in the middle of the lake.\",\n          \"sourceKind\": \"book\"\n        }\n      },\n      {\n        \"op\": \"add\",\n        \"target\": \"example\",\n        \"in\": \"sensebalsaraft0\",\n        \"fromAttestation\": \"a1\",\n        \"value\": {\n          \"text\": \"La balsa se hundió a mitad del lago.\",\n          \"translation\": \"The raft sank in the middle of the lake.\",\n          \"matchedForm\": \"balsa\",\n          \"matchedTranslationForm\": \"raft\"\n        }\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "That is a great sentence to add — it shows a raft sinking halfway across the lake, which is a vivid context for «balsa». I have added it as a new example.",
+    "followUps": [
+      "One more example",
+      "What is the plural?"
+    ],
+    "proposal": {
+      "summary": "Adds the sentence from the book as a new attestation and example.",
+      "ops": [
+        {
+          "op": "add",
+          "target": "attestation",
+          "ref": "a1",
+          "value": {
+            "text": "La balsa se hundió a mitad del lago.",
+            "translation": "The raft sank in the middle of the lake.",
+            "sourceKind": "book"
+          }
+        },
+        {
+          "op": "add",
+          "target": "example",
+          "in": "sensebalsaraft0",
+          "fromAttestation": "a1",
+          "value": {
+            "text": "La balsa se hundió a mitad del lago.",
+            "translation": "The raft sank in the middle of the lake.",
+            "matchedForm": "balsa",
+            "matchedTranslationForm": "raft"
+          }
+        }
+      ]
+    }
+  },
+  "seconds": 1.63,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "That is a great sentence to add — it shows a raft sinking halfway across the lake, which is a vivid context for «balsa». I have added it as a new example.",
+      "followUps": [
+        "One more example",
+        "What is the plural?"
+      ],
+      "proposal": {
+        "summary": "Adds the sentence from the book as a new attestation and example.",
+        "ops": [
+          {
+            "op": "add",
+            "target": "attestation",
+            "ref": "a1",
+            "value": {
+              "text": "La balsa se hundió a mitad del lago.",
+              "translation": "The raft sank in the middle of the lake.",
+              "sourceKind": "book"
+            }
+          },
+          {
+            "op": "add",
+            "target": "example",
+            "in": "sensebalsaraft0",
+            "value": {
+              "text": "La balsa se hundió a mitad del lago.",
+              "translation": "The raft sank in the middle of the lake.",
+              "matchedForm": "balsa",
+              "matchedTranslationForm": "raft"
+            },
+            "fromAttestation": "a1"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 2,
+      "records": [
+        {
+          "key": "mint00000000002",
+          "mark": "added",
+          "fields": []
+        },
+        {
+          "key": "mint00000000001",
+          "mark": "added",
+          "fields": []
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "before",
+  "case": "multi-ab-after-refusal",
+  "split": "held",
+  "category": "multi",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"reply\": \"Хотите изменить только главный перевод (*primaryGloss*) и короткий глоссарий (*shortGloss*), оставив первый научный смысл как есть?\",\n  \"followUps\": [\n    \"Yes, update the main glosses\",\n    \"How does the usage differ?\",\n    \"Give me one more example\"\n  ],\n  \"proposal\": {\n    \"summary\": \"Updates the primary gloss and short gloss to use «бездонный».\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"primaryGloss\",\n        \"value\": \"бездонный\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"бездонный; глубоководный\"\n      }\n    ]\n  }\n}",
+  "parsed": {
+    "reply": "Хотите изменить только главный перевод (*primaryGloss*) и короткий глоссарий (*shortGloss*), оставив первый научный смысл как есть?",
+    "followUps": [
+      "Yes, update the main glosses",
+      "How does the usage differ?",
+      "Give me one more example"
+    ],
+    "proposal": {
+      "summary": "Updates the primary gloss and short gloss to use «бездонный».",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "primaryGloss",
+          "value": "бездонный"
+        },
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "бездонный; глубоководный"
+        }
+      ]
+    }
+  },
+  "seconds": 1.21,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Хотите изменить только главный перевод (*primaryGloss*) и короткий глоссарий (*shortGloss*), оставив первый научный смысл как есть?",
+      "followUps": [
+        "Yes, update the main glosses",
+        "How does the usage differ?",
+        "Give me one more example"
+      ],
+      "proposal": {
+        "summary": "Updates the primary gloss and short gloss to use «бездонный».",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "primaryGloss",
+            "value": "бездонный"
+          },
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "бездонный; глубоководный"
+          }
+        ]
+      },
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "draft:lexeme",
+          "mark": "changed",
+          "fields": [
+            "shortGloss",
+            "primaryGloss"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in sense:lgksiv0a4adcaar.glosses; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  },
+  "final": {
+    "pass": false,
+    "failure": "wrong-edit",
+    "why": "«абиссальн» is still in sense:lgksiv0a4adcaar.glosses, example:pvs056rz7zyuix1.translation, example:pvs056rz7zyuix1.matchedTranslationForm; «бездонн» is not in sense:lgksiv0a4adcaar.glosses; «бездонн» is not in example:pvs056rz7zyuix1.translation",
+    "minor": []
+  }
+}

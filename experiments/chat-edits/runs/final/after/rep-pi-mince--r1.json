@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rep-pi-mince",
+  "split": "held",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «to dice» with «to mince» in the second sense's glosses.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:sensepicarchop0\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"en\",\n            \"terms\": [\n              \"to chop\",\n              \"to mince\"\n            ]\n          }\n        ]\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that replaces «to dice» with «to mince» in the glosses for the second sense.\",\n  \"followUps\": [\n    \"Use «to mince» everywhere\",\n    \"Add an example with «mince»\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «to dice» with «to mince» in the second sense's glosses.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "sense:sensepicarchop0",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "en",
+              "terms": [
+                "to chop",
+                "to mince"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "reply": "Here is a change that replaces «to dice» with «to mince» in the glosses for the second sense.",
+    "followUps": [
+      "Use «to mince» everywhere",
+      "Add an example with «mince»"
+    ]
+  },
+  "seconds": 0.98,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that replaces «to dice» with «to mince» in the glosses for the second sense.",
+      "followUps": [
+        "Use «to mince» everywhere",
+        "Add an example with «mince»"
+      ],
+      "proposal": {
+        "summary": "Replaces «to dice» with «to mince» in the second sense's glosses.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "sense:sensepicarchop0",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "en",
+                "terms": [
+                  "to chop",
+                  "to mince"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "sensepicarchop0",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

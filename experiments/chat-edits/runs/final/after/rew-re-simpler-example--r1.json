@@ -1,0 +1,121 @@
+{
+  "schema": 1,
+  "runId": "final",
+  "arm": "after",
+  "case": "rew-re-simpler-example",
+  "split": "dev",
+  "category": "reword",
+  "expect": "edit",
+  "repeat": 1,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Simplifies and shortens the second example's text and translation.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"text\",\n        \"value\": \"It was reckless to swim so far out alone.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"translation\",\n        \"value\": \"Было безрассудно заплывать так далеко одной.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedForm\",\n        \"value\": \"reckless\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:examplereckles2\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"безрассудно\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that makes the second example simpler and shorter.\",\n  \"followUps\": [\n    \"Make the third example's translation correct\",\n    \"Add an example with reckless abandon\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Simplifies and shortens the second example's text and translation.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "text",
+          "value": "It was reckless to swim so far out alone."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "translation",
+          "value": "Было безрассудно заплывать так далеко одной."
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedForm",
+          "value": "reckless"
+        },
+        {
+          "op": "set",
+          "target": "example:examplereckles2",
+          "field": "matchedTranslationForm",
+          "value": "безрассудно"
+        }
+      ]
+    },
+    "reply": "Here is a change that makes the second example simpler and shorter.",
+    "followUps": [
+      "Make the third example's translation correct",
+      "Add an example with reckless abandon"
+    ]
+  },
+  "seconds": 1.29,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that makes the second example simpler and shorter.",
+      "followUps": [
+        "Make the third example's translation cor",
+        "Add an example with reckless abandon"
+      ],
+      "proposal": {
+        "summary": "Simplifies and shortens the second example's text and translation.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "text",
+            "value": "It was reckless to swim so far out alone."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "translation",
+            "value": "Было безрассудно заплывать так далеко одной."
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedForm",
+            "value": "reckless"
+          },
+          {
+            "op": "set",
+            "target": "example:examplereckles2",
+            "field": "matchedTranslationForm",
+            "value": "безрассудно"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 1,
+      "records": [
+        {
+          "key": "examplereckles2",
+          "mark": "changed",
+          "fields": [
+            "text",
+            "translation"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "repairs": [],
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}

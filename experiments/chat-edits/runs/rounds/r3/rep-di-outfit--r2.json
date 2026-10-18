@@ -1,0 +1,150 @@
+{
+  "schema": 1,
+  "runId": "rounds",
+  "arm": "r3",
+  "case": "rep-di-outfit",
+  "split": "dev",
+  "category": "replace",
+  "expect": "edit",
+  "repeat": 2,
+  "status": "ok",
+  "raw": "{\n  \"intent\": \"edit\",\n  \"proposal\": {\n    \"summary\": \"Replaces «costume» with «outfit» in the short glosses, sense glosses, examples, and matched translation forms.\",\n    \"ops\": [\n      {\n        \"op\": \"set\",\n        \"target\": \"lexeme\",\n        \"field\": \"shortGloss\",\n        \"value\": \"outfit; disguise\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"sense:kq2m7x1p4vd9r0s\",\n        \"field\": \"glosses\",\n        \"value\": [\n          {\n            \"lang\": \"en\",\n            \"terms\": [\n              \"outfit\",\n              \"disguise\"\n            ]\n          }\n        ]\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:b8n4k2j7w1q5z0c\",\n        \"field\": \"translation\",\n        \"value\": \"The pirate outfit comes with a hook.\"\n      },\n      {\n        \"op\": \"set\",\n        \"target\": \"example:b8n4k2j7w1q5z0c\",\n        \"field\": \"matchedTranslationForm\",\n        \"value\": \"outfit\"\n      }\n    ]\n  },\n  \"reply\": \"Here is a change that uses «outfit» instead of «costume» everywhere in your entry.\",\n  \"followUps\": [\n    \"One more example with outfit\",\n    \"Keep costume as an alternative\"\n  ]\n}",
+  "parsed": {
+    "intent": "edit",
+    "proposal": {
+      "summary": "Replaces «costume» with «outfit» in the short glosses, sense glosses, examples, and matched translation forms.",
+      "ops": [
+        {
+          "op": "set",
+          "target": "lexeme",
+          "field": "shortGloss",
+          "value": "outfit; disguise"
+        },
+        {
+          "op": "set",
+          "target": "sense:kq2m7x1p4vd9r0s",
+          "field": "glosses",
+          "value": [
+            {
+              "lang": "en",
+              "terms": [
+                "outfit",
+                "disguise"
+              ]
+            }
+          ]
+        },
+        {
+          "op": "set",
+          "target": "example:b8n4k2j7w1q5z0c",
+          "field": "translation",
+          "value": "The pirate outfit comes with a hook."
+        },
+        {
+          "op": "set",
+          "target": "example:b8n4k2j7w1q5z0c",
+          "field": "matchedTranslationForm",
+          "value": "outfit"
+        }
+      ]
+    },
+    "reply": "Here is a change that uses «outfit» instead of «costume» everywhere in your entry.",
+    "followUps": [
+      "One more example with outfit",
+      "Keep costume as an alternative"
+    ]
+  },
+  "seconds": 1.41,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "shaped": {
+    "usable": true,
+    "shaped": {
+      "reply": "Here is a change that uses «outfit» instead of «costume» everywhere in your entry.",
+      "followUps": [
+        "One more example with outfit",
+        "Keep costume as an alternative"
+      ],
+      "proposal": {
+        "summary": "Replaces «costume» with «outfit» in the short glosses, sense glosses, examples, and matched translation forms.",
+        "ops": [
+          {
+            "op": "set",
+            "target": "lexeme",
+            "field": "shortGloss",
+            "value": "outfit; disguise"
+          },
+          {
+            "op": "set",
+            "target": "sense:kq2m7x1p4vd9r0s",
+            "field": "glosses",
+            "value": [
+              {
+                "lang": "en",
+                "terms": [
+                  "outfit",
+                  "disguise"
+                ]
+              }
+            ]
+          },
+          {
+            "op": "set",
+            "target": "example:b8n4k2j7w1q5z0c",
+            "field": "translation",
+            "value": "The pirate outfit comes with a hook."
+          },
+          {
+            "op": "set",
+            "target": "example:b8n4k2j7w1q5z0c",
+            "field": "matchedTranslationForm",
+            "value": "outfit"
+          }
+        ]
+      },
+      "proposalProblem": null,
+      "rejected": null,
+      "capture": null,
+      "modelId": "gemini/gemini-3.5-flash-lite"
+    },
+    "dropped": null
+  },
+  "applied": {
+    "status": "applied",
+    "changes": {
+      "count": 3,
+      "records": [
+        {
+          "key": "zx4p8m2v6n1t7wq",
+          "mark": "changed",
+          "fields": [
+            "shortGloss"
+          ]
+        },
+        {
+          "key": "kq2m7x1p4vd9r0s",
+          "mark": "changed",
+          "fields": [
+            "glosses"
+          ]
+        },
+        {
+          "key": "b8n4k2j7w1q5z0c",
+          "mark": "changed",
+          "fields": [
+            "translation",
+            "matchedTranslationForm"
+          ]
+        }
+      ],
+      "notes": []
+    }
+  },
+  "verdict": {
+    "pass": true,
+    "minor": []
+  },
+  "final": {
+    "pass": true,
+    "minor": []
+  }
+}
