@@ -132,47 +132,18 @@ words change, and "Record again" replaces one at a time.
 
 ## Hearing a voice before choosing it
 
-`POST /pronunciations/preview` reads the owner's newest example in a language — with its emotion, for
-the expressive order — or failing that the newest headword, in exactly the voice pressed and the
-vocabulary's accent. The pair is pinned, so nothing falls through to a backup and what is heard is
-what was pressed. Nothing is stored; the call log has a `pronounce-preview` line, and a refusal keeps
-the provider's sentence there like any other. The page holds each sample for the session, so comparing
-voices costs one call per voice.
+`POST /pronunciations/preview` reads a sample in exactly the voice pressed and the vocabulary's
+accent. The pair is pinned, so nothing falls through to a backup and what is heard is what was
+pressed. Nothing is stored; the call log has a `pronounce-preview` line, and a refusal keeps the
+provider's sentence there like any other.
 
-**The expressive order is read only by voices that take a direction** (`pronunciations.readers`, the
-one place this is decided, for examples, loops and stories alike). A voice that cannot take one used
-to sit anywhere in the order and, when it answered, record the clip as though no emotion had been
-asked for — nothing failed and nothing was logged, and on one deployment every expressive clip lost
-its direction that way. Now:
-
-- Settings ▸ Providers offers only `instruction` voices for the expressive order, and says why; the
-  catalogue refuses an expressive default that names any other.
-- A saved order is a preference and is kept as saved. The walk skips a voice that cannot take a
-  direction; the pane does not draw it, so the next change the owner makes saves the order without it.
-- **When no directed voice can answer** — none left in the order, or every one refusing for a quota,
-  a busy provider or an unusable answer — the plain order reads, without the direction, and the call
-  log carries `result=undirected` with the reason. A rejected credential is raised, not routed around.
-- Gemini speech is reached only through Cloud TTS. Through LiteLLM the Gemini API and Vertex have no
-  field for an instruction, so neither the free tier nor Vertex offers speech.
-
-**A saved order outlives the rows it names** (`services.models.speech_chain`). A pair the catalogue no
-longer offers for speech — a row that stopped offering it, a model that was withdrawn — is stepped
-over rather than refused, for either order, because the voices behind it can still read. The order is
-kept as saved, and each read that steps over one writes `result=skipped reason=retired` with the
-pair to the call log. Settings ▸ Providers describes the same walk, so it does not report an order
-that is reading as unable to; it does not draw the pair, and leaves it out of the next change the
-owner saves, since an order naming it is refused on the way in. An order left with nothing reads as
-though none had been chosen; one saved empty is still every voice switched off. This is a rule about
-speech orders only: for every other chain a withdrawn model is refused
-([`../architecture/models.md`](../architecture/models.md)).
-
-**A refusal keeps the provider's own sentence**, in the activity log and on the `pronounce-*` outcome
-line as `detail=`, and never in what the owner is shown: "configuration" is a dozen different
-mistakes, and the log is where they are told apart.
-
-A pair that does not speak the language is left out of the walk; a chain
-where none does answers `no_voice_for_language`, naming what to fix. `pronunciation/targets.py` decides
-the *use* and never the order, because that package may not read settings.
+**The page chooses the sample, from the replica** (`voiceSample` in `selectors.ts`): the newest
+example written in the language, with its emotion for the expressive order, or failing that the
+newest word. A loop's guide says the translations, so its voice reads the newest example translated
+*into* its language — which exists even when no vocabulary is kept in that language — and falls back
+the same way. With nothing in the language at all the page says to add a word and asks nothing. The
+page keeps a played sample for the session **under the words it says** as well as the voice, so a new
+example is heard the next time rather than an old one replayed, with nothing to invalidate.
 
 ## The take route, for loops
 

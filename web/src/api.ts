@@ -1404,9 +1404,10 @@ export const backendSession = {
     return { audio: await response.blob(), voice: response.headers.get("X-Acervo-Voice") || null };
   },
 
-  /** Hear one voice read the owner's newest example in a language. Nothing is stored. */
+  /** Hear one voice read a sample of the owner's own, with its emotion. Nothing is stored. */
   async previewVoice(choice: {
     order: PronunciationOrder; language: string; provider: string; model: string; voice: string | null;
+    text: string; emotion: string | null;
   }): Promise<Blob> {
     const response = await client.bytes(
       "/pronunciations/preview",

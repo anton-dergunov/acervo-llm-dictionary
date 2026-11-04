@@ -3,7 +3,7 @@ import { validateGraph, type LoopCue, type LoopItem, type StudyState } from "./d
 import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
   formatLabel, heldWord, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
-  strengthOf, topicOptions, visibleRows, weakestOf
+  strengthOf, topicOptions, visibleRows, voiceSample, weakestOf
 } from "./selectors";
 import { drillCues, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
@@ -411,5 +411,34 @@ describe("playing a loop", () => {
   it("names a format by the generator's label, else by its id made readable", () => {
     expect(formatLabel([{ id: "radio-lesson", label: "Radio lesson" }], "radio-lesson")).toBe("Radio lesson");
     expect(formatLabel(undefined, "radio-lesson")).toBe("Radio lesson");
+  });
+});
+
+
+describe("what a voice reads when it is auditioned", () => {
+  /* The newest example is the one that says "Me pica la nariz.", with its emotion. */
+  const graph = () => {
+    const base = testGraph();
+    return { ...base, examples: base.examples.map((example) => ({
+      ...example, editedAt: example.id === "examplepicar010" ? "2026-03-01T00:00:00.000Z" : "2026-01-01T00:00:00.000Z"
+    })) };
+  };
+
+  it("reads the newest example written in the language, with its emotion", () => {
+    expect(voiceSample(graph(), "es", "native"))
+      .toEqual({ text: "Me pica la nariz.", emotion: "exasperated, scratching at the collar" });
+  });
+
+  it("gives a guide the newest example translated into its language, which exists without a vocabulary in it", () => {
+    const withoutEnglishWords = { ...graph(), lexemes: graph().lexemes.filter((lexeme) => lexeme.language !== "en") };
+    expect(voiceSample(withoutEnglishWords, "en", "guide"))
+      .toEqual({ text: "My nose itches.", emotion: "exasperated, scratching at the collar" });
+  });
+
+  it("falls back to the newest word, and to nothing when the language has none", () => {
+    const noExamples = { ...graph(), examples: [] };
+    expect(voiceSample(noExamples, "es", "native")?.emotion).toBeNull();
+    expect(voiceSample(noExamples, "es", "native")?.text).toBeTruthy();
+    expect(voiceSample(noExamples, "fr", "guide")).toBeNull();
   });
 });

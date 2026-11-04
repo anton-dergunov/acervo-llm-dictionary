@@ -425,16 +425,22 @@ def utterance(settings: Settings, owner: str, text: str, language: str) -> tuple
 
 
 def preview(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, str, dict[str, str]]:
-    """One voice reading something of the owner's own, so it can be heard before it is chosen.
+    """One voice reading `text`, so it can be heard before it is chosen.
 
-    Exactly the voice asked for — the pair is pinned, so nothing falls through to a backup and what
-    is heard is what was pressed — in the vocabulary's accent, and for the expressive order with the
-    example's emotion. Nothing is stored, as for a selection; the call log is its only trace.
+    The page chooses the text — something of the owner's own, from the replica, and with it the
+    example's `emotion` — so a sample it keeps is kept under the words it says. Read in exactly the
+    voice asked for — the pair is pinned, so nothing falls through to a backup and what is heard is
+    what was pressed — in the vocabulary's accent, with the emotion for the expressive order. Nothing
+    is stored, as for a selection; the call log is its only trace.
     """
     started = time.monotonic()
     order, language = str(body.get("order") or ""), str(body.get("language") or "")
     provider_id, model = str(body.get("provider") or ""), str(body.get("model") or "")
     voice = str(body.get("voice") or "") or None
+    words = str(body.get("text") or "").strip()
+    emotion = str(body.get("emotion") or "").strip() or None
+    if not words or len(words) > TAKE_LIMIT or (emotion and len(emotion) > 300):
+        raise ApiError(400, "invalid_input", f"A sample is between 1 and {TAKE_LIMIT} characters.")
     if order not in ORDERS:
         raise ApiError(400, "invalid_input", f"order is {' or '.join(ORDERS)}.")
     if not is_language(language):
@@ -456,12 +462,6 @@ def preview(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes
                         pair=f"{provider_id}:{model}", voice=voice, result=error,
                         seconds=time.monotonic() - started, **noted)
 
-    sample = graph.sample_sentence(owner, language)
-    if sample is None:
-        failed("nothing_to_read")
-        raise ApiError(422, "nothing_to_read",
-                       f"Add a word in {speaking.language_name(language)} to hear its voices.")
-    words, emotion = sample
     style = None
     if order == "expressive" and emotion:
         style = speaking.direction(prompt_text(Path(settings.prompts_path), STYLE_PROMPT), emotion, locale)

@@ -461,37 +461,6 @@ def owner_vocabularies(owner: str) -> list[dict[str, Any]]:
         ]
 
 
-def sample_sentence(owner: str, language: str) -> tuple[str, str | None] | None:
-    """Something of the owner's own to hear a voice read: the newest example in `language`, with
-    its emotion, or failing that the newest headword. None when the owner has no word in it.
-
-    The owner's own words rather than a fixed sentence, because they are what the voice will be
-    reading — in the variety they learn — and the same one for every voice compared in a sitting.
-    """
-    examples, senses, lexemes = tables.examples, tables.senses, tables.lexemes
-    with reading() as connection:
-        example = connection.execute(
-            select(examples.c.text, examples.c.emotion)
-            .join(senses, senses.c.id == examples.c.sense)
-            .join(lexemes, lexemes.c.id == senses.c.lexeme)
-            .where(examples.c.owner == owner, examples.c.deleted.is_(False),
-                   senses.c.deleted.is_(False), lexemes.c.deleted.is_(False),
-                   lexemes.c.language == language, examples.c.text_lang == language,
-                   func.length(examples.c.text) <= 240)
-            .order_by(examples.c.edited_at.desc())
-            .limit(1)
-        ).first()
-        if example:
-            return example.text, (example.emotion or "").strip() or None
-        headword = connection.execute(
-            select(lexemes.c.headword)
-            .where(lexemes.c.owner == owner, lexemes.c.deleted.is_(False), lexemes.c.language == language)
-            .order_by(lexemes.c.edited_at.desc())
-            .limit(1)
-        ).scalar()
-    return (headword, None) if headword else None
-
-
 def owner_topics(owner: str) -> list[dict[str, Any]]:
     table = tables.topics
     with reading() as connection:

@@ -10,13 +10,15 @@
  * back; it never restates the rule.
  */
 
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import {
   backendSession, type FirstVoices, type PronunciationOrder, type PronunciationSettings,
   type VoiceChoices, type VoiceMatch, type VoiceOption, type VoiceReader
 } from "../api";
-import { regionName, regionOf } from "../languages";
+import { languageOf, regionName, regionOf } from "../languages";
 import { playPreview, useSpeechState } from "../pronunciation";
+import { repository } from "../repository";
+import { voiceSample } from "../selectors";
 import { Action, Choice, Group, Link, Listen, Row, Select } from "./kit";
 
 /** Whose voice: the vocabulary's own, or a loop's guide saying the lines in your language. */
@@ -113,17 +115,30 @@ function optimistic(settings: PronunciationSettings, changes: VoiceChanges): Pro
   return { ...settings, ...changes, chosen: true } as PronunciationSettings;
 }
 
-/** Hear a voice read your newest example. The same player as every other sound in the app. */
-function usePreview(settings: PronunciationSettings, onNotify: (message: string) => void) {
+/**
+ * Hear a voice read something of your own — the newest example in the language, or for a guide the
+ * newest translated into it (`voiceSample`) — through the same player as every other sound in the
+ * app. A played sample is kept under the words it says, so a new example is heard the next time
+ * rather than an old one replayed.
+ */
+function usePreview(settings: PronunciationSettings, role: Role, language: string, onNotify: (message: string) => void) {
   const speech = useSpeechState();
-  const keyOf = (order: PronunciationOrder, language: string, provider: string, model: string, voice: string | null) =>
-    `preview:${order}:${settings.accents?.[language] ?? language}:${provider}:${model}:${voice ?? ""}`;
-  return (order: PronunciationOrder, language: string, provider: string, model: string, voice: string | null, name: string): ReactNode => {
-    const key = keyOf(order, language, provider, model, voice);
+  const snapshot = repository.snapshot();
+  const sample = useMemo(() => voiceSample(snapshot, language, role), [snapshot, language, role]);
+  const accent = settings.accents?.[language] ?? language;
+  return (order: PronunciationOrder, provider: string, model: string, voice: string | null, name: string): ReactNode => {
+    const key = `preview:${order}:${accent}:${provider}:${model}:${voice ?? ""}:${sample?.text ?? ""}`;
     return <Listen
       name={name} playing={speech.playing === key} busy={speech.busy === key}
-      onPlay={() => void playPreview(key, () => backendSession.previewVoice({ order, language, provider, model, voice }))
-        .catch((error: unknown) => onNotify(error instanceof Error ? error.message : "That voice could not be heard."))}
+      onPlay={() => {
+        if (!sample) {
+          onNotify(`Add a word in ${languageOf(language).name} to hear its voices.`);
+          return;
+        }
+        void playPreview(key, () => backendSession.previewVoice({
+          order, language, provider, model, voice, text: sample.text, emotion: order === "expressive" ? sample.emotion : null
+        })).catch((error: unknown) => onNotify(error instanceof Error ? error.message : "That voice could not be heard."));
+      }}
     />;
   };
 }
@@ -139,7 +154,7 @@ export function VoiceRow({ settings, role, order, language, label = ORDER_NAMES[
   onOpen(): void;
   onNotify(message: string): void;
 }) {
-  const listen = usePreview(settings, onNotify);
+  const listen = usePreview(settings, role, language, onNotify);
   const readers = readersOf(settings, role, order, language);
   const locale = settings.accents?.[language] ?? language;
   const first = readers[0];
@@ -153,7 +168,7 @@ export function VoiceRow({ settings, role, order, language, label = ORDER_NAMES[
     label={label}
     hint={`${first.model}${backups ? ` · ${backups} ${backups === 1 ? "backup" : "backups"}` : ""}`}
     value={`${first.voice ? shortName(first.voice.name) : "Its own voice"} · ${accentOf(first.voice, locale)}`}
-    before={listen(order, language, first.provider, first.model, first.voice?.name ?? null, first.voice?.name ?? first.model)}
+    before={listen(order, first.provider, first.model, first.voice?.name ?? null, first.voice?.name ?? first.model)}
     onOpen={onOpen}
   />;
 }
@@ -175,7 +190,7 @@ export function VoicePage({ settings, role, order, language, apply, onNotify }: 
   apply(changes: VoiceChanges, optimistic: PronunciationSettings): void;
   onNotify(message: string): void;
 }) {
-  const listen = usePreview(settings, onNotify);
+  const listen = usePreview(settings, role, language, onNotify);
   const readers = readersOf(settings, role, order, language);
   const locale = settings.accents?.[language] ?? language;
   const region = regionOf(locale);
@@ -240,7 +255,7 @@ export function VoicePage({ settings, role, order, language, apply, onNotify }: 
         label={voiceLabel(one.option)}
         hint={`${one.providerLabel} · ${one.model}${one.available ? "" : " · not configured"}`}
         checked={first?.provider === one.provider && first.voice?.name === one.option.name}
-        before={listen(order, language, one.provider, one.model, one.option.name, one.option.name)}
+        before={listen(order, one.provider, one.model, one.option.name, one.option.name)}
         onSelect={() => choose(one)}
       />)}
     </Group>)}
@@ -259,7 +274,7 @@ export function VoicePage({ settings, role, order, language, apply, onNotify }: 
             ...voices.map((option) => ({ value: option.name, label: voiceLabel(option) }))
           ]}
           onChange={(name) => chooseBackup(reader, name)}
-        >{listen(order, language, reader.provider, reader.model, reader.voice?.name ?? null, reader.voice?.name ?? reader.model)}</Select>;
+        >{listen(order, reader.provider, reader.model, reader.voice?.name ?? null, reader.voice?.name ?? reader.model)}</Select>;
       })}
     </Group>}
 

@@ -13,6 +13,8 @@ import { MemoryMediaStore } from "../mediaStore";
 import PronunciationPanel, { offeredVoices } from "./PronunciationPanel";
 import { replaceStoreForTests } from "../pronunciation";
 import { SubPages, reader, voice } from "./testVoices";
+import { repository } from "../repository";
+import { testGraph } from "../testGraph";
 import { offeredFirst, shortName } from "./voices";
 
 /* Spanish heard as in Argentina: no clear voice is made for it, so a US one is nearest and Spain's is
@@ -47,6 +49,7 @@ function settings(overrides: Partial<PronunciationSettings> = {}): Pronunciation
 
 async function panel(stored = settings()) {
   replaceStoreForTests(new MemoryMediaStore());
+  vi.spyOn(repository, "snapshot").mockReturnValue(testGraph() as never);
   setPronunciationCacheEnabled(true);
   vi.spyOn(backendSession, "pronunciationSettings").mockResolvedValue(stored);
   const saved = vi.spyOn(backendSession, "savePronunciationSettings")
@@ -106,13 +109,27 @@ describe("Settings ▸ Pronunciation", () => {
     expect(spanish).toHaveTextContent("No clear voice has an accent from Argentina yet; the nearest reads.");
   });
 
+  it("says what to do when there is nothing in the language to read yet", async () => {
+    const told = vi.fn();
+    replaceStoreForTests(new MemoryMediaStore());
+    vi.spyOn(repository, "snapshot").mockReturnValue({ ...testGraph(), lexemes: [], senses: [], examples: [] } as never);
+    vi.spyOn(backendSession, "pronunciationSettings").mockResolvedValue(settings());
+    const heard = vi.spyOn(backendSession, "previewVoice");
+    render(<SubPages><PronunciationPanel onNotify={told} /></SubPages>);
+    fireEvent.click(await screen.findByRole("button", { name: "Hear Kore" }));
+    expect(told).toHaveBeenCalledWith("Add a word in Spanish to hear its voices.");
+    expect(heard).not.toHaveBeenCalled();
+  });
+
   it("plays a voice through the preview route before it is chosen", async () => {
     await panel();
     const heard = vi.spyOn(backendSession, "previewVoice").mockResolvedValue(new Blob(["x"], { type: "audio/ogg" }));
+    // Something of the owner's own: the newest Spanish example in the replica, and its emotion.
     fireEvent.click(screen.getByRole("button", { name: "Hear Kore" }));
-    await waitFor(() => expect(heard).toHaveBeenCalledWith({
-      order: "expressive", language: "es", provider: "google-tts", model: GEMINI.model, voice: "Kore"
-    }));
+    await waitFor(() => expect(heard).toHaveBeenCalledWith(expect.objectContaining({
+      order: "expressive", language: "es", provider: "google-tts", model: GEMINI.model, voice: "Kore",
+      text: expect.any(String)
+    })));
   });
 
   it("lists a language's voices by accent, nearest first, and makes the one chosen read first", async () => {

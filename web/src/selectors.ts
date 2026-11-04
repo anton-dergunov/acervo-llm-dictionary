@@ -1082,3 +1082,40 @@ function fold(value: string): string {
 function isWordish(character: string | undefined): boolean {
   return character !== undefined && /[\p{L}\p{N}]/u.test(character);
 }
+
+/** What a voice is heard reading in Settings: something of the owner's own, and how it should sound. */
+export interface VoiceSample {
+  text: string;
+  emotion: string | null;
+}
+
+/* Long enough for any real example; a paragraph would only cost more to hear. */
+const SAMPLE_LIMIT = 240;
+
+/**
+ * What a voice reads when it is auditioned, in `language`.
+ *
+ * A vocabulary's own voice reads the newest example written in the language, with its emotion, or
+ * failing that the newest word. A loop's **guide** says the translations, so its voice reads the
+ * newest example translated *into* the language — which is there even when no vocabulary is kept in
+ * it — and falls back the same way. Newest rather than fixed so it is in the variety being learned;
+ * the text is part of what a played sample is kept under, so a new example is simply heard next time.
+ * Null when there is nothing in the language at all.
+ */
+export function voiceSample(graph: VocabularyGraph, language: string, role: "native" | "guide"): VoiceSample | null {
+  const lexemes = new Map(graph.lexemes.filter((lexeme) => !lexeme.deleted).map((lexeme) => [lexeme.id, lexeme]));
+  const senses = new Map(graph.senses.filter((sense) => !sense.deleted && lexemes.has(sense.lexemeId)).map((sense) => [sense.id, sense]));
+  const newest = <T extends { editedAt: string }>(records: T[]): T | undefined =>
+    records.reduce<T | undefined>((best, record) => !best || record.editedAt > best.editedAt ? record : best, undefined);
+  const live = graph.examples.filter((example) => !example.deleted && senses.has(example.senseId));
+  const fits = (text: string | null): text is string => Boolean(text?.trim()) && text!.length <= SAMPLE_LIMIT;
+
+  if (role === "guide") {
+    const translated = newest(live.filter((example) => example.translationLang === language && fits(example.translation)));
+    if (translated) return { text: translated.translation!, emotion: translated.emotion };
+  }
+  const example = newest(live.filter((one) => one.textLang === language && lexemes.get(senses.get(one.senseId)!.lexemeId)?.language === language && fits(one.text)));
+  if (example) return { text: example.text, emotion: example.emotion };
+  const word = newest([...lexemes.values()].filter((lexeme) => lexeme.language === language));
+  return word ? { text: word.headword, emotion: null } : null;
+}

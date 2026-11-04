@@ -531,27 +531,25 @@ def test_a_first_voice_that_cannot_take_a_direction_is_refused_for_the_expressiv
     assert answer.status_code == 400 and answer.json()["error"]["code"] == "undirected_voice"
 
 
-def test_a_preview_reads_the_owners_newest_example_in_exactly_that_voice_and_stores_nothing(server):
-    _, _, sentence = accented_word(server, "AR")
+def test_a_preview_reads_the_sample_in_exactly_that_voice_and_accent_and_stores_nothing(server):
+    accented_word(server, "AR")
     answer = server.post("/pronunciations/preview", {
         "order": "expressive", "language": "es", "provider": "google-tts",
-        "model": "gemini-2.5-flash-tts", "voice": "Charon"})
+        "model": "gemini-2.5-flash-tts", "voice": "Charon",
+        "text": "¡Me pica todo, che!", "emotion": "exasperated"})
     assert answer.status_code == 200 and answer.content[:4] == b"OggS"
     assert answer.headers["x-acervo-voice"] == "Charon"
     call = server.speech.calls[-1]
-    assert call["model"] == "gemini-2.5-flash-tts" and call["words"] == sentence["text"]
+    assert call["model"] == "gemini-2.5-flash-tts" and call["words"] == "¡Me pica todo, che!"
     assert "exasperated" in call["style"] and "Argentina" in call["style"]
     assert server.pull().json()["data"]["changes"]["pronunciations"] == []
 
 
-def test_a_preview_with_nothing_to_read_says_so_and_is_logged(server, caplog):
-    caplog.set_level(logging.INFO)
+def test_a_preview_must_have_something_to_read(server):
     answer = server.post("/pronunciations/preview", {
-        "order": "plain", "language": "ru", "provider": "google-tts", "model": "wavenet", "voice": ""})
-    assert answer.status_code == 422
-    assert answer.json()["error"]["message"] == "Add a word in Russian to hear its voices."
-    assert any("pronounce-preview" in record.getMessage() and "nothing_to_read" in record.getMessage()
-               for record in caplog.records)
+        "order": "plain", "language": "es", "provider": "google-tts", "model": "wavenet", "voice": "",
+        "text": "  "})
+    assert answer.status_code == 400
 
 
 def test_a_preview_that_the_provider_refuses_keeps_its_sentence_in_the_log(server, caplog):
@@ -562,7 +560,7 @@ def test_a_preview_that_the_provider_refuses_keeps_its_sentence_in_the_log(serve
     caplog.set_level(logging.INFO)
     answer = server.post("/pronunciations/preview", {
         "order": "plain", "language": "es", "provider": "google-tts", "model": "wavenet",
-        "voice": "es-US-Wavenet-A"})
+        "voice": "es-US-Wavenet-A", "text": "picar"})
     assert answer.status_code >= 400
     assert any("pronounce-preview" in record.getMessage() and "is not enabled for this project" in record.getMessage()
                for record in caplog.records)
