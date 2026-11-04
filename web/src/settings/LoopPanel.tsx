@@ -20,8 +20,8 @@ import { setLoopCacheEnabled, useLoopCache } from "../editorPreferences";
 import { languageOf } from "../languages";
 import { forgetLoops, keptLoopBytes } from "../loops";
 import { SETTINGS, useServerSetting } from "./cache";
-import { Action, Group, Notice, Placeholder, Row, Segmented, Select, Toggle, Value } from "./kit";
-import { offeredVoices } from "./PronunciationPanel";
+import { Action, Group, Notice, Placeholder, Row, Segmented, Toggle, Value, useSubPage } from "./kit";
+import { VoicePage, VoiceRow } from "./voices";
 
 /* The same two orders Settings ▸ Pronunciation offers, said in terms of what each does to a loop.
    Both facts are measured rather than felt: a directed take is its own model call per repetition,
@@ -40,6 +40,7 @@ export default function LoopPanel({ onNotify }: { onNotify(message: string): voi
   const { value: voice, set: setVoice } = useServerSetting(SETTINGS.pronunciations);
   const keeping = useLoopCache();
   const [kept, setKept] = useState<number | null>(null);
+  const { sub, open } = useSubPage();
 
   useEffect(() => { void keptLoopBytes().then(setKept); }, []);
 
@@ -62,21 +63,10 @@ export default function LoopPanel({ onNotify }: { onNotify(message: string): voi
     { ...voice, delivery: { ...voice.delivery, loops: order }, chosen: true }
   );
 
-  /* The guide's voice for one model and language: the same record as the voices, the same shape. */
-  const chooseGuide = (provider: string, model: string, language: string, choice: string) => {
-    if (!voice) return;
-    const guideVoices = offeredVoices(structuredClone(voice.guideVoices), voice);
-    const forModel = { ...(guideVoices[provider]?.[model] ?? {}) };
-    if (choice) forModel[language] = choice; else delete forModel[language];
-    guideVoices[provider] = { ...(guideVoices[provider] ?? {}), [model]: forModel };
-    void save({ guideVoices }, { ...voice, guideVoices, chosen: true });
-  };
-
-  /* The models that read loops, in the order chosen above, that have voices in a language the guide
-     speaks. */
-  const guideModels = voice
-    ? voice.orders[voice.delivery.loops].filter((model) =>
-      voice.guideLanguages.some((language) => (model.voices[language] ?? []).length > 0))
+  /* The guide's voice for a language: who says the lines in it, chosen like any other voice, in
+     the order that reads loops. Unchosen, the voice that reads the words says them too. */
+  const guideLanguages = voice
+    ? voice.guideLanguages.filter((language) => (voice.guideReaders?.[voice.delivery.loops]?.[language] ?? []).length > 0)
     : [];
 
   const keep = async (on: boolean) => {
@@ -84,22 +74,25 @@ export default function LoopPanel({ onNotify }: { onNotify(message: string): voi
     if (!on) { await forgetLoops(); setKept(0); }
   };
 
+  const [, guideLanguage] = sub?.id.startsWith("guide:") ? sub.id.split(":") : [];
+  if (voice && guideLanguage && guideLanguages.includes(guideLanguage)) {
+    return <VoicePage
+      settings={voice} role="guide" order={voice.delivery.loops} language={guideLanguage}
+      apply={(changes, next) => void save(changes, next)} onNotify={onNotify}
+    />;
+  }
+
   return <>
     {voice ? <>
       <Group title="Voice">
         <Segmented label="Repetitions are" value={voice.delivery.loops} options={ORDERS} onChange={chooseOrder} />
       </Group>
-      {guideModels.length > 0 && <Group title="Guide’s voice" foot="Who says the lines in your own language. Unset, one voice says every line.">
-        {guideModels.flatMap((model) => voice.guideLanguages
-          .filter((language) => (model.voices[language] ?? []).length > 0)
-          .map((language) => <Select
-            key={`${model.provider}/${model.model}/${language}`}
-            label={languageOf(language).name}
-            hint={`${model.providerLabel} · ${model.model}${model.available ? "" : " · not configured"}`}
-            value={voice.guideVoices[model.provider]?.[model.model]?.[language] ?? ""}
-            options={[{ value: "", label: "The same voice" }, ...model.voices[language].map((one) => ({ value: one, label: one }))]}
-            onChange={(choice) => chooseGuide(model.provider, model.model, language, choice)}
-          />))}
+      {guideLanguages.length > 0 && <Group title="Guide’s voice" foot="Who says the lines in your own language. Unchosen, the same voice says every line.">
+        {guideLanguages.map((language) => <VoiceRow
+          key={language} settings={voice} role="guide" order={voice.delivery.loops} language={language}
+          label={languageOf(language).name} onNotify={onNotify}
+          onOpen={() => open({ id: `guide:${language}`, title: `${languageOf(language).name} · Guide’s voice` })}
+        />)}
       </Group>}
     </> : <Placeholder rows={2} />}
 

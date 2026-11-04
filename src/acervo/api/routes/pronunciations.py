@@ -8,6 +8,8 @@ corpus — recorded human speech, a different thing from a voice reading a recor
   which is "Record again" after hearing a bad one.
 - `POST /pronunciations/utterance` reads a selection aloud and answers with the audio itself. Nothing
   is stored, because a selection names no record.
+- `POST /pronunciations/preview` reads something of the owner's own in one voice, so a voice can be
+  heard in Settings before it is chosen. Nothing is stored.
 - `POST /pronunciations/take` says one line of a loop and answers with the **master**. It is the one
   route a render-scoped token may call, which is how the loop generator gets a voice while holding no
   provider credential of its own.
@@ -30,6 +32,7 @@ from acervo.repository import graph
 from acervo.services.pronunciations import (
     CLIP_LIMIT,
     apply_settings,
+    preview,
     pronounce,
     restore,
     settings_view,
@@ -61,6 +64,20 @@ async def say(request: Request) -> Response:
     audio, mime, spoken = await run_in_threadpool(
         utterance, request.app.state.settings, owner, str(body.get("text") or ""), str(body.get("language") or "")
     )
+    return Response(
+        content=audio, media_type=mime,
+        headers={"X-Acervo-Provider": spoken["provider"], "X-Acervo-Model": spoken["model"],
+                 "X-Acervo-Voice": spoken["voice"], "Cache-Control": "no-store"},
+    )
+
+
+@router.post("/pronunciations/preview")
+async def hear_voice(request: Request) -> Response:
+    """The audio itself, like a selection. Declared before `/{collection}/{target_id}` for the reason
+    `take` is."""
+    owner = owner_id(request)
+    body = await json_body(request)
+    audio, mime, spoken = await run_in_threadpool(preview, request.app.state.settings, owner, body)
     return Response(
         content=audio, media_type=mime,
         headers={"X-Acervo-Provider": spoken["provider"], "X-Acervo-Model": spoken["model"],

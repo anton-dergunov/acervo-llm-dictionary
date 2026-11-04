@@ -470,7 +470,7 @@ def demo_records(owner_id: str) -> list[tuple[str, dict]]:
         ("vocabularies", {"id": rid("vocabularies", language), "owner": owner_id,
                           "language": language, "definition_lang": definition_lang,
                           "gloss_langs": gloss_langs, "notes_lang": notes_lang,
-                          "display_name": name, "flag": flag,
+                          "display_name": name, "flag": flag, "region": "",
                           "vocab_order": order, **sync_fields()})
         for order, (language, definition_lang, gloss_langs, notes_lang, name, flag)
         in enumerate(STARTER_VOCABULARIES)

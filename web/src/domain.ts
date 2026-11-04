@@ -58,6 +58,12 @@ export interface Vocabulary extends SyncFields, OwnedFields {
   notesLang: string;
   displayName: string | null;
   flag: string | null;
+  /**
+   * The accent learned: a region subtag — `AR`, `GB`, `419` — or null for none. A fact about the
+   * vocabulary rather than about a voice, so whatever speaks or writes it can follow it; today the
+   * voices do (Settings ▸ Pronunciation).
+   */
+  region: string | null;
   order: number;
 }
 
@@ -590,6 +596,8 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     language(record.notesLang, "Vocabulary notes language");
     optionalString(record.displayName, "Vocabulary name");
     optionalString(record.flag, "Vocabulary flag");
+    invariant(record.region === null || /^([A-Z]{2}|\d{3})$/.test(record.region),
+      "A vocabulary's accent is a region code such as AR, GB or 419.");
     invariant(Number.isSafeInteger(record.order) && record.order >= 0, "Vocabulary order is invalid.");
   },
   topics(record: Topic): void {

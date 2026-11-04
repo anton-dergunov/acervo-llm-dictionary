@@ -52,4 +52,14 @@ def test_a_direction_names_the_language_and_carries_the_emotion_verbatim():
     template = "Say this {language} sentence, sounding {emotion}."
     assert direction(template, "tender {and} warm", "es-MX") == "Say this Spanish sentence, sounding tender {and} warm."
     assert language_name("zh-Hans") == "Mandarin Chinese"
-    assert language_name("tlh") == "tlh"
+    # A language the table does not name is named by CLDR, and a tag nobody names is used as it is.
+    assert language_name("pt-BR") == "Portuguese" and language_name("ka") == "Georgian"
+    assert language_name("qaa") == "qaa"
+
+
+def test_a_direction_carries_the_accent_only_when_one_was_chosen():
+    template = "Read this {language} line as {speaker} would. {accent}Go."
+    assert direction(template, "", "es") == "Read this Spanish line as a native speaker would. Go."
+    assert direction(template, "", "es-AR") == (
+        "Read this Spanish line as a native speaker from Argentina would. "
+        "Speak with the accent of a native speaker from Argentina. Go.")

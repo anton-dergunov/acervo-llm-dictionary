@@ -50,6 +50,12 @@ provenance — when, and from which device — and never a merge key.
 | `glossLangs` | the languages translated into, most preferred first, never empty | one word can carry an English gloss *and* a Russian one |
 | `notesLang` | the language usage notes are written in, defaulting to `glossLangs[0]` | a note is unbounded contrastive prose — the part of an article you skim |
 
+A vocabulary also carries its **accent**, `region`: a BCP-47 region subtag (`AR`, `GB`, `419`) or
+null. It is not a fourth language — Argentine Spanish is still `es`, so a lexeme's `language` and every
+lookup keyed on it are unchanged — but the variety learned, which the voices read it in
+([`../features/pronunciation.md`](../features/pronunciation.md)). A lexeme's `dialect` is the
+opposite case: one word that belongs to a variety, whatever the vocabulary's.
+
 `shortGloss`, `primaryGloss` and a sense's `domain` follow `glossLangs[0]` and deliberately have no
 setting of their own: the order of the gloss languages *is* the control. Every prose field in the
 compose prompt states which of the three it is written in, because a field whose language is

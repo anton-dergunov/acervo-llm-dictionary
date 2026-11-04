@@ -327,7 +327,7 @@ def test_the_settings_offer_voices_in_the_language_the_guide_speaks(server):
     view = server.get("/pronunciations/settings").json()["data"]
     assert view["languages"] == ["es"] and view["guideLanguages"] == ["en"]
     gemini = next(entry for entry in view["orders"]["expressive"] if entry["model"] == GEMINI)
-    assert "Charon" in gemini["voices"]["en"]
+    assert "Charon" in [voice["name"] for voice in gemini["voices"]["en"]]
     assert view["guideVoices"] == {}
     refused = server.put("/pronunciations/settings", {
         "guideVoices": {"google-tts": {GEMINI: {"en": "Nobody"}}}})

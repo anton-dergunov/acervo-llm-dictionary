@@ -161,6 +161,9 @@ Questions to answer before building:
   have.
 - **Local models as rows.** Whether the encoder and segmenter become choosable at all, or stay pinned
   because a changed encoder means a recomputed map.
+- **Voices from the provider's own list.** A voice row's `voices` — keyed by locale, with gender and
+  character — are what Settings ▸ Pronunciation ranks by accent, and most providers publish them
+  through a list endpoint. A preset should fill them from it rather than asking the user to type them.
 
 ### 3 · A setup guide for new users
 

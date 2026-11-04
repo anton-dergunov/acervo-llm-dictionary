@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Action, Group, Link, Notice, Reorder, Row, useSubPage } from "./kit";
+import { Action, Group, Link, Notice, Reorder, Row, Select, useSubPage } from "./kit";
 import type { Topic, Vocabulary } from "../domain";
-import { languageOf } from "../languages";
+import { accentOptions, languageOf, regionName } from "../languages";
+import { SETTINGS, useServerSetting } from "./cache";
 import { repository, type ReplicaSnapshot } from "../repository";
 import { topicOptions, vocabularies as configuredVocabularies } from "../selectors";
 
@@ -51,6 +52,14 @@ function VocabularyForm({ vocabulary, onSave, onRemove, onDone }: {
   const [definitionLang, setDefinitionLang] = useState(vocabulary.definitionLang);
   const [glossLangs, setGlossLangs] = useState(vocabulary.glossLangs.join(", "));
   const [notesLang, setNotesLang] = useState(vocabulary.notesLang);
+  const [region, setRegion] = useState(vocabulary.region ?? "");
+  /* Any accent a voice is declared for is offered too, so a provider with Chilean voices makes
+     Chile a choice without this list knowing it. Read from the cache; absent offline. */
+  const voices = useServerSetting(SETTINGS.pronunciations).value;
+  const declared = Object.values(voices?.orders ?? {}).flat()
+    .flatMap((model) => model.voices[vocabulary.language] ?? [])
+    .flatMap((voice) => voice.locale ? [voice.locale] : []);
+  const accents = accentOptions(vocabulary.language, declared);
 
   return <>
     <Group foot="Language tags, most preferred first, such as es, en or zh-Hans.">
@@ -59,6 +68,14 @@ function VocabularyForm({ vocabulary, onSave, onRemove, onDone }: {
       <Field label="Senses defined in" value={definitionLang} onChange={setDefinitionLang} />
       <Field label="Translated into" value={glossLangs} placeholder="en, ru" onChange={setGlossLangs} />
       <Field label="Notes written in" value={notesLang} onChange={setNotesLang} />
+    </Group>
+    <Group>
+      <Select
+        label="Accent" hint="The voices read it as it is spoken there" value={region}
+        options={[{ value: "", label: "None" }, ...accents, ...(region && !accents.some((one) => one.value === region)
+          ? [{ value: region, label: region }] : [])]}
+        onChange={setRegion}
+      />
     </Group>
     <div className="pref-buttons">
       <button type="button" className="tb-btn" onClick={onDone}>Cancel</button>
@@ -69,7 +86,8 @@ function VocabularyForm({ vocabulary, onSave, onRemove, onDone }: {
           flag: flag.trim() || null,
           definitionLang: definitionLang.trim(),
           glossLangs: parseLanguageList(glossLangs) ?? vocabulary.glossLangs,
-          notesLang: notesLang.trim() || vocabulary.notesLang
+          notesLang: notesLang.trim() || vocabulary.notesLang,
+          region: region || null
         });
       }}>Save</button>
     </div>
@@ -127,6 +145,7 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
       notesLang: glossLangs[0],
       displayName: defaults.name,
       flag: defaults.flag,
+      region: null,
       order: entries.length
     }), "That vocabulary could not be added.").then((added) => {
       if (!added) return;
@@ -159,6 +178,7 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
       notesLang: editing.notesLang,
       displayName: editing.displayName,
       flag: editing.flag,
+      region: editing.region,
       order: editing.order,
       ...changes
     }, editing.id), "That vocabulary could not be saved.")}
@@ -174,7 +194,7 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
         return <Link
           key={vocabulary.id}
           label={`${vocabulary.flag ?? fallback.flag}  ${name}`}
-          hint={`${vocabulary.language} · defined in ${vocabulary.definitionLang} · translated into ${vocabulary.glossLangs.join(", ")} · notes in ${vocabulary.notesLang}`}
+          hint={`${vocabulary.language}${vocabulary.region ? ` · ${regionName(vocabulary.region)}` : ""} · defined in ${vocabulary.definitionLang} · translated into ${vocabulary.glossLangs.join(", ")} · notes in ${vocabulary.notesLang}`}
           value={`${words.toLocaleString()} ${words === 1 ? "word" : "words"}`}
           onOpen={() => open({ id: `vocabulary:${vocabulary.id}`, title: name })}
         />;

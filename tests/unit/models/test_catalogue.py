@@ -220,17 +220,69 @@ def test_serving_keeps_catalogue_order():
     assert [row.id for row in SHIPPED.serving("audio")] == ["google-tts", "cloudflare", "openai"]
 
 
-def test_speech_capabilities_are_declared_per_model_and_widen_from_the_most_specific_tag():
+def test_speech_capabilities_are_declared_per_model():
     google = SHIPPED.find("google-tts")
     assert google.style_for("wavenet") == "none"
     assert google.style_for("gemini-3.1-flash-tts-preview") == "instruction"
     assert google.speaks("wavenet", "zh-Hant") and not google.speaks("wavenet", "fr")
     assert google.speaks("gemini-2.5-flash-tts", "fr")
     assert google.locale_for("wavenet", "zh-Hant") == "cmn-TW"
-    assert google.locale_for("wavenet", "es-MX") == "es-ES"
     assert google.voices_for("standard", "ru")[0] == "ru-RU-Standard-A"
     assert SHIPPED.find("cloudflare").speaks("@cf/deepgram/aura-1", "en")
     assert not SHIPPED.find("cloudflare").speaks("@cf/deepgram/aura-1", "es")
+
+
+def test_a_bare_language_keeps_its_main_locale_and_its_first_voice():
+    """No accent chosen is what every vocabulary has today, and it must sound as it did."""
+    google = SHIPPED.find("google-tts")
+    assert google.voices_for("wavenet", "es")[0] == "es-ES-Wavenet-F"
+    assert google.locale_for("wavenet", "es") == "es-ES"
+    assert google.voices_for("wavenet", "en")[0] == "en-US-Wavenet-C"
+    assert google.locale_for("gemini-2.5-flash-tts", "es") == "es-ES"
+    assert google.locale_for("gemini-2.5-flash-tts", "zh-Hans") == "cmn-CN"
+
+
+def test_an_accent_ranks_voices_made_for_it_and_sends_the_nearest_locale_a_model_accepts():
+    google = SHIPPED.find("google-tts")
+    # A voice made for the accent, where one exists.
+    assert google.voices_for("wavenet", "en-GB")[0] == "en-GB-Wavenet-A"
+    assert dict((voice.name, match) for voice, match in google.voice_options("wavenet", "en-GB"))[
+        "en-GB-Wavenet-A"] == "exact"
+    # None for Argentina: a Latin American voice is nearer than Spain's, and Spain's is still offered.
+    options = dict((voice.name, match) for voice, match in google.voice_options("wavenet", "es-AR"))
+    assert options["es-US-Wavenet-A"] == "near" and options["es-ES-Wavenet-F"] == "main"
+    assert google.locale_for("wavenet", "es-AR") == "es-US"
+    # A chosen voice is sent with its own locale, whatever was asked.
+    assert google.locale_for("wavenet", "es-AR", "es-ES-Wavenet-F") == "es-ES"
+    # A voice that speaks any accent is told the nearest locale its model accepts.
+    assert google.locale_for("gemini-2.5-flash-tts", "es-AR") == "es-419"
+    assert google.locale_for("gemini-2.5-flash-tts", "en-IE") == "en-GB"
+    assert {match for _, match in google.voice_options("gemini-2.5-flash-tts", "es-AR")} == {"any"}
+
+
+def test_voices_are_a_declaration_any_row_can_make(tmp_path):
+    """Nothing about accents is Google's: a row of another provider, declared the same way, is
+    ranked the same way."""
+    path = written(tmp_path, a_row(
+        id="regional", kinds=["audio"], adapter={"audio": "google-tts"}, models={"audio": ["neural"]},
+        capabilities={"audio": {"style": "none", "languages": ["es"], "voices": {
+            "es-ES": ["Alvaro"], "es-AR": [{"name": "Elena", "gender": "female"}],
+        }}},
+    ))
+    row = load_catalogue(path).find("regional")
+    assert row.voices_for("neural", "es-AR") == ("Elena", "Alvaro")
+    assert row.voices_for("neural", "es") == ("Alvaro", "Elena")
+    assert row.locale_for("neural", "es-AR") == "es-AR"
+    assert row.voice_options("neural", "es-AR")[0][0].gender == "female"
+
+
+def test_a_voice_declared_with_an_unknown_gender_is_refused(tmp_path):
+    path = written(tmp_path, a_row(
+        id="regional", kinds=["audio"], adapter={"audio": "google-tts"}, models={"audio": ["neural"]},
+        capabilities={"audio": {"voices": {"es-ES": [{"name": "Alvaro", "gender": "tenor"}]}}},
+    ))
+    with pytest.raises(CatalogueError, match="must declare voices"):
+        load_catalogue(path)
 
 
 def test_the_speech_chains_have_recommended_orders_that_name_real_pairs():
@@ -445,3 +497,32 @@ def test_image_references_that_are_not_a_count_are_refused(tmp_path, count):
     path = written(tmp_path, a_row(capabilities={"image": {"references": count}}))
     with pytest.raises(CatalogueError, match="not a count"):
         load_catalogue(path)
+
+
+VOICE_CODE = (
+    "src/acervo/models/catalogue.py",
+    "src/acervo/models/locales.py",
+    "src/acervo/pronunciation/speak.py",
+    "src/acervo/services/pronunciations.py",
+    "src/acervo/repository/pronunciation_settings.py",
+)
+
+
+def test_the_code_that_chooses_a_voice_names_no_provider_model_or_voice():
+    """Accents, voices and locales are what a catalogue row declares, so a provider added later — by
+    hand or from Settings — is chosen the way today's are. A literal naming one of today's would be
+    a branch on it. Comments may still use them as examples; code may not."""
+    import ast
+    from pathlib import Path
+
+    root = CATALOGUE_PATH.parents[1]
+    named = {row.id for row in SHIPPED}
+    for row in SHIPPED.serving("audio"):
+        for model in row.models_for("audio"):
+            named.add(model)
+            for key in (row.audio_for(model).get("voices") or {}):
+                named.update(voice.name for voice, _ in row.voice_options(model, key if key != "*" else "en"))
+    for relative in VOICE_CODE:
+        tree = ast.parse((root / relative).read_text(encoding="utf-8"))
+        literals = {node.value for node in ast.walk(tree) if isinstance(node, ast.Constant) and isinstance(node.value, str)}
+        assert not literals & named, f"{relative} names {sorted(literals & named)}"

@@ -50,7 +50,7 @@ def speech(
         )
     body: dict[str, Any] = {
         "input": {"text": words},
-        "voice": {"languageCode": row.locale_for(model, language), "name": chosen},
+        "voice": {"languageCode": row.locale_for(model, language, chosen), "name": chosen},
         # The row says what to ask for, per model. Google's `MP3` is 32 kbps for a Gemini voice and
         # 64 for a WaveNet one, so the rows ask for `LINEAR16` and `pronunciation/encode.py` does the
         # compressing — see `experiments/pronunciation-encoding/`.

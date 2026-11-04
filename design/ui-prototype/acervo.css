@@ -3252,4 +3252,20 @@ button.pref-action:disabled { color: var(--ink-3); cursor: default; }
 .pref-row a.icon-btn svg { width: 15px; height: 15px; }
 .pref-row .model-id { font-family: var(--mono); font-size: 12.5px; font-weight: 400; color: var(--ink-2); }
 .pref-row.unavailable .pref-label { color: var(--ink-3); }
+
+/* A voice: a row with a play button at its start, and the rest of the row a second button — the way
+   to its page, or the choice of it. Every row of a voice group has one, so their labels align. */
+.pref-row.split { padding-left: 8px; gap: 10px; }
+.pref-row.split > .pref-open {
+  flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 12px; align-self: stretch;
+  margin: -10px -14px -10px 0; padding: 10px 14px 10px 0;
+  background: none; border: 0; color: inherit; font: inherit; text-align: left; cursor: pointer;
+}
+.pref-row.split > .pref-open:hover { background: color-mix(in srgb, var(--surface-2) 40%, var(--surface)); }
+.pref-row .icon-btn.listen { flex: none; width: 34px; height: 34px; border-radius: 50%; color: var(--core); }
+.pref-row .icon-btn.listen svg { width: 14px; height: 14px; }
+.pref-row .icon-btn.listen.busy { animation: listen-busy 1s ease-in-out infinite alternate; }
+@keyframes listen-busy { from { opacity: 1; } to { opacity: .35; } }
+.pref-check { flex: none; display: inline-flex; width: 18px; height: 18px; color: var(--core); }
+.pref-check svg { width: 100%; height: 100%; }
 .pref-group .danger-zone h3 { margin: 0; font-size: 15px; }

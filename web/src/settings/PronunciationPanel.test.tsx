@@ -12,18 +12,35 @@ import { pronunciationCacheEnabled, setPronunciationCacheEnabled } from "../edit
 import { MemoryMediaStore } from "../mediaStore";
 import PronunciationPanel, { offeredVoices } from "./PronunciationPanel";
 import { replaceStoreForTests } from "../pronunciation";
+import { SubPages, reader, voice } from "./testVoices";
+import { offeredFirst, shortName } from "./voices";
+
+/* Spanish heard as in Argentina: no clear voice is made for it, so a US one is nearest and Spain's is
+   the language's main one; a voice that takes an instruction speaks any accent. */
+const US = voice("es-US-Wavenet-A", "es-US", "near", { gender: "female" });
+const SPAIN = voice("es-ES-Wavenet-F", "es-ES", "main", { gender: "female" });
+const KORE = voice("Kore", null, "any", { gender: "female", note: "firm" });
+const PUCK = voice("Puck", null, "any", { gender: "male", note: "upbeat" });
 
 const WAVENET = {
   provider: "google-tts", providerLabel: "Google Cloud Text-to-Speech", model: "wavenet",
-  available: true, style: "none" as const, voices: { es: ["es-ES-Wavenet-F", "es-ES-Wavenet-E"] }
+  available: true, style: "none" as const, voices: { es: [US, SPAIN] }
 };
+const STANDARD = { ...WAVENET, model: "standard", voices: { es: [voice("es-ES-Standard-F", "es-ES", "main")] } };
+const GEMINI = { ...WAVENET, model: "gemini-3.1-flash-tts-preview", style: "instruction" as const, voices: { es: [KORE, PUCK] } };
 
 function settings(overrides: Partial<PronunciationSettings> = {}): PronunciationSettings {
   return {
     pregenerate: { headword: false, definitions: false, examples: false, stories: true },
     delivery: { words: "plain", examples: "expressive", loops: "expressive", stories: "expressive" },
-    voices: {}, guideVoices: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
-    orders: { plain: [WAVENET], expressive: [{ ...WAVENET, model: "gemini-3.1-flash-tts-preview", style: "instruction", voices: { es: ["Kore"] } }] },
+    voices: {}, guideVoices: {}, first: {}, guideFirst: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
+    accents: { es: "es-AR", en: "en" },
+    orders: { plain: [WAVENET, STANDARD], expressive: [GEMINI] },
+    readers: {
+      plain: { es: [reader("google-tts", "wavenet", US), reader("google-tts", "standard", STANDARD.voices.es[0])] },
+      expressive: { es: [reader("google-tts", GEMINI.model, KORE)] }
+    },
+    guideReaders: { plain: {}, expressive: {} },
     ...overrides
   };
 }
@@ -39,7 +56,7 @@ async function panel(stored = settings()) {
       delivery: { ...stored.delivery, ...changes.delivery },
       chosen: true,
     }));
-  render(<PronunciationPanel onNotify={() => undefined} />);
+  render(<SubPages><PronunciationPanel onNotify={() => undefined} /></SubPages>);
   await screen.findByRole("region", { name: "Record in advance" });
   return saved;
 }
@@ -76,19 +93,61 @@ describe("Settings ▸ Pronunciation", () => {
       .toEqual(["Clear voice", "Expressive voice"]);
   });
 
-  it("offers each model's voices for each vocabulary language, the default first", async () => {
+  it("shows each language once, with its accent and the voice that reads it clearly and with feeling", async () => {
     await panel();
-    const select = screen.getAllByRole("combobox", { name: /Spanish/ })[0];
-    expect([...select.querySelectorAll("option")].map((option) => option.textContent))
-      .toEqual(["Default · es-ES-Wavenet-F", "es-ES-Wavenet-F", "es-ES-Wavenet-E"]);
+    const spanish = screen.getByRole("region", { name: "🇪🇸 Spanish · Argentina" });
+    expect(spanish).toHaveTextContent("Clear voice");
+    expect(spanish).toHaveTextContent("Wavenet-A · United States");
+    expect(spanish).toHaveTextContent("1 backup");
+    expect(spanish).toHaveTextContent("Expressive voice");
+    expect(spanish).toHaveTextContent("Kore · Argentina");
+    // Said once, under the language, rather than as a row per model.
+    expect(screen.getAllByRole("region", { name: /Spanish/ })).toHaveLength(1);
+    expect(spanish).toHaveTextContent("No clear voice has an accent from Argentina yet; the nearest reads.");
   });
 
-  it("stores a chosen voice under its model and language", async () => {
-    const saved = await panel();
-    fireEvent.change(screen.getAllByRole("combobox", { name: /Spanish/ })[0], { target: { value: "es-ES-Wavenet-E" } });
-    await waitFor(() => expect(saved).toHaveBeenCalledWith({
-      voices: { "google-tts": { wavenet: { es: "es-ES-Wavenet-E" } } }
+  it("plays a voice through the preview route before it is chosen", async () => {
+    await panel();
+    const heard = vi.spyOn(backendSession, "previewVoice").mockResolvedValue(new Blob(["x"], { type: "audio/ogg" }));
+    fireEvent.click(screen.getByRole("button", { name: "Hear Kore" }));
+    await waitFor(() => expect(heard).toHaveBeenCalledWith({
+      order: "expressive", language: "es", provider: "google-tts", model: GEMINI.model, voice: "Kore"
     }));
+  });
+
+  it("lists a language's voices by accent, nearest first, and makes the one chosen read first", async () => {
+    const saved = await panel();
+    fireEvent.click(screen.getByRole("button", { name: /Clear voice/ }));
+    expect(await screen.findByRole("heading", { name: "Spanish · Clear voice" })).toBeInTheDocument();
+    const titles = screen.getAllByRole("region").map((region) => region.getAttribute("aria-label"));
+    expect(titles.slice(0, 2)).toEqual(["United States", "Spain"]);
+    expect(screen.getByRole("radio", { name: /Wavenet-A · female/ })).toHaveAttribute("aria-checked", "true");
+
+    fireEvent.click(screen.getByRole("radio", { name: /Wavenet-F · female/ }));
+    await waitFor(() => expect(saved).toHaveBeenCalledWith({
+      voices: { "google-tts": { wavenet: { es: "es-ES-Wavenet-F" } } },
+      first: { plain: { es: ["google-tts", "wavenet"] } }
+    }));
+  });
+
+  it("shows who reads when the chosen voice cannot, and lets each say it in a voice of its own", async () => {
+    const saved = await panel();
+    fireEvent.click(screen.getByRole("button", { name: /Clear voice/ }));
+    const backups = await screen.findByRole("region", { name: "If it can’t answer" });
+    expect(backups).toHaveTextContent("Google Cloud Text-to-Speech · standard");
+    fireEvent.change(screen.getByRole("combobox", { name: /standard/ }), { target: { value: "es-ES-Standard-F" } });
+    await waitFor(() => expect(saved).toHaveBeenCalledWith({
+      voices: { "google-tts": { standard: { es: "es-ES-Standard-F" } } }, first: {}
+    }));
+  });
+
+  it("offers the expressive voices that speak any accent, telling them which", async () => {
+    await panel();
+    fireEvent.click(screen.getByRole("button", { name: /Expressive voice/ }));
+    const any = await screen.findByRole("region", { name: "Speaks any accent" });
+    expect(any).toHaveTextContent("Kore · female · firm");
+    expect(any).toHaveTextContent("Puck · male · upbeat");
+    expect(screen.getByText("Told to speak as in Argentina.")).toBeInTheDocument();
   });
 
   it("keeps clips as a device preference, which the server is never told about", async () => {
@@ -106,7 +165,22 @@ describe("Settings ▸ Pronunciation", () => {
   });
 });
 
+describe("a voice's name", () => {
+  it("drops a locale it repeats, whoever names voices that way, and keeps any other", () => {
+    expect(shortName("es-ES-Wavenet-F")).toBe("Wavenet-F");
+    expect(shortName("cmn-CN-Standard-A")).toBe("Standard-A");
+    expect(shortName("Kore")).toBe("Kore");
+  });
+});
+
 describe("the voice document a change sends", () => {
+  it("lets go of a first voice its order no longer holds", () => {
+    expect(offeredFirst({
+      plain: { es: ["google-tts", "wavenet"], ru: ["gone", "model"] },
+      expressive: { es: ["google-tts", "wavenet"] }
+    }, settings())).toEqual({ plain: { es: ["google-tts", "wavenet"] } });
+  });
+
   it("lets go of a voice chosen for a model no order offers any more, and keeps the rest", () => {
     const stored = {
       "google-tts": { wavenet: { es: "es-ES-Wavenet-E" }, "gemini-3.1-flash-tts-preview": { es: "Kore" } },

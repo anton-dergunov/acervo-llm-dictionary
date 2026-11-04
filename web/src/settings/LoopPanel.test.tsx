@@ -12,10 +12,13 @@ import { backendSession, type LoopSchema, type PronunciationSettings } from "../
 import LoopPanel from "./LoopPanel";
 import { replaceStoreForTests } from "../loops";
 import { MemoryMediaStore } from "../mediaStore";
+import { SubPages, reader, voice } from "./testVoices";
 
+const KORE = voice("Kore", null, "any", { gender: "female", note: "firm" });
+const CHARON = voice("Charon", null, "any", { gender: "male", note: "informative" });
 const GEMINI = {
   provider: "google-tts", providerLabel: "Google Cloud Text-to-Speech", model: "gemini-3.1-flash-tts-preview",
-  available: true, style: "instruction" as const, voices: { es: ["Kore", "Charon"], en: ["Kore", "Charon"] }
+  available: true, style: "instruction" as const, voices: { es: [KORE, CHARON], en: [KORE, CHARON] }
 };
 
 const SCHEMA: LoopSchema = {
@@ -28,8 +31,10 @@ function settings(loops: "plain" | "expressive" = "expressive"): PronunciationSe
   return {
     pregenerate: { headword: false, definitions: false, examples: false, stories: true },
     delivery: { words: "plain", examples: "expressive", loops, stories: "expressive" },
-    voices: {}, guideVoices: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
-    orders: { plain: [], expressive: [GEMINI] }
+    voices: {}, guideVoices: {}, first: {}, guideFirst: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
+    accents: { es: "es", en: "en" }, orders: { plain: [], expressive: [GEMINI] },
+    readers: { plain: {}, expressive: { es: [reader("google-tts", GEMINI.model, KORE)] } },
+    guideReaders: { plain: {}, expressive: { en: [reader("google-tts", GEMINI.model, KORE)] } }
   };
 }
 
@@ -44,9 +49,10 @@ async function panel(stored = settings()) {
       delivery: { ...stored.delivery, ...changes.delivery },
       voices: changes.voices ?? stored.voices,
       guideVoices: changes.guideVoices ?? stored.guideVoices,
+      guideFirst: changes.guideFirst ?? stored.guideFirst,
       chosen: true
     }));
-  render(<LoopPanel onNotify={() => undefined} />);
+  render(<SubPages><LoopPanel onNotify={() => undefined} /></SubPages>);
   await screen.findByRole("radiogroup", { name: "Repetitions are" });
   return saved;
 }
@@ -54,21 +60,23 @@ async function panel(stored = settings()) {
 afterEach(() => vi.restoreAllMocks());
 
 describe("Settings ▸ Loops", () => {
-  it("chooses who says the guide lines, per model, in the language the translations are in", async () => {
+  it("chooses who says the guide lines, in the language the translations are in", async () => {
     const saved = await panel();
-    const guide = await screen.findByRole("combobox", { name: "English" });
-    expect(guide).toHaveValue("");
-    expect(screen.getByRole("option", { name: "The same voice" })).toBeInTheDocument();
-    fireEvent.change(guide, { target: { value: "Charon" } });
+    const guide = await screen.findByRole("region", { name: "Guide’s voice" });
+    expect(guide).toHaveTextContent("English");
+    expect(guide).toHaveTextContent("Kore · Any accent");
+    fireEvent.click(screen.getByRole("button", { name: /English/ }));
+    fireEvent.click(await screen.findByRole("radio", { name: /Charon/ }));
     await waitFor(() => expect(saved).toHaveBeenCalledWith({
-      guideVoices: { "google-tts": { "gemini-3.1-flash-tts-preview": { en: "Charon" } } }
+      guideVoices: { "google-tts": { "gemini-3.1-flash-tts-preview": { en: "Charon" } } },
+      guideFirst: { expressive: { en: ["google-tts", "gemini-3.1-flash-tts-preview"] } }
     }));
   });
 
-  it("offers only the models that read loops", async () => {
+  it("offers a guide voice only where the order that reads loops has one", async () => {
     await panel(settings("plain"));
     await screen.findByRole("radio", { name: "Recorded once, varied" });
-    expect(screen.queryByRole("combobox", { name: "English" })).toBeNull();
+    expect(screen.queryByRole("region", { name: "Guide’s voice" })).toBeNull();
   });
 
   it("chooses the voice that speaks a loop, and stores it where the other two uses live", async () => {

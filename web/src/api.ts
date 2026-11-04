@@ -6,7 +6,7 @@ type Envelope<T> = { data?: T; error?: { code?: string; message?: string } };
 type LoginResponse = { token: string; user: { id: string; email: string } };
 
 /** Shared with the server hook. A mismatch stops synchronisation until the app is updated. */
-export const SCHEMA_VERSION = 19;
+export const SCHEMA_VERSION = 20;
 
 interface SyncEnvelope {
   schemaVersion: number;
@@ -135,7 +135,25 @@ export interface PronunciationPregenerate {
   stories: boolean;
 }
 
-/** One model in one of the two orders, and the voices it offers per vocabulary language. */
+/**
+ * How well a voice serves the accent asked for, best first: made for it, able to be told it, made
+ * for a nearby one (`es-US` for Argentina), made for the language's main locale, made for another,
+ * or not saying.
+ */
+export type VoiceMatch = "exact" | "any" | "near" | "main" | "other" | "unstated";
+
+/** One voice as its provider's catalogue row declares it. Only the name is certain. */
+export interface VoiceOption {
+  name: string;
+  /** The accent it was made for, `es-ES`; null for a voice that speaks any it is told. */
+  locale: string | null;
+  gender: "female" | "male" | "neutral" | null;
+  /** A word for its character, "firm", where the row gives one. */
+  note: string | null;
+  match: VoiceMatch;
+}
+
+/** One model in one of the two orders, and the voices it offers per language, best first. */
 export interface PronunciationModel {
   provider: string;
   providerLabel: string;
@@ -143,8 +161,21 @@ export interface PronunciationModel {
   available: boolean;
   /** `instruction` takes an example's emotion; `none` reads everything plainly. */
   style: "instruction" | "none";
-  voices: Record<string, string[]>;
+  voices: Record<string, VoiceOption[]>;
 }
+
+/** One pair in the walk that reads a language, with the voice it would be asked for. */
+export interface VoiceReader {
+  provider: string;
+  providerLabel: string;
+  model: string;
+  voice: VoiceOption | null;
+}
+
+/** {provider: {model: {language: voice}}}. */
+export type VoiceChoices = Record<string, Record<string, Record<string, string>>>;
+/** {order: {language: [provider, model]}}: which pair reads a language first. */
+export type FirstVoices = Partial<Record<PronunciationOrder, Record<string, [string, string]>>>;
 
 /** What a voice is asked to read. A selection reads with the `words` order. */
 export type PronunciationUse = "words" | "examples" | "loops" | "stories";
@@ -161,16 +192,24 @@ export interface PronunciationSettings {
    * for emotion now means — one mechanism where there were two.
    */
   delivery: Record<PronunciationUse, PronunciationOrder>;
-  /** {provider: {model: {language: voice}}}. Absent means the model's first voice. */
-  voices: Record<string, Record<string, Record<string, string>>>;
+  /** What each pair says each language in. Absent means its best voice for the accent. */
+  voices: VoiceChoices;
   /** Who says a loop's guide lines, in the same shape. Absent means the voice above says them. */
-  guideVoices: Record<string, Record<string, Record<string, string>>>;
+  guideVoices: VoiceChoices;
+  /** Which pair reads a language first. Absent means the order's own first. */
+  first: FirstVoices;
+  guideFirst: FirstVoices;
   chosen: boolean;
   languages: string[];
   /** What a loop's guide speaks: each vocabulary's first gloss language. Each model's `voices`
    *  lists these too, so a guide voice can be chosen. */
   guideLanguages: string[];
+  /** The locale each language is heard in — `es-AR` once Spanish is set to Argentina, else `es`. */
+  accents: Record<string, string>;
   orders: { plain: PronunciationModel[]; expressive: PronunciationModel[] };
+  /** Who reads each language, first voice then backups, by the rule the recording follows. */
+  readers: Record<PronunciationOrder, Record<string, VoiceReader[]>>;
+  guideReaders: Record<PronunciationOrder, Record<string, VoiceReader[]>>;
 }
 
 /** What a selection was read by. The audio itself carries no row, because nothing was stored. */
@@ -1329,8 +1368,10 @@ export const backendSession = {
     changes: Partial<{
       pregenerate: Partial<PronunciationPregenerate>;
       delivery: Partial<Record<PronunciationUse, PronunciationOrder>>;
-      voices: PronunciationSettings["voices"];
-      guideVoices: PronunciationSettings["guideVoices"];
+      voices: VoiceChoices;
+      guideVoices: VoiceChoices;
+      first: FirstVoices;
+      guideFirst: FirstVoices;
     }>
   ): Promise<PronunciationSettings> {
     return client.call<PronunciationSettings>("/pronunciations/settings", {
@@ -1359,6 +1400,18 @@ export const backendSession = {
       PRONOUNCE_TIMEOUT
     );
     return { audio: await response.blob(), voice: response.headers.get("X-Acervo-Voice") || null };
+  },
+
+  /** Hear one voice read the owner's newest example in a language. Nothing is stored. */
+  async previewVoice(choice: {
+    order: PronunciationOrder; language: string; provider: string; model: string; voice: string | null;
+  }): Promise<Blob> {
+    const response = await client.bytes(
+      "/pronunciations/preview",
+      { method: "POST", body: JSON.stringify({ ...choice, voice: choice.voice ?? "" }) },
+      PRONOUNCE_TIMEOUT
+    );
+    return response.blob();
   },
 
   /** Put back a clip a bundle carried, naming who recorded it. Refused if the words have changed. */

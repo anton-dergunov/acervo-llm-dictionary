@@ -11,7 +11,11 @@
 # `google-auth` is named rather than left to arrive with LiteLLM: `models/google_tts.py` imports it
 # directly to authenticate Cloud Text-to-Speech, so it is this package's own dependency and must not
 # disappear when another one stops needing it.
+# `babel` is CLDR read from Python: which locales are close (`es-AR` and `es-US` share
+# `es-419`), which locale a bare language means, and what to call a country. `models/locales.py`
+# is its one reader, and choosing a voice for an accent is the reason.
 PyYAML
+babel
 google-auth
 google-genai
 httpx

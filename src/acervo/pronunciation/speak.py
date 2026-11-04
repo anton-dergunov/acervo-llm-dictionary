@@ -18,7 +18,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Callable, Sequence
 
-from acervo.models import chain
+from acervo.models import chain, locales
 from acervo.models import call as provider
 from acervo.models.catalogue import Catalogue
 from acervo.models.errors import ProviderUnavailable
@@ -36,6 +36,7 @@ LANGUAGE_NAMES = {
 CALLERS = {
     "words": "pronounce-word", "examples": "pronounce-sentence",
     "selection": "pronounce-selection", "loops": "pronounce-take", "stories": "pronounce-story",
+    "preview": "pronounce-preview",
 }
 
 
@@ -59,7 +60,21 @@ class Spoken:
 
 
 def language_name(language: str) -> str:
-    return LANGUAGE_NAMES.get(language.split("-")[0].lower(), language)
+    """The language a tag names, in English. The table first, for the names a direction has always
+    used ("Mandarin Chinese"); CLDR's name for anything else."""
+    return LANGUAGE_NAMES.get(language.split("-")[0].lower()) or locales.language_name(language)
+
+
+def speaker(language: str) -> str:
+    """Who a direction asks the voice to sound like: "a native speaker from Argentina" for `es-AR`,
+    "a native speaker" for a bare language, where no accent was chosen."""
+    region = locales.region_name(locales.parse(language).region)
+    return f"a native speaker from {region}" if region else "a native speaker"
+
+
+def accented(language: str) -> bool:
+    """Whether an accent was chosen, which is what makes a direction worth sending on its own."""
+    return bool(locales.parse(language).region)
 
 
 def direction(template: str, note: str, language: str) -> str:
@@ -68,9 +83,12 @@ def direction(template: str, note: str, language: str) -> str:
     Two names for the same blank, because the same thing is written down twice under two names. An
     example's arrives on the record as its `emotion`; a take's arrives from the loop generator as a
     `direction`. Both are a short English phrase saying how a line should be said, and a template
-    uses whichever name reads correctly in its own sentence.
+    uses whichever name reads correctly in its own sentence. `{speaker}` carries the accent.
     """
     filled = template.strip().replace("{language}", language_name(language))
+    filled = filled.replace("{speaker}", speaker(language))
+    region = locales.region_name(locales.parse(language).region)
+    filled = filled.replace("{accent}", f"Speak with the accent of {speaker(language)}. " if region else "")
     return filled.replace("{emotion}", note).replace("{direction}", note)
 
 

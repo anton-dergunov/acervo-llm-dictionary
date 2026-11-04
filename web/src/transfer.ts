@@ -193,6 +193,7 @@ function vocabularyContent(graph: VocabularyGraph, languages: string[]): Vocabul
       notesLang: entry.notesLang,
       displayName: entry.displayName,
       flag: entry.flag,
+      region: entry.region,
       order: entry.order
     }));
 }
@@ -445,7 +446,7 @@ export interface BundlePlan {
  * the sentence it illustrates and does not get an anchor invented for it — matching by position or
  * by text would be a guess, and a wrong anchor puts the picture under the wrong sentence.
  */
-const READABLE = new Set([SCHEMA_VERSION, 14, 9, 8, 7, 6]);
+const READABLE = new Set([SCHEMA_VERSION, 19, 14, 9, 8, 7, 6]);
 
 /**
  * Version 15 gave a story part a recording. A story is not in a bundle and no word file changed, so
@@ -453,8 +454,12 @@ const READABLE = new Set([SCHEMA_VERSION, 14, 9, 8, 7, 6]);
  * form of this exception to prefer. Without this line every bundle exported the day before would
  * have been refused for a change that has nothing to do with it.
  */
+/*
+ * Version 20 gave a vocabulary an accent. A version 19 bundle names none, and a vocabulary without
+ * one is exactly what an absent `region` reads as, so it too is accepted as it stands.
+ */
 function upgradeBundle(files: BundleFile[], from: number): BundleFile[] {
-  if (from === SCHEMA_VERSION || from === 14) return files;
+  if (from === SCHEMA_VERSION || from === 19 || from === 14) return files;
   if (READABLE.has(from)) {
     return files.map((file) => isWordFile(file.path)
       ? {
@@ -556,6 +561,7 @@ export function readBundle(input: BundleFile[]): BundlePlan {
       notesLang: text(raw.notesLang) ?? glossLangs[0],
       displayName: text(raw.displayName),
       flag: text(raw.flag),
+      region: text(raw.region)?.toUpperCase() ?? null,
       order: typeof raw.order === "number" ? raw.order : 0
     };
   });

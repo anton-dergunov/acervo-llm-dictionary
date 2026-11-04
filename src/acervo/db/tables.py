@@ -186,6 +186,12 @@ pronunciation_settings = Table(
     # Who says a loop's guide lines — translations, remarks, announcements — in the same shape, where
     # the owner chose a second voice for them. Absent means the voice above says every line.
     Column("guide_voices", JSON, nullable=False, default=dict),
+    # Which pair reads *first* for a language, per order: {"plain"|"expressive": {language:
+    # [provider, model]}}. The voice it says things in is in `voices`; the rest of the order is its
+    # backups, in the order Settings ▸ Providers gives. Absent means Providers order decides.
+    Column("first_voices", JSON, nullable=False, default=dict),
+    # The same for a loop's guide lines, beside `guide_voices`.
+    Column("guide_first_voices", JSON, nullable=False, default=dict),
     Column("edited_at", String(24), nullable=False),
     Index("idx_pronunciation_settings_owner", "owner", unique=True),
 )
@@ -317,6 +323,10 @@ vocabularies = Table(
     Column("notes_lang", String(35), nullable=False),
     Column("display_name", String(120), nullable=False, default=""),
     Column("flag", String(32), nullable=False, default=""),
+    # The accent the owner learns: a region subtag — `AR`, `GB`, `419` — or "" for none. A fact about
+    # the vocabulary rather than about a voice, so whatever speaks or writes it can follow it; today
+    # that is the voices (`docs/features/pronunciation.md`).
+    Column("region", String(8), nullable=False, default=""),
     Column("vocab_order", Integer, nullable=False, default=0),
     *_sync_fields(),
     Index("idx_vocabularies_owner_revision", "owner", "revision"),

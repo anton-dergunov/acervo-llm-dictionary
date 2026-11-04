@@ -75,17 +75,61 @@ reference**: one per word, offline, correct, and read by one voice held stable p
 deviation is audible. **An example's recording is a reading**, where prosody carries meaning and a
 voice that takes a direction earns its cost.
 
-**Which voice reads each language is the owner's choice**, per model and language, in Settings ▸
-Pronunciation (`pronunciation_settings.voices`), held to what the catalogue declares: each choice is checked against the
-catalogue, and a voice a model does not offer for the language is dropped rather than sent. That is what holds a
-headword to one stable voice per language, and the voice is recorded on every clip.
-
 Both orders draw from the catalogue's one `audio` kind, because any voice can read either. Audio
-capabilities are declared **per model** (`capabilities.audio.models`: style, languages, locales,
-voices), since one Google endpoint serves per-language WaveNet voices that take no direction and
-Gemini voices that speak anything and do. A direction is a short English phrase the compose prompt
-writes, sent only to a model whose row declares `style: instruction`, and recorded on the row only
-when it was actually sent.
+capabilities are declared **per model** (`capabilities.audio.models`: style, languages, voices,
+the locales it accepts), since one Google endpoint serves per-locale WaveNet voices that take no
+direction and Gemini voices that speak anything and do. A direction is a short English phrase the
+compose prompt writes, sent only to a model whose row declares `style: instruction`, and recorded on
+the row only when it was actually sent.
+
+## Accent, and which voice reads first
+
+**The accent is the vocabulary's** (`vocabularies.region`: `AR`, `GB`, `419`), set in Settings ▸
+Vocabularies, because it is a fact about what is learned rather than about a voice — the writer, a
+story and the clip search may follow it too ([`../plans/languages/accents.md`](../plans/languages/accents.md)).
+The voices are its first reader: everything spoken in that vocabulary is asked for in its locale,
+`es-AR`, and a vocabulary with no accent is asked for in the bare language exactly as before.
+
+**Providers handle accent in two ways, and both are declarations in the catalogue row, never code.**
+A voice made for one locale is keyed by it (`voices: {"es-ES": […], "es-US": […]}`) and has that
+locale's accent. A voice that speaks any is keyed `"*"`, and when its model takes an instruction it is
+*told* the accent — "as a native speaker from Argentina", in the same field as the emotion, so it is
+never read aloud — and sent the nearest locale its model `accepts` (`es-419` for Argentina). Which
+locales are near is CLDR's answer, read through Babel in `models/locales.py`: `es-AR`, `es-MX` and
+`es-US` share `es-419`, so for Argentina a US Spanish voice outranks a Castilian one, which is still
+offered. `Row.voice_options` ranks a model's voices for a locale — made for it, told it, near, the
+language's main locale, another — and that ranking is the only place accent is matched. A test holds
+the code that chooses a voice to naming no provider, model or voice, so a provider added later is
+ranked the same way by filling in the same fields. A voice made for a locale is told nothing extra:
+its accent is the one it was made for. The accent alone is not an emotion, so a clip records an
+emotion only when the emotion was what was sent.
+
+**Which voice reads each language is the owner's choice, per order** — one clear voice and one
+expressive voice per language, in Settings ▸ Pronunciation. Choosing a voice sets two things:
+the voice that pair says the language in (`pronunciation_settings.voices`, per pair and language),
+and that the pair **reads first** for that language (`first_voices`, `{order: {language: [provider,
+model]}}`). The rest of the order are its backups, in Providers order; a backup that offers the same
+voice name says it too (Kore on one Gemini model, then the next), and otherwise says its best voice
+for the accent unless the owner chose one for it. `pronunciations.readers` applies the choice for
+every use — words, examples, selections, loops, stories — and `settings_view` returns the resulting
+walk per order and language (`readers`) so the page draws it rather than restating the rule. Each
+choice is held to the catalogue, and a voice a model does not offer is dropped rather than sent. The
+voice is recorded on every clip. One limit follows from the storage: a pair in both orders says a
+language in one voice, so choosing a Gemini voice as both the clear and the expressive voice keeps the
+later choice for both.
+
+A loop's guide lines are chosen the same way (`guide_voices`, `guide_first_voices`), in the order that
+reads loops. **Changing the accent or the voice records nothing again**: a clip is stale only when its
+words change, and "Record again" replaces one at a time.
+
+## Hearing a voice before choosing it
+
+`POST /pronunciations/preview` reads the owner's newest example in a language — with its emotion, for
+the expressive order — or failing that the newest headword, in exactly the voice pressed and the
+vocabulary's accent. The pair is pinned, so nothing falls through to a backup and what is heard is
+what was pressed. Nothing is stored; the call log has a `pronounce-preview` line, and a refusal keeps
+the provider's sentence there like any other. The page holds each sample for the session, so comparing
+voices costs one call per voice.
 
 **The expressive order is read only by voices that take a direction** (`pronunciations.readers`, the
 one place this is decided, for examples, loops and stories alike). A voice that cannot take one used

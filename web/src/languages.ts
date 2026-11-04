@@ -70,3 +70,49 @@ export function notesLanguageFor(code: string, vocabularies: Vocabulary[] = []):
 export function definitionLanguageFor(code: string, vocabularies: Vocabulary[] = []): string {
   return vocabularies.find((entry) => !entry.deleted && entry.language === code)?.definitionLang ?? code;
 }
+
+/* ── accents ─────────────────────────────────────────────────────────── */
+
+/**
+ * The regions offered as a vocabulary's accent, most-spoken first: where a language is spoken with
+ * an accent of its own. A short list rather than every country, so the choice stays a choice; a
+ * region a voice is declared for is offered as well, whatever this says. A language absent here
+ * offers only those.
+ */
+const ACCENTS: Record<string, string[]> = {
+  es: ["ES", "MX", "AR", "CO", "CL", "PE", "VE", "CU", "UY", "US", "419"],
+  en: ["GB", "US", "AU", "IE", "CA", "NZ", "IN", "ZA"],
+  pt: ["BR", "PT"],
+  fr: ["FR", "CA", "BE", "CH"],
+  de: ["DE", "AT", "CH"],
+  it: ["IT"],
+  ru: ["RU"],
+  "zh-Hans": ["CN", "SG"],
+  "zh-Hant": ["TW", "HK"]
+};
+
+/** A region subtag of a locale: `AR` of `es-AR`, `CN` of `zh-Hans-CN`. Null for a bare language. */
+export function regionOf(locale: string | null | undefined): string | null {
+  const found = (locale ?? "").split("-").slice(1).find((part) => /^([A-Za-z]{2}|\d{3})$/.test(part));
+  return found ? found.toUpperCase() : null;
+}
+
+/** What a region is called: "Argentina", "Latin America". The code where the platform has no name. */
+export function regionName(region: string): string {
+  try {
+    return new Intl.DisplayNames(["en"], { type: "region" }).of(region) ?? region;
+  } catch {
+    return region;
+  }
+}
+
+/** The accents a vocabulary may choose, as `{value, label}`: the list above and any `declared`. */
+export function accentOptions(language: string, declared: Iterable<string> = []): { value: string; label: string }[] {
+  const base = language.split("-").slice(0, /^[A-Za-z]{4}$/.test(language.split("-")[1] ?? "") ? 2 : 1).join("-");
+  const regions = [...(ACCENTS[base] ?? ACCENTS[base.split("-")[0]] ?? [])];
+  for (const locale of declared) {
+    const region = regionOf(locale);
+    if (region && !regions.includes(region)) regions.push(region);
+  }
+  return regions.map((region) => ({ value: region, label: regionName(region) }));
+}

@@ -77,6 +77,7 @@ def _project_vocabulary(row: Mapping[str, Any]) -> dict[str, Any]:
         "notesLang": row["notes_lang"],
         "displayName": text_or_none(row["display_name"]),
         "flag": text_or_none(row["flag"]),
+        "region": text_or_none(row["region"]),
         "order": to_int(row["vocab_order"]),
     }
 
@@ -89,6 +90,7 @@ def _assign_vocabulary(value: Mapping[str, Any]) -> dict[str, Any]:
         "notes_lang": trimmed(value.get("notesLang")),
         "display_name": trimmed(value.get("displayName")),
         "flag": trimmed(value.get("flag")),
+        "region": trimmed(value.get("region")).upper(),
         "vocab_order": to_int(value.get("order")),
     }
 

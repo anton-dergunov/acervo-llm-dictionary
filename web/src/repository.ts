@@ -21,7 +21,7 @@ import type { ArticleDraft } from "./yaml";
  * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`. 21: a study
  * state's `senseId`.
  */
-export const LOCAL_SCHEMA_VERSION = 21;
+export const LOCAL_SCHEMA_VERSION = 22;
 
 export const EMPTY_GRAPH = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],

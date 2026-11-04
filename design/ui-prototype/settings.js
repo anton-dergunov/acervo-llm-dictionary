@@ -32,7 +32,8 @@ const ICON = {
   up: svg('<path d="M6 15l6-6 6 6"/>'),
   down: svg('<path d="M6 9l6 6 6-6"/>'),
   alert: svg('<path d="M12 4l9 16H3z"/><path d="M12 10v4M12 17.2v.1"/>'),
-  check: svg('<path d="M6 12.5l4 4 8-8.5"/>')
+  check: svg('<path d="M6 12.5l4 4 8-8.5"/>'),
+  play: `<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>`
 };
 
 const GROUPS = [
@@ -57,6 +58,12 @@ const toggle = (label, hint, on, disabled = false) => `<label class="pref-row">$
   <input type="checkbox" role="switch" class="toggle" ${on ? "checked" : ""} ${disabled ? "disabled" : ""}></label>`;
 const row = (label, hint, trailing = "") => `<div class="pref-row">${text(label, hint)}${trailing}</div>`;
 const link = (label, value, to, hint = "") => `<button class="pref-row" data-sub="${to}">${text(label, hint)}${value ? `<span class="pref-value">${esc(value)}</span>` : ""}${ICON.chev.replace("<svg", '<svg class="chev"')}</button>`;
+/* A voice: its ▶ at the start of the row, and the rest of the row the way to its page or the choice of it. */
+const listen = (name) => `<button class="icon-btn listen" aria-label="Hear ${esc(name)}">${ICON.play}</button>`;
+const voiceLink = (label, value, to, hint = "") => `<div class="pref-row split">${listen(value)}<button class="pref-open" data-sub="${to}">${text(label, hint)}<span class="pref-value">${esc(value)}</span>${ICON.chev.replace("<svg", '<svg class="chev"')}</button></div>`;
+const choice = (label, hint, checked = false) => `<div class="pref-row split">${listen(label)}<button class="pref-open" role="radio" aria-checked="${checked}">${text(label, hint)}${checked ? `<span class="pref-check">${ICON.check}</span>` : ""}</button></div>`;
+const voiceSelect = (label, hint, options, chosen) => `<div class="pref-row split">${listen(label)}${text(label, hint)}
+  <select class="pref-select">${options.map((o) => `<option ${o === chosen ? "selected" : ""}>${esc(o)}</option>`).join("")}</select></div>`;
 const action = (label, kind = "") => `<button class="pref-row pref-action ${kind}">${esc(label)}</button>`;
 const select = (label, hint, options, chosen) => `<label class="pref-row">${text(label, hint)}
   <select class="pref-select">${options.map((o) => `<option ${o === chosen ? "selected" : ""}>${esc(o)}</option>`).join("")}</select></label>`;
@@ -117,7 +124,7 @@ const PAGES = {
 
   vocabularies: () => [
     group("", [
-      link("🇪🇸  Spanish", "", "vocabulary", "Defined in Spanish · glossed in English, Russian"),
+      link("🇪🇸  Spanish", "", "vocabulary", "es · Argentina · defined in es · translated into en, ru"),
       link("🇨🇳  Chinese", "", "vocabulary", "Defined in English · glossed in English")
     ]),
     group("", [action("Add a vocabulary…")])
@@ -161,13 +168,21 @@ Never use the word "literally" in a gloss.</textarea>
       toggle("Definitions", "When they are in the language you learn", false),
       toggle("Example sentences", "", true)
     ]),
-    group("Voice", [
+    group("Which voice reads", [
       select("Words and definitions", "", ["Clear voice", "Expressive voice"], "Clear voice"),
       select("Example sentences", "", ["Clear voice", "Expressive voice"], "Expressive voice")
-    ], "The expressive voice reads with emotion; the clear one is cheaper."),
-    group("Voices", [
-      select("Spanish", "Gemini · flash-tts", ["Kore", "Puck", "Aoede", "Charon"], "Kore"),
-      select("Chinese", "Gemini · flash-tts", ["Kore", "Puck", "Aoede", "Charon"], "Aoede")
+    ], "The expressive voice reads with emotion; the clear one is cheaper and faster."),
+    group("🇪🇸 Spanish · Argentina", [
+      voiceLink("Clear voice", "Wavenet-A · United States", "voice", "wavenet · 1 backup"),
+      voiceLink("Expressive voice", "Kore · Argentina", "voice-expressive", "gemini-3.1-flash-tts-preview · 1 backup")
+    ], "No clear voice has an accent from Argentina yet; the nearest reads."),
+    group("🇬🇧 English · United Kingdom", [
+      voiceLink("Clear voice", "Wavenet-A · United Kingdom", "voice", "wavenet · 1 backup"),
+      voiceLink("Expressive voice", "Puck · United Kingdom", "voice-expressive", "gemini-3.1-flash-tts-preview · 1 backup")
+    ]),
+    group("🇷🇺 Russian · Russia", [
+      voiceLink("Clear voice", "Wavenet-B · Russia", "voice", "wavenet · 1 backup"),
+      voiceLink("Expressive voice", "Charon · Russia", "voice-expressive", "gemini-3.1-flash-tts-preview · 1 backup")
     ]),
     group("On this device", [
       toggle("Keep pronunciations", "Play offline · 12 MB kept", true),
@@ -189,7 +204,8 @@ Never use the word "literally" in a gloss.</textarea>
   loops: () => [
     group("Voice", [segmented("Repetitions are", "", ["Read again each time", "Recorded once, varied"], "Read again each time")],
       "Read again sounds the emotion you wrote; recorded once is cheaper."),
-    group("Guide’s voice", [select("English", "Gemini · flash-tts", ["Kore", "Puck", "Aoede"], "Puck")]),
+    group("Guide’s voice", [voiceLink("English", "Puck · United Kingdom", "voice-expressive", "gemini-3.1-flash-tts-preview")],
+      "Who says the lines in your own language. Unchosen, the same voice says every line."),
     group("Generator", [row("LexiBeat 2.3", "", `<span class="pref-value">Sample pack installed</span>`)]),
     group("On this device", [toggle("Keep loops", "Play offline · 220 MB kept", true), action("Forget loops on this device", "danger")])
   ],
@@ -255,6 +271,33 @@ Never use the word "literally" in a gloss.</textarea>
 };
 
 const SUBPAGES = {
+  voice: { parent: "pronunciation", title: "Spanish · Clear voice", render: () => [
+    group("United States", [
+      choice("Wavenet-A · female", "Google Cloud Text-to-Speech · wavenet", true),
+      choice("Wavenet-B · male", "Google Cloud Text-to-Speech · wavenet"),
+      choice("Standard-A · female", "Google Cloud Text-to-Speech · standard")
+    ], "None of these voices has an accent from Argentina; the nearest reads. The accent is set in Vocabularies."),
+    group("Spain", [
+      choice("Wavenet-F · female", "Google Cloud Text-to-Speech · wavenet"),
+      choice("Wavenet-E · male", "Google Cloud Text-to-Speech · wavenet"),
+      choice("Standard-F · female", "Google Cloud Text-to-Speech · standard")
+    ]),
+    group("If it can’t answer", [
+      voiceSelect("Google Cloud Text-to-Speech · standard", "United States", ["Automatic · Standard-A", "Standard-A · female", "Standard-B · male"], "Automatic · Standard-A")
+    ], "Each is asked in turn, in the order Providers gives."),
+    group("", [action("Use the default voice")])
+  ] },
+  "voice-expressive": { parent: "pronunciation", title: "Spanish · Expressive voice", render: () => [
+    group("Speaks any accent", [
+      choice("Kore · female · firm", "Google Cloud Text-to-Speech · gemini-3.1-flash-tts-preview", true),
+      choice("Puck · male · upbeat", "Google Cloud Text-to-Speech · gemini-3.1-flash-tts-preview"),
+      choice("Charon · male · informative", "Google Cloud Text-to-Speech · gemini-3.1-flash-tts-preview"),
+      choice("Aoede · female · breezy", "Google Cloud Text-to-Speech · gemini-3.1-flash-tts-preview")
+    ], "Told to speak as in Argentina."),
+    group("If it can’t answer", [
+      voiceSelect("Google Cloud Text-to-Speech · gemini-2.5-flash-tts", "Argentina", ["Automatic · Kore", "Kore · female · firm", "Puck · male · upbeat"], "Automatic · Kore")
+    ], "Each is asked in turn, in the order Providers gives.")
+  ] },
   channels: { parent: "clips", title: "Channels", render: () => [
     group("", [row("Update now", "Last updated 3 Nov, 03:00", button("Update"))]),
     group("Spanish", [
@@ -280,6 +323,7 @@ const SUBPAGES = {
       `<label class="pref-row">${text("Glossed in")}<input class="pref-input" value="en, ru" style="max-width:55%"></label>`,
       select("Notes written in", "", ["English", "Spanish", "Russian"], "English")
     ]),
+    group("", [select("Accent", "The voices read it as it is spoken there", ["None", "Spain", "Mexico", "Argentina", "Colombia", "Chile", "Latin America"], "Argentina")]),
     `<div style="display:flex;justify-content:flex-end;gap:8px">${button("Cancel")}${button("Save", true)}</div>`,
     group("", [action("Remove this vocabulary", "danger")])
   ] }

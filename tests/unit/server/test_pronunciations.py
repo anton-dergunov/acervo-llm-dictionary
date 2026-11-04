@@ -375,7 +375,8 @@ def test_settings_follow_the_default_until_chosen_and_are_per_owner(server, othe
     }
     assert view["languages"] == ["es"]
     plain = {(entry["provider"], entry["model"]): entry for entry in view["orders"]["plain"]}
-    assert plain[("google-tts", "wavenet")]["voices"]["es"][0] == "es-ES-Wavenet-F"
+    assert plain[("google-tts", "wavenet")]["voices"]["es"][0] == {
+        "name": "es-ES-Wavenet-F", "locale": "es-ES", "gender": "female", "note": None, "match": "main"}
 
     saved = server.put("/pronunciations/settings", {
         "pregenerate": {"headword": True},
@@ -447,3 +448,121 @@ def test_every_request_leaves_one_outcome_line_saying_what_happened(server, capl
     assert "pair=google-tts:gemini-3.1-flash-tts-preview" in outcomes[0] and "style=yes" in outcomes[0]
     assert 'text="¡Me pica todo!"' in outcomes[0]
     assert "source=reused" in outcomes[1]
+
+
+# ── an accent, and which voice reads first ──────────────────────────────────
+
+
+def accented_word(server, region: str):
+    """A Spanish word in a vocabulary whose accent is `region`."""
+    entry = lexeme(status="active")
+    itch = sense(entry["id"], definition="Producir comezón.", definitionLang="es", order=0)
+    sentence = example(itch["id"], text="¡Me pica todo, che!", translation="Everything itches!",
+                       translationLang="en", emotion="exasperated")
+    answer = server.push({"vocabularies": [vocabulary(region=region)], "lexemes": [entry],
+                          "senses": [itch], "examples": [sentence]})
+    assert answer.status_code == 200, answer.json()
+    return entry, itch, sentence
+
+
+def test_a_vocabulary_accent_is_replicated_and_must_be_a_region_code(server):
+    accented_word(server, "AR")
+    pulled = server.pull().json()["data"]["changes"]["vocabularies"]
+    assert pulled[0]["region"] == "AR"
+    refused = server.push({"vocabularies": [vocabulary(region="Arg")]})
+    assert refused.status_code == 400 and "region code" in refused.json()["error"]["message"]
+
+
+def test_an_accent_picks_the_nearest_clear_voice_and_tells_an_expressive_one(server):
+    """Argentina has no clear voice of its own; a Latin American one is nearer than Spain's. A voice
+    that takes an instruction is told the accent, beside the emotion."""
+    entry, _, sentence = accented_word(server, "AR")
+    headword = say(server, "lexemes", entry["id"]).json()["data"]
+    assert headword["voice"] == "es-US-Wavenet-A" and headword["lang"] == "es"
+    call = server.speech.calls[-1]
+    assert call["language"] == "es-AR" and call["style"] is None, "a voice made for a locale is told nothing"
+
+    clip = say(server, "examples", sentence["id"]).json()["data"]
+    call = server.speech.calls[-1]
+    assert call["model"] == "gemini-3.1-flash-tts-preview" and call["language"] == "es-AR"
+    assert "a native speaker from Argentina" in call["style"] and "exasperated" in call["style"]
+    assert clip["emotion"] == "exasperated"
+
+
+def test_an_accent_alone_is_sent_to_a_voice_that_takes_one_and_is_not_an_emotion(server):
+    entry, _, _ = accented_word(server, "AR")
+    server.put("/pronunciations/settings", {"delivery": {"words": "expressive"}})
+    clip = say(server, "lexemes", entry["id"]).json()["data"]
+    call = server.speech.calls[-1]
+    assert call["style"].startswith("Read this Spanish text aloud clearly and evenly, as a native speaker from Argentina")
+    assert clip["emotion"] is None
+
+
+def test_without_an_accent_nothing_changes(server):
+    entry, *_ = word(server)
+    server.put("/pronunciations/settings", {"delivery": {"words": "expressive"}})
+    say(server, "lexemes", entry["id"])
+    assert server.speech.calls[-1]["language"] == "es" and server.speech.calls[-1]["style"] is None
+
+
+def test_the_voice_chosen_to_read_first_reads_first_and_a_backup_keeps_its_name(server):
+    entry, *_ = word(server)
+    saved = server.put("/pronunciations/settings", {
+        "voices": {"google-tts": {"standard": {"es": "es-ES-Standard-E"}}},
+        "first": {"plain": {"es": ["google-tts", "standard"]}},
+    }).json()["data"]
+    walk = saved["readers"]["plain"]["es"]
+    assert [(one["model"], one["voice"]["name"]) for one in walk] == [
+        ("standard", "es-ES-Standard-E"), ("wavenet", "es-ES-Wavenet-F")]
+    clip = say(server, "lexemes", entry["id"]).json()["data"]
+    assert clip["modelId"] == "standard" and clip["voice"] == "es-ES-Standard-E"
+
+    server.put("/pronunciations/settings", {
+        "voices": {"google-tts": {"gemini-2.5-flash-tts": {"es": "Puck"}}},
+        "first": {"expressive": {"es": ["google-tts", "gemini-2.5-flash-tts"]}},
+    })
+    walk = server.get("/pronunciations/settings").json()["data"]["readers"]["expressive"]["es"]
+    assert [(one["model"], one["voice"]["name"]) for one in walk] == [
+        ("gemini-2.5-flash-tts", "Puck"), ("gemini-3.1-flash-tts-preview", "Puck")]
+
+
+def test_a_first_voice_that_cannot_take_a_direction_is_refused_for_the_expressive_order(server):
+    answer = server.put("/pronunciations/settings", {"first": {"expressive": {"es": ["google-tts", "wavenet"]}}})
+    assert answer.status_code == 400 and answer.json()["error"]["code"] == "undirected_voice"
+
+
+def test_a_preview_reads_the_owners_newest_example_in_exactly_that_voice_and_stores_nothing(server):
+    _, _, sentence = accented_word(server, "AR")
+    answer = server.post("/pronunciations/preview", {
+        "order": "expressive", "language": "es", "provider": "google-tts",
+        "model": "gemini-2.5-flash-tts", "voice": "Charon"})
+    assert answer.status_code == 200 and answer.content[:4] == b"OggS"
+    assert answer.headers["x-acervo-voice"] == "Charon"
+    call = server.speech.calls[-1]
+    assert call["model"] == "gemini-2.5-flash-tts" and call["words"] == sentence["text"]
+    assert "exasperated" in call["style"] and "Argentina" in call["style"]
+    assert server.pull().json()["data"]["changes"]["pronunciations"] == []
+
+
+def test_a_preview_with_nothing_to_read_says_so_and_is_logged(server, caplog):
+    caplog.set_level(logging.INFO)
+    answer = server.post("/pronunciations/preview", {
+        "order": "plain", "language": "ru", "provider": "google-tts", "model": "wavenet", "voice": ""})
+    assert answer.status_code == 422
+    assert answer.json()["error"]["message"] == "Add a word in Russian to hear its voices."
+    assert any("pronounce-preview" in record.getMessage() and "nothing_to_read" in record.getMessage()
+               for record in caplog.records)
+
+
+def test_a_preview_that_the_provider_refuses_keeps_its_sentence_in_the_log(server, caplog):
+    accented_word(server, "AR")
+    server.speech.refusing["wavenet"] = ProviderRefused(
+        "configuration", "es-US-Wavenet-A is not enabled for this project",
+        provider_id="google-tts", model="wavenet")
+    caplog.set_level(logging.INFO)
+    answer = server.post("/pronunciations/preview", {
+        "order": "plain", "language": "es", "provider": "google-tts", "model": "wavenet",
+        "voice": "es-US-Wavenet-A"})
+    assert answer.status_code >= 400
+    assert any("pronounce-preview" in record.getMessage() and "is not enabled for this project" in record.getMessage()
+               for record in caplog.records)

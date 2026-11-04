@@ -10,7 +10,7 @@
  */
 
 import { createContext, useContext, type ReactNode } from "react";
-import { AlertIcon, ChevronIcon, DownIcon, ForwardIcon } from "../icons";
+import { AlertIcon, CheckIcon, ChevronIcon, DownIcon, ForwardIcon, PauseIcon, PlayIcon } from "../icons";
 
 export function Group({ title, count, foot, children }: {
   title?: string;
@@ -69,23 +69,58 @@ export function Toggle({ label, hint, checked, disabled, onChange, children }: {
   return <label className="pref-row"><Text label={label} hint={hint} />{input}</label>;
 }
 
-export function Select<T extends string>({ label, hint, value, options, disabled, onChange }: {
+export function Select<T extends string>({ label, hint, value, options, disabled, onChange, children }: {
   label: string;
   hint?: ReactNode;
   value: T;
   options: { value: T; label: string }[];
   disabled?: boolean;
   onChange(value: T): void;
+  /** Something at the row's start that belongs to the same thing, such as a `Listen` button. */
+  children?: ReactNode;
 }) {
-  return <label className="pref-row">
-    <Text label={label} hint={hint} />
-    <select
-      className="pref-select" value={value} disabled={disabled} aria-label={label}
-      onChange={(event) => onChange(event.target.value as T)}
-    >
-      {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
-    </select>
-  </label>;
+  const select = <select
+    className="pref-select" value={value} disabled={disabled} aria-label={label}
+    onChange={(event) => onChange(event.target.value as T)}
+  >
+    {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+  </select>;
+  /* `Toggle`'s reason: a row that holds a button cannot be a label. */
+  if (children) return <div className="pref-row split">{children}<Text label={label} hint={hint} />{select}</div>;
+  return <label className="pref-row"><Text label={label} hint={hint} />{select}</label>;
+}
+
+/** The round play button a voice is chosen by: press to hear it, press again to stop. */
+export function Listen({ name, playing, busy, disabled, onPlay }: {
+  /** What is heard, for a screen reader: "Hear Kore". */
+  name: string;
+  playing: boolean;
+  busy: boolean;
+  disabled?: boolean;
+  onPlay(): void;
+}) {
+  return <button
+    type="button" className={`icon-btn listen${busy ? " busy" : ""}`} disabled={disabled}
+    aria-label={playing ? `Stop ${name}` : `Hear ${name}`} aria-busy={busy || undefined}
+    onClick={(event) => { event.preventDefault(); onPlay(); }}
+  >{playing ? <PauseIcon /> : <PlayIcon />}</button>;
+}
+
+/** One of several, chosen by tapping it: a voice on its page. `before` is its `Listen` button. */
+export function Choice({ label, hint, checked, before, onSelect }: {
+  label: string;
+  hint?: ReactNode;
+  checked: boolean;
+  before?: ReactNode;
+  onSelect(): void;
+}) {
+  return <div className="pref-row split">
+    {before}
+    <button type="button" role="radio" aria-checked={checked} className="pref-open" onClick={onSelect}>
+      <Text label={label} hint={hint} />
+      {checked && <span className="pref-check"><CheckIcon /></span>}
+    </button>
+  </div>;
 }
 
 /** Two or three choices, side by side; the hint is the chosen one's, so it says what it means. */
@@ -107,18 +142,25 @@ export function Segmented<T extends string>({ label, value, options, onChange }:
   </div>;
 }
 
-/** A row that leads somewhere: a sub-page of this page, with what is there as its value. */
-export function Link({ label, hint, value, onOpen }: {
+/** A row that leads somewhere: a sub-page of this page, with what is there as its value. `before`
+    is a button at the row's start that does something else, such as a `Listen`. */
+export function Link({ label, hint, value, before, onOpen }: {
   label: string;
   hint?: ReactNode;
   value?: ReactNode;
+  before?: ReactNode;
   onOpen(): void;
 }) {
-  return <button type="button" className="pref-row" onClick={onOpen}>
+  const inside = <>
     <Text label={label} hint={hint} />
     {value !== undefined && <Value>{value}</Value>}
     <span className="chev"><ForwardIcon /></span>
-  </button>;
+  </>;
+  if (before) return <div className="pref-row split">
+    {before}
+    <button type="button" className="pref-open" onClick={onOpen}>{inside}</button>
+  </div>;
+  return <button type="button" className="pref-row" onClick={onOpen}>{inside}</button>;
 }
 
 /** A whole-row button: an action in the accent, or in the warning colour when it destroys. */

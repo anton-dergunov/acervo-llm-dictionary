@@ -114,7 +114,9 @@ def narrate_part(
     part = next((row for row in parts if row["id"] == part_id), None)
     if part is None:
         raise ApiError(404, "not_found", "That part is not in this story.")
-    language = story["language"]
+    # Heard in the accent of the story's vocabulary: `es-AR` once Spanish is set to Argentina. Every
+    # voice, cache key and direction below follows it, so a story in an accent is a story of its own.
+    language = pronunciations.spoken_locale(owner, story["language"])
 
     preferences = pronunciation_settings.settings(owner)
     order = preferences.order_for("stories")
@@ -154,23 +156,26 @@ def _record(settings: Settings, owner: str, segments, language: str, order: str,
         if gate is not None:
             gate()
         text = segment.text.strip()
-        style = None
+        emotional = None
         if reading == "expressive" and segment.direction:
-            style = speaking.direction(
+            emotional = speaking.direction(
                 stories._template(settings, SPEAK_TEMPLATE), segment.direction, language)
+        # The accent alone where there is no direction to give; it is not recorded as one.
+        style = pronunciations.directed(settings, language, emotional)
         # A direction is recorded on the row only where one was really sent. A passage found in the
         # cache was keyed on what was sent; a fresh one says so on its answer.
         kept = _remembered(cache, text, language, style, pin, voices)
         if kept is not None:
             data, pin = kept
-            recordings.append((data, segment.direction if style else ""))
+            recordings.append((data, segment.direction if emotional else ""))
             continue
         spoken = _say(settings, owner, text, language, order, style, preferences, pin, voices)
         answered = spoken.result.answer
         pin = (answered.provider_id, answered.model, spoken.result.voice)
         master, mime = encode.master(spoken.result.data, spoken.result.mime)
         take_store.store(cache, _take_key(text, language, spoken.direction, pin), master, mime)
-        recordings.append((spoken.result.data, segment.direction if spoken.direction else ""))
+        sent = emotional is not None and spoken.direction == emotional
+        recordings.append((spoken.result.data, segment.direction if sent else ""))
     return recordings, pin
 
 

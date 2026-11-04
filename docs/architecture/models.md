@@ -23,7 +23,10 @@ inside each, model by model, in catalogue order.
 **What a row can do is a declaration, not code.** `capabilities.jsonMode` decides whether
 `{"type": "json_object"}` is sent or JSON is asked for in prose; `params` carries per-row generation
 settings; `timeouts` how long to wait on that row; `passes` which call arguments come from which
-variables; `capabilities.audio.models` the style, languages, locales and voices of each voice model;
+variables; `capabilities.audio.models` the style, languages and voices of each voice model — voices
+keyed by the locale they were made for, or `"*"` for any, each with an optional gender and a word for
+its character — and the locales a model `accepts`, with the row's `wire` spelling of one where the
+provider's differs (`cmn-CN` for `zh-Hans-CN`);
 `capabilities.image` whether a seed is honoured and whether references can be sent. **A provider fact
 discovered the hard way belongs in the row, not in a branch** — that one text-to-speech route takes
 `text` where another took `prompt`, that Vertex refuses `response_format`, that Gemini will not accept

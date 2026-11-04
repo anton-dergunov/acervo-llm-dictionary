@@ -285,6 +285,31 @@ export async function playRuns(runs: SpokenRun[]): Promise<void> {
   }
 }
 
+/* What a voice sounded like, held for the session: comparing voices means pressing play on the same
+   one again, and that should cost nothing. Never kept on the device — it is not a recording of any
+   record, only a sample. */
+const previews = new Map<string, Blob>();
+
+/**
+ * Hear a voice before choosing it, through this player like every other sound here. `key` names the
+ * voice; pressing the one that is playing stops it.
+ */
+export async function playPreview(key: string, fetch: () => Promise<Blob>): Promise<void> {
+  if (state.playing === key) { stop(); return; }
+  prime();
+  let blob = previews.get(key);
+  if (!blob) {
+    update({ busy: key });
+    try {
+      blob = await fetch().catch((error) => { throw failure(error); });
+    } finally {
+      if (state.busy === key) update({ busy: null });
+    }
+    previews.set(key, blob);
+  }
+  await sound(blob, key);
+}
+
 /* ── keeping clips ───────────────────────────────────────────────────── */
 
 async function forget(reference: string): Promise<void> {

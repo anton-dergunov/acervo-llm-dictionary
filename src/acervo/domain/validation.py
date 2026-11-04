@@ -32,6 +32,8 @@ PHOTO_REF = re.compile(r"^photos/(?P<owner>[a-z0-9]{15})/(?P<digest>[0-9a-f]{16}
 PHOTO_REGION_LIMIT = 400
 # A story's guidance is a note in the owner's words, not a second prompt: a few sentences at most.
 GUIDANCE_LIMIT = 1000
+# A BCP-47 region subtag: two letters for a country, three digits for a wider area (`419`).
+REGION = re.compile(r"[A-Z]{2}|[0-9]{3}")
 ORIGIN_VALUES = ("attestation", "llm", "tatoeba", "subtitle", "wiktionary", "manual")
 # What a pronunciation reads, and the table and field each one names.
 PRONUNCIATION_TARGETS = {
@@ -45,7 +47,7 @@ PRONUNCIATION_TARGETS = {
 TEXT_RULES: dict[str, dict[str, tuple[bool, int]]] = {
     "vocabularies": {
         "language": (True, 35), "definition_lang": (True, 35), "notes_lang": (True, 35),
-        "display_name": (False, 120), "flag": (False, 32),
+        "display_name": (False, 120), "flag": (False, 32), "region": (False, 8),
     },
     "topics": {"name": (True, 120), "icon": (False, 120)},
     "lexemes": {
@@ -316,6 +318,9 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         for code in gloss_langs:  # type: ignore[union-attr]
             valid_language(code, "Vocabulary gloss language")
         valid_language(row.get("notes_lang"), "Vocabulary notes language")
+        region = _text(row, "region")
+        if region and not REGION.fullmatch(region):
+            refuse("A vocabulary's accent is a region code such as AR, GB or 419.")
         return
 
     if name == "topics":

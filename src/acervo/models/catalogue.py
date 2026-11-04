@@ -26,6 +26,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from acervo.models import locales
+
 CATALOGUE_PATH = Path(__file__).resolve().parents[3] / "models" / "catalogue.json"
 
 KINDS = ("text", "image", "audio", "ocr")
@@ -152,21 +154,59 @@ class Row:
             return True
         return any(_within(language, declared) for declared in languages)
 
-    def voices_for(self, model: str, language: str) -> tuple[str, ...]:
-        """The voices this model offers for a language, the default first. Empty when it names none."""
-        voices = self.audio_for(model).get("voices") or {}
-        for candidate in (*_widening(language), "*"):
-            if voices.get(candidate):
-                return tuple(voices[candidate])
-        return ()
+    def voice_options(self, model: str, locale: str) -> tuple[tuple["Voice", str], ...]:
+        """Every voice this model declares for the language of `locale`, best first, each with how
+        well it serves that locale (`locales.MATCHES`).
 
-    def locale_for(self, model: str, language: str) -> str:
-        """The locale a provider wants for a language — `cmn-CN` for `zh-Hans` — or the tag itself."""
-        locales = self.audio_for(model).get("locales") or {}
-        for candidate in _widening(language):
-            if locales.get(candidate):
-                return str(locales[candidate])
-        return language
+        `locale` is what the owner wants heard — `es-AR`, or a bare `es` when no accent is chosen.
+        A voice keyed by a locale has that accent; one keyed `"*"` speaks any, and is told which
+        when its model takes an instruction. Declared order is kept within a match, so a row's first
+        voice stays its default.
+        """
+        declared = self.audio_for(model).get("voices") or {}
+        instruction = self.style_for(model) == "instruction"
+        found: list[tuple[Voice, str]] = []
+        for key, entries in declared.items():
+            if key != "*" and not locales.same_language(key, locale):
+                continue
+            regional = key if key != "*" and locales.parse(key).region else None
+            for entry in entries:
+                voice = _voice(entry, regional)
+                found.append((voice, locales.match(regional, locale, instruction=instruction)
+                              if key == "*" or regional else "unstated"))
+        if not any(key == "*" for key in declared) and not found:
+            return ()
+        return tuple(sorted(found, key=lambda pair: locales.rank(pair[1])))
+
+    def voices_for(self, model: str, locale: str) -> tuple[str, ...]:
+        """The names of the voices this model offers for `locale`, the default first. Empty when it
+        names none, and the provider then uses its own."""
+        return tuple(voice.name for voice, _ in self.voice_options(model, locale))
+
+    def locale_for(self, model: str, locale: str, voice: str | None = None) -> str:
+        """The language code to send with `voice` (or the default voice) for `locale`, in the
+        provider's own spelling — `cmn-CN` for `zh-Hans-CN`.
+
+        A voice made for one locale is sent with that locale. A voice that speaks any is sent the
+        closest locale its model `accepts`: `es-419` for Argentina, the language's main locale when
+        no accent is chosen. A model that declares no `accepts` is sent the tag as asked.
+        """
+        audio = self.audio_for(model)
+        options = self.voice_options(model, locale)
+        chosen = next((one for one, _ in options if one.name == voice), None) if voice else None
+        chosen = chosen or (options[0][0] if options else None)
+        if chosen and chosen.locale:
+            wanted = chosen.locale
+        else:
+            accepted = [tag for tag in audio.get("accepts") or () if locales.same_language(tag, locale)]
+            ancestry = {str(tag) for tag in locales.lineage(locale)}
+            ranked = sorted(accepted, key=lambda tag: (
+                locales.rank(locales.match(tag, locale, instruction=False)),
+                str(locales.likely(tag)) not in ancestry,
+            ))
+            wanted = ranked[0] if ranked else locale
+        wire = audio.get("wire") or {}
+        return str(next((code for tag, code in wire.items() if locales.likely(tag) == locales.likely(wanted)), wanted))
 
     @property
     def json_mode(self) -> str:
@@ -208,10 +248,25 @@ class Catalogue:
         return tuple(row for row in self.rows if row.serves(kind))
 
 
-def _widening(language: str) -> tuple[str, ...]:
-    """`zh-Hans-CN`, then `zh-Hans`, then `zh`: the most specific declaration wins."""
-    parts = language.split("-")
-    return tuple("-".join(parts[:count]) for count in range(len(parts), 0, -1))
+GENDERS = ("female", "male", "neutral")
+
+
+@dataclass(frozen=True)
+class Voice:
+    """One voice as a row declares it. Only the name is required; the rest is for the person
+    choosing — "Kore · female · firm" — and the locale is its accent, or None for one that has none
+    of its own."""
+
+    name: str
+    locale: str | None = None
+    gender: str | None = None
+    note: str | None = None
+
+
+def _voice(entry: Any, locale: str | None) -> Voice:
+    if isinstance(entry, str):
+        return Voice(entry, locale)
+    return Voice(str(entry["name"]), locale, entry.get("gender"), entry.get("note"))
 
 
 def _within(language: str, declared: str) -> bool:
@@ -240,10 +295,29 @@ def _validate_audio(row: Row) -> None:
             raise CatalogueError(f"{row.id} must declare audio languages as \"any\" or a list of tags")
         voices = declared.get("voices") or {}
         if not isinstance(voices, dict) or not all(
-            isinstance(names, list) and names and all(isinstance(n, str) and n for n in names)
-            for names in voices.values()
+            isinstance(entries, list) and entries and all(_valid_voice(entry) for entry in entries)
+            for entries in voices.values()
         ):
-            raise CatalogueError(f"{row.id} must declare voices as {{language: [name, ...]}}")
+            raise CatalogueError(
+                f"{row.id} must declare voices as {{locale: [name or {{name, gender, note}}, ...]}}"
+            )
+        accepts = declared.get("accepts", [])
+        if not isinstance(accepts, list) or not all(isinstance(tag, str) and tag for tag in accepts):
+            raise CatalogueError(f"{row.id} must declare the locales a model accepts as a list of tags")
+        wire = declared.get("wire", {})
+        if not isinstance(wire, dict) or not all(isinstance(v, str) and v for v in wire.values()):
+            raise CatalogueError(f"{row.id} must declare wire locales as {{tag: provider code}}")
+
+
+def _valid_voice(entry: Any) -> bool:
+    if isinstance(entry, str):
+        return bool(entry)
+    return (
+        isinstance(entry, dict) and isinstance(entry.get("name"), str) and bool(entry["name"])
+        and entry.get("gender") in (None, *GENDERS)
+        and (entry.get("note") is None or isinstance(entry["note"], str))
+        and set(entry) <= {"name", "gender", "note"}
+    )
 
 
 def _validate(row: Row) -> None:

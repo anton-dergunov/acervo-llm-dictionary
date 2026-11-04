@@ -54,7 +54,7 @@ DELIVERY_DEFAULT = {
 class PronunciationSettings(Mapping):
     """The owner's answer, or the default when they have not given one. A `Mapping`, like `ImageSettings`."""
 
-    __slots__ = ("pregenerate", "delivery", "voices", "guide_voices", "chosen")
+    __slots__ = ("pregenerate", "delivery", "voices", "guide_voices", "first", "guide_first", "chosen")
 
     def __init__(
         self,
@@ -63,6 +63,8 @@ class PronunciationSettings(Mapping):
         delivery: Mapping[str, Any] | None = None,
         voices: Mapping[str, Any] | None = None,
         guide_voices: Mapping[str, Any] | None = None,
+        first: Mapping[str, Any] | None = None,
+        guide_first: Mapping[str, Any] | None = None,
         chosen: bool = False,
     ) -> None:
         given = pregenerate if isinstance(pregenerate, Mapping) else {}
@@ -74,6 +76,10 @@ class PronunciationSettings(Mapping):
         # Who says a loop's guide lines — its translations, remarks and announcements — where the
         # owner chose someone other than the voice above. Same shape; absent means the same voice.
         self.guide_voices = _voices(guide_voices)
+        # Which pair reads first, per order and language: {order: {language: [provider, model]}}.
+        # Absent means the order's own first pair that speaks the language.
+        self.first = _first(first)
+        self.guide_first = _first(guide_first)
         self.chosen = bool(chosen)
 
     def __getitem__(self, key: str) -> Any:
@@ -82,14 +88,16 @@ class PronunciationSettings(Mapping):
             "delivery": dict(self.delivery),
             "voices": self.voices,
             "guideVoices": self.guide_voices,
+            "first": self.first,
+            "guideFirst": self.guide_first,
             "chosen": self.chosen,
         }[key]
 
     def __iter__(self):
-        return iter(("pregenerate", "delivery", "voices", "guideVoices", "chosen"))
+        return iter(("pregenerate", "delivery", "voices", "guideVoices", "first", "guideFirst", "chosen"))
 
     def __len__(self) -> int:
-        return 5
+        return 7
 
     def for_guide(self) -> "PronunciationSettings":
         """These settings as a loop's guide lines read them: the guide voice wherever one is chosen,
@@ -99,8 +107,12 @@ class PronunciationSettings(Mapping):
         for provider, models in self.guide_voices.items():
             for model, languages in models.items():
                 merged.setdefault(provider, {}).setdefault(model, {}).update(languages)
+        first = {order: dict(languages) for order, languages in self.first.items()}
+        for order, languages in self.guide_first.items():
+            first.setdefault(order, {}).update(languages)
         return PronunciationSettings(pregenerate=self.pregenerate, delivery=self.delivery,
                                      voices=merged, guide_voices=self.guide_voices,
+                                     first=first, guide_first=self.guide_first,
                                      chosen=self.chosen)
 
     @property
@@ -113,13 +125,30 @@ class PronunciationSettings(Mapping):
         return self.delivery.get(use, DELIVERY_DEFAULT.get(use, "plain"))
 
     def voice(self, provider: str, model: str, language: str) -> str | None:
-        """The voice chosen for this pair in this language, widening `es-MX` to `es`, or None."""
-        chosen = self.voices.get(provider, {}).get(model, {})
-        parts = language.split("-")
-        for count in range(len(parts), 0, -1):
-            if found := chosen.get("-".join(parts[:count])):
-                return found
-        return None
+        """The voice chosen for this pair in this language, widening `es-AR` to `es`, or None."""
+        return _widened(self.voices.get(provider, {}).get(model, {}), language)
+
+    def first_for(self, order: str, language: str) -> tuple[str, str] | None:
+        """The pair chosen to read `language` first in `order`, widening `es-AR` to `es`, or None."""
+        found = _widened(self.first.get(order, {}), language)
+        return (found[0], found[1]) if found else None
+
+    def reader(self, order: str):
+        """The voice each pair should be asked for in `order`, as `speak` takes it.
+
+        A pair's own choice first. Failing that, the voice the first pair says things in — so a
+        backup that offers the same name keeps the same voice (Kore on one Gemini model, then Kore on
+        the next); `speak.asked_of` drops a name the pair does not offer, and it then uses its own
+        default for the accent.
+        """
+        def voice(provider: str, model: str, language: str) -> str | None:
+            own = self.voice(provider, model, language)
+            if own:
+                return own
+            first = self.first_for(order, language)
+            return self.voice(*first, language) if first else None
+
+        return voice
 
 
 def _delivery(value: Any) -> dict[str, str]:
@@ -152,12 +181,38 @@ def _voices(value: Any) -> dict[str, dict[str, dict[str, str]]]:
     return found
 
 
+def _widened(chosen: Mapping[str, Any], language: str) -> Any:
+    parts = language.split("-")
+    for count in range(len(parts), 0, -1):
+        if found := chosen.get("-".join(parts[:count])):
+            return found
+    return None
+
+
+def _first(value: Any) -> dict[str, dict[str, list[str]]]:
+    """Only the well-formed part: a known order, a language, and a `[provider, model]` pair —
+    a pair rather than one string, because a model id may itself contain a slash."""
+    found: dict[str, dict[str, list[str]]] = {}
+    if not isinstance(value, Mapping):
+        return found
+    for order, languages in value.items():
+        if order not in ORDERS or not isinstance(languages, Mapping):
+            continue
+        kept = {str(language): [str(pair[0]), str(pair[1])] for language, pair in languages.items()
+                if isinstance(pair, (list, tuple)) and len(pair) == 2
+                and all(isinstance(part, str) and part for part in pair)}
+        if kept:
+            found[str(order)] = kept
+    return found
+
+
 def _read(row: Any) -> PronunciationSettings:
     if row is None:
         return PronunciationSettings()
     return PronunciationSettings(
         pregenerate=row["pregenerate"], delivery=row["delivery"], voices=row["voices"],
-        guide_voices=row["guide_voices"], chosen=True
+        guide_voices=row["guide_voices"], first=row["first_voices"],
+        guide_first=row["guide_first_voices"], chosen=True
     )
 
 
@@ -176,6 +231,8 @@ def save(
     delivery: Mapping[str, str] | None = None,
     voices: Mapping[str, Any] | None = None,
     guide_voices: Mapping[str, Any] | None = None,
+    first: Mapping[str, Any] | None = None,
+    guide_first: Mapping[str, Any] | None = None,
 ) -> PronunciationSettings:
     """Change only what is named, inside one `BEGIN IMMEDIATE`. Returns the whole stored document."""
     table = tables.pronunciation_settings
@@ -187,6 +244,8 @@ def save(
             delivery={**current.delivery, **(delivery or {})},
             voices=current.voices if voices is None else voices,
             guide_voices=current.guide_voices if guide_voices is None else guide_voices,
+            first=current.first if first is None else first,
+            guide_first=current.guide_first if guide_first is None else guide_first,
             chosen=True,
         )
         values = {
@@ -194,6 +253,8 @@ def save(
             "delivery": dict(wanted.delivery),
             "voices": wanted.voices,
             "guide_voices": wanted.guide_voices,
+            "first_voices": wanted.first,
+            "guide_first_voices": wanted.guide_first,
             "edited_at": now_instant(),
         }
         if row is None:

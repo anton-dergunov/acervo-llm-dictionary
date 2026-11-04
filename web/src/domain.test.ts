@@ -126,7 +126,7 @@ describe("Acervo domain", () => {
     it("refuses a second vocabulary for a language, and allows it once the first is deleted", () => {
       const spanish = {
         id: "vocab0000000001", language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en",
-        displayName: null, flag: null, order: 0, ...sync
+        displayName: null, flag: null, region: null, order: 0, ...sync
       };
       const withSpanish = merged(base, { vocabularies: [spanish] });
       agrees(withSpanish, { vocabularies: [{ ...spanish, id: "vocab0000000002" }] }, "Two vocabularies claim es");

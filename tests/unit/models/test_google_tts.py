@@ -63,6 +63,21 @@ def test_a_wavenet_voice_is_named_by_locale_and_takes_no_model_name_and_no_promp
     assert body["audioConfig"] == {"audioEncoding": "LINEAR16"}
 
 
+def test_an_accent_travels_as_the_locale_each_voice_family_takes(monkeypatch):
+    """A voice made for a locale goes with it; a Gemini voice is sent the nearest locale its row
+    accepts — Latin American Spanish for Argentina — and is told the rest in its prompt."""
+    calls = []
+    transport(monkeypatch, audio(), calls)
+    google_tts.speech(ROW, "wavenet", "picar", language="es-AR")
+    assert calls[-1]["json"]["voice"] == {"languageCode": "es-US", "name": "es-US-Wavenet-A"}
+    google_tts.speech(ROW, "wavenet", "picar", language="es-AR", voice="es-ES-Wavenet-F")
+    assert calls[-1]["json"]["voice"]["languageCode"] == "es-ES"
+    google_tts.speech(ROW, "gemini-2.5-flash-tts", "picar", language="es-AR", voice="Kore")
+    assert calls[-1]["json"]["voice"]["languageCode"] == "es-419"
+    google_tts.speech(ROW, "wavenet", "lorry", language="en-GB")
+    assert calls[-1]["json"]["voice"] == {"languageCode": "en-GB", "name": "en-GB-Wavenet-A"}
+
+
 def test_the_row_says_what_to_ask_for_and_an_undeclared_model_still_gets_something(monkeypatch):
     """Every Google model declares `LINEAR16`; the fallback exists so a new row cannot ask for
     nothing at all and fail inside Google rather than here."""

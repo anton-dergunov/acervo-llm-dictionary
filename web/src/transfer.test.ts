@@ -67,8 +67,8 @@ describe("exporting a bundle", () => {
 
   it("writes the vocabulary and topic records the article documents cannot express", () => {
     expect(parse(at(bundle(), VOCABULARIES_FILE).text)).toEqual([
-      { language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en", displayName: null, flag: null, order: 0 },
-      { language: "en", definitionLang: "en", glossLangs: ["ru"], notesLang: "ru", displayName: null, flag: null, order: 1 }
+      { language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en", displayName: null, flag: null, region: null, order: 0 },
+      { language: "en", definitionLang: "en", glossLangs: ["ru"], notesLang: "ru", displayName: null, flag: null, region: null, order: 1 }
     ]);
     expect(parse(at(bundle(), TOPICS_FILE).text)).toEqual([
       { name: "Food", icon: "🍽️", order: 0 },
@@ -408,6 +408,27 @@ describe("reading a bundle", () => {
     const plan = readBundle(files);
     expect(plan.problems).toEqual([]);
     expect(plan.articles.length).toBeGreaterThan(0);
+  });
+
+  it("carries a vocabulary's accent there and back", () => {
+    const graph = testGraph();
+    const accented = { ...graph, vocabularies: graph.vocabularies.map((entry) =>
+      entry.language === "es" ? { ...entry, region: "AR" } : entry) };
+    const plan = readBundle(bundle(accented));
+    expect(plan.vocabularies.find((entry) => entry.language === "es")?.region).toBe("AR");
+    expect(plan.vocabularies.find((entry) => entry.language === "en")?.region).toBeNull();
+  });
+
+  it("reads a bundle from the version before accents exactly as it stands, with none", () => {
+    const files = bundle().map((file) => {
+      if (file.path === MANIFEST_FILE) {
+        return { ...file, text: file.text.replace(`schemaVersion: ${SCHEMA_VERSION}`, "schemaVersion: 19") };
+      }
+      return file.path === VOCABULARIES_FILE ? { ...file, text: file.text.replace(/^\s*region:.*\r?\n/gm, "") } : file;
+    });
+    const plan = readBundle(files);
+    expect(plan.problems).toEqual([]);
+    expect(plan.vocabularies.every((entry) => entry.region === null)).toBe(true);
   });
 
   it("refuses a bundle from another schema version, naming both", () => {

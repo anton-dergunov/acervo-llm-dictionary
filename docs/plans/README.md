@@ -21,6 +21,7 @@ what it said.
 - [`word-discovery.md`](word-discovery.md) — finding the words worth knowing next.
 - [`languages/language-support.md`](languages/language-support.md) — every feature in the languages people learn.
 - [`languages/chinese.md`](languages/chinese.md) — the characters, the tones, and photos without spaces.
+- [`languages/accents.md`](languages/accents.md) — the writer, stories and clips following a vocabulary's accent.
 
 **Quality** — the research track: whether what the models write is right.
 

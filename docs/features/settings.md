@@ -58,7 +58,10 @@ read in the background ([`spoken-clips.md`](spoken-clips.md) §10).
 Every page is built from `kit.tsx`: a **group** is a titled card of rows; a **row** is a label with at
 most one hint under it and its control on the right — a switch, a select, a segmented choice of two or
 three, a link to a sub-page, or a whole-row action (in the warning colour when it destroys). A
-**notice** is a fact to act on: no provider, a service that does not answer.
+**notice** is a fact to act on: no provider, a service that does not answer. A voice is chosen by
+listening, so its rows carry a **listen** button at their start — a link to its page, a **choice**
+among several (a radio row with a check), or a select — and every row of a voice group has one, so
+their labels align (`voices.tsx`, shared by Pronunciation and Loops).
 
 **A hint is one line of about a dozen words, saying what the setting does for you.** Not how it works
 inside — servers, calls, caches, records, which model is asked how many times. The pages carried
