@@ -83,8 +83,10 @@ A language is **found by its name**, in English or in itself — "Spanish", "esp
 its flag, never as a tag. The tag is how it is stored. The list is CLDR's, from the server
 (`GET /languages`, `locales.catalogue`): every language at least a million people speak, most
 speakers first, with a script of its own where it is officially written in two (`zh-Hans` and
-`zh-Hant`, `sr-Cyrl` and `sr-Latn`). A tag the list lacks is still offered as typed, if the platform
-can name it, so a smaller language can be kept. The same search chooses the languages a vocabulary is
+`zh-Hant`, `sr-Cyrl` and `sr-Latn`). A name matches where one of its words begins — "trad" finds
+Chinese (Traditional), "eng" does not find Vietnamese through *Tiếng*. A typed tag is read in its
+canonical form, so `eng` finds English rather than a second English; a tag whose language the list
+lacks is offered as typed, if the platform can name it, so a smaller language can be kept. The same search chooses the languages a vocabulary is
 defined, translated and annotated in.
 
 **Add a language…** finds one and opens its page **unsaved**, filled in: named in English, defined in

@@ -136,6 +136,17 @@ describe("Settings ▸ Vocabularies", () => {
     expect(search(LANGUAGES, "xx-nothing")).toEqual([]);
   });
 
+  it("finds a language once by its three-letter code, and only where a word of its name begins", () => {
+    expect(search(LANGUAGES, "eng").map((entry) => entry.tag)).toEqual(["en"]);
+    expect(search(LANGUAGES, "rus").map((entry) => entry.tag)).toEqual(["ru"]);
+    expect(search(LANGUAGES, "zho").map((entry) => entry.tag)).toEqual(["zh-Hans", "zh-Hant"]);
+    expect(search(LANGUAGES, "GSW")[0].tag).toBe("gsw");
+    // Inside a word is not a match: "eng" is in "Tiếng Việt", "anc" in "français".
+    expect(search([...LANGUAGES, { tag: "vi", name: "Vietnamese", autonym: "Tiếng Việt", region: "VN", varieties: [] }], "eng")
+      .map((entry) => entry.tag)).toEqual(["en"]);
+    expect(search(LANGUAGES, "anc")).toEqual([]);
+  });
+
   it("names the window's page after the language while it is being added", async () => {
     editor();
     fireEvent.click(screen.getByRole("button", { name: "Add a language…" }));
