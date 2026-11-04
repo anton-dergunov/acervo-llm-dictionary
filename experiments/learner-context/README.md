@@ -41,12 +41,11 @@ The decision lives in [`docs/features/standing-rules.md`](../../docs/features/st
   repeats, three for v3.
 - **Measured without a judge** ([`score.py`](score.py)): an example or story part *leaks* when a stem
   from the learner's `leak` list (Argentina, Buenos Aires, viaj-, software, código…; meeting, email,
-  football…) appears in it or its translation. Blunt, and readable: every hit was read by hand for this
-  write-up, and the false positives are named below. No stronger model was available to label
-  (Vertex is not configured on this machine), and the lesson of `compose-lesson-line/` is that a judge
-  must be calibrated against a person before it is believed anyway — so the person is the check:
-  [`review.py`](review.py) serves a blind sample for hand labels and reports Cohen's κ between them and
-  the keywords.
+  football…) appears in it or its translation. Blunt, and readable: every hit was read for this write-up,
+  and for the shipped wording so was every sentence it did not flag (below). Reading everything beats
+  calibrating a judge model on a sample — the lesson of `compose-lesson-line/` is that a judge must be
+  checked against a reader before it is believed anyway. [`review.py`](review.py) serves a blind
+  sample for the owner's own labels and reports Cohen's κ between them and the keywords.
 
 ## Three wordings
 
@@ -101,8 +100,15 @@ examples are a holiday photo saved to the cloud (*nube*) and "I regret not trave
   said elsewhere", 69% → 88%).
 - **The level.** Example length barely moves (8.7 → 9.0 words); whether B1 examples are *easier* is a
   judgement the review page asks for, not a count.
-- **The hand labels.** The keyword measure has not yet been checked against a person. To label (the
-  sample is drawn on first start and kept):
+- **The owner's own labels.** The keyword measure was checked both ways by reading, not by a judge
+  model: every sentence it *flagged* (precision — the false positives are named above), and every
+  sentence of v3 on unrelated words it did *not* flag (recall — 66 examples and 12 stories). That
+  second read found **no missed leak**: no software, trip, meetings, email or football. What the
+  keywords do not see is the variety at work — *departamento*, *palier*, *mozo*, *mate y galletitas*
+  in the stories — which is wanted; and *pintar*'s "the project isn't looking good", which is the
+  word's own idiomatic sense. Both reads were made by Claude in the session that ran the experiment,
+  so they are a model's labels, not the owner's. To add the owner's (the sample is drawn on first
+  start and kept):
 
       .venv/bin/python experiments/learner-context/review.py serve runs/review \
           --from runs/first:none --from runs/third:light --host "$(tailscale ip -4)" --port 8766
