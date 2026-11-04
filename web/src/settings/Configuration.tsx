@@ -53,13 +53,13 @@ function VocabularyForm({ vocabulary, onSave, onRemove, onDone }: {
   const [glossLangs, setGlossLangs] = useState(vocabulary.glossLangs.join(", "));
   const [notesLang, setNotesLang] = useState(vocabulary.notesLang);
   const [region, setRegion] = useState(vocabulary.region ?? "");
-  /* Any accent a voice is declared for is offered too, so a provider with Chilean voices makes
-     Chile a choice without this list knowing it. Read from the cache; absent offline. */
+  /* Where the language has an accent of its own comes from the server, which reads it from CLDR;
+     any accent a voice is declared for is offered too. Offline, only the one already chosen. */
   const voices = useServerSetting(SETTINGS.pronunciations).value;
   const declared = Object.values(voices?.orders ?? {}).flat()
     .flatMap((model) => model.voices[vocabulary.language] ?? [])
     .flatMap((voice) => voice.locale ? [voice.locale] : []);
-  const accents = accentOptions(vocabulary.language, declared);
+  const accents = accentOptions(voices?.accentChoices?.[vocabulary.language] ?? [], declared, vocabulary.region);
 
   return <>
     <Group foot="Language tags, most preferred first, such as es, en or zh-Hans.">
@@ -72,8 +72,7 @@ function VocabularyForm({ vocabulary, onSave, onRemove, onDone }: {
     <Group>
       <Select
         label="Accent" hint="The voices read it as it is spoken there" value={region}
-        options={[{ value: "", label: "None" }, ...accents, ...(region && !accents.some((one) => one.value === region)
-          ? [{ value: region, label: region }] : [])]}
+        options={[{ value: "", label: "None" }, ...accents]}
         onChange={setRegion}
       />
     </Group>

@@ -34,7 +34,7 @@ function settings(overrides: Partial<PronunciationSettings> = {}): Pronunciation
     pregenerate: { headword: false, definitions: false, examples: false, stories: true },
     delivery: { words: "plain", examples: "expressive", loops: "expressive", stories: "expressive" },
     voices: {}, guideVoices: {}, first: {}, guideFirst: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
-    accents: { es: "es-AR", en: "en" },
+    accentChoices: {}, accents: { es: "es-AR", en: "en" },
     orders: { plain: [WAVENET, STANDARD], expressive: [GEMINI] },
     readers: {
       plain: { es: [reader("google-tts", "wavenet", US), reader("google-tts", "standard", STANDARD.voices.es[0])] },

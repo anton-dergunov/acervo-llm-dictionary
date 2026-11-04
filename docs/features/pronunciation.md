@@ -89,6 +89,14 @@ Vocabularies, because it is a fact about what is learned rather than about a voi
 story and the clip search may follow it too ([`../plans/languages/accents.md`](../plans/languages/accents.md)).
 The voices are its first reader: everything spoken in that vocabulary is asked for in its locale,
 `es-AR`, and a vocabulary with no accent is asked for in the bare language exactly as before.
+**Which accents a language is offered is CLDR's answer, not a list in the code**
+(`locales.accents`): every region where CLDR says the language is official, de facto official or
+official in part of the country, with at least 200,000 speakers, most speakers first — Mexico,
+Argentina, Spain, Colombia, the US… for Spanish — then a wider region two of them share (`419`,
+Latin America). Where a language is only widely learned (English in Germany) is no accent of its
+own and is left out. The speaker counts are CLDR's too, through `langcodes`, since Babel does not
+carry them. The server sends the list with the pronunciation settings, and the form adds any region
+a voice is declared for.
 
 **Providers handle accent in two ways, and both are declarations in the catalogue row, never code.**
 A voice made for one locale is keyed by it (`voices: {"es-ES": […], "es-US": […]}`) and has that

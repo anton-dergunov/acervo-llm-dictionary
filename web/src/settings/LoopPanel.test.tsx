@@ -32,7 +32,7 @@ function settings(loops: "plain" | "expressive" = "expressive"): PronunciationSe
     pregenerate: { headword: false, definitions: false, examples: false, stories: true },
     delivery: { words: "plain", examples: "expressive", loops, stories: "expressive" },
     voices: {}, guideVoices: {}, first: {}, guideFirst: {}, chosen: false, languages: ["es"], guideLanguages: ["en"],
-    accents: { es: "es", en: "en" }, orders: { plain: [], expressive: [GEMINI] },
+    accentChoices: {}, accents: { es: "es", en: "en" }, orders: { plain: [], expressive: [GEMINI] },
     readers: { plain: {}, expressive: { es: [reader("google-tts", GEMINI.model, KORE)] } },
     guideReaders: { plain: {}, expressive: { en: [reader("google-tts", GEMINI.model, KORE)] } }
   };

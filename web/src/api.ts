@@ -206,6 +206,8 @@ export interface PronunciationSettings {
   guideLanguages: string[];
   /** The locale each language is heard in — `es-AR` once Spanish is set to Argentina, else `es`. */
   accents: Record<string, string>;
+  /** The regions each language has an accent of its own in, most speakers first, from CLDR. */
+  accentChoices: Record<string, string[]>;
   orders: { plain: PronunciationModel[]; expressive: PronunciationModel[] };
   /** Who reads each language, first voice then backups, by the rule the recording follows. */
   readers: Record<PronunciationOrder, Record<string, VoiceReader[]>>;

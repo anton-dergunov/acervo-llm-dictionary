@@ -121,6 +121,9 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
     guide = chosen.for_guide()
     return {
         **chosen, "languages": languages, "guideLanguages": guide_languages, "accents": accents,
+        # The regions each language has an accent of its own in, most speakers first, from CLDR —
+        # what Settings ▸ Vocabularies offers as a vocabulary's accent.
+        "accentChoices": {language: list(locales.accents(language)) for language in offered},
         "orders": orders,
         "readers": {order: {language: _walk(settings, owner, order, accents[language], chosen, catalogue)
                             for language in languages} for order in CHAINS},

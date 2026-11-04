@@ -526,3 +526,15 @@ def test_the_code_that_chooses_a_voice_names_no_provider_model_or_voice():
         tree = ast.parse((root / relative).read_text(encoding="utf-8"))
         literals = {node.value for node in ast.walk(tree) if isinstance(node, ast.Constant) and isinstance(node.value, str)}
         assert not literals & named, f"{relative} names {sorted(literals & named)}"
+
+
+def test_the_accents_a_language_is_offered_come_from_cldr_most_speakers_first():
+    """Where a language is official, by how many speak it — not a list anybody wrote."""
+    from acervo.models.locales import accents
+
+    spanish = accents("es")
+    assert spanish[:3] == ("MX", "AR", "ES") and "US" in spanish and "419" in spanish
+    assert "PH" not in spanish, "widely learned is not an accent of its own"
+    assert "DE" not in accents("en") and accents("en")[0] == "US"
+    assert accents("zh-Hant")[:2] == ("TW", "HK") and accents("zh-Hans")[0] == "CN"
+    assert accents("qaa") == ()

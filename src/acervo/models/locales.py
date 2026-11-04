@@ -11,8 +11,13 @@ comparison needs three facts no provider supplies:
   `zh-Hans-CN`. A vocabulary with no accent set keeps the voices it always had.
 - **What to call them.** "Argentina", "Spanish", in English, for the interface and for a direction.
 
-All three are CLDR data, read through Babel rather than restated by hand. Tags are parsed here
-rather than by Babel, because a tag a provider declares need not be a locale CLDR has data for.
+- **Where a language has an accent of its own** — the regions offered as a vocabulary's accent
+  (`accents`): where CLDR says the language is official, most speakers first.
+
+All of it is CLDR data, read through Babel — and the speaker counts through `langcodes`, which
+carries CLDR's population figures where Babel does not — rather than restated by hand. Tags are
+parsed here rather than by Babel, because a tag a provider declares need not be a locale CLDR has
+data for.
 """
 
 from __future__ import annotations
@@ -132,6 +137,53 @@ def match(voice_locale: str | None, wanted: str, *, instruction: bool) -> str:
 
 def rank(found: str) -> int:
     return MATCHES.index(found)
+
+
+# Where a language is official, or official in part of a country (Spanish in the US), it is spoken
+# there natively, with an accent of its own. Where it is only widely learned (English in Germany,
+# Spanish in the Philippines) CLDR names no status, and that is no accent to learn.
+SPOKEN_HERE = ("official", "de_facto_official", "official_regional")
+# Fewer speakers than this is a footnote rather than an accent anybody sets out to learn.
+FEWEST_SPEAKERS = 200_000
+
+
+@lru_cache(maxsize=64)
+def accents(language: str) -> tuple[str, ...]:
+    """The regions `language` has an accent of its own in, most speakers first: `es` → `MX`, `AR`,
+    `ES`, `CO`, …, then a wider region two of them share (`419`, Latin America).
+
+    The language's script is respected: `zh-Hant` is Taiwan and Hong Kong, `zh-Hans` the mainland
+    and Singapore. Empty for a language CLDR knows nothing about.
+    """
+    import langcodes
+    from babel.core import get_global
+
+    parsed = parse(language)
+    found: list[tuple[int, str]] = []
+    for territory, spoken in get_global("territory_languages").items():
+        if len(territory) != 2:
+            continue
+        here = spoken.get(f"{parsed.language}_{parsed.script}") if parsed.script else None
+        if here is None:
+            here = spoken.get(parsed.language)
+            # `zh` in a territory counts for the script that territory writes it in.
+            if here is not None and parsed.script and _script(parsed.language, territory) != parsed.script:
+                here = None
+        if not here or here.get("official_status") not in SPOKEN_HERE:
+            continue
+        tag = "-".join(part for part in (parsed.language, parsed.script, territory) if part)
+        speakers = langcodes.Language.get(tag).speaking_population()
+        if speakers >= FEWEST_SPEAKERS:
+            found.append((speakers, territory))
+    regions = [territory for _, territory in sorted(found, key=lambda pair: (-pair[0], pair[1]))]
+    # A wider region is offered when it is what two or more of these share — `es-419`.
+    shared: dict[str, int] = {}
+    for region in regions:
+        tag = "-".join(part for part in (parsed.language, parsed.script, region) if part)
+        for parent in lineage(tag)[1:]:
+            if parent.region and parent.region.isdigit() and parent.region != "001":
+                shared[parent.region] = shared.get(parent.region, 0) + 1
+    return tuple(regions + [region for region, count in shared.items() if count >= 2])
 
 
 def region_name(region: str | None) -> str | None:
