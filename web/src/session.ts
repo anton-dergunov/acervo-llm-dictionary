@@ -11,7 +11,8 @@ function nativeHandler() {
   return window.webkit?.messageHandlers?.acervo;
 }
 
-async function nativeCall<T>(method: string, payload: unknown = {}): Promise<T> {
+/** One call to the Mac application, answered with its data or refused with its sentence. */
+export async function nativeCall<T>(method: string, payload: unknown = {}): Promise<T> {
   const response = await nativeHandler()!.postMessage({ method, payload }) as { data?: T; error?: string };
   if (response.error) throw new Error(response.error);
   return response.data as T;

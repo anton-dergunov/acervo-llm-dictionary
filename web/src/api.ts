@@ -605,7 +605,6 @@ export interface ClipSettings {
   selfContainedOnly: boolean;
   /** False means "following the deployment default", which is a real answer and not a gap. */
   chosen: boolean;
-  corpus: CorpusReadout;
 }
 
 /**
@@ -665,7 +664,7 @@ export interface Job {
   children?: Job[];
 }
 
-/** Settings ▸ Schedule: when the nightly run happens, and which of its steps are on. */
+/** Settings ▸ Activity: when the nightly run happens, and which of its steps are on. */
 export interface ScheduleSettings {
   /** 0–23, read in the server's `timezone`. */
   hour: number;
@@ -1426,6 +1425,13 @@ export const backendSession = {
 
   clipSettings(): Promise<ClipSettings> {
     return client.call<ClipSettings>("/clips/settings");
+  },
+  /**
+   * What the corpus holds, asked of the corpus itself — a call to another service, so it travels on
+   * its own and the owner's switches never wait for it.
+   */
+  clipCorpus(): Promise<CorpusReadout> {
+    return client.call<CorpusReadout>("/clips/corpus");
   },
   saveClipSettings(
     changes: Partial<Pick<ClipSettings, "searchEnabled" | "selfContainedOnly">>

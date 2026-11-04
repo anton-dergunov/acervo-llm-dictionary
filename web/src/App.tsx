@@ -51,7 +51,9 @@ import {
   articleFor, articleFromDraft, inboxCount, languageOptions, lexemesIn, selectedWords, shortGlossOf,
   topicOptions, visibleRows, type SortKey, type TopicSelection
 , loopsIn, storiesIn } from "./selectors";
-import Settings, { type Page as SettingsPage } from "./Settings";
+import Settings, { type Page as SettingsPage } from "./settings/Settings";
+import { forgetServerSettings } from "./settings/cache";
+import { receiveHostState } from "./host";
 import { Launch } from "./Launch";
 import { forgetPlace, lastPlace, placeIn, rememberPlace } from "./lastPlace";
 import { markSession, markStartup } from "./startup";
@@ -260,8 +262,6 @@ export default function App() {
   const [externalTotal, setExternalTotal] = useState(0);
   const [external, setExternal] = useState<ExternalEntry | null>(null);
   const [externalBusy, setExternalBusy] = useState(false);
-  /* Which settings section is open, or null for closed. The native menu names a section, so
-     "open settings" is not a boolean here. */
   /* Loops. Its own surface, reached from the bar at the foot of a phone or the chip in the top bar
      of a desktop — never a sheet over the list, because a player is a place you go to and the words
      it shows need the column. What is *playing* is the player module's, not this: a loop goes on
@@ -351,7 +351,9 @@ export default function App() {
       setLoops(true);
     }
   }, []);
-  const [settings, setSettings] = useState<SettingsPage | null>(null);
+  /* Whether Settings is open, and on which page when something asked for one: the native menu, the
+     sync chip. Opened from the gear it names none, and the window chooses. */
+  const [settings, setSettings] = useState<{ page?: SettingsPage } | null>(null);
   const [armed, setArmed] = useState<"delete" | null>(null);
   const [toast, setToast] = useState("");
   /** One optional action on the toast. Undo after a chat edit is the only thing that uses it. */
@@ -395,9 +397,16 @@ export default function App() {
   useEffect(() => {
     window.acervo = {
       command(name) {
-        setSettings("data");
+        if (name === "settings" || name.startsWith("settings:")) {
+          const page = name.slice("settings:".length) as SettingsPage;
+          setSettings({ page: page || "general" });
+          setArmed(null);
+          return;
+        }
+        setSettings({ page: "data" });
         setArmed(name === "delete" ? "delete" : null);
-      }
+      },
+      hostState: receiveHostState
     };
     return () => { delete window.acervo; };
   }, []);
@@ -1381,6 +1390,7 @@ export default function App() {
     forgetPlace();
     setSnapshot(null);
     setSettings(null);
+    forgetServerSettings();
     setSession(null);
   }
 
@@ -1482,15 +1492,12 @@ export default function App() {
             onLoops={openLoops} onStories={openStories}
           />}
 
-          {/* Shown on the native host too. The Mac window owns where the server is and how the
-              app updates; sync status, signing out and deleting the vocabulary are operations on
-              the vocabulary, which the host deliberately does not own — so they live here, and
-              without this they were unreachable on macOS altogether. */}
-          <SyncChip status={syncStatus} onOpen={() => setSettings("general")} />
+          {/* Opens Settings ▸ Sync, which is where someone goes to find out why a device stopped. */}
+          <SyncChip status={syncStatus} onOpen={() => setSettings({ page: "sync" })} />
 
           <button
             className={`icon-btn gear ${update === "ready" ? "has-update" : ""}`}
-            onClick={() => setSettings("general")}
+            onClick={() => setSettings({})}
             aria-label={update === "ready" ? "Open settings; an update is ready" : "Open settings"}
           ><GearIcon /></button>
 
@@ -1836,10 +1843,10 @@ export default function App() {
     {settings && <Settings
       // Directing the dialog at a section is a fresh open, not a prop change: the section and the
       // armed confirmation are where it starts, and it navigates itself from there.
-      key={`${settings}:${armed ?? ""}`}
+      key={`${settings.page ?? ""}:${armed ?? ""}`}
       update={update} email={session.email} status={syncStatus} snapshot={snapshot} language={language}
       captureHealth={captureHealth}
-      page={settings} arm={armed}
+      page={settings.page} arm={armed}
       onSignOut={() => void signOut()}
       onClose={() => { setSettings(null); setArmed(null); }}
       onNotify={notify}

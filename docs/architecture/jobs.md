@@ -127,7 +127,7 @@ saves each word to the Inbox through the same save, records each word's outcome,
 child `enrich` per saved word. Interactive capture stays synchronous, because someone is reviewing
 it.
 
-**One timed run.** Settings ▸ Schedule holds one hour, read in `ACERVO_TIMEZONE`, and a switch per
+**One timed run.** Settings ▸ Activity holds one hour, read in `ACERVO_TIMEZONE`, and a switch per
 step; at that hour one
 `nightly` job runs its steps in order, so they can never compete for an allowance. A failed step does
 not stop the next, a night the server missed runs once when it comes back, and missed nights do not

@@ -147,7 +147,7 @@ def chain_for(
 ) -> list[chain.Choice] | None:
     """The chain this request walks: the owner's choice, then the deployment's, then the catalogue.
 
-    Read per call and never cached — that is what makes a change in Settings ▸ Models take effect on
+    Read per call and never cached — that is what makes a change in Settings ▸ Providers take effect on
     the next capture with nothing restarted. It is one indexed read against a local SQLite file, set
     against two model calls of up to 120 seconds each, so do not cache it.
 
@@ -519,7 +519,7 @@ def _chain_view(settings: Settings, owner: str, kind: str, catalogue: Catalogue)
 
 
 def catalogue_view(settings: Settings, owner: str) -> dict[str, Any]:
-    """Everything Settings ▸ Models renders: the catalogue, and this owner's chains."""
+    """Everything Settings ▸ Providers renders: the catalogue, and this owner's chains."""
     catalogue = load_catalogue()
     return {
         "providers": [_provider_view(row) for row in catalogue],

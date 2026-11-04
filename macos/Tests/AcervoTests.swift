@@ -98,7 +98,7 @@ final class AcervoTests: XCTestCase {
     }
 
     /// Closing the main window used to drop straight back to the menu bar, which took the Dock icon
-    /// and the menu bar out from under the Settings window standing beside it.
+    /// and the menu bar out from under any other window of Acervo's standing beside it.
     @MainActor
     func testTheMenuBarIsKeptWhileAnyAcervoWindowIsStillOnScreen() {
         func testWindow() -> NSWindow {
@@ -112,15 +112,15 @@ final class AcervoTests: XCTestCase {
             return window
         }
         let main = testWindow()
-        let settings = testWindow()
-        defer { main.orderOut(nil); settings.orderOut(nil) }
+        let other = testWindow()
+        defer { main.orderOut(nil); other.orderOut(nil) }
 
-        settings.orderFront(nil)
-        XCTAssertFalse(AppActivation.shouldReturnToMenuBar(owning: [main, settings]),
-                       "the Dock icon was given up with Settings still open")
+        other.orderFront(nil)
+        XCTAssertFalse(AppActivation.shouldReturnToMenuBar(owning: [main, other]),
+                       "the Dock icon was given up with a window still open")
 
-        settings.orderOut(nil)
-        XCTAssertTrue(AppActivation.shouldReturnToMenuBar(owning: [main, settings]))
+        other.orderOut(nil)
+        XCTAssertTrue(AppActivation.shouldReturnToMenuBar(owning: [main, other]))
         XCTAssertTrue(AppActivation.shouldReturnToMenuBar(owning: [nil, nil]))
     }
 
@@ -152,6 +152,65 @@ final class AcervoTests: XCTestCase {
         XCTAssertFalse(AppSettings(defaults: defaults).showWindowAtLogin)
         AppSettings(defaults: defaults).showWindowAtLogin = true
         XCTAssertTrue(AppSettings(defaults: defaults).showWindowAtLogin)
+    }
+
+    /// The application's own settings, as the interface's Settings ▸ General reads and changes them.
+    @MainActor
+    func testHostSettingsReportWhatTheApplicationHolds() throws {
+        let suite = "AcervoTests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        defaults.set("https://acervo.example.com", forKey: UpdateService.serverURLKey)
+        let host = HostSettings(
+            updates: UpdateService(defaults: defaults), appSettings: AppSettings(defaults: defaults),
+            loginItem: { true }, setLoginItem: { _ in true }
+        )
+
+        let shown = host.snapshot()
+        XCTAssertEqual(shown.serverURL, "https://acervo.example.com")
+        XCTAssertTrue(shown.openAtLogin)
+        XCTAssertFalse(shown.showWindowAtLogin)
+        XCTAssertTrue(shown.automaticChecks, "checking is on until someone switches it off")
+        XCTAssertEqual(shown.update.state, "idle")
+    }
+
+    /// Every change is told to the interface, including the ones it asked for, so a page that is
+    /// open shows what the application holds rather than what was clicked.
+    @MainActor
+    func testHostSettingsChangeAndSaySo() throws {
+        let suite = "AcervoTests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let appSettings = AppSettings(defaults: defaults)
+        let host = HostSettings(
+            updates: UpdateService(defaults: defaults), appSettings: appSettings,
+            loginItem: { false }, setLoginItem: { _ in true }
+        )
+        var told: [HostSettings.Snapshot] = []
+        host.onChange = { told.append($0) }
+
+        XCTAssertTrue(try host.set("showWindowAtLogin", to: true).showWindowAtLogin)
+        XCTAssertTrue(appSettings.showWindowAtLogin)
+        XCTAssertFalse(try host.set("automaticInstall", to: false).automaticInstall)
+        XCTAssertEqual(told.last?.showWindowAtLogin, true)
+        XCTAssertThrowsError(try host.set("somethingElse", to: true))
+    }
+
+    /// The system can refuse a login item. The switch must not claim otherwise, and the refusal
+    /// must reach the interface with a sentence rather than as a switch that quietly moves back.
+    @MainActor
+    func testARefusedLoginItemIsSaidAndNotShownAsDone() throws {
+        let suite = "AcervoTests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let host = HostSettings(
+            updates: UpdateService(defaults: defaults), appSettings: AppSettings(defaults: defaults),
+            loginItem: { false }, setLoginItem: { _ in false }
+        )
+        XCTAssertThrowsError(try host.set("openAtLogin", to: true)) { error in
+            XCTAssertTrue(error.localizedDescription.contains("Login Items"))
+        }
+        XCTAssertFalse(host.snapshot().openAtLogin)
     }
 
     /// A development build and the test host share the installed application's preferences, so

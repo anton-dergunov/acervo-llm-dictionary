@@ -28,7 +28,7 @@ that commits that tree to a private git repository somewhere the owner does not 
 - **Open:** which remote, and whether it pushes over SSH or HTTPS.
 
 The nightly run ([`../architecture/jobs.md`](../architecture/jobs.md)) is the natural place for it: one
-more step with its own switch in Settings ▸ Schedule.
+more step with its own switch in Settings ▸ Activity.
 
 ## 3 · Media and the Anki collection, off the machine
 

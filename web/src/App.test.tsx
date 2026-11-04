@@ -202,6 +202,11 @@ function mockGarfioCapture() {
 }
 
 /** Renders the app and waits for the pulled replica to reach the word list. */
+/** Opens a page of Settings from its list, which is a sidebar or a page of its own by width. */
+function openPage(settings: ReturnType<typeof within>, name: string) {
+  fireEvent.click(within(settings.getByRole("navigation", { name: "Settings sections" })).getByRole("button", { name }));
+}
+
 async function openList() {
   render(<App />);
   await screen.findByRole("heading", { name: /All words/ });
@@ -647,25 +652,40 @@ describe("Acervo application", () => {
     expect(editorText()).toContain("id: lexemepicar0001");
   });
 
-  it("reaches sync, sign-out and delete on the native host, without its update controls", async () => {
-    // The Mac window owns the server address and the app's own updates. Everything about the
-    // vocabulary is here — and hiding the whole pane to keep the update controls out left none of
-    // it reachable on macOS at all.
-    window.webkit = { messageHandlers: { acervo: { postMessage: vi.fn() } } };
+  it("shows the Mac application's own settings in General, and asks it to change them", async () => {
+    // There used to be a second Settings window on the Mac for these. The application still owns
+    // them; this page reads them through the bridge and asks it to change them.
+    const host = {
+      serverURL: "https://acervo.example.com", openAtLogin: true, showWindowAtLogin: false,
+      automaticChecks: true, automaticInstall: false, version: "0.4.0 (52)",
+      update: { state: "idle", available: "53" }
+    };
+    const postMessage = vi.fn(async (message: { method: string; payload: { name?: string; value?: boolean } }) => {
+      if (message.method === "hostSettings") return { data: host };
+      if (message.method === "setHostSetting") return { data: { ...host, [message.payload.name!]: message.payload.value } };
+      return undefined;
+    });
+    window.webkit = { messageHandlers: { acervo: { postMessage } } };
     signedIn();
     await openList();
     fireEvent.click(screen.getByRole("button", { name: /Open settings/ }));
 
     const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
     expect(settings.getByRole("button", { name: "Sign out" })).toBeInTheDocument();
-    // A second update control here would conflict with the one the host already owns.
-    expect(settings.queryByText("Acervo is up to date")).not.toBeInTheDocument();
+    expect(settings.getByRole("button", { name: "Change server…" })).toBeInTheDocument();
+    // The web app's own update and download controls would contradict the application's.
     expect(settings.queryByText(/Download Acervo for macOS/)).not.toBeInTheDocument();
-    expect(settings.getByText("Updates and server address")).toBeInTheDocument();
+    expect(await settings.findByText("acervo.example.com")).toBeInTheDocument();
+    expect(settings.getByRole("button", { name: "Update and Restart" })).toBeInTheDocument();
+    fireEvent.click(settings.getByRole("switch", { name: "Open Acervo at login" }));
+    await waitFor(() => expect(postMessage).toHaveBeenCalledWith({
+      method: "setHostSetting", payload: { name: "openAtLogin", value: false }
+    }));
+    expect(await settings.findByRole("switch", { name: "Open Acervo at login" })).not.toBeChecked();
 
-    fireEvent.click(settings.getByRole("tab", { name: "Sync" }));
+    openPage(settings, "Sync");
     expect(settings.getByRole("button", { name: "Sync now" })).toBeInTheDocument();
-    fireEvent.click(settings.getByRole("tab", { name: "Data" }));
+    openPage(settings, "Data");
     expect(settings.getByRole("button", { name: /Delete all words/ })).toBeInTheDocument();
   });
 
@@ -675,7 +695,7 @@ describe("Acervo application", () => {
     fireEvent.click(screen.getByRole("button", { name: "Open settings" }));
 
     const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
-    fireEvent.click(settings.getByRole("tab", { name: "Data" }));
+    openPage(settings, "Data");
     expect(settings.getByRole("button", { name: "Export…" })).toBeInTheDocument();
     expect(settings.getByRole("combobox")).toHaveValue("all");
     expect(settings.getByRole("heading", { name: "Import" })).toBeInTheDocument();
@@ -700,7 +720,7 @@ describe("Acervo application", () => {
     fireEvent.click(screen.getByRole("button", { name: "Open settings" }));
 
     const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
-    fireEvent.click(settings.getByRole("tab", { name: "Topics" }));
+    openPage(settings, "Topics");
     fireEvent.click(settings.getByRole("button", { name: "Add a topic…" }));
     fireEvent.change(settings.getByLabelText("Name"), { target: { value: "Slang" } });
     fireEvent.change(settings.getByLabelText("Icon"), { target: { value: "💬" } });
@@ -708,7 +728,7 @@ describe("Acervo application", () => {
 
     // Generated entries can only be filed under topics that exist, so this is what unblocks capture
     // on an account that was not seeded.
-    expect(await settings.findByText("Slang")).toBeInTheDocument();
+    expect(await settings.findByText(/Slang/)).toBeInTheDocument();
     fireEvent.click(screen.getByRole("button", { name: "Close settings" }));
     expect(await screen.findByRole("button", { name: /Slang/ })).toBeInTheDocument();
   });
@@ -719,9 +739,9 @@ describe("Acervo application", () => {
     fireEvent.click(screen.getByRole("button", { name: "Open settings" }));
 
     const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
-    fireEvent.click(settings.getByRole("tab", { name: "Vocabularies" }));
-    const spanish = settings.getByText(/^es · defined in es/).closest(".config-row")!;
-    fireEvent.click(within(spanish as HTMLElement).getByRole("button", { name: "Remove" }));
+    openPage(settings, "Vocabularies");
+    fireEvent.click(settings.getByRole("button", { name: /es · defined in es/ }));
+    fireEvent.click(settings.getByRole("button", { name: "Remove this vocabulary" }));
     // Nothing is deleted, but the words would lose the gloss preference they are rendered with.
     expect(await screen.findByText(/still has 3 words/)).toBeInTheDocument();
     expect(repository.snapshot().vocabularies.filter((entry) => !entry.deleted)).toHaveLength(2);
@@ -1166,8 +1186,8 @@ describe("Acervo application", () => {
     // Wrap and numbers describe this screen, not the vocabulary, so they live in settings rather
     // than as controls you step over on the way to the editor.
     const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
-    fireEvent.click(settings.getByRole("tab", { name: "Reading" }));
-    fireEvent.click(settings.getByRole("checkbox", { name: /Show line numbers/ }));
+    openPage(settings, "Reading");
+    fireEvent.click(settings.getByRole("switch", { name: /Show line numbers/ }));
     fireEvent.click(screen.getByRole("button", { name: "Close settings" }));
 
     fireEvent.click(await screen.findByRole("button", { name: /picar/ }));
@@ -1525,10 +1545,9 @@ describe("Acervo application", () => {
     const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
 
     expect(settings.queryByText(/Entries are built by/)).not.toBeInTheDocument();
-    fireEvent.click(settings.getByRole("tab", { name: "Providers" }));
-    // Twice on purpose: once as a row in the text chain, once in the credentials table below it.
-    expect(await settings.findAllByText("Gemini (free tier)")).toHaveLength(2);
-    expect(settings.getByText("gemini/gemini-3.1-flash-lite")).toBeInTheDocument();
+    openPage(settings, "Providers");
+    expect(await settings.findByText("gemini/gemini-3.1-flash-lite")).toBeInTheDocument();
+    expect(settings.getByRole("button", { name: /Credentials/ })).toBeInTheDocument();
   });
 });
 

@@ -33,26 +33,48 @@ def declarations(stylesheet: pathlib.Path, selector: str) -> dict[str, str]:
     return found
 
 
-# ── the settings overlay ─────────────────────────────────────────────────
+# ── the dialogs ──────────────────────────────────────────────────────────
+# The smaller dialogs — a picture, a clip, a loop, a story — share the `.settings` shell.
 
-def test_the_settings_dialog_is_bounded_by_the_window():
-    settings = declarations(APP, ".settings")
-    assert "max-height" in settings, "the dialog can grow past the screen again"
-    assert "100%" in settings["max-height"] or "vh" in settings["max-height"]
-    assert settings.get("display") == "flex"
-    assert settings.get("flex-direction") == "column"
+def test_a_dialog_is_bounded_by_the_window():
+    dialog = declarations(APP, ".settings")
+    assert "max-height" in dialog, "the dialog can grow past the screen again"
+    assert "100%" in dialog["max-height"] or "vh" in dialog["max-height"]
+    assert dialog.get("display") == "flex"
+    assert dialog.get("flex-direction") == "column"
 
 
-def test_the_settings_panel_scrolls_rather_than_clipping():
+def test_a_dialog_body_scrolls_rather_than_clipping():
     body = declarations(APP, ".settings-body")
-    assert body.get("overflow-y") == "auto", "settings content taller than the dialog is unreachable"
+    assert body.get("overflow-y") == "auto", "content taller than the dialog is unreachable"
     assert body.get("min-height") == "0"
     assert body.get("overscroll-behavior") == "contain"
 
 
-def test_the_settings_header_and_tabs_do_not_scroll_away():
+def test_a_dialog_header_does_not_scroll_away():
     assert declarations(APP, ".settings header").get("flex") == "none"
-    assert "none" in declarations(APP, ".settings-nav").get("flex", "")
+
+
+# ── the Settings window ──────────────────────────────────────────────────
+# Sized by the screen, never by the page in it: a page switch must not move or resize anything.
+
+@pytest.mark.parametrize("stylesheet", [APP, PROTOTYPE], ids=lambda path: path.name)
+def test_the_settings_window_has_a_height_of_its_own(stylesheet):
+    window = declarations(stylesheet, ".settings-window")
+    assert "dvh" in window.get("height", ""), "a window sized by its content resizes on every page"
+    assert "dvh" in window.get("max-height", "")
+    assert window.get("overflow") == "hidden"
+
+
+@pytest.mark.parametrize("stylesheet", [APP, PROTOTYPE], ids=lambda path: path.name)
+def test_the_list_and_the_page_each_scroll_on_their_own(stylesheet):
+    scroll = declarations(stylesheet, ".prefs-scroll")
+    assert scroll.get("overflow-y") == "auto"
+    assert scroll.get("min-height") == "0", "a flex item will not shrink below its content without this"
+    assert scroll.get("overscroll-behavior") == "contain"
+    assert declarations(stylesheet, ".prefs-head").get("flex") == "none"
+    column = declarations(stylesheet, ".prefs-side, .prefs-main")
+    assert column.get("min-height") == "0" and column.get("flex-direction") == "column"
 
 
 # ── the composer ─────────────────────────────────────────────────────────

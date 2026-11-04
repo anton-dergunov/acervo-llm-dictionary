@@ -1,5 +1,7 @@
 /* The prototype's icon set, unchanged. Stroke and size come from the stylesheet. */
 
+import type { ReactNode } from "react";
+
 const stroke = { fill: "none", stroke: "currentColor", strokeLinecap: "round" } as const;
 
 export const SearchIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={2} aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-3.6-3.6" /></svg>;
@@ -87,3 +89,17 @@ export const MapIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1
 export const FitIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.9} strokeLinejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg>;
 export const MinusIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={2} aria-hidden="true"><path d="M5 12h14" /></svg>;
 export const HourglassIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><path d="M7 4h10M7 20h10" /><path d="M8 4c0 4 4 5 4 8s-4 4-4 8" /><path d="M16 4c0 4-4 5-4 8s4 4 4 8" /></svg>;
+
+/* The pages of Settings, drawn alike so the list reads as one set. The prototype's
+   `design/ui-prototype/settings.js` draws the same paths. */
+const page = (body: ReactNode) => () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.8} strokeLinejoin="round" aria-hidden="true">{body}</svg>;
+export const SunIcon = page(<><circle cx="12" cy="12" r="3" /><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8" /></>);
+export const FlagIcon = page(<><path d="M5 21V4" /><path d="M5 4h11l-2 4 2 4H5" /></>);
+export const TagIcon = page(<><path d="M4 12.5V5a1 1 0 0 1 1-1h7.5L20 11.5 12.5 19z" /><circle cx="8.5" cy="8.5" r="1.3" /></>);
+export const SpeakerIcon = page(<><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" /><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" /></>);
+export const VideoIcon = page(<><rect x="3.5" y="5" width="17" height="14" rx="2" /><path d="M10 9.5v5l4.5-2.5z" /></>);
+export const OpenBookIcon = page(<><path d="M12 6.5C10 5 7.5 4.5 4 4.5v13c3.5 0 6 .5 8 2 2-1.5 4.5-2 8-2v-13c-3.5 0-6 .5-8 2z" /><path d="M12 6.5v13" /></>);
+export const ChipIcon = page(<><rect x="6" y="6" width="12" height="12" rx="2" /><path d="M9.5 9.5h5v5h-5z" /><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" /></>);
+export const PulseIcon = page(<path d="M3.5 12h4l2.5-6 4 12 2.5-6h4" />);
+export const CardsIcon = page(<><rect x="4" y="6.5" width="12" height="14" rx="2" /><path d="M8 3.5h10a2 2 0 0 1 2 2V17" /></>);
+export const ArchiveIcon = page(<><path d="M4 7.5h16v12H4z" /><path d="M3 4h18v3.5H3z" /><path d="M10 11.5h4" /></>);

@@ -102,7 +102,7 @@ class Settings(BaseSettings):
     # source of truth that drifts the first time a row is added.
     text_chain: str = Field(default="", alias="ACERVO_TEXT_CHAIN")
 
-    # The zone the nightly hour in Settings ▸ Schedule is read in, as an IANA name. Empty means the
+    # The zone the nightly hour in Settings ▸ Activity is read in, as an IANA name. Empty means the
     # server's own local zone — which in a container is usually UTC, so a deployment sets this.
     timezone: str = Field(default="", alias="ACERVO_TIMEZONE")
 

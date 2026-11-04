@@ -1,4 +1,4 @@
-"""Settings ▸ Models, on the server: what the owner may choose, and what they may never see.
+"""Settings ▸ Providers, on the server: what the owner may choose, and what they may never see.
 
 Three things here are load-bearing beyond the obvious. The route is owner-scoped, so one account's
 choice must be invisible to another. It is *not* replicated, and the failure mode of getting that

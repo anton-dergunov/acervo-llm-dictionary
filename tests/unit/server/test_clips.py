@@ -324,7 +324,20 @@ def test_no_row_means_following_the_deployment_default(server, corpus):
     answer = server.get("/clips/settings").json()["data"]
     assert answer["searchEnabled"] is True
     assert answer["chosen"] is False
-    assert answer["corpus"]["configured"] is True and answer["corpus"]["indexedLanguages"] == ["es"]
+
+
+def test_the_settings_never_ask_the_corpus(server, corpus):
+    """The switches are Acervo's own and come back at once; the corpus is another service, asked
+    only by the route that reports on it — so a slow corpus cannot hold the page up."""
+    assert "corpus" not in server.get("/clips/settings").json()["data"]
+    assert server.put("/clips/settings", {"searchEnabled": False}).status_code == 200
+    assert not [url for url in corpus.calls if url.path.endswith("/status")]
+
+
+def test_the_corpus_reading_says_what_it_holds(server, corpus):
+    answer = server.get("/clips/corpus").json()["data"]
+    assert answer["configured"] is True and answer["reachable"] is True
+    assert answer["indexedLanguages"] == ["es"]
 
 
 def test_the_passage_rule_is_off_by_default_and_reaches_the_prompt_when_on(server, corpus):
@@ -363,11 +376,13 @@ def test_the_route_searches_even_with_save_time_searching_off(server, corpus):
     assert len(stored_clips(server)) == 1
 
 
-def test_settings_open_with_the_corpus_down(server, corpus):
-    """A corpus that is down is a fact to show, not an error to raise."""
+def test_settings_open_with_the_corpus_down(server, corpus, caplog):
+    """A corpus that is down is a fact to show, not an error to raise — and the owner was shown it,
+    so it is written down where `admin log --failed` will find it."""
     corpus.status = httpx.ConnectError("no route to host")
-    answer = server.get("/clips/settings")
+    with caplog.at_level("WARNING", logger="acervo.activity"):
+        answer = server.get("/clips/corpus")
     assert answer.status_code == 200
-    assert answer.json()["data"]["corpus"] == {
-        "configured": True, "reachable": False, "error": "unreachable"
-    }
+    assert answer.json()["data"] == {"configured": True, "reachable": False, "error": "unreachable"}
+    line = next(record.getMessage() for record in caplog.records if record.name == "acervo.activity")
+    assert line.startswith("corpus unanswered") and "reason=unreachable" in line

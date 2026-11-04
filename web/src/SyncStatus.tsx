@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AlertIcon, CloudIcon, CloudOffIcon, SyncIcon } from "./icons";
 import { relativeTime } from "./format";
 import { describeStartup, startupTimings } from "./startup";
+import { Action, Group, Notice, Row } from "./settings/kit";
 import type { SyncStatus } from "./sync";
 
 /** Typed, not clicked, when the copy being discarded may be the only complete one left. */
@@ -55,51 +56,49 @@ export function SyncPanel({ status, lexemeCount, onSyncNow, onDownloadAgain }: {
     setTyped("");
     onDownloadAgain();
   }
-  return <div className="sync-panel">
-    <div className="update-status">
-      <strong>{LABELS[status.state]}</strong>
-      <span>
-        Received {relativeTime(status.lastPulledAt)}
-        {status.lastWroteAt ? ` · last change saved ${relativeTime(status.lastWroteAt)}` : ""}
-        {status.cursor > 0 ? ` · revision ${status.cursor}` : ""}
-      </span>
-    </div>
-    {timings && <p className="sync-launch">{describeStartup(timings)}</p>}
-    {!status.persistent && <p className="sync-warning" role="status">
-      This device could not open its local storage, so the vocabulary is held in memory for this
-      session only and will not be here after a reload.
-    </p>}
-    {status.state === "datasetChanged" && <p className="sync-warning" role="alert">
-      Nothing has been changed on this device. Its copy may be more complete than the server's, so
-      choose deliberately: download the server's copy over it, or rebuild the server from this
-      device before continuing.
-    </p>}
-    {status.message && status.state !== "idle" && <p className="sync-message">{status.message}</p>}
-    <div className="sync-actions">
-      <button className="tb-btn" onClick={onSyncNow} disabled={status.state === "syncing" || stopped}>Sync now</button>
-      {!confirming && <button className="tb-btn" onClick={() => setConfirming(true)}>
-        Replace this device's copy with the server's…
-      </button>}
-    </div>
-    {confirming && <div className="replace-copy">
-      <p role="alert">
-        This deletes the {lexemeCount} {lexemeCount === 1 ? "entry" : "entries"} held here and
-        downloads the server's copy in their place.
-        {irreversible
-          ? " The server database was rebuilt, so it may hold fewer than this device does. Nothing here can be recovered afterwards."
-          : " Nothing is lost: the server has everything this device does."}
-      </p>
-      {irreversible && <>
-        <label htmlFor="replace-confirmation">Type {CONFIRMATION} to confirm</label>
-        <input
-          id="replace-confirmation" value={typed} autoComplete="off"
-          onChange={(event) => setTyped(event.target.value)}
-        />
-      </>}
-      <div className="sync-actions">
-        <button className="tb-btn" onClick={() => { setConfirming(false); setTyped(""); }}>Cancel</button>
-        <button className="tb-btn danger" disabled={!ready} onClick={download}>Replace this device's copy</button>
+  return <>
+    <Group foot={timings ? describeStartup(timings) : undefined}>
+      <Row
+        label={LABELS[status.state]}
+        hint={`Received ${relativeTime(status.lastPulledAt)}`
+          + (status.lastWroteAt ? ` · last change saved ${relativeTime(status.lastWroteAt)}` : "")
+          + (status.cursor > 0 ? ` · revision ${status.cursor}` : "")}
+      />
+      <Action onClick={onSyncNow} disabled={status.state === "syncing" || stopped}>Sync now</Action>
+    </Group>
+    {!status.persistent && <Notice>
+      This device could not open its local storage, so your words are held only until you reload.
+    </Notice>}
+    {status.state === "datasetChanged" && <Notice>
+      The server’s database changed. Nothing here has been touched, and this copy may be the more
+      complete one: replace it with the server’s, or rebuild the server from this device first.
+    </Notice>}
+    {status.message && status.state !== "idle" && <p className="pref-foot sync-message">{status.message}</p>}
+
+    {!confirming && <Group foot="Downloads everything again from the server.">
+      <Action danger onClick={() => setConfirming(true)}>Replace this device's copy with the server's…</Action>
+    </Group>}
+    {confirming && <section className="pref-group" aria-label="Replace this device's copy">
+      <div className="danger-zone">
+        <p role="alert">
+          This deletes the {lexemeCount} {lexemeCount === 1 ? "entry" : "entries"} held here and
+          downloads the server's copy in their place.
+          {irreversible
+            ? " The server database was rebuilt, so it may hold fewer than this device does. Nothing here can be recovered afterwards."
+            : " Nothing is lost: the server has everything this device does."}
+        </p>
+        {irreversible && <>
+          <label htmlFor="replace-confirmation">Type {CONFIRMATION} to confirm</label>
+          <input
+            id="replace-confirmation" value={typed} autoComplete="off"
+            onChange={(event) => setTyped(event.target.value)}
+          />
+        </>}
+        <div className="sync-actions">
+          <button type="button" className="tb-btn" onClick={() => { setConfirming(false); setTyped(""); }}>Cancel</button>
+          <button type="button" className="tb-btn danger" disabled={!ready} onClick={download}>Replace this device's copy</button>
+        </div>
       </div>
-    </div>}
-  </div>;
+    </section>}
+  </>;
 }

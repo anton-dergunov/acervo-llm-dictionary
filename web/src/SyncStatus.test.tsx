@@ -36,7 +36,7 @@ describe("the sync panel", () => {
 
   it("warns when the replica is only held in memory", () => {
     render(<SyncPanel status={status({ persistent: false })} lexemeCount={12} onSyncNow={() => {}} onDownloadAgain={() => {}} />);
-    expect(screen.getByText(/held in memory for this\s+session only/)).toBeInTheDocument();
+    expect(screen.getByText(/held only until you reload/)).toBeInTheDocument();
   });
 
   it("does not offer a retry that cannot work while the app must be updated", () => {
@@ -47,7 +47,7 @@ describe("the sync panel", () => {
 
   it("explains a changed server database without offering to act blindly", () => {
     render(<SyncPanel status={status({ state: "datasetChanged" })} lexemeCount={12} onSyncNow={() => {}} onDownloadAgain={() => {}} />);
-    expect(screen.getByRole("alert")).toHaveTextContent(/may be more complete than the server/);
+    expect(screen.getByRole("status")).toHaveTextContent(/may be the more complete one/);
     expect(screen.getByRole("button", { name: "Sync now" })).toBeDisabled();
   });
 

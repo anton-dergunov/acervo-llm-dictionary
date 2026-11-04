@@ -285,7 +285,7 @@ def test_update_now_is_one_job_however_often_it_is_pressed(server, corpus):
     assert second.json()["data"]["id"] == first.json()["data"]["id"]
 
 
-# ── Settings ▸ Schedule ─────────────────────────────────────────────────────
+# ── Settings ▸ Activity ─────────────────────────────────────────────────────
 
 
 def test_the_schedule_follows_the_defaults_until_chosen(server, madrid):

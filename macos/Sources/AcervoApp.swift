@@ -54,16 +54,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
     private var webView: AcervoWebView!
     private var interfaceServer: InterfaceServer?
     private var interfaceFailure: String?
-    private let sessionBridge = SessionBridge()
     private var menuBar: MenuBarController!
     private let updates = UpdateService()
-    private let settings = SettingsWindowController()
+    /// The application's own settings, shown in the interface's Settings ▸ General.
+    private lazy var hostSettings = HostSettings(updates: updates)
+    private lazy var sessionBridge = SessionBridge(host: hostSettings)
     /// Where each in-flight download is going, so the finished file can be revealed rather than lost.
     private var downloadDestinations: [ObjectIdentifier: URL] = [:]
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         installMainMenu()
         createWindow()
+        hostSettings.onChange = { [weak self] state in self?.tellInterface(state) }
         menuBar = MenuBarController(
             openWindow: { [weak self] in self?.showWindow() },
             restartToUpdate: { [weak self] in self?.updates.restartNow() },
@@ -87,11 +89,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
         updates.onUpdateMarkChanged = { [weak self] mark in self?.menuBar.setUpdateMark(mark) }
         menuBar.setUpdateMark(updates.currentMark)
         updates.start()
-
-        // Asking for the address is a window too, so a quiet start leaves it for the next opening.
-        if !updates.hasServerURL, !startsQuietly {
-            DispatchQueue.main.async { [weak self] in self?.showSettings(.general) }
-        }
+        // No server yet is the interface's sign-in screen, which asks for the address; signing in
+        // stores it where the updater reads it.
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
@@ -101,11 +100,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
         return true
     }
 
-    /// Hides the Dock icon once nothing of Acervo's is left on screen; the status item stays. Both
-    /// the main window and the Settings window report their closing here, and neither of them going
-    /// away is on its own a reason to give up the menu bar.
+    /// Hides the Dock icon once nothing of Acervo's is left on screen; the status item stays.
     func windowWillClose(_ notification: Notification) {
-        AppActivation.returnToMenuBar(owning: [window, settings.openWindow])
+        AppActivation.returnToMenuBar(owning: [window])
     }
 
     private func createWindow() {
@@ -307,21 +304,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
         ])
     }
 
+    /// Settings ▸ General shows the check as it happens. The check itself is the application's, so
+    /// it runs even if the interface could not load.
     @objc private func checkForUpdates() {
-        showSettings(.updates)
+        open("settings:general")
         Task { [weak self] in await self?.updates.check(force: true) }
     }
 
-    @objc private func showSettingsMenu() { showSettings(.general) }
+    @objc private func showSettingsMenu() { open("settings") }
 
     @objc fileprivate func exportVocabulary() { open("export") }
     @objc fileprivate func importVocabulary() { open("import") }
     @objc fileprivate func deleteAllWords() { open("delete") }
 
-    /// Every confirmation, and every write, stays on the side that owns the vocabulary.
+    /// Every confirmation, and every write, stays on the side that owns the vocabulary — and every
+    /// setting is shown in its one Settings, which is the interface's.
     ///
-    /// The name travels as an argument rather than inside the source. Today it is one of three
-    /// literals, so nothing can go wrong; a command that one day carries text somebody selected must
+    /// The name travels as an argument rather than inside the source. Today it is always a fixed name,
+    /// so nothing can go wrong; a command that one day carries text somebody selected must
     /// not be able to close the string literal it was pasted into and run as script in the origin
     /// that holds the session.
     private func open(_ command: String) {
@@ -338,14 +338,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, WKNa
         )
     }
 
-    private func showSettings(_ pane: SettingsView.Pane) {
-        settings.show(
-            updates: updates,
-            pane: pane,
-            checkNow: { [weak self] in Task { await self?.updates.check(force: true) } },
-            installUpdate: { [weak self] in Task { await self?.updates.install(thenRestart: true) } },
-            restartNow: { [weak self] in self?.updates.restartNow() }
+    /// The application's settings changed; Settings ▸ General, if it is open, shows it. Sent as an
+    /// argument, never spliced into source, for `open`'s reason.
+    private func tellInterface(_ state: HostSettings.Snapshot) {
+        guard let encoded = try? JSONEncoder().encode(state),
+              let object = try? JSONSerialization.jsonObject(with: encoded) else { return }
+        webView.callAsyncJavaScript(
+            "window.acervo?.hostState(state)",
+            arguments: ["state": object],
+            in: nil,
+            in: .page,
+            completionHandler: nil
         )
-        settings.openWindow?.delegate = self
     }
 }

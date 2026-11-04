@@ -35,7 +35,7 @@ services:
       # nothing here. The keys themselves are named by their catalogue rows, and every value comes
       # from llm.env, which the installer writes mode 600 and compose passes last.
       ACERVO_TEXT_CHAIN: "${ACERVO_TEXT_CHAIN:-}"
-      # The zone days and Settings ▸ Schedule's nightly hour are read in; unset means UTC.
+      # The zone days and the nightly hour in Settings ▸ Activity are read in; unset means UTC.
       ACERVO_TIMEZONE: "${ACERVO_TIMEZONE:-}"
       # The Anki robot: another sync client of the sync server beside it, pushing the vocabulary
       # after it changes and reading review state back every hour. Its collection is in the worker's

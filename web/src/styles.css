@@ -523,8 +523,6 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .meta-foot span { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: .04em; }
 .meta-foot span b { color: var(--ink-2); font-weight: 500; }
 
-
-
 /* ══════════════════════════ article redesign spike ══════════════════════════
    Page and Cards (see app.js). The design language is unchanged — the same faces, sizes and rules —
    and what changed is how much of it is on screen at once. */
@@ -1018,7 +1016,6 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .menu .sel-drop { flex: none; width: 32px; height: 32px; padding: 0; justify-content: center; color: var(--ink-3); }
 .menu .sel-drop:hover { color: var(--warn); }
 .sel-drop svg { width: 14px; height: 14px; }
-
 
 /* ── the chip in the top bar ──
    A bar across the foot of a wide window is a lot of furniture for one line of text, and the top bar
@@ -1534,26 +1531,16 @@ details.fold .fold-body { padding: 4px 0 18px; }
    character against a provider's own console. A pair this server has no credential for is dimmed
    and says why, rather than disappearing: it keeps its place in the order and is skipped, so
    hiding it would make the order the owner saved unexplainable. */
-.model-kind { display: grid; gap: 7px; margin-top: 14px; }
-.model-kind h4 {
-  margin: 0; font-size: 12px; font-weight: 600; letter-spacing: .04em;
-  text-transform: uppercase; color: var(--ink-3);
-}
+
 .model-row { align-items: flex-start; }
-.model-switch { display: flex; align-items: flex-start; gap: 11px; cursor: pointer; flex: 1; min-width: 0; }
-.model-switch input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--core); flex: none; }
+
 .model-id { font-family: var(--mono); font-size: 11.5px; overflow-wrap: anywhere; }
-.model-warning { color: var(--warn); }
-.model-account { font-family: var(--mono); font-size: 11px; overflow-wrap: anywhere; }
+
 /* Dimming alone was too quiet to catch while scrolling a long list, so an unavailable row also
    carries a badge. The icon is decorative and the word beside it is what a screen reader reads. */
-.model-badge {
-  margin-left: 7px; padding: 1px 6px; border-radius: 3px; vertical-align: 1px;
-  font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: .02em;
-  text-transform: uppercase; color: var(--warn); background: var(--warn-soft);
-}
-.model-row.unavailable .config-main > strong, .model-row.unavailable .model-id { opacity: .6; }
-.model-row.unavailable .model-badge { opacity: 1; }
+
+.model-row.unavailable .model-id { opacity: .6; }
+
 /* An arrow that cannot move anything must not look like one that can: a switched-off row has no
    place in the order to move within. */
 .icon-btn:disabled { opacity: .3; cursor: not-allowed; }
@@ -1570,28 +1557,21 @@ details.fold .fold-body { padding: 4px 0 18px; }
    them. The stacking rule that should have saved it was a *viewport* `@media`, and the dialog is a
    fixed width regardless of the window, so on any desktop it never fired. Hence `minmax(0, …)`,
    which may shrink, and a **container** query against the dialog's own width. */
-.provider-table { display: grid; gap: 1px; margin-top: 9px; background: var(--rule); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+
 .provider-line {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) minmax(0, 1.4fr) auto;
   gap: 11px; align-items: baseline; padding: 8px 11px; background: var(--surface);
   min-width: 0;
 }
-.provider-name { font-weight: 600; }
-.provider-credential, .provider-account { display: grid; gap: 2px; min-width: 0; }
-.provider-var { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
-.provider-hint { font-family: var(--mono); font-size: 11px; overflow-wrap: anywhere; }
-.provider-none { font-size: 11px; color: var(--ink-3); font-style: italic; }
-.provider-setting { font-size: 11px; color: var(--ink-3); }
-.provider-usage { justify-self: end; white-space: nowrap; font-size: 11.5px; }
+
 /* An unavailable provider dims its own facts but keeps its name readable: the row is still the
    answer to "is the key there", and that answer is no. */
-.provider-line.unavailable .provider-credential, .provider-line.unavailable .provider-account { opacity: .65; }
-.provider-heading { margin: 18px 0 0; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); }
+
 /* Against the dialog, not the window: it is the dialog the table has to fit inside. */
 @container modal (max-width: 620px) {
   .provider-line { grid-template-columns: minmax(0, 1fr) auto; row-gap: 4px; }
-  .provider-credential, .provider-account { grid-column: 1 / -1; }
+
 }
 
 /* ══════════════════════════ composer ══════════════════════════ */
@@ -1741,7 +1721,6 @@ details.fold .fold-body { padding: 4px 0 18px; }
   text-underline-offset: 3px;
 }
 .toast:has(.toast-action) { pointer-events: auto; }
-
 
 /* ══════════════════════════ the ask dock ══════════════════════════
    `docs/features/article-chat.md` §7. One surface at every width: a bar pinned to the bottom of the
@@ -2254,19 +2233,7 @@ details.fold .fold-body { padding: 4px 0 18px; }
   display: flex; align-items: center; justify-content: space-between; flex: none;
   padding: 16px 20px; border-bottom: 1px solid var(--rule-soft); background: var(--surface);
 }
-.settings-nav {
-  display: flex; flex: none; gap: 2px; padding: 0 12px; overflow-x: auto;
-  border-bottom: 1px solid var(--rule-soft); background: var(--surface);
-  scrollbar-width: none;
-}
-.settings-nav::-webkit-scrollbar { display: none; }
-.settings-nav button {
-  flex: none; padding: 11px 12px; background: none; border: 0; cursor: pointer;
-  font-size: 13.5px; font-weight: 600; color: var(--ink-3); white-space: nowrap;
-  border-bottom: 2px solid transparent; margin-bottom: -1px;
-}
-.settings-nav button:hover { color: var(--ink); }
-.settings-nav button.on { color: var(--core); border-bottom-color: var(--core); }
+
 .settings h2 { font-family: var(--serif); font-size: 21px; font-weight: 700; margin: 0; letter-spacing: -.015em; }
 .close { font-size: 26px; line-height: 1; width: 32px; height: 32px; color: var(--ink-3); }
 .close:hover { color: var(--ink); }
@@ -2277,18 +2244,11 @@ details.fold .fold-body { padding: 4px 0 18px; }
      — so the panel would grow the dialog past its bound and be clipped rather than scrolled. */
   flex: 1 1 auto; min-height: 0;
 }
-.update-status, .update-action, .download-action { display: grid; gap: 4px; text-align: left; }
-.update-status strong, .update-action strong, .download-action strong { font-size: 15px; font-weight: 600; }
-.update-status span, .update-action span, .download-action span, .version {
+
+.version {
   font-size: 13px; line-height: 1.45; color: var(--ink-3);
 }
-.update-action, .download-action {
-  border: 1px solid var(--rule); border-radius: 8px; padding: 13px 15px;
-  background: var(--surface); color: var(--ink); text-decoration: none;
-}
-.update-action { border-color: var(--core); background: var(--core-soft); color: var(--core); }
-.update-action:hover { filter: brightness(1.04); }
-.download-action:hover { background: var(--surface-2); }
+
 .settings-body .tb-btn { justify-content: center; }
 .version { margin: 0; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; }
 
@@ -2304,32 +2264,16 @@ details.fold .fold-body { padding: 4px 0 18px; }
 @keyframes sync-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .sync-chip.syncing svg { animation: none; } }
 
-.sync-panel { display: grid; gap: 10px; }
-.sync-warning, .sync-message {
+.sync-message {
   margin: 0; font-size: 13px; line-height: 1.45;
   border-radius: 8px; padding: 10px 12px;
 }
-.sync-warning { color: var(--warn); background: var(--warn-soft); }
+
 .sync-message { color: var(--ink-3); background: var(--surface-2); }
 /* How long this launch took to put words on screen, measured on the device (`startup.ts`). */
-.sync-launch { margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--ink-3); }
+
 .sync-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .sync-actions .tb-btn { flex: 1 1 auto; justify-content: center; }
-
-.replace-copy {
-  display: grid; gap: 9px; padding: 12px 13px;
-  border: 1px solid var(--rule); border-radius: 8px; background: var(--surface-2);
-}
-.replace-copy p { margin: 0; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
-.replace-copy label {
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: .07em;
-  text-transform: uppercase; color: var(--ink-3);
-}
-.replace-copy input {
-  font-family: var(--mono); font-size: 14px; letter-spacing: .08em;
-  padding: 9px 11px; border: 1px solid var(--rule); border-radius: 7px;
-  background: var(--surface); color: var(--ink);
-}
 
 .danger-zone {
   display: grid; gap: 9px; padding: 14px 15px;
@@ -2384,32 +2328,12 @@ details.fold .fold-body { padding: 4px 0 18px; }
 }
 
 /* ══════════════════════════ vocabularies & topics ══════════════════════════ */
-.config-section { display: grid; gap: 9px; }
-.config-section h3 { margin: 0; font-size: 14px; font-weight: 700; }
+
 .config-help { margin: 0; font-size: 13px; line-height: 1.45; color: var(--ink-3); }
-.config-list { display: grid; gap: 7px; }
-.config-row {
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-  padding: 10px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
-}
-.config-icon { font-size: 19px; line-height: 1; }
+
 /* The label takes the row on a narrow screen and the controls drop beneath it, rather than each
    button squeezing until its text wraps mid-word. */
-.config-main { display: grid; gap: 2px; flex: 1 1 12rem; min-width: 0; }
-.config-main strong { font-size: 14.5px; font-weight: 600; }
-.config-main span { font-size: 12.5px; color: var(--ink-3); overflow-wrap: anywhere; }
-.config-row .tb-btn { height: 28px; padding: 0 10px; font-size: 12.5px; }
-.config-row .icon-btn { padding: 4px 7px; font-size: 14px; line-height: 1; }
-.config-edit {
-  display: grid; gap: 6px; padding: 12px 13px;
-  border: 1px solid var(--core); border-radius: 8px; background: var(--surface-2);
-}
-.config-edit input {
-  padding: 9px 11px; border: 1px solid var(--rule); border-radius: 7px;
-  background: var(--surface); color: var(--ink); font-size: 14px;
-}
-.config-edit input:focus { border-color: var(--core); outline: none; }
-.config-edit .sync-actions { margin-top: 4px; }
+
 .config-switch {
   display: flex; align-items: flex-start; gap: 11px; cursor: pointer;
   padding: 11px 13px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
@@ -2419,29 +2343,6 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .config-switch > span { display: grid; gap: 3px; }
 .config-switch strong { font-size: 14.5px; font-weight: 600; }
 .config-switch > span > span { font-size: 12.5px; line-height: 1.45; color: var(--ink-3); }
-
-/* ══════════════════════════ dictionaries ═════════════════════════════ */
-/* A row is a switch plus, for the ones that can be stored here, an action. Built out of the same
-   surface, rule and ink tokens as the rest of Settings rather than a look of its own — the design
-   in design/ui-prototype/ does not cover this dialog, so these are the only definitions. */
-.dictionary-group { display: grid; gap: 7px; margin-top: 14px; }
-.dictionary-group h4 {
-  margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--ink-3);
-}
-.dictionary-row {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 10px 12px; border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
-}
-.dictionary-row:hover { background: var(--surface-2); }
-.dictionary-switch { display: flex; align-items: flex-start; gap: 11px; cursor: pointer; flex: 1; min-width: 0; }
-.dictionary-switch input { margin: 2px 0 0; width: 16px; height: 16px; accent-color: var(--core); flex: none; }
-.dictionary-main { display: grid; gap: 3px; min-width: 0; flex: 1; }
-.dictionary-main strong { font-size: 14.5px; font-weight: 600; }
-.dictionary-main > span { font-size: 12.5px; line-height: 1.45; color: var(--ink-3); }
-.dictionary-note { font-size: 12.5px; line-height: 1.45; color: var(--ink-3); font-style: italic; }
-.dictionary-progress { font-size: 12.5px; color: var(--core); font-variant-numeric: tabular-nums; }
-.dictionary-row .tb-btn, .dictionary-row a.tb-btn { flex: none; align-self: center; text-decoration: none; }
 
 /* ══════════════════════════ export & import ══════════════════════════ */
 .config-field { display: grid; gap: 5px; font-size: 13px; color: var(--ink-3); }
@@ -2459,12 +2360,7 @@ details.fold .fold-body { padding: 4px 0 18px; }
   margin-right: 10px; padding: 6px 11px; border: 1px solid var(--rule); border-radius: 6px;
   background: var(--surface-2); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer;
 }
-.transfer-summary {
-  display: grid; gap: 3px; padding: 11px 13px;
-  border: 1px solid var(--rule); border-radius: 8px; background: var(--surface-2);
-}
-.transfer-summary strong { font-size: 14.5px; font-weight: 600; }
-.transfer-summary > span { font-size: 12.5px; line-height: 1.45; color: var(--ink-3); }
+
 .transfer-problem { margin: 0; font-size: 13px; line-height: 1.45; color: var(--warn); }
 /* The settings dialog cannot scroll, so a report of four hundred entries has to scroll itself. */
 .transfer-report {
@@ -2479,7 +2375,6 @@ details.fold .fold-body { padding: 4px 0 18px; }
 }
 .transfer-report li { font-size: 12.5px; line-height: 1.4; overflow-wrap: anywhere; }
 .transfer-report li span { color: var(--ink-3); }
-
 
 /* ══════════════════════════ clips ══════════════════════════ */
 /* The dialog is a `.settings` dialog, like the picture one: it inherits the bound, the scroll
@@ -2572,67 +2467,32 @@ details.fold .fold-body { padding: 4px 0 18px; }
 
 /* Settings ▸ Clips. The corpus is a separate service, so this pane mostly *reports* rather than
    switching: what it holds, and which channels it harvests — a list Acervo does not own. */
-.config-subhead {
-  margin: 22px 0 4px; font-family: var(--sans); font-size: 12px; font-weight: 700;
-  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
-}
-.corpus-readout { margin-bottom: 4px; }
+
 /* Settings ▸ Clips · the channel catalogue.
    Grouped by language and, inside that, by the corpus service's own curated sections. Shut by
    default: a long list, read rarely and changed more rarely, whose usual question — how many are on
    — is answered in the summary without opening it. */
-.channel-group { border-top: 1px solid var(--rule-soft); }
-.channel-group[open] { padding-bottom: 10px; }
-.channel-group > summary {
-  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
-  padding: 10px 2px; cursor: pointer; list-style: none;
-}
-.channel-group > summary::-webkit-details-marker { display: none; }
+
 /* A disclosure triangle we draw, so it turns with the section rather than sitting where the
    platform happens to put one. */
-.channel-group > summary::before {
-  content: "›"; display: inline-block; width: 12px; margin-right: 2px;
-  color: var(--ink-3); transform: rotate(0deg); transition: transform .12s ease;
-}
-.channel-group[open] > summary::before { transform: rotate(90deg); }
-.channel-group > summary:focus-visible { outline: 2px solid var(--core); outline-offset: 2px; }
-.channel-group-name { flex: 1; font-weight: 600; font-size: 14px; }
-.channel-group-count { color: var(--ink-3); font-size: 12px; white-space: nowrap; }
 
-.channel-section { padding: 2px 0 8px 14px; }
-.channel-section h5 {
-  margin: 8px 0 4px; font-family: var(--sans); font-size: 11px; font-weight: 600;
-  letter-spacing: .04em; color: var(--ink-3);
-}
 /* A grid rather than a flex label, which is what ran the name and its details together on one line
    before: `.style-switch` lays its children out in a row, and these want two. */
-.channel-row {
-  display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 8px;
-  padding: 3px 0; font-size: 13.5px;
-}
-.channel-row input { align-self: center; }
-.channel-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
-.channel-text a { color: var(--ink); font-weight: 600; text-decoration: none; }
-.channel-text a:hover { color: var(--core); text-decoration: underline; }
+
 /* The channel opens elsewhere, and the mark says so without costing a word. */
-.channel-text a::after { content: " ↗"; color: var(--ink-3); font-weight: 400; font-size: 11px; }
-.channel-text span { color: var(--ink-3); font-size: 11.5px; line-height: 1.35; }
 
 /* ══════════════════════════ pictures ══════════════════════════ */
 /* The dialog is a `.settings` dialog with a different body, so it inherits the bound, the scroll
    region and the full-screen-on-a-phone rule rather than restating any of them. */
 .image-dialog { width: min(620px, 100%); }
-.image-brief, .rules-text {
+.image-brief {
   padding: 10px 12px; border: 1px solid var(--rule); border-radius: 8px;
   background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; line-height: 1.5;
   resize: vertical; min-height: 96px;
 }
-.image-brief:focus, .rules-text:focus { border-color: var(--core); outline: none; }
+.image-brief:focus { border-color: var(--core); outline: none; }
 /* Settings ▸ Rules: the owner's standing rules, a few sentences to a few paragraphs. */
-.rules-text { width: 100%; min-height: 160px; }
-.rules-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.rules-count { font-size: 12.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-.rules-count.warn { color: var(--warn); }
+
 /* The whole prompt that was sent: read to copy, so it wraps rather than scrolling sideways. */
 .image-composed {
   margin: 0; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 8px;
@@ -2653,30 +2513,11 @@ details.fold .fold-body { padding: 4px 0 18px; }
 
 /* The two bulk moves for twenty-three switches. Small and quiet: they sit above the list rather
    than competing with it, and the count is what actually answers "where am I". */
-.style-bulk { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
-.style-bulk button {
-  padding: 5px 10px; border: 1px solid var(--rule); border-radius: 6px;
-  background: var(--surface); color: var(--ink); font-size: 12.5px; font-weight: 600; cursor: pointer;
-}
-.style-bulk button:hover:not(:disabled) { border-color: var(--core); color: var(--core); }
-.style-bulk button:disabled { opacity: .4; cursor: not-allowed; }
-.style-count { margin-left: auto; font-size: 12px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+
 /* Twenty-three switches, so a column each would be a screen of scrolling to find one name. */
-.style-grid {
-  display: grid; gap: 2px 14px; margin-top: 4px;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-}
-.style-switch {
-  display: flex; align-items: center; gap: 8px; padding: 4px 0;
-  font-size: 13.5px; cursor: pointer;
-}
-.style-switch input { flex: none; }
-.style-switch .label { font-size: 10.5px; }
+
 .config-help.warn { color: var(--warn); }
 /* A voice per model per language: the model named once, its languages as selects beneath it. */
-.voice-model { display: grid; gap: 8px; margin-top: 12px; }
-.voice-model > strong { font-size: 13.5px; font-weight: 600; }
-.voice-model > strong .label { font-size: 10.5px; font-weight: 400; }
 
 /* ── the server's work, shown ───────────────────────────────────────────
    One quiet line under the header's rule while a word fills in. It is as tall as the first section's
@@ -2712,22 +2553,8 @@ details.fold .fold-body { padding: 4px 0 18px; }
 @media (prefers-reduced-motion: reduce) { .working-mark { animation: none; } }
 
 /* Settings ▸ Clips: adding a channel to the corpus's own catalogue. */
-.channel-form {
-  display: grid; gap: 10px; margin-top: 12px; padding: 12px;
-  border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
-}
-.channel-form .config-field { margin: 0; }
 
 /* Settings ▸ Activity. */
-.activity-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
-.activity-row {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px;
-  padding: 8px 11px; background: var(--surface);
-}
-.activity-what { display: grid; gap: 2px; flex: 1; min-width: 0; }
-.activity-what strong { font-size: 13.5px; font-weight: 600; }
-.activity-what .hint { font-size: 11.5px; color: var(--ink-3); }
-.activity-actions { display: flex; gap: 6px; }
 
 /* ══ article redesign spike: narrow and tablet ══ */
 /* Reading a word does not need the topic strip or the rail beside it on a phone or a tablet. */
@@ -3221,3 +3048,252 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .map-lang-menu { right: 0; top: calc(100% + 8px); }
 /* The counts go only where there is no room for them — a phone — and nothing is kept for them there:
    Find simply takes the width. */
+
+/* ── settings ──
+   One window of a fixed size, never sized by the page in it: a page switch must not move or resize
+   anything, so the box is as big as the screen allows rather than as big as its content. Full screen
+   on a phone, nearly so on a tablet, a generous resizable window with a mouse.
+   The pages are listed in groups. Where there is room (≥640px of dialog) the list is a sidebar beside
+   the page; narrower, it is a page of its own and a page drills in from it with a back button. One
+   DOM serves both — `data-level` says which of the two a narrow dialog shows — so nothing but this
+   stylesheet knows the width. */
+.settings-window {
+  position: relative;
+  width: min(1000px, calc(100vw - 64px)); height: min(760px, calc(100dvh - 64px));
+  min-width: min(640px, calc(100vw - 40px)); min-height: min(480px, calc(100dvh - 40px));
+  max-width: calc(100vw - 40px); max-height: calc(100dvh - 40px);
+  overflow: hidden; resize: both;
+  background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; box-shadow: var(--shadow);
+  container-type: inline-size; container-name: prefs;
+}
+/* A tablet: the screen, less a margin that shows it is a layer over the app. */
+@media (pointer: coarse) and (min-width: 761px) {
+  .modal-backdrop:has(> .settings-window) { padding: 16px; }
+  .settings-window {
+    width: calc(100vw - 32px); height: calc(100dvh - 32px); min-width: 0; min-height: 0;
+    max-width: none; max-height: none; border-radius: 16px; resize: none;
+  }
+}
+/* A phone, or a narrow window: the whole screen. */
+@media (max-width: 760px) {
+  .modal-backdrop:has(> .settings-window) { padding: 0; }
+  .settings-window {
+    width: 100vw; height: 100dvh; min-width: 0; min-height: 0; max-width: none; max-height: none;
+    border: 0; border-radius: 0; resize: none;
+  }
+}
+.prefs-frame { height: 100%; display: grid; grid-template-columns: 100%; grid-template-rows: 100%; }
+
+/* The one close button sits on the window itself, so it is in the same place at every level. */
+.settings-window > .close {
+  position: absolute; z-index: 2; top: max(12px, env(safe-area-inset-top)); right: 12px;
+  width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%;
+  border: 0; background: none; color: var(--ink-3); cursor: pointer;
+}
+.settings-window > .close:hover { background: var(--surface-2); color: var(--ink); }
+.settings-window > .close svg { width: 20px; height: 20px; }
+
+.prefs-side, .prefs-main { min-height: 0; display: flex; flex-direction: column; }
+.prefs-head {
+  flex: none; display: flex; align-items: center; gap: 4px; min-height: 60px;
+  padding: max(12px, env(safe-area-inset-top)) 60px 8px 20px;
+}
+.prefs-head h2, .prefs-head h3 {
+  margin: 0; font-family: var(--serif); font-weight: 700; letter-spacing: -.015em; color: var(--ink);
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.prefs-head h2 { font-size: 24px; }
+.prefs-head h3 { font-size: 22px; }
+.prefs-back {
+  flex: none; display: inline-flex; align-items: center; gap: 2px; height: 36px; margin-left: -10px;
+  padding: 0 10px 0 4px; border: 0; border-radius: 8px; background: none;
+  font-size: 15px; color: var(--core); cursor: pointer;
+}
+.prefs-back:hover { background: var(--core-soft); }
+.prefs-back svg { width: 20px; height: 20px; }
+.prefs-scroll {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: 4px 16px max(24px, env(safe-area-inset-bottom));
+}
+.prefs-page { display: grid; gap: 22px; align-content: start; max-width: 680px; }
+
+/* The narrow dialog shows one level at a time. */
+.settings-window[data-level="list"] .prefs-main,
+.settings-window[data-level="page"] .prefs-side { display: none; }
+/* A back button to a list that is already on screen would be a button that does nothing. */
+.prefs-back.to-list { display: inline-flex; }
+
+/* ── the list of pages ──
+   Narrow, it is the iOS-style grouped list a phone expects; wide, a quiet sidebar. */
+.prefs-nav { display: grid; gap: 22px; }
+.prefs-nav h4 { margin: 0 0 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: .07em;
+                text-transform: uppercase; color: var(--ink-3); }
+.prefs-nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px;
+                background: var(--rule-soft); border: 1px solid var(--rule-soft); border-radius: 12px; overflow: hidden; }
+.prefs-nav button {
+  width: 100%; display: flex; align-items: center; gap: 12px; min-height: 50px; padding: 8px 12px;
+  border: 0; background: var(--surface); color: var(--ink); font-size: 15.5px; text-align: left; cursor: pointer;
+}
+.prefs-nav button:hover { background: color-mix(in srgb, var(--surface-2) 50%, var(--surface)); }
+.prefs-nav button > span:not(.prefs-icon):not(.chev) { flex: 1; }
+.prefs-nav .chev { width: 18px; height: 18px; color: var(--ink-3); }
+.prefs-icon {
+  flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px;
+  background: var(--core-soft); color: var(--core);
+}
+.prefs-icon svg { width: 18px; height: 18px; }
+
+@container prefs (min-width: 640px) {
+  .prefs-frame { grid-template-columns: 228px minmax(0, 1fr); }
+  .settings-window[data-level] .prefs-side, .settings-window[data-level] .prefs-main { display: flex; }
+  .prefs-side { border-right: 1px solid var(--rule-soft); background: color-mix(in srgb, var(--surface-2) 45%, var(--paper)); }
+  .prefs-side .prefs-head { padding-right: 16px; }
+  .prefs-side .prefs-scroll { padding: 0 10px 16px; }
+  .prefs-main .prefs-scroll { padding: 4px 28px 28px; }
+  .prefs-main .prefs-head { padding-left: 28px; }
+  .prefs-back.to-list { display: none; }
+  .prefs-nav { gap: 16px; }
+  .prefs-nav h4 { margin: 0 0 4px 10px; font-size: 11px; }
+  .prefs-nav ul { gap: 1px; background: none; border: 0; border-radius: 0; }
+  .prefs-nav button { min-height: 36px; padding: 5px 10px; gap: 10px; border-radius: 8px;
+                      background: none; font-size: 14px; color: var(--ink-2); }
+  .prefs-nav button:hover { background: var(--surface-2); color: var(--ink); }
+  .prefs-nav button[aria-current="page"] { background: var(--core-soft); color: var(--ink); font-weight: 600; }
+  .prefs-nav .chev { display: none; }
+  .prefs-icon { width: 24px; height: 24px; border-radius: 6px; background: none; }
+  .prefs-icon svg { width: 17px; height: 17px; }
+}
+
+/* ── the kit ──
+   Every page is built from these: a group is a titled card of rows, a row is a label with at most
+   one line of hint on the left and its control on the right. */
+.pref-group { display: grid; gap: 7px; }
+.pref-group > h4 {
+  display: flex; align-items: baseline; gap: 10px; margin: 0 4px;
+  font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3);
+}
+.pref-group > h4 .count { margin-left: auto; letter-spacing: 0; text-transform: none; font-weight: 500; }
+.pref-card {
+  display: grid; gap: 1px; background: var(--rule-soft);
+  border: 1px solid var(--rule-soft); border-radius: 12px; overflow: hidden;
+}
+.pref-foot { margin: 0 4px; font-size: 13px; line-height: 1.45; color: var(--ink-3); }
+.pref-foot a, .pref-link-inline { color: var(--core); background: none; border: 0; padding: 0; font: inherit; cursor: pointer; text-decoration: none; }
+.pref-row {
+  display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 10px 14px;
+  background: var(--surface); color: var(--ink); text-align: left; width: 100%; border: 0; font: inherit;
+}
+label.pref-row, button.pref-row { cursor: pointer; }
+button.pref-row:hover, label.pref-row:hover { background: color-mix(in srgb, var(--surface-2) 40%, var(--surface)); }
+.pref-row.stack { flex-direction: column; align-items: stretch; gap: 10px; }
+.pref-text { flex: 1 1 auto; min-width: 0; display: grid; gap: 1px; }
+.pref-label { font-size: 15px; font-weight: 500; line-height: 1.35; }
+.pref-hint { font-size: 13px; line-height: 1.4; color: var(--ink-3); }
+.pref-value { flex: none; max-width: 55%; font-size: 14px; color: var(--ink-3); text-align: right;
+              overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pref-value.mono { font-family: var(--mono); font-size: 12.5px; }
+.pref-row .chev { flex: none; width: 18px; height: 18px; color: var(--ink-3); }
+/* A chevron is drawn by the app inside a span and by the prototype as the svg itself: both fill the box. */
+span.chev { display: inline-flex; flex: none; }
+.chev svg { width: 100%; height: 100%; }
+.pref-row .tb-btn { flex: none; height: 32px; }
+.pref-row .badge {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--warn); background: var(--warn-soft); border-radius: 4px; padding: 2px 6px; flex: none;
+}
+/* A whole-row button: an action, centred, in the accent — or the warning colour when it destroys. */
+button.pref-action { justify-content: center; min-height: 48px; color: var(--core); font-weight: 500; font-size: 15px; }
+button.pref-action.danger { color: var(--warn); }
+button.pref-action:disabled { color: var(--ink-3); cursor: default; }
+.pref-avatar {
+  flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--core); color: var(--on-core); font-family: var(--serif); font-size: 20px; font-weight: 700;
+}
+
+/* The switch. A checkbox underneath, so a label still toggles it and a form still reads it. */
+.toggle {
+  -webkit-appearance: none; appearance: none; flex: none; position: relative; margin: 0;
+  width: 46px; height: 28px; border-radius: 14px; background: var(--rule); cursor: pointer;
+  transition: background-color .16s ease;
+}
+.toggle::before {
+  content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.28); transition: transform .16s ease;
+}
+.toggle:checked { background: var(--core); }
+.toggle:checked::before { transform: translateX(18px); }
+.toggle:disabled { opacity: .45; cursor: default; }
+.toggle:focus-visible { outline: 2px solid var(--core); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .toggle, .toggle::before { transition: none; } }
+
+/* A choice of two or three, as the segmented control the app already uses, in sentence case here. */
+.pref-row .seg { display: flex; }
+.pref-row .seg button { flex: 1; font-family: var(--sans); font-size: 13.5px; letter-spacing: 0; text-transform: none; padding: 7px 10px; }
+.pref-select, .pref-input {
+  flex: none; max-width: 55%; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 8px;
+  background: var(--paper); color: var(--ink); font: inherit; font-size: 14px;
+}
+.pref-input { flex: 1 1 auto; max-width: none; min-width: 0; }
+/* The browser's own arrow sits against the edge and differs per platform; this one is drawn, in the
+   hint colour of the theme, with the same inset as the text. */
+.pref-select {
+  -webkit-appearance: none; appearance: none; padding-right: 34px; cursor: pointer;
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236D827C' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: var(--chevron); background-repeat: no-repeat;
+  background-position: right 11px center; background-size: 14px 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pref-select { --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C908B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); }
+}
+:root[data-theme="dark"] .pref-select { --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237C908B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); }
+
+/* Between what a page sets and what it reports: Activity's schedule above, its record below. */
+.pref-divider {
+  display: flex; align-items: center; gap: 12px; margin: 8px 4px 0;
+  font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-3);
+}
+.pref-divider::before, .pref-divider::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.pref-select:focus, .pref-input:focus, .pref-text-area:focus { border-color: var(--core); outline: none; }
+.pref-text-area {
+  width: 100%; min-height: 150px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 8px;
+  background: var(--paper); color: var(--ink); font: inherit; font-size: 14.5px; line-height: 1.5; resize: vertical;
+}
+.pref-reorder { flex: none; display: flex; gap: 4px; }
+.pref-reorder .icon-btn { width: 30px; height: 30px; }
+.pref-reorder .icon-btn svg { width: 15px; height: 15px; }
+
+/* A fact to act on: no provider, a corpus that does not answer. Never an explanation. */
+.pref-notice {
+  display: flex; gap: 10px; align-items: flex-start; padding: 11px 14px; border-radius: 12px;
+  background: var(--warn-soft); color: var(--ink); font-size: 14px; line-height: 1.45;
+}
+.pref-notice svg { flex: none; width: 18px; height: 18px; margin-top: 1px; color: var(--warn); }
+
+/* What a page shows before its first answer: the shape it will have, never a line of text. */
+.pref-skel { height: 12px; border-radius: 6px; background: var(--surface-2); }
+.pref-row .pref-skel { width: 40%; }
+.pref-row .pref-skel + .pref-skel { width: 24%; }
+@media (prefers-reduced-motion: no-preference) {
+  .pref-skel { animation: pref-pulse 1.4s ease-in-out infinite; }
+}
+@keyframes pref-pulse { 50% { opacity: .5; } }
+
+/* Picture styles: chips that are switches, wrapped. */
+.pref-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 14px; background: var(--surface); }
+.pref-chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--paper); color: var(--ink-2); font-size: 13.5px; cursor: pointer;
+}
+.pref-chip svg { width: 13px; height: 13px; }
+.pref-chip[aria-pressed="true"] { border-color: color-mix(in srgb, var(--core) 50%, transparent); background: var(--core-soft); color: var(--core); font-weight: 500; }
+
+/* Buttons that belong to a group rather than to a row: Save and Cancel, Switch all on and off. */
+.pref-buttons { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
+.pref-buttons > .pref-hint { flex: 1; }
+.pref-hint.warn { color: var(--warn); }
+.pref-stack { display: grid; gap: 22px; }
+.pref-row a.icon-btn { flex: none; width: 32px; height: 32px; }
+.pref-row a.icon-btn svg { width: 15px; height: 15px; }
+.pref-row .model-id { font-family: var(--mono); font-size: 12.5px; font-weight: 400; color: var(--ink-2); }
+.pref-row.unavailable .pref-label { color: var(--ink-3); }
+.pref-group .danger-zone h3 { margin: 0; font-size: 15px; }

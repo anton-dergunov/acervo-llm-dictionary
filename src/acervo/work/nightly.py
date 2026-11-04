@@ -1,6 +1,6 @@
 """`nightly`: the one timed run, and the timer that queues it (`docs/architecture/jobs.md`).
 
-Steps in sequence, each behind its own switch in Settings ▸ Schedule, and a failed step never stops
+Steps in sequence, each behind its own switch in Settings ▸ Activity, and a failed step never stops
 the next. Today there is one, `corpus.update`; reading Anki back runs every hour instead
 (`work/anki.py`). The timer is a tick of the runner's
 loop: at most once a minute it asks, for each account, whether a run is due, and queues one if so.

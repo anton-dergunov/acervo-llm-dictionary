@@ -166,8 +166,8 @@ Then:
    https://acervo.<tailnet-name>.ts.net/api/acervo/v1/health
    ```
 
-8. Enter the first address, without `/api/...`, in the Acervo macOS Settings window. The native
-   updater derives its manifest and download addresses from that base URL.
+8. On the Mac, enter the address, without `/api/...`, as the server on Acervo's sign-in screen.
+   Signing in stores it, and the native updater derives its manifest and download addresses from it.
 
 Inspect what the host is serving, including every other service, with:
 
@@ -248,15 +248,18 @@ npm run package:mac
 ```
 
 The application is a thin AppKit host around the same `web/dist` interface the PWA uses. Its native
-bridge stores session state; it holds no vocabulary model and no operations of its own. On first launch
-its Settings window asks for the HTTPS Acervo address, which stays in local macOS preferences and is
-never placed in source code, documentation or release metadata.
+bridge stores session state and answers for the application's own settings; it holds no vocabulary
+model and no operations of its own. **There is one Settings, the interface's**: Acervo ▸ Settings… (⌘,)
+opens it, and on the Mac its General page shows the application's own settings — updates, opening at
+login, the server — read and changed through the bridge (`macos/Sources/HostSettings.swift`). The HTTPS
+Acervo address is asked for on the sign-in screen, stays in local macOS preferences, and is never placed
+in source code, documentation or release metadata. Changing server is signing in again.
 
 **Acervo opens at login**, because the update mark is only seen while it is running. A copy in an
 Applications folder registers itself once, on its first launch; **Settings ▸ General ▸ Open Acervo at
 login** turns it off, and off stays off. The switch reads the system's own answer, so removing Acervo
 under System Settings ▸ Login Items shows there too. **A login launch stays in the menu bar** — no window, and no
-request for a missing server address — unless **Show the window when opened at login** is on; opening
+request for a missing server address — unless **Show the window at login** is on; opening
 Acervo yourself always shows the window. A login launch is recognised from the event that opens the
 application, not from the launchd service name, which every launch carries.
 

@@ -565,7 +565,7 @@ def test_health_never_puts_a_key_an_endpoint_or_an_account_id_in_an_unauthentica
 
 
 # ── whose chain decides ─────────────────────────────────────────────────────
-# The point of Settings ▸ Models: the owner's order takes effect on the next capture, with nothing
+# The point of Settings ▸ Providers: the owner's order takes effect on the next capture, with nothing
 # restarted and nothing redeployed. These run against the same process, which is the whole claim.
 
 

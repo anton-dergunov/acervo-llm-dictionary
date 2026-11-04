@@ -123,6 +123,12 @@ artefact and should be measured before a shared machine is trusted with it.
 Add, edit and remove a provider, and enter its key, from Settings ▸ Providers, taking effect on the
 next request with nothing redeployed.
 
+The page is built from the Settings kit ([`../features/settings.md`](../features/settings.md) §5): each
+kind's order is already an ordered list of switches, and Credentials is already a sub-page. A provider
+becomes a row there that opens a sub-page of its own — its key field, the cheap call that says whether
+the key works, its preset — and "Add a provider…" is a whole-row action that opens the same sub-page
+empty. Usage (§4) is one more sub-page, not a second screen.
+
 Rules that already hold and must keep holding:
 
 - **A credential never leaves the server**, apart from the bounded first-four/last-four exception.

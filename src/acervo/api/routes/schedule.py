@@ -1,4 +1,4 @@
-"""Settings ▸ Schedule: the nightly hour, its step switches, and how the last run went."""
+"""Settings ▸ Activity: the nightly hour, its step switches, and how the last run went."""
 
 from __future__ import annotations
 

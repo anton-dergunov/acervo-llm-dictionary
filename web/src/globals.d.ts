@@ -13,11 +13,18 @@ declare module "virtual:pwa-register" {
   export function registerSW(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void>;
 }
 
-/** What the macOS menu bar can ask the interface to open. */
-type AcervoCommand = "export" | "import" | "delete";
+/**
+ * What the macOS menu bar can ask the interface to open: a Settings page by name — "settings" alone
+ * is General — or one of the vocabulary's own operations, which open Settings ▸ Data.
+ */
+type AcervoCommand = "export" | "import" | "delete" | "settings" | `settings:${string}`;
 
 interface Window {
-  acervo?: { command(name: AcervoCommand): void };
+  acervo?: {
+    command(name: AcervoCommand): void;
+    /** The application's own settings changed: a download moved on, a build arrived. */
+    hostState(state: import("./host").HostState): void;
+  };
   webkit?: {
     messageHandlers?: {
       acervo?: { postMessage(message: unknown): Promise<unknown> };

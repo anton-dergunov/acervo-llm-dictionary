@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from acervo import trace
+from acervo import activity, trace
 from acervo.article import ArticleView, article_for
 from acervo.clips.corpus import Candidate, Corpus, CorpusError
 from acervo.clips.ids import clip_example_id
@@ -67,7 +67,7 @@ def _candidates(settings: Settings, owner: str) -> tuple[chain.Candidate, ...]:
 
     Resolved per call rather than cached, for `chain_for`'s reason: it is one indexed read against a
     local SQLite file set against a model call of up to two minutes, and caching it would mean a
-    change in Settings ▸ Models took effect at some unpredictable later time.
+    change in Settings ▸ Providers took effect at some unpredictable later time.
     """
     try:
         resolved = chain.resolve("text", chain_for(settings, owner, "text"), load_catalogue())
@@ -81,26 +81,37 @@ def _candidates(settings: Settings, owner: str) -> tuple[chain.Candidate, ...]:
 # ── settings ────────────────────────────────────────────────────────────────
 
 
-def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
-    """What the owner chose, and whether this deployment could find a clip at all.
+#: How long Settings waits for the corpus to describe itself. A search may take the client's whole
+#: bound; a status read that takes more than a few seconds is a corpus that is not answering, and
+#: the owner is looking at the page while it waits.
+STATUS_TIMEOUT_SECONDS = 4.0
 
-    The corpus reading travels with the settings rather than through a route of its own, exactly as
-    the style table travels with Settings ▸ Pictures: the switch is meaningless without knowing
-    whether anything is indexed, and one round trip cannot show a half-loaded screen.
+
+def settings_view(owner: str) -> dict[str, Any]:
+    """What the owner chose: one indexed read, so Settings ▸ Clips shows its switches at once."""
+    return dict(clip_settings.settings(owner))
+
+
+def corpus_view(settings: Settings) -> dict[str, Any]:
+    """Whether this deployment could find a clip at all, and what the corpus holds.
+
+    A call to another service, so it is a route of its own rather than part of the settings: the
+    switches never wait for it, and changing one does not ask it again. A corpus that is down is a
+    fact to show, not an error to raise — Settings must open and say so — and it is written down,
+    because the owner was shown it and `admin log` is where they would look for why.
     """
-    chosen = clip_settings.settings(owner)
-    corpus: dict[str, Any] = {"configured": bool(settings.speech_url), "reachable": False}
-    if settings.speech_url:
-        try:
-            corpus = {"configured": True, "reachable": True, **Corpus(settings.speech_url, request_id=trace.current()).status()}
-        except CorpusError as error:
-            # A corpus that is down is a fact to show, not an error to raise: Settings must open and
-            # say so, the way it does for a dictionary source that cannot be reached.
-            corpus["error"] = error.reason
-    return {**chosen, "corpus": corpus}
+    if not settings.speech_url:
+        return {"configured": False, "reachable": False}
+    try:
+        return {"configured": True, "reachable": True, **Corpus(
+            settings.speech_url, timeout=STATUS_TIMEOUT_SECONDS, request_id=trace.current()
+        ).status()}
+    except CorpusError as error:
+        activity.note("corpus unanswered", failed=True, reason=error.reason, message=str(error))
+        return {"configured": True, "reachable": False, "error": error.reason}
 
 
-def apply_settings(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, Any]:
+def apply_settings(owner: str, body: dict[str, Any]) -> dict[str, Any]:
     changes: dict[str, Any] = {}
     for field, column in (("searchEnabled", "search_enabled"),
                           ("selfContainedOnly", "self_contained_only")):
@@ -110,7 +121,7 @@ def apply_settings(settings: Settings, owner: str, body: dict[str, Any]) -> dict
                 raise ApiError(400, "invalid_input", f"{field} must be true or false.")
             changes[column] = value
     clip_settings.save(owner, **changes)
-    return settings_view(settings, owner)
+    return settings_view(owner)
 
 
 # ── the one call ────────────────────────────────────────────────────────────

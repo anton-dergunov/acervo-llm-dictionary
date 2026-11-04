@@ -298,11 +298,18 @@ own — the owner's list is the owner's. And a language the seed does not cover 
 Settings; that is a limitation to fix in the retrieval repository rather than to work around here.
 
 **Settings ▸ Clips** shows whether the service answers and what its corpus holds, lists the channels with
-enable, disable and add, offers Update now, and has two switches: `searchEnabled`, which stops the search
+enable, disable and add on a Channels sub-page, offers Update now there, and has two switches: `searchEnabled`, which stops the search
 a save queues while a person's own request still searches, and `selfContainedOnly`, a matter of taste —
 speech tidy enough to follow cold, or as messy as a real room. **Disabling a channel stops new downloads
 and removes its clips from search at the next update**; clips already stored in articles stay, being
 records the owner kept rather than a live query.
+
+The switches and the corpus reading are **two routes, not one**: `GET /clips/settings` is the owner's
+row and answers at once, and `GET /clips/corpus` asks the service for its status with a four-second
+bound of its own. They were one route, so the page showed nothing until another service answered — up
+to the client's whole twenty seconds when it did not — and every change of a switch asked it again. A
+corpus that does not answer is shown, not raised, and written to the activity log (`corpus unanswered`)
+because the owner was told. The channel list is read only when its sub-page opens.
 
 ### 11 · A step of the word's enrichment, not a second engine
 

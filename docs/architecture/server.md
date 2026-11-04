@@ -193,7 +193,7 @@ The routes, under `/api/acervo/v1` unless shown:
 | The map | `GET /map/{language}` |
 | Review history | `POST /reviews` (a batch, append-only), `GET /reviews/latest?system=`, `GET /stats?language=&days=&weeks=` |
 | Anki | `GET /anki`, `PUT /anki/settings`, `POST /anki/push`, `POST /anki/pull` (due at once) |
-| Clips and the corpus | `GET`/`PUT /clips/settings`, and the allow-listed proxy under `/speech/…` |
+| Clips and the corpus | `GET`/`PUT /clips/settings`, `GET /clips/corpus` (what the corpus holds, asked of it with a short timeout), and the allow-listed proxy under `/speech/…` |
 | Dictionaries | `GET /dictionaries`, `GET /dictionaries/online/{source}` |
 | Settings | `GET /models`, `PUT /models/selection`, `GET`/`PUT /rules`, `GET`/`PUT /schedule/settings` |
 | Static | `GET /api/acervo/media/{path}` (bearer), `GET /api/acervo/dictionaries/{file}` (bearer), `GET /api/acervo/downloads/{file}` (none), `GET /api/acervo/v1/mac-release` (none), `GET /` (the PWA) |

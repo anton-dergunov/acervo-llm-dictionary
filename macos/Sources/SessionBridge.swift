@@ -12,6 +12,14 @@ private struct SessionRequest: Decodable {
     let session: StoredSession
 }
 
+private struct HostSettingRequest: Decodable {
+    let name: String
+    let value: Bool
+}
+
+/// The interface's one way into the application: its session, and — on Settings ▸ General — the
+/// application's own settings (`HostSettings`). A method this does not name is refused.
+@MainActor
 final class SessionBridge: NSObject, WKScriptMessageHandlerWithReply {
     private enum Keys {
         static let email = "AcervoBackendEmail"
@@ -20,7 +28,13 @@ final class SessionBridge: NSObject, WKScriptMessageHandlerWithReply {
     }
 
     private let defaults: UserDefaults
-    init(defaults: UserDefaults = .standard) { self.defaults = defaults }
+    /// Absent in a test host that only exercises the session; asking for settings then is refused.
+    private let host: HostSettings?
+
+    init(defaults: UserDefaults = .standard, host: HostSettings? = nil) {
+        self.defaults = defaults
+        self.host = host
+    }
 
     func userContentController(
         _ userContentController: WKUserContentController,
@@ -41,12 +55,28 @@ final class SessionBridge: NSObject, WKScriptMessageHandlerWithReply {
             case "clearSession":
                 clearSession()
                 successVoid(replyHandler)
+            case "hostSettings":
+                try success(hostSettings().snapshot(), replyHandler)
+            case "setHostSetting":
+                let request: HostSettingRequest = try decode(envelope["payload"] ?? [:])
+                try success(hostSettings().set(request.name, to: request.value), replyHandler)
+            case "checkForUpdates":
+                try success(hostSettings().checkForUpdates(), replyHandler)
+            case "installUpdate":
+                try success(hostSettings().installUpdate(), replyHandler)
+            case "restartNow":
+                try success(hostSettings().restartNow(), replyHandler)
             default:
                 throw BridgeError.invalid("Unknown bridge method.")
             }
         } catch {
             replyHandler(["error": error.localizedDescription], nil)
         }
+    }
+
+    private func hostSettings() throws -> HostSettings {
+        guard let host else { throw BridgeError.invalid("This copy of Acervo has no settings of its own to show.") }
+        return host
     }
 
     private func loadSession() -> StoredSession? {

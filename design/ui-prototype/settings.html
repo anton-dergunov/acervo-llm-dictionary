@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Settings — UI prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Literata:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="acervo.css">
+<style>
+  /* Prototype scaffolding: something for the dialog to sit over. Not part of the design. */
+  .behind { padding: 24px; display: grid; gap: 14px; filter: saturate(.6); }
+  .behind div { height: 56px; border-radius: 10px; background: var(--surface); border: 1px solid var(--rule-soft); }
+</style>
+</head>
+<body>
+<!-- The Settings window on its own page, so the phone and tablet layouts are seen at their real
+     widths: the main prototype's preview frames sit inside a desktop window, where a viewport media
+     query never fires. Deep links: ?page=clips&sub=channels, level=list, host=mac, theme=dark,
+     load=slow (the clip corpus answering late), corpus=down. -->
+<div class="behind" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<script src="settings.js"></script>
+</body>
+</html>

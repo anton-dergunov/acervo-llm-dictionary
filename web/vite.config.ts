@@ -61,5 +61,11 @@ export default defineConfig({
   // Above the current largest chunk (index, ~482 kB) with room for ordinary growth, so the warning
   // means the bundle grew materially rather than at all.
   build: { outDir: "dist", emptyOutDir: true, chunkSizeWarningLimit: 550 },
-  test: { environment: "jsdom", globals: true, setupFiles: ["./src/testSetup.ts"] }
+  test: {
+    environment: "jsdom", globals: true, setupFiles: ["./src/testSetup.ts"],
+    // Node 25 and later define a global `localStorage` of their own, which shadows jsdom's and is
+    // undefined without a backing file — every test that touches storage then fails at its first
+    // line. The tests want the browser's storage, which is jsdom's.
+    execArgv: ["--no-experimental-webstorage"]
+  }
 });

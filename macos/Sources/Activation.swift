@@ -47,8 +47,8 @@ enum AppActivation {
 
     /// Returns to the menu bar once nothing is left on screen. The window that is closing still
     /// reports itself visible while its delegate runs, so the decision waits for AppKit to finish
-    /// closing it -- and the Settings window standing next to the main one is enough to keep the
-    /// Dock icon and the menu bar where they are.
+    /// closing it -- and any other window of Acervo's still open is enough to keep the Dock icon and
+    /// the menu bar where they are.
     static func returnToMenuBar(owning windows: [NSWindow?]) {
         DispatchQueue.main.async {
             guard shouldReturnToMenuBar(owning: windows) else { return }

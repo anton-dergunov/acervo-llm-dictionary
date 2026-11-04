@@ -7,8 +7,13 @@ import { beforeEach } from "vitest";
  * left behind by the test before changes where the next one lands: a word opened in one test was
  * reopened at the start of the next file's first test.
  */
-beforeEach(() => {
+beforeEach(async () => {
   try { localStorage.clear(); } catch { /* an environment without storage has nothing to clear */ }
+  /* Settings remembers what the server said while the app is open, which in a test file is every
+     test. Imported here rather than at the top so it is the instance the test file's own mocks
+     reached, not one bound to the real API before they were in place. */
+  const { forgetServerSettings } = await import("./settings/cache");
+  forgetServerSettings();
 });
 
 /**

@@ -102,6 +102,7 @@ Even **10,000 fully structured words** with no media are only tens of megabytes.
 - [`features/anki.md`](features/anki.md) — cards out, review state back.
 - [`features/export.md`](features/export.md) — the bundle, the Obsidian mirror, and import.
 - [`features/standing-rules.md`](features/standing-rules.md) — telling every prompt something once.
+- [`features/settings.md`](features/settings.md) — one window of sixteen pages in five groups, sized by the screen.
 - [`ml.md`](ml.md) — a tour of the machine-learning decisions across all of the above.
 
 **Operations** — running it.
