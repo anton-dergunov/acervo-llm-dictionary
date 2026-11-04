@@ -126,6 +126,17 @@ describe("the cursor pull", () => {
     expect(repository.snapshot().lexemes).toHaveLength(graph.lexemes.length);
   });
 
+  it("does not say it is checking once a pull asked for during another has finished", async () => {
+    // On launch the startup pull and the event stream's first pull overlap. The first pull's
+    // spinner timer outlived both and left "Checking the server for changes" up, with nothing
+    // running, until the next minute's poll.
+    vi.spyOn(backendSession, "pullGraph").mockResolvedValue(pullResponse(EMPTY(), 0));
+    await Promise.all([syncEngine.syncNow(), syncEngine.syncNow()]);
+    expect(syncEngine.getStatus().state).toBe("idle");
+    await new Promise((resolve) => setTimeout(resolve, 700));
+    expect(syncEngine.getStatus().state).toBe("idle");
+  });
+
   it("hands out the same snapshot until something changes", async () => {
     const { graph, cursor } = numbered();
     vi.spyOn(backendSession, "pullGraph").mockResolvedValue(pullResponse(graph, cursor));

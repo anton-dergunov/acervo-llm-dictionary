@@ -110,11 +110,7 @@ class SyncEngine implements RemoteGraph {
         await this.exchange(immediate);
       } while (this.again && this.status.state === "idle");
       return this.status;
-    })().finally(() => {
-      window.clearTimeout(this.announce);
-      this.announce = undefined;
-      this.running = null;
-    });
+    })().finally(() => { this.running = null; });
     return this.running;
   }
 
@@ -128,6 +124,12 @@ class SyncEngine implements RemoteGraph {
       this.update({ state: "idle", message: null });
     } catch (error) {
       this.update(this.failure(error));
+    } finally {
+      // Each exchange cancels its own announcement. Clearing only when the loop ended let the first
+      // of two back-to-back pulls — the launch pull and the event stream's — announce itself after
+      // both were done, and "Checking the server for changes" stayed up until the next poll.
+      window.clearTimeout(this.announce);
+      this.announce = undefined;
     }
   }
 
