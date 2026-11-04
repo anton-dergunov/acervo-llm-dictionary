@@ -20,6 +20,11 @@ from acervo.models.catalogue import Catalogue
 from acervo.models.errors import ProviderUnavailable
 from acervo.stories.write import Part
 
+# The heading the request sits under. Written here rather than ending the template, so a section
+# the binding layer appends to the template — the reader, the standing rules — never lands between
+# this heading and the request it introduces.
+HEADING = "## The story"
+
 TRANSLATE_PARAMS: Mapping[str, Any] = {"temperature": 0.2}
 
 
@@ -121,7 +126,7 @@ class Translator:
     def translate(
         self, request: Mapping[str, Any], parts: Sequence[Part]
     ) -> tuple[Translated, dict[str, Any]]:
-        prompt = f"{self.template}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
+        prompt = f"{self.template}\n\n{HEADING}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
         asked = tuple(str(word["lexemeId"]) for word in request.get("words", ()))
 
         def ask(candidate: chain.Candidate) -> call.TextResult:

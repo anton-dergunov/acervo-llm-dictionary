@@ -1,11 +1,10 @@
 /**
- * Presentation for the languages a replica happens to contain.
+ * Presentation for the languages a replica happens to contain: a name and a flag for any tag.
  *
- * Configuration now lives in the owner's `vocabularies` records
- * (`docs/architecture/data-model.md`), so this table is only the *defaults* a record falls back on:
- * the flag and name to offer when someone adds a language, and the gloss languages to assume for a
- * lexeme whose language has no record at all. Tags absent from both fall back to the platform's own
- * display names, so nothing renders as a bare tag.
+ * Configuration lives in the owner's `vocabularies` records (`docs/architecture/data-model.md`).
+ * What is derived here is derived from the platform's own locale data, so it works offline and
+ * nothing renders as a bare tag: a name from `Intl.DisplayNames`, and a flag from the vocabulary's
+ * variety or, without one, from the region the language is most likely spoken in.
  */
 
 import type { Vocabulary } from "./domain";
@@ -17,42 +16,66 @@ export interface LanguagePresentation {
   glossLangs: string[];
 }
 
-const TABLE: Record<string, Omit<LanguagePresentation, "code">> = {
-  es: { flag: "🇪🇸", name: "Spanish", glossLangs: ["en"] },
-  en: { flag: "🇬🇧", name: "English", glossLangs: ["ru"] },
-  ru: { flag: "🇷🇺", name: "Russian", glossLangs: ["en"] },
-  "zh-Hans": { flag: "🇨🇳", name: "Chinese (Simplified)", glossLangs: ["ru", "en"] },
-  "zh-Hant": { flag: "🇹🇼", name: "Chinese (Traditional)", glossLangs: ["ru", "en"] }
+/**
+ * The gloss languages to assume for a lexeme whose language has no vocabulary record at all — one
+ * the owner has since removed. A new vocabulary takes its defaults from the owner's others instead.
+ */
+const GLOSS_DEFAULTS: Record<string, string[]> = {
+  es: ["en"], en: ["ru"], ru: ["en"], "zh-Hans": ["ru", "en"], "zh-Hant": ["ru", "en"]
 };
 
-function displayName(code: string): string {
+/** A language's name in English: "Spanish", "Chinese (Traditional)". The tag where none is known. */
+export function languageName(code: string): string {
   try {
-    return new Intl.DisplayNames(["en"], { type: "language" }).of(code) ?? code;
+    return new Intl.DisplayNames(["en"], { type: "language", languageDisplay: "standard" }).of(code) ?? code;
   } catch {
     return code;
   }
 }
 
+/** The region a language is most likely spoken in, from the platform's likely subtags: `es` → `ES`. */
+export function mainRegion(code: string): string | null {
+  try {
+    return new Intl.Locale(code).maximize().region ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** A region's flag: `AR` → 🇦🇷. A wider region (`419`, Latin America) has none and gets a globe. */
+export function flagOf(region: string | null | undefined): string {
+  if (!region) return "🌐";
+  if (!/^[A-Za-z]{2}$/.test(region)) return "🌐";
+  return String.fromCodePoint(...[...region.toUpperCase()].map((letter) => 0x1F1E6 + letter.charCodeAt(0) - 65));
+}
+
+/** The flag a vocabulary shows: the owner's own, else its variety's, else its language's main region's. */
+export function flagFor(vocabulary: Pick<Vocabulary, "language" | "flag" | "region">): string {
+  return vocabulary.flag ?? automaticFlag(vocabulary.language, vocabulary.region);
+}
+
+/** The flag that follows a variety, before the owner pastes their own over it. */
+export function automaticFlag(language: string, region: string | null): string {
+  return flagOf(region ?? mainRegion(language));
+}
+
 export function languageOf(code: string): LanguagePresentation {
-  const known = TABLE[code];
-  if (known) return { code, ...known };
-  return { code, flag: "🏳️", name: displayName(code), glossLangs: [] };
+  return { code, flag: flagOf(mainRegion(code)), name: languageName(code), glossLangs: GLOSS_DEFAULTS[code] ?? [] };
 }
 
 /** What a configured vocabulary looks like in the switcher: its own labels, defaults behind them. */
 export function presentationOf(vocabulary: Vocabulary): LanguagePresentation {
-  const fallback = languageOf(vocabulary.language);
   return {
     code: vocabulary.language,
-    flag: vocabulary.flag ?? fallback.flag,
-    name: vocabulary.displayName ?? fallback.name,
+    flag: flagFor(vocabulary),
+    name: vocabulary.displayName ?? languageName(vocabulary.language),
     glossLangs: vocabulary.glossLangs
   };
 }
 
 /**
  * Which languages to reach for when reducing a sense to one line. The owner's own preference wins;
- * the table is what answers for a lexeme in a language they have since removed.
+ * the defaults answer for a lexeme in a language they have since removed.
  */
 export function glossLanguagesFor(code: string, vocabularies: Vocabulary[] = []): string[] {
   const configured = vocabularies.find((entry) => !entry.deleted && entry.language === code);
@@ -71,7 +94,7 @@ export function definitionLanguageFor(code: string, vocabularies: Vocabulary[] =
   return vocabularies.find((entry) => !entry.deleted && entry.language === code)?.definitionLang ?? code;
 }
 
-/* ── accents ─────────────────────────────────────────────────────────── */
+/* ── varieties ───────────────────────────────────────────────────────── */
 
 /** A region subtag of a locale: `AR` of `es-AR`, `CN` of `zh-Hans-CN`. Null for a bare language. */
 export function regionOf(locale: string | null | undefined): string | null {
@@ -89,14 +112,14 @@ export function regionName(region: string): string {
 }
 
 /**
- * The accents a vocabulary may choose, as `{value, label}`: the regions the server derived from CLDR
- * for the language, most speakers first, then any a voice is `declared` for, then the one already
- * chosen — so a choice never disappears from its own list.
+ * The varieties a vocabulary may choose, as `{value, label}` with each one's flag: the regions the
+ * server derived from CLDR for the language, most speakers first, then any a voice is `declared`
+ * for, then the one already chosen — so a choice never disappears from its own list.
  */
-export function accentOptions(choices: readonly string[], declared: Iterable<string> = [], current?: string | null): { value: string; label: string }[] {
+export function varietyOptions(choices: readonly string[], declared: Iterable<string> = [], current?: string | null): { value: string; label: string }[] {
   const regions = [...choices];
   for (const region of [...[...declared].map(regionOf), current ?? null]) {
     if (region && !regions.includes(region)) regions.push(region);
   }
-  return regions.map((region) => ({ value: region, label: regionName(region) }));
+  return regions.map((region) => ({ value: region, label: `${flagOf(region)} ${regionName(region)}` }));
 }

@@ -39,6 +39,7 @@ from acervo.repository.graph import article_records
 from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal
 from acervo.services.prompts import prompt_text
+from acervo.services.reader import vocabulary_for, with_reader
 from acervo.services.rules import with_rules
 from acervo.settings import Settings
 from acervo.stories import continuity, illustrate, translate, write
@@ -279,7 +280,9 @@ def write_story(settings: Settings, owner: str, device: str, story_id: str) -> d
     story_type = table.get(story["typeId"] or "") or table.surprise(story_id)
 
     writer = write.StoryWriter(
-        load_catalogue(), candidates, with_rules(_template(settings, WRITE_TEMPLATE), owner)
+        load_catalogue(), candidates,
+        with_reader(_template(settings, WRITE_TEMPLATE), owner,
+                    vocabulary_for(graph.owner_vocabularies(owner), story["language"])),
     )
     request = write.build_request(
         language=story["language"], language_name=language_name(story["language"]),

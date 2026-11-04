@@ -84,9 +84,10 @@ the row only when it was actually sent.
 
 ## Accent, and which voice reads first
 
-**The accent is the vocabulary's** (`vocabularies.region`: `AR`, `GB`, `419`), set in Settings ▸
-Vocabularies, because it is a fact about what is learned rather than about a voice — the writer, a
-story and the clip search may follow it too ([`../plans/languages/accents.md`](../plans/languages/accents.md)).
+**The accent is the vocabulary's variety** (`vocabularies.region`: `AR`, `GB`, `419`), set in
+Settings ▸ Vocabularies, because it is a fact about what is learned rather than about a voice — the
+writers follow it too ([`standing-rules.md`](standing-rules.md), "The reader"), and the clip search may
+([`../plans/languages/accents.md`](../plans/languages/accents.md)).
 The voices are its first reader: everything spoken in that vocabulary is asked for in its locale,
 `es-AR`, and a vocabulary with no accent is asked for in the bare language exactly as before.
 **Which accents a language is offered is CLDR's answer, not a list in the code**
@@ -95,8 +96,9 @@ official in part of the country, with at least 200,000 speakers, most speakers f
 Argentina, Spain, Colombia, the US… for Spanish — then a wider region two of them share (`419`,
 Latin America). Where a language is only widely learned (English in Germany) is no accent of its
 own and is left out. The speaker counts are CLDR's too, through `langcodes`, since Babel does not
-carry them. The server sends the list with the pronunciation settings, and the form adds any region
-a voice is declared for.
+carry them. The server sends the list with each language in `GET /languages`, so a language's
+varieties are offered before its vocabulary exists, and the form adds any region a voice is declared
+for.
 
 **Providers handle accent in two ways, and both are declarations in the catalogue row, never code.**
 A voice made for one locale is keyed by it (`voices: {"es-ES": […], "es-US": […]}`) and has that

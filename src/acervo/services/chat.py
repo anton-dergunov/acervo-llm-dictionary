@@ -29,6 +29,7 @@ from acervo import activity
 from acervo.errors import ApiError
 from acervo.models import journal
 from acervo.models.call import HEDGE_SECONDS
+from acervo.repository import graph
 from acervo.services.capture.coerce import (
     REFERENCE_LIMIT,
     pick_optional_choice,
@@ -37,7 +38,7 @@ from acervo.services.capture.coerce import (
 )
 from acervo.services.models import llm_json
 from acervo.services.prompts import prompt_text
-from acervo.services.rules import with_rules
+from acervo.services.reader import vocabulary_for, with_reader
 from acervo.settings import Settings
 
 DOCUMENT_LIMIT = 32000
@@ -102,7 +103,9 @@ def run_chat(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, 
     name = "acervo_chat" if subject["kind"] == "article" else "acervo_chat_reference"
     try:
         answer, call = llm_json(
-            settings, owner, with_rules(prompt_text(settings.prompts_path, name), owner),
+            settings, owner,
+            with_reader(prompt_text(settings.prompts_path, name), owner,
+                        vocabulary_for(graph.owner_vocabularies(owner), subject["language"])),
             _user_turn(subject, body), caller="chat", hedge_after=HEDGE_SECONDS,
         )
     except ApiError as refused:
@@ -186,6 +189,7 @@ def _subject(body: dict[str, Any]) -> dict[str, Any]:
         return {
             "kind": "article",
             "lexemeId": trimmed(raw.get("lexemeId")),
+            "language": trimmed(raw.get("language")) or None,
             "document": document[:DOCUMENT_LIMIT],
             "focus": trimmed(raw.get("focus")) or None,
         }

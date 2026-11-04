@@ -6,7 +6,7 @@ type Envelope<T> = { data?: T; error?: { code?: string; message?: string } };
 type LoginResponse = { token: string; user: { id: string; email: string } };
 
 /** Shared with the server hook. A mismatch stops synchronisation until the app is updated. */
-export const SCHEMA_VERSION = 20;
+export const SCHEMA_VERSION = 21;
 
 interface SyncEnvelope {
   schemaVersion: number;
@@ -206,8 +206,6 @@ export interface PronunciationSettings {
   guideLanguages: string[];
   /** The locale each language is heard in — `es-AR` once Spanish is set to Argentina, else `es`. */
   accents: Record<string, string>;
-  /** The regions each language has an accent of its own in, most speakers first, from CLDR. */
-  accentChoices: Record<string, string[]>;
   orders: { plain: PronunciationModel[]; expressive: PronunciationModel[] };
   /** Who reads each language, first voice then backups, by the rule the recording follows. */
   readers: Record<PronunciationOrder, Record<string, VoiceReader[]>>;
@@ -512,8 +510,21 @@ export interface ChatRepair {
   previous: unknown;
 }
 
+/** One language a vocabulary may be kept in, as `GET /languages` names it. */
+export interface LanguageEntry {
+  tag: string;
+  /** In English: "Spanish", "Chinese (Traditional)". */
+  name: string;
+  /** In itself: "español", "中文 (繁體)". */
+  autonym: string;
+  /** Where it is most likely spoken, the flag shown before a variety is chosen. */
+  region: string | null;
+  /** The regions it has a variety of its own in, most speakers first, then a wider one (`419`). */
+  varieties: string[];
+}
+
 export type ChatSubject =
-  | { kind: "article"; lexemeId: string; document: string; focus: string | null }
+  | { kind: "article"; lexemeId: string; language: string | null; document: string; focus: string | null }
   | { kind: "reference"; headword: string; language: string | null };
 
 /** Headword and gloss only. Enough to say "you already have «el traje»", and nothing more. */
@@ -1361,6 +1372,11 @@ export const backendSession = {
       `/images/prompts/${encodeURIComponent(promptId)}`,
       { method: "DELETE", headers: { "X-Acervo-Device": deviceId } }
     );
+  },
+
+  /** Every language a vocabulary may be kept in, most speakers first, from CLDR. */
+  languages(): Promise<{ languages: LanguageEntry[] }> {
+    return client.call<{ languages: LanguageEntry[] }>("/languages");
   },
 
   pronunciationSettings(): Promise<PronunciationSettings> {

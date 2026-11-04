@@ -23,7 +23,9 @@ is not renamed lightly.
 
 A page may open **sub-pages**: Clips ▸ Channels, Providers ▸ Credentials, a vocabulary or a topic being
 edited. They share the window's back button and title (`useSubPage` in `kit.tsx`), so a page that grows
-a detail view does not grow a dialog.
+a detail view does not grow a dialog. A sub-page may name the one it was opened from as its `parent`,
+and Back returns there: a vocabulary ▸ Translated into. The window draws each sub-page afresh, so
+anything being edited across them is kept outside the page.
 
 ## 2 · The window is the screen's size, never the page's
 
@@ -63,6 +65,10 @@ listening, so its rows carry a **listen** button at their start — a link to it
 among several (a radio row with a check), or a select — and every row of a voice group has one, so
 their labels align (`voices.tsx`, shared by Pronunciation and Loops).
 
+A group that is a **form** — fields to type and selects, such as a vocabulary's name, flag and
+variety — is `aligned`: every control starts in the same column, whatever its label's length. Left to
+flex, each field started where its own label ended and no two lined up.
+
 **A hint is one line of about a dozen words, saying what the setting does for you.** Not how it works
 inside — servers, calls, caches, records, which model is asked how many times. The pages carried
 paragraphs of that, forty to eighty words each, and the owner read none of it; the reasoning belongs in
@@ -71,7 +77,35 @@ the feature's document, which is where it is now. A page has no introduction.
 The kit is also what the provider work in [`../plans/provider-management.md`](../plans/provider-management.md)
 builds on: an ordered list with switches, a sub-page per provider, a key field.
 
-## 6 · On the Mac there is one Settings
+## 6 · Vocabularies
+
+A language is **found by its name**, in English or in itself — "Spanish", "español" — and shown with
+its flag, never as a tag. The tag is how it is stored. The list is CLDR's, from the server
+(`GET /languages`, `locales.catalogue`): every language at least a million people speak, most
+speakers first, with a script of its own where it is officially written in two (`zh-Hans` and
+`zh-Hant`, `sr-Cyrl` and `sr-Latn`). A tag the list lacks is still offered as typed, if the platform
+can name it, so a smaller language can be kept. The same search chooses the languages a vocabulary is
+defined, translated and annotated in.
+
+**Add a language…** finds one and opens its page **unsaved**, filled in: named in English, defined in
+itself, translated into what the owner's other vocabularies translate into most (or the browser's
+language for the first), notes in the first of those. Nothing is written until *Add vocabulary*;
+Cancel leaves nothing behind.
+
+A vocabulary's page has three groups:
+
+- **Name, Flag, Variety.** The **variety** (`region`) is the regional form learned — Argentina's
+  Spanish — offered as CLDR's varieties for the language with their flags. *Variety* is the linguist's
+  word, and the right one: it now changes the words and grammar the writers prefer, not only how the
+  voices sound. The **flag follows the variety**, or the language's main region without one, and is
+  derived on the device; a flag pasted in is the owner's own, and choosing another variety returns it
+  to automatic.
+- **Written in**: the three languages, each a sub-page with the search.
+- **You**: a CEFR **level** and **About you**, a paragraph in the owner's own words — goals, what they
+  know well and what they don't. Both reach the writers ([`standing-rules.md`](standing-rules.md),
+  "The reader"), the level firmly and the paragraph lightly.
+
+## 7 · On the Mac there is one Settings
 
 The application's own settings — opening at login, showing the window at login, checking for and
 installing updates, the server — are on General, read and changed through the bridge

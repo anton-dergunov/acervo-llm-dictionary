@@ -277,3 +277,15 @@ def test_a_proposal_the_device_refused_is_logged_under_the_same_turn(logs, serve
     refused = [line for line in lines(logs["act"]) if " chat proposal refused " in line]
     assert len(refused) == 1
     assert "rid=turnzyxwvuts987" in refused[0] and "that is not there" in refused[0] and "ops=1" in refused[0]
+
+
+def test_a_language_list_that_cannot_be_read_is_logged_in_its_own_words(logs, server, monkeypatch):
+    """`GET /languages` reads CLDR on its first call; a broken install says so in the log."""
+    def broken():
+        raise LookupError("no CLDR data for territory_languages")
+
+    monkeypatch.setattr("acervo.models.locales.catalogue", broken)
+    assert server.get("/languages").status_code == 500
+    (line,) = refusals(logs)
+    assert "path=/api/acervo/v1/languages" in line
+    assert 'message="LookupError: no CLDR data for territory_languages"' in line

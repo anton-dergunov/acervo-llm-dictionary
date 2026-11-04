@@ -18,7 +18,7 @@
 
 import { Document, isScalar, isSeq, parse, Scalar, visit } from "yaml";
 import { SCHEMA_VERSION } from "./api";
-import type { Lexeme, PronunciationTarget, TopicInput, VocabularyGraph, VocabularyInput } from "./domain";
+import { CEFR_LEVELS, type CefrLevel, type Lexeme, type PronunciationTarget, type TopicInput, type VocabularyGraph, type VocabularyInput } from "./domain";
 import { newId } from "./ids";
 import { markdownFor } from "./markdown";
 import type { AcervoRepository } from "./repository";
@@ -194,6 +194,8 @@ function vocabularyContent(graph: VocabularyGraph, languages: string[]): Vocabul
       displayName: entry.displayName,
       flag: entry.flag,
       region: entry.region,
+      level: entry.level,
+      learnerNote: entry.learnerNote,
       order: entry.order
     }));
 }
@@ -446,7 +448,7 @@ export interface BundlePlan {
  * the sentence it illustrates and does not get an anchor invented for it — matching by position or
  * by text would be a guess, and a wrong anchor puts the picture under the wrong sentence.
  */
-const READABLE = new Set([SCHEMA_VERSION, 19, 14, 9, 8, 7, 6]);
+const READABLE = new Set([SCHEMA_VERSION, 20, 19, 14, 9, 8, 7, 6]);
 
 /**
  * Version 15 gave a story part a recording. A story is not in a bundle and no word file changed, so
@@ -457,9 +459,12 @@ const READABLE = new Set([SCHEMA_VERSION, 19, 14, 9, 8, 7, 6]);
 /*
  * Version 20 gave a vocabulary an accent. A version 19 bundle names none, and a vocabulary without
  * one is exactly what an absent `region` reads as, so it too is accepted as it stands.
+ *
+ * Version 21 gave a vocabulary a level and a note about its learner, and the same holds: a version
+ * 20 bundle states neither, which is what an absent `level` and `learnerNote` read as.
  */
 function upgradeBundle(files: BundleFile[], from: number): BundleFile[] {
-  if (from === SCHEMA_VERSION || from === 19 || from === 14) return files;
+  if (from === SCHEMA_VERSION || from === 20 || from === 19 || from === 14) return files;
   if (READABLE.has(from)) {
     return files.map((file) => isWordFile(file.path)
       ? {
@@ -526,6 +531,12 @@ function readRecords<T>(
 const text = (value: unknown): string | null =>
   typeof value === "string" && value.trim() ? value.trim() : null;
 
+/** A CEFR level as a bundle states it, or null for none or one that is not a level. */
+const cefrLevel = (value: string | null): CefrLevel | null => {
+  const level = value?.toUpperCase() ?? null;
+  return level && (CEFR_LEVELS as readonly string[]).includes(level) ? level as CefrLevel : null;
+};
+
 export function readBundle(input: BundleFile[]): BundlePlan {
   const problems: BundleProblem[] = [];
   const unwrapped = unwrap(input);
@@ -562,6 +573,8 @@ export function readBundle(input: BundleFile[]): BundlePlan {
       displayName: text(raw.displayName),
       flag: text(raw.flag),
       region: text(raw.region)?.toUpperCase() ?? null,
+      level: cefrLevel(text(raw.level)),
+      learnerNote: text(raw.learnerNote),
       order: typeof raw.order === "number" ? raw.order : 0
     };
   });

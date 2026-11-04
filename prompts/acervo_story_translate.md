@@ -84,5 +84,3 @@ that a word survives. Only once the translation is finished, report what it says
 
 Same number of parts, same order, faithful, and readable. The reader is checking themselves against
 this, so a translation that quietly differs from the original is worse than no translation at all.
-
-## The story

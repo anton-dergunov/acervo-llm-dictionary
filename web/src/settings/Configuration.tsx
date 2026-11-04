@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Action, Group, Link, Notice, Reorder, Row, Select, useSubPage } from "./kit";
-import type { Topic, Vocabulary } from "../domain";
-import { accentOptions, languageOf, regionName } from "../languages";
+import type { LanguageEntry } from "../api";
+import { Action, Group, Link, Notice, Reorder, Row, Select, TextArea, TextField, useSubPage, type SubPage } from "./kit";
+import { CEFR_LEVELS, LEARNER_NOTE_LIMIT, type CefrLevel, type Topic, type Vocabulary, type VocabularyInput } from "../domain";
+import { automaticFlag, flagFor, flagOf, languageName, mainRegion, regionName, varietyOptions } from "../languages";
+import { CloseIcon } from "../icons";
 import { SETTINGS, useServerSetting } from "./cache";
+import { LanguageSearch } from "./LanguageSearch";
 import { repository, type ReplicaSnapshot } from "../repository";
 import { topicOptions, vocabularies as configuredVocabularies } from "../selectors";
 
@@ -13,84 +16,176 @@ import { topicOptions, vocabularies as configuredVocabularies } from "../selecto
  *
  * Every action here is an ordinary online-only write through the repository, so it fails loudly and
  * changes nothing locally when the server is unreachable, exactly like editing an article.
+ *
+ * A language is always shown by its name and flag; the tag is how it is stored, never what is read
+ * (`docs/features/settings.md`, "Vocabularies").
  */
 
-const LANGUAGE_TAG = /^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/;
+const LEVEL_NAMES: Record<CefrLevel, string> = {
+  A1: "Beginner", A2: "Elementary", B1: "Intermediate", B2: "Upper intermediate", C1: "Advanced", C2: "Proficient"
+};
 
-function parseLanguageList(value: string): string[] | null {
-  const codes = value.split(",").map((code) => code.trim()).filter(Boolean);
-  if (!codes.length || codes.some((code) => !LANGUAGE_TAG.test(code))) return null;
-  return [...new Set(codes)];
+/** A vocabulary as it is being edited: on its page and on the pages its languages are chosen on. */
+interface VocabularyDraft {
+  /** The record being edited, or null for one being added. */
+  id: string | null;
+  language: string;
+  displayName: string;
+  /** The owner's own flag, or "" for the one that follows the variety. */
+  flag: string;
+  region: string;
+  definitionLang: string;
+  glossLangs: string[];
+  notesLang: string;
+  level: CefrLevel | "";
+  learnerNote: string;
 }
 
-/** A text field in a row, its label on the left. */
-function Field({ label, value, placeholder, onChange }: {
-  label: string;
-  value: string;
-  placeholder?: string;
-  onChange(value: string): void;
-}) {
-  return <label className="pref-row">
-    <span className="pref-text"><span className="pref-label">{label}</span></span>
-    <input
-      className="pref-input" value={value} placeholder={placeholder} aria-label={label}
-      autoComplete="off" spellCheck={false} onChange={(event) => onChange(event.target.value)}
-    />
-  </label>;
+function draftOf(vocabulary: Vocabulary): VocabularyDraft {
+  return {
+    id: vocabulary.id,
+    language: vocabulary.language,
+    displayName: vocabulary.displayName ?? languageName(vocabulary.language),
+    flag: vocabulary.flag ?? "",
+    region: vocabulary.region ?? "",
+    definitionLang: vocabulary.definitionLang,
+    glossLangs: vocabulary.glossLangs,
+    notesLang: vocabulary.notesLang,
+    level: vocabulary.level ?? "",
+    learnerNote: vocabulary.learnerNote ?? ""
+  };
 }
 
-/** Vocabularies ▸ one of them: its name, flag and the three languages it is written in. */
-function VocabularyForm({ vocabulary, onSave, onRemove, onDone }: {
-  vocabulary: Vocabulary;
-  onSave(changes: Partial<Vocabulary>): void;
+/**
+ * A new vocabulary, filled in the way the owner's others are: translated into the languages they
+ * already translate into most, and defined in the language itself, as every vocabulary starts.
+ */
+function newDraft(language: LanguageEntry, others: Vocabulary[]): VocabularyDraft {
+  const used = new Map<string, number>();
+  others.forEach((entry) => entry.glossLangs.forEach((code, index) =>
+    used.set(code, (used.get(code) ?? 0) + (entry.glossLangs.length - index))));
+  const preferred = [...used.entries()].sort((a, b) => b[1] - a[1]).map(([code]) => code)
+    .filter((code) => code !== language.tag);
+  const fallback = [...(typeof navigator === "undefined" ? [] : navigator.languages ?? []), "en", "es"]
+    .map((code) => code.split("-")[0]).find((code) => code !== language.tag) ?? "en";
+  const glossLangs = preferred.length ? preferred : [fallback];
+  return {
+    id: null, language: language.tag, displayName: language.name, flag: "", region: "",
+    definitionLang: language.tag, glossLangs, notesLang: glossLangs[0], level: "", learnerNote: ""
+  };
+}
+
+/**
+ * The vocabulary being edited, kept outside the page: the window draws each sub-page afresh, so a
+ * draft held in the page's own state would be lost the moment one of its languages is chosen.
+ */
+let editing: VocabularyDraft | null = null;
+
+/** A language as it reads in a row: the owner's own flag where they keep it, else its country's. */
+function presented(code: string, kept: Vocabulary[]): string {
+  const vocabulary = kept.find((entry) => entry.language === code);
+  return `${vocabulary ? flagFor(vocabulary) : flagOf(mainRegion(code))} ${languageName(code)}`;
+}
+
+/** Vocabularies ▸ one of them: what it is called, its variety, its three languages and its learner. */
+function VocabularyForm({ draft, kept, busy, page, onChange, onSave, onCancel, onRemove }: {
+  draft: VocabularyDraft;
+  kept: Vocabulary[];
+  busy: boolean;
+  page: SubPage;
+  onChange(changes: Partial<VocabularyDraft>): void;
+  onSave(): void;
+  onCancel(): void;
   onRemove(): void;
-  onDone(): void;
 }) {
-  const fallback = languageOf(vocabulary.language);
-  const [name, setName] = useState(vocabulary.displayName ?? fallback.name);
-  const [flag, setFlag] = useState(vocabulary.flag ?? fallback.flag);
-  const [definitionLang, setDefinitionLang] = useState(vocabulary.definitionLang);
-  const [glossLangs, setGlossLangs] = useState(vocabulary.glossLangs.join(", "));
-  const [notesLang, setNotesLang] = useState(vocabulary.notesLang);
-  const [region, setRegion] = useState(vocabulary.region ?? "");
-  /* Where the language has an accent of its own comes from the server, which reads it from CLDR;
-     any accent a voice is declared for is offered too. Offline, only the one already chosen. */
+  const { open } = useSubPage();
+  /* Which varieties the language has comes from the server, which reads it from CLDR; any variety a
+     voice is declared for is offered too. Offline, only the one already chosen. */
+  const catalogue = useServerSetting(SETTINGS.languages).value;
   const voices = useServerSetting(SETTINGS.pronunciations).value;
   const declared = Object.values(voices?.orders ?? {}).flat()
-    .flatMap((model) => model.voices[vocabulary.language] ?? [])
+    .flatMap((model) => model.voices[draft.language] ?? [])
     .flatMap((voice) => voice.locale ? [voice.locale] : []);
-  const accents = accentOptions(voices?.accentChoices?.[vocabulary.language] ?? [], declared, vocabulary.region);
+  const choices = catalogue?.languages.find((entry) => entry.tag === draft.language)?.varieties ?? [];
+  const varieties = varietyOptions(choices, declared, draft.region || null);
+  const choose = (field: "definition" | "gloss" | "notes", title: string) =>
+    open({ id: `${page.id}:${field}`, title, parent: page });
 
   return <>
-    <Group foot="Language tags, most preferred first, such as es, en or zh-Hans.">
-      <Field label="Name" value={name} onChange={setName} />
-      <Field label="Flag" value={flag} onChange={setFlag} />
-      <Field label="Senses defined in" value={definitionLang} onChange={setDefinitionLang} />
-      <Field label="Translated into" value={glossLangs} placeholder="en, ru" onChange={setGlossLangs} />
-      <Field label="Notes written in" value={notesLang} onChange={setNotesLang} />
-    </Group>
-    <Group>
+    <Group aligned>
+      <TextField label="Name" value={draft.displayName} onChange={(displayName) => onChange({ displayName })} />
+      <TextField
+        label="Flag" value={draft.flag} maxLength={32}
+        placeholder={automaticFlag(draft.language, draft.region || null)}
+        onChange={(flag) => onChange({ flag })}
+      />
       <Select
-        label="Accent" hint="The voices read it as it is spoken there" value={region}
-        options={[{ value: "", label: "None" }, ...accents]}
-        onChange={setRegion}
+        label="Variety" value={draft.region}
+        options={[{ value: "", label: "None" }, ...varieties]}
+        // A flag follows the variety it was chosen for; one pasted in is the owner's to paste again.
+        onChange={(region) => onChange({ region, flag: "" })}
+      />
+    </Group>
+    <Group title="Written in">
+      <Link label="Senses defined in" value={presented(draft.definitionLang, kept)}
+        onOpen={() => choose("definition", "Senses defined in")} />
+      <Link label="Translated into" value={draft.glossLangs.map((code) => presented(code, kept)).join(", ")}
+        onOpen={() => choose("gloss", "Translated into")} />
+      <Link label="Notes written in" value={presented(draft.notesLang, kept)}
+        onOpen={() => choose("notes", "Notes written in")} />
+    </Group>
+    <Group title="You" aligned>
+      <Select
+        label="Level" value={draft.level}
+        options={[{ value: "" as const, label: "Not set" },
+          ...CEFR_LEVELS.map((level) => ({ value: level, label: `${level} · ${LEVEL_NAMES[level]}` }))]}
+        onChange={(level) => onChange({ level })}
+      />
+      <TextArea
+        label="About you" value={draft.learnerNote} limit={LEARNER_NOTE_LIMIT}
+        placeholder={"Your goals, what you know well and what you don't.\n"
+          + "For example: preparing for a trip to Argentina; the subjunctive is my weak spot."}
+        onChange={(learnerNote) => onChange({ learnerNote })}
       />
     </Group>
     <div className="pref-buttons">
-      <button type="button" className="tb-btn" onClick={onDone}>Cancel</button>
-      <button type="button" className="tb-btn primary" onClick={() => {
-        onDone();
-        onSave({
-          displayName: name.trim() || null,
-          flag: flag.trim() || null,
-          definitionLang: definitionLang.trim(),
-          glossLangs: parseLanguageList(glossLangs) ?? vocabulary.glossLangs,
-          notesLang: notesLang.trim() || vocabulary.notesLang,
-          region: region || null
-        });
-      }}>Save</button>
+      <button type="button" className="tb-btn" onClick={onCancel}>Cancel</button>
+      <button type="button" className="tb-btn primary" disabled={busy} onClick={onSave}>
+        {draft.id ? "Save" : "Add vocabulary"}
+      </button>
     </div>
-    <Group><Action danger onClick={onRemove}>Remove this vocabulary</Action></Group>
+    {draft.id && <Group><Action danger onClick={onRemove}>Remove this vocabulary</Action></Group>}
+  </>;
+}
+
+/** A vocabulary ▸ Translated into: the gloss languages, most preferred first, and a way to add one. */
+function GlossLanguages({ draft, kept, onChange }: {
+  draft: VocabularyDraft;
+  kept: Vocabulary[];
+  onChange(glossLangs: string[]): void;
+}) {
+  const list = draft.glossLangs;
+  const move = (index: number, direction: -1 | 1) => {
+    const next = [...list];
+    [next[index], next[index + direction]] = [next[index + direction], next[index]];
+    onChange(next);
+  };
+  return <>
+    <Group foot="The first is the one a word's one-line gloss is written in.">
+      {list.map((code, index) => <Row key={code} label={presented(code, kept)}>
+        <Reorder name={languageName(code)} first={index === 0} last={index === list.length - 1}
+          onMove={(direction) => move(index, direction)} />
+        <button type="button" className="icon-btn" aria-label={`Remove ${languageName(code)}`}
+          disabled={list.length === 1} onClick={() => onChange(list.filter((one) => one !== code))}>
+          <CloseIcon />
+        </button>
+      </Row>)}
+    </Group>
+    <LanguageSearch
+      label="Add a language to translate into"
+      unavailable={Object.fromEntries(list.map((code) => [code, "Already in the list"]))}
+      onChoose={(language) => onChange([...list, language.tag])}
+    />
   </>;
 }
 
@@ -101,8 +196,8 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
 }) {
   const entries = configuredVocabularies(snapshot);
   const { sub, open, close } = useSubPage();
-  const [adding, setAdding] = useState(false);
-  const [code, setCode] = useState("");
+  const [draft, keep] = useState<VocabularyDraft | null>(() => editing);
+  const setDraft = (next: VocabularyDraft | null) => { editing = next; keep(next); };
   const [busy, setBusy] = useState(false);
 
   const counts = new Map<string, number>();
@@ -123,98 +218,97 @@ export function VocabularyEditor({ snapshot, onNotify, onChanged }: {
     }
   }
 
-  function add() {
-    const language = code.trim();
-    if (!LANGUAGE_TAG.test(language)) {
-      onNotify("That is not a language tag. Try es, en, ru or zh-Hans.");
-      return;
-    }
-    if (entries.some((entry) => entry.language === language)) {
-      onNotify(`You already keep a ${language} vocabulary.`);
-      return;
-    }
-    const defaults = languageOf(language);
-    // A language the table does not know has no sensible pivot to guess, so English is the
-    // starting point and the row is immediately editable.
-    const glossLangs = defaults.glossLangs.length ? defaults.glossLangs : ["en"];
-    void run(() => repository.saveVocabulary({
-      language,
-      definitionLang: language,
-      glossLangs,
-      notesLang: glossLangs[0],
-      displayName: defaults.name,
-      flag: defaults.flag,
-      region: null,
-      order: entries.length
-    }), "That vocabulary could not be added.").then((added) => {
-      if (!added) return;
-      setAdding(false);
-      setCode("");
-    });
+  function leave() {
+    close();
+    setDraft(null);
   }
 
-  function remove(vocabulary: Vocabulary): boolean {
+  function save(current: VocabularyDraft) {
+    if (current.learnerNote.trim().length > LEARNER_NOTE_LIMIT) {
+      onNotify(`What you say about yourself may be at most ${LEARNER_NOTE_LIMIT} characters.`);
+      return;
+    }
+    const record = current.id ? entries.find((entry) => entry.id === current.id) : undefined;
+    const input: VocabularyInput = {
+      language: current.language,
+      definitionLang: current.definitionLang,
+      glossLangs: current.glossLangs,
+      notesLang: current.notesLang,
+      displayName: current.displayName.trim() || null,
+      flag: current.flag.trim() || null,
+      region: current.region || null,
+      level: current.level || null,
+      learnerNote: current.learnerNote.trim() || null,
+      order: record?.order ?? entries.length
+    };
+    void run(() => repository.saveVocabulary(input, current.id ?? undefined),
+      current.id ? "That vocabulary could not be saved." : "That vocabulary could not be added.")
+      .then((saved) => { if (saved) leave(); });
+  }
+
+  function remove(vocabulary: Vocabulary) {
     const words = counts.get(vocabulary.language) ?? 0;
     if (words > 0) {
       // Removing the configuration would leave those words with no gloss preference and no way back
       // to it, which reads as data loss even though nothing was deleted.
-      onNotify(`${vocabulary.displayName ?? vocabulary.language} still has ${words} ${words === 1 ? "word" : "words"}. Delete or move them first.`);
-      return false;
+      onNotify(`${vocabulary.displayName ?? languageName(vocabulary.language)} still has ${words} ${words === 1 ? "word" : "words"}. Delete or move them first.`);
+      return;
     }
-    void run(() => repository.delete("vocabularies", vocabulary.id), "That vocabulary could not be removed.");
-    return true;
+    void run(() => repository.delete("vocabularies", vocabulary.id), "That vocabulary could not be removed.")
+      .then((removed) => { if (removed) leave(); });
   }
 
-  const editing = sub?.id.startsWith("vocabulary:") ? entries.find((entry) => `vocabulary:${entry.id}` === sub.id) : undefined;
-  if (editing) return <VocabularyForm
-    key={editing.id}
-    vocabulary={editing}
-    onDone={close}
-    onSave={(changes) => void run(() => repository.saveVocabulary({
-      language: editing.language,
-      definitionLang: editing.definitionLang,
-      glossLangs: editing.glossLangs,
-      notesLang: editing.notesLang,
-      displayName: editing.displayName,
-      flag: editing.flag,
-      region: editing.region,
-      order: editing.order,
-      ...changes
-    }, editing.id), "That vocabulary could not be saved.")}
-    onRemove={() => { if (remove(editing)) close(); }}
+  if (sub?.id === "vocabulary:add") return <LanguageSearch
+    label="Find a language"
+    unavailable={Object.fromEntries(entries.map((entry) => [entry.language, "Already kept"]))}
+    onChoose={(language) => {
+      setDraft(newDraft(language, entries));
+      open({ id: "vocabulary:new", title: language.name });
+    }}
   />;
+
+  const [, key, field] = sub?.id.match(/^vocabulary:([^:]+)(?::(\w+))?$/) ?? [];
+  const record = key ? entries.find((entry) => entry.id === key) : undefined;
+  const current = draft && (draft.id ?? "new") === key ? draft : record ? draftOf(record) : null;
+  if (key && current) {
+    const page: SubPage = sub?.parent ?? sub!;
+    const change = (changes: Partial<VocabularyDraft>) => setDraft({ ...current, ...changes });
+    if (field === "gloss") return <GlossLanguages draft={current} kept={entries}
+      onChange={(glossLangs) => change({ glossLangs })} />;
+    if (field === "definition" || field === "notes") return <LanguageSearch
+      label={field === "definition" ? "Find the language senses are defined in" : "Find the language notes are written in"}
+      onChoose={(language) => {
+        change(field === "definition" ? { definitionLang: language.tag } : { notesLang: language.tag });
+        open(page);
+      }}
+    />;
+    return <VocabularyForm
+      key={key} draft={current} kept={entries} busy={busy} page={page}
+      onChange={change} onCancel={leave} onSave={() => save(current)}
+      onRemove={() => { if (record) remove(record); }}
+    />;
+  }
 
   return <>
     {entries.length ? <Group>
       {entries.map((vocabulary) => {
-        const fallback = languageOf(vocabulary.language);
-        const name = vocabulary.displayName ?? fallback.name;
+        const name = vocabulary.displayName ?? languageName(vocabulary.language);
         const words = counts.get(vocabulary.language) ?? 0;
+        const hint = [
+          vocabulary.region ? regionName(vocabulary.region) : null,
+          vocabulary.level,
+          `translated into ${vocabulary.glossLangs.map(languageName).join(", ")}`
+        ].filter(Boolean).join(" · ");
         return <Link
           key={vocabulary.id}
-          label={`${vocabulary.flag ?? fallback.flag}  ${name}`}
-          hint={`${vocabulary.language}${vocabulary.region ? ` · ${regionName(vocabulary.region)}` : ""} · defined in ${vocabulary.definitionLang} · translated into ${vocabulary.glossLangs.join(", ")} · notes in ${vocabulary.notesLang}`}
+          label={`${flagFor(vocabulary)}  ${name}`}
+          hint={hint}
           value={`${words.toLocaleString()} ${words === 1 ? "word" : "words"}`}
-          onOpen={() => open({ id: `vocabulary:${vocabulary.id}`, title: name })}
+          onOpen={() => { setDraft(draftOf(vocabulary)); open({ id: `vocabulary:${vocabulary.id}`, title: name }); }}
         />;
       })}
     </Group> : <Notice>None yet. Add the first language you are learning: a word needs one to be captured.</Notice>}
-
-    {adding ? <>
-      <Group foot="A language tag, such as es, en, ru or zh-Hans.">
-        <label className="pref-row">
-          <span className="pref-text"><span className="pref-label">Language tag</span></span>
-          <input
-            className="pref-input" value={code} autoComplete="off" spellCheck={false} placeholder="es"
-            aria-label="Language tag" onChange={(event) => setCode(event.target.value)}
-          />
-        </label>
-      </Group>
-      <div className="pref-buttons">
-        <button type="button" className="tb-btn" onClick={() => { setAdding(false); setCode(""); }}>Cancel</button>
-        <button type="button" className="tb-btn primary" disabled={busy} onClick={add}>Add vocabulary</button>
-      </div>
-    </> : <Group><Action onClick={() => setAdding(true)}>Add a vocabulary…</Action></Group>}
+    <Group><Action onClick={() => open({ id: "vocabulary:add", title: "Add a language" })}>Add a language…</Action></Group>
   </>;
 }
 
@@ -228,9 +322,9 @@ function TopicForm({ topic, onSave, onRemove, onDone }: {
   const [name, setName] = useState(topic.name);
   const [icon, setIcon] = useState(topic.icon ?? "");
   return <>
-    <Group>
-      <Field label="Name" value={name} onChange={setName} />
-      <Field label="Icon" value={icon} placeholder="💬" onChange={setIcon} />
+    <Group aligned>
+      <TextField label="Name" value={name} onChange={setName} />
+      <TextField label="Icon" value={icon} placeholder="💬" onChange={setIcon} />
     </Group>
     <div className="pref-buttons">
       <button type="button" className="tb-btn" onClick={onDone}>Cancel</button>
@@ -326,9 +420,9 @@ export function TopicEditor({ snapshot, language, onNotify, onChanged }: {
     </Group> : <Notice>None yet. Words cannot be filed until you add a topic.</Notice>}
 
     {adding ? <>
-      <Group>
-        <Field label="Name" value={name} placeholder="Slang" onChange={setName} />
-        <Field label="Icon" value={icon} placeholder="💬" onChange={setIcon} />
+      <Group aligned>
+        <TextField label="Name" value={name} placeholder="Slang" onChange={setName} />
+        <TextField label="Icon" value={icon} placeholder="💬" onChange={setIcon} />
       </Group>
       <div className="pref-buttons">
         <button type="button" className="tb-btn" onClick={() => { setAdding(false); setName(""); setIcon(""); }}>Cancel</button>

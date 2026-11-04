@@ -214,8 +214,8 @@ clip_settings = Table(
     Index("idx_clip_settings_owner", "owner", unique=True),
 )
 
-# The owner's standing rules for everything a text model writes for them — "I am vegan", "I read
-# Spanish at B2" — appended to those prompts by `services/prompts.with_rules`. Free text, one per
+# The owner's standing rules for everything a text model writes for them — "I am vegan", "no
+# profanity" — appended to those prompts by `services/rules.with_rules`. Free text, one per
 # owner, and like the other settings tables **no row means none**.
 prompt_rules = Table(
     "prompt_rules",
@@ -322,11 +322,18 @@ vocabularies = Table(
     Column("gloss_langs", JSON, nullable=False, default=list),
     Column("notes_lang", String(35), nullable=False),
     Column("display_name", String(120), nullable=False, default=""),
+    # The owner's own flag, pasted in. "" means the flag follows the variety, or the language's main
+    # region where none is chosen — derived on the device, so it is never stored twice.
     Column("flag", String(32), nullable=False, default=""),
-    # The accent the owner learns: a region subtag — `AR`, `GB`, `419` — or "" for none. A fact about
-    # the vocabulary rather than about a voice, so whatever speaks or writes it can follow it; today
-    # that is the voices (`docs/features/pronunciation.md`).
+    # The variety the owner learns: a region subtag — `AR`, `GB`, `419` — or "" for none. A fact about
+    # the vocabulary rather than about a voice, so whatever speaks or writes it can follow it: the
+    # voices, and the writers through the reader section (`docs/features/standing-rules.md`).
     Column("region", String(8), nullable=False, default=""),
+    # The owner's level in the language, a CEFR level `A1`…`C2`, or "" for unsaid.
+    Column("level", String(2), nullable=False, default=""),
+    # What the owner says about themselves as a learner of this language — goals, what they know well
+    # and what they don't — in their own words. Background for the writers, weighted lightly.
+    Column("learner_note", String(1000), nullable=False, default=""),
     Column("vocab_order", Integer, nullable=False, default=0),
     *_sync_fields(),
     Index("idx_vocabularies_owner_revision", "owner", "revision"),

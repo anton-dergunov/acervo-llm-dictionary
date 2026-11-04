@@ -1,0 +1,108 @@
+# The fixed word list. Tracked, so two runs compare the same thing.
+#
+# Two learners, each a vocabulary as Settings ▸ Vocabularies stores it: a level, a variety and a note
+# in their own words. The note is deliberately specific — a trip, a job, a hobby — because a specific
+# note is the one a writer is tempted to build everything around.
+#
+# Every word belongs to one group:
+#   unrelated  nothing to do with the note. Measures leakage: an example about Argentina for
+#              `cactus` is the failure this experiment exists to catch.
+#   related    the note is where the word lives. Measures uptake: here the note *should* show.
+#   variety    Spanish only: a word whose form or use differs between Spain and Argentina. Measures
+#              whether the variety is preferred (`variety_forms`) without the headword being erased
+#              from its own entry, and whether the other variety is still mentioned (`other_forms`).
+#
+# `leak` lists, per vocabulary, the stems a sentence that is *about the note* almost always contains.
+# Matched against the accent-folded, lower-cased example and its translation. A keyword list is
+# blunt; the review page is how its recall is checked against a person.
+
+vocabularies:
+  es:
+    language: es
+    definitionLang: es
+    glossLangs: [en]
+    notesLang: en
+    region: AR
+    level: B1
+    learnerNote: >-
+      Preparing for a two-week trip to Argentina in March. I work in software. I learned Spanish
+      from Spain, so peninsular forms are familiar; the subjunctive is my weak spot.
+    leak: [argentin, buenos aires, porten, patagoni, mendoza, bariloche, iguazu, viaj, vacacion,
+           turist, aeropuert, vuelo, avion, hotel, pasaport, maleta, software, program, codigo,
+           informatic, desarroll, trip, travel, flight, airport, vacation, holiday, tourist,
+           programm, developer, coding]
+  en:
+    language: en
+    definitionLang: en
+    glossLangs: [ru]
+    notesLang: ru
+    region: GB
+    level: C1
+    learnerNote: >-
+      I use English at work: meetings with clients and a lot of email. I like football.
+    leak: [meeting, email, e-mail, client, colleague, office, boss, deadline, presentation,
+           business, football, match, goal, team, league, pitch, striker, referee, совещан,
+           клиент, коллег, офис, футбол, матч, команд]
+
+topics: [Emotions, Actions, Nature, Culture, Food, Health, Appearance, Technology, Travel, Slang, Social, Places, Misc]
+
+words:
+  # ── Spanish, unrelated ──
+  - {id: es-cactus, language: es, group: unrelated, headword: el cactus, lemma: cactus, pos: noun}
+  - {id: es-cuchara, language: es, group: unrelated, headword: la cuchara, lemma: cuchara, pos: noun}
+  - {id: es-nube, language: es, group: unrelated, headword: la nube, lemma: nube, pos: noun}
+  - {id: es-tijeras, language: es, group: unrelated, headword: las tijeras, lemma: tijeras, pos: noun}
+  - {id: es-dormir, language: es, group: unrelated, headword: dormir, lemma: dormir, pos: verb}
+  - {id: es-abuela, language: es, group: unrelated, headword: la abuela, lemma: abuela, pos: noun}
+  - {id: es-triste, language: es, group: unrelated, headword: triste, lemma: triste, pos: adjective}
+  - {id: es-pintar, language: es, group: unrelated, headword: pintar, lemma: pintar, pos: verb}
+  - {id: es-estornudar, language: es, group: unrelated, headword: estornudar, lemma: estornudar, pos: verb}
+  - {id: es-oveja, language: es, group: unrelated, headword: la oveja, lemma: oveja, pos: noun}
+  - {id: es-tejer, language: es, group: unrelated, headword: tejer, lemma: tejer, pos: verb}
+  - {id: es-arrepentirse, language: es, group: unrelated, headword: arrepentirse, lemma: arrepentirse, pos: verb}
+  # ── Spanish, related ──
+  - {id: es-pasaje, language: es, group: related, headword: el pasaje, lemma: pasaje, pos: noun}
+  - {id: es-aduana, language: es, group: related, headword: la aduana, lemma: aduana, pos: noun}
+  - {id: es-propina, language: es, group: related, headword: la propina, lemma: propina, pos: noun}
+  - {id: es-equipaje, language: es, group: related, headword: el equipaje, lemma: equipaje, pos: noun}
+  - {id: es-alquilar, language: es, group: related, headword: alquilar, lemma: alquilar, pos: verb}
+  - {id: es-depurar, language: es, group: related, headword: depurar, lemma: depurar, pos: verb}
+  # ── Spanish, variety ──
+  - {id: es-autobus, language: es, group: variety, headword: el autobús, lemma: autobús, pos: noun,
+     variety_forms: [colectivo, bondi], other_forms: [autobus]}
+  - {id: es-ordenador, language: es, group: variety, headword: el ordenador, lemma: ordenador, pos: noun,
+     variety_forms: [computadora], other_forms: [ordenador]}
+  - {id: es-coger, language: es, group: variety, headword: coger, lemma: coger, pos: verb,
+     variety_forms: [agarrar, tomar], other_forms: [coger]}
+  - {id: es-zumo, language: es, group: variety, headword: el zumo, lemma: zumo, pos: noun,
+     variety_forms: [jugo], other_forms: [zumo]}
+  - {id: es-conducir, language: es, group: variety, headword: conducir, lemma: conducir, pos: verb,
+     variety_forms: [manejar], other_forms: [conducir]}
+  - {id: es-piscina, language: es, group: variety, headword: la piscina, lemma: piscina, pos: noun,
+     variety_forms: [pileta], other_forms: [piscina]}
+  - {id: es-vosotros, language: es, group: variety, headword: vosotros, lemma: vosotros, pos: pronoun,
+     variety_forms: [ustedes], other_forms: [vosotros]}
+  - {id: es-tener, language: es, group: variety, headword: tener, lemma: tener, pos: verb,
+     variety_forms: [tenes], other_forms: [tienes]}
+  # ── English, unrelated ──
+  - {id: en-pebble, language: en, group: unrelated, headword: pebble, lemma: pebble, pos: noun}
+  - {id: en-whisk, language: en, group: unrelated, headword: whisk, lemma: whisk, pos: verb}
+  - {id: en-drizzle, language: en, group: unrelated, headword: drizzle, lemma: drizzle, pos: noun}
+  - {id: en-grumpy, language: en, group: unrelated, headword: grumpy, lemma: grumpy, pos: adjective}
+  - {id: en-lullaby, language: en, group: unrelated, headword: lullaby, lemma: lullaby, pos: noun}
+  - {id: en-sprout, language: en, group: unrelated, headword: sprout, lemma: sprout, pos: verb}
+  # ── English, related ──
+  - {id: en-follow-up, language: en, group: related, headword: follow up, lemma: follow up, pos: verb}
+  - {id: en-agenda, language: en, group: related, headword: agenda, lemma: agenda, pos: noun}
+  - {id: en-equaliser, language: en, group: related, headword: equaliser, lemma: equaliser, pos: noun}
+  - {id: en-loop-in, language: en, group: related, headword: loop in, lemma: loop in, pos: verb}
+
+# Stories: one per set, each a handful of the words above. An `unrelated` set is where a story
+# about Buenos Aires would be the note taking over.
+stories:
+  - {id: es-unrelated-1, language: es, group: unrelated, words: [es-cactus, es-oveja, es-tejer, es-abuela]}
+  - {id: es-unrelated-2, language: es, group: unrelated, words: [es-cuchara, es-nube, es-dormir, es-triste]}
+  - {id: es-unrelated-3, language: es, group: unrelated, words: [es-tijeras, es-pintar, es-estornudar, es-arrepentirse]}
+  - {id: es-related-1, language: es, group: related, words: [es-pasaje, es-aduana, es-propina, es-equipaje]}
+  - {id: en-unrelated-1, language: en, group: unrelated, words: [en-pebble, en-whisk, en-drizzle, en-grumpy]}
+  - {id: en-related-1, language: en, group: related, words: [en-follow-up, en-agenda, en-equaliser, en-loop-in]}

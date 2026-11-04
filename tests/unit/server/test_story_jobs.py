@@ -145,8 +145,8 @@ def only_the_story(server) -> None:
             jobs.finish(job["id"], "cancelled")
 
 
-def a_story(server, count: int = 2, style: str = "comic-book", **extra) -> dict:
-    server.push({"vocabularies": [vocabulary()]})
+def a_story(server, count: int = 2, style: str = "comic-book", learner: dict | None = None, **extra) -> dict:
+    server.push({"vocabularies": [vocabulary(**(learner or {}))]})
     ids = []
     for index in range(count):
         entry = lexeme(headword="asombroso" if index == 0 else f"palabra{index}",
@@ -194,6 +194,20 @@ def test_a_whole_story_is_written_translated_briefed_and_drawn(server, models, r
     refreshed = graph.story_words(server.owner, story["id"])
     assert refreshed[0]["forms"] == ["asombroso"]
     assert refreshed[1]["forms"] == []
+
+
+def test_the_story_is_written_for_the_reader_and_translated_without_them(server, models, runner):
+    """The level, the variety and the note shape what the learner reads in the language; the
+    translation renders that text and owes the learner nothing more."""
+    story = a_story(server, 2, learner={"level": "A2", "region": "AR", "learnerNote": "I love football."})
+    models.texts = [story_reply(4), translation_reply(4), brief_reply(4)]
+    runner.run_until_idle()
+
+    write, translate = models.prompts[0], models.prompts[1]
+    assert "## The reader" in write and "A2, elementary" in write and "I love football." in write
+    # The request still sits directly under its own heading, after everything appended to the prompt.
+    assert write.index("## The reader") < write.index("## The request\n\n{")
+    assert "## The reader" not in translate and "## The story\n\n{" in translate
 
 
 def _draw_step(server) -> dict:

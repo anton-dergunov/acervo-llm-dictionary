@@ -31,6 +31,11 @@ from acervo.models.catalogue import Catalogue
 from acervo.models.errors import ProviderUnavailable
 from acervo.stories.write import Part
 
+# The heading the request sits under. Written here rather than ending the template, so a section
+# the binding layer appends to the template — the reader, the standing rules — never lands between
+# this heading and the request it introduces.
+HEADING = "## The story"
+
 MAX_REFERENCES = 2
 
 # Cool: this call names what is in each picture and invents nothing.
@@ -203,7 +208,7 @@ class Labeller:
         self.template = template
 
     def label(self, request: Mapping[str, Any], count: int) -> tuple[Continuity, dict[str, Any]]:
-        prompt = f"{self.template}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
+        prompt = f"{self.template}\n\n{HEADING}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
 
         def ask(candidate: chain.Candidate) -> call.TextResult:
             result = call.text(prompt, row=candidate.row, model=candidate.model, as_json=True,

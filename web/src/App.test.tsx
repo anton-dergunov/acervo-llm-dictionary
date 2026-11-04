@@ -740,7 +740,7 @@ describe("Acervo application", () => {
 
     const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
     openPage(settings, "Vocabularies");
-    fireEvent.click(settings.getByRole("button", { name: /es · defined in es/ }));
+    fireEvent.click(settings.getByRole("button", { name: /🇪🇸\s+Spanish/ }));
     fireEvent.click(settings.getByRole("button", { name: "Remove this vocabulary" }));
     // Nothing is deleted, but the words would lose the gloss preference they are rendered with.
     expect(await screen.findByText(/still has 3 words/)).toBeInTheDocument();

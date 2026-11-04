@@ -17,7 +17,7 @@ from acervo.models.call import HEDGE_SECONDS
 from acervo.services.capture.coerce import reference_of, text_list, trimmed
 from acervo.services.models import llm_json
 from acervo.services.prompts import prompt_text
-from acervo.services.rules import with_rules
+from acervo.services.reader import with_reader
 from acervo.settings import Settings
 
 
@@ -100,7 +100,7 @@ def compose(
     user = build_user_message(resolution, request, vocabulary, topics)
 
     answer, call = llm_json(
-        settings, owner, with_rules(prompt_text(settings.prompts_path, "acervo_compose"), owner), user,
+        settings, owner, with_reader(prompt_text(settings.prompts_path, "acervo_compose"), owner, vocabulary), user,
         caller="compose", hedge_after=HEDGE_SECONDS,
     )
     if not isinstance(answer, dict):

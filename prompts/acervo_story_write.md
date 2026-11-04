@@ -162,5 +162,3 @@ teaches them nothing about why.
 
 Every word must appear, the facts must be true, and it must be worth reading. A correct story
 nobody enjoys does not get read twice, and being read twice is how the words are learned.
-
-## The request

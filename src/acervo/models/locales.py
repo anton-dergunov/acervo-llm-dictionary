@@ -202,3 +202,70 @@ def language_name(tag: str) -> str:
     parsed = parse(tag)
     names = Locale("en").languages
     return names.get(parsed.language) or tag
+
+
+# Fewer speakers than this and a language is left out of the list a vocabulary is chosen from. A
+# language below it can still be kept: the form takes a tag it does not list.
+FEWEST_LISTED = 1_000_000
+
+
+@dataclass(frozen=True)
+class Language:
+    """One language a vocabulary may be kept in, as Settings ▸ Vocabularies offers it."""
+
+    tag: str
+    name: str  # in English: "Spanish", "Chinese (Traditional)"
+    autonym: str  # in itself: "español", "中文 (繁體)"
+    region: str | None  # where it is most likely spoken, for a flag: `ES`, `TW`
+    speakers: int
+    varieties: tuple[str, ...]  # `accents(tag)`
+
+
+def _scripts(language: str) -> list[str]:
+    """The scripts `language` is officially written in, one per territory that says so. More than one
+    — Chinese, Serbian, Punjabi — means a learner chooses a script, so each becomes its own entry."""
+    from babel.core import get_global
+
+    found: list[str] = []
+    for territory, spoken in get_global("territory_languages").items():
+        if len(territory) != 2:
+            continue
+        for key, facts in spoken.items():
+            base, _, script = key.partition("_")
+            if base != language or facts.get("official_status") not in SPOKEN_HERE:
+                continue
+            script = script or _script(language, territory)
+            if script and script not in found:
+                found.append(script)
+    return found
+
+
+@lru_cache(maxsize=1)
+def catalogue() -> tuple[Language, ...]:
+    """Every language spoken by at least `FEWEST_LISTED` people that CLDR can name, most speakers
+    first, with a script of its own where it is officially written in more than one."""
+    import langcodes
+    from babel import Locale, UnknownLocaleError
+    from babel.core import get_global
+
+    english = Locale("en")
+    bases = {key.partition("_")[0] for spoken in get_global("territory_languages").values() for key in spoken}
+    found: list[Language] = []
+    for base in bases:
+        if base not in english.languages:
+            continue
+        speakers = langcodes.Language.get(base).speaking_population()
+        if speakers < FEWEST_LISTED:
+            continue
+        scripts = _scripts(base)
+        for script in scripts if len(scripts) > 1 else [None]:
+            tag = f"{base}-{script}" if script else base
+            try:
+                locale = Locale.parse(tag.replace("-", "_"))
+                name = locale.get_display_name("en") or english.languages[base]
+                autonym = locale.get_display_name(locale) or name
+            except (ValueError, LookupError, UnknownLocaleError):
+                name = english.languages[base]
+                autonym = name
+            found.append(Language(tag, name, autonym, likely(tag).region, speakers, accents(tag)))
+    return tuple(sorted(found, key=lambda language: (-language.speakers, language.name)))

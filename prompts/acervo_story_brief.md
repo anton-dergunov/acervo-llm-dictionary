@@ -87,5 +87,3 @@ its aftermath, or the moment before it.
 
 The same people must look the same in every picture, nothing may contain text, and each picture
 must show the moment its own part turns on.
-
-## The story

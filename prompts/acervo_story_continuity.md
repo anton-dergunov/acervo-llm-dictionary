@@ -62,5 +62,3 @@ story gives one, spell each id identically everywhere, and declare every id a pa
 **Describe what a camera would see.** A `description` is what makes the person or place
 recognisable — age, build, hair, clothing, colours; layout, materials, light — taken from the
 briefs. Do not invent what the briefs do not say.
-
-## The story

@@ -3234,6 +3234,10 @@ button.pref-action:disabled { color: var(--ink-3); cursor: default; }
   background: var(--paper); color: var(--ink); font: inherit; font-size: 14px;
 }
 .pref-input { flex: 1 1 auto; max-width: none; min-width: 0; }
+/* A form's fields share one column: the label takes what is left of a fixed share, so a field starts
+   in the same place whatever its own label's length. */
+.pref-card.aligned .pref-text { flex: 1 1 0; }
+.pref-card.aligned .pref-input, .pref-card.aligned .pref-select { flex: 0 0 55%; max-width: 55%; min-width: 0; }
 /* The browser's own arrow sits against the edge and differs per platform; this one is drawn, in the
    hint colour of the theme, with the same inset as the text. */
 .pref-select {
@@ -3258,6 +3262,14 @@ button.pref-action:disabled { color: var(--ink-3); cursor: default; }
   width: 100%; min-height: 150px; padding: 10px 12px; border: 1px solid var(--rule); border-radius: 8px;
   background: var(--paper); color: var(--ink); font: inherit; font-size: 14.5px; line-height: 1.5; resize: vertical;
 }
+.pref-text-area.short { min-height: 96px; }
+/* A language to choose: its flag, its name in English and, under it, its name in itself. */
+.pref-flag { flex: none; width: 26px; font-size: 20px; line-height: 1; text-align: center; }
+button.pref-language:disabled { cursor: default; }
+button.pref-language:disabled .pref-label { color: var(--ink-3); }
+.pref-row > .icon-btn { flex: none; width: 30px; height: 30px; }
+.pref-row > .icon-btn svg { width: 15px; height: 15px; }
+.pref-count { align-self: flex-end; }
 .pref-reorder { flex: none; display: flex; gap: 4px; }
 .pref-reorder .icon-btn { width: 30px; height: 30px; }
 .pref-reorder .icon-btn svg { width: 15px; height: 15px; }

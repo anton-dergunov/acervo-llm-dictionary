@@ -12,16 +12,18 @@
 import { createContext, useContext, type ReactNode } from "react";
 import { AlertIcon, CheckIcon, ChevronIcon, DownIcon, ForwardIcon, PauseIcon, PlayIcon } from "../icons";
 
-export function Group({ title, count, foot, children }: {
+export function Group({ title, count, foot, aligned = false, children }: {
   title?: string;
   /** A short tally at the right of the title, such as "18 of 23 on". */
   count?: string;
   foot?: ReactNode;
+  /** A form: every field and select starts at the same place, whatever its label's length. */
+  aligned?: boolean;
   children: ReactNode;
 }) {
   return <section className="pref-group" aria-label={title}>
     {title && <h4>{title}{count && <span className="count">{count}</span>}</h4>}
-    <div className="pref-card">{children}</div>
+    <div className={`pref-card${aligned ? " aligned" : ""}`}>{children}</div>
     {foot && <p className="pref-foot">{foot}</p>}
   </section>;
 }
@@ -88,6 +90,43 @@ export function Select<T extends string>({ label, hint, value, options, disabled
   /* `Toggle`'s reason: a row that holds a button cannot be a label. */
   if (children) return <div className="pref-row split">{children}<Text label={label} hint={hint} />{select}</div>;
   return <label className="pref-row"><Text label={label} hint={hint} />{select}</label>;
+}
+
+/** A line of text to type or paste, its label on the left. */
+export function TextField({ label, hint, value, placeholder, maxLength, onChange }: {
+  label: string;
+  hint?: ReactNode;
+  value: string;
+  placeholder?: string;
+  maxLength?: number;
+  onChange(value: string): void;
+}) {
+  return <label className="pref-row">
+    <Text label={label} hint={hint} />
+    <input
+      className="pref-input" value={value} placeholder={placeholder} aria-label={label} maxLength={maxLength}
+      autoComplete="off" spellCheck={false} onChange={(event) => onChange(event.target.value)}
+    />
+  </label>;
+}
+
+/** A paragraph to write, under its label, with its length against its bound. */
+export function TextArea({ label, value, placeholder, limit, onChange }: {
+  label: string;
+  value: string;
+  placeholder?: string;
+  limit: number;
+  onChange(value: string): void;
+}) {
+  const over = value.trim().length > limit;
+  return <div className="pref-row stack">
+    <Text label={label} />
+    <textarea
+      className="pref-text-area short" aria-label={label} value={value} placeholder={placeholder}
+      onChange={(event) => onChange(event.target.value)}
+    />
+    <span className={`pref-hint pref-count${over ? " warn" : ""}`}>{value.trim().length} / {limit}</span>
+  </div>;
 }
 
 /** The round play button a voice is chosen by: press to hear it, press again to stop. */
@@ -217,7 +256,12 @@ export function Placeholder({ rows = 3 }: { rows?: number }) {
  * The window owns the back button and the title, so a page opens a sub-page by naming it here and
  * renders it when `sub` says so. Leaving the page closes it.
  */
-export interface SubPage { id: string; title: string }
+export interface SubPage {
+  id: string;
+  title: string;
+  /** The sub-page this one was opened from, which Back returns to: a vocabulary, from its languages. */
+  parent?: SubPage;
+}
 
 export const SubPageContext = createContext<{
   sub: SubPage | null;

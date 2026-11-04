@@ -48,7 +48,7 @@ export default function RulesPanel({ onNotify }: { onNotify(message: string): vo
         value={text}
         onChange={(event) => setDraft(event.target.value)}
         placeholder={"For example:\nI am vegan, so never show or mention meat or fish as food.\n"
-          + "I read Spanish at about B2; keep examples at that level."}
+          + "Never use profanity in an example."}
       />
       <div className="pref-buttons">
         <span className={`pref-hint${over ? " warn" : ""}`}>{text.trim().length} / {stored.limit}</span>

@@ -964,6 +964,7 @@ export default function App() {
       subject = {
         kind: "article",
         lexemeId: article.lexeme.id,
+        language: article.lexeme.language,
         // What the proposal would save, when one is live — not `diff.shown`, which carries removed
         // records back for the reader's sake and would show the model records it just took away.
         document: proposal ? yamlForDraft(proposal.after) : yamlFor(article),
@@ -1141,10 +1142,10 @@ export default function App() {
    * nothing to read it out of — and the neighbours are left empty: a word being added has no topics
    * chosen yet, and guessing at them would be conditioning on nothing.
    */
-  const askAboutDraft = useCallback((document: string, turns: ChatTurn[], options?: AskOptions) => {
+  const askAboutDraft = useCallback((document: string, turns: ChatTurn[], options?: AskOptions, language?: string | null) => {
     const deviceId = repository.state().deviceId;
     return backendSession.chat(deviceId, {
-      subject: { kind: "article", lexemeId: "", document, focus: null },
+      subject: { kind: "article", lexemeId: "", language: language ?? null, document, focus: null },
       turns,
       repair: options?.repair ?? null
     }, options?.requestId);
@@ -1408,7 +1409,7 @@ export default function App() {
      being downloaded again — and opens as it is once that has ended, whether it worked or not. */
   if (!snapshot || (!language && (languages.length > 0 || !settled))) return <Launch />;
 
-  const active = languageOf(language || "en");
+  const active = languages.find((option) => option.code === language) ?? languageOf(language || "en");
   /** Both surfaces you compose in. The main region stops scrolling and hands that to the view. */
   /* `asking` joins this for the same reason the other two are here: a surface that owns the height
      and scrolls itself must not sit inside a region that also scrolls. */

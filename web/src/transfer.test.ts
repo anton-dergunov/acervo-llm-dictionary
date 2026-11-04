@@ -67,8 +67,8 @@ describe("exporting a bundle", () => {
 
   it("writes the vocabulary and topic records the article documents cannot express", () => {
     expect(parse(at(bundle(), VOCABULARIES_FILE).text)).toEqual([
-      { language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en", displayName: null, flag: null, region: null, order: 0 },
-      { language: "en", definitionLang: "en", glossLangs: ["ru"], notesLang: "ru", displayName: null, flag: null, region: null, order: 1 }
+      { language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en", displayName: null, flag: null, region: null, level: null, learnerNote: null, order: 0 },
+      { language: "en", definitionLang: "en", glossLangs: ["ru"], notesLang: "ru", displayName: null, flag: null, region: null, level: null, learnerNote: null, order: 1 }
     ]);
     expect(parse(at(bundle(), TOPICS_FILE).text)).toEqual([
       { name: "Food", icon: "🍽️", order: 0 },
@@ -408,6 +408,31 @@ describe("reading a bundle", () => {
     const plan = readBundle(files);
     expect(plan.problems).toEqual([]);
     expect(plan.articles.length).toBeGreaterThan(0);
+  });
+
+  it("carries a vocabulary's level and its learner's note there and back", () => {
+    const graph = testGraph();
+    const described = { ...graph, vocabularies: graph.vocabularies.map((entry) =>
+      entry.language === "es" ? { ...entry, level: "B1" as const, learnerNote: "Off to Argentina." } : entry) };
+    const plan = readBundle(bundle(described));
+    const spanish = plan.vocabularies.find((entry) => entry.language === "es");
+    expect(spanish?.level).toBe("B1");
+    expect(spanish?.learnerNote).toBe("Off to Argentina.");
+    expect(plan.vocabularies.find((entry) => entry.language === "en")?.level).toBeNull();
+  });
+
+  it("reads a bundle from the version before levels exactly as it stands, with none", () => {
+    const files = bundle().map((file) => {
+      if (file.path === MANIFEST_FILE) {
+        return { ...file, text: file.text.replace(`schemaVersion: ${SCHEMA_VERSION}`, "schemaVersion: 20") };
+      }
+      return file.path === VOCABULARIES_FILE
+        ? { ...file, text: file.text.replace(/^\s*(level|learnerNote):.*\r?\n/gm, "") }
+        : file;
+    });
+    const plan = readBundle(files);
+    expect(plan.problems).toEqual([]);
+    expect(plan.vocabularies.every((entry) => entry.level === null && entry.learnerNote === null)).toBe(true);
   });
 
   it("carries a vocabulary's accent there and back", () => {

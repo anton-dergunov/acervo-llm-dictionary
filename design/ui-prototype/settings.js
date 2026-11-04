@@ -48,9 +48,9 @@ const TITLES = Object.fromEntries(GROUPS.flatMap((group) => group.pages));
 const esc = (text) => String(text).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 /* ── the kit ── */
-const group = (title, rows, foot = "", count = "") => `<section class="pref-group">
+const group = (title, rows, foot = "", count = "", aligned = false) => `<section class="pref-group">
   ${title ? `<h4>${esc(title)}${count ? `<span class="count">${esc(count)}</span>` : ""}</h4>` : ""}
-  <div class="pref-card">${rows.join("")}</div>
+  <div class="pref-card${aligned ? " aligned" : ""}">${rows.join("")}</div>
   ${foot ? `<p class="pref-foot">${foot}</p>` : ""}
 </section>`;
 const text = (label, hint) => `<span class="pref-text"><span class="pref-label">${esc(label)}</span>${hint ? `<span class="pref-hint">${esc(hint)}</span>` : ""}</span>`;
@@ -64,6 +64,14 @@ const voiceLink = (label, value, to, hint = "") => `<div class="pref-row split">
 const choice = (label, hint, checked = false) => `<div class="pref-row split">${listen(label)}<button class="pref-open" role="radio" aria-checked="${checked}">${text(label, hint)}${checked ? `<span class="pref-check">${ICON.check}</span>` : ""}</button></div>`;
 const voiceSelect = (label, hint, options, chosen) => `<div class="pref-row split">${listen(label)}${text(label, hint)}
   <select class="pref-select">${options.map((o) => `<option ${o === chosen ? "selected" : ""}>${esc(o)}</option>`).join("")}</select></div>`;
+const field = (label, value, placeholder = "") => `<label class="pref-row">${text(label)}<input class="pref-input" value="${esc(value)}" placeholder="${esc(placeholder)}"></label>`;
+const area = (label, value, placeholder, limit) => `<div class="pref-row stack">${text(label)}
+  <textarea class="pref-text-area short" placeholder="${esc(placeholder)}">${esc(value)}</textarea>
+  <span class="pref-hint pref-count">${value.trim().length} / ${limit}</span></div>`;
+/* A language to choose: its flag, its English name, its own name under it, and why not, if not. */
+const language = (flag, name, autonym, why = "") => `<button class="pref-row pref-language" ${why ? "disabled" : ""}>
+  <span class="pref-flag" aria-hidden="true">${flag}</span>${text(name, autonym === name ? "" : autonym)}${why ? `<span class="pref-value">${esc(why)}</span>` : ""}</button>`;
+const search = (placeholder, value = "") => group("", [`<label class="pref-row"><input class="pref-input" type="search" value="${esc(value)}" placeholder="${esc(placeholder)}"></label>`]);
 const action = (label, kind = "") => `<button class="pref-row pref-action ${kind}">${esc(label)}</button>`;
 const select = (label, hint, options, chosen) => `<label class="pref-row">${text(label, hint)}
   <select class="pref-select">${options.map((o) => `<option ${o === chosen ? "selected" : ""}>${esc(o)}</option>`).join("")}</select></label>`;
@@ -124,10 +132,10 @@ const PAGES = {
 
   vocabularies: () => [
     group("", [
-      link("🇪🇸  Spanish", "", "vocabulary", "es · Argentina · defined in es · translated into en, ru"),
-      link("🇨🇳  Chinese", "", "vocabulary", "Defined in English · glossed in English")
+      link("🇦🇷  Spanish", "1,412 words", "vocabulary", "Argentina · B1 · translated into English, Russian"),
+      link("🇨🇳  Chinese (Simplified)", "316 words", "vocabulary", "translated into Russian, English")
     ]),
-    group("", [action("Add a vocabulary…")])
+    `<section class="pref-group"><div class="pref-card"><button class="pref-row pref-action" data-sub="addLanguage">Add a language…</button></div></section>`
   ],
 
   topics: () => [
@@ -317,15 +325,47 @@ const SUBPAGES = {
   ] },
   vocabulary: { parent: "vocabularies", title: "Spanish", render: () => [
     group("", [
-      `<label class="pref-row">${text("Name")}<input class="pref-input" value="Spanish" style="max-width:55%"></label>`,
-      `<label class="pref-row">${text("Flag")}<input class="pref-input" value="🇪🇸" style="max-width:80px"></label>`,
-      select("Senses defined in", "", ["Spanish", "English"], "Spanish"),
-      `<label class="pref-row">${text("Glossed in")}<input class="pref-input" value="en, ru" style="max-width:55%"></label>`,
-      select("Notes written in", "", ["English", "Spanish", "Russian"], "English")
+      field("Name", "Spanish"),
+      field("Flag", "", "🇦🇷"),
+      select("Variety", "", ["None", "🇲🇽 Mexico", "🇦🇷 Argentina", "🇪🇸 Spain", "🇨🇴 Colombia", "🇺🇸 United States", "🌐 Latin America"], "🇦🇷 Argentina")
+    ], "", "", true),
+    group("Written in", [
+      link("Senses defined in", "🇪🇸 Spanish", "definitionLanguage"),
+      link("Translated into", "🇬🇧 English, 🇷🇺 Russian", "glossLanguages"),
+      link("Notes written in", "🇬🇧 English", "definitionLanguage")
     ]),
-    group("", [select("Accent", "The voices read it as it is spoken there", ["None", "Spain", "Mexico", "Argentina", "Colombia", "Chile", "Latin America"], "Argentina")]),
-    `<div style="display:flex;justify-content:flex-end;gap:8px">${button("Cancel")}${button("Save", true)}</div>`,
+    group("You", [
+      select("Level", "", ["Not set", "A1 · Beginner", "A2 · Elementary", "B1 · Intermediate", "B2 · Upper intermediate", "C1 · Advanced", "C2 · Proficient"], "B1 · Intermediate"),
+      area("About you", "Preparing for a trip to Argentina in March. I learned Spanish from Spain, so peninsular forms are familiar; the subjunctive is my weak spot.",
+        "Your goals, what you know well and what you don't.", 1000)
+    ], "", "", true),
+    `<div class="pref-buttons">${button("Cancel")}${button("Save", true)}</div>`,
     group("", [action("Remove this vocabulary", "danger")])
+  ] },
+  addLanguage: { parent: "vocabularies", title: "Add a language", render: () => [
+    search("Search by name, such as Spanish or español", "fr"),
+    group("", [
+      language("🇫🇷", "French", "français"),
+      language("🇮🇷", "Persian", "فارسی"),
+      language("🇿🇦", "Afrikaans", "Afrikaans"),
+      language("🇫🇮", "Finnish", "suomi"),
+      language("🇳🇱", "Western Frisian", "Frysk")
+    ])
+  ] },
+  glossLanguages: { parent: "vocabulary", title: "Translated into", render: () => [
+    group("", [
+      row("🇬🇧 English", "", `<span class="pref-reorder"><button class="icon-btn" aria-label="Move up" disabled>${ICON.up}</button><button class="icon-btn" aria-label="Move down">${ICON.down}</button></span><button class="icon-btn" aria-label="Remove English">${ICON.close}</button>`),
+      row("🇷🇺 Russian", "", `<span class="pref-reorder"><button class="icon-btn" aria-label="Move up">${ICON.up}</button><button class="icon-btn" aria-label="Move down" disabled>${ICON.down}</button></span><button class="icon-btn" aria-label="Remove Russian">${ICON.close}</button>`)
+    ], "The first is the one a word's one-line gloss is written in."),
+    search("Search by name, such as Spanish or español", "ger"),
+    group("", [language("🇩🇪", "German", "Deutsch"), language("🇩🇿", "Algerian Arabic", "Algerian Arabic")])
+  ] },
+  definitionLanguage: { parent: "vocabulary", title: "Senses defined in", render: () => [
+    search("Search by name, such as Spanish or español"),
+    group("", [
+      language("🇺🇸", "English", "English"), language("🇨🇳", "Chinese (Simplified)", "中文 (简体)"),
+      language("🇮🇳", "Hindi", "हिन्दी"), language("🇪🇸", "Spanish", "español"), language("🇪🇬", "Arabic", "العربية")
+    ])
   ] }
 };
 
@@ -354,7 +394,7 @@ function render() {
   const sub = state.sub && SUBPAGES[state.sub];
   const title = sub ? sub.title : TITLES[state.page];
   const back = sub
-    ? `<button class="prefs-back">${ICON.back}${esc(TITLES[sub.parent])}</button>`
+    ? `<button class="prefs-back">${ICON.back}${esc(SUBPAGES[sub.parent]?.title ?? TITLES[sub.parent])}</button>`
     : `<button class="prefs-back to-list">${ICON.back}Settings</button>`;
   const body = (sub ? sub.render() : PAGES[state.page]()).filter(Boolean).join("");
   root.innerHTML = `<section class="settings-window" role="dialog" aria-modal="true" aria-labelledby="settings-title" data-level="${state.level}">
@@ -380,7 +420,11 @@ function render() {
   });
   root.querySelectorAll("[data-sub]").forEach((b) => b.onclick = () => { state.sub = b.dataset.sub; render(); });
   const backButton = root.querySelector(".prefs-back");
-  backButton.onclick = () => { if (state.sub) state.sub = null; else state.level = "list"; render(); };
+  backButton.onclick = () => {
+    if (state.sub) state.sub = SUBPAGES[SUBPAGES[state.sub].parent] ? SUBPAGES[state.sub].parent : null;
+    else state.level = "list";
+    render();
+  };
   root.querySelectorAll(".seg button").forEach((b) => b.onclick = () => {
     b.parentElement.querySelectorAll("button").forEach((o) => { o.classList.toggle("on", o === b); o.setAttribute("aria-checked", o === b); });
   });

@@ -1,6 +1,6 @@
 """The owner's standing rules, and the one place they are joined to a prompt.
 
-Settings ▸ Rules is free text — "I am vegan, so never show or mention meat", "I read Spanish at B2"
+Settings ▸ Rules is free text — "I am vegan, so never show or mention meat", "no profanity in examples"
 — and it reaches every text call that writes something the owner will read: entries, the article
 conversation, picture briefs, stories and the choice of clips. Not the resolver, which only names
 the word a scrap of text is about, and not narration, which cuts a story into passages and may not

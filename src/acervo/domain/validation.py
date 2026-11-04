@@ -34,6 +34,10 @@ PHOTO_REGION_LIMIT = 400
 GUIDANCE_LIMIT = 1000
 # A BCP-47 region subtag: two letters for a country, three digits for a wider area (`419`).
 REGION = re.compile(r"[A-Z]{2}|[0-9]{3}")
+# The CEFR levels a vocabulary may state, lowest first.
+LEVELS = ("A1", "A2", "B1", "B2", "C1", "C2")
+# What the owner says about themselves as a learner: a short paragraph, background rather than a prompt.
+LEARNER_NOTE_LIMIT = 1000
 ORIGIN_VALUES = ("attestation", "llm", "tatoeba", "subtitle", "wiktionary", "manual")
 # What a pronunciation reads, and the table and field each one names.
 PRONUNCIATION_TARGETS = {
@@ -48,6 +52,7 @@ TEXT_RULES: dict[str, dict[str, tuple[bool, int]]] = {
     "vocabularies": {
         "language": (True, 35), "definition_lang": (True, 35), "notes_lang": (True, 35),
         "display_name": (False, 120), "flag": (False, 32), "region": (False, 8),
+        "level": (False, 2), "learner_note": (False, LEARNER_NOTE_LIMIT),
     },
     "topics": {"name": (True, 120), "icon": (False, 120)},
     "lexemes": {
@@ -320,7 +325,10 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         valid_language(row.get("notes_lang"), "Vocabulary notes language")
         region = _text(row, "region")
         if region and not REGION.fullmatch(region):
-            refuse("A vocabulary's accent is a region code such as AR, GB or 419.")
+            refuse("A vocabulary's variety is a region code such as AR, GB or 419.")
+        level = _text(row, "level")
+        if level and level not in LEVELS:
+            refuse("A vocabulary's level is one of A1, A2, B1, B2, C1 or C2.")
         return
 
     if name == "topics":

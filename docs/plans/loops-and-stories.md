@@ -29,15 +29,13 @@ Two may combine — hardest among the unused — but only if a single one proves
 
 ## 3 · Level and length
 
-- **A learner level per language**, on the `vocabularies` record, which every prompt that writes for
-  the owner reads: stories, loops, and the examples compose writes. It is a schema change on both
-  sides, so how it is deployed is decided when it is built. It touches the compose prompt, so it goes
-  through the article-quality checks ([`quality/article-quality.md`](quality/article-quality.md))
-  before it ships.
+- **A level for loops.** A vocabulary has a level now, and compose, chat and a story's text read it
+  ([`../features/standing-rules.md`](../features/standing-rules.md), "The reader"). A loop's sentences
+  are written by LexiBeat, so following it there means sending it in `render_request` and a change on
+  that side.
 - **A level for one story**, overriding the language's, in the story dialog.
 - **How many parts**, in the same dialog. The writer is free today, and the server accepts three to
   eight.
-- **A level for a loop**, if the loop's sentences turn out to need one.
 
 ## 4 · Listening hands-free
 

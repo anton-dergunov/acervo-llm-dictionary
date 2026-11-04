@@ -97,7 +97,7 @@ export default function AddView({
   /** Open the word already held and ask one question against it, seeded with what was captured. */
   onFoldIn?(lexemeId: string, foldable: CaptureFoldable, photo: KeptPhoto | null): void;
   /** One turn about the unsaved document. Absent when the server has no model, like Capture itself. */
-  onChat?(document: string, turns: ChatTurn[], options?: AskOptions): Promise<ChatResult>;
+  onChat?(document: string, turns: ChatTurn[], options?: AskOptions, language?: string | null): Promise<ChatResult>;
   /** A proposal still refused once the dock's repairs ran out, for the server's log. */
   onChatRefused?(requestId: string, problem: string, proposal: unknown): void;
   /** Photo capture's three round trips. Without them there is no Photo tab. */
@@ -183,7 +183,14 @@ export default function AddView({
    * under review, the text it proposes, so the next turn is about what is on screen. One sentence
    * changes one thing, instead of re-running generation and losing what was already right.
    */
-  const askAboutDraft = (turns: ChatTurn[], options: AskOptions) => onChat!(pending?.text ?? draft, turns, options);
+  const askAboutDraft = (turns: ChatTurn[], options: AskOptions) => {
+    const text = pending?.text ?? draft;
+    // Which vocabulary's learner the answer is written for. A draft that does not parse yet is asked
+    // about all the same, for no learner in particular.
+    let language: string | null = null;
+    try { language = parseArticle(text).language || null; } catch { /* asked about as it stands */ }
+    return onChat!(text, turns, options, language);
+  };
 
   /**
    * The proposal applied, without showing it. Throws what `applyOps` throws.

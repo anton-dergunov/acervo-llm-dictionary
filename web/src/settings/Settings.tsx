@@ -168,7 +168,7 @@ export default function Settings({ update, email, status, snapshot, language, ca
   }
 
   function back() {
-    if (sub) setSub(null); else setLevel("list");
+    if (sub) setSub(sub.parent ?? null); else setLevel("list");
   }
 
   const liveLexemes = snapshot?.lexemes.filter((lexeme) => !lexeme.deleted).length ?? 0;
@@ -249,7 +249,7 @@ export default function Settings({ update, email, status, snapshot, language, ca
         <div className="prefs-main" role="region" aria-labelledby="settings-page-title">
           <header className="prefs-head">
             {sub
-              ? <button type="button" className="prefs-back" onClick={back}><BackIcon />{LABELS[page]}</button>
+              ? <button type="button" className="prefs-back" onClick={back}><BackIcon />{sub.parent?.title ?? LABELS[page]}</button>
               : <button type="button" className="prefs-back to-list" onClick={back}><BackIcon />Settings</button>}
             <h3 id="settings-page-title">{sub?.title ?? LABELS[page]}</h3>
           </header>

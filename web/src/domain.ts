@@ -57,15 +57,28 @@ export interface Vocabulary extends SyncFields, OwnedFields {
    */
   notesLang: string;
   displayName: string | null;
+  /** The owner's own flag, pasted in. Null means it follows the variety — `flagFor` in `languages.ts`. */
   flag: string | null;
   /**
-   * The accent learned: a region subtag — `AR`, `GB`, `419` — or null for none. A fact about the
-   * vocabulary rather than about a voice, so whatever speaks or writes it can follow it; today the
-   * voices do (Settings ▸ Pronunciation).
+   * The variety learned: a region subtag — `AR`, `GB`, `419` — or null for none. A fact about the
+   * vocabulary rather than about a voice, so whatever speaks or writes it can follow it: the voices,
+   * and the writers, which prefer its forms without hiding the others.
    */
   region: string | null;
+  /** The owner's CEFR level in the language, `A1`…`C2`, or null for unsaid. */
+  level: CefrLevel | null;
+  /**
+   * What the owner says about themselves as a learner of it — goals, what they know well and what
+   * they don't. The writers read it as light background, never as a subject.
+   */
+  learnerNote: string | null;
   order: number;
 }
+
+export const CEFR_LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
+export type CefrLevel = typeof CEFR_LEVELS[number];
+/** How long a learner note may be, matching the server's bound. */
+export const LEARNER_NOTE_LIMIT = 1000;
 
 export interface Topic extends SyncFields, OwnedFields {
   id: string;
@@ -597,7 +610,12 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     optionalString(record.displayName, "Vocabulary name");
     optionalString(record.flag, "Vocabulary flag");
     invariant(record.region === null || /^([A-Z]{2}|\d{3})$/.test(record.region),
-      "A vocabulary's accent is a region code such as AR, GB or 419.");
+      "A vocabulary's variety is a region code such as AR, GB or 419.");
+    invariant(record.level === null || (CEFR_LEVELS as readonly string[]).includes(record.level),
+      "A vocabulary's level is one of A1, A2, B1, B2, C1 or C2.");
+    optionalString(record.learnerNote, "Vocabulary learner note");
+    invariant((record.learnerNote ?? "").length <= LEARNER_NOTE_LIMIT,
+      `A note about the learner may be at most ${LEARNER_NOTE_LIMIT} characters.`);
     invariant(Number.isSafeInteger(record.order) && record.order >= 0, "Vocabulary order is invalid.");
   },
   topics(record: Topic): void {

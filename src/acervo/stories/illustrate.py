@@ -26,6 +26,11 @@ from acervo.models.catalogue import Catalogue
 from acervo.models.errors import ProviderUnavailable
 from acervo.stories.write import Part
 
+# The heading the request sits under. Written here rather than ending the template, so a section
+# the binding layer appends to the template — the reader, the standing rules — never lands between
+# this heading and the request it introduces.
+HEADING = "## The story"
+
 # Warm: a brief is a creative act with a fixed job, between the story and the translation.
 BRIEF_PARAMS: Mapping[str, Any] = {"temperature": 0.7}
 
@@ -93,7 +98,7 @@ class BriefWriter:
         self.template = template
 
     def write(self, request: Mapping[str, Any], parts: Sequence[Part]) -> tuple[Briefed, dict[str, Any]]:
-        prompt = f"{self.template}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
+        prompt = f"{self.template}\n\n{HEADING}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
 
         def ask(candidate: chain.Candidate) -> call.TextResult:
             result = call.text(

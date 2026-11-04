@@ -27,6 +27,11 @@ from acervo.models import call, chain
 from acervo.models.catalogue import Catalogue
 from acervo.models.errors import ProviderUnavailable
 
+# The heading the request sits under. Written here rather than ending the template, so a section
+# the binding layer appends to the template — the reader, the standing rules — never lands between
+# this heading and the request it introduces.
+HEADING = "## The request"
+
 # Hot, deliberately. See the module docstring. A row that pins its own temperature still wins —
 # `call.text` spreads this first and the row second.
 WRITE_PARAMS: Mapping[str, Any] = {"temperature": 1.0}
@@ -223,7 +228,7 @@ class StoryWriter:
         self.template = template
 
     def write(self, request: Mapping[str, Any], wanted: Sequence[str]) -> tuple[Written, dict[str, Any]]:
-        prompt = f"{self.template}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
+        prompt = f"{self.template}\n\n{HEADING}\n\n{json.dumps(request, ensure_ascii=False, indent=2)}\n"
 
         def ask(candidate: chain.Candidate) -> call.TextResult:
             result = call.text(

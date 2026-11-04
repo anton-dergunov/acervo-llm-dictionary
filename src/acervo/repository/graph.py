@@ -456,6 +456,8 @@ def owner_vocabularies(owner: str) -> list[dict[str, Any]]:
                 "notesLang": row["notes_lang"],
                 "displayName": (row["display_name"] or "").strip() or None,
                 "region": (row["region"] or "").strip() or None,
+                "level": (row["level"] or "").strip() or None,
+                "learnerNote": (row["learner_note"] or "").strip() or None,
             }
             for row in rows
         ]

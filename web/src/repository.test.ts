@@ -332,7 +332,7 @@ describe("loops", () => {
     repository.attachRemote(fakeRemote());
     await repository.saveVocabulary({
       language: "es", definitionLang: "es", glossLangs: ["en"], notesLang: "en",
-      displayName: null, flag: null, region: null, order: 0
+      displayName: null, flag: null, region: null, level: null, learnerNote: null, order: 0
     }, "vocabes00000001");
     await repository.saveLexeme({ ...lexemeInput, primaryGloss: "to faint" }, "lexeme000000001");
     return repository;

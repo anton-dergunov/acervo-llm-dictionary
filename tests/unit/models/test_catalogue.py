@@ -538,3 +538,15 @@ def test_the_accents_a_language_is_offered_come_from_cldr_most_speakers_first():
     assert "DE" not in accents("en") and accents("en")[0] == "US"
     assert accents("zh-Hant")[:2] == ("TW", "HK") and accents("zh-Hans")[0] == "CN"
     assert accents("qaa") == ()
+
+
+def test_the_language_list_is_cldr_s_most_speakers_first_with_a_script_where_two_are_official():
+    from acervo.models.locales import catalogue
+
+    languages = {language.tag: language for language in catalogue()}
+    assert {"zh-Hans", "zh-Hant", "sr-Cyrl", "sr-Latn"} <= set(languages)
+    assert "zh" not in languages and "sr" not in languages
+    assert languages["zh-Hans"].autonym == "中文 (简体)" and languages["zh-Hant"].varieties[0] == "TW"
+    assert languages["fr"].name == "French" and languages["fr"].autonym == "français"
+    assert languages["en"].region == "US" and languages["pt"].region == "BR"
+    assert all(language.speakers >= 1_000_000 for language in languages.values())

@@ -1,7 +1,7 @@
 /* Test helpers for the pages that choose voices: a voice as a row declares it, and the Settings
    window's sub-page slot, which those pages open into. Imported by tests only. */
 
-import { useState, type ReactNode } from "react";
+import { Fragment, useState, type ReactNode } from "react";
 import type { VoiceMatch, VoiceOption, VoiceReader } from "../api";
 import { SubPageContext, type SubPage } from "./kit";
 
@@ -18,6 +18,7 @@ export function SubPages({ children }: { children: ReactNode }) {
   const [sub, setSub] = useState<SubPage | null>(null);
   return <SubPageContext.Provider value={{ sub, open: setSub, close: () => setSub(null) }}>
     {sub && <h3>{sub.title}</h3>}
-    {children}
+    {/* Keyed by where it is, as the window's scroll area is, so a page is drawn afresh on each. */}
+    <Fragment key={sub?.id ?? ""}>{children}</Fragment>
   </SubPageContext.Provider>;
 }

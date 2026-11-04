@@ -32,6 +32,7 @@ export const SETTINGS = {
   rules: resource("rules", () => backendSession.promptRules(), UNREACHABLE),
   images: resource("images", () => backendSession.imageSettings(), UNREACHABLE),
   pronunciations: resource("pronunciations", () => backendSession.pronunciationSettings(), UNREACHABLE),
+  languages: resource("languages", () => backendSession.languages(), "The list of languages is on the server, which could not be reached."),
   schedule: resource("schedule", () => backendSession.scheduleSettings(), UNREACHABLE),
   anki: resource("anki", () => backendSession.ankiStatus(), UNREACHABLE),
   jobs: resource("jobs", () => backendSession.jobs(false), "The server’s activity could not be read."),

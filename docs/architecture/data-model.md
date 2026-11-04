@@ -50,11 +50,21 @@ provenance — when, and from which device — and never a merge key.
 | `glossLangs` | the languages translated into, most preferred first, never empty | one word can carry an English gloss *and* a Russian one |
 | `notesLang` | the language usage notes are written in, defaulting to `glossLangs[0]` | a note is unbounded contrastive prose — the part of an article you skim |
 
-A vocabulary also carries its **accent**, `region`: a BCP-47 region subtag (`AR`, `GB`, `419`) or
+A vocabulary also carries its **variety**, `region`: a BCP-47 region subtag (`AR`, `GB`, `419`) or
 null. It is not a fourth language — Argentine Spanish is still `es`, so a lexeme's `language` and every
-lookup keyed on it are unchanged — but the variety learned, which the voices read it in
-([`../features/pronunciation.md`](../features/pronunciation.md)). A lexeme's `dialect` is the
-opposite case: one word that belongs to a variety, whatever the vocabulary's.
+lookup keyed on it are unchanged — but the regional form learned, which the voices read it in
+([`../features/pronunciation.md`](../features/pronunciation.md)) and the writers prefer. A lexeme's
+`dialect` is the opposite case: one word that belongs to a variety, whatever the vocabulary's.
+
+Two more fields describe the learner rather than the language: `level`, a CEFR level `A1`…`C2` or
+null, and `learnerNote`, up to 1,000 characters in the owner's own words. The writers read both
+([`../features/standing-rules.md`](../features/standing-rules.md), "The reader"). They belong to the
+vocabulary rather than to the owner because one owner learns several languages at different levels
+for different reasons.
+
+`flag` is the owner's own flag, pasted in, or null — and null is the usual case: the device derives
+the flag from the variety, or from the region the language is most likely spoken in (`flagFor` in
+`languages.ts`). A stored flag that merely restated the derived one would stop following the variety.
 
 `shortGloss`, `primaryGloss` and a sense's `domain` follow `glossLangs[0]` and deliberately have no
 setting of their own: the order of the gloss languages *is* the control. Every prose field in the
@@ -213,7 +223,7 @@ Three rules they share:
   another owner is refused as `id_conflict`, never overwritten.
 - **No uniqueness constraints on replicated collections.** Server-only tables that never replicate —
   `sync_state`, `model_selection`, `jobs`, `loop_scripts` — are exempt.
-- **A vocabulary language is a record, not a table in the code.** `languages.ts` supplies only the
-  defaults a record falls back on.
+- **A vocabulary language is a record, not a table in the code.** `languages.ts` derives only names
+  and flags, from the platform's locale data.
 - **Any change to a replicated record's shape bumps `LOCAL_SCHEMA_VERSION`** in `repository.ts`, and a
   replica written under another version is wiped and pulled again ([`sync.md`](sync.md)).
