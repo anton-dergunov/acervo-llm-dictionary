@@ -289,6 +289,11 @@ picks the orders and voices once more. Nothing reads the old ids.
    - Write `docs/providers.md`, which leads with the zero-cost set, then the popular paid providers,
      then local models. Each provider gets how to sign up, which key to create, what the free
      allowance means in words and pictures a day, and where to paste it.
+   - Say where a Google credentials file is and how to reach it. Your own sign-in is
+     `~/.config/gcloud/application_default_credentials.json`, in a folder a file dialog hides. In the
+     macOS dialog, ⇧⌘G opens a typed path and ⇧⌘. shows hidden folders. On an iPad, or anywhere the
+     dialog cannot reach it, copy the file on the Mac (`pbcopy < ~/.config/gcloud/application_default_credentials.json`)
+     and use **Paste…** on the Google Cloud page.
    - Add a short README section linking to it.
    - Rewrite `docs/architecture/models.md` for the store.
    - Fold `vertex-setup.md` and `cloudflare-workers-ai.md` into the guide.

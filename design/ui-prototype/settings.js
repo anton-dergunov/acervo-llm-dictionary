@@ -582,9 +582,12 @@ function googleCloud(mode) {
     key
       ? group("Key", [keyRow("API key", "Allowed to use Text-to-Speech and Vision", "AIza…7tPe"), checkRow(["ok", "Works · Text-to-Speech and Vision answer"], "Checked today, 14:02")])
       : group("Credentials", [
-          row("Credentials file", "A service account, or your own sign-in", button("Replace…")),
+          row("Credentials file", "A service account, or your own sign-in", `${button("Paste…")}${button("Replace…")}`),
+          ...(params.get("paste") ? [`<div class="pref-row stack">
+            <textarea class="pref-text-area short" placeholder='{ "type": "authorized_user", … }'>{ "type": "authorized_user", "client_id": "…</textarea>
+            <div class="pref-buttons"><span class="pref-hint warn">That is not the whole file: it should start with { and end with }.</span>${button("Cancel")}${button("Use it", true)}</div></div>`] : []),
           checkRow(["ok", "Works as acervo-tts@project.example.com"], "Checked today, 14:02")
-        ]),
+        ], `Your own sign-in is usually at <code>~/.config/gcloud/application_default_credentials.json</code>. It is kept on your server.`),
     key ? "" : group("", [
       field("Project", "example-project"),
       select("Location", "", ["global", "europe-west1", "us-central1"], "global")

@@ -143,7 +143,10 @@ and `ProviderPages.tsx` for everything under it.
   check said with Check again, the family's settings, a group per kind with **Add a model…**, a link to
   the provider's own page for the bill, and Remove. Remove asks for a second press, since the key goes
   with it. Google Cloud signs in with a key or a credentials file; the choice says what each reaches,
-  and what only the file reaches is hidden while it signs in with a key.
+  and what only the file reaches is hidden while it signs in with a key. The file is chosen or
+  **pasted**: gcloud keeps your own sign-in in a hidden folder a file dialog does not show, and an iPad
+  reaches no folder on the Mac at all, while the clipboard crosses devices. What is pasted is checked to
+  be whole JSON before it is sent. The line under the field says where the file usually is.
 - **Add a model** is one box. It searches what the provider itself says it has, with what is already
   added marked, and once nothing listed matches, what is typed is offered as it is — *Add
   "flux-2-klein-9b"*, under a line saying the provider does not list it — for a model too new for the

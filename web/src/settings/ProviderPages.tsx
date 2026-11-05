@@ -135,27 +135,72 @@ function Buttons({ busy, label, busyLabel = "Checking…", onCancel, onSubmit }:
   </div>;
 }
 
-/** A credentials file, chosen and read as text: the server takes its text and nothing else. A real
-    button opens the hidden file input, so it is reached by keyboard like any other. */
-function FileChooser({ label, hint, button, onRead }: {
-  label: string;
+/** Where a credentials file usually is, said under the field: the question is "where is it?", and
+    gcloud keeps your own sign-in in a folder a file dialog hides. */
+const CREDENTIALS_FOOT = <>Your own sign-in is usually at <code>~/.config/gcloud/application_default_credentials.json</code>.
+  It is kept on your server.</>;
+
+/**
+ * A credentials file, chosen or pasted, and read as text: the server takes its text and nothing else.
+ * Pasting is for a file the dialog cannot reach — gcloud keeps it in a hidden folder, and an iPad
+ * reaches no folder on the Mac at all — and the clipboard crosses devices. What is pasted is checked
+ * to be JSON here, so a half-copied file is said before anything is sent.
+ *
+ * A real button opens the hidden file input, so it is reached by keyboard like any other.
+ */
+function CredentialsFile({ hint, button, busy = false, onRead }: {
   hint?: ReactNode;
   button: string;
+  busy?: boolean;
   onRead(text: string, name: string): void;
 }) {
   const input = useRef<HTMLInputElement>(null);
-  return <div className="pref-row">
-    <span className="pref-text"><span className="pref-label">{label}</span>{hint && <span className="pref-hint">{hint}</span>}</span>
-    <button type="button" className="tb-btn" onClick={() => input.current?.click()}>{button}</button>
-    <input
-      ref={input} type="file" accept="application/json,.json" hidden aria-label={label}
-      onChange={(event) => {
-        const file = event.target.files?.[0];
-        if (file) void file.text().then((text) => onRead(text, file.name));
-        event.target.value = "";
-      }}
-    />
-  </div>;
+  const [pasting, setPasting] = useState(false);
+  const [pasted, setPasted] = useState("");
+  const [wrong, setWrong] = useState<string | null>(null);
+
+  function use() {
+    try {
+      const parsed: unknown = JSON.parse(pasted);
+      if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) throw new Error("not an object");
+    } catch {
+      setWrong("That is not the whole file: it should start with { and end with }.");
+      return;
+    }
+    onRead(pasted, "Pasted");
+    setPasting(false); setPasted(""); setWrong(null);
+  }
+
+  return <>
+    <div className="pref-row">
+      <span className="pref-text">
+        <span className="pref-label">Credentials file</span>
+        {hint && <span className="pref-hint">{hint}</span>}
+      </span>
+      <button type="button" className="tb-btn" disabled={busy} onClick={() => setPasting(!pasting)}>Paste…</button>
+      <button type="button" className="tb-btn" disabled={busy} onClick={() => input.current?.click()}>{button}</button>
+      <input
+        ref={input} type="file" accept="application/json,.json" hidden aria-label="Credentials file"
+        onChange={(event) => {
+          const file = event.target.files?.[0];
+          if (file) void file.text().then((text) => onRead(text, file.name));
+          event.target.value = "";
+        }}
+      />
+    </div>
+    {pasting && <div className="pref-row stack">
+      <textarea
+        className="pref-text-area short" aria-label="The credentials file’s contents" value={pasted} autoFocus
+        spellCheck={false} placeholder={'{ "type": "authorized_user", … }'}
+        onChange={(event) => { setPasted(event.target.value); setWrong(null); }}
+      />
+      <div className="pref-buttons">
+        {wrong && <span className="pref-hint warn">{wrong}</span>}
+        <button type="button" className="tb-btn" onClick={() => { setPasting(false); setPasted(""); setWrong(null); }}>Cancel</button>
+        <button type="button" className="tb-btn primary" disabled={!pasted.trim()} onClick={use}>Use it</button>
+      </div>
+    </div>}
+  </>;
 }
 
 /** The family's settings that apply in this sign-in mode, each a field or a pick. */
@@ -272,8 +317,9 @@ function NewProvider({ family, write, onCancel, onAdded }: {
         value={key} secret mono placeholder="Paste it here" onChange={setKey}
       />
     </Group>}
-    {mode === "file" && <Group title="Credentials" foot="A service account’s key, or your own sign-in. It is kept on your server.">
-      <FileChooser label="Credentials file" hint={file?.name} button="Choose…" onRead={(text, name) => setFile({ text, name })} />
+    {mode === "file" && <Group title="Credentials" foot={CREDENTIALS_FOOT}>
+      <CredentialsFile hint={file?.name ?? "A service account, or your own sign-in"} button="Choose…"
+        onRead={(text, name) => setFile({ text, name })} />
     </Group>}
     <Buttons busy={busy} label="Check and add" onCancel={onCancel} onSubmit={() => void add()} />
   </>;
@@ -355,11 +401,10 @@ function ProviderView({ provider, family, write, onOpen, onRemoved, onNotify }: 
       <Row label="No key needed" hint="It answers at its address" />
       <CheckRow provider={provider} busy={busy === "check"} onCheck={() => void run("check", () => backendSession.checkProvider(provider.id), true)} />
     </Group>;
-    if (mode === "file") return <Group title="Credentials">
-      <FileChooser
-        label="Credentials file"
+    if (mode === "file") return <Group title="Credentials" foot={CREDENTIALS_FOOT}>
+      <CredentialsFile
         hint={switching ? (file?.name || "A service account, or your own sign-in") : provider.credential.account ?? "Your own sign-in"}
-        button={busy === "file" ? "Checking…" : switching ? "Choose…" : "Replace…"}
+        button={busy === "file" ? "Checking…" : switching ? "Choose…" : "Replace…"} busy={busy === "file"}
         onRead={(text, name) => { setFile({ text, name }); void replaceFile(text); }}
       />
       {!switching && <CheckRow provider={provider} busy={busy === "check"} onCheck={() => void run("check", () => backendSession.checkProvider(provider.id), true)} />}

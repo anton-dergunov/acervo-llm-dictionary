@@ -153,6 +153,60 @@ describe("adding a provider", () => {
   });
 });
 
+describe("a credentials file the dialog cannot reach", () => {
+  afterEach(() => { vi.restoreAllMocks(); notified.mockReset(); });
+
+  async function googleFileForm() {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
+    render(<Window />);
+    fireEvent.click(await screen.findByRole("button", { name: "Add a provider…" }));
+    fireEvent.click(screen.getByText("Google Cloud"));
+    fireEvent.click(screen.getByRole("radio", { name: "Credentials file" }));
+    fireEvent.change(screen.getByLabelText("Project"), { target: { value: "example-project" } });
+  }
+
+  it("says where your own sign-in usually is", async () => {
+    await googleFileForm();
+    expect(screen.getByText("~/.config/gcloud/application_default_credentials.json")).toBeInTheDocument();
+  });
+
+  it("takes the file pasted, and sends it as its text", async () => {
+    await googleFileForm();
+    const add = vi.spyOn(backendSession, "addProvider").mockResolvedValue(answer([GEMINI, GOOGLE], "google-cloud"));
+    const file = JSON.stringify({ type: "authorized_user", client_id: "x" });
+    fireEvent.click(screen.getByRole("button", { name: "Paste…" }));
+    fireEvent.change(screen.getByLabelText("The credentials file’s contents"), { target: { value: file } });
+    fireEvent.click(screen.getByRole("button", { name: "Use it" }));
+    expect(screen.getByText("Pasted")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Check and add" }));
+    await waitFor(() => expect(add).toHaveBeenCalledWith(expect.objectContaining({ credentials: file })));
+  });
+
+  it("says a half-copied file is not whole, and sends nothing", async () => {
+    await googleFileForm();
+    const add = vi.spyOn(backendSession, "addProvider");
+    fireEvent.click(screen.getByRole("button", { name: "Paste…" }));
+    fireEvent.change(screen.getByLabelText("The credentials file’s contents"), { target: { value: '{ "type": "authorized_user", "cli' } });
+    fireEvent.click(screen.getByRole("button", { name: "Use it" }));
+    expect(screen.getByText(/That is not the whole file/)).toBeInTheDocument();
+    expect(screen.queryByText("Pasted")).toBeNull();
+    expect(add).not.toHaveBeenCalled();
+  });
+
+  it("replaces a stored provider's file by pasting, checked at once", async () => {
+    const vertex: ModelProvider = { ...GOOGLE, credential: { kind: "file", hint: null, account: "acervo@project.example.com" },
+      settings: { project: "example-project" } };
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue([vertex]));
+    const change = vi.spyOn(backendSession, "changeProvider").mockResolvedValue(answer([vertex], "google-cloud"));
+    await openProvider("Google Cloud");
+    const file = JSON.stringify({ type: "service_account", client_email: "acervo@project.example.com" });
+    fireEvent.click(screen.getByRole("button", { name: "Paste…" }));
+    fireEvent.change(screen.getByLabelText("The credentials file’s contents"), { target: { value: file } });
+    fireEvent.click(screen.getByRole("button", { name: "Use it" }));
+    await waitFor(() => expect(change).toHaveBeenCalledWith("google-cloud", { credentials: file }));
+  });
+});
+
 describe("a provider's page", () => {
   afterEach(() => { vi.restoreAllMocks(); notified.mockReset(); });
 
