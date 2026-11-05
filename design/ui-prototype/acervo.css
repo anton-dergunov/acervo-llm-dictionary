@@ -3071,7 +3071,9 @@ body.framed .map-tool.pointer-only { display: none; }
   flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
   padding: 4px 16px max(24px, env(safe-area-inset-bottom));
 }
-.prefs-page { display: grid; gap: 22px; align-content: start; max-width: 680px; }
+/* A column of rows, centred in the pane: wide enough that a value is rarely cut short, never so wide
+   that a switch sits far from its label. */
+.prefs-page { display: grid; gap: 22px; align-content: start; max-width: 760px; margin-inline: auto; }
 
 /* The narrow dialog shows one level at a time. */
 .settings-window[data-level="list"] .prefs-main,
@@ -3106,7 +3108,8 @@ body.framed .map-tool.pointer-only { display: none; }
   .prefs-side .prefs-head { padding-right: 16px; }
   .prefs-side .prefs-scroll { padding: 0 10px 16px; }
   .prefs-main .prefs-scroll { padding: 4px 28px 28px; }
-  .prefs-main .prefs-head { padding-left: 28px; }
+  /* The title starts where the centred column of rows starts (`.prefs-page`). */
+  .prefs-main .prefs-head { padding-left: max(28px, calc((100% - 760px) / 2)); }
   .prefs-back.to-list { display: none; }
   .prefs-nav { gap: 16px; }
   .prefs-nav h4 { margin: 0 0 4px 10px; font-size: 11px; }

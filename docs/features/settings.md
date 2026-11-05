@@ -34,6 +34,10 @@ that can be resized and keeps the size it was dragged to on that device. **No pa
 The window used to be as tall as the page in it, centred, so every switch between pages resized it and
 moved its header, and a page that was still loading first shrank it to one line.
 
+A wide window does not stretch the rows: a page is a column at most 760px wide, centred in the pane,
+with its title starting where the column does. A switch 1,600 pixels from its label is a row nobody
+can read across; a narrow column pinned to the left of a wide window looked unfinished.
+
 ## 3 · One DOM at every width
 
 Where the window is at least 640px wide the list of pages is a sidebar beside the page. Narrower, the
