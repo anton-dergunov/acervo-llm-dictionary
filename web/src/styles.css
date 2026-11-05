@@ -3328,3 +3328,19 @@ button.pref-language:disabled .pref-label { color: var(--ink-3); }
 .pref-check { flex: none; display: inline-flex; width: 18px; height: 18px; color: var(--core); }
 .pref-check svg { width: 100%; height: 100%; }
 .pref-group .danger-zone h3 { margin: 0; font-size: 15px; }
+
+/* ── providers ──
+   Settings ▸ Providers (docs/plans/provider-management.md): a model's id in its own spelling, a key
+   field, and whether a provider's key works. */
+.pref-label.mono { font-family: var(--mono); font-size: 14px; font-weight: 500; }
+.pref-input.mono { font-family: var(--mono); font-size: 13px; }
+.pref-row .pref-input + .tb-btn { margin-left: 4px; }
+/* A provider's own page opens as a link, and looks like the buttons beside it. */
+a.tb-btn { text-decoration: none; }
+/* Whether a provider's key works: an icon that carries the state, and words in ink. */
+.pref-state { flex: none; display: inline-flex; align-items: center; gap: 5px; font-size: 14px; color: var(--ink-2); }
+.pref-text > .pref-state { font-size: 15px; font-weight: 500; color: var(--ink); }
+.pref-state svg { flex: none; width: 15px; height: 15px; }
+.pref-state.ok svg { color: var(--core); }
+.pref-state.bad svg { color: var(--warn); }
+.pref-state.bad { color: var(--warn); }

@@ -1549,7 +1549,10 @@ describe("Acervo application", () => {
     expect(settings.queryByText(/Entries are built by/)).not.toBeInTheDocument();
     openPage(settings, "Providers");
     expect(await settings.findByText("gemini-3.1-flash-lite")).toBeInTheDocument();
-    expect(settings.getByRole("button", { name: /Credentials/ })).toBeInTheDocument();
+    // The provider's row opens its own page, in the window's place, with its key as its edges.
+    fireEvent.click(settings.getByRole("button", { name: /^Gemini API/ }));
+    expect(await settings.findByRole("heading", { name: "Gemini API" })).toBeInTheDocument();
+    expect(settings.getByText("AIza…mnop")).toBeInTheDocument();
   });
 });
 

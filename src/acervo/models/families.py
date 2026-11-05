@@ -88,6 +88,9 @@ class Family:
     # the provider's settings, never over its key.
     key_url: str | None = None
     usage_url: str | None = None
+    # Where the owner reads a model's voices, for a provider that cannot list them and so has them
+    # typed in.
+    voices_url: str | None = None
     fields: tuple[Field, ...] = ()
     # The base URL LiteLLM is given, a template over the settings. None means LiteLLM's own default
     # for the prefix.
@@ -169,6 +172,7 @@ FAMILIES: tuple[Family, ...] = (
         lister="cloudflare",
         key_url="https://dash.cloudflare.com/profile/api-tokens",
         usage_url="https://dash.cloudflare.com/{accountId}/ai/workers-ai",
+        voices_url="https://developers.cloudflare.com/workers-ai/models/?tasks=Text-to-Speech",
     ),
     Family(
         id="groq", label="Groq", group="Free to start", hint="Fast text",

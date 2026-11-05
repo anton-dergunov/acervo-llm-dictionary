@@ -61,8 +61,9 @@ export interface ModelProvider {
   models: Record<string, ProviderModel[]>;
   extra: Record<string, unknown>;
   credential: ProviderCredential;
-  /** What the last check of its key said, in the provider's own words. */
-  check: { ok: boolean; said: string; at: string | null } | null;
+  /** What the last check of its key said, in the provider's own words, and why it failed if it did:
+      `authentication` is a refused key, anything else a provider that did not answer. */
+  check: { ok: boolean; said: string; reason?: string | null; at: string | null } | null;
   available: boolean;
   /** What is missing — a key, a setting, a key the provider refused — and never a value. */
   reason: string | null;
@@ -82,6 +83,8 @@ export interface ProviderFamily {
   credential: "key" | "key-or-file" | "optional" | "none";
   keyLabel: string;
   keyUrl: string | null;
+  /** Where a model's voices are read, for a provider that cannot list them. */
+  voicesUrl: string | null;
   fields: { name: string; label: string; needed: "always" | "file" | "never"; default: string | null;
             hint: string | null; choices: string[] }[];
 }
@@ -269,6 +272,23 @@ export interface ModelCatalogue {
   chains: Record<string, ModelChain>;
 }
 
+/** What a provider write answers: the whole readout, and the id of the provider it changed. */
+export type ProviderChange = ModelCatalogue & { provider: string };
+
+/** What a new or changed provider sends. A key or a credentials file is sent once and never read back. */
+export interface ProviderBody {
+  family?: string;
+  label?: string;
+  settings?: Record<string, string>;
+  models?: Record<string, ProviderModel[]>;
+  key?: string;
+  /** A Google credentials file, as its text. */
+  credentials?: string;
+}
+
+/** The voices one speech model has. `listed` is false where they are typed on the model. */
+export interface ProviderVoice { name: string; locale?: string; gender?: string; note?: string }
+
 export interface ServerHealth {
   name: string;
   version: string;
@@ -311,6 +331,9 @@ const STORY_AUDIO_TIMEOUT = 180_000;
 const PHOTO_TIMEOUT = 45_000;
 // The quick look-up: about a second at the median, raced by a second model at 2.5 s on the server.
 const QUICK_TIMEOUT = 20_000;
+/** A provider write or listing asks the provider first, with its own 15 s bound, and Google may
+    fetch a token before it: the request has to outlast both. */
+const PROVIDER_TIMEOUT = 45_000;
 
 /* ── capture ────────────────────────────────────────────────────────────
    The capture route (`docs/features/capture.md`). What comes back is a *proposal*: a draft the
@@ -1345,6 +1368,29 @@ export const backendSession = {
     return client.call<ModelCatalogue>("/models/selection", {
       method: "PUT", body: JSON.stringify({ chains })
     });
+  },
+
+  /* ── providers ──────────────────────────────────────────────────────────
+     Every write answers with the whole readout, because taking a model or a provider away also
+     takes it out of the orders. A key or a credentials file goes to the server once. */
+  addProvider(body: ProviderBody): Promise<ProviderChange> {
+    return client.call<ProviderChange>("/providers", { method: "POST", body: JSON.stringify(body) }, false, PROVIDER_TIMEOUT);
+  },
+  changeProvider(id: string, body: ProviderBody): Promise<ProviderChange> {
+    return client.call<ProviderChange>(`/providers/${encodeURIComponent(id)}`, { method: "PUT", body: JSON.stringify(body) }, false, PROVIDER_TIMEOUT);
+  },
+  checkProvider(id: string): Promise<ProviderChange> {
+    return client.call<ProviderChange>(`/providers/${encodeURIComponent(id)}/check`, { method: "POST", body: "{}" }, false, PROVIDER_TIMEOUT);
+  },
+  removeProvider(id: string): Promise<ProviderChange> {
+    return client.call<ProviderChange>(`/providers/${encodeURIComponent(id)}`, { method: "DELETE" });
+  },
+  /** What a provider says it has for a kind; `listed` is false where the name has to be typed. */
+  providerModels(id: string, kind: string): Promise<{ kind: string; listed: boolean; models: string[] }> {
+    return client.call(`/providers/${encodeURIComponent(id)}/models?kind=${encodeURIComponent(kind)}`, {}, false, PROVIDER_TIMEOUT);
+  },
+  providerVoices(id: string, model: string): Promise<{ listed: boolean; voices: ProviderVoice[] }> {
+    return client.call(`/providers/${encodeURIComponent(id)}/voices?model=${encodeURIComponent(model)}`, {}, false, PROVIDER_TIMEOUT);
   },
 
   imageSettings(): Promise<ImageSettings> {

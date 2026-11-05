@@ -14,10 +14,14 @@ import sqlite3
 import stat
 
 import pytest
-from provider_rows import CLOUDFLARE_ACCOUNT, CLOUDFLARE_TOKEN, GEMINI_KEY, GOOGLE, SERVICE_ACCOUNT
+from provider_rows import (
+    CLOUDFLARE, CLOUDFLARE_ACCOUNT, CLOUDFLARE_TOKEN, GEMINI_KEY, GOOGLE, SERVICE_ACCOUNT, VERTEX,
+    google_voices,
+)
 
 from acervo import activity
 from acervo.models import listing
+from acervo.models.errors import ProviderRefused, ProviderUnavailable
 from acervo.models.providers import Checked
 from acervo.services import provider_secrets
 
@@ -49,18 +53,25 @@ def providers(server):
     return {row["id"]: row for row in server.get("/models").json()["data"]["providers"]}
 
 
+def changed(answer):
+    """The provider a change names, out of the readout it answers with."""
+    readout = answer.json()["data"]
+    return next(row for row in readout["providers"] if row["id"] == readout["provider"])
+
+
 # ── adding ──────────────────────────────────────────────────────────────────
 
 
 def test_a_provider_whose_key_works_is_added_after_the_others(server, checks):
     answer = server.post("/providers", cloudflare())
     assert answer.status_code == 201
-    added = answer.json()["data"]
+    added = changed(answer)
     assert added["id"] == "cloudflare" and added["label"] == "Cloudflare"
     assert added["check"]["ok"] is True and added["check"]["said"] == "Works · 3 models"
     assert added["available"] is True
-    assert list(providers(server)) == ["gemini-api", "cloudflare"]
-    pairs = server.get("/models").json()["data"]["chains"]["text"]["pairs"]
+    # The answer is the whole readout, so the page renders the server's orders as well.
+    assert [row["id"] for row in answer.json()["data"]["providers"]] == ["gemini-api", "cloudflare"]
+    pairs = answer.json()["data"]["chains"]["text"]["pairs"]
     assert pairs[-1] == {"provider": "cloudflare", "model": "@cf/meta/llama-3.3-70b-instruct-fp8-fast"}
 
 
@@ -112,16 +123,16 @@ def test_a_bad_provider_is_refused_with_a_code_that_says_which_mistake(server, c
 
 
 def test_a_second_provider_of_one_family_is_numbered(server, checks):
-    added = server.post("/providers", {"family": "gemini-api", "key": NEW_KEY,
-                                       "models": {"text": ["gemini-3.5-flash-lite"]}}).json()["data"]
+    added = changed(server.post("/providers", {"family": "gemini-api", "key": NEW_KEY,
+                                               "models": {"text": ["gemini-3.5-flash-lite"]}}))
     assert added["id"] == "gemini-api-2"
 
 
 def test_google_cloud_takes_an_uploaded_credentials_file_as_its_text(server, checks):
-    added = server.post("/providers", {
+    added = changed(server.post("/providers", {
         "family": "google-cloud", "id": "vertex", "settings": {"project": "example-project"},
         "credentials": json.dumps(SERVICE_ACCOUNT), "models": {"text": ["gemini-3.8-flash"]},
-    }).json()["data"]
+    }))
     assert added["credential"] == {"kind": "file", "hint": None, "account": SERVICE_ACCOUNT["client_email"]}
 
 
@@ -160,16 +171,16 @@ def test_a_new_key_is_checked_before_it_replaces_the_old_one(server, checks):
     assert answer.json()["error"]["code"] == "key_refused"
     assert provider_secrets.read(server.settings)["gemini-api"] == {"key": GEMINI_KEY}
 
-    changed = server.put("/providers/gemini-api", {"key": NEW_KEY}).json()["data"]
-    assert changed["credential"]["hint"] == f"{NEW_KEY[:4]}…{NEW_KEY[-4:]}"
+    replaced = changed(server.put("/providers/gemini-api", {"key": NEW_KEY}))
+    assert replaced["credential"]["hint"] == f"{NEW_KEY[:4]}…{NEW_KEY[-4:]}"
     assert provider_secrets.read(server.settings)["gemini-api"] == {"key": NEW_KEY}
     assert asked == ["gemini-api", "gemini-api"]
 
 
 def test_a_change_that_keeps_the_key_and_the_settings_asks_nothing(server, checks):
     _, asked = checks
-    changed = server.put("/providers/gemini-api", {"label": "My Gemini"}).json()["data"]
-    assert changed["label"] == "My Gemini" and asked == []
+    renamed = changed(server.put("/providers/gemini-api", {"label": "My Gemini"}))
+    assert renamed["label"] == "My Gemini" and asked == []
 
 
 def test_a_providers_family_and_id_do_not_change(server, checks):
@@ -192,9 +203,11 @@ def test_a_model_taken_away_leaves_every_order_and_voice_choice(server, checks):
     })
 
     server.put("/providers/gemini-api", {"models": {"text": ["gemini-3.5-flash-lite"]}})
-    server.put("/providers/google-cloud", {"models": {
+    answer = server.put("/providers/google-cloud", {"models": {
         "audio": [m for m in GOOGLE["models"]["audio"] if m != "Standard"], "ocr": ["document-text-detection"]}})
 
+    # What the change answers is what the server now holds, orders included.
+    assert answer.json()["data"]["chains"] == server.get("/models").json()["data"]["chains"]
     chains = server.get("/models").json()["data"]["chains"]
     assert chains["text"]["pairs"] == [{"provider": "gemini-api", "model": "gemini-3.5-flash-lite"}]
     assert chains["audioPlain"]["pairs"] == [{"provider": "google-cloud", "model": "Wavenet"}]
@@ -206,8 +219,10 @@ def test_a_model_taken_away_leaves_every_order_and_voice_choice(server, checks):
 def test_a_check_is_kept_whatever_it_said_and_a_refused_key_is_then_skipped(server, checks):
     said, _ = checks
     said.append(Checked(False, "Gemini API refused this key", "authentication"))
-    checked = server.post("/providers/gemini-api/check", {}).json()["data"]
+    checked = changed(server.post("/providers/gemini-api/check", {}))
     assert checked["check"]["ok"] is False and checked["check"]["said"] == "Gemini API refused this key"
+    # The reason, so the page can say "Key refused" rather than only that something is wrong.
+    assert checked["check"]["reason"] == "authentication"
     assert checked["available"] is False
     assert server.capture().json()["error"]["code"] == "capture_unavailable"
     assert server.model.calls == []
@@ -228,7 +243,9 @@ def test_removing_a_provider_takes_its_key_and_every_order_naming_it(server, che
             "image": [{"provider": "cloudflare", "model": "@cf/black-forest-labs/flux-2-klein-4b"}],
         }})
 
-    assert server.delete("/providers/cloudflare").json()["data"] == {"removed": "cloudflare"}
+    removed = server.delete("/providers/cloudflare").json()["data"]
+    assert removed["provider"] == "cloudflare"
+    assert "cloudflare" not in [row["id"] for row in removed["providers"]]
 
     assert "cloudflare" not in providers(server)
     assert "cloudflare" not in provider_secrets.read(server.settings)
@@ -243,6 +260,87 @@ def test_removing_a_provider_takes_its_key_and_every_order_naming_it(server, che
 
 def test_every_route_needs_a_signed_in_account(server):
     for method, path in (("post", "/providers"), ("put", "/providers/x"),
-                         ("post", "/providers/x/check"), ("delete", "/providers/x")):
-        answer = getattr(server.client, method)(f"/api/acervo/v1{path}", **({"json": {}} if method != "delete" else {}))
+                         ("post", "/providers/x/check"), ("delete", "/providers/x"),
+                         ("get", "/providers/x/models"), ("get", "/providers/x/voices")):
+        body = {"json": {}} if method in ("post", "put") else {}
+        answer = getattr(server.client, method)(f"/api/acervo/v1{path}", **body)
         assert answer.status_code == 401
+
+
+# ── what a provider has ─────────────────────────────────────────────────────
+
+
+def test_add_a_model_lists_what_the_provider_has_for_that_kind(server, monkeypatch):
+    asked = []
+
+    def models(provider, kind):
+        asked.append((provider.id, kind))
+        return ("gemini-3.8-flash", "gemini-3.5-flash-lite")
+
+    monkeypatch.setattr(listing, "models", models)
+    answer = server.get("/providers/gemini-api/models?kind=text").json()["data"]
+    assert answer == {"kind": "text", "listed": True, "models": ["gemini-3.8-flash", "gemini-3.5-flash-lite"]}
+    assert asked == [("gemini-api", "text")]
+
+
+def test_a_kind_the_provider_cannot_list_is_typed_and_asks_nothing(server, monkeypatch):
+    server.add_provider(VERTEX)
+    monkeypatch.setattr(listing, "models", lambda *_: pytest.fail("Vertex lists nothing cheaply"))
+    answer = server.get("/providers/vertex/models?kind=text").json()["data"]
+    assert answer == {"kind": "text", "listed": False, "models": []}
+
+
+def test_a_kind_the_family_does_not_do_is_refused(server):
+    answer = server.get("/providers/gemini-api/models?kind=ocr")
+    assert answer.json()["error"]["code"] == "unsupported_kind"
+    assert server.get("/providers/nonesuch/models?kind=text").json()["error"]["code"] == "unknown_provider"
+
+
+def test_a_listing_the_provider_refuses_says_its_sentence_and_is_logged(server, monkeypatch, caplog):
+    def models(provider, kind):
+        raise ProviderRefused("authentication", "API key not valid. Please pass a valid API key.",
+                              provider_id=provider.id, status=400)
+
+    monkeypatch.setattr(listing, "models", models)
+    caplog.set_level(logging.INFO, logger=activity.LOGGER)
+    answer = server.get("/providers/gemini-api/models?kind=text")
+    assert answer.status_code == 400
+    assert answer.json()["error"] == {
+        "code": "key_refused",
+        "message": "Gemini API refused this key: API key not valid. Please pass a valid API key.",
+    }
+    # What `admin log --failed` shows: the sentence, which provider, and why.
+    line = next(record.getMessage() for record in caplog.records if "key_refused" in record.getMessage())
+    assert "API key not valid" in line and "provider=gemini-api" in line and "reason=authentication" in line
+
+
+def test_a_listing_that_does_not_answer_is_a_bad_gateway(server, monkeypatch):
+    def models(provider, kind):
+        raise ProviderUnavailable("unreachable", "connection refused", provider_id=provider.id)
+
+    monkeypatch.setattr(listing, "models", models)
+    answer = server.get("/providers/gemini-api/models?kind=text")
+    assert answer.status_code == 502
+    assert answer.json()["error"] == {"code": "provider_listing_failed",
+                                      "message": "Gemini API did not answer: connection refused."}
+
+
+def test_a_voice_models_voices_come_from_the_provider_where_it_lists_them(server, monkeypatch):
+    server.add_provider(GOOGLE)
+    monkeypatch.setattr(listing, "_google_voices", google_voices)
+    answer = server.get("/providers/google-cloud/voices?model=Wavenet").json()["data"]
+    assert answer["listed"] is True
+    assert answer["voices"] and all(voice["locale"] for voice in answer["voices"])
+    gemini = server.get("/providers/google-cloud/voices?model=gemini-2.5-flash-tts").json()["data"]
+    # A Gemini voice speaks any locale, so it carries none.
+    assert gemini["voices"] and not any("locale" in voice for voice in gemini["voices"])
+
+
+def test_voices_typed_on_a_model_are_the_ones_shown(server, monkeypatch):
+    document = {**CLOUDFLARE, "models": {**CLOUDFLARE["models"], "audio": [
+        {"id": "@cf/deepgram/aura-1", "voices": [{"name": "angus", "gender": "male"}]}]}}
+    server.add_provider(document)
+    monkeypatch.setattr(listing, "voices", lambda *_: pytest.fail("typed voices are not asked for"))
+    answer = server.get("/providers/cloudflare/voices?model=@cf/deepgram/aura-1").json()["data"]
+    assert answer == {"listed": False, "voices": [{"name": "angus", "gender": "male"}]}
+    assert server.get("/providers/cloudflare/voices?model=nonesuch").json()["error"]["code"] == "unknown_model"

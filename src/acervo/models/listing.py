@@ -52,21 +52,25 @@ def check(provider: "Provider") -> "Checked":
     try:
         said, account = _CHECKS[provider.family.lister](provider)
     except ProviderError as error:
-        # A check sends a request of ours that does not change, so a provider that turns it away is
-        # turning away the key or the settings beside it — and some say so with a 400 rather than a
-        # 401: Google answers a key that is not valid with `INVALID_ARGUMENT`.
-        reason = "authentication" if error.reason in ("authentication", "configuration") else error.reason
-        return Checked(False, _refusal(provider, error, reason), reason, None)
+        reason, said = refusal(provider, error)
+        return Checked(False, said, reason, None)
     return Checked(True, said, None, account)
 
 
-def _refusal(provider: "Provider", error: ProviderError, reason: str) -> str:
+def refusal(provider: "Provider", error: ProviderError) -> tuple[str, str]:
+    """Why a listing or a check was turned away, and the sentence that says so.
+
+    A listing sends a request of ours that does not change, so a provider that turns it away is
+    turning away the key or the settings beside it — and some say so with a 400 rather than a 401:
+    Google answers a key that is not valid with `INVALID_ARGUMENT`.
+    """
+    reason = "authentication" if error.reason in ("authentication", "configuration") else error.reason
     detail = f": {error.detail.strip().rstrip('.')}" if error.detail else ""
     if reason == "authentication":
-        return f"{provider.label} refused this key{detail}"
+        return reason, f"{provider.label} refused this key{detail}"
     if reason in ("unreachable", "unavailable"):
-        return f"{provider.label} did not answer{detail}"
-    return f"{provider.label} said no{detail}"
+        return reason, f"{provider.label} did not answer{detail}"
+    return reason, f"{provider.label} said no{detail}"
 
 
 def _check_openai(provider: "Provider") -> tuple[str, str | None]:
@@ -100,6 +104,12 @@ def _count(found: tuple[str, ...]) -> str:
 
 
 # ── models ──
+
+
+def lists(provider: "Provider", kind: str) -> bool:
+    """Whether this provider can say which models it has for a kind. Where it cannot — Vertex, or
+    Gemini's voices on Cloud Text-to-Speech — the owner types the model's name."""
+    return kind in _LISTS[provider.family.lister]
 
 
 def models(provider: "Provider", kind: str) -> tuple[str, ...]:
@@ -169,9 +179,14 @@ def _google_models(provider: "Provider", kind: str) -> tuple[str, ...]:
 # ── voices ──
 
 
+def lists_voices(provider: "Provider") -> bool:
+    """Whether this provider can say which voices a model has. Where it cannot, they are typed."""
+    return provider.family.lister in _VOICES
+
+
 def voices(provider: "Provider", model: str) -> tuple["Voice", ...]:
     """The voices a model speaks with, from the provider's own list. Empty where it has none."""
-    if provider.family.lister != "google-cloud":
+    if not lists_voices(provider):
         return ()
     from acervo.models.providers import Voice
 
@@ -289,6 +304,16 @@ _CHECKS = {
     "cloudflare": _check_cloudflare,
     "google-cloud": _check_google,
 }
+# The kinds each listing code can list, and the ones whose voices it can.
+_LISTS = {
+    "openai": {"text"},
+    "gemini": {"text"},
+    "anthropic": {"text"},
+    "ollama": {"text"},
+    "cloudflare": {"text", "image", "audio"},
+    "google-cloud": {"audio", "ocr"},
+}
+_VOICES = {"google-cloud"}
 _MODELS = {
     "openai": _openai_models,
     "gemini": _gemini_models,

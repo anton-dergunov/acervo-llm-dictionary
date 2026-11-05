@@ -4,14 +4,17 @@ import {
   type ModelCatalogue,
   type ModelChain,
   type ModelPair,
-  type ModelProvider
+  type ModelProvider,
+  type ProviderChange
 } from "../api";
-import { SETTINGS, useServerSetting } from "./cache";
-import { Group, Link, Notice, Placeholder, Reorder, useSubPage } from "./kit";
+import { refresh, SETTINGS, useServerSetting } from "./cache";
+import { Action, Group, Link, Notice, Placeholder, Reorder, Row, StateMark, useSubPage } from "./kit";
+import { ADD_PROVIDER, KIND_TITLES, ProviderSubPage, providerPage, stateOf, type Write } from "./ProviderPages";
 import { useState } from "react";
 
 /**
- * Settings ▸ Providers: which provider and model build an entry, in what order.
+ * Settings ▸ Providers: the providers this server holds, and which of their models build an entry,
+ * in what order. Adding a provider, its own page and its model pickers are `ProviderPages.tsx`.
  *
  * The unit is a **(provider, model) pair**, not a provider. A free tier is metered per model, so
  * Gemini's two 500-a-day models are a thousand a day and the second is reached by the first one's
@@ -134,6 +137,13 @@ function KindSection({ kind, offers, label, hint, catalogue, onChange }: {
         : "Switched off: nothing here is generated.")
       : chain.reason ? `Nothing chosen can answer now: ${chain.reason}.` : "";
 
+  if (pairs.length === 0) {
+    return <Group title={label} foot={hint}>
+      <Row label={kind === DIRECTED ? "No voice here takes a direction" : "Nothing offers this yet"}
+        hint={kind === DIRECTED ? "Switch it on for a voice model on its provider’s page" : "Add a model to a provider above"} />
+    </Group>;
+  }
+
   return <Group
     title={label}
     foot={<>
@@ -166,47 +176,31 @@ function KindSection({ kind, offers, label, hint, catalogue, onChange }: {
   </Group>;
 }
 
-/**
- * Providers ▸ Credentials: every provider this server holds, which key it holds, and whether the key
- * worked when it was last checked.
- *
- * It answers a question the orders cannot: *which* key is set. Two keys for the same provider are
- * otherwise indistinguishable, so a rotation that only half happened looks exactly like one that
- * worked. A key is shown as four characters at each end and never more — enough to match against
- * the provider's own dashboard by eye, not enough to use. A credentials file shows no fragment at
- * all; it is named by its account. Adding and changing providers is the page Settings ▸ Providers
- * grows next.
- */
-function Credentials({ providers }: { providers: ModelProvider[] }) {
-  return <Group foot="Keys are kept on the server. Usage opens the provider’s own page.">
+/** The providers, each with what it offers and whether it works, and the way to add another. */
+function ProviderList({ providers, onOpen, onAdd }: {
+  providers: ModelProvider[];
+  onOpen(provider: ModelProvider): void;
+  onAdd(): void;
+}) {
+  return <Group title="Providers">
     {providers.map((provider) => {
-      const credential = provider.credential;
-      const detail = [
-        credential.account,
-        ...Object.entries(provider.settings).map(([name, value]) => `${name} ${value}`),
-        provider.check ? provider.check.said : null
-      ].filter(Boolean).join(" · ");
-      const value = credential.kind === "none" ? "No key needed"
-        : credential.kind === "key" ? credential.hint || "A key"
-        : "A credentials file";
-      return <div key={provider.id} className="pref-row" data-testid="provider-line">
-        <span className="pref-text">
-          <span className="pref-label">{provider.label}</span>
-          {detail && <span className="pref-hint">{detail}</span>}
-        </span>
-        <span className={`pref-value${credential.kind === "key" && credential.hint ? " mono" : ""}`}>{value}</span>
-        {/* The visible word is the same in every row, so the accessible name carries the provider. */}
-        {provider.usageUrl && <a
-          className="tb-btn" href={provider.usageUrl} target="_blank" rel="noreferrer noopener"
-          aria-label={`${provider.label} usage`}
-        >Usage</a>}
-      </div>;
+      const state = stateOf(provider);
+      return <Link
+        key={provider.id} label={provider.label}
+        hint={provider.kinds.length ? provider.kinds.map((kind) => KIND_TITLES[kind] ?? kind).join(" · ") : "No models yet"}
+        mark={<StateMark ok={state.ok}>{state.words}</StateMark>}
+        onOpen={() => onOpen(provider)}
+      />;
     })}
+    <Action onClick={onAdd}>Add a provider…</Action>
   </Group>;
 }
 
+const failure = (error: unknown, fallback: string) =>
+  error instanceof AcervoApiError || error instanceof Error ? error.message : fallback;
+
 export default function ModelPanel({ onNotify }: { onNotify(message: string): void }) {
-  const { sub, open } = useSubPage();
+  const { sub, open, close } = useSubPage();
   const { value: catalogue, error, set } = useServerSetting(SETTINGS.models);
   const [working, setWorking] = useState(false);
 
@@ -217,24 +211,39 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
       set(await backendSession.saveModelSelection({ [kind]: pairs }));
       if (pairs === null) onNotify("The providers’ own order is back in force.");
     } catch (error) {
-      onNotify(error instanceof AcervoApiError || error instanceof Error ? error.message : "That choice could not be saved.");
+      onNotify(failure(error, "That choice could not be saved."));
     } finally { setWorking(false); }
   }
 
-  if (!catalogue) return error ? <Notice>{error}</Notice> : <Placeholder rows={4} />;
-  if (sub?.id === "credentials") return <Credentials providers={catalogue.providers} />;
+  /** A provider write: the readout it answers replaces the cached one, orders and all. Voice
+      choices live on Pronunciation's settings, and losing a model can change them too. */
+  const write: Write = async (call: () => Promise<ProviderChange>) => {
+    try {
+      const answer = await call();
+      set(answer);
+      void refresh(SETTINGS.pronunciations).catch(() => undefined);
+      return answer;
+    } catch (error) {
+      return failure(error, "The server could not be reached, so nothing changed.");
+    }
+  };
 
-  const configured = catalogue.providers.filter((provider) => provider.available !== false).length;
+  if (!catalogue) return error ? <Notice>{error}</Notice> : <Placeholder rows={4} />;
+  if (sub) return <ProviderSubPage sub={sub} catalogue={catalogue} write={write} open={open} close={close} onNotify={onNotify} />;
+
+  const refused = catalogue.providers.filter((provider) => provider.check?.ok === false && provider.check.reason === "authentication");
   return <div className="pref-stack" aria-busy={working}>
+    {catalogue.providers.length === 0 && <Notice>
+      This server has no provider yet, so nothing can be written, drawn or read aloud. Add one below.
+    </Notice>}
+    {refused.map((provider) => <Notice key={provider.id}>
+      {provider.label} refused its key, so nothing is sent to it.{" "}
+      <button type="button" className="pref-link-inline" onClick={() => open(providerPage(provider))}>Replace the key</button>
+    </Notice>)}
+    <ProviderList providers={catalogue.providers} onOpen={(provider) => open(providerPage(provider))} onAdd={() => open(ADD_PROVIDER)} />
     {KINDS.map((entry) => <KindSection
       key={entry.id} {...entry} kind={entry.id} catalogue={catalogue}
       onChange={(kind, pairs) => void save(kind, pairs)}
     />)}
-    <Group>
-      <Link
-        label="Credentials" value={`${configured} of ${catalogue.providers.length} working`}
-        onOpen={() => open({ id: "credentials", title: "Credentials" })}
-      />
-    </Group>
   </div>;
 }

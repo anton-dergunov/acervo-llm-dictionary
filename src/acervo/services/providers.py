@@ -21,6 +21,7 @@ from typing import Any, Mapping
 from acervo import activity
 from acervo.errors import ApiError
 from acervo.models import families, listing
+from acervo.models.errors import ProviderError
 from acervo.models.providers import (
     Checked, DocumentError, Provider, Providers, build, parse, suggested_id,
 )
@@ -73,6 +74,7 @@ def family_view(family: families.Family) -> dict[str, Any]:
         "credential": family.credential,
         "keyLabel": family.key_label,
         "keyUrl": family.key_url,
+        "voicesUrl": family.voices_url,
         "fields": [
             {"name": one.name, "label": one.label, "needed": one.needed, "default": one.default,
              "hint": one.hint, "choices": list(one.choices)}
@@ -106,12 +108,18 @@ def provider_view(provider: Provider) -> dict[str, Any]:
             "account": provider.identity(),
         },
         "check": None if provider.check is None else {
-            "ok": provider.check.ok, "said": provider.check.said, "at": provider.checked_at,
+            "ok": provider.check.ok, "said": provider.check.said, "reason": provider.check.reason,
+            "at": provider.checked_at,
         },
         "available": provider.available,
         "reason": provider.reason(),
         "usageUrl": provider.usage_url(),
     }
+
+
+def _voice_view(voice: Any) -> dict[str, Any]:
+    return {name: value for name, value in (("name", voice.name), ("locale", voice.locale),
+                                            ("gender", voice.gender), ("note", voice.note)) if value}
 
 
 def _model_view(model: Any) -> dict[str, Any]:
@@ -121,14 +129,56 @@ def _model_view(model: Any) -> dict[str, Any]:
     if model.languages != "any":
         found["languages"] = list(model.languages)
     if model.voices:
-        found["voices"] = [
-            {name: value for name, value in (("name", voice.name), ("locale", voice.locale),
-                                             ("gender", voice.gender), ("note", voice.note)) if value}
-            for voice in model.voices
-        ]
+        found["voices"] = [_voice_view(voice) for voice in model.voices]
     if model.allowance:
         found["allowance"] = dict(model.allowance)
     return found
+
+
+# ── what a provider has, for the pickers ──
+
+
+def offered_models(settings: Settings, identifier: str, kind: str) -> dict[str, Any]:
+    """The models a provider says it has for a kind, for "Add a model". `listed` is false where it
+    cannot say, and the owner then types the model's name."""
+    provider = find(settings, identifier)
+    if kind not in families.KINDS:
+        raise ApiError(400, "invalid_input", f"There is no kind called {kind or 'that'}.")
+    if not provider.family.serves(kind):
+        raise ApiError(400, "unsupported_kind", f"{provider.label} does not do {kind}.")
+    if not listing.lists(provider, kind):
+        return {"kind": kind, "listed": False, "models": []}
+    try:
+        found = listing.models(provider, kind)
+    except ProviderError as error:
+        raise _listing_refused(provider, error, kind=kind) from None
+    return {"kind": kind, "listed": True, "models": list(found)}
+
+
+def offered_voices(settings: Settings, identifier: str, model: str) -> dict[str, Any]:
+    """The voices one of a provider's speech models has: typed on the model, else the provider's
+    own list. `listed` says which, so the page offers typing one only where it is the way."""
+    provider = find(settings, identifier)
+    found = provider.model("audio", model)
+    if found is None:
+        raise ApiError(400, "unknown_model", f"{provider.label} has no voice model called {model or 'that'}.")
+    if found.voices or not listing.lists_voices(provider):
+        return {"listed": False, "voices": [_voice_view(voice) for voice in found.voices]}
+    try:
+        voices = listing.voices(provider, model)
+    except ProviderError as error:
+        raise _listing_refused(provider, error, model=model) from None
+    return {"listed": True, "voices": [_voice_view(voice) for voice in voices]}
+
+
+def _listing_refused(provider: Provider, error: ProviderError, **about: str) -> ApiError:
+    """A listing the provider turned away, in its own words. The envelope writes it down, with the
+    provider and the reason beside it, so `admin log --failed` shows it."""
+    reason, said = listing.refusal(provider, error)
+    noted = {"provider": provider.id, "family": provider.family.id, "reason": reason, **about}
+    if reason == "authentication":
+        return ApiError(400, "key_refused", f"{said}.", noted=noted)
+    return ApiError(502, "provider_listing_failed", f"{said}.", noted=noted)
 
 
 # ── what the owner may change ──

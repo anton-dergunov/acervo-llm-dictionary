@@ -28,22 +28,29 @@ export function Group({ title, count, foot, aligned = false, children }: {
   </section>;
 }
 
-function Text({ label, hint }: { label: ReactNode; hint?: ReactNode }) {
+function Text({ label, hint, mono = false }: { label: ReactNode; hint?: ReactNode; mono?: boolean }) {
   return <span className="pref-text">
-    <span className="pref-label">{label}</span>
+    <span className={`pref-label${mono ? " mono" : ""}`}>{label}</span>
     {hint && <span className="pref-hint">{hint}</span>}
   </span>;
 }
 
 /** A row whose control is whatever it is given: a button, a value, a badge. */
-export function Row({ label, hint, children, stack = false }: {
+export function Row({ label, hint, children, stack = false, mono = false }: {
   label: ReactNode;
   hint?: ReactNode;
   children?: ReactNode;
   /** The control goes under the label rather than beside it: a segmented choice, a text area. */
   stack?: boolean;
+  /** The label is a name in someone else's spelling: a model's id. */
+  mono?: boolean;
 }) {
-  return <div className={`pref-row${stack ? " stack" : ""}`}><Text label={label} hint={hint} />{children}</div>;
+  return <div className={`pref-row${stack ? " stack" : ""}`}><Text label={label} hint={hint} mono={mono} />{children}</div>;
+}
+
+/** Whether something works: an icon that carries the state, then a few words. */
+export function StateMark({ ok, children }: { ok: boolean; children: ReactNode }) {
+  return <span className={`pref-state ${ok ? "ok" : "bad"}`}>{ok ? <CheckIcon /> : <AlertIcon />}{children}</span>;
 }
 
 /** A row that is not a setting at all, only something to read: "12,340 videos · 5 languages". */
@@ -93,19 +100,24 @@ export function Select<T extends string>({ label, hint, value, options, disabled
 }
 
 /** A line of text to type or paste, its label on the left. */
-export function TextField({ label, hint, value, placeholder, maxLength, onChange }: {
+export function TextField({ label, hint, value, placeholder, maxLength, secret = false, mono = false, onChange }: {
   label: string;
   hint?: ReactNode;
   value: string;
   placeholder?: string;
   maxLength?: number;
+  /** A key: hidden as it is typed, and never offered to a password manager to keep. */
+  secret?: boolean;
+  /** Something spelled exactly: a key, a model's id, an address. */
+  mono?: boolean;
   onChange(value: string): void;
 }) {
   return <label className="pref-row">
     <Text label={label} hint={hint} />
     <input
-      className="pref-input" value={value} placeholder={placeholder} aria-label={label} maxLength={maxLength}
-      autoComplete="off" spellCheck={false} onChange={(event) => onChange(event.target.value)}
+      className={`pref-input${mono ? " mono" : ""}`} value={value} placeholder={placeholder} aria-label={label}
+      maxLength={maxLength} type={secret ? "password" : "text"} autoComplete={secret ? "new-password" : "off"}
+      spellCheck={false} onChange={(event) => onChange(event.target.value)}
     />
   </label>;
 }
@@ -183,16 +195,20 @@ export function Segmented<T extends string>({ label, value, options, onChange }:
 
 /** A row that leads somewhere: a sub-page of this page, with what is there as its value. `before`
     is a button at the row's start that does something else, such as a `Listen`. */
-export function Link({ label, hint, value, before, onOpen }: {
+export function Link({ label, hint, value, mark, before, mono = false, onOpen }: {
   label: string;
   hint?: ReactNode;
   value?: ReactNode;
+  /** A `StateMark` in place of a value: whether the thing behind the row works. */
+  mark?: ReactNode;
   before?: ReactNode;
+  mono?: boolean;
   onOpen(): void;
 }) {
   const inside = <>
-    <Text label={label} hint={hint} />
+    <Text label={label} hint={hint} mono={mono} />
     {value !== undefined && <Value>{value}</Value>}
+    {mark}
     <span className="chev"><ForwardIcon /></span>
   </>;
   if (before) return <div className="pref-row split">
@@ -251,7 +267,7 @@ export function Placeholder({ rows = 3 }: { rows?: number }) {
 }
 
 /**
- * A page's own sub-pages: Clips ▸ Channels, Providers ▸ Credentials, a vocabulary being edited.
+ * A page's own sub-pages: Clips ▸ Channels, a provider's page, a vocabulary being edited.
  *
  * The window owns the back button and the title, so a page opens a sub-page by naming it here and
  * renders it when `sub` says so. Leaving the page closes it.

@@ -21,7 +21,7 @@ goes in the group it belongs to. The nightly run is on Activity, beside the reco
 rather than on a page of its own. Docs and the interface name a page as **Settings ▸ Page**, so a page
 is not renamed lightly.
 
-A page may open **sub-pages**: Clips ▸ Channels, Providers ▸ Credentials, a vocabulary or a topic being
+A page may open **sub-pages**: Clips ▸ Channels, a provider's own page, a vocabulary or a topic being
 edited. They share the window's back button and title (`useSubPage` in `kit.tsx`), so a page that grows
 a detail view does not grow a dialog. A sub-page may name the one it was opened from as its `parent`,
 and Back returns there: a vocabulary ▸ Translated into. The window draws each sub-page afresh, so
@@ -78,8 +78,8 @@ inside — servers, calls, caches, records, which model is asked how many times.
 paragraphs of that, forty to eighty words each, and the owner read none of it; the reasoning belongs in
 the feature's document, which is where it is now. A page has no introduction.
 
-The kit is also what the provider work in [`../plans/provider-management.md`](../plans/provider-management.md)
-builds on: an ordered list with switches, a sub-page per provider, a key field.
+Whether something works is a **state mark**: an icon that carries it, then two or three words — *Works*,
+*Key refused*. A key is typed in a **secret** field, hidden and never offered to a password manager.
 
 ## 6 · Vocabularies
 
@@ -124,3 +124,35 @@ answer, and a refusal comes back as a sentence. The server is shown and not edit
 is signing in again — a session's token belongs to the server that issued it — so **Change server…**
 signs out to the sign-in screen, which asks for the address. Checking for updates still runs natively,
 so an interface that fails to load cannot strand the Mac on a broken build.
+
+## 8 · Providers
+
+A provider is an account the owner adds — one key, offering models of several kinds — and the page is
+where every one of them is added; there is no file to edit and no deploy
+([`../architecture/models.md`](../architecture/models.md)). The code is `ModelPanel.tsx` for the page
+and `ProviderPages.tsx` for everything under it.
+
+- **The page** lists the providers, each with the kinds it has models for and a state mark, then the
+  six orders. A provider whose key was refused is also a notice at the top, with a link to its page:
+  nothing is sent to it until the key works, so it must not be missed while scrolling.
+- **Add a provider** shows the families this server knows, in the groups the server sends. Choosing one
+  opens a short form — a name, the few settings the family asks for, the key — and **Check and add**
+  makes one call that spends nothing. A refusal is shown on the form in the provider's own words, and
+  nothing is added; a key that works opens the new provider's page, empty.
+- **A provider's page** has its key as its first and last four characters with Replace, what the last
+  check said with Check again, the family's settings, a group per kind with **Add a model…**, a link to
+  the provider's own page for the bill, and Remove. Remove asks for a second press, since the key goes
+  with it. Google Cloud signs in with a key or a credentials file; the choice says what each reaches,
+  and what only the file reaches is hidden while it signs in with a key.
+- **Add a model** lists what the provider itself says it has, searchable, with what is already added
+  marked; where a provider cannot list a kind — Vertex, or Gemini's voices on Cloud Text-to-Speech — the
+  name is typed as the provider spells it.
+- **A voice model** has its own page: whether it takes a direction, the languages it speaks (any, or
+  some, chosen with the language search), a free allowance, and its voices — listed by the provider, or
+  typed with a link to where the provider lists them. The voices are not heard here: a preview needs a
+  language and a sample in it, and a WaveNet list spans every language. They are heard on
+  Pronunciation, which is where one is chosen.
+
+Every write answers with the whole readout and replaces it, because taking a model or a provider away
+also takes it out of the orders. Pronunciation's settings are read again after one, since its voice
+choices can change too.

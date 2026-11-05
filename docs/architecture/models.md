@@ -42,6 +42,12 @@ services are one family's code with a preset each: a prefix, a base URL and a li
 
 **What changes with the provider's catalogue comes from the provider** (`models/listing.py`): its
 models, and its voices with their locales and genders, asked for with calls that spend nothing.
+Settings asks for them when a picker opens — `GET /providers/{id}/models?kind=` and
+`GET /providers/{id}/voices?model=` — and each says `listed: false` where the provider cannot say, so
+the owner types the name instead; which kinds each family can list is one table in `listing.py`. A
+listing the provider turns away is refused in its own words (`key_refused`, or
+`provider_listing_failed`), and the envelope writes it down with the provider, the kind and the
+reason, so `admin log --failed` shows it.
 Google's voice list is the one a call depends on, so it is kept in memory for a day per provider and
 credential. A Gemini voice is listed once (`Kore`) under `en-US`, which is where it was made rather
 than all it says, so it speaks any locale and is sent the nearest one Google lists any voice under —
@@ -123,15 +129,20 @@ same way with a render token. Keys live in one container.
 
 ## Credentials
 
-**A credential never leaves the server, with one bounded exception.** `GET /models` shows a key as
-its first four and last four characters, so Settings can say *which* key is set — "a key is set" and
-"*that* key is set" are different answers, and only the second closes a half-finished rotation. A
+**A credential never leaves the server, with one bounded exception.** The readout — `GET /models`,
+and what every provider change answers with — shows a key as its first four and last four
+characters, so Settings can say *which* key is set: "a key is set" and "*that* key is set" are
+different answers, and only the second closes a half-finished rotation. A
 credentials file is shown as the account it names. `test_it_never_returns_a_key_or_a_credentials_file`
 asserts the whole secret is absent from the whole response body.
 
 **Keys live in `providers.secrets.json` beside the database**, mode 600, written whole through a
 temporary file and a rename, and read on every call (`services/provider_secrets.py`). A lost file
 costs typing the keys again, and keys can be made again; that is the right way round.
+
+**Every change to a provider answers with the whole readout** — what `GET /models` answers, and
+the id of the provider it changed — because removing a model or a provider also takes it out of the
+orders, and Settings renders what the server holds rather than guessing it.
 
 **Saving a key makes one call that spends nothing** — a model list, or Google's voice list — and says
 plainly whether the key works, and as whom where the provider says (`listing.check`). A provider is

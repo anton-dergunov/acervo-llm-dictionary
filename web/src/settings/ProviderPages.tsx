@@ -1,0 +1,741 @@
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import {
+  AcervoApiError,
+  backendSession,
+  type ModelCatalogue,
+  type ModelProvider,
+  type ProviderBody,
+  type ProviderChange,
+  type ProviderFamily,
+  type ProviderModel,
+  type ProviderVoice
+} from "../api";
+import { CloseIcon } from "../icons";
+import { flagOf, languageName, mainRegion } from "../languages";
+import { LanguageSearch } from "./LanguageSearch";
+import {
+  Action, Group, Link, Notice, Placeholder, Row, Segmented, Select, StateMark, TextField, Toggle, Value,
+  type SubPage
+} from "./kit";
+
+/**
+ * Settings ▸ Providers' sub-pages: adding a provider, a provider's own page, and picking its models.
+ *
+ * A provider is one account: one key, offering models of several kinds. What it offers comes from
+ * the provider itself where it can say — its model list, its voices — and is typed where it cannot.
+ * Every write is one request answered by the whole readout (`ProviderChange`), which replaces what
+ * is shown: taking a model away also takes it out of the orders, and the page shows what the server
+ * did rather than guess it. A key is sent once and never comes back; the page shows its first and
+ * last four characters.
+ */
+
+export type Write = (call: () => Promise<ProviderChange>) => Promise<ProviderChange | string>;
+
+export const KIND_TITLES: Record<string, string> = {
+  text: "Text", image: "Pictures", audio: "Voices", ocr: "Reading photos"
+};
+const ADD_TITLES: Record<string, string> = {
+  text: "Add a text model", image: "Add a picture model", audio: "Add a voice model", ocr: "Add a model for photos"
+};
+/** How many of a long voice list show before "Show all". */
+const VOICES_SHOWN = 6;
+
+/* A sub-page's id carries what it is about as JSON, because a model's id may hold any character —
+   `qwen3-235b:free` has a colon. */
+const subId = (kind: string, ...parts: string[]) => `${kind}:${JSON.stringify(parts)}`;
+function parseSub(id: string): { kind: string; parts: string[] } | null {
+  const at = id.indexOf(":");
+  if (at < 0) return id === "add-provider" ? { kind: id, parts: [] } : null;
+  try { return { kind: id.slice(0, at), parts: JSON.parse(id.slice(at + 1)) as string[] }; }
+  catch { return null; }
+}
+
+export const ADD_PROVIDER: SubPage = { id: "add-provider", title: "Add a provider" };
+export const providerPage = (provider: ModelProvider): SubPage =>
+  ({ id: subId("provider", provider.id), title: provider.label });
+
+export function host(url: string | null | undefined): string {
+  if (!url) return "";
+  try { return new URL(url).host; } catch { return url; }
+}
+
+const message = (error: unknown, fallback: string) =>
+  error instanceof AcervoApiError || error instanceof Error ? error.message : fallback;
+
+/** Whether a provider can be asked, in two or three words. */
+export function stateOf(provider: ModelProvider): { ok: boolean; words: string } {
+  if (provider.check && !provider.check.ok) {
+    return { ok: false, words: provider.check.reason === "authentication" ? "Key refused" : "Not answering" };
+  }
+  if (provider.reason) return { ok: false, words: "Not set up" };
+  return { ok: true, words: "Works" };
+}
+
+/** "1M", "10k", "1,000", "500": the figure a free allowance is read in at a glance. */
+function figure(amount: number): string {
+  if (amount >= 1_000_000 && amount % 100_000 === 0) return `${amount / 1_000_000}M`;
+  if (amount >= 10_000 && amount % 100 === 0) return `${amount / 1000}k`;
+  return amount.toLocaleString("en-GB");
+}
+
+export function allowanceWords(allowance: ProviderModel["allowance"]): string | null {
+  if (!allowance) return null;
+  const unit = allowance.unit === "calls" ? "" : ` ${allowance.unit}`;
+  return `${figure(allowance.amount)}${unit} a ${allowance.per} free`;
+}
+
+function voiceHint(model: ProviderModel): string {
+  const languages = model.languages?.length
+    ? model.languages.map(languageName).join(", ")
+    : model.direction ? "any language" : null;
+  return [model.direction ? "Takes a direction" : null, languages, allowanceWords(model.allowance)]
+    .filter(Boolean).join(" · ");
+}
+
+function checkedWhen(at: string | null | undefined): string {
+  if (!at) return "";
+  const date = new Date(at);
+  if (Number.isNaN(date.getTime())) return "";
+  const time = date.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  const day = date.toDateString() === new Date().toDateString()
+    ? "today" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+  return `Checked ${day}, ${time}`;
+}
+
+/** A provider's models with one of them replaced, or taken away when `next` is null. */
+function withModel(provider: ModelProvider, kind: string, id: string, next: ProviderModel | null) {
+  const models = provider.models[kind] ?? [];
+  const at = models.findIndex((model) => model.id === id);
+  const changed = next === null ? models.filter((model) => model.id !== id)
+    : at < 0 ? [...models, next] : models.map((model, index) => index === at ? next : model);
+  return { ...provider.models, [kind]: changed };
+}
+
+/** A model as it is sent: only the fields it has, so "any language" is the absence of a list. */
+function cleanModel(model: ProviderModel): ProviderModel {
+  const kept: ProviderModel = { id: model.id };
+  if (model.direction) kept.direction = true;
+  if (model.languages?.length) kept.languages = model.languages;
+  if (model.voices?.length) kept.voices = model.voices;
+  if (model.allowance) kept.allowance = model.allowance;
+  return kept;
+}
+
+/** The two buttons a form ends with. */
+function Buttons({ busy, label, busyLabel = "Checking…", onCancel, onSubmit }: {
+  busy: boolean;
+  label: string;
+  busyLabel?: string;
+  onCancel?(): void;
+  onSubmit(): void;
+}) {
+  return <div className="pref-buttons">
+    {onCancel && <button type="button" className="tb-btn" disabled={busy} onClick={onCancel}>Cancel</button>}
+    <button type="button" className="tb-btn primary" disabled={busy} onClick={onSubmit}>{busy ? busyLabel : label}</button>
+  </div>;
+}
+
+/** A credentials file, chosen and read as text: the server takes its text and nothing else. A real
+    button opens the hidden file input, so it is reached by keyboard like any other. */
+function FileChooser({ label, hint, button, onRead }: {
+  label: string;
+  hint?: ReactNode;
+  button: string;
+  onRead(text: string, name: string): void;
+}) {
+  const input = useRef<HTMLInputElement>(null);
+  return <div className="pref-row">
+    <span className="pref-text"><span className="pref-label">{label}</span>{hint && <span className="pref-hint">{hint}</span>}</span>
+    <button type="button" className="tb-btn" onClick={() => input.current?.click()}>{button}</button>
+    <input
+      ref={input} type="file" accept="application/json,.json" hidden aria-label={label}
+      onChange={(event) => {
+        const file = event.target.files?.[0];
+        if (file) void file.text().then((text) => onRead(text, file.name));
+        event.target.value = "";
+      }}
+    />
+  </div>;
+}
+
+/** The family's settings that apply in this sign-in mode, each a field or a pick. */
+function SettingFields({ family, mode, values, onChange }: {
+  family: ProviderFamily;
+  mode: "key" | "file";
+  values: Record<string, string>;
+  onChange(name: string, value: string): void;
+}) {
+  return <>{shownFields(family, mode).map((field) => field.choices.length
+    ? <Select
+      key={field.name} label={field.label} hint={field.hint ?? undefined}
+      value={values[field.name] || field.default || field.choices[0]}
+      options={field.choices.map((choice) => ({ value: choice, label: choice }))}
+      onChange={(value) => onChange(field.name, value)}
+    />
+    : <TextField
+      key={field.name} label={field.label} value={values[field.name] ?? ""} mono={field.name === "baseUrl"}
+      placeholder={field.default ?? field.hint ?? ""} onChange={(value) => onChange(field.name, value)}
+    />)}</>;
+}
+
+function shownFields(family: ProviderFamily, mode: "key" | "file") {
+  return family.fields.filter((field) => field.needed !== "file" || mode === "file");
+}
+
+/** The kinds one sign-in reaches, in words: "voices and reading photos". */
+function reaches(family: ProviderFamily, mode: "key" | "file"): string {
+  const kinds = family.kinds.filter((kind) => mode === "file" || !family.fileOnly.includes(kind))
+    .map((kind) => KIND_TITLES[kind].toLowerCase());
+  return kinds.length <= 1 ? kinds.join("") : `${kinds.slice(0, -1).join(", ")} and ${kinds[kinds.length - 1]}`;
+}
+
+type SignIn = "key" | "file";
+
+function signInOptions(family: ProviderFamily): { value: SignIn; label: string; hint: string }[] {
+  return [
+    { value: "key", label: "API key", hint: `Reaches ${reaches(family, "key")}` },
+    { value: "file", label: "Credentials file", hint: `Reaches ${reaches(family, "file")}` }
+  ];
+}
+
+/** Only what a field was given: an empty one is the family's default. */
+function filled(values: Record<string, string>, family: ProviderFamily, mode: "key" | "file") {
+  return Object.fromEntries(shownFields(family, mode)
+    .map((field) => [field.name, (values[field.name] ?? "").trim()] as const)
+    .filter(([, value]) => value));
+}
+
+/* ── Add a provider ── */
+
+function AddProvider({ families, onChoose }: { families: ProviderFamily[]; onChoose(family: ProviderFamily): void }) {
+  const groups = [...new Set(families.map((family) => family.group))];
+  return <>{groups.map((name) => {
+    const members = families.filter((family) => family.group === name);
+    /* A group of one named after its one member, "Any compatible service", needs no title. */
+    const title = members.length === 1 && members[0].label === name ? undefined : name;
+    return <Group key={name} title={title}>
+      {members.map((family) => <Link key={family.id} label={family.label} hint={family.hint} onOpen={() => onChoose(family)} />)}
+    </Group>;
+  })}</>;
+}
+
+/** Choosing a family opens its page empty: the few fields it needs, then one check. */
+function NewProvider({ family, write, onCancel, onAdded }: {
+  family: ProviderFamily;
+  write: Write;
+  onCancel(): void;
+  onAdded(answer: ProviderChange): void;
+}) {
+  const [label, setLabel] = useState(family.label);
+  const [mode, setMode] = useState<"key" | "file">("key");
+  const [values, setValues] = useState<Record<string, string>>(() =>
+    Object.fromEntries(family.fields.filter((field) => field.default).map((field) => [field.name, field.default as string])));
+  const [key, setKey] = useState("");
+  const [file, setFile] = useState<{ text: string; name: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [refused, setRefused] = useState<string | null>(null);
+
+  async function add() {
+    const body: ProviderBody = { family: family.id, label: label.trim() || family.label, settings: filled(values, family, mode) };
+    if (mode === "file") {
+      if (!file) { setRefused("Choose the credentials file first."); return; }
+      body.credentials = file.text;
+    } else if (key.trim()) {
+      body.key = key.trim();
+    }
+    setBusy(true);
+    setRefused(null);
+    const answer = await write(() => backendSession.addProvider(body));
+    setBusy(false);
+    if (typeof answer === "string") setRefused(answer);
+    else onAdded(answer);
+  }
+
+  const keyed = family.credential !== "none";
+  return <>
+    {refused && <Notice>{refused}</Notice>}
+    {family.credential === "key-or-file" && <Group>
+      <Segmented<SignIn> label="Sign in with" value={mode} options={signInOptions(family)} onChange={setMode} />
+    </Group>}
+    <Group aligned>
+      <TextField label="Name" value={label} onChange={setLabel} />
+      <SettingFields family={family} mode={mode} values={values}
+        onChange={(name, value) => setValues((current) => ({ ...current, [name]: value }))} />
+    </Group>
+    {keyed && mode === "key" && <Group
+      title="Key" aligned
+      foot={<>{family.keyUrl && <>Create one at <a href={family.keyUrl} target="_blank" rel="noreferrer noopener">{host(family.keyUrl)}</a>. </>}
+        It is kept on your server.</>}
+    >
+      <TextField
+        label={family.keyLabel} hint={family.credential === "optional" ? "If the service asks for one" : undefined}
+        value={key} secret mono placeholder="Paste it here" onChange={setKey}
+      />
+    </Group>}
+    {mode === "file" && <Group title="Credentials" foot="A service account’s key, or your own sign-in. It is kept on your server.">
+      <FileChooser label="Credentials file" hint={file?.name} button="Choose…" onRead={(text, name) => setFile({ text, name })} />
+    </Group>}
+    <Buttons busy={busy} label="Check and add" onCancel={onCancel} onSubmit={() => void add()} />
+  </>;
+}
+
+/* ── a provider's own page ── */
+
+function ProviderView({ provider, family, write, onOpen, onRemoved, onNotify }: {
+  provider: ModelProvider;
+  family: ProviderFamily | undefined;
+  write: Write;
+  onOpen(sub: SubPage): void;
+  onRemoved(): void;
+  onNotify(message: string): void;
+}) {
+  const stored: "key" | "file" = provider.credential.kind === "file" ? "file" : "key";
+  const [mode, setMode] = useState<"key" | "file">(stored);
+  const [replacing, setReplacing] = useState(false);
+  const [key, setKey] = useState("");
+  const [file, setFile] = useState<{ text: string; name: string } | null>(null);
+  const [draft, setDraft] = useState<Record<string, string> | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [refused, setRefused] = useState<string | null>(null);
+  const [armed, setArmed] = useState(false);
+
+  useEffect(() => { setMode(stored); }, [stored]);
+
+  async function run(what: string, call: () => Promise<ProviderChange>, inline: boolean): Promise<boolean> {
+    setBusy(what);
+    setRefused(null);
+    const answer = await write(call);
+    setBusy(null);
+    if (typeof answer === "string") {
+      if (inline) setRefused(answer); else onNotify(answer);
+      return false;
+    }
+    return true;
+  }
+
+  const switching = mode !== stored;
+  const page = providerPage(provider);
+  const values = draft ?? provider.settings;
+
+  /** The models a sign-in can keep: a key reaches no file-only kind, so those go with the file. */
+  const keptModels = (next: "key" | "file") => Object.fromEntries(Object.entries(provider.models)
+    .filter(([kind]) => next === "file" || !family?.fileOnly.includes(kind)));
+
+  async function replaceKey() {
+    if (!key.trim()) { setRefused(`Paste the new ${family?.keyLabel ?? "key"} first.`); return; }
+    const body: ProviderBody = { key: key.trim() };
+    if (switching) Object.assign(body, { models: keptModels("key"), settings: filled(values, family!, "key") });
+    if (await run("key", () => backendSession.changeProvider(provider.id, body), true)) {
+      setKey(""); setReplacing(false); setDraft(null);
+    }
+  }
+
+  async function replaceFile(text: string) {
+    const body: ProviderBody = { credentials: text };
+    if (switching && family) {
+      body.settings = filled(values, family, "file");
+      if (!body.settings.project) { setFile({ text, name: "" }); setRefused("Give the project first, then choose the file."); return; }
+    }
+    if (await run("file", () => backendSession.changeProvider(provider.id, body), true)) {
+      setFile(null); setDraft(null);
+    }
+  }
+
+  async function saveSettings() {
+    if (!draft || !family) return;
+    const body: ProviderBody = { settings: filled(draft, family, mode) };
+    if (await run("settings", () => backendSession.changeProvider(provider.id, body), true)) setDraft(null);
+  }
+
+  const removeModel = (kind: string, id: string) => void run(
+    `remove ${id}`, () => backendSession.changeProvider(provider.id, { models: withModel(provider, kind, id, null) }), false);
+
+  const keyGroup = (() => {
+    if (family?.credential === "none") return <Group title="Key">
+      <Row label="No key needed" hint="It answers at its address" />
+      <CheckRow provider={provider} busy={busy === "check"} onCheck={() => void run("check", () => backendSession.checkProvider(provider.id), true)} />
+    </Group>;
+    if (mode === "file") return <Group title="Credentials">
+      <FileChooser
+        label="Credentials file"
+        hint={switching ? (file?.name || "A service account, or your own sign-in") : provider.credential.account ?? "Your own sign-in"}
+        button={busy === "file" ? "Checking…" : switching ? "Choose…" : "Replace…"}
+        onRead={(text, name) => { setFile({ text, name }); void replaceFile(text); }}
+      />
+      {!switching && <CheckRow provider={provider} busy={busy === "check"} onCheck={() => void run("check", () => backendSession.checkProvider(provider.id), true)} />}
+    </Group>;
+    const keyLabel = family?.keyLabel ?? "API key";
+    return <Group title="Key" aligned={replacing || switching}
+      foot={(replacing || switching) && family?.keyUrl
+        ? <>Create one at <a href={family.keyUrl} target="_blank" rel="noreferrer noopener">{host(family.keyUrl)}</a>. It is kept on your server.</>
+        : undefined}>
+      {replacing || switching
+        ? <TextField label={keyLabel} value={key} secret mono placeholder="Paste it here" onChange={setKey} />
+        : <Row label={keyLabel} hint="Kept on your server">
+          <Value mono>{provider.credential.hint ?? "None"}</Value>
+          <button type="button" className="tb-btn" onClick={() => setReplacing(true)}>{provider.credential.hint ? "Replace" : "Add"}</button>
+        </Row>}
+      {!(replacing || switching) && <CheckRow provider={provider} busy={busy === "check"}
+        onCheck={() => void run("check", () => backendSession.checkProvider(provider.id), true)} />}
+    </Group>;
+  })();
+
+  const fields = family ? shownFields(family, mode) : [];
+  return <>
+    {refused && <Notice>{refused}</Notice>}
+    {family?.credential === "key-or-file" && <Group>
+      <Segmented<SignIn> label="Sign in with" value={mode} options={signInOptions(family)}
+        onChange={(next) => { setMode(next); setRefused(null); }} />
+    </Group>}
+    {keyGroup}
+    {(replacing || (switching && mode === "key")) && <Buttons
+      busy={busy === "key"} label="Check and save"
+      onCancel={() => { setReplacing(false); setKey(""); setMode(stored); setRefused(null); }}
+      onSubmit={() => void replaceKey()}
+    />}
+    {family && fields.length > 0 && <Group aligned>
+      <SettingFields family={family} mode={mode} values={values}
+        onChange={(name, value) => setDraft({ ...values, [name]: value })} />
+    </Group>}
+    {draft !== null && !switching && <Buttons
+      busy={busy === "settings"} label="Check and save"
+      onCancel={() => setDraft(null)} onSubmit={() => void saveSettings()}
+    />}
+    {!switching && (family?.kinds ?? Object.keys(provider.models))
+      .filter((kind) => mode === "file" || !family?.fileOnly.includes(kind))
+      .map((kind) => <Group key={kind} title={KIND_TITLES[kind] ?? kind}>
+        {(provider.models[kind] ?? []).map((model) => kind === "audio"
+          ? <Link
+            key={model.id} label={model.id} mono hint={voiceHint(model) || undefined}
+            onOpen={() => onOpen({ id: subId("model", provider.id, model.id), title: model.id, parent: page })}
+          />
+          : <Row key={model.id} label={model.id} mono hint={allowanceWords(model.allowance) ?? undefined}>
+            <button type="button" className="icon-btn" aria-label={`Remove ${model.id}`}
+              disabled={busy === `remove ${model.id}`} onClick={() => removeModel(kind, model.id)}><CloseIcon /></button>
+          </Row>)}
+        <Action onClick={() => onOpen({ id: subId("add-model", provider.id, kind), title: ADD_TITLES[kind] ?? "Add a model", parent: page })}>
+          Add a model…
+        </Action>
+      </Group>)}
+    {provider.usageUrl && <Group>
+      <Row label={host(provider.usageUrl)} hint="Your limits and the bill">
+        <a className="tb-btn" href={provider.usageUrl} target="_blank" rel="noreferrer noopener"
+          aria-label={`Open ${provider.label}’s own page`}>Open</a>
+      </Row>
+    </Group>}
+    <Group foot={armed ? "Its key goes too, and every order and voice choice that names it." : undefined}>
+      <Action danger disabled={busy === "remove"} onClick={() => {
+        if (!armed) { setArmed(true); return; }
+        void run("remove", () => backendSession.removeProvider(provider.id), false).then((done) => { if (done) onRemoved(); });
+      }}>{armed ? `Remove ${provider.label} and its key` : "Remove this provider"}</Action>
+    </Group>
+  </>;
+}
+
+/** What the last check said, and the button that asks again. */
+function CheckRow({ provider, busy, onCheck }: { provider: ModelProvider; busy: boolean; onCheck(): void }) {
+  const check = provider.check;
+  const when = checkedWhen(check?.at);
+  const hint = check && !check.ok && check.reason === "authentication"
+    ? [when, "nothing is sent to it until it works"].filter(Boolean).join(" · ") : when;
+  return <div className="pref-row">
+    <span className="pref-text">
+      {check ? <StateMark ok={check.ok}>{check.said}</StateMark> : <StateMark ok={false}>Not checked yet</StateMark>}
+      {hint && <span className="pref-hint">{hint}</span>}
+    </span>
+    <button type="button" className="tb-btn" disabled={busy} onClick={onCheck}>{busy ? "Checking…" : "Check again"}</button>
+  </div>;
+}
+
+/* ── Add a model ── */
+
+function AddModel({ provider, kind, write, onNotify }: {
+  provider: ModelProvider;
+  kind: string;
+  write: Write;
+  onNotify(message: string): void;
+}) {
+  const [listing, setListing] = useState<{ listed: boolean; models: string[] } | null>(null);
+  const [failed, setFailed] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
+  const [typed, setTyped] = useState("");
+  const [busy, setBusy] = useState<string | null>(null);
+
+  useEffect(() => {
+    let live = true;
+    backendSession.providerModels(provider.id, kind).then(
+      (answer) => { if (live) setListing(answer); },
+      (error: unknown) => { if (live) setFailed(message(error, `${provider.label} could not be asked for its models.`)); });
+    return () => { live = false; };
+  }, [provider.id, kind, provider.label]);
+
+  const added = new Set((provider.models[kind] ?? []).map((model) => model.id));
+  const shown = useMemo(() => {
+    const wanted = query.trim().toLowerCase();
+    return (listing?.models ?? []).filter((id) => !wanted || id.toLowerCase().includes(wanted));
+  }, [listing, query]);
+
+  async function add(id: string) {
+    const name = id.trim();
+    if (!name || added.has(name)) return;
+    setBusy(name);
+    const answer = await write(() => backendSession.changeProvider(provider.id, {
+      models: withModel(provider, kind, name, { id: name })
+    }));
+    setBusy(null);
+    if (typeof answer === "string") onNotify(answer);
+    else { onNotify(`${name} added.`); setTyped(""); }
+  }
+
+  const typing = <div className="pref-row">
+    <span className="pref-text"><span className="pref-label">{listing?.listed === false ? "Its name" : "Or type its name"}</span></span>
+    <input
+      className="pref-input mono" value={typed} aria-label="Model name" autoComplete="off" spellCheck={false}
+      placeholder={provider.models[kind]?.[0]?.id ?? listing?.models[0] ?? ""}
+      onChange={(event) => setTyped(event.target.value)}
+      onKeyDown={(event) => { if (event.key === "Enter") void add(typed); }}
+    />
+    <button type="button" className="tb-btn" disabled={!typed.trim() || busy !== null} onClick={() => void add(typed)}>Add</button>
+  </div>;
+
+  if (failed) return <>
+    <Notice>{failed}</Notice>
+    <Group>{typing}</Group>
+  </>;
+  if (!listing) return <Placeholder rows={4} />;
+  if (!listing.listed) return <Group foot={`${provider.label} does not list these, so type the name as its own page spells it.`}>{typing}</Group>;
+  return <>
+    <Group>
+      <label className="pref-row">
+        <input
+          className="pref-input" type="search" value={query} aria-label={`Search ${provider.label}’s models`}
+          placeholder={`Search ${provider.label}’s models`} autoComplete="off" spellCheck={false}
+          onChange={(event) => setQuery(event.target.value)}
+        />
+      </label>
+    </Group>
+    <Group title={`${provider.label} offers`} count={`${listing.models.length}`}>
+      {shown.length === 0 && <Row label={query ? "Nothing is called that" : "It lists none"} />}
+      {shown.map((id) => added.has(id)
+        ? <Row key={id} label={id} mono><Value>Added</Value></Row>
+        : <button key={id} type="button" className="pref-row" disabled={busy !== null} onClick={() => void add(id)}>
+          <span className="pref-text"><span className="pref-label mono">{id}</span></span>
+          {busy === id && <Value>Adding…</Value>}
+        </button>)}
+    </Group>
+    <Group>{typing}</Group>
+  </>;
+}
+
+/* ── a voice model ── */
+
+function VoiceModel({ provider, model, family, write, onOpen, onRemoved, onNotify }: {
+  provider: ModelProvider;
+  model: ProviderModel;
+  family: ProviderFamily | undefined;
+  write: Write;
+  onOpen(sub: SubPage): void;
+  onRemoved(): void;
+  onNotify(message: string): void;
+}) {
+  const [voices, setVoices] = useState<{ listed: boolean; voices: ProviderVoice[] } | null>(null);
+  const [failed, setFailed] = useState<string | null>(null);
+  const [all, setAll] = useState(false);
+  const [typed, setTyped] = useState("");
+  const [allowance, setAllowance] = useState<{ amount: string; unit: string; per: "day" | "month" } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [direction, setDirection] = useState<boolean | null>(null);
+  const typedVoices = model.voices ?? [];
+
+  useEffect(() => {
+    let live = true;
+    backendSession.providerVoices(provider.id, model.id).then(
+      (answer) => { if (live) setVoices(answer); },
+      (error: unknown) => { if (live) setFailed(message(error, `${provider.label} could not be asked for its voices.`)); });
+    return () => { live = false; };
+    /* Typed voices change with the model; listed ones with the provider. */
+  }, [provider.id, model.id, provider.label, typedVoices.length]);
+
+  async function save(next: ProviderModel): Promise<boolean> {
+    setBusy(true);
+    const answer = await write(() => backendSession.changeProvider(provider.id, {
+      models: withModel(provider, "audio", model.id, cleanModel(next))
+    }));
+    setBusy(false);
+    if (typeof answer === "string") { onNotify(answer); return false; }
+    return true;
+  }
+
+  const page: SubPage = { id: subId("model", provider.id, model.id), title: model.id, parent: providerPage(provider) };
+  const languages = model.languages ?? [];
+  const shownAllowance = allowance ?? {
+    amount: model.allowance ? String(model.allowance.amount) : "",
+    unit: model.allowance?.unit ?? "characters",
+    per: model.allowance?.per ?? "month"
+  };
+  const amount = Number(shownAllowance.amount);
+  const listedVoices = voices?.listed ? voices.voices : [];
+
+  return <>
+    <Group>
+      <Toggle
+        label="Takes a direction" hint="Reads as asked: warmly, slowly, as in Argentina"
+        checked={direction ?? model.direction === true} disabled={busy}
+        onChange={(checked) => {
+          /* The switch moves at once, and goes back if the save is refused. */
+          setDirection(checked);
+          void save({ ...model, direction: checked }).finally(() => setDirection(null));
+        }}
+      />
+      <Select
+        label="Languages" value={languages.length ? "some" : "any"} disabled={busy}
+        options={[{ value: "any", label: "Any language" }, { value: "some", label: "Only some…" }]}
+        onChange={(value) => {
+          if (value === "any") void save({ ...model, languages: undefined });
+          else onOpen({ id: subId("languages", provider.id, model.id), title: "Languages", parent: page });
+        }}
+      />
+      {languages.length > 0 && <Link
+        label="Speaks" value={languages.map(languageName).join(", ")}
+        onOpen={() => onOpen({ id: subId("languages", provider.id, model.id), title: "Languages", parent: page })}
+      />}
+    </Group>
+    <Group title="Free allowance" aligned
+      foot={provider.usageUrl ? <>Your own limit is on <a href={provider.usageUrl} target="_blank" rel="noreferrer noopener">{host(provider.usageUrl)}</a>.</> : undefined}>
+      <TextField label="Amount" value={shownAllowance.amount} placeholder="None"
+        onChange={(value) => setAllowance({ ...shownAllowance, amount: value.replace(/[^0-9]/g, "") })} />
+      <Select label="Counted in" value={shownAllowance.unit}
+        options={[{ value: "characters", label: "Characters" }, { value: "calls", label: "Calls" }]}
+        onChange={(value) => setAllowance({ ...shownAllowance, unit: value })} />
+      <Select label="Each" value={shownAllowance.per}
+        options={[{ value: "day", label: "Day" }, { value: "month", label: "Month" }]}
+        onChange={(value) => setAllowance({ ...shownAllowance, per: value })} />
+    </Group>
+    {allowance && <Buttons
+      busy={busy} label={shownAllowance.amount ? "Save" : "Clear"} busyLabel="Saving…"
+      onCancel={() => setAllowance(null)}
+      onSubmit={() => void save({
+        ...model,
+        allowance: amount > 0 ? { amount, unit: shownAllowance.unit, per: shownAllowance.per } : undefined
+      }).then((done) => { if (done) setAllowance(null); })}
+    />}
+    {failed
+      ? <Notice>{failed}</Notice>
+      : !voices ? <Placeholder rows={3} />
+      : voices.listed
+        ? <Group title="Voices" count={`${listedVoices.length} listed by ${provider.label}`}
+          foot="Who reads each language is chosen in Pronunciation.">
+          {listedVoices.length === 0 && <Row label="It lists none for this model" />}
+          {(all ? listedVoices : listedVoices.slice(0, VOICES_SHOWN)).map((voice) =>
+            <Row key={`${voice.name} ${voice.locale ?? ""}`} label={voice.name} hint={voiceWords(voice)} />)}
+          {!all && listedVoices.length > VOICES_SHOWN && <Action onClick={() => setAll(true)}>Show all {listedVoices.length}</Action>}
+        </Group>
+        : <Group title="Voices" count={typedVoices.length ? `${typedVoices.length} typed` : undefined}
+          foot={<>{family?.voicesUrl && <>Its voices are listed at <a href={family.voicesUrl} target="_blank" rel="noreferrer noopener">{host(family.voicesUrl)}</a>. </>}
+            Who reads each language is chosen in Pronunciation.</>}>
+          {typedVoices.map((voice) => <Row key={voice.name} label={voice.name} hint={voiceWords(voice)}>
+            <button type="button" className="icon-btn" aria-label={`Remove ${voice.name}`} disabled={busy}
+              onClick={() => void save({ ...model, voices: typedVoices.filter((one) => one.name !== voice.name) })}><CloseIcon /></button>
+          </Row>)}
+          <div className="pref-row">
+            <span className="pref-text"><span className="pref-label">Add a voice</span></span>
+            <input className="pref-input mono" value={typed} aria-label="Voice name" autoComplete="off" spellCheck={false}
+              onChange={(event) => setTyped(event.target.value)} />
+            <button type="button" className="tb-btn" disabled={busy || !typed.trim() || typedVoices.some((one) => one.name === typed.trim())}
+              onClick={() => void save({ ...model, voices: [...typedVoices, { name: typed.trim() }] }).then((done) => { if (done) setTyped(""); })}>Add</button>
+          </div>
+        </Group>}
+    <Group>
+      <Action danger disabled={busy} onClick={() => void (async () => {
+        setBusy(true);
+        const answer = await write(() => backendSession.changeProvider(provider.id, { models: withModel(provider, "audio", model.id, null) }));
+        setBusy(false);
+        if (typeof answer === "string") onNotify(answer); else onRemoved();
+      })()}>Remove this model</Action>
+    </Group>
+  </>;
+}
+
+function voiceWords(voice: ProviderVoice): string | undefined {
+  const region = voice.locale ? mainRegion(voice.locale) : null;
+  const where = voice.locale
+    ? `${region ? `${flagOf(region)} ` : ""}${new Intl.DisplayNames(["en"], { type: "language" }).of(voice.locale) ?? voice.locale}`
+    : null;
+  return [voice.gender, voice.note, where].filter(Boolean).join(" · ") || undefined;
+}
+
+/** The languages a voice model is sent, nearest first, and a search to add one. */
+function ModelLanguages({ provider, model, write, onNotify }: {
+  provider: ModelProvider;
+  model: ProviderModel;
+  write: Write;
+  onNotify(message: string): void;
+}) {
+  const chosen = model.languages ?? [];
+  const save = async (languages: string[]) => {
+    const answer = await write(() => backendSession.changeProvider(provider.id, {
+      models: withModel(provider, "audio", model.id, cleanModel({ ...model, languages }))
+    }));
+    if (typeof answer === "string") onNotify(answer);
+  };
+  return <>
+    {chosen.length > 0 && <Group foot="Removing the last one lets it speak any language.">
+      {chosen.map((tag) => <Row key={tag} label={`${flagOf(mainRegion(tag))} ${languageName(tag)}`}>
+        <button type="button" className="icon-btn" aria-label={`Remove ${languageName(tag)}`}
+          onClick={() => void save(chosen.filter((one) => one !== tag))}><CloseIcon /></button>
+      </Row>)}
+    </Group>}
+    <LanguageSearch
+      label="Find a language" unavailable={Object.fromEntries(chosen.map((tag) => [tag, "Added"]))}
+      onChoose={(entry) => void save([...chosen, entry.tag])}
+    />
+  </>;
+}
+
+/* ── which page ── */
+
+/** The sub-page `sub` names, or null when it is not one of these. */
+export function ProviderSubPage({ sub, catalogue, write, open, close, onNotify }: {
+  sub: SubPage;
+  catalogue: ModelCatalogue;
+  write: Write;
+  open(sub: SubPage): void;
+  close(): void;
+  onNotify(message: string): void;
+}): ReactNode {
+  const found = parseSub(sub.id);
+  if (!found) return null;
+  const families = new Map(catalogue.families.map((family) => [family.id, family]));
+  if (found.kind === "add-provider") {
+    return <AddProvider families={catalogue.families}
+      onChoose={(family) => open({ id: subId("new", family.id), title: family.label, parent: ADD_PROVIDER })} />;
+  }
+  if (found.kind === "new") {
+    const family = families.get(found.parts[0]);
+    if (!family) return null;
+    return <NewProvider family={family} write={write} onCancel={() => open(ADD_PROVIDER)} onAdded={(answer) => {
+      const added = answer.providers.find((one) => one.id === answer.provider);
+      if (added) open(providerPage(added)); else close();
+    }} />;
+  }
+  const provider = catalogue.providers.find((one) => one.id === found.parts[0]);
+  /* A provider removed from under its page — here or on another device — leaves nothing to show. */
+  if (!provider) return <Notice>This provider is no longer on the server.</Notice>;
+  const family = families.get(provider.family);
+  switch (found.kind) {
+    case "provider":
+      return <ProviderView key={provider.id} provider={provider} family={family} write={write} onOpen={open}
+        onRemoved={close} onNotify={onNotify} />;
+    case "add-model":
+      return <AddModel provider={provider} kind={found.parts[1]} write={write} onNotify={onNotify} />;
+    case "model":
+    case "languages": {
+      const model = (provider.models.audio ?? []).find((one) => one.id === found.parts[1]);
+      if (!model) return <Notice>This model is no longer on {provider.label}.</Notice>;
+      if (found.kind === "languages") return <ModelLanguages provider={provider} model={model} write={write} onNotify={onNotify} />;
+      return <VoiceModel provider={provider} model={model} family={family} write={write} onOpen={open}
+        onRemoved={() => open(providerPage(provider))} onNotify={onNotify} />;
+    }
+  }
+  return null;
+}

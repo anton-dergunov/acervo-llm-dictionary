@@ -54,13 +54,6 @@ function panel() {
   return render(<ModelPanel onNotify={() => {}} />);
 }
 
-/** Providers ▸ Credentials, the sub-page the Credentials row opens. */
-function credentials() {
-  return render(<SubPageContext.Provider value={{ sub: { id: "credentials", title: "Credentials" }, open() {}, close() {} }}>
-    <ModelPanel onNotify={() => {}} />
-  </SubPageContext.Provider>);
-}
-
 const rowOf = (element: HTMLElement): HTMLElement => element.closest(".model-row") as HTMLElement;
 
 describe("the Providers pane", () => {
@@ -240,13 +233,6 @@ describe("the Providers pane", () => {
     expect(within(rowOf(screen.getByText(GEMINI_SECOND))).getByRole("switch")).not.toBeChecked();
   });
 
-  it("links out to each provider's own usage page", async () => {
-    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
-    credentials();
-    const link = await screen.findByRole("link", { name: /Gemini API usage/i });
-    expect(link).toHaveAttribute("href", "https://aistudio.google.com/rate-limit");
-  });
-
   it("says so plainly when the server cannot be reached", async () => {
     vi.spyOn(backendSession, "fetchModels").mockRejectedValue(new Error("offline"));
     panel();
@@ -254,50 +240,49 @@ describe("the Providers pane", () => {
   });
 });
 
-/** The provider's row on the Credentials sub-page. */
-async function credentialLine(label: string): Promise<HTMLElement> {
-  const lines = await screen.findAllByTestId("provider-line");
-  return lines.find((line) => within(line).queryByText(label))!;
-}
-
-describe("the credentials table", () => {
+describe("the provider list", () => {
   afterEach(() => vi.restoreAllMocks());
 
-  it("shows which key is set without showing the key, and what its check said", async () => {
-    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
-    credentials();
+  const providerRow = async (label: string) =>
+    (await within(await screen.findByRole("region", { name: "Providers" })).findByText(label)).closest("button") as HTMLElement;
 
-    const line = await credentialLine("Gemini API");
-    expect(within(line).getByText("AIza…mnop")).toBeTruthy();
-    expect(within(line).getByText(/Works · 52 models/)).toBeTruthy();
+  it("says what each provider offers and whether its key works", async () => {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
+    panel();
+    const gemini = await providerRow("Gemini API");
+    expect(within(gemini).getByText("Text")).toBeInTheDocument();
+    expect(within(gemini).getByText("Works")).toBeInTheDocument();
+    const google = await providerRow("Google Cloud");
+    expect(within(google).getByText("Voices")).toBeInTheDocument();
   });
 
-  it("says a refused key was refused, and keeps the settings in sight", async () => {
-    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
-    credentials();
-
-    const line = await credentialLine("Cloudflare");
-    expect(within(line).getByText(/Cloudflare refused this key/)).toBeTruthy();
-    // The account id is how you tell one Cloudflare account from another.
-    expect(within(line).getByText(/accountId abc/)).toBeTruthy();
-  });
-
-  it("names the account for a credential that is a file", async () => {
+  it("says a refused key was refused, at the top and on its row, with the way to fix it", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue({
-      providers: [{
-        id: "vertex", family: "google-cloud", label: "Vertex", kinds: ["text"],
-        models: { text: ids("gemini-3.8-flash") }, extra: {}, settings: { project: "a-project" },
-        available: true, reason: null, usageUrl: null, check: null,
-        credential: { kind: "file", hint: null, account: "acervo-vertex@project.example.com" }
-      }]
+      providers: catalogue().providers.map((one) => one.id === "cloudflare"
+        ? { ...one, check: { ...one.check!, reason: "authentication" } } : one)
     }));
-    credentials();
-
-    const shown = await credentialLine("Vertex");
-    expect(within(shown).getByText("A credentials file")).toBeTruthy();
-    expect(within(shown).getByText(/acervo-vertex@project\.example\.com/)).toBeTruthy();
-    expect(within(shown).getByText(/a-project/)).toBeTruthy();
+    const opened = vi.fn();
+    render(<SubPageContext.Provider value={{ sub: null, open: opened, close() {} }}>
+      <ModelPanel onNotify={() => {}} />
+    </SubPageContext.Provider>);
+    expect(await screen.findByText(/Cloudflare refused its key, so nothing is sent to it/)).toBeInTheDocument();
+    expect(within(await providerRow("Cloudflare")).getByText("Key refused")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Replace the key" }));
+    expect(opened).toHaveBeenCalledWith(expect.objectContaining({ title: "Cloudflare" }));
   });
+
+  it("asks for a first provider when there is none, and every order says nothing offers it", async () => {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue({ providers: [] }));
+    panel();
+    expect(await screen.findByText(/This server has no provider yet/)).toBeInTheDocument();
+    const text = await screen.findByRole("region", { name: "Text" });
+    expect(within(text).getByText("Nothing offers this yet")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Add a provider…" })).toBeInTheDocument();
+  });
+});
+
+describe("the orders", () => {
+  afterEach(() => vi.restoreAllMocks());
 
   it("leaves a saved pair no provider offers out of the next save, which would be refused", async () => {
     const saved = catalogue({ chains: {

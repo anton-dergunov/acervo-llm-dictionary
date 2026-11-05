@@ -1,10 +1,10 @@
 # Providers: added in Settings, with their keys, and their usage shown
 
-**Status:** designed and agreed with the owner on 5 Nov 2026. **S1 and S5 are built and not deployed:**
-they ship together with S2, since until Settings can add a provider the server has none. What is built
-is described in [`../architecture/models.md`](../architecture/models.md); this page keeps what is
-left. The mock-ups in `design/ui-prototype/settings.html?page=providers` are the specification for S2
-onwards.
+**Status:** designed and agreed with the owner on 5 Nov 2026. **S1, S2 and S5 are built and not
+deployed;** they ship together, since until Settings can add a provider the server has none. What is
+built is described in [`../architecture/models.md`](../architecture/models.md) and
+[`../features/settings.md`](../features/settings.md) §8; this page keeps what is left. The mock-ups in
+`design/ui-prototype/settings.html?page=providers` are the specification for S3 onwards.
 
 ## Why
 
@@ -198,27 +198,14 @@ and a fall-back.
 
 ## Settings ▸ Providers
 
-The page is built from the Settings kit ([`../features/settings.md`](../features/settings.md) §5),
-and the mock-up is `design/ui-prototype/settings.html?page=providers`.
+Built in S2 ([`../features/settings.md`](../features/settings.md) §8). What the mock-ups show and S2 left
+for later:
 
-- **Providers.** One row per provider, giving its name, the kinds it serves, and whether its key
-  works. Each row opens the provider's sub-page. "Add a provider…" is a whole-row action. A **Usage**
-  row shows today's calls and failures and opens the Usage sub-page.
-- **The six orders, as today.**
-- **Add a provider.** The families are grouped as *Free to start*, *Popular*, *On your own
-  machines* and *Any compatible service*, each with a one-line hint of what it serves. Choosing one
-  opens the provider's sub-page, empty.
-- **A provider's sub-page** has these parts:
-  - the key field, the check and what it said;
-  - the family's settings;
-  - one group per kind listing its models, with "Add a model…" picking from the provider's own list,
-    or typed when there is none;
-  - per voice model: *Takes a direction*, its languages, and voices listed live or typed with a link
-    to the provider's voice page;
-  - an optional free allowance per model;
-  - "Remove this provider". Removing it also drops its pairs from every order.
-- **Removed:** the Credentials sub-page and the external Usage links, which the provider page and
-  Usage replace. A preset's link to the provider's own usage page stays on the provider's sub-page.
+- **Usage** (S3): the Usage row on the page and on each provider's page, the allowance gauge under a
+  pair in an order, and Usage ▸ model ▸ **Change**, which is where a text, picture or photo model's
+  free allowance is set. A voice model's allowance is already on its own page.
+- **The new families** (S4): ElevenLabs, Azure Speech, a speech server, Draw Things or Forge. "Add a
+  provider" lists whatever families the server has, so each appears there when it is built.
 
 ## Usage
 
@@ -281,14 +268,10 @@ picks the orders and voices once more. Nothing reads the old ids.
    - The converter, `providers.local.json`, and the deploy path removed.
    - Behaviour is otherwise unchanged. The owner re-adds Gemini, Google Cloud and Cloudflare, and
      everything answers as before.
-2. **S2 · Settings.** The provider list, Add a provider, the provider's sub-page, the key check,
-   and the model and voice pickers from the provider's own lists.
-   **S1 and S2 deploy together.** After S1 the server has no providers until some are added, and
-   S2 is how they are added. A deploy of S1 alone would leave every model call unanswered. S2 builds
-   on the routes S1 added (`POST /providers`, `PUT`/`DELETE /providers/{id}`, `POST
-   /providers/{id}/check`) and `GET /models`'s `families`; it adds the routes that list a
-   provider's own models and voices for the pickers (`listing.models`, `listing.voices` exist).
-3. **S3 · Usage.** The counters, the sink, the route and the two Usage pages. It can come before S2.
+2. **S2 · Settings.** *Built, and deploys with S1.* The provider list, Add a provider, the
+   provider's sub-page, the key check, and the model and voice pickers from the provider's own lists
+   (`GET /providers/{id}/models` and `/voices`).
+3. **S3 · Usage.** The counters, the sink, the route and the two Usage pages.
 4. **S4 · New families.** Gemini API TTS, OpenAI-compatible speech (Kokoro first), OpenAI images,
    A1111, ElevenLabs and Azure (plain voices). Each one is tried on Acervo's own prompts before the
    guide recommends it, and every failure it adds shows in `admin log` with its sentence.
