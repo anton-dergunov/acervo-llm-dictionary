@@ -1,7 +1,8 @@
 # Providers: added in Settings, with their keys, and their usage shown
 
-**Status:** designed, not built. Step one, this page and the mock-ups in `design/ui-prototype/`, is
-done. The build is six sessions, listed at the end, and each one ships on its own.
+**Status:** designed and agreed with the owner on 5 Nov 2026, not built. This page and the mock-ups
+in `design/ui-prototype/settings.html?page=providers` are the specification. The build is the sessions
+listed at the end.
 
 ## Why
 
@@ -271,6 +272,8 @@ picks the orders and voices once more. Nothing reads the old ids.
      everything answers as before.
 2. **S2 · Settings.** The provider list, Add a provider, the provider's sub-page, the key check,
    and the model and voice pickers from the provider's own lists.
+   **S1 and S2 deploy together.** After S1 the server has no providers until some are added, and
+   S2 is how they are added. A deploy of S1 alone would leave every model call unanswered.
 3. **S3 · Usage.** The counters, the sink, the route and the two Usage pages. It can come before S2.
 4. **S4 · New families.** Gemini API TTS, OpenAI-compatible speech (Kokoro first), OpenAI images,
    A1111, ElevenLabs and Azure (plain voices). Each one is tried on Acervo's own prompts before the
