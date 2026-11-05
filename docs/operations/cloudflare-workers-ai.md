@@ -1,19 +1,14 @@
 # Cloudflare Workers AI setup
 
-Cloudflare is one of the catalogue's providers — pictures through FLUX.2 Klein and a voice through
-Aura — and the image benchmark calls it too. Both use the Workers AI REST API directly, so neither needs
-a deployed Worker, Worker ID, domain, zone ID, or global API key.
+Cloudflare is a provider family — text, pictures through FLUX.2 Klein and a voice through Aura — and
+the image benchmark calls it too. Both use the Workers AI REST API directly, so neither needs a
+deployed Worker, Worker ID, domain, zone ID, or global API key.
 
-**For the server**, create the token below and give it to the deployment with the account id; the key is
-read from standard input and never reaches a command line:
-
-```bash
-./deploy.sh --configure-llm --llm-set CLOUDFLARE_ACCOUNT_ID=<account id> \
-  --llm-key CLOUDFLARE_API_TOKEN --llm-api-key-stdin
-```
+**For the server**, create the token below and add **Cloudflare** in Settings ▸ Providers with it and
+the account id. Saving checks the token with a call that spends nothing.
 
 The rest of this page is the same credential set up for a terminal session, which is what the
-benchmark and the live model tests read.
+benchmark reads; the live model tests read it from `providers.local.json`.
 
 ## Create credentials
 

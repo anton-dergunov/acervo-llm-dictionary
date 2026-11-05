@@ -38,7 +38,8 @@ from typing import Any, Sequence
 
 import dataset
 
-from acervo.models import call, load_catalogue
+from acervo.models.local import load_local
+from acervo.models import call
 from acervo.models.errors import ProviderError, ProviderUnavailable
 
 HERE = Path(__file__).resolve().parent
@@ -48,8 +49,8 @@ ARMS = HERE / "arms"
 BUILD = HERE / "build"
 WEB = ROOT / "web"
 
-PROVIDER = "gemini-free"
-MODEL = "gemini/gemini-3.5-flash-lite"
+PROVIDER = "gemini-api"
+MODEL = "gemini-3.5-flash-lite"
 
 
 def digest(text: str) -> str:
@@ -158,7 +159,7 @@ def body_for(case: dataset.Case, document: str | None = None,
 
 
 def row_for_pair():
-    catalogue = load_catalogue()
+    catalogue = load_local()
     for row in catalogue.serving("text"):
         if row.id == PROVIDER:
             return row

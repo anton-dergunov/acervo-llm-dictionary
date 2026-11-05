@@ -1,142 +1,156 @@
-"""The translation seam: one structured call on the owner's chain, for the corpus to use.
+"""The translation seam: one structured call, answered by Acervo, for the corpus to use.
 
 `deploy/acervo/speech/serve.py` is the wiring that knows the retrieval service's prompts, schemas
 and exception types, and it lives in the one image where that package is installed. What is under
-test here is the half that is Acervo's — and it imports nothing of that service's, which is exactly
-why it can be tested from a virtualenv that does not carry FastAPI, uvicorn, yt-dlp or Stanza.
+test here is the half that is Acervo's — an HTTP call home to `POST /companion/text` — and it
+imports nothing of that service's, which is why it can be tested from a virtualenv that does not
+carry FastAPI, uvicorn, yt-dlp or Stanza. The route itself is `tests/unit/server/test_companion.py`.
 """
 
 from __future__ import annotations
 
+import json
+
+import httpx
 import pytest
 
-from acervo.models.errors import ChainExhausted, ProviderRefused, ProviderUnavailable
-from acervo.models.results import Answer, TextResult
-from acervo.speech.provider import ChainGenerator, GenerationFailed
+from acervo import trace
+from acervo.speech import provider as module
+from acervo.speech.provider import AcervoGenerator, GenerationFailed
 
-
-def answered(payload: str, *, provider: str = "cloudflare", model: str = "second") -> TextResult:
-    return TextResult(
-        text=payload,
-        parsed=None if payload is None else __import__("json").loads(payload),
-        answer=Answer(provider_id=provider, model=model, seconds=0.4, cost_usd=None),
-    )
+URL = "http://server:8000/api/acervo/v1"
+TOKEN = "an-operator-token-0123456789"
 
 
 @pytest.fixture
-def walking(monkeypatch):
-    """Stand in for the chain, so this tests the adapter rather than LiteLLM."""
-    from acervo.models import chain
-
+def home(monkeypatch):
+    """Acervo, answering. `state["answer"]` is the response it gives, or an exception to raise."""
     calls: list[dict] = []
-    state: dict = {"result": answered('{"target_text": "it itches"}')}
+    state: dict = {"answer": httpx.Response(200, json={"data": {
+        "payload": {"target_text": "it itches"}, "provider": "cloudflare", "model": "second",
+        "seconds": 0.4}})}
 
-    def walk(kind, chosen, catalogue, ask, stamp):
-        calls.append({"kind": kind, "chosen": chosen})
-        outcome = state["result"]
-        if isinstance(outcome, BaseException):
-            raise outcome
-        return outcome
+    def post(url, **kwargs):
+        calls.append({"url": url, **kwargs})
+        if isinstance(state["answer"], BaseException):
+            raise state["answer"]
+        return state["answer"]
 
-    monkeypatch.setattr(chain, "walk", walk)
-    class Candidate:
-        named = ("gemini-free", "flash")
-
-    monkeypatch.setattr(
-        ChainGenerator, "_candidates", lambda self: state.get("candidates", (Candidate(),))
-    )
+    monkeypatch.setattr(module.httpx, "post", post)
     return calls, state
+
+
+def generator(stage="clip-translate"):
+    return AcervoGenerator(URL, TOKEN, stage)
 
 
 # ── the cache key ───────────────────────────────────────────────────────────
 
 
-def test_it_reports_the_chain_and_never_the_row_that_answered(walking):
+def test_it_reports_the_order_and_never_the_provider_that_answered(home):
     """The service caches on `provider` and `model`, so a fall-through that moved them would miss
-    the cache on every retry and re-translate work already paid for. The row that answered travels
-    in the metadata instead, where it is provenance rather than a key."""
-    generator = ChainGenerator(["gemini-free", "cloudflare"])
-    assert (generator.provider, generator.model) == ("acervo-chain", "gemini-free,cloudflare")
-
-    answer = generator.generate(instructions="translate", user_text="Me pica.", schema={})
+    the cache on every retry and re-translate work already paid for. The provider that answered
+    travels in the metadata instead, where it is provenance rather than a key."""
+    asked = generator()
+    answer = asked.generate(instructions="translate", user_text="Me pica.", schema={})
     assert answer.provider_metadata == {"answered_by": "cloudflare:second"}
-    # Asking again after a fall-through must not change the key.
-    assert (generator.provider, generator.model) == ("acervo-chain", "gemini-free,cloudflare")
+    assert (asked.provider, asked.model) == ("acervo-chain", "deployment-default")
 
 
-def test_no_chain_is_still_a_stable_key():
-    """Absent means "follow the deployment default", which is one order rather than no order."""
-    assert ChainGenerator(None).model == "deployment-default"
-    assert ChainGenerator([]).model == "deployment-default"
+# ── what is sent ────────────────────────────────────────────────────────────
+
+
+def test_it_calls_home_with_the_operator_token_and_a_request_id(home):
+    calls, _ = home
+    generator("clip-align").generate(instructions="align", user_text="Me pica.", schema={},
+                                     temperature=0.2)
+    sent = calls[-1]
+    assert sent["url"] == f"{URL}/companion/text"
+    assert sent["headers"]["Authorization"] == f"Bearer {TOKEN}"
+    assert trace.well_formed(sent["headers"][trace.HEADER])
+    assert sent["json"]["caller"] == "clip-align"
+    assert sent["json"]["text"] == "Me pica."
+    assert sent["json"]["temperature"] == 0.2
+
+
+def test_no_schema_is_sent_at_all(home):
+    """Constrained decoding is not used here, or anywhere — docs/architecture/models.md says why,
+    and the alignment measurement behind it is the strongest case that was tried and still lost."""
+    calls, _ = home
+    generator().generate(instructions="Translate it.", user_text="me pica",
+                         schema={"type": "OBJECT", "properties": {"target_text": {"type": "STRING"}}})
+    assert set(calls[-1]["json"]) <= {"instructions", "text", "caller", "temperature"}
+
+
+def test_the_shape_is_stated_in_the_instructions(home):
+    """With no schema sent anywhere, the instructions are the only statement of the shape. The
+    retrieval service's two prompts name no field at all, so no model could answer without this."""
+    calls, _ = home
+    generator().generate(instructions="Translate it.", user_text="me pica",
+                         schema={"type": "OBJECT", "properties": {"target_text": {"type": "STRING"}}})
+    instructions = calls[-1]["json"]["instructions"]
+    assert instructions.startswith("Translate it.")
+    assert '"type": "object"' in instructions and "target_text" in instructions
+    assert "OBJECT" not in instructions
 
 
 # ── what comes back ─────────────────────────────────────────────────────────
 
 
-def test_a_parsed_object_comes_back_with_how_long_it_took(walking):
-    answer = ChainGenerator(["gemini-free"]).generate(
-        instructions="translate", user_text="Me pica.", schema={"type": "object"}
-    )
+def test_a_parsed_object_comes_back_with_how_long_it_took(home):
+    answer = generator().generate(instructions="translate", user_text="Me pica.", schema={})
     assert answer.payload == {"target_text": "it itches"}
-    assert answer.raw_output == '{"target_text": "it itches"}'
+    assert json.loads(answer.raw_output) == {"target_text": "it itches"}
     assert answer.latency_ms >= 0
 
 
-def test_a_reply_that_is_not_an_object_is_retryable_and_carries_the_raw_output(walking):
-    """The service has an invalid-output path that re-asks, and it wants the text to log."""
-    _calls, state = walking
-    state["result"] = TextResult(text="not json at all", parsed=None,
-                                 answer=Answer("gemini-free", "flash", 0.1, None))
-
+def test_a_payload_that_is_not_an_object_is_retryable_and_carries_the_raw_output(home):
+    _calls, state = home
+    state["answer"] = httpx.Response(200, json={"data": {"payload": ["a list"], "provider": "p", "model": "m"}})
     with pytest.raises(GenerationFailed) as raised:
-        ChainGenerator(["gemini-free"]).generate(instructions="t", user_text="x", schema={})
-    assert raised.value.code == "invalid_output"
-    assert raised.value.retryable is True
-    assert raised.value.raw == "not json at all"
+        generator().generate(instructions="t", user_text="x", schema={})
+    assert raised.value.code == "invalid_output" and raised.value.retryable is True
+    assert raised.value.raw == '["a list"]'
 
 
 # ── how failure is classified ───────────────────────────────────────────────
 
 
-@pytest.mark.parametrize("reason, code, retryable", [
-    ("rate_limited", "rate_limited", True),
-    ("unavailable", "temporarily_unavailable", True),
-    ("unreachable", "temporarily_unavailable", True),
-    ("authentication", "provider_unavailable", False),
-    ("configuration", "provider_unavailable", False),
-    ("refused", "provider_unavailable", False),
+@pytest.mark.parametrize("status, code, expected, retryable", [
+    (503, "llm_rate_limited", "rate_limited", True),
+    (503, "llm_unavailable", "temporarily_unavailable", True),
+    (502, "llm_unreachable", "temporarily_unavailable", True),
+    (502, "llm_unusable", "invalid_output", True),
+    (503, "llm_authentication", "provider_unavailable", False),
+    (503, "llm_configuration", "provider_unavailable", False),
+    (503, "capture_unavailable", "provider_unavailable", False),
+    (401, "unauthenticated", "provider_unavailable", False),
 ])
-def test_each_reason_maps_to_what_the_service_acts_on(walking, reason, code, retryable):
-    """The service draws one distinction — wait or do not — and it is the same one `acervo.models`
-    already draws: a provider that is busy says nothing about the request, while a rejected
-    credential is a mistake to fix rather than a condition to route around."""
-    _calls, state = walking
-    failure = (ProviderUnavailable if retryable else ProviderRefused)(reason, "detail")
-    state["result"] = ChainExhausted(attempts=(("gemini-free", "flash"),), last=failure)
-
+def test_each_refusal_maps_to_what_the_service_acts_on(home, status, code, expected, retryable):
+    """The service draws one distinction — wait or do not — and it is the one Acervo's codes
+    already draw: a provider that is busy says nothing about the request, while a refused key, a
+    server with no provider or a wrong token is a mistake to fix."""
+    _calls, state = home
+    state["answer"] = httpx.Response(status, json={"error": {"code": code, "message": "said so"}})
     with pytest.raises(GenerationFailed) as raised:
-        ChainGenerator(["gemini-free"]).generate(instructions="t", user_text="x", schema={})
-    assert (raised.value.code, raised.value.retryable) == (code, retryable)
+        generator().generate(instructions="t", user_text="x", schema={})
+    assert (raised.value.code, raised.value.retryable) == (expected, retryable)
+    assert str(raised.value) == "said so"
 
 
-def test_a_chain_with_no_credentials_refuses_rather_than_waiting(walking):
-    """Nothing to wait for. Retrying this every time a clip opens would be a busy loop."""
-    _calls, state = walking
-    state["candidates"] = ()
-
+def test_acervo_out_of_reach_is_worth_waiting_for(home):
+    _calls, state = home
+    state["answer"] = httpx.ConnectError("refused")
     with pytest.raises(GenerationFailed) as raised:
-        ChainGenerator(["gemini-free"]).generate(instructions="t", user_text="x", schema={})
-    assert raised.value.retryable is False
+        generator().generate(instructions="t", user_text="x", schema={})
+    assert raised.value.retryable is True
 
 
-def test_the_chain_is_given_rather_than_looked_up(walking):
-    """This runs in the speech container, which has no business reaching Acervo's database — the
-    rule already stated for any work that cannot import `repository/`."""
-    import acervo.speech.provider as module
-
-    source = (module.__file__ or "")
-    assert "acervo.repository" not in open(source, encoding="utf-8").read()
-    assert "acervo.settings" not in open(source, encoding="utf-8").read()
+def test_this_container_holds_no_key_and_reaches_no_database():
+    """It imports neither the provider package nor anything that reads Acervo's state."""
+    source = open(module.__file__ or "", encoding="utf-8").read()
+    for name in ("acervo.models", "acervo.repository", "acervo.settings", "litellm"):
+        assert name not in source
 
 
 # ── the shape of the answer, said twice ─────────────────────────────────────
@@ -183,58 +197,3 @@ def test_googles_type_spelling_is_renamed_into_json_schemas():
     # Already JSON Schema, including a union, and unchanged.
     already = {"type": "object", "properties": {"segmentId": {"type": ["string", "null"]}}}
     assert json_schema(already) == already
-
-
-def _asking(monkeypatch):
-    """A chain that actually calls the ask, so what reaches `call.text` can be read."""
-    from acervo.models import call, chain
-
-    seen: list[dict] = []
-
-    def text(prompt, **kwargs):
-        seen.append({"prompt": prompt, **kwargs})
-        return answered('{"target_text": "it itches"}')
-
-    monkeypatch.setattr(call, "text", text)
-    monkeypatch.setattr(chain, "walk", lambda kind, chosen, catalogue, ask, stamp: ask(Asked()))
-
-    class Asked:
-        row = object()
-        model = "flash"
-        named = ("gemini-free", "flash")
-
-    monkeypatch.setattr(ChainGenerator, "_candidates", lambda self: (Asked(),))
-    return seen
-
-
-def test_no_schema_is_sent_at_all(monkeypatch):
-    """Constrained decoding is not used here, or anywhere — AGENTS.md says why, and the alignment
-    measurement behind it is the strongest case that was tried and still lost."""
-    seen = _asking(monkeypatch)
-    ChainGenerator(None).generate(
-        instructions="Translate it.", user_text="me pica",
-        schema={"type": "OBJECT", "properties": {"target_text": {"type": "STRING"}}},
-    )
-    assert "schema" not in seen[-1]
-    assert seen[-1]["as_json"] is True
-
-
-def test_the_shape_is_also_stated_in_the_instructions(monkeypatch):
-    """Not belt-and-braces: with no schema sent anywhere, it is the only statement of the shape.
-
-    The retrieval service's two prompts name no field at all — they end with "Return only the
-    requested structured result" and leave the shape entirely to the schema, which is how its own
-    Gemini adapter works. A row declaring `prompt` is sent no schema by design, so cloudflare and
-    openrouter could never answer either stage without this line. It is in JSON Schema's spelling
-    too, so the instruction and the wire say the same thing.
-    """
-    seen = _asking(monkeypatch)
-    ChainGenerator(None).generate(
-        instructions="Translate it.", user_text="me pica",
-        schema={"type": "OBJECT", "properties": {"target_text": {"type": "STRING"}}},
-    )
-    system = seen[-1]["system"]
-    assert system.startswith("Translate it.")
-    assert '"type": "object"' in system
-    assert "target_text" in system
-    assert "OBJECT" not in system

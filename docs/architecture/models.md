@@ -1,42 +1,62 @@
 # Models · how Acervo calls a model
 
-**`src/acervo/models/` is the one way to call a model, and a provider is a row.** Text, pictures,
-speech and OCR all go through it — `text()`, `image()`, `speech()`, `ocr()` — and every call returns an
-`Answer` naming the (provider, model) pair that **answered**, which under a chain is not knowable
-before the call. The contract is that a record names the model that did the work, not the one asked
-first. Adding providers and their keys from Settings, and which providers to support, are
-[`../plans/provider-management.md`](../plans/provider-management.md).
+**`src/acervo/models/` is the one way to call a model, a provider is an account the owner added, and
+a provider fact found the hard way belongs in its family.** Text, pictures, speech and OCR all go
+through it — `text()`, `image()`, `speech()`, `ocr()` — and every call returns an `Answer` naming the
+(provider, model) pair that **answered**, which under a chain is not knowable before the call. The
+contract is that a record names the model that did the work, not the one asked first. Which providers
+to support next, the Settings pages and usage are [`../plans/provider-management.md`](../plans/provider-management.md).
 
 ---
 
-## The catalogue
+## Providers and families
 
-`models/catalogue.json` is tracked and ships the **list, never a credential**: `keyEnv` and `requires`
-name environment variables, and `usageUrl` is a template rather than a link with an account in it. It
-is the only place a provider's model ids, endpoint and capabilities are written down.
+**A provider is one account: one credential, offering one or more kinds.** "Google Cloud" is one
+provider, answering text and pictures through Vertex, voices through Cloud Text-to-Speech and photos
+through Cloud Vision. Providers belong to the server, not to an account: every account on a server
+spends the same keys. A provider is a row the owner adds (`providers`, never replicated) holding:
 
-**A row names several models per kind, and the unit of choice is a (provider, model) pair**, not a
-provider: a free tier is metered per model, so two models at 500 requests a day each are a thousand,
-and the second is reached by the first one's 429. The default walk is provider by provider and,
-inside each, model by model, in catalogue order.
+- an `id`, a slug orders and voice choices name, which does not change once saved;
+- its `family`, the code that speaks to it;
+- the family's non-secret `settings` — a Cloudflare account id, a Vertex project and location, the
+  address of an Ollama;
+- its models per kind, in the order they were added, each carrying only what varies between models
+  and can be checked on the provider's own page: whether a voice takes a `direction`, the
+  `languages` it speaks, `voices` typed in where the provider cannot list them, and an optional free
+  `allowance`;
+- `extra`, a JSON object merged into every call for the quirk no family foresaw;
+- what its last key check said.
 
-**What a row can do is a declaration, not code.** `capabilities.jsonMode` decides whether
-`{"type": "json_object"}` is sent or JSON is asked for in prose; `params` carries per-row generation
-settings; `timeouts` how long to wait on that row; `passes` which call arguments come from which
-variables; `capabilities.audio.models` the style, languages and voices of each voice model — voices
-keyed by the locale they were made for, or `"*"` for any, each with an optional gender and a word for
-its character — and the locales a model `accepts`, with the row's `wire` spelling of one where the
-provider's differs (`cmn-CN` for `zh-Hans-CN`);
-`capabilities.image` whether a seed is honoured and whether references can be sent. **A provider fact
-discovered the hard way belongs in the row, not in a branch** — that one text-to-speech route takes
-`text` where another took `prompt`, that Vertex refuses `response_format`, that Gemini will not accept
-OpenAI's voice names, that the same call answers in under two seconds on a free tier and takes half a
-minute on Vertex.
+**The key is not in the row.** It is in `providers.secrets.json` beside the database (see
+*Credentials*), so a database backup, a deploy's copy of it and an export never carry one.
 
-`text()`, `image()` and `speech()` go over LiteLLM, imported lazily so the rate limiter
-(`models/pacing`) works in the worker image, which does not install it. What LiteLLM does not cover is
-reached by hand: Cloudflare's image and audio models (`cloudflare.py`), Cloud Text-to-Speech
-(`google_tts.py`) and Cloud Vision (`google_vision.py`).
+**A family is code** (`models/families.py`), and it carries what a user should never need to know:
+the route LiteLLM takes and its prefix, the base URL, whether JSON mode is native, the parameters a
+provider needs, how long it is worth waiting, what its image route does with a size, a seed and
+reference pictures, what its speech route needs, its usage page. Every one of those was found by a
+call that failed — that one text-to-speech route takes `text` where another took `prompt`, that
+Vertex refuses `response_format`, that Workers AI truncates at 256 tokens unless told otherwise, that
+the same call answers in under two seconds on a free tier and takes half a minute on Vertex — and
+each is a fact about the provider rather than about anybody's account. The OpenAI-compatible
+services are one family's code with a preset each: a prefix, a base URL and a listing endpoint.
+
+**What changes with the provider's catalogue comes from the provider** (`models/listing.py`): its
+models, and its voices with their locales and genders, asked for with calls that spend nothing.
+Google's voice list is the one a call depends on, so it is kept in memory for a day per provider and
+credential. A Gemini voice is listed once (`Kore`) under `en-US`, which is where it was made rather
+than all it says, so it speaks any locale and is sent the nearest one Google lists any voice under —
+`es-US` for Argentina, which shares `es-419` with it; a Gemini voice refuses `es-AR` and a bare `es`
+(measured on 5 Nov 2026). Locales typed on a model win over that list.
+
+**Laptop tools** — the scripts, the experiments and the live tests — read a gitignored
+`providers.local.json` in the shape the server stores, with each key inline (`models/local.py`). The
+server never reads it.
+
+`text()` and `image()` go over LiteLLM, imported lazily so the rate limiter (`models/pacing`) works in
+the worker image, which does not install it. What LiteLLM does not cover is reached by hand:
+Cloudflare's image and audio models (`cloudflare.py`), Cloud Text-to-Speech (`google_tts.py`) and Cloud
+Vision (`google_vision.py`). Speech never goes through LiteLLM: reached that way, a Gemini voice drops
+its direction before the request is built.
 
 ## The chain
 
@@ -61,52 +81,74 @@ connection, and an answer the caller declares unusable — and on nothing else.*
 - **A caller with somebody waiting hedges.** Resolve, compose and chat pass `hedge_after`: a pair silent
   that long is raced by the next one, the first usable answer wins, and the loser's late outcome is only
   logged. The delays live beside the timeouts in `call.py`, set from measured healthy answers.
-- **A pair naming a model the catalogue no longer offers is refused**, because nothing is supposed to
-  produce it and skipping it would walk half the chain forever with no symptom. The speech orders are
+- **A pair naming a model its provider does not offer is refused**, because nothing is supposed to
+  produce it — removing a model removes it from every order — and skipping it would walk half the
+  chain forever with no symptom. The speech orders are
   the one exception, and theirs is logged on every read
   ([`../features/pronunciation.md`](../features/pronunciation.md)).
 
 ## Whose chain it is
 
 **Which pairs answer is the owner's choice**, per kind, in Settings ▸ Providers. `services/models.py`
-resolves the owner's `model_selection` row, then the deployment's default — `ACERVO_TEXT_CHAIN` for
-text, the catalogue's `defaultChains` for the two voice orders — then catalogue order — re-read on
-every request, so a change takes effect on the next call with nothing restarted. The row is
-owner-scoped server state, never replicated, and **no row means "follow the deployment default"**, a
-legitimate answer rather than a gap, so nothing creates one eagerly. A chain has **three states**:
-absent follows the default, an explicitly empty one means "generate nothing of this kind", and a
-list is an order. Collapsing the first two would make unticking the last model look like switching a
-kind off while the server carried on with its own order.
+resolves the owner's `model_selection` row, and with none, the providers in the order they were
+added and their models in the order they were added — re-read on every request, so a change takes
+effect on the next call with nothing restarted. The row is owner-scoped server state, never
+replicated, and **no row means "follow the providers' own order"**, a legitimate answer rather than a
+gap, so nothing creates one eagerly. A chain has **three states**: absent follows that order, an
+explicitly empty one means "generate nothing of this kind", and a list is an order. Collapsing the
+first two would make unticking the last model look like switching a kind off while the server
+carried on with its own order.
 
-**A pair whose provider has no credential is kept and skipped**, not refused: a chain is a preference
-and a credential is a deployment fact, and a rotated key must not destroy an order or lock the owner
-out of changing it.
+**A pair whose provider cannot be asked is kept and skipped**, not refused: no key, a missing
+setting, or a key the provider refused when it was last checked. A chain is a preference and a
+working key is a fact about the provider, and a refused key must not destroy an order or lock the
+owner out of changing it. **Removing a provider, or one of its models, takes it out of every order
+and voice choice** in the same transaction, which is why a pair naming a model nobody offers is
+refused rather than skipped: nothing is supposed to produce one.
 
 **The kinds are `text`, `quick`, `image`, `ocr`, and two voice orders.** `quick` is the text models in a
 second order, for a call made while a finger is still on the glass (photo capture's tap). The voice
 orders, `audioPlain` and `audioExpressive`, both draw from the one `audio` kind
-([`../features/pronunciation.md`](../features/pronunciation.md)). **Only a voice whose model declares
-`style: instruction` reads the expressive order**: that order exists to carry a direction, and a voice
-that cannot take one recorded as though none had been asked for, silently. A saved order is kept as
-saved and the walk skips such voices; the catalogue refuses an expressive default that names one; and
-when no directed voice can answer, the plain order reads instead, with a log line saying so.
+([`../features/pronunciation.md`](../features/pronunciation.md)). **Only a voice whose model takes a
+direction reads the expressive order**: that order exists to carry a direction, and a voice that
+cannot take one recorded as though none had been asked for, silently. Its default is only the voices
+that take one; a saved order is kept as saved and the walk skips the others; and when no directed
+voice can answer, the plain order reads instead, with a log line saying so.
+
+**A companion service is given no key.** The clip service calls home to `POST /companion/text` for
+each translation and alignment, authenticated by the operator token the two already share, and
+Acervo walks the providers' own order for it — its job has no owner
+([`../features/spoken-clips.md`](../features/spoken-clips.md) §2.13). LexiBeat's writer calls home the
+same way with a render token. Keys live in one container.
 
 ## Credentials
 
-**A credential never leaves the server, with one bounded exception.** `GET /models` returns what the
-server is credentialed *for*, and a key's first four and last four characters on that one
-authenticated owner route, so Settings ▸ Providers can say *which* key is deployed — "a key is set" and
+**A credential never leaves the server, with one bounded exception.** `GET /models` shows a key as
+its first four and last four characters, so Settings can say *which* key is set — "a key is set" and
 "*that* key is set" are different answers, and only the second closes a half-finished rotation. A
-`requires` value, such as a project id, is shown in full, and a row listing its `keyEnv` among them is
-refused. `test_it_never_returns_a_key_or_how_a_provider_is_reached` asserts the whole value is absent
-from the whole response body.
+credentials file is shown as the account it names. `test_it_never_returns_a_key_or_a_credentials_file`
+asserts the whole secret is absent from the whole response body.
 
-**Vertex is the one provider whose credential is a file**: Google will not authenticate from a value,
-so a workstation uses application default credentials and a server mounts the file, named by the row's
-`authEnv`. Because that file is whichever Google login was last signed in, a row may name an
-`accountEnv` — set, and the row refuses to run as any other account, and refuses too when the
-credentials cannot prove whose they are. Setting it up is [`../operations/vertex-setup.md`](../operations/vertex-setup.md);
-`python -m acervo.admin providers` prints what a machine can call, and as whom, spending nothing.
+**Keys live in `providers.secrets.json` beside the database**, mode 600, written whole through a
+temporary file and a rename, and read on every call (`services/provider_secrets.py`). A lost file
+costs typing the keys again, and keys can be made again; that is the right way round.
+
+**Saving a key makes one call that spends nothing** — a model list, or Google's voice list — and says
+plainly whether the key works, and as whom where the provider says (`listing.check`). A provider is
+stored only when its check works; a key the provider refuses is said in the provider's own words and
+nothing is stored. Every check is an `activity.log` line, so `admin log --failed` shows a refused
+key with its sentence.
+
+**Google Cloud takes a key or a credentials file.** A key reaches Cloud Text-to-Speech and Cloud
+Vision, sent as `x-goog-api-key` so it is never in an address. A file — a service account's key or a
+user's own sign-in — reaches those and Vertex text and pictures, and is handed to LiteLLM per call
+with the provider's project and location, so two Google Cloud providers can be two accounts; its
+access token is cached per provider and credential, and a user's sign-in sends the project as its
+quota project. `python -m acervo.admin providers` prints the server's providers, which key each
+holds, and what its last check said, spending nothing.
+
+**Every value a credential could leak is redacted** from every provider error, at construction:
+building a provider teaches `redact.py` its secrets, so no list of names has to be kept in step.
 
 ## Constrained decoding is not used, anywhere
 

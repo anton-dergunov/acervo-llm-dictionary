@@ -22,7 +22,7 @@ from typing import Any, Mapping, Sequence
 from acervo.images.render import Rendered, Renderer
 from acervo.images.styles import Style
 from acervo.models import call, chain
-from acervo.models.catalogue import Catalogue
+from acervo.models.providers import Providers
 from acervo.models.errors import ProviderUnavailable
 from acervo.stories.write import Part
 
@@ -92,7 +92,7 @@ def parse_reply(payload: Any, parts: Sequence[Part]) -> Briefed:
 
 
 class BriefWriter:
-    def __init__(self, catalogue: Catalogue, candidates: Sequence[chain.Candidate], template: str) -> None:
+    def __init__(self, catalogue: Providers, candidates: Sequence[chain.Candidate], template: str) -> None:
         self.catalogue = catalogue
         self.candidates = tuple(candidates)
         self.template = template
@@ -129,7 +129,7 @@ class BriefWriter:
 
 
 def draw(brief: str, style: Style, *, seed: int, candidates: Sequence[chain.Candidate],
-         catalogue: Catalogue, references: Sequence[bytes] = (),
+         catalogue: Providers, references: Sequence[bytes] = (),
          with_references: str | None = None) -> Rendered:
     """One part's picture, in the story's one style.
 

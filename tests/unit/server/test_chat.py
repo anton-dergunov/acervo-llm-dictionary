@@ -77,7 +77,7 @@ def test_it_refuses_a_subject_kind_it_does_not_know(talking):
 
 
 def test_it_says_so_when_no_model_is_configured(server, monkeypatch):
-    monkeypatch.delenv("GEMINI_API_KEY", raising=False)
+    server.remove_provider("gemini-api")
     answered = server.chat()
     assert answered.status_code == 503
     assert answered.json()["error"]["code"] == "capture_unavailable"

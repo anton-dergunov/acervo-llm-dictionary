@@ -79,7 +79,7 @@ Even **10,000 fully structured words** with no media are only tens of megabytes.
 - [`architecture/sync.md`](architecture/sync.md) — the replica, the cursor, online-only writes, media on the device.
 - [`architecture/server.md`](architecture/server.md) — the Python service: layering, storage, auth, every route.
 - [`architecture/jobs.md`](architecture/jobs.md) — what is a job, the runner, where work runs, what the interface shows.
-- [`architecture/models.md`](architecture/models.md) — providers as catalogue rows, chains, and why no schema is ever sent.
+- [`architecture/models.md`](architecture/models.md) — providers, their families and keys, chains, and why no schema is ever sent.
 - [`architecture/observability.md`](architecture/observability.md) — three logs, one id across them, and how to find out why.
 - [`architecture/durability.md`](architecture/durability.md) — what protects the vocabulary, and how to restore.
 - [`architecture/performance.md`](architecture/performance.md) — the measured write path.

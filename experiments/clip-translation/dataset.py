@@ -164,7 +164,7 @@ def _examples_for(passage: Passage, senses: list[dict], target_lang: str) -> lis
         "id": f"x{sense['id'][1:]}"[:15], "senseId": sense["id"],
         "text": example["text"], "textLang": passage.source_lang,
         "translation": translation, "translationLang": target_lang if translation else None,
-        "origin": "llm", "modelId": "gemini/gemini-3.5-flash-lite", **SYNC,
+        "origin": "llm", "modelId": "gemini-3.5-flash-lite", **SYNC,
     } for sense in senses[:1]]
 
 

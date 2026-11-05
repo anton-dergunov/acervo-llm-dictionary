@@ -17,6 +17,7 @@ from graph_records import vocabulary
 from acervo.api.auth import TAKE_AUDIENCE, mint_render
 from acervo.pronunciation import takes
 from acervo.repository import accounts
+from provider_rows import GOOGLE
 
 MP3 = b"ID3\x04\x00an-mp3-of-some-length"
 
@@ -36,11 +37,7 @@ def wav(words: str) -> bytes:
 
 @pytest.fixture(autouse=True)
 def a_voice(server, monkeypatch, tmp_path):
-    credentials = tmp_path / "service-account.json"
-    credentials.write_text("{}")
-    monkeypatch.setenv("ACERVO_VERTEX_PROJECT", "a-project-name")
-    monkeypatch.setenv("GOOGLE_APPLICATION_CREDENTIALS", str(credentials))
-    monkeypatch.delenv("ACERVO_VERTEX_ACCOUNT", raising=False)
+    server.add_provider(GOOGLE)
     calls: list[dict] = []
 
     def speech(row, model, words, **kwargs):
@@ -80,7 +77,7 @@ def test_a_take_comes_back_as_the_lossless_master_and_not_as_a_clip(server):
 
 def test_the_answer_names_who_said_it_and_whether_the_direction_landed(server):
     answer = ask(server)
-    assert answer.headers["x-acervo-provider"] == "google-tts"
+    assert answer.headers["x-acervo-provider"] == "google-cloud"
     assert answer.headers["x-acervo-model"] == "gemini-3.1-flash-tts-preview"
     assert answer.headers["x-acervo-direction"] == "sent"
     assert server.speech.calls[-1]["style"]
@@ -117,7 +114,7 @@ def test_the_voice_header_means_one_thing_on_both_paths(server):
     assert fresh.headers["x-acervo-voice"] == cached.headers["x-acervo-voice"] == ""
 
     server.put("/pronunciations/settings", {
-        "voices": {"google-tts": {"gemini-3.1-flash-tts-preview": {"es": "Kore"}}}
+        "voices": {"google-cloud": {"gemini-3.1-flash-tts-preview": {"es": "Kore"}}}
     })
     chosen = ask(server, text="otra palabra")
     assert chosen.headers["x-acervo-voice"] == "Kore"
@@ -138,7 +135,7 @@ def test_a_dropped_direction_is_an_answer_rather_than_a_failure(server):
     answer = ask(server)
     assert answer.status_code == 200
     assert answer.headers["x-acervo-direction"] == "dropped"
-    assert answer.headers["x-acervo-model"] == "wavenet"
+    assert answer.headers["x-acervo-model"] == "Wavenet"
     assert server.speech.calls[-1]["style"] is None
 
 
@@ -146,12 +143,12 @@ def test_an_expressive_order_with_no_directed_voice_drops_the_direction_and_is_f
     """The clear order reads for it, and the take it records is keyed on what was sent — nothing —
     so the second request for the same line is served from disk rather than paid for again."""
     server.put("/models/selection", {"chains": {
-        "audioExpressive": [{"provider": "google-tts", "model": "standard"}],
-        "audioPlain": [{"provider": "google-tts", "model": "wavenet"}],
+        "audioExpressive": [{"provider": "google-cloud", "model": "Standard"}],
+        "audioPlain": [{"provider": "google-cloud", "model": "Wavenet"}],
     }})
     first = ask(server)
     assert first.headers["x-acervo-direction"] == "dropped"
-    assert first.headers["x-acervo-model"] == "wavenet"
+    assert first.headers["x-acervo-model"] == "Wavenet"
     calls = len(server.speech.calls)
     again = ask(server)
     assert again.content == first.content and len(server.speech.calls) == calls
@@ -161,8 +158,8 @@ def test_a_take_recorded_plainly_is_not_served_once_a_directed_voice_answers_aga
     """One day without a directed voice must not leave a line flat in every later loop that uses the
     same words: the plain take is looked for only when no directed voice can read."""
     directed = server.put("/models/selection", {"chains": {
-        "audioExpressive": [{"provider": "google-tts", "model": "standard"}],
-        "audioPlain": [{"provider": "google-tts", "model": "wavenet"}],
+        "audioExpressive": [{"provider": "google-cloud", "model": "Standard"}],
+        "audioPlain": [{"provider": "google-cloud", "model": "Wavenet"}],
     }})
     assert directed.status_code == 200
     assert ask(server).headers["x-acervo-direction"] == "dropped"
@@ -180,7 +177,7 @@ def test_directed_voices_out_of_reach_serve_the_plain_take_already_recorded(serv
     server.put("/pronunciations/settings", {"delivery": {"loops": "plain"}})
     plain = ask(server)
     server.put("/pronunciations/settings", {"delivery": {"loops": "expressive"}})
-    server.speech.failure = ProviderUnavailable("rate_limited", "quota", provider_id="google-tts", model="any")
+    server.speech.failure = ProviderUnavailable("rate_limited", "quota", provider_id="google-cloud", model="any")
     calls = len(server.speech.calls)
     answer = ask(server)
     assert answer.status_code == 200 and answer.content == plain.content
@@ -297,8 +294,8 @@ GEMINI = "gemini-3.1-flash-tts-preview"
 
 def test_a_guide_line_is_said_by_the_guide_voice_and_a_native_one_is_not(server):
     server.put("/pronunciations/settings", {
-        "voices": {"google-tts": {GEMINI: {"es": "Kore", "en": "Kore"}}},
-        "guideVoices": {"google-tts": {GEMINI: {"en": "Charon"}}},
+        "voices": {"google-cloud": {GEMINI: {"es": "Kore", "en": "Kore"}}},
+        "guideVoices": {"google-cloud": {GEMINI: {"en": "Charon"}}},
     })
     guide = ask(server, text="disgust", language="en", role="guide")
     assert guide.headers["x-acervo-voice"] == "Charon"
@@ -313,7 +310,7 @@ def test_a_guide_line_is_said_by_the_guide_voice_and_a_native_one_is_not(server)
 
 def test_without_a_guide_voice_every_line_is_said_by_the_one_voice(server):
     server.put("/pronunciations/settings", {
-        "voices": {"google-tts": {GEMINI: {"en": "Puck"}}}})
+        "voices": {"google-cloud": {GEMINI: {"en": "Puck"}}}})
     assert ask(server, text="disgust", language="en", role="guide").headers["x-acervo-voice"] == "Puck"
 
 
@@ -330,5 +327,5 @@ def test_the_settings_offer_voices_in_the_language_the_guide_speaks(server):
     assert "Charon" in [voice["name"] for voice in gemini["voices"]["en"]]
     assert view["guideVoices"] == {}
     refused = server.put("/pronunciations/settings", {
-        "guideVoices": {"google-tts": {GEMINI: {"en": "Nobody"}}}})
+        "guideVoices": {"google-cloud": {GEMINI: {"en": "Nobody"}}}})
     assert refused.json()["error"]["code"] == "unknown_voice"

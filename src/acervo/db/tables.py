@@ -130,6 +130,35 @@ model_selection = Table(
     Index("idx_model_selection_owner", "owner", unique=True),
 )
 
+# The providers this server may call: one row per account the owner added, each with the models it
+# offers (`docs/architecture/models.md`). The server's rather than an owner's — every account on a
+# server spends the same keys — so there is no `owner`, and like `model_selection` it is server state
+# that never replicates, which is why the id may be a primary key the owner chose. **The key is not
+# here**: it is in `providers.secrets.json` beside the database, so a backup of this file, a deploy's
+# copy of it and an export never carry one.
+providers = Table(
+    "providers",
+    metadata,
+    # A slug the owner may change before saving and not after: orders and voice choices name it.
+    Column("id", String(40), primary_key=True),
+    # Which family speaks to it (`models/families.py`).
+    Column("family", String(40), nullable=False),
+    Column("label", String(80), nullable=False),
+    # The order it was added in, which is the default order of every chain.
+    Column("position", Integer, nullable=False),
+    # The family's non-secret values: an account id, a project, an address.
+    Column("settings", JSON, nullable=False, default=dict),
+    # {kind: [{"id", "direction"?, "languages"?, "voices"?, "allowance"?}, ...]}, in the order added.
+    Column("models", JSON, nullable=False, default=dict),
+    # Merged into every call, for the quirk no family foresaw.
+    Column("extra", JSON, nullable=False, default=dict),
+    # What the last check said: {"ok", "said", "reason", "account"}, or null before the first.
+    Column("check", JSON, nullable=True),
+    Column("checked_at", String(24), nullable=True),
+    Column("created_at", String(24), nullable=False),
+    Column("edited_at", String(24), nullable=False),
+)
+
 # How this owner wants sense images drawn. Server state for the same reason `model_selection` is:
 # the drawing happens on the server, so unlike the editor's wrapping preference this cannot live on
 # the device. Never replicated, no `revision`/`deleted`/`edited_by`, and the unique index is safe for
@@ -181,7 +210,7 @@ pronunciation_settings = Table(
     # directed order is what asking for emotion now means — one mechanism where there were two.
     Column("delivery", JSON, nullable=False, default=dict),
     # The owner's voice per model per language: {provider: {model: {language: voice}}}. Absent means
-    # the first voice the catalogue declares, so a voice list that grows never changes a choice.
+    # the provider's first voice for it, so a voice list that grows never changes a choice.
     Column("voices", JSON, nullable=False, default=dict),
     # Who says a loop's guide lines — translations, remarks, announcements — in the same shape, where
     # the owner chose a second voice for them. Absent means the voice above says every line.

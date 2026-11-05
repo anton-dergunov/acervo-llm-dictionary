@@ -22,7 +22,8 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from acervo.models import call, chain, load_catalogue  # noqa: E402
+from acervo.models.local import load_local  # noqa: E402
+from acervo.models import call, chain  # noqa: E402
 
 LANGUAGE_NAMES = {"es": "Spanish", "en": "English"}
 
@@ -62,11 +63,11 @@ def groups_text(regions: list[dict]) -> str:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("--chain", default="gemini-free")
+    parser.add_argument("--chain", default="gemini-api")
     parser.add_argument("--lang", action="append", default=[])
     args = parser.parse_args()
 
-    candidates = chain.resolve("text", [c.strip() for c in args.chain.split(",")], load_catalogue())
+    candidates = chain.resolve("text", [c.strip() for c in args.chain.split(",")], load_local())
     if not candidates:
         print("No usable pair. Is GEMINI_API_KEY exported?", file=sys.stderr)
         return 2

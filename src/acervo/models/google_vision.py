@@ -10,7 +10,7 @@ it.
 What comes back is `OcrWord`s, in Vision's reading order, with Vision's names gone: a break type is
 one of four words, and the block and paragraph a word sat in survive as two numbers.
 
-Authentication and failure are `google_auth.py`'s, shared with Cloud Text-to-Speech.
+Signing in and failure are `google_auth.py`'s, shared with Cloud Text-to-Speech.
 """
 
 from __future__ import annotations
@@ -19,7 +19,7 @@ import base64
 from typing import Any, Sequence
 
 from acervo.models import google_auth
-from acervo.models.catalogue import Row
+from acervo.models.providers import Provider
 from acervo.models.results import OcrWord
 
 ANNOTATE_URL = "https://vision.googleapis.com/v1/images:annotate"
@@ -36,7 +36,7 @@ _BREAKS = {
 
 
 def read(
-    row: Row,
+    row: Provider,
     model: str,
     data: bytes,
     *,

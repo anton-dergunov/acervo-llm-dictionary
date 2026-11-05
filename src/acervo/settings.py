@@ -92,16 +92,6 @@ class Settings(BaseSettings):
     # attaches it, and no route returns it — for the reason a provider key never leaves it either.
     speech_operator_token: str = Field(default="", alias="ACERVO_SPEECH_OPERATOR_TOKEN")
 
-    # Which providers answer, in order, as ids from `models/catalogue.json`. Empty means every row
-    # this deployment is credentialed for, in catalogue order — so a server with one provider
-    # configured needs nothing set here at all.
-    #
-    # The credentials themselves are deliberately absent from this class. A provider's key variable
-    # is named by its catalogue row and read from the environment there, because the catalogue is
-    # the only place a provider's facts are written down; listing them here too would be a second
-    # source of truth that drifts the first time a row is added.
-    text_chain: str = Field(default="", alias="ACERVO_TEXT_CHAIN")
-
     # The zone the nightly hour in Settings ▸ Activity is read in, as an IANA name. Empty means the
     # server's own local zone — which in a container is usually UTC, so a deployment sets this.
     timezone: str = Field(default="", alias="ACERVO_TIMEZONE")

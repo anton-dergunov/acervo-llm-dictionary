@@ -191,11 +191,11 @@ stays one tap away. **Export leaves photos out**, and the export panel says so.
 
 ## Where OCR runs
 
-**Google Cloud Vision (`DOCUMENT_TEXT_DETECTION`) is the reader**, the only row of the `ocr` kind in
-`models/catalogue.json`, so a 429 falls through a chain like any other call. It returns word
-polygons, block and paragraph structure and a detected language, under the Google project Vertex
-already uses. LiteLLM does not cover it, so `models/google_vision.py` reaches it by hand and answers
-provider-neutral `OcrWord`s — another engine is one row and one adapter. The first 1,000 images a
+**Google Cloud Vision (`DOCUMENT_TEXT_DETECTION`) is the reader**, the one `ocr` model of the Google
+Cloud family, so a 429 falls through a chain like any other call. It returns word polygons, block
+and paragraph structure and a detected language, with the Google Cloud provider's key or credentials
+file. LiteLLM does not cover it, so `models/google_vision.py` reaches it by hand and answers
+provider-neutral `OcrWord`s — another engine is one family and one adapter. The first 1,000 images a
 month are free, then $1.50 per 1,000.
 
 **RapidOCR on the NAS is not a usable fallback.** It is too slow — 6.7 s at the median for a 2048 px

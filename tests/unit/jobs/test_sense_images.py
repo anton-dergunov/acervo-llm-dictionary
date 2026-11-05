@@ -470,21 +470,21 @@ def test_a_blocked_record_is_not_a_problem(tmp_path: Path):
 
 
 # ── the chain, at the two call sites ────────────────────────────────────────
-# The catalogue rows, the adapter and the pacing were built by the provider package; what these
+# The providers, the adapter and the pacing were built by the provider package; what these
 # cover is that the image job actually goes through them and records what answered.
 
 
 def _candidates(*pairs):
-    """Resolved candidates over a throwaway catalogue, with no credentials involved."""
+    """Resolved candidates over throwaway providers, which nothing calls."""
     from acervo.models import chain
-    from acervo.models.catalogue import Catalogue, Row
+    from acervo.models.providers import Providers, parse
 
     rows = tuple(
-        Row(id=provider, label=provider.title(), kinds=("text", "image"),
-            litellm={"text": [model], "image": [model]}, auth="none")
+        parse({"id": provider, "family": "cloudflare", "settings": {"accountId": "a" * 32},
+               "models": {"text": [model], "image": [model]}}, {"key": "a-throwaway-token-0123"})
         for provider, model in dict.fromkeys((pair[0], pair[1]) for pair in pairs)
     )
-    catalogue = Catalogue(1, "a throwaway catalogue", rows)
+    catalogue = Providers(rows)
     return catalogue, chain.resolve("image", list(pairs), catalogue)
 
 
@@ -649,9 +649,9 @@ def test_the_configured_size_reaches_the_call(tmp_path):
 
 def _writer():
     from acervo.images.brief import BriefWriter
-    from acervo.models.catalogue import load_catalogue
+    from acervo.models.providers import Providers
 
-    return BriefWriter(load_catalogue(), (), TEMPLATE.read_text(encoding="utf-8"), load_styles(STYLES))
+    return BriefWriter(Providers(), (), TEMPLATE.read_text(encoding="utf-8"), load_styles(STYLES))
 
 
 def _exhausted(*reasons: str):

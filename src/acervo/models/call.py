@@ -1,4 +1,4 @@
-"""One row, one call, over LiteLLM or a row's own adapter.
+"""One provider, one call, over LiteLLM or the family's own adapter.
 
 Four functions, and each returns what it did. The chain lives next door in `chain.py`; this module
 knows only how to ask one provider and how to read what came back.
@@ -26,9 +26,8 @@ import re
 import time
 from typing import Any, Mapping, Sequence
 
-from acervo.models.catalogue import Row, base_url, key, passed
 from acervo.models.errors import RETRYABLE, ProviderRefused, ProviderUnavailable, Reason
-from acervo.models.redact import redactor
+from acervo.models.providers import Provider as Row
 from acervo.models.results import Answer, AudioResult, ImageResult, OcrResult, TextResult
 
 # **Both of these are set from the call log, not from feel** — run `python -m acervo.admin calls`
@@ -97,10 +96,6 @@ def image_generation(**kwargs: Any) -> Any:
     return _litellm().image_generation(**kwargs)
 
 
-def speech_synthesis(**kwargs: Any) -> Any:
-    return _litellm().speech(**kwargs)
-
-
 _AUDIO_SIGNATURES: tuple[tuple[bytes, str], ...] = (
     (b"RIFF", "audio/wav"),
     (b"OggS", "audio/ogg"),
@@ -145,35 +140,32 @@ def classify(error: BaseException) -> tuple[Reason, int | None]:
     for name, reason in _BY_TYPE:
         if name in names:
             return reason, status
+    return status_reason(status), status
+
+
+def status_reason(status: int | None) -> Reason:
+    """What a bare HTTP status means, for an adapter that has nothing but the status to go on."""
     if status is not None:
         if status == 429:
-            return "rate_limited", status
+            return "rate_limited"
         if status in (401, 403):
-            return "authentication", status
+            return "authentication"
         if status in (400, 404):
-            return "configuration", status
+            return "configuration"
         if status >= 500:
-            return "unavailable", status
-    return "refused", status
+            return "unavailable"
+    return "refused"
 
 
 def _raise(row: Row, model: str, error: BaseException) -> None:
     reason, status = classify(error)
-    redact = redactor(row.secret_names)
     failure = ProviderUnavailable if reason in RETRYABLE else ProviderRefused
-    raise failure(
-        reason, redact(str(error)), provider_id=row.id, model=model, status=status
-    ) from None
+    raise failure(reason, str(error), provider_id=row.id, model=model, status=status) from None
 
 
-def _transport(row: Row) -> dict[str, Any]:
-    """What every call to this row carries: the credential, the endpoint, and no retries."""
-    settings: dict[str, Any] = {"num_retries": 0, "max_retries": 0, **passed(row)}
-    if (credential := key(row)) is not None:
-        settings["api_key"] = credential
-    if (endpoint := base_url(row)) is not None:
-        settings["api_base"] = endpoint
-    return settings
+def _transport(row: Row, kind: str) -> dict[str, Any]:
+    """What every call to this provider carries: the credential, the endpoint, and no retries."""
+    return {"num_retries": 0, "max_retries": 0, **row.transport(kind)}
 
 
 def _answer(row: Row, model: str, started: float, response: Any, warnings: Sequence[str] = ()) -> Answer:
@@ -209,16 +201,16 @@ def text(
     params: Mapping[str, Any] | None = None,
     timeout: float = TIMEOUT_SECONDS,
 ) -> TextResult:
-    """One text call against one row.
+    """One text call against one provider.
 
-    `model` is the one the chain chose from this row's list; without it the row's first is used.
+    `model` is the one the chain chose from this provider's list; without it the first is used.
 
     `params` is what the **caller** wants of the generation — a story asks for a high temperature
     and the translation of that story asks for a low one, which is a fact about the two tasks and
     not about any provider. It is spread *before* `row.params_for("text")` and therefore **loses**
-    to it, which is the whole design: a value in the catalogue was put there because a provider
-    refused something or behaved badly without it, and a caller's preference must not quietly undo
-    a fact somebody discovered the hard way. A row that says nothing about temperature lets the
+    to it, which is the whole design: a value in a family was put there because a provider refused
+    something or behaved badly without it, and a caller's preference must not quietly undo a fact
+    somebody discovered the hard way. A family that says nothing about temperature lets the
     caller's through, which is the case this exists for.
 
     `as_json` asks for a JSON object **without naming its shape**, which is the only thing this
@@ -239,13 +231,13 @@ def text(
     messages.append({"role": "user", "content": prompt})
 
     request: dict[str, Any] = {
-        "model": model,
+        "model": row.wire_model("text", model),
         "messages": messages,
         "timeout": row.timeout_for("text", timeout),
-        # The caller's wish first, the row's facts second: the row wins. See the docstring.
+        # The caller's wish first, the family's facts second: the family wins. See the docstring.
         **(params or {}),
         **row.params_for("text"),
-        **_transport(row),
+        **_transport(row, "text"),
     }
     if as_json and row.json_mode == "native":
         request["response_format"] = {"type": "json_object"}
@@ -277,10 +269,10 @@ def image(
     references: Sequence[bytes] = (),
     timeout: float = TIMEOUT_SECONDS,
 ) -> ImageResult:
-    """One image call against one row, through LiteLLM or through the row's own adapter.
+    """One image call against one provider, through LiteLLM or through the family's own adapter.
 
-    `references` are earlier pictures the model should draw from, sent only where the row declares
-    `capabilities.image.references`; elsewhere they are dropped with a warning, the rule `speech`
+    `references` are earlier pictures the model should draw from, sent only where the family says
+    its image models take them; elsewhere they are dropped with a warning, the rule `speech`
     follows for a `style`. The prompt is the caller's to word so that it says what each one is for.
     """
     model = model or row.models_for("image")[0]
@@ -296,24 +288,24 @@ def image(
             references = tuple(references)[-allowed:]
     if references:
         return _image_with_references(prompt, row, model, size, references, timeout, started, warnings)
-    if row.adapter.get("image"):
+    if row.route("image").via == "cloudflare":
         from acervo.models import cloudflare
 
         data, mime = cloudflare.image(row, model, prompt, seed=seed, size=size, timeout=timeout)
-        return ImageResult(data=data, mime=mime, answer=_answer(row, model, started, None))
+        return ImageResult(data=data, mime=mime, answer=_answer(row, model, started, None, warnings))
 
     request: dict[str, Any] = {
         "prompt": prompt,
-        "model": model,
+        "model": row.wire_model("image", model),
         "timeout": row.timeout_for("image", timeout),
         **row.params_for("image"),
-        **_transport(row),
+        **_transport(row, "image"),
     }
-    # Asking for bytes rather than a URL is a per-provider fact and the row states it: OpenAI
+    # Asking for bytes rather than a URL is a per-provider fact and the family states it: OpenAI
     # answers with a URL unless told otherwise, and Vertex refuses the parameter outright
     # ("Setting `response_format` is not supported by vertex_ai"). It defaults to the answer that
-    # needs no second fetch, so a row only speaks up to say it cannot take the parameter.
-    image_capabilities = (row.capabilities.get("image") or {}) if isinstance(row.capabilities, dict) else {}
+    # needs no second fetch, so a family only speaks up to say it cannot take the parameter.
+    image_capabilities = row.image_capabilities()
     if image_capabilities.get("responseFormat", "b64_json"):
         request["response_format"] = image_capabilities.get("responseFormat", "b64_json")
     # Size and seed are declared, not assumed, for the same reason `speech` declares `style`: what
@@ -326,7 +318,7 @@ def image(
             request["size"] = f"{size[0]}x{size[1]}"
         else:
             # Still sent: for Vertex it is the only channel that carries the aspect ratio, and the
-            # resolution rides in the row's `params.image.imageConfig` instead.
+            # resolution rides in the family's `imageConfig` parameter instead.
             request["size"] = f"{size[0]}x{size[1]}"
             warnings.append(f"this provider chooses its own resolution, not {size[0]}x{size[1]}")
     if seed is not None:
@@ -340,7 +332,9 @@ def image(
         _raise(row, model, error)
         raise
 
-    encoded = response.data[0].b64_json
+    # An answer with no picture in it is said as one, not left to fail as an index out of range:
+    # a model that declines a prompt answers successfully with nothing to show.
+    encoded = response.data[0].b64_json if getattr(response, "data", None) else None
     if not encoded:
         raise ProviderRefused(
             "refused", "the provider returned no image data", provider_id=row.id, model=model
@@ -358,7 +352,7 @@ def _image_with_references(prompt: str, row: Row, model: str, size: tuple[int, i
     """The same picture asked for over the chat route, where a message can carry images.
 
     LiteLLM's `image_generation` takes no image for Vertex Gemini, and `completion` with
-    `modalities` does. The row's image `params` travel unchanged — `imageConfig` included, which on
+    `modalities` does. The family's image parameters travel unchanged — `imageConfig` included, which on
     this route is copied into `generationConfig` — with the aspect ratio added from `size`, because
     here there is no `size` parameter to carry it.
     """
@@ -376,12 +370,12 @@ def _image_with_references(prompt: str, row: Row, model: str, size: tuple[int, i
     content.append({"type": "text", "text": prompt})
     try:
         response = completion(
-            model=model,
+            model=row.wire_model("image", model),
             messages=[{"role": "user", "content": content}],
             modalities=["image", "text"],
             timeout=row.timeout_for("image", timeout),
             **params,
-            **_transport(row),
+            **_transport(row, "image"),
         )
     except Exception as error:  # noqa: BLE001
         _raise(row, model, error)
@@ -412,7 +406,8 @@ def _picture_mime(data: bytes) -> str:
 
 
 def _audio_adapter(name: str):
-    """The hand-written speech adapters, by the name a row gives in `adapter.audio`."""
+    """The speech adapters, by the route a family gives `audio`. None of them is LiteLLM's: reached
+    through LiteLLM a Gemini voice drops its direction before the request is built."""
     if name == "cloudflare":
         from acervo.models import cloudflare
 
@@ -434,53 +429,28 @@ def speech(
     style: str | None = None,
     timeout: float = TIMEOUT_SECONDS,
 ) -> AudioResult:
-    """One speech call against one row, in a BCP-47 `language`.
+    """One speech call against one provider, in a BCP-47 `language`.
 
-    `voice` is the caller's choice, and without one the model's first declared voice for the
-    language is used. `style` is a free-text delivery direction, carried only where the *model*
-    declares `style: instruction` — elsewhere it is dropped with a warning rather than sent to a voice
-    that would read it aloud. The answer names the voice that actually spoke.
+    `voice` is the caller's choice, and without one the model's first voice for the language is
+    used. `style` is a free-text delivery direction, carried only where the *model* takes one —
+    elsewhere it is dropped with a warning rather than sent to a voice that would read it aloud. The
+    answer names the voice that actually spoke.
     """
     model = model or row.models_for("audio")[0]
-    # Voice names do not carry across providers: Gemini refuses OpenAI's "alloy" and names thirty of
-    # its own, and Google's per-language voices carry the language in the name. The row says which.
+    # Voice names do not carry across providers: Google's per-language voices carry the language in
+    # the name, and a Gemini voice is named once. The provider says which.
     voice = voice or next(iter(row.voices_for(model, language)), None)
     warnings: list[str] = []
-    if style and row.style_for(model) != "instruction":
+    if style and not row.takes_direction(model):
         warnings.append("style is not supported by this provider")
         style = None
     timeout = row.timeout_for("audio", timeout)
     started = time.monotonic()
-
-    if row.adapter.get("audio"):
-        data, _declared = _audio_adapter(row.adapter["audio"])(
-            row, model, words, language=language, voice=voice, style=style, timeout=timeout
-        )
-        return AudioResult(
-            data=data, mime=audio_mime(data), answer=_answer(row, model, started, None, warnings),
-            voice=voice,
-        )
-
-    request: dict[str, Any] = {
-        "model": model,
-        "input": words,
-        "voice": voice,
-        "timeout": timeout,
-        **row.params_for("audio"),
-        **_transport(row),
-    }
-    if style:
-        request["instructions"] = style
-    try:
-        response = speech_synthesis(**request)
-    except Exception as error:  # noqa: BLE001
-        _raise(row, model, error)
-        raise
-
+    data, _declared = _audio_adapter(row.route("audio").via)(
+        row, model, words, language=language, voice=voice, style=style, timeout=timeout
+    )
     return AudioResult(
-        data=response.content,
-        mime=audio_mime(response.content),
-        answer=_answer(row, model, started, response, warnings),
+        data=data, mime=audio_mime(data), answer=_answer(row, model, started, None, warnings),
         voice=voice,
     )
 
@@ -490,7 +460,7 @@ OCR_TIMEOUT_SECONDS = 15
 
 
 def _ocr_adapter(name: str):
-    """The OCR engines, by the name a row gives in `adapter.ocr`. None of them is in LiteLLM."""
+    """The OCR engines, by the route a family gives `ocr`. None of them is in LiteLLM."""
     if name == "google-vision":
         from acervo.models import google_vision
 
@@ -512,11 +482,8 @@ def ocr(
     engine may use to choose a script and never has to obey.
     """
     model = model or row.models_for("ocr")[0]
-    adapter = row.adapter.get("ocr")
-    if not adapter:
-        raise ProviderRefused("configuration", f"{row.id} names no ocr adapter", provider_id=row.id, model=model)
     started = time.monotonic()
-    words, width, height, language = _ocr_adapter(adapter)(
+    words, width, height, language = _ocr_adapter(row.route("ocr").via)(
         row, model, data, language_hints=language_hints, timeout=row.timeout_for("ocr", timeout)
     )
     return OcrResult(

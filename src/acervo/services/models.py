@@ -1,4 +1,4 @@
-"""Acervo's binding to the provider package: `Settings` in, `llm_*` error codes out.
+"""Acervo's binding to the provider package: the server's providers in, `llm_*` error codes out.
 
 Not to be confused with `acervo.models`, which is the provider package itself and knows nothing
 about Acervo. This module is the other half of that split, and the split is deliberate:
@@ -30,47 +30,33 @@ from typing import Any, Mapping
 
 from acervo import logfiles
 from acervo.errors import ApiError
-from acervo.models import (
-    Answer, ChainExhausted, ProviderError, TextResult, chain, journal, load_catalogue
-)
+from acervo.models import Answer, ChainExhausted, ProviderError, Providers, TextResult, chain, journal
 from acervo.models.errors import ProviderUnavailable
+from acervo.models.families import EXPRESSIVE_CHAIN
 from acervo.models import call as provider
-from acervo.models.catalogue import (
-    Catalogue,
-    Row,
-    available,
-    identity,
-    key_hint,
-    reason,
-    row_settings,
-    usage_url,
-)
 from acervo.repository import model_selection
+from acervo.services import providers as stored_providers
+from acervo.services.providers import ORDER_KINDS
 from acervo.settings import Settings
 
-KINDS = ("text", "quick", "image", "audioPlain", "audioExpressive", "ocr")
+KINDS = tuple(ORDER_KINDS)
 
-# Which catalogue kind each chain draws its pairs from. Two chains share `audio` because they are two
-# answers to one question asked twice: what should read a headword, which wants a clear free voice
-# held stable, and what should read an example, which wants a voice that can take the sentence's
-# emotion. Any speech model is a legitimate answer to either, so the catalogue does not split them.
-#
-# `quick` shares `text` for the same reason. It is the look-up a photo tap makes while a finger is
-# still on the glass, and the owner's text chain is ordered for writing good entries rather than for
-# answering in a second: measured in `experiments/photo-capture/`, a flash-lite model answered in
-# 1.02 s at the median and the strongest text model took 4.4. Two orders of one set of models.
-CATALOGUE_KINDS = {
-    "text": "text",
-    "quick": "text",
-    "image": "image",
-    "audioPlain": "audio",
-    "audioExpressive": "audio",
-    "ocr": "ocr",
-}
+# Which kind each order draws its pairs from (`services/providers.ORDER_KINDS`). Two orders share
+# `audio` because they are two answers to one question asked twice: what should read a headword,
+# which wants a clear free voice held stable, and what should read an example, which wants a voice
+# that can take the sentence's emotion. `quick` shares `text` for the same reason: it is the look-up
+# a photo tap makes while a finger is still on the glass, and measured in `experiments/photo-capture/`
+# a flash-lite model answered in 1.02 s at the median and the strongest text model took 4.4.
 
 
 def catalogue_kind(kind: str) -> str:
-    return CATALOGUE_KINDS.get(kind, kind)
+    """The kind a provider offers that this order draws on."""
+    return ORDER_KINDS.get(kind, kind)
+
+
+def load(settings: Settings) -> Providers:
+    """The server's providers, read now. Never cached: see `services/providers.load`."""
+    return stored_providers.load(settings)
 
 # reason -> (status, code, what the owner is told). Total over `acervo.models.Reason`; the test that
 # pairs every reason with a row here is what stops an eighth reason arriving unmapped.
@@ -121,73 +107,43 @@ REFUSALS: dict[str, tuple[int, str, str]] = {
 }
 
 
-def deployment_chain(settings: Settings, kind: str = "text") -> list[chain.Choice] | None:
-    """What this *deployment* asks for a chain, or None when it has not said.
-
-    None rather than an empty list, because an empty list now means "switched off" and an unset
-    variable means the opposite: fall back to catalogue order.
-
-    Text reads `ACERVO_TEXT_CHAIN`, as row ids: a deploy-time flag pins a provider and leaves the
-    models to the catalogue. The speech chains read the catalogue's `defaultChains` instead, as pairs,
-    because catalogue order is wrong for them in a specific way — it would read a headword with a
-    paid expressive voice — and that is a fact about the voices rather than about a deployment.
-    Every other chain — `quick`, `image`, `ocr` — is catalogue order until somebody chooses, and for
-    `quick` that is already the order it wants: the free flash-lite models lead the catalogue.
-    """
-    if kind in ("audioPlain", "audioExpressive"):
-        recommended = load_catalogue().default_chains.get(kind)
-        return list(recommended) if recommended else None
-    named = settings.text_chain if kind == "text" else ""
-    ids = [part.strip() for part in (named or "").split(",") if part.strip()]
-    return ids or None
-
-
 def chain_for(
     settings: Settings, owner: str | None, kind: str = "text"
 ) -> list[chain.Choice] | None:
-    """The chain this request walks: the owner's choice, then the deployment's, then the catalogue.
+    """The chain this request walks: the owner's order, or None for the providers' own order.
 
-    Read per call and never cached — that is what makes a change in Settings ▸ Providers take effect on
-    the next capture with nothing restarted. It is one indexed read against a local SQLite file, set
-    against two model calls of up to 120 seconds each, so do not cache it.
-
-    Pairs come back from the owner's record and ids from the environment; `chain.resolve` takes
-    both, which is exactly why `chain.Choice` is a union.
+    Read per call and never cached — that is what makes a change in Settings ▸ Providers take effect
+    on the next capture with nothing restarted. It is one indexed read against a local SQLite file.
 
     Three answers, not two. A list is an order to walk — and an **empty** one means every model was
-    switched off on purpose. `None` means nobody has chosen and the catalogue's own order stands.
+    switched off on purpose. `None` means nobody has chosen, and the providers are walked in the
+    order they were added.
     """
     if owner is not None:
         stored = model_selection.chains(owner)
         if kind in stored:
-            # Including an empty one: switching every model off is a choice, and it outranks the
-            # deployment default exactly as a non-empty order does.
+            # Including an empty one: switching every model off is a choice.
             return list(stored[kind])
-    return deployment_chain(settings, kind)
+    return None
 
 
 def speech_chain(
     settings: Settings, owner: str | None, kind: str
 ) -> tuple[list[chain.Choice] | None, list[str]]:
-    """A speech chain as far as the catalogue still offers it, and the pairs that were left out.
+    """A speech order as far as the providers still offer it, and the pairs that were left out.
 
-    **A pair the catalogue no longer offers for speech is left out rather than refused.** A saved
-    order is a preference and outlives the rows it names: when a row stops offering speech, an order
-    still naming it used to refuse every word and definition before any voice was asked, while the
-    voices behind it in the same order could have read them. The order is kept as saved; the pane
-    does not draw the pair, so the next change the owner makes saves it without.
+    **A pair no provider offers for speech is left out rather than refused.** A saved order is a
+    preference, and the voices behind a stale pair in the same order can still read the words.
+    Removing a provider or a model takes it out of every order, so this should find nothing; it is
+    the readout below and the walk agreeing about the same order that matters.
 
-    An order left with nothing reads as though none had been chosen, which is the catalogue's own.
-    One the owner saved empty is still every voice switched off.
-
-    Here rather than beside its callers in `services/pronunciations.py` because the readout below
-    has to describe the same walk, and a pane saying "nothing you have chosen can be asked" over an
-    order that is reading every word is two answers to one question.
+    An order left with nothing reads as though none had been chosen. One the owner saved empty is
+    still every voice switched off.
     """
     chosen = chain_for(settings, owner, kind)
     if not chosen:
         return chosen, []
-    catalogue = load_catalogue()
+    catalogue = load(settings)
     offered: list[chain.Choice] = []
     skipped: list[str] = []
     for choice in chosen:
@@ -200,7 +156,7 @@ def speech_chain(
             skipped.append(f"{identifier}:{model or '*'}")
             continue
         offered.append(choice)
-    return offered or deployment_chain(settings, kind), skipped
+    return offered or None, skipped
 
 
 def chain_readout(settings: Settings, owner: str | None, kind: str = "text") -> dict[str, Any]:
@@ -210,21 +166,20 @@ def chain_readout(settings: Settings, owner: str | None, kind: str = "text") -> 
     two separate computations of that would drift. Never a key, an endpoint or a project id.
 
     `reason` exists because a bare "capture is unavailable" is what let a real outage stay invisible:
-    false could equally mean no key, the wrong key name, a missing Vertex project or an unknown
-    provider, and nobody could tell which without shell access to the server. It names the first
-    unmet requirement as an environment variable, and deliberately never carries a value — health
-    serves it unauthenticated.
+    false could equally mean no provider, no key, a refused key or a missing setting, and nobody
+    could tell which. It names what is missing and never a value — health serves it unauthenticated.
 
     `provider` and `model` name the pair that would be asked *first*. Which pair actually answers is
     only known after a call, and that is what lands in `modelId`.
     """
-    catalogue = load_catalogue()
+    catalogue = load(settings)
     if catalogue_kind(kind) == "audio":
         chosen, _ = speech_chain(settings, owner, kind)
     else:
         chosen = chain_for(settings, owner, kind)
     try:
-        candidates = chain.resolve(catalogue_kind(kind), chosen, catalogue)
+        candidates = chain.resolve(catalogue_kind(kind), chosen, catalogue,
+                                   expressive=kind == EXPRESSIVE_CHAIN)
     except ProviderError as error:
         return {"available": False, "provider": None, "model": None, "reason": error.detail}
     if not candidates:
@@ -304,7 +259,7 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
 
     try:
         result: TextResult = chain.walk(
-            catalogue_kind(kind), chain_for(settings, owner, kind), load_catalogue(), ask,
+            catalogue_kind(kind), chain_for(settings, owner, kind), load(settings), ask,
             chain.stamped, caller=caller, hedge_after=hedge_after,
         )
     except ChainExhausted as exhausted:
@@ -339,7 +294,7 @@ def llm_text(settings: Settings, owner: str, user: str, caller: str = "text",
 
     try:
         result: TextResult = chain.walk(
-            catalogue_kind("text"), chain_for(settings, owner, "text"), load_catalogue(), ask,
+            catalogue_kind("text"), chain_for(settings, owner, "text"), load(settings), ask,
             chain.stamped, caller=caller,
         )
     except ChainExhausted as exhausted:
@@ -347,6 +302,39 @@ def llm_text(settings: Settings, owner: str, user: str, caller: str = "text",
     except ProviderError as error:
         raise refusal(error, "text") from None
     return result.text, result.answer
+
+
+# The callers a companion may name in the call log, and how long each pair may take. The clip
+# service's two stages are a translation and a word alignment of one clip: a whole answer, not a
+# quick one, and the sixty seconds its own chain always had.
+COMPANION_CALLERS = ("clip-translate", "clip-align")
+COMPANION_TIMEOUT_SECONDS = 60
+
+
+def companion_text(settings: Settings, body: Mapping[str, Any]) -> dict[str, Any]:
+    """One JSON call for a companion service, on the providers' own order.
+
+    No owner: the call comes from the clip service's own job rather than from anybody's request, and
+    walking the providers in the order they were added is what its text order always was. The shape
+    is the caller's to state in the instructions, and the answer is held to being JSON here, inside
+    the walk, so a model that cannot answer in JSON passes to the next one.
+    """
+    instructions = body.get("instructions")
+    text = body.get("text")
+    if not isinstance(instructions, str) or not instructions.strip() or not isinstance(text, str):
+        raise ApiError(400, "invalid_input", "Send the instructions and the text.")
+    caller = body.get("caller") if body.get("caller") in COMPANION_CALLERS else "companion"
+    temperature = body.get("temperature")
+    params = {"temperature": float(temperature)} if isinstance(temperature, (int, float)) \
+        and not isinstance(temperature, bool) else None
+    parsed, answer = llm_json(settings, None, instructions, text, caller=caller, params=params,
+                              timeout=COMPANION_TIMEOUT_SECONDS)
+    return {
+        "payload": parsed,
+        "provider": answer.provider_id,
+        "model": answer.model,
+        "seconds": round(answer.seconds, 3),
+    }
 
 
 # What each passing reason means to the owner, said of a provider. Ordered by how much it tells:
@@ -368,20 +356,16 @@ def waiting_on(exhausted: ChainExhausted) -> str:
     Gemini's free tier answered 503 and Cloudflare's daily allowance had run out — two causes that
     pass at very different speeds, and only one of which the owner could have done anything about.
     """
-    catalogue = load_catalogue()
     order: list[str] = []
     reasons: dict[str, list[str]] = {}
-    for provider, _model, reason in exhausted.passed_over:
-        if provider not in reasons:
-            order.append(provider)
-        reasons.setdefault(provider, []).append(reason)
+    for named, _model, reason in exhausted.passed_over:
+        if named not in reasons:
+            order.append(named)
+        reasons.setdefault(named, []).append(reason)
     phrases = []
-    for provider in order:
-        try:
-            label = catalogue.find(provider).label
-        except KeyError:
-            label = provider or "A model"
-        said = next((WAITING_ON[one] for one in WAITING_ON if one in reasons[provider]),
+    for named in order:
+        label = exhausted.labels.get(named) or named or "A model"
+        said = next((WAITING_ON[one] for one in WAITING_ON if one in reasons[named]),
                     "is unavailable")
         phrases.append(f"{label} {said}")
     return "; ".join(phrases)
@@ -416,8 +400,8 @@ def refusal(error: ProviderError | ChainExhausted, kind: str = "text") -> ApiErr
             "so nothing was created", "so the photo was not read"
         )
     # "Unconfigured" is the one refusal whose *particular* cause the owner can act on, and it is
-    # already safe to show: it names an environment variable or says every model is switched off,
-    # never a value. `/health` has shown exactly this string since the route existed.
+    # already safe to show: it names what is missing or says every model is switched off, never a
+    # value. `/health` shows exactly this string.
     # What the provider package itself said — which pair, which field — goes to the log and never to
     # the owner. Without it a refusal was written down as its code alone, and "configuration" names
     # a dozen different mistakes. It is redacted where the error is made (`models/errors.py`).
@@ -428,119 +412,57 @@ def refusal(error: ProviderError | ChainExhausted, kind: str = "text") -> ApiErr
 
 
 # ── what the owner is shown, and what they may choose ───────────────────────
-# The catalogue as the interface sees it, and the one place a submitted chain is held to it. The
+# The providers as the interface sees them, and the one place a submitted chain is held to them. The
 # repository stores what it is given and deliberately knows nothing about providers, so this is the
 # only validator; `chain.resolve` checks the same things in the same order at walk time, and the two
 # agreeing about which mistake is reported is what makes the refusal codes worth reading.
 
 
-def _provider_view(row: Row) -> dict[str, Any]:
-    """One row, as the interface needs it. Never a key, a base URL, or what the row `requires`.
-
-    `usageUrl` is the exception that is not one: it interpolates a `requires` value — Cloudflare's
-    account id — and that is the point of it. This route is authenticated and serves it to the owner
-    whose account it is, and `catalogue._validate` already refuses a row that puts its *key* in
-    either URL.
-    """
-    return {
-        "id": row.id,
-        "label": row.label,
-        "kinds": list(row.kinds),
-        "models": {kind: list(row.models_for(kind)) for kind in row.kinds},
-        # What each speech model does with a direction, so the expressive order offers only the ones
-        # that take it (`pronunciations.readers`).
-        "styles": {model: row.style_for(model) for model in row.models_for("audio")}
-        if row.serves("audio") else {},
-        "available": available(row),
-        "reason": reason(row),
-        "usageUrl": usage_url(row),
-        # Which account this row spends, for the one provider whose credentials do not say so in
-        # their own name. A laptop can hold a personal and a work Google login at once.
-        "account": identity(row),
-        "credential": _credential_view(row),
-        # The row's non-secret deployment facts, shown in full. `_validate` refuses a row that
-        # lists its key here, so this cannot become a way to publish one.
-        "settings": [{"name": name, "value": value} for name, value in row_settings(row)],
-        "notes": row.notes,
-    }
-
-
-def _credential_view(row: Row) -> dict[str, Any]:
-    """Which credential this row would use, named and abbreviated — never the value.
-
-    Four characters at each end is the whole disclosure, and it exists because "a key is set" and
-    "*that* key is set" are different answers: a half-finished rotation, or two accounts, look
-    identical without it. A row whose credential is a file has no hint at all — it is identified by
-    the account it names, which is the better answer and the reason to prefer a key.
-    """
-    variable = row.keyEnv or row.authEnv
-    if not variable:
-        return {"kind": "none", "variable": None, "present": True, "hint": None}
-    if row.keyEnv:
-        hint = key_hint(row)
-        return {"kind": "key", "variable": variable, "present": hint is not None, "hint": hint}
-    return {
-        "kind": "file",
-        "variable": variable,
-        # A file credential is present when something can be read, which `identity` answers for a
-        # key and `reason` answers for the rest — asking `reason` here would be circular, so this
-        # is the narrow question of whether the row got past its own credential check.
-        "present": reason(row) is None,
-        "hint": None,
-    }
-
-
-def _chain_view(settings: Settings, owner: str, kind: str, catalogue: Catalogue) -> dict[str, Any]:
+def _chain_view(settings: Settings, owner: str, kind: str, catalogue: Providers) -> dict[str, Any]:
     """One kind's chain: whose it is, what is in it, and why nothing in it can be asked.
 
-    `pairs` is what is *stored*, not what will be walked. An uncredentialed pair keeps its place, so
-    a rotated key does not quietly destroy an ordering the owner chose; `providers[].available` is
-    how the interface shows that pair will be skipped.
-
-    `reason` comes from `chain_readout`, the same producer `/health` uses, so this route is total: a
-    mistyped `ACERVO_TEXT_CHAIN` renders a reason rather than failing the settings pane.
+    `pairs` is what is *stored*, not what will be walked. A pair whose provider cannot be asked keeps
+    its place, so a refused key does not quietly destroy an ordering the owner chose;
+    `providers[].available` is how the interface shows that pair will be skipped. With nothing
+    stored, `pairs` is the providers' own order, which is what will be walked.
     """
     stored = model_selection.chains(owner)
     if kind in stored:
         pairs = [{"provider": provider, "model": model} for provider, model in stored[kind]]
         source = "owner"
     else:
-        source = "deployment"
-        try:
-            pairs = [
-                {"provider": candidate.row.id, "model": candidate.model}
-                for candidate in chain.resolve(
-                    catalogue_kind(kind), deployment_chain(settings, kind), catalogue
-                )
-            ]
-        except ProviderError:
-            pairs = []
+        source = "default"
+        pairs = [
+            {"provider": candidate.row.id, "model": candidate.model}
+            for candidate in chain.resolve(catalogue_kind(kind), None, catalogue,
+                                           expressive=kind == EXPRESSIVE_CHAIN)
+        ]
     return {"source": source, "reason": chain_readout(settings, owner, kind)["reason"], "pairs": pairs}
 
 
 def catalogue_view(settings: Settings, owner: str) -> dict[str, Any]:
-    """Everything Settings ▸ Providers renders: the catalogue, and this owner's chains."""
-    catalogue = load_catalogue()
+    """Everything Settings ▸ Providers renders: the families a provider can be added from, the
+    providers, and this owner's chains."""
+    catalogue = load(settings)
     return {
-        "providers": [_provider_view(row) for row in catalogue],
+        "families": stored_providers.families_view(),
+        "providers": [stored_providers.provider_view(row) for row in catalogue],
         "chains": {kind: _chain_view(settings, owner, kind, catalogue) for kind in KINDS},
     }
 
 
-def _submitted(kind: str, value: Any, catalogue: Catalogue) -> list[tuple[str, str]]:
-    """One kind's submitted chain, checked against the catalogue.
+def _submitted(kind: str, value: Any, catalogue: Providers) -> list[tuple[str, str]]:
+    """One kind's submitted chain, checked against the providers.
 
     The order of checks matches `chain.resolve`'s, so the mistake reported here is the mistake that
     would be reported at capture time. There is deliberately no availability check: a chain is an
-    owner preference and a credential is deployment state, and refusing an uncredentialed pair would
-    mean a rotated key locked the owner out of reordering that kind at all. `chain.resolve` skips it
+    owner preference and a working key is a fact about the provider, and refusing a pair whose key
+    was refused would lock the owner out of reordering that kind at all. `chain.resolve` skips it
     when walking, and the interface marks it.
     """
     if not isinstance(value, list):
         raise ApiError(400, "invalid_input", f"The {kind} chain must be a list of providers.")
-    # An empty list is allowed and means "switch this off". Refusing it left no way to say so, and
-    # made unticking the last model bounce back to the server's order — which read as the tick
-    # having been ignored, while entries carried on being built.
+    # An empty list is allowed and means "switch this off". Refusing it left no way to say so.
     pairs: list[tuple[str, str]] = []
     for entry in value:
         if not isinstance(entry, dict):
@@ -571,21 +493,19 @@ def apply_selection(settings: Settings, owner: str, body: dict[str, Any]) -> dic
     """Store the chains this request names, then answer with what `GET /models` would say.
 
     Every kind is validated before anything is written, so a bad second kind cannot leave the first
-    one stored. Answering with the full view rather than an acknowledgement means the interface
-    renders the server's answer instead of its own optimism, and gets fresh availability without a
-    second round trip.
+    one stored. Answering with the full view means the interface renders the server's answer instead
+    of its own optimism.
     """
     submitted = body.get("chains")
     if not isinstance(submitted, dict) or not submitted:
         raise ApiError(400, "invalid_input", "Say which chains to change.")
 
-    catalogue = load_catalogue()
+    catalogue = load(settings)
     changes: dict[str, list[tuple[str, str]] | None] = {}
     for kind, value in submitted.items():
         if kind not in KINDS:
             raise ApiError(400, "unsupported_kind", f"There is no {kind} chain.")
-        # `null` forgets a kind and returns it to the deployment default. Without it, once an owner
-        # has chosen there is no way back — unchecking everything is refused as an empty chain.
+        # `null` forgets a kind and returns it to the providers' own order.
         changes[kind] = None if value is None else _submitted(kind, value, catalogue)
 
     model_selection.save(owner, changes)

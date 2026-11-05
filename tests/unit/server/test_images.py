@@ -18,6 +18,7 @@ from acervo.services.images import MAX_ATTEMPTS, brief_lexeme, render_prompt
 
 from conftest import PNG_OTHER
 from graph_records import attestation, example, lexeme, sense, vocabulary
+from provider_rows import VERTEX_IMAGE
 
 DEVICE = "device000000001"
 
@@ -30,7 +31,7 @@ def a_provider_that_draws(server, monkeypatch):
     Set *after* the `server` fixture, which clears every provider but Gemini, and it takes effect
     without a restart because `settings` is deliberately re-read on every request.
     """
-    monkeypatch.setenv("OPENAI_API_KEY", "stub-key")
+    server.add_provider(VERTEX_IMAGE)
 
 
 def word(server, **overrides):
@@ -659,5 +660,5 @@ def test_settings_are_per_owner(server, other):
 
 
 def test_a_server_with_no_image_provider_says_so_instead_of_offering_a_button(server, monkeypatch):
-    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    server.remove_provider("vertex")
     assert server.get("/images/settings").json()["data"]["available"] is False

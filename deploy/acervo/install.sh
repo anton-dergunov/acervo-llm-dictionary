@@ -7,7 +7,7 @@ PATH="$PATH:/usr/local/bin:/var/packages/ContainerManager/target/usr/bin:/var/pa
 export PATH
 
 usage() {
-  echo "usage: install.sh [--root PATH] [--archive FILE] [--credentials-stdin | --credentials-file FILE] [--llm-credentials-file FILE] [--google-credentials-file FILE] [--bind-address ADDRESS] [--port PORT] [--app-bind-address ADDRESS] [--app-port PORT] [--timezone ZONE] [--reset-anki] [--reset-database | --transition] [--rebuild]" >&2
+  echo "usage: install.sh [--root PATH] [--archive FILE] [--credentials-stdin | --credentials-file FILE] [--bind-address ADDRESS] [--port PORT] [--app-bind-address ADDRESS] [--app-port PORT] [--timezone ZONE] [--reset-anki] [--reset-database | --transition] [--rebuild]" >&2
   exit 2
 }
 
@@ -34,8 +34,6 @@ acervo_root=
 archive=
 credentials_stdin=false
 credentials_file=
-llm_credentials_file=
-google_credentials_file=
 reset_anki=false
 reset_database=false
 transition=false
@@ -51,8 +49,6 @@ while [ "$#" -gt 0 ]; do
     --archive) [ "$#" -ge 2 ] || usage; archive=$2; shift 2 ;;
     --credentials-stdin) credentials_stdin=true; shift ;;
     --credentials-file) [ "$#" -ge 2 ] || usage; credentials_file=$2; shift 2 ;;
-    --llm-credentials-file) [ "$#" -ge 2 ] || usage; llm_credentials_file=$2; shift 2 ;;
-    --google-credentials-file) [ "$#" -ge 2 ] || usage; google_credentials_file=$2; shift 2 ;;
     --bind-address) [ "$#" -ge 2 ] || usage; requested_bind_address=$2; shift 2 ;;
     --port) [ "$#" -ge 2 ] || usage; requested_anki_port=$2; shift 2 ;;
     --app-bind-address) [ "$#" -ge 2 ] || usage; requested_app_bind_address=$2; shift 2 ;;
@@ -190,8 +186,7 @@ fi
 # because nobody types it: the retrieval service refuses to start without one when mutations are
 # enabled on a non-loopback bind, and Acervo's proxy attaches it server-side so it never reaches a
 # browser. Kept once minted, so a redeploy does not lock the running service out of its own
-# catalogue. Not llm.env, whose writer only accepts names a provider row in models/catalogue.json
-# actually reads.
+# catalogue. The corpus also sends it back when it calls home for a translation.
 if ! grep -q '^ACERVO_SPEECH_OPERATOR_TOKEN=' "$acervo_root/secrets.env"; then
   printf "ACERVO_SPEECH_OPERATOR_TOKEN='%s'\n" "$(head -c 48 /dev/urandom | base64 | tr -d '=+/\n')" \
     >>"$acervo_root/secrets.env"
@@ -199,49 +194,9 @@ fi
 chmod 600 "$acervo_root/secrets.env"
 . "$acervo_root/secrets.env"
 
-# Provider credentials are deliberately independent of the server and Anki credentials. Switching
-# between paid Vertex ingestion and a Gemini Developer key rewrites only this file, and retains the
-# inactive provider's key for a later switch back.
-if [ ! -f "$acervo_root/llm.env" ]; then
-  : >"$acervo_root/llm.env"
-fi
-chmod 600 "$acervo_root/llm.env"
+# Provider keys are not here: they are added in Settings ▸ Providers and kept in
+# data/server/providers.secrets.json, beside the database and out of it.
 
-# Google credentials are a *file*, not a variable, so they cannot travel in llm.env. The directory
-# is created whether or not one is configured: a bind mount of a path that does not exist makes a
-# root-owned directory instead, and the container then fails in a way that has nothing to do with
-# the missing credential.
-mkdir -p "$acervo_root/credentials"
-chmod 700 "$acervo_root/credentials"
-if [ -n "$google_credentials_file" ]; then
-  [ -f "$google_credentials_file" ] || { echo "Missing Google credentials file" >&2; exit 2; }
-  # Either shape Google's own libraries accept: a service-account key, or the `authorized_user`
-  # file `gcloud auth application-default login` writes. Refused here rather than discovered at the
-  # first capture, a deployment later.
-  grep -qE '"type"[[:space:]]*:[[:space:]]*"(service_account|authorized_user)"' "$google_credentials_file" || {
-    echo "That file is neither a Google service-account key nor an application-default" >&2
-    echo "credentials file." >&2
-    exit 2
-  }
-  cat "$google_credentials_file" >"$acervo_root/credentials/google.json"
-  chmod 600 "$acervo_root/credentials/google.json"
-fi
-
-# A model key used to be written to secrets.env as well, and compose passes llm.env last — so one
-# variable was defined in two files and the loser was silent. Move any such line here once. This
-# erases itself: after the first run there is nothing left to move.
-if grep -q '^GEMINI_API_KEY=' "$acervo_root/secrets.env"; then
-  if [ -n "${GEMINI_API_KEY:-}" ] && ! grep -q '^GEMINI_API_KEY=' "$acervo_root/llm.env"; then
-    printf 'GEMINI_API_KEY=%s\n' "$GEMINI_API_KEY" >>"$acervo_root/llm.env"
-  fi
-  secrets_tmp="$acervo_root/secrets.env.tmp.$$"
-  trap 'rm -f "$secrets_tmp"' EXIT HUP INT TERM
-  # `|| true` because grep reports "no lines matched" as a failure, and set -e would take it.
-  grep -v '^GEMINI_API_KEY=' "$acervo_root/secrets.env" >"$secrets_tmp" || true
-  chmod 600 "$secrets_tmp"
-  mv "$secrets_tmp" "$acervo_root/secrets.env"
-  trap - EXIT HUP INT TERM
-fi
 # One timestamp names both this deployment's backup and its release tree, so the two can be read
 # together. Deduped because it is to the second: two deployments inside one second would otherwise
 # share both directories — the second backup overwriting the first, and the second release extracted
@@ -288,51 +243,6 @@ else
   release_dir=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 fi
 
-if [ -n "$llm_credentials_file" ]; then
-  [ -f "$llm_credentials_file" ] || { echo "Missing LLM credentials file" >&2; exit 2; }
-  catalogue="$release_dir/models/catalogue.json"
-  [ -f "$catalogue" ] || { echo "Missing provider catalogue at $catalogue" >&2; exit 2; }
-
-  # A provider is a row of data, so what may be written here is "a variable some row reads", not a
-  # list this script keeps in step by hand. `ACERVO_TEXT_CHAIN` is the one name that belongs to no
-  # row. This replaces the old gemini|vertex whitelist: adding a provider is a catalogue edit.
-  llm_tmp="$acervo_root/llm.env.tmp.$$"
-  names_tmp="$acervo_root/llm.names.$$"
-  trap 'rm -f "$llm_tmp" "$names_tmp"' EXIT HUP INT TERM
-  : >"$names_tmp"
-  while IFS= read -r line || [ -n "$line" ]; do
-    [ -n "$line" ] || continue
-    case "$line" in
-      *=*) ;;
-      *) echo "LLM configuration lines must be NAME=VALUE" >&2; exit 2 ;;
-    esac
-    name=${line%%=*}
-    value=${line#*=}
-    case "$name" in
-      ''|*[!A-Z0-9_]*) echo "Unsafe LLM variable name: $name" >&2; exit 2 ;;
-    esac
-    case "$value" in
-      *[!A-Za-z0-9._:/,-]*) echo "Unsafe LLM configuration value" >&2; exit 2 ;;
-    esac
-    if [ "$name" != ACERVO_TEXT_CHAIN ] && ! grep -q "\"$name\"" "$catalogue"; then
-      echo "$name is not a variable any provider in the catalogue reads" >&2
-      exit 2
-    fi
-    printf '%s\n' "$name" >>"$names_tmp"
-  done <"$llm_credentials_file"
-
-  # Only the named lines are rewritten, so a provider that is not being configured keeps its key and
-  # can be switched back to without minting a new one.
-  awk -F= 'NR == FNR { drop[$0] = 1; next } !($1 in drop)' \
-    "$names_tmp" "$acervo_root/llm.env" >"$llm_tmp"
-  cat "$llm_credentials_file" >>"$llm_tmp"
-  chmod 600 "$llm_tmp"
-  mv "$llm_tmp" "$acervo_root/llm.env"
-  rm -f "$names_tmp"
-  trap - EXIT HUP INT TERM
-fi
-
-
 uid=$(id -u)
 gid=$(id -g)
 compose_project=${ACERVO_COMPOSE_PROJECT:-acervo}
@@ -374,7 +284,6 @@ ACERVO_LEXIBEAT_BUNDLE=$acervo_root/data/lexibeat-bundle
 ACERVO_LEXIBEAT_OUT=$acervo_root/data/lexibeat-out
 ACERVO_DOWNLOADS=$acervo_root/downloads
 ACERVO_INPUT_PATH=$acervo_root/input
-ACERVO_CREDENTIALS=$acervo_root/credentials
 EOF
 chmod 600 "$acervo_root/deployment.env"
 
@@ -409,7 +318,6 @@ if [ "$rebuild" = true ]; then
   run_quietly "Rebuilding every image" compose -p "$compose_project" \
     --env-file "$acervo_root/deployment.env" \
     --env-file "$acervo_root/secrets.env" \
-    --env-file "$acervo_root/llm.env" \
     -f "$compose_file" build --no-cache --pull anki-sync-server speech-retrieval lexibeat server
 fi
 
@@ -422,7 +330,6 @@ if [ "$reset_database" = true ]; then
   compose -p "$compose_project" \
     --env-file "$acervo_root/deployment.env" \
     --env-file "$acervo_root/secrets.env" \
-    --env-file "$acervo_root/llm.env" \
     -f "$compose_file" stop server >/dev/null 2>&1 || true
   # Copied only once the container is stopped: copying a live WAL database is the classic route to
   # a backup that looks fine until the day you need it.
@@ -450,13 +357,11 @@ if [ "$transition" = true ]; then
   run_quietly "Building the server image" compose -p "$compose_project" \
     --env-file "$acervo_root/deployment.env" \
     --env-file "$acervo_root/secrets.env" \
-    --env-file "$acervo_root/llm.env" \
     -f "$compose_file" build server
   echo "Stopping the server to convert its database..."
   compose -p "$compose_project" \
     --env-file "$acervo_root/deployment.env" \
     --env-file "$acervo_root/secrets.env" \
-    --env-file "$acervo_root/llm.env" \
     -f "$compose_file" stop server >/dev/null 2>&1 || true
   # The database and its write-ahead files, and only those: this changes nothing but the schema, so
   # the media beside it is not copied into every dated backup. Copied once the container has stopped,
@@ -472,7 +377,6 @@ if [ "$transition" = true ]; then
   compose -p "$compose_project" \
     --env-file "$acervo_root/deployment.env" \
     --env-file "$acervo_root/secrets.env" \
-    --env-file "$acervo_root/llm.env" \
     -f "$compose_file" run --rm --no-deps \
     -v "$release_dir/scripts:/opt/release-scripts:ro" \
     server python /opt/release-scripts/transition.py || transition_status=$?
@@ -481,7 +385,6 @@ if [ "$transition" = true ]; then
     compose -p "$compose_project" \
       --env-file "$acervo_root/deployment.env" \
       --env-file "$acervo_root/secrets.env" \
-      --env-file "$acervo_root/llm.env" \
       -f "$compose_file" start server >/dev/null 2>&1 || true
     echo "Nothing was deployed. The backup is at $backup_dir/server" >&2
     exit "$transition_status"
@@ -524,7 +427,6 @@ echo "Building what changed and starting containers..."
 run_quietly "Building and starting containers" compose -p "$compose_project" \
   --env-file "$acervo_root/deployment.env" \
   --env-file "$acervo_root/secrets.env" \
-  --env-file "$acervo_root/llm.env" \
   -f "$compose_file" up -d --build anki-sync-server speech-retrieval lexibeat server
 
 # Runs the container's own healthcheck now, rather than waiting for Docker to. Docker's first probe
@@ -552,7 +454,7 @@ wait_until_serving() {
   until probe_now "$compose_project-$1-1"; do
     attempt=$((attempt + 1))
     if [ "$attempt" -ge 30 ]; then
-      compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" --env-file "$acervo_root/llm.env" -f "$compose_file" logs "$1" >&2
+      compose -p "$compose_project" --env-file "$acervo_root/deployment.env" --env-file "$acervo_root/secrets.env" -f "$compose_file" logs "$1" >&2
       exit 1
     fi
     sleep 2

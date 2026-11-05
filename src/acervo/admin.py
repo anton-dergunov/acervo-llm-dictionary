@@ -216,33 +216,36 @@ def serve(settings: Settings, host: str, port: int) -> int:
     return 0
 
 
-def providers() -> int:
-    """Print which providers this machine can use, and whose account each one spends.
+def providers(settings: Settings) -> int:
+    """Print the providers this server may call, and whose account each one spends.
 
-    The same reading on a laptop and inside the server container, so "am I about to spend my work
-    Google account?" has one answer arrived at one way. It calls nothing and spends nothing: every
-    line comes from the catalogue and the environment.
+    It calls nothing and spends nothing: every line comes from the server's own store, and is what
+    Settings ▸ Providers shows. A laptop tool's providers are `providers.local.json`, which this does
+    not read.
     """
-    from acervo.models import load_catalogue
-    from acervo.models.catalogue import identity, key_hint, reason, row_settings
+    from acervo.services.providers import load
 
-    for row in load_catalogue():
-        why = reason(row)
-        print(f"{'yes' if why is None else 'no ':>3}  {row.label}")
-        print(f"     kinds     {', '.join(row.kinds)}")
+    open_database(settings.database_path)
+    found = load(settings)
+    if not len(found):
+        print("No providers. Add them in Settings ▸ Providers.")
+    for row in found:
+        why = row.reason()
+        print(f"{'yes' if why is None else 'no ':>3}  {row.label} ({row.id}, {row.family.label})")
         for kind in row.kinds:
             print(f"     {kind:<9} {', '.join(row.models_for(kind))}")
-        # The same three facts Settings ▸ Providers renders, so the terminal reading and the pane
-        # cannot disagree about which credential is deployed. Four characters at each end of a key
-        # is the whole disclosure, here as there.
-        if row.keyEnv:
-            print(f"     key       {row.keyEnv} {key_hint(row) or '(not set)'}")
-        elif row.authEnv:
-            print(f"     key       {row.authEnv} (a credentials file)")
-        for name, value in row_settings(row):
-            print(f"     setting   {name}={value or '(not set)'}")
-        if (account := identity(row)) is not None:
+        # The same facts Settings ▸ Providers renders. Four characters at each end of a key is the
+        # whole disclosure, here as there.
+        if row.credential.key:
+            print(f"     key       {row.key_hint()}")
+        elif row.credential.file:
+            print("     key       a credentials file")
+        for name, value in row.settings.items():
+            print(f"     setting   {name}={value}")
+        if (account := row.identity()) is not None:
             print(f"     account   {account}")
+        if row.check is not None:
+            print(f"     checked   {row.checked_at}: {row.check.said}")
         if why is not None:
             print(f"     why not   {why}")
     return 0
@@ -462,7 +465,7 @@ def main(argv: list[str] | None = None) -> int:
     seed_parser = commands.add_parser("seed", help="insert disposable demonstration vocabulary")
     seed_parser.add_argument("--owner-email", required=True)
 
-    commands.add_parser("providers", help="what this machine can call, and as whom")
+    commands.add_parser("providers", help="the providers this server may call, and as whom")
 
     anki_parser = commands.add_parser("anki", help="Anki by hand: what the push and pull jobs do")
     anki_commands = anki_parser.add_subparsers(dest="anki_command", required=True)
@@ -547,7 +550,7 @@ def main(argv: list[str] | None = None) -> int:
     if arguments.command == "seed":
         return seed(settings, arguments.owner_email)
     if arguments.command == "providers":
-        return providers()
+        return providers(settings)
     if arguments.command == "anki":
         return anki_command(settings, arguments.anki_command, arguments.owner_email)
     if arguments.command == "stories":

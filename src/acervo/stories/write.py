@@ -24,7 +24,7 @@ from dataclasses import dataclass, field
 from typing import Any, Mapping, Sequence
 
 from acervo.models import call, chain
-from acervo.models.catalogue import Catalogue
+from acervo.models.providers import Providers
 from acervo.models.errors import ProviderUnavailable
 
 # The heading the request sits under. Written here rather than ending the template, so a section
@@ -222,7 +222,7 @@ def parse_reply(payload: Any, wanted: Sequence[Mapping[str, Any]]) -> Written:
 class StoryWriter:
     """One story, over whichever pair in the chain answers."""
 
-    def __init__(self, catalogue: Catalogue, candidates: Sequence[chain.Candidate], template: str) -> None:
+    def __init__(self, catalogue: Providers, candidates: Sequence[chain.Candidate], template: str) -> None:
         self.catalogue = catalogue
         self.candidates = tuple(candidates)
         self.template = template

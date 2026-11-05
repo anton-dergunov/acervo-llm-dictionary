@@ -35,8 +35,8 @@ from typing import Any, Sequence
 import dataset
 
 from acervo.clips.select import build_request, parse_reply
-from acervo.models import call, load_catalogue
-from acervo.models.catalogue import available, reason
+from acervo.models.local import load_local
+from acervo.models import call
 from acervo.models.errors import ProviderError, ProviderUnavailable
 from acervo.services.prompts import sections
 
@@ -69,12 +69,12 @@ def pairs() -> list[dict[str, Any]]:
     row's second model is listed so the first one's 429 has somewhere to go, and it is measured here
     for the same reason it is tested there.
     """
-    catalogue = load_catalogue()
+    catalogue = load_local()
     out = []
     for row in catalogue.serving("text"):
         for model in row.models_for("text"):
             out.append({"provider": row.id, "model": model, "row": row,
-                        "available": available(row), "reason": reason(row)})
+                        "available": row.available, "reason": row.reason()})
     return out
 
 

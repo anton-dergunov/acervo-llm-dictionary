@@ -12,10 +12,10 @@ import pytest
 
 from acervo.models import google_auth, google_vision
 from acervo.models.call import ocr
-from acervo.models.catalogue import load_catalogue
+from provider_rows import GOOGLE, google_voices, provider
 from acervo.models.errors import ProviderRefused, ProviderUnavailable
 
-ROW = load_catalogue().find("google-vision")
+ROW = provider(GOOGLE)
 
 
 class _Credentials:
@@ -25,11 +25,11 @@ class _Credentials:
 
 @pytest.fixture(autouse=True)
 def credentials(monkeypatch):
-    import google.auth
+    from acervo.models import listing
 
     google_auth.forget_credentials()
-    monkeypatch.setenv("ACERVO_VERTEX_PROJECT", "a-project-name")
-    monkeypatch.setattr(google.auth, "default", lambda **kwargs: (_Credentials(), "a-project-name"))
+    monkeypatch.setattr(listing, "_google_voices", google_voices)
+    monkeypatch.setattr(google_auth, "_load", lambda info, project: _Credentials())
     yield
     google_auth.forget_credentials()
 
@@ -93,10 +93,9 @@ def test_the_request_asks_for_dense_text_with_the_owners_languages_as_hints(monk
     request = calls[-1]["json"]["requests"][0]
     assert request["features"] == [{"type": "DOCUMENT_TEXT_DETECTION"}]
     assert request["imageContext"] == {"languageHints": ["es", "zh"]}
-    assert calls[-1]["headers"]["Authorization"] == "Bearer an-access-token-value"
-    assert calls[-1]["headers"]["x-goog-user-project"] == "a-project-name"
+    assert calls[-1]["headers"]["x-goog-api-key"] == ROW.credential.key
     assert [w.text for w in result.words][:2] == ["12:04", "Hola"]
-    assert (result.answer.provider_id, result.answer.model) == ("google-vision", "document-text-detection")
+    assert (result.answer.provider_id, result.answer.model) == ("google-cloud", "document-text-detection")
 
 
 @pytest.mark.parametrize(

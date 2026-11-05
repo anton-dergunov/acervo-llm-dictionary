@@ -65,7 +65,7 @@ compose_file="$release/deploy/acervo/compose.yaml"
 # is a `profiles: ["tools"]` container that exists to be `run`, so nothing else ever rebuilds it and
 # a job would quietly execute whatever code the last build happened to contain. The layers cache, so
 # an unchanged release costs a second.
-common_args="-p acervo --env-file $acervo_root/deployment.env --env-file $acervo_root/secrets.env --env-file $acervo_root/llm.env -f $compose_file"
+common_args="-p acervo --env-file $acervo_root/deployment.env --env-file $acervo_root/secrets.env -f $compose_file"
 
 input_dir=
 cleanup() {

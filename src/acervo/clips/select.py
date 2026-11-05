@@ -34,7 +34,7 @@ from typing import Any, Sequence
 
 from acervo.article import ArticleView
 from acervo.models import ChainExhausted, TextResult, call, chain, journal
-from acervo.models.catalogue import Catalogue
+from acervo.models.providers import Providers
 from acervo.models.errors import SHAPE_TRIES, ProviderUnavailable
 
 from .corpus import Candidate
@@ -238,7 +238,7 @@ class ClipSelector:
     refuse before any money is spent instead of at the first word of a sweep.
     """
 
-    def __init__(self, catalogue: Catalogue, candidates: Sequence[chain.Candidate],
+    def __init__(self, catalogue: Providers, candidates: Sequence[chain.Candidate],
                  template: str) -> None:
         self.catalogue = catalogue
         self.candidates = tuple(candidates)

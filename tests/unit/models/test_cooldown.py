@@ -10,24 +10,20 @@ import httpx
 import pytest
 
 from acervo.models import chain
-from acervo.models.catalogue import load_catalogue
+from provider_rows import GEMINI, providers
 from acervo.models.cooldown import LONGEST, REST, Rests, retry_after_of, rests
 from acervo.models.errors import ProviderUnavailable
 from acervo.models.results import Answer, TextResult
 
-SHIPPED = load_catalogue()
-FIRST = ("gemini-free", "gemini/gemini-3.5-flash-lite")
-SECOND = ("gemini-free", "gemini/gemini-3.1-flash-lite")
+OPENAI = {"id": "openai", "family": "openai", "models": {"text": ["gpt-5.1"]}}
+SHIPPED = providers(GEMINI, OPENAI)
+FIRST = ("gemini-api", "gemini-3.5-flash-lite")
+SECOND = ("gemini-api", "gemini-3.1-flash-lite")
 
 
 @pytest.fixture(autouse=True)
 def clean(monkeypatch):
     rests.forget_all()
-    monkeypatch.setenv("GEMINI_API_KEY", "a-gemini-key")
-    monkeypatch.setenv("OPENAI_API_KEY", "an-openai-key")
-    for name in ("CLOUDFLARE_API_TOKEN", "OPENROUTER_API_KEY", "ACERVO_OLLAMA_URL",
-                 "ACERVO_VERTEX_PROJECT"):
-        monkeypatch.delenv(name, raising=False)
     yield
     rests.forget_all()
 
@@ -40,7 +36,7 @@ def answers(candidate):
 
 
 def limited():
-    return ProviderUnavailable("rate_limited", "429", provider_id="gemini-free", status=429)
+    return ProviderUnavailable("rate_limited", "429", provider_id="gemini-api", status=429)
 
 
 def test_a_rested_pair_is_asked_last_rather_than_not_at_all():
@@ -174,7 +170,7 @@ def test_a_rested_pair_is_still_reached_once_everything_else_has_refused():
         raise limited()
 
     with pytest.raises(Exception):
-        chain.walk("text", [("gemini-free", FIRST[1])], SHIPPED, ask, chain.stamped)
+        chain.walk("text", [("gemini-api", FIRST[1])], SHIPPED, ask, chain.stamped)
 
     asked: list[tuple[str, str]] = []
 
@@ -183,7 +179,7 @@ def test_a_rested_pair_is_still_reached_once_everything_else_has_refused():
         return answers(candidate)
 
     # Resting, and the only member of the chain — so it is asked anyway, and it works.
-    result = chain.walk("text", [("gemini-free", FIRST[1])], SHIPPED, answering, chain.stamped)
+    result = chain.walk("text", [("gemini-api", FIRST[1])], SHIPPED, answering, chain.stamped)
     assert asked == [FIRST]
     assert result.answer.model == FIRST[1]
 

@@ -14,19 +14,13 @@ import httpx
 import pytest
 
 from acervo.models import cloudflare
-from acervo.models.catalogue import load_catalogue
+from provider_rows import CLOUDFLARE, CLOUDFLARE_ACCOUNT, CLOUDFLARE_TOKEN, provider
 from acervo.models.errors import ProviderRefused, ProviderUnavailable
 
-ROW = load_catalogue().find("cloudflare")
+ROW = provider(CLOUDFLARE)
 MODEL = "@cf/black-forest-labs/flux-2-klein-4b"
-ACCOUNT = "0123456789abcdef0123456789abcdef"
-TOKEN = "a-cloudflare-token-value"
-
-
-@pytest.fixture(autouse=True)
-def credentials(monkeypatch):
-    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", ACCOUNT)
-    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", TOKEN)
+ACCOUNT = CLOUDFLARE_ACCOUNT
+TOKEN = CLOUDFLARE_TOKEN
 
 
 def transport(monkeypatch, response: httpx.Response, calls: list | None = None):
@@ -150,12 +144,11 @@ def test_speech_sends_json_rather_than_multipart(monkeypatch):
     assert calls[0]["json"] == {"text": "hola"}
 
 
-def test_a_row_whose_credentials_are_missing_is_refused_rather_than_called(monkeypatch):
-    monkeypatch.delenv("CLOUDFLARE_ACCOUNT_ID")
+def test_a_provider_whose_account_is_missing_is_refused_rather_than_called(monkeypatch):
     monkeypatch.setattr(
         cloudflare.httpx, "post", lambda *a, **k: pytest.fail("a call was made without an account")
     )
     with pytest.raises(ProviderRefused) as caught:
-        cloudflare.image(ROW, MODEL, "a hook")
+        cloudflare.image(provider(CLOUDFLARE, settings={}), MODEL, "a hook")
     assert caught.value.reason == "unconfigured"
-    assert caught.value.detail == "CLOUDFLARE_ACCOUNT_ID is not set"
+    assert caught.value.detail == "Cloudflare needs its account ID"

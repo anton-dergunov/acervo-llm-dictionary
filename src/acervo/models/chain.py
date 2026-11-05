@@ -7,8 +7,8 @@ spends money at the next provider.
 
 **The unit is a pair, not a provider.** A free tier is metered per model, so two models with 500
 requests a day each are a thousand requests a day and the second is reached by the first one's 429.
-The default walk is therefore provider by provider and, inside each, model by model — the order the
-catalogue lists them in.
+The default walk is therefore provider by provider in the order they were added and, inside each,
+model by model in the order they were added.
 
 A refusal is also remembered, in `cooldown.py`: a pair that has just been rate limited goes to
 the back of the queue for a while, so an exhausted free tier is not re-probed on every entry. It is
@@ -37,7 +37,7 @@ from dataclasses import dataclass, replace
 from typing import Callable, Sequence, TypeVar
 
 from acervo.models import journal
-from acervo.models.catalogue import Catalogue, Row, available, reason
+from acervo.models.providers import Provider as Row, Providers
 from acervo.models.cooldown import rests, retry_after_of
 from acervo.models.errors import ChainExhausted, ProviderRefused, ProviderUnavailable
 
@@ -46,11 +46,10 @@ Result = TypeVar("Result")
 Choice = str | tuple[str, str]
 """One entry in a chain: a whole row, or one of its models.
 
-A bare id is shorthand for "this row, every model it offers for this kind, in the order it lists
-them" — the shape `ACERVO_TEXT_CHAIN` writes, because a deploy-time flag should pin a provider and
-leave the models to the catalogue. A pair is "this row, exactly this model" — the shape the owner's
-record stores, because a free tier is metered per model and the owner is choosing buckets rather
-than vendors.
+A bare id is shorthand for "this provider, every model it offers for this kind, in the order they
+were added" — the shape a laptop tool's `--image-chain` flag takes. A pair is "this provider, exactly
+this model" — the shape the owner's record stores, because a free tier is metered per model and the
+owner is choosing buckets rather than vendors.
 
 A widening rather than an overload: an id names a *group* of pairs, not a second kind of thing.
 `Candidate.named` and `Answer.attempts` are already this tuple, so a stored choice and a recorded
@@ -60,7 +59,7 @@ attempt are the same shape and can be compared without a mapping layer.
 
 @dataclass(frozen=True)
 class Candidate:
-    """One thing that can be asked: a row and one of its models for a kind."""
+    """One thing that can be asked: a provider and one of its models for a kind."""
 
     row: Row
     model: str
@@ -71,18 +70,19 @@ class Candidate:
 
 
 def _named(choice: Choice) -> tuple[str, str | None]:
-    """A choice as (row id, model or None). None means "every model this row offers"."""
+    """A choice as (provider id, model or None). None means "every model this provider offers"."""
     return (choice, None) if isinstance(choice, str) else (choice[0], choice[1])
 
 
 def resolve(
-    kind: str, chosen: Sequence[Choice] | None, catalogue: Catalogue
+    kind: str, chosen: Sequence[Choice] | None, catalogue: Providers, *, expressive: bool = False,
 ) -> tuple[Candidate, ...]:
     """The pairs that will be tried, in order.
 
-    `None` means nothing has been chosen: every credentialed row that serves this kind in catalogue
-    order, each row's models in the order it lists them — so a deployment that has configured one
-    provider needs no chain setting at all.
+    `None` means nothing has been chosen: every provider that can be asked and serves this kind, in
+    the order they were added, each one's models in the order they were added — so a server with one
+    provider needs no order at all. `expressive` keeps only the voices that take a direction, which
+    is what the expressive order exists to carry.
 
     An **empty** sequence is not the same thing. It means every model was switched off deliberately,
     and it resolves to nothing at all. The distinction is the whole reason this takes a `Sequence |
@@ -92,20 +92,20 @@ def resolve(
 
     Otherwise, exactly the choices given, in that order.
 
-    **A retired model is refused; an uncredentialed row is skipped.** The line is whether the state
-    is legitimate. Not holding a key is expected — ordering three providers on a deployment that
-    holds one key is the entire point of a chain. A pair naming a model the catalogue does not offer
-    is a state nothing is supposed to produce, and skipping it is silently wrong twice over: retire
-    both of a row's models and `unconfigured()` would report a key as missing when it is plainly
-    set, and retire one and capture would quietly walk half the chain the owner configured, forever,
-    with no symptom.
+    **A model the provider does not offer is refused; a provider that cannot be asked is skipped.**
+    The line is whether the state is legitimate. A missing or refused key is expected — ordering
+    three providers when one of them has no key is the entire point of a chain. A pair naming a
+    model nobody offers is a state nothing is supposed to produce, because removing a model or a
+    provider removes it from every order, and skipping it would quietly walk half the chain the
+    owner configured, forever, with no symptom.
     """
     if chosen is None:
         return tuple(
             Candidate(row, model)
             for row in catalogue.serving(kind)
-            if available(row)
+            if row.available
             for model in row.models_for(kind)
+            if not expressive or row.takes_direction(model)
         )
 
     found: list[Candidate] = []
@@ -115,7 +115,7 @@ def resolve(
             row = catalogue.find(identifier)
         except KeyError:
             raise ProviderRefused(
-                "configuration", f"no provider {identifier!r} is in the catalogue"
+                "configuration", f"there is no provider called {identifier!r}"
             ) from None
         if not row.serves(kind):
             raise ProviderRefused("configuration", f"provider {identifier!r} does not serve {kind}")
@@ -127,7 +127,7 @@ def resolve(
             raise ProviderRefused(
                 "configuration", f"provider {identifier!r} does not offer {model!r} for {kind}"
             )
-        if not available(row):
+        if not row.available:
             continue
         found.extend(Candidate(row, one) for one in ((model,) if model else offered))
     # A pair named twice would fail twice, double the latency of an exhausted chain and appear twice
@@ -136,12 +136,12 @@ def resolve(
 
 
 def unconfigured(
-    kind: str, chosen: Sequence[Choice] | None, catalogue: Catalogue
+    kind: str, chosen: Sequence[Choice] | None, catalogue: Providers
 ) -> ProviderRefused:
-    """Why nothing can serve this kind, named as an environment variable rather than a value.
+    """Why nothing can serve this kind: what is missing, and never a value.
 
-    It reports the *first* row that would have served, so the message is about the provider the
-    deployment is closest to having, rather than about the last one in the file.
+    It reports the *first* provider that would have served, so the message is about the one the
+    server is closest to being able to ask.
     """
     if chosen is not None and not chosen:
         return ProviderRefused("unconfigured", f"no model is switched on for {kind}")
@@ -151,16 +151,19 @@ def unconfigured(
         else list(catalogue.serving(kind))
     )
     detail = next(
-        (reason(row) for row in rows if reason(row) is not None),
-        f"no provider in the catalogue serves {kind}",
+        (row.reason() for row in rows if row.reason() is not None),
+        f"no provider is added for {_KIND_NAMES.get(kind, kind)}",
     )
     return ProviderRefused("unconfigured", detail or "")
+
+
+_KIND_NAMES = {"text": "text", "image": "pictures", "audio": "voices", "ocr": "reading photos"}
 
 
 def walk(
     kind: str,
     chosen: Sequence[Choice] | None,
-    catalogue: Catalogue,
+    catalogue: Providers,
     ask: Callable[[Candidate], Result],
     stamp: Callable[[Result, tuple[tuple[str, str], ...], tuple[tuple[str, str, str], ...]], Result],
     caller: str = "text",
@@ -216,9 +219,11 @@ class _Walk:
         self.caller = caller
         self.attempts: list[tuple[str, str]] = []
         self.passed_over: list[tuple[str, str, str]] = []
+        self.labels: dict[str, str] = {}
         self.last: ProviderUnavailable | None = None
 
     def failed(self, candidate: Candidate, error: ProviderUnavailable, started: float) -> None:
+        self.labels[candidate.row.id] = candidate.row.label
         rests.note(candidate.named, error.reason, retry_after=retry_after_of(error))
         self.passed_over.append((*candidate.named, error.reason))
         journal.passed(self.caller, *candidate.named, error.reason, str(error), time.monotonic() - started)
@@ -233,7 +238,8 @@ class _Walk:
         assert self.last is not None
         reasons = tuple(reason for _, _, reason in self.passed_over)
         journal.exhausted(self.caller, len(self.attempts), reasons)
-        raise ChainExhausted(tuple(self.attempts), self.last, reasons, tuple(self.passed_over))
+        raise ChainExhausted(tuple(self.attempts), self.last, reasons, tuple(self.passed_over),
+                             self.labels)
 
 
 def _raced(

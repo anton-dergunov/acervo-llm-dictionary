@@ -438,6 +438,7 @@ def test_what_every_layer_logs_through_imports_nothing_else_of_acervos(name):
 NOT_A_COMPANION = {
     "models/cloudflare.py",
     "models/google_auth.py",
+    "models/listing.py",
     "services/dictionaries/online.py",
 }
 

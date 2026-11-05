@@ -36,34 +36,54 @@ export interface CaptureHealth {
    decides what the words are *made of*. It deliberately does not go through `AcervoRepository`,
    which owns the replica and nothing else — the external-dictionary list arrives the same way. */
 
-/** One provider the server knows about, and whether this deployment can actually use it. */
+/** One model a provider offers, with only what varies between models. */
+export interface ProviderModel {
+  id: string;
+  /** A voice that takes a free-text direction. Only such a voice reads the expressive order. */
+  direction?: boolean;
+  /** The locales it speaks, where the owner said; absent means any. */
+  languages?: string[];
+  /** Typed in only where the provider cannot list its voices. */
+  voices?: { name: string; locale?: string; gender?: string; note?: string }[];
+  allowance?: { amount: number; unit: string; per: "day" | "month" };
+}
+
+/** One provider the owner added: one account, one credential, and the models it offers. */
 export interface ModelProvider {
   id: string;
+  /** Which family speaks to it — one of `ModelCatalogue.families`. */
+  family: string;
   label: string;
   kinds: string[];
-  /** The models it offers, per kind. A chain entry is one of these, not a whole provider. */
-  models: Record<string, string[]>;
-  /** What each speech model does with a direction. Only `instruction` reads the expressive order. */
-  styles?: Record<string, "instruction" | "none">;
+  /** The family's non-secret settings: an account id, a project, an address. */
+  settings: Record<string, string>;
+  /** The models it offers, per kind, in the order they were added. A chain entry is one of these. */
+  models: Record<string, ProviderModel[]>;
+  extra: Record<string, unknown>;
+  credential: ProviderCredential;
+  /** What the last check of its key said, in the provider's own words. */
+  check: { ok: boolean; said: string; at: string | null } | null;
   available: boolean;
-  /** Names an environment variable and never a value, so it is safe to show. */
+  /** What is missing — a key, a setting, a key the provider refused — and never a value. */
   reason: string | null;
-  /** Where the owner reads their own usage. No provider serves that figure over an API. */
+  /** Where the owner reads their own usage and bill. */
   usageUrl: string | null;
-  /**
-   * Whose credentials this provider spends, where the credential names one. Null for a provider
-   * whose key is just a key, and for a Google login that does not record the account.
-   */
-  account?: string | null;
-  /**
-   * Which credential this provider would use, named and abbreviated. `hint` is four characters at
-   * each end of the key and never more — enough to tell two keys apart, never enough to use one —
-   * and is null for a credential that is a file, which is identified by its `account` instead.
-   */
-  credential?: ProviderCredential;
-  /** The provider's non-secret deployment facts: a project, an account id, a local URL. */
-  settings?: { name: string; value: string }[];
-  notes: string | null;
+}
+
+/** A family a provider can be added from, as "Add a provider" offers it. */
+export interface ProviderFamily {
+  id: string;
+  label: string;
+  group: string;
+  hint: string;
+  kinds: string[];
+  /** The kinds a key alone does not reach: Google Cloud's text and pictures need a credentials file. */
+  fileOnly: string[];
+  credential: "key" | "key-or-file" | "optional" | "none";
+  keyLabel: string;
+  keyUrl: string | null;
+  fields: { name: string; label: string; needed: "always" | "file" | "never"; default: string | null;
+            hint: string | null; choices: string[] }[];
 }
 
 /* Sense images. Owner-scoped server state and a picture the server draws, so like the provider
@@ -218,11 +238,15 @@ export interface Utterance {
   voice: string | null;
 }
 
+/**
+ * Which credential a provider holds, never the value. `hint` is four characters at each end of a key
+ * and never more — enough to tell two keys apart, never enough to use one; a credentials file is
+ * named by the `account` it belongs to, where it says.
+ */
 export interface ProviderCredential {
   kind: "key" | "file" | "none";
-  variable: string | null;
-  present: boolean;
   hint: string | null;
+  account: string | null;
 }
 
 export interface ModelPair {
@@ -231,8 +255,8 @@ export interface ModelPair {
 }
 
 export interface ModelChain {
-  /** `deployment` means nothing has been chosen and the server's own order is in force. */
-  source: "owner" | "deployment";
+  /** `default` means nothing has been chosen: the providers are asked in the order they were added. */
+  source: "owner" | "default";
   /** Why nothing in this chain can be asked, or null. Same producer as the health readout. */
   reason: string | null;
   /** What is *stored*, not what will be walked: an unavailable pair keeps its place. */
@@ -240,6 +264,7 @@ export interface ModelChain {
 }
 
 export interface ModelCatalogue {
+  families: ProviderFamily[];
   providers: ModelProvider[];
   chains: Record<string, ModelChain>;
 }

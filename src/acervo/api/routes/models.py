@@ -1,4 +1,4 @@
-"""Which providers this server can use, and which ones this owner wants.
+"""Which providers this server holds, and which of their models this owner wants, in what order.
 
 Two routes and no vocabulary. The choice is owner-scoped server state, never replicated: it decides
 what the owner's words are *made of* — which model wrote a definition, at what cost, to what quality
@@ -28,7 +28,7 @@ router = APIRouter()
 
 @router.get("/models")
 def listing(request: Request) -> JSONResponse:
-    """The catalogue as this owner sees it, and their chains.
+    """The providers, the families they can be added from, and this owner's chains.
 
     Owner-scoped: `chains` is this account's, and another account's choice is invisible here.
     """
@@ -40,8 +40,8 @@ def listing(request: Request) -> JSONResponse:
 async def selection(request: Request) -> JSONResponse:
     """Change the chains this request names, and answer with the whole readout.
 
-    Validation, the write and the view are one threadpool call rather than three: the catalogue is
-    read from disk and the record from SQLite, and neither belongs on the event loop.
+    Validation, the write and the view are one threadpool call rather than three: the providers'
+    keys are read from a file and the records from SQLite, and neither belongs on the event loop.
     """
     owner = owner_id(request)
     body = await json_body(request)

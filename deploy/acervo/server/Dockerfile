@@ -65,12 +65,8 @@ RUN mkdir -p /var/lib/acervo/server /var/lib/acervo/downloads /var/lib/acervo/di
 # from are owner-only, and `COPY` makes them root-owned. The container runs as the deploying user,
 # which then cannot read its own code.
 
-# The provider catalogue, beside `src` the way `dictionaries/` is: the package resolves it
-# relative to itself, so it needs no environment variable and no staging step.
-COPY --chmod=755 models /app/models
-# The style table is content of the same kind, and `acervo.images.styles` resolves it relative to
-# the package exactly as the two catalogues above do — hence the matching path rather than a third
-# environment variable.
+# The style table is content resolved relative to the package, like the pins above — hence the
+# matching path rather than an environment variable.
 COPY --chmod=755 config/image-styles.yaml /app/config/image-styles.yaml
 COPY --chmod=755 config/story-types.yaml /app/config/story-types.yaml
 # The Anki cards' faces, stylesheet, script and fonts, which every push brings up to date.

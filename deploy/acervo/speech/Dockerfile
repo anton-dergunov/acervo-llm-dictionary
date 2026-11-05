@@ -32,17 +32,6 @@ WORKDIR /app
 COPY vendor/speech/*.whl /tmp/wheels/
 RUN pip install --no-cache-dir /tmp/wheels/*.whl && rm -rf /tmp/wheels
 
-# `google-auth` is not optional here even though LiteLLM does not require it. Vertex is the one
-# provider that authenticates from a file, and LiteLLM reaches it with a deferred
-# `import google.auth` — so without this the row looks perfectly available (a catalogue row is
-# checked for environment variables and a credentials file, never for an importable library) and
-# raises on the first real call. The server image gets it for free through `google-genai`; this one
-# installs LiteLLM alone and got nothing. The `[requests]` extra is what supplies
-# `google.auth.transport.requests`, LiteLLM itself depending on httpx.
-#
-# Before any of Acervo's own files, so that changing one of them does not install this again.
-RUN pip install --no-cache-dir "litellm>=1.100" "google-auth[requests]>=2"
-
 # `data` holds two very different things and they are mounted separately: `raw/` is acquired
 # captions, which cost bandwidth and are the one thing here nothing may delete, while `index/` and
 # `derived/` are rebuilt from it. `catalogues/` is the operator's channel list.
@@ -67,29 +56,24 @@ RUN mkdir -p /var/lib/speech/data/raw /var/lib/speech/data/index \
 COPY --chmod=755 deploy/acervo/speech/entrypoint.sh /usr/local/bin/speech-entrypoint
 COPY --chmod=755 deploy/acervo/speech/serve.py /app/serve.py
 
-# The player's target text runs on the *owner's* chain rather than on a key this service holds, so
-# this image carries `acervo.models` and the catalogue that names the providers — and nothing else
-# of Acervo's. `create_app` takes both providers as arguments, which is a public entry point of that
-# package, so the retrieval repository changes nothing: no LiteLLM dependency, no schema-dialect
-# port, no error-taxonomy mapping. See docs/features/spoken-clips.md §2.13.
+# The player's target text is written by Acervo's providers rather than by a key this service holds:
+# `serve.py` sends each call home to Acervo's `POST /companion/text`. So this image carries no model
+# library and no provider key — only the few modules of Acervo's that the launcher imports, which
+# need nothing beyond httpx, and the corpus wheel brings that. `create_app` takes both providers as
+# arguments, a public entry point of that package, so the retrieval repository changes nothing. See
+# docs/features/spoken-clips.md §2.13.
 #
 # Acervo's *server* image still never imports `speech_retrieval`, and this one never imports
 # Acervo's graph, settings or database.
-# Laid out as `/app/src/acervo/...` beside `/app/models`, which is exactly the server image's
-# shape — and it has to be, because `CATALOGUE_PATH` is resolved relative to the module's own file
-# (`parents[3] / "models" / "catalogue.json"`). Installing the package into site-packages instead
-# put the catalogue somewhere that does not exist, and the only symptom was no provider being
-# injected, silently.
 ENV PYTHONPATH=/app/src
-COPY --chmod=755 models /app/models
 COPY --chmod=755 src/acervo/__init__.py /app/src/acervo/__init__.py
 COPY --chmod=755 src/acervo/access_log.py /app/src/acervo/access_log.py
+COPY --chmod=755 src/acervo/trace.py /app/src/acervo/trace.py
 COPY --chmod=755 src/acervo/speech /app/src/acervo/speech
-COPY --chmod=755 src/acervo/models /app/src/acervo/models
 
 EXPOSE 8000
 ENTRYPOINT ["/usr/local/bin/speech-entrypoint"]
-# Acervo's own entry point rather than the console script, so `create_app` is called with the
-# owner's chain behind both provider stages. With no chain and no credential it injects neither and
-# the service behaves exactly as `speech-retrieval serve` would.
+# Acervo's own entry point rather than the console script, so `create_app` is called with Acervo
+# behind both provider stages. Without Acervo's address and the operator token it injects neither,
+# and the service behaves exactly as `speech-retrieval serve` would.
 CMD ["python", "/app/serve.py"]

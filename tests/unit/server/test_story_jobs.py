@@ -26,6 +26,7 @@ from acervo.repository import graph, image_settings, jobs, pronunciation_setting
 from acervo.services import stories
 from acervo.work import kinds
 from acervo.work.runner import Runner
+from provider_rows import VERTEX_IMAGE
 
 # A real PNG, as `conftest.ImageStub` uses: the renderer decodes what comes back before it
 # re-encodes, so a byte string that is not an image fails inside Pillow rather than in the job.
@@ -114,10 +115,9 @@ class Models:
 @pytest.fixture
 def models(server, monkeypatch) -> Models:
     stub = Models()
-    monkeypatch.setenv("GEMINI_API_KEY", "a-key")
     # The `server` fixture clears every provider but Gemini, which draws nothing. OpenAI is the
     # image row `test_images.py` credentials for the same reason.
-    monkeypatch.setenv("OPENAI_API_KEY", "a-key")
+    server.add_provider(VERTEX_IMAGE)
     monkeypatch.setattr("acervo.models.call.completion", lambda **kw: stub.completion(**kw))
     monkeypatch.setattr("acervo.models.call.image_generation",
                         lambda **kw: stub.image_generation(**kw))
@@ -395,7 +395,7 @@ def continuity_reply() -> dict:
 @pytest.fixture
 def references(monkeypatch):
     """The test image row, declared as one that takes reference pictures, as Vertex's does."""
-    monkeypatch.setattr("acervo.models.catalogue.Row.image_references", lambda row: 14)
+    monkeypatch.setattr("acervo.models.providers.Provider.image_references", lambda row: 14)
 
 
 def test_a_later_picture_is_drawn_from_the_earlier_pictures_of_who_and_where_it_shows(
@@ -459,7 +459,9 @@ def test_labels_that_cannot_be_had_cost_no_picture(server, models, runner, refer
     assert models.referenced == []
 
 
-def test_a_row_that_takes_no_references_draws_every_part_the_ordinary_way(server, models, runner):
+def test_a_row_that_takes_no_references_draws_every_part_the_ordinary_way(server, models, runner,
+                                                                          monkeypatch):
+    monkeypatch.setattr("acervo.models.providers.Provider.image_references", lambda row: 0)
     a_story(server, 1)
     models.texts = [story_reply(4), translation_reply(4), brief_reply(4), continuity_reply()]
 

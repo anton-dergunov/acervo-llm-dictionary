@@ -40,10 +40,8 @@ FROM sync-server AS worker
 # code change rebuilds as few layers as it can.
 COPY --chmod=755 templates /app/templates
 COPY --chmod=755 dictionaries /app/dictionaries
-# The provider catalogue. LiteLLM itself is deliberately not installed here: no worker job
-# calls a model yet, and `acervo.models` imports it lazily so `acervo.models.pacing` — which
-# the file ingestion uses — works without it.
-COPY --chmod=755 models /app/models
+# LiteLLM is deliberately not installed here: no worker job calls a model, and `acervo.models`
+# imports it lazily so `acervo.models.pacing` — which the file ingestion uses — works without it.
 COPY --chmod=755 scripts/integration/anki_sync_client.py /app/scripts/integration/anki_sync_client.py
 COPY --chmod=755 scripts/acervo_worker.py /app/scripts/acervo_worker.py
 COPY --chmod=755 src /app/src

@@ -363,9 +363,8 @@ def test_release_archive_excludes_deployment_secrets(tmp_path: Path) -> None:
     with tarfile.open(archive) as package:
         members = package.getnames()
     assert not any(name.endswith("secrets.env") for name in members)
-    assert "deploy/acervo/llm.env" not in members
     assert "deploy/acervo/secrets.env.example" in members
-    assert "deploy/acervo/llm.env.example" in members
+    assert not any(name.endswith("providers.local.json") for name in members)
     assert "deploy/acervo/server/web/manifest.webmanifest" in members
     assert "deploy/acervo/server/Dockerfile" in members
     # The image installs the package out of the bundle, so its build files travel with it.
@@ -554,59 +553,6 @@ def test_the_launcher_refuses_any_other_jobs_operation(tmp_path: Path) -> None:
     assert result.returncode == 2
 
 
-def test_remote_llm_configuration_streams_the_key_without_exposing_it(tmp_path: Path) -> None:
-    bin_dir = tmp_path / "bin"
-    bin_dir.mkdir()
-    ssh_log = tmp_path / "ssh.log"
-    release_upload = tmp_path / "release.tar.gz"
-    llm_upload = tmp_path / "llm-credentials"
-    ssh = bin_dir / "ssh"
-    ssh.write_text(
-        "#!/bin/sh\n"
-        "printf '%s\\n' \"$*\" >>\"$ACERVO_TEST_SSH_LOG\"\n"
-        "case \"$*\" in\n"
-        "  *'deploy-acervo check'*) printf 'helper\\n' ;;\n"
-        "  *'deploy-acervo deploy'*) cat >\"$ACERVO_TEST_RELEASE\" ;;\n"
-        "  *'cat > /tmp/acervo-llm-credentials-'*) cat >\"$ACERVO_TEST_LLM\" ;;\n"
-        "esac\n",
-        encoding="utf-8",
-    )
-    ssh.chmod(0o755)
-    env = os.environ.copy()
-    env.update({
-        "PATH": f"{bin_dir}:{env['PATH']}",
-        "ACERVO_TEST_SSH_LOG": str(ssh_log),
-        "ACERVO_TEST_RELEASE": str(release_upload),
-        "ACERVO_TEST_LLM": str(llm_upload),
-        "ACERVO_SKIP_MACOS_RELEASE": "true",
-        "ACERVO_SKIP_APP_BUILD": "true",
-    })
-
-    result = subprocess.run(
-        [
-            str(REPO_ROOT / "deploy.sh"), "--target", "deployer@server.example.test",
-            "--root", "/volume1/docker/acervo", "--configure-llm",
-            "--llm-chain", "cloudflare,gemini-free",
-            "--llm-set", "CLOUDFLARE_ACCOUNT_ID=0123456789abcdef0123456789abcdef",
-            "--llm-key", "CLOUDFLARE_API_TOKEN", "--llm-api-key-stdin",
-        ],
-        cwd=REPO_ROOT, env=env, input="cloudflare-token\n", text=True,
-        capture_output=True, check=False,
-    )
-
-    assert result.returncode == 0, result.stderr
-    assert llm_upload.read_text(encoding="utf-8") == (
-        "ACERVO_TEXT_CHAIN=cloudflare,gemini-free\n"
-        "CLOUDFLARE_ACCOUNT_ID=0123456789abcdef0123456789abcdef\n"
-        "CLOUDFLARE_API_TOKEN=cloudflare-token\n"
-    )
-    commands = ssh_log.read_text(encoding="utf-8")
-    assert "cat > /tmp/acervo-llm-credentials-" in commands
-    assert "--llm-credentials-file /tmp/acervo-llm-credentials-" in commands
-    # The key travels over stdin into a mode-600 file. A command line is visible in `ps`.
-    assert "cloudflare-token" not in commands + result.stdout + result.stderr
-
-
 def test_installer_accepts_streamed_credential_file_and_network_options(
     tmp_path: Path,
 ) -> None:
@@ -660,32 +606,6 @@ def test_installer_accepts_streamed_credential_file_and_network_options(
     assert "ACERVO_APP_PORT=27802\n" in deployment
     assert f"ACERVO_SERVER_DATA={root}/data/server\n" in deployment
     assert f"ACERVO_DOWNLOADS={root}/downloads\n" in deployment
-
-
-def test_installer_moves_a_model_key_out_of_secrets_env(tmp_path: Path) -> None:
-    """One variable defined in two files has a silent loser, and llm.env is passed last."""
-    env, root = deployment_env(tmp_path)
-    secrets = root / "secrets.env"
-    secrets.write_text(
-        secrets.read_text(encoding="utf-8") + "GEMINI_API_KEY='stranded-key'\n",
-        encoding="utf-8",
-    )
-
-    result = subprocess.run(
-        [
-            str(REPO_ROOT / "deploy/acervo/install.sh"),
-            "--root", str(root),
-            "--bind-address", "127.0.0.1", "--port", "27701",
-            "--app-bind-address", "127.0.0.1", "--app-port", "27702",
-        ],
-        cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False,
-    )
-
-    assert result.returncode == 0, result.stderr
-    assert "GEMINI_API_KEY" not in secrets.read_text(encoding="utf-8")
-    assert "GEMINI_API_KEY=stranded-key\n" in (root / "llm.env").read_text(encoding="utf-8")
-    # The move happens once and leaves nothing behind to move again.
-    assert (root / "llm.env").read_text(encoding="utf-8").count("GEMINI_API_KEY") == 1
 
 
 def test_reconfiguring_credentials_does_not_sign_every_device_out(tmp_path: Path) -> None:
@@ -1314,111 +1234,6 @@ def test_the_summary_says_the_shape_of_the_address_when_it_cannot_read_the_tailn
     assert "tailscale status" in result.stdout
 
 
-def run_configure_llm(tmp_path: Path, *arguments: str) -> subprocess.CompletedProcess[str]:
-    env = os.environ.copy()
-    env["PATH"] = f"{fake_docker_path(tmp_path)}:{env['PATH']}"
-    # Hermetic: the real .acervo-deploy names a live server.
-    env["ACERVO_DEPLOY_PROFILE"] = str(tmp_path / "absent-profile")
-    return subprocess.run(
-        [str(REPO_ROOT / "deploy.sh"), "--local", "--configure-llm", *arguments],
-        cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False, input="a-key\n",
-    )
-
-
-def test_a_variable_name_that_looks_nothing_like_one_is_refused(tmp_path: Path) -> None:
-    """Which names are allowed is the catalogue's business — the installer checks against the row
-    list it was shipped. What this script can say on its own is that a name is shaped like one."""
-    result = run_configure_llm(tmp_path, "--llm-set", "not a variable=x")
-    assert result.returncode == 2
-    assert "Unsafe LLM variable name" in result.stderr
-
-
-def test_a_provider_id_that_is_merely_new_is_not_refused(tmp_path: Path) -> None:
-    """No list of provider names lives in this script any more, so a row added to the catalogue
-    tomorrow needs no change here. That is what replaced the old `gemini|vertex` whitelist."""
-    result = run_configure_llm(tmp_path, "--llm-chain", "some-provider-invented-later")
-    assert "some-provider-invented-later" not in result.stderr
-
-
-def test_a_key_on_standard_input_needs_to_say_which_variable_it_is(tmp_path: Path) -> None:
-    result = run_configure_llm(tmp_path, "--llm-api-key-stdin")
-    assert result.returncode == 2
-    assert "--llm-key" in result.stderr
-
-
-def test_credentials_and_llm_are_configured_in_separate_commands(tmp_path: Path) -> None:
-    result = run_configure_llm(
-        tmp_path, "--configure-credentials", "--llm-chain", "gemini-free",
-    )
-    assert result.returncode == 2
-    assert "separate commands" in result.stderr
-
-
-def test_installer_updates_only_llm_env_and_preserves_both_provider_keys(tmp_path: Path) -> None:
-    env, root = deployment_env(tmp_path)
-    original_secrets = (root / "secrets.env").read_bytes()
-
-    def configure(contents: str) -> subprocess.CompletedProcess[str]:
-        settings = tmp_path / "llm-credentials"
-        settings.write_text(contents, encoding="utf-8")
-        settings.chmod(0o600)
-        return subprocess.run(
-            [
-                str(REPO_ROOT / "deploy/acervo/install.sh"),
-                "--root", str(root),
-                "--llm-credentials-file", str(settings),
-                "--bind-address", "127.0.0.1", "--port", "27701",
-                "--app-bind-address", "127.0.0.1", "--app-port", "27702",
-            ],
-            cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False,
-        )
-
-    result = configure(
-        "ACERVO_TEXT_CHAIN=cloudflare\n"
-        "CLOUDFLARE_ACCOUNT_ID=0123456789abcdef0123456789abcdef\n"
-        "CLOUDFLARE_API_TOKEN=cloudflare-token\n"
-    )
-    assert result.returncode == 0, result.stderr
-    result = configure("ACERVO_TEXT_CHAIN=gemini-free\nGEMINI_API_KEY=gemini-key\n")
-    assert result.returncode == 0, result.stderr
-
-    assert (root / "secrets.env").read_bytes() == original_secrets
-    llm = (root / "llm.env").read_text(encoding="utf-8")
-    assert "ACERVO_TEXT_CHAIN=gemini-free\n" in llm
-    assert "GEMINI_API_KEY=gemini-key\n" in llm
-    # The point of the whole file: switching provider keeps the other one's credentials, so
-    # switching back does not mean minting a new key.
-    assert "CLOUDFLARE_API_TOKEN=cloudflare-token\n" in llm
-    assert "CLOUDFLARE_ACCOUNT_ID=0123456789abcdef0123456789abcdef\n" in llm
-    assert llm.count("ACERVO_TEXT_CHAIN") == 1
-    assert (root / "llm.env").stat().st_mode & 0o777 == 0o600
-
-
-def test_the_installer_refuses_a_variable_no_provider_reads(tmp_path: Path) -> None:
-    """The replacement for the old `gemini|vertex` whitelist: a name has to belong to a row.
-
-    A key written under a name nothing reads is the worst kind of misconfiguration — it deploys
-    cleanly and the server is simply unable to build entries, with health blaming the variable that
-    *is* missing.
-    """
-    env, root = deployment_env(tmp_path)
-    settings = tmp_path / "llm-credentials"
-    settings.write_text("NOT_A_PROVIDER_VARIABLE=x\n", encoding="utf-8")
-    settings.chmod(0o600)
-    result = subprocess.run(
-        [
-            str(REPO_ROOT / "deploy/acervo/install.sh"),
-            "--root", str(root),
-            "--llm-credentials-file", str(settings),
-            "--bind-address", "127.0.0.1", "--port", "27701",
-            "--app-bind-address", "127.0.0.1", "--app-port", "27702",
-        ],
-        cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False,
-    )
-    assert result.returncode == 2
-    assert "not a variable any provider in the catalogue reads" in result.stderr
-
-
 def test_remote_status_does_not_build_or_upload(tmp_path: Path) -> None:
     bin_dir = tmp_path / "bin"
     bin_dir.mkdir()
@@ -1517,66 +1332,32 @@ def test_remote_helper_runs_the_packaged_installer_from_standard_input(tmp_path:
     env = os.environ.copy()
     env["PATH"] = f"{fake_docker_path(tmp_path)}:{env['PATH']}"
 
-    # The Google credential rides through the launcher too, and it is the one credential that is a
-    # file the whole way. The launcher only accepts it under the path the deployer streams it to,
-    # so the test has to use that path rather than tmp_path.
-    uploaded = Path(f"/tmp/acervo-google-credentials-{os.getpid()}")
-    uploaded.write_text('{"type": "service_account", "client_email": "a@b.example.com"}',
-                        encoding="utf-8")
-
-    try:
-        result = subprocess.run(
-            [
-                str(helper),
-                "deploy",
-                "--root",
-                str(root),
-                "--google-credentials-file",
-                str(uploaded),
-                "--bind-address",
-                "127.0.0.1",
-                "--port",
-                "27701",
-                "--app-bind-address",
-                "127.0.0.1",
-                "--app-port",
-                "27702",
-            ],
-            env=env,
-            input=archive.read_bytes(),
-            capture_output=True,
-            check=False,
-        )
-    finally:
-        uploaded.unlink(missing_ok=True)
+    result = subprocess.run(
+        [
+            str(helper),
+            "deploy",
+            "--root",
+            str(root),
+            "--bind-address",
+            "127.0.0.1",
+            "--port",
+            "27701",
+            "--app-bind-address",
+            "127.0.0.1",
+            "--app-port",
+            "27702",
+        ],
+        env=env,
+        input=archive.read_bytes(),
+        capture_output=True,
+        check=False,
+    )
 
     assert result.returncode == 0, result.stderr.decode()
     assert (root / "deployment.env").exists()
     assert b"internal HTTP backend" in result.stdout
-    installed = root / "credentials" / "google.json"
-    assert installed.read_text(encoding="utf-8").startswith('{"type": "service_account"')
-    assert installed.stat().st_mode & 0o777 == 0o600
-    # The launcher removes what it was handed, so nothing sensitive is left in /tmp on the server.
-    assert not uploaded.exists()
-
-
-def test_the_launcher_refuses_a_credential_path_it_did_not_expect(tmp_path: Path) -> None:
-    """The launcher runs as root out of sudoers, so every path it is handed is checked against the
-    shape the deployer would have written — the same guard the other two credentials already have."""
-    helper = runnable_remote_helper(tmp_path)
-    elsewhere = tmp_path / "google.json"
-    elsewhere.write_text('{"type": "service_account"}', encoding="utf-8")
-    result = subprocess.run(
-        [
-            str(helper), "deploy", "--root", str(tmp_path / "acervo"),
-            "--google-credentials-file", str(elsewhere),
-            "--bind-address", "127.0.0.1", "--port", "27701",
-            "--app-bind-address", "127.0.0.1", "--app-port", "27702",
-        ],
-        text=True, capture_output=True, check=False,
-    )
-    assert result.returncode == 2
-    assert "Unexpected Google credentials path" in result.stderr
+    # Provider keys are added in Settings, so a deploy leaves no file of them behind.
+    assert not (root / "llm.env").exists() and not (root / "credentials").exists()
 
 
 def test_the_launcher_protocol_matches_the_deployer() -> None:
@@ -2009,77 +1790,6 @@ def test_shared_host_guardrails_are_documented_and_global_serve_mutations_are_ab
     assert "serve off" not in helper
 
 
-def test_a_google_credential_that_is_not_one_is_refused_before_it_is_deployed(tmp_path: Path) -> None:
-    """Vertex does not authenticate from a variable, so this is a file — and a file is the one kind
-    of credential that can be plausibly wrong: an API key pasted into a file, the wrong export,
-    something else entirely. Discovering that at the first capture costs a deployment cycle."""
-    wrong = tmp_path / "not-a-key.json"
-    wrong.write_text('{"api_key": "AIzaSyNotAKeyFile"}', encoding="utf-8")
-    result = run_configure_llm(tmp_path, "--google-credentials", str(wrong))
-    assert result.returncode == 2
-    assert "neither a service-account key nor an" in result.stderr
-
-
-@pytest.mark.parametrize("kind", ["service_account", "authorized_user"])
-def test_both_shapes_google_actually_writes_are_accepted(tmp_path: Path, kind: str) -> None:
-    """A key, and the file `gcloud auth application-default login` writes. Refusing the second would
-    mean the one-command path that already works on a workstation could not reach the server."""
-    good = tmp_path / "creds.json"
-    good.write_text(f'{{"type": "{kind}", "client_email": "acervo-vertex@personal.example.com"}}',
-                    encoding="utf-8")
-    result = run_configure_llm(tmp_path, "--google-credentials", str(good))
-    assert "neither a service-account key" not in result.stderr
-
-
-def test_a_google_credential_is_installed_beside_the_env_file_and_named_from_inside(tmp_path: Path) -> None:
-    env, root = deployment_env(tmp_path)
-    key = tmp_path / "google.json"
-    key.write_text('{"type": "service_account", "project_id": "p"}', encoding="utf-8")
-    settings = tmp_path / "llm-credentials"
-    settings.write_text(
-        "GOOGLE_APPLICATION_CREDENTIALS=/run/acervo/credentials/google.json\n", encoding="utf-8"
-    )
-    settings.chmod(0o600)
-
-    result = subprocess.run(
-        [
-            str(REPO_ROOT / "deploy/acervo/install.sh"),
-            "--root", str(root),
-            "--llm-credentials-file", str(settings),
-            "--google-credentials-file", str(key),
-            "--bind-address", "127.0.0.1", "--port", "27701",
-            "--app-bind-address", "127.0.0.1", "--app-port", "27702",
-        ],
-        cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False,
-    )
-    assert result.returncode == 0, result.stderr
-
-    installed = root / "credentials" / "google.json"
-    assert installed.read_text(encoding="utf-8").startswith('{"type": "service_account"')
-    assert installed.stat().st_mode & 0o777 == 0o600
-    # The variable names the path the container will read, not the one it was uploaded from.
-    llm = (root / "llm.env").read_text(encoding="utf-8")
-    assert "GOOGLE_APPLICATION_CREDENTIALS=/run/acervo/credentials/google.json\n" in llm
-
-
-def test_the_credentials_directory_exists_even_when_no_key_is_configured(tmp_path: Path) -> None:
-    """A bind mount of a path that does not exist makes a root-owned directory instead, and the
-    container then fails in a way that has nothing to do with the missing credential."""
-    env, root = deployment_env(tmp_path)
-    result = subprocess.run(
-        [
-            str(REPO_ROOT / "deploy/acervo/install.sh"),
-            "--root", str(root),
-            "--bind-address", "127.0.0.1", "--port", "27701",
-            "--app-bind-address", "127.0.0.1", "--app-port", "27702",
-        ],
-        cwd=REPO_ROOT, env=env, text=True, capture_output=True, check=False,
-    )
-    assert result.returncode == 0, result.stderr
-    assert (root / "credentials").is_dir()
-    assert "ACERVO_CREDENTIALS=" in (root / "deployment.env").read_text(encoding="utf-8")
-
-
 def test_the_corpus_operator_token_is_minted_once_and_kept(tmp_path: Path) -> None:
     """Nobody types this one, so the installer mints it.
 
@@ -2115,9 +1825,6 @@ def test_the_corpus_operator_token_is_minted_once_and_kept(tmp_path: Path) -> No
         r"^ACERVO_SPEECH_OPERATOR_TOKEN='([A-Za-z0-9]{16,})'$", written, flags=re.MULTILINE
     )
     assert minted, written
-    # It is a credential, so it belongs beside the others rather than in llm.env — whose writer only
-    # accepts names a provider row in models/catalogue.json reads, and would reject this one.
-    assert "ACERVO_SPEECH_OPERATOR_TOKEN" not in (root / "llm.env").read_text(encoding="utf-8")
 
     assert deploy().returncode == 0
     again = secrets.read_text(encoding="utf-8")
@@ -2305,6 +2012,30 @@ def test_the_launcher_refuses_an_unexpected_acervo_root(tmp_path: Path) -> None:
     assert "Refusing unexpected Acervo root" in result.stderr
 
 
+PROVIDER_VARIABLES = {
+    "ACERVO_TEXT_CHAIN", "GEMINI_API_KEY", "OPENAI_API_KEY", "OPENROUTER_API_KEY",
+    "CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID", "ACERVO_OLLAMA_URL",
+    "ACERVO_VERTEX_PROJECT", "GOOGLE_APPLICATION_CREDENTIALS", "ACERVO_VERTEX_ACCOUNT",
+}
+
+
+def test_no_service_is_handed_a_provider_key_by_compose():
+    """Providers are added in Settings ▸ Providers and their keys kept beside the database, so no
+    container is given one by its environment — not the server, not the worker, and not the clip
+    service, which calls home to Acervo for each text call instead."""
+    import yaml
+
+    compose = yaml.safe_load(
+        (REPO_ROOT / "deploy/acervo/compose.yaml").read_text(encoding="utf-8")
+    )
+    for name, service in compose["services"].items():
+        environment = set(service.get("environment") or {})
+        assert not PROVIDER_VARIABLES & environment, f"{name} is handed {sorted(PROVIDER_VARIABLES & environment)}"
+        assert not any("/run/acervo/credentials" in mount for mount in service.get("volumes") or []), name
+    speech = compose["services"]["speech-retrieval"]["environment"]
+    assert "ACERVO_API_URL" in speech and "SPEECH_RETRIEVAL_OPERATOR_TOKEN" in speech
+
+
 def test_the_loop_service_is_given_no_provider_credential_at_all() -> None:
     """The one companion service that calls no model, and its absence from the tuple above is the
     design rather than an oversight.
@@ -2323,12 +2054,7 @@ def test_the_loop_service_is_given_no_provider_credential_at_all() -> None:
     )
     service = compose["services"]["lexibeat"]
     environment = set(service.get("environment") or {})
-    forbidden = {
-        "ACERVO_TEXT_CHAIN", "GEMINI_API_KEY", "OPENAI_API_KEY", "OPENROUTER_API_KEY",
-        "CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID", "ACERVO_OLLAMA_URL",
-        "ACERVO_VERTEX_PROJECT", "GOOGLE_APPLICATION_CREDENTIALS", "ACERVO_VERTEX_ACCOUNT",
-        "ACERVO_JWT_SECRET",
-    }
+    forbidden = {*PROVIDER_VARIABLES, "ACERVO_JWT_SECRET", "ACERVO_SPEECH_OPERATOR_TOKEN"}
     assert not (forbidden & environment), f"lexibeat must hold no credential: {sorted(forbidden & environment)}"
     # Vertex's is a *file*, so not mounting the directory is half of the same statement.
     assert not any("/run/acervo/credentials" in mount for mount in service.get("volumes") or [])
@@ -2347,51 +2073,6 @@ def test_the_loop_sample_bundle_is_never_deleted_by_a_reset() -> None:
     reset = installer.split("if [ \"$reset_anki\" = true ]; then", 1)[1].split("fi", 1)[0]
     assert "lexibeat" not in reset
     assert "data/lexibeat-bundle" in installer, "the installer must still create the bundle directory"
-
-
-def test_every_service_that_calls_a_model_is_given_the_same_credentials() -> None:
-    """Three services walk the owner's chain, and they must be able to walk all of it.
-
-    Nothing asserted this, and the speech service was silently missing Cloudflare's two variables
-    while the server and the worker had them. The symptom is as bad as it is quiet: a catalogue row
-    is checked for environment variables, so the row looks perfectly available *in the container
-    that has them* and is simply skipped in the one that does not — and a chain naming only that row
-    fails every call there while succeeding everywhere else.
-    """
-    import yaml
-
-    compose = yaml.safe_load(
-        (REPO_ROOT / "deploy/acervo/compose.yaml").read_text(encoding="utf-8")
-    )
-    callers = ("server", "acervo-worker", "speech-retrieval")
-    # Everything a catalogue row names, plus the chain that orders them. Not a wildcard over the
-    # services' environments: each carries variables of its own that have no business being shared.
-    required = {
-        "ACERVO_TEXT_CHAIN", "GEMINI_API_KEY", "OPENAI_API_KEY", "OPENROUTER_API_KEY",
-        "CLOUDFLARE_API_TOKEN", "CLOUDFLARE_ACCOUNT_ID", "ACERVO_OLLAMA_URL",
-        "ACERVO_VERTEX_PROJECT", "GOOGLE_APPLICATION_CREDENTIALS", "ACERVO_VERTEX_ACCOUNT",
-    }
-    for name in callers:
-        environment = set(compose["services"][name]["environment"])
-        assert required <= environment, f"{name} is missing {sorted(required - environment)}"
-    # Vertex is the one credential that is a file, so the directory has to be mounted as well as
-    # named — half of that configuration works exactly as badly as none of it.
-    for name in callers:
-        mounts = " ".join(compose["services"][name]["volumes"])
-        assert "/run/acervo/credentials" in mounts, f"{name} cannot read Vertex credentials"
-
-
-def test_the_speech_image_can_authenticate_to_vertex() -> None:
-    """LiteLLM does not require `google-auth`, and reaches Vertex through a deferred import of it.
-
-    The server image gets it transitively through `google-genai`; this one installs LiteLLM alone
-    and got nothing, so a Vertex chain raised on the first real call — with the row having looked
-    entirely available, because availability is environment variables and a credentials file and
-    never an importable library. The `[requests]` extra is what supplies
-    `google.auth.transport.requests`; LiteLLM itself depends on httpx.
-    """
-    dockerfile = (REPO_ROOT / "deploy/acervo/speech/Dockerfile").read_text(encoding="utf-8")
-    assert "google-auth[requests]" in dockerfile
 
 
 def test_the_speech_image_carries_every_acervo_module_its_launcher_imports() -> None:

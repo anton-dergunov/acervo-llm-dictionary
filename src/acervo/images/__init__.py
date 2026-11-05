@@ -7,7 +7,7 @@ deliberately make them look nothing alike, which is the entire reason per-sense 
 image per word.
 
 **This package stands alone**, the same way `acervo.models` does and enforced by the same test. It
-imports a catalogue and a chain from `acervo.models` and nothing else of Acervo's: no settings, no
+imports providers and a chain from `acervo.models` and nothing else of Acervo's: no settings, no
 graph, no database, no repository, no wire vocabulary, and not even `acervo.errors` — deciding *what
 kind of thing* went wrong is `acervo.models`' job and deciding what Acervo's wire calls it is
 `acervo.services.images`', and one import here would collapse that split invisibly.

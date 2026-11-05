@@ -74,8 +74,8 @@ nothing recurs.
 - **The labels are a separate call** over briefs already written, not more fields in the brief prompt:
   asked for ids as well, the brief writer stopped restating the cast, which a part drawn with no
   references depends on. The call is opportunistic — if it fails the story is drawn without references.
-- **Whether a model can take references is per pair**, `capabilities.image.references` on its catalogue
-  row; a pair without it is sent the plain brief. References go over LiteLLM's chat route, since
+- **Whether a model can take references is its family's fact** (`image.references` in
+  `models/families.py`); a pair without it is sent the plain brief. References go over LiteLLM's chat route, since
   `image_generation` takes no image for Vertex Gemini, and `prompts/acervo_story_reference.md` puts the
   picture first and the references second, because a conditioned photograph came out matching and
   stiffer the other way round.
@@ -97,8 +97,8 @@ is not a word. No passages is *not recorded*.
 cuts it into passages with a direction each, and one call to the voice per passage
 (`prompts/acervo_pronounce_story.md`: a narrator, not "in the moment"). **With a clear voice**, one
 passage covers the whole part, so the shape is the same either way and there is simply nothing to tap
-below it. A directed story is read by whoever reads the expressive order, which is only pairs declaring
-`style: instruction` — the rule every spoken thing follows
+below it. A directed story is read by whoever reads the expressive order, which is only voices that take a
+direction — the rule every spoken thing follows
 ([`pronunciation.md`](pronunciation.md)), not one of the story's own. Where none can be reached, the
 part is read whole in one call and no segmentation call is made: passages exist to carry a direction,
 and four plain calls would cost four times one. If the directed voices run out partway through a part,

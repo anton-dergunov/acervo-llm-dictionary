@@ -1,88 +1,115 @@
-"""Google's own APIs, reached by hand: one access token, and one way to fail.
+"""Google's own APIs, reached by hand: one way to sign in per provider, and one way to fail.
 
-Cloud Text-to-Speech and Cloud Vision are both outside LiteLLM, and both authenticate the way the
-`vertex` row does — application default credentials: a user login on a workstation, a mounted
-service-account key on a server. They share this module rather than a copy each, so there is one
-credential cache, one refresh, and one table from a `google.auth` exception to this package's
-reasons.
+Cloud Text-to-Speech and Cloud Vision are both outside LiteLLM. A Google Cloud provider signs in to
+them with a key, sent as `x-goog-api-key` so it never sits in a URL, or with a credentials file —
+a service account's key or a user's own sign-in — exchanged for an access token. Each provider holds
+its own credential, so two Google Cloud providers can be two accounts; tokens are cached per
+provider and per credential, and a replaced file is read again.
 
-A user login is refused by these APIs unless it names a quota project, so the project travels as
-`x-goog-user-project` whenever the row passes one — `headers` adds it. The token is fetched once and
-refreshed when it lapses; it never appears in an error.
+A user's own sign-in is refused by these APIs unless it names a quota project, so the provider's
+project travels as `x-goog-user-project` with a file. The token never appears in an error.
 """
 
 from __future__ import annotations
 
 import json
 import threading
-from typing import Any, NoReturn
+from typing import TYPE_CHECKING, Any, NoReturn
 
 import httpx
 
-from acervo.models.catalogue import Row, passed
 from acervo.models.errors import RETRYABLE, ProviderRefused, ProviderUnavailable
-from acervo.models.redact import redactor
+
+if TYPE_CHECKING:
+    from acervo.models.providers import Provider
 
 SCOPE = "https://www.googleapis.com/auth/cloud-platform"
 DETAIL_LIMIT = 2000
 
 _lock = threading.Lock()
-_credentials: Any = None
+_credentials: dict[tuple[str, str], Any] = {}
 
 
-def headers(row: Row, model: str) -> dict[str, str]:
-    """What every call to a Google API carries: a current token, and the quota project if any."""
-    project = passed(row).get("quotaProject")
-    found = {"Authorization": f"Bearer {token(row, model, project)}", "Content-Type": "application/json"}
-    if project:
+def headers(provider: "Provider", model: str) -> dict[str, str]:
+    """What every call to a Google API carries: a key, or a current token and the quota project."""
+    found = {"Content-Type": "application/json"}
+    if provider.credential.key:
+        found["x-goog-api-key"] = provider.credential.key
+        return found
+    if not provider.credential.file:
+        raise ProviderRefused("unconfigured", f"{provider.label} has no key or credentials file",
+                              provider_id=provider.id, model=model)
+    found["Authorization"] = f"Bearer {token(provider, model)}"
+    if project := provider.setting("project"):
         found["x-goog-user-project"] = project
     return found
 
 
-def token(row: Row, model: str, project: str | None) -> str:
-    """A current access token from application default credentials, refreshed only when it lapses."""
-    global _credentials
-    try:
-        import google.auth
-        import google.auth.exceptions
-        import google.auth.transport.requests
-    except ImportError as error:  # pragma: no cover — google-auth is a declared dependency
-        raise ProviderRefused("unconfigured", str(error), provider_id=row.id, model=model) from None
+def token(provider: "Provider", model: str) -> str:
+    """A current access token from this provider's credentials file, refreshed only when it lapses."""
+    import google.auth
+    import google.auth.exceptions
+    import google.auth.transport.requests
 
+    held = (provider.id, provider.credential.digest())
     with _lock:
         try:
-            if _credentials is None:
-                _credentials, _ = google.auth.default(scopes=[SCOPE], quota_project_id=project)
-            if not _credentials.valid:
-                _credentials.refresh(google.auth.transport.requests.Request())
+            credentials = _credentials.get(held)
+            if credentials is None:
+                credentials = _load(dict(provider.credential.file or {}), provider.setting("project"))
+                _credentials[held] = credentials
+            if not credentials.valid:
+                credentials.refresh(google.auth.transport.requests.Request())
         except google.auth.exceptions.DefaultCredentialsError as error:
-            _credentials = None
-            fail(row, model, "unconfigured", str(error), None)
+            _credentials.pop(held, None)
+            fail(provider, model, "configuration", str(error), None)
         except google.auth.exceptions.RefreshError as error:
-            _credentials = None
-            fail(row, model, "authentication", str(error), None)
+            _credentials.pop(held, None)
+            fail(provider, model, "authentication", str(error), None)
         except google.auth.exceptions.TransportError as error:
-            fail(row, model, "unreachable", str(error), None)
-        return str(_credentials.token)
+            fail(provider, model, "unreachable", str(error), None)
+        return str(credentials.token)
+
+
+def _load(info: dict[str, Any], project: str) -> Any:
+    """The file's credentials, by the loader for its own type.
+
+    Only the two types Google writes for a person are accepted — a service account's key and a
+    user's own sign-in — and `providers.parse` refuses any other before it is stored, so a file that
+    names some other kind of credential is never handed to Google's generic loader.
+    """
+    import google.auth.exceptions
+    from google.oauth2 import credentials as user, service_account
+
+    kind = info.get("type")
+    try:
+        if kind == "service_account":
+            found = service_account.Credentials.from_service_account_info(info, scopes=[SCOPE])
+        elif kind == "authorized_user":
+            found = user.Credentials.from_authorized_user_info(info, scopes=[SCOPE])
+        else:
+            raise google.auth.exceptions.DefaultCredentialsError(f"credentials of type {kind!r} are not taken")
+    except ValueError as error:
+        raise google.auth.exceptions.DefaultCredentialsError(str(error)) from None
+    return found.with_quota_project(project) if project else found
 
 
 def forget_credentials() -> None:
-    """Drop the cached credentials, so the next call reads them again. Tests use it."""
-    global _credentials
+    """Drop every cached token, so the next call reads its file again. Tests use it."""
     with _lock:
-        _credentials = None
+        _credentials.clear()
 
 
-def post(row: Row, model: str, url: str, body: dict[str, Any], timeout: float) -> httpx.Response:
-    """One authenticated POST, with a transport failure already classified. A non-2xx is failed too."""
+def post(provider: "Provider", model: str, url: str, body: dict[str, Any], timeout: float) -> httpx.Response:
+    """One signed-in POST, with a transport failure already classified. A non-2xx is failed too."""
     try:
-        response = httpx.post(url, headers=headers(row, model), json=body, timeout=timeout)
+        response = httpx.post(url, headers=headers(provider, model), json=body, timeout=timeout)
     except httpx.TimeoutException as error:
-        fail(row, model, "unreachable", f"timed out: {error}", None)
+        fail(provider, model, "unreachable", f"timed out: {error}", None)
     except httpx.HTTPError as error:
-        fail(row, model, "unreachable", str(error), None)
+        fail(provider, model, "unreachable", str(error), None)
     if not response.is_success:
-        fail(row, model, None, detail(response), response.status_code)
+        fail(provider, model, None, detail(response), response.status_code)
     return response
 
 
@@ -96,19 +123,10 @@ def detail(response: httpx.Response) -> str:
         return (response.text or "").strip()[:DETAIL_LIMIT] or "empty response body"
 
 
-def fail(row: Row, model: str, reason: str | None, detail: str, status: int | None) -> NoReturn:
-    from acervo.models.call import classify
+def fail(provider: "Provider", model: str, reason: str | None, detail: str, status: int | None) -> NoReturn:
+    from acervo.models.call import status_reason
 
     if reason is None:
-        reason, _ = classify(_Status(status))
-    redact = redactor(row.secret_names)
+        reason = status_reason(status)
     failure = ProviderUnavailable if reason in RETRYABLE else ProviderRefused
-    raise failure(reason, redact(detail), provider_id=row.id, model=model, status=status)
-
-
-class _Status(Exception):
-    """A bare HTTP status, so it goes through the same classifier LiteLLM's exceptions do."""
-
-    def __init__(self, status: int | None) -> None:
-        super().__init__(str(status))
-        self.status_code = status
+    raise failure(reason, detail, provider_id=provider.id, model=model, status=status)  # type: ignore[arg-type]

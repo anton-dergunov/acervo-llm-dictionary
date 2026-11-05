@@ -19,6 +19,7 @@ from acervo.models.errors import ProviderRefused, ProviderUnavailable
 from acervo.pronunciation.ids import pronunciation_id
 
 from graph_records import attestation, example, lexeme, sense, vocabulary
+from provider_rows import GOOGLE
 
 DEVICE = "device000000001"
 MP3 = b"ID3\x04\x00an-mp3-of-some-length"
@@ -45,11 +46,7 @@ def wav(words: str) -> bytes:
 @pytest.fixture(autouse=True)
 def a_voice(server, monkeypatch, tmp_path):
     """Cloud TTS is credentialed and answers, so the catalogue's recommended orders stand."""
-    credentials = tmp_path / "service-account.json"
-    credentials.write_text("{}")
-    monkeypatch.setenv("ACERVO_VERTEX_PROJECT", "a-project-name")
-    monkeypatch.setenv("GOOGLE_APPLICATION_CREDENTIALS", str(credentials))
-    monkeypatch.delenv("ACERVO_VERTEX_ACCOUNT", raising=False)
+    server.add_provider(GOOGLE)
     calls: list[dict] = []
 
     def speech(row, model, words, **kwargs):
@@ -104,7 +101,7 @@ def test_pressing_play_writes_the_file_and_a_row_at_the_derived_id(server):
     assert clip["id"] == pronunciation_id("lexeme", entry["id"])
     assert clip["targetKind"] == "lexeme" and clip["targetId"] == entry["id"]
     assert clip["text"] == "picar" and clip["lang"] == "es"
-    assert clip["providerId"] == "google-tts" and clip["modelId"] == "wavenet"
+    assert clip["providerId"] == "google-cloud" and clip["modelId"] == "Wavenet"
     assert clip["voice"] == "es-ES-Wavenet-F"
     # Asked for uncompressed, stored as Opus: `pronunciation/encode.py`, measured blind in
     # `experiments/pronunciation-encoding/`.
@@ -178,7 +175,7 @@ def test_choosing_the_clear_order_for_examples_reads_them_plainly_and_cheaply(se
     assert server.speech.calls[-1]["style"] is None
     assert clip["emotion"] is None
     # And the cheap voice actually read it: the order changed, not just what was sent to it.
-    assert clip["modelId"] == "wavenet"
+    assert clip["modelId"] == "Wavenet"
 
 
 def test_delivery_takes_only_the_two_orders_and_the_three_uses(server):
@@ -194,14 +191,14 @@ def test_an_expressive_order_with_no_directed_voice_is_read_by_the_clear_one(ser
     reads, plainly, and the log says so."""
     entry, itch, sentence, _ = word(server)
     server.put("/models/selection", {"chains": {
-        "audioExpressive": [{"provider": "google-tts", "model": "standard"}],
-        "audioPlain": [{"provider": "google-tts", "model": "wavenet"}],
+        "audioExpressive": [{"provider": "google-cloud", "model": "Standard"}],
+        "audioPlain": [{"provider": "google-cloud", "model": "Wavenet"}],
     }})
     with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
         clip = say(server, "examples", sentence["id"]).json()["data"]
-    assert [call["model"] for call in server.speech.calls] == ["wavenet"], "the saved plain voice was skipped"
+    assert [call["model"] for call in server.speech.calls] == ["Wavenet"], "the saved plain voice was skipped"
     assert server.speech.calls[-1]["style"] is None
-    assert clip["modelId"] == "wavenet" and clip["emotion"] is None
+    assert clip["modelId"] == "Wavenet" and clip["emotion"] is None
     assert any("result=undirected" in record.getMessage() and "reason=no_directed_voice" in record.getMessage()
                for record in caplog.records)
 
@@ -209,10 +206,10 @@ def test_an_expressive_order_with_no_directed_voice_is_read_by_the_clear_one(ser
 def test_directed_voices_that_are_all_out_of_reach_hand_over_to_the_clear_order(server, caplog):
     entry, itch, sentence, _ = word(server)
     for model in ("gemini-3.1-flash-tts-preview", "gemini-2.5-flash-tts"):
-        server.speech.refusing[model] = ProviderUnavailable("rate_limited", "quota", provider_id="google-tts", model=model)
+        server.speech.refusing[model] = ProviderUnavailable("rate_limited", "quota", provider_id="google-cloud", model=model)
     with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
         clip = say(server, "examples", sentence["id"]).json()["data"]
-    assert clip["modelId"] == "wavenet" and clip["emotion"] is None
+    assert clip["modelId"] == "Wavenet" and clip["emotion"] is None
     assert server.speech.calls[-1]["style"] is None
     assert any("result=undirected" in record.getMessage() and "reason=rate_limited" in record.getMessage()
                for record in caplog.records)
@@ -226,20 +223,20 @@ def test_a_pair_the_catalogue_stopped_offering_is_stepped_over_and_the_rest_of_t
 
     entry, *_ = word(server)
     model_selection.save(server.owner, {"audioPlain": [
-        ("gemini-free", "gemini/gemini-3.1-flash-tts-preview"), ("google-tts", "standard"),
+        ("gemini-api", "gemini/gemini-3.1-flash-tts-preview"), ("google-cloud", "Standard"),
     ]})
     with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
         answer = say(server, "lexemes", entry["id"])
     assert answer.status_code == 200, answer.json()
-    assert answer.json()["data"]["modelId"] == "standard"
+    assert answer.json()["data"]["modelId"] == "Standard"
     skipped = [record.getMessage() for record in caplog.records if "result=skipped" in record.getMessage()]
     assert skipped and "reason=retired" in skipped[0] and "order=audioPlain" in skipped[0]
-    assert "pair=gemini-free:gemini/gemini-3.1-flash-tts-preview" in skipped[0]
-    assert model_selection.chains(server.owner)["audioPlain"][0][0] == "gemini-free", "kept as saved"
+    assert "pair=gemini-api:gemini/gemini-3.1-flash-tts-preview" in skipped[0]
+    assert model_selection.chains(server.owner)["audioPlain"][0][0] == "gemini-api", "kept as saved"
     # The pane is told what will happen — a voice answers — and may save the order without the pair.
     assert server.get("/models").json()["data"]["chains"]["audioPlain"]["reason"] is None
     saved = server.put("/models/selection", {"chains": {
-        "audioPlain": [{"provider": "google-tts", "model": "standard"}]}})
+        "audioPlain": [{"provider": "google-cloud", "model": "Standard"}]}})
     assert saved.status_code == 200
 
 
@@ -249,9 +246,9 @@ def test_an_order_naming_only_pairs_no_longer_offered_reads_as_though_none_were_
     entry, itch, sentence, _ = word(server)
     model_selection.save(server.owner, {
         "audioPlain": [("vertex", "gemini-2.5-flash-preview-tts")],
-        "audioExpressive": [("gemini-free", "gemini/gemini-3.1-flash-tts-preview")],
+        "audioExpressive": [("gemini-api", "gemini/gemini-3.1-flash-tts-preview")],
     })
-    assert say(server, "lexemes", entry["id"]).json()["data"]["modelId"] == "wavenet"
+    assert say(server, "lexemes", entry["id"]).json()["data"]["modelId"] == "Wavenet"
     clip = say(server, "examples", sentence["id"]).json()["data"]
     assert clip["modelId"] == "gemini-3.1-flash-tts-preview" and clip["emotion"]
 
@@ -266,7 +263,7 @@ def test_an_order_saved_empty_is_still_every_voice_switched_off(server):
 def test_a_refusal_keeps_what_the_provider_said_for_the_log_and_not_for_the_owner(server, caplog):
     entry, *_ = word(server)
     server.speech.failure = ProviderRefused(
-        "configuration", "es-ES-Wavenet-Z is not a voice", provider_id="google-tts", model="wavenet")
+        "configuration", "es-ES-Wavenet-Z is not a voice", provider_id="google-cloud", model="Wavenet")
     with caplog.at_level(logging.INFO):
         answer = say(server, "lexemes", entry["id"])
     assert answer.json()["error"]["code"] == "llm_configuration"
@@ -281,16 +278,16 @@ def test_a_rejected_credential_is_not_routed_around(server):
     """Falling through a rejected key would only spend another allowance on the same mistake."""
     entry, itch, sentence, _ = word(server)
     server.speech.refusing["gemini-3.1-flash-tts-preview"] = ProviderRefused(
-        "authentication", "bad key", provider_id="google-tts", model="gemini-3.1-flash-tts-preview")
+        "authentication", "bad key", provider_id="google-cloud", model="gemini-3.1-flash-tts-preview")
     answer = say(server, "examples", sentence["id"])
     assert answer.status_code >= 400
-    assert "wavenet" not in {call["model"] for call in server.speech.calls}
+    assert "Wavenet" not in {call["model"] for call in server.speech.calls}
 
 
 def test_a_language_no_model_in_the_order_speaks_is_its_own_refusal(server):
     entry = lexeme(language="fr", headword="piquer", lemma="piquer", status="active")
     assert server.push({"lexemes": [entry]}).status_code == 200
-    server.put("/models/selection", {"chains": {"audioPlain": [{"provider": "google-tts", "model": "wavenet"}]}})
+    server.put("/models/selection", {"chains": {"audioPlain": [{"provider": "google-cloud", "model": "Wavenet"}]}})
     answer = say(server, "lexemes", entry["id"])
     assert answer.status_code == 422
     assert answer.json()["error"]["code"] == "no_voice_for_language"
@@ -299,8 +296,8 @@ def test_a_language_no_model_in_the_order_speaks_is_its_own_refusal(server):
 
 def test_a_rate_limit_is_the_same_code_every_other_model_speaks(server):
     entry, *_ = word(server)
-    server.put("/models/selection", {"chains": {"audioPlain": [{"provider": "google-tts", "model": "wavenet"}]}})
-    server.speech.failure = ProviderUnavailable("rate_limited", "quota", provider_id="google-tts", model="wavenet")
+    server.put("/models/selection", {"chains": {"audioPlain": [{"provider": "google-cloud", "model": "Wavenet"}]}})
+    server.speech.failure = ProviderUnavailable("rate_limited", "quota", provider_id="google-cloud", model="Wavenet")
     answer = say(server, "lexemes", entry["id"])
     assert answer.json()["error"]["code"] == "llm_rate_limited"
     assert "speech model" in answer.json()["error"]["message"]
@@ -375,12 +372,12 @@ def test_settings_follow_the_default_until_chosen_and_are_per_owner(server, othe
     }
     assert view["languages"] == ["es"]
     plain = {(entry["provider"], entry["model"]): entry for entry in view["orders"]["plain"]}
-    assert plain[("google-tts", "wavenet")]["voices"]["es"][0] == {
+    assert plain[("google-cloud", "Wavenet")]["voices"]["es"][0] == {
         "name": "es-ES-Wavenet-F", "locale": "es-ES", "gender": "female", "note": None, "match": "main"}
 
     saved = server.put("/pronunciations/settings", {
         "pregenerate": {"headword": True},
-        "voices": {"google-tts": {"wavenet": {"es": "es-ES-Wavenet-E"}}},
+        "voices": {"google-cloud": {"Wavenet": {"es": "es-ES-Wavenet-E"}}},
     }).json()["data"]
     assert saved["chosen"] is True and saved["pregenerate"]["headword"] is True
     assert saved["pregenerate"]["stories"] is True, "what was not named keeps its default"
@@ -393,14 +390,14 @@ def test_settings_follow_the_default_until_chosen_and_are_per_owner(server, othe
 
 def test_a_chosen_voice_is_the_one_that_reads(server):
     entry, *_ = word(server)
-    server.put("/pronunciations/settings", {"voices": {"google-tts": {"wavenet": {"es": "es-ES-Wavenet-E"}}}})
+    server.put("/pronunciations/settings", {"voices": {"google-cloud": {"Wavenet": {"es": "es-ES-Wavenet-E"}}}})
     clip = say(server, "lexemes", entry["id"]).json()["data"]
     assert server.speech.calls[-1]["voice"] == "es-ES-Wavenet-E"
     assert clip["voice"] == "es-ES-Wavenet-E"
 
 
 def test_a_voice_the_catalogue_does_not_offer_is_refused(server):
-    answer = server.put("/pronunciations/settings", {"voices": {"google-tts": {"wavenet": {"es": "en-US-Wavenet-C"}}}})
+    answer = server.put("/pronunciations/settings", {"voices": {"google-cloud": {"Wavenet": {"es": "en-US-Wavenet-C"}}}})
     assert answer.json()["error"]["code"] == "unknown_voice"
 
 
@@ -408,13 +405,13 @@ def test_an_exported_clip_is_put_back_with_who_recorded_it(server):
     entry, *_ = word(server)
     answer = server.client.put(
         f"/api/acervo/v1/pronunciations/lexemes/{entry['id']}/audio",
-        params={"text": "picar", "providerId": "google-tts", "modelId": "wavenet", "voice": "es-ES-Wavenet-F"},
+        params={"text": "picar", "providerId": "google-cloud", "modelId": "Wavenet", "voice": "es-ES-Wavenet-F"},
         headers={**server.auth, "X-Acervo-Device": DEVICE, "Content-Type": "audio/mpeg"},
         content=MP3,
     )
     assert answer.status_code == 200, answer.json()
     clip = answer.json()["data"]
-    assert clip["modelId"] == "wavenet" and clip["voice"] == "es-ES-Wavenet-F"
+    assert clip["modelId"] == "Wavenet" and clip["voice"] == "es-ES-Wavenet-F"
     # A bundle's clip is put back byte for byte, whatever it was recorded as: it is already a file.
     assert clip["audioMime"] == "audio/mpeg"
     assert server.speech.calls == [], "restoring spends nothing"
@@ -427,7 +424,7 @@ def test_a_clip_of_words_the_record_no_longer_holds_is_refused(server):
     entry, *_ = word(server)
     answer = server.client.put(
         f"/api/acervo/v1/pronunciations/lexemes/{entry['id']}/audio",
-        params={"text": "picaron", "providerId": "google-tts", "modelId": "wavenet"},
+        params={"text": "picaron", "providerId": "google-cloud", "modelId": "Wavenet"},
         headers={**server.auth, "X-Acervo-Device": DEVICE}, content=MP3,
     )
     assert answer.status_code == 409 and answer.json()["error"]["code"] == "stale_clip"
@@ -445,7 +442,7 @@ def test_every_request_leaves_one_outcome_line_saying_what_happened(server, capl
     assert len(outcomes) == 2
     assert outcomes[0].startswith("pronounce-sentence outcome target=example:")
     assert "source=generated" in outcomes[0] and "result=stored" in outcomes[0]
-    assert "pair=google-tts:gemini-3.1-flash-tts-preview" in outcomes[0] and "style=yes" in outcomes[0]
+    assert "pair=google-cloud:gemini-3.1-flash-tts-preview" in outcomes[0] and "style=yes" in outcomes[0]
     assert 'text="¡Me pica todo!"' in outcomes[0]
     assert "source=reused" in outcomes[1]
 
@@ -508,18 +505,21 @@ def test_without_an_accent_nothing_changes(server):
 def test_the_voice_chosen_to_read_first_reads_first_and_a_backup_keeps_its_name(server):
     entry, *_ = word(server)
     saved = server.put("/pronunciations/settings", {
-        "voices": {"google-tts": {"standard": {"es": "es-ES-Standard-E"}}},
-        "first": {"plain": {"es": ["google-tts", "standard"]}},
+        "voices": {"google-cloud": {"Standard": {"es": "es-ES-Standard-E"}}},
+        "first": {"plain": {"es": ["google-cloud", "Standard"]}},
     }).json()["data"]
     walk = saved["readers"]["plain"]["es"]
+    # With no order chosen the clear voices are every voice, in the order they were added: the two
+    # Gemini voices come last, reached only when both of Google's own have failed.
     assert [(one["model"], one["voice"]["name"]) for one in walk] == [
-        ("standard", "es-ES-Standard-E"), ("wavenet", "es-ES-Wavenet-F")]
+        ("Standard", "es-ES-Standard-E"), ("Wavenet", "es-ES-Wavenet-F"),
+        ("gemini-3.1-flash-tts-preview", "Kore"), ("gemini-2.5-flash-tts", "Kore")]
     clip = say(server, "lexemes", entry["id"]).json()["data"]
-    assert clip["modelId"] == "standard" and clip["voice"] == "es-ES-Standard-E"
+    assert clip["modelId"] == "Standard" and clip["voice"] == "es-ES-Standard-E"
 
     server.put("/pronunciations/settings", {
-        "voices": {"google-tts": {"gemini-2.5-flash-tts": {"es": "Puck"}}},
-        "first": {"expressive": {"es": ["google-tts", "gemini-2.5-flash-tts"]}},
+        "voices": {"google-cloud": {"gemini-2.5-flash-tts": {"es": "Puck"}}},
+        "first": {"expressive": {"es": ["google-cloud", "gemini-2.5-flash-tts"]}},
     })
     walk = server.get("/pronunciations/settings").json()["data"]["readers"]["expressive"]["es"]
     assert [(one["model"], one["voice"]["name"]) for one in walk] == [
@@ -527,14 +527,14 @@ def test_the_voice_chosen_to_read_first_reads_first_and_a_backup_keeps_its_name(
 
 
 def test_a_first_voice_that_cannot_take_a_direction_is_refused_for_the_expressive_order(server):
-    answer = server.put("/pronunciations/settings", {"first": {"expressive": {"es": ["google-tts", "wavenet"]}}})
+    answer = server.put("/pronunciations/settings", {"first": {"expressive": {"es": ["google-cloud", "Wavenet"]}}})
     assert answer.status_code == 400 and answer.json()["error"]["code"] == "undirected_voice"
 
 
 def test_a_preview_reads_the_sample_in_exactly_that_voice_and_accent_and_stores_nothing(server):
     accented_word(server, "AR")
     answer = server.post("/pronunciations/preview", {
-        "order": "expressive", "language": "es", "provider": "google-tts",
+        "order": "expressive", "language": "es", "provider": "google-cloud",
         "model": "gemini-2.5-flash-tts", "voice": "Charon",
         "text": "¡Me pica todo, che!", "emotion": "exasperated"})
     assert answer.status_code == 200 and answer.content[:4] == b"OggS"
@@ -547,19 +547,19 @@ def test_a_preview_reads_the_sample_in_exactly_that_voice_and_accent_and_stores_
 
 def test_a_preview_must_have_something_to_read(server):
     answer = server.post("/pronunciations/preview", {
-        "order": "plain", "language": "es", "provider": "google-tts", "model": "wavenet", "voice": "",
+        "order": "plain", "language": "es", "provider": "google-cloud", "model": "Wavenet", "voice": "",
         "text": "  "})
     assert answer.status_code == 400
 
 
 def test_a_preview_that_the_provider_refuses_keeps_its_sentence_in_the_log(server, caplog):
     accented_word(server, "AR")
-    server.speech.refusing["wavenet"] = ProviderRefused(
+    server.speech.refusing["Wavenet"] = ProviderRefused(
         "configuration", "es-US-Wavenet-A is not enabled for this project",
-        provider_id="google-tts", model="wavenet")
+        provider_id="google-cloud", model="Wavenet")
     caplog.set_level(logging.INFO)
     answer = server.post("/pronunciations/preview", {
-        "order": "plain", "language": "es", "provider": "google-tts", "model": "wavenet",
+        "order": "plain", "language": "es", "provider": "google-cloud", "model": "Wavenet",
         "voice": "es-US-Wavenet-A", "text": "picar"})
     assert answer.status_code >= 400
     assert any("pronounce-preview" in record.getMessage() and "is not enabled for this project" in record.getMessage()

@@ -14,6 +14,7 @@ import litellm
 import pytest
 from acervo.models import call as provider_call
 from graph_records import lexeme, topic, vocabulary
+from provider_rows import CLOUDFLARE, CLOUDFLARE_ACCOUNT, CLOUDFLARE_TOKEN, GEMINI, GEMINI_KEY
 
 # What a provider says when it refuses. Every classification test asserts this never reaches
 # the owner: a provider's own error text routinely echoes the request back, key included.
@@ -231,7 +232,7 @@ def test_it_builds_a_draft_keeping_the_learners_sentence_as_an_attestation_the_e
     assert own["sourceAttestationId"] == draft["attestations"][0]["id"]
     assert own["modelId"] is None
     assert invented["origin"] == "llm"
-    assert invented["modelId"] == "gemini/gemini-3.5-flash-lite"
+    assert invented["modelId"] == "gemini-3.5-flash-lite"
     # Every minted id is a real Acervo id, or nothing could reference anything.
     for identifier in (draft["senses"][0]["id"], own["id"], draft["attestations"][0]["id"]):
         assert re.match(r"^[a-z0-9]{15}$", identifier)
@@ -332,17 +333,18 @@ def test_a_proposal_is_never_written_even_when_applying_is_asked_for(seeded):
 
 
 # ── how the provider is called ──────────────────────────────────────────────
-# A provider is a row in `models/catalogue.json` reached through LiteLLM, so what is worth asserting
-# here is what the row put into the request — not a URL this code no longer builds.
+# A provider is reached through LiteLLM by its family, so what is worth asserting here is what the
+# family put into the request — not a URL this code no longer builds. LiteLLM is sent the family's
+# prefix and the provider's own model id; a record names the provider's own id.
 
 
-def test_it_asks_the_first_credentialed_row_in_the_catalogue(seeded):
+def test_it_asks_the_first_provider_added(seeded):
     seeded.capture()
     call = seeded.model.calls[0]
     assert call["model"] == "gemini/gemini-3.5-flash-lite"
-    assert call["api_key"] == "stub-key"
+    assert call["api_key"] == GEMINI_KEY
     assert call["timeout"] == provider_call.TIMEOUT_SECONDS
-    # Gemini's row declares `jsonMode: native`, so JSON mode is requested rather than asked for in
+    # The Gemini API's family says JSON mode is native, so it is requested rather than asked for in
     # prose. The two capture prompts return free-form documents, so it is `json_object` and not a
     # schema.
     assert call["response_format"] == {"type": "json_object"}
@@ -357,17 +359,18 @@ def test_litellms_own_retries_are_switched_off(seeded):
     assert seeded.model.calls[0]["max_retries"] == 0
 
 
-def test_the_chain_setting_decides_which_row_is_asked_first(seeded, monkeypatch):
-    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", "cloudflare-token")
-    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", "0123456789abcdef0123456789abcdef")
-    monkeypatch.setattr(seeded.settings, "text_chain", "cloudflare,gemini-free")
+def test_the_order_decides_which_provider_is_asked_first(seeded):
+    seeded.add_provider(CLOUDFLARE)
+    select(seeded, {"text": [{"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+                             {"provider": "gemini-api", "model": GEMINI_FIRST}]})
 
     seeded.capture()
     call = seeded.model.calls[0]
-    assert call["model"].startswith("cloudflare/")
-    assert call["api_key"] == "cloudflare-token"
-    # Cloudflare's row declares `jsonMode: prompt`: the instruction is the prompt's job there, and
-    # the reply is parsed afterwards.
+    assert call["model"] == f"cloudflare/{CLOUDFLARE_MODEL}"
+    assert call["api_key"] == CLOUDFLARE_TOKEN
+    # The account travels in the address rather than in the environment.
+    assert call["api_base"] == f"https://api.cloudflare.com/client/v4/accounts/{CLOUDFLARE_ACCOUNT}/ai/v1"
+    # Cloudflare's family asks for JSON in the prompt, and the reply is parsed afterwards.
     assert "response_format" not in call
 
 
@@ -380,7 +383,7 @@ def test_a_rate_limited_model_falls_through_to_the_next_model_of_the_same_provid
     asked = [call["model"] for call in seeded.model.calls]
     assert asked[:2] == ["gemini/gemini-3.5-flash-lite", "gemini/gemini-3.1-flash-lite"]
     _own, invented = draft["senses"][0]["examples"]
-    assert invented["modelId"] == "gemini/gemini-3.1-flash-lite"
+    assert invented["modelId"] == "gemini-3.1-flash-lite"
 
 
 def test_the_second_model_call_does_not_re_probe_what_the_first_exhausted(seeded):
@@ -399,23 +402,21 @@ def test_the_second_model_call_does_not_re_probe_what_the_first_exhausted(seeded
 
 def test_an_exhausted_provider_falls_through_and_the_entry_records_who_answered(seeded, monkeypatch):
     """The locked provenance contract, end to end. `modelId` naming the first choice is a bug."""
-    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", "cloudflare-token")
-    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", "0123456789abcdef0123456789abcdef")
+    seeded.add_provider(CLOUDFLARE)
     seeded.model.limited = {"gemini/gemini-3.5-flash-lite", "gemini/gemini-3.1-flash-lite"}
 
     draft = seeded.capture().json()["data"]["draft"]
     asked = [call["model"] for call in seeded.model.calls]
     assert [m.split("/")[0] for m in asked[:3]] == ["gemini", "gemini", "cloudflare"]
     _own, invented = draft["senses"][0]["examples"]
-    assert invented["modelId"].startswith("cloudflare/")
+    assert invented["modelId"] == CLOUDFLARE_MODEL
 
 
 def test_an_authentication_failure_stops_the_chain_rather_than_spending_the_next_provider(
     seeded, monkeypatch
 ):
     """A mistake to fix, not a condition to route around. The call count is the assertion."""
-    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", "cloudflare-token")
-    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", "0123456789abcdef0123456789abcdef")
+    seeded.add_provider(CLOUDFLARE)
     seeded.model.error = litellm.AuthenticationError(message=PRIVATE, llm_provider="p", model="m")
 
     assert seeded.capture().json()["error"]["code"] == "llm_authentication"
@@ -472,12 +473,11 @@ def test_a_provider_that_cannot_be_reached_is_told_apart_from_one_that_refuses(s
 
 def test_every_row_being_rate_limited_still_reads_as_rate_limited(seeded, monkeypatch):
     """What keeps the retry contract when a chain runs out: the last error is the reported one."""
-    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", "cloudflare-token")
-    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", "0123456789abcdef0123456789abcdef")
+    seeded.add_provider(CLOUDFLARE)
     seeded.model.error = litellm.RateLimitError(message=PRIVATE, llm_provider="p", model="m")
 
     assert seeded.capture().json()["error"]["code"] == "llm_rate_limited"
-    # Every pair, not every row: gemini-free's two models and then Cloudflare's one.
+    # Every pair, not every provider: the Gemini API's two models and then Cloudflare's one.
     assert len(seeded.model.calls) == 3
 
 
@@ -516,32 +516,33 @@ def capture_health(server):
     return server.client.get("/api/acervo/v1/health").json()["data"]["capture"]
 
 
-def test_health_reports_the_row_that_would_be_asked_first(seeded):
+def test_health_reports_the_pair_that_would_be_asked_first(seeded):
     assert capture_health(seeded) == {
         "available": True,
-        "provider": "gemini-free",
-        "model": "gemini/gemini-3.5-flash-lite",
+        "provider": "gemini-api",
+        "model": "gemini-3.5-flash-lite",
         "reason": None,
     }
 
 
 BROKEN = {
-    "GEMINI_API_KEY is not set": {"env": {"GEMINI_API_KEY": None}},
-    "CLOUDFLARE_ACCOUNT_ID is not set": {
-        "env": {"GEMINI_API_KEY": None, "CLOUDFLARE_API_TOKEN": "cloudflare-token"},
-        "chain": "cloudflare",
-    },
-    "no provider 'nonesuch' is in the catalogue": {"chain": "nonesuch"},
+    "no provider is added for text": {"remove": True},
+    "Gemini API has no API key": {"secret": {}},
+    "Cloudflare needs its account ID": {"remove": True, "add": {**CLOUDFLARE, "settings": {}}},
+    "Gemini API refused its key when it was last checked": {
+        "check": {"ok": False, "said": "no", "reason": "authentication", "account": None}},
 }
 
 
 @pytest.mark.parametrize("reason", list(BROKEN))
-def test_health_names_the_first_unmet_requirement_and_capture_then_refuses(seeded, monkeypatch, reason):
+def test_health_names_the_first_unmet_requirement_and_capture_then_refuses(seeded, reason):
     case = BROKEN[reason]
-    for name, value in (case.get("env") or {}).items():
-        monkeypatch.delenv(name, raising=False) if value is None else monkeypatch.setenv(name, value)
-    if case.get("chain"):
-        monkeypatch.setattr(seeded.settings, "text_chain", case["chain"])
+    if case.get("remove"):
+        seeded.remove_provider("gemini-api")
+    if "secret" in case or "check" in case:
+        seeded.add_provider(GEMINI, case.get("secret"), case.get("check"))
+    if case.get("add"):
+        seeded.add_provider(case["add"])
 
     readout = capture_health(seeded)
     assert readout["available"] is False
@@ -556,11 +557,9 @@ def test_health_names_the_first_unmet_requirement_and_capture_then_refuses(seede
 def test_health_never_puts_a_key_an_endpoint_or_an_account_id_in_an_unauthenticated_response(
     seeded, monkeypatch
 ):
-    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", "cloudflare-token")
-    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", "0123456789abcdef0123456789abcdef")
-    monkeypatch.setattr(seeded.settings, "text_chain", "cloudflare,gemini-free")
+    seeded.add_provider(CLOUDFLARE)
     body = seeded.client.get("/api/acervo/v1/health").text
-    for secret in ("cloudflare-token", "stub-key", "0123456789abcdef0123456789abcdef"):
+    for secret in (CLOUDFLARE_TOKEN, GEMINI_KEY, CLOUDFLARE_ACCOUNT):
         assert secret not in body
 
 
@@ -569,8 +568,12 @@ def test_health_never_puts_a_key_an_endpoint_or_an_account_id_in_an_unauthentica
 # restarted and nothing redeployed. These run against the same process, which is the whole claim.
 
 
-GEMINI_SECOND = "gemini/gemini-3.1-flash-lite"
-CLOUDFLARE_TEXT = "cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+GEMINI_FIRST = "gemini-3.5-flash-lite"
+GEMINI_SECOND = "gemini-3.1-flash-lite"
+CLOUDFLARE_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+# What LiteLLM is sent: the family's prefix and the provider's own id.
+WIRE_SECOND = f"gemini/{GEMINI_SECOND}"
+WIRE_CLOUDFLARE = f"cloudflare/{CLOUDFLARE_MODEL}"
 
 
 def select(server, chains):
@@ -580,89 +583,83 @@ def select(server, chains):
 
 
 @pytest.fixture
-def cloudflare_too(monkeypatch):
-    monkeypatch.setenv("CLOUDFLARE_API_TOKEN", "cloudflare-token")
-    monkeypatch.setenv("CLOUDFLARE_ACCOUNT_ID", "0123456789abcdef0123456789abcdef")
+def cloudflare_too(seeded):
+    seeded.add_provider(CLOUDFLARE)
 
 
 def test_the_owners_chain_takes_effect_on_the_next_capture_with_no_restart(seeded, cloudflare_too):
     seeded.capture()
     assert seeded.model.calls[0]["model"].startswith("gemini/")
 
-    select(seeded, {"text": [{"provider": "cloudflare", "model": CLOUDFLARE_TEXT}]})
+    select(seeded, {"text": [{"provider": "cloudflare", "model": CLOUDFLARE_MODEL}]})
     seeded.model.calls.clear()
     seeded.capture()
-    assert seeded.model.calls[0]["model"] == CLOUDFLARE_TEXT
+    assert seeded.model.calls[0]["model"] == WIRE_CLOUDFLARE
 
 
-def test_the_owners_chain_outranks_the_deployments(seeded, monkeypatch, cloudflare_too):
-    monkeypatch.setattr(seeded.settings, "text_chain", "gemini-free")
-    select(seeded, {"text": [{"provider": "cloudflare", "model": CLOUDFLARE_TEXT}]})
+def test_with_nothing_chosen_the_providers_are_asked_in_the_order_they_were_added(seeded, cloudflare_too):
+    seeded.model.limited = {"gemini/gemini-3.5-flash-lite", WIRE_SECOND}
     seeded.capture()
-    assert seeded.model.calls[0]["model"] == CLOUDFLARE_TEXT
+    assert [call["model"] for call in seeded.model.calls][:3] == [
+        "gemini/gemini-3.5-flash-lite", WIRE_SECOND, WIRE_CLOUDFLARE]
 
 
-def test_the_deployment_still_decides_when_the_owner_has_not_chosen(seeded, monkeypatch, cloudflare_too):
-    """The other rung of the ladder: owner, then deployment, then catalogue order."""
-    monkeypatch.setattr(seeded.settings, "text_chain", "cloudflare")
-    seeded.capture()
-    assert seeded.model.calls[0]["model"] == CLOUDFLARE_TEXT
-
-
-def test_the_owner_can_pin_the_second_model_of_a_row_and_it_is_the_only_one_called(seeded):
+def test_the_owner_can_pin_the_second_model_of_a_provider_and_it_is_the_only_one_called(seeded):
     """Two free-tier buckets of 500 a day; the owner picks which one this account spends."""
-    select(seeded, {"text": [{"provider": "gemini-free", "model": GEMINI_SECOND}]})
+    select(seeded, {"text": [{"provider": "gemini-api", "model": GEMINI_SECOND}]})
     seeded.capture()
-    assert [call["model"] for call in seeded.model.calls] == [GEMINI_SECOND, GEMINI_SECOND]
+    assert [call["model"] for call in seeded.model.calls] == [WIRE_SECOND, WIRE_SECOND]
 
 
 def test_a_chosen_chain_falls_through_and_the_entry_records_who_answered(seeded, cloudflare_too):
     select(seeded, {"text": [
-        {"provider": "gemini-free", "model": GEMINI_SECOND},
-        {"provider": "cloudflare", "model": CLOUDFLARE_TEXT},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
     ]})
-    seeded.model.limited = {GEMINI_SECOND}
+    seeded.model.limited = {WIRE_SECOND}
 
     draft = seeded.capture().json()["data"]["draft"]
-    assert [call["model"] for call in seeded.model.calls][:2] == [GEMINI_SECOND, CLOUDFLARE_TEXT]
+    assert [call["model"] for call in seeded.model.calls][:2] == [WIRE_SECOND, WIRE_CLOUDFLARE]
     _own, invented = draft["senses"][0]["examples"]
-    assert invented["modelId"] == CLOUDFLARE_TEXT
+    assert invented["modelId"] == CLOUDFLARE_MODEL
 
 
-def test_a_chosen_pair_whose_key_is_gone_is_skipped_rather_than_refused(seeded, monkeypatch, cloudflare_too):
-    """A rotated credential must not turn the owner's saved order into a refusal."""
+def test_a_chosen_pair_whose_key_was_refused_is_skipped_rather_than_refused(seeded, cloudflare_too):
+    """A refused key must not turn the owner's saved order into a refusal of every capture."""
     select(seeded, {"text": [
-        {"provider": "cloudflare", "model": CLOUDFLARE_TEXT},
-        {"provider": "gemini-free", "model": GEMINI_SECOND},
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
     ]})
-    monkeypatch.delenv("CLOUDFLARE_API_TOKEN")
+    seeded.add_provider(CLOUDFLARE, check={"ok": False, "said": "no", "reason": "authentication",
+                                           "account": None})
     seeded.capture()
-    assert [call["model"] for call in seeded.model.calls] == [GEMINI_SECOND, GEMINI_SECOND]
+    assert [call["model"] for call in seeded.model.calls] == [WIRE_SECOND, WIRE_SECOND]
 
 
-def test_a_chosen_model_the_catalogue_no_longer_offers_refuses_before_spending_anything(seeded):
-    """Refuse, never skip. A retired model is a state nothing is supposed to produce, and skipping
-    it would walk half the chain the owner configured, silently, forever."""
+def test_a_chosen_model_the_provider_no_longer_offers_refuses_before_spending_anything(seeded):
+    """Refuse, never skip. A model nobody offers is a state nothing is supposed to produce —
+    removing one takes it out of every order — and skipping it would walk half the chain the owner
+    configured, silently, forever."""
     from acervo.repository import model_selection
 
-    model_selection.save(seeded.owner, {"text": [("gemini-free", "gemini/retired-last-year")]})
+    model_selection.save(seeded.owner, {"text": [("gemini-api", "retired-last-year")]})
     answer = seeded.capture()
     assert answer.json()["error"]["code"] == "llm_configuration"
     assert seeded.model.calls == []
 
 
-def test_health_reports_the_deployment_while_the_owner_reports_their_own(seeded, cloudflare_too):
+def test_health_reports_the_providers_order_while_the_owner_reports_their_own(seeded, cloudflare_too):
     """`/health` is unauthenticated — the liveness probe and the pre-sign-in readout — so it must
     not vary by caller. What the owner's chain will do is `GET /models`."""
-    select(seeded, {"text": [{"provider": "cloudflare", "model": CLOUDFLARE_TEXT}]})
+    select(seeded, {"text": [{"provider": "cloudflare", "model": CLOUDFLARE_MODEL}]})
 
     assert capture_health(seeded) == {
-        "available": True, "provider": "gemini-free",
-        "model": "gemini/gemini-3.5-flash-lite", "reason": None,
+        "available": True, "provider": "gemini-api",
+        "model": "gemini-3.5-flash-lite", "reason": None,
     }
     chosen = seeded.get("/models").json()["data"]["chains"]["text"]
     assert chosen["source"] == "owner"
-    assert chosen["pairs"] == [{"provider": "cloudflare", "model": CLOUDFLARE_TEXT}]
+    assert chosen["pairs"] == [{"provider": "cloudflare", "model": CLOUDFLARE_MODEL}]
 
 
 def test_a_fall_through_is_reported_so_a_broken_provider_is_not_invisible(seeded, cloudflare_too):
@@ -672,14 +669,14 @@ def test_a_fall_through_is_reported_so_a_broken_provider_is_not_invisible(seeded
     never chose, and they go on believing it is the one building their words.
     """
     select(seeded, {"text": [
-        {"provider": "cloudflare", "model": CLOUDFLARE_TEXT},
-        {"provider": "gemini-free", "model": GEMINI_SECOND},
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
     ]})
-    seeded.model.limited = {CLOUDFLARE_TEXT}
+    seeded.model.limited = {WIRE_CLOUDFLARE}
 
     body = seeded.capture().json()["data"]
     assert body["passedOver"] == [
-        {"provider": "cloudflare", "model": CLOUDFLARE_TEXT, "reason": "rate_limited"}
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL, "reason": "rate_limited"}
     ]
     _own, invented = body["draft"]["senses"][0]["examples"]
     assert invented["modelId"] == GEMINI_SECOND
@@ -692,10 +689,10 @@ def test_nothing_is_reported_when_the_first_choice_answered(seeded):
 def test_a_provider_that_refused_both_calls_is_reported_once(seeded, cloudflare_too):
     """One thing that is wrong, not two — a capture is two model calls, not two problems."""
     select(seeded, {"text": [
-        {"provider": "cloudflare", "model": CLOUDFLARE_TEXT},
-        {"provider": "gemini-free", "model": GEMINI_SECOND},
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
     ]})
-    seeded.model.limited = {CLOUDFLARE_TEXT}
+    seeded.model.limited = {WIRE_CLOUDFLARE}
     seeded.capture()
 
     # The rest means the second call skips it, so this also pins that a remembered refusal does not

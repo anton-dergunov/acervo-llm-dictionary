@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-PROTOCOL=14
+PROTOCOL=15
 HELPER_PATH=/usr/local/sbin/deploy-acervo
 SUDOERS_PATH=/etc/sudoers.d/deploy-acervo
 PATH="$PATH:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/bin:/var/packages/ContainerManager/target/usr/bin:/var/packages/Docker/target/usr/bin"
@@ -239,8 +239,6 @@ configure_https() {
 deploy_release() {
   acervo_root=
   credentials_file=
-  llm_credentials_file=
-  google_credentials_file=
   reset_anki=false
   reset_database=false
   transition=false
@@ -254,8 +252,6 @@ deploy_release() {
     case "$1" in
       --root) [ "$#" -ge 2 ] || exit 2; acervo_root=$2; shift 2 ;;
       --credentials-file) [ "$#" -ge 2 ] || exit 2; credentials_file=$2; shift 2 ;;
-      --llm-credentials-file) [ "$#" -ge 2 ] || exit 2; llm_credentials_file=$2; shift 2 ;;
-      --google-credentials-file) [ "$#" -ge 2 ] || exit 2; google_credentials_file=$2; shift 2 ;;
       --bind-address) [ "$#" -ge 2 ] || exit 2; bind_address=$2; shift 2 ;;
       --port) [ "$#" -ge 2 ] || exit 2; anki_port=$2; shift 2 ;;
       --app-bind-address) [ "$#" -ge 2 ] || exit 2; app_bind_address=$2; shift 2 ;;
@@ -284,23 +280,9 @@ deploy_release() {
       exit 2
     }
   fi
-  if [ -n "$llm_credentials_file" ]; then
-    case "$llm_credentials_file" in /tmp/acervo-llm-credentials-[0-9]*) ;; *) echo "Unexpected LLM credentials path" >&2; exit 2 ;; esac
-    [ -f "$llm_credentials_file" ] && [ ! -L "$llm_credentials_file" ] || {
-      echo "Missing LLM credentials file" >&2
-      exit 2
-    }
-  fi
-  if [ -n "$google_credentials_file" ]; then
-    case "$google_credentials_file" in /tmp/acervo-google-credentials-[0-9]*) ;; *) echo "Unexpected Google credentials path" >&2; exit 2 ;; esac
-    [ -f "$google_credentials_file" ] && [ ! -L "$google_credentials_file" ] || {
-      echo "Missing Google credentials file" >&2
-      exit 2
-    }
-  fi
 
   private_dir=$(mktemp -d /tmp/acervo-deploy.XXXXXX)
-  trap 'rm -rf "$private_dir"; [ -z "${credentials_file:-}" ] || rm -f "$credentials_file"; [ -z "${llm_credentials_file:-}" ] || rm -f "$llm_credentials_file"; [ -z "${google_credentials_file:-}" ] || rm -f "$google_credentials_file"' EXIT HUP INT TERM
+  trap 'rm -rf "$private_dir"; [ -z "${credentials_file:-}" ] || rm -f "$credentials_file"' EXIT HUP INT TERM
   archive="$private_dir/release.tar.gz"
   installer="$private_dir/install.sh"
   chmod 700 "$private_dir"
@@ -320,21 +302,6 @@ deploy_release() {
     cp "$credentials_file" "$credentials_copy"
     chmod 600 "$credentials_copy"
     set -- "$@" --credentials-file "$credentials_copy"
-  fi
-  if [ -n "$llm_credentials_file" ]; then
-    llm_credentials_copy="$private_dir/llm-credentials"
-    cp "$llm_credentials_file" "$llm_credentials_copy"
-    chmod 600 "$llm_credentials_copy"
-    set -- "$@" --llm-credentials-file "$llm_credentials_copy"
-  fi
-  # Google will not authenticate from a value, so this one credential travels as a file the whole
-  # way: streamed to /tmp by the deployer, copied into the private directory here, and installed
-  # beside llm.env by the installer for the container to mount.
-  if [ -n "$google_credentials_file" ]; then
-    google_credentials_copy="$private_dir/google-credentials"
-    cp "$google_credentials_file" "$google_credentials_copy"
-    chmod 600 "$google_credentials_copy"
-    set -- "$@" --google-credentials-file "$google_credentials_copy"
   fi
   [ "$reset_anki" = false ] || set -- "$@" --reset-anki
   [ -z "$timezone" ] || set -- "$@" --timezone "$timezone"
@@ -411,7 +378,6 @@ install_samples() {
   set -- -p "${ACERVO_COMPOSE_PROJECT:-acervo}" \
     --env-file "$acervo_root/deployment.env" \
     --env-file "$acervo_root/secrets.env" \
-    --env-file "$acervo_root/llm.env" \
     -f "$compose_file"
   echo "Fetching the sample pack — about 3.1 GB, once. It replaces any older one." >&2
   # Unquoted on purpose: it is a list of `--from URL` pairs, each checked above to hold no space or

@@ -32,8 +32,8 @@ from typing import Any
 
 import dataset
 
-from acervo.models import call, load_catalogue
-from acervo.models.catalogue import available, reason
+from acervo.models.local import load_local
+from acervo.models import call
 from acervo.models.errors import ProviderError
 from acervo.models.pacing import Pace
 from acervo.services.capture.compose import build_user_message
@@ -44,7 +44,7 @@ TIMEOUT_SECONDS = 90.0
 
 # Well under what each provider publishes. Gemini's free tier documents 15/min and meters the
 # credential rather than the model, so the gate is per ROW and set at eight.
-RATE_PER_MINUTE = {"gemini-free": 8, "vertex": 6, "cloudflare": 4}
+RATE_PER_MINUTE = {"gemini-api": 8, "vertex": 6, "cloudflare": 4}
 DEFAULT_RATE = 10
 
 # A refused pair rests, doubling, and then parks: dribbling a biased subsample of one pair's answers
@@ -82,13 +82,13 @@ def arm_digest(name: str) -> str:
 
 def pairs() -> list[dict[str, Any]]:
     """Every (row, model) the catalogue offers for text, with why a row cannot be called."""
-    catalogue = load_catalogue()
+    catalogue = load_local()
     out: list[dict[str, Any]] = []
     for row in catalogue.serving("text"):
         for model in row.models_for("text"):
             out.append({
                 "provider": row.id, "model": model, "row": row,
-                "available": available(row), "reason": reason(row),
+                "available": row.available, "reason": row.reason(),
             })
     return out
 
@@ -110,7 +110,7 @@ def chosen_pairs(only: list[str] | None) -> list[dict[str, Any]]:
 def preflight(live: list[dict[str, Any]]) -> dict[str, Any]:
     """Refuse to spend on the wrong account. Returns what it checked, for the manifest."""
     checked: dict[str, Any] = {"expectedAccount": EXPECT_ACCOUNT, "expectedProject": EXPECT_PROJECT}
-    if not any(p["provider"] in ("vertex", "google-tts") for p in live):
+    if not any(p["provider"] in ("vertex", "google-cloud") for p in live):
         checked["skipped"] = "no Google row in this run"
         return checked
     if not shutil.which("gcloud"):

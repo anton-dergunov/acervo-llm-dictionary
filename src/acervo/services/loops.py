@@ -514,7 +514,7 @@ def delivery(owner: str) -> str:
 
     The generator needs it to know whether to vary the repetitions itself or leave that to the
     director notes (§2.6), and it has no way to find out on its own: it holds no settings, no
-    catalogue and no credential. Choosing the clear voice is therefore worth what it says it is —
+    provider and no credential. Choosing the clear voice is therefore worth what it says it is —
     one recording a line rather than three — rather than three identical calls.
     """
     return pronunciation_settings.settings(owner).order_for("loops")

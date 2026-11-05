@@ -41,8 +41,8 @@ from PIL import Image
 from acervo.client import AcervoClient, AcervoError
 from acervo.images.render import MASTER, encode_master
 from acervo.images.styles import load_styles
-from acervo.models import call, chain, load_catalogue
-from acervo.models.catalogue import reason as unmet
+from acervo.models.local import load_local
+from acervo.models import call, chain
 from acervo.models.errors import ChainExhausted, ProviderRefused, ProviderUnavailable
 from acervo.stories import continuity, illustrate
 from acervo.stories.write import Part
@@ -53,9 +53,9 @@ PROMPTS = REPO / "prompts"
 OUT = Path(os.environ.get("STORY_PICTURES_OUT") or HERE / "out")
 
 IMAGE_PROVIDER = "vertex"
-IMAGE_MODEL = "vertex_ai/gemini-3.1-flash-lite-image"
+IMAGE_MODEL = "gemini-3.1-flash-lite-image"
 PICTURE_USD = 0.0342  # $0.0336 a picture and about two references at $0.00028
-TEXT_CHAIN = ["gemini-free"]  # the labels; GEMINI_API_KEY from `.env`
+TEXT_CHAIN = ["gemini-api"]  # the labels; GEMINI_API_KEY from `providers.local.json`
 RECENT = 5
 # The sets a run draws, and which picture a returning character is drawn from in each. Run 2 drew
 # `continuity` with the latest; run 3 compares that with the first, which the application now uses.
@@ -194,7 +194,7 @@ def _prompt_for(story: dict[str, Any], labels: continuity.Continuity, index: int
 def prepare(args: argparse.Namespace) -> None:
     stories = _stories()
     styles = load_styles()
-    catalogue = load_catalogue()
+    catalogue = load_local()
     candidates = chain.resolve("text", TEXT_CHAIN, catalogue)
     if not candidates:
         sys.exit("No text model: GEMINI_API_KEY is not set (it is read from .env).")
@@ -316,8 +316,8 @@ def _same_as_earlier_set(story: dict[str, Any], labels: continuity.Continuity, s
 
 
 def draw(args: argparse.Namespace) -> None:
-    row = load_catalogue().find(IMAGE_PROVIDER)
-    problem = unmet(row)
+    row = load_local().find(IMAGE_PROVIDER)
+    problem = row.reason()
     if problem:
         sys.exit(f"Vertex cannot be called from this machine: {problem}.")
     styles = load_styles()

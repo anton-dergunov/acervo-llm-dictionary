@@ -1,8 +1,10 @@
 # Providers: added in Settings, with their keys, and their usage shown
 
-**Status:** designed and agreed with the owner on 5 Nov 2026, not built. This page and the mock-ups
-in `design/ui-prototype/settings.html?page=providers` are the specification. The build is the sessions
-listed at the end.
+**Status:** designed and agreed with the owner on 5 Nov 2026. **S1 and S5 are built and not deployed:**
+they ship together with S2, since until Settings can add a provider the server has none. What is built
+is described in [`../architecture/models.md`](../architecture/models.md); this page keeps what is
+left. The mock-ups in `design/ui-prototype/settings.html?page=providers` are the specification for S2
+onwards.
 
 ## Why
 
@@ -179,9 +181,16 @@ and a fall-back.
   - **The file:** a service account or a user login, uploaded through the form. It adds Vertex text
     and pictures, and it is the only way for someone whose organisation blocks key creation
     ([`../operations/vertex-setup.md`](../operations/vertex-setup.md)).
-  - **To check in S1 and S4:** whether a Vertex express-mode key works through LiteLLM's Vertex
-    route, and whether Gemini-TTS on Cloud TTS accepts a key. One live call each. The form then says
-    which kinds a key unlocks.
+  - **Still to check, in S4:** whether a Vertex express-mode key works through LiteLLM's Vertex
+    route, and whether Gemini-TTS on Cloud TTS accepts a key. One live call each, and neither could
+    be made in S1: this machine holds no Google Cloud API key or express key. Until then a key
+    reaches voices and photos, and Vertex needs the file. The form then says which kinds a key
+    unlocks.
+  - **Checked in S1** (5 Nov 2026): Google's `voices.list` lists the 30 Gemini voices under plain
+    names (`Kore`) with their gender, but only under `en-US`, so it cannot say which locales they
+    accept. A Gemini voice refuses `es-AR` and a bare `es` and accepts `es-419` and `es-US`. Acervo
+    therefore sends a voice that speaks any locale the nearest one Google lists any voice under
+    (`es-US` for Argentina), unless locales are typed on the model.
   - **Credentials per provider:** each Google Cloud provider holds its own credential, which replaces
     the one process-wide default in `google_auth.py`.
 - **Ways that stop existing:** `--configure-llm`, `llm.env` and `ACERVO_TEXT_CHAIN`, along with the
@@ -261,7 +270,9 @@ picks the orders and voices once more. Nothing reads the old ids.
 
 ## Sessions
 
-1. **S1 · The provider store.**
+1. **S1 · The provider store.** *Built, with S5; deploys with S2.* The orders' default now includes
+   every voice in the clear order, the Gemini voices last, where `defaultChains` held only WaveNet and
+   Standard; the expressive default holds only voices that take a direction.
    - The families registry, covering today's families only (OpenAI-compatible through LiteLLM,
      Google Cloud, Cloudflare).
    - The providers table, the secrets file, and `models/` taking rows instead of reading the
@@ -273,7 +284,10 @@ picks the orders and voices once more. Nothing reads the old ids.
 2. **S2 · Settings.** The provider list, Add a provider, the provider's sub-page, the key check,
    and the model and voice pickers from the provider's own lists.
    **S1 and S2 deploy together.** After S1 the server has no providers until some are added, and
-   S2 is how they are added. A deploy of S1 alone would leave every model call unanswered.
+   S2 is how they are added. A deploy of S1 alone would leave every model call unanswered. S2 builds
+   on the routes S1 added (`POST /providers`, `PUT`/`DELETE /providers/{id}`, `POST
+   /providers/{id}/check`) and `GET /models`'s `families`; it adds the routes that list a
+   provider's own models and voices for the pickers (`listing.models`, `listing.voices` exist).
 3. **S3 · Usage.** The counters, the sink, the route and the two Usage pages. It can come before S2.
 4. **S4 · New families.** Gemini API TTS, OpenAI-compatible speech (Kokoro first), OpenAI images,
    A1111, ElevenLabs and Azure (plain voices). Each one is tried on Acervo's own prompts before the
@@ -285,8 +299,9 @@ picks the orders and voices once more. Nothing reads the old ids.
      apparatus and its own scoring page.
    - Work out what 10,000 credits a month buy in words, sentences and passages.
    - The result decides the zero-cost set's expressive order.
-6. **S5 · The clip service calls home.** The internal route, and the provider variables removed
-   from its container.
+6. **S5 · The clip service calls home.** *Built in S1*, so that removing `llm.env` did not leave
+   the clip service without a provider: `POST /companion/text`, authenticated by the operator token,
+   walking the providers' own order.
 7. **S6 · The guide.**
    - Write `docs/providers.md`, which leads with the zero-cost set, then the popular paid providers,
      then local models. Each provider gets how to sign up, which key to create, what the free

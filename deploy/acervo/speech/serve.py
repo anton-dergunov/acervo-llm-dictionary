@@ -1,17 +1,19 @@
-"""The speech container's command: the retrieval service, with Acervo's chain behind its providers.
+"""The speech container's command: the retrieval service, with Acervo behind its providers.
 
 `speech_retrieval.create_app` takes a `TranslationProvider` and a `WordAlignmentProvider` as
-constructor arguments — a public entry point of that package — so the player's target text runs on
-the owner's own chain without that repository gaining a LiteLLM dependency, a schema-dialect port or
-an error-taxonomy mapping. It changes nothing at all (`docs/features/spoken-clips.md` §2.13).
+constructor arguments — a public entry point of that package — so the player's target text is
+written by Acervo's own providers without that repository gaining a LiteLLM dependency, a
+schema-dialect port or an error-taxonomy mapping (`docs/features/spoken-clips.md` §2.13). This
+container holds no provider key: each call goes home to Acervo's `POST /companion/text`.
 
 This file is the only place the two projects' vocabularies meet, and it is deliberately thin: the
-call itself is `acervo.speech.provider.ChainGenerator`, which imports nothing of this service's and
+call itself is `acervo.speech.provider.AcervoGenerator`, which imports nothing of this service's and
 is tested from a virtualenv that does not carry FastAPI, uvicorn, yt-dlp or Stanza. What is here is
 the wiring that knows this version's prompts, schemas and exception types.
 
-Without `ACERVO_TEXT_CHAIN` and a credential, no providers are injected and the service falls back
-to its own behaviour — the authored caption where one exists, and no target text where none does.
+Without Acervo's address and the operator token, no providers are injected and the service falls
+back to its own behaviour — the authored caption where one exists, and no target text where none
+does. With them, a server that has no provider says so on each clip, as any refusal does.
 """
 
 from __future__ import annotations
@@ -40,18 +42,18 @@ from speech_retrieval.translations import (
 )
 
 from acervo.access_log import quiet_health_probes
-from acervo.speech.provider import ChainGenerator, GenerationFailed
+from acervo.speech.provider import AcervoGenerator, GenerationFailed
 
 
 class _Stage:
     """One stage, satisfying the service's Protocol structurally.
 
-    `provider` and `model` name the **chain**, never the row that answered: the service caches on
+    `provider` and `model` name the **order**, never the provider that answered: the service caches on
     them, so a fall-through that moved them would miss the cache on every retry and re-translate
     work already paid for. What actually answered travels in `provider_metadata`.
     """
 
-    def __init__(self, generator: ChainGenerator) -> None:
+    def __init__(self, generator: AcervoGenerator) -> None:
         self._generator = generator
         self.provider = generator.provider
         self.model = generator.model
@@ -138,41 +140,22 @@ class AcervoAlignmentProvider(_Stage):
 def providers():
     """Both stages, or neither.
 
-    Separate generators so the two stages are separate cache keys — the service keys them apart and
-    they need not be served by the same model. Absent when nothing is configured, which leaves the
-    service's own behaviour: the authored caption where one exists, and no target text where none.
-
-    **The question asked here is the one the chain will ask.** An earlier version asked whether
-    *any* text row was credentialed, ignoring `ACERVO_TEXT_CHAIN` — so a chain naming only rows
-    this container lacks passed the guard, injected a provider, and failed every single clip with a
-    message about a failure. "Translation is unavailable." is the truthful answer to that state,
-    and it is only reachable by injecting nothing.
+    Separate generators so the two stages are separate cache keys and separate lines in Acervo's
+    call log. Absent when this container has not been told where Acervo is or what the operator
+    token is, which leaves the service's own behaviour: the authored caption where one exists, and
+    no target text where none. Said out loud, because the only symptom otherwise is translations
+    quietly never appearing.
     """
-    named = [part.strip() for part in os.environ.get("ACERVO_TEXT_CHAIN", "").split(",") if part.strip()]
-    try:
-        from acervo.models import chain, load_catalogue
-
-        candidates = chain.resolve("text", named or None, load_catalogue())
-    except Exception as error:   # noqa: BLE001 — a broken catalogue must not stop the corpus serving
-        # Searching and playing must keep working; only the target text is lost. Said out loud,
-        # because the first version of this swallowed a misplaced catalogue and the only symptom was
-        # translations quietly never appearing.
-        print(f"speech: the text chain could not be resolved ({error!r}); "
-              "the player will show no target text", file=sys.stderr, flush=True)
-        return None, None
-    if not candidates:
-        print("speech: no credentialed text provider; the player will show no target text",
+    url = os.environ.get("ACERVO_API_URL", "").strip()
+    token = os.environ.get("SPEECH_RETRIEVAL_OPERATOR_TOKEN", "").strip()
+    if not url or not token:
+        print("speech: no Acervo address or operator token; the player will show no target text",
               file=sys.stderr, flush=True)
         return None, None
-    # What would answer, and in what order. This image carries no `acervo.admin`, so this line is
-    # the only reading of it available on the deployment — and the one question worth being able to
-    # answer from a log when the player shows nothing.
-    print("speech: target text runs on " + ", ".join(
-        f"{candidate.row.id}:{candidate.model}" for candidate in candidates
-    ), file=sys.stderr, flush=True)
+    print(f"speech: target text is written by Acervo at {url}", file=sys.stderr, flush=True)
     return (
-        AcervoTranslationProvider(ChainGenerator(named or None)),
-        AcervoAlignmentProvider(ChainGenerator(named or None)),
+        AcervoTranslationProvider(AcervoGenerator(url, token, "clip-translate")),
+        AcervoAlignmentProvider(AcervoGenerator(url, token, "clip-align")),
     )
 
 

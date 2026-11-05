@@ -1,8 +1,10 @@
 # Setting up Vertex AI for Acervo
 
-Vertex is the one provider whose credential is a **file**. Google will not authenticate from a
-value, and LiteLLM has no express-key path, so where every other provider is an API key in
-`llm.env`, Vertex needs a JSON file mounted into the container.
+Vertex is reached through a **Google Cloud** provider signed in with a credentials **file**: Google
+will not authenticate Vertex from a value through LiteLLM. An API key on the same provider reaches
+Cloud Text-to-Speech and Cloud Vision but not Vertex. The file is uploaded in Settings ▸ Providers,
+kept in the server's secrets file beside the database, and handed to each Vertex call with the
+provider's project and location.
 
 There are two shapes of that file and Acervo accepts both. This page walks each one end to end.
 
@@ -15,14 +17,13 @@ There are two shapes of that file and Acervo accepts both. This page walks each 
 | What it is | The file `gcloud auth application-default login` writes on your machine | A JSON file that authenticates as a non-human identity in your project |
 | Unlocking needed | None | One organization-policy override |
 | Says whose account it is | **No** — it has an `account` field and leaves it empty | **Yes** — `client_email` |
-| `ACERVO_VERTEX_ACCOUNT` guard | Cannot be used | Works |
-| Settings ▸ Providers shows | "a user login" | The service account |
+| Settings ▸ Providers shows | "Works with your own sign-in" | "Works as" the service account |
 | Good for | A workstation, and getting going quickly | A server, and any machine that holds more than one Google login |
 
 **Pick the key if you can.** Application default credentials are simply whichever Google login was
 signed in last, so on a machine that also holds a work account, "which account is Acervo spending?"
-can change without anything in Acervo changing. A key answers that question, and setting
-`ACERVO_VERTEX_ACCOUNT` then makes the wrong answer impossible rather than merely visible.
+can change without anything in Acervo changing. A service account's key answers that question:
+the provider's check says which account it is, every time it is checked.
 
 Everything below uses `PROJECT_ID` for your project and
 `acervo-vertex@PROJECT_ID.iam.gserviceaccount.com` for the service account. Substitute your own.
@@ -67,7 +68,7 @@ gcloud services list --enabled --project=PROJECT_ID | grep texttospeech
 
 Cloud TTS refuses a *user* login that names no quota project, which is what Step 2 of Path A sets —
 so if speech says the project is missing while Vertex is happy, that is the setting to check. Acervo
-sends `ACERVO_VERTEX_PROJECT` as the quota project on every speech call for the same reason.
+sends the provider's project as the quota project on every speech call for the same reason.
 
 To hear that it works, before Acervo is involved at all:
 
@@ -108,18 +109,11 @@ gcloud auth application-default login
 gcloud auth application-default set-quota-project PROJECT_ID
 ```
 
-**Step 3.** Check it locally before sending it anywhere. Vertex should say `yes`:
-
-```bash
-.venv/bin/python -m acervo.admin providers
-```
-
-**Step 4.** Send it to the server — §05.
+**Step 3.** Add it to the server — §05.
 
 > **What this file will not tell you.** Open it and you will see `"account": ""`. Google does not
-> record which login wrote it, so Acervo cannot say whose account the server is spending, and
-> `ACERVO_VERTEX_ACCOUNT` cannot be set — the guard refuses when it cannot check, because half a
-> guard that passes when it cannot check is not a guard. If that matters to you, use §04 instead.
+> record which login wrote it, so Acervo cannot say whose account the server is spending. If that
+> matters to you, use §04 instead.
 
 ---
 
@@ -275,103 +269,40 @@ Remember you will have to turn it off again to rotate the key.
 
 ---
 
-## §05 · Deploying it
+## §05 · Adding it
 
-### Re-install the launcher, once
+In **Settings ▸ Providers**, add **Google Cloud**, choose *Credentials file*, and upload the file —
+`~/acervo-vertex.json` for a key (path B), or `~/.config/gcloud/application_default_credentials.json`
+for your own sign-in (path A). Fill in the project, and leave the location at `global`: the Gemini
+image models 404 in a named region. Saving checks the file with a call that spends nothing and says
+whose it is; then add the Vertex models — `gemini-3.8-flash` for text, `gemini-3.1-flash-lite-image`
+for pictures — and put them in the orders on the same page.
 
-Deployments to a server go through a small root-owned launcher, and it carries a protocol number so
-a stale copy is refused rather than used. Support for the Google credentials file changed that
-number, so the launcher on the server has to be refreshed once. This asks for your sudo password;
-ordinary deployments afterwards will not.
-
-```bash
-./deploy.sh --install-helper
-```
-
-Skipping this gives `Unsupported deploy argument: --google-credentials-file` at the end of a full
-release build.
-
-### Send the credentials
-
-One command, whichever file you have. Nothing sensitive reaches a command line — the file travels
-over the SSH connection's standard input, is installed mode 600 beside `llm.env`, and is mounted
-read-only into the container.
-
-```bash
-# Path B, a service-account key
-./deploy.sh --configure-llm \
-  --llm-set ACERVO_VERTEX_PROJECT=PROJECT_ID \
-  --google-credentials ~/acervo-vertex.json
-
-# Path A, the file gcloud wrote
-./deploy.sh --configure-llm \
-  --llm-set ACERVO_VERTEX_PROJECT=PROJECT_ID \
-  --google-credentials ~/.config/gcloud/application_default_credentials.json
-```
-
-`--google-credentials` implies `GOOGLE_APPLICATION_CREDENTIALS`; you never set it yourself. The
-other providers' keys are untouched.
-
-### Lock the account down — key path only
-
-Name the account this row is allowed to spend, and it will refuse to run as any other — and refuse
-too when the credentials cannot prove whose they are, which is the application-default case.
-
-```bash
-./deploy.sh --configure-llm \
-  --llm-set ACERVO_VERTEX_ACCOUNT=acervo-vertex@PROJECT_ID.iam.gserviceaccount.com
-```
-
-### Put Vertex in the chain
-
-Which providers answer is the **owner's** choice, made in Settings ▸ Providers and taking effect on
-the next capture with nothing restarted. Setting a deployment default is optional:
-
-```bash
-./deploy.sh --configure-llm --llm-chain vertex,gemini-free,cloudflare
-```
+Nothing about this is deployment configuration: no file to send, no variable, no deploy.
 
 ---
 
 ## §06 · Checking it
 
-The same reading on a laptop and inside the container. It calls nothing and spends nothing.
+The provider's page says what its last check said. On the server, the same reading, spending nothing:
 
 ```bash
-# on your machine
-.venv/bin/python -m acervo.admin providers
-
-# on the server
 sudo docker exec acervo-server-1 python -m acervo.admin providers
 ```
 
-Vertex should read:
-
-```
-yes  Vertex AI
-     kinds     text, image
-     text      vertex_ai/gemini-3.8-flash, vertex_ai/gemini-3.5-flash
-     image     vertex_ai/gemini-3.1-flash-lite-image
-     account   acervo-vertex@PROJECT_ID.iam.gserviceaccount.com
-```
-
-Settings ▸ Providers shows the same thing, without an SSH session.
-
-### When it says `no`
+### When the check says no
 
 | What it says | What to do |
 |---|---|
-| `ACERVO_VERTEX_PROJECT is not set` | The `--llm-set` above did not reach the server. Re-run it. |
-| `Google application default credentials are not configured` | No file was installed. Re-run with `--google-credentials`. |
-| `…they do not say which account they are. A service-account key does.` | `ACERVO_VERTEX_ACCOUNT` is set but the file is an application-default one. Use a key, or unset the guard. |
-| `these credentials belong to X, and ACERVO_VERTEX_ACCOUNT names another account` | Exactly what it says. The guard is doing its job. |
+| `…needs its project` | Fill in the project on the provider's page. |
+| `…refused this key` with Google's sentence | The file was revoked, or the account lacks the Vertex AI User role (§04). |
+| `Vertex AI API has not been used in project …` | Enable the API (§02). |
 
 ### One real call per kind
 
-Gated, costs money, and skips a provider this machine has no credentials for:
+Gated, costs money, reads this machine's `providers.local.json`, and skips a provider with no key:
 
 ```bash
-set -a; . ./.env; set +a
 RUN_LIVE_MODEL_TESTS=true .venv/bin/python -m pytest tests/integration/test_models_live.py
 ```
 

@@ -1529,15 +1529,17 @@ describe("Acervo application", () => {
        the moment a chain was chosen. */
     signedIn();
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue({
+      families: [],
       providers: [{
-        id: "gemini-free", label: "Gemini (free tier)", kinds: ["text"],
-        models: { text: ["gemini/gemini-3.1-flash-lite"] },
-        available: true, reason: null, usageUrl: null, notes: null
+        id: "gemini-api", family: "gemini-api", label: "Gemini API", kinds: ["text"],
+        models: { text: [{ id: "gemini-3.1-flash-lite" }] }, settings: {}, extra: {},
+        credential: { kind: "key", hint: "AIza…mnop", account: null }, check: null,
+        available: true, reason: null, usageUrl: null
       }],
       chains: {
-        text: { source: "deployment", reason: null, pairs: [] },
-        image: { source: "deployment", reason: null, pairs: [] },
-        audio: { source: "deployment", reason: null, pairs: [] }
+        text: { source: "default", reason: null, pairs: [] },
+        image: { source: "default", reason: null, pairs: [] },
+        audio: { source: "default", reason: null, pairs: [] }
       }
     });
     await openList();
@@ -1546,7 +1548,7 @@ describe("Acervo application", () => {
 
     expect(settings.queryByText(/Entries are built by/)).not.toBeInTheDocument();
     openPage(settings, "Providers");
-    expect(await settings.findByText("gemini/gemini-3.1-flash-lite")).toBeInTheDocument();
+    expect(await settings.findByText("gemini-3.1-flash-lite")).toBeInTheDocument();
     expect(settings.getByRole("button", { name: /Credentials/ })).toBeInTheDocument();
   });
 });

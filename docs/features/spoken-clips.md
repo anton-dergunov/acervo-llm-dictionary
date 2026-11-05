@@ -368,20 +368,20 @@ Acervo stores none of it and reimplements none of it.
 > passage, cost two calls and up to two minutes, and left the player and the article disagreeing in
 > front of the reader. A deployment with no translation provider still shows its own sentence.
 
-**The service's model calls run on the owner's chain.** `TranslationProvider` and
-`WordAlignmentProvider` are Protocols there, and `create_app` takes both — a public entry point. So
-Acervo writes the adapter against `acervo.models` and the speech container calls `create_app` with
-it injected, in place of the console script. The other repository changes nothing at all: no LiteLLM
-dependency, no schema-dialect port, no error-taxonomy mapping.
-
-`acervo.models` stands alone by design, so that image carries it and `models/catalogue.json` and
-nothing else of Acervo's; Acervo's *server* image still never imports `speech_retrieval`. The chain
-is **given** as `ACERVO_TEXT_CHAIN` rather than looked up, since that container has no business
-reaching the database — the rule already stated for work that cannot import `repository/`. And
-Vertex needs only the credentials directory two containers already mount.
+**The service's model calls are answered by Acervo, and its container holds no key.**
+`TranslationProvider` and `WordAlignmentProvider` are Protocols there, and `create_app` takes both —
+a public entry point. So Acervo writes the adapter (`acervo/speech/provider.py`) and the speech
+container calls `create_app` with it injected, in place of the console script. The adapter sends
+each call home to Acervo's `POST /companion/text` with the instructions and the text, authenticated
+by the operator token the two containers already share, and Acervo walks its providers in the order
+they were added — the translation runs as the service's own job, with no owner behind it — and
+answers with the parsed object ([`../architecture/models.md`](../architecture/models.md), "Whose chain
+it is"). The other repository changes nothing at all: no LiteLLM dependency, no schema-dialect port,
+no error-taxonomy mapping. The image carries the adapter, the request id and nothing else of
+Acervo's; Acervo's *server* image still never imports `speech_retrieval`.
 
 One rule for that adapter: the cache is keyed on the `provider` and `model` it reports, so it
-reports **the chain**, never the row that happened to answer. Otherwise fall-through thrashes the
+reports **the order**, never the provider that happened to answer. Otherwise fall-through thrashes the
 cache. Translation and alignment are separate stages with separate keys, so they need not be served
 by the same model.
 
@@ -401,20 +401,17 @@ ranks last instead.
 
 ## §3 · Operating it
 
-**The model calls in the speech container carry no schema.** The service's two prompts name no
+**The model calls the speech container asks for carry no schema.** The service's two prompts name no
 field and leave the shape to a `responseSchema`. Acervo's adapter renames that dialect and writes
 the shape into the instructions instead, because no schema is sent anywhere in Acervo (`AGENTS.md`,
 "Constrained decoding is not used"): the alignment schema, the strongest case for one, bought no
 accuracy against constructed ground truth and was rejected with a 400 above roughly a hundred tokens.
 
-Three facts, each of which once produced the same single grey line in the player:
+Two facts, each of which once produced the same single grey line in the player:
 
-- **The image must carry `google-auth`.** LiteLLM reaches Vertex through a deferred import of it and
-  does not require it; a catalogue row is checked for environment variables and a credentials file,
-  never for an importable library, so the row looked available and raised on the first call.
-- **The startup guard must ask the question the chain asks.** Asking whether *any* text row is
-  credentialed, while `chain.resolve` honours `ACERVO_TEXT_CHAIN`, injects a provider that can only
-  fail. Injecting nothing is what produces the truthful "Translation is unavailable."
+- **Without Acervo's address and the operator token, nothing is injected.** That is what produces
+  the truthful "Translation is unavailable." With both, a server that has no provider says so on
+  each clip, in Acervo's own refusal.
 - **The service caches a refusal.** A stage that produced unusable output is served from memory ever
   after, `cache_hit` and all, unless `retry_failed` is sent — so a correct fix still shows the old
   failure on every clip already attempted. The player's retry sends that flag.

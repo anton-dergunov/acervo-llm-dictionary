@@ -149,9 +149,9 @@ running again gives you a genuinely different one rather than the same picture b
 
 ### A seed is only a seed where the provider takes one
 
-Now that the picture is drawn through the catalogue, the row says whether it honours a seed.
-Cloudflare does. Vertex does not — LiteLLM's transformer never puts one in the request — and OpenAI
-rejects the parameter outright, so both rows declare `capabilities.image.seed: "ignored"` and the
+Now that the picture is drawn through `models/`, the provider's family says whether it honours a
+seed. Cloudflare does. Vertex does not — LiteLLM's transformer never puts one in the request — and
+OpenAI rejects the parameter outright, so those families say `seed: "ignored"` and the
 answer comes back carrying a warning, which the record keeps under `run.usage.warnings`. The seed is
 still stored, because it is what a re-run derives, but on those rows "a regeneration keeps the look"
 is not true and the record says so rather than implying otherwise. Resolution is the same shape of
@@ -523,7 +523,7 @@ client's write path.
 
 - **Which provider draws is a chain**: the `--brief-chain` / `--image-chain` flag, else the chain the
   owner chose (fetched from `GET /models`, since `jobs/` may not read the owner's chain directly), else
-  the catalogue's order.
+  the order of this laptop's `providers.local.json`.
 - **A run is resumable.** Output is `output/images/<runId>/`: a manifest, and per job a JSON record —
   brief, composed prompt, style, seed, models, timings, cost — beside its WebP, keyed by the real
   derived id and skipped if already complete.
@@ -581,7 +581,7 @@ shape and the job step.
 ## §11 · What this deliberately does not do
 
 - No local diffusion fallback. Both calls now go through `src/acervo/models/`, so which provider
-  draws is a chain of catalogue rows rather than a constant — `--image-chain cloudflare,vertex`
+  draws is a chain of providers rather than a constant — `--image-chain cloudflare,vertex`
   carries the steady state on Cloudflare FLUX.2 Klein 4B and falls through to Vertex when its daily
   allocation stops. A *local* model is a different matter: the research measured 2.5–10 GiB of
   unified memory and one image per child process, and the machine with the GPU is not the machine

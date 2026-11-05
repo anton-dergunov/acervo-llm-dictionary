@@ -36,12 +36,13 @@ from acervo.images.compose import compose, prompt_version
 from acervo.images.ids import image_prompt_id, image_reference, seed_for
 from acervo.images.render import Renderer, as_master
 from acervo.images.styles import StyleTable, load_styles
-from acervo.models import ChainExhausted, ProviderError, ProviderRefused, chain, load_catalogue
+from acervo.models import ChainExhausted, ProviderError, ProviderRefused, Providers, chain
 from acervo.repository import graph, image_settings
 from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal
 from acervo.services.rules import with_rules
 from acervo.settings import Settings
+from acervo.services.providers import load as load_providers
 
 # How many times a sense is drawn before the sweep leaves it alone. In code rather than in the
 # record, which is what keeps `attempts` a count and stops it becoming a status enum: the record
@@ -76,14 +77,14 @@ def _candidates(settings: Settings, owner: str, kind: str) -> tuple[chain.Candid
     change in Settings ▸ Pictures took effect at some unpredictable later time.
     """
     try:
-        return chain.resolve(kind, chain_for(settings, owner, kind), load_catalogue())
+        return chain.resolve(kind, chain_for(settings, owner, kind), load_providers(settings))
     except ProviderError as error:
         raise refusal(error, kind) from None
 
 
 def _require(candidates: tuple[chain.Candidate, ...], settings: Settings, owner: str, kind: str) -> None:
     if not candidates:
-        raise refusal(chain.unconfigured(kind, chain_for(settings, owner, kind), load_catalogue()), kind)
+        raise refusal(chain.unconfigured(kind, chain_for(settings, owner, kind), load_providers(settings)), kind)
 
 
 # ── settings ────────────────────────────────────────────────────────────────
@@ -186,7 +187,7 @@ def brief_lexeme(settings: Settings, owner: str, device: str, lexeme_id: str,
     view, stored = _article(owner, lexeme_id)
     table = _styles()
     writer = BriefWriter(
-        load_catalogue(), candidates,
+        load_providers(settings), candidates,
         with_rules(_template(settings).read_text(encoding="utf-8"), owner), table,
         weights=chosen.weights(style.id for style in table.styles),
         boost_variety=chosen.boost_variety,
@@ -410,7 +411,7 @@ def _draw(candidates: tuple[chain.Candidate, ...], prompt: str, seed: int):
     return chain.walk(
         "image",
         [candidate.named for candidate in candidates],
-        load_catalogue(),
+        Providers(tuple({candidate.row.id: candidate.row for candidate in candidates}.values())),
         lambda candidate: renderer.draw(prompt, seed, candidate),
         chain.stamped,
         caller="picture",

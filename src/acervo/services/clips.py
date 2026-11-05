@@ -25,12 +25,13 @@ from acervo.clips.ids import clip_example_id
 from acervo.clips.select import ClipSelector, Selection
 from acervo.domain.ids import now_instant
 from acervo.errors import ApiError
-from acervo.models import ChainExhausted, ProviderError, chain, load_catalogue
+from acervo.models import ChainExhausted, ProviderError, chain
 from acervo.repository import clip_settings, graph
 from acervo.services.models import chain_for, refusal
 from acervo.services.prompts import prompt_text
 from acervo.services.rules import with_rules
 from acervo.settings import Settings
+from acervo.services.providers import load as load_providers
 
 # What a chosen clip is written as: an ordinary example whose origin says it was spoken.
 CLIP_ORIGIN = "subtitle"
@@ -70,11 +71,11 @@ def _candidates(settings: Settings, owner: str) -> tuple[chain.Candidate, ...]:
     change in Settings ▸ Providers took effect at some unpredictable later time.
     """
     try:
-        resolved = chain.resolve("text", chain_for(settings, owner, "text"), load_catalogue())
+        resolved = chain.resolve("text", chain_for(settings, owner, "text"), load_providers(settings))
     except ProviderError as error:
         raise refusal(error) from None
     if not resolved:
-        raise refusal(chain.unconfigured("text", chain_for(settings, owner, "text"), load_catalogue()))
+        raise refusal(chain.unconfigured("text", chain_for(settings, owner, "text"), load_providers(settings)))
     return resolved
 
 
@@ -178,7 +179,7 @@ def find_clips(settings: Settings, owner: str, device: str, lexeme_id: str) -> d
         settings.prompts_path, "acervo_clip_select",
         {"selfContainedOnly": chosen.self_contained_only},
     )
-    selector = ClipSelector(load_catalogue(), resolved, with_rules(template, owner))
+    selector = ClipSelector(load_providers(settings), resolved, with_rules(template, owner))
     gloss_lang = (article.gloss_langs or ["en"])[0]
     try:
         # Nothing is stamped on any path that raises, so a word refused here stays unconsulted and

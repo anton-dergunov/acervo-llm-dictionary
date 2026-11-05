@@ -284,7 +284,7 @@ the old `expressive` switch was deleted rather than left beside the new control:
 where there were two, and the cheap voice finally reachable for examples as well as loops.
 
 No third chain. Any voice may read the clear order and any voice that takes a direction the other, which
-is why the catalogue has one `audio` kind and `defaultChains` has two orders over it. A voice that cannot
+is why a provider has one `audio` kind and there are two orders over it. A voice that cannot
 take a direction never reads the directed order: it would record every line as though none had been
 asked for ([`pronunciation.md`](pronunciation.md)).
 

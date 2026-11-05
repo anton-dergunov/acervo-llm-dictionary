@@ -25,9 +25,9 @@ from __future__ import annotations
 from typing import Literal
 
 Reason = Literal[
-    "unconfigured",    # no row in the chain has its credentials
+    "unconfigured",    # no provider in the chain can be asked
     "authentication",  # 401, 403 — the credential was rejected
-    "configuration",   # 400, 404, an unknown row id, a row that cannot serve this kind
+    "configuration",   # 400, 404, an unknown provider, one that cannot serve this kind
     "refused",         # any other terminal answer, including one with no status at all
     "rate_limited",    # 429
     "unavailable",     # 5xx
@@ -55,23 +55,15 @@ SHAPE_TRIES = 2
 
 
 def _clean(detail: str) -> str:
-    """`detail`, with every credential the catalogue names taken out of it.
+    """`detail`, with every credential any provider was built with taken out of it.
 
-    Imported inside the function: `errors.py` is the bottom of this package and importing the
-    catalogue at module scope would invert that. A catalogue that cannot be read must not turn a
-    provider error into a different exception, so the unredacted text is never the fallback —
-    nothing is.
+    Imported inside the function: `errors.py` is the bottom of this package.
     """
     if not detail:
         return detail
-    try:
-        from acervo.models.catalogue import load_catalogue
-        from acervo.models.redact import redactor
+    from acervo.models.redact import redact
 
-        names = {name for row in load_catalogue().rows for name in row.secret_names}
-        return redactor(names)(detail)
-    except Exception:   # noqa: BLE001 — see above: no catalogue means no claim about this text
-        return ""
+    return redact(detail)
 
 
 class ProviderError(Exception):
@@ -85,9 +77,8 @@ class ProviderError(Exception):
     docstring always claimed, but the cleaning actually lived in `call.py` on the way in — so it
     covered errors classified from a provider's response and nothing else. Every error a *caller*
     raises by hand went through unwashed, which was harmless while nobody wrote them down and stopped
-    being harmless the moment `journal.py` did. Against every name in the catalogue rather than one
-    row's, because the error does not reliably know whose row it belongs to, and read fresh each
-    time, because a rotated key must not leave the old value unredacted.
+    being harmless the moment `journal.py` did. Against every credential any provider was built with
+    rather than one provider's, because the error does not reliably know whose call it was.
     """
 
     reason: Reason
@@ -136,7 +127,8 @@ class ChainExhausted(Exception):
 
     def __init__(self, attempts: tuple[tuple[str, str], ...], last: ProviderUnavailable,
                  reasons: tuple[str, ...] = (),
-                 passed_over: tuple[tuple[str, str, str], ...] = ()) -> None:
+                 passed_over: tuple[tuple[str, str, str], ...] = (),
+                 labels: dict[str, str] | None = None) -> None:
         listed = ", ".join(f"{provider} {model}" for provider, model in attempts)
         super().__init__(f"every provider was unavailable: {listed}")
         self.attempts = attempts
@@ -146,6 +138,8 @@ class ChainExhausted(Exception):
         # *which* of their models refused and why — "Gemini is overloaded, Cloudflare is out of
         # allowance" — rather than only the last one's reason as though it were the whole story.
         self.passed_over = passed_over or ((last.provider_id or "", last.model or "", last.reason),)
+        # The name the owner knows each provider by, so a sentence about them needs nothing else.
+        self.labels = dict(labels or {})
 
     @property
     def waited_on_nothing(self) -> bool:

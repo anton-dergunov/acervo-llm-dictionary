@@ -13,32 +13,29 @@ import logging
 import pytest
 
 from acervo.models import chain, journal
-from acervo.models.catalogue import load_catalogue
+from provider_rows import GEMINI, GEMINI_KEY, providers
 from acervo.models.errors import ChainExhausted, ProviderUnavailable
 from acervo.models.results import Answer, TextResult
 
-SHIPPED = load_catalogue()
+SHIPPED = providers(GEMINI)
 
 
 @pytest.fixture
 def written(monkeypatch, caplog):
-    for name in ("GEMINI_API_KEY", "OPENAI_API_KEY", "OPENROUTER_API_KEY"):
-        monkeypatch.delenv(name, raising=False)
-    monkeypatch.setenv("GEMINI_API_KEY", "AIzaSy-not-a-real-key-000")
     caplog.set_level(logging.INFO, logger=journal.LOGGER)
     return caplog
 
 
 def answer() -> TextResult:
     return TextResult(text="{}", parsed={},
-                      answer=Answer(provider_id="gemini-free", model="m", seconds=0.1, cost_usd=None))
+                      answer=Answer(provider_id="gemini-api", model="m", seconds=0.1, cost_usd=None))
 
 
 def test_a_pair_that_answered_is_recorded_with_its_name_and_its_cost_in_time(written):
-    chain.walk("text", [("gemini-free", "gemini/gemini-3.1-flash-lite")], SHIPPED,
+    chain.walk("text", [("gemini-api", "gemini-3.1-flash-lite")], SHIPPED,
                lambda candidate: answer(), chain.stamped, caller="brief")
     line = written.text
-    assert "brief" in line and "gemini-free" in line and "ok in" in line
+    assert "brief" in line and "gemini-api" in line and "ok in" in line
 
 
 def test_a_refusal_records_why_the_next_pair_is_being_asked(written):
@@ -50,7 +47,7 @@ def test_a_refusal_records_why_the_next_pair_is_being_asked(written):
         )
 
     with pytest.raises(ChainExhausted):
-        chain.walk("text", [("gemini-free", "gemini/gemini-3.1-flash-lite")], SHIPPED,
+        chain.walk("text", [("gemini-api", "gemini-3.1-flash-lite")], SHIPPED,
                    ask, chain.stamped, caller="brief")
     assert "unusable" in written.text
     assert "senseId" in written.text          # what actually came back
@@ -62,14 +59,14 @@ def test_a_key_a_provider_echoed_back_never_reaches_the_log(written):
     repeating it — a message cleaned only on its way to a log has a path that skips the cleaning."""
     def ask(candidate):
         raise ProviderUnavailable(
-            "refused", "rejected key AIzaSy-not-a-real-key-000",
+            "refused", f"rejected key {GEMINI_KEY}",
             provider_id=candidate.row.id, model=candidate.model,
         )
 
     with pytest.raises(ChainExhausted):
-        chain.walk("text", [("gemini-free", "gemini/gemini-3.1-flash-lite")], SHIPPED,
+        chain.walk("text", [("gemini-api", "gemini-3.1-flash-lite")], SHIPPED,
                    ask, chain.stamped, caller="brief")
-    assert "AIzaSy" not in written.text
+    assert GEMINI_KEY not in written.text
     assert "«redacted»" in written.text
 
 
@@ -88,7 +85,6 @@ def test_the_file_is_opened_once_and_creates_its_directory(tmp_path, monkeypatch
     from acervo.services.models import open_call_log
     from acervo.settings import Settings
 
-    monkeypatch.setenv("GEMINI_API_KEY", "AIzaSy-not-a-real-key-000")
     path = tmp_path / "nested" / "model-calls.log"
     settings = Settings(ACERVO_CALL_LOG_PATH=str(path))
     logger = logging.getLogger(journal.LOGGER)
@@ -98,8 +94,8 @@ def test_the_file_is_opened_once_and_creates_its_directory(tmp_path, monkeypatch
         open_call_log(settings)
         assert sum(getattr(h, "acervo_log_file", False) for h in logger.handlers) == 1
 
-        journal.passed("brief", "gemini-free", "m", "unusable",
-                       'got {"senses":[{"senseId":"s1"}]} AIzaSy-not-a-real-key-000', 1.5)
+        journal.passed("brief", "gemini-api", "m", "unusable",
+                       'got {"senses":[{"senseId":"s1"}]}', 1.5)
         for handler in logger.handlers:
             handler.flush()
         written = path.read_text(encoding="utf-8")
@@ -109,7 +105,7 @@ def test_the_file_is_opened_once_and_creates_its_directory(tmp_path, monkeypatch
                 handler.close()
                 logger.removeHandler(handler)
 
-    assert "brief gemini-free:m unusable after 1.50s" in written
+    assert "brief gemini-api:m unusable after 1.50s" in written
     assert "senseId" in written
 
 
@@ -146,12 +142,12 @@ def test_a_call_somebody_is_waiting_on_gives_up_long_before_capture_would():
 # ── reading the log back ────────────────────────────────────────────────────
 
 
-LIVE = """2026-09-12 20:32:56,709 INFO text gemini-free:gemini/gemini-3.1-flash-lite ok in 6.65s
-2026-09-12 20:33:06,691 INFO brief gemini-free:gemini/gemini-3.1-flash-lite ok in 1.46s
-2026-09-12 20:33:58,074 INFO brief gemini-free:gemini/gemini-3.1-flash-lite ok in 2.19s
-2026-09-12 20:34:56,116 INFO brief gemini-free:gemini/gemini-3.1-flash-lite ok in 2.29s
-2026-09-12 20:46:02,888 WARNING clips gemini-free:gemini/gemini-3.1-flash-lite unreachable — Timeout
-2026-09-12 20:46:04,329 INFO clips gemini-free:gemini/gemini-3.5-flash-lite ok in 1.44s
+LIVE = """2026-09-12 20:32:56,709 INFO text gemini-api:gemini-3.1-flash-lite ok in 6.65s
+2026-09-12 20:33:06,691 INFO brief gemini-api:gemini-3.1-flash-lite ok in 1.46s
+2026-09-12 20:33:58,074 INFO brief gemini-api:gemini-3.1-flash-lite ok in 2.19s
+2026-09-12 20:34:56,116 INFO brief gemini-api:gemini-3.1-flash-lite ok in 2.29s
+2026-09-12 20:46:02,888 WARNING clips gemini-api:gemini-3.1-flash-lite unreachable — Timeout
+2026-09-12 20:46:04,329 INFO clips gemini-api:gemini-3.5-flash-lite ok in 1.44s
 2026-09-12 20:46:06,457 ERROR brief exhausted after 1 attempt(s): unusable""".splitlines()
 
 
@@ -161,14 +157,14 @@ def test_the_log_answers_how_long_each_job_takes():
     from acervo.models import journal
 
     rows = {(row.caller, row.pair.split(":", 1)[1]): row for row in journal.summarise(LIVE)}
-    brief = rows[("brief", "gemini/gemini-3.1-flash-lite")]
+    brief = rows[("brief", "gemini-3.1-flash-lite")]
     assert (brief.answered, brief.failed) == (3, 0)
     assert brief.at(.5) == 2.19
     assert brief.at(1.0) == 2.29
 
     # A timeout is counted and contributes no duration: it took exactly as long as the bound
     # allowed, so averaging it in would measure the bound rather than the provider.
-    timed_out = rows[("clips", "gemini/gemini-3.1-flash-lite")]
+    timed_out = rows[("clips", "gemini-3.1-flash-lite")]
     assert (timed_out.answered, timed_out.failed) == (0, 1)
     assert timed_out.at(1.0) == 0.0
 
@@ -193,10 +189,10 @@ def test_the_log_totals_what_failures_cost_the_person_waiting():
     from acervo.models import journal
 
     lines = [
-        "2026-09-15 15:12:47,476 WARNING resolve gemini-free:m unreachable after 30.01s — Timeout",
-        "2026-09-15 15:13:00,349 WARNING resolve gemini-free:m unavailable after 0.40s — 503",
-        "2026-09-15 15:13:02,328 INFO resolve gemini-free:m ok in 1.98s",
-        "2026-09-15 15:13:03,000 INFO resolve gemini-free:m late ok after 9.00s",
+        "2026-09-15 15:12:47,476 WARNING resolve gemini-api:m unreachable after 30.01s — Timeout",
+        "2026-09-15 15:13:00,349 WARNING resolve gemini-api:m unavailable after 0.40s — 503",
+        "2026-09-15 15:13:02,328 INFO resolve gemini-api:m ok in 1.98s",
+        "2026-09-15 15:13:03,000 INFO resolve gemini-api:m late ok after 9.00s",
     ]
     (row,) = journal.summarise(lines)
     assert (row.answered, row.failed) == (1, 2)
@@ -210,9 +206,9 @@ def test_a_raced_chain_names_its_failures_with_their_cost(written):
                                   provider_id=candidate.row.id, model=candidate.model)
 
     with pytest.raises(ChainExhausted):
-        chain.walk("text", [("gemini-free", "gemini/gemini-3.1-flash-lite")], SHIPPED,
+        chain.walk("text", [("gemini-api", "gemini-3.1-flash-lite")], SHIPPED,
                    ask, chain.stamped, caller="compose", hedge_after=5)
-    assert "compose gemini-free:gemini/gemini-3.1-flash-lite unavailable after" in written.text
+    assert "compose gemini-api:gemini-3.1-flash-lite unavailable after" in written.text
 
 
 def test_an_outcome_line_is_key_value_quoted_where_it_must_be_and_invisible_to_the_timings(written):

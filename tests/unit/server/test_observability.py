@@ -18,6 +18,7 @@ from acervo.models import journal as call_journal
 from acervo.repository import accounts
 from acervo.tokens import ALGORITHM, mint_render, signing_key
 from acervo.work import journal as job_journal
+from provider_rows import GOOGLE
 
 API = "/api/acervo/v1"
 
@@ -167,11 +168,7 @@ def test_each_way_a_token_fails_is_named_and_the_caller_is_told_nothing(logs, se
 
 
 def test_a_take_asked_for_with_a_renders_token_is_filed_under_that_render(logs, server, monkeypatch, tmp_path):
-    credentials = tmp_path / "service-account.json"
-    credentials.write_text("{}")
-    monkeypatch.setenv("ACERVO_VERTEX_PROJECT", "a-project-name")
-    monkeypatch.setenv("GOOGLE_APPLICATION_CREDENTIALS", str(credentials))
-    monkeypatch.delenv("ACERVO_VERTEX_ACCOUNT", raising=False)
+    server.add_provider(GOOGLE)
     from test_takes import wav
 
     monkeypatch.setattr("acervo.models.google_tts.speech",

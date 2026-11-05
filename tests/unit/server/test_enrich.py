@@ -21,6 +21,7 @@ from conftest import OWNER_EMAIL
 from graph_records import example, lexeme, sense, vocabulary
 from test_clips import SPEECH_URL, CorpusStub, recorded
 from test_pronunciations import wav
+from provider_rows import GOOGLE, VERTEX_IMAGE
 
 
 @pytest.fixture
@@ -34,12 +35,8 @@ def corpus(server, monkeypatch) -> CorpusStub:
 
 
 @pytest.fixture
-def voice(monkeypatch, tmp_path):
-    credentials = tmp_path / "service-account.json"
-    credentials.write_text("{}")
-    monkeypatch.setenv("ACERVO_VERTEX_PROJECT", "a-project-name")
-    monkeypatch.setenv("GOOGLE_APPLICATION_CREDENTIALS", str(credentials))
-    monkeypatch.delenv("ACERVO_VERTEX_ACCOUNT", raising=False)
+def voice(server, monkeypatch):
+    server.add_provider(GOOGLE)
     said: list[str] = []
 
     def speech(row, model, words, **kwargs):
@@ -52,7 +49,7 @@ def voice(monkeypatch, tmp_path):
 
 @pytest.fixture(autouse=True)
 def providers(server, monkeypatch):
-    monkeypatch.setenv("OPENAI_API_KEY", "stub-key")
+    server.add_provider(VERTEX_IMAGE)
 
 
 @pytest.fixture

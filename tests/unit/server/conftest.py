@@ -181,6 +181,36 @@ class Server:
         client.token = self.token
         return client
 
+    def add_provider(self, document: dict, secret: dict | None = None, check: dict | None = None) -> None:
+        """Put a provider in the store as Settings would, without the call that checks its key.
+
+        `document` is one of `provider_rows`' documents; its usual secret goes with it unless
+        another is given. `check` is what the last check said, a working one by default.
+        """
+        from acervo.repository import providers as store
+        from acervo.services import provider_secrets
+        from provider_rows import SECRETS
+
+        provider_secrets.put(self.settings, document["id"],
+                             SECRETS.get(document["id"], {}) if secret is None else secret)
+        from acervo.models.families import find
+
+        stored = {"family": document["family"], "label": document.get("label") or find(document["family"]).label,
+                  "settings": document.get("settings") or {}, "models": document.get("models") or {},
+                  "extra": document.get("extra") or {}}
+        if store.get(document["id"]) is None:
+            store.add(document["id"], stored, check or {"ok": True, "said": "Works", "reason": None,
+                                                        "account": None})
+        else:
+            store.change(document["id"], stored, check)
+
+    def remove_provider(self, identifier: str) -> None:
+        from acervo.repository import providers as store
+        from acervo.services import provider_secrets
+
+        store.remove(identifier)
+        provider_secrets.put(self.settings, identifier, None)
+
     def get(self, path: str, **kwargs):
         return self.client.get(f"/api/acervo/v1{path}", headers=self.auth, **kwargs)
 
@@ -278,23 +308,10 @@ def server(tmp_path, monkeypatch) -> Server:
     monkeypatch.setenv("ACERVO_APP_BUILD", "218")
     monkeypatch.setenv("ACERVO_JWT_SECRET", "test-secret")
 
-    # One credentialed row, so the default chain is exactly `gemini-free` and a test about how a
-    # refusal is classified is not also a test about falling through to somebody else. The tests
-    # that are about the chain set these themselves.
-    monkeypatch.setenv("GEMINI_API_KEY", "stub-key")
-    monkeypatch.delenv("ACERVO_TEXT_CHAIN", raising=False)
-    for name in (
-        "CLOUDFLARE_API_TOKEN",
-        "CLOUDFLARE_ACCOUNT_ID",
-        "OPENAI_API_KEY",
-        "OPENROUTER_API_KEY",
-        "ACERVO_OLLAMA_URL",
-        "ACERVO_VERTEX_PROJECT",
-    ):
-        monkeypatch.delenv(name, raising=False)
-
     from acervo.api.app import create_app
     from acervo.models import call as model_call
+    from acervo.models import listing
+    from provider_rows import GEMINI, google_voices
     from acervo.repository import accounts
     from acervo.services import prompts
 
@@ -303,6 +320,8 @@ def server(tmp_path, monkeypatch) -> Server:
     painter = ImageStub()
     monkeypatch.setattr(model_call, "completion", model)
     monkeypatch.setattr(model_call, "image_generation", painter)
+    # Google's voice list, without the network: a test that adds Google Cloud gets these voices.
+    monkeypatch.setattr(listing, "_google_voices", google_voices)
 
     app = create_app()
     client = TestClient(app, raise_server_exceptions=False)
@@ -311,7 +330,7 @@ def server(tmp_path, monkeypatch) -> Server:
         "/api/acervo/v1/session", json={"email": OWNER_EMAIL, "password": OWNER_PASSWORD}
     ).json()["data"]
 
-    return Server(
+    found = Server(
         client=client,
         owner=created["id"],
         token=signed_in["token"],
@@ -323,6 +342,11 @@ def server(tmp_path, monkeypatch) -> Server:
         media=media,
         web=web,
     )
+    # One provider, so the default chain is exactly the Gemini API's two models and a test about how
+    # a refusal is classified is not also a test about falling through to somebody else. The tests
+    # that are about the chain add others with `add_provider`.
+    found.add_provider(GEMINI)
+    return found
 
 
 @pytest.fixture

@@ -57,14 +57,15 @@ from score import has_emoji, primary_shape, words_of
 
 from acervo.client import AcervoClient, AcervoError
 from acervo.domain.ids import now_instant
-from acervo.models import call, load_catalogue
+from acervo.models.local import load_local
+from acervo.models import call
 from acervo.models.errors import ProviderError
 from acervo.models.pacing import Pace
 
 HERE = Path(__file__).resolve().parent
 COMPOSE_PROMPT = HERE.parents[1] / "prompts" / "acervo_compose.md"
 DEVICE_ID = "backfillfieldsscript"  # matches ^[a-z0-9]{1,32}$ (domain/ids.py)
-PROVIDER = "gemini-free"
+PROVIDER = "gemini-api"
 RATE_PER_MINUTE = 8
 WRITE_BATCH = 15  # push_graph is all-or-nothing per call; keep each write's blast radius small
 GEN_BATCH = 8  # words per model call — small enough that one bad JSON reply is cheap to redo
@@ -270,7 +271,7 @@ def main() -> int:
         print("\n--dry-run (default): nothing generated, nothing written. Add --apply to spend and write.")
         return 0
 
-    row = load_catalogue().find(PROVIDER)
+    row = load_local().find(PROVIDER)
     gate = Pace(RATE_PER_MINUTE, cooldown=30.0, cap=600.0)
 
     if args.only in ("primary", "both") and needs_primary:

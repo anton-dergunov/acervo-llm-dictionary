@@ -577,7 +577,7 @@ function googleCloud(mode) {
       ? group("Key", [keyRow("API key", "Allowed to use Text-to-Speech and Vision", "AIza…7tPe"), checkRow(["ok", "Works · Text-to-Speech and Vision answer"], "Checked today, 14:02")])
       : group("Credentials", [
           row("Credentials file", "A service account, or your own sign-in", button("Replace…")),
-          checkRow(["ok", "Works as acervo-tts@example-project.iam.gserviceaccount.com"], "Checked today, 14:02")
+          checkRow(["ok", "Works as acervo-tts@project.example.com"], "Checked today, 14:02")
         ]),
     key ? "" : group("", [
       field("Project", "example-project"),

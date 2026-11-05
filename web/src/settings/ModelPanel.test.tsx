@@ -7,46 +7,44 @@ import { SubPageContext } from "./kit";
 const GEMINI = "gemini/gemini-3.1-flash-lite";
 const GEMINI_SECOND = "gemini/gemini-3.5-flash-lite";
 const CLOUDFLARE = "cloudflare/@cf/meta/llama-3.3-70b-instruct-fp8-fast";
-const WAVENET = "wavenet";
+const WAVENET = "Wavenet";
 const GEMINI_VOICE = "gemini-3.1-flash-tts-preview";
 
 const pair = (provider: string, model: string): ModelPair => ({ provider, model });
 
+const ids = (...models: string[]) => models.map((id) => ({ id }));
+
 function catalogue(overrides: Partial<ModelCatalogue> = {}): ModelCatalogue {
   return {
+    families: [],
     providers: [
       {
-        id: "gemini-free", label: "Gemini (free tier)", kinds: ["text"],
-        models: { text: [GEMINI, GEMINI_SECOND] }, styles: {},
-        available: true, reason: null,
-        usageUrl: "https://aistudio.google.com/rate-limit", notes: "500 a day at no cost.",
-        credential: {
-          kind: "key", variable: "GEMINI_API_KEY", present: true, hint: "AIza…mnop"
-        },
-        settings: []
+        id: "gemini-api", family: "gemini-api", label: "Gemini API", kinds: ["text"],
+        models: { text: ids(GEMINI, GEMINI_SECOND) }, extra: {}, settings: {},
+        available: true, reason: null, usageUrl: "https://aistudio.google.com/rate-limit",
+        credential: { kind: "key", hint: "AIza…mnop", account: null },
+        check: { ok: true, said: "Works · 52 models", at: "2026-11-05T14:02:00.000Z" }
       },
       {
-        id: "cloudflare", label: "Cloudflare Workers AI", kinds: ["text"],
-        models: { text: [CLOUDFLARE] },
-        available: false, reason: "CLOUDFLARE_API_TOKEN is not set",
-        usageUrl: "https://dash.cloudflare.com/abc/ai/workers-ai", notes: null,
-        credential: {
-          kind: "key", variable: "CLOUDFLARE_API_TOKEN", present: false, hint: null
-        },
-        settings: [{ name: "CLOUDFLARE_ACCOUNT_ID", value: "abc" }]
+        id: "cloudflare", family: "cloudflare", label: "Cloudflare", kinds: ["text"],
+        models: { text: ids(CLOUDFLARE) }, extra: {}, settings: { accountId: "abc" },
+        available: false, reason: "Cloudflare refused its key when it was last checked",
+        usageUrl: "https://dash.cloudflare.com/abc/ai/workers-ai",
+        credential: { kind: "key", hint: "Xb3d…k2Lm", account: null },
+        check: { ok: false, said: "Cloudflare refused this key", at: "2026-11-05T09:15:00.000Z" }
       },
       {
-        id: "google-tts", label: "Google Cloud Text-to-Speech", kinds: ["audio"],
-        models: { audio: [WAVENET, GEMINI_VOICE] },
-        styles: { [WAVENET]: "none", [GEMINI_VOICE]: "instruction" },
-        available: true, reason: null, usageUrl: null, notes: null, settings: []
+        id: "google-cloud", family: "google-cloud", label: "Google Cloud", kinds: ["audio"],
+        models: { audio: [{ id: WAVENET }, { id: GEMINI_VOICE, direction: true }] }, extra: {},
+        settings: {}, available: true, reason: null, usageUrl: null,
+        credential: { kind: "key", hint: "AIza…7tPe", account: null }, check: null
       }
     ],
     chains: {
-      text: { source: "deployment", reason: null, pairs: [pair("gemini-free", GEMINI)] },
-      image: { source: "deployment", reason: null, pairs: [] },
-      audioPlain: { source: "deployment", reason: null, pairs: [] },
-      audioExpressive: { source: "deployment", reason: null, pairs: [] }
+      text: { source: "default", reason: null, pairs: [pair("gemini-api", GEMINI)] },
+      image: { source: "default", reason: null, pairs: [] },
+      audioPlain: { source: "default", reason: null, pairs: [] },
+      audioExpressive: { source: "default", reason: null, pairs: [] }
     },
     ...overrides
   };
@@ -89,7 +87,7 @@ describe("the Providers pane", () => {
     panel();
     const row = rowOf(await screen.findByText(CLOUDFLARE));
     expect(row).toHaveClass("unavailable");
-    expect(within(row).getByText(/CLOUDFLARE_API_TOKEN is not set/)).toBeInTheDocument();
+    expect(within(row).getByText(/Cloudflare refused its key when it was last checked/)).toBeInTheDocument();
   });
 
   it("shows the server's own order as switched on, because it is what will actually be asked", async () => {
@@ -110,7 +108,7 @@ describe("the Providers pane", () => {
     fireEvent.click(within(row).getByRole("switch"));
     // Adding to the inherited order, which is what was on screen — not replacing it.
     await waitFor(() => expect(save).toHaveBeenCalledWith({
-      text: [pair("gemini-free", GEMINI), pair("cloudflare", CLOUDFLARE)]
+      text: [pair("gemini-api", GEMINI), pair("cloudflare", CLOUDFLARE)]
     }));
   });
 
@@ -122,7 +120,7 @@ describe("the Providers pane", () => {
     fireEvent.click(within(row).getByRole("switch"));
     await waitFor(() => expect(save).toHaveBeenCalledTimes(1));
     expect(save).toHaveBeenCalledWith({
-      text: [pair("gemini-free", GEMINI), pair("gemini-free", GEMINI_SECOND)]
+      text: [pair("gemini-api", GEMINI), pair("gemini-api", GEMINI_SECOND)]
     });
   });
 
@@ -139,10 +137,10 @@ describe("the Providers pane", () => {
        entries carried on being built by them. */
     const chosen = catalogue({
       chains: {
-        text: { source: "owner", reason: null, pairs: [pair("gemini-free", GEMINI)] },
-        image: { source: "deployment", reason: null, pairs: [] },
-        audioPlain: { source: "deployment", reason: null, pairs: [] },
-        audioExpressive: { source: "deployment", reason: null, pairs: [] }
+        text: { source: "owner", reason: null, pairs: [pair("gemini-api", GEMINI)] },
+        image: { source: "default", reason: null, pairs: [] },
+        audioPlain: { source: "default", reason: null, pairs: [] },
+        audioExpressive: { source: "default", reason: null, pairs: [] }
       }
     });
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(chosen);
@@ -157,9 +155,9 @@ describe("the Providers pane", () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue({
       chains: {
         text: { source: "owner", reason: "no model is switched on for text", pairs: [] },
-        image: { source: "deployment", reason: null, pairs: [] },
-        audioPlain: { source: "deployment", reason: null, pairs: [] },
-        audioExpressive: { source: "deployment", reason: null, pairs: [] }
+        image: { source: "default", reason: null, pairs: [] },
+        audioPlain: { source: "default", reason: null, pairs: [] },
+        audioExpressive: { source: "default", reason: null, pairs: [] }
       }
     }));
     panel();
@@ -170,10 +168,10 @@ describe("the Providers pane", () => {
   it("offers a way back to the server's order, which no arrangement of tick boxes could mean", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue({
       chains: {
-        text: { source: "owner", reason: null, pairs: [pair("gemini-free", GEMINI)] },
-        image: { source: "deployment", reason: null, pairs: [] },
-        audioPlain: { source: "deployment", reason: null, pairs: [] },
-        audioExpressive: { source: "deployment", reason: null, pairs: [] }
+        text: { source: "owner", reason: null, pairs: [pair("gemini-api", GEMINI)] },
+        image: { source: "default", reason: null, pairs: [] },
+        audioPlain: { source: "default", reason: null, pairs: [] },
+        audioExpressive: { source: "default", reason: null, pairs: [] }
       }
     }));
     const save = vi.spyOn(backendSession, "saveModelSelection").mockResolvedValue(catalogue());
@@ -187,11 +185,11 @@ describe("the Providers pane", () => {
       chains: {
         text: {
           source: "owner", reason: null,
-          pairs: [pair("gemini-free", GEMINI), pair("gemini-free", GEMINI_SECOND)]
+          pairs: [pair("gemini-api", GEMINI), pair("gemini-api", GEMINI_SECOND)]
         },
-        image: { source: "deployment", reason: null, pairs: [] },
-        audioPlain: { source: "deployment", reason: null, pairs: [] },
-        audioExpressive: { source: "deployment", reason: null, pairs: [] }
+        image: { source: "default", reason: null, pairs: [] },
+        audioPlain: { source: "default", reason: null, pairs: [] },
+        audioExpressive: { source: "default", reason: null, pairs: [] }
       }
     });
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(chosen);
@@ -200,7 +198,7 @@ describe("the Providers pane", () => {
     const row = rowOf(await screen.findByText(GEMINI_SECOND));
     fireEvent.click(within(row).getByRole("button", { name: /up$/i }));
     await waitFor(() => expect(save).toHaveBeenCalledWith({
-      text: [pair("gemini-free", GEMINI_SECOND), pair("gemini-free", GEMINI)]
+      text: [pair("gemini-api", GEMINI_SECOND), pair("gemini-api", GEMINI)]
     }));
   });
 
@@ -216,10 +214,10 @@ describe("the Providers pane", () => {
   it("shows what the server answered rather than what was clicked", async () => {
     const after = catalogue({
       chains: {
-        text: { source: "owner", reason: null, pairs: [pair("gemini-free", GEMINI_SECOND)] },
-        image: { source: "deployment", reason: null, pairs: [] },
-        audioPlain: { source: "deployment", reason: null, pairs: [] },
-        audioExpressive: { source: "deployment", reason: null, pairs: [] }
+        text: { source: "owner", reason: null, pairs: [pair("gemini-api", GEMINI_SECOND)] },
+        image: { source: "default", reason: null, pairs: [] },
+        audioPlain: { source: "default", reason: null, pairs: [] },
+        audioExpressive: { source: "default", reason: null, pairs: [] }
       }
     });
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
@@ -245,7 +243,7 @@ describe("the Providers pane", () => {
   it("links out to each provider's own usage page", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
     credentials();
-    const link = await screen.findByRole("link", { name: /Gemini \(free tier\) usage/i });
+    const link = await screen.findByRole("link", { name: /Gemini API usage/i });
     expect(link).toHaveAttribute("href", "https://aistudio.google.com/rate-limit");
   });
 
@@ -265,53 +263,47 @@ async function credentialLine(label: string): Promise<HTMLElement> {
 describe("the credentials table", () => {
   afterEach(() => vi.restoreAllMocks());
 
-  it("shows which key is deployed without showing the key", async () => {
+  it("shows which key is set without showing the key, and what its check said", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
     credentials();
 
-    const line = await credentialLine("Gemini (free tier)");
-    expect(within(line).getByText(/GEMINI_API_KEY/)).toBeTruthy();
+    const line = await credentialLine("Gemini API");
     expect(within(line).getByText("AIza…mnop")).toBeTruthy();
+    expect(within(line).getByText(/Works · 52 models/)).toBeTruthy();
   });
 
-  it("names the variable a provider is waiting for rather than leaving a blank", async () => {
+  it("says a refused key was refused, and keeps the settings in sight", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
     credentials();
 
-    const line = await credentialLine("Cloudflare Workers AI");
-    expect(within(line).getByText("Not set")).toBeTruthy();
-    expect(within(line).getByText(/CLOUDFLARE_API_TOKEN/)).toBeTruthy();
-    // The deployment fact stays visible: the account id is what the usage link is built from, and
-    // it is how you tell one Cloudflare account from another.
-    expect(within(line).getByText(/account id abc/)).toBeTruthy();
+    const line = await credentialLine("Cloudflare");
+    expect(within(line).getByText(/Cloudflare refused this key/)).toBeTruthy();
+    // The account id is how you tell one Cloudflare account from another.
+    expect(within(line).getByText(/accountId abc/)).toBeTruthy();
   });
 
-  it("names the account for the one credential that is a file", async () => {
+  it("names the account for a credential that is a file", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue({
       providers: [{
-        id: "vertex", label: "Vertex AI", kinds: ["text"],
-        models: { text: ["vertex_ai/gemini-3.8-flash"] },
-        available: true, reason: null, usageUrl: null, notes: null,
-        account: "acervo-vertex@PROJECT_ID.iam.gserviceaccount.com",
-        credential: {
-          kind: "file", variable: "GOOGLE_APPLICATION_CREDENTIALS", present: true, hint: null
-        },
-        settings: [{ name: "ACERVO_VERTEX_PROJECT", value: "a-project" }]
+        id: "vertex", family: "google-cloud", label: "Vertex", kinds: ["text"],
+        models: { text: ids("gemini-3.8-flash") }, extra: {}, settings: { project: "a-project" },
+        available: true, reason: null, usageUrl: null, check: null,
+        credential: { kind: "file", hint: null, account: "acervo-vertex@project.example.com" }
       }]
     }));
     credentials();
 
-    const shown = await credentialLine("Vertex AI");
+    const shown = await credentialLine("Vertex");
     expect(within(shown).getByText("A credentials file")).toBeTruthy();
-    expect(within(shown).getByText(/acervo-vertex@PROJECT_ID\.iam\.gserviceaccount\.com/)).toBeTruthy();
+    expect(within(shown).getByText(/acervo-vertex@project\.example\.com/)).toBeTruthy();
     expect(within(shown).getByText(/a-project/)).toBeTruthy();
   });
 
-  it("leaves a saved pair the catalogue has withdrawn out of the next save, which would be refused", async () => {
+  it("leaves a saved pair no provider offers out of the next save, which would be refused", async () => {
     const saved = catalogue({ chains: {
       ...catalogue().chains,
       audioPlain: { source: "owner", reason: null, pairs: [
-        pair("gemini-free", "gemini/retired-tts"), pair("google-tts", WAVENET)
+        pair("gemini-api", "gemini/retired-tts"), pair("google-cloud", WAVENET)
       ] }
     } });
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(saved);
@@ -321,7 +313,7 @@ describe("the credentials table", () => {
     expect(within(plain).queryByText("gemini/retired-tts")).toBeNull();
     fireEvent.click(within(rowOf(within(plain).getByText(GEMINI_VOICE))).getByRole("switch"));
     await waitFor(() => expect(save).toHaveBeenCalledWith({
-      audioPlain: [pair("google-tts", WAVENET), pair("google-tts", GEMINI_VOICE)]
+      audioPlain: [pair("google-cloud", WAVENET), pair("google-cloud", GEMINI_VOICE)]
     }));
   });
 
@@ -344,7 +336,7 @@ describe("the credentials table", () => {
     it("keeps a saved voice that cannot take one out of sight, and out of the next save", async () => {
       const saved = catalogue({ chains: {
         ...catalogue().chains,
-        audioExpressive: { source: "owner", reason: null, pairs: [pair("google-tts", WAVENET)] }
+        audioExpressive: { source: "owner", reason: null, pairs: [pair("google-cloud", WAVENET)] }
       } });
       vi.spyOn(backendSession, "fetchModels").mockResolvedValue(saved);
       const save = vi.spyOn(backendSession, "saveModelSelection").mockResolvedValue(saved);
@@ -353,7 +345,7 @@ describe("the credentials table", () => {
       expect(within(expressive).getByText(/Nothing chosen takes a direction/)).toBeInTheDocument();
       fireEvent.click(within(rowOf(within(expressive).getByText(GEMINI_VOICE))).getByRole("switch"));
       await waitFor(() => expect(save).toHaveBeenCalledWith({
-        audioExpressive: [pair("google-tts", GEMINI_VOICE)]
+        audioExpressive: [pair("google-cloud", GEMINI_VOICE)]
       }));
     });
   });

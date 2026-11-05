@@ -45,8 +45,8 @@ from acervo.jobs.images.publish import BATCH, publish
 from acervo.jobs.images.run import Runner, Store, plan
 from acervo.jobs.images.sheet import write_sheet
 from acervo.jobs.images.verify import verify
-from acervo.models import chain, load_catalogue
-from acervo.models.catalogue import identity, reason
+from acervo.models import chain
+from acervo.models.local import load_local
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT = REPO_ROOT / "output" / "images"
@@ -55,7 +55,7 @@ DEFAULT_TEMPLATE = REPO_ROOT / "prompts" / "acervo_image_brief.md"
 def parse_chain(text: str) -> list[chain.Choice] | None:
     """`--image-chain cloudflare,vertex` or `--image-chain cloudflare:@cf/…`, or nothing.
 
-    A bare provider id means every model that row offers, in the order it lists them, which is what
+    A bare provider id means every model that provider offers, in the order listed, which is what
     `chain.resolve` already understands.
     """
     chosen: list[chain.Choice] = []
@@ -68,15 +68,15 @@ def parse_chain(text: str) -> list[chain.Choice] | None:
 
 
 def owner_chain(args: argparse.Namespace, kind: str) -> list[chain.Choice] | None:
-    """The chain the owner chose in Settings, or None to use this machine's catalogue order.
+    """The chain the owner chose in Settings, or None to use this machine's own order.
 
     Only an *owner* chain is carried across. The server also answers with the order it would use
-    itself, and that one is resolved on the server — against the server's credentials — so it drops
-    the Vertex row on exactly the machine that cannot reach it while this laptop can. A deployment's
-    order is not a preference and does not travel.
+    itself, and that one is resolved against the server's providers rather than this laptop's. The
+    owner's pairs name the server's provider ids, so `providers.local.json` should use the same ids
+    for them to mean anything here.
 
     An owner chain that is empty is not a gap: it means every image model was switched off on
-    purpose, and the sweep must stop rather than quietly fall back to the catalogue.
+    purpose, and the sweep must stop rather than quietly fall back to this machine's order.
     """
     if not getattr(args, "server_url", ""):
         return None
@@ -87,7 +87,7 @@ def owner_chain(args: argparse.Namespace, kind: str) -> list[chain.Choice] | Non
             readout = client.models()
     except AcervoError as error:
         print(f"note: the server did not say which models you chose ({error}); "
-              f"using this machine's catalogue order for {kind}", file=sys.stderr)
+              f"using the order in providers.local.json for {kind}", file=sys.stderr)
         return None
     found = (readout.get("chains") or {}).get(kind) or {}
     if found.get("source") != "owner":
@@ -98,35 +98,32 @@ def owner_chain(args: argparse.Namespace, kind: str) -> list[chain.Choice] | Non
 def resolve_chain(args: argparse.Namespace, kind: str, flag: str) -> tuple[chain.Candidate, ...]:
     """Resolve once, before anything is spent.
 
-    A mistyped provider or a model the catalogue no longer offers refuses here rather than at the
-    first word of a sweep — which is the whole reason this resolves at startup instead of per call.
+    A mistyped provider or a model it does not offer refuses here rather than at the first word of a
+    sweep — which is the whole reason this resolves at startup instead of per call.
     """
     chosen = parse_chain(flag) if flag else owner_chain(args, kind)
-    catalogue = load_catalogue()
+    catalogue = load_local()
     candidates = chain.resolve(kind, chosen, catalogue)
     if not candidates:
         raise SystemExit(chain.unconfigured(kind, chosen, catalogue).detail
-                         or f"Nothing in the catalogue can produce {kind}.")
+                         or f"Nothing in providers.local.json can produce {kind}.")
     return candidates
 
 
 def confirm_unnamed_credentials(candidates, assume_yes: bool) -> None:
-    """The hazard the old `gcloud` preflight existed for, narrowed to the case that still has one.
+    """Ask before spending a Google sign-in that does not say whose it is.
 
-    A row that can name its account is held to `accountEnv` by the catalogue and simply cannot run
-    as the wrong one — no question needed, and no `gcloud` subprocess to ask it. Plain application
-    default credentials do not record which login wrote them, so on that path, and only on it, the
-    old "Bill this account?" question is still worth asking. Naming the account in
-    `ACERVO_VERTEX_ACCOUNT` is how you stop being asked.
+    A service account's key names its account, and `check` prints it. A user's own sign-in — the
+    file `gcloud auth application-default login` writes — does not record which login wrote it, so
+    on that path, and only on it, "Bill this account?" is still worth asking.
     """
     unnamed = [candidate.row for candidate in candidates
-               if candidate.row.auth == "adc" and identity(candidate.row) is None
-               and not (os.environ.get(candidate.row.accountEnv or "") or "").strip()]
+               if candidate.row.credential.file and candidate.row.identity() is None]
     if not unnamed or assume_yes:
         return
-    for row in dict.fromkeys(unnamed):
-        print(f"{row.label} will spend whichever Google account is signed in, and its credentials "
-              f"do not say which.")
+    for row in {row.id: row for row in unnamed}.values():
+        print(f"{row.label} will spend whichever Google account signed in to write its credentials "
+              f"file, and the file does not say which.")
     if input("Draw anyway? [y/N] ").strip().lower() not in {"y", "yes"}:
         raise SystemExit("Stopped without spending anything.")
 
@@ -151,14 +148,14 @@ def command_check(args: argparse.Namespace) -> int:
     styles = load_styles(args.styles)
     print(f"Styles          {len(styles.styles)} ({styles.digest})")
     print(f"Prompt version  {prompt_version(args.template, styles.digest)}")
-    catalogue = load_catalogue()
+    catalogue = load_local()
     for kind in ("text", "image"):
         for candidate in chain.resolve(kind, parse_chain(getattr(args, f"{kind}_chain", "")), catalogue):
-            account = identity(candidate.row)
+            account = candidate.row.identity()
             print(f"{kind:<15} {candidate.row.label} · {candidate.model}"
                   + (f"  ({account})" if account else ""))
         for row in catalogue.serving(kind):
-            if (why := reason(row)) is not None:
+            if (why := row.reason()) is not None:
                 print(f"{'':<15} {row.label} is unavailable — {why}")
     return 0
 
@@ -195,7 +192,7 @@ def command_run(args: argparse.Namespace) -> int:
         return 0
 
     styles = load_styles(args.styles)
-    catalogue = load_catalogue()
+    catalogue = load_local()
     runner = Runner(
         store=store,
         writer=BriefWriter(catalogue, brief_chain, Path(args.template).read_text(encoding="utf-8"), styles),
@@ -305,7 +302,7 @@ def main() -> int:
     # day a quota increase comes through.
     runner.add_argument("--brief-chain", default="",
                         help="Providers to write briefs with, e.g. `vertex,gemini-free`. "
-                             "Default: your chain from the server, else the catalogue's order.")
+                             "Default: your chain from the server, else the order in providers.local.json.")
     runner.add_argument("--image-chain", default="",
                         help="Providers to draw with, e.g. `cloudflare,vertex` or "
                              "`cloudflare:@cf/black-forest-labs/flux-2-klein-4b`.")

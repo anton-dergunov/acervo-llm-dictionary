@@ -82,14 +82,6 @@ def test_the_dictionary_catalogue_is_packaged_and_readable():
     assert catalogue["dictionaries"], "the shipped catalogue is empty"
 
 
-def test_the_provider_catalogue_is_packaged_and_readable():
-    """The service reads it on every capture and on every health check, so an unpackaged catalogue
-    is a 500 on the first word rather than a build failure."""
-    assert "models" in bundled_directories()
-    catalogue = json.loads((ROOT / "models" / "catalogue.json").read_text())
-    assert catalogue["providers"], "the shipped provider catalogue is empty"
-
-
 def test_the_capture_prompts_are_packaged_and_named_as_the_service_reads_them():
     """The service reads prompts by name at request time; a renamed file is a runtime failure."""
     assert "prompts" in bundled_directories()

@@ -23,7 +23,7 @@ eval "$("$repo_root/scripts/version.sh")"
 mkdir -p "$output_dir" "$bundle"
 for directory in config deploy dictionaries docs models prompts requirements scripts src templates; do
   mkdir -p "$bundle/$directory"
-  rsync -a --exclude .DS_Store --exclude __pycache__ --exclude '*.pyc' --exclude 'llm.env' \
+  rsync -a --exclude .DS_Store --exclude __pycache__ --exclude '*.pyc' \
     "$repo_root/$directory/" "$bundle/$directory/"
 done
 # The server image installs the package from the bundle, so its build files travel too.

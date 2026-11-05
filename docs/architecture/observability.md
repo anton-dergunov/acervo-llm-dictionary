@@ -21,7 +21,7 @@ docker exec acervo-server-1 python -m acervo.admin calls            # how long e
 |---|---|---|---|
 | `model-calls.log` | `models/journal.py` | attempt on a provider, and what the caller did with the answer | which provider refused, and how long a call really takes |
 | `jobs.log` | `work/journal.py` | job start, step outcome, job end | why a job failed |
-| `activity.log` | `activity.py` | request refused, chat proposal the device would not apply, media file removed, server start and stop | why was I told no, and what was running when |
+| `activity.log` | `activity.py` | request refused, chat proposal the device would not apply, media file removed, a provider added, changed, checked or removed, server start and stop | why was I told no, and what was running when |
 
 They are separate files because they are read for different questions and written at very different
 rates; mixing them makes every `grep` worse. All three keep the same shape:
@@ -104,6 +104,12 @@ sentence: the refusal happens on the device, and without the report it would rea
 which file and why: `replaced`, `deleted`, `rollback` (written for a row that then failed to land) or
 `unclaimed` (a pending photo nobody added). Writing a file is not logged; the row that names it is the
 record of that, and it replicates.
+
+**Every key check, and every provider added, changed or removed.** A check is a call to the provider
+that spends nothing, and its line carries the provider's own sentence, redacted, with `reason=` its
+kind: `grep "provider check" activity.log` answers "why would it not take my key", and `admin log
+--failed` shows a refused one. A stored provider that can no longer be read is a `provider unreadable`
+line, since nothing should produce one.
 
 **The server starting and stopping**, with its version and build — which is how a deploy is recorded,
 and what answers "what changed before this broke". The installer does not write into a file the

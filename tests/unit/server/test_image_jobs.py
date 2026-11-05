@@ -14,11 +14,12 @@ from acervo.repository import jobs
 from acervo.work.runner import Runner
 
 from test_images import a_brief_for, brief, word
+from provider_rows import VERTEX_IMAGE
 
 
 @pytest.fixture(autouse=True)
 def a_provider_that_draws(server, monkeypatch):
-    monkeypatch.setenv("OPENAI_API_KEY", "stub-key")
+    server.add_provider(VERTEX_IMAGE)
 
 
 @pytest.fixture

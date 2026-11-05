@@ -32,7 +32,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
-from acervo.models import call, chain, load_catalogue  # noqa: E402
+from acervo.models.local import load_local  # noqa: E402
+from acervo.models import call, chain  # noqa: E402
 from acervo.stories import narrate  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
@@ -96,13 +97,13 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runs", type=int, default=5)
     parser.add_argument("--label", default="run")
-    parser.add_argument("--chain", default="gemini-free")
+    parser.add_argument("--chain", default="gemini-api")
     parser.add_argument("--pause", type=float, default=7.0, help="seconds between calls")
     parser.add_argument("--limit", type=int, default=0, help="stop after this many calls")
     parser.add_argument("--prompt", default=str(PROMPT))
     args = parser.parse_args()
 
-    candidates = chain.resolve("text", [one.strip() for one in args.chain.split(",")], load_catalogue())
+    candidates = chain.resolve("text", [one.strip() for one in args.chain.split(",")], load_local())
     if not candidates:
         print("No usable pair. Is GEMINI_API_KEY exported?", file=sys.stderr)
         return 2

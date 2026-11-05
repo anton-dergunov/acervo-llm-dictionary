@@ -32,7 +32,7 @@ from typing import Any
 
 from acervo.domain.validation import PHOTO_REF
 from acervo.errors import ApiError
-from acervo.models import ChainExhausted, ProviderError, chain, journal, load_catalogue
+from acervo.models import ChainExhausted, ProviderError, chain, journal
 from acervo.models import call as provider
 from acervo.models.results import OcrResult
 from acervo.ocr import layout, segment
@@ -40,6 +40,7 @@ from acervo.repository import graph
 from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal
 from acervo.settings import Settings
+from acervo.services.providers import load as load_providers
 
 # The long edge a photo is kept and read at. Measured in `experiments/photo-capture/`: at 2048 px
 # Vision's character error on a book photo is 0.4%, at 1280 px it is 2.3%, and the full sensor buys
@@ -151,7 +152,7 @@ def _ocr(settings: Settings, owner: str, photo: bytes, hints: list[str]) -> OcrR
 
     try:
         return chain.walk(
-            "ocr", chain_for(settings, owner, "ocr"), load_catalogue(), ask, chain.stamped,
+            "ocr", chain_for(settings, owner, "ocr"), load_providers(settings), ask, chain.stamped,
             caller="photo-read",
         )
     except ChainExhausted as exhausted:

@@ -7,8 +7,8 @@ weaker one. Eager creation would have to invent a value, and both candidates are
 indistinguishable from absence, and snapshotting the deployment default would freeze a server
 setting at the instant the account was made.
 
-This module stores what it is given. It does not know the catalogue — which providers exist and
-which models they offer is `acervo.models`'s question, and `acervo.services.models` is where a
+This module stores what it is given. It does not know the providers — which exist and which models
+they offer is `acervo.models`'s question, and `acervo.services.models` is where a
 document is held to it. Two validators would be one drift.
 """
 
@@ -73,9 +73,9 @@ def save(owner: str, changes: Mapping[str, Sequence[tuple[str, str]] | None]) ->
     """Change only the kinds named. `None` forgets one, and the row goes when nothing is left.
 
     Forgetting matters: without it, once an owner has saved there is no way back to following the
-    deployment default, because unchecking everything is refused as an empty chain. The two states
-    genuinely differ — when a deploy adds a catalogue row, a defaulted owner picks it up and an
-    owner who once chose explicitly does not.
+    providers' own order, because unchecking everything is refused as an empty chain. The two states
+    genuinely differ — when a provider is added, a defaulted owner picks it up and an owner who once
+    chose explicitly does not.
 
     Read-modify-write inside one `transaction()`, which is `BEGIN IMMEDIATE`, so check-then-insert
     cannot interleave with a second save and the unique index is never reached in anger. Returns the

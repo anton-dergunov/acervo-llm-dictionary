@@ -21,13 +21,13 @@ import { useState } from "react";
  * what the vocabulary is made of, so an entry captured on a phone should be built by the same model
  * as one captured on a laptop. Saving is an ordinary online-only write that fails loudly.
  *
- * A pair whose provider this server has no credential for stays in the list, keeps its place and is
- * simply skipped when the chain is walked. That is deliberate: a chain is a preference and a
- * credential is a deployment fact, and a rotated key must not destroy an order or lock the owner
- * out of changing it.
+ * A pair whose provider cannot be asked — no key, or a key the provider refused — stays in the list,
+ * keeps its place and is simply skipped when the chain is walked. That is deliberate: a chain is a
+ * preference and a working key is a fact about the provider, and a refused key must not destroy an
+ * order or lock the owner out of changing it.
  */
 
-/* `offers` is the catalogue kind a chain draws its models from. The two pronunciation orders both draw
+/* `offers` is the kind of model a chain draws from. The two pronunciation orders both draw
    from `audio`: any voice can read either, and which one should is the owner's answer, not a fact
    about the voice. The kinds are named for what they do, so the names here are the ones the
    Pronunciation, Loops and Stories pages use for the two voices. */
@@ -48,11 +48,11 @@ const same = (one: ModelPair, other: ModelPair) =>
 /** The order that exists to carry a direction, and so offers only voices that take one. */
 const DIRECTED = "audioExpressive";
 
-/** Every pair a kind can offer, in catalogue order. */
+/** Every pair a kind can offer, in the order the providers and their models were added. */
 function offeredPairs(providers: ModelProvider[], kind: string, offers: string): ModelPair[] {
   return providers.flatMap((provider) => (provider.models[offers] ?? [])
-    .filter((model) => kind !== DIRECTED || provider.styles?.[model] === "instruction")
-    .map((model) => ({ provider: provider.id, model })));
+    .filter((model) => kind !== DIRECTED || model.direction === true)
+    .map((model) => ({ provider: provider.id, model: model.id })));
 }
 
 /** The offered pairs with the chosen ones lifted to the front. */
@@ -76,7 +76,7 @@ function ModelRow({ pair, provider, on, first, last, onToggle, onMove }: {
      belong to any of several logins, where a key belongs to whoever holds it. */
   /* Unavailable keeps its place in the order and is passed over; the badge says so, the hint why. */
   const hint = missing ? provider?.reason ?? undefined
-    : provider?.account ? `Billed to ${provider.account}` : undefined;
+    : provider?.credential.account ? `Billed to ${provider.credential.account}` : undefined;
   return <div className={`pref-row model-row${missing ? " unavailable" : ""}`}>
     <input
       type="checkbox" role="switch" className="toggle" checked={on}
@@ -104,20 +104,19 @@ function KindSection({ kind, offers, label, hint, catalogue, onChange }: {
   if (!chain) return null;
   const providers = new Map(catalogue.providers.map((provider) => [provider.id, provider]));
   /* What is switched on is what will actually be asked — under an owner's chain *and* under the
-     server's own order, which the server resolves and sends here as `pairs`.
+     providers' own order, which the server resolves and sends here as `pairs`.
 
-     Showing every box unchecked under the deployment default was a lie with consequences: unticking
+     Showing every box unchecked under the default order was a lie with consequences: unticking
      the last model looked like turning capture off, and the server carried on building entries with
      the model at the head of its own order. The pane must show what will happen, so an inherited
      order arrives ticked and says whose it is. Changing anything makes the order yours. */
   const offered = offeredPairs(catalogue.providers, kind, offers);
   /* A saved order is kept as it was saved, and it can name a pair this kind no longer offers: a
-     voice that cannot take a direction, in the order that exists to carry one, or a model the
-     catalogue has since withdrawn. Such a pair is not drawn — and it is left out of the next change
+     voice that cannot take a direction, in the order that exists to carry one. Such a pair is not drawn — and it is left out of the next change
      you make, because the server refuses an order naming it, and one carried along unseen made
      every change to that order fail. */
   const live = chain.pairs.filter((pair) => offered.some((one) => same(one, pair)));
-  const inherited = chain.source === "deployment";
+  const inherited = chain.source === "default";
   const pairs = orderedPairs(offered, live);
 
   /* Three states, and unticking the last box reaches the third rather than bouncing off it:
@@ -168,36 +167,34 @@ function KindSection({ kind, offers, label, hint, catalogue, onChange }: {
 }
 
 /**
- * Providers ▸ Credentials: every credential this server holds, and whose account it spends.
+ * Providers ▸ Credentials: every provider this server holds, which key it holds, and whether the key
+ * worked when it was last checked.
  *
- * It answers a question the orders cannot: *which* key is deployed. Two keys for the same provider
- * are otherwise indistinguishable, so a rotation that only half happened looks exactly like one
- * that worked. A key is shown as four characters at each end and never more — enough to match
- * against the provider's own dashboard by eye, not enough to use. A file credential shows no
- * fragment at all; it is named by its account.
+ * It answers a question the orders cannot: *which* key is set. Two keys for the same provider are
+ * otherwise indistinguishable, so a rotation that only half happened looks exactly like one that
+ * worked. A key is shown as four characters at each end and never more — enough to match against
+ * the provider's own dashboard by eye, not enough to use. A credentials file shows no fragment at
+ * all; it is named by its account. Adding and changing providers is the page Settings ▸ Providers
+ * grows next.
  */
 function Credentials({ providers }: { providers: ModelProvider[] }) {
-  return <Group foot="Keys are set on the server. Usage opens the provider’s own page: none says how much is left.">
+  return <Group foot="Keys are kept on the server. Usage opens the provider’s own page.">
     {providers.map((provider) => {
       const credential = provider.credential;
-      const settings = (provider.settings ?? []).map((setting) =>
-        `${setting.name.replace(/^ACERVO_|^CLOUDFLARE_/, "").toLowerCase().replace(/_/g, " ")} ${setting.value || "not set"}`);
       const detail = [
-        credential?.kind === "key" && credential.variable,
-        credential?.kind === "file" && credential.variable,
-        provider.account,
-        ...settings
+        credential.account,
+        ...Object.entries(provider.settings).map(([name, value]) => `${name} ${value}`),
+        provider.check ? provider.check.said : null
       ].filter(Boolean).join(" · ");
-      const value = credential?.kind === "none" ? "No credential needed"
-        : credential?.kind === "key" ? credential.hint || "Not set"
-        : credential?.kind === "file" ? (credential.present ? "A credentials file" : "No file installed")
-        : "";
+      const value = credential.kind === "none" ? "No key needed"
+        : credential.kind === "key" ? credential.hint || "A key"
+        : "A credentials file";
       return <div key={provider.id} className="pref-row" data-testid="provider-line">
         <span className="pref-text">
           <span className="pref-label">{provider.label}</span>
           {detail && <span className="pref-hint">{detail}</span>}
         </span>
-        <span className={`pref-value${credential?.kind === "key" && credential.hint ? " mono" : ""}`}>{value}</span>
+        <span className={`pref-value${credential.kind === "key" && credential.hint ? " mono" : ""}`}>{value}</span>
         {/* The visible word is the same in every row, so the accessible name carries the provider. */}
         {provider.usageUrl && <a
           className="tb-btn" href={provider.usageUrl} target="_blank" rel="noreferrer noopener"
@@ -218,7 +215,7 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
     setWorking(true);
     try {
       set(await backendSession.saveModelSelection({ [kind]: pairs }));
-      if (pairs === null) onNotify("This server’s own order is back in force.");
+      if (pairs === null) onNotify("The providers’ own order is back in force.");
     } catch (error) {
       onNotify(error instanceof AcervoApiError || error instanceof Error ? error.message : "That choice could not be saved.");
     } finally { setWorking(false); }
@@ -235,7 +232,7 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
     />)}
     <Group>
       <Link
-        label="Credentials" value={`${configured} of ${catalogue.providers.length} set up`}
+        label="Credentials" value={`${configured} of ${catalogue.providers.length} working`}
         onOpen={() => open({ id: "credentials", title: "Credentials" })}
       />
     </Group>

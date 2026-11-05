@@ -25,7 +25,7 @@ src/acervo/
   api/               FastAPI: routers, the error envelope, auth, the static surfaces
   services/          request-path work, and the binding layer between the packages below and Acervo
   work/              the job runner and its kinds
-  models/            the provider catalogue, and text() / image() / speech() / ocr()
+  models/            provider families and rows, and text() / image() / speech() / ocr()
   article.py         one word and its senses, the view every enrichment reads
   images/            sense pictures: a brief per lexeme, a picture per sense
   clips/             spoken clips: a corpus search and one selection per lexeme
@@ -129,6 +129,10 @@ so the owner's `sync_state` row is created with the account rather than on first
 `since=0` pull is unbounded** and materialises the whole vocabulary before serialising; the core
 stays small enough for that, and it is the first thing to measure if that changes.
 
+**The providers' keys live beside the database file and in no table**: `providers.secrets.json`,
+mode 600, so a backup of the database, a deploy's copy of it and an export never carry a key
+([`models.md`](models.md), "Credentials").
+
 **Derived stores live beside the database file and in no table**: the loop take cache (`takes/`)
 and the meaning map's embeddings and drawn maps (`maps/`). Both are server-local and keyed by a digest
 of what they hold, so neither needs a mount, an environment variable or a schema change, and both
@@ -195,7 +199,8 @@ The routes, under `/api/acervo/v1` unless shown:
 | Anki | `GET /anki`, `PUT /anki/settings`, `POST /anki/push`, `POST /anki/pull` (due at once) |
 | Clips and the corpus | `GET`/`PUT /clips/settings`, `GET /clips/corpus` (what the corpus holds, asked of it with a short timeout), and the allow-listed proxy under `/speech/…` |
 | Dictionaries | `GET /dictionaries`, `GET /dictionaries/online/{source}` |
-| Settings | `GET /models`, `PUT /models/selection`, `GET`/`PUT /rules`, `GET`/`PUT /schedule/settings` |
+| Settings | `GET /models`, `PUT /models/selection`, `POST /providers`, `PUT`/`DELETE /providers/{id}`, `POST /providers/{id}/check`, `GET`/`PUT /rules`, `GET`/`PUT /schedule/settings` |
+| Companions | `POST /companion/text` (the operator token), `POST /loops/write` and `POST /pronunciations/take` (a render token) |
 | Static | `GET /api/acervo/media/{path}` (bearer), `GET /api/acervo/dictionaries/{file}` (bearer), `GET /api/acervo/downloads/{file}` (none), `GET /api/acervo/v1/mac-release` (none), `GET /` (the PWA) |
 
 What is load-bearing and easy to unify by accident:

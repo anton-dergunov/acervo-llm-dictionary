@@ -38,8 +38,8 @@ from typing import Any
 
 import yaml
 
-from acervo.models import call, load_catalogue
-from acervo.models.catalogue import available, reason
+from acervo.models.local import load_local
+from acervo.models import call
 from acervo.models.errors import ProviderError
 from acervo.models.locales import language_name, region_name
 from acervo.models.pacing import Pace
@@ -53,8 +53,8 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 PROMPTS = ROOT / "prompts"
 ARMS = ("none", "light", "plain")
-PROVIDER = "gemini-free"
-MODEL = "gemini/gemini-3.5-flash-lite"
+PROVIDER = "gemini-api"
+MODEL = "gemini-3.5-flash-lite"
 STORY_TYPE = "funny"
 STORY_PARTS = 4
 TIMEOUT_SECONDS = 120.0
@@ -211,14 +211,14 @@ def main(argv: list[str] | None = None) -> int:
     data = load()
     arms, kinds = args.arms or list(ARMS), args.kinds or ["entry", "story"]
     matrix = jobs(data, arms, args.repeats, kinds)
-    row = load_catalogue().find(PROVIDER)
+    row = load_local().find(PROVIDER)
     print(f"{len(matrix)} calls to {PROVIDER}:{MODEL}, about {len(matrix) / RATE_PER_MINUTE:.0f} minutes")
     if args.dry_run:
         for arm in ARMS:
             print(f"\n── {arm} ──\n{section(arm, data['vocabularies']['es']) or '(nothing appended)'}")
         return 0
-    if not available(row):
-        print(f"{PROVIDER} cannot be called here: {reason(row)}", file=sys.stderr)
+    if not row.available:
+        print(f"{PROVIDER} cannot be called here: {row.reason()}", file=sys.stderr)
         return 1
 
     run_id = args.run or datetime.now().strftime("%Y%m%d-%H%M%S")

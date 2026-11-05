@@ -1,4 +1,4 @@
-"""The one way to call a model from Python: a catalogue of rows, and four functions.
+"""The one way to call a model from Python: the providers the owner added, and four functions.
 
 Four unrelated mechanisms reached a model before this package existed, and the layer that looked
 like the abstraction was dead code. What made it dead is worth stating, because it is the shape this
@@ -6,29 +6,24 @@ package is built to avoid: `ImageProvider.synthesize(text, path) -> None` had no
 cost or the model that answered, so the pipeline that needed both bypassed it. Every function here
 returns an `Answer` alongside its payload.
 
-A provider is a row of data in `models/catalogue.json`, never a class. A row declares what it
-supports — `capabilities.jsonMode` is `native` or `prompt` — and this package adapts once, at the
-call boundary. There is no per-provider code except the adapters LiteLLM leaves necessary:
-`cloudflare.py` for Cloudflare images and audio, and `google_tts.py` and `google_vision.py` for
-Google's speech and OCR APIs, which share `google_auth.py`.
+A provider is a row the owner added — one account, one credential, its models — and its family
+(`families.py`) is the code that speaks to it: the LiteLLM route, the base URL, whether JSON mode is
+native, and every quirk found the hard way. There is no per-provider code except the adapters
+LiteLLM leaves necessary: `cloudflare.py` for Cloudflare images and audio, and `google_tts.py` and
+`google_vision.py` for Google's speech and OCR APIs, which share `google_auth.py`. What a provider
+offers is asked of it (`listing.py`).
 
 **This package stands alone.** It imports no Acervo settings, graph, database or wire vocabulary,
-and `tests/unit/server/test_layering.py` enforces that. It takes a catalogue and a chain and nothing
+and `tests/unit/server/test_layering.py` enforces that. It takes providers and a chain and nothing
 else, which is what lets a second project use it and what keeps `acervo.models.pacing` importable in
 an image that does not carry LiteLLM. `acervo.services.models` is the separate, Acervo-specific
-binding layer that reads `Settings` and speaks the `llm_*` error codes.
+binding layer that reads the providers from the server's store and speaks the `llm_*` error codes;
+a laptop tool reads them from `providers.local.json` (`local.py`).
 """
 
 from __future__ import annotations
 
-from acervo.models.catalogue import (
-    CATALOGUE_PATH,
-    Catalogue,
-    Row,
-    available,
-    load_catalogue,
-    reason,
-)
+from acervo.models.providers import Provider, Providers
 from acervo.models.errors import (
     ChainExhausted,
     ProviderError,
@@ -45,8 +40,6 @@ __all__ = [
     "Answer",
     "journal",
     "AudioResult",
-    "CATALOGUE_PATH",
-    "Catalogue",
     "ChainExhausted",
     "ImageResult",
     "OcrResult",
@@ -56,14 +49,12 @@ __all__ = [
     "ProviderUnavailable",
     "RETRYABLE",
     "Reason",
-    "Row",
+    "Provider",
+    "Providers",
     "TERMINAL",
     "TextResult",
-    "available",
     "image",
-    "load_catalogue",
     "ocr",
-    "reason",
     "speech",
     "text",
 ]

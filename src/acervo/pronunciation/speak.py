@@ -2,14 +2,14 @@
 
 Two decisions live here and nowhere else.
 
-**Only a model that speaks the language is asked.** The catalogue says which languages each model
+**Only a model that speaks the language is asked.** The provider says which languages each model
 covers — Aura is English, Google's WaveNet voices exist per language, Gemini's speak anything — and a
 pair that cannot say Russian is left out of the walk for Russian rather than asked and refused. When
 nothing in the chain can, that is its own answer (`NoVoice`), because "your chain has no Russian
 voice" is something the owner can fix and a refusal from the first provider would hide it.
 
 **A direction reaches only a voice that can follow one.** The emotion is sent where the answering
-model declares `style: instruction`, and the result says whether it was, so the stored clip records
+model takes a direction, and the result says whether it was, so the stored clip records
 the delivery it actually got rather than the one that was hoped for.
 """
 
@@ -20,7 +20,7 @@ from typing import Callable, Sequence
 
 from acervo.models import chain, locales
 from acervo.models import call as provider
-from acervo.models.catalogue import Catalogue
+from acervo.models.providers import Providers
 from acervo.models.errors import ProviderUnavailable
 from acervo.models.results import AudioResult
 
@@ -97,8 +97,8 @@ def asked_of(row, model: str, language: str, style: str | None,
     """What this pair would actually be *sent*: the voice and the direction, after its own limits.
 
     A voice the model does not declare for that language is dropped rather than sent — one picked for
-    WaveNet must not reach Gemini, which would refuse it — and a direction reaches only a model whose
-    row declares `style: instruction`.
+    WaveNet must not reach Gemini, which would refuse it — and a direction reaches only a model that
+    takes one.
 
     One function because it has three callers that must agree exactly: the call itself, and the two
     halves of the take cache. Keying a take on what was *asked for* rather than on what came back is
@@ -108,11 +108,11 @@ def asked_of(row, model: str, language: str, style: str | None,
     preferred = voice(row.id, model, language)
     return (
         preferred if preferred and (not offered or preferred in offered) else None,
-        style if style and row.style_for(model) == "instruction" else None,
+        style if style and row.takes_direction(model) else None,
     )
 
 
-def speakers(chosen: Sequence[chain.Choice] | None, catalogue: Catalogue, language: str) -> tuple[chain.Candidate, ...]:
+def speakers(chosen: Sequence[chain.Choice] | None, catalogue: Providers, language: str) -> tuple[chain.Candidate, ...]:
     """The pairs in this chain that can say something in `language`, in order."""
     return tuple(
         candidate for candidate in chain.resolve("audio", chosen, catalogue)
@@ -125,7 +125,7 @@ def speak(
     language: str,
     *,
     chosen: Sequence[chain.Choice] | None,
-    catalogue: Catalogue,
+    catalogue: Providers,
     style: str | None = None,
     voice: Callable[[str, str, str], str | None] = lambda provider_id, model, language: None,
     caller: str = "pronounce-word",

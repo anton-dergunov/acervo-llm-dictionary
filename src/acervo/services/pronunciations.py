@@ -26,9 +26,9 @@ from typing import Any
 
 from acervo.domain.ids import is_language, now_instant
 from acervo.errors import ApiError
-from acervo.models import ChainExhausted, ProviderError, journal, load_catalogue, locales
+from acervo.models import ChainExhausted, ProviderError, journal, locales
 from acervo.models.call import audio_mime
-from acervo.models.catalogue import Voice, available
+from acervo.models.providers import Voice
 from acervo.pronunciation import encode, speak as speaking
 from acervo.pronunciation.ids import pronunciation_id
 from acervo.pronunciation.targets import COLLECTION, Target, current, target_in
@@ -39,6 +39,7 @@ from acervo.services import media as media_files
 from acervo.services.models import chain_for, refusal, speech_chain
 from acervo.services.prompts import prompt_text
 from acervo.settings import Settings
+from acervo.services.providers import load as load_providers
 
 STYLE_PROMPT = "acervo_pronounce_style"
 # What an instruction-taking voice is told when there is no emotion to give but there is an accent:
@@ -91,7 +92,7 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
     walk itself — first voice, then backups — computed here by the rule the recording follows, so
     the page never restates that rule and cannot drift from it.
     """
-    catalogue = load_catalogue()
+    catalogue = load_providers(settings)
     chosen = pronunciation_settings.settings(owner)
     vocabularies = graph.owner_vocabularies(owner)
     languages = [vocabulary["language"] for vocabulary in vocabularies]
@@ -110,8 +111,8 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
                 "provider": row.id,
                 "providerLabel": row.label,
                 "model": model,
-                "available": available(row),
-                "style": row.style_for(model),
+                "available": row.available,
+                "style": "instruction" if row.takes_direction(model) else "none",
                 "voices": {
                     language: [_option(voice, match) for voice, match in row.voice_options(model, accents[language])]
                     for language in offered if row.speaks(model, accents[language])
@@ -157,7 +158,7 @@ def _order_speakers(settings: Settings, owner: str, order: str, language: str, c
     """The pairs of `order` that would be asked for `language`, in Providers order."""
     pairs = [candidate.named for candidate in speaking.speakers(order_of(settings, owner, order), catalogue, language)]
     if order == "expressive":
-        pairs = [pair for pair in pairs if catalogue.find(pair[0]).style_for(pair[1]) == "instruction"]
+        pairs = [pair for pair in pairs if catalogue.find(pair[0]).takes_direction(pair[1])]
     return pairs
 
 
@@ -207,7 +208,7 @@ def _pairs(settings: Settings, owner: str, order: str, catalogue) -> list[tuple[
         identifier, model = (choice, None) if isinstance(choice, str) else choice
         row = catalogue.find(identifier)
         for one in ([model] if model else row.models_for("audio")):
-            if order == "expressive" and row.style_for(one) != "instruction":
+            if order == "expressive" and not row.takes_direction(one):
                 continue
             found.append((row, one))
     return found
@@ -237,22 +238,22 @@ def apply_settings(settings: Settings, owner: str, body: dict[str, Any]) -> dict
             )
         changes["delivery"] = submitted
     if "voices" in body:
-        changes["voices"] = _voices(body["voices"])
+        changes["voices"] = _voices(settings, body["voices"])
     if "guideVoices" in body:
-        changes["guide_voices"] = _voices(body["guideVoices"])
+        changes["guide_voices"] = _voices(settings, body["guideVoices"])
     if "first" in body:
-        changes["first"] = _firsts(body["first"])
+        changes["first"] = _firsts(settings, body["first"])
     if "guideFirst" in body:
-        changes["guide_first"] = _firsts(body["guideFirst"])
+        changes["guide_first"] = _firsts(settings, body["guideFirst"])
     pronunciation_settings.save(owner, **changes)
     return settings_view(settings, owner)
 
 
-def _voices(submitted: Any) -> dict[str, dict[str, dict[str, str]]]:
+def _voices(settings: Settings, submitted: Any) -> dict[str, dict[str, dict[str, str]]]:
     """A voice document held to the catalogue: every provider, model and voice must exist."""
     if not isinstance(submitted, dict):
         raise ApiError(400, "invalid_input", "Voices must be {provider: {model: {language: voice}}}.")
-    catalogue = load_catalogue()
+    catalogue = load_providers(settings)
     kept: dict[str, dict[str, dict[str, str]]] = {}
     for provider_id, models in submitted.items():
         try:
@@ -274,11 +275,11 @@ def _voices(submitted: Any) -> dict[str, dict[str, dict[str, str]]]:
     return kept
 
 
-def _firsts(submitted: Any) -> dict[str, dict[str, list[str]]]:
+def _firsts(settings: Settings, submitted: Any) -> dict[str, dict[str, list[str]]]:
     """Which pair reads each language first, held to the catalogue. An empty value lets go."""
     if not isinstance(submitted, dict):
         raise ApiError(400, "invalid_input", "First voices must be {order: {language: [provider, model]}}.")
-    catalogue = load_catalogue()
+    catalogue = load_providers(settings)
     kept: dict[str, dict[str, list[str]]] = {}
     for order, languages in submitted.items():
         if order not in ORDERS or not isinstance(languages, dict):
@@ -295,7 +296,7 @@ def _firsts(submitted: Any) -> dict[str, dict[str, list[str]]]:
                 raise ApiError(400, "unknown_provider", f"This server has no provider called {provider_id}.") from None
             if not row.serves("audio") or model not in row.models_for("audio"):
                 raise ApiError(400, "unknown_model", f"{row.label} does not offer {model} for speech.")
-            if order == "expressive" and row.style_for(model) != "instruction":
+            if order == "expressive" and not row.takes_direction(model):
                 raise ApiError(400, "undirected_voice",
                                f"{row.label} · {model} cannot take a direction, so it cannot be the expressive voice.")
             kept.setdefault(order, {})[str(language)] = [row.id, model]
@@ -442,7 +443,7 @@ def preview(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes
         raise ApiError(400, "invalid_input", f"order is {' or '.join(ORDERS)}.")
     if not is_language(language):
         raise ApiError(400, "invalid_input", "language must be a BCP-47 language tag.")
-    catalogue = load_catalogue()
+    catalogue = load_providers(settings)
     try:
         row = catalogue.find(provider_id)
     except KeyError:
@@ -538,7 +539,7 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
         )
 
     cache = Path(settings.takes_path)
-    catalogue = load_catalogue()
+    catalogue = load_providers(settings)
 
     def kept(reading: str, asked_style: str | None) -> tuple[bytes, str, dict[str, str]] | None:
         """The take already recorded for this line by a pair of `reading`, if there is one.
@@ -647,7 +648,7 @@ class Undirected(Exception):
 
 
 def order_of(settings: Settings, owner: str, order: str, caller: str | None = None) -> Any:
-    """The owner's order for a speech chain, as far as the catalogue still offers it — the rule is
+    """The owner's order for a speech chain, as far as the providers still offer it — the rule is
     `services.models.speech_chain`'s. Each read that steps over a pair says so in the call log, under
     `caller`; a reader with no caller, such as the settings pane's, says nothing."""
     chain_name = CHAINS[order]
@@ -662,19 +663,19 @@ def readers(settings: Settings, owner: str, order: str, language: str,
     """Who reads `order` in `language`: the order that actually reads, and the choices to walk.
 
     **The expressive order is read only by voices that take a direction.** It exists to carry one,
-    and a pair that cannot — a row declaring `style: none` — records the clip as though no direction
+    and a pair that cannot — a voice that takes no direction — records the clip as though no direction
     had been asked for, silently: that is how a whole deployment's examples, loops and stories lost
     their emotion with nothing failing and nothing logged. So the owner's expressive order is walked
-    with its `none` pairs left out. The order itself is a preference and is kept as saved; only the
+    with those pairs left out. The order itself is a preference and is kept as saved; only the
     walk skips them. **When no directed voice can be reached, the plain order reads instead**, and
     the caller records without a direction — the answer is still worth hearing.
 
-    A pair the catalogue no longer offers is left out of either order (`order_of`), with `caller`
+    A pair no provider offers any more is left out of either order (`order_of`), with `caller`
     naming whose line says so. **The pair the owner chose to read this language first is moved to
     the front** (`pronunciation_settings.first_voices`); the rest of the order are its backups.
     """
     preferences = preferences or pronunciation_settings.settings(owner)
-    catalogue = load_catalogue()
+    catalogue = load_providers(settings)
     chosen = order_of(settings, owner, order, caller)
 
     def first(pairs, reading: str):
@@ -687,7 +688,7 @@ def readers(settings: Settings, owner: str, order: str, language: str,
         return order, first(chosen, order)
     directed_pairs = [
         candidate.named for candidate in speaking.speakers(chosen, catalogue, language)
-        if candidate.row.style_for(candidate.model) == "instruction"
+        if candidate.row.takes_direction(candidate.model)
     ]
     if directed_pairs:
         return order, first(directed_pairs, order)
@@ -721,7 +722,7 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
             provider_id, model, voice_name = pinned
             return speaking.speak(
                 text, language,
-                chosen=[(provider_id, model)], catalogue=load_catalogue(),
+                chosen=[(provider_id, model)], catalogue=load_providers(settings),
                 style=style, voice=lambda provider, model_id, lang: voice_name,
                 caller=caller, hedge_after=None,
             )
@@ -734,7 +735,7 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
             style = directed(settings, language, None)
         try:
             return speaking.speak(
-                text, language, chosen=chosen, catalogue=load_catalogue(),
+                text, language, chosen=chosen, catalogue=load_providers(settings),
                 style=style, voice=preferences.reader(reading), caller=caller, hedge_after=HEDGE[reading],
             )
         except ChainExhausted as exhausted:
@@ -747,7 +748,7 @@ def _speak(settings: Settings, owner: str, text: str, language: str, order: str,
             chain_name = CHAINS["plain"]
             return speaking.speak(
                 text, language, chosen=readers(settings, owner, "plain", language, caller, preferences)[1],
-                catalogue=load_catalogue(), style=directed(settings, language, None),
+                catalogue=load_providers(settings), style=directed(settings, language, None),
                 voice=preferences.reader("plain"), caller=caller, hedge_after=HEDGE["plain"],
             )
     except speaking.NoVoice:

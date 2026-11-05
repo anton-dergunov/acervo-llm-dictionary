@@ -293,7 +293,8 @@ gear, and the new worker activates only when **Update Acervo** is chosen.
 Everything is under the deployment root, and a deploy replaces only the release it installs:
 
 ```text
-data/server            the vocabulary database, the take cache and the meaning maps beside it
+data/server            the vocabulary database, the providers' keys (providers.secrets.json, mode 600),
+                       the take cache and the meaning maps beside it
 data/media             pictures and recordings (ACERVO_MEDIA_PATH)
 data/dictionaries      compiled dictionaries, merged in from each release
 data/speech-cache      the corpus's downloaded captions — not regenerable, never deleted
@@ -306,7 +307,7 @@ data/acervo-worker     the headless Anki robot's collection
 downloads              the macOS release, outside the served directory so no service worker precaches it
 backups                a dated copy of the database and the Anki files from every deploy; ten are kept
 releases               the unpacked releases
-deployment.env, secrets.env, llm.env   the deployment's settings and credentials, mode 600
+deployment.env, secrets.env   the deployment's settings and credentials, mode 600
 ```
 
 `web/dist/` and `deploy/acervo/server/web/` on the laptop are generated staging directories that the
@@ -434,31 +435,22 @@ from the terminal and never placed on a command line:
 
 ## Model providers
 
-Which providers the server can call is deployment configuration, kept in `llm.env` separately from the
-server and Anki credentials; which of them answer, and in what order, is the owner's choice in
-Settings ▸ Providers ([`../architecture/models.md`](../architecture/models.md)).
+Providers are added in **Settings ▸ Providers**, each with its key, and nothing about them is
+deployment configuration: no file to edit, no variable in compose, no deploy. The server keeps their
+rows in the database and their keys in `data/server/providers.secrets.json` beside it, mode 600, so a
+backup of the database never carries a key; a deploy leaves both alone. Saving a key checks it with a
+call that spends nothing and stores the provider only if the key works
+([`../architecture/models.md`](../architecture/models.md), "Credentials"). Which providers answer, and
+in what order, is the owner's choice on the same page; with none chosen, they answer in the order they
+were added.
 
-```bash
-# The deployment's default order, as ids from models/catalogue.json. Empty means every provider this
-# server has credentials for, in catalogue order.
-./deploy.sh --configure-llm --llm-chain gemini-free,cloudflare
+No container but the server holds a key. The clip service calls home to the server for each text call
+with the operator token in `secrets.env`, and LexiBeat with a render token.
 
-# A non-secret variable, such as an account id or a Vertex project. Repeatable.
-./deploy.sh --configure-llm --llm-set CLOUDFLARE_ACCOUNT_ID=0123456789abcdef0123456789abcdef
-
-# A key, read from standard input so it never reaches a command line or shell history.
-./deploy.sh --configure-llm --llm-key CLOUDFLARE_API_TOKEN --llm-api-key-stdin
-
-# Vertex authenticates from a file, not a variable: a service-account key or the file
-# `gcloud auth application-default login` writes. Installed mode 600 and mounted read-only.
-./deploy.sh --configure-llm --google-credentials path/to/credentials.json
-```
-
-The flags combine in one command. Configuring one provider retains every other provider's key, so
-switching back needs nothing re-entered. Setting Vertex up — both credential shapes, and the
-organisation policy that blocks creating a service-account key — is
-[`vertex-setup.md`](vertex-setup.md). `python -m acervo.admin providers` in the server container prints
-what the server can call and as whom, spending nothing.
+`python -m acervo.admin providers` in the server container prints the providers, which key each holds
+as its first and last four characters, and what its last check said, spending nothing. Setting Google
+Cloud up — a key, or a credentials file for Vertex, and the organisation policy that blocks creating
+a service-account key — is [`vertex-setup.md`](vertex-setup.md).
 
 ## Worker operations
 

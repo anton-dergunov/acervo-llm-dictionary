@@ -47,7 +47,7 @@ from typing import Any, Callable
 
 from acervo.domain.ids import now_instant
 from acervo.errors import ApiError
-from acervo.models import journal, load_catalogue
+from acervo.models import journal
 from acervo.models.call import audio_mime
 from acervo.models.errors import ChainExhausted, ProviderError
 from acervo.pronunciation import encode, speak as speaking, takes as take_store
@@ -57,6 +57,7 @@ from acervo.services import pronunciations, stories
 from acervo.services.models import refusal
 from acervo.settings import Settings
 from acervo.stories import narrate
+from acervo.services.providers import load as load_providers
 
 NARRATE_TEMPLATE = "acervo_story_narrate"
 # What tells the voice how to read a passage. Not the sentence template a word's example uses
@@ -123,7 +124,7 @@ def narrate_part(
     reading, voices = _readers(settings, owner, language, order)
 
     segments = _segments(settings, owner, part["text"], language, reading)
-    pin = _pin(parts, language)
+    pin = _pin(settings, parts, language)
     recordings, pin = _record(settings, owner, segments, language, order, reading, preferences, pin,
                               voices, gate)
 
@@ -239,20 +240,20 @@ def _readers(settings: Settings, owner: str, language: str, order: str):
     `_speak` then says why in the refusal it raises."""
     try:
         reading, chosen = pronunciations.readers(settings, owner, order, language)
-        return reading, speaking.speakers(chosen, load_catalogue(), language)
+        return reading, speaking.speakers(chosen, load_providers(settings), language)
     except ProviderError:
         return order, ()
 
 
-def _pin(parts: list[dict[str, Any]], language: str) -> Pin | None:
+def _pin(settings: Settings, parts: list[dict[str, Any]], language: str) -> Pin | None:
     """The voice this story is already being read in: the first recorded part's, if it can still be
-    asked for. A pair that has since left the catalogue, lost its credential or stopped speaking the
+    asked for. A pair whose provider has since been removed, lost its key or stopped speaking the
     language is not one to insist on — a story then starts again with whatever answers first."""
     for part in sorted(parts, key=lambda row: row.get("position", 0)):
         if part.get("audioSegments") and part.get("audioProviderId") and part.get("audioModelId"):
             pair = (part["audioProviderId"], part["audioModelId"])
             try:
-                usable = speaking.speakers([pair], load_catalogue(), language)
+                usable = speaking.speakers([pair], load_providers(settings), language)
             except ProviderError:
                 usable = ()
             return (*pair, part.get("audioVoice") or None) if usable else None
@@ -273,7 +274,7 @@ def _segments(settings: Settings, owner: str, text: str, language: str,
     candidates = stories._candidates(settings, owner, "text")
     stories._require(candidates, settings, owner, "text")
     narrator = narrate.Narrator(
-        load_catalogue(), candidates, stories._template(settings, NARRATE_TEMPLATE))
+        load_providers(settings), candidates, stories._template(settings, NARRATE_TEMPLATE))
     try:
         tiled, usage = narrator.segment(
             narrate.build_request(language_name=speaking.language_name(language), text=text))

@@ -32,8 +32,8 @@ from typing import Any
 
 import dataset
 
-from acervo.models import call, load_catalogue
-from acervo.models.catalogue import available, reason
+from acervo.models.local import load_local
+from acervo.models import call
 from acervo.models.errors import ProviderError
 from acervo.models.pacing import Pace
 from acervo.services.capture.compose import build_user_message
@@ -41,7 +41,7 @@ from acervo.services.capture.compose import build_user_message
 HERE = Path(__file__).resolve().parent
 ARMS = ("before", "after")
 TIMEOUT_SECONDS = 90.0
-PROVIDER = "gemini-free"
+PROVIDER = "gemini-api"
 
 # Gemini's free tier documents 15/min and meters the credential rather than the model.
 RATE_PER_MINUTE = 8
@@ -72,11 +72,11 @@ def arm_digest(name: str) -> str:
 
 def pairs() -> list[dict[str, Any]]:
     """Only `gemini-free`'s text models — this experiment never calls a second provider."""
-    catalogue = load_catalogue()
+    catalogue = load_local()
     row = catalogue.find(PROVIDER)
     return [
         {"provider": row.id, "model": model, "row": row,
-         "available": available(row), "reason": reason(row)}
+         "available": row.available, "reason": row.reason()}
         for model in row.models_for("text")
     ]
 

@@ -21,7 +21,7 @@ encodings and sample rates the catalogue does not declare, and an experiment tha
 shipped row in order to measure it would be measuring the change. `experiments/` may not be imported
 by anything that ships (`tests/unit/server/test_layering.py`), and this keeps that trivially true.
 
-Nothing here is a second pipeline: the outcome is one value in `models/catalogue.json`.
+Nothing here is a second pipeline: the outcome is one value in the Google Cloud family (`src/acervo/models/families.py`).
 """
 
 from __future__ import annotations

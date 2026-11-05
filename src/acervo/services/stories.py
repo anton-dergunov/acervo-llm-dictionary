@@ -30,7 +30,7 @@ from acervo.domain.ids import is_record_id, new_record_id, now_instant
 from acervo.domain.validation import GUIDANCE_LIMIT
 from acervo.errors import ApiError
 from acervo.images.styles import load_styles
-from acervo.models import chain, load_catalogue
+from acervo.models import chain
 from acervo.models.errors import ChainExhausted, ProviderError, ProviderRefused
 from acervo.pronunciation.speak import language_name
 from acervo.repository import image_settings
@@ -44,6 +44,7 @@ from acervo.services.rules import with_rules
 from acervo.settings import Settings
 from acervo.stories import continuity, illustrate, translate, write
 from acervo.stories.types import story_types
+from acervo.services.providers import load as load_providers
 
 # A story is built around a handful of words, not a vocabulary list. The ceiling is about what the
 # writer can weave into twenty sentences without the prose buckling, which the experiment found
@@ -75,14 +76,14 @@ def _template(settings: Settings, name: str) -> str:
 def _candidates(settings: Settings, owner: str, kind: str) -> tuple[chain.Candidate, ...]:
     """The owner's chain for one kind, resolved per call. See `services/images._candidates`."""
     try:
-        return chain.resolve(kind, chain_for(settings, owner, kind), load_catalogue())
+        return chain.resolve(kind, chain_for(settings, owner, kind), load_providers(settings))
     except ProviderError as error:
         raise refusal(error, kind) from None
 
 
 def _require(candidates: tuple[chain.Candidate, ...], settings: Settings, owner: str, kind: str) -> None:
     if not candidates:
-        raise refusal(chain.unconfigured(kind, chain_for(settings, owner, kind), load_catalogue()), kind)
+        raise refusal(chain.unconfigured(kind, chain_for(settings, owner, kind), load_providers(settings)), kind)
 
 
 # ── what can be asked for ───────────────────────────────────────────────────
@@ -280,7 +281,7 @@ def write_story(settings: Settings, owner: str, device: str, story_id: str) -> d
     story_type = table.get(story["typeId"] or "") or table.surprise(story_id)
 
     writer = write.StoryWriter(
-        load_catalogue(), candidates,
+        load_providers(settings), candidates,
         with_reader(_template(settings, WRITE_TEMPLATE), owner,
                     vocabulary_for(graph.owner_vocabularies(owner), story["language"])),
     )
@@ -348,7 +349,7 @@ def translate_story(settings: Settings, owner: str, device: str, story_id: str) 
     candidates = _candidates(settings, owner, "text")
     _require(candidates, settings, owner, "text")
     translator = translate.Translator(
-        load_catalogue(), candidates, with_rules(_template(settings, TRANSLATE_TEMPLATE), owner)
+        load_providers(settings), candidates, with_rules(_template(settings, TRANSLATE_TEMPLATE), owner)
     )
     parts = [write.Part(row["heading"] or "", row["text"] or "") for row in rows]
     try:
@@ -392,7 +393,7 @@ def brief_story(settings: Settings, owner: str, device: str, story_id: str) -> d
     candidates = _candidates(settings, owner, "text")
     _require(candidates, settings, owner, "text")
     briefer = illustrate.BriefWriter(
-        load_catalogue(), candidates, with_rules(_template(settings, BRIEF_TEMPLATE), owner)
+        load_providers(settings), candidates, with_rules(_template(settings, BRIEF_TEMPLATE), owner)
     )
     parts = [write.Part(row["heading"] or "", row["text"] or "") for row in rows]
     try:
@@ -448,7 +449,7 @@ def draw_pictures(settings: Settings, owner: str, device: str, story_id: str,
     candidates = _candidates(settings, owner, "image")
     _require(candidates, settings, owner, "image")
     media = Path(settings.media_path)
-    catalogue = load_catalogue()
+    catalogue = load_providers(settings)
     drawn = 0
     referenced = 0
     failed: list[str] = []
@@ -559,7 +560,7 @@ def _labels(settings: Settings, owner: str, story: dict[str, Any], rows: list[di
     candidates = _candidates(settings, owner, "text")
     if not candidates:
         return None
-    labeller = continuity.Labeller(load_catalogue(), candidates,
+    labeller = continuity.Labeller(load_providers(settings), candidates,
                                    _template(settings, CONTINUITY_TEMPLATE))
     parts = [write.Part(row["heading"] or "", row["text"] or "") for row in rows]
     try:

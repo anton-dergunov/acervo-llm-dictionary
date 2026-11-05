@@ -6,10 +6,10 @@ actually produces the JSON object it asks for, that a real model addresses the i
 it was given rather than inventing them, that "small, or nothing" holds — and, most important, that
 a question which should change nothing comes back with no proposal at all.
 
-    set -a; . ./.env; set +a
     RUN_LIVE_CHAT_TESTS=true .venv/bin/python -m pytest tests/integration/test_chat_live.py -v -s
 
-Roughly one model call per test. The document below is a real Acervo projection, ids and all.
+The providers are this machine's `providers.local.json`, copied into a throwaway server store, so
+the turn walks them as the server would. Roughly one model call per test. The document below is a real Acervo projection, ids and all.
 """
 
 from __future__ import annotations
@@ -72,13 +72,30 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 def gated(tmp_path_factory):
     if os.environ.get("RUN_LIVE_CHAT_TESTS") != "true":
         pytest.skip("live chat tests are gated; set RUN_LIVE_CHAT_TESTS=true to run them")
-    if not os.environ.get("GEMINI_API_KEY"):
-        pytest.skip("no GEMINI_API_KEY in the environment")
+    from acervo.models.local import LocalProvidersMissing, load_local
+    from acervo.repository import providers as store
+    from acervo.services import provider_secrets
+    from acervo.services.providers import _stored
+
+    try:
+        local = [row for row in load_local() if row.serves("text") and row.available]
+    except LocalProvidersMissing as missing:
+        pytest.skip(str(missing))
+    if not local:
+        pytest.skip("no provider in providers.local.json can answer text")
     # The default is the container's `/app/prompts`; on a workstation the tracked files are here.
     os.environ.setdefault("ACERVO_PROMPTS_PATH", str(REPOSITORY_ROOT / "prompts"))
     # Every turn reads the owner's standing rules from the database. A fresh one holds none, so the
     # model is sent exactly the tracked prompt.
-    open_database(tmp_path_factory.mktemp("live-chat") / "acervo.db")
+    database = tmp_path_factory.mktemp("live-chat") / "acervo.db"
+    os.environ["ACERVO_DB_PATH"] = str(database)
+    open_database(database)
+    for row in local:
+        provider_secrets.put(read_settings(), row.id,
+                             {"key": row.credential.key} if row.credential.key
+                             else {"credentials": dict(row.credential.file or {})})
+        store.add(row.id, _stored(row), {"ok": True, "said": "copied from providers.local.json",
+                                         "reason": None, "account": None})
 
 
 def ask(question: str, **overrides):

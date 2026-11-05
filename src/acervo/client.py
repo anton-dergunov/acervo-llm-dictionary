@@ -151,11 +151,11 @@ class AcervoClient:
         return self.call("GET", f"{API_PATH}/health", anonymous=True, timeout=15.0)
 
     def models(self) -> dict[str, Any]:
-        """The catalogue as this owner sees it, and their chains, one kind at a time.
+        """The server's providers as this owner sees them, and their chains, one kind at a time.
 
         A batch job on a laptop reads this to find out which providers the owner chose, then
-        resolves that order against its *own* catalogue and its own credentials — the order is a
-        preference and the credentials are a fact about the machine.
+        resolves that order against its *own* `providers.local.json` and its keys — the order is a
+        preference and the keys are a fact about the machine.
         """
         return self.call("GET", f"{API_PATH}/models")
 

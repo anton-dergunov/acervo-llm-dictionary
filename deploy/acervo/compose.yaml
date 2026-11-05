@@ -28,13 +28,11 @@ services:
       # reaching it — a render is asked for by the server, never by a browser.
       ACERVO_LEXIBEAT_URL: "${ACERVO_LEXIBEAT_URL:-http://lexibeat:8000/api/v1}"
       # Held here and never sent to a client, exactly like a provider key: it authorises channel
-      # mutations, and the proxy attaches it server-side.
+      # mutations, and the proxy attaches it server-side. The corpus sends it back when it calls
+      # home for a translation (`POST /companion/text`).
       ACERVO_SPEECH_OPERATOR_TOKEN: "${ACERVO_SPEECH_OPERATOR_TOKEN:-}"
-      # Which providers answer, in order, as ids from models/catalogue.json. Unset means every one
-      # this deployment has credentials for, in catalogue order — so a server with one key needs
-      # nothing here. The keys themselves are named by their catalogue rows, and every value comes
-      # from llm.env, which the installer writes mode 600 and compose passes last.
-      ACERVO_TEXT_CHAIN: "${ACERVO_TEXT_CHAIN:-}"
+      # No provider variable and no credentials mount: providers are added in Settings ▸ Providers,
+      # and their keys live in providers.secrets.json beside the database, on the volume below.
       # The zone days and the nightly hour in Settings ▸ Activity are read in; unset means UTC.
       ACERVO_TIMEZONE: "${ACERVO_TIMEZONE:-}"
       # The Anki robot: another sync client of the sync server beside it, pushing the vocabulary
@@ -45,19 +43,6 @@ services:
       ACERVO_ANKI_SYNC_USERNAME: "${ACERVO_ANKI_SYNC_USERNAME:-}"
       ACERVO_ANKI_SYNC_PASSWORD: "${ACERVO_ANKI_SYNC_PASSWORD:-}"
       ACERVO_ANKI_DATA_PATH: /var/lib/acervo/worker
-      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
-      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
-      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
-      CLOUDFLARE_API_TOKEN: "${CLOUDFLARE_API_TOKEN:-}"
-      CLOUDFLARE_ACCOUNT_ID: "${CLOUDFLARE_ACCOUNT_ID:-}"
-      ACERVO_OLLAMA_URL: "${ACERVO_OLLAMA_URL:-}"
-      # Vertex authenticates by application default credentials, not by a key: LiteLLM has no
-      # express-key path. Without GOOGLE_APPLICATION_CREDENTIALS pointing at a service-account file
-      # mounted into the container, the vertex row is simply unavailable and health says so.
-      ACERVO_VERTEX_PROJECT: "${ACERVO_VERTEX_PROJECT:-}"
-      GOOGLE_APPLICATION_CREDENTIALS: "${GOOGLE_APPLICATION_CREDENTIALS:-}"
-      # Optional guard: the account those credentials must belong to, or the row refuses to run.
-      ACERVO_VERTEX_ACCOUNT: "${ACERVO_VERTEX_ACCOUNT:-}"
     ports:
       - "${ACERVO_APP_BIND_ADDRESS:-127.0.0.1}:${ACERVO_APP_PORT:-27702}:8000"
     volumes:
@@ -71,10 +56,6 @@ services:
       # The robot's Anki collection, its backups and the cards' kept payload. Not under the server's
       # own data directory, so --reset-database never takes Anki with it; --reset-anki does.
       - "${ACERVO_WORKER_DATA:-acervo-worker-data}:/var/lib/acervo/worker"
-      # Google will not authenticate from an environment variable: Vertex wants a credentials
-      # file, and LiteLLM has no express-key path. The directory is mounted rather than the
-      # file so the mount is valid whether or not one has been configured.
-      - "${ACERVO_CREDENTIALS:-acervo-credentials}:/run/acervo/credentials:ro"
     healthcheck:
       # Asserts an HTTP 200, not a TCP connect: a service that is listening but refusing every
       # request is not healthy. `wget` is deliberately not used — the alpine image had it and
@@ -116,22 +97,10 @@ services:
       # Acervo's own interface is the only browser client and it reaches this through the server's
       # proxy, so the service needs no CORS origins of its own.
       SPEECH_RETRIEVAL_CORS_ORIGINS: ""
-      # The player's target text runs on the *owner's* chain rather than on a key this service
-      # holds (spoken-clips §2.13). The chain is **given** rather than looked up: this container has
-      # no business reaching Acervo's database, which is the rule for any work that cannot import
-      # `repository/`. With none of these set, no provider is injected and the service falls back to
-      # the authored caption where one exists and no target text where none does.
-      ACERVO_TEXT_CHAIN: "${ACERVO_TEXT_CHAIN:-}"
-      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
-      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
-      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
-      CLOUDFLARE_API_TOKEN: "${CLOUDFLARE_API_TOKEN:-}"
-      CLOUDFLARE_ACCOUNT_ID: "${CLOUDFLARE_ACCOUNT_ID:-}"
-      ACERVO_OLLAMA_URL: "${ACERVO_OLLAMA_URL:-}"
-      # Vertex needs the credentials *file*, which is the one provider whose secret is not a value.
-      ACERVO_VERTEX_PROJECT: "${ACERVO_VERTEX_PROJECT:-}"
-      GOOGLE_APPLICATION_CREDENTIALS: "${GOOGLE_APPLICATION_CREDENTIALS:-}"
-      ACERVO_VERTEX_ACCOUNT: "${ACERVO_VERTEX_ACCOUNT:-}"
+      # The player's target text is written by Acervo's providers rather than by a key this
+      # service holds (spoken-clips §2.13): each call goes home to Acervo with the operator token
+      # above, and Acervo walks its own providers. This container holds no provider key.
+      ACERVO_API_URL: "${ACERVO_SPEECH_API_URL:-http://server:8000/api/acervo/v1}"
     # Deliberately no `ports`. Nothing outside the compose network talks to it: the browser goes
     # through Acervo's authenticated proxy, which is what keeps an unauthenticated read API off the
     # network and the operator token off the client.
@@ -145,9 +114,6 @@ services:
       - "${ACERVO_SPEECH_INDEX:-acervo-speech-index}:/var/lib/speech/data"
       # The owner's channel list, seeded from the wheel on first start and never overwritten.
       - "${ACERVO_SPEECH_CATALOGUES:-acervo-speech-catalogues}:/var/lib/speech/catalogues"
-      # The same credentials directory the server and the worker already mount, and for the same
-      # reason: Vertex authenticates from a file that Google will not accept as a value.
-      - "${ACERVO_CREDENTIALS:-acervo-credentials}:/run/acervo/credentials:ro"
     healthcheck:
       # Liveness, **not** readiness. Readiness answers 503 until an index has been built, which is
       # honest and correct on a fresh deployment — and a healthcheck pointed at it would report a
@@ -173,11 +139,9 @@ services:
       # POST /pronunciations/take, carrying the render-scoped token that arrived with the request.
       ACERVO_API_URL: "${ACERVO_LEXIBEAT_API_URL:-http://server:8000/api/acervo/v1}"
       LEXIBEAT_SERVICE_OUT: /var/lib/lexibeat/out
-    # **Deliberately no provider credential of any kind**, and this is the one companion service
-    # where that is true — no GEMINI_API_KEY, no Cloudflare pair, no Vertex project, no credentials
-    # mount. It is handed a voice per render instead (§2.3), so there is nothing here to leak, to
-    # rotate, or to keep in step with the server's chain. `test_deployment.py` asserts the absence
-    # so a later reader cannot mistake it for an oversight.
+    # **Deliberately no provider credential of any kind**, like every companion: it is handed a
+    # voice per render instead (§2.3), so there is nothing here to leak, to rotate, or to keep in
+    # step with the server's providers. `test_deployment.py` asserts the absence.
     #
     # Deliberately no `ports` either, for `speech-retrieval`'s reason: a render is asked for by the
     # server, and nothing outside this network talks to it.
@@ -262,30 +226,13 @@ services:
       # password it asks for. Deliberately not ACERVO_JWT_SECRET: that signs every account's
       # tokens, and a batch job has no business holding it.
       ACERVO_SERVER_URL: "${ACERVO_SERVER_URL:-http://server:8000}"
-      # Which providers answer, in order, as ids from models/catalogue.json. Unset means every one
-      # this deployment has credentials for, in catalogue order — so a server with one key needs
-      # nothing here. The keys themselves are named by their catalogue rows, and every value comes
-      # from llm.env, which the installer writes mode 600 and compose passes last.
-      ACERVO_TEXT_CHAIN: "${ACERVO_TEXT_CHAIN:-}"
-      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
-      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
-      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
-      CLOUDFLARE_API_TOKEN: "${CLOUDFLARE_API_TOKEN:-}"
-      CLOUDFLARE_ACCOUNT_ID: "${CLOUDFLARE_ACCOUNT_ID:-}"
-      ACERVO_OLLAMA_URL: "${ACERVO_OLLAMA_URL:-}"
-      # Vertex authenticates by application default credentials, not by a key: LiteLLM has no
-      # express-key path. Without GOOGLE_APPLICATION_CREDENTIALS pointing at a service-account file
-      # mounted into the container, the vertex row is simply unavailable and health says so.
-      ACERVO_VERTEX_PROJECT: "${ACERVO_VERTEX_PROJECT:-}"
-      GOOGLE_APPLICATION_CREDENTIALS: "${GOOGLE_APPLICATION_CREDENTIALS:-}"
-      # Optional guard: the account those credentials must belong to, or the row refuses to run.
-      ACERVO_VERTEX_ACCOUNT: "${ACERVO_VERTEX_ACCOUNT:-}"
+      # No provider variable: nothing the worker runs calls a model. A loop render asks the server,
+      # which holds the keys.
     volumes:
       - "${ACERVO_WORKER_DATA:?Set ACERVO_WORKER_DATA}:/var/lib/acervo/worker"
       - "${ACERVO_DICTIONARIES:-acervo-dictionaries}:/var/lib/acervo/dictionaries"
       - "${ACERVO_MEDIA:-acervo-media}:/var/lib/acervo/media"
       - "${ACERVO_INPUT_PATH:?Set ACERVO_INPUT_PATH}:/input:ro"
-      - "${ACERVO_CREDENTIALS:-acervo-credentials}:/run/acervo/credentials:ro"
     depends_on:
       anki-sync-server:
         condition: service_healthy
@@ -306,7 +253,3 @@ volumes:
   acervo-speech-catalogues:
   acervo-lexibeat-bundle:
   acervo-lexibeat-out:
-  # The fallback for `ACERVO_CREDENTIALS`, which three services mount. Undeclared, it made *every*
-  # compose command fail with "refers to undefined volume" the moment a caller left the variable
-  # unset — which the installer never does and the Docker integration test always does.
-  acervo-credentials:

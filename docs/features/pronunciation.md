@@ -75,11 +75,12 @@ reference**: one per word, offline, correct, and read by one voice held stable p
 deviation is audible. **An example's recording is a reading**, where prosody carries meaning and a
 voice that takes a direction earns its cost.
 
-Both orders draw from the catalogue's one `audio` kind, because any voice can read either. Audio
-capabilities are declared **per model** (`capabilities.audio.models`: style, languages, voices,
-the locales it accepts), since one Google endpoint serves per-locale WaveNet voices that take no
-direction and Gemini voices that speak anything and do. A direction is a short English phrase the
-compose prompt writes, sent only to a model whose row declares `style: instruction`, and recorded on
+Both orders draw from a provider's one `audio` kind, because any voice can read either. What a voice
+can do is said **per model** — whether it takes a `direction`, and the `languages` it speaks where the
+owner says — since one Google endpoint serves per-locale WaveNet voices that take no direction and
+Gemini voices that speak anything and do; the voices themselves come from the provider's own list
+([`../architecture/models.md`](../architecture/models.md), "Providers and families"). A direction is a
+short English phrase the compose prompt writes, sent only to a model that takes one, and recorded on
 the row only when it was actually sent.
 
 ## Accent, and which voice reads first
@@ -100,14 +101,15 @@ carry them. The server sends the list with each language in `GET /languages`, so
 varieties are offered before its vocabulary exists, and the form adds any region a voice is declared
 for.
 
-**Providers handle accent in two ways, and both are declarations in the catalogue row, never code.**
-A voice made for one locale is keyed by it (`voices: {"es-ES": […], "es-US": […]}`) and has that
-locale's accent. A voice that speaks any is keyed `"*"`, and when its model takes an instruction it is
-*told* the accent — "as a native speaker from Argentina", in the same field as the emotion, so it is
-never read aloud — and sent the nearest locale its model `accepts` (`es-419` for Argentina). Which
-locales are near is CLDR's answer, read through Babel in `models/locales.py`: `es-AR`, `es-MX` and
-`es-US` share `es-419`, so for Argentina a US Spanish voice outranks a Castilian one, which is still
-offered. `Row.voice_options` ranks a model's voices for a locale — made for it, told it, near, the
+**Providers handle accent in two ways, and both come from what the provider says, never code.** A
+voice made for one locale carries it (Google lists `es-ES-Wavenet-F` under `es-ES`) and has that
+locale's accent. A voice that speaks any has no locale of its own, and when its model takes a
+direction it is *told* the accent — "as a native speaker from Argentina", in the same field as the
+emotion, so it is never read aloud — and sent the nearest locale the model accepts: the ones typed on
+it, else the ones the provider lists voices under. Gemini voices refuse `es-AR`, so for Argentina
+they are sent `es-US`. Which locales are near is CLDR's answer, read through Babel in
+`models/locales.py`: `es-AR`, `es-MX` and `es-US` share `es-419`, so for Argentina a US Spanish voice
+outranks a Castilian one, which is still offered. `Provider.voice_options` ranks a model's voices for a locale — made for it, told it, near, the
 language's main locale, another — and that ranking is the only place accent is matched. A test holds
 the code that chooses a voice to naming no provider, model or voice, so a provider added later is
 ranked the same way by filling in the same fields. A voice made for a locale is told nothing extra:
@@ -123,7 +125,8 @@ voice name says it too (Kore on one Gemini model, then the next), and otherwise 
 for the accent unless the owner chose one for it. `pronunciations.readers` applies the choice for
 every use — words, examples, selections, loops, stories — and `settings_view` returns the resulting
 walk per order and language (`readers`) so the page draws it rather than restating the rule. Each
-choice is held to the catalogue, and a voice a model does not offer is dropped rather than sent. The
+choice is held to the provider, and a voice a model does not offer is dropped rather than sent;
+removing a provider or one of its voices removes the choices that named it. The
 voice is recorded on every clip. One limit follows from the storage: a pair in both orders says a
 language in one voice, so choosing a Gemini voice as both the clear and the expressive voice keeps the
 later choice for both.

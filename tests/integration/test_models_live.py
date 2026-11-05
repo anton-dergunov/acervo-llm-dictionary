@@ -2,15 +2,17 @@
 
 Everything about how a provider *failure* is handled is in `tests/unit/models/`, which runs offline
 in two seconds against real LiteLLM exception objects. What only a live call can tell you is the
-half a stub cannot fake: that a catalogue row's model id still exists, that the credential in this
-deployment's environment is accepted, that a `native` row really does honour `response_format`, and
-that the bytes coming back are an image rather than a URL or an envelope nobody parsed.
+half a stub cannot fake: that a provider's model id still exists, that its key is accepted, that a
+family whose JSON mode is native really does honour `response_format`, that every key check is
+right about a working key, and that the bytes coming back are an image rather than a URL or an
+envelope nobody parsed.
 
-    set -a; . ./.env; set +a
+The providers are this machine's `providers.local.json` (`acervo/models/local.py`):
+
     RUN_LIVE_MODEL_TESTS=true .venv/bin/python -m pytest tests/integration/test_models_live.py -v
 
-A row this machine has no credentials for skips individually rather than failing the run, so the
-same command is useful on a workstation with three providers and on a server with one.
+A provider with no key skips individually rather than failing the run, so the same command is
+useful with three providers and with one.
 """
 
 from __future__ import annotations
@@ -20,13 +22,19 @@ import os
 
 import pytest
 
-from acervo.models import call, load_catalogue
-from acervo.models.catalogue import available, reason
+from acervo.models import call, listing
 from acervo.models.errors import ProviderUnavailable
+from acervo.models.local import LocalProvidersMissing, load_local
+from acervo.models.providers import parse
 
 pytestmark = pytest.mark.integration
 
-CATALOGUE = load_catalogue()
+try:
+    CATALOGUE = load_local()
+except LocalProvidersMissing:
+    from acervo.models.providers import Providers
+
+    CATALOGUE = Providers()
 
 # Short, cheap and unambiguous. The text prompt asks for a shape rather than for knowledge, so a
 # failure is about the transport rather than about the model being clever enough.
@@ -42,10 +50,10 @@ def gated():
 
 
 def pairs(kind: str) -> list[tuple[str, str]]:
-    """Every (row, model) this catalogue offers for a kind — each one gets its own case.
+    """Every (provider, model) this machine has for a kind — each one gets its own case.
 
-    Per pair rather than per row, because a row's second model is exactly the thing a stub cannot
-    check: it is listed so that the first one's 429 has somewhere to go, and a model id that has
+    Per pair rather than per provider, because a provider's second model is exactly the thing a stub
+    cannot check: it is listed so that the first one's 429 has somewhere to go, and a model id that has
     been retired sits there silently until the day the first bucket runs out.
     """
     return [(row.id, model) for row in CATALOGUE.serving(kind) for model in row.models_for(kind)]
@@ -55,8 +63,8 @@ def row_for(kind: str, identifier: str):
     row = CATALOGUE.find(identifier)
     if not row.serves(kind):
         pytest.skip(f"{identifier} does not serve {kind}")
-    if not available(row):
-        pytest.skip(f"{identifier}: {reason(row)}")
+    if not row.available:
+        pytest.skip(f"{identifier}: {row.reason()}")
     return row
 
 
@@ -129,13 +137,13 @@ def test_speech_comes_back_as_audio_from_a_real_provider(identifier, model):
     words = WORD if language == "es" else "hello"
     # A style goes only where the model declares it takes one, which is exactly what is being
     # checked for the Gemini voices: that `prompt` is accepted and the answer is still audio.
-    style = "Say it warmly, like greeting an old friend." if row.style_for(model) == "instruction" else None
+    style = "Say it warmly, like greeting an old friend." if row.takes_direction(model) else None
     result = reachable(row, "audio")(
         lambda: call.speech(words, row=row, model=model, language=language, style=style)
     )
     check(result.answer, row)
     assert len(result.data) > 500, "that is too small to be a spoken word"
-    # Sniffed from the bytes, not asserted by the row: Gemini answers WAV and Aura answers MP3.
+    # Sniffed from the bytes, not asserted by the family: Gemini answers WAV and Aura answers MP3.
     assert result.mime != "application/octet-stream", f"unrecognised audio {result.data[:8]!r}"
     assert result.answer.warnings == ()
     print(f"\n{identifier}: {model} voice={result.voice} style={bool(style)} → {len(result.data)} "
@@ -167,24 +175,51 @@ def test_a_photographed_page_comes_back_as_words_with_outlines(identifier, model
     print(f"\n{identifier}: {len(result.words)} words, {result.language}, in {result.answer.seconds:.1f}s")
 
 
-def test_a_wrong_credential_is_refused_rather_than_routed_around(monkeypatch):
+def _first_with_a_key(kind: str):
+    row = next((row for row in CATALOGUE.serving(kind) if row.credential.key and row.available), None)
+    if row is None:
+        pytest.skip(f"no provider here has a key for {kind}")
+    return row
+
+
+def test_a_wrong_credential_is_refused_rather_than_routed_around():
     """The locked rule, against the real service: a rejected key must not spend the next provider.
 
     This is the one live case worth having beyond "it works", because it is the one where being
     wrong costs money quietly rather than failing loudly.
     """
-    row = row_for("text", "gemini-free")
-    monkeypatch.setenv(row.keyEnv, "not-a-real-key-0000000000")
     from acervo.models.errors import ProviderRefused
 
+    good = _first_with_a_key("text")
+    wrong = parse({"id": good.id, "family": good.family.id, "settings": dict(good.settings),
+                   "models": {"text": list(good.models_for("text"))}}, {"key": "not-a-real-key-0000000000"})
     with pytest.raises(ProviderRefused) as caught:
-        call.text(TEXT_PROMPT, row=row, as_json=True)
+        call.text(TEXT_PROMPT, row=wrong, as_json=True)
     assert caught.value.reason in ("authentication", "configuration")
     assert "not-a-real-key-0000000000" not in caught.value.detail
 
 
-def test_the_shipped_catalogue_names_models_these_providers_still_have():
-    """A model id that has been retired is a 404 at capture time and nowhere earlier."""
-    checked = [row.id for row in CATALOGUE if available(row)]
-    assert checked, "no provider on this machine has credentials; nothing was verified"
-    print("\ncredentialed here: " + json.dumps(checked))
+@pytest.mark.parametrize("identifier", [row.id for row in CATALOGUE], ids=str)
+def test_the_key_check_says_a_working_key_works(identifier):
+    """The call that decides whether a provider may be added. It spends nothing."""
+    row = CATALOGUE.find(identifier)
+    if not row.available:
+        pytest.skip(f"{identifier}: {row.reason()}")
+    checked = listing.check(row)
+    assert checked.ok, checked.said
+    print(f"\n{identifier}: {checked.said}")
+
+
+def test_the_key_check_says_a_wrong_key_is_refused():
+    good = _first_with_a_key("text")
+    wrong = parse({"id": good.id, "family": good.family.id, "settings": dict(good.settings),
+                   "models": {"text": list(good.models_for("text"))}}, {"key": "not-a-real-key-0000000000"})
+    checked = listing.check(wrong)
+    assert not checked.ok and checked.reason in ("authentication", "configuration"), checked.said
+    assert "not-a-real-key-0000000000" not in checked.said
+
+
+def test_this_machine_has_providers_to_check():
+    checked = [row.id for row in CATALOGUE if row.available]
+    assert checked, "no provider in providers.local.json can be asked; nothing was verified"
+    print("\ncan be asked here: " + json.dumps(checked))

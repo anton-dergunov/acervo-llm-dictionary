@@ -31,7 +31,8 @@ import dataset
 import render
 
 from acervo.errors import ApiError
-from acervo.models import call, load_catalogue
+from acervo.models.local import load_local
+from acervo.models import call
 from acervo.models.errors import ProviderError
 from acervo.models.pacing import Pace
 from acervo.services.capture.draft import draft_from
@@ -157,8 +158,8 @@ def ask(job: dict[str, Any], row: Any, model: str, timeout: float, gate: Pace) -
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run")
-    parser.add_argument("--judge", default="vertex_ai/gemini-3.1-pro-preview")
-    parser.add_argument("--row", default="vertex", help="the catalogue row whose credential is used")
+    parser.add_argument("--judge", default="gemini-3.1-pro-preview")
+    parser.add_argument("--row", default="vertex", help="the provider in providers.local.json whose credential is used")
     parser.add_argument("--concurrency", type=int, default=2)
     parser.add_argument("--max-cost-usd", type=float, default=3.0)
     parser.add_argument("--timeout", type=float, default=180.0)
@@ -178,7 +179,7 @@ def main() -> int:
     if not pending:
         return 0
 
-    row = load_catalogue().find(args.row)
+    row = load_local().find(args.row)
     gate = Pace(JUDGE_PER_MINUTE, cooldown=30.0, cap=600.0)
     random.Random(7).shuffle(pending)
     spent, lock, stop = 0.0, threading.Lock(), threading.Event()

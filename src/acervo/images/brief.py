@@ -13,7 +13,7 @@ from typing import Any, Sequence
 
 from acervo.models import ChainExhausted, TextResult, call, chain, journal
 from acervo.models.errors import SHAPE_TRIES, ProviderUnavailable
-from acervo.models.catalogue import Catalogue
+from acervo.models.providers import Providers
 
 from acervo.article import ArticleView
 
@@ -154,7 +154,7 @@ class BriefWriter:
     at the first word of a sweep.
     """
 
-    def __init__(self, catalogue: Catalogue, candidates: Sequence[chain.Candidate],
+    def __init__(self, catalogue: Providers, candidates: Sequence[chain.Candidate],
                  template: str, styles: StyleTable,
                  weights: dict[str, float] | None = None, boost_variety: bool = True) -> None:
         self.catalogue = catalogue

@@ -27,7 +27,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
-from acervo.models import chain, load_catalogue  # noqa: E402
+from acervo.models.local import load_local  # noqa: E402
+from acervo.models import chain  # noqa: E402
 from acervo.stories import illustrate, translate, types, write  # noqa: E402
 
 PROMPTS = Path(__file__).resolve().parents[2] / "prompts"
@@ -65,13 +66,13 @@ def main() -> int:
     parser.add_argument("--language", default="es")
     parser.add_argument("--kind", default="funny", help="a story type id, or 'surprise'")
     parser.add_argument("--parts", type=int, default=4)
-    parser.add_argument("--chain", default="gemini-free", help="comma-separated provider ids")
+    parser.add_argument("--chain", default="gemini-api", help="comma-separated provider ids")
     parser.add_argument("--translate", action="store_true", help="also ask for the translation")
     parser.add_argument("--brief", action="store_true", help="also ask for the image briefs")
     parser.add_argument("--into", default="en", help="the language to translate into")
     args = parser.parse_args()
 
-    catalogue = load_catalogue()
+    catalogue = load_local()
     chosen = [one.strip() for one in args.chain.split(",") if one.strip()]
     candidates = chain.resolve("text", chosen, catalogue)
     if not candidates:

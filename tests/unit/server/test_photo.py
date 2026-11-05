@@ -21,6 +21,7 @@ from acervo.ocr import segment
 from acervo.services import photo as photo_service
 
 from graph_records import DEVICE, lexeme, vocabulary
+from provider_rows import GOOGLE
 
 SENTENCE = "Esta operación, llevada a cabo en secreto, fue ordenada por el rey."
 
@@ -52,8 +53,7 @@ class Splitter:
 @pytest.fixture
 def reader(server, monkeypatch):
     """A server that can read photos: the Vision row credentialed, its adapter stubbed."""
-    monkeypatch.setenv("ACERVO_VERTEX_PROJECT", "a-project-name")
-    monkeypatch.setenv("GOOGLE_APPLICATION_CREDENTIALS", "/nonexistent/credentials.json")
+    server.add_provider(GOOGLE)
     asked = []
 
     def read(row, model, data, *, language_hints=(), timeout=15.0):
@@ -80,7 +80,7 @@ def test_a_photo_is_read_into_a_page_and_kept_pending(reader):
     page = answer.json()["data"]
 
     assert page["language"] == "es" and page["vocabulary"] is True
-    assert page["readBy"] == {"provider": "google-vision", "model": "document-text-detection"}
+    assert page["readBy"] == {"provider": "google-cloud", "model": "document-text-detection"}
     assert page["text"] == SENTENCE
     assert page["sentences"][0]["text"] == SENTENCE
     assert page["words"][0]["polygons"][0][0] == [0.025, 0.13333]

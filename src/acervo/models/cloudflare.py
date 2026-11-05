@@ -1,4 +1,4 @@
-"""The one hand-written adapter: Cloudflare images and Cloudflare audio.
+"""Cloudflare images and Cloudflare audio, which LiteLLM does not reach.
 
 LiteLLM covers Cloudflare *text* and neither of the other two, and this is the whole of the gap. The
 logic is lifted from `experiments/image_benchmark/image_benchmark_runner.py`'s `run_cloudflare`, which already works
@@ -27,17 +27,16 @@ from __future__ import annotations
 
 import base64
 import json
-import os
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import httpx
 
-from acervo.models.catalogue import Row, key
 from acervo.models.errors import RETRYABLE, ProviderRefused, ProviderUnavailable
-from acervo.models.redact import redactor
+
+if TYPE_CHECKING:
+    from acervo.models.providers import Provider as Row
 
 RUN_URL = "https://api.cloudflare.com/client/v4/accounts/{account}/ai/run/{model}"
-ACCOUNT_ENV = "CLOUDFLARE_ACCOUNT_ID"
 DETAIL_LIMIT = 2000
 
 
@@ -74,12 +73,10 @@ def speech(
     timeout: float = 120.0,
 ) -> tuple[bytes, str]:
     # `language` and `style` are accepted for the adapter signature and not sent: Aura is one
-    # language per model, and the row says which through `languages`; it takes no direction.
-    audio = row.audio_for(model)
-    # Cloudflare's two text-to-speech families disagree about what the field is called: melotts
-    # takes `prompt` (plus a `lang`), Deepgram's Aura takes `text` and refuses `prompt`. The row
-    # says which, because that is a fact about the model rather than about Cloudflare.
-    body: dict[str, Any] = {str(audio.get("inputField") or "prompt"): words}
+    # language per model, and the model says which through `languages`; it takes no direction.
+    # Cloudflare's text-to-speech models disagree about what the field is called: MeloTTS takes
+    # `prompt` (plus a `lang`), Deepgram's Aura takes `text` and refuses `prompt`.
+    body: dict[str, Any] = {str(row.family.audio.get("inputField") or "prompt"): words}
     chosen = voice
     if chosen:
         body["speaker"] = chosen
@@ -95,16 +92,12 @@ def _run(
     json_body: dict[str, Any] | None = None,
     timeout: float,
 ) -> httpx.Response:
-    account = (os.environ.get(ACCOUNT_ENV) or "").strip()
-    token = key(row)
+    account = row.setting("accountId")
+    token = row.credential.key
     if not account or not token:
-        # Reaching here means the chain called a row it had already been told was unavailable.
-        raise ProviderRefused(
-            "unconfigured",
-            f"{ACCOUNT_ENV if not account else row.keyEnv} is not set",
-            provider_id=row.id,
-            model=model,
-        )
+        # Reaching here means the chain called a provider it had already been told was unavailable.
+        raise ProviderRefused("unconfigured", row.reason() or f"{row.label} cannot be asked",
+                              provider_id=row.id, model=model)
 
     try:
         response = httpx.post(
@@ -166,18 +159,9 @@ def _detail(response: httpx.Response) -> str:
 
 
 def _fail(row: Row, model: str, reason: str | None, detail: str, status: int | None) -> None:
-    from acervo.models.call import classify
+    from acervo.models.call import status_reason
 
     if reason is None:
-        reason, _ = classify(_Status(status))
-    redact = redactor(row.secret_names)
+        reason = status_reason(status)
     failure = ProviderUnavailable if reason in RETRYABLE else ProviderRefused
-    raise failure(reason, redact(detail), provider_id=row.id, model=model, status=status)
-
-
-class _Status(Exception):
-    """A bare HTTP status, so it can go through the same classifier LiteLLM's exceptions do."""
-
-    def __init__(self, status: int | None) -> None:
-        super().__init__(str(status))
-        self.status_code = status
+    raise failure(reason, detail, provider_id=row.id, model=model, status=status)  # type: ignore[arg-type]

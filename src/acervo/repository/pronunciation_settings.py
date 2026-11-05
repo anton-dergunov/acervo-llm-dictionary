@@ -5,7 +5,7 @@ row eagerly, and every read is a pure read. Server state rather than a device pr
 recording happens on the server — a phone that has never opened Settings still gets the voices the
 owner chose. Whether a clip is *kept on a device* is the opposite case and lives on the device.
 
-This module stores what it is given. Which voices exist is the catalogue's question, and
+This module stores what it is given. Which voices exist is the providers' question, and
 `acervo.services.pronunciations` is where a document is held to it.
 """
 

@@ -23,6 +23,7 @@ from test_story_jobs import (
 from acervo.models.errors import ProviderUnavailable
 from acervo.repository import graph, image_settings, jobs, pronunciation_settings
 from acervo.work.runner import Runner
+from provider_rows import GOOGLE, VERTEX_IMAGE
 
 DEVICE = "device000000001"
 FIRST, SECOND = "gemini-3.1-flash-tts-preview", "gemini-2.5-flash-tts"
@@ -44,11 +45,7 @@ def wav(words: str) -> bytes:
 @pytest.fixture(autouse=True)
 def a_voice(server, monkeypatch, tmp_path):
     """Cloud TTS is credentialed and answers. `speech.fail[model]` makes one model refuse."""
-    credentials = tmp_path / "service-account.json"
-    credentials.write_text("{}")
-    monkeypatch.setenv("ACERVO_VERTEX_PROJECT", "a-project-name")
-    monkeypatch.setenv("GOOGLE_APPLICATION_CREDENTIALS", str(credentials))
-    monkeypatch.delenv("ACERVO_VERTEX_ACCOUNT", raising=False)
+    server.add_provider(GOOGLE)
     calls: list[dict] = []
 
     def speech(row, model, words, **kwargs):
@@ -66,8 +63,7 @@ def a_voice(server, monkeypatch, tmp_path):
 @pytest.fixture
 def models(server, monkeypatch) -> Models:
     stub = Models()
-    monkeypatch.setenv("GEMINI_API_KEY", "a-key")
-    monkeypatch.setenv("OPENAI_API_KEY", "a-key")
+    server.add_provider(VERTEX_IMAGE)
     monkeypatch.setattr("acervo.models.call.completion", lambda **kw: stub.completion(**kw))
     monkeypatch.setattr("acervo.models.call.image_generation", lambda **kw: stub.image_generation(**kw))
     # This file is about the voice. Drawing from earlier pictures adds a text call to label them,
@@ -130,7 +126,7 @@ def test_a_clear_voice_reads_the_part_in_one_go_with_no_passages_and_no_text_cal
     assert only["text"] == part["text"] and only["direction"] == ""
     assert only["audioRef"].startswith(f"stories/{story['id']}/{part['id']}-")
     assert only["audioMime"] == "audio/ogg" and only["durationSeconds"] > 0
-    assert (row["audioProviderId"], row["audioModelId"]) == ("google-tts", "wavenet")
+    assert (row["audioProviderId"], row["audioModelId"]) == ("google-cloud", "Wavenet")
     assert Path(server.settings.media_path, only["audioRef"]).read_bytes()[:4] == b"OggS"
 
 
@@ -156,7 +152,7 @@ def test_a_directed_voice_reads_a_passage_at_a_time_and_says_where_each_is(serve
     for one in passages:
         assert one["durationSeconds"] > 0
         assert Path(server.settings.media_path, one["audioRef"]).read_bytes()[:4] == b"OggS"
-    assert row["audioProviderId"] == "google-tts" and row["audioModelId"] == FIRST
+    assert row["audioProviderId"] == "google-cloud" and row["audioModelId"] == FIRST
 
 
 def test_only_a_voice_that_can_take_a_direction_reads_a_directed_story(server, models, runner):
@@ -169,7 +165,7 @@ def test_only_a_voice_that_can_take_a_direction_reads_a_directed_story(server, m
     row = read(server, story, part)
 
     assert row["audioModelId"] in (FIRST, SECOND), "one of the two that declare `instruction`"
-    assert "wavenet" not in {call["model"] for call in server.speech.calls}, "the plain voice was never asked"
+    assert "Wavenet" not in {call["model"] for call in server.speech.calls}, "the plain voice was never asked"
     assert all(one["direction"] for one in row["audioSegments"])
 
 
@@ -179,12 +175,12 @@ def test_a_part_no_directed_voice_can_read_is_read_whole_and_plainly(server, mod
     where to cut it."""
     story = written(server, models, runner, parts=3)
     part = parts_of(server, story)[0]
-    server.put("/models/selection", {"chains": {"audioExpressive": [{"provider": "google-tts", "model": "standard"}]}})
+    server.put("/models/selection", {"chains": {"audioExpressive": [{"provider": "google-cloud", "model": "Standard"}]}})
     before = len(models.prompts)
 
     row = read(server, story, part)
 
-    assert row["audioModelId"] == "wavenet", "the clear order read it"
+    assert row["audioModelId"] == "Wavenet", "the clear order read it"
     assert len(row["audioSegments"]) == 1, "one passage, so there is nothing to tap"
     assert [call["words"] for call in server.speech.calls] == [part["text"]], "the whole part, in one call"
     assert len(models.prompts) == before, "no model was asked where to cut it"
@@ -196,12 +192,12 @@ def test_a_part_whose_directed_voices_run_out_is_read_on_by_the_clear_voice(serv
     story = written(server, models, runner, parts=3)
     part = parts_of(server, story)[0]
     for model in (FIRST, SECOND):
-        server.speech.fail[model] = ProviderUnavailable("unavailable", "down", provider_id="google-tts", model=model)
+        server.speech.fail[model] = ProviderUnavailable("unavailable", "down", provider_id="google-cloud", model=model)
     models.texts = [narrate_reply(part["text"])]
 
     row = read(server, story, part)
 
-    assert row["audioModelId"] == "wavenet", "the clear voice read it"
+    assert row["audioModelId"] == "Wavenet", "the clear voice read it"
     assert "".join(one["text"] for one in row["audioSegments"]) == part["text"]
     assert not any(one["direction"] for one in row["audioSegments"])
 
@@ -234,7 +230,7 @@ def test_the_pair_that_answered_first_reads_every_later_passage_and_part(server,
     first, second, *_ = parts_of(server, story)
     models.texts = [narrate_reply(first["text"]), narrate_reply(second["text"])]
     # The first pair in the order is down for the first passage, so the second answers it…
-    server.speech.fail[FIRST] = ProviderUnavailable("unavailable", "down", provider_id="google-tts", model=FIRST)
+    server.speech.fail[FIRST] = ProviderUnavailable("unavailable", "down", provider_id="google-cloud", model=FIRST)
 
     read(server, story, first)
     server.speech.fail.clear()  # …and is healthy again by the time the next part is read.
@@ -258,7 +254,7 @@ def test_a_pinned_voice_that_runs_out_is_stepped_over_so_the_story_still_finishe
     pinned = parts_of(server, story)[0]["audioModelId"]
     server.speech.calls.clear()
     server.speech.fail[pinned] = ProviderUnavailable(
-        "rate_limited", "no allowance left today", provider_id="google-tts", model=pinned)
+        "rate_limited", "no allowance left today", provider_id="google-cloud", model=pinned)
 
     row = read(server, story, second)
 
@@ -278,7 +274,7 @@ def test_a_pinned_voice_is_not_stepped_over_for_a_mistake_in_the_deployment(serv
     pinned = parts_of(server, story)[0]["audioModelId"]
     server.speech.calls.clear()
     server.speech.fail[pinned] = ProviderUnavailable(
-        "authentication", "that key was rejected", provider_id="google-tts", model=pinned)
+        "authentication", "that key was rejected", provider_id="google-cloud", model=pinned)
 
     error = read(server, story, second, expect=503)
 
@@ -402,7 +398,7 @@ def test_trying_again_after_a_failed_recording_records_the_rest_and_writes_no_se
     def flaky(row, model, words, **kwargs):
         calls["count"] += 1
         if "Numero 2" in words:
-            raise ProviderUnavailable("authentication", "rejected", provider_id="google-tts", model=model)
+            raise ProviderUnavailable("authentication", "rejected", provider_id="google-cloud", model=model)
         return original(row, model, words, **kwargs)
 
     monkeypatch.setattr("acervo.models.google_tts.speech", flaky)
