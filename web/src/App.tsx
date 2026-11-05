@@ -52,7 +52,7 @@ import {
   topicOptions, visibleRows, type SortKey, type TopicSelection
 , loopsIn, storiesIn } from "./selectors";
 import Settings, { type Page as SettingsPage } from "./settings/Settings";
-import { forgetServerSettings } from "./settings/cache";
+import { forgetServerSettings, onSaved, SETTINGS } from "./settings/cache";
 import { receiveHostState } from "./host";
 import { Launch } from "./Launch";
 import { forgetPlace, lastPlace, placeIn, rememberPlace } from "./lastPlace";
@@ -1221,7 +1221,11 @@ export default function App() {
 
   /* Asked once for the session, here rather than in the two views that show it: AddView is keyed
      and remounts for every seeded composition, so an effect of its own would re-ask on each one.
-     Nothing awaits this and every failure is silence — startup must not depend on the server. */
+     Nothing awaits this and every failure is silence — startup must not depend on the server.
+     Asked again after every save in Settings ▸ Providers, which is what changes the answer: kept
+     from before, a provider just added still read "cannot build entries" and Capture stayed off. */
+  const [providersSaved, setProvidersSaved] = useState(0);
+  useEffect(() => onSaved(SETTINGS.models, () => setProvidersSaved((count) => count + 1)), []);
   useEffect(() => {
     if (!session) return;
     let live = true;
@@ -1229,7 +1233,7 @@ export default function App() {
       .then((health) => { if (live) setCaptureHealth(health?.capture); })
       .catch(() => { /* unknown, which is not the same as unavailable */ });
     return () => { live = false; };
-  }, [session]);
+  }, [session, providersSaved]);
 
   /**
    * Put a word in the selection, or take it out. Its own language's selection, which is the one on

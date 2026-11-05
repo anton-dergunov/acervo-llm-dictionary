@@ -113,11 +113,26 @@ export function refresh<T>(source: Resource<T>): Promise<T> {
   return request;
 }
 
+const savedListeners = new Map<string, Set<() => void>>();
+
 /** What a save returned, which is now what the server holds. */
 export function store<T>(source: Resource<T>, value: T) {
   const entry = entryFor(source.key);
   entry.version += 1;
   publish(entry, { value, error: null });
+  savedListeners.get(source.key)?.forEach((listener) => listener());
+}
+
+/**
+ * Hear about every save to a setting, for what outside Settings depends on it: a provider added or
+ * an order changed decides whether this server can build entries at all, which the app reads from
+ * `/health` and would otherwise keep from before the save.
+ */
+export function onSaved<T>(source: Resource<T>, listener: () => void): () => void {
+  const listeners = savedListeners.get(source.key) ?? new Set();
+  savedListeners.set(source.key, listeners);
+  listeners.add(listener);
+  return () => { listeners.delete(listener); };
 }
 
 export function prefetchSettings() {

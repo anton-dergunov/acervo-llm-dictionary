@@ -7,6 +7,7 @@ import { hydrateGlosses, lookup as lookupDictionaries, searchDictionaries } from
 import { jobStream } from "./jobs";
 import { INSTALLED_EVENT, UPDATE_EVENT } from "./pwa";
 import { LocalAcervoRepository, repository } from "./repository";
+import { SETTINGS, store } from "./settings/cache";
 import type { LocalDatabase } from "./localDatabase";
 import { articleChanges } from "./testArticles";
 import { TEST_OWNER, testGraph } from "./testGraph";
@@ -1510,6 +1511,21 @@ describe("Acervo application", () => {
     expect(capture).not.toHaveBeenCalled();
     // Writing the entry by hand needs no model, so that way out stays open.
     expect(screen.getByRole("button", { name: "Write YAML instead" })).toBeEnabled();
+  });
+
+  it("asks again whether entries can be built once a provider is saved, without a reload", async () => {
+    signedIn();
+    serverHealth({ available: false, provider: null, model: null, reason: "no provider is added for text" });
+    await openList();
+    fireEvent.click(screen.getByRole("button", { name: "Open settings" }));
+    const settings = within(await screen.findByRole("dialog", { name: /Settings/ }));
+    openPage(settings, "General");
+    expect(await settings.findByText(/This server cannot build entries/)).toBeInTheDocument();
+
+    // A provider added in Settings ▸ Providers: its save is what changes the server's answer.
+    serverHealth();
+    act(() => store(SETTINGS.models, { families: [], providers: [], chains: {} }));
+    await waitFor(() => expect(settings.queryByText(/This server cannot build entries/)).not.toBeInTheDocument());
   });
 
   it("leaves Capture live when the server never answered about it", async () => {
