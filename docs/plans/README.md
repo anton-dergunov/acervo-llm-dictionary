@@ -8,7 +8,7 @@ what it said.
 
 - [`capture-transports.md`](capture-transports.md) — getting a word in from every device.
 - [`backups.md`](backups.md) — scheduled snapshots, an off-machine export, restore drills.
-- [`provider-management.md`](provider-management.md) — providers in Settings, usage figures, an audit, a setup guide.
+- [`provider-management.md`](provider-management.md) — providers and keys added in Settings, their usage, and which providers to support.
 
 **Study material**
 
@@ -38,5 +38,4 @@ what it said.
 
 **Later, kept on purpose**
 
-- [`nas-to-mac-job-queue.md`](nas-to-mac-job-queue.md) — a second machine doing the work.
 - [`icon-redesign.md`](icon-redesign.md) — the small and menu-bar icons.

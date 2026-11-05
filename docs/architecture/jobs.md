@@ -160,11 +160,10 @@ logs join, and what else is written down, is [`observability.md`](observability.
 
 ## A second machine
 
-The always-on machine has no GPU, and the machine with one is not always on. Nothing needs the Mac
-today, because the chosen providers are hosted. If a local model becomes worth running there, the
-sketch of how it would claim work is [`../plans/nas-to-mac-job-queue.md`](../plans/nas-to-mac-job-queue.md),
-and which models are worth it is the audit in
-[`../plans/provider-management.md`](../plans/provider-management.md).
+The always-on machine has no GPU, and the machine with one is not always on. Nothing needs the Mac,
+and no job is handed to another machine: a model running elsewhere — Ollama, a speech server, Draw
+Things — is reached as a provider over HTTP, the way a hosted one is
+([`../plans/provider-management.md`](../plans/provider-management.md)).
 
 ## Prefect
 

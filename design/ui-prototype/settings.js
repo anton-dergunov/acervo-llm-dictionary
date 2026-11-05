@@ -75,7 +75,7 @@ const search = (placeholder, value = "") => group("", [`<label class="pref-row">
 const action = (label, kind = "") => `<button class="pref-row pref-action ${kind}">${esc(label)}</button>`;
 const select = (label, hint, options, chosen) => `<label class="pref-row">${text(label, hint)}
   <select class="pref-select">${options.map((o) => `<option ${o === chosen ? "selected" : ""}>${esc(o)}</option>`).join("")}</select></label>`;
-const segmented = (label, hint, options, chosen) => `<div class="pref-row stack">${text(label, hint)}
+const segmented = (label, hint, options, chosen) => `<div class="pref-row stack">${label ? text(label, hint) : ""}
   <div class="seg" role="radiogroup" aria-label="${esc(label)}">${options.map((o) =>
     `<button role="radio" aria-checked="${o === chosen}" class="${o === chosen ? "on" : ""}">${esc(o)}</button>`).join("")}</div></div>`;
 const button = (label, primary = false) => `<button class="tb-btn ${primary ? "primary" : ""}">${esc(label)}</button>`;
@@ -85,6 +85,66 @@ const reorder = (label, hint, on, badge = "") => `<div class="pref-row">
   <input type="checkbox" role="switch" class="toggle" aria-label="Use ${esc(label)}" ${on ? "checked" : ""}>
   ${text(label, hint)}${badge ? `<span class="badge">${esc(badge)}</span>` : ""}
   <span class="pref-reorder"><button class="icon-btn" aria-label="Move up">${ICON.up}</button><button class="icon-btn" aria-label="Move down">${ICON.down}</button></span></div>`;
+
+/* ── providers and usage ──
+   The mock of docs/plans/provider-management.md: a provider is an account with one key, offering
+   models of several kinds; Usage counts every call per model, against a free allowance if one is set. */
+const PROVIDERS = {
+  "provider-gemini": { label: "Gemini API", kinds: "Text · Voices", state: ["ok", "Works"] },
+  "provider-google": { label: "Google Cloud", kinds: "Voices · Reading photos", state: ["ok", "Works"] },
+  "provider-cloudflare": { label: "Cloudflare", kinds: "Text · Pictures", state: ["ok", "Works"] },
+  "provider-elevenlabs": { label: "ElevenLabs", kinds: "Voices", state: ["ok", "Works"] },
+  "provider-groq": { label: "Groq", kinds: "Text", state: ["ok", "Works"] },
+  "provider-openrouter": { label: "OpenRouter", kinds: "Text", state: ["bad", "Key rejected"] }
+};
+const stateMark = ([tone, words]) => `<span class="pref-state ${tone}">${tone === "ok" ? ICON.check : ICON.alert}${esc(words)}</span>`;
+const providerLink = (id, p) => `<button class="pref-row" data-sub="${id}">${text(p.label, p.kinds)}${stateMark(p.state)}${ICON.chev.replace("<svg", '<svg class="chev"')}</button>`;
+const subAction = (label, to, kind = "") => `<button class="pref-row pref-action ${kind}" data-sub="${to}">${esc(label)}</button>`;
+/* A pair in an order: the provider, its model in the provider's own spelling, and how much is spent. */
+const pair = (provider, model, used, on, badge) => `<div class="pref-row${on ? "" : " unavailable"}">
+  <input type="checkbox" role="switch" class="toggle" aria-label="Use ${esc(provider)} ${esc(model)}" ${on ? "checked" : ""}>
+  <span class="pref-text"><span class="pref-label">${esc(provider)} · <span class="model-id">${esc(model)}</span></span>${used ? `<span class="pref-hint">${esc(used)}</span>` : ""}</span>
+  ${badge ? `<span class="badge">${esc(badge)}</span>` : ""}
+  <span class="pref-reorder"><button class="icon-btn" aria-label="Move up">${ICON.up}</button><button class="icon-btn" aria-label="Move down">${ICON.down}</button></span></div>`;
+const modelLabel = (id, hint) => `<span class="pref-text"><span class="pref-label mono">${esc(id)}</span>${hint ? `<span class="pref-hint">${esc(hint)}</span>` : ""}</span>`;
+const modelRow = (id, hint) => `<div class="pref-row">${modelLabel(id, hint)}<button class="icon-btn" aria-label="Remove ${esc(id)}">${ICON.close}</button></div>`;
+const modelLink = (id, hint, to) => `<button class="pref-row" data-sub="${to}">${modelLabel(id, hint)}${ICON.chev.replace("<svg", '<svg class="chev"')}</button>`;
+const keyField = (label, placeholder) => `<label class="pref-row">${text(label)}<input class="pref-input mono" type="password" autocomplete="off" placeholder="${esc(placeholder)}"></label>`;
+const keyRow = (label, hint, shown) => row(label, hint, `<span class="pref-value mono">${esc(shown)}</span>${button("Replace")}`);
+const checkRow = (state, hint, again = "Check again") => `<div class="pref-row"><span class="pref-text">${stateMark(state)}<span class="pref-hint">${esc(hint)}</span></span>${again ? button(again) : ""}</div>`;
+/* How much of an allowance is gone: the figure, then a thin bar, warning-coloured from 90%. */
+const gauge = (used, of, words) => {
+  const share = Math.min(1, used / of);
+  return `<span class="pref-gauge${share >= .9 ? " near" : ""}"><span class="pref-gauge-words">${esc(words)}</span>
+    <span class="pref-gauge-track" role="meter" aria-valuemin="0" aria-valuemax="${of}" aria-valuenow="${used}" aria-label="${esc(words)}"><span style="width:${(share * 100).toFixed(1)}%"></span></span></span>`;
+};
+const usageRow = (id, hint, meter = "") => `<button class="pref-row usage" data-sub="usage-model">${modelLabel(id, hint)}${meter}${ICON.chev.replace("<svg", '<svg class="chev"')}</button>`;
+const figures = (items) => `<section class="pref-group"><div class="pref-card"><div class="pref-figures">${items.map(([n, l]) =>
+  `<div class="pref-figure"><span class="pref-figure-n">${esc(n)}</span><span class="pref-figure-l">${esc(l)}</span></div>`).join("")}</div></div></section>`;
+
+/* Thirty days of one model, oldest first: calls that answered, and calls that failed. The last
+   eight days run into the free allowance of ten a day, which is what a rate limit looks like here. */
+const DAYS = [6, 4, 8, 3, 0, 5, 7, 9, 2, 6, 10, 8, 4, 0, 3, 7, 9, 10, 6, 5, 8, 10, 10, 9, 10, 10, 7, 10, 10, 9]
+  .map((ok, i) => ({ ok, failed: [0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,2,0,0,0,3,2,0,4,3,0,2,0,2][i] }));
+function dayLabel(index) {
+  const date = new Date(Date.UTC(2026, 10, 5 - (DAYS.length - 1 - index)));
+  return index === DAYS.length - 1 ? "Today" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+}
+function chart() {
+  const top = 15;
+  const bars = DAYS.map((d, i) => {
+    const tip = `${dayLabel(i)}: ${d.ok} answered${d.failed ? `, ${d.failed} failed` : ""}`;
+    const ok = d.ok ? `<span class="seg-ok${d.failed ? "" : " end"}" style="height:${(d.ok / top) * 100}%"></span>` : "";
+    const failed = d.failed ? `<span class="seg-failed end" style="height:${(d.failed / top) * 100}%"></span>` : "";
+    return `<span class="pref-bar" tabindex="0" data-tip="${esc(tip)}" aria-label="${esc(tip)}">${ok}${failed}</span>`;
+  }).join("");
+  return `<div class="pref-chart">
+    <div class="pref-legend"><span><i class="seg-ok"></i>Answered</span><span><i class="seg-failed"></i>Failed</span></div>
+    <div class="pref-plot"><span class="pref-tick" style="bottom:${(10 / top) * 100}%">10</span><span class="pref-grid" style="bottom:${(10 / top) * 100}%"></span>
+      <div class="pref-bars">${bars}</div><span class="pref-tip" hidden></span></div>
+    <div class="pref-axis"><span>${dayLabel(0)}</span><span>${dayLabel(15)}</span><span>Today</span></div>
+  </div>`;
+}
 
 /* ── the pages ── */
 const PAGES = {
@@ -225,16 +285,24 @@ Never use the word "literally" in a gloss.</textarea>
     group("Pictures", [segmented("Keep characters and places consistent", "", ["Every style", "Drawn only", "Off"], "Drawn only")])
   ],
 
+  /* Providers are added here, each with its own key; the orders below choose among their models.
+     The hint under a pair is how much of its free allowance is gone, the same figure Usage shows. */
   providers: () => [
+    notice(`OpenRouter refused its key, so nothing is sent to it. <button class="pref-link-inline" data-sub="provider-openrouter">Replace the key</button>`),
+    group("Providers", [
+      ...Object.entries(PROVIDERS).map(([id, p]) => providerLink(id, p)),
+      subAction("Add a provider…", "addProvider")
+    ]),
+    group("", [link("Usage", "Today: 142 calls · 3 failed", "usage")]),
     ...[
-      ["Text", [["Gemini · 2.5 Flash Lite", "gemini-free", true, ""], ["Cloudflare · Llama 3.3 70B", "cloudflare", true, ""], ["OpenRouter · Qwen3", "", false, "No key"]]],
-      ["Quick look-up", [["Gemini · 2.5 Flash Lite", "gemini-free", true, ""]]],
-      ["Pictures", [["Cloudflare · FLUX.1 schnell", "cloudflare", true, ""], ["Vertex · Imagen 4", "vertex", true, ""]]],
-      ["Clear voice", [["Gemini · flash-tts", "gemini-free", true, ""]]],
-      ["Expressive voice", [["Gemini · flash-tts", "gemini-free", true, ""]]],
-      ["Reading photos", [["Gemini · 2.5 Flash", "gemini-free", true, ""]]]
-    ].map(([kind, rows]) => group(kind, rows.map(([name, billed, on, badge]) => reorder(name, billed ? `Billed to ${billed}` : "", on, badge)))),
-    group("", [link("Credentials", "4 providers", "credentials")])
+      ["Text", [["Gemini API", "gemini-3.5-flash-lite", "96 of 500 today", true], ["Groq", "llama-3.3-70b-versatile", "", true],
+                ["Cloudflare", "gpt-oss-20b", "", true], ["OpenRouter", "qwen3-235b:free", "", false, "Key rejected"]]],
+      ["Quick look-up", [["Gemini API", "gemini-3.1-flash-lite", "21 of 500 today", true]]],
+      ["Pictures", [["Cloudflare", "flux-2-klein-4b", "18 of 95 today", true], ["Cloudflare", "flux-1-schnell", "", true]]],
+      ["Clear voice", [["Google Cloud", "Chirp 3 HD", "212k of 1M characters this month", true], ["Google Cloud", "WaveNet", "", true]]],
+      ["Expressive voice", [["Gemini API", "gemini-3.8-flash-tts", "9 of 10 today", true], ["ElevenLabs", "eleven_v4", "3.1k of 10k characters this month", true]]],
+      ["Reading photos", [["Google Cloud", "document-text-detection", "41 of 1,000 this month", true]]]
+    ].map(([kind, rows]) => group(kind, rows.map(([provider, model, used, on, badge = ""]) => pair(provider, model, used, on, badge))))
   ],
 
   activity: () => [
@@ -315,13 +383,131 @@ const SUBPAGES = {
     group("Chinese", [toggle("小Lin说", "Economics", true), toggle("Mandarin Corner", "Learning", true)], "", "2 of 2 on"),
     group("", [action("Add a channel…")], "Changes take effect at the next update.")
   ] },
-  credentials: { parent: "providers", title: "Credentials", render: () => [
+  addProvider: { parent: "providers", title: "Add a provider", render: () => [
+    group("Free to start", [
+      link("Gemini API", "", "provider-new", "Text, and voices that take a direction"),
+      link("Cloudflare", "", "provider-new", "Text, pictures and voices, a daily allowance"),
+      link("Groq", "", "provider-new", "Fast text"),
+      link("OpenRouter", "", "provider-new", "Text from many models, some free")
+    ]),
+    group("Popular", [
+      link("OpenAI", "", "provider-new", "Text and pictures"),
+      link("Anthropic", "", "provider-new", "Text"),
+      link("Google Cloud", "", "provider-new", "Voices and reading photos; text and pictures too"),
+      link("ElevenLabs", "", "provider-new", "Voices that take a direction"),
+      link("Azure Speech", "", "provider-new", "Voices in over a hundred languages")
+    ]),
+    group("On your own machines", [
+      link("Ollama", "", "provider-new", "Text from a model on your computer"),
+      link("Speech server", "", "provider-new", "Kokoro or Piper voices on your computer"),
+      link("Draw Things or Forge", "", "provider-new", "Pictures drawn on your computer")
+    ]),
+    group("", [link("Any compatible service", "", "provider-new", "Give its address and key")])
+  ] },
+  /* Choosing a provider opens its page empty: the few fields it needs, then one check. */
+  "provider-new": { parent: "addProvider", title: "Cloudflare", render: () => [
     group("", [
-      row("Gemini", "GEMINI_API_KEY", `<span class="pref-value mono">AIza…9xQk</span>`),
-      row("Cloudflare", "CLOUDFLARE_API_TOKEN", `<span class="pref-value mono">Xb3d…k2Lm</span>`),
-      row("Vertex", "Service account", `<span class="pref-value">Configured</span>`),
-      row("OpenRouter", "OPENROUTER_API_KEY", `<span class="badge">Missing</span>`)
-    ], "Keys are set on the server with <code>./deploy.sh --configure-llm</code>.")
+      field("Name", "Cloudflare"),
+      field("Account ID", "", "On the Workers AI page")
+    ], "", "", true),
+    group("Key", [keyField("API token", "Paste the token")],
+      `Create a Workers AI token at <a href="#">dash.cloudflare.com</a>. It is kept on your server.`, "", true),
+    `<div class="pref-buttons">${button("Cancel")}${button("Check and add", true)}</div>`
+  ] },
+  "provider-gemini": { parent: "providers", title: "Gemini API", render: () => [
+    group("Key", [
+      keyRow("API key", "From Google AI Studio", "AIza…k3Fq"),
+      checkRow(["ok", "Works · 52 models"], "Checked today, 14:02")
+    ]),
+    group("Text", [
+      modelRow("gemini-3.5-flash-lite", "500 a day free"),
+      modelRow("gemini-3.1-flash-lite", "500 a day free"),
+      subAction("Add a model…", "addModel")
+    ]),
+    group("Voices", [
+      modelLink("gemini-3.8-flash-tts", "Takes a direction · any language · 10 a day free", "model-tts"),
+      modelLink("gemini-3.8-flash-lite-tts", "Takes a direction · any language", "model-tts"),
+      subAction("Add a model…", "addModel")
+    ]),
+    group("Pictures", [subAction("Add a model…", "addModel")], "Gemini has no free pictures."),
+    group("", [
+      link("Usage", "Today: 126 calls · 2 failed", "usage"),
+      row("Google AI Studio", "Your limits and the bill", button("Open"))
+    ]),
+    group("", [action("Remove this provider", "danger")])
+  ] },
+  /* Google Cloud signs in two ways; the choice says what each one unlocks. */
+  "provider-google": { parent: "providers", title: "Google Cloud", render: () => googleCloud("key") },
+  "provider-google-file": { parent: "providers", title: "Google Cloud", render: () => googleCloud("file") },
+  "provider-cloudflare": { parent: "providers", title: "Cloudflare", render: () => simpleProvider("Cloudflare", "API token", "Xb3d…k2Lm", "Works · account a1b2…9f0e",
+    [["Text", [["gpt-oss-20b", ""]]], ["Pictures", [["flux-2-klein-4b", "About 95 a day free"], ["flux-1-schnell", "About 170 a day free"]]]]) },
+  "provider-elevenlabs": { parent: "providers", title: "ElevenLabs", render: () => simpleProvider("ElevenLabs", "API key", "sk_4f…e81a", "Works · free plan",
+    [["Voices", [["eleven_v4", "Takes a direction · 10k characters a month free"]]]]) },
+  "provider-groq": { parent: "providers", title: "Groq", render: () => simpleProvider("Groq", "API key", "gsk_…Q2vd", "Works · 21 models",
+    [["Text", [["llama-3.3-70b-versatile", "1,000 a day free"]]]]) },
+  "provider-openrouter": { parent: "providers", title: "OpenRouter", render: () => [
+    group("Key", [
+      keyRow("API key", "From openrouter.ai", "sk-or…77Hc"),
+      checkRow(["bad", "OpenRouter refused this key"], "Checked today, 09:15 · nothing is sent to it until it works", "Check again")
+    ]),
+    group("Text", [modelRow("qwen3-235b:free", "50 a day free")]),
+    group("", [action("Remove this provider", "danger")])
+  ] },
+  addModel: { parent: "provider-gemini", title: "Add a text model", render: () => [
+    search("Search Gemini’s models", "flash"),
+    group("Gemini offers", [
+      row("gemini-3.5-flash-lite", "Gemini 3.5 Flash-Lite", `<span class="pref-value">Added</span>`).replace('class="pref-label"', 'class="pref-label mono"'),
+      `<button class="pref-row">${modelLabel("gemini-3.8-flash", "Gemini 3.8 Flash")}</button>`,
+      `<button class="pref-row">${modelLabel("gemini-3.6-flash", "Gemini 3.6 Flash")}</button>`,
+      `<button class="pref-row">${modelLabel("gemini-3.8-pro", "Gemini 3.8 Pro")}</button>`
+    ]),
+    group("", [`<label class="pref-row">${text("Or type its name")}<input class="pref-input mono" placeholder="gemini-3.5-flash-lite">${button("Add")}</label>`])
+  ] },
+  "model-tts": { parent: "provider-gemini", title: "gemini-3.8-flash-tts", render: () => [
+    group("", [
+      toggle("Takes a direction", "Reads as asked: warmly, slowly, as in Argentina", true),
+      select("Languages", "", ["Any language", "Only some…"], "Any language")
+    ]),
+    group("Free allowance", [
+      field("Calls", "10"),
+      select("Each", "", ["Day", "Month"], "Day")
+    ], `Your own limit is on <a href="#">Google AI Studio</a>. Usage measures against it.`, "", true),
+    `<section class="pref-group"><h4>Voices<span class="count">30 listed by Gemini</span></h4><div class="pref-card">${[
+      ["Kore", "female · firm"], ["Puck", "male · upbeat"], ["Charon", "male · informative"], ["Aoede", "female · breezy"]
+    ].map(([name, hint]) => `<div class="pref-row split">${listen(name)}${text(name, hint)}</div>`).join("")}
+      <button class="pref-row pref-action">Show all 30</button></div>
+      <p class="pref-foot">Who reads each language is chosen in Pronunciation.</p></section>`,
+    group("", [action("Remove this model", "danger")])
+  ] },
+  /* Usage: what this server has spent, per provider and model, against the allowances you set. */
+  usage: { parent: "providers", title: "Usage", render: () => [
+    group("", [segmented("", "", ["Today", "This month", "All time"], "Today")]),
+    figures([["142", "calls"], ["3", "failed"], ["1.2M", "tokens"], ["18", "pictures"], ["24k", "characters"], ["4", "photos"]]),
+    group("Gemini API", [
+      usageRow("gemini-3.5-flash-lite", "96 calls · 980k tokens", gauge(96, 500, "96 of 500 today")),
+      usageRow("gemini-3.1-flash-lite", "21 calls · 230k tokens", gauge(21, 500, "21 of 500 today")),
+      usageRow("gemini-3.8-flash-tts", "9 calls · 2 failed · 1.4k characters", gauge(9, 10, "9 of 10 today"))
+    ]),
+    group("Cloudflare", [
+      usageRow("flux-2-klein-4b", "18 pictures · 1 failed", gauge(18, 95, "18 of 95 today")),
+      usageRow("gpt-oss-20b", "3 calls · 12k tokens")
+    ]),
+    group("Google Cloud", [
+      usageRow("Chirp 3 HD", "38 calls · 2.1k characters", gauge(212000, 1000000, "212k of 1M this month")),
+      usageRow("document-text-detection", "4 photos", gauge(41, 1000, "41 of 1,000 this month"))
+    ]),
+    group("ElevenLabs", [usageRow("eleven_v4", "6 calls · 640 characters", gauge(3100, 10000, "3.1k of 10k this month"))],
+      "Counted by Acervo. Your provider’s own page has the bill.")
+  ] },
+  "usage-model": { parent: "usage", title: "gemini-3.8-flash-tts", render: () => [
+    group("", [row("Gemini API · Expressive voice", "Free allowance 10 a day · answers in 2.4 s on average", button("Change"))]),
+    figures([["214", "calls, 30 days"], ["19", "failed · 9%"], ["31k", "characters"]]),
+    `<section class="pref-group"><h4>Last 30 days</h4><div class="pref-card">${chart()}</div></section>`,
+    group("Why calls failed", [
+      row("Allowance spent", "Gemini said no more today", `<span class="pref-value">17</span>`),
+      row("Too slow", "No answer in 30 seconds", `<span class="pref-value">2</span>`)
+    ], "A failed call passes to the next voice in the order."),
+    group("Last failure", [row("Quota exceeded for today, retry after 00:00 UTC", "Today, 11:42 · ElevenLabs read it instead")])
   ] },
   vocabulary: { parent: "vocabularies", title: "Spanish", render: () => [
     group("", [
@@ -368,6 +554,48 @@ const SUBPAGES = {
     ])
   ] }
 };
+
+/* A provider with one key and a few models: the shape most of them have. */
+function simpleProvider(name, keyLabel, shown, works, kinds) {
+  return [
+    group("Key", [keyRow(keyLabel, `From ${name}`, shown), checkRow(["ok", works], "Checked today, 14:02")]),
+    ...kinds.map(([kind, models]) => group(kind, [...models.map(([id, hint]) => modelRow(id, hint)), subAction("Add a model…", "addModel")])),
+    group("", [link("Usage", "", "usage")]),
+    group("", [action("Remove this provider", "danger")])
+  ];
+}
+
+/* Google Cloud: a key reaches voices and photos; a credentials file adds Vertex text and pictures. */
+function googleCloud(mode) {
+  const key = mode === "key";
+  const signIn = `<div class="pref-row stack">${text("Sign in with", key ? "Reaches voices and reading photos" : "Reaches everything, Vertex text and pictures too")}
+    <div class="seg" role="radiogroup" aria-label="Sign in with">${[["API key", "provider-google"], ["Credentials file", "provider-google-file"]].map(([label, to]) =>
+      `<button role="radio" data-sub="${to}" aria-checked="${(to === "provider-google") === key}" class="${(to === "provider-google") === key ? "on" : ""}">${label}</button>`).join("")}</div></div>`;
+  return [
+    group("", [signIn]),
+    key
+      ? group("Key", [keyRow("API key", "Allowed to use Text-to-Speech and Vision", "AIza…7tPe"), checkRow(["ok", "Works · Text-to-Speech and Vision answer"], "Checked today, 14:02")])
+      : group("Credentials", [
+          row("Credentials file", "A service account, or your own sign-in", button("Replace…")),
+          checkRow(["ok", "Works as acervo-tts@example-project.iam.gserviceaccount.com"], "Checked today, 14:02")
+        ]),
+    key ? "" : group("", [
+      field("Project", "example-project"),
+      select("Location", "", ["global", "europe-west1", "us-central1"], "global")
+    ], "", "", true),
+    key ? "" : group("Text", [modelRow("gemini-3.8-flash", ""), subAction("Add a model…", "addModel")]),
+    key ? "" : group("Pictures", [modelRow("gemini-3.1-flash-lite-image", "Keeps a story’s characters the same"), subAction("Add a model…", "addModel")]),
+    group("Voices", [
+      modelLink("Chirp 3 HD", "1M characters a month free", "model-tts"),
+      modelLink("WaveNet", "4M characters a month free", "model-tts"),
+      modelLink("gemini-2.5-flash-tts", "Takes a direction", "model-tts"),
+      subAction("Add a model…", "addModel")
+    ]),
+    group("Reading photos", [modelRow("document-text-detection", "1,000 a month free")]),
+    group("", [link("Usage", "", "usage"), row("Google Cloud console", "Your quotas and the bill", button("Open"))]),
+    group("", [action("Remove this provider", "danger")])
+  ];
+}
 
 function dictionary(name, state, on, act) {
   return `<label class="pref-row">${text(name, state)}${act ? button(act) : ""}<input type="checkbox" role="switch" class="toggle" ${on ? "checked" : ""}></label>`;
@@ -427,6 +655,18 @@ function render() {
   };
   root.querySelectorAll(".seg button").forEach((b) => b.onclick = () => {
     b.parentElement.querySelectorAll("button").forEach((o) => { o.classList.toggle("on", o === b); o.setAttribute("aria-checked", o === b); });
+  });
+  /* The chart's tooltip: the day under the pointer or the focus, said in words. */
+  root.querySelectorAll(".pref-plot").forEach((plot) => {
+    const tip = plot.querySelector(".pref-tip");
+    const show = (bar) => {
+      tip.textContent = bar.dataset.tip; tip.hidden = false;
+      const left = bar.offsetLeft + bar.offsetWidth / 2;
+      tip.style.left = `${Math.max(tip.offsetWidth / 2, Math.min(plot.clientWidth - tip.offsetWidth / 2, left))}px`;
+      plot.querySelectorAll(".pref-bar").forEach((b) => b.classList.toggle("hot", b === bar));
+    };
+    plot.querySelectorAll(".pref-bar").forEach((bar) => { bar.onpointerenter = () => show(bar); bar.onfocus = () => show(bar); bar.onclick = () => show(bar); });
+    plot.onpointerleave = () => { tip.hidden = true; plot.querySelectorAll(".pref-bar").forEach((b) => b.classList.remove("hot")); };
   });
   root.querySelectorAll(".pref-chip").forEach((b) => b.onclick = () => {
     const on = b.getAttribute("aria-pressed") !== "true";

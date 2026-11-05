@@ -4,7 +4,7 @@
 speech and OCR all go through it — `text()`, `image()`, `speech()`, `ocr()` — and every call returns an
 `Answer` naming the (provider, model) pair that **answered**, which under a chain is not knowable
 before the call. The contract is that a record names the model that did the work, not the one asked
-first. Managing providers from Settings, and auditing the alternatives to today's defaults, are
+first. Adding providers and their keys from Settings, and which providers to support, are
 [`../plans/provider-management.md`](../plans/provider-management.md).
 
 ---

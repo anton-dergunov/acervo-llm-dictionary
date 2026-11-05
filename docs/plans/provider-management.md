@@ -1,193 +1,294 @@
-# Providers: managed in Settings, audited, and easy to set up
+# Providers: added in Settings, with their keys, and their usage shown
 
-**Status:** planned, not scheduled. Nothing here is built. It collects what is known so the work can
-start from a page rather than from memory.
+**Status:** designed, not built. Step one, this page and the mock-ups in `design/ui-prototype/`, is
+done. The build is six sessions, listed at the end, and each one ships on its own.
 
 ## Why
 
-Acervo reaches every model through `models/catalogue.json`, a tracked file that ships to the server
-inside the release, and every credential through `llm.env`, which `./deploy.sh --configure-llm`
-writes on the server. That was the right shape for one owner and one machine. It is the wrong shape
-for anyone else: a new user should be able to add a provider, paste a key and see it answer without
-editing a file on a NAS or knowing what `passes` or `jsonMode` mean.
+Anyone should be able to install Acervo, open **Settings ▸ Providers**, add the providers they want,
+paste a key, and have it answer. There should be no file to edit, no deploy, and nothing to know about
+`passes` or `jsonMode`. It should also be possible to run with **no API bill at all**, on free tiers and
+models on your own machines.
 
-It is also the wrong shape for the owner's own future. Today almost everything — text, pictures,
-voices, OCR — runs on Google, because a time-limited trial makes that the obvious choice while it
-lasts. When it ends the chains must move to other hosted providers, or to models running on the NAS
-or the Mac, without that being a code change. The provider package already makes a provider a row
-rather than a branch; this plan makes a row something the interface can create.
+Today none of that holds:
 
-## Where things stand
+- Every provider is a row in the tracked `models/catalogue.json`.
+- Every key is a line in `llm.env`, which `./deploy.sh --configure-llm` writes.
+- Compose passes a fixed list of variable names into three containers.
+- The file also freezes facts that belong to the provider: Google's voice lists copied from
+  `voices.list` by hand, the locales a Gemini voice accepts, and the voices of a model that has no
+  list at all.
 
-- **Eight rows, four kinds.** `gemini-free`, `vertex`, `google-tts`, `google-vision`, `cloudflare`,
-  `openai`, `openrouter`, `ollama-local`, across `text`, `image`, `audio` and `ocr`. Five of them are
-  Google or reach Google's credential. Two local models are *not* rows at all: the map's encoder
-  (`models/encoder.json`) and the sentence splitter (`models/segmenter.json`), both baked into the
-  image.
-- **A row declares what the provider can do**: model ids per kind, `capabilities` (JSON mode, audio
-  style, languages and voices per model, image references), `params`, `timeouts`, `passes`, and the
-  environment variables it needs (`keyEnv`, `requires`, `authEnv`, `accountEnv`). Every one of those
-  facts was discovered by calling the provider and getting it wrong first.
-- **The owner already chooses the order.** Settings ▸ Providers edits `model_selection`, per kind,
-  among pairs whose provider has a credential; `GET /models` reports which credentials exist and a
-  key's first and last four characters, and nothing more.
-- **Keys arrive by deploy.** `--configure-llm --llm-key NAME --llm-api-key-stdin` writes `llm.env`;
-  Vertex additionally needs a credentials *file* mounted and named by `authEnv`
-  ([`../operations/vertex-setup.md`](../operations/vertex-setup.md)).
-- **The expressive voice order holds only voices that take a direction.** Settings ▸ Providers offers
-  no other, the catalogue refuses a default that names one, and the walk skips one saved before
-  ([`../features/pronunciation.md`](../features/pronunciation.md)). Whatever the Settings form for
-  audio becomes, it keeps that impossible to configure. It is also why neither `gemini-free` nor
-  `vertex` speaks: through LiteLLM both drop a direction, so Gemini speech is reached only through
-  `google-tts`.
+A new provider, or a new voice, should not be a commit.
 
-## Four pieces of work
+## The shape
 
-### 1 · Audit the providers
+**A provider is one account: one credential, offering one or more kinds.** "Google Cloud" is one
+provider. It answers text and pictures through Vertex, voices through Cloud TTS and photos through
+Cloud Vision, rather than the three rows that share one credential today. Providers belong to the
+server, not to an account: every account on a server spends the same keys. Whether a second account
+should have keys of its own is a question for [`first-use/other-users.md`](first-use/other-users.md),
+and the shape does not need to change for it.
 
-For each thing Acervo asks a model to do, which providers can do it, how well, on what free
-allowance, and in which languages. Measured on Acervo's own prompts with the apparatus that already
-exists, not read off a pricing page:
+```json
+{
+  "id": "gemini",
+  "family": "gemini-api",
+  "label": "Gemini API",
+  "settings": {},
+  "models": {
+    "text":  [{"id": "gemini-3.5-flash-lite", "allowance": {"amount": 500, "unit": "calls", "per": "day"}}],
+    "audio": [{"id": "gemini-3.8-flash-tts", "direction": true, "languages": "any"}]
+  },
+  "extra": {}
+}
+```
 
-| Task | Existing apparatus |
-|---|---|
-| Compose, resolve, chat, clip selection, story write/translate/brief | `experiments/compose-lesson-line/`, `story-quality/`, `clip-translation/`, `tests/integration/test_models_live.py` |
-| Sense and story pictures | `experiments/image_benchmark/`, [`../research/image-benchmark.md`](../research/image-benchmark.md) |
-| Voices, plain and directed | `experiments/pronunciation-encoding/` (blind listening) |
-| OCR | `experiments/photo-capture/` |
-| Embedding for the map | `experiments/meaning-space/` |
+- **`id`** is a slug. The form suggests one from the family and the owner may change it. Orders and
+  voice choices refer to it, so it does not change once saved.
+- **`family`** picks the code that speaks to the provider. A family's preset fills in the base URL,
+  the route LiteLLM takes, whether JSON mode is native, the provider's own usage page and its docs
+  link. The user never sees any of that.
+- **`settings`** are the non-secret values a family asks for: a Cloudflare account id, a Vertex
+  project and location, the base URL of an Ollama or a custom endpoint.
+- **A model** carries only what varies between models and what a user can check on the provider's
+  own page:
+  - `direction`: whether a voice takes a free-text direction;
+  - `languages`: `"any"` or a list;
+  - `voices`: typed in only when the provider cannot list them;
+  - `allowance`: optional, for the usage gauge.
+- **`extra`** is an optional JSON object merged into every call, for the quirk no family foresaw.
+  It is never needed for the families below.
+- **The secret is not in the row.** See *Keys*.
 
-Local and on-device options belong in the same table as hosted ones, judged on the same prompts:
-Ollama for text on the NAS or the Mac, Piper or Kokoro for voices on the NAS, a local diffusion model
-on the Mac (the idle-machine question is [`nas-to-mac-job-queue.md`](nas-to-mac-job-queue.md)),
-RapidOCR. The photo spike already measured RapidOCR on the NAS and it lost; that is the kind of
-answer this should produce for every kind.
+What stays as it is:
 
-The output is a recommendation per kind — a default chain that does not depend on one company — and
-the catalogue rows to go with it.
+- **The orders.** The six kinds are `text`, `quick`, `image`, `audioPlain`, `audioExpressive` and
+  `ocr`, each an ordered list of (provider, model) pairs in `model_selection`.
+- **The fall-through rules.** A chain passes on only on 429, 5xx, timeouts, dropped connections and
+  unusable answers, never on a rejected key.
+- **The expressive rule.** The expressive voice order can only hold models with `direction: true`.
 
-**Local models, as an opportunity.** Running a model on the owner's own machines is a real option,
-not a curiosity, and the likeliest place it pays is the voice. What the pronunciation research of
-15 Sep 2026 found, as a starting point:
+**With no order chosen, the default is the providers in the order they were added, then their models
+in the order they were added.** That default replaces both `ACERVO_TEXT_CHAIN` and the catalogue's
+`defaultChains`.
 
-| Route | Languages | Quality for a reference | Where it runs |
+**Provider facts move from the file into the family, and the family is code.** That is a deliberate
+change from "a provider is a row":
+
+- The quirks found the hard way stay out of the user's hands. Examples: Vertex refuses
+  `response_format` on images; Cloudflare needs `max_tokens`; Aura takes `text` where another takes
+  `prompt`; Cloud TTS wants `LINEAR16` for Gemini voices.
+- The facts that change with the provider's catalogue, models and voices, come from the provider.
+
+## Families
+
+Measured or read on 5 Nov 2026. A free allowance marked *(console)* is one Google, Groq or Mistral no
+longer publish: the number is from a third-party table, and the guide tells the user where their own
+console shows it.
+
+### Text
+
+| Family | Presets | Free allowance | Notes |
 |---|---|---|---|
-| **Kokoro on the NAS** (CPU, Docker) | 8 | excellent for 82 M parameters | ~1.3 core-hours per audio hour: fine for recording in advance |
-| **Piper on the NAS** (CPU, Docker) | ~30, 100+ voices | good, not native | ~10× real time per core |
-| Kokoro in the browser (`kokoro-js`) | English only offline | very good | 92 MB q8 / 326 MB fp32 — ruled out, since other languages phonemise over the network |
-| Piper in the browser (WASM) | ~30, phonemised offline | good, not native | ~60 MB per voice — not needed, since writes are online |
+| **OpenAI-compatible** | Gemini API, OpenAI, Anthropic, OpenRouter, Groq, Mistral, DeepSeek, Cloudflare, Ollama, LM Studio, *any other* | Gemini 3.5 / 3.1 Flash-Lite ≈ 500 requests a day, 3.8 Flash ≈ 20 *(console)*. Groq ≈ 1,000 a day on the 70B models *(console)*. OpenRouter `:free` models 50 a day, or 1,000 once 10 credits are bought. Cloudflare 10,000 neurons a day. | Every preset lists its models from `GET /models`. Anthropic ignores `response_format`, so its preset asks for JSON in the prompt; the *any other* preset has a switch for it. |
+| **Google Cloud** (Vertex) | — | trial credit only | Needs the credentials file (see *Keys*). |
 
-The server once had a Kokoro adapter (`src/acervo/tts/`, since deleted), so a local voice is a rebuild
-rather than a revival — but the shape it would take is already settled: a catalogue row whose
-transport is a local HTTP service, like `ollama-local` for text, recording into the same
-`pronunciations` rows as any other voice. Text on Ollama and images on the Mac fit the same way.
+Text was never the hard kind: there are plenty of providers, and one family reaches nearly all of
+them.
 
-**Candidates already known**, parked here rather than dropped:
+### Pictures
 
-- **Cloudflare Aura-2** for Spanish — a second model id and a voice list in the existing row, no code.
-  Aura-2 exists only as `-en` and `-es`.
-- **Azure Neural voices**, whose styles are an SSML enum rather than free text: a third value for
-  `capabilities.audio.style`, and the first real test of that declaration.
-- **Human recordings** as a source tier above TTS: Lingua Libre / Wikimedia Commons / Wiktionary
-  (150–310 languages, CC-BY-SA, patchy per word), and Forvo (430+ languages; at the time of the
-  research $2/month non-profit, 500 requests a day, no commercial use, attribution required — check
-  whether its terms allow storing the file).
-- **Isolated words read badly** — stress pairs, tone sandhi, a model that answers a short word with
-  generated text. A carrier phrase synthesised and trimmed is the standard fix. Worth measuring per
-  provider before deciding anything.
+| Family | Presets | Free allowance | Notes |
+|---|---|---|---|
+| **Cloudflare Workers AI** (native `/ai/run`) | — | 10,000 neurons a day, reset at 00:00 UTC: about **170** pictures with FLUX.1 schnell, or **95** with FLUX.2 klein 4B, at 1024² | The free picture provider. Its compatible endpoint does not cover images. |
+| **OpenAI images** (`/v1/images/generations`) | OpenAI, Together, *any other* | none (Together's free FLUX.1 schnell is listed, but whether it is served is unverified) | gpt-image-2 and gpt-image-1-mini are billed by token. |
+| **Gemini image** | through the Gemini API key, or Vertex | **none**: no image model has a free tier | Takes reference pictures, which keep a story's characters the same. Imagen has left the Gemini API. |
+| **A1111** (`/sdapi/v1/txt2img`) | Draw Things on a Mac, Forge or A1111 on a GPU machine | free | The simplest local picture API. ComfyUI is more capable and much harder to drive, so it is left out. |
 
-**Voice costs, desk research of 15 Sep 2026** — a starting point to re-check, not a result. A whole
-vocabulary at the design's ceiling is ~1.9 M characters (10,000 headwords at ~9 characters, ~30,000
-sentences at ~60):
+### Voices
 
-| Provider | Metered by | Headwords | Sentences | Free allowance |
+| Family | Free allowance | Languages | Takes a direction | Voices listed by |
 |---|---|---|---|---|
-| Google Cloud TTS Standard | characters, $4/1M | $0.36 | $7.20 | 4 M chars/month |
-| Google Cloud TTS WaveNet | characters, $4/1M | $0.36 | $7.20 | 1 M chars/month |
-| Cloudflare Aura-1 | neurons ≈ $15/1M chars | $1.35 | $27.00 | ≈ 7.3 k chars/day |
-| Azure Neural | characters, $16/1M | $1.44 | $28.80 | 500 k chars/month |
-| Google Chirp 3: HD | characters, $30/1M | $2.70 | $54.00 | 1 M chars/month |
-| Gemini 3.5 Flash TTS | audio tokens, $6/1M | $1.20 | $15.75 | — (Vertex, paid) |
-| Gemini 3.1 Flash TTS | audio tokens, $20/1M | $4.00 | $52.50 | 10 requests/day |
-| OpenAI gpt-4o-mini-tts | ≈ $0.015/min | $2.00 | $26.25 | — |
+| **Google Cloud TTS** | Standard and WaveNet 4 M characters a month; Neural2 and Chirp 3 HD 1 M; Gemini-TTS unlisted | the widest catalogue; Gemini-TTS 24 GA and 63 preview | Gemini-TTS models, through `prompt` | `voices.list` |
+| **Gemini API TTS** (Interactions API) | free tier with a small daily cap *(console)* | 3.8 Flash TTS 130+, Flash-Lite TTS 100+ | yes, `speech_metadata.style`, free text | `GET /v1beta/voices` (language, accent, gender) |
+| **ElevenLabs** | 10,000 credits a month, non-commercial, attribution required (to verify on the pricing page) | v4: 90+ | v3 and v4, through free-text `[tags]` | `GET /v1/voices` |
+| **OpenAI-compatible speech** (`/v1/audio/speech`) | presets: Kokoro (Kokoro-FastAPI), Piper (Speaches), Ollama; OpenAI | Kokoro 9, Piper 37, Ollama English only | only OpenAI's `instructions`, and OpenAI retires its speech models on **6 Jan 2027** | `/v1/audio/voices` where the server has it |
+| **Cloudflare Workers AI** | 10,000 neurons a day ≈ 540 minutes of MeloTTS, or 7,000 characters of Aura-1 | MeloTTS en, es, fr, zh, ja, ko; Aura-2 en, es | no | typed in |
+| **Azure Speech** | 500,000 characters a month | 100+ | no: its styles are a fixed SSML list, a later addition | `voices/list` |
 
-Steady state (~100 headwords a day) sits inside every character-metered free tier by two orders of
-magnitude, so for voices the deciding questions are language coverage and whether the voice is right,
-not price. The same research found local voices comfortable on the NAS's CPU — Piper at roughly 10×
-real time per core, Kokoro at roughly real time — and named the honest reason to run one: not cost,
-but independence from free tiers that expire. Piper's published 2.6 GB peak memory is a harness
-artefact and should be measured before a shared machine is trusted with it.
+**ElevenLabs direction.** Eleven v3 and v4 take audio tags in square brackets, and the tags are free
+text: ElevenLabs' own prompting guide shows `[Warm, conversational tone, faint amusement]`. So a v3 or
+v4 model counts as `direction: true`, and the family sends Acervo's direction as one leading tag,
+`[<direction>] <text>`. Older models (multilingual v2, flash) are plain.
 
-### 2 · Providers and keys in Settings
+### Photos
 
-Add, edit and remove a provider, and enter its key, from Settings ▸ Providers, taking effect on the
-next request with nothing redeployed.
+**Google Cloud Vision only**, with 1,000 photos a month free. Photo capture needs every word's
+outline, which a vision language model does not return reliably, and RapidOCR was measured on the NAS
+and lost ([`../features/photo-capture.md`](../features/photo-capture.md)). Vision takes an API key or
+the credentials file.
 
-The page is built from the Settings kit ([`../features/settings.md`](../features/settings.md) §5): each
-kind's order is already an ordered list of switches, and Credentials is already a sub-page. A provider
-becomes a row there that opens a sub-page of its own — its key field, the cheap call that says whether
-the key works, its preset — and "Add a provider…" is a whole-row action that opens the same sub-page
-empty. Usage (§4) is one more sub-page, not a second screen.
+### Left out, and why
 
-Rules that already hold and must keep holding:
+- **Hume.** It shuts down its TTS API on 13 Nov 2026.
+- **Amazon Polly.** Its generative engine covers 11 languages, and its free allowance lasts 12 months.
+- **fal, Replicate, Black Forest Labs, Stability.** Each needs its own asynchronous adapter, and none
+  has a free tier worth the adapter.
+- **ComfyUI.** A1111 is the simpler local API.
+- **A local voice that takes a direction.** Qwen3-TTS (`instruct`, 10 languages, Apache-2.0) and
+  CosyVoice 3 are realistic on an Apple Silicon Mac and not on the NAS's CPU, and neither ships a
+  server. Anyone who runs one behind an OpenAI-style speech server can add it as that family with
+  `direction` on. Acervo does not build or pin that server.
 
-- **A credential never leaves the server**, apart from the bounded first-four/last-four exception.
-  A key typed into the interface travels to the server once and never comes back.
-- **A provider fact is a declaration, not code.** A user cannot be expected to know that Vertex
-  refuses `response_format` or that Aura takes `text` where another takes `prompt`, so the form
-  starts from a **preset** per provider family — "Gemini API key", "OpenAI-compatible endpoint",
-  "Cloudflare account", "Ollama on this network" — and a preset is a catalogue row with the blanks
-  left for the user.
-- **Which pairs answer stays the owner's choice**, and a chain still falls through only on the
-  transient reasons. A key that is rejected is a mistake to show, not a condition to route around —
-  so saving a key should make one cheap call and say plainly whether it worked and as whom.
+## The zero-cost set
 
-Questions to answer before building:
+This is the guide's first page: the fewest accounts that cover every kind, at no cost.
 
-- **Where rows live.** An owner-scoped, never-replicated server table like `model_selection` is the
-  obvious home. The tracked catalogue would then be the list of presets, the way
-  `dictionaries/catalogue.json` is a list and not data. There must be one source of truth for a row,
-  not the file *and* the table. **The owner wants the JSON kept as a way to define rows**, not only
-  the form — so the likely shape is that a row can be written as JSON in the form or imported from a
-  file, and becomes a table row either way, rather than the server reading two sources.
-- **Where keys live, and how they are protected at rest.** Today they are an env file only root can
-  read. A table in the same SQLite file as the vocabulary is backed up with it; that is either a
-  feature or a leak, and needs deciding.
-- **What happens to `--configure-llm`.** Two ways to set a key is one too many; the deploy flag
-  either goes or becomes the way to seed the table.
-- **Vertex's file credential.** Uploading a service-account JSON through the interface, or keeping
-  that one provider a deployment fact. The organisation policy that blocks creating keys
-  ([`../operations/vertex-setup.md`](../operations/vertex-setup.md)) means a user login may be the only option some people
-  have.
-- **Local models as rows.** Whether the encoder and segmenter become choosable at all, or stay pinned
-  because a changed encoder means a recomputed map.
-- **Voices from the provider's own list.** A voice row's `voices` — keyed by locale, with gender and
-  character — are what Settings ▸ Pronunciation ranks by accent, and most providers publish them
-  through a list endpoint. A preset should fill them from it rather than asking the user to type them.
+| Kind | Order |
+|---|---|
+| Text | Gemini API Flash-Lite → Groq → Cloudflare → Ollama, if there is one |
+| Pictures | Cloudflare (FLUX.2 klein 4B, or FLUX.1 schnell for more a day) |
+| Clear voice | Google Cloud TTS WaveNet → Kokoro on the NAS, if there is one |
+| Expressive voice | Gemini API TTS and ElevenLabs v4. S4b decides which comes first. When both are spent, the expressive order already falls back to the clear voice. |
+| Photos | Google Cloud Vision |
 
-### 3 · A setup guide for new users
+That set is four accounts: Google AI Studio, Google Cloud with billing enabled, Cloudflare and
+ElevenLabs. Groq is optional. Steady use, about 100 words a day, sits well inside every
+character-metered allowance. The directed voice is the scarce one, which is why it has two providers
+and a fall-back.
 
-For each provider the audit recommends: how to sign up, what the free allowance covers in Acervo
-terms (words a day, pictures a day), which key to create with which permissions, and where to paste
-it. A recommended starter set — the fewest accounts that cover every kind — with a no-cost path
-first. [`../operations/vertex-setup.md`](../operations/vertex-setup.md) is the existing example of one provider's page;
-the guide should read like that, for someone who has never deployed Acervo.
+## Keys
 
-### 4 · How much each model is used, and how often it fails
+- **A key is typed once and never comes back.** The interface sends it to the server once. From
+  then on the server shows only its first and last four characters, the one exception
+  `GET /models` already makes.
+- **Keys live in a secrets file beside the database, not in it.** The file is
+  `providers.secrets.json`, mode 600, owned by the server's user, and it holds keys and uploaded
+  credential files keyed by provider id. Keeping it out of SQLite means a database backup, a deploy's
+  backup copy and an export bundle never carry a key. A lost secrets file costs re-entering the keys,
+  and keys can be created again; that is the right way round. The off-machine export in
+  [`backups.md`](backups.md) leaves it out by construction.
+- **Saving a key makes one call that spends nothing**, such as a model list or a voice list, and says
+  plainly whether the key works, and as whom where the provider says. A key that is refused is shown
+  as a mistake to fix. It is never routed around.
+- **Google Cloud takes an API key or a credentials file.**
+  - **A key:** Cloud TTS (`text:synthesize`) and Cloud Vision (`images:annotate`) both take `?key=`,
+    so voices and photos need no file. Use a key restricted to those two APIs.
+  - **The file:** a service account or a user login, uploaded through the form. It adds Vertex text
+    and pictures, and it is the only way for someone whose organisation blocks key creation
+    ([`../operations/vertex-setup.md`](../operations/vertex-setup.md)).
+  - **To check in S1 and S4:** whether a Vertex express-mode key works through LiteLLM's Vertex
+    route, and whether Gemini-TTS on Cloud TTS accepts a key. One live call each. The form then says
+    which kinds a key unlocks.
+  - **Credentials per provider:** each Google Cloud provider holds its own credential, which replaces
+    the one process-wide default in `google_auth.py`.
+- **Ways that stop existing:** `--configure-llm`, `llm.env` and `ACERVO_TEXT_CHAIN`, along with the
+  variable lists in compose. Settings is the only way to add a key.
 
-Settings ▸ Providers shows, per provider and model, how many calls were made and how many failed — by
-day, week, month and in total — so the owner can see which free tier is being spent and which model
-is unreliable, without a shell on the server.
+## Settings ▸ Providers
 
-The numbers already exist. Every model call is a line in the call log beside the database, and
-`python -m acervo.admin calls` reads it back per job and per provider:model — succeeded, failed,
-median and p95 time. What is missing is a route that serves the same reading and the panel that
-draws it. The log rotates, so "in total" is either as far back as the log reaches, or a small
-counter the server keeps; which is part of building it.
+The page is built from the Settings kit ([`../features/settings.md`](../features/settings.md) §5),
+and the mock-up is `design/ui-prototype/settings.html?page=providers`.
 
-## Order
+- **Providers.** One row per provider, giving its name, the kinds it serves, and whether its key
+  works. Each row opens the provider's sub-page. "Add a provider…" is a whole-row action. A **Usage**
+  row shows today's calls and failures and opens the Usage sub-page.
+- **The six orders, as today.**
+- **Add a provider.** The families are grouped as *Free to start*, *Popular*, *On your own
+  machines* and *Any compatible service*, each with a one-line hint of what it serves. Choosing one
+  opens the provider's sub-page, empty.
+- **A provider's sub-page** has these parts:
+  - the key field, the check and what it said;
+  - the family's settings;
+  - one group per kind listing its models, with "Add a model…" picking from the provider's own list,
+    or typed when there is none;
+  - per voice model: *Takes a direction*, its languages, and voices listed live or typed with a link
+    to the provider's voice page;
+  - an optional free allowance per model;
+  - "Remove this provider". Removing it also drops its pairs from every order.
+- **Removed:** the Credentials sub-page and the external Usage links, which the provider page and
+  Usage replace. A preset's link to the provider's own usage page stays on the provider's sub-page.
 
-The audit first, because it decides which presets the Settings form needs and which providers the
-guide covers. Then Settings, then the guide. The audit can start any time and does not wait on the
-trial ending — the point is to know the answer before it does. The usage figures depend on none of
-it and can come first.
+## Usage
+
+Per provider and model, Usage shows how many calls were made, how many failed and why, and what they
+spent: tokens for text, pictures, characters for voices, photos. It covers today, the last 7 days,
+the last 30 days and all time. Where an allowance is set, a gauge shows how much of today's or this
+month's is gone. One model's page has the last 30 days as bars, its failures by reason, and the last
+failure's sentence.
+
+- **A never-replicated table of daily counters:**
+  - The key is `(day, provider, model, kind)`.
+  - The counters are calls, succeeded, failed by `Reason`, seconds, input and output tokens,
+    characters, pictures and photos.
+  - It also keeps `cost_usd` where LiteLLM reports it, and the last failure's sentence and time.
+  - "All time" is the sum of the table, so the rotating call log stops limiting it.
+- **Every attempt is counted, not only the one that answered**, because a 429 spends a free request
+  too.
+- **The `models/` package does not write the table.** It reports each attempt to a sink that the
+  binding layer hands it, which keeps `models/` free of Acervo imports. The call log stays the
+  per-call record, and gains the units.
+- **Units come from the answer.** Tokens come from LiteLLM's `usage`. Characters are what was sent to
+  a voice. Pictures and photos are counted.
+- **Cloudflare does not report neurons per call**, so its allowance is entered in pictures or
+  characters, with the arithmetic above.
+
+## What goes away
+
+- `models/catalogue.json`, with its hardcoded voices, `accepts` lists and `defaultChains`.
+- `llm.env`, `deploy/acervo/llm.env.example`, `--configure-llm` and its flags, `ACERVO_TEXT_CHAIN`,
+  and the provider variables in `compose.yaml` and `run-worker.sh`.
+- `cloudflare.py`'s own read of `CLOUDFLARE_ACCOUNT_ID`, and the process-wide Google credential.
+- The check in `install.sh` that refuses a variable the release's catalogue does not name.
+
+**The encoder and the segmenter stay pinned files.** They are not providers: a changed encoder means
+a recomputed map.
+
+**Laptop tools** are the scripts, the experiments and the live tests. They read a gitignored
+`providers.local.json` in the shape the server stores, with keys inline. The server never reads it.
+
+**The clip service stops holding keys.** Today its container imports `acervo.models` and calls
+providers itself with the keys compose hands it. Instead it asks Acervo for each text call, the way
+LexiBeat's writer already does through `POST /loops/write`
+([`../features/loops.md`](../features/loops.md), "The writer calls home, like the voice"). Acervo
+walks the owner's chain and answers, so keys live in one container.
+
+**Crossing over.** The new tables are additive, so a throwaway converter creates them and re-stamps
+the head, and the vocabulary survives. The owner then adds their providers again in Settings and
+picks the orders and voices once more. Nothing reads the old ids.
+
+## Sessions
+
+1. **S1 · The provider store.**
+   - The families registry, covering today's families only (OpenAI-compatible through LiteLLM,
+     Google Cloud, Cloudflare).
+   - The providers table, the secrets file, and `models/` taking rows instead of reading the
+     environment.
+   - Routes to add, change, check and remove a provider, and `GET /models` reshaped.
+   - The converter, `providers.local.json`, and the deploy path removed.
+   - Behaviour is otherwise unchanged. The owner re-adds Gemini, Google Cloud and Cloudflare, and
+     everything answers as before.
+2. **S2 · Settings.** The provider list, Add a provider, the provider's sub-page, the key check,
+   and the model and voice pickers from the provider's own lists.
+3. **S3 · Usage.** The counters, the sink, the route and the two Usage pages. It can come before S2.
+4. **S4 · New families.** Gemini API TTS, OpenAI-compatible speech (Kokoro first), OpenAI images,
+   A1111, ElevenLabs and Azure (plain voices). Each one is tried on Acervo's own prompts before the
+   guide recommends it, and every failure it adds shows in `admin log` with its sentence.
+5. **S4b · ElevenLabs as the free directed voice.**
+   - Put v4 and v3 in the expressive order beside Gemini API TTS.
+   - Record a fixed set: words, sentences, accent directions (es-ES, es-AR) and story directions.
+     The owner rates it blind on the tablet, with the `experiments/pronunciation-encoding/`
+     apparatus and its own scoring page.
+   - Work out what 10,000 credits a month buy in words, sentences and passages.
+   - The result decides the zero-cost set's expressive order.
+6. **S5 · The clip service calls home.** The internal route, and the provider variables removed
+   from its container.
+7. **S6 · The guide.**
+   - Write `docs/providers.md`, which leads with the zero-cost set, then the popular paid providers,
+     then local models. Each provider gets how to sign up, which key to create, what the free
+     allowance means in words and pictures a day, and where to paste it.
+   - Add a short README section linking to it.
+   - Rewrite `docs/architecture/models.md` for the store.
+   - Fold `vertex-setup.md` and `cloudflare-workers-ai.md` into the guide.
+   - Delete this plan.

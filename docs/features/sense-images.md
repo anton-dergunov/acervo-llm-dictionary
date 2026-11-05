@@ -585,7 +585,7 @@ shape and the job step.
   carries the steady state on Cloudflare FLUX.2 Klein 4B and falls through to Vertex when its daily
   allocation stops. A *local* model is a different matter: the research measured 2.5–10 GiB of
   unified memory and one image per child process, and the machine with the GPU is not the machine
-  that is always on. That is [`../plans/nas-to-mac-job-queue.md`](../plans/nas-to-mac-job-queue.md)'s territory, not this one's.
+  that is always on.
 - No automatic quality gate. The benchmark report sketches one — luminance and colour variance,
   entropy, edge density, dominant-colour share — and Gemini's 0/12 rejection rate does not justify
   building it. It becomes interesting when generation moves to a less reliable model.
