@@ -453,6 +453,8 @@ const SUBPAGES = {
     group("Text", [modelRow("qwen3-235b:free", "50 a day free")]),
     group("", [action("Remove this provider", "danger")])
   ] },
+  /* One box: it searches the provider's own list, and once nothing listed matches, what is typed can
+     be added as it is — a model too new for the list. A second "type its name" field asked twice. */
   addModel: { parent: "provider-gemini", title: "Add a text model", render: () => [
     search("Search Gemini’s models", "flash"),
     group("Gemini offers", [
@@ -460,8 +462,12 @@ const SUBPAGES = {
       `<button class="pref-row">${modelLabel("gemini-3.8-flash", "Gemini 3.8 Flash")}</button>`,
       `<button class="pref-row">${modelLabel("gemini-3.6-flash", "Gemini 3.6 Flash")}</button>`,
       `<button class="pref-row">${modelLabel("gemini-3.8-pro", "Gemini 3.8 Pro")}</button>`
-    ]),
-    group("", [`<label class="pref-row">${text("Or type its name")}<input class="pref-input mono" placeholder="gemini-3.5-flash-lite">${button("Add")}</label>`])
+    ], "", "52")
+  ] },
+  "addModel-unlisted": { parent: "provider-gemini", title: "Add a text model", render: () => [
+    search("Search Gemini’s models", "gemini-3.9-flash"),
+    group("Gemini offers", [action("Add “gemini-3.9-flash”")],
+      "Gemini does not list it, so add it only as its own page spells it.", "52")
   ] },
   "model-tts": { parent: "provider-gemini", title: "gemini-3.8-flash-tts", render: () => [
     group("", [

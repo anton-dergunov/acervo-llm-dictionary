@@ -248,28 +248,63 @@ describe("adding a model", () => {
     expect(notified).toHaveBeenCalledWith("gemini-3.8-pro added.");
   });
 
-  it("is typed where the provider lists nothing", async () => {
+  it("adds a name the list does not hold from the same box, and says the list lacks it", async () => {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
+    vi.spyOn(backendSession, "providerModels").mockResolvedValue({ kind: "text", listed: true, models: ["gemini-3.8-flash"] });
+    const change = vi.spyOn(backendSession, "changeProvider").mockResolvedValue(answer([GEMINI, GOOGLE], "gemini-api"));
+    await openProvider("Gemini API");
+    fireEvent.click(screen.getByRole("button", { name: "Add a model…" }));
+    const search = await screen.findByLabelText("Search Gemini API’s models");
+    expect(screen.queryByLabelText("Model name")).toBeNull();
+
+    fireEvent.change(search, { target: { value: "gemini-3.9-flash" } });
+    // Enter does not turn a name the list lacks into a model: a half-typed search would.
+    fireEvent.keyDown(search, { key: "Enter" });
+    expect(change).not.toHaveBeenCalled();
+    expect(screen.getByText(/Gemini API does not list it/)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Add “gemini-3.9-flash”" }));
+    await waitFor(() => expect(change).toHaveBeenCalledWith("gemini-api", { models: {
+      text: [GEMINI.models.text[0], { id: "gemini-3.9-flash" }]
+    } }));
+  });
+
+  it("offers no unlisted name when what is typed is in the list, and Enter adds it", async () => {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
+    vi.spyOn(backendSession, "providerModels").mockResolvedValue({ kind: "text", listed: true, models: ["gemini-3.8-flash"] });
+    const change = vi.spyOn(backendSession, "changeProvider").mockResolvedValue(answer([GEMINI, GOOGLE], "gemini-api"));
+    await openProvider("Gemini API");
+    fireEvent.click(screen.getByRole("button", { name: "Add a model…" }));
+    const search = await screen.findByLabelText("Search Gemini API’s models");
+    fireEvent.change(search, { target: { value: "gemini-3.8-flash" } });
+    expect(screen.queryByRole("button", { name: /^Add “/ })).toBeNull();
+    fireEvent.keyDown(search, { key: "Enter" });
+    await waitFor(() => expect(change).toHaveBeenCalledWith("gemini-api", { models: {
+      text: [GEMINI.models.text[0], { id: "gemini-3.8-flash" }]
+    } }));
+  });
+
+  it("takes the name in the same box where the provider lists nothing", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
     vi.spyOn(backendSession, "providerModels").mockResolvedValue({ kind: "audio", listed: false, models: [] });
     const change = vi.spyOn(backendSession, "changeProvider").mockResolvedValue(answer([GEMINI, GOOGLE], "google-cloud"));
     await openProvider("Google Cloud");
     fireEvent.click(within(screen.getByRole("region", { name: "Voices" })).getByRole("button", { name: "Add a model…" }));
     expect(await screen.findByText(/does not list these/)).toBeInTheDocument();
-    fireEvent.change(screen.getByLabelText("Model name"), { target: { value: "gemini-3.1-flash-tts-preview" } });
-    fireEvent.click(screen.getByRole("button", { name: "Add" }));
+    fireEvent.change(screen.getByLabelText("The model’s name"), { target: { value: "gemini-3.1-flash-tts-preview" } });
+    fireEvent.click(screen.getByRole("button", { name: "Add “gemini-3.1-flash-tts-preview”" }));
     await waitFor(() => expect(change).toHaveBeenCalledWith("google-cloud", { models: expect.objectContaining({
       audio: [...GOOGLE.models.audio, { id: "gemini-3.1-flash-tts-preview" }]
     }) }));
   });
 
-  it("says in the provider's words when it cannot be asked, and still lets a name be typed", async () => {
+  it("says in the provider's words when it cannot be asked, and still takes a name", async () => {
     vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
     vi.spyOn(backendSession, "providerModels").mockRejectedValue(
       new AcervoApiError("Gemini API did not answer: connection refused.", 502, "provider_listing_failed"));
     await openProvider("Gemini API");
     fireEvent.click(screen.getByRole("button", { name: "Add a model…" }));
     expect(await screen.findByText("Gemini API did not answer: connection refused.")).toBeInTheDocument();
-    expect(screen.getByLabelText("Model name")).toBeInTheDocument();
+    expect(screen.getByLabelText("The model’s name")).toBeInTheDocument();
   });
 });
 

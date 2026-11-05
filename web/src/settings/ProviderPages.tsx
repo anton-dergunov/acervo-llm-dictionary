@@ -449,6 +449,11 @@ function CheckRow({ provider, busy, onCheck }: { provider: ModelProvider; busy: 
 
 /* ── Add a model ── */
 
+/**
+ * One box: it searches what the provider lists, and what it does not list can still be added as
+ * typed — a model too new for the list, or one the provider cannot list at all. A second "type its
+ * name" field beside the search asked for the same name twice.
+ */
 function AddModel({ provider, kind, write, onNotify }: {
   provider: ModelProvider;
   kind: string;
@@ -458,7 +463,6 @@ function AddModel({ provider, kind, write, onNotify }: {
   const [listing, setListing] = useState<{ listed: boolean; models: string[] } | null>(null);
   const [failed, setFailed] = useState<string | null>(null);
   const [query, setQuery] = useState("");
-  const [typed, setTyped] = useState("");
   const [busy, setBusy] = useState<string | null>(null);
 
   useEffect(() => {
@@ -470,60 +474,67 @@ function AddModel({ provider, kind, write, onNotify }: {
   }, [provider.id, kind, provider.label]);
 
   const added = new Set((provider.models[kind] ?? []).map((model) => model.id));
+  const listed = listing?.listed ? listing.models : [];
+  const typed = query.trim();
   const shown = useMemo(() => {
-    const wanted = query.trim().toLowerCase();
-    return (listing?.models ?? []).filter((id) => !wanted || id.toLowerCase().includes(wanted));
-  }, [listing, query]);
+    const wanted = typed.toLowerCase();
+    return listed.filter((id) => !wanted || id.toLowerCase().includes(wanted));
+  }, [listed, typed]);
+  /* What is typed, once the list holds nothing like it: offered as typed, and said so. While
+     something listed still matches, the box is a search, and "Add “flash”" would be noise. */
+  const unlisted = typed && shown.length === 0 ? typed : null;
 
   async function add(id: string) {
-    const name = id.trim();
-    if (!name || added.has(name)) return;
-    setBusy(name);
+    if (!id || added.has(id)) return;
+    setBusy(id);
     const answer = await write(() => backendSession.changeProvider(provider.id, {
-      models: withModel(provider, kind, name, { id: name })
+      models: withModel(provider, kind, id, { id })
     }));
     setBusy(null);
     if (typeof answer === "string") onNotify(answer);
-    else { onNotify(`${name} added.`); setTyped(""); }
+    else { onNotify(`${id} added.`); if (id === unlisted) setQuery(""); }
   }
 
-  const typing = <div className="pref-row">
-    <span className="pref-text"><span className="pref-label">{listing?.listed === false ? "Its name" : "Or type its name"}</span></span>
-    <input
-      className="pref-input mono" value={typed} aria-label="Model name" autoComplete="off" spellCheck={false}
-      placeholder={provider.models[kind]?.[0]?.id ?? listing?.models[0] ?? ""}
-      onChange={(event) => setTyped(event.target.value)}
-      onKeyDown={(event) => { if (event.key === "Enter") void add(typed); }}
-    />
-    <button type="button" className="tb-btn" disabled={!typed.trim() || busy !== null} onClick={() => void add(typed)}>Add</button>
-  </div>;
-
-  if (failed) return <>
-    <Notice>{failed}</Notice>
-    <Group>{typing}</Group>
-  </>;
-  if (!listing) return <Placeholder rows={4} />;
-  if (!listing.listed) return <Group foot={`${provider.label} does not list these, so type the name as its own page spells it.`}>{typing}</Group>;
+  if (!listing && !failed) return <Placeholder rows={4} />;
+  const searching = listing?.listed === true;
+  const label = searching ? `Search ${provider.label}’s models` : "The model’s name";
+  const unlistedRow = unlisted && (added.has(unlisted)
+    ? <Row label={unlisted} mono><Value>Added</Value></Row>
+    : <Action disabled={busy !== null} onClick={() => void add(unlisted)}>
+      {busy === unlisted ? "Adding…" : `Add “${unlisted}”`}
+    </Action>);
+  const why = failed
+    ? "Type the name as its own page spells it."
+    : `${provider.label} does not list ${searching ? "it" : "these"}, so add it only as its own page spells it.`;
   return <>
-    <Group>
+    {failed && <Notice>{failed}</Notice>}
+    <Group foot={searching ? undefined : why}>
       <label className="pref-row">
         <input
-          className="pref-input" type="search" value={query} aria-label={`Search ${provider.label}’s models`}
-          placeholder={`Search ${provider.label}’s models`} autoComplete="off" spellCheck={false}
+          className={`pref-input${searching ? "" : " mono"}`} type={searching ? "search" : "text"} value={query}
+          aria-label={label} placeholder={searching ? label : provider.models[kind]?.[0]?.id ?? label}
+          autoComplete="off" spellCheck={false} autoFocus
           onChange={(event) => setQuery(event.target.value)}
+          /* Enter adds only a name the list holds, or any name where there is no list: a half-typed
+             search must not become a model. */
+          onKeyDown={(event) => {
+            if (event.key === "Enter" && typed && (!searching || listed.includes(typed))) void add(typed);
+          }}
         />
       </label>
     </Group>
-    <Group title={`${provider.label} offers`} count={`${listing.models.length}`}>
-      {shown.length === 0 && <Row label={query ? "Nothing is called that" : "It lists none"} />}
-      {shown.map((id) => added.has(id)
-        ? <Row key={id} label={id} mono><Value>Added</Value></Row>
-        : <button key={id} type="button" className="pref-row" disabled={busy !== null} onClick={() => void add(id)}>
-          <span className="pref-text"><span className="pref-label mono">{id}</span></span>
-          {busy === id && <Value>Adding…</Value>}
-        </button>)}
-    </Group>
-    <Group>{typing}</Group>
+    {searching
+      ? <Group title={`${provider.label} offers`} count={`${listed.length}`} foot={unlisted ? why : undefined}>
+        {listed.length === 0 && !unlisted && <Row label="It lists none" />}
+        {shown.map((id) => added.has(id)
+          ? <Row key={id} label={id} mono><Value>Added</Value></Row>
+          : <button key={id} type="button" className="pref-row" disabled={busy !== null} onClick={() => void add(id)}>
+            <span className="pref-text"><span className="pref-label mono">{id}</span></span>
+            {busy === id && <Value>Adding…</Value>}
+          </button>)}
+        {unlistedRow}
+      </Group>
+      : unlistedRow && <Group>{unlistedRow}</Group>}
   </>;
 }
 

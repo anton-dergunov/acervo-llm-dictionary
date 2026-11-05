@@ -144,9 +144,12 @@ and `ProviderPages.tsx` for everything under it.
   the provider's own page for the bill, and Remove. Remove asks for a second press, since the key goes
   with it. Google Cloud signs in with a key or a credentials file; the choice says what each reaches,
   and what only the file reaches is hidden while it signs in with a key.
-- **Add a model** lists what the provider itself says it has, searchable, with what is already added
-  marked; where a provider cannot list a kind — Vertex, or Gemini's voices on Cloud Text-to-Speech — the
-  name is typed as the provider spells it.
+- **Add a model** is one box. It searches what the provider itself says it has, with what is already
+  added marked, and once nothing listed matches, what is typed is offered as it is — *Add
+  "flux-2-klein-9b"*, under a line saying the provider does not list it — for a model too new for the
+  list. Enter adds only a listed name, so a half-typed search never becomes a model. Where a provider
+  cannot list a kind at all — Vertex, or Gemini's voices on Cloud Text-to-Speech — the same box takes
+  the name. A second "type its name" field beside the search asked for the same name twice.
 - **A voice model** has its own page: whether it takes a direction, the languages it speaks (any, or
   some, chosen with the language search), a free allowance, and its voices — listed by the provider, or
   typed with a link to where the provider lists them. The voices are not heard here: a preview needs a
