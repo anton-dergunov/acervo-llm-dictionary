@@ -75,6 +75,7 @@ def family_view(family: families.Family) -> dict[str, Any]:
         "keyLabel": family.key_label,
         "keyUrl": family.key_url,
         "voicesUrl": family.voices_url,
+        "tried": family.tried,
         "fields": [
             {"name": one.name, "label": one.label, "needed": one.needed, "default": one.default,
              "hint": one.hint, "choices": list(one.choices)}

@@ -448,6 +448,10 @@ def _audio_adapter(name: str):
         from acervo.models import openai_speech
 
         return openai_speech.speech
+    if name == "azure-speech":
+        from acervo.models import azure_speech
+
+        return azure_speech.speech
     raise ProviderRefused("configuration", f"no audio adapter named {name!r}")
 
 

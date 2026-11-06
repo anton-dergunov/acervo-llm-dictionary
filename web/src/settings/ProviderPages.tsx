@@ -315,7 +315,9 @@ function AddProvider({ families, onChoose }: { families: ProviderFamily[]; onCho
     /* A group of one named after its one member, "Any compatible service", needs no title. */
     const title = members.length === 1 && members[0].label === name ? undefined : name;
     return <Group key={name} title={title}>
-      {members.map((family) => <Link key={family.id} label={family.label} hint={family.hint} onOpen={() => onChoose(family)} />)}
+      {members.map((family) => <Link key={family.id} label={family.label}
+        hint={family.tried === false ? `${family.hint} · not yet tried with Acervo` : family.hint}
+        onOpen={() => onChoose(family)} />)}
     </Group>;
   })}</>;
 }

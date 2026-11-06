@@ -436,6 +436,7 @@ def test_what_every_layer_logs_through_imports_nothing_else_of_acervos(name):
 # Modules that open a connection to somewhere that is not one of Acervo's own services: a model
 # provider, a third-party dictionary. There is nobody on the other end to file anything under an id.
 NOT_A_COMPANION = {
+    "models/azure_speech.py",
     "models/cloudflare.py",
     "models/elevenlabs.py",
     "models/gemini_tts.py",

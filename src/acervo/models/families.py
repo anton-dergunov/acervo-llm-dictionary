@@ -115,6 +115,10 @@ class Family:
     # A route that says whether a key works when the model list does not — OpenRouter lists its
     # models to anyone.
     check_url: str | None = None
+    # Whether a real call has answered through this family. One written from the provider's own
+    # reference alone is offered as not yet tried, because the quirks a family exists to hold are
+    # found by calls that fail, and none has been made.
+    tried: bool = True
 
     def serves(self, kind: str) -> bool:
         return kind in self.routes
@@ -277,6 +281,22 @@ FAMILIES: tuple[Family, ...] = (
         lister="elevenlabs",
         key_url="https://elevenlabs.io/app/settings/api-keys",
         usage_url="https://elevenlabs.io/app/usage",
+    ),
+    Family(
+        # Plain voices: Azure's styles are a fixed SSML list, not a free-text direction. The key
+        # belongs to one region's Speech resource and answers only there, so the region is a
+        # setting. Written from Microsoft's REST reference; see `azure_speech.py`.
+        id="azure-speech", label="Azure Speech", group="Popular",
+        hint="Voices in over a hundred languages",
+        key_label="Key",
+        routes=MappingProxyType({"audio": Route("azure-speech")}),
+        fields=(Field("region", "Region", hint="As Keys and Endpoint shows it, such as westeurope"),),
+        audio=_frozen({"format": "riff-24khz-16bit-mono-pcm"}),
+        timeouts=MappingProxyType({"audio": 30}),
+        lister="azure-speech",
+        key_url="https://portal.azure.com/#create/Microsoft.CognitiveServicesSpeechServices",
+        usage_url="https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/overview",
+        tried=False,
     ),
     Family(
         id="mistral", label="Mistral", group="Popular", hint="Text",

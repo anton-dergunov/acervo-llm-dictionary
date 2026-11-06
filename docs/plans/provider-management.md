@@ -117,7 +117,7 @@ them.
 | **ElevenLabs** — *built* | 10,000 credits a month through the API (checked), non-commercial, attribution required | v4: 90+ | v3 and v4, through free-text `[tags]` | `GET /v1/voices` |
 | **OpenAI-compatible speech** (`/v1/audio/speech`) | presets: Kokoro (Kokoro-FastAPI), Piper (Speaches), Ollama; OpenAI | Kokoro 9, Piper 37, Ollama English only | only OpenAI's `instructions`, and OpenAI retires its speech models on **6 Jan 2027** | `/v1/audio/voices` where the server has it |
 | **Cloudflare Workers AI** | 10,000 neurons a day ≈ 540 minutes of MeloTTS, or 7,000 characters of Aura-1 | MeloTTS en, es, fr, zh, ja, ko; Aura-2 en, es | no | typed in |
-| **Azure Speech** | 500,000 characters a month | 100+ | no: its styles are a fixed SSML list, a later addition | `voices/list` |
+| **Azure Speech** — *built, not yet tried* | 500,000 characters a month | 100+ | no: its styles are a fixed SSML list, a later addition | `voices/list` |
 
 **ElevenLabs direction.** Eleven v3 and v4 take audio tags in square brackets, and the tags are free
 text: ElevenLabs' own prompting guide shows `[Warm, conversational tone, faint amusement]`. So a v3 or
@@ -200,7 +200,7 @@ and a fall-back.
 Built in S2 and S3 ([`../features/settings.md`](../features/settings.md) §8). What the mock-ups show
 and is left for later:
 
-- **The new families** (S4): Azure Speech, Draw Things or Forge. "Add a
+- **The new families** (S4): Draw Things or Forge. "Add a
   provider" lists whatever families the server has, so each appears there when it is built.
 
 ## What goes away
@@ -246,8 +246,9 @@ picks the orders and voices once more. Nothing reads the old ids.
 3. **S3 · Usage.** *Built* ([`../architecture/models.md`](../architecture/models.md), "Usage"): the
    counters, the sink, the route and the two Usage pages.
 4. **S4 · New families.** Gemini API TTS, ElevenLabs and a speech server on OpenAI's route, tried
-   with Kokoro (*built*, [`../architecture/models.md`](../architecture/models.md)). Left: OpenAI's
-   own speech and images, A1111 and Azure (plain voices). Each one is tried on Acervo's own prompts before the
+   with Kokoro (*built*, [`../architecture/models.md`](../architecture/models.md)). Azure (plain
+   voices) is built from Microsoft's reference and marked not yet tried: the owner's account cannot
+   create the resource. Left: OpenAI's own speech and images, and A1111. Each one is tried on Acervo's own prompts before the
    guide recommends it, and every failure it adds shows in `admin log` with its sentence.
 5. **S4b · ElevenLabs as the free directed voice.**
    - Put v4 and v3 in the expressive order beside Gemini API TTS.

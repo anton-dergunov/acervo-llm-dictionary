@@ -395,7 +395,7 @@ const SUBPAGES = {
       link("Anthropic", "", "provider-new", "Text"),
       link("Google Cloud", "", "provider-new", "Voices and reading photos; text and pictures too"),
       link("ElevenLabs", "", "provider-new", "Voices that take a direction"),
-      link("Azure Speech", "", "provider-new", "Voices in over a hundred languages")
+      link("Azure Speech", "", "provider-new", "Voices in over a hundred languages · not yet tried with Acervo")
     ]),
     group("On your own machines", [
       link("Ollama", "", "provider-new", "Text from a model on your computer"),

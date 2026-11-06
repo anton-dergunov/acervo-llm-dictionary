@@ -118,6 +118,10 @@ def _check_speech_server(provider: "Provider") -> tuple[str, str | None]:
     return f"Works · {len(_speech_server_voices(provider, fresh=True))} voices", None
 
 
+def _check_azure(provider: "Provider") -> tuple[str, str | None]:
+    return f"Works · {len(_azure_voices(provider, fresh=True))} voices", None
+
+
 def _count(found: tuple[str, ...]) -> str:
     return f"{len(found)} model{'s' if len(found) != 1 else ''}"
 
@@ -345,6 +349,37 @@ def _speech_server_voices(provider: "Provider", *, fresh: bool = False) -> tuple
     return _cached_voices(provider, read, fresh=fresh)
 
 
+# Azure has voices and no models to choose between, so it offers one.
+AZURE_MODELS = ("neural",)
+AZURE_VOICES_URL = "https://{region}.tts.speech.microsoft.com/cognitiveservices/voices/list"
+
+
+def _azure_models(provider: "Provider", kind: str) -> tuple[str, ...]:
+    return AZURE_MODELS if kind == "audio" else ()
+
+
+def _azure_voice_list(provider: "Provider", model: str) -> tuple["Voice", ...]:
+    """Azure's voices for the resource's region, each made for one locale (`es-AR-ElenaNeural`)."""
+    from acervo.models.providers import Voice
+
+    found = []
+    for one in _azure_voices(provider):
+        gender = str(one.get("Gender") or "").lower()
+        found.append(Voice(str(one["ShortName"]), str(one.get("Locale") or "") or None,
+                           gender if gender in GENDERS.values() else None, None,
+                           str(one.get("DisplayName") or "") or None))
+    return tuple(found)
+
+
+def _azure_voices(provider: "Provider", *, fresh: bool = False) -> tuple[dict[str, Any], ...]:
+    def read(provider: "Provider") -> tuple[dict[str, Any], ...]:
+        url = AZURE_VOICES_URL.format(region=provider.setting("region"))
+        listed = _get(provider, url, {"Ocp-Apim-Subscription-Key": provider.credential.key or ""}).json()
+        return tuple(one for one in listed or () if isinstance(one, dict) and one.get("ShortName"))
+
+    return _cached_voices(provider, read, fresh=fresh)
+
+
 def _elevenlabs_voices(provider: "Provider") -> tuple[dict[str, Any], ...]:
     listed: list[dict[str, Any]] = []
     token = None
@@ -498,6 +533,7 @@ _CHECKS = {
     "google-cloud": _check_google,
     "elevenlabs": _check_elevenlabs,
     "speech-server": _check_speech_server,
+    "azure-speech": _check_azure,
 }
 # The kinds each listing code can list, and the ones whose voices it can.
 _LISTS = {
@@ -509,12 +545,14 @@ _LISTS = {
     "google-cloud": {"audio", "ocr"},
     "elevenlabs": {"audio"},
     "speech-server": {"audio"},
+    "azure-speech": {"audio"},
 }
 _VOICES = {
     "google-cloud": _google_voice_list,
     "gemini": _gemini_voice_list,
     "elevenlabs": _elevenlabs_voice_list,
     "speech-server": _speech_server_voice_list,
+    "azure-speech": _azure_voice_list,
 }
 _MODELS = {
     "openai": _openai_models,
@@ -525,4 +563,5 @@ _MODELS = {
     "google-cloud": _google_models,
     "elevenlabs": _elevenlabs_models,
     "speech-server": _speech_server_models,
+    "azure-speech": _azure_models,
 }

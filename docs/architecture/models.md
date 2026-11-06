@@ -39,7 +39,10 @@ call that failed — that one text-to-speech route takes `text` where another to
 Vertex refuses `response_format`, that Workers AI truncates at 256 tokens unless told otherwise, that
 the same call answers in under two seconds on a free tier and takes half a minute on Vertex — and
 each is a fact about the provider rather than about anybody's account. The OpenAI-compatible
-services are one family's code with a preset each: a prefix, a base URL and a listing endpoint.
+services are one family's code with a preset each: a prefix, a base URL and a listing endpoint. A
+family written from the provider's reference alone, with no real call made through it, says so
+(`tried`), and Add a provider marks it "not yet tried": the quirks a family holds are found by calls
+that fail, and none has been made.
 
 **What changes with the provider's catalogue comes from the provider** (`models/listing.py`): its
 models, and its voices with their locales and genders, asked for with calls that spend nothing.
@@ -72,8 +75,8 @@ server never reads it.
 the worker image, which does not install it. What LiteLLM does not cover is reached by hand:
 Cloudflare's image and audio models (`cloudflare.py`), Cloud Text-to-Speech (`google_tts.py`), the
 Gemini API's speech (`gemini_tts.py`, the Interactions API), ElevenLabs (`elevenlabs.py`), a speech
-server on OpenAI's route (`openai_speech.py`: Kokoro, Piper behind Speaches) and Cloud Vision
-(`google_vision.py`).
+server on OpenAI's route (`openai_speech.py`: Kokoro, Piper behind Speaches), Azure Speech
+(`azure_speech.py`, SSML, not yet tried) and Cloud Vision (`google_vision.py`).
 Speech never goes through LiteLLM: reached that way, a Gemini voice drops its direction before the
 request is built.
 
