@@ -285,7 +285,20 @@ picks the orders and voices once more. Nothing reads the old ids.
 6. **S5 · The clip service calls home.** *Built in S1*, so that removing `llm.env` did not leave
    the clip service without a provider: `POST /companion/text`, authenticated by the operator token,
    walking the providers' own order.
-7. **S6 · The guide.**
+7. **S7 · Ready-made models.** *Later; asked for by the owner on 6 Nov 2026, not designed yet.* Adding
+   a popular provider should be the account and nothing more: for Google Cloud, a project and a key or
+   a credentials file, and every kind it reaches arrives configured. Today each model is added by hand,
+   and a voice's direction switched on by hand.
+   - Each family that has an obvious set names it, in code beside its other facts: which models per
+     kind, which voices take a direction, and the free allowance where it is published. For Google
+     Cloud, Flash-Lite text and Gemini image on Vertex, WaveNet, Chirp 3 HD and Gemini-TTS voices,
+     and document text detection.
+   - The add form offers it with one switch, on by default, saying what it adds. A model the
+     provider's own list no longer holds is left out rather than added, so a set that ages costs a
+     missing model and never a broken one. Kinds only a credentials file reaches come only with the
+     file.
+   - The page stays as it is afterwards: the set is where a provider starts, not a mode it is in.
+8. **S6 · The guide.**
    - Write `docs/providers.md`, which leads with the zero-cost set, then the popular paid providers,
      then local models. Each provider gets how to sign up, which key to create, what the free
      allowance means in words and pictures a day, and where to paste it.
@@ -297,4 +310,4 @@ picks the orders and voices once more. Nothing reads the old ids.
    - Add a short README section linking to it.
    - Rewrite `docs/architecture/models.md` for the store.
    - Fold `vertex-setup.md` and `cloudflare-workers-ai.md` into the guide.
-   - Delete this plan.
+   - Delete this plan, once S7 is built or moved to a plan of its own.
