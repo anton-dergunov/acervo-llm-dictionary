@@ -37,10 +37,11 @@ const RANK: Record<VoiceMatch, number> = { exact: 0, any: 1, near: 2, main: 3, o
 
 /**
  * A voice's own name, without a locale it repeats: `es-ES-Wavenet-F` is "Wavenet-F" once its accent
- * is shown beside it. Any leading `xx-YY-`, whoever names voices that way.
+ * is shown beside it. Any leading `xx-YY-` or `xx-419-`, whoever names voices that way.
  */
 export function shortName(name: string): string {
-  return name.replace(/^[a-z]{2,3}-(?:[A-Z][a-z]{3}-)?(?:[A-Z]{2}|\d{3})-/, "") || name;
+  // The region in either case: the Gemini API writes its ids in lower case (`es-es-advisor-2`).
+  return name.replace(/^[a-z]{2,3}-(?:[A-Z][a-z]{3}-)?(?:[A-Za-z]{2}|\d{3})-/, "") || name;
 }
 
 /** "Kore · female · firm". */

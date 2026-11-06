@@ -141,11 +141,18 @@ FAMILIES: tuple[Family, ...] = (
         # Two Flash-Lite models at 500 requests a day each, which is why a provider holds several
         # models per kind: they are separate buckets, and the second is reached by the first one's
         # 429. Temperature is deliberately unset: LiteLLM recommends leaving Gemini 3+ at its
-        # default. Speech through this key is S4's Interactions API family; reached through LiteLLM
-        # a Gemini voice drops its direction before the request is built.
+        # default. Speech goes through the Interactions API (`gemini_tts.py`), not LiteLLM: reached
+        # through LiteLLM a Gemini voice drops its direction before the request is built. The free
+        # tier's speech is three requests a minute per model (measured on Flash-Lite TTS,
+        # 6 Nov 2026), and the 429 says when to come back, which the cooldown reads.
         id="gemini-api", label="Gemini API", group="Free to start",
-        hint="Text, with a daily free allowance",
-        routes=_text("gemini/"), json_mode="native", lister="gemini",
+        hint="Text and voices, with a daily free allowance",
+        routes=MappingProxyType({
+            "text": Route("litellm", "gemini/"),
+            "audio": Route("gemini-tts"),
+        }),
+        json_mode="native", lister="gemini",
+        timeouts=MappingProxyType({"audio": 30}),
         key_url="https://aistudio.google.com/apikey",
         usage_url="https://aistudio.google.com/rate-limit?timeRange=last-28-days",
     ),

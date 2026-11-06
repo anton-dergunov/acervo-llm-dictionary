@@ -113,7 +113,7 @@ them.
 | Family | Free allowance | Languages | Takes a direction | Voices listed by |
 |---|---|---|---|---|
 | **Google Cloud TTS** | Standard and WaveNet 4 M characters a month; Neural2 and Chirp 3 HD 1 M; Gemini-TTS unlisted | the widest catalogue; Gemini-TTS 24 GA and 63 preview | Gemini-TTS models, through `prompt` | `voices.list` |
-| **Gemini API TTS** (Interactions API) | free tier with a small daily cap *(console)* | 3.8 Flash TTS 130+, Flash-Lite TTS 100+ | yes, `speech_metadata.style`, free text | `GET /v1beta/voices` (language, accent, gender) |
+| **Gemini API TTS** (Interactions API) — *built* | free tier: 3 requests a minute per model (measured), daily cap *(console)* | 3.8 Flash TTS 130+, Flash-Lite TTS 100+ | yes, `speech_metadata.style`, free text | `GET /v1beta/voices` (language, accent, gender) |
 | **ElevenLabs** | 10,000 credits a month, non-commercial, attribution required (to verify on the pricing page) | v4: 90+ | v3 and v4, through free-text `[tags]` | `GET /v1/voices` |
 | **OpenAI-compatible speech** (`/v1/audio/speech`) | presets: Kokoro (Kokoro-FastAPI), Piper (Speaches), Ollama; OpenAI | Kokoro 9, Piper 37, Ollama English only | only OpenAI's `instructions`, and OpenAI retires its speech models on **6 Jan 2027** | `/v1/audio/voices` where the server has it |
 | **Cloudflare Workers AI** | 10,000 neurons a day ≈ 540 minutes of MeloTTS, or 7,000 characters of Aura-1 | MeloTTS en, es, fr, zh, ja, ko; Aura-2 en, es | no | typed in |
@@ -245,8 +245,8 @@ picks the orders and voices once more. Nothing reads the old ids.
    (`GET /providers/{id}/models` and `/voices`).
 3. **S3 · Usage.** *Built* ([`../architecture/models.md`](../architecture/models.md), "Usage"): the
    counters, the sink, the route and the two Usage pages.
-4. **S4 · New families.** Gemini API TTS, OpenAI-compatible speech (Kokoro first), OpenAI images,
-   A1111, ElevenLabs and Azure (plain voices). Each one is tried on Acervo's own prompts before the
+4. **S4 · New families.** Gemini API TTS (*built*, [`../architecture/models.md`](../architecture/models.md)),
+   OpenAI-compatible speech (Kokoro first), OpenAI images, A1111, ElevenLabs and Azure (plain voices). Each one is tried on Acervo's own prompts before the
    guide recommends it, and every failure it adds shows in `admin log` with its sentence.
 5. **S4b · ElevenLabs as the free directed voice.**
    - Put v4 and v3 in the expressive order beside Gemini API TTS.

@@ -32,6 +32,10 @@ VOICES_TTL_SECONDS = 24 * 3600
 
 GOOGLE_VOICES_URL = "https://texttospeech.googleapis.com/v1/voices"
 GEMINI_MODELS_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+GEMINI_VOICES_URL = "https://generativelanguage.googleapis.com/v1beta/voices"
+# Gemini lists about 2,100 voices, a thousand to a page. A bound on pages, so a token that never ends
+# cannot hold a request open.
+GEMINI_VOICE_PAGES = 10
 ANTHROPIC_MODELS_URL = "https://api.anthropic.com/v1/models"
 CLOUDFLARE_URL = "https://api.cloudflare.com/client/v4/accounts/{account}/ai/models/search"
 # Workers AI's own names for the tasks a kind is.
@@ -128,14 +132,20 @@ def _openai_models(provider: "Provider", kind: str) -> tuple[str, ...]:
 
 
 def _gemini_models(provider: "Provider", kind: str) -> tuple[str, ...]:
-    if kind != "text":
+    """Every model that answers `generateContent`, split by Gemini's own naming: a speech model is
+    `…-tts`, a picture model `…-image`, and neither writes text."""
+    if kind not in ("text", "audio"):
         return ()
     payload = _get(provider, GEMINI_MODELS_URL, {"x-goog-api-key": provider.credential.key or ""},
                    params={"pageSize": 1000}).json()
-    return tuple(
+    names = [
         str(one["name"]).removeprefix("models/") for one in payload.get("models") or ()
         if "generateContent" in (one.get("supportedGenerationMethods") or ())
-    )
+    ]
+    speech = [name for name in names if "-tts" in name]
+    if kind == "audio":
+        return tuple(speech)
+    return tuple(name for name in names if name not in speech and "-image" not in name)
 
 
 def _anthropic_models(provider: "Provider", kind: str) -> tuple[str, ...]:
@@ -188,6 +198,10 @@ def voices(provider: "Provider", model: str) -> tuple["Voice", ...]:
     """The voices a model speaks with, from the provider's own list. Empty where it has none."""
     if not lists_voices(provider):
         return ()
+    return _VOICES[provider.family.lister](provider, model)
+
+
+def _google_voice_list(provider: "Provider", model: str) -> tuple["Voice", ...]:
     from acervo.models.providers import Voice
 
     listed = _google_voices(provider)
@@ -215,6 +229,59 @@ def locales(provider: "Provider") -> tuple[str, ...]:
     ))
 
 
+def _gemini_voice_list(provider: "Provider", model: str) -> tuple["Voice", ...]:
+    """The Gemini API's voices, the same for every speech model.
+
+    Two kinds, told apart the way Google Cloud's are. The thirty voices named once (`kore`) are
+    listed under `en-US` and speak any language they are told. The rest are made for a locale and
+    carry it in their id (`es-419-advisor-1`). Latin American Spanish is one locale on the wire, and
+    the voice's `accent` names the country ("Argentina Spanish"), so the voice is offered as `es-AR`.
+    """
+    from acervo.models.providers import Voice
+
+    found = []
+    for one in _cached_voices(provider, _gemini_voices):
+        identifier = str(one["id"])
+        code = str(one.get("language_code") or "")
+        gender = one.get("gender") if one.get("gender") in GENDERS.values() else None
+        if not code or not identifier.lower().startswith(code.lower() + "-"):
+            found.append(Voice(identifier, None, gender))
+            continue
+        accent = str(one.get("accent") or "") or None
+        found.append(Voice(identifier, _named_country(code, accent), gender, accent))
+    return tuple(found)
+
+
+def _named_country(code: str, accent: str | None) -> str:
+    """`es-419` with "Argentina Spanish" → `es-AR`. Any other locale is kept as listed."""
+    from acervo.models import locales as tags
+
+    parsed = tags.parse(code)
+    if not accent or not parsed.region or not parsed.region.isdigit():
+        return code
+    for region in tags.accents(parsed.language):
+        name = tags.region_name(region)
+        if len(region) == 2 and name and accent.startswith(name + " "):
+            return tags.with_region(code, region)
+    return code
+
+
+def _gemini_voices(provider: "Provider") -> tuple[dict[str, Any], ...]:
+    listed: list[dict[str, Any]] = []
+    token = None
+    for _ in range(GEMINI_VOICE_PAGES):
+        params: dict[str, Any] = {"page_size": 1000}
+        if token:
+            params["page_token"] = token
+        payload = _get(provider, GEMINI_VOICES_URL, {"x-goog-api-key": provider.credential.key or ""},
+                       params=params).json()
+        listed.extend(one for one in payload.get("voices") or () if isinstance(one, dict) and one.get("id"))
+        token = payload.get("next_page_token")
+        if not token:
+            break
+    return tuple(listed)
+
+
 def _voice_type(voice: dict[str, Any]) -> str | None:
     """`es-ES-Chirp3-HD-Kore` → `Chirp3-HD`; `Kore` → None."""
     name = str(voice.get("name") or "")
@@ -232,15 +299,24 @@ def _bcp47(provider: "Provider", code: str) -> str:
 
 
 def _google_voices(provider: "Provider", *, fresh: bool = False) -> tuple[dict[str, Any], ...]:
+    return _cached_voices(provider, _read_google_voices, fresh=fresh)
+
+
+def _read_google_voices(provider: "Provider") -> tuple[dict[str, Any], ...]:
+    from acervo.models import google_auth
+
+    response = _get(provider, GOOGLE_VOICES_URL, google_auth.headers(provider, "voices"))
+    return tuple(one for one in response.json().get("voices") or () if isinstance(one, dict) and one.get("name"))
+
+
+def _cached_voices(provider: "Provider", read, *, fresh: bool = False) -> tuple[dict[str, Any], ...]:
+    """A provider's voice list, read at most once a day per provider and credential."""
     held = (provider.id, provider.credential.digest())
     with _lock:
         cached = _voices.get(held)
     if cached and not fresh and time.monotonic() - cached[0] < VOICES_TTL_SECONDS:
         return cached[1]
-    from acervo.models import google_auth
-
-    response = _get(provider, GOOGLE_VOICES_URL, google_auth.headers(provider, "voices"))
-    listed = tuple(one for one in response.json().get("voices") or () if isinstance(one, dict) and one.get("name"))
+    listed = read(provider)
     with _lock:
         _voices[held] = (time.monotonic(), listed)
     return listed
@@ -307,13 +383,16 @@ _CHECKS = {
 # The kinds each listing code can list, and the ones whose voices it can.
 _LISTS = {
     "openai": {"text"},
-    "gemini": {"text"},
+    "gemini": {"text", "audio"},
     "anthropic": {"text"},
     "ollama": {"text"},
     "cloudflare": {"text", "image", "audio"},
     "google-cloud": {"audio", "ocr"},
 }
-_VOICES = {"google-cloud"}
+_VOICES = {
+    "google-cloud": _google_voice_list,
+    "gemini": _gemini_voice_list,
+}
 _MODELS = {
     "openai": _openai_models,
     "gemini": _gemini_models,

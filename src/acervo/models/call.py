@@ -436,6 +436,10 @@ def _audio_adapter(name: str):
         from acervo.models import google_tts
 
         return google_tts.speech
+    if name == "gemini-tts":
+        from acervo.models import gemini_tts
+
+        return gemini_tts.speech
     raise ProviderRefused("configuration", f"no audio adapter named {name!r}")
 
 

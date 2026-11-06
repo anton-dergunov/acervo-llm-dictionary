@@ -187,6 +187,9 @@ describe("a voice's name", () => {
     expect(shortName("es-ES-Wavenet-F")).toBe("Wavenet-F");
     expect(shortName("cmn-CN-Standard-A")).toBe("Standard-A");
     expect(shortName("Kore")).toBe("Kore");
+    expect(shortName("es-es-advisor-2")).toBe("advisor-2");
+    expect(shortName("es-419-advisor-1")).toBe("advisor-1");
+    expect(shortName("achernar")).toBe("achernar");
   });
 });
 

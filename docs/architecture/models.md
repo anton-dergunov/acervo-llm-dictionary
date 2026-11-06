@@ -54,6 +54,10 @@ credential. A Gemini voice is listed once (`Kore`) under `en-US`, which is where
 than all it says, so it speaks any locale and is sent the nearest one Google lists any voice under —
 `es-US` for Argentina, which shares `es-419` with it; a Gemini voice refuses `es-AR` and a bare `es`
 (measured on 5 Nov 2026). Locales typed on a model win over that list.
+The Gemini API's voice list (`GET /v1beta/voices`, about 2,100 voices) is kept the same way, and has
+the same two kinds. The thirty voices named once (`kore`) speak any language. The rest are made for
+a locale and say so in their id (`es-419-advisor-1`). Latin American Spanish is one locale there, and
+the voice's accent names the country ("Argentina Spanish"), so such a voice is offered as `es-AR`.
 
 **Laptop tools** — the scripts, the experiments and the live tests — read a gitignored
 `providers.local.json` in the shape the server stores, with each key inline (`models/local.py`). The
@@ -61,9 +65,16 @@ server never reads it.
 
 `text()` and `image()` go over LiteLLM, imported lazily so the rate limiter (`models/pacing`) works in
 the worker image, which does not install it. What LiteLLM does not cover is reached by hand:
-Cloudflare's image and audio models (`cloudflare.py`), Cloud Text-to-Speech (`google_tts.py`) and Cloud
-Vision (`google_vision.py`). Speech never goes through LiteLLM: reached that way, a Gemini voice drops
-its direction before the request is built.
+Cloudflare's image and audio models (`cloudflare.py`), Cloud Text-to-Speech (`google_tts.py`), the
+Gemini API's speech (`gemini_tts.py`, the Interactions API) and Cloud Vision (`google_vision.py`).
+Speech never goes through LiteLLM: reached that way, a Gemini voice drops its direction before the
+request is built.
+
+The Gemini API's speech request has no language field, and the model guesses the language from the
+words. It gets a sentence right and a single word wrong: "picar" came back as English and "pie" as
+Hindi (measured on 6 Nov 2026, with a transcriber listening back). So the language always heads the
+direction ("Say this in Spanish."), whatever else the direction says. The free tier allows three
+speech requests a minute per model, and its 429 says when to come back.
 
 ## The chain
 

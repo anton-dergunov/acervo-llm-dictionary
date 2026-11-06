@@ -437,6 +437,7 @@ def test_what_every_layer_logs_through_imports_nothing_else_of_acervos(name):
 # provider, a third-party dictionary. There is nobody on the other end to file anything under an id.
 NOT_A_COMPANION = {
     "models/cloudflare.py",
+    "models/gemini_tts.py",
     "models/google_auth.py",
     "models/listing.py",
     "services/dictionaries/online.py",
