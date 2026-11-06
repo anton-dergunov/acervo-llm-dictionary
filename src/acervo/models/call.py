@@ -440,6 +440,14 @@ def _audio_adapter(name: str):
         from acervo.models import gemini_tts
 
         return gemini_tts.speech
+    if name == "elevenlabs":
+        from acervo.models import elevenlabs
+
+        return elevenlabs.speech
+    if name == "openai-speech":
+        from acervo.models import openai_speech
+
+        return openai_speech.speech
     raise ProviderRefused("configuration", f"no audio adapter named {name!r}")
 
 

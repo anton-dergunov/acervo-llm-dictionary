@@ -15,6 +15,7 @@ credential: a replaced key reads it again.
 from __future__ import annotations
 
 import json
+import re
 import threading
 import time
 from typing import TYPE_CHECKING, Any
@@ -33,9 +34,10 @@ VOICES_TTL_SECONDS = 24 * 3600
 GOOGLE_VOICES_URL = "https://texttospeech.googleapis.com/v1/voices"
 GEMINI_MODELS_URL = "https://generativelanguage.googleapis.com/v1beta/models"
 GEMINI_VOICES_URL = "https://generativelanguage.googleapis.com/v1beta/voices"
+ELEVENLABS_URL = "https://api.elevenlabs.io"
 # Gemini lists about 2,100 voices, a thousand to a page. A bound on pages, so a token that never ends
 # cannot hold a request open.
-GEMINI_VOICE_PAGES = 10
+VOICE_PAGES = 10
 ANTHROPIC_MODELS_URL = "https://api.anthropic.com/v1/models"
 CLOUDFLARE_URL = "https://api.cloudflare.com/client/v4/accounts/{account}/ai/models/search"
 # Workers AI's own names for the tasks a kind is.
@@ -101,6 +103,19 @@ def _check_google(provider: "Provider") -> tuple[str, str | None]:
         return (f"Works as {account}" if account else "Works with your own sign-in"), account
     return (f"Works · Text-to-Speech answers with {len(voices)} voices. Vision is not checked, "
             "since no call to it is free"), None
+
+
+def _check_elevenlabs(provider: "Provider") -> tuple[str, str | None]:
+    """The account's plan and what it has spent this month, from `/v1/user`, which spends nothing."""
+    subscription = _get(provider, f"{ELEVENLABS_URL}/v1/user", _xi(provider)).json().get("subscription") or {}
+    used, limit = subscription.get("character_count"), subscription.get("character_limit")
+    plan = f" · {subscription['tier']} plan" if subscription.get("tier") else ""
+    spent = f" · {used:,} of {limit:,} credits used this month" if isinstance(used, int) and isinstance(limit, int) else ""
+    return f"Works{plan}{spent}", None
+
+
+def _check_speech_server(provider: "Provider") -> tuple[str, str | None]:
+    return f"Works · {len(_speech_server_voices(provider, fresh=True))} voices", None
 
 
 def _count(found: tuple[str, ...]) -> str:
@@ -171,6 +186,28 @@ def _cloudflare_models(provider: "Provider", kind: str) -> tuple[str, ...]:
     payload = _get(provider, CLOUDFLARE_URL.format(account=provider.setting("accountId")),
                    _bearer(provider), params={"task": task, "per_page": 100}).json()
     return tuple(str(one["name"]) for one in payload.get("result") or () if one.get("name"))
+
+
+def _elevenlabs_models(provider: "Provider", kind: str) -> tuple[str, ...]:
+    if kind != "audio":
+        return ()
+    listed = _get(provider, f"{ELEVENLABS_URL}/v1/models", _xi(provider)).json()
+    return tuple(str(one["model_id"]) for one in listed if isinstance(one, dict) and one.get("model_id")
+                 and one.get("can_do_text_to_speech"))
+
+
+def _speech_server_models(provider: "Provider", kind: str) -> tuple[str, ...]:
+    if kind != "audio":
+        return ()
+    payload = _get(provider, f"{_address(provider)}/models", _bearer(provider)).json()
+    return tuple(str(one["id"]) for one in payload.get("data") or () if isinstance(one, dict) and one.get("id"))
+
+
+def _address(provider: "Provider") -> str:
+    base = provider.filled(provider.family.list_url) or provider.base_url()
+    if not base:
+        raise ProviderRefused("configuration", f"{provider.label} has no address", provider_id=provider.id)
+    return base
 
 
 def _google_models(provider: "Provider", kind: str) -> tuple[str, ...]:
@@ -244,12 +281,83 @@ def _gemini_voice_list(provider: "Provider", model: str) -> tuple["Voice", ...]:
         identifier = str(one["id"])
         code = str(one.get("language_code") or "")
         gender = one.get("gender") if one.get("gender") in GENDERS.values() else None
+        label = str(one.get("display_name") or "") or None
         if not code or not identifier.lower().startswith(code.lower() + "-"):
-            found.append(Voice(identifier, None, gender))
+            found.append(Voice(identifier, None, gender, label=label))
             continue
         accent = str(one.get("accent") or "") or None
-        found.append(Voice(identifier, _named_country(code, accent), gender, accent))
+        found.append(Voice(identifier, _named_country(code, accent), gender, accent, label))
     return tuple(found)
+
+
+def _elevenlabs_voice_list(provider: "Provider", model: str) -> tuple["Voice", ...]:
+    """The account's voices: the premade ones and any it made. Each speaks every language its model
+    has, so none is given a locale. ElevenLabs names one "Sarah - Mature, Reassuring, Confident":
+    the name before the dash, and the words after it are its character."""
+    from acervo.models.providers import Voice
+
+    found = []
+    for one in _cached_voices(provider, _elevenlabs_voices):
+        name, _, character = str(one.get("name") or one["voice_id"]).partition(" - ")
+        gender = (one.get("labels") or {}).get("gender")
+        found.append(Voice(str(one["voice_id"]), None, gender if gender in GENDERS.values() else None,
+                           character.strip() or None, name.strip() or None))
+    return tuple(found)
+
+
+# Kokoro names a voice by language and gender: `ef_dora` is a woman speaking Spanish. Its own table
+# (`VOICES.md` in hexgrad/Kokoro-82M); Spanish and Chinese say no region, so none is claimed.
+KOKORO_LANGUAGES = {"a": "en-US", "b": "en-GB", "e": "es", "f": "fr-FR", "h": "hi-IN", "i": "it-IT",
+                    "j": "ja-JP", "p": "pt-BR", "z": "zh"}
+_KOKORO = re.compile(r"^([abefhijpz])([fm])_[a-z0-9_]+$")
+# Piper names a voice by its locale: `en_US-amy-medium`, sometimes behind a path.
+_PIPER = re.compile(r"(?:^|[/_-])([a-z]{2,3})_([A-Z]{2})(?=[-_.]|$)")
+
+
+def _speech_server_voice_list(provider: "Provider", model: str) -> tuple["Voice", ...]:
+    """A speech server's voices, with the locale and gender their names carry where they follow
+    Kokoro's or Piper's convention. A name that follows neither speaks any locale it is told."""
+    from acervo.models.providers import Voice
+
+    found = []
+    for name in _speech_server_voices(provider):
+        if kokoro := _KOKORO.match(name):
+            found.append(Voice(name, KOKORO_LANGUAGES[kokoro.group(1)],
+                               "female" if kokoro.group(2) == "f" else "male"))
+        elif piper := _PIPER.search(name):
+            found.append(Voice(name, f"{piper.group(1)}-{piper.group(2)}"))
+        else:
+            found.append(Voice(name))
+    return tuple(found)
+
+
+def _speech_server_voices(provider: "Provider", *, fresh: bool = False) -> tuple[str, ...]:
+    def read(provider: "Provider") -> tuple[str, ...]:
+        payload = _get(provider, f"{_address(provider)}/audio/voices", _bearer(provider)).json()
+        listed = payload.get("voices") if isinstance(payload, dict) else payload
+        names = []
+        for one in listed or ():
+            name = one.get("id") or one.get("name") if isinstance(one, dict) else one
+            if isinstance(name, str) and name.strip():
+                names.append(name.strip())
+        return tuple(names)
+
+    return _cached_voices(provider, read, fresh=fresh)
+
+
+def _elevenlabs_voices(provider: "Provider") -> tuple[dict[str, Any], ...]:
+    listed: list[dict[str, Any]] = []
+    token = None
+    for _ in range(VOICE_PAGES):
+        params: dict[str, Any] = {"page_size": 100}
+        if token:
+            params["next_page_token"] = token
+        payload = _get(provider, f"{ELEVENLABS_URL}/v2/voices", _xi(provider), params=params).json()
+        listed.extend(one for one in payload.get("voices") or () if isinstance(one, dict) and one.get("voice_id"))
+        token = payload.get("next_page_token")
+        if not payload.get("has_more") or not token:
+            break
+    return tuple(listed)
 
 
 def _named_country(code: str, accent: str | None) -> str:
@@ -269,7 +377,7 @@ def _named_country(code: str, accent: str | None) -> str:
 def _gemini_voices(provider: "Provider") -> tuple[dict[str, Any], ...]:
     listed: list[dict[str, Any]] = []
     token = None
-    for _ in range(GEMINI_VOICE_PAGES):
+    for _ in range(VOICE_PAGES):
         params: dict[str, Any] = {"page_size": 1000}
         if token:
             params["page_token"] = token
@@ -331,6 +439,10 @@ def forget() -> None:
 # ── one GET ──
 
 
+def _xi(provider: "Provider") -> dict[str, str]:
+    return {"xi-api-key": provider.credential.key or ""}
+
+
 def _bearer(provider: "Provider") -> dict[str, str]:
     return {"Authorization": f"Bearer {provider.credential.key}"} if provider.credential.key else {}
 
@@ -343,11 +455,12 @@ def _get(provider: "Provider", url: str, headers: dict[str, str], *,
     except httpx.HTTPError as error:
         _fail(provider, "unreachable", str(error) or type(error).__name__, None)
     if not response.is_success:
-        _fail(provider, None, _detail(response), response.status_code)
+        _fail(provider, None, response_detail(response), response.status_code)
     return response
 
 
-def _detail(response: httpx.Response) -> str:
+def response_detail(response: httpx.Response) -> str:
+    """A provider's own sentence for a failed response, whichever of the usual shapes it takes."""
     try:
         payload = response.json()
     except ValueError:
@@ -360,6 +473,10 @@ def _detail(response: httpx.Response) -> str:
             return error[:DETAIL_LIMIT]
         if payload.get("errors"):
             return json.dumps(payload["errors"], ensure_ascii=False)[:DETAIL_LIMIT]
+        # ElevenLabs: `{"detail": {"code": …, "message": …}}`.
+        detail = payload.get("detail")
+        if isinstance(detail, dict) and detail.get("message"):
+            return str(detail["message"])[:DETAIL_LIMIT]
     return json.dumps(payload, ensure_ascii=False)[:DETAIL_LIMIT]
 
 
@@ -379,6 +496,8 @@ _CHECKS = {
     "ollama": _check_listing,
     "cloudflare": _check_cloudflare,
     "google-cloud": _check_google,
+    "elevenlabs": _check_elevenlabs,
+    "speech-server": _check_speech_server,
 }
 # The kinds each listing code can list, and the ones whose voices it can.
 _LISTS = {
@@ -388,10 +507,14 @@ _LISTS = {
     "ollama": {"text"},
     "cloudflare": {"text", "image", "audio"},
     "google-cloud": {"audio", "ocr"},
+    "elevenlabs": {"audio"},
+    "speech-server": {"audio"},
 }
 _VOICES = {
     "google-cloud": _google_voice_list,
     "gemini": _gemini_voice_list,
+    "elevenlabs": _elevenlabs_voice_list,
+    "speech-server": _speech_server_voice_list,
 }
 _MODELS = {
     "openai": _openai_models,
@@ -400,4 +523,6 @@ _MODELS = {
     "ollama": _ollama_models,
     "cloudflare": _cloudflare_models,
     "google-cloud": _google_models,
+    "elevenlabs": _elevenlabs_models,
+    "speech-server": _speech_server_models,
 }

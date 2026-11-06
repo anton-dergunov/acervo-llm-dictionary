@@ -44,9 +44,14 @@ export function shortName(name: string): string {
   return name.replace(/^[a-z]{2,3}-(?:[A-Z][a-z]{3}-)?(?:[A-Za-z]{2}|\d{3})-/, "") || name;
 }
 
+/** What a voice is called on screen: the provider's own word for it, else its name made short. */
+export function voiceName(option: { name: string; label?: string | null }): string {
+  return option.label || shortName(option.name);
+}
+
 /** "Kore · female · firm". */
 export function voiceLabel(option: VoiceOption): string {
-  return [shortName(option.name), option.gender, option.note].filter(Boolean).join(" · ");
+  return [voiceName(option), option.gender, option.note].filter(Boolean).join(" · ");
 }
 
 /**
@@ -168,8 +173,8 @@ export function VoiceRow({ settings, role, order, language, label = ORDER_NAMES[
   return <Link
     label={label}
     hint={`${first.model}${backups ? ` · ${backups} ${backups === 1 ? "backup" : "backups"}` : ""}`}
-    value={`${first.voice ? shortName(first.voice.name) : "Its own voice"} · ${accentOf(first.voice, locale)}`}
-    before={listen(order, first.provider, first.model, first.voice?.name ?? null, first.voice?.name ?? first.model)}
+    value={`${first.voice ? voiceName(first.voice) : "Its own voice"} · ${accentOf(first.voice, locale)}`}
+    before={listen(order, first.provider, first.model, first.voice?.name ?? null, first.voice ? voiceName(first.voice) : first.model)}
     onOpen={onOpen}
   />;
 }
@@ -256,7 +261,7 @@ export function VoicePage({ settings, role, order, language, apply, onNotify }: 
         label={voiceLabel(one.option)}
         hint={`${one.providerLabel} · ${one.model}${one.available ? "" : " · not configured"}`}
         checked={first?.provider === one.provider && first.voice?.name === one.option.name}
-        before={listen(order, one.provider, one.model, one.option.name, one.option.name)}
+        before={listen(order, one.provider, one.model, one.option.name, voiceName(one.option))}
         onSelect={() => choose(one)}
       />)}
     </Group>)}
@@ -271,11 +276,11 @@ export function VoicePage({ settings, role, order, language, apply, onNotify }: 
           hint={accentOf(reader.voice, locale)}
           value={own}
           options={[
-            { value: "", label: `Automatic · ${reader.voice ? shortName(reader.voice.name) : "its own voice"}` },
+            { value: "", label: `Automatic · ${reader.voice ? voiceName(reader.voice) : "its own voice"}` },
             ...voices.map((option) => ({ value: option.name, label: voiceLabel(option) }))
           ]}
           onChange={(name) => chooseBackup(reader, name)}
-        >{listen(order, reader.provider, reader.model, reader.voice?.name ?? null, reader.voice?.name ?? reader.model)}</Select>;
+        >{listen(order, reader.provider, reader.model, reader.voice?.name ?? null, reader.voice ? voiceName(reader.voice) : reader.model)}</Select>;
       })}
     </Group>}
 

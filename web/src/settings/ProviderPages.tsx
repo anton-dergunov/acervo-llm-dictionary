@@ -796,7 +796,7 @@ function VoiceModel({ provider, model, family, write, onOpen, onRemoved, onNotif
           foot="Who reads each language is chosen in Pronunciation.">
           {listedVoices.length === 0 && <Row label="It lists none for this model" />}
           {(all ? listedVoices : listedVoices.slice(0, VOICES_SHOWN)).map((voice) =>
-            <Row key={`${voice.name} ${voice.locale ?? ""}`} label={voice.name} hint={voiceWords(voice)} />)}
+            <Row key={`${voice.name} ${voice.locale ?? ""}`} label={voice.label || voice.name} hint={voiceWords(voice)} />)}
           {!all && listedVoices.length > VOICES_SHOWN && <Action onClick={() => setAll(true)}>Show all {listedVoices.length}</Action>}
         </Group>
         : <Group title="Voices" count={typedVoices.length ? `${typedVoices.length} typed` : undefined}

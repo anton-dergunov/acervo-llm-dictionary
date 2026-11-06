@@ -146,7 +146,7 @@ FAMILIES: tuple[Family, ...] = (
         # tier's speech is three requests a minute per model (measured on Flash-Lite TTS,
         # 6 Nov 2026), and the 429 says when to come back, which the cooldown reads.
         id="gemini-api", label="Gemini API", group="Free to start",
-        hint="Text and voices, with a daily free allowance",
+        hint="Text, and voices that take a direction",
         routes=MappingProxyType({
             "text": Route("litellm", "gemini/"),
             "audio": Route("gemini-tts"),
@@ -260,6 +260,25 @@ FAMILIES: tuple[Family, ...] = (
         usage_url="https://console.cloud.google.com/billing?project={project}",
     ),
     Family(
+        # Voices only. Eleven v3 and v4 take a direction as a free-text tag in square brackets at the
+        # head of the words — ElevenLabs' own guide shows `[Warm, conversational tone]` — so a
+        # direction is a tag here, and an older model (multilingual v2, flash) is a plain voice.
+        #
+        # Facts measured on the free plan, 6 Nov 2026: `wav_24000` is the best master it allows
+        # (44.1 kHz PCM and WAV need Pro, 192 kbps MP3 needs Creator, each refused with a 403), and
+        # every model takes `language_code`. A month's credits spent is a 402
+        # `insufficient_credits`, which is an allowance spent rather than a refusal
+        # (`elevenlabs.py`). The free plan is for non-commercial use, with attribution.
+        id="elevenlabs", label="ElevenLabs", group="Popular",
+        hint="Voices that take a direction",
+        routes=MappingProxyType({"audio": Route("elevenlabs")}),
+        audio=_frozen({"format": "wav_24000"}),
+        timeouts=MappingProxyType({"audio": 30}),
+        lister="elevenlabs",
+        key_url="https://elevenlabs.io/app/settings/api-keys",
+        usage_url="https://elevenlabs.io/app/usage",
+    ),
+    Family(
         id="mistral", label="Mistral", group="Popular", hint="Text",
         routes=_text("mistral/"), json_mode="native",
         list_url="https://api.mistral.ai/v1",
@@ -296,6 +315,21 @@ FAMILIES: tuple[Family, ...] = (
                       hint="Where LM Studio answers"),),
         base_url="{baseUrl}", list_url="{baseUrl}",
         timeouts=MappingProxyType({"text": 60}),
+    ),
+    Family(
+        # Anything that answers OpenAI's speech route: Kokoro-FastAPI (port 8880) and Speaches,
+        # which serves Piper. Kokoro on a Mac's CPU reads a word in about a second (measured,
+        # 6 Nov 2026). Voices are the server's own list; their names say their language.
+        id="speech-server", label="Speech server", group="On your own machines",
+        hint="Kokoro or Piper voices on your computer",
+        credential="optional",
+        routes=MappingProxyType({"audio": Route("openai-speech")}),
+        fields=(Field("baseUrl", "Address", default="http://localhost:8880/v1",
+                      hint="Where the speech server answers"),),
+        base_url="{baseUrl}", list_url="{baseUrl}",
+        audio=_frozen({"format": "wav"}),
+        timeouts=MappingProxyType({"audio": 60}),
+        lister="speech-server",
     ),
     # ── any compatible service ──
     Family(

@@ -217,7 +217,10 @@ export type VoiceMatch = "exact" | "any" | "near" | "main" | "other" | "unstated
 
 /** One voice as its provider's catalogue row declares it. Only the name is certain. */
 export interface VoiceOption {
+  /** What the provider is sent. */
   name: string;
+  /** What the provider calls it, where that is not its name: "Sarah" for `EXAVITQu4vr4xnSDxMaL`. */
+  label?: string | null;
   /** The accent it was made for, `es-ES`; null for a voice that speaks any it is told. */
   locale: string | null;
   gender: "female" | "male" | "neutral" | null;
@@ -337,7 +340,7 @@ export interface ProviderBody {
 }
 
 /** The voices one speech model has. `listed` is false where they are typed on the model. */
-export interface ProviderVoice { name: string; locale?: string; gender?: string; note?: string }
+export interface ProviderVoice { name: string; label?: string; locale?: string; gender?: string; note?: string }
 
 export interface ServerHealth {
   name: string;

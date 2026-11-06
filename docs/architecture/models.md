@@ -58,6 +58,11 @@ The Gemini API's voice list (`GET /v1beta/voices`, about 2,100 voices) is kept t
 the same two kinds. The thirty voices named once (`kore`) speak any language. The rest are made for
 a locale and say so in their id (`es-419-advisor-1`). Latin American Spanish is one locale there, and
 the voice's accent names the country ("Argentina Spanish"), so such a voice is offered as `es-AR`.
+A voice is sent by its `name` and shown by its `label` where the provider's id is not a word anybody
+would read: ElevenLabs sends `EXAVITQu4vr4xnSDxMaL` for the voice it calls Sarah. Its voices speak
+every language their model has, so none carries a locale. A speech server's voices carry theirs in
+their names, by Kokoro's convention (`ef_dora`: Spanish, female) or Piper's (`en_GB-alan-medium`), so
+a language none of its voices speaks is not asked of it.
 
 **Laptop tools** — the scripts, the experiments and the live tests — read a gitignored
 `providers.local.json` in the shape the server stores, with each key inline (`models/local.py`). The
@@ -66,7 +71,9 @@ server never reads it.
 `text()` and `image()` go over LiteLLM, imported lazily so the rate limiter (`models/pacing`) works in
 the worker image, which does not install it. What LiteLLM does not cover is reached by hand:
 Cloudflare's image and audio models (`cloudflare.py`), Cloud Text-to-Speech (`google_tts.py`), the
-Gemini API's speech (`gemini_tts.py`, the Interactions API) and Cloud Vision (`google_vision.py`).
+Gemini API's speech (`gemini_tts.py`, the Interactions API), ElevenLabs (`elevenlabs.py`), a speech
+server on OpenAI's route (`openai_speech.py`: Kokoro, Piper behind Speaches) and Cloud Vision
+(`google_vision.py`).
 Speech never goes through LiteLLM: reached that way, a Gemini voice drops its direction before the
 request is built.
 
@@ -75,6 +82,12 @@ words. It gets a sentence right and a single word wrong: "picar" came back as En
 Hindi (measured on 6 Nov 2026, with a transcriber listening back). So the language always heads the
 direction ("Say this in Spanish."), whatever else the direction says. The free tier allows three
 speech requests a minute per model, and its 429 says when to come back.
+
+ElevenLabs v3 and v4 take a direction as one free-text tag at the head of the words,
+`[Surprised and amused] No me digas.`, and do not read it out (a transcriber listening back heard only
+the sentence). A month's free credits spent is a 402 `insufficient_credits`, which the bare status
+table would call a refusal; the adapter says it as an allowance spent, so the expressive order passes
+to the next voice. The free plan allows `wav_24000` as its best master (6 Nov 2026).
 
 ## The chain
 

@@ -373,7 +373,7 @@ def test_settings_follow_the_default_until_chosen_and_are_per_owner(server, othe
     assert view["languages"] == ["es"]
     plain = {(entry["provider"], entry["model"]): entry for entry in view["orders"]["plain"]}
     assert plain[("google-cloud", "Wavenet")]["voices"]["es"][0] == {
-        "name": "es-ES-Wavenet-F", "locale": "es-ES", "gender": "female", "note": None, "match": "main"}
+        "name": "es-ES-Wavenet-F", "label": None, "locale": "es-ES", "gender": "female", "note": None, "match": "main"}
 
     saved = server.put("/pronunciations/settings", {
         "pregenerate": {"headword": True},

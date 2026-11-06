@@ -52,12 +52,16 @@ class DocumentError(ValueError):
 @dataclass(frozen=True)
 class Voice:
     """One voice. Only the name is required; the rest is for the person choosing — "Kore · female ·
-    firm" — and the locale is its accent, or None for a voice that speaks any locale it is told."""
+    firm" — and the locale is its accent, or None for a voice that speaks any locale it is told.
+
+    `name` is what the provider is sent. `label` is what it calls the voice where the two differ:
+    ElevenLabs sends `EXAVITQu4vr4xnSDxMaL` for the voice it calls Sarah."""
 
     name: str
     locale: str | None = None
     gender: str | None = None
     note: str | None = None
+    label: str | None = None
 
 
 @dataclass(frozen=True)

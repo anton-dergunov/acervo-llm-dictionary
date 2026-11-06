@@ -118,8 +118,9 @@ def provider_view(provider: Provider) -> dict[str, Any]:
 
 
 def _voice_view(voice: Any) -> dict[str, Any]:
-    return {name: value for name, value in (("name", voice.name), ("locale", voice.locale),
-                                            ("gender", voice.gender), ("note", voice.note)) if value}
+    return {name: value for name, value in (("name", voice.name), ("label", voice.label),
+                                            ("locale", voice.locale), ("gender", voice.gender),
+                                            ("note", voice.note)) if value}
 
 
 def _model_view(model: Any) -> dict[str, Any]:

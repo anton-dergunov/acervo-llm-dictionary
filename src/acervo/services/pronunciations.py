@@ -131,8 +131,8 @@ def settings_view(settings: Settings, owner: str) -> dict[str, Any]:
 
 
 def _option(voice: Voice, match: str) -> dict[str, Any]:
-    return {"name": voice.name, "locale": voice.locale, "gender": voice.gender, "note": voice.note,
-            "match": match}
+    return {"name": voice.name, "label": voice.label, "locale": voice.locale, "gender": voice.gender,
+            "note": voice.note, "match": match}
 
 
 def _walk(settings: Settings, owner: str, order: str, language: str, preferences,
