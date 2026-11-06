@@ -159,6 +159,42 @@ providers = Table(
     Column("edited_at", String(24), nullable=False),
 )
 
+# What each model has been asked, one row a UTC day per (provider, model, kind), for Settings ▸
+# Providers ▸ Usage (`docs/architecture/models.md`, "Usage"). Every attempt is counted, not only the
+# one that answered, because a refused request still spends a free one. The server's rather than an
+# owner's, like `providers`, and never replicated, so the composite key is safe for `sync_state`'s
+# reason. "All time" is the sum of the table, which is why nothing deletes from it — not even
+# removing a provider — and why the rotating call log does not limit it.
+model_usage = Table(
+    "model_usage",
+    metadata,
+    # The UTC day, `YYYY-MM-DD`: when Cloudflare's daily allowance resets, and the same for everyone.
+    Column("day", String(10), nullable=False),
+    Column("provider", String(40), nullable=False),
+    Column("model", Text, nullable=False),
+    # What the provider offers the model as: text, image, audio or ocr — never an order's name, so
+    # the text and quick orders spend one model's one allowance.
+    Column("kind", String(8), nullable=False),
+    Column("calls", Integer, nullable=False, default=0),
+    Column("succeeded", Integer, nullable=False, default=0),
+    # {reason: count} for the calls that did not answer, in `acervo.models.Reason`'s words.
+    Column("failures", JSON, nullable=False, default=dict),
+    # Seconds spent on calls that answered. A failure is left out: a timeout measures the bound.
+    Column("seconds", Float, nullable=False, default=0.0),
+    Column("input_tokens", BigInteger, nullable=False, default=0),
+    Column("output_tokens", BigInteger, nullable=False, default=0),
+    Column("characters", BigInteger, nullable=False, default=0),
+    Column("pictures", Integer, nullable=False, default=0),
+    Column("photos", Integer, nullable=False, default=0),
+    # The sum of what LiteLLM priced; null while nothing that day was priced.
+    Column("cost_usd", Float, nullable=True),
+    # The day's last failure, in the provider's own words as redacted where the error was made.
+    Column("last_failure", Text, nullable=True),
+    Column("last_reason", String(16), nullable=True),
+    Column("last_failure_at", String(24), nullable=True),
+    PrimaryKeyConstraint("day", "provider", "model", "kind"),
+)
+
 # How this owner wants sense images drawn. Server state for the same reason `model_selection` is:
 # the drawing happens on the server, so unlike the editor's wrapping preference this cannot live on
 # the device. Never replicated, no `revision`/`deleted`/`edited_by`, and the unique index is safe for

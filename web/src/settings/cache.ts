@@ -29,6 +29,7 @@ const UNREACHABLE = "These settings are on the server, which could not be reache
 
 export const SETTINGS = {
   models: resource("models", () => backendSession.fetchModels(), "Your server could not be reached."),
+  usage: resource("usage", () => backendSession.usage(), "Usage is counted on the server, which could not be reached."),
   rules: resource("rules", () => backendSession.promptRules(), UNREACHABLE),
   images: resource("images", () => backendSession.imageSettings(), UNREACHABLE),
   pronunciations: resource("pronunciations", () => backendSession.pronunciationSettings(), UNREACHABLE),
@@ -48,7 +49,7 @@ export const SETTINGS = {
  * another service, made only by the page that shows it.
  */
 const PREFETCHED = [
-  SETTINGS.models, SETTINGS.rules, SETTINGS.images, SETTINGS.pronunciations,
+  SETTINGS.models, SETTINGS.usage, SETTINGS.rules, SETTINGS.images, SETTINGS.pronunciations,
   SETTINGS.schedule, SETTINGS.anki, SETTINGS.jobs, SETTINGS.clips
 ];
 

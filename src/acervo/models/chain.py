@@ -36,10 +36,11 @@ from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from dataclasses import dataclass, replace
 from typing import Callable, Sequence, TypeVar
 
-from acervo.models import journal
+from acervo.models import journal, usage
 from acervo.models.providers import Provider as Row, Providers
 from acervo.models.cooldown import rests, retry_after_of
 from acervo.models.errors import ChainExhausted, ProviderRefused, ProviderUnavailable
+from acervo.models.results import Spent
 
 Result = TypeVar("Result")
 
@@ -192,7 +193,7 @@ def walk(
     awake = rests.ready([candidate.named for candidate in candidates])
     order = sorted(candidates, key=lambda candidate: candidate.named not in awake)
 
-    walked = _Walk(caller)
+    walked = _Walk(caller, kind)
     if hedge_after is None:
         for candidate in order:
             walked.attempts.append(candidate.named)
@@ -201,6 +202,9 @@ def walk(
                 result = ask(candidate)
             except ProviderUnavailable as error:
                 walked.failed(candidate, error, started)
+            except ProviderRefused as error:
+                walked.refused(candidate, error, started)
+                raise
             else:
                 return walked.answered(candidate, result, started, stamp)
         walked.exhaust()
@@ -213,10 +217,16 @@ IN_FLIGHT = 2
 
 
 class _Walk:
-    """What one walk has tried, what passed it over, and the journal lines for both."""
+    """What one walk has tried, what passed it over, and the journal lines and usage for each.
 
-    def __init__(self, caller: str) -> None:
+    **Every pair asked is reported to `usage`**, the one that answered and every one that did not —
+    a 429 spends a free request too, and a refused key is a call made. The walk is where all of them
+    are seen, so it is where they are reported from.
+    """
+
+    def __init__(self, caller: str, kind: str) -> None:
         self.caller = caller
+        self.kind = kind
         self.attempts: list[tuple[str, str]] = []
         self.passed_over: list[tuple[str, str, str]] = []
         self.labels: dict[str, str] = {}
@@ -226,12 +236,24 @@ class _Walk:
         self.labels[candidate.row.id] = candidate.row.label
         rests.note(candidate.named, error.reason, retry_after=retry_after_of(error))
         self.passed_over.append((*candidate.named, error.reason))
-        journal.passed(self.caller, *candidate.named, error.reason, str(error), time.monotonic() - started)
+        seconds = time.monotonic() - started
+        journal.passed(self.caller, *candidate.named, error.reason, str(error), seconds)
+        _report(self.kind, candidate, self.caller, seconds, error=error)
         self.last = error
+
+    def refused(self, candidate: Candidate, error: ProviderRefused, started: float) -> None:
+        """A pair that refused outright. The walk ends here and the error goes on up unchanged."""
+        seconds = time.monotonic() - started
+        journal.refused(self.caller, *candidate.named, error.reason, str(error), seconds)
+        _report(self.kind, candidate, self.caller, seconds, error=error)
 
     def answered(self, candidate: Candidate, result: Result, started: float, stamp) -> Result:
         rests.succeeded(candidate.named)
-        journal.answered(self.caller, *candidate.named, time.monotonic() - started)
+        seconds = time.monotonic() - started
+        answer = getattr(result, "answer", None)
+        journal.answered(self.caller, *candidate.named, seconds, getattr(answer, "spent", None),
+                         getattr(answer, "cost_usd", None))
+        _report(self.kind, candidate, self.caller, seconds, answer=answer)
         return stamp(result, tuple(self.attempts), tuple(self.passed_over))
 
     def exhaust(self) -> None:
@@ -240,6 +262,21 @@ class _Walk:
         journal.exhausted(self.caller, len(self.attempts), reasons)
         raise ChainExhausted(tuple(self.attempts), self.last, reasons, tuple(self.passed_over),
                              self.labels)
+
+
+def _report(kind: str, candidate: Candidate, caller: str, seconds: float, *,
+            answer=None, error: BaseException | None = None) -> None:
+    """One attempt, to whoever counts them. An answer brings what it used up; a failure, its reason
+    and its sentence. Anything that is not a provider's own error is still a call that failed."""
+    if error is not None:
+        reason = getattr(error, "reason", None) or "refused"
+        usage.report(usage.Attempt(kind, *candidate.named, caller, str(reason), seconds, str(error)))
+        return
+    usage.report(usage.Attempt(
+        kind, *candidate.named, caller, None, seconds,
+        spent=getattr(answer, "spent", None) or Spent(),
+        cost_usd=getattr(answer, "cost_usd", None),
+    ))
 
 
 def _raced(
@@ -276,10 +313,12 @@ def _raced(
                 except ProviderUnavailable as error:
                     walked.failed(candidate, error, started)
                     continue
-                except BaseException:
-                    _abandon(running, walked.caller)
+                except BaseException as error:
+                    if isinstance(error, ProviderRefused):
+                        walked.refused(candidate, error, started)
+                    _abandon(running, walked.caller, walked.kind)
                     raise
-                _abandon(running, walked.caller)
+                _abandon(running, walked.caller, walked.kind)
                 return walked.answered(candidate, result, started, stamp)
             if waiting and not running:
                 start()
@@ -290,19 +329,24 @@ def _raced(
         pool.shutdown(wait=False)
 
 
-def _abandon(running: dict[Future, tuple[Candidate, float]], caller: str) -> None:
-    """Let the losers finish in the background. What they say later is noted, never returned."""
+def _abandon(running: dict[Future, tuple[Candidate, float]], caller: str, kind: str) -> None:
+    """Let the losers finish in the background. What they say later is noted and counted, never
+    returned: a late answer spent its request and its tokens as surely as the one that won."""
     for future, (candidate, started) in running.items():
         def settle(done: Future, candidate: Candidate = candidate, started: float = started) -> None:
             seconds = time.monotonic() - started
             error = done.exception()
             if error is None:
-                journal.late(caller, *candidate.named, "ok", seconds)
+                answer = getattr(done.result(), "answer", None)
+                journal.late(caller, *candidate.named, "ok", seconds, getattr(answer, "spent", None),
+                             getattr(answer, "cost_usd", None))
+                _report(kind, candidate, caller, seconds, answer=answer)
                 return
             reason = getattr(error, "reason", type(error).__name__)
             if isinstance(error, ProviderUnavailable):
                 rests.note(candidate.named, error.reason, retry_after=retry_after_of(error))
             journal.late(caller, *candidate.named, str(reason), seconds)
+            _report(kind, candidate, caller, seconds, error=error)
 
         future.add_done_callback(settle)
     running.clear()

@@ -2,14 +2,17 @@ import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   AcervoApiError,
   backendSession,
+  type Allowance,
   type ModelCatalogue,
   type ModelProvider,
   type ProviderBody,
   type ProviderChange,
   type ProviderFamily,
   type ProviderModel,
-  type ProviderVoice
+  type ProviderVoice,
+  type UsageCounts
 } from "../api";
+import { SETTINGS, useServerSetting } from "./cache";
 import { CloseIcon } from "../icons";
 import { flagOf, languageName, mainRegion } from "../languages";
 import { LanguageSearch } from "./LanguageSearch";
@@ -42,8 +45,8 @@ const VOICES_SHOWN = 6;
 
 /* A sub-page's id carries what it is about as JSON, because a model's id may hold any character —
    `qwen3-235b:free` has a colon. */
-const subId = (kind: string, ...parts: string[]) => `${kind}:${JSON.stringify(parts)}`;
-function parseSub(id: string): { kind: string; parts: string[] } | null {
+export const subId = (kind: string, ...parts: string[]) => `${kind}:${JSON.stringify(parts)}`;
+export function parseSub(id: string): { kind: string; parts: string[] } | null {
   const at = id.indexOf(":");
   if (at < 0) return id === "add-provider" ? { kind: id, parts: [] } : null;
   try { return { kind: id.slice(0, at), parts: JSON.parse(id.slice(at + 1)) as string[] }; }
@@ -53,6 +56,18 @@ function parseSub(id: string): { kind: string; parts: string[] } | null {
 export const ADD_PROVIDER: SubPage = { id: "add-provider", title: "Add a provider" };
 export const providerPage = (provider: ModelProvider): SubPage =>
   ({ id: subId("provider", provider.id), title: provider.label });
+
+/** Usage, of every provider or of one; a model's own usage; and a model's free allowance. Their
+    pages are `UsagePages.tsx`. */
+export const USAGE_PAGES = ["usage", "usage-model", "allowance"];
+export const usagePage = (parent?: SubPage, provider?: string): SubPage =>
+  ({ id: provider ? subId("usage", provider) : subId("usage"), title: "Usage", parent });
+export const usageModelPage = (parent: SubPage, provider: string, kind: string, model: string): SubPage =>
+  ({ id: subId("usage-model", provider, kind, model), title: model, parent });
+export const allowancePage = (parent: SubPage, provider: string, kind: string, model: string): SubPage =>
+  ({ id: subId("allowance", provider, kind, model), title: "Free allowance", parent });
+export const modelPage = (provider: ModelProvider, model: string): SubPage =>
+  ({ id: subId("model", provider.id, model), title: model, parent: providerPage(provider) });
 
 export function host(url: string | null | undefined): string {
   if (!url) return "";
@@ -72,16 +87,57 @@ export function stateOf(provider: ModelProvider): { ok: boolean; words: string }
 }
 
 /** "1M", "10k", "1,000", "500": the figure a free allowance is read in at a glance. */
-function figure(amount: number): string {
+export function figure(amount: number): string {
   if (amount >= 1_000_000 && amount % 100_000 === 0) return `${amount / 1_000_000}M`;
   if (amount >= 10_000 && amount % 100 === 0) return `${amount / 1000}k`;
   return amount.toLocaleString("en-GB");
 }
 
-export function allowanceWords(allowance: ProviderModel["allowance"]): string | null {
-  if (!allowance) return null;
+/** "142", "1.4k", "980k", "1.2M": a count read at a glance, where the exact figure does not matter. */
+export function compact(count: number): string {
+  const short = (value: number, unit: string) => `${value < 10 ? value.toFixed(1).replace(/\.0$/, "") : Math.round(value)}${unit}`;
+  if (count >= 1_000_000) return short(count / 1_000_000, "M");
+  if (count >= 1000) return short(count / 1000, "k");
+  return count.toLocaleString("en-GB");
+}
+
+/** "10 a day", "1M characters a month". */
+export function allowanceAmount(allowance: Allowance): string {
   const unit = allowance.unit === "calls" ? "" : ` ${allowance.unit}`;
-  return `${figure(allowance.amount)}${unit} a ${allowance.per} free`;
+  return `${figure(allowance.amount)}${unit} a ${allowance.per}`;
+}
+
+export function allowanceWords(allowance: ProviderModel["allowance"]): string | null {
+  return allowance ? `${allowanceAmount(allowance)} free` : null;
+}
+
+/** How much of an allowance is gone: "96 of 500 today", or with its unit, "212k of 1M characters
+    this month". Calls go without, as the allowance's own words do. */
+export function gaugeWords(gauge: Allowance & { used: number }, withUnit = false): string {
+  const unit = withUnit && gauge.unit !== "calls" ? ` ${gauge.unit}` : "";
+  return `${compact(gauge.used)} of ${figure(gauge.amount)}${unit} ${gauge.per === "day" ? "today" : "this month"}`;
+}
+
+/** One period's counts over several models: a provider's, from its models'. */
+export function providerTotal(models: { today: UsageCounts; month: UsageCounts; all: UsageCounts }[],
+  period: "today" | "month" | "all"): UsageCounts {
+  return models.reduce<UsageCounts>((sum, model) => {
+    const counts = model[period];
+    return {
+      calls: sum.calls + counts.calls, failed: sum.failed + counts.failed,
+      inputTokens: sum.inputTokens + counts.inputTokens, outputTokens: sum.outputTokens + counts.outputTokens,
+      characters: sum.characters + counts.characters, pictures: sum.pictures + counts.pictures,
+      photos: sum.photos + counts.photos,
+      costUsd: counts.costUsd === null ? sum.costUsd : (sum.costUsd ?? 0) + counts.costUsd
+    };
+  }, { calls: 0, failed: 0, inputTokens: 0, outputTokens: 0, characters: 0, pictures: 0, photos: 0, costUsd: null });
+}
+
+/** "Today: 142 calls · 3 failed", for the row that leads to Usage. */
+export function todayWords(counts: UsageCounts | undefined): string {
+  if (!counts || counts.calls === 0) return "Nothing asked today";
+  const failed = counts.failed ? ` · ${counts.failed.toLocaleString("en-GB")} failed` : "";
+  return `Today: ${counts.calls.toLocaleString("en-GB")} call${counts.calls === 1 ? "" : "s"}${failed}`;
 }
 
 function voiceHint(model: ProviderModel): string {
@@ -103,7 +159,7 @@ function checkedWhen(at: string | null | undefined): string {
 }
 
 /** A provider's models with one of them replaced, or taken away when `next` is null. */
-function withModel(provider: ModelProvider, kind: string, id: string, next: ProviderModel | null) {
+export function withModel(provider: ModelProvider, kind: string, id: string, next: ProviderModel | null) {
   const models = provider.models[kind] ?? [];
   const at = models.findIndex((model) => model.id === id);
   const changed = next === null ? models.filter((model) => model.id !== id)
@@ -112,7 +168,7 @@ function withModel(provider: ModelProvider, kind: string, id: string, next: Prov
 }
 
 /** A model as it is sent: only the fields it has, so "any language" is the absence of a list. */
-function cleanModel(model: ProviderModel): ProviderModel {
+export function cleanModel(model: ProviderModel): ProviderModel {
   const kept: ProviderModel = { id: model.id };
   if (model.direction) kept.direction = true;
   if (model.languages?.length) kept.languages = model.languages;
@@ -122,7 +178,7 @@ function cleanModel(model: ProviderModel): ProviderModel {
 }
 
 /** The two buttons a form ends with. */
-function Buttons({ busy, label, busyLabel = "Checking…", onCancel, onSubmit }: {
+export function Buttons({ busy, label, busyLabel = "Checking…", onCancel, onSubmit }: {
   busy: boolean;
   label: string;
   busyLabel?: string;
@@ -361,6 +417,8 @@ function ProviderView({ provider, family, write, onOpen, onRemoved, onNotify }: 
 
   const switching = mode !== stored;
   const page = providerPage(provider);
+  const { value: usage } = useServerSetting(SETTINGS.usage);
+  const usageToday = usage ? providerTotal(usage.providers.find((one) => one.id === provider.id)?.models ?? [], "today") : undefined;
   const values = draft ?? provider.settings;
 
   /** The models a sign-in can keep: a key reaches no file-only kind, so those go with the file. */
@@ -452,7 +510,7 @@ function ProviderView({ provider, family, write, onOpen, onRemoved, onNotify }: 
         {(provider.models[kind] ?? []).map((model) => kind === "audio"
           ? <Link
             key={model.id} label={model.id} mono hint={voiceHint(model) || undefined}
-            onOpen={() => onOpen({ id: subId("model", provider.id, model.id), title: model.id, parent: page })}
+            onOpen={() => onOpen(modelPage(provider, model.id))}
           />
           : <Row key={model.id} label={model.id} mono hint={allowanceWords(model.allowance) ?? undefined}>
             <button type="button" className="icon-btn" aria-label={`Remove ${model.id}`}
@@ -462,12 +520,13 @@ function ProviderView({ provider, family, write, onOpen, onRemoved, onNotify }: 
           Add a model…
         </Action>
       </Group>)}
-    {provider.usageUrl && <Group>
-      <Row label={host(provider.usageUrl)} hint="Your limits and the bill">
+    <Group>
+      <Link label="Usage" hint={todayWords(usageToday)} onOpen={() => onOpen(usagePage(page, provider.id))} />
+      {provider.usageUrl && <Row label={host(provider.usageUrl)} hint="Your limits and the bill">
         <a className="tb-btn" href={provider.usageUrl} target="_blank" rel="noreferrer noopener"
           aria-label={`Open ${provider.label}’s own page`}>Open</a>
-      </Row>
-    </Group>}
+      </Row>}
+    </Group>
     <Group foot={armed ? "Its key goes too, and every order and voice choice that names it." : undefined}>
       <Action danger disabled={busy === "remove"} onClick={() => {
         if (!armed) { setArmed(true); return; }
@@ -583,6 +642,85 @@ function AddModel({ provider, kind, write, onNotify }: {
   </>;
 }
 
+/* ── a model's free allowance ── */
+
+/** What each kind's allowance is counted in, as its providers meter it. A picture is one call, and a
+    photo one call, so those have one unit; text is metered in requests or in tokens, a voice in
+    characters or in requests. */
+const ALLOWANCE_UNITS: Record<string, { value: string; label: string }[]> = {
+  text: [{ value: "calls", label: "Calls" }, { value: "tokens", label: "Tokens" }],
+  image: [{ value: "pictures", label: "Pictures" }],
+  audio: [{ value: "characters", label: "Characters" }, { value: "calls", label: "Calls" }],
+  ocr: [{ value: "photos", label: "Photos" }]
+};
+/** What a new allowance starts as: the way each kind's free tiers are usually published. */
+const ALLOWANCE_STARTS: Record<string, Omit<Allowance, "amount">> = {
+  text: { unit: "calls", per: "day" },
+  image: { unit: "pictures", per: "day" },
+  audio: { unit: "characters", per: "month" },
+  ocr: { unit: "photos", per: "month" }
+};
+
+/**
+ * A model's free allowance: how much, counted in what, each day or month. Usage measures against it
+ * and does nothing else with it — the provider's own limit is what refuses a call. A voice's is on
+ * its own page; a text, picture or photo model's is reached from its Usage page, since those have
+ * no page of their own.
+ */
+export function AllowanceForm({ provider, kind, model, write, onNotify, onSaved }: {
+  provider: ModelProvider;
+  kind: string;
+  model: ProviderModel;
+  write: Write;
+  onNotify(message: string): void;
+  onSaved?(): void;
+}) {
+  const [draft, setDraft] = useState<{ amount: string; unit: string; per: "day" | "month" } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const start = ALLOWANCE_STARTS[kind] ?? { unit: "calls", per: "day" };
+  const shown = draft ?? {
+    amount: model.allowance ? String(model.allowance.amount) : "",
+    unit: model.allowance?.unit ?? start.unit,
+    per: model.allowance?.per ?? start.per
+  };
+  const offered = ALLOWANCE_UNITS[kind] ?? [{ value: "calls", label: "Calls" }];
+  /* A unit stored some other way is still shown, so opening the page does not quietly change it. */
+  const units = offered.some((one) => one.value === shown.unit)
+    ? offered : [...offered, { value: shown.unit, label: shown.unit[0].toUpperCase() + shown.unit.slice(1) }];
+  const amount = Number(shown.amount);
+
+  async function save() {
+    setBusy(true);
+    const allowance = amount > 0 ? { amount, unit: shown.unit, per: shown.per } : undefined;
+    const answer = await write(() => backendSession.changeProvider(provider.id, {
+      models: withModel(provider, kind, model.id, cleanModel({ ...model, allowance }))
+    }));
+    setBusy(false);
+    if (typeof answer === "string") { onNotify(answer); return; }
+    setDraft(null);
+    onSaved?.();
+  }
+
+  return <>
+    <Group title="Free allowance" aligned
+      foot={provider.usageUrl
+        ? <>Your own limit is on <a href={provider.usageUrl} target="_blank" rel="noreferrer noopener">{host(provider.usageUrl)}</a>. Usage measures against it.</>
+        : "Usage measures against it."}>
+      <TextField label="Amount" value={shown.amount} placeholder="None"
+        onChange={(value) => setDraft({ ...shown, amount: value.replace(/[^0-9]/g, "") })} />
+      {units.length > 1 && <Select label="Counted in" value={shown.unit} options={units}
+        onChange={(value) => setDraft({ ...shown, unit: value })} />}
+      <Select label="Each" value={shown.per}
+        options={[{ value: "day", label: "Day" }, { value: "month", label: "Month" }]}
+        onChange={(value) => setDraft({ ...shown, per: value })} />
+    </Group>
+    {draft && <Buttons
+      busy={busy} label={shown.amount ? "Save" : "Clear"} busyLabel="Saving…"
+      onCancel={() => setDraft(null)} onSubmit={() => void save()}
+    />}
+  </>;
+}
+
 /* ── a voice model ── */
 
 function VoiceModel({ provider, model, family, write, onOpen, onRemoved, onNotify }: {
@@ -598,7 +736,6 @@ function VoiceModel({ provider, model, family, write, onOpen, onRemoved, onNotif
   const [failed, setFailed] = useState<string | null>(null);
   const [all, setAll] = useState(false);
   const [typed, setTyped] = useState("");
-  const [allowance, setAllowance] = useState<{ amount: string; unit: string; per: "day" | "month" } | null>(null);
   const [busy, setBusy] = useState(false);
   const [direction, setDirection] = useState<boolean | null>(null);
   const typedVoices = model.voices ?? [];
@@ -622,14 +759,8 @@ function VoiceModel({ provider, model, family, write, onOpen, onRemoved, onNotif
     return true;
   }
 
-  const page: SubPage = { id: subId("model", provider.id, model.id), title: model.id, parent: providerPage(provider) };
+  const page = modelPage(provider, model.id);
   const languages = model.languages ?? [];
-  const shownAllowance = allowance ?? {
-    amount: model.allowance ? String(model.allowance.amount) : "",
-    unit: model.allowance?.unit ?? "characters",
-    per: model.allowance?.per ?? "month"
-  };
-  const amount = Number(shownAllowance.amount);
   const listedVoices = voices?.listed ? voices.voices : [];
 
   return <>
@@ -656,25 +787,7 @@ function VoiceModel({ provider, model, family, write, onOpen, onRemoved, onNotif
         onOpen={() => onOpen({ id: subId("languages", provider.id, model.id), title: "Languages", parent: page })}
       />}
     </Group>
-    <Group title="Free allowance" aligned
-      foot={provider.usageUrl ? <>Your own limit is on <a href={provider.usageUrl} target="_blank" rel="noreferrer noopener">{host(provider.usageUrl)}</a>.</> : undefined}>
-      <TextField label="Amount" value={shownAllowance.amount} placeholder="None"
-        onChange={(value) => setAllowance({ ...shownAllowance, amount: value.replace(/[^0-9]/g, "") })} />
-      <Select label="Counted in" value={shownAllowance.unit}
-        options={[{ value: "characters", label: "Characters" }, { value: "calls", label: "Calls" }]}
-        onChange={(value) => setAllowance({ ...shownAllowance, unit: value })} />
-      <Select label="Each" value={shownAllowance.per}
-        options={[{ value: "day", label: "Day" }, { value: "month", label: "Month" }]}
-        onChange={(value) => setAllowance({ ...shownAllowance, per: value })} />
-    </Group>
-    {allowance && <Buttons
-      busy={busy} label={shownAllowance.amount ? "Save" : "Clear"} busyLabel="Saving…"
-      onCancel={() => setAllowance(null)}
-      onSubmit={() => void save({
-        ...model,
-        allowance: amount > 0 ? { amount, unit: shownAllowance.unit, per: shownAllowance.per } : undefined
-      }).then((done) => { if (done) setAllowance(null); })}
-    />}
+    <AllowanceForm provider={provider} kind="audio" model={model} write={write} onNotify={onNotify} />
     {failed
       ? <Notice>{failed}</Notice>
       : !voices ? <Placeholder rows={3} />

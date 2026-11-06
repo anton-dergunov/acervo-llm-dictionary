@@ -19,9 +19,9 @@ docker exec acervo-server-1 python -m acervo.admin calls            # how long e
 
 | File | Written by | One line per | Read to answer |
 |---|---|---|---|
-| `model-calls.log` | `models/journal.py` | attempt on a provider, and what the caller did with the answer | which provider refused, and how long a call really takes |
+| `model-calls.log` | `models/journal.py` | attempt on a provider, what it used up, and what the caller did with the answer | which provider refused, and how long a call really takes |
 | `jobs.log` | `work/journal.py` | job start, step outcome, job end | why a job failed |
-| `activity.log` | `activity.py` | request refused, chat proposal the device would not apply, media file removed, a provider added, changed, checked or removed, server start and stop | why was I told no, and what was running when |
+| `activity.log` | `activity.py` | request refused, chat proposal the device would not apply, media file removed, a provider added, changed, checked or removed, a model call that could not be counted, server start and stop | why was I told no, and what was running when |
 
 They are separate files because they are read for different questions and written at very different
 rates; mixing them makes every `grep` worse. All three keep the same shape:
@@ -110,6 +110,10 @@ that spends nothing, and its line carries the provider's own sentence, redacted,
 kind: `grep "provider check" activity.log` answers "why would it not take my key", and `admin log
 --failed` shows a refused one. A stored provider that can no longer be read is a `provider unreadable`
 line, since nothing should produce one.
+
+**A model call that could not be counted** for Usage is a `usage not counted` line naming the
+provider, model, kind and caller, with the sentence the write failed with. The call itself still
+answers: losing a count is the smaller loss ([`models.md`](models.md), "Usage").
 
 **The server starting and stopping**, with its version and build — which is how a deploy is recorded,
 and what answers "what changed before this broke". The installer does not write into a file the

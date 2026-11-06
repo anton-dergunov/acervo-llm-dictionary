@@ -222,7 +222,7 @@ Three rules they share:
   attestation, or an image prompt's sense, must also belong to the same lexeme. An id already held by
   another owner is refused as `id_conflict`, never overwritten.
 - **No uniqueness constraints on replicated collections.** Server-only tables that never replicate —
-  `sync_state`, `model_selection`, `jobs`, `loop_scripts`, `providers` — are exempt.
+  `sync_state`, `model_selection`, `jobs`, `loop_scripts`, `providers`, `model_usage` — are exempt.
 - **A vocabulary language is a record, not a table in the code.** `languages.ts` derives only names
   and flags, from the platform's locale data.
 - **Any change to a replicated record's shape bumps `LOCAL_SCHEMA_VERSION`** in `repository.ts`, and a

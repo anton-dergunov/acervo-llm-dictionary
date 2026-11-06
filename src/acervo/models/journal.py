@@ -52,8 +52,27 @@ def excerpt(text: str, limit: int = EXCERPT) -> str:
     return flattened if len(flattened) <= limit else flattened[:limit] + "…"
 
 
-def answered(caller: str, provider: str, model: str, seconds: float) -> None:
-    logger.info("%s %s:%s ok in %.2fs", caller, provider, model, seconds)
+def spent(units: object = None, cost_usd: float | None = None) -> str:
+    """What an answer used up, as `key=value` after the duration — ` in=812 out=95 cost=0.0001`.
+
+    The call log is the per-call record of what Usage adds up, so it carries the same units. Empty
+    ones are left out, so a call nobody metered reads exactly as it did before. `units` is a
+    `results.Spent`, read by attribute so this module stays the bottom of the package.
+    """
+    pairs = [
+        (label, getattr(units, name, 0))
+        for label, name in (("in", "input_tokens"), ("out", "output_tokens"),
+                            ("characters", "characters"), ("pictures", "pictures"), ("photos", "photos"))
+    ]
+    words = [f"{label}={value}" for label, value in pairs if value]
+    if cost_usd:
+        words.append(f"cost={cost_usd:.6g}")
+    return "".join(f" {word}" for word in words)
+
+
+def answered(caller: str, provider: str, model: str, seconds: float, units: object = None,
+             cost_usd: float | None = None) -> None:
+    logger.info("%s %s:%s ok in %.2fs%s", caller, provider, model, seconds, spent(units, cost_usd))
 
 
 def passed(caller: str, provider: str, model: str, reason: str, detail: str, seconds: float) -> None:
@@ -69,9 +88,19 @@ def passed(caller: str, provider: str, model: str, reason: str, detail: str, sec
     logger.warning("%s %s:%s %s after %.2fs — %s", caller, provider, model, reason, seconds, detail)
 
 
-def late(caller: str, provider: str, model: str, outcome: str, seconds: float) -> None:
-    """A raced pair that finished after another had already answered. Its outcome changed nothing."""
-    logger.info("%s %s:%s late %s after %.2fs", caller, provider, model, outcome, seconds)
+def refused(caller: str, provider: str, model: str, reason: str, detail: str, seconds: float) -> None:
+    """One pair that refused, which ends the walk: a rejected key or a request the provider will not
+    take. The same shape as `passed`, so `summarise` counts it as a failure, and at `error`, because
+    nothing behind it in the order was asked."""
+    logger.error("%s %s:%s %s after %.2fs — %s", caller, provider, model, reason, seconds, detail)
+
+
+def late(caller: str, provider: str, model: str, outcome: str, seconds: float, units: object = None,
+         cost_usd: float | None = None) -> None:
+    """A raced pair that finished after another had already answered. Its outcome changed nothing,
+    but what it used up was used up all the same."""
+    logger.info("%s %s:%s late %s after %.2fs%s", caller, provider, model, outcome, seconds,
+                spent(units, cost_usd))
 
 
 def exhausted(caller: str, attempts: int, reasons: tuple[str, ...]) -> None:

@@ -5,11 +5,16 @@ import {
   type ModelChain,
   type ModelPair,
   type ModelProvider,
-  type ProviderChange
+  type ProviderChange,
+  type UsageReadout
 } from "../api";
 import { refresh, SETTINGS, useServerSetting } from "./cache";
 import { Action, Group, Link, Notice, Placeholder, Reorder, Row, StateMark, useSubPage } from "./kit";
-import { ADD_PROVIDER, KIND_TITLES, ProviderSubPage, providerPage, stateOf, type Write } from "./ProviderPages";
+import {
+  ADD_PROVIDER, gaugeWords, KIND_TITLES, parseSub, ProviderSubPage, providerPage, stateOf, todayWords, USAGE_PAGES,
+  usagePage, type Write
+} from "./ProviderPages";
+import { UsageSubPage } from "./UsagePages";
 import { useState } from "react";
 
 /**
@@ -64,9 +69,18 @@ function orderedPairs(offered: ModelPair[], chosen: ModelPair[]): ModelPair[] {
   return [...picked, ...offered.filter((one) => !picked.some((pair) => same(pair, one)))];
 }
 
-function ModelRow({ pair, provider, on, first, last, onToggle, onMove }: {
+/** How much of a pair's free allowance is gone, in the words Usage uses, or nothing without one. */
+function spentOf(usage: UsageReadout | undefined, pair: ModelPair, offers: string): string | undefined {
+  const model = usage?.providers.find((group) => group.id === pair.provider)?.models
+    .find((one) => one.kind === offers && one.model === pair.model);
+  return model?.gauge ? gaugeWords(model.gauge, true) : undefined;
+}
+
+function ModelRow({ pair, provider, spent, on, first, last, onToggle, onMove }: {
   pair: ModelPair;
   provider: ModelProvider | undefined;
+  /** "96 of 500 today": the same figure Usage shows. */
+  spent?: string;
   on: boolean;
   first: boolean;
   last: boolean;
@@ -79,7 +93,8 @@ function ModelRow({ pair, provider, on, first, last, onToggle, onMove }: {
      belong to any of several logins, where a key belongs to whoever holds it. */
   /* Unavailable keeps its place in the order and is passed over; the badge says so, the hint why. */
   const hint = missing ? provider?.reason ?? undefined
-    : provider?.credential.account ? `Billed to ${provider.credential.account}` : undefined;
+    : [spent, provider?.credential.account ? `Billed to ${provider.credential.account}` : null]
+      .filter(Boolean).join(" · ") || undefined;
   return <div className={`pref-row model-row${missing ? " unavailable" : ""}`}>
     <input
       type="checkbox" role="switch" className="toggle" checked={on}
@@ -95,12 +110,13 @@ function ModelRow({ pair, provider, on, first, last, onToggle, onMove }: {
   </div>;
 }
 
-function KindSection({ kind, offers, label, hint, catalogue, onChange }: {
+function KindSection({ kind, offers, label, hint, catalogue, usage, onChange }: {
   kind: string;
   offers: string;
   label: string;
   hint: string;
   catalogue: ModelCatalogue;
+  usage: UsageReadout | undefined;
   onChange(kind: string, pairs: ModelPair[] | null): void;
 }) {
   const chain: ModelChain | undefined = catalogue.chains[kind];
@@ -159,6 +175,7 @@ function KindSection({ kind, offers, label, hint, catalogue, onChange }: {
         key={`${pair.provider} ${pair.model}`}
         pair={pair}
         provider={providers.get(pair.provider)}
+        spent={spentOf(usage, pair, offers)}
         on={at >= 0}
         first={at <= 0}
         last={at < 0 || at === live.length - 1}
@@ -202,6 +219,7 @@ const failure = (error: unknown, fallback: string) =>
 export default function ModelPanel({ onNotify }: { onNotify(message: string): void }) {
   const { sub, open, close } = useSubPage();
   const { value: catalogue, error, set } = useServerSetting(SETTINGS.models);
+  const { value: usage } = useServerSetting(SETTINGS.usage);
   const [working, setWorking] = useState(false);
 
   /** One write, and the server's answer replaces what is shown — never this client's optimism. */
@@ -216,12 +234,14 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
   }
 
   /** A provider write: the readout it answers replaces the cached one, orders and all. Voice
-      choices live on Pronunciation's settings, and losing a model can change them too. */
+      choices live on Pronunciation's settings, and losing a model can change them too; an
+      allowance is what Usage's gauges measure against. */
   const write: Write = async (call: () => Promise<ProviderChange>) => {
     try {
       const answer = await call();
       set(answer);
       void refresh(SETTINGS.pronunciations).catch(() => undefined);
+      void refresh(SETTINGS.usage).catch(() => undefined);
       return answer;
     } catch (error) {
       return failure(error, "The server could not be reached, so nothing changed.");
@@ -229,7 +249,9 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
   };
 
   if (!catalogue) return error ? <Notice>{error}</Notice> : <Placeholder rows={4} />;
-  if (sub) return <ProviderSubPage sub={sub} catalogue={catalogue} write={write} open={open} close={close} onNotify={onNotify} />;
+  if (sub) return USAGE_PAGES.includes(parseSub(sub.id)?.kind ?? "")
+    ? <UsageSubPage sub={sub} catalogue={catalogue} write={write} open={open} onNotify={onNotify} />
+    : <ProviderSubPage sub={sub} catalogue={catalogue} write={write} open={open} close={close} onNotify={onNotify} />;
 
   const refused = catalogue.providers.filter((provider) => provider.check?.ok === false && provider.check.reason === "authentication");
   return <div className="pref-stack" aria-busy={working}>
@@ -241,8 +263,11 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
       <button type="button" className="pref-link-inline" onClick={() => open(providerPage(provider))}>Replace the key</button>
     </Notice>)}
     <ProviderList providers={catalogue.providers} onOpen={(provider) => open(providerPage(provider))} onAdd={() => open(ADD_PROVIDER)} />
+    {catalogue.providers.length > 0 && <Group>
+      <Link label="Usage" hint={todayWords(usage?.totals.today)} onOpen={() => open(usagePage())} />
+    </Group>}
     {KINDS.map((entry) => <KindSection
-      key={entry.id} {...entry} kind={entry.id} catalogue={catalogue}
+      key={entry.id} {...entry} kind={entry.id} catalogue={catalogue} usage={usage}
       onChange={(kind, pairs) => void save(kind, pairs)}
     />)}
   </div>;

@@ -28,7 +28,7 @@ from typing import Any, Mapping, Sequence
 
 from acervo.models.errors import RETRYABLE, ProviderRefused, ProviderUnavailable, Reason
 from acervo.models.providers import Provider as Row
-from acervo.models.results import Answer, AudioResult, ImageResult, OcrResult, TextResult
+from acervo.models.results import Answer, AudioResult, ImageResult, OcrResult, Spent, TextResult
 
 # **Both of these are set from the call log, not from feel** — run `python -m acervo.admin calls`
 # and they can be argued with. Across every call that deployment has recorded, the slowest answer of
@@ -168,7 +168,8 @@ def _transport(row: Row, kind: str) -> dict[str, Any]:
     return {"num_retries": 0, "max_retries": 0, **row.transport(kind)}
 
 
-def _answer(row: Row, model: str, started: float, response: Any, warnings: Sequence[str] = ()) -> Answer:
+def _answer(row: Row, model: str, started: float, response: Any, warnings: Sequence[str] = (),
+            spent: Spent = Spent()) -> Answer:
     return Answer(
         provider_id=row.id,
         model=model,
@@ -176,7 +177,24 @@ def _answer(row: Row, model: str, started: float, response: Any, warnings: Seque
         cost_usd=_cost(response),
         warnings=tuple(warnings),
         attempts=((row.id, model),),
+        spent=spent,
     )
+
+
+def _tokens(response: Any, **counted: int) -> Spent:
+    """The tokens LiteLLM's `usage` reports, beside whatever the caller counted itself.
+
+    Read defensively, like `_cost`: a local model or a Cloudflare adapter reports no usage at all,
+    and a count that cannot be read is zero rather than a failed call.
+    """
+    usage = getattr(response, "usage", None)
+
+    def read(name: str) -> int:
+        value = usage.get(name) if isinstance(usage, dict) else getattr(usage, name, None)
+        return value if isinstance(value, int) and not isinstance(value, bool) and value > 0 else 0
+
+    return Spent(input_tokens=read("prompt_tokens") or read("input_tokens"),
+                 output_tokens=read("completion_tokens") or read("output_tokens"), **counted)
 
 
 def _cost(response: Any) -> float | None:
@@ -256,7 +274,8 @@ def text(
             parsed = json.loads(body)
         except ValueError:
             parsed = None
-    return TextResult(text=body, parsed=parsed, answer=_answer(row, model, started, response))
+    return TextResult(text=body, parsed=parsed,
+                      answer=_answer(row, model, started, response, spent=_tokens(response)))
 
 
 def image(
@@ -292,7 +311,8 @@ def image(
         from acervo.models import cloudflare
 
         data, mime = cloudflare.image(row, model, prompt, seed=seed, size=size, timeout=timeout)
-        return ImageResult(data=data, mime=mime, answer=_answer(row, model, started, None, warnings))
+        return ImageResult(data=data, mime=mime,
+                           answer=_answer(row, model, started, None, warnings, Spent(pictures=1)))
 
     request: dict[str, Any] = {
         "prompt": prompt,
@@ -342,7 +362,7 @@ def image(
     return ImageResult(
         data=base64.b64decode(encoded),
         mime="image/png",
-        answer=_answer(row, model, started, response, warnings),
+        answer=_answer(row, model, started, response, warnings, _tokens(response, pictures=1)),
     )
 
 
@@ -393,7 +413,7 @@ def _image_with_references(prompt: str, row: Row, model: str, size: tuple[int, i
     mime = header.removeprefix("data:").split(";", 1)[0] or "image/png"
     return ImageResult(
         data=base64.b64decode(encoded), mime=mime,
-        answer=_answer(row, model, started, response, warnings),
+        answer=_answer(row, model, started, response, warnings, _tokens(response, pictures=1)),
     )
 
 
@@ -450,7 +470,8 @@ def speech(
         row, model, words, language=language, voice=voice, style=style, timeout=timeout
     )
     return AudioResult(
-        data=data, mime=audio_mime(data), answer=_answer(row, model, started, None, warnings),
+        data=data, mime=audio_mime(data),
+        answer=_answer(row, model, started, None, warnings, Spent(characters=len(words))),
         voice=voice,
     )
 
@@ -488,5 +509,5 @@ def ocr(
     )
     return OcrResult(
         words=tuple(words), width=width, height=height, language=language,
-        answer=_answer(row, model, started, None),
+        answer=_answer(row, model, started, None, spent=Spent(photos=1)),
     )

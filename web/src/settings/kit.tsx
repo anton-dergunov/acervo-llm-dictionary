@@ -175,15 +175,18 @@ export function Choice({ label, hint, checked, before, onSelect }: {
 }
 
 /** Two or three choices, side by side; the hint is the chosen one's, so it says what it means. */
-export function Segmented<T extends string>({ label, value, options, onChange }: {
+export function Segmented<T extends string>({ label, value, options, labelHidden = false, onChange }: {
   label: string;
   value: T;
   options: { value: T; label: string; hint?: string }[];
+  /** The choices say what they are on their own — Today, This month — so the label is only read
+      out, not shown. */
+  labelHidden?: boolean;
   onChange(value: T): void;
 }) {
   const chosen = options.find((option) => option.value === value);
   return <div className="pref-row stack">
-    <Text label={label} hint={chosen?.hint} />
+    {!labelHidden && <Text label={label} hint={chosen?.hint} />}
     <div className="seg" role="radiogroup" aria-label={label}>
       {options.map((option) => <button
         key={option.value} type="button" role="radio" aria-checked={option.value === value}

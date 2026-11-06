@@ -3306,8 +3306,7 @@ a.tb-btn { text-decoration: none; }
 .pref-state.bad { color: var(--warn); }
 
 /* ── usage ──
-   The mock of Usage in docs/plans/provider-management.md, not yet in web/src/styles.css: these
-   arrive there with the Usage session of that plan, and change together with it from then on. */
+   Settings ▸ Providers ▸ Usage: what each model was asked, and how much of its free allowance is gone. */
 
 /* How much of a free allowance is gone: the figure over a thin bar, in the warning colour from 90%. */
 .pref-gauge { flex: none; width: 150px; display: grid; gap: 5px; justify-items: end; }
@@ -3319,6 +3318,9 @@ a.tb-btn { text-decoration: none; }
 /* On a phone the gauge takes its own line under the model, so a model's name is never broken. */
 @container prefs (max-width: 600px) {
   .pref-row.usage { flex-wrap: wrap; row-gap: 8px; }
+  /* From nothing, so a long model id breaks inside its own line rather than pushing the chevron
+     onto one of its own. */
+  .pref-row.usage > .pref-text { flex-basis: 0; }
   .pref-row.usage > .chev { order: 2; }
   .pref-row.usage > .pref-gauge { order: 3; flex: 1 0 100%; justify-items: start; }
 }

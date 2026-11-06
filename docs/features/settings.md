@@ -129,19 +129,22 @@ so an interface that fails to load cannot strand the Mac on a broken build.
 
 A provider is an account the owner adds — one key, offering models of several kinds — and the page is
 where every one of them is added; there is no file to edit and no deploy
-([`../architecture/models.md`](../architecture/models.md)). The code is `ModelPanel.tsx` for the page
-and `ProviderPages.tsx` for everything under it.
+([`../architecture/models.md`](../architecture/models.md)). The code is `ModelPanel.tsx` for the page,
+`ProviderPages.tsx` for everything under it, and `UsagePages.tsx` for Usage.
 
-- **The page** lists the providers, each with the kinds it has models for and a state mark, then the
-  six orders. A provider whose key was refused is also a notice at the top, with a link to its page:
-  nothing is sent to it until the key works, so it must not be missed while scrolling.
+- **The page** lists the providers, each with the kinds it has models for and a state mark, then a
+  Usage row with today's calls and failures, then the six orders. A pair whose model has a free
+  allowance says under it how much is gone — "96 of 500 today", "212k of 1M characters this month" —
+  the same figure Usage shows. A provider whose key was refused is also a notice at the top, with a
+  link to its page: nothing is sent to it until the key works, so it must not be missed while
+  scrolling.
 - **Add a provider** shows the families this server knows, in the groups the server sends. Choosing one
   opens a short form — a name, the few settings the family asks for, the key — and **Check and add**
   makes one call that spends nothing. A refusal is shown on the form in the provider's own words, and
   nothing is added; a key that works opens the new provider's page, empty.
 - **A provider's page** has its key as its first and last four characters with Replace, what the last
-  check said with Check again, the family's settings, a group per kind with **Add a model…**, a link to
-  the provider's own page for the bill, and Remove. Remove asks for a second press, since the key goes
+  check said with Check again, the family's settings, a group per kind with **Add a model…**, its own
+  Usage row, a link to the provider's own page for the bill, and Remove. Remove asks for a second press, since the key goes
   with it. Google Cloud signs in with a key or a credentials file; the choice says what each reaches,
   and what only the file reaches is hidden while it signs in with a key. The file is chosen or
   **pasted**: gcloud keeps your own sign-in in a hidden folder a file dialog does not show, and an iPad
@@ -154,11 +157,27 @@ and `ProviderPages.tsx` for everything under it.
   cannot list a kind at all — Vertex, or Gemini's voices on Cloud Text-to-Speech — the same box takes
   the name. A second "type its name" field beside the search asked for the same name twice.
 - **A voice model** has its own page: whether it takes a direction, the languages it speaks (any, or
-  some, chosen with the language search), a free allowance, and its voices — listed by the provider, or
+  some, chosen with the language search), its free allowance, and its voices — listed by the provider, or
   typed with a link to where the provider lists them. The voices are not heard here: a preview needs a
   language and a sample in it, and a WaveNet list spans every language. They are heard on
   Pronunciation, which is where one is chosen.
 
+- **Usage** is what this server asked of each model ([`../architecture/models.md`](../architecture/models.md),
+  "Usage"): Today, This month or All time; the totals as a row of figures; then a group per provider
+  with a row per model saying its calls, failures and units, and a gauge where it has an allowance,
+  in the warning colour from 90%. A model with nothing in the period is left out unless it has an
+  allowance, whose gauge still says how much is left. A provider no longer on the server keeps its
+  calls, under its id. From a provider's page, Usage shows that provider alone. The foot says the
+  counts are Acervo's and the bill is on the provider's own page.
+- **A model's Usage** says its provider and kind, its free allowance and how fast it answers on
+  average, with **Change**; its last thirty days as figures and a column a day, answered under failed,
+  a line at its daily allowance where that is counted in calls, and the day in words under the pointer
+  or the focus; why calls failed, by reason, in words; and the last failure's sentence and when.
+  **Change** opens a voice's own page, where its allowance already is; a text, picture or photo model
+  has no page of its own, so it opens **Free allowance** alone — the amount, what it is counted in
+  where a kind has a choice (calls or tokens for text, characters or calls for a voice; a picture and
+  a photo are one call each), and whether each day or month.
+
 Every write answers with the whole readout and replaces it, because taking a model or a provider away
 also takes it out of the orders. Pronunciation's settings are read again after one, since its voice
-choices can change too.
+choices can change too, and so is Usage, since an allowance is what its gauges measure against.

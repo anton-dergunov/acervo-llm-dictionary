@@ -118,7 +118,7 @@ const gauge = (used, of, words) => {
   return `<span class="pref-gauge${share >= .9 ? " near" : ""}"><span class="pref-gauge-words">${esc(words)}</span>
     <span class="pref-gauge-track" role="meter" aria-valuemin="0" aria-valuemax="${of}" aria-valuenow="${used}" aria-label="${esc(words)}"><span style="width:${(share * 100).toFixed(1)}%"></span></span></span>`;
 };
-const usageRow = (id, hint, meter = "") => `<button class="pref-row usage" data-sub="usage-model">${modelLabel(id, hint)}${meter}${ICON.chev.replace("<svg", '<svg class="chev"')}</button>`;
+const usageRow = (id, hint, meter = "", to = "usage-model") => `<button class="pref-row usage" data-sub="${to}">${modelLabel(id, hint)}${meter}${ICON.chev.replace("<svg", '<svg class="chev"')}</button>`;
 const figures = (items) => `<section class="pref-group"><div class="pref-card"><div class="pref-figures">${items.map(([n, l]) =>
   `<div class="pref-figure"><span class="pref-figure-n">${esc(n)}</span><span class="pref-figure-l">${esc(l)}</span></div>`).join("")}</div></div></section>`;
 
@@ -475,9 +475,10 @@ const SUBPAGES = {
       select("Languages", "", ["Any language", "Only some…"], "Any language")
     ]),
     group("Free allowance", [
-      field("Calls", "10"),
+      field("Amount", "10"),
+      select("Counted in", "", ["Characters", "Calls"], "Calls"),
       select("Each", "", ["Day", "Month"], "Day")
-    ], `Your own limit is on <a href="#">Google AI Studio</a>. Usage measures against it.`, "", true),
+    ], `Your own limit is on <a href="#">aistudio.google.com</a>. Usage measures against it.`, "", true),
     `<section class="pref-group"><h4>Voices<span class="count">30 listed by Gemini</span></h4><div class="pref-card">${[
       ["Kore", "female · firm"], ["Puck", "male · upbeat"], ["Charon", "male · informative"], ["Aoede", "female · breezy"]
     ].map(([name, hint]) => `<div class="pref-row split">${listen(name)}${text(name, hint)}</div>`).join("")}
@@ -490,7 +491,7 @@ const SUBPAGES = {
     group("", [segmented("", "", ["Today", "This month", "All time"], "Today")]),
     figures([["142", "calls"], ["3", "failed"], ["1.2M", "tokens"], ["18", "pictures"], ["24k", "characters"], ["4", "photos"]]),
     group("Gemini API", [
-      usageRow("gemini-3.5-flash-lite", "96 calls · 980k tokens", gauge(96, 500, "96 of 500 today")),
+      usageRow("gemini-3.5-flash-lite", "96 calls · 980k tokens", gauge(96, 500, "96 of 500 today"), "usage-model-text"),
       usageRow("gemini-3.1-flash-lite", "21 calls · 230k tokens", gauge(21, 500, "21 of 500 today")),
       usageRow("gemini-3.8-flash-tts", "9 calls · 2 failed · 1.4k characters", gauge(9, 10, "9 of 10 today"))
     ]),
@@ -505,15 +506,32 @@ const SUBPAGES = {
     group("ElevenLabs", [usageRow("eleven_v4", "6 calls · 640 characters", gauge(3100, 10000, "3.1k of 10k this month"))],
       "Counted by Acervo. Your provider’s own page has the bill.")
   ] },
+  /* A voice's Change opens its own page, where its allowance already is; any other model has no
+     page, so its Change opens the allowance alone. */
   "usage-model": { parent: "usage", title: "gemini-3.8-flash-tts", render: () => [
-    group("", [row("Gemini API · Expressive voice", "Free allowance 10 a day · answers in 2.4 s on average", button("Change"))]),
+    group("", [row("Gemini API · Voices", "Free allowance 10 a day · answers in 2.4 s on average",
+      `<button class="tb-btn" data-sub="model-tts">Change</button>`)]),
     figures([["214", "calls, 30 days"], ["19", "failed · 9%"], ["31k", "characters"]]),
     `<section class="pref-group"><h4>Last 30 days</h4><div class="pref-card">${chart()}</div></section>`,
     group("Why calls failed", [
       row("Allowance spent", "Gemini said no more today", `<span class="pref-value">17</span>`),
       row("Too slow", "No answer in 30 seconds", `<span class="pref-value">2</span>`)
     ], "A failed call passes to the next voice in the order."),
-    group("Last failure", [row("Quota exceeded for today, retry after 00:00 UTC", "Today, 11:42 · ElevenLabs read it instead")])
+    group("Last failure", [row("Quota exceeded for today, retry after 00:00 UTC", "Today, 11:42")])
+  ] },
+  "usage-model-text": { parent: "usage", title: "gemini-3.5-flash-lite", render: () => [
+    group("", [row("Gemini API · Text", "Free allowance 500 a day · answers in 1.1 s on average",
+      `<button class="tb-btn" data-sub="allowance">Change</button>`)]),
+    figures([["2,870", "calls, 30 days"], ["0", "failed · 0%"], ["29M", "tokens"]]),
+    `<section class="pref-group"><h4>Last 30 days</h4><div class="pref-card">${chart()}</div></section>`
+  ] },
+  allowance: { parent: "usage-model-text", title: "Free allowance", render: () => [
+    group("Free allowance", [
+      field("Amount", "500"),
+      select("Counted in", "", ["Calls", "Tokens"], "Calls"),
+      select("Each", "", ["Day", "Month"], "Day")
+    ], `Your own limit is on <a href="#">aistudio.google.com</a>. Usage measures against it.`, "", true),
+    `<div class="pref-buttons">${button("Cancel")}${button("Save", true)}</div>`
   ] },
   vocabulary: { parent: "vocabularies", title: "Spanish", render: () => [
     group("", [

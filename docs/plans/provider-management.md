@@ -1,10 +1,9 @@
 # Providers: added in Settings, with their keys, and their usage shown
 
-**Status:** designed and agreed with the owner on 5 Nov 2026. **S1, S2 and S5 are built and not
-deployed;** they ship together, since until Settings can add a provider the server has none. What is
-built is described in [`../architecture/models.md`](../architecture/models.md) and
-[`../features/settings.md`](../features/settings.md) §8; this page keeps what is left. The mock-ups in
-`design/ui-prototype/settings.html?page=providers` are the specification for S3 onwards.
+**Status:** designed and agreed with the owner on 5 Nov 2026. **S1, S2, S3 and S5 are built.** What
+is built is described in [`../architecture/models.md`](../architecture/models.md) — Usage included —
+and [`../features/settings.md`](../features/settings.md) §8; this page keeps what is left. The mock-ups
+in `design/ui-prototype/settings.html?page=providers` are the specification for S4 onwards.
 
 ## Why
 
@@ -198,38 +197,11 @@ and a fall-back.
 
 ## Settings ▸ Providers
 
-Built in S2 ([`../features/settings.md`](../features/settings.md) §8). What the mock-ups show and S2 left
-for later:
+Built in S2 and S3 ([`../features/settings.md`](../features/settings.md) §8). What the mock-ups show
+and is left for later:
 
-- **Usage** (S3): the Usage row on the page and on each provider's page, the allowance gauge under a
-  pair in an order, and Usage ▸ model ▸ **Change**, which is where a text, picture or photo model's
-  free allowance is set. A voice model's allowance is already on its own page.
 - **The new families** (S4): ElevenLabs, Azure Speech, a speech server, Draw Things or Forge. "Add a
   provider" lists whatever families the server has, so each appears there when it is built.
-
-## Usage
-
-Per provider and model, Usage shows how many calls were made, how many failed and why, and what they
-spent: tokens for text, pictures, characters for voices, photos. It covers today, the last 7 days,
-the last 30 days and all time. Where an allowance is set, a gauge shows how much of today's or this
-month's is gone. One model's page has the last 30 days as bars, its failures by reason, and the last
-failure's sentence.
-
-- **A never-replicated table of daily counters:**
-  - The key is `(day, provider, model, kind)`.
-  - The counters are calls, succeeded, failed by `Reason`, seconds, input and output tokens,
-    characters, pictures and photos.
-  - It also keeps `cost_usd` where LiteLLM reports it, and the last failure's sentence and time.
-  - "All time" is the sum of the table, so the rotating call log stops limiting it.
-- **Every attempt is counted, not only the one that answered**, because a 429 spends a free request
-  too.
-- **The `models/` package does not write the table.** It reports each attempt to a sink that the
-  binding layer hands it, which keeps `models/` free of Acervo imports. The call log stays the
-  per-call record, and gains the units.
-- **Units come from the answer.** Tokens come from LiteLLM's `usage`. Characters are what was sent to
-  a voice. Pictures and photos are counted.
-- **Cloudflare does not report neurons per call**, so its allowance is entered in pictures or
-  characters, with the arithmetic above.
 
 ## What goes away
 
@@ -271,7 +243,8 @@ picks the orders and voices once more. Nothing reads the old ids.
 2. **S2 · Settings.** *Built, and deploys with S1.* The provider list, Add a provider, the
    provider's sub-page, the key check, and the model and voice pickers from the provider's own lists
    (`GET /providers/{id}/models` and `/voices`).
-3. **S3 · Usage.** The counters, the sink, the route and the two Usage pages.
+3. **S3 · Usage.** *Built* ([`../architecture/models.md`](../architecture/models.md), "Usage"): the
+   counters, the sink, the route and the two Usage pages.
 4. **S4 · New families.** Gemini API TTS, OpenAI-compatible speech (Kokoro first), OpenAI images,
    A1111, ElevenLabs and Azure (plain voices). Each one is tried on Acervo's own prompts before the
    guide recommends it, and every failure it adds shows in `admin log` with its sentence.

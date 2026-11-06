@@ -41,9 +41,11 @@ from acervo.api.routes import (
     session,
     speech,
     stories,
+    usage,
 )
 from acervo.repository.session import open_database
 from acervo.services.models import open_call_log
+from acervo.services.usage import open_usage
 from acervo.settings import Settings
 from acervo.settings import settings as read_settings
 from acervo.work import anki as anki_jobs
@@ -133,6 +135,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # Before the first request, because the first request is the one worth having a record of.
     open_call_log(settings)
     open_activity_log(settings)
+    # Every attempt at a model is counted for Usage from here on (`services/usage.py`).
+    open_usage()
 
     # PocketBase allowed every origin by default; FastAPI sends nothing. The macOS host loads its
     # interface from `acervo://app` and calls the server cross-origin with headers that trigger a
@@ -155,7 +159,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     api = APIRouter(prefix=API_ROOT)
     for module in (health, session, graph, anki, articles, capture, chat, clips, companion, dictionaries,
                    events, images, jobs, languages, loops, mac_release, meaning, models, photo,
-                   pronunciations, providers, reviews, rules, schedule, speech, stories):
+                   pronunciations, providers, reviews, rules, schedule, speech, stories, usage):
         api.include_router(module.router)
     app.include_router(api)
 

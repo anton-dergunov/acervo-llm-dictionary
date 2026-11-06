@@ -4,8 +4,9 @@
 a provider fact found the hard way belongs in its family.** Text, pictures, speech and OCR all go
 through it — `text()`, `image()`, `speech()`, `ocr()` — and every call returns an `Answer` naming the
 (provider, model) pair that **answered**, which under a chain is not knowable before the call. The
-contract is that a record names the model that did the work, not the one asked first. Which providers
-to support next, the Settings pages and usage are [`../plans/provider-management.md`](../plans/provider-management.md).
+contract is that a record names the model that did the work, not the one asked first. Every attempt is
+counted for Usage (below). Which providers to support next is
+[`../plans/provider-management.md`](../plans/provider-management.md).
 
 ---
 
@@ -193,11 +194,47 @@ file ingestion and the job runner retry on exactly `llm_rate_limited`, `llm_unav
 `llm_unreachable` without the package knowing those codes exist. Batch work under `jobs/` may not
 import `repository/`, so it is *given* a chain rather than looking one up.
 
+## Usage
+
+Settings ▸ Providers ▸ Usage ([`../features/settings.md`](../features/settings.md) §8) shows, per
+provider and model, how many calls were made, how many failed and why, and what they used up, against
+the free allowance typed on the model. Five rules shape it:
+
+- **Every attempt is counted, not only the one that answered**, because a 429 spends a free request
+  too. `chain.walk` is where every attempt is seen, so it reports each one: the pair that answered,
+  every pair passed over, a refusal that ends the walk (which also writes a call-log line, where it
+  used to leave none), and a raced pair that finishes after another won. Every server call goes
+  through a walk; the laptop image sweep does not, and nothing counts its calls.
+- **The package reports; it does not count.** `models/usage.py` hands an `Attempt` to the sinks it
+  was given and stops, the rule the call log follows. `services/usage.py` attaches the one sink that
+  writes, when the application starts, and a sink can never fail a call: a count that cannot be
+  written is an `activity.log` line, `usage not counted`, with the sentence
+  ([`observability.md`](observability.md) §3).
+- **Units come from the answer.** `Answer.spent` (`Spent`) carries tokens from LiteLLM's `usage`, the
+  characters sent to a voice, and one picture or one photo per call; `cost_usd` is kept where LiteLLM
+  priced the call. A failed call carries no units — and so an answer refused for its shape
+  (`unusable`, `empty`) counts as a failed call whose tokens are not known.
+- **One row a UTC day per (provider, model, kind)**, in the never-replicated `model_usage` table:
+  calls, those that answered, failures by reason, the seconds of the answered calls (a timeout
+  measures the bound, as the call log's timings argue), the units, the cost and the day's last
+  failure. The day is UTC for everyone — Cloudflare's allowance resets at 00:00 UTC, Gemini's at
+  midnight in California, so its gauge runs some hours off — and "this month" is the UTC calendar
+  month. "All time" is the sum of the table, so the rotating call log does not limit it, and nothing
+  deletes from it: a removed provider's calls are still shown under its id.
+- **An allowance is measured, never enforced.** A gauge is the allowance's own unit over its own
+  period — every attempt for `calls`, tokens in and out for `tokens`, and what was counted for the
+  rest — and the provider's own limit is still what refuses a call. Cloudflare reports no neurons per
+  call, so its allowance is typed in pictures or characters (about 95 FLUX.2 klein pictures a day).
+
+`GET /usage` answers every period, every model's last thirty days and every gauge at once, so the
+pages switch period without asking again.
+
 ## The call log
 
 Every model call is one `key=value` line in a rotating file beside the database
-(`ACERVO_CALL_LOG_PATH`), naming the pair that answered, how long it took and what the caller did with
-the answer. `python -m acervo.admin calls` reads it back per job and per model, and it is where every
+(`ACERVO_CALL_LOG_PATH`), naming the pair that answered, how long it took, what it used up — `in=` and
+`out=` tokens, `characters=`, `pictures=`, `photos=`, `cost=` — and what the caller did with the
+answer. `python -m acervo.admin calls` reads it back per job and per model, and it is where every
 timeout here is set from: a bound is read from the log rather than guessed. Each line ends with the id
 of the request or job that made the call, added where the file is opened — the package itself emits
 and knows nothing of it ([`observability.md`](observability.md) §2).

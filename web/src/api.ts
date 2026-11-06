@@ -71,6 +71,56 @@ export interface ModelProvider {
   usageUrl: string | null;
 }
 
+/** A free allowance, as typed on a model: so many calls, pictures, characters, photos or tokens a
+    day or a month. */
+export type Allowance = NonNullable<ProviderModel["allowance"]>;
+
+/** What was asked of a model over one period. `failed` is part of `calls`: a refused request is a
+    call made, and spends a free one. Units are what answered calls used up. */
+export interface UsageCounts {
+  calls: number;
+  failed: number;
+  inputTokens: number;
+  outputTokens: number;
+  characters: number;
+  pictures: number;
+  photos: number;
+  costUsd: number | null;
+}
+
+/** One model's usage: the three periods, its last thirty UTC days, and how much of its allowance is
+    gone, measured in the allowance's own unit over its own period. */
+export interface UsageModel {
+  model: string;
+  /** What the provider offers it as: text, image, audio or ocr. */
+  kind: string;
+  /** False once the provider no longer offers it: its calls are still counted. */
+  offered: boolean;
+  allowance: Allowance | null;
+  gauge: (Allowance & { used: number }) | null;
+  today: UsageCounts;
+  month: UsageCounts;
+  all: UsageCounts;
+  /** The last thirty days, ending today. */
+  window: UsageCounts;
+  /** Oldest first, ending today. */
+  days: { day: string; succeeded: number; failed: number }[];
+  /** Failed calls by reason, over the last thirty days. */
+  failures: Record<string, number>;
+  /** Mean seconds of the calls that answered, over the last thirty days. */
+  seconds: number | null;
+  lastFailure: { said: string; reason: string | null; at: string | null } | null;
+}
+
+/** `GET /usage`: every period at once, so switching between them asks nothing again. */
+export interface UsageReadout {
+  /** Today, as the server counts days: in UTC. */
+  day: string;
+  totals: { today: UsageCounts; month: UsageCounts; all: UsageCounts };
+  /** In the order the providers were added; one no longer on the server last, `present` false. */
+  providers: { id: string; label: string; present: boolean; models: UsageModel[] }[];
+}
+
 /** A family a provider can be added from, as "Add a provider" offers it. */
 export interface ProviderFamily {
   id: string;
@@ -1391,6 +1441,10 @@ export const backendSession = {
   },
   providerVoices(id: string, model: string): Promise<{ listed: boolean; voices: ProviderVoice[] }> {
     return client.call(`/providers/${encodeURIComponent(id)}/voices?model=${encodeURIComponent(model)}`, {}, false, PROVIDER_TIMEOUT);
+  },
+  /** What this server has asked of each model, against the allowances set on them. */
+  usage(): Promise<UsageReadout> {
+    return client.call<UsageReadout>("/usage");
   },
 
   imageSettings(): Promise<ImageSettings> {

@@ -7,6 +7,20 @@ from typing import Any
 
 
 @dataclass(frozen=True)
+class Spent:
+    """What one answer used up, in the units a provider meters: tokens for text, a picture, the
+    characters sent to a voice, a photo read. Read from the answer itself — tokens from LiteLLM's
+    `usage`, the rest counted — so a provider that reports nothing reads as nothing rather than as a
+    guess. It is what Usage adds up, against the free allowance the owner typed."""
+
+    input_tokens: int = 0
+    output_tokens: int = 0
+    characters: int = 0
+    pictures: int = 0
+    photos: int = 0
+
+
+@dataclass(frozen=True)
 class Answer:
     """Which row answered, how long it took, and what it cost.
 
@@ -29,6 +43,8 @@ class Answer:
     # is otherwise invisible — the entry names who answered, but nothing says who was asked first or
     # why they were passed over, so a provider that is quietly broken looks like one nobody chose.
     passed_over: tuple[tuple[str, str, str], ...] = ()
+    # What this answer used up (`Spent`), for Usage and the call log.
+    spent: Spent = Spent()
 
 
 @dataclass(frozen=True)

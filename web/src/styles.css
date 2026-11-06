@@ -3348,3 +3348,51 @@ a.tb-btn { text-decoration: none; }
 .pref-state.ok svg { color: var(--core); }
 .pref-state.bad svg { color: var(--warn); }
 .pref-state.bad { color: var(--warn); }
+
+/* ── usage ──
+   Settings ▸ Providers ▸ Usage: what each model was asked, and how much of its free allowance is gone. */
+
+/* How much of a free allowance is gone: the figure over a thin bar, in the warning colour from 90%. */
+.pref-gauge { flex: none; width: 150px; display: grid; gap: 5px; justify-items: end; }
+.pref-gauge-words { font-size: 13px; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.pref-gauge-track { width: 100%; height: 4px; border-radius: 2px; background: var(--surface-2); overflow: hidden; }
+.pref-gauge-track > span { display: block; height: 100%; border-radius: 2px; background: var(--core); }
+.pref-gauge.near .pref-gauge-words { color: var(--warn); }
+.pref-gauge.near .pref-gauge-track > span { background: var(--warn); }
+/* On a phone the gauge takes its own line under the model, so a model's name is never broken. */
+@container prefs (max-width: 600px) {
+  .pref-row.usage { flex-wrap: wrap; row-gap: 8px; }
+  /* From nothing, so a long model id breaks inside its own line rather than pushing the chevron
+     onto one of its own. */
+  .pref-row.usage > .pref-text { flex-basis: 0; }
+  .pref-row.usage > .chev { order: 2; }
+  .pref-row.usage > .pref-gauge { order: 3; flex: 1 0 100%; justify-items: start; }
+}
+
+/* Headline figures: a row of numbers, each with what it counts under it. */
+/* Wrapped, the last line's figures stretch to fill it, so no empty cell shows the rule colour. */
+.pref-figures { display: flex; flex-wrap: wrap; gap: 1px; background: var(--rule-soft); }
+.pref-figure { flex: 1 1 140px; display: grid; gap: 2px; padding: 12px 14px; background: var(--surface); }
+.pref-figure-n { font-size: 22px; font-weight: 600; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.pref-figure-l { font-size: 12.5px; color: var(--ink-3); }
+
+/* One model's last thirty days: a stacked column a day, answered under failed, 2px of surface between. */
+.pref-chart { display: grid; gap: 10px; padding: 14px; background: var(--surface); }
+.pref-legend { display: flex; gap: 16px; font-size: 13px; color: var(--ink-2); }
+.pref-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.pref-legend i { width: 10px; height: 10px; border-radius: 3px; }
+.pref-plot { position: relative; height: 150px; border-bottom: 1px solid var(--rule); }
+.pref-grid { position: absolute; left: 22px; right: 0; height: 1px; background: var(--rule-soft); }
+.pref-tick { position: absolute; left: 0; transform: translateY(50%); font-size: 11.5px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.pref-bars { position: absolute; inset: 0 0 0 22px; display: flex; align-items: flex-end; gap: 2px; }
+.pref-bar { flex: 1 1 0; max-width: 24px; height: 100%; display: flex; flex-direction: column-reverse; gap: 2px; cursor: default; outline: none; }
+.pref-bar > span { display: block; flex: none; }
+.pref-bar .end { border-radius: 4px 4px 0 0; }
+.pref-bar.hot > span, .pref-bar:focus-visible > span { filter: brightness(1.15); }
+.seg-ok { background: var(--core); }
+.seg-failed { background: var(--warn); }
+.pref-tip {
+  position: absolute; top: -6px; transform: translate(-50%, -100%); padding: 5px 9px; border-radius: 6px; pointer-events: none;
+  background: var(--ink); color: var(--surface); font-size: 12.5px; white-space: nowrap; box-shadow: var(--shadow);
+}
+.pref-axis { display: flex; justify-content: space-between; padding-left: 22px; font-size: 11.5px; color: var(--ink-3); }
