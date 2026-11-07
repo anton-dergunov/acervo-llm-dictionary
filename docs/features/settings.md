@@ -140,7 +140,9 @@ where every one of them is added; there is no file to edit and no deploy
   scrolling.
 - **Add a provider** shows the families this server knows, in the groups the server sends. Choosing one
   opens a short form — a name, the few settings the family asks for, the key — and **Check and add**
-  makes one call that spends nothing. A refusal is shown on the form in the provider's own words, and
+  makes one call that spends nothing. Where the family has a usual set, **Add the usual models** is
+  on, saying what it adds ("Text, pictures and voices, ready to use"), and the provider starts with
+  them; with a key, what only a credentials file reaches is left out. A refusal is shown on the form in the provider's own words, and
   nothing is added; a key that works opens the new provider's page, empty.
 - **A provider's page** has its key as its first and last four characters with Replace, what the last
   check said with Check again, the family's settings, a group per kind with **Add a model…**, its own

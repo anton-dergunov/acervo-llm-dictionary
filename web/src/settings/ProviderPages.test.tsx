@@ -20,6 +20,9 @@ const FAMILIES: ProviderFamily[] = [
            fields: [{ name: "accountId", label: "Account ID", needed: "always", default: null, hint: "On the Workers AI page", choices: [] }] }),
   family({ id: "google-cloud", label: "Google Cloud", group: "Popular", kinds: ["text", "image", "audio", "ocr"],
            fileOnly: ["text", "image"], credential: "key-or-file",
+           ready: [{ kind: "text", id: "gemini-3.8-flash", fileOnly: true }, { kind: "image", id: "gemini-3.1-flash-lite-image", fileOnly: true },
+                   { kind: "audio", id: "Wavenet", fileOnly: false }, { kind: "audio", id: "gemini-2.5-flash-tts", fileOnly: true },
+                   { kind: "ocr", id: "document-text-detection", fileOnly: false }],
            fields: [
              { name: "project", label: "Project", needed: "file", default: null, hint: null, choices: [] },
              { name: "location", label: "Location", needed: "file", default: "global", hint: null, choices: ["global", "europe-west1"] }
@@ -137,9 +140,12 @@ describe("adding a provider", () => {
     fireEvent.click(screen.getByText("Google Cloud"));
     expect(screen.queryByLabelText("Project")).toBeNull();
     expect(screen.getByText("Reaches voices and reading photos")).toBeInTheDocument();
+    // The usual models a key reaches, and with the file everything.
+    expect(screen.getByText("Voices and reading photos, ready to use")).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole("radio", { name: "Credentials file" }));
     expect(screen.getByText("Reaches text, pictures, voices and reading photos")).toBeInTheDocument();
+    expect(screen.getByText("Text, pictures, voices and reading photos, ready to use")).toBeInTheDocument();
     expect(screen.queryByLabelText("API key")).toBeNull();
     fireEvent.change(screen.getByLabelText("Project"), { target: { value: "example-project" } });
     const file = new File([JSON.stringify({ type: "service_account" })], "acervo.json", { type: "application/json" });
@@ -148,8 +154,23 @@ describe("adding a provider", () => {
     fireEvent.click(screen.getByRole("button", { name: "Check and add" }));
     await waitFor(() => expect(add).toHaveBeenCalledWith({
       family: "google-cloud", label: "Google Cloud", settings: { project: "example-project", location: "global" },
-      credentials: JSON.stringify({ type: "service_account" })
+      credentials: JSON.stringify({ type: "service_account" }), ready: true
     }));
+  });
+
+  it("adds the usual models unless the switch is turned off, and offers none where a family has none", async () => {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
+    const add = vi.spyOn(backendSession, "addProvider").mockResolvedValue(answer([GEMINI, GOOGLE], "google-cloud"));
+    render(<Window />);
+    fireEvent.click(await screen.findByRole("button", { name: "Add a provider…" }));
+    fireEvent.click(screen.getByText("Gemini API"));
+    expect(screen.queryByText(/Add the usual models/)).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    fireEvent.click(await screen.findByText("Google Cloud"));
+    fireEvent.click(screen.getByRole("switch", { name: /Add the usual models/ }));
+    fireEvent.change(screen.getByLabelText("API key"), { target: { value: "test-google-cloud-key-qrstuvwx" } });
+    fireEvent.click(screen.getByRole("button", { name: "Check and add" }));
+    await waitFor(() => expect(add).toHaveBeenCalledWith(expect.objectContaining({ ready: false })));
   });
 });
 

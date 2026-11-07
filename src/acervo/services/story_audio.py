@@ -175,7 +175,7 @@ def _record(settings: Settings, owner: str, segments, language: str, order: str,
         pin = (answered.provider_id, answered.model, spoken.result.voice)
         master, mime = encode.master(spoken.result.data, spoken.result.mime)
         take_store.store(cache, _take_key(text, language, spoken.direction, pin), master, mime)
-        sent = emotional is not None and spoken.direction == emotional
+        sent = speaking.carried(spoken.direction, emotional)
         recordings.append((spoken.result.data, segment.direction if sent else ""))
     return recordings, pin
 

@@ -8,7 +8,7 @@ what it said.
 
 - [`capture-transports.md`](capture-transports.md) — getting a word in from every device.
 - [`backups.md`](backups.md) — scheduled snapshots, an off-machine export, restore drills.
-- [`provider-management.md`](provider-management.md) — providers and keys added in Settings, their usage, and which providers to support.
+- [`expressive-voice.md`](expressive-voice.md) — which free voice reads with feeling first, by ear.
 
 **Study material**
 
@@ -35,6 +35,7 @@ what it said.
 
 - [`first-use/standalone-mac-app.md`](first-use/standalone-mac-app.md) — download, open, use.
 - [`first-use/other-users.md`](first-use/other-users.md) — a few accounts per server, and starter vocabularies.
+- [`first-use/first-run-guide.md`](first-use/first-run-guide.md) — a guide through vocabulary, topics and providers on first use.
 
 **Later, kept on purpose**
 

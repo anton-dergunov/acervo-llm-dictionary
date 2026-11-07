@@ -586,9 +586,9 @@ second kind of lesson exists, and a loop is a thing that repeats, which is both 
 
 ### 17 · What is deliberately not built
 
-- **No Chatterbox, no local model, no GPU** in this integration. A local voice is its own question
-  ([`../plans/provider-management.md`](../plans/provider-management.md)), and the injected-provider seam
-  means trying one later changes nothing here: it would be one more row in the owner's chain.
+- **No Chatterbox, no local model, no GPU** in this integration. A local voice is a provider like any
+  other ([`../providers.md`](../providers.md), "On your own computer"), and the injected-provider seam
+  means it changes nothing here: it is one more row in the owner's chain.
 - **No second provider layer, credential set, rate limiter or cooldown store** — the whole point of
   §2.3.
 - **No compatibility path and no backfill.** A word without a `primaryGloss` is not eligible for a

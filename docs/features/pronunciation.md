@@ -186,5 +186,5 @@ register their pause, and each silences the others before it plays.
   character-metered provider.
 
 Not built, deliberately: speech-to-text, pronunciation assessment (recording the owner and scoring it
-is a product of its own), a second media store, and voices running on the device. Voices running on the
-NAS and other providers are [`../plans/provider-management.md`](../plans/provider-management.md).
+is a product of its own), a second media store, and voices running on the device. A voice on your own
+machine is a provider like the others ([`../providers.md`](../providers.md)).

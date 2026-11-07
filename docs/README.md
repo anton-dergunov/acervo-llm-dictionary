@@ -106,10 +106,9 @@ Even **10,000 fully structured words** with no media are only tens of megabytes.
 - [`ml.md`](ml.md) — a tour of the machine-learning decisions across all of the above.
 
 **Operations** — running it.
+[`providers.md`](providers.md) — the models Acervo calls, and how to add each ·
 [`operations/deployment.md`](operations/deployment.md) ·
-[`operations/vertex-setup.md`](operations/vertex-setup.md) ·
-[`operations/anki-sync.md`](operations/anki-sync.md) ·
-[`operations/cloudflare-workers-ai.md`](operations/cloudflare-workers-ai.md)
+[`operations/anki-sync.md`](operations/anki-sync.md)
 
 **Research** — surveys, measurements and readings that informed the design.
 [`research/similar-projects.md`](research/similar-projects.md) ·

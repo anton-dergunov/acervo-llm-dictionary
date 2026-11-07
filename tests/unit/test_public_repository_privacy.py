@@ -22,7 +22,7 @@ SECRET_SHAPE = re.compile(
 # Placeholder local parts, allowed on any domain.
 #
 # The reserved `.example.com` domains cover almost everything, but not documentation that has to
-# name a *provider* account: `docs/operations/vertex-setup.md` tells the owner to bind an IAM role
+# name a *provider* account: `docs/providers.md` tells the owner to bind an IAM role
 # to their Google login, and `learner@account.example.com` there would be worse than useless — it
 # implies a domain that cannot be a Google account, so a reader would copy something that cannot
 # work. The address has to look like what they will actually type.

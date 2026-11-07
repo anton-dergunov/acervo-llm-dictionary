@@ -115,3 +115,24 @@ def test_only_models_that_speak_are_offered(monkeypatch):
         {"model_id": "eleven_english_sts_v2", "can_do_text_to_speech": False},
     ]))
     assert listing.models(ROW, "audio") == ("eleven_v4",)
+
+
+def test_a_voice_that_reads_a_tag_is_sent_the_emotion_alone_and_nothing_for_an_accent():
+    """Measured: the tag is billed as words are, and an accent tag made a word be said twice."""
+    from pathlib import Path
+
+    from acervo.pronunciation import speak
+
+    root = Path(__file__).resolve().parents[3] / "prompts"
+    style = speak.direction((root / "acervo_pronounce_style.md").read_text(), "surprised and amused", "es-AR")
+    accent = speak.direction((root / "acervo_pronounce_accent.md").read_text(), "", "es-AR")
+    no_voice = lambda *_: None  # noqa: E731
+    assert speak.asked_of(ROW, "eleven_v4", "es-AR", style, no_voice)[1] == "surprised and amused"
+    assert speak.asked_of(ROW, "eleven_v4", "es-AR", accent, no_voice)[1] is None
+    # A voice that reads instructions keeps the whole sentence, accent and all.
+    gemini = provider({"id": "gemini-api", "family": "gemini-api",
+                       "models": {"audio": [{"id": "gemini-3.8-flash-tts", "direction": True}]}},
+                      {"key": "test-gemini-key-abcdefghijklmnop"})
+    sent = speak.asked_of(gemini, "gemini-3.8-flash-tts", "es-AR", style, no_voice)[1]
+    assert sent == style and "Argentina" in sent
+    assert speak.carried("surprised and amused", style) and speak.carried(str(style), style)

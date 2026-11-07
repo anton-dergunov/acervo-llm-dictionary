@@ -252,6 +252,32 @@ def _google_models(provider: "Provider", kind: str) -> tuple[str, ...]:
     ))
 
 
+def ready(provider: "Provider") -> dict[str, list[dict[str, Any]]]:
+    """The family's usual models this provider can have, as a provider document's `models`.
+
+    A kind only a credentials file reaches comes only with the file, and so does a model a key does
+    not reach. A model the provider lists is kept only while its list still holds it; a list that
+    cannot be read keeps the set as it is, since the key was checked a moment ago and the call that
+    needs the model will say in the provider's words if it is gone.
+    """
+    found: dict[str, list[dict[str, Any]]] = {}
+    held: dict[str, tuple[str, ...] | None] = {}
+    for one in provider.family.ready:
+        route = provider.family.routes[one.kind]
+        if not provider.credential.file and (route.file_only or one.id.startswith(route.file_only_models or ("\0",))):
+            continue
+        if one.listed and lists(provider, one.kind):
+            if one.kind not in held:
+                try:
+                    held[one.kind] = models(provider, one.kind)
+                except ProviderError:
+                    held[one.kind] = None
+            if held[one.kind] is not None and one.id not in held[one.kind]:
+                continue
+        found.setdefault(one.kind, []).append(one.document())
+    return found
+
+
 # ── voices ──
 
 

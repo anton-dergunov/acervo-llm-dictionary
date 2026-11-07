@@ -163,7 +163,7 @@ logs join, and what else is written down, is [`observability.md`](observability.
 The always-on machine has no GPU, and the machine with one is not always on. Nothing needs the Mac,
 and no job is handed to another machine: a model running elsewhere — Ollama, a speech server, Draw
 Things — is reached as a provider over HTTP, the way a hosted one is
-([`../plans/provider-management.md`](../plans/provider-management.md)).
+([`../providers.md`](../providers.md), "On your own computer").
 
 ## Prefect
 

@@ -335,9 +335,12 @@ function NewProvider({ family, write, onCancel, onAdded }: {
   const [file, setFile] = useState<{ text: string; name: string } | null>(null);
   const [busy, setBusy] = useState(false);
   const [refused, setRefused] = useState<string | null>(null);
+  const usualKinds = readyKinds(family, mode);
+  const [usual, setUsual] = useState(true);
 
   async function add() {
     const body: ProviderBody = { family: family.id, label: label.trim() || family.label, settings: filled(values, family, mode) };
+    if (usualKinds.length) body.ready = usual;
     if (mode === "file") {
       if (!file) { setRefused("Choose the credentials file first."); return; }
       body.credentials = file.text;
@@ -377,8 +380,26 @@ function NewProvider({ family, write, onCancel, onAdded }: {
       <CredentialsFile hint={file?.name ?? "A service account, or your own sign-in"} button="Choose…"
         onRead={(text, name) => setFile({ text, name })} />
     </Group>}
+    {usualKinds.length > 0 && <Group>
+      <Toggle label="Add the usual models" hint={`${sentence(usualKinds)}, ready to use`} checked={usual} onChange={setUsual} />
+    </Group>}
     <Buttons busy={busy} label="Check and add" onCancel={onCancel} onSubmit={() => void add()} />
   </>;
+}
+
+const KIND_WORDS: Record<string, string> = { text: "text", image: "pictures", audio: "voices", ocr: "reading photos" };
+
+/** The kinds "Add the usual models" adds, signed in this way: a key leaves out what needs a file. */
+function readyKinds(family: ProviderFamily, mode: "key" | "file"): string[] {
+  const kinds = (family.ready ?? []).filter((one) => mode === "file" || !one.fileOnly).map((one) => one.kind);
+  return ["text", "image", "audio", "ocr"].filter((kind) => kinds.includes(kind));
+}
+
+/** "Text, pictures and voices". */
+function sentence(kinds: string[]): string {
+  const words = kinds.map((kind) => KIND_WORDS[kind] ?? kind);
+  const said = words.length > 1 ? `${words.slice(0, -1).join(", ")} and ${words[words.length - 1]}` : words[0];
+  return said.charAt(0).toUpperCase() + said.slice(1);
 }
 
 /* ── a provider's own page ── */

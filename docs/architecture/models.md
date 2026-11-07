@@ -5,8 +5,8 @@ a provider fact found the hard way belongs in its family.** Text, pictures, spee
 through it — `text()`, `image()`, `speech()`, `ocr()` — and every call returns an `Answer` naming the
 (provider, model) pair that **answered**, which under a chain is not knowable before the call. The
 contract is that a record names the model that did the work, not the one asked first. Every attempt is
-counted for Usage (below). Which providers to support next is
-[`../plans/provider-management.md`](../plans/provider-management.md).
+counted for Usage (below). Which providers Acervo supports, and how each is added, is
+[`../providers.md`](../providers.md).
 
 ---
 
@@ -70,6 +70,15 @@ every language their model has, so none carries a locale. A speech server's voic
 their names, by Kokoro's convention (`ef_dora`: Spanish, female) or Piper's (`en_GB-alan-medium`), so
 a language none of its voices speaks is not asked of it.
 
+**A family may carry its usual models** (`Ready` in `families.py`): the models per kind Acervo has
+called through it with its own prompts, which voices take a direction, and the free allowance where
+the provider publishes one. Add a provider offers them with one switch, on by default, and
+`listing.ready` chooses once the key works: a kind or model only a credentials file reaches comes only
+with the file, and a model the provider lists is added only while its list still holds it, so a set
+that ages costs a missing model and never a broken one. The page is the same afterwards; the set is
+where a provider starts, not a mode it is in. Google Cloud's is everything Acervo does, from one
+account, and is what the owner runs.
+
 **Laptop tools** — the scripts, the experiments and the live tests — read a gitignored
 `providers.local.json` in the shape the server stores, with each key inline (`models/local.py`). The
 server never reads it.
@@ -95,6 +104,20 @@ ElevenLabs v3 and v4 take a direction as one free-text tag at the head of the wo
 the sentence). A month's free credits spent is a 402 `insufficient_credits`, which the bare status
 table would call a refusal; the adapter says it as an allowance spent, so the expressive order passes
 to the next voice. The free plan allows `wav_24000` as its best master (6 Nov 2026).
+
+### Left out, and why
+
+- **Hume**: it shut down its speech API on 13 Nov 2026.
+- **Amazon Polly**: its generative engine covers 11 languages, and its free allowance lasts 12 months.
+- **fal, Replicate, Black Forest Labs, Stability**: each needs its own asynchronous adapter, and none
+  has a free tier worth one.
+- **ComfyUI**: A1111's route is far simpler to drive, and Draw Things, Forge and A1111 all answer it.
+- **A local voice that takes a direction** (Qwen3-TTS, CosyVoice 3): realistic on an Apple Silicon Mac
+  and not on the NAS's processor, and neither ships a server. One run behind an OpenAI-style speech
+  server is added as a speech server with `direction` switched on; Acervo does not build or pin it.
+- **OpenAI's own speech and pictures**: the speech-server and LiteLLM image routes reach them, and
+  no family offers them until a call has been made through them; OpenAI retires its speech models on
+  6 Jan 2027.
 
 ## The chain
 

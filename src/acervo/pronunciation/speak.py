@@ -77,7 +77,36 @@ def accented(language: str) -> bool:
     return bool(locales.parse(language).region)
 
 
-def direction(template: str, note: str, language: str) -> str:
+class Direction(str):
+    """A direction: the sentence a voice that reads instructions is sent, carrying the short form a
+    voice that reads a tag in the words is sent instead (`tag`, or None for nothing).
+
+    Two forms because the two kinds of voice differ in what a direction costs and what it can do.
+    Measured on ElevenLabs v4, 6 Nov 2026: the tag is billed character for character, so the
+    136-194 character sentence written for Gemini cost 20-30 times a word; the emotion alone as a
+    tag ("surprised and amused") was heard as clearly as the sentence; and an accent tag changed no
+    accent a transcriber could hear and made a short text be said twice ("picar, picar"). So the
+    tag is the note and nothing else, and an accent alone sends none.
+
+    A `str` so that everything that reads, logs or keys on the sentence goes on doing so.
+    """
+
+    tag: str | None
+
+    def __new__(cls, sentence: str, tag: str | None) -> "Direction":
+        made = super().__new__(cls, sentence)
+        made.tag = tag
+        return made
+
+
+def carried(sent: str | None, direction: str | None) -> bool:
+    """Whether what was sent is this direction, in either of its forms."""
+    if not sent or not direction:
+        return False
+    return sent == direction or sent == getattr(direction, "tag", None)
+
+
+def direction(template: str, note: str, language: str) -> Direction:
     """The template with its blanks filled. `replace` rather than `format`: a direction is free text.
 
     Two names for the same blank, because the same thing is written down twice under two names. An
@@ -89,7 +118,7 @@ def direction(template: str, note: str, language: str) -> str:
     filled = filled.replace("{speaker}", speaker(language))
     region = locales.region_name(locales.parse(language).region)
     filled = filled.replace("{accent}", f"Speak with the accent of {speaker(language)}. " if region else "")
-    return filled.replace("{emotion}", note).replace("{direction}", note)
+    return Direction(filled.replace("{emotion}", note).replace("{direction}", note), note.strip() or None)
 
 
 def asked_of(row, model: str, language: str, style: str | None,
@@ -98,7 +127,7 @@ def asked_of(row, model: str, language: str, style: str | None,
 
     A voice the model does not declare for that language is dropped rather than sent — one picked for
     WaveNet must not reach Gemini, which would refuse it — and a direction reaches only a model that
-    takes one.
+    takes one, in the form its family reads (`Direction`).
 
     One function because it has three callers that must agree exactly: the call itself, and the two
     halves of the take cache. Keying a take on what was *asked for* rather than on what came back is
@@ -106,10 +135,10 @@ def asked_of(row, model: str, language: str, style: str | None,
     """
     offered = row.voices_for(model, language)
     preferred = voice(row.id, model, language)
-    return (
-        preferred if preferred and (not offered or preferred in offered) else None,
-        style if style and row.takes_direction(model) else None,
-    )
+    sent = style if style and row.takes_direction(model) else None
+    if sent is not None and row.family.audio.get("direction") == "tag":
+        sent = getattr(sent, "tag", sent) or None
+    return (preferred if preferred and (not offered or preferred in offered) else None, sent)
 
 
 def speakers(chosen: Sequence[chain.Choice] | None, catalogue: Providers, language: str) -> tuple[chain.Candidate, ...]:

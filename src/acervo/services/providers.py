@@ -75,6 +75,10 @@ def family_view(family: families.Family) -> dict[str, Any]:
         "keyLabel": family.key_label,
         "keyUrl": family.key_url,
         "voicesUrl": family.voices_url,
+        # What "Add the usual models" adds, so the form can say so.
+        "ready": [{"kind": one.kind, "id": one.id, "fileOnly": family.routes[one.kind].file_only
+                   or one.id.startswith(family.routes[one.kind].file_only_models or ("\0",))}
+                  for one in family.ready],
         "fields": [
             {"name": one.name, "label": one.label, "needed": one.needed, "default": one.default,
              "hint": one.hint, "choices": list(one.choices)}
@@ -207,6 +211,9 @@ def add(settings: Settings, body: Mapping[str, Any]) -> dict[str, Any]:
     secret = _secret(body)
     provider = _parsed(document, secret)
     checked = _checked(provider, "added")
+    # "Add the usual models": the family's set, once the key is known to work (`listing.ready`).
+    if body.get("ready") and provider.family.ready and not provider.models:
+        provider = _parsed({**document, "models": listing.ready(provider)}, secret)
     provider_secrets.put(settings, identifier, secret)
     if store.add(identifier, _stored(provider), checked.stored()) is None:
         raise ApiError(409, "provider_exists", f"There is already a provider called {identifier}.")

@@ -16,8 +16,8 @@ deciding:
 
 - how the bundled server, its database and its media live inside a macOS application, and how they are
   backed up;
-- how providers and keys are configured without a deploy — which is the Settings work in
-  [`provider-management.md`](../provider-management.md);
+- how providers and keys are configured without a deploy — which Settings ▸ Providers already does
+  ([`../../providers.md`](../../providers.md));
 - whether the companion services (the corpus, the loop generator, Anki's sync server) come along, are
   optional downloads, or are left out;
 - how a standalone installation later joins a server for sync across devices, if at all.

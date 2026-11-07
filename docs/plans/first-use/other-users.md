@@ -3,8 +3,9 @@
 **Status:** an intention, not scheduled. Acervo has one owner today. This collects what it would take
 for someone else to use it — on their own server, or as a second account on the owner's — so the
 work can start from a page. The standalone application is its own plan
-([`standalone-mac-app.md`](standalone-mac-app.md)); providers and a setup guide for them are
-[`../provider-management.md`](../provider-management.md).
+([`standalone-mac-app.md`](standalone-mac-app.md)); providers and how to add them are
+[`../../providers.md`](../../providers.md), and a first-run guide is
+[`first-run-guide.md`](first-run-guide.md).
 
 ## The size to build for
 
@@ -27,7 +28,8 @@ needs deciding before there is a second account:
   builder already reports progress and raises rather than prints — and is what someone without a
   shell on the server needs.
 - **Provider allowances.** Whose keys a second account spends, and whether one account can exhaust
-  another's free tier, is a question for [`../provider-management.md`](../provider-management.md).
+  another's free tier, is this plan's question: today providers belong to the server, and every
+  account on it spends the same keys ([`../../architecture/models.md`](../../architecture/models.md)).
 
 ## Starting with words already there
 

@@ -156,9 +156,9 @@ Its model directory normally follows the Draw Things application. Override
 Remote jobs require both `--execute-remote` and `--max-cost-usd`. The harness
 checks the configured paid list-price projection before starting any runner:
 
-Credential creation, safe shell configuration, verification, and
-troubleshooting are documented in
-[Cloudflare Workers AI setup](../operations/cloudflare-workers-ai.md).
+Creating the token and finding the account id are in
+[the providers guide](../providers.md#cloudflare-text-pictures-and-an-english-voice). Keep the token
+out of shell history with `read -s "CLOUDFLARE_API_TOKEN?Cloudflare Workers AI token: "`.
 
 ```bash
 export CLOUDFLARE_ACCOUNT_ID="..."

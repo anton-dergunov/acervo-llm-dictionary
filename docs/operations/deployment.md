@@ -448,9 +448,9 @@ No container but the server holds a key. The clip service calls home to the serv
 with the operator token in `secrets.env`, and LexiBeat with a render token.
 
 `python -m acervo.admin providers` in the server container prints the providers, which key each holds
-as its first and last four characters, and what its last check said, spending nothing. Setting Google
-Cloud up — a key, or a credentials file for Vertex, and the organisation policy that blocks creating
-a service-account key — is [`vertex-setup.md`](vertex-setup.md).
+as its first and last four characters, and what its last check said, spending nothing. Setting each
+provider up — Google Cloud's key or credentials file, and the organisation policy that blocks
+creating a service-account key, among them — is [`../providers.md`](../providers.md).
 
 ## Worker operations
 

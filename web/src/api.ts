@@ -135,6 +135,8 @@ export interface ProviderFamily {
   keyUrl: string | null;
   /** Where a model's voices are read, for a provider that cannot list them. */
   voicesUrl: string | null;
+  /** What "Add the usual models" adds. `fileOnly` ones come only with a credentials file. */
+  ready?: { kind: string; id: string; fileOnly: boolean }[];
   fields: { name: string; label: string; needed: "always" | "file" | "never"; default: string | null;
             hint: string | null; choices: string[] }[];
 }
@@ -337,6 +339,8 @@ export interface ProviderBody {
   key?: string;
   /** A Google credentials file, as its text. */
   credentials?: string;
+  /** Add the family's usual models once the key works. */
+  ready?: boolean;
 }
 
 /** The voices one speech model has. `listed` is false where they are typed on the model. */

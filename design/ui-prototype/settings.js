@@ -87,7 +87,7 @@ const reorder = (label, hint, on, badge = "") => `<div class="pref-row">
   <span class="pref-reorder"><button class="icon-btn" aria-label="Move up">${ICON.up}</button><button class="icon-btn" aria-label="Move down">${ICON.down}</button></span></div>`;
 
 /* ── providers and usage ──
-   The mock of docs/plans/provider-management.md: a provider is an account with one key, offering
+   The mock of Settings ▸ Providers (docs/providers.md): a provider is an account with one key, offering
    models of several kinds; Usage counts every call per model, against a free allowance if one is set. */
 const PROVIDERS = {
   "provider-gemini": { label: "Gemini API", kinds: "Text · Voices", state: ["ok", "Works"] },
@@ -413,6 +413,7 @@ const SUBPAGES = {
     ], "", "", true),
     group("Key", [keyField("API token", "Paste the token")],
       `Create a Workers AI token at <a href="#">dash.cloudflare.com</a>. It is kept on your server.`, "", true),
+    group("", [toggle("Add the usual models", "Text, pictures and voices, ready to use", true)]),
     `<div class="pref-buttons">${button("Cancel")}${button("Check and add", true)}</div>`
   ] },
   "provider-gemini": { parent: "providers", title: "Gemini API", render: () => [

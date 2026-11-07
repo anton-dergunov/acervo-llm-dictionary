@@ -79,6 +79,40 @@ class Route:
 
 
 @dataclass(frozen=True)
+class Ready:
+    """A model a family starts a new provider with, when the owner leaves "Add the usual models" on.
+
+    The set is where a provider starts, not a mode it is in: the page is the same afterwards. Each
+    is a model Acervo has called through this family with its own prompts. `listed` says whether the
+    provider's own list names it; one it lists is added only while the list still holds it, so a set
+    that ages costs a missing model and never a broken one. `allowance` is the free allowance where
+    the provider publishes one, for the usage gauge.
+    """
+
+    kind: str
+    id: str
+    direction: bool = False
+    languages: tuple[str, ...] = ()
+    allowance: Mapping[str, Any] | None = None
+    listed: bool = True
+
+    def document(self) -> dict[str, Any]:
+        """The model as a provider document holds it."""
+        found: dict[str, Any] = {"id": self.id}
+        if self.direction:
+            found["direction"] = True
+        if self.languages:
+            found["languages"] = list(self.languages)
+        if self.allowance:
+            found["allowance"] = dict(self.allowance)
+        return found
+
+
+def _per(amount: int, unit: str, per: str) -> Mapping[str, Any]:
+    return MappingProxyType({"amount": amount, "unit": unit, "per": per})
+
+
+@dataclass(frozen=True)
 class Family:
     id: str
     label: str
@@ -118,6 +152,8 @@ class Family:
     # A route that says whether a key works when the model list does not — OpenRouter lists its
     # models to anyone.
     check_url: str | None = None
+    # What "Add the usual models" adds (`Ready`).
+    ready: tuple[Ready, ...] = ()
 
     def serves(self, kind: str) -> bool:
         return kind in self.routes
@@ -156,6 +192,12 @@ FAMILIES: tuple[Family, ...] = (
         }),
         json_mode="native", lister="gemini",
         timeouts=MappingProxyType({"audio": 30}),
+        ready=(
+            Ready("text", "gemini-3.5-flash-lite", allowance=_per(500, "calls", "day")),
+            Ready("text", "gemini-3.1-flash-lite", allowance=_per(500, "calls", "day")),
+            Ready("audio", "gemini-3.8-flash-tts", direction=True),
+            Ready("audio", "gemini-3.8-flash-lite-tts", direction=True),
+        ),
         key_url="https://aistudio.google.com/apikey",
         usage_url="https://aistudio.google.com/rate-limit?timeRange=last-28-days",
     ),
@@ -180,6 +222,11 @@ FAMILIES: tuple[Family, ...] = (
         audio=_frozen({"inputField": "text"}),
         image=_frozen({"size": "native", "seed": "native"}),
         lister="cloudflare",
+        ready=(
+            Ready("text", "@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
+            Ready("image", "@cf/black-forest-labs/flux-2-klein-4b"),
+            Ready("audio", "@cf/deepgram/aura-1", languages=("en",)),
+        ),
         key_url="https://dash.cloudflare.com/profile/api-tokens",
         usage_url="https://dash.cloudflare.com/{accountId}/ai/workers-ai",
         voices_url="https://developers.cloudflare.com/workers-ai/models/?tasks=Text-to-Speech",
@@ -188,6 +235,7 @@ FAMILIES: tuple[Family, ...] = (
         id="groq", label="Groq", group="Free to start", hint="Fast text",
         routes=_text("groq/"), json_mode="native",
         list_url="https://api.groq.com/openai/v1",
+        ready=(Ready("text", "openai/gpt-oss-120b"), Ready("text", "qwen/qwen3.8-27b")),
         key_url="https://console.groq.com/keys",
         usage_url="https://console.groq.com/dashboard/usage",
         timeouts=MappingProxyType({"text": 60}),
@@ -225,7 +273,7 @@ FAMILIES: tuple[Family, ...] = (
     Family(
         # A key reaches Cloud Text-to-Speech and Cloud Vision, which both take one; a credentials
         # file adds Vertex text and pictures, which take nothing else
-        # (`docs/operations/vertex-setup.md`). Location stays `global` by default: the Gemini image
+        # (`docs/providers.md`). Location stays `global` by default: the Gemini image
         # models 404 in a named region.
         #
         # Vertex image facts, each measured against the installed LiteLLM: `response_format` is
@@ -262,6 +310,19 @@ FAMILIES: tuple[Family, ...] = (
         audio=_frozen({"encoding": "LINEAR16",
                        "wire": {"zh-Hans-CN": "cmn-CN", "zh-Hant-TW": "cmn-TW"}}),
         lister="google-cloud",
+        # The set the owner runs: everything Acervo does, from one account. Vertex lists nothing a
+        # key or a file can read cheaply, and Cloud TTS lists no Gemini voice, so those are kept as
+        # they are; the text and pictures, and the Gemini voices, come only with the file.
+        ready=(
+            Ready("text", "gemini-3.8-flash", listed=False),
+            Ready("text", "gemini-3.5-flash", listed=False),
+            Ready("image", "gemini-3.1-flash-lite-image", listed=False),
+            Ready("audio", "Wavenet", allowance=_per(4_000_000, "characters", "month")),
+            Ready("audio", "Chirp3-HD", allowance=_per(1_000_000, "characters", "month")),
+            Ready("audio", "gemini-3.1-flash-tts-preview", direction=True, listed=False),
+            Ready("audio", "gemini-2.5-flash-tts", direction=True, listed=False),
+            Ready("ocr", "document-text-detection", allowance=_per(1000, "photos", "month")),
+        ),
         key_url="https://console.cloud.google.com/apis/credentials",
         usage_url="https://console.cloud.google.com/billing?project={project}",
     ),
@@ -278,9 +339,12 @@ FAMILIES: tuple[Family, ...] = (
         id="elevenlabs", label="ElevenLabs", group="Popular",
         hint="Voices that take a direction",
         routes=MappingProxyType({"audio": Route("elevenlabs")}),
-        audio=_frozen({"format": "wav_24000"}),
+        # `direction: tag`: sent the short form of a direction, which is billed as words are
+        # (`pronunciation/speak.Direction`).
+        audio=_frozen({"format": "wav_24000", "direction": "tag"}),
         timeouts=MappingProxyType({"audio": 30}),
         lister="elevenlabs",
+        ready=(Ready("audio", "eleven_v4", direction=True), Ready("audio", "eleven_v3", direction=True)),
         key_url="https://elevenlabs.io/app/settings/api-keys",
         usage_url="https://elevenlabs.io/app/usage",
     ),
@@ -351,6 +415,7 @@ FAMILIES: tuple[Family, ...] = (
         audio=_frozen({"format": "wav"}),
         timeouts=MappingProxyType({"audio": 60}),
         lister="speech-server",
+        ready=(Ready("audio", "kokoro"),),
     ),
     Family(
         # A Mac drawing with Draw Things, its API server switched on (HTTP, port 7860). It lists
@@ -409,6 +474,7 @@ def find(identifier: str) -> Family:
 def _check() -> None:
     for family in FAMILIES:
         assert family.group in GROUPS, family.id
+        assert all(family.serves(one.kind) for one in family.ready), family.id
         assert family.credential in CREDENTIALS, family.id
         assert family.json_mode in JSON_MODES, family.id
         assert set(family.routes) <= set(KINDS), family.id

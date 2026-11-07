@@ -344,3 +344,66 @@ def test_voices_typed_on_a_model_are_the_ones_shown(server, monkeypatch):
     answer = server.get("/providers/cloudflare/voices?model=@cf/deepgram/aura-1").json()["data"]
     assert answer == {"listed": False, "voices": [{"name": "angus", "gender": "male"}]}
     assert server.get("/providers/cloudflare/voices?model=nonesuch").json()["error"]["code"] == "unknown_model"
+
+
+# ── the usual models ────────────────────────────────────────────────────────
+
+
+def test_the_usual_models_are_added_once_the_key_works_and_only_while_the_provider_lists_them(
+        server, checks, monkeypatch):
+    # Cloudflare's list no longer holds the voice its set names: that one is left out, not added broken.
+    monkeypatch.setattr(listing, "models", lambda provider, kind: {
+        "text": ("@cf/meta/llama-3.3-70b-instruct-fp8-fast",),
+        "image": ("@cf/black-forest-labs/flux-2-klein-4b",),
+        "audio": ("@cf/myshell-ai/melotts",),
+    }[kind])
+    added = changed(server.post("/providers", cloudflare(models={}, ready=True)))
+    assert added["models"] == {
+        "text": [{"id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast"}],
+        "image": [{"id": "@cf/black-forest-labs/flux-2-klein-4b"}],
+    }
+
+
+def test_google_cloud_with_a_key_starts_with_what_a_key_reaches_and_with_the_file_with_everything(
+        server, checks, monkeypatch):
+    monkeypatch.setattr(listing, "models", lambda provider, kind: {
+        "audio": ("Wavenet", "Standard", "Chirp3-HD"), "ocr": ("document-text-detection",)}[kind])
+    keyed = changed(server.post("/providers", {"family": "google-cloud", "id": "google-keyed",
+                                               "key": "test-google-cloud-key-qrstuvwx", "ready": True}))
+    assert {kind: [one["id"] for one in models] for kind, models in keyed["models"].items()} == {
+        "audio": ["Wavenet", "Chirp3-HD"], "ocr": ["document-text-detection"]}
+    assert keyed["models"]["audio"][0]["allowance"] == {"amount": 4_000_000, "unit": "characters", "per": "month"}
+
+    filed = changed(server.post("/providers", {"family": "google-cloud", "id": "google-filed",
+                                               "settings": {"project": "example-project"},
+                                               "credentials": json.dumps(SERVICE_ACCOUNT), "ready": True}))
+    assert [one["id"] for one in filed["models"]["text"]] == ["gemini-3.8-flash", "gemini-3.5-flash"]
+    assert [one["id"] for one in filed["models"]["image"]] == ["gemini-3.1-flash-lite-image"]
+    voices = filed["models"]["audio"]
+    assert [one["id"] for one in voices] == ["Wavenet", "Chirp3-HD", "gemini-3.1-flash-tts-preview",
+                                             "gemini-2.5-flash-tts"]
+    assert [one.get("direction", False) for one in voices] == [False, False, True, True]
+
+
+def test_a_list_that_cannot_be_read_keeps_the_set_and_the_switch_off_adds_nothing(server, checks, monkeypatch):
+    def unreadable(provider, kind):
+        raise ProviderUnavailable("unreachable", "timed out", provider_id=provider.id)
+
+    monkeypatch.setattr(listing, "models", unreadable)
+    added = changed(server.post("/providers", {"family": "gemini-api", "id": "gemini-two",
+                                               "key": GEMINI_KEY, "ready": True}))
+    assert [one["id"] for one in added["models"]["audio"]] == ["gemini-3.8-flash-tts", "gemini-3.8-flash-lite-tts"]
+    assert added["models"]["text"][0] == {"id": "gemini-3.5-flash-lite",
+                                          "allowance": {"amount": 500, "unit": "calls", "per": "day"}}
+    bare = changed(server.post("/providers", {"family": "gemini-api", "id": "gemini-three",
+                                              "key": GEMINI_KEY, "ready": False}))
+    assert bare["models"] == {}
+
+
+def test_add_a_provider_says_what_the_usual_models_are(server):
+    families = {row["id"]: row for row in server.get("/models").json()["data"]["families"]}
+    google = families["google-cloud"]["ready"]
+    assert {"kind": "ocr", "id": "document-text-detection", "fileOnly": False} in google
+    assert {"kind": "text", "id": "gemini-3.8-flash", "fileOnly": True} in google
+    assert {"kind": "audio", "id": "gemini-2.5-flash-tts", "fileOnly": True} in google
+    assert families["openai"]["ready"] == []

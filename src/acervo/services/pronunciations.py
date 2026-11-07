@@ -350,7 +350,7 @@ def pronounce(settings: Settings, owner: str, device: str, route_kind: str, targ
         settings, owner, device, target, existing, clip_id, kept, mime,
         provider_id=result.answer.provider_id, model_id=result.answer.model, voice=result.voice,
         # The emotion only when it was what was sent: an accent alone is a direction too.
-        emotion=target.emotion if emotional and spoken.direction == emotional else None,
+        emotion=target.emotion if speaking.carried(spoken.direction, emotional) else None,
         on_logged=lambda clip, outcome: log(
             started, source=source, clip=clip, result=outcome, failed=outcome != "stored",
             bytes=len(kept), answered=f"{result.mime}:{len(result.data)}",
