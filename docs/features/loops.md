@@ -461,13 +461,41 @@ repository re-measures it on every run, so the pair cannot drift apart.
 
 ### 12 · Words come from what you are looking at
 
-The interface samples N lexeme ids from the scope on screen — this language, this topic, or everything,
+The interface draws N lexeme ids from the scope on screen — this language, this topic, or everything,
 never a word set aside — as a pure selector over the replica, and posts the list. The server never re-derives scope, and the
 route takes ids rather than a query.
 
 That is what made the next step cheap: **choosing words by hand is the same route with a different
 list** — the device's word selection ([`word-selection.md`](word-selection.md)), built with no
 server change.
+
+**The draw is shown before it is sent, and words not used yet come first** (`WordPicker.tsx`,
+`drawOrder` in `selectors.ts`). The dialog lays the drawn words out as chips, each with its ×: a word
+removed is replaced by the next in the order, so the count stays what was asked for, and **Draw
+again**, a labelled button under the chips, passes over every word showing. Both are labelled because
+unlabelled they go unnoticed: a chip that is quietly a button, or a bare ⟳ at the end of the row, reads
+as decoration. Every order first
+sorts the candidates by how many live loops each is already in, fewest first, so each draw deals from
+a deck without putting cards back — every word in scope has its turn before any comes round again,
+and then the least used come first. The count is per kind: a word in a story is still new to loops.
+Within that the owner chooses the order:
+
+- **Random** — a seeded shuffle. It was never biased: thirty draws of twelve from 932 words cover
+  them exactly as often as chance says, so the words that kept coming back were ordinary overlap, which
+  is what putting the unused first removes.
+- **Hard** — Anki's FSRS difficulty, then its lapses ([`anki.md`](anki.md)), the figure the list's
+  "Hardest" sort reads. Use only breaks ties here: going over a hard word again is the point. Until
+  Anki has reviewed anything the option says it needs that history.
+- **Rare** — how common the headword is in the language, as wordfreq's Zipf figure (code Apache-2.0,
+  word lists CC BY-SA 4.0), rarest first. It is a fact about the language, not the record, so it is
+  asked for (`GET /words/rarity?language=`, once a session) rather than replicated; a language with
+  no list — Japanese and Korean, which would need MeCab — is refused by name and the dialog says so.
+- **Newest** — the most recently added.
+- **The selection**, when there is one, sent as chosen.
+
+The order and the count are remembered per kind on this device. Beside the count the dialog says how
+many words in scope are not in a loop yet, and how long the loop will run: the median seconds per word
+of this replica's ready loops of the same format, left out when there are none.
 
 **The style and format catalogues are LexiBeat's**, read from its `schema` route and never copied here
 — the rule [`spoken-clips.md`](spoken-clips.md) §2.10 settled for channels. The dialog offers *Surprise me* or a family
@@ -611,6 +639,14 @@ until the store step replaces both with the new track, so a render that fails ch
 lesson's examples and remarks survive a change of music word for word, every take is found in the
 cache, and new music costs render time and no provider spend. The dialog offers the
 generator's own styles without `auto`, which is the absence of a choice and is called *Surprise me*.
+The kept beds come first, as a row of their own: each its style's picture, its name with the star,
+when it was kept and the loop it came from in plain view, and a button to hear that loop. A kept bed is
+not a style tile with a small star, because one looks like the style it is a piece of and goes unseen. Under them is a strip of pictures one row high — Surprise me, then every style — and **All**
+shows that strip as a grid in place of the dialog's body, each with its sentence (`ChoiceStrip.tsx`).
+The dialog opens on the music last asked for on this device, as it does on the format; a kept bed
+let go or a style no longer offered falls back to Surprise me.
+The pictures are `web/src/art/music/<family>.webp`, drawn once by `scripts/draw_dialog_art.py`; a
+family with none yet gets its initial, so a family LexiBeat adds still appears.
 
 **A kept bed is a `beds` record**, not a flag on the loop: `styleId` and `seed` replay it for any
 words, and `sourceLoopId` outlives the loop it came from. The star in the player writes or tombstones
@@ -629,17 +665,27 @@ safe integer, which is the real constraint.
 
 ### 19 · Formats: chosen in the dialog, written by the owner's text model
 
-**The make dialog offers the formats as cards**, the generator's label in bold and its sentence
-beneath, and the chosen one's switches under it — an on/off switch as a checkbox row, a choice as a
-row of segments ("Times each word is said: 2 3 4"). It opens on the format last made on this device,
-with that format's switches as they were last set: a device fact, like the player's switches. The
-request carries `format` and `switches`, and the server checks both against the schema and refuses a
-format or a switch the generator does not offer by name.
+**The make dialog offers three kinds of loop as tiles** — Drill, Radio lesson, Story — with the chosen
+format's sentence beneath and its options folded into one line that reads them out ("3× · Remarks
+about words · Quiz halfway · Final review"). The four ways of drilling — `classic`, `alternating`,
+`echo` and `review` — are one tile and its variants (Pause to recall, Straight through, Say it back,
+Meaning first), because to a listener they are one kind of loop said four ways, and six cards of equal
+weight were the longest thing in a dialog that had to be scrolled. The grouping is a table of format
+ids in `LoopFormat.tsx` and nothing else: labels and sentences stay the generator's, and a format the
+table does not know gets a tile of its own, so a new format still appears with no change here. An
+on/off switch is a checkbox row, a choice a row of segments. The dialog opens on the format last made
+on this device, with that format's switches as they were last set: a device fact, like the player's
+switches. The request carries `format` and `switches`, and the server checks both against the schema
+and refuses a format or a switch the generator does not offer by name.
+
+The dialog says nothing it does not need to: no intro sentence, no count of eligible words, no
+footnote. Which engine and sample pack the server has is Settings ▸ Loops'; a missing pack is said
+only in place of the button, which it disables.
 
 **A format that needs what this server lacks says so before it is chosen.** A radio lesson requires a
 writer and a loop voice that can mix languages, and falls back to the classic drill without either;
-its card says "Falls back to Classic drill here" and names what to set up and where. A story requires
-a writer and has no fallback, so without one its card is disabled and says why. A loop that fell back
+chosen, it says "Falls back to Classic drill here" and names what to set up and where. A story requires
+a writer and has no fallback, so without one its tile is disabled and says what it needs. A loop that fell back
 anyway — the state changed between asking and rendering — says so beside the player.
 
 **The writer calls home, like the voice.** LexiBeat's injected `Writer` is `AcervoWriter` in

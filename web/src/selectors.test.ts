@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { validateGraph, type LoopCue, type LoopItem, type StudyState } from "./domain";
+import { validateGraph, type Lexeme, type LoopCue, type LoopItem, type StudyState, type VocabularyGraph } from "./domain";
 import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
   formatLabel, heldWord, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
-  storyCandidates, storyEligible, strengthOf, topicOptions, visibleRows, voiceSample, weakestOf
+  storyCandidates, storyEligible, strengthOf, topicOptions, visibleRows, voiceSample, weakestOf,
+  drawOrder, drawWords, hasReviewState, loopSecondsPerWord, usageCounts
 } from "./selectors";
 import { drillCues, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
@@ -470,5 +471,84 @@ describe("what a voice reads when it is auditioned", () => {
     expect(voiceSample(noExamples, "es", "native")?.emotion).toBeNull();
     expect(voiceSample(noExamples, "es", "native")?.text).toBeTruthy();
     expect(voiceSample(noExamples, "fr", "guide")).toBeNull();
+  });
+});
+
+describe("drawing words to make something from", () => {
+  /** The fixture, with four more Spanish words a loop can say, added a day apart. */
+  function wider(): { graph: VocabularyGraph; ids: string[] } {
+    const graph = testGraph();
+    const template = graph.lexemes.find((one) => one.id === "lexemebalsa0001")!;
+    const ids = ["lexemeextra0001", "lexemeextra0002", "lexemeextra0003", "lexemeextra0004"];
+    ids.forEach((id, index) => graph.lexemes.push({
+      ...template, id, headword: `palabra${index}`, lemma: `palabra${index}`,
+      createdAt: `2026-10-0${index + 1}T00:00:00.000Z`
+    }));
+    return { graph, ids };
+  }
+  const ids = (lexemes: Lexeme[]) => lexemes.map((one) => one.id);
+
+  it("counts each word once per live loop, and per kind", () => {
+    const graph = testGraph();
+    expect(usageCounts(graph, "loop")).toEqual(new Map([["lexemepicar0001", 1], ["lexemebalsa0001", 1]]));
+    // Asked of a story still being written counts: the word was chosen for it.
+    expect(usageCounts(graph, "story")).toEqual(new Map([["lexemebalsa0001", 1], ["lexemepicar0001", 2]]));
+    graph.loops.find((one) => one.id === "loopmorning0001")!.deleted = true;
+    expect(usageCounts(graph, "loop").size).toBe(0);
+  });
+
+  it("puts words not used yet first, whatever the seed", () => {
+    const { graph, ids: extra } = wider();
+    const candidates = loopCandidates(graph, query);
+    for (const seed of [1, 7, 99, 12345]) {
+      const order = drawOrder(graph, candidates, { order: "random", usage: usageCounts(graph, "loop"), seed });
+      expect(new Set(ids(order).slice(0, 4))).toEqual(new Set(extra));
+    }
+  });
+
+  it("brings the least used round first once every word has been used", () => {
+    const { graph } = wider();
+    const usage = new Map([["lexemepicar0001", 1], ["lexemebalsa0001", 3], ["lexemeextra0001", 2],
+      ["lexemeextra0002", 1], ["lexemeextra0003", 2], ["lexemeextra0004", 1]]);
+    const order = ids(drawOrder(graph, loopCandidates(graph, query), { order: "random", usage, seed: 3 }));
+    expect(new Set(order.slice(0, 3))).toEqual(new Set(["lexemepicar0001", "lexemeextra0002", "lexemeextra0004"]));
+    expect(order.at(-1)).toBe("lexemebalsa0001");
+  });
+
+  it("orders the unused newest first, and rarest first", () => {
+    const { graph } = wider();
+    const usage = usageCounts(graph, "loop");
+    const candidates = loopCandidates(graph, query);
+    expect(ids(drawOrder(graph, candidates, { order: "newest", usage, seed: 1 })).slice(0, 4))
+      .toEqual(["lexemeextra0004", "lexemeextra0003", "lexemeextra0002", "lexemeextra0001"]);
+    const rarity = { lexemeextra0001: 3.1, lexemeextra0002: 1.2, lexemeextra0003: 4.5, lexemepicar0001: 0.5 };
+    // A word the figures lack goes last among the unused; picar is rarest of all but already used.
+    expect(ids(drawOrder(graph, candidates, { order: "rare", usage, rarity, seed: 1 })).slice(0, 5))
+      .toEqual(["lexemeextra0002", "lexemeextra0001", "lexemeextra0003", "lexemeextra0004", "lexemepicar0001"]);
+  });
+
+  it("orders by Anki's difficulty whether or not the word was used, which only breaks ties", () => {
+    const { graph } = wider();
+    const order = ids(drawOrder(graph, loopCandidates(graph, query), { order: "hard", usage: usageCounts(graph, "loop"), seed: 5 }));
+    // picar (8.4) and la balsa (3.9) are in a loop already, and still come first.
+    expect(order.slice(0, 2)).toEqual(["lexemepicar0001", "lexemebalsa0001"]);
+    expect(hasReviewState(graph, loopCandidates(graph, query))).toBe(true);
+    expect(hasReviewState({ ...graph, studyStates: [] }, loopCandidates(graph, query))).toBe(false);
+  });
+
+  it("passes over the words turned down, and takes them back only when nothing else is left", () => {
+    const { graph } = wider();
+    const order = drawOrder(graph, loopCandidates(graph, query), { order: "newest", usage: new Map(), seed: 1 });
+    const first = ids(drawWords(order, 3, new Set()));
+    const swapped = ids(drawWords(order, 3, new Set([first[1]])));
+    expect(swapped).toEqual([first[0], first[2], ids(order)[3]]);
+    expect(ids(drawWords(order, 6, new Set(ids(order).slice(0, 5))))).toEqual([...ids(order).slice(5), ...ids(order).slice(0, 5)]);
+  });
+
+  it("estimates a loop's length per word from the ready loops of that format", () => {
+    const graph = testGraph();
+    // One ready classic loop: 124.5 seconds over two words.
+    expect(loopSecondsPerWord(graph, "classic")).toBeCloseTo(62.25);
+    expect(loopSecondsPerWord(graph, "radio-lesson")).toBeNull();
   });
 });

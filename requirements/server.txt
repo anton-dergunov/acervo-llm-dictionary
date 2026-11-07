@@ -16,3 +16,10 @@ pydantic-settings
 soundfile
 sqlalchemy>=2
 uvicorn[standard]
+
+# How common a word is (`acervo/frequency/`), for the make dialogs' "Rare" order. wordfreq's code is
+# Apache-2.0 and its word lists CC BY-SA 4.0; its lists for ~40 languages are about 60 MB in the
+# image. `jieba` (MIT) is the tokeniser it reads Chinese with; Japanese and Korean would need MeCab
+# and its dictionaries, which are not installed, so those two are refused by name.
+wordfreq
+jieba

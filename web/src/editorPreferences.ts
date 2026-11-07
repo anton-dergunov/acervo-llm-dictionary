@@ -191,6 +191,46 @@ export function rememberLoopFormat(format: string, switches: Record<string, bool
   } catch { /* a preference, not data */ }
 }
 
+/* The music last asked for, as the make dialog keys it: a favourite, a style, or Surprise me. A
+   device fact for the format's reason; a favourite let go or a style no longer offered is simply not
+   found, and Surprise me stands. */
+
+const LOOP_MUSIC_KEY = "acervo-loop-music";
+
+export function lastLoopMusic(): string | null {
+  try { return localStorage.getItem(LOOP_MUSIC_KEY); } catch { return null; }
+}
+
+export function rememberLoopMusic(key: string): void {
+  try { localStorage.setItem(LOOP_MUSIC_KEY, key); } catch { /* a preference, not data */ }
+}
+
+/* How the make dialogs last drew their words, per kind: the order and how many. A device fact for
+   the format's reason. An order the dialog no longer offers, or a count past what it allows, is
+   simply not used. */
+
+const MAKE_DRAW_KEY = "acervo-make-draw";
+
+export interface RememberedDraw { order?: string; count?: number }
+
+export function lastDraw(kind: "loop" | "story"): RememberedDraw {
+  try {
+    const stored = JSON.parse(localStorage.getItem(MAKE_DRAW_KEY) || "{}") as Record<string, unknown>;
+    const mine = stored[kind] as RememberedDraw | undefined;
+    return mine && typeof mine === "object" ? {
+      order: typeof mine.order === "string" ? mine.order : undefined,
+      count: typeof mine.count === "number" && Number.isFinite(mine.count) ? mine.count : undefined
+    } : {};
+  } catch { return {}; }
+}
+
+export function rememberDraw(kind: "loop" | "story", draw: RememberedDraw): void {
+  try {
+    const stored = JSON.parse(localStorage.getItem(MAKE_DRAW_KEY) || "{}") as Record<string, unknown>;
+    localStorage.setItem(MAKE_DRAW_KEY, JSON.stringify({ ...stored, [kind]: draw }));
+  } catch { /* a preference, not data */ }
+}
+
 /**
  * Whether a list shows its words set aside, remembered per device and for every list at once: they
  * are folded away by default, which is the point of setting them aside.

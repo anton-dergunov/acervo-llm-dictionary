@@ -5,7 +5,7 @@ import AskDock, { type AskOptions, type Detent } from "./AskDock";
 import ReviewBar from "./ReviewBar";
 import MadeBar from "./MadeBar";
 import SelectionBar from "./SelectionBar";
-import type { WordSource } from "./MakeFrom";
+import type { WordSource } from "./WordPicker";
 import { clearSelected, restoreSelected, toggleSelected, useSelectedIds } from "./wordSelection";
 import LoopDialog from "./LoopDialog";
 import LoopView from "./LoopView";
@@ -867,8 +867,9 @@ export default function App() {
         // On the map the bar holds the map's row, so the search box exists only once it has left.
         setSearchSoon(true);
       }
-      // Innermost first: leave what you are composing before leaving the entry it belongs to.
-      if (event.key === "Escape") {
+      // Innermost first: leave what you are composing before leaving the entry it belongs to. A
+      // dialog that answered the key itself has marked it so.
+      if (event.key === "Escape" && !event.defaultPrevented) {
         if (addTab) closeCapture();
         else if (mode === "edit") { setProblems([]); setMode("read"); }
         else if (external) setExternal(null);

@@ -103,3 +103,26 @@ export const ChipIcon = page(<><rect x="6" y="6" width="12" height="12" rx="2" /
 export const PulseIcon = page(<path d="M3.5 12h4l2.5-6 4 12 2.5-6h4" />);
 export const CardsIcon = page(<><rect x="4" y="6.5" width="12" height="14" rx="2" /><path d="M8 3.5h10a2 2 0 0 1 2 2V17" /></>);
 export const ArchiveIcon = page(<><path d="M4 7.5h16v12H4z" /><path d="M3 4h18v3.5H3z" /><path d="M10 11.5h4" /></>);
+
+/* ── the make dialogs ──
+   How words are drawn, the three kinds of loop, and the strip's own controls. */
+/** Surprise me: a die, because the choice is left to chance and says so. */
+export const DiceIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true">
+  <rect x="4" y="4" width="16" height="16" rx="3.5" />
+  <g fill="currentColor" stroke="none"><circle cx="8.6" cy="8.6" r="1.35" /><circle cx="15.4" cy="8.6" r="1.35" /><circle cx="12" cy="12" r="1.35" /><circle cx="8.6" cy="15.4" r="1.35" /><circle cx="15.4" cy="15.4" r="1.35" /></g>
+</svg>;
+export const ShuffleIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.8} strokeLinejoin="round" aria-hidden="true"><path d="M4 7h3c2.2 0 3.3 1.2 4.5 3.4l1 1.8c1.2 2.2 2.3 3.8 4.5 3.8H20" /><path d="M4 17h3c1.3 0 2.2-.5 3-1.4M14 8.4c.8-.9 1.7-1.4 3-1.4h3" /><path d="M17.5 4.5L20 7l-2.5 2.5M17.5 14.5L20 17l-2.5 2.5" /></svg>;
+/** Hard: a summit, the climb Anki says a word still is. */
+export const PeakIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.8} strokeLinejoin="round" aria-hidden="true"><path d="M3 19.5l6.5-11.5 3.6 6.2 2.4-3.7 5.5 9z" /><path d="M7.4 11.7l2.1 1.3 1.6-1.2" /></svg>;
+/** Rare: a gem, met seldom. */
+export const GemIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><path d="M6.5 4.5h11l3.5 5L12 20 3 9.5z" /><path d="M3 9.5h18M9.5 4.5 8 9.5l4 10.5 4-10.5-1.5-5" /></svg>;
+/** Newest: freshly added. */
+export const SparkleIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z" /><path d="M18 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z" /></svg>;
+/** Every choice at once, as a grid. */
+export const GridIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5" /></svg>;
+/** A drill: a word and its translation, turned over and over. */
+export const DrillIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} strokeLinejoin="round" aria-hidden="true"><rect x="3" y="8.5" width="8" height="11" rx="1.6" /><rect x="13" y="8.5" width="8" height="11" rx="1.6" /><path d="M6.5 6c1.6-1.9 9.4-1.9 11 0" /><path d="M15.6 3.9l1.9 2.1-2.4 1" /><path d="M5.5 14h3M15.5 14h3" /></svg>;
+/** A radio lesson: someone presenting the words. */
+export const MicIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><rect x="9" y="3.5" width="6" height="10.5" rx="3" /><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0" /><path d="M12 18v2.5M8.5 20.5h7" /></svg>;
+/** A story told between the words. */
+export const TaleIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} strokeLinejoin="round" aria-hidden="true"><path d="M12 7C10 5.5 7.5 5 4 5v12.5c3.5 0 6 .5 8 2 2-1.5 4.5-2 8-2V5c-3.5 0-6 .5-8 2z" /><path d="M12 7v12.5" /><path d="M6.5 9h3M6.5 12h3M14.5 9h3M14.5 12h3" /></svg>;

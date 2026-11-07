@@ -506,6 +506,18 @@ def duplicate_lexemes(owner: str, language: str, headword: str, lemma: str) -> l
         ]
 
 
+def headwords(owner: str, language: str) -> list[tuple[str, str]]:
+    """Every live word this owner holds in one language, as `(id, headword)`, in a stable order."""
+    table = tables.lexemes
+    with reading() as connection:
+        rows = connection.execute(
+            select(table.c.id, table.c.headword)
+            .where(table.c.owner == owner, table.c.language == language, table.c.deleted.is_(False))
+            .order_by(table.c.id)
+        )
+        return [(row.id, row.headword) for row in rows]
+
+
 def map_senses(owner: str, language: str) -> list[dict[str, Any]]:
     """Every live sense of every word this owner holds in one language, for the meaning map.
 

@@ -696,9 +696,15 @@ export function sampleLexemeIds(
   graph: VocabularyGraph, query: ListQuery, count: number, seed = 0,
   candidatesOf: (graph: VocabularyGraph, query: ListQuery) => Lexeme[] = loopCandidates
 ): string[] {
-  const candidates = candidatesOf(graph, query);
-  // A small deterministic shuffle: xorshift over the seed, so the same scope and seed pick the same
-  // words. Nothing here needs cryptographic quality, and `Math.random` would make it untestable.
+  return shuffled(candidatesOf(graph, query), seed).slice(0, Math.max(count, 0)).map((lexeme) => lexeme.id);
+}
+
+/**
+ * A small deterministic shuffle: xorshift over the seed, so the same list and seed give the same
+ * order. Nothing here needs cryptographic quality, and `Math.random` would make it untestable.
+ * Measured: thirty draws of twelve from 932 words cover the words exactly as often as chance says.
+ */
+function shuffled<T>(items: readonly T[], seed: number): T[] {
   let state = (seed || 1) >>> 0;
   const next = () => {
     state ^= state << 13; state >>>= 0;
@@ -706,12 +712,112 @@ export function sampleLexemeIds(
     state ^= state << 5; state >>>= 0;
     return state / 0x100000000;
   };
-  const pool = candidates.slice();
+  const pool = items.slice();
   for (let index = pool.length - 1; index > 0; index -= 1) {
     const swap = Math.floor(next() * (index + 1));
     [pool[index], pool[swap]] = [pool[swap], pool[index]];
   }
-  return pool.slice(0, Math.max(count, 0)).map((lexeme) => lexeme.id);
+  return pool;
+}
+
+/* ── drawing words to make something from ────────────────────────────────
+   A make dialog draws its words here, and shows them before it sends them. **Words not used yet
+   come first, under every order but two**: a draw sorts by how many live loops (or stories) a word
+   is already in, fewest first, and only then by the order chosen. So each draw deals from a deck
+   without putting cards back — every word in scope has its turn before any comes round again — and
+   once all have been used the least used come round first. Counted per kind: a word already in a
+   story is still new to loops. The two exceptions are Hard, where going over a hard word again is
+   the point, so its use only breaks ties, and the selection, which is sent as chosen. */
+
+/** The kind of thing being made, which is what a word's use is counted against. */
+export type MadeKind = "loop" | "story";
+/** How a draw is ordered once unused words have been put first. */
+export type DrawOrder = "random" | "hard" | "rare" | "newest";
+
+/** How many live loops (or stories) each word is in. A word in none is simply absent. */
+export function usageCounts(graph: VocabularyGraph, kind: MadeKind): Map<string, number> {
+  const made = new Set((kind === "loop" ? live(graph.loops) : live(graph.stories)).map((one) => one.id));
+  const rows: { owner: string; lexemeId: string }[] = kind === "loop"
+    ? live(graph.loopItems).map((item) => ({ owner: item.loopId, lexemeId: item.lexemeId }))
+    : live(graph.storyWords).map((word) => ({ owner: word.storyId, lexemeId: word.lexemeId }));
+  const seen = new Set<string>();
+  const counts = new Map<string, number>();
+  for (const row of rows) {
+    const key = `${row.owner}\u0000${row.lexemeId}`;
+    if (!made.has(row.owner) || seen.has(key)) continue;
+    seen.add(key);
+    counts.set(row.lexemeId, (counts.get(row.lexemeId) ?? 0) + 1);
+  }
+  return counts;
+}
+
+/** Whether Anki has said anything about any word here: Hard has nothing to order by until it has. */
+export function hasReviewState(graph: VocabularyGraph, lexemes: readonly Lexeme[]): boolean {
+  const ids = new Set(lexemes.map((lexeme) => lexeme.id));
+  return live(graph.studyStates).some((state) => state.reps > 0 && ids.has(state.lexemeId));
+}
+
+export interface DrawInput {
+  order: DrawOrder;
+  usage: Map<string, number>;
+  /** Zipf figure per word, lower is rarer; required for `rare`, and a word it lacks goes last. */
+  rarity?: Readonly<Record<string, number>> | null;
+  seed: number;
+}
+
+/**
+ * Every candidate, in the order a draw takes them. Shuffled first, so whatever the keys leave tied
+ * is decided by the seed rather than by graph order; `Array.prototype.sort` is stable.
+ */
+export function drawOrder(graph: VocabularyGraph, candidates: readonly Lexeme[], input: DrawInput): Lexeme[] {
+  const used = (lexeme: Lexeme) => input.usage.get(lexeme.id) ?? 0;
+  const study = new Map<string, StudyState | null>();
+  const studyOf = (lexeme: Lexeme) => {
+    if (!study.has(lexeme.id)) study.set(lexeme.id, studyStateOf(graph, lexeme.id));
+    return study.get(lexeme.id) ?? null;
+  };
+  const reviewed = (lexeme: Lexeme) => {
+    const state = studyOf(lexeme);
+    return state && state.reps > 0 ? state : null;
+  };
+  const zipf = (lexeme: Lexeme) => input.rarity?.[lexeme.id] ?? Number.POSITIVE_INFINITY;
+  const compare: Record<DrawOrder, (left: Lexeme, right: Lexeme) => number> = {
+    random: (left, right) => used(left) - used(right),
+    newest: (left, right) => used(left) - used(right) || right.createdAt.localeCompare(left.createdAt),
+    rare: (left, right) => used(left) - used(right) || zipf(left) - zipf(right),
+    hard: (left, right) =>
+      (reviewed(right)?.difficulty ?? -1) - (reviewed(left)?.difficulty ?? -1)
+      || (reviewed(right)?.lapses ?? -1) - (reviewed(left)?.lapses ?? -1)
+      || used(left) - used(right)
+  };
+  return shuffled(candidates, input.seed).sort(compare[input.order]);
+}
+
+/**
+ * The first `count` of an order, passing over the words the owner turned down — swapped out one at a
+ * time, or all at once by drawing again. Turned-down words come back only when nothing else is left,
+ * so a scope smaller than the count still fills it.
+ */
+export function drawWords(ordered: readonly Lexeme[], count: number, passed: ReadonlySet<string>): Lexeme[] {
+  const fresh = ordered.filter((lexeme) => !passed.has(lexeme.id));
+  const turnedDown = ordered.filter((lexeme) => passed.has(lexeme.id));
+  return [...fresh, ...turnedDown].slice(0, Math.max(count, 0));
+}
+
+/**
+ * What a loop of this format has taken per word on this device's replica, as the median of every
+ * ready one: the estimate a dialog shows beside its count. Null when there is nothing to go on.
+ */
+export function loopSecondsPerWord(graph: VocabularyGraph, format: string): number | null {
+  const items = new Map<string, number>();
+  for (const item of live(graph.loopItems)) items.set(item.loopId, (items.get(item.loopId) ?? 0) + 1);
+  const rates = live(graph.loops)
+    .filter((loop) => loop.format === format && loop.durationSeconds && items.get(loop.id))
+    .map((loop) => loop.durationSeconds! / items.get(loop.id)!)
+    .sort((left, right) => left - right);
+  if (!rates.length) return null;
+  const middle = Math.floor(rates.length / 2);
+  return rates.length % 2 ? rates[middle] : (rates[middle - 1] + rates[middle]) / 2;
 }
 
 /* ── playing a loop ──────────────────────────────────────────────────────

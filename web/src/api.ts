@@ -976,6 +976,12 @@ export interface StoryTypes {
   defaultParts: number;
 }
 
+/** How common each of the owner's words in one language is: a Zipf figure, lower is rarer. */
+export interface WordRarity {
+  language: string;
+  zipf: Record<string, number>;
+}
+
 export interface StoryRequest {
   deviceId: string;
   language: string;
@@ -1216,6 +1222,11 @@ export const backendSession = {
     );
   },
   storyTypes(): Promise<StoryTypes> { return client.call<StoryTypes>("/stories/types"); },
+  /* A figure about the language rather than the record, so it is asked for, not replicated: the
+     make dialogs' "Rare" order, once a session. A language with no frequency list is refused by name. */
+  wordRarity(language: string): Promise<WordRarity> {
+    return client.call<WordRarity>(`/words/rarity?language=${encodeURIComponent(language)}`);
+  },
   /* Answers 202 with the row and the job that will write it. The row exists either way: a story
      that was asked for and never written is one with no parts, which is all "not written" means. */
   makeStory(request: StoryRequest): Promise<{ story: Story; job: Job }> {

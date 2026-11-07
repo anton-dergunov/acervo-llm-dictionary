@@ -1,20 +1,26 @@
 /**
- * Choosing a loop's music: the list the make dialog and the player's menu share.
+ * Choosing a loop's music: the make dialog's tiles and the player's menu.
  *
- * **Three kinds of choice, in the order a person reaches for them.** Surprise me — the generator
- * picks a style and a bed. A favourite — a bed the owner kept, asked for again by its style *and*
- * seed, which is the pair that replays it. A style — one of the generator's families, each with the
+ * **Three kinds of choice, in the order a person reaches for them.** A favourite — a bed the owner
+ * kept, asked for again by its style *and* seed, which is the pair that replays it. Surprise me —
+ * the generator picks a style and a bed. A style — one of the generator's families, each with the
  * sentence the generator gives to choose it by. There is no "Auto" beside "Surprise me": they were
  * the same request under two names, and the list said both.
+ *
+ * **A favourite is not a style tile with a star**, because such a tile looks like the style it is a
+ * piece of and goes unseen. The favourites are a row of their own above the styles, each saying in
+ * plain view when it was kept and which loop it came from, with a button to hear it.
  *
  * The styles are the generator's catalogue, read from `GET /loops/schema` once per session and never
  * copied here, so a family added in a later version appears with nothing changing on this side.
  */
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { backendSession, type LoopFamily, type LoopMusic, type LoopSchema } from "./api";
 import type { Bed, Loop, VocabularyGraph } from "./domain";
-import { PauseIcon, PlayIcon, StarIcon } from "./icons";
+import { Art } from "./art";
+import type { StripChoice } from "./ChoiceStrip";
+import { DiceIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
 import * as player from "./loops";
 import { loopIsReady, loopTitle, loopTrackOf, styleLabel } from "./selectors";
 
@@ -89,42 +95,68 @@ function Preview({ graph, bed }: { graph: VocabularyGraph; bed: Bed }) {
   >{playing ? <PauseIcon /> : <PlayIcon />}</button>;
 }
 
-function same(left: MusicChoice, right: MusicChoice): boolean {
-  if (left.kind !== right.kind) return false;
-  if (left.kind === "style" && right.kind === "style") return left.family === right.family;
-  if (left.kind === "bed" && right.kind === "bed") return left.bed.id === right.bed.id;
-  return true;
+/** A choice as one string, which is what a strip of tiles is keyed by. */
+export function musicKey(choice: MusicChoice): string {
+  if (choice.kind === "style") return `style:${choice.family}`;
+  if (choice.kind === "bed") return `bed:${choice.bed.id}`;
+  return "surprise";
 }
 
-/** The make dialog's list: one choice, drawn as rows a finger can hit, each saying what it is. */
-export function MusicChoices({ graph, families, favourites, value, onChange }: {
+/**
+ * The make dialog's music. The favourites, each with its star, what it came from and a button to hear
+ * it; then the strip: Surprise me, and every style. Each picture is the style's (`art.tsx`), so a
+ * favourite looks like the style it is a piece of. `of` reads a remembered key back, and anything it
+ * no longer names — a favourite let go, a style the generator dropped — is Surprise me.
+ */
+export function musicChoices(graph: VocabularyGraph, families: LoopFamily[], favourites: Bed[]): {
+  favourites: Bed[];
+  styles: StripChoice[];
+  of(key: string | null): MusicChoice;
+} {
+  const byKey = new Map<string, MusicChoice>();
+  for (const bed of favourites) byKey.set(musicKey({ kind: "bed", bed }), { kind: "bed", bed });
+  const tile = (choice: MusicChoice, entry: Omit<StripChoice, "id">): StripChoice => {
+    byKey.set(musicKey(choice), choice);
+    return { id: musicKey(choice), ...entry };
+  };
+  const styles = [
+    tile({ kind: "surprise" }, {
+      label: "Surprise me", about: "New music, in any style",
+      art: <span className="choice-stand-in icon" aria-hidden="true"><DiceIcon /></span>
+    }),
+    ...families.map((family) => tile({ kind: "style", family: family.id }, {
+      label: family.label, about: family.description,
+      art: <Art group="music" id={family.id} label={family.label} />
+    }))
+  ];
+  return { favourites, styles, of: (key) => (key && byKey.get(key)) || { kind: "surprise" } };
+}
+
+/** The favourites as a row of their own: the picture, the name with its star, where it came from. */
+export function FavouriteMusic({ graph, families, favourites, value, onChange }: {
   graph: VocabularyGraph;
   families: LoopFamily[];
   favourites: Bed[];
-  value: MusicChoice;
-  onChange(choice: MusicChoice): void;
+  value: string;
+  onChange(key: string): void;
 }) {
-  const row = (choice: MusicChoice, name: string, about: string, extra?: ReactNode, star = false) => {
-    const on = same(value, choice);
-    return <div className={`music-choice${on ? " on" : ""}`}>
-      <button type="button" role="radio" aria-checked={on} onClick={() => onChange(choice)}>
-        <span className="music-name">{star && <StarIcon filled />}{name}</span>
-        <span className="music-about">{about}</span>
-      </button>
-      {extra}
-    </div>;
-  };
-  return <div className="music-choices" role="radiogroup" aria-label="Music">
-    {row({ kind: "surprise" }, "Surprise me", "New music, in any style")}
-    {favourites.length > 0 && <div className="music-group label">Favourites</div>}
-    {favourites.map((bed) => <div key={bed.id}>
-      {row({ kind: "bed", bed }, styleLabel(families, bed.styleId), bedAbout(graph, bed),
-        <Preview graph={graph} bed={bed} />, true)}
-    </div>)}
-    {families.length > 0 && <div className="music-group label">Styles</div>}
-    {families.map((family) => <div key={family.id}>
-      {row({ kind: "style", family: family.id }, family.label, family.description)}
-    </div>)}
+  if (!favourites.length) return null;
+  return <div className="music-favourites" role="radiogroup" aria-label="Favourite music">
+    {favourites.map((bed) => {
+      const key = musicKey({ kind: "bed", bed });
+      const label = styleLabel(families, bed.styleId);
+      return <div key={bed.id} className={`favourite${key === value ? " on" : ""}`}>
+        <button type="button" role="radio" aria-checked={key === value} onClick={() => onChange(key)}
+          aria-label={`${label}, ${bedAbout(graph, bed)}`}>
+          <span className="favourite-art"><Art group="music" id={bed.styleId} label={label} /></span>
+          <span className="favourite-text">
+            <span className="favourite-name"><StarIcon filled />{label}</span>
+            <span className="favourite-about">{bedAbout(graph, bed)}</span>
+          </span>
+        </button>
+        <Preview graph={graph} bed={bed} />
+      </div>;
+    })}
   </div>;
 }
 

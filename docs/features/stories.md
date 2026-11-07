@@ -19,6 +19,16 @@ rest), the styles are the picture style table, and both are ids stored **on the 
 writes the story that was asked for rather than quietly becoming a different one. The note is sent to
 the writer only when present, and outranks the kind's direction but never the prompt's rules.
 
+**The dialog is the loop dialog's frame** (`StoryDialog.tsx` on `MakeDialog.tsx`): the words drawn and
+shown before they are sent, the unused first, with the same orders and the selection
+([`loops.md`](loops.md) §2.12); the count as segments, one to eight, because a story's handful is eight
+values and not a range; then the kinds and the styles as strips of pictures, each with **All** for the
+whole catalogue as a grid. Once a kind is chosen, the styles it suggests come first in its order. A
+style's tile is a sample of that style — one subject drawn with the style's own brief — and a kind's is
+a vignette; both are `web/src/art/`, drawn by `scripts/draw_dialog_art.py`, and an id with none yet
+shows its emoji or its initial, so a kind or style added to config still appears. The note is one line
+until it is written in.
+
 **The job is five steps, so four good ones survive a fifth that fails:**
 
 | Step | Calls | Lane |

@@ -265,6 +265,17 @@ def test_the_meaning_map_stands_alone(path):
     assert not offenders, f"{path} imports {sorted(offenders)}; the meaning map stands alone"
 
 
+@pytest.mark.parametrize("path", modules_under("frequency"), ids=identify)
+def test_the_frequency_lists_stand_alone(path):
+    """A headword and a language in, a figure out — and no idea whose word it is.
+
+    `services/rarity.py` is the binding layer that reads the owner's words and refuses a language by
+    name, which is the split every pipeline package here keeps.
+    """
+    offenders = {name for name in imports_of(path) if name.startswith(STANDS_ALONE)}
+    assert not offenders, f"{path} imports {sorted(offenders)}; the frequency package stands alone"
+
+
 @pytest.mark.parametrize("path", modules_under("ocr"), ids=identify)
 def test_the_photo_reader_stands_on_the_provider_package_and_nothing_else(path):
     """An engine's words in, a page to tap out — and no idea whose photo it is or where it is kept.

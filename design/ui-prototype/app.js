@@ -1697,7 +1697,8 @@ function styleLabel(styleId) {
 const bedOfLoop = (loop) => BEDS.find((bed) => bed.styleId === loop.styleId && bed.seed === loop.seed);
 const bedAbout = (bed) => {
   const source = loopOf(bed.sourceLoopId);
-  return source ? `kept ${bed.createdAt.slice(5)} · from “${loopTitle(source)}”` : `kept ${bed.createdAt.slice(5)}`;
+  const kept = new Date(bed.createdAt).toLocaleDateString(undefined, { day: "numeric", month: "short" });
+  return source ? `kept ${kept} · from “${loopTitle(source)}”` : `kept ${kept}`;
 };
 
 /* The player's menu of other music — `LoopMusic.tsx` `MusicMenu`. Choosing is asking; no Apply. */
@@ -2501,241 +2502,281 @@ function paintLoops() {
   if (chipAt && chipAt.textContent !== clock(player.at)) chipAt.textContent = clock(player.at);
 }
 
-/* ── make a loop ── */
-function loopEligible() {
-  return LEXEMES.filter((x) => x.language === state.lang && x.status === "active" && x.primaryGloss
-    && (state.topic === "all" || x.topics.includes(state.topic))).length;
+/* ── make a loop, make a story ──
+   `MakeDialog.tsx`, `WordPicker.tsx`, `ChoiceStrip.tsx`, `LoopFormat.tsx`: one frame for both, the
+   button in a footer that never scrolls away, the words shown before they are sent, and every long
+   catalogue a strip of pictures with All as a grid in place of the body. */
+const MAKE_ICON = {
+  dice: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><g fill="currentColor" stroke="none"><circle cx="8.6" cy="8.6" r="1.35"/><circle cx="15.4" cy="8.6" r="1.35"/><circle cx="12" cy="12" r="1.35"/><circle cx="8.6" cy="15.4" r="1.35"/><circle cx="15.4" cy="15.4" r="1.35"/></g></svg>',
+  shuffle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3c2.2 0 3.3 1.2 4.5 3.4l1 1.8c1.2 2.2 2.3 3.8 4.5 3.8H20"/><path d="M4 17h3c1.3 0 2.2-.5 3-1.4M14 8.4c.8-.9 1.7-1.4 3-1.4h3"/><path d="M17.5 4.5L20 7l-2.5 2.5M17.5 14.5L20 17l-2.5 2.5"/></svg>',
+  peak: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19.5l6.5-11.5 3.6 6.2 2.4-3.7 5.5 9z"/><path d="M7.4 11.7l2.1 1.3 1.6-1.2"/></svg>',
+  gem: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4.5h11l3.5 5L12 20 3 9.5z"/><path d="M3 9.5h18M9.5 4.5 8 9.5l4 10.5 4-10.5-1.5-5"/></svg>',
+  sparkle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M11 3.5l1.9 5.1 5.1 1.9-5.1 1.9L11 17.5l-1.9-5.1L4 10.5l5.1-1.9z"/><path d="M18 14.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg>',
+  grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>',
+  redraw: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg>',
+  picture: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 16.5l4.5-4 3.5 3 3-2.5 5 4"/></svg>',
+  drill: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8.5" width="8" height="11" rx="1.6"/><rect x="13" y="8.5" width="8" height="11" rx="1.6"/><path d="M6.5 6c1.6-1.9 9.4-1.9 11 0"/><path d="M15.6 3.9l1.9 2.1-2.4 1"/><path d="M5.5 14h3M15.5 14h3"/></svg>',
+  mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3.5" width="6" height="10.5" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v2.5M8.5 20.5h7"/></svg>',
+  tale: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7C10 5.5 7.5 5 4 5v12.5c3.5 0 6 .5 8 2 2-1.5 4.5-2 8-2V5c-3.5 0-6 .5-8 2z"/><path d="M12 7v12.5"/><path d="M6.5 9h3M6.5 12h3M14.5 9h3M14.5 12h3"/></svg>'
+};
+const ORDERS = [
+  { id: "random", label: "Random", icon: "shuffle" },
+  { id: "hard", label: "Hard", icon: "peak" },
+  { id: "rare", label: "Rare", icon: "gem" },
+  { id: "newest", label: "Newest", icon: "sparkle" }
+];
+const MAKE = {
+  loop: { max: 24, least: 4, initial: 12, usable: (x) => Boolean(x.primaryGloss), why: "no single term to say", label: "Make the loop", title: "Make a loop" },
+  story: { max: 8, least: 1, initial: 3, usable: () => true, why: "", label: "Make the story", title: "Make a story" }
+};
+/* The prototype's stand-in for the rarity figures the server answers (`GET /words/rarity`). */
+const zipfOf = (x) => (x.headword.length * 7919) % 50 / 10;
+
+/* Every candidate in the order a draw takes them: words in no loop (or story) yet first, then the
+   order chosen — `drawOrder` in `selectors.ts`. Hard orders by Anki and uses use only to break ties. */
+function drawOrder(kind, order, seed) {
+  const used = new Map();
+  const rows = kind === "loop" ? LOOP_ITEMS.map((i) => [i.loopId, i.lexemeId]) : STORY_WORDS.map((w) => [w.storyId, w.lexemeId]);
+  for (const [, id] of new Map(rows.map(([owner, id]) => [`${owner}:${id}`, [owner, id]])).values()) used.set(id, (used.get(id) || 0) + 1);
+  const pool = LEXEMES.filter((x) => x.language === state.lang && x.status !== "aside" && MAKE[kind].usable(x)
+    && (state.topic === "all" || x.topics.includes(state.topic)));
+  let s = seed;
+  const shuffled = pool.map((x) => { s = (s * 1103515245 + 12345) % 2147483648; return [s, x]; }).sort((a, b) => a[0] - b[0]).map(([, x]) => x);
+  const u = (x) => used.get(x.id) || 0;
+  const by = {
+    random: (a, b) => u(a) - u(b),
+    newest: (a, b) => u(a) - u(b) || String(b.createdAt).localeCompare(String(a.createdAt)),
+    rare: (a, b) => u(a) - u(b) || zipfOf(a) - zipfOf(b),
+    hard: (a, b) => ((b.study?.difficulty ?? -1) - (a.study?.difficulty ?? -1)) || u(a) - u(b)
+  };
+  return { ordered: shuffled.sort(by[order]), unused: pool.filter((x) => !u(x)).length };
 }
 
-/* The kind of loop — `LoopFormat.tsx` `FormatChoices`: the generator's formats as radio cards, the
-   chosen one's switches beneath, and a card that this server cannot make saying why. */
+function makeChip(w, button) {
+  const body = `<span aria-hidden="true">${w.emoji || "\u{1F4C4}"}</span>${esc(w.headword)}`;
+  return button
+    ? `<button type="button" class="make-chip" lang="${state.lang}" data-swap="${w.id}" aria-label="Remove ${esc(w.headword)}" title="Remove — the next word takes its place">${body}<span class="make-chip-x">${ICON.close}</span></button>`
+    : `<span class="make-chip${w.skip ? " skip" : ""}" lang="${state.lang}"${w.skip ? ` title="Left out: ${esc(w.skip)}"` : ""}>${body}</span>`;
+}
+
+/* The words block: the orders, the count, and the chips that will be sent. */
+function wordPicker(kind, draw) {
+  const rule = MAKE[kind];
+  const selection = picked();
+  const fromSelection = draw.choice === "selection" && selection.length;
+  const pills = ORDERS.map((o) => `<button type="button" role="radio" data-order="${o.id}" aria-checked="${draw.choice === o.id}" class="word-order${draw.choice === o.id ? " on" : ""}">${MAKE_ICON[o.icon]}${o.label}</button>`).join("")
+    + (selection.length ? `<button type="button" role="radio" data-order="selection" aria-checked="${Boolean(fromSelection)}" class="word-order${fromSelection ? " on" : ""}">${ICON.selected}Selection · ${selection.length}</button>` : "");
+  const hard = LEXEMES.some((x) => x.study?.reps > 0);
+  const caption = draw.choice === "hard" ? (hard ? "Words Anki says you find hardest." : "Needs your review history from Anki, which has none yet.")
+    : draw.choice === "rare" ? `Words least common in everyday ${langOf(state.lang).name}.` : "";
+  let chips = "", note = "", count = "";
+  if (fromSelection) {
+    let used = 0;
+    const words = selection.map((w) => {
+      if (!rule.usable({ primaryGloss: w.loopable })) return { ...w, id: w.key, skip: rule.why };
+      used += 1;
+      return { ...w, id: w.key, skip: used > rule.max ? `a ${kind} takes at most ${rule.max}` : "" };
+    });
+    draw.ids = words.filter((w) => !w.skip).map((w) => w.id);
+    chips = words.map((w) => makeChip(w, false)).join("");
+    const skipped = words.filter((w) => w.skip);
+    note = skipped.length ? `<p class="word-note">Left out, ${esc(skipped[0].skip)}: ${skipped.map((w) => `<i lang="${state.lang}">${esc(w.headword)}</i>`).join(", ")}.</p>` : "";
+  } else {
+    const { ordered, unused } = drawOrder(kind, draw.choice, draw.seed);
+    const most = Math.max(Math.min(rule.max, ordered.length), Math.min(rule.least, ordered.length));
+    const least = Math.min(rule.least, most);
+    draw.count = Math.min(Math.max(draw.count, least), most);
+    const fresh = ordered.filter((x) => !draw.passed.has(x.id));
+    const words = [...fresh, ...ordered.filter((x) => draw.passed.has(x.id))].slice(0, draw.count);
+    draw.ids = words.map((x) => x.id);
+    chips = words.map((x) => makeChip(x, true)).join("");
+    count = kind === "loop"
+      ? `<div class="word-count"><input type="range" data-count min="${least}" max="${most}" value="${draw.count}" aria-label="How many words"><output>${wordsCount(draw.count)}</output></div>`
+      : `<div class="word-count"><span class="seg word-count-seg" role="radiogroup" aria-label="How many words">${Array.from({ length: most - least + 1 }, (_, i) => least + i)
+        .map((n) => `<button type="button" role="radio" data-count-to="${n}" aria-checked="${n === draw.count}" class="${n === draw.count ? "on" : ""}">${n}</button>`).join("")}</span><output>${wordsCount(draw.count)}</output></div>`;
+    note = `<div class="word-foot"><p class="word-note">${draw.choice === "hard" ? `Hardest first, from ${ordered.length}`
+      : unused >= draw.count ? `From ${unused} not in a ${kind} yet`
+        : unused ? `${unused} not in a ${kind} yet, then the least used` : `Every word has been in a ${kind}: the least used first`}</p>${ordered.length > draw.count
+      ? `<button type="button" class="word-redraw" data-redraw>${MAKE_ICON.redraw}Draw again</button>` : ""}</div>`;
+  }
+  return `<div class="word-picker">
+    <div class="word-orders" role="radiogroup" aria-label="Which words">${pills}</div>
+    ${caption ? `<p class="word-caption${draw.choice === "hard" && !hard ? " warn" : ""}">${caption}</p>` : ""}
+    ${count}<div class="make-words">${chips}</div>${note}</div>`;
+}
+
+/* A catalogue entry's picture, or its emoji or initial when it has none yet (`art.tsx`). */
+function art(group, id, label, emoji = "") {
+  const stand = `<span class="choice-stand-in${emoji ? " emoji" : ""}"${group ? " hidden" : ""} aria-hidden="true">${emoji || esc(label.charAt(0).toUpperCase())}</span>`;
+  return group ? `<img class="choice-img" src="img/art/${group}/${id}.webp" alt="" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false">${stand}` : stand;
+}
+const iconArt = (svg) => `<span class="choice-stand-in icon" aria-hidden="true">${svg}</span>`;
+
+/* `ChoiceStrip` and `ChoiceGrid`: one tile per choice, the chosen one ringed. */
+function choiceTile(c, value, wide) {
+  const on = c.id === value;
+  return `<div class="choice${on ? " on" : ""}" data-choice="${esc(c.id)}">
+    <button type="button" role="radio" aria-checked="${on}"${wide || !c.about ? "" : ` title="${esc(c.about)}"`}>
+      <span class="choice-art">${c.art}${c.badge ? `<span class="choice-badge">${c.badge}</span>` : ""}</span>
+      <span class="choice-name">${esc(c.label)}</span>${wide && c.about ? `<span class="choice-about">${esc(c.about)}</span>` : ""}
+    </button>${c.extra || ""}</div>`;
+}
+function choiceStrip(name, choices, value) {
+  return `<div class="choice-strip" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${choices.map((c) => choiceTile(c, value, false)).join("")}
+    <div class="choice choice-all"><button type="button" data-all="${esc(name)}" aria-label="All: ${esc(name)}"><span class="choice-art">${MAKE_ICON.grid}</span><span class="choice-name">All</span></button></div></div>`;
+}
+function choiceGrid(name, choices, value) {
+  return `<div class="choice-grid-view"><div class="choice-grid" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${choices.map((c) => choiceTile(c, value, true)).join("")}</div></div>`;
+}
+
+/* `LoopMusic.tsx`: Surprise me and the styles as a strip; the favourites as a row of their own. */
+function musicTiles() {
+  return [
+    { id: "surprise", label: "Surprise me", about: "New music, in any style", art: iconArt(MAKE_ICON.dice) },
+    ...LOOP_SCHEMA.families.map((f) => ({ id: f.id, label: f.label, about: f.description, art: art("music", f.id, f.label) }))
+  ];
+}
+function favouriteMusic(value) {
+  if (!BEDS.length) return "";
+  return `<div class="music-favourites" role="radiogroup" aria-label="Favourite music" data-strip="Music">${BEDS.map((bed) => {
+    const id = `bed:${bed.id}`, on = id === value, label = styleLabel(bed.styleId);
+    return `<div class="favourite${on ? " on" : ""}" data-choice="${id}">
+      <button type="button" role="radio" aria-checked="${on}" aria-label="${esc(label)}, ${esc(bedAbout(bed))}">
+        <span class="favourite-art">${art("music", bed.styleId, label)}</span>
+        <span class="favourite-text"><span class="favourite-name">${ICON.starOn}${esc(label)}</span><span class="favourite-about">${esc(bedAbout(bed))}</span></span>
+      </button>${loopOf(bed.sourceLoopId) ? `<button type="button" class="music-preview" aria-label="Hear this music">${ICON.play}</button>` : ""}</div>`;
+  }).join("")}</div>`;
+}
+
+/* The kinds of loop as three tiles — `LoopFormat.tsx` `KindChoices`. */
+const DRILL = ["classic", "alternating", "echo", "review"];
+const VARIANTS = { classic: "Pause to recall", alternating: "Straight through", echo: "Say it back", review: "Meaning first" };
+function loopKinds() {
+  const kinds = [];
+  for (const f of LOOP_SCHEMA.formats) {
+    if (DRILL.includes(f.id)) {
+      let drill = kinds.find((k) => k.id === "drill");
+      if (!drill) kinds.push(drill = { id: "drill", label: "Drill", icon: MAKE_ICON.drill, formats: [] });
+      drill.formats.push(f);
+    } else kinds.push({ id: f.id, label: f.label, icon: { "radio-lesson": MAKE_ICON.mic, story: MAKE_ICON.tale }[f.id] || ICON.note, formats: [f] });
+  }
+  return kinds;
+}
 function formatMissing(format) {
   return format.requires.filter((need) =>
     (need === "writer" && !LOOP_SCHEMA.writerAvailable) || (need === "multilingual_voice" && !LOOP_SCHEMA.mixesLanguages));
 }
-
-function formatSwitches(format) {
-  const entries = Object.entries(format.switches);
-  if (!entries.length) return "";
-  return `<div class="format-switches">${entries.map(([name, spec]) => spec.choices
-    ? `<div class="format-switch"><span>${esc(spec.label)}</span>
-        <span class="seg" role="radiogroup" aria-label="${esc(spec.label)}">${spec.choices.map((choice) =>
-          `<button type="button" role="radio" aria-checked="${choice === spec.default}" class="${choice === spec.default ? "on" : ""}">${esc(choice)}</button>`).join("")}</span></div>`
-    : `<label class="format-switch"><input type="checkbox" name="switch-${name}"${spec.default ? " checked" : ""}><span>${esc(spec.label)}</span></label>`).join("")}</div>`;
-}
-
-function formatChoices(chosen = "classic") {
-  return `<div class="format-choices">${LOOP_SCHEMA.formats.map((format) => {
-    const missing = formatMissing(format);
-    const usable = !missing.length || Boolean(format.fallback);
-    const needs = missing.map((need) => NEEDS[need].what).join(" and ");
-    const where = [...new Set(missing.map((need) => NEEDS[need].where))].join(" and ");
-    const note = !missing.length ? "" : format.fallback
-      ? `Falls back to ${formatLabel(format.fallback)} here: it needs ${needs} (${where}).`
-      : `Needs ${needs} — set one up in ${where}.`;
-    return `<label class="config-switch format-card${format.id === chosen ? " on" : ""}${usable ? "" : " off"}">
-      <input type="radio" name="loop-format" value="${format.id}"${format.id === chosen ? " checked" : ""}${usable ? "" : " disabled"}>
-      <span><strong>${esc(format.label)}</strong><span>${esc(format.description)}</span>${note
-        ? `<span class="format-note warn">${esc(note)}</span>` : ""}</span>
-    </label>`;
-  }).join("")}${formatSwitches(LOOP_SCHEMA.formats.find((format) => format.id === chosen))}</div>`;
-}
-
-/* One choice in the dialog's list — `LoopMusic.tsx` `MusicChoices`. */
-function musicChoice(value, name, about, on = false, extra = "") {
-  return `<div class="music-choice${on ? " on" : ""}">
-    <button type="button" role="radio" aria-checked="${on}" data-choice="${esc(value)}">
-      <span class="music-name">${name}</span><span class="music-about">${esc(about)}</span></button>${extra}</div>`;
-}
-
-/* Where a dialog's words come from: the selection, or a random draw from what is on screen. The
-   switch is there only when there is a selection; opened from the selection bar it starts on it, and
-   from a surface's own Make button on the random draw, which is what that button always meant.
-
-   In selection mode the words are drawn as chips in the order they were chosen. One the kind cannot
-   use is dimmed and says why, and one past the limit is dimmed too — the first ones chosen are the
-   ones used — so what will be sent is always exactly what is shown undimmed. */
-const MAKE = {
-  loop: { max: 24, usable: (w) => w.loopable, why: "no single term to say" },
-  story: { max: 8, usable: () => true, why: "" }
-};
-function madeFrom(kind) {
-  const rule = MAKE[kind];
-  const words = picked();
-  let used = 0;
-  return words.map((w) => {
-    if (!rule.usable(w)) return { ...w, skip: rule.why };
-    used += 1;
-    return used > rule.max ? { ...w, skip: `a ${kind} takes at most ${rule.max}` } : { ...w, skip: "" };
-  });
-}
-function sourceBlock(kind, from, scopeHtml) {
-  const words = madeFrom(kind);
-  if (!words.length) return scopeHtml;
-  const sel = from === "selection";
-  const usable = words.filter((w) => !w.skip).length;
-  const skipped = words.length - usable;
-  const where = state.topic === "all" ? langOf(state.lang).name : `${langOf(state.lang).name} · ${topicOf(state.topic)?.name || "Inbox"}`;
-  return `<div class="config-field"><span>Words</span>
-      <div class="seg make-source" role="radiogroup" aria-label="Which words">
-        <button type="button" role="radio" data-source="selection" aria-checked="${sel}" class="${sel ? "on" : ""}">Your selection · ${words.length}</button>
-        <button type="button" role="radio" data-source="scope" aria-checked="${!sel}" class="${sel ? "" : "on"}">Random from ${esc(where)}</button>
-      </div></div>
-    <div data-pane="selection"${sel ? "" : " hidden"}>
-      <div class="make-words">${words.map((w) => `<span class="make-chip${w.skip ? " skip" : ""}" lang="${state.lang}"${w.skip ? ` title="Left out: ${esc(w.skip)}"` : ""}>
-        <span aria-hidden="true">${w.emoji || "\u{1F4C4}"}</span>${esc(w.headword)}</span>`).join("")}</div>
-      ${skipped ? `<p class="config-help make-skip">${[...new Set(words.filter((w) => w.skip).map((w) => w.skip))].map((why) => {
-        const names = words.filter((w) => w.skip === why).map((w) => `<i lang="${state.lang}">${esc(w.headword)}</i>`);
-        return `Left out, ${esc(why)}: ${names.join(", ")}.`;
-      }).join(" ")} ${usable ? `The ${kind} is made from the other ${usable}.` : `There is nothing left to make a ${kind} from.`}</p>` : ""}
-    </div>
-    <div data-pane="scope"${sel ? " hidden" : ""}>${scopeHtml}</div>`;
-}
-/* The dialog's own wiring for the switch: which pane shows, and what the button promises. */
-function wireSource(node, kind, label) {
-  const go = $(".make-go", node);
-  const usable = madeFrom(kind).filter((w) => !w.skip).length;
-  const paint = (source) => {
-    node.querySelectorAll("[data-source]").forEach((b) => {
-      const on = b.dataset.source === source;
-      b.classList.toggle("on", on); b.setAttribute("aria-checked", String(on));
-    });
-    node.querySelectorAll("[data-pane]").forEach((pane) => { pane.hidden = pane.dataset.pane !== source; });
-    const fromSelection = source === "selection" && node.querySelector("[data-source]");
-    go.textContent = fromSelection ? `${label} from ${wordsCount(usable)}` : label;
-    go.disabled = Boolean(fromSelection) && !usable;
-  };
-  node.querySelectorAll("[data-source]").forEach((b) => { b.onclick = () => paint(b.dataset.source); });
-  paint(node.querySelector('[data-source].on')?.dataset.source || "scope");
-}
-
-function renderLoopDialog(from) {
-  const eligible = loopEligible();
-  const where = state.topic === "all" ? langOf(state.lang).name : `${langOf(state.lang).name} · ${topicOf(state.topic).name}`;
-  const count = Math.min(12, Math.max(1, eligible));
-  const scope = `<div class="loop-scope">${ICON.book}<span><b>${esc(where)}</b> · ${eligible} words can be in a loop</span></div>
-        <label class="config-field"><span>How many words</span>
-          <span class="loop-count">
-            <input type="range" id="loopCount" min="4" max="${Math.max(4, Math.min(24, eligible))}" value="${count}">
-            <output for="loopCount" id="loopCountOut">${count} words</output>
-          </span></label>`;
-  return `<div class="modal-backdrop" id="loopBackdrop">
-    <section class="settings loop-dialog" role="dialog" aria-modal="true" aria-labelledby="loop-dialog-title">
-      <header><h2 id="loop-dialog-title">Make a loop</h2>
-        <button class="close" id="loopClose" aria-label="Close">×</button></header>
-      <div class="settings-body">
-        <p class="config-help">Your words, set to music with their translations.</p>
-        ${sourceBlock("loop", from, scope)}
-        <div class="config-field"><span>Kind of loop</span>${formatChoices(state.loopFormat || "classic")}</div>
-        <div class="config-field"><span>Music</span>
-          <div class="music-choices" role="radiogroup" aria-label="Music">
-            ${musicChoice("surprise", "Surprise me", "New music, in any style", true)}
-            ${BEDS.length ? '<div class="music-group label">Favourites</div>' : ""}
-            ${BEDS.map((bed) => musicChoice(`bed:${bed.id}`, `${ICON.starOn}${esc(styleLabel(bed.styleId))}`, bedAbout(bed), false,
-              loopOf(bed.sourceLoopId) ? `<button type="button" class="music-preview" aria-label="Hear this music">${ICON.play}</button>` : "")).join("")}
-            <div class="music-group label">Styles</div>
-            ${LOOP_SCHEMA.families.map((family) => musicChoice(family.id, esc(family.label), family.description)).join("")}
-          </div></div>
-        <p class="config-help">A word with no single term to say is not eligible: a loop has to
-          choose one meaning, and <i>espolvorear</i> has none written down yet.</p>
-        <div class="loop-engine">engine ${esc(LOOP_SCHEMA.engineVersion)} · ${
-          LOOP_SCHEMA.productionBundle ? "sample pack installed" : "no sample pack — beds will be synthesised"}</div>
-        <div class="loop-actions">
-          <button class="tb-btn" id="loopCancel">Cancel</button>
-          <button class="tb-btn primary make-go" id="loopGo">Make the loop</button>
-        </div>
-      </div>
-    </section>
+function kindChoices(d) {
+  const format = LOOP_SCHEMA.formats.find((f) => f.id === d.format);
+  const kinds = loopKinds();
+  const kind = kinds.find((k) => k.formats.includes(format));
+  const usable = (f) => !formatMissing(f).length || Boolean(f.fallback);
+  const variants = kind.formats.filter(usable);
+  const missing = formatMissing(format);
+  const note = !missing.length ? "" : ` <span class="format-note warn">${format.fallback
+    ? `Falls back to ${esc(formatLabel(format.fallback))} here: it needs ${missing.map((n) => NEEDS[n].what).join(" and ")}.`
+    : `Needs ${missing.map((n) => NEEDS[n].what).join(" and ")}.`}</span>`;
+  const switches = Object.entries(format.switches);
+  const summary = [kind.formats.length > 1 ? VARIANTS[format.id] : "",
+    ...switches.map(([name, spec]) => { const v = d.switches[name] ?? spec.default; return spec.choices ? `${v}×` : v ? spec.label : ""; })].filter(Boolean).join(" · ");
+  return `<div class="kind-choice">
+    <div class="kind-tiles" role="radiogroup" aria-label="Kind of loop">${kinds.map((k) => {
+      const ok = k.formats.some(usable);
+      return `<button type="button" role="radio" data-kind="${k.id}" aria-checked="${k === kind}" class="kind-tile${k === kind ? " on" : ""}"${ok ? "" : " disabled"}>${k.icon}<span class="kind-name">${esc(k.label)}</span>${ok ? "" : `<span class="kind-needs">Needs ${formatMissing(k.formats[0]).map((n) => NEEDS[n].what).join(" and ")}</span>`}</button>`;
+    }).join("")}</div>
+    <p class="kind-about">${esc(format.description)}${note}</p>
+    ${variants.length > 1 || switches.length ? `<details class="kind-options"${d.optionsOpen ? " open" : ""}><summary><span>Options</span><span class="kind-summary">${esc(summary)}</span></summary>
+      <div class="format-switches">
+        ${variants.length > 1 ? `<div class="format-switch"><span>${esc(kind.label)}</span><span class="seg" role="radiogroup" aria-label="Kind of drill">${variants.map((f) =>
+          `<button type="button" role="radio" data-format="${f.id}" aria-checked="${f === format}" class="${f === format ? "on" : ""}">${esc(VARIANTS[f.id] || f.label)}</button>`).join("")}</span></div>` : ""}
+        ${switches.map(([name, spec]) => spec.choices
+          ? `<div class="format-switch"><span>${esc(spec.label)}</span><span class="seg" role="radiogroup" aria-label="${esc(spec.label)}">${spec.choices.map((c) =>
+            `<button type="button" role="radio" data-switch="${name}" data-value="${c}" aria-checked="${(d.switches[name] ?? spec.default) === c}" class="${(d.switches[name] ?? spec.default) === c ? "on" : ""}">${esc(c)}</button>`).join("")}</span></div>`
+          : `<label class="format-switch"><input type="checkbox" data-toggle="${name}"${(d.switches[name] ?? spec.default) ? " checked" : ""}><span>${esc(spec.label)}</span></label>`).join("")}
+      </div></details>` : ""}
   </div>`;
 }
 
-function openModal(html) {
-  const node = el(html);
+const makeSection = (label, body) => `<section class="make-section" aria-label="${esc(label)}"><div class="make-label"><span>${esc(label)}</span></div>${body}</section>`;
+
+/* One make dialog, drawn again from its state on every change, as the application re-renders. */
+function openMakeDialog(kind, from = "scope") {
+  const rule = MAKE[kind];
+  const d = {
+    choice: from === "selection" && picked().length ? "selection" : "random", count: rule.initial, seed: Date.now() % 100000,
+    passed: new Set(), ids: [], browsing: null, format: state.loopFormat || "classic", switches: {}, optionsOpen: false,
+    music: state.loopMusic || "surprise", storyKind: "auto", style: "auto", guidance: ""
+  };
+  const node = el(`<div class="modal-backdrop"><section class="settings make-dialog" role="dialog" aria-modal="true" tabindex="-1"></section></div>`);
   document.body.appendChild(node);
-  const onKey = (ev) => { if (ev.key === "Escape") shut(); };
-  const shut = () => { node.remove(); document.removeEventListener("keydown", onKey); };
-  document.addEventListener("keydown", onKey);
+  const frame = $(".make-dialog", node);
+  const kinds = () => [{ id: "auto", label: "Surprise me", about: "Any kind of story", art: iconArt(MAKE_ICON.dice) },
+    ...STORY_TYPES.map((t) => ({ id: t.id, label: t.label, art: art("kinds", t.id, t.label, t.emoji) }))];
+  const pictures = () => {
+    const suggested = STORY_TYPES.find((t) => t.id === d.storyKind)?.styles || [];
+    const rank = (id) => (suggested.includes(id) ? suggested.indexOf(id) : suggested.length);
+    return [{ id: "auto", label: "To suit the story", about: "A style this kind of story suits", art: iconArt(MAKE_ICON.picture) },
+      ...STORY_STYLES.slice().sort((a, b) => rank(a.id) - rank(b.id)).map((s) => ({ id: s.id, label: s.label, art: art("styles", s.id, s.label) }))];
+  };
+  const catalogues = () => kind === "loop"
+    ? { Music: [musicTiles(), "music"] }
+    : { "Kind of story": [kinds(), "storyKind"], Pictures: [pictures(), "style"] };
+  const paint = () => {
+    const cats = catalogues();
+    const body = d.browsing
+      ? choiceGrid(d.browsing, cats[d.browsing][0], d[cats[d.browsing][1]])
+      : makeSection("Words", wordPicker(kind, d)) + (kind === "loop"
+        ? makeSection("Kind of loop", kindChoices(d)) + makeSection("Music", favouriteMusic(d.music) + choiceStrip("Music", cats.Music[0], d.music))
+        : makeSection("Kind of story", choiceStrip("Kind of story", cats["Kind of story"][0], d.storyKind))
+          + makeSection("Pictures", choiceStrip("Pictures", cats.Pictures[0], d.style))
+          + `<textarea class="make-guidance" aria-label="Anything else? (optional)" rows="${d.guidance ? 3 : 1}" maxlength="1000" placeholder="Anything else? Set it on a night train, tell it from the dog’s side…">${esc(d.guidance)}</textarea>`);
+    frame.innerHTML = `<header>${d.browsing ? `<button type="button" class="make-back" data-back aria-label="Back to ${rule.title}">${ICON.back}</button>` : ""}
+        <h2>${esc(d.browsing || rule.title)}</h2><button class="close" aria-label="Close">×</button></header>
+      <div class="make-body">${body}</div>
+      <footer class="make-footer"><button class="tb-btn primary make-go"${d.ids.length ? "" : " disabled"}>${rule.label}<span class="make-go-count"> · ${wordsCount(d.ids.length)}</span></button></footer>`;
+  };
+  const shut = () => { node.remove(); document.removeEventListener("keydown", onKey, true); };
+  const onKey = (ev) => {
+    if (ev.key !== "Escape") return;
+    ev.preventDefault(); ev.stopPropagation();
+    if (d.browsing) { d.browsing = null; paint(); } else shut();
+  };
+  document.addEventListener("keydown", onKey, true);
   node.onmousedown = (ev) => { if (ev.target === node) shut(); };
-  node.querySelectorAll(".close, [data-cancel]").forEach((b) => { b.onclick = shut; });
-  return { node, shut };
-}
-
-function openLoopDialog(from = "scope") {
-  const { node, shut } = openModal(renderLoopDialog(from));
-  $("#loopCancel", node).onclick = shut;
-  const range = $("#loopCount", node);
-  range.oninput = () => { $("#loopCountOut", node).textContent = `${range.value} words`; };
-  $(".music-choices", node).onclick = (ev) => {
-    const choice = ev.target.closest("[data-choice]");
-    if (ev.target.closest(".music-preview")) { toast("Plays the loop this music was kept from — prototype only"); return; }
-    if (!choice) return;
-    node.querySelectorAll(".music-choice").forEach((one) => {
-      const on = one.contains(choice);
-      one.classList.toggle("on", on);
-      one.querySelector("[data-choice]").setAttribute("aria-checked", String(on));
-    });
+  frame.oninput = (ev) => {
+    if (ev.target.matches("[data-count]")) { d.count = Number(ev.target.value); paint(); }
+    if (ev.target.matches(".make-guidance")) d.guidance = ev.target.value;
   };
-  const wireFormats = () => {
-    $(".format-choices", node).onchange = (ev) => {
-      if (ev.target.name !== "loop-format") return;
-      state.loopFormat = ev.target.value;
-      $(".format-choices", node).outerHTML = formatChoices(state.loopFormat);
-      wireFormats();
-    };
-    $(".format-choices", node).onclick = (ev) => {
-      const segment = ev.target.closest(".seg button");
-      if (!segment) return;
-      segment.parentElement.querySelectorAll("button").forEach((one) => {
-        one.classList.toggle("on", one === segment);
-        one.setAttribute("aria-checked", String(one === segment));
-      });
-    };
+  frame.onchange = (ev) => { if (ev.target.dataset.toggle) { d.switches[ev.target.dataset.toggle] = ev.target.checked; d.optionsOpen = true; paint(); } };
+  frame.onclick = (ev) => {
+    const t = ev.target.closest("button, [data-choice] button, summary");
+    if (!t) return;
+    if (t.matches("summary")) { d.optionsOpen = !t.parentElement.open; return; }
+    if (t.matches(".close")) return shut();
+    if (t.matches("[data-back]")) { d.browsing = null; return paint(); }
+    if (t.matches(".make-go")) { if (kind === "loop") state.loopMusic = d.music; shut(); return toast(`Asked for a ${kind} from ${wordsCount(d.ids.length)} — prototype only, nothing was made`); }
+    if (t.matches(".music-preview")) return toast("Plays the loop this music was kept from — prototype only");
+    if (t.dataset.order) { d.choice = t.dataset.order; d.passed = new Set(); return paint(); }
+    if (t.dataset.swap) { d.passed.add(t.dataset.swap); return paint(); }
+    if (t.matches("[data-redraw]")) { d.ids.forEach((id) => d.passed.add(id)); return paint(); }
+    if (t.dataset.countTo) { d.count = Number(t.dataset.countTo); return paint(); }
+    if (t.dataset.kind) { const k = loopKinds().find((x) => x.id === t.dataset.kind); d.format = k.formats[0].id; d.switches = {}; state.loopFormat = d.format; return paint(); }
+    if (t.dataset.format) { d.format = t.dataset.format; state.loopFormat = d.format; d.optionsOpen = true; return paint(); }
+    if (t.dataset.switch) { d.switches[t.dataset.switch] = t.dataset.value; d.optionsOpen = true; return paint(); }
+    if (t.dataset.all) { d.browsing = t.dataset.all; return paint(); }
+    const tile = t.closest("[data-choice]");
+    if (tile) {
+      const strip = tile.closest("[data-strip]").dataset.strip;
+      d[catalogues()[strip][1]] = tile.dataset.choice;
+      d.browsing = null;
+      return paint();
+    }
   };
-  wireFormats();
-  wireSource(node, "loop", "Make the loop");
-  $("#loopGo", node).onclick = () => { shut(); toast("Asked for a loop — prototype only, nothing was made"); };
+  paint();
+  frame.focus();
 }
-
-/* Make a story — `StoryDialog.tsx`, which the prototype had not drawn until it had a selection to
-   show. The kind and the pictures are the application's two selects; their options here are a
-   sample. */
-function openStoryDialog(from = "scope") {
-  const where = state.topic === "all" ? langOf(state.lang).name : `${langOf(state.lang).name} · ${topicOf(state.topic)?.name || "Inbox"}`;
-  const eligible = visible().rows.length;
-  const scope = `<div class="loop-scope">${ICON.book}<span><b>${esc(where)}</b> · ${eligible} words can be in a story</span></div>
-        <label class="config-field"><span>How many words</span>
-          <span class="loop-count">
-            <input type="range" id="storyCount" min="1" max="${Math.max(1, Math.min(8, eligible))}" value="3">
-            <output for="storyCount" id="storyCountOut">3 words</output>
-          </span></label>`;
-  const { node, shut } = openModal(`<div class="modal-backdrop">
-    <section class="settings loop-dialog" role="dialog" aria-modal="true" aria-labelledby="story-dialog-title">
-      <header><h2 id="story-dialog-title">Make a story</h2>
-        <button class="close" aria-label="Close">×</button></header>
-      <div class="settings-body">
-        <p class="config-help">A few of your words, told back to you as a short illustrated story you
-          can read in a couple of minutes.</p>
-        ${sourceBlock("story", from, scope)}
-        <label class="config-field"><span>Kind of story</span>
-          <select><option>Surprise me</option><option>\u{1F9ED} An adventure</option><option>\u{1F52C} How it was invented</option></select></label>
-        <label class="config-field"><span>Pictures</span>
-          <select><option>To suit the story</option><option>Watercolour</option><option>Photograph</option></select></label>
-        <label class="config-field"><span>Anything else? <em>(optional)</em></span>
-          <textarea rows="3" maxlength="1000" placeholder="Set it on a night train, tell it from the dog’s side, keep it gentle…"></textarea></label>
-        <p class="config-help">Every word you choose has to earn its place in the story, so a few work
-          better than many. All the pictures are drawn in one style, so the story looks like one thing.</p>
-        <div class="loop-actions">
-          <button class="tb-btn" data-cancel>Cancel</button>
-          <button class="tb-btn primary make-go" id="storyGo">Make the story</button>
-        </div>
-      </div>
-    </section>
-  </div>`);
-  const range = $("#storyCount", node);
-  range.oninput = () => { $("#storyCountOut", node).textContent = wordsCount(Number(range.value)); };
-  wireSource(node, "story", "Make the story");
-  $("#storyGo", node).onclick = () => { shut(); toast("Asked for a story — prototype only, nothing was made"); };
-}
+const openLoopDialog = (from = "scope") => openMakeDialog("loop", from);
+const openStoryDialog = (from = "scope") => openMakeDialog("story", from);
 
 /* ── wiring ──
    Delegated from the pane, the bar and the top bar, so a re-render never leaves a dead handler. */

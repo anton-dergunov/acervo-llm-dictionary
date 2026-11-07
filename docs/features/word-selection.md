@@ -99,9 +99,10 @@ twenty words gathered over an hour, and one mistaken tap should not throw that a
 ## Making from it
 
 Loop and Story open the ordinary make dialogs, and **the dialogs say exactly what will be sent.** When a
-selection exists, a switch offers **Your selection · N** or **Random from {scope}**. It starts on the
-selection when the dialog was opened from the bar, and on the random draw when opened from a surface's
-own Make button — which is what that button always meant.
+selection exists it is one more way of choosing words, **Selection · N**, beside the draws from the
+scope on screen (Random, Hard, Rare, Newest — [`loops.md`](loops.md) §2.12). It is chosen when the
+dialog was opened from the bar, and a draw is chosen when opened from a surface's own Make button —
+which is what that button always meant.
 
 - **The selection is drawn as chips, in the order chosen.**
 - **Undimmed means sent.** A word the kind cannot use is struck through, and a sentence names it and
@@ -109,9 +110,9 @@ own Make button — which is what that button always meant.
   on a device with no hover. Words past the kind's limit (the loop schema's `maxItems`, a story's
   maximum of eight) are struck through too, and the first chosen are the ones used.
 - **The button counts only the words it will send.**
-- **The random draw is the kind's own**: a story draws words a story can use, not words a loop can say
+- **A draw is the kind's own**: a story draws words a story can use, not words a loop can say
   — sampling a loop's eligible words would give a scope with no single-term glosses no story at all.
-- **The random draw leaves out a word set aside; the selection keeps it.** Setting a word aside says
+- **A draw leaves out a word set aside; the selection keeps it.** Setting a word aside says
   "not this one unless I ask", and choosing it by hand is asking.
 
 **No server change.** `POST /loops` and `POST /stories` already take lexeme ids and never re-derive the

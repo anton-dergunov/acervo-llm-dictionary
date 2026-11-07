@@ -1419,8 +1419,8 @@ describe("Acervo application", () => {
     expect(screen.getByRole("button", { name: "Remove from selection" })).toHaveAttribute("aria-pressed", "true");
 
     fireEvent.click(screen.getByRole("button", { name: "Make a loop from these words" }));
-    expect(await screen.findByRole("radio", { name: /Your selection · 2/ })).toHaveAttribute("aria-checked", "true");
-    expect(await screen.findByRole("button", { name: "Make the loop from 2 words" })).toBeInTheDocument();
+    expect(await screen.findByRole("radio", { name: /Selection · 2/ })).toHaveAttribute("aria-checked", "true");
+    expect(await screen.findByRole("button", { name: "Make the loop · 2 words" })).toBeInTheDocument();
     localStorage.removeItem("acervo-word-selection");
     reloadSelectionForTests();
   });

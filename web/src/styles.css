@@ -1221,58 +1221,204 @@ details.fold .fold-body { padding: 4px 0 18px; }
   color: var(--core);
 }
 
-/* ── make a loop ── */
-.loop-dialog { width: min(560px, 100%); }
-.loop-scope { display: flex; align-items: center; gap: 9px; padding: 11px 13px; border-radius: 8px;
-              background: var(--surface-2); color: var(--ink-2); font-size: 13.5px; }
-.loop-scope svg { flex: none; width: 17px; height: 17px; color: var(--ink-3); }
-.loop-count { display: flex; align-items: center; gap: 14px; }
-.loop-count input[type=range] { flex: 1; accent-color: var(--core); }
-.loop-count output { font-family: var(--mono); font-size: 13px; color: var(--ink); min-width: 64px; text-align: right; }
-.loop-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
-/* Where the words come from, and — from the selection — the words themselves, in the order they were
-   chosen. One the kind cannot use is dimmed and struck, and the button counts only the rest. */
-.make-source { align-self: start; max-width: 100%; }
-.make-source button { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+/* ── make a loop, make a story ──
+   One frame for both (`MakeDialog.tsx`): the body as tall as what is in it, and the button in a
+   footer that never scrolls away. A catalogue is a strip of pictures one row high whatever its
+   length; All shows it as a grid in place of the body. */
+/* As tall as the window allows, not Settings' 820px: the make dialogs are meant to be read without scrolling. */
+.settings.make-dialog { width: min(640px, 100%); max-height: 100%; }
+.make-dialog:focus { outline: none; }
+.make-dialog header { gap: 6px; padding: 14px 18px 14px 20px; }
+.make-dialog header h2 { flex: 1; min-width: 0; }
+.make-back { display: grid; place-items: center; width: 32px; height: 32px; margin-left: -8px; border-radius: 8px; color: var(--ink-2); }
+.make-back:hover { background: var(--surface-2); color: var(--ink); }
+.make-back svg { width: 20px; height: 20px; }
+.make-body {
+  display: grid; gap: 22px; padding: 18px 20px 22px; align-content: start;
+  overflow-y: auto; overscroll-behavior: contain; flex: 1 1 auto; min-height: 0;
+}
+.make-section { display: grid; gap: 10px; min-width: 0; }
+.make-label {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3);
+}
+.make-footer {
+  flex: none; display: flex; align-items: center; justify-content: flex-end; gap: 14px;
+  padding: 12px 20px; border-top: 1px solid var(--rule-soft); background: var(--surface);
+}
+.make-blocked { flex: 1; margin: 0; font-size: 13px; line-height: 1.4; }
+.make-blocked.warn { color: var(--warn); }
+.make-go { height: 40px; padding: 0 18px; font-size: 14.5px; }
+.make-go-count { font-weight: 400; opacity: .82; }
+
+/* Which words: the orders as pills, the count, and the words themselves — what is drawn is what is
+   sent, so each chip carries the × that removes it (the next word takes its place), and Draw again
+   is a labelled button under them rather than a mark at the end of the row. */
+.word-picker { display: grid; gap: 10px; min-width: 0; }
+.word-orders { display: flex; flex-wrap: wrap; gap: 6px; }
+.word-order {
+  display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 13px 0 10px;
+  border: 1px solid var(--rule); border-radius: 999px; background: var(--surface);
+  color: var(--ink-2); font-size: 13.5px; cursor: pointer; white-space: nowrap;
+}
+.word-order svg { width: 16px; height: 16px; flex: none; color: var(--ink-3); }
+.word-order:hover { background: var(--surface-2); }
+.word-order.on { border-color: color-mix(in srgb, var(--core) 55%, transparent); background: var(--core-soft); color: var(--core); font-weight: 600; }
+.word-order.on svg { color: var(--core); }
+.word-caption, .word-note { margin: 0; font-size: 12.5px; line-height: 1.4; color: var(--ink-3); }
+.word-caption.warn, .word-note.warn { color: var(--warn); }
+.word-count { display: flex; align-items: center; gap: 14px; min-height: 34px; }
+.word-count input[type=range] { flex: 1; min-width: 0; accent-color: var(--core); }
+.word-count output { font-family: var(--mono); font-size: 13px; color: var(--ink); white-space: nowrap; }
+.word-count output small { font-size: 12px; color: var(--ink-3); }
+.word-count-seg { flex: 1; justify-content: space-between; }
+.word-count-seg button { flex: 1; min-width: 30px; padding: 7px 0; font-size: 12px; }
 .make-words { display: flex; flex-wrap: wrap; gap: 6px; }
 .make-chip {
   display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 11px 0 9px;
   border-radius: 999px; background: var(--surface); border: 1px solid var(--rule-soft);
   font: 500 14px/1 var(--serif); color: var(--ink);
 }
+button.make-chip { cursor: pointer; }
+button.make-chip:hover { background: var(--surface-2); border-color: var(--rule); }
 .make-chip.skip { color: var(--ink-3); background: none; border-style: dashed; text-decoration: line-through; text-decoration-color: var(--rule); }
-.make-skip { margin-top: 8px; }
-.loop-engine { padding-top: 12px; border-top: 1px solid var(--rule-soft);
-               font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em;
-               text-transform: uppercase; color: var(--ink-3); }
-.loop-engine .warn { color: var(--warn); }
-/* The kind of loop: the generator's formats as the settings' radio cards, the chosen one holding the
-   colour, and its switches beneath it. One this server cannot make says why, in the card. */
-.format-choices { display: grid; gap: 6px; }
-.format-card.on { border-color: color-mix(in srgb, var(--core) 45%, transparent); background: var(--core-soft); }
-.format-card.off { cursor: default; opacity: .62; }
-.format-card.off:hover { background: var(--surface); }
-.config-switch > span > .format-note { color: var(--warn); }
-.format-switches { display: grid; gap: 8px; padding: 4px 2px 2px 13px; }
-.format-switch { display: flex; align-items: center; gap: 10px; min-height: 30px; font-size: 13.5px; color: var(--ink-2); }
+.make-chip.more { font: 500 12px/1 var(--mono); color: var(--ink-3); }
+.make-chip:has(.make-chip-x) { gap: 5px; padding-right: 5px; }
+.make-chip-x {
+  display: grid; place-items: center; width: 19px; height: 19px; border-radius: 999px;
+  color: var(--ink-3); background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+.make-chip-x svg { width: 10px; height: 10px; }
+button.make-chip:hover .make-chip-x { color: var(--surface); background: var(--ink-2); }
+.word-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 30px; }
+.word-redraw {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 10px;
+  border: 1px solid var(--rule); border-radius: 999px; background: var(--surface);
+  color: var(--core); font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
+}
+.word-redraw svg { width: 14px; height: 14px; }
+.word-redraw:hover { background: var(--core-soft); border-color: color-mix(in srgb, var(--core) 45%, transparent); }
+
+/* The kind of loop: three tiles, the chosen one holding the colour; under them the sentence that
+   says what it is, and its variants and switches folded into a line that reads them out. */
+.kind-choice { display: grid; gap: 9px; }
+.kind-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 8px; }
+.kind-tile {
+  display: grid; justify-items: center; align-content: start; gap: 7px; padding: 15px 8px 13px;
+  border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); color: var(--ink-3); cursor: pointer;
+}
+.kind-tile svg { width: 30px; height: 30px; }
+.kind-name { font-size: 14px; font-weight: 600; color: var(--ink); }
+.kind-tile:not(.on):hover:not(:disabled) { background: var(--surface-2); }
+.kind-tile.on { border-color: var(--core); background: var(--core-soft); box-shadow: inset 0 0 0 1px var(--core); color: var(--core); }
+.kind-tile.on .kind-name { color: var(--core); }
+.kind-tile:disabled { opacity: .55; cursor: default; }
+.kind-needs { font-size: 11.5px; line-height: 1.3; text-align: center; color: var(--ink-3); }
+.kind-about { margin: 0; font-size: 13px; line-height: 1.45; color: var(--ink-3); }
+.kind-about .format-note { color: var(--warn); }
+.kind-options { border: 1px solid var(--rule-soft); border-radius: 8px; background: var(--surface); }
+.kind-options summary {
+  display: flex; align-items: center; gap: 10px; min-height: 38px; padding: 0 12px;
+  font-size: 13.5px; color: var(--ink-2); cursor: pointer; list-style: none;
+}
+.kind-options summary::-webkit-details-marker { display: none; }
+.kind-options summary::before {
+  content: ""; flex: none; width: 6px; height: 6px; margin-right: 2px;
+  border-right: 1.7px solid var(--ink-3); border-bottom: 1.7px solid var(--ink-3);
+  transform: rotate(-45deg); transition: transform .15s;
+}
+.kind-options[open] summary::before { transform: rotate(45deg); }
+.kind-summary { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12.5px; color: var(--ink-3); }
+.format-switches { display: grid; gap: 8px; padding: 2px 12px 12px 30px; }
+.format-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; min-height: 30px; font-size: 13.5px; color: var(--ink-2); }
 .format-switch input { width: 16px; height: 16px; margin: 0; accent-color: var(--core); }
 .format-switch .seg { margin-left: auto; }
 
-/* ── choosing music ──
-   One list for both places music is chosen: each choice is a name and the sentence that says what it
-   is, two lines a finger can hit, and the chosen one holds the colour rather than changing shape. */
-.music-choices { display: grid; gap: 2px; max-height: min(44vh, 420px); overflow-y: auto;
-                 padding: 4px; border: 1px solid var(--rule-soft); border-radius: 8px; }
-.music-choice { display: flex; align-items: center; gap: 6px; border-radius: 6px; }
-.music-choice.on { background: var(--core-soft); }
-.music-choice > button[role=radio] { flex: 1; min-width: 0; display: grid; gap: 2px; padding: 9px 10px;
-                                     border: 0; background: none; text-align: left; cursor: pointer; border-radius: 6px; }
-.music-choice:not(.on) > button[role=radio]:hover { background: var(--surface-2); }
+/* A catalogue as pictures: a strip one row high, and the grid All opens. The chosen picture is
+   ringed rather than resized, so nothing in the row moves when the choice does. */
+.choice-strip {
+  display: flex; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: 6px;
+  padding: 6px 6px 8px; margin: -6px -6px -2px; scrollbar-width: thin;
+}
+.choice { position: relative; flex: none; width: 92px; scroll-snap-align: start; }
+.choice > button {
+  display: grid; align-content: start; gap: 6px; width: 100%; padding: 0;
+  border: 0; background: none; text-align: left; color: var(--ink-2); cursor: pointer;
+}
+.choice-art {
+  position: relative; display: block; aspect-ratio: 1; overflow: hidden;
+  border: 1px solid var(--rule-soft); border-radius: 10px; background: var(--surface-2);
+}
+.choice-img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.choice-stand-in {
+  display: grid; place-items: center; width: 100%; height: 100%;
+  font: 600 30px/1 var(--serif); color: var(--core);
+  background: linear-gradient(145deg, var(--core-soft), var(--surface-2));
+}
+.choice-stand-in.emoji { font-size: 36px; }
+.choice-stand-in[hidden], .choice-img[hidden] { display: none; }
+.choice-stand-in.icon svg { width: 34px; height: 34px; }
+.choice-name {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 12.5px; line-height: 1.25; color: var(--ink-2);
+}
+.choice > button:hover .choice-art { border-color: var(--rule); }
+.choice.on .choice-art { outline: 2.5px solid var(--core); outline-offset: 2px; }
+.choice.on .choice-name { color: var(--core); font-weight: 600; }
+.choice-badge {
+  position: absolute; left: 6px; top: 6px; display: grid; place-items: center; width: 22px; height: 22px;
+  border-radius: 999px; background: var(--surface); color: var(--core); box-shadow: var(--shadow);
+}
+.choice-badge svg { width: 13px; height: 13px; }
+.choice .music-preview {
+  position: absolute; right: 6px; top: 6px; width: 30px; height: 30px; margin: 0;
+  background: color-mix(in srgb, var(--surface) 90%, transparent); box-shadow: var(--shadow);
+}
+.choice .music-preview svg { width: 13px; height: 13px; }
+.choice-all .choice-art { display: grid; place-items: center; border-style: dashed; background: var(--surface); color: var(--ink-3); }
+.choice-all .choice-art svg { width: 26px; height: 26px; }
+.choice-grid-view { display: grid; gap: 14px; }
+.choice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 18px 14px; padding: 4px; }
+.choice-grid .choice { width: auto; }
+.choice-about { font-size: 12px; line-height: 1.35; color: var(--ink-3); }
+
+/* The favourites: a row of their own above the styles, each its picture, its name with the star and,
+   in plain view, when it was kept and which loop it came from. Chosen, it fills like a kind tile. */
+.music-favourites {
+  display: flex; gap: 8px; overflow-x: auto; overscroll-behavior-x: contain;
+  padding: 2px; margin: -2px; scrollbar-width: thin;
+}
+.favourite {
+  flex: none; display: flex; align-items: center; width: min(100%, 320px);
+  border: 1px solid var(--rule); border-radius: 10px; background: var(--surface);
+}
+.favourite:hover { background: var(--surface-2); }
+.favourite.on { border-color: var(--core); background: var(--core-soft); box-shadow: inset 0 0 0 1px var(--core); }
+.favourite > button[role=radio] {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 11px; padding: 7px 4px 7px 7px;
+  border: 0; background: none; text-align: left; color: var(--ink-2); cursor: pointer;
+}
+.favourite-art { flex: none; width: 48px; height: 48px; overflow: hidden; border-radius: 7px; background: var(--surface-2); }
+.favourite-art .choice-stand-in { font-size: 20px; }
+.favourite-text { display: grid; gap: 3px; min-width: 0; }
+.favourite-name { display: flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.favourite-name svg { flex: none; width: 13px; height: 13px; color: var(--core); }
+.favourite.on .favourite-name { color: var(--core); }
+.favourite-about { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; line-height: 1.3; color: var(--ink-3); }
+.favourite .music-preview { margin-right: 7px; }
+
+/* Anything else: one line until it is used, so an optional box is not the tallest thing on screen. */
+.make-guidance {
+  width: 100%; padding: 9px 12px; resize: none;
+  border: 1px solid var(--rule); border-radius: 8px; background: var(--surface);
+  font: inherit; font-size: 14px; line-height: 1.45; color: var(--ink);
+}
+.make-guidance:focus { min-height: 5.2em; border-color: var(--core); outline: none; }
+
+/* The player's music menu: each choice a name and the sentence that says what it is. */
 .music-name { display: inline-flex; align-items: center; gap: 6px; font-size: 14.5px; color: var(--ink); }
-.music-choice.on .music-name { color: var(--core); font-weight: 600; }
 .music-name svg { width: 14px; height: 14px; color: var(--core); flex: none; }
 .music-about { font-size: 12.5px; color: var(--ink-3); line-height: 1.35; }
-.music-group { padding: 10px 10px 4px; }
 .music-preview { flex: none; display: grid; place-items: center; width: 36px; height: 36px; margin-right: 4px;
                  border: 0; border-radius: 999px; background: var(--surface-2); color: var(--ink-2); cursor: pointer; }
 .music-preview svg { width: 15px; height: 15px; }

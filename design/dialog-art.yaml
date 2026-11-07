@@ -1,0 +1,57 @@
+# The make dialogs' pictures: what `scripts/draw_dialog_art.py` asks an image model to draw.
+#
+# Three groups, each written to `web/src/art/<group>/<id>.webp` and mirrored into the prototype:
+#
+# - styles: one sample per picture style in `config/image-styles.yaml`. Every sample is the same
+#   subject drawn with that style's own brief, so the tiles differ only in what the choice changes.
+#   Nothing per style is listed here: a style added to the table is drawn the next time this runs.
+# - kinds: a vignette per kind of story in `config/story-types.yaml`, in the house style below.
+# - music: a vignette per LexiBeat bed family, in the house style, picturing how the music feels
+#   rather than an instrument catalogue, so fourteen tiles read as fourteen moods.
+#
+# An id with no line here, or no picture yet, still gets a tile: its emoji or its initial.
+
+# The subject every picture-style sample shows. Chosen to be legible in any style, from a photograph
+# to pixel art: one figure, one object, one place, and light that a style can do something with.
+style_subject: >-
+  a young woman reading a large open book on a stone bridge over a canal at dusk, a small dog
+  sitting beside her looking up, street lamps just coming on
+
+# Appended to every kinds and music prompt, so the two strips read as one set beside the samples.
+house: >-
+  A small square vignette, mid-century gouache and cut-paper illustration with soft grain, a
+  limited palette of deep teal, sea green, warm sand, terracotta and off-white on a calm pale
+  background, one clear motif that fills the square edge to edge with the background part of the
+  scene, no border, no frame and no inset picture, gentle and warm, no people's faces in close-up.
+  Absolutely no text, letters, numbers or symbols anywhere.
+
+kinds:
+  funny: a cat balancing a teetering stack of teacups on its head while a startled parrot looks on
+  historical: an old sailing ship beside a quill and a rolled parchment map with a wax seal
+  science: a glowing flask and a small telescope under a night sky with orbiting planets
+  invention: a cluttered workbench with gears, a lit bulb and a half-built flying contraption
+  travel: a winding road to distant hills, a leather suitcase and a small red train
+  mystery: a lantern lighting footprints on a cobbled street at night, a keyhole glowing in a door
+  nature: a curious monkey in a lush tree, a hummingbird and big tropical leaves
+  technology: a friendly robot beside a satellite dish under a starry sky with a rocket trail
+  cultures: lanterns strung over a market square with a drum, woven textiles and pottery
+  mythology: a dragon curled around an ancient column under a crescent moon, a laurel wreath
+  food: a steaming bowl of noodles with chopsticks, fresh herbs, chillies and a wooden spoon
+  lesson: a seedling growing from an open book, a small heart-shaped leaf catching the sun
+  everyday: a sunny kitchen table with a coffee cup, a newspaper and a bicycle seen through the window
+
+music:
+  meditative: a still lake at dawn with one long soft horizon line and a single held glow of light
+  organic: wooden marimba bars and a hand drum among ferns and river stones, soft pulse of ripples
+  acoustic: an upright piano and a glockenspiel in a warm room, strings of light like violin strings
+  sunlit: a relaxed sunny meadow with a few drifting dandelion seeds in a light breeze
+  radiant: a bright sunrise bursting over hills, rays fanning upward, birds rising
+  acoustic-flow: a calm river curving through a valley, long flowing ribbons of light over the water
+  playful-minimal: a few bouncing coloured balls over a soft plain background, lots of empty space
+  warm-motion: a gently rolling sea of warm amber waves carrying a small sailboat forward
+  bright-organic: a marimba on a breezy terrace with a walking bass of stepping stones and lemons
+  gentle-game: a cosy little board game world of hills and tiny houses with a sparkling path
+  sunlit-acoustic: an acoustic guitar and a harp in a sunlit garden, plucked strings glinting
+  gentle-movement: a slow carousel of soft lights and a vibraphone under a twilight sky
+  playful-plucked: a kalimba and a small guitar with notes hopping like frogs across lily pads
+  bright-pastoral: open green countryside with sheep, a winding path and an ocarina on a fence post

@@ -4,20 +4,10 @@
 [`../features/stories.md`](../features/stories.md). Four pieces, each usable alone. A finished render
 stays silent on purpose: the loop or story is in its list when the owner goes back to it.
 
-## 1 · Choosing the words
+## 1 · Drawing the favourites
 
-Today a loop or a story is made from the selection, or from a random draw of the words on screen
-(`sampleLexemeIds` in `web/src/selectors.ts`). The make dialog should offer one choice of *how* to draw:
-
-- **Random**, as now.
-- **Not used yet** — words with no loop yet, for a loop; words in no story yet, for a story. Counted
-  per kind: a word already in a story is still new to loops.
-- **Hardest** — by the figure in [`anki.md`](anki.md) §2, the one the list's "Hardest" sort uses.
-- **Newest.**
-- **Favourites** (§2).
-
-Each is a filter or an order over the words on screen, so topics and search still narrow it first.
-Two may combine — hardest among the unused — but only if a single one proves too blunt.
+One more order for the make dialogs' draw ([`../features/loops.md`](../features/loops.md) §2.12):
+**Favourites**, the starred words first, once words can be starred (§2).
 
 ## 2 · Favourites and order
 

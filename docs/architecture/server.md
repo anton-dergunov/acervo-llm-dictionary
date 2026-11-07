@@ -86,7 +86,7 @@ transport would change the file ingestion's retry behaviour without changing its
 **6 · The pipeline packages stand alone.** `models/` imports no settings, graph, database or Acervo
 wire vocabulary; it decides *what kind of thing* went wrong — a closed seven-value `Reason` — and
 `services/models.py` decides what Acervo's wire calls that. `images/`, `clips/`, `pronunciation/`,
-`meaning/` and `ocr/` may import the provider package and `article.py`, and nothing else of Acervo's;
+`meaning/` and `ocr/` may import the provider package and `article.py`, and nothing else of Acervo's, and `frequency/` (how common a word is) imports nothing of Acervo's at all;
 `services/` is where each meets settings and the graph. This is the rule that breaks most quietly:
 one `from acervo.errors import ApiError` in `models/call.py` and everything still works — the package
 is simply no longer usable without Acervo.
@@ -193,7 +193,7 @@ The routes, under `/api/acervo/v1` unless shown:
 | Work | `GET /jobs`, `POST /jobs`, `GET /jobs/{id}`, `POST /jobs/{id}/cancel`, `POST /jobs/{id}/dismiss`, `GET /events` (a stream) |
 | Pictures | `GET`/`DELETE /images/prompts/{id}`, `PUT /images/senses/{id}/picture`, `GET`/`PUT /images/settings` |
 | Pronunciation | `POST /pronunciations/utterance`, `POST /pronunciations/take`, `POST /pronunciations/{collection}/{id}`, `PUT …/{id}/audio`, `GET`/`PUT /pronunciations/settings` |
-| Loops and stories | `POST /loops`, `GET /loops/schema`, `POST /loops/{id}/music`, `DELETE /loops/{id}`, `POST /stories`, `GET /stories/types`, `DELETE /stories/{id}`, `POST /stories/{id}/parts/{part}/audio` |
+| Loops and stories | `POST /loops`, `GET /loops/schema`, `POST /loops/{id}/music`, `DELETE /loops/{id}`, `POST /stories`, `GET /stories/types`, `DELETE /stories/{id}`, `POST /stories/{id}/parts/{part}/audio`, `GET /words/rarity` |
 | The map | `GET /map/{language}` |
 | Review history | `POST /reviews` (a batch, append-only), `GET /reviews/latest?system=`, `GET /stats?language=&days=&weeks=` |
 | Anki | `GET /anki`, `PUT /anki/settings`, `POST /anki/push`, `POST /anki/pull` (due at once) |
