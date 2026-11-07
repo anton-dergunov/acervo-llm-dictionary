@@ -79,7 +79,7 @@ so the card stays a button.
   a gloss or a note in the reader's own language is not looked up, nor is an article's headword.
 - **A language written without spaces** gets its unit from the segmenter's word boundaries around the
   tapped character, and the quick prompt widens it as it does *New York*
-  ([`../plans/languages/chinese.md`](../plans/languages/chinese.md)).
+  ([`../plans/languages/cjk.md`](../plans/languages/cjk.md)).
 
 ## The sheet
 

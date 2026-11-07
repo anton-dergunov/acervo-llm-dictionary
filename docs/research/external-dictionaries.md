@@ -501,7 +501,7 @@ tiering affordable:
 
 ### Explicitly out of scope
 
-The Chinese subsystem ([`../plans/languages/chinese.md`](../plans/languages/chinese.md)); any scraper; bundling BKRS or anything else of unclear provenance;
+The Chinese subsystem ([`../plans/languages/cjk.md`](../plans/languages/cjk.md)); any scraper; bundling BKRS or anything else of unclear provenance;
 per-entry caching of dictionary data; bespoke connectors for APIs beyond the two Wiktionary-shaped
 ones; and anything that puts a dictionary row in the database.
 

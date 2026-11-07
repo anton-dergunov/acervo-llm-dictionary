@@ -11,22 +11,26 @@
  * with their distance from it. A row whose ends simply stop does not say that it scrolls; one whose
  * middle is the point, with pictures fading off both sides, does. The choice a dialog opens on —
  * Surprise me, To suit the story — is the middle of its list (`centred`), so the row opens with
- * pictures on both sides rather than an empty half; the grid keeps it first. Moving the row is choosing:
- * - a swipe chooses as it goes: whichever picture is in the middle is the choice, while the finger
- *   is still moving, and the row is not pulled back to it;
- * - a sideways wheel steps one picture for each notch's worth of travel. It does not scroll the row
- *   itself: a wheel scrolling a snapping row that is also gliding to its choice pulled it back and
- *   forth on every small turn;
- * - tapping a picture brings it to the middle;
- * - the ‹ › buttons on the row's edges step one picture, for a desktop with no sideways wheel;
- * - the row is one stop for the keyboard, and ← → step, as in any radio group.
+ * pictures on both sides rather than an empty half; the grid keeps it first.
  *
- * The size of each picture is a transform written as the row scrolls, never its layout size, so the
- * row and the dialog keep their size while it moves. **All** (the dialog's link above the row) shows
- * the catalogue as a grid in place of the dialog's body (`MakeDialog`), with every sentence at once.
+ * **The row is Embla** (`embla-carousel-react`, MIT), with its wheel plugin
+ * (`embla-carousel-wheel-gestures`, MIT): a swipe, a drag, a sideways wheel or a trackpad moves it
+ * smoothly, with momentum, and it settles with a picture in the middle. **Whatever passes the middle
+ * is the choice, as it passes**, so the row and the choice never disagree. A wheel stepping one
+ * picture per notch, and a native scrolling row steered to its choice, were both tried before this:
+ * the first needed a precise hand, and the second could stop with one picture in the middle and
+ * another chosen. A tap, ← → from the keyboard, or the ‹ › buttons on the row's edges (for a mouse
+ * with no sideways wheel) choose a picture, and the row glides to it.
+ *
+ * The size of each picture is a transform written as the row moves, never its layout size, and the
+ * caption under it has a fixed height, so the dialog keeps its size while the row moves. **All** (the
+ * dialog's link above the row) shows the catalogue as a grid in place of the dialog's body
+ * (`MakeDialog`), with every sentence at once.
  */
 
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import { BackIcon, ForwardIcon } from "./icons";
 
 export interface CatalogueChoice {
@@ -37,12 +41,6 @@ export interface CatalogueChoice {
   art: ReactNode;
 }
 
-/** How long after the last scroll event a row counts as at rest, where `scrollend` is missing. */
-const SETTLE_MS = 120;
-/** Sideways wheel travel that steps one picture, and how long a pause starts the count again. */
-const WHEEL_STEP = 50;
-const WHEEL_PAUSE_MS = 200;
-
 /** A list with its default choice in the middle, so a carousel opening on it has both sides filled. */
 export function centred<T>(first: T, rest: T[]): T[] {
   const half = Math.floor(rest.length / 2);
@@ -51,12 +49,8 @@ export function centred<T>(first: T, rest: T[]): T[] {
 
 /** The size and opacity of a picture `distance` pictures from the middle. */
 function look(distance: number): { scale: number; opacity: number } {
-  if (distance <= 1) return { scale: 1.3 - 0.3 * distance, opacity: 1 };
-  return { scale: Math.max(0.7, 1 - 0.18 * (distance - 1)), opacity: Math.max(0.35, 1 - 0.32 * (distance - 1)) };
-}
-
-function calm(): boolean {
-  return typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (distance <= 1) return { scale: 1.2 - 0.2 * distance, opacity: 1 };
+  return { scale: Math.max(0.72, 1 - 0.16 * (distance - 1)), opacity: Math.max(0.35, 1 - 0.32 * (distance - 1)) };
 }
 
 export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
@@ -68,148 +62,96 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
   /** Said under the row while nothing in it is chosen. */
   idle?: string;
 }) {
-  const row = useRef<HTMLDivElement>(null);
-  const settled = useRef<number | undefined>(undefined);
-  const painting = useRef(0);
-  /** Whether the row has been moved or chosen in since it appeared, as against only placed. */
-  const placed = useRef(false);
-  /** A finger is moving the row: what passes the middle is chosen, and the row is not steered. */
-  const byHand = useRef(false);
-  /** The choice came from the row's own position, so the row is already where it should be. */
-  const following = useRef(false);
-  /** Where the wheel has stepped to before the dialog has drawn it, and its unspent travel. */
-  const wheel = useRef<{ travel: number; pause?: number; target: number | null }>({ travel: 0, target: null });
   const index = choices.findIndex((choice) => choice.id === value);
   const chosen = index >= 0 ? choices[index] : null;
-  // Which picture is in the middle while nothing here is chosen, so the arrows step from it.
-  const [middle, setMiddle] = useState(0);
+  // Where the row opens: on the choice, else on the middle of the list, where its default sits.
+  const [opening] = useState(() => (index >= 0 ? index : Math.floor((choices.length - 1) / 2)));
+  const [viewport, api] = useEmblaCarousel(
+    // `watchResize` as the components that measure text do: where there is no ResizeObserver there
+    // is no layout to follow (jsdom).
+    { align: "center", containScroll: false, startIndex: opening, duration: 22, watchResize: typeof ResizeObserver === "function" },
+    [WheelGesturesPlugin()]
+  );
+  // The picture in the middle, which is what the arrows and keys step from while nothing is chosen.
+  const [middle, setMiddle] = useState(opening);
   const at = index >= 0 ? index : middle;
-  const latest = useRef({ at, index, choices, onChange });
-  latest.current = { at, index, choices, onChange };
+  /** Whether the row has been moved by hand; until then, a row with nothing chosen chooses nothing. */
+  const moved = useRef(false);
+  /** The row is gliding to a choice made elsewhere: what it passes on the way is not chosen. */
+  const steering = useRef(false);
+  /** The choice came from the row's own movement, so the row is already where it should be. */
+  const following = useRef(false);
+  const latest = useRef({ index, choices, onChange });
+  latest.current = { index, choices, onChange };
 
-  const items = () => [...(row.current?.querySelectorAll<HTMLElement>("[data-choice]") ?? [])];
-
-  /** Writes each picture's size from its distance to the middle of the row. */
-  const paint = () => {
-    const strip = row.current;
-    if (!strip) return;
-    const centre = strip.scrollLeft + strip.clientWidth / 2;
-    for (const item of items()) {
-      const step = item.offsetWidth + 28;
-      const distance = Math.abs(item.offsetLeft + item.offsetWidth / 2 - centre) / (step || 1);
+  /** Writes each picture's size from its distance to the middle of the row; returns the nearest. */
+  const paint = useCallback((): number => {
+    const frame = api?.rootNode();
+    if (!api || !frame) return -1;
+    const box = frame.getBoundingClientRect();
+    const centre = box.left + box.width / 2;
+    let nearest = -1;
+    let least = Infinity;
+    api.slideNodes().forEach((slide, position) => {
+      const rect = slide.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - centre) / (rect.width || 1);
+      if (distance < least) { least = distance; nearest = position; }
       const { scale, opacity } = look(distance);
-      item.style.setProperty("--scale", scale.toFixed(3));
-      item.style.setProperty("--fade", opacity.toFixed(3));
-    }
-  };
-
-  /** The picture nearest the middle of the row as it is now. */
-  const nearest = (): number => {
-    const strip = row.current;
-    if (!strip) return -1;
-    const centre = strip.scrollLeft + strip.clientWidth / 2;
-    let best = -1;
-    let gap = Infinity;
-    items().forEach((item, position) => {
-      const away = Math.abs(item.offsetLeft + item.offsetWidth / 2 - centre);
-      if (away < gap) { gap = away; best = position; }
+      slide.style.setProperty("--scale", scale.toFixed(3));
+      slide.style.setProperty("--fade", opacity.toFixed(3));
     });
-    return best;
-  };
+    return nearest;
+  }, [api]);
 
-  /** Chooses what a finger has brought to the middle, without steering the row to it. */
-  const follow = () => {
-    const found = nearest();
-    const { index: now, choices: list, onChange: change } = latest.current;
-    if (found < 0) return;
-    setMiddle(found);
-    if (found !== now) {
-      following.current = true;
-      change(list[found].id);
-    }
-  };
-
-  // Brings the choice to the middle: at once when the row first appears, smoothly afterwards, and
-  // not at all when the row's own movement made the choice.
   useEffect(() => {
-    wheel.current.target = null;
-    if (following.current) { following.current = false; paint(); return; }
-    const strip = row.current;
-    const item = index >= 0 ? items()[index] : null;
-    if (strip && item) {
-      const left = item.offsetLeft + item.offsetWidth / 2 - strip.clientWidth / 2;
-      if (Math.abs(strip.scrollLeft - left) > 1) {
-        strip.scrollTo({ left, behavior: placed.current && !calm() ? "smooth" : "auto" });
+    if (!api) return;
+    /** Chooses what the row's own movement has brought to the middle, without steering the row. */
+    const follow = (found: number) => {
+      const { index: now, choices: list, onChange: change } = latest.current;
+      if (found < 0 || !list[found]) return;
+      setMiddle(found);
+      if (found !== now && (now >= 0 || moved.current)) {
+        following.current = true;
+        change(list[found].id);
       }
-    }
+    };
+    // While a finger, a wheel or the momentum after them moves the row, the picture passing the
+    // middle is chosen as it passes; while the row glides to a tapped choice, nothing on the way is.
+    const scroll = () => {
+      const nearest = paint();
+      if (!steering.current && moved.current) follow(nearest);
+    };
+    const settle = () => {
+      steering.current = false;
+      follow(api.selectedScrollSnap());
+    };
+    const touched = () => { moved.current = true; steering.current = false; };
+    const frame = api.rootNode();
+    api.on("scroll", scroll).on("settle", settle).on("reInit", paint).on("pointerDown", touched);
+    frame.addEventListener("wheel", touched, { passive: true });
     paint();
-  }, [value, choices.map((choice) => choice.id).join()]);
+    return () => {
+      api.off("scroll", scroll).off("settle", settle).off("reInit", paint).off("pointerDown", touched);
+      frame.removeEventListener("wheel", touched);
+    };
+  }, [api, paint]);
+
+  // A choice made by a tap, a key, an arrow or the grid: the row glides to it.
+  useEffect(() => {
+    if (following.current) { following.current = false; return; }
+    if (api && index >= 0 && api.selectedScrollSnap() !== index) {
+      steering.current = true;
+      api.scrollTo(index);
+    }
+  }, [api, index, choices.map((choice) => choice.id).join()]);
 
   const choose = (position: number, focus = false) => {
     const { choices: list, onChange: change } = latest.current;
     const next = Math.max(0, Math.min(list.length - 1, position));
-    placed.current = true;
-    // A choice made by a tap, a key, an arrow or the wheel owns the movement that follows it.
-    byHand.current = false;
-    wheel.current.target = next;
+    moved.current = true;
     change(list[next].id);
-    if (focus) requestAnimationFrame(() => items()[next]?.querySelector("button")?.focus({ preventScroll: true }));
+    if (focus) requestAnimationFrame(() => api?.slideNodes()[next]?.querySelector("button")?.focus({ preventScroll: true }));
   };
-
-  useEffect(() => {
-    const strip = row.current;
-    if (!strip) return;
-    const onScroll = () => {
-      cancelAnimationFrame(painting.current);
-      painting.current = requestAnimationFrame(() => {
-        paint();
-        if (byHand.current) follow();
-      });
-      window.clearTimeout(settled.current);
-      settled.current = window.setTimeout(onEnd, SETTLE_MS);
-    };
-    const onEnd = () => {
-      window.clearTimeout(settled.current);
-      if (byHand.current) follow();
-      byHand.current = false;
-    };
-    const onTouch = () => { placed.current = true; byHand.current = true; };
-    const onPointer = (event: PointerEvent) => { if (event.pointerType !== "mouse") onTouch(); };
-    const onWheel = (event: WheelEvent) => {
-      if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
-      event.preventDefault();
-      const state = wheel.current;
-      // Lines (Firefox) or pages, as pixels.
-      const scale = event.deltaMode === 1 ? 40 : event.deltaMode === 2 ? strip.clientWidth : 1;
-      state.travel += event.deltaX * scale;
-      window.clearTimeout(state.pause);
-      state.pause = window.setTimeout(() => { state.travel = 0; }, WHEEL_PAUSE_MS);
-      let steps = 0;
-      while (Math.abs(state.travel) >= WHEEL_STEP) {
-        const sign = Math.sign(state.travel);
-        steps += sign;
-        state.travel -= sign * WHEEL_STEP;
-      }
-      if (steps) choose((state.target ?? latest.current.at) + steps);
-    };
-    strip.addEventListener("scroll", onScroll, { passive: true });
-    strip.addEventListener("scrollend", onEnd);
-    strip.addEventListener("touchstart", onTouch, { passive: true });
-    strip.addEventListener("pointerdown", onPointer);
-    strip.addEventListener("wheel", onWheel, { passive: false });
-    window.addEventListener("resize", paint);
-    return () => {
-      strip.removeEventListener("scroll", onScroll);
-      strip.removeEventListener("scrollend", onEnd);
-      strip.removeEventListener("touchstart", onTouch);
-      strip.removeEventListener("pointerdown", onPointer);
-      strip.removeEventListener("wheel", onWheel);
-      window.removeEventListener("resize", paint);
-      window.clearTimeout(settled.current);
-      window.clearTimeout(wheel.current.pause);
-      cancelAnimationFrame(painting.current);
-    };
-  }, []);
 
   const onKey = (event: KeyboardEvent<HTMLDivElement>) => {
     const moves: Record<string, number> = { ArrowRight: at + 1, ArrowDown: at + 1, ArrowLeft: at - 1, ArrowUp: at - 1, Home: 0, End: choices.length - 1 };
@@ -221,16 +163,18 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
   const about = choices.some((choice) => choice.about);
   return <div className="carousel">
     <div className="carousel-frame">
-      <div className="carousel-row" ref={row} role="radiogroup" aria-label={label} onKeyDown={onKey}>
-        {choices.map((choice, position) => <div
-          key={choice.id} data-choice={choice.id} className={`carousel-item${position === index ? " on" : ""}`}
-        >
-          <button
-            type="button" role="radio" aria-checked={position === index} tabIndex={position === at ? 0 : -1}
-            aria-label={choice.label} aria-description={choice.about} title={position === index ? undefined : choice.label}
-            onClick={() => choose(position)}
-          ><span className="choice-art">{choice.art}</span></button>
-        </div>)}
+      <div className="carousel-row" ref={viewport}>
+        <div className="carousel-track" role="radiogroup" aria-label={label} onKeyDown={onKey}>
+          {choices.map((choice, position) => <div
+            key={choice.id} data-choice={choice.id} className={`carousel-item${position === index ? " on" : ""}`}
+          >
+            <button
+              type="button" role="radio" aria-checked={position === index} tabIndex={position === at ? 0 : -1}
+              aria-label={choice.label} aria-description={choice.about} title={position === index ? undefined : choice.label}
+              onClick={() => choose(position)}
+            ><span className="choice-art">{choice.art}</span></button>
+          </div>)}
+        </div>
       </div>
       <button type="button" className="carousel-step prev" aria-label={`Previous: ${label}`}
         hidden={at <= 0} onClick={() => choose(at - 1)}><BackIcon /></button>

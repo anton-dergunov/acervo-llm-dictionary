@@ -2621,7 +2621,7 @@ function carousel(name, choices, value, idle = "") {
   const items = choices.map((c, i) => `<div class="carousel-item${i === at ? " on" : ""}" data-choice="${esc(c.id)}">
       <button type="button" role="radio" aria-checked="${i === at}" tabindex="${i === Math.max(at, 0) ? 0 : -1}" aria-label="${esc(c.label)}"${i === at ? "" : ` title="${esc(c.label)}"`}><span class="choice-art">${c.art}</span></button></div>`).join("");
   return `<div class="carousel"><div class="carousel-frame">
-      <div class="carousel-row" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${items}</div>
+      <div class="carousel-row" data-row="${esc(name)}"><div class="carousel-track" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${items}</div></div>
       <button type="button" class="carousel-step prev" data-step="-1" data-strip="${esc(name)}" aria-label="Previous: ${esc(name)}"${at <= 0 ? " hidden" : ""}>${ICON.back}</button>
       <button type="button" class="carousel-step next" data-step="1" data-strip="${esc(name)}" aria-label="Next: ${esc(name)}"${at >= choices.length - 1 ? " hidden" : ""}>${ICON.forward}</button>
     </div><div class="carousel-caption${choices.some((c) => c.about) ? " described" : ""}" aria-hidden="true">${chosen
@@ -2636,20 +2636,21 @@ function choiceGrid(name, choices, value) {
 const centred = (list) => { const half = Math.floor((list.length - 1) / 2); return [...list.slice(1, half + 1), list[0], ...list.slice(half + 1)]; };
 const allLink = (name, count) => `<button type="button" class="make-more" data-all="${esc(name)}" aria-label="All ${count}: ${esc(name)}">All ${count} ›</button>`;
 
-/* A carousel's pictures sized by their distance from the middle, as `ChoiceCarousel` writes them. */
-function paintCarousel(row) {
-  const centre = row.scrollLeft + row.clientWidth / 2;
-  for (const item of row.querySelectorAll(".carousel-item")) {
-    const dist = Math.abs(item.offsetLeft + item.offsetWidth / 2 - centre) / (item.offsetWidth + 28);
-    const scale = dist <= 1 ? 1.3 - 0.3 * dist : Math.max(0.7, 1 - 0.18 * (dist - 1));
-    const fade = dist <= 1 ? 1 : Math.max(0.35, 1 - 0.32 * (dist - 1));
-    item.style.setProperty("--scale", scale.toFixed(3));
-    item.style.setProperty("--fade", fade.toFixed(3));
-  }
+/* A carousel's pictures sized by their distance from the middle, as `ChoiceCarousel` writes them;
+   returns the one nearest the middle. The row is Embla's, as in the application. */
+function paintCarousel(embla) {
+  const box = embla.rootNode().getBoundingClientRect();
+  const centre = box.left + box.width / 2;
+  let nearest = 0, least = Infinity;
+  embla.slideNodes().forEach((slide, i) => {
+    const rect = slide.getBoundingClientRect();
+    const dist = Math.abs(rect.left + rect.width / 2 - centre) / (rect.width || 1);
+    if (dist < least) { least = dist; nearest = i; }
+    slide.style.setProperty("--scale", (dist <= 1 ? 1.2 - 0.2 * dist : Math.max(0.72, 1 - 0.16 * (dist - 1))).toFixed(3));
+    slide.style.setProperty("--fade", (dist <= 1 ? 1 : Math.max(0.35, 1 - 0.32 * (dist - 1))).toFixed(3));
+  });
+  return nearest;
 }
-const centreOf = (row, item) => item.offsetLeft + item.offsetWidth / 2 - row.clientWidth / 2;
-const nearestItem = (row) => [...row.querySelectorAll(".carousel-item")].reduce((best, item) =>
-  Math.abs(centreOf(row, item) - row.scrollLeft) < Math.abs(centreOf(row, best) - row.scrollLeft) ? item : best);
 
 /* `LoopMusic.tsx`: Surprise me and the styles as a carousel; saved music as a section of its own. */
 function musicTiles() {
@@ -2739,7 +2740,7 @@ function openMakeDialog(kind, from = "scope") {
   const node = el(`<div class="modal-backdrop"><section class="settings make-dialog" role="dialog" aria-modal="true" tabindex="-1"></section></div>`);
   document.body.appendChild(node);
   const frame = $(".make-dialog", node);
-  const kinds = () => [{ id: "auto", label: "Surprise me", about: "Any kind of story", art: iconArt(MAKE_ICON.dice) },
+  const kinds = () => [{ id: "auto", label: "Surprise me", art: iconArt(MAKE_ICON.dice) },
     ...STORY_TYPES.map((t) => ({ id: t.id, label: t.label, art: art("kinds", t.id, t.label, t.emoji) }))];
   /* One order whatever the kind; what To suit the story picks from is named under it. */
   const suits = () => {
@@ -2753,8 +2754,8 @@ function openMakeDialog(kind, from = "scope") {
   const catalogues = () => kind === "loop"
     ? { "Music style": [musicTiles(), "music"] }
     : { "Kind of story": [kinds(), "storyKind"], "Picture style": [pictures(), "style"] };
-  // Where each carousel was before a repaint, so a new choice glides there rather than jumping.
-  const scrolled = {};
+  // Each carousel's Embla and how to steer it, so a tap, an arrow or a key glides the row.
+  const rows = {};
   const strip = (name, idle) => {
     const [choices, key] = catalogues()[name];
     return makeSection(name, carousel(name, centred(choices), d[key], idle), allLink(name, choices.length),
@@ -2762,7 +2763,8 @@ function openMakeDialog(kind, from = "scope") {
   };
   const paint = () => {
     const cats = catalogues();
-    for (const row of frame.querySelectorAll(".carousel-row")) scrolled[row.dataset.strip] = row.scrollLeft;
+    for (const one of Object.values(rows)) one.embla.destroy();
+    for (const name of Object.keys(rows)) delete rows[name];
     const body = d.browsing === "Saved music" ? savedCards(BEDS, d.music)
       : d.browsing ? choiceGrid(d.browsing, cats[d.browsing][0], d[cats[d.browsing][1]])
       : makeSection("Words", wordPicker(kind, d)) + (kind === "loop"
@@ -2777,63 +2779,55 @@ function openMakeDialog(kind, from = "scope") {
       <footer class="make-footer"><button class="tb-btn primary make-go"${d.ids.length ? "" : " disabled"}>${rule.label}<span class="make-go-count"> · ${wordsCount(d.ids.length)}</span></button></footer>`;
     for (const row of frame.querySelectorAll(".carousel-row")) placeRow(row);
   };
-  /* Each carousel: back where it was, then to its choice; sized as it scrolls; a row brought to rest
-     by hand chooses what is in the middle. */
+  /* Each carousel: opened on its choice, sized as it moves. Whatever a finger, a wheel or the momentum
+     after them brings to the middle is chosen as it passes, in place; a tap, an arrow or a key glides
+     the row to its choice. Once the row settles the dialog is drawn again from what was chosen. */
   const placeRow = (row) => {
-    const name = row.dataset.strip;
-    const on = $(".carousel-item.on", row);
-    if (name in scrolled) row.scrollLeft = scrolled[name];
-    if (on) {
-      const left = centreOf(row, on);
-      if (Math.abs(row.scrollLeft - left) > 1) row.scrollTo({ left, behavior: name in scrolled ? "smooth" : "auto" });
-    }
-    paintCarousel(row);
-    const key = catalogues()[name][1];
-    let frameId = 0, timer = 0, byHand = false, travel = 0, pause = 0;
-    /* A finger moving the row chooses what passes the middle, in place, without redrawing under it. */
-    const follow = () => {
-      const item = nearestItem(row);
-      if (item.dataset.choice === d[key]) return;
-      d[key] = item.dataset.choice;
-      for (const one of row.querySelectorAll(".carousel-item")) {
-        one.classList.toggle("on", one === item);
-        one.querySelector("button").setAttribute("aria-checked", String(one === item));
-      }
-      const c = catalogues()[name][0].find((x) => x.id === d[key]);
-      row.closest(".carousel").querySelector(".carousel-caption").innerHTML = `<strong>${esc(c.label)}</strong>${c.about ? `<span>${esc(c.about)}</span>` : ""}`;
+    const name = row.dataset.row;
+    const [choices, key] = catalogues()[name];
+    const order = centred(choices);
+    const at = order.findIndex((c) => c.id === d[key]);
+    const embla = EmblaCarousel(row, { align: "center", containScroll: false, duration: 22,
+      startIndex: at >= 0 ? at : Math.floor((order.length - 1) / 2) }, [EmblaCarouselWheelGestures()]);
+    let moved = false, steering = false;
+    const mark = (i) => {
+      const c = order[i];
+      if (!c || c.id === d[key]) return;
+      d[key] = c.id;
+      embla.slideNodes().forEach((slide, j) => {
+        slide.classList.toggle("on", j === i);
+        slide.querySelector("button").setAttribute("aria-checked", String(j === i));
+      });
+      const box = row.closest(".carousel");
+      box.querySelector(".carousel-caption").innerHTML = `<strong>${esc(c.label)}</strong>${c.about ? `<span>${esc(c.about)}</span>` : ""}`;
+      box.querySelector(".carousel-step.prev").hidden = i <= 0;
+      box.querySelector(".carousel-step.next").hidden = i >= order.length - 1;
     };
-    row.addEventListener("touchstart", () => { byHand = true; }, { passive: true });
-    row.addEventListener("scroll", () => {
-      cancelAnimationFrame(frameId); frameId = requestAnimationFrame(() => { paintCarousel(row); if (byHand) follow(); });
-      clearTimeout(timer); timer = setTimeout(() => { if (byHand) { byHand = false; follow(); paint(); } }, 120);
-    }, { passive: true });
-    /* A sideways wheel steps one picture for each 50 px of travel, rather than scrolling the row. */
-    row.addEventListener("wheel", (ev) => {
-      if (Math.abs(ev.deltaX) <= Math.abs(ev.deltaY)) return;
-      ev.preventDefault();
-      travel += ev.deltaX * (ev.deltaMode === 1 ? 40 : 1);
-      clearTimeout(pause); pause = setTimeout(() => { travel = 0; }, 200);
-      let steps = 0;
-      while (Math.abs(travel) >= 50) { const sign = Math.sign(travel); steps += sign; travel -= sign * 50; }
-      if (!steps) return;
-      const items = [...row.querySelectorAll(".carousel-item")];
-      const at = Math.max(0, items.findIndex((item) => item.dataset.choice === d[key]));
-      d[key] = items[Math.max(0, Math.min(items.length - 1, at + steps))].dataset.choice;
-      paint();
-    }, { passive: false });
+    const steer = (i) => {
+      const to = Math.max(0, Math.min(order.length - 1, i));
+      moved = true; steering = true;
+      mark(to);
+      embla.scrollTo(to);
+    };
+    embla.on("scroll", () => { const n = paintCarousel(embla); if (moved && !steering) mark(n); });
+    embla.on("settle", () => { steering = false; if (moved) { mark(embla.selectedScrollSnap()); paint(); } });
+    embla.on("pointerDown", () => { moved = true; steering = false; });
+    row.addEventListener("wheel", () => { moved = true; steering = false; }, { passive: true });
     row.addEventListener("keydown", (ev) => {
-      const items = [...row.querySelectorAll(".carousel-item")];
-      const at = Math.max(0, items.findIndex((item) => item.classList.contains("on")));
-      const to = { ArrowRight: at + 1, ArrowLeft: at - 1, Home: 0, End: items.length - 1 }[ev.key];
+      const now = Math.max(0, order.findIndex((c) => c.id === d[key]));
+      const to = { ArrowRight: now + 1, ArrowLeft: now - 1, Home: 0, End: order.length - 1 }[ev.key];
       if (to === undefined) return;
       ev.preventDefault();
-      const next = items[Math.max(0, Math.min(items.length - 1, to))];
-      d[catalogues()[name][1]] = next.dataset.choice;
-      paint();
-      $(`.carousel-row[data-strip="${name}"] .carousel-item.on button`, frame)?.focus({ preventScroll: true });
+      steer(to);
+      embla.slideNodes()[Math.max(0, Math.min(order.length - 1, to))].querySelector("button").focus({ preventScroll: true });
     });
+    paintCarousel(embla);
+    rows[name] = { embla, steer, order, key };
   };
-  const shut = () => { node.remove(); document.removeEventListener("keydown", onKey, true); };
+  const shut = () => {
+    for (const one of Object.values(rows)) one.embla.destroy();
+    node.remove(); document.removeEventListener("keydown", onKey, true);
+  };
   const onKey = (ev) => {
     if (ev.key !== "Escape") return;
     ev.preventDefault(); ev.stopPropagation();
@@ -2864,13 +2858,15 @@ function openMakeDialog(kind, from = "scope") {
     if (t.dataset.switch) { d.switches[t.dataset.switch] = t.dataset.value; d.optionsOpen = true; return paint(); }
     if (t.dataset.all) { d.browsing = t.dataset.all; return paint(); }
     if (t.dataset.step) {
-      const [choices, key] = catalogues()[t.dataset.strip];
-      const order = centred(choices);
-      const at = Math.max(0, order.findIndex((c) => c.id === d[key]));
-      d[key] = order[Math.max(0, Math.min(order.length - 1, at + Number(t.dataset.step)))].id;
-      return paint();
+      const one = rows[t.dataset.strip];
+      const at = one.order.findIndex((c) => c.id === d[one.key]);
+      return one.steer((at >= 0 ? at : one.embla.selectedScrollSnap()) + Number(t.dataset.step));
     }
     const tile = t.closest("[data-choice]");
+    if (tile && tile.closest(".carousel-track")) {
+      const one = rows[tile.closest("[data-strip]").dataset.strip];
+      return one.steer(one.order.findIndex((c) => c.id === tile.dataset.choice));
+    }
     if (tile) {
       const strip = tile.closest("[data-strip]").dataset.strip;
       d[catalogues()[strip][1]] = tile.dataset.choice;

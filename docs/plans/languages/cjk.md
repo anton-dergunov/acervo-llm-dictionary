@@ -1,6 +1,27 @@
-# Chinese · the subsystem beyond the schema
+# Chinese, Japanese and Korean · what the schema does not cover
 
-**Status:** not started, deliberately. What exists is the part that is painful to retrofit: every
+**Status:** not started, deliberately. The three are one plan because what they share — no spaces
+between words, or not where a European tool expects them — breaks the same features in all three;
+what is Chinese alone is the larger part, and has its own section.
+
+## Words without spaces
+
+A tool that finds the word under a finger, or counts how common a word is, has to cut text into words
+first, and for these languages that is a segmenter, not a split on spaces.
+
+- **Rare** (the make dialogs' order by word frequency, `src/acervo/frequency/`) reads wordfreq's
+  lists, which exist for all three. Chinese is cut by `jieba`, which is installed; **Japanese and
+  Korean need MeCab and its dictionaries, which are not, so Rare refuses them by name** ("There is no
+  word-frequency list for Japanese…"). Covering them is installing MeCab with the Japanese and Korean
+  dictionaries in the server image and letting `covers()` say yes; measure the image's growth first.
+- **A tap on a photo or a story** lands on a character, not a word (below, and
+  [`../../features/look-up.md`](../../features/look-up.md)).
+- Whatever else Japanese and Korean need beyond this is the audit's to find
+  ([`language-support.md`](language-support.md)); Chinese is known to need more, below.
+
+## Chinese
+
+What exists is the part that is painful to retrofit: every
 record carries its `language`, a Chinese lexeme **requires** a `reading` (pinyin, on a prefix test so
 `zh-Hant-TW` and `zho` match), and dictionaries, pictures, voices
 and the map already work per language. What is not built is modelling how the language works — and
@@ -25,7 +46,7 @@ measure words, a corpus for Chinese in the retrieval service, photo capture's ta
 (below), and the Chinese views — a character network, a tone-pair grid, a syllable table
 ([`../../research/similar-projects.md`](../../research/similar-projects.md)).
 
-## Correctness first
+### Correctness first
 
 What a Chinese word needs before anything is built on top of it — part of making every feature work in
 every language ([`language-support.md`](language-support.md)), but specific enough to list here.
@@ -37,7 +58,7 @@ every language ([`language-support.md`](language-support.md)), but specific enou
 - **Search by pinyin properly**: with marks, with digits, or with no tones at all (`tushu` finding
   图书) — today it is the numbered form that finds a word.
 
-## Learning the characters: a spike
+### Learning the characters: a spike
 
 For a European learner the characters are the hard part, and the one thing a vocabulary tool can do
 that a dictionary does not: **help remember them**. Not a second Pleco — the dictionary exists and is

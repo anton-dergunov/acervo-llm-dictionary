@@ -116,7 +116,8 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
   };
 
   const kinds: CatalogueChoice[] = [
-    { id: "auto", label: "Surprise me", about: "Any kind of story",
+    // No sentence: no kind has one, so the row's caption is its name alone, one line high.
+    { id: "auto", label: "Surprise me",
       art: <span className="choice-stand-in icon" aria-hidden="true"><DiceIcon /></span> },
     ...(offered?.types ?? []).map((one) => ({
       id: one.id, label: one.label, art: <Art group="kinds" id={one.id} label={one.label} emoji={one.emoji} />

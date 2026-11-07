@@ -6,7 +6,7 @@
  * kept bed asked for by the pair that replays it, and every choice in a grid.
  */
 
-import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { AcervoApiError, backendSession, type LoopSchema } from "./api";
 import type { VocabularyGraph } from "./domain";
@@ -230,23 +230,6 @@ describe("choosing the music", () => {
     fireEvent.click(screen.getByRole("button", { name: "All 3: Music style" }));
     expect(within(screen.getByRole("radiogroup", { name: "Music style" })).getAllByRole("radio")[0])
       .toHaveTextContent("Surprise me");
-  });
-
-  it("steps one style per notch of a sideways wheel, and leaves an upright wheel to the page", async () => {
-    open();
-    const music = await screen.findByRole("radiogroup", { name: "Music style" });
-    await within(music).findByRole("radio", { name: "Meditative" });
-    const upright = new WheelEvent("wheel", { deltaX: 0, deltaY: 120, bubbles: true, cancelable: true });
-    music.dispatchEvent(upright);
-    expect(upright.defaultPrevented).toBe(false);
-    expect(within(music).getByRole("radio", { name: "Surprise me" })).toHaveAttribute("aria-checked", "true");
-    const sideways = new WheelEvent("wheel", { deltaX: 30, deltaY: 0, bubbles: true, cancelable: true });
-    act(() => { music.dispatchEvent(sideways); });
-    expect(sideways.defaultPrevented).toBe(true);
-    // 30 px is less than a step; 30 more is one.
-    expect(within(music).getByRole("radio", { name: "Surprise me" })).toHaveAttribute("aria-checked", "true");
-    act(() => { music.dispatchEvent(new WheelEvent("wheel", { deltaX: 30, bubbles: true, cancelable: true })); });
-    expect(within(music).getByRole("radio", { name: "Meditative" })).toHaveAttribute("aria-checked", "true");
   });
 
   it("steps through the styles with the arrows and the keyboard", async () => {

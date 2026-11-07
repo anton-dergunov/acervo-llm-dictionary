@@ -19,11 +19,12 @@ Russian, Japanese, Chinese, Korean and English — each checked against every fe
 | Voices | a voice exists on the chain for the language, plain and expressive |
 | Clips | the corpus holds the language at all |
 | Dictionaries | a source worth installing ([`../dictionaries.md`](../dictionaries.md)) |
+| Rare (word frequency) | a frequency list covers it; Japanese and Korean are refused until MeCab is installed ([`cjk.md`](cjk.md)) |
 | Loops, stories, Anki, the map | made and shown correctly |
 
 The result is the table filled in, and a short list of fixes. Chinese has more beyond correctness
-than a row can hold, and is its own plan ([`chinese.md`](chinese.md)); Japanese and Korean may turn
-out to need the same once the audit has looked.
+than a row can hold, and shares a plan with Japanese and Korean ([`cjk.md`](cjk.md)), which also
+holds what the three need in common.
 
 ## 2 · Conjugations and other forms
 

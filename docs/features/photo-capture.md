@@ -222,4 +222,4 @@ beyond `acervo.models`; `services/photo.py` is the binding layer, and `test_laye
 
 An image share target is one of the capture transports
 ([`../plans/capture-transports.md`](../plans/capture-transports.md), A2); Chinese and Japanese are
-[`../plans/languages/chinese.md`](../plans/languages/chinese.md).
+[`../plans/languages/cjk.md`](../plans/languages/cjk.md).

@@ -80,3 +80,27 @@ if (typeof HTMLMediaElement !== "undefined") {
   };
   HTMLMediaElement.prototype.pause = function pause() { /* nothing is playing in jsdom */ };
 }
+
+/**
+ * jsdom has no `matchMedia` or `IntersectionObserver`, which every browser Acervo targets has and
+ * which the make dialogs' carousel (Embla) uses. jsdom does no layout, so there is nothing for them to
+ * report: these answer "no match" and never call back. `ResizeObserver` is left missing on purpose:
+ * its absence is how the components that measure text know there is no layout to measure.
+ * Test environment only, for `Blob`'s reason above.
+ */
+if (typeof window !== "undefined" && typeof window.matchMedia !== "function") {
+  window.matchMedia = (query: string) => ({
+    matches: false, media: query, onchange: null,
+    addListener: () => undefined, removeListener: () => undefined,
+    addEventListener: () => undefined, removeEventListener: () => undefined, dispatchEvent: () => false
+  }) as MediaQueryList;
+}
+class Unobserved {
+  observe(): void { /* jsdom does no layout */ }
+  unobserve(): void { /* jsdom does no layout */ }
+  disconnect(): void { /* jsdom does no layout */ }
+  takeRecords(): [] { return []; }
+}
+if (typeof globalThis.IntersectionObserver === "undefined") {
+  globalThis.IntersectionObserver = Unobserved as unknown as typeof IntersectionObserver;
+}

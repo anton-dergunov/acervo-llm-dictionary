@@ -658,14 +658,18 @@ it. A row whose ends simply stop does not say it scrolls; one whose middle is th
 me is the middle of the list rather than its start, so the row opens with styles on both sides
 instead of an empty half; the grid keeps it first.
 
-Moving the row is choosing. A swipe chooses as it goes — whatever is in the middle while the finger is
-still moving — and the row is not steered back to it. A sideways wheel steps one style per notch
-rather than scrolling the row: a wheel scrolling a snapping row that was also gliding to its choice
-pulled it back and forth on every small turn. A tap brings a picture to the middle, ‹ › on the row's
-edges step one for a desktop without a sideways wheel, and ← → step from the keyboard. The size is a
-transform written as the row scrolls, so the dialog never moves with it. While saved music is
-chosen, nothing in the row is. **All 15 ›** above the row shows the styles as a grid in place of the
-dialog's body, each with its sentence.
+Moving the row is choosing, and **whatever passes the middle is the choice as it passes**, so the
+row and the choice never disagree. The row is Embla (`embla-carousel-react` with
+`embla-carousel-wheel-gestures`, both MIT): a swipe, a drag, a sideways wheel or a trackpad moves it
+smoothly, with momentum, and it settles with a picture in the middle. Two hand-written rows came
+before it and are why it is a library: a wheel stepping one picture per notch needed a precise hand
+and skipped two on a fast turn, and a natively scrolling row steered to its choice could come to rest
+with one picture in the middle and another chosen. A tap, ‹ › on the row's edges (for a mouse with no
+sideways wheel) or ← → from the keyboard choose a picture, and the row glides to it without choosing
+what it passes. The size is a transform written as the row moves and the caption under it has a
+fixed height, so the dialog never changes size with it. While saved music is chosen, nothing in the
+row is. **All 15 ›** above the row shows the styles as a grid in place of the dialog's body, each
+with its sentence.
 The dialog opens on the music last asked for on this device, as it does on the format; a kept bed
 let go or a style no longer offered falls back to Surprise me.
 The pictures are `web/src/art/music/<family>.webp`, drawn once by `scripts/draw_dialog_art.py`; a

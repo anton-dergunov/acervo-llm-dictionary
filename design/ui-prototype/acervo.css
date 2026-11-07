@@ -1362,22 +1362,22 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
 
 /* A catalogue as pictures: a carousel with the choice in the middle, larger than its neighbours,
    which shrink and fade with their distance from it (`--scale` and `--fade`, written as the row
-   scrolls). The size is a transform, so nothing in the dialog moves while the row does; the row is
-   padded by half its width so the first and last pictures can reach the middle. */
-.carousel { display: grid; gap: 6px; min-width: 0; }
+   moves). The row is Embla's: a clipped frame and a track it moves. The size is a transform on the
+   picture, never the slide's width, so nothing in the dialog moves while the row does; the caption
+   has a fixed height for the same reason. */
+.carousel { display: grid; gap: 4px; min-width: 0; }
 .carousel-frame { position: relative; min-width: 0; }
 .carousel-row {
-  display: flex; gap: 28px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none;
-  scroll-snap-type: x mandatory; padding: 22px calc(50% - 46px);
+  overflow: hidden; padding: 13px 0;
   -webkit-mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
   mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
 }
-.carousel-row::-webkit-scrollbar { display: none; }
-.carousel-item {
-  flex: none; width: 92px; scroll-snap-align: center;
+.carousel-track { display: flex; touch-action: pan-y pinch-zoom; }
+.carousel-item { flex: 0 0 106px; min-width: 0; padding: 0 11px; }
+.carousel-item > button {
+  display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer;
   transform: scale(var(--scale, 1)); opacity: var(--fade, 1);
 }
-.carousel-item > button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
 .carousel-item > button:focus-visible { outline: none; }
 .carousel-item > button:focus-visible .choice-art { outline: 2.5px solid var(--core); outline-offset: 2px; }
 .carousel-item.on .choice-art { outline: 2px solid var(--core); outline-offset: 2px; }
@@ -1391,10 +1391,13 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
 .carousel-step svg { width: 16px; height: 16px; }
 .carousel-step.prev { left: 0; }
 .carousel-step.next { right: 0; }
-.carousel-caption { display: grid; justify-items: center; gap: 2px; min-height: 22px; padding: 0 12px; text-align: center; }
-.carousel-caption.described { min-height: 58px; align-content: start; }
-.carousel-caption strong { font-size: 14.5px; font-weight: 600; color: var(--ink); }
-.carousel-caption span { max-width: 44ch; font-size: 12.5px; line-height: 1.4; color: var(--ink-3); }
+.carousel-caption { display: grid; justify-items: center; align-content: start; gap: 1px; height: 20px; padding: 0 12px; text-align: center; }
+.carousel-caption.described { height: 56px; }
+.carousel-caption strong { font-size: 14.5px; line-height: 20px; font-weight: 600; color: var(--ink); }
+.carousel-caption span {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 12.5px; line-height: 17px; color: var(--ink-3);
+}
 .choice-art {
   position: relative; display: block; aspect-ratio: 1; overflow: hidden;
   border: 1px solid var(--rule-soft); border-radius: 10px; background: var(--surface-2);
