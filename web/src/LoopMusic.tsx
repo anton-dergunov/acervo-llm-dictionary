@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 import { backendSession, type LoopFamily, type LoopMusic, type LoopSchema } from "./api";
 import type { Bed, Loop, VocabularyGraph } from "./domain";
 import { Art } from "./art";
-import type { CatalogueChoice } from "./ChoiceCarousel";
+import { AllChoices, type CatalogueChoice } from "./ChoiceCarousel";
 import { MakeSection } from "./MakeDialog";
 import { DiceIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
 import * as player from "./loops";
@@ -139,47 +139,60 @@ export function musicChoices(graph: VocabularyGraph, families: LoopFamily[], fav
   return { favourites, styles, of: (key) => (key && byKey.get(key)) || { kind: "surprise" } };
 }
 
-/** How many saved pieces show before the rest are unfolded. */
+/** How many saved pieces the section shows; All shows the rest in place of the dialog's body. */
 const SAVED_SHOWN = 2;
 
-/** Saved music, as a section of its own: the picture, the name with its star, where it came from. */
-export function SavedMusic({ graph, families, favourites, value, onChange }: {
+/** Saved pieces as cards: the picture, the name with its star, where it came from, and ▶. */
+export function SavedCards({ graph, families, favourites, value, onChange }: {
   graph: VocabularyGraph;
   families: LoopFamily[];
   favourites: Bed[];
   value: string;
   onChange(key: string): void;
 }) {
-  const [open, setOpen] = useState(false);
+  return <div className="music-favourites" role="radiogroup" aria-label="Saved music">
+    {favourites.map((bed) => {
+      const key = musicKey({ kind: "bed", bed });
+      const label = styleLabel(families, bed.styleId);
+      return <div key={bed.id} className={`favourite${key === value ? " on" : ""}`}>
+        <button type="button" role="radio" aria-checked={key === value} onClick={() => onChange(key)}
+          aria-label={`${label}, ${bedAbout(graph, bed)}`}>
+          <span className="favourite-art"><Art group="music" id={bed.styleId} label={label} /></span>
+          <span className="favourite-text">
+            <span className="favourite-name"><StarIcon filled />{label}</span>
+            <span className="favourite-about">{bedAbout(graph, bed)}</span>
+          </span>
+        </button>
+        <Preview graph={graph} bed={bed} />
+      </div>;
+    })}
+  </div>;
+}
+
+/**
+ * Saved music, as a section of its own: the two most recent pieces, and All for every one, shown in
+ * place of the dialog's body as the styles' grid is — so the dialog is the same height however many
+ * are kept. A chosen piece that is not among the two takes the second place, so what is chosen is
+ * always in sight.
+ */
+export function SavedMusic({ graph, families, favourites, value, onChange, onAll }: {
+  graph: VocabularyGraph;
+  families: LoopFamily[];
+  favourites: Bed[];
+  value: string;
+  onChange(key: string): void;
+  onAll(): void;
+}) {
   if (!favourites.length) return null;
-  const keys = favourites.map((bed) => musicKey({ kind: "bed", bed }));
-  // A choice among the folded ones unfolds them: what is chosen is never hidden.
-  const unfolded = open || keys.indexOf(value) >= SAVED_SHOWN;
-  const shown = unfolded ? favourites : favourites.slice(0, SAVED_SHOWN);
-  const more = favourites.length - SAVED_SHOWN;
-  const toggle = more > 0
-    ? <button type="button" className="make-more" onClick={() => setOpen(!unfolded)}>
-      {unfolded ? "Show fewer" : `+${more} more ›`}
-    </button>
+  const chosen = favourites.find((bed) => musicKey({ kind: "bed", bed }) === value);
+  const shown = chosen && favourites.indexOf(chosen) >= SAVED_SHOWN
+    ? [favourites[0], chosen]
+    : favourites.slice(0, SAVED_SHOWN);
+  const all = favourites.length > SAVED_SHOWN
+    ? <AllChoices count={favourites.length} label="Saved music" onOpen={onAll} />
     : null;
-  return <MakeSection label="Saved music" aside={toggle}>
-    <div className="music-favourites" role="radiogroup" aria-label="Saved music">
-      {shown.map((bed) => {
-        const key = musicKey({ kind: "bed", bed });
-        const label = styleLabel(families, bed.styleId);
-        return <div key={bed.id} className={`favourite${key === value ? " on" : ""}`}>
-          <button type="button" role="radio" aria-checked={key === value} onClick={() => onChange(key)}
-            aria-label={`${label}, ${bedAbout(graph, bed)}`}>
-            <span className="favourite-art"><Art group="music" id={bed.styleId} label={label} /></span>
-            <span className="favourite-text">
-              <span className="favourite-name"><StarIcon filled />{label}</span>
-              <span className="favourite-about">{bedAbout(graph, bed)}</span>
-            </span>
-          </button>
-          <Preview graph={graph} bed={bed} />
-        </div>;
-      })}
-    </div>
+  return <MakeSection label="Saved music" aside={all}>
+    <SavedCards graph={graph} families={families} favourites={shown} value={value} onChange={onChange} />
   </MakeSection>;
 }
 

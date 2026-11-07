@@ -401,6 +401,8 @@ export interface Story extends SyncFields, OwnedFields {
   position: number;
   /** What the owner asked the writer for, in their own words. Null when nothing was asked. */
   guidance: string | null;
+  /** How many parts the owner asked for, so Try again writes a story of the same length. */
+  parts: number;
 }
 
 /**
@@ -857,6 +859,7 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     optionalString(record.modelId, "Story model");
     optionalString(record.guidance, "Story guidance");
     invariant(Number.isSafeInteger(record.position) && record.position >= 0, "Story position is invalid.");
+    invariant(Number.isSafeInteger(record.parts) && record.parts >= 1, "Story part count is invalid.");
   },
   storyParts(record: StoryPart, find: Find): void {
     const story = find.stories(record.storyId);

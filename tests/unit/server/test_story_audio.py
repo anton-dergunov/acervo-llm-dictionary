@@ -87,7 +87,7 @@ def switch(server, **changes) -> None:
     pronunciation_settings.save(server.owner, **changes)
 
 
-def written(server, models, runner, parts: int = 3) -> dict:
+def written(server, models, runner, parts: int = 4) -> dict:
     """A story that has been written, translated, briefed and drawn — with nothing read aloud yet."""
     switch(server, pregenerate={"stories": False})
     story = a_story(server, 2)
@@ -111,7 +111,7 @@ def parts_of(server, story) -> list[dict]:
 
 
 def test_a_clear_voice_reads_the_part_in_one_go_with_no_passages_and_no_text_call(server, models, runner):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     switch(server, delivery={"stories": "plain"})
     part = parts_of(server, story)[0]
 
@@ -131,7 +131,7 @@ def test_a_clear_voice_reads_the_part_in_one_go_with_no_passages_and_no_text_cal
 
 
 def test_a_directed_voice_reads_a_passage_at_a_time_and_says_where_each_is(server, models, runner):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     part = parts_of(server, story)[0]
     models.texts = [narrate_reply(part["text"])]
 
@@ -158,7 +158,7 @@ def test_a_directed_voice_reads_a_passage_at_a_time_and_says_where_each_is(serve
 def test_only_a_voice_that_can_take_a_direction_reads_a_directed_story(server, models, runner):
     """The passages exist to carry a direction. A pair that cannot take one would turn four calls a
     part into four times the cost of one for nothing, which is what emptied a real allowance."""
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     part = parts_of(server, story)[0]
     models.texts = [narrate_reply(part["text"])]
 
@@ -173,7 +173,7 @@ def test_a_part_no_directed_voice_can_read_is_read_whole_and_plainly(server, mod
     """The reason it is one call and not four: a part nobody can read expressively is going to be
     read plainly, so it is read plainly *once*, offers no passages to tap, and no model is asked
     where to cut it."""
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     part = parts_of(server, story)[0]
     server.put("/models/selection", {"chains": {"audioExpressive": [{"provider": "google-cloud", "model": "Standard"}]}})
     before = len(models.prompts)
@@ -189,7 +189,7 @@ def test_a_part_no_directed_voice_can_read_is_read_whole_and_plainly(server, mod
 def test_a_part_whose_directed_voices_run_out_is_read_on_by_the_clear_voice(server, models, runner):
     """Out of reach at the moment of asking rather than by configuration: the passages were already
     cut, so each is read plainly in turn, and none claims a direction it was not given."""
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     part = parts_of(server, story)[0]
     for model in (FIRST, SECOND):
         server.speech.fail[model] = ProviderUnavailable("unavailable", "down", provider_id="google-cloud", model=model)
@@ -205,7 +205,7 @@ def test_a_part_whose_directed_voices_run_out_is_read_on_by_the_clear_voice(serv
 def test_a_clear_voice_is_never_asked_where_to_cut_a_part(server, models, runner):
     """The text call exists to place the directions. With no direction to place it is a call spent
     on nothing, so it is not made — for the chosen clear voice, or for a directed one out of reach."""
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     switch(server, delivery={"stories": "plain"})
     before = len(models.prompts)
 
@@ -215,7 +215,7 @@ def test_a_clear_voice_is_never_asked_where_to_cut_a_part(server, models, runner
 
 
 def test_a_part_that_is_not_in_the_story_is_not_found(server, models, runner):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
 
     error = read(server, story, {"id": "notapart0000001"}, expect=404)
 
@@ -226,7 +226,7 @@ def test_a_part_that_is_not_in_the_story_is_not_found(server, models, runner):
 
 
 def test_the_pair_that_answered_first_reads_every_later_passage_and_part(server, models, runner):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     first, second, *_ = parts_of(server, story)
     models.texts = [narrate_reply(first["text"]), narrate_reply(second["text"])]
     # The first pair in the order is down for the first passage, so the second answers it…
@@ -247,7 +247,7 @@ def test_the_pair_that_answered_first_reads_every_later_passage_and_part(server,
 def test_a_pinned_voice_that_runs_out_is_stepped_over_so_the_story_still_finishes(server, models, runner):
     """The pin is a preference, not a cage. Insisting on it cost a real story three silent parts: the
     pinned pair was a free row whose daily allowance had gone, and a chain of one has no way out."""
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     first, second, *_ = parts_of(server, story)
     models.texts = [narrate_reply(first["text"]), narrate_reply(second["text"])]
     read(server, story, first)
@@ -267,7 +267,7 @@ def test_a_pinned_voice_that_runs_out_is_stepped_over_so_the_story_still_finishe
 def test_a_pinned_voice_is_not_stepped_over_for_a_mistake_in_the_deployment(server, models, runner):
     """A rejected credential is something to fix, not a condition to wait out or route around —
     `models/` states it for a chain and it holds here: spending another allowance hides it."""
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     first, second, *_ = parts_of(server, story)
     models.texts = [narrate_reply(first["text"]), narrate_reply(second["text"])]
     read(server, story, first)
@@ -283,7 +283,7 @@ def test_a_pinned_voice_is_not_stepped_over_for_a_mistake_in_the_deployment(serv
 
 
 def test_a_pair_that_can_no_longer_be_asked_for_does_not_hold_the_story_to_it(server, models, runner):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     first, second, *_ = parts_of(server, story)
     models.texts = [narrate_reply(first["text"]), narrate_reply(second["text"])]
     read(server, story, first)
@@ -300,7 +300,7 @@ def test_a_pair_that_can_no_longer_be_asked_for_does_not_hold_the_story_to_it(se
 
 
 def test_a_part_the_text_models_cannot_cut_is_read_whole_rather_than_left_silent(server, models, runner):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     part = parts_of(server, story)[0]
     models.texts = [{"nonsense": True}] * 6
 
@@ -312,7 +312,7 @@ def test_a_part_the_text_models_cannot_cut_is_read_whole_rather_than_left_silent
 
 
 def test_a_rate_limited_text_model_is_a_wait_not_a_fallback(server, models, runner, monkeypatch):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     part = parts_of(server, story)[0]
 
     def limited(**kwargs):
@@ -329,7 +329,7 @@ def test_a_rate_limited_text_model_is_a_wait_not_a_fallback(server, models, runn
 def test_a_passage_already_paid_for_is_not_recorded_again(server, models, runner):
     """A part is written only once all its passages exist, so a part that ran out of allowance
     halfway used to buy its first passages twice. On ten calls a day that is the whole story."""
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     first, second, *_ = parts_of(server, story)
     models.texts = [narrate_reply(first["text"]), narrate_reply(first["text"]), narrate_reply(second["text"])]
     read(server, story, first)
@@ -359,8 +359,8 @@ def _step(server, name: str) -> dict:
 
 def test_the_job_reads_every_part_in_one_voice_and_reports_how_far_it_has_got(server, models, runner):
     story = a_story(server, 2)
-    models.texts = [story_reply(3), translation_reply(3), brief_reply(3)]
-    models.texts += [narrate_reply(f"Marcos vio algo asombroso. Numero {index}.") for index in range(3)]
+    models.texts = [story_reply(4), translation_reply(4), brief_reply(4)]
+    models.texts += [narrate_reply(f"Marcos vio algo asombroso. Numero {index}.") for index in range(4)]
 
     runner.run_until_idle()
 
@@ -368,13 +368,13 @@ def test_the_job_reads_every_part_in_one_voice_and_reports_how_far_it_has_got(se
     assert all(part["audioSegments"] for part in held)
     assert len({(part["audioProviderId"], part["audioModelId"], part["audioVoice"]) for part in held}) == 1
     step = _step(server, "story.audio")
-    assert step["state"] == "done" and (step["done"], step["total"]) == (3, 3)
+    assert step["state"] == "done" and (step["done"], step["total"]) == (4, 4)
 
 
 def test_a_story_is_not_recorded_when_the_switch_is_off(server, models, runner):
     switch(server, pregenerate={"stories": False})
     story = a_story(server, 2)
-    models.texts = [story_reply(3), translation_reply(3), brief_reply(3)]
+    models.texts = [story_reply(4), translation_reply(4), brief_reply(4)]
 
     runner.run_until_idle()
 
@@ -389,8 +389,8 @@ def test_trying_again_after_a_failed_recording_records_the_rest_and_writes_no_se
     first three must find their work already done — otherwise the retry writes the story a second
     time, beside the first, before it ever reaches the recording."""
     story = a_story(server, 2)
-    models.texts = [story_reply(3), translation_reply(3), brief_reply(3)]
-    models.texts += [narrate_reply(f"Marcos vio algo asombroso. Numero {index}.") for index in range(3)]
+    models.texts = [story_reply(4), translation_reply(4), brief_reply(4)]
+    models.texts += [narrate_reply(f"Marcos vio algo asombroso. Numero {index}.") for index in range(4)]
     # The second part's recording fails outright: a voice that refuses it, and no other in the chain.
     original = server.speech
     calls = {"count": 0}
@@ -403,11 +403,11 @@ def test_trying_again_after_a_failed_recording_records_the_rest_and_writes_no_se
 
     monkeypatch.setattr("acervo.models.google_tts.speech", flaky)
     runner.run_until_idle()
-    assert [bool(part["audioSegments"]) for part in parts_of(server, story)] == [True, True, False]
+    assert [bool(part["audioSegments"]) for part in parts_of(server, story)] == [True, True, False, False]
     ids_before = [part["id"] for part in parts_of(server, story)]
 
     monkeypatch.setattr("acervo.models.google_tts.speech", original)
-    models.texts = [narrate_reply("Marcos vio algo asombroso. Numero 2.")]
+    models.texts = [narrate_reply(f"Marcos vio algo asombroso. Numero {index}.") for index in (2, 3)]
     answer = server.post("/jobs", {"kind": "story", "subject": {"kind": "story", "id": story["id"]}})
     assert answer.status_code in (200, 202), answer.text
     runner.run_until_idle()
@@ -415,14 +415,14 @@ def test_trying_again_after_a_failed_recording_records_the_rest_and_writes_no_se
     held = parts_of(server, story)
     assert [part["id"] for part in held] == ids_before, "no second set of parts"
     assert all(part["audioSegments"] for part in held)
-    assert len(models.prompts) == 3 + 3 + 1, "the writer, translator and briefer were not asked again"
+    assert len(models.prompts) == 3 + 3 + 2, "the writer, translator and briefer were not asked again"
 
 
 # ── deleting ────────────────────────────────────────────────────────────────
 
 
 def test_deleting_a_story_removes_its_recordings_with_its_pictures(server, models, runner):
-    story = written(server, models, runner, parts=3)
+    story = written(server, models, runner, parts=4)
     part = parts_of(server, story)[0]
     models.texts = [narrate_reply(part["text"])]
     row = read(server, story, part)

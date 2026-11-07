@@ -22,10 +22,19 @@ the writer only when present, and outranks the kind's direction but never the pr
 **The dialog is the loop dialog's frame** (`StoryDialog.tsx` on `MakeDialog.tsx`): the words drawn and
 shown before they are sent, the unused first, with the same orders and the selection
 ([`loops.md`](loops.md) §2.12); the count as segments, one to eight, because a story's handful is eight
-values and not a range; then **Kind of story** and **Picture style** as the loop dialog's carousels
-([`loops.md`](loops.md) §2.18), each with **All** above it for the whole catalogue as a grid. Neither
-has a sentence under the chosen picture but Surprise me's and To suit the story's: a kind's brief and a
-style's are long directions to a model, not descriptions. Once a kind is chosen, the styles it suggests come first in its order. A
+values and not a range; then **Parts**, how many the story is told in — the server's range, four to
+six, starting on its default and remembered per device; then **Kind of story** and **Picture style**
+as the loop dialog's carousels ([`loops.md`](loops.md) §2.18), each with **All** above it for the
+whole catalogue as a grid. Neither has a sentence under the chosen picture but Surprise me's and To
+suit the story's: a kind's brief and a style's are long directions to a model, not descriptions. The
+styles keep one order whatever the kind, because a row that re-ordered itself when the row above it
+changed looked as if it had scrolled with it; what a kind suggests is said instead, under To suit the
+story ("For Mystery: Film noir, …"), which is what picks from those styles.
+
+**The number of parts is kept on the story** (`stories.parts`), for `guidance`'s reason: Try again
+writes a story of the length that was asked for. The writer is told the number, and a reply of any
+other length is an unusable answer, so the next model in the chain is asked and the call log says
+"4 parts were asked for, and the story has 3". A
 style's tile is a sample of that style — one subject drawn with the style's own brief — and a kind's is
 a vignette; both are `web/src/art/`, drawn by `scripts/draw_dialog_art.py`, and an id with none yet
 shows its emoji or its initial, so a kind or style added to config still appears. The note is one line

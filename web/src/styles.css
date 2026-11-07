@@ -1271,6 +1271,25 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .word-order:hover { background: var(--surface-2); }
 .word-order.on { border-color: color-mix(in srgb, var(--core) 55%, transparent); background: var(--core-soft); color: var(--core); font-weight: 600; }
 .word-order.on svg { color: var(--core); }
+.word-order-count::before { content: "· "; }
+/* On a phone the orders are one bar of equal segments, the icon over the name, rather than pills
+   that wrap onto a second line; the selection's count becomes a badge so its name still fits. */
+@container modal (max-width: 480px) {
+  .word-orders {
+    display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 2px; padding: 3px;
+    border: 1px solid var(--rule-soft); border-radius: 10px; background: var(--surface-2);
+  }
+  .word-order {
+    position: relative; flex-direction: column; justify-content: center; gap: 3px; height: auto; min-height: 50px;
+    padding: 6px 2px; border: 0; border-radius: 7px; background: none; font-size: 12px;
+  }
+  .word-order.on { border: 0; background: var(--surface); box-shadow: 0 1px 2px rgba(19,34,32,.1); }
+  .word-order-count {
+    position: absolute; top: 4px; right: 5px; min-width: 16px; padding: 1px 4px; border-radius: 999px;
+    background: var(--core); color: var(--surface); font: 600 10px/14px var(--sans); text-align: center;
+  }
+  .word-order-count::before { content: none; }
+}
 .word-caption, .word-note { margin: 0; font-size: 12.5px; line-height: 1.4; color: var(--ink-3); }
 .word-caption.warn, .word-note.warn { color: var(--warn); }
 .word-count { display: flex; align-items: center; gap: 14px; min-height: 34px; }

@@ -6,7 +6,7 @@
  * kept bed asked for by the pair that replays it, and every choice in a grid.
  */
 
-import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { AcervoApiError, backendSession, type LoopSchema } from "./api";
 import type { VocabularyGraph } from "./domain";
@@ -221,17 +221,45 @@ describe("choosing the music", () => {
     expect(document.querySelector(".carousel-caption")).toHaveTextContent("Surprise meNew music, in any style");
   });
 
+  it("opens with Surprise me in the middle of the row, and first in the grid", async () => {
+    open();
+    const music = await screen.findByRole("radiogroup", { name: "Music style" });
+    await within(music).findByRole("radio", { name: "Meditative" });
+    expect(within(music).getAllByRole("radio").map((one) => one.getAttribute("aria-label")))
+      .toEqual(["Sunlit acoustic", "Surprise me", "Meditative"]);
+    fireEvent.click(screen.getByRole("button", { name: "All 3: Music style" }));
+    expect(within(screen.getByRole("radiogroup", { name: "Music style" })).getAllByRole("radio")[0])
+      .toHaveTextContent("Surprise me");
+  });
+
+  it("steps one style per notch of a sideways wheel, and leaves an upright wheel to the page", async () => {
+    open();
+    const music = await screen.findByRole("radiogroup", { name: "Music style" });
+    await within(music).findByRole("radio", { name: "Meditative" });
+    const upright = new WheelEvent("wheel", { deltaX: 0, deltaY: 120, bubbles: true, cancelable: true });
+    music.dispatchEvent(upright);
+    expect(upright.defaultPrevented).toBe(false);
+    expect(within(music).getByRole("radio", { name: "Surprise me" })).toHaveAttribute("aria-checked", "true");
+    const sideways = new WheelEvent("wheel", { deltaX: 30, deltaY: 0, bubbles: true, cancelable: true });
+    act(() => { music.dispatchEvent(sideways); });
+    expect(sideways.defaultPrevented).toBe(true);
+    // 30 px is less than a step; 30 more is one.
+    expect(within(music).getByRole("radio", { name: "Surprise me" })).toHaveAttribute("aria-checked", "true");
+    act(() => { music.dispatchEvent(new WheelEvent("wheel", { deltaX: 30, bubbles: true, cancelable: true })); });
+    expect(within(music).getByRole("radio", { name: "Meditative" })).toHaveAttribute("aria-checked", "true");
+  });
+
   it("steps through the styles with the arrows and the keyboard", async () => {
     open();
     const music = await screen.findByRole("radiogroup", { name: "Music style" });
     await within(music).findByRole("radio", { name: "Meditative" });
-    expect(screen.queryByRole("button", { name: "Previous: Music style" })).toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "Next: Music style" }));
-    expect(within(music).getByRole("radio", { name: "Sunlit acoustic" })).toHaveAttribute("aria-checked", "true");
-    fireEvent.keyDown(music, { key: "ArrowRight" });
     expect(within(music).getByRole("radio", { name: "Meditative" })).toHaveAttribute("aria-checked", "true");
     expect(screen.queryByRole("button", { name: "Next: Music style" })).toBeNull();
     fireEvent.keyDown(music, { key: "Home" });
+    expect(within(music).getByRole("radio", { name: "Sunlit acoustic" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.queryByRole("button", { name: "Previous: Music style" })).toBeNull();
+    fireEvent.keyDown(music, { key: "ArrowRight" });
     expect(within(music).getByRole("radio", { name: /surprise me/i })).toHaveAttribute("aria-checked", "true");
   });
 
@@ -248,6 +276,33 @@ describe("choosing the music", () => {
     // No style is chosen while saved music is, and the row says so.
     expect(within(screen.getByRole("radiogroup", { name: "Music style" })).queryByRole("radio", { checked: true })).toBeNull();
     expect(document.querySelector(".carousel-caption")).toHaveTextContent("Saved music chosen above");
+    fireEvent.click(await go());
+    await waitFor(() => expect(make).toHaveBeenCalled());
+    expect(make.mock.calls[0][0]).toMatchObject({ family: "sunlit-acoustic", seed: 104740 });
+  });
+
+  it("shows the two most recent saved pieces, and every one in place of the dialog's body", async () => {
+    const graph = testGraph();
+    const [bed] = graph.beds;
+    graph.beds = [
+      { ...bed, id: "bedlatest000001", createdAt: "2026-11-02T10:00:00.000Z", seed: 1 },
+      { ...bed, id: "bedmiddle000001", createdAt: "2026-10-20T10:00:00.000Z", seed: 2 },
+      bed
+    ];
+    const make = made();
+    open(graph);
+    const saved = await screen.findByRole("radiogroup", { name: "Saved music" });
+    expect(within(saved).getAllByRole("radio")).toHaveLength(2);
+    fireEvent.click(screen.getByRole("button", { name: "All 3: Saved music" }));
+    expect(screen.getByRole("heading", { name: "Saved music" })).toBeInTheDocument();
+    const every = within(screen.getByRole("radiogroup", { name: "Saved music" })).getAllByRole("radio");
+    expect(every).toHaveLength(3);
+    fireEvent.click(every[2]);
+    // Back in the dialog, the oldest piece is chosen and takes the second place, so it is in sight.
+    expect(screen.getByRole("heading", { name: "Make a loop" })).toBeInTheDocument();
+    const shown = within(screen.getByRole("radiogroup", { name: "Saved music" })).getAllByRole("radio");
+    expect(shown).toHaveLength(2);
+    expect(shown[1]).toHaveAttribute("aria-checked", "true");
     fireEvent.click(await go());
     await waitFor(() => expect(make).toHaveBeenCalled());
     expect(make.mock.calls[0][0]).toMatchObject({ family: "sunlit-acoustic", seed: 104740 });

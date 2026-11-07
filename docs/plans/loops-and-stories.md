@@ -17,15 +17,13 @@ One more order for the make dialogs' draw ([`../features/loops.md`](../features/
   interface sets it yet.
 - **Groups**, only if the lists get long enough that stars and order do not keep them usable.
 
-## 3 · Level and length
+## 3 · Level
 
 - **A level for loops.** A vocabulary has a level now, and compose, chat and a story's text read it
   ([`../features/standing-rules.md`](../features/standing-rules.md), "The reader"). A loop's sentences
   are written by LexiBeat, so following it there means sending it in `render_request` and a change on
   that side.
 - **A level for one story**, overriding the language's, in the story dialog.
-- **How many parts**, in the same dialog. The writer is free today, and the server accepts three to
-  eight.
 
 ## 4 · Listening hands-free
 

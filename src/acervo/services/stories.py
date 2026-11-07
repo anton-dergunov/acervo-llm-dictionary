@@ -187,7 +187,7 @@ def create(settings: Settings, owner: str, device: str, body: dict[str, Any]) ->
             # what "not written yet" means.
             "title": "", "titleTranslation": "", "emoji": chosen_type.emoji, "modelId": "",
             "position": graph.next_story_position(owner, language),
-            "guidance": guidance,
+            "guidance": guidance, "parts": parts,
             **stamp,
         }],
         "storyWords": [{
@@ -288,7 +288,7 @@ def write_story(settings: Settings, owner: str, device: str, story_id: str) -> d
     request = write.build_request(
         language=story["language"], language_name=language_name(story["language"]),
         words=words, story_type_brief=story_type.brief, story_type_label=story_type.label,
-        parts=DEFAULT_PARTS, guidance=story.get("guidance") or "",
+        parts=int(story.get("parts") or DEFAULT_PARTS), guidance=story.get("guidance") or "",
     )
     try:
         written, usage = writer.write(request, words)

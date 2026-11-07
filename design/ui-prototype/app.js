@@ -2565,7 +2565,7 @@ function wordPicker(kind, draw) {
   const selection = picked();
   const fromSelection = draw.choice === "selection" && selection.length;
   const pills = ORDERS.map((o) => `<button type="button" role="radio" data-order="${o.id}" aria-checked="${draw.choice === o.id}" class="word-order${draw.choice === o.id ? " on" : ""}">${MAKE_ICON[o.icon]}${o.label}</button>`).join("")
-    + (selection.length ? `<button type="button" role="radio" data-order="selection" aria-checked="${Boolean(fromSelection)}" class="word-order${fromSelection ? " on" : ""}">${ICON.selected}Selection · ${selection.length}</button>` : "");
+    + (selection.length ? `<button type="button" role="radio" data-order="selection" aria-checked="${Boolean(fromSelection)}" aria-label="Selection · ${selection.length}" class="word-order${fromSelection ? " on" : ""}">${ICON.selected}Selection<span class="word-order-count">${selection.length}</span></button>` : "");
   const hard = LEXEMES.some((x) => x.study?.reps > 0);
   const caption = draw.choice === "hard" ? (hard ? "Words Anki says you find hardest." : "Needs your review history from Anki, which has none yet.")
     : draw.choice === "rare" ? `Words least common in everyday ${langOf(state.lang).name}.` : "";
@@ -2632,6 +2632,8 @@ function choiceGrid(name, choices, value) {
     <button type="button" role="radio" aria-checked="${c.id === value}"><span class="choice-art">${c.art}</span>
       <span class="choice-name">${esc(c.label)}</span>${c.about ? `<span class="choice-about">${esc(c.about)}</span>` : ""}</button></div>`).join("")}</div>`;
 }
+/* `centred`: the default choice in the middle of a carousel's list, so it opens with both sides filled. */
+const centred = (list) => { const half = Math.floor((list.length - 1) / 2); return [...list.slice(1, half + 1), list[0], ...list.slice(half + 1)]; };
 const allLink = (name, count) => `<button type="button" class="make-more" data-all="${esc(name)}" aria-label="All ${count}: ${esc(name)}">All ${count} ›</button>`;
 
 /* A carousel's pictures sized by their distance from the middle, as `ChoiceCarousel` writes them. */
@@ -2656,22 +2658,23 @@ function musicTiles() {
     ...LOOP_SCHEMA.families.map((f) => ({ id: f.id, label: f.label, about: f.description, art: art("music", f.id, f.label) }))
   ];
 }
-/* `SavedMusic`: the two most recent, and the rest unfolded in place. */
-function savedMusic(d) {
-  if (!BEDS.length) return "";
-  const keys = BEDS.map((bed) => `bed:${bed.id}`);
-  const open = d.savedOpen || keys.indexOf(d.music) >= 2;
-  const more = BEDS.length - 2;
-  const cards = (open ? BEDS : BEDS.slice(0, 2)).map((bed) => {
-    const id = `bed:${bed.id}`, on = id === d.music, label = styleLabel(bed.styleId);
+/* `SavedCards` and `SavedMusic`: the two most recent in their section, All for every one in place
+   of the body; a chosen piece beyond the two takes the second place. */
+function savedCards(beds, value) {
+  return `<div class="music-favourites" role="radiogroup" aria-label="Saved music" data-strip="Music style">${beds.map((bed) => {
+    const id = `bed:${bed.id}`, on = id === value, label = styleLabel(bed.styleId);
     return `<div class="favourite${on ? " on" : ""}" data-choice="${id}">
       <button type="button" role="radio" aria-checked="${on}" aria-label="${esc(label)}, ${esc(bedAbout(bed))}">
         <span class="favourite-art">${art("music", bed.styleId, label)}</span>
         <span class="favourite-text"><span class="favourite-name">${ICON.starOn}${esc(label)}</span><span class="favourite-about">${esc(bedAbout(bed))}</span></span>
       </button>${loopOf(bed.sourceLoopId) ? `<button type="button" class="music-preview" aria-label="Hear this music">${ICON.play}</button>` : ""}</div>`;
-  }).join("");
-  const toggle = more > 0 ? `<button type="button" class="make-more" data-saved-toggle>${open ? "Show fewer" : `+${more} more ›`}</button>` : "";
-  return makeSection("Saved music", `<div class="music-favourites" role="radiogroup" aria-label="Saved music" data-strip="Music style">${cards}</div>`, toggle);
+  }).join("")}</div>`;
+}
+function savedMusic(d) {
+  if (!BEDS.length) return "";
+  const chosen = BEDS.find((bed) => `bed:${bed.id}` === d.music);
+  const shown = chosen && BEDS.indexOf(chosen) >= 2 ? [BEDS[0], chosen] : BEDS.slice(0, 2);
+  return makeSection("Saved music", savedCards(shown, d.music), BEDS.length > 2 ? allLink("Saved music", BEDS.length) : "");
 }
 
 /* The kinds of loop as three tiles — `LoopFormat.tsx` `KindChoices`. */
@@ -2731,19 +2734,22 @@ function openMakeDialog(kind, from = "scope") {
   const d = {
     choice: from === "selection" && picked().length ? "selection" : "random", count: rule.initial, seed: Date.now() % 100000,
     passed: new Set(), ids: [], browsing: null, format: state.loopFormat || "classic", switches: {}, optionsOpen: false,
-    music: state.loopMusic || "surprise", storyKind: "auto", style: "auto", guidance: ""
+    music: state.loopMusic || "surprise", storyKind: "auto", style: "auto", guidance: "", parts: state.storyParts || 4
   };
   const node = el(`<div class="modal-backdrop"><section class="settings make-dialog" role="dialog" aria-modal="true" tabindex="-1"></section></div>`);
   document.body.appendChild(node);
   const frame = $(".make-dialog", node);
   const kinds = () => [{ id: "auto", label: "Surprise me", about: "Any kind of story", art: iconArt(MAKE_ICON.dice) },
     ...STORY_TYPES.map((t) => ({ id: t.id, label: t.label, art: art("kinds", t.id, t.label, t.emoji) }))];
-  const pictures = () => {
-    const suggested = STORY_TYPES.find((t) => t.id === d.storyKind)?.styles || [];
-    const rank = (id) => (suggested.includes(id) ? suggested.indexOf(id) : suggested.length);
-    return [{ id: "auto", label: "To suit the story", about: "A style this kind of story suits", art: iconArt(MAKE_ICON.picture) },
-      ...STORY_STYLES.slice().sort((a, b) => rank(a.id) - rank(b.id)).map((s) => ({ id: s.id, label: s.label, art: art("styles", s.id, s.label) }))];
+  /* One order whatever the kind; what To suit the story picks from is named under it. */
+  const suits = () => {
+    const type = STORY_TYPES.find((t) => t.id === d.storyKind);
+    if (!type) return "A style to suit whichever kind is written";
+    const names = type.styles.map((id) => STORY_STYLES.find((st) => st.id === id)?.label).filter(Boolean);
+    return `For ${type.label}: ${names.slice(0, 3).join(", ")}${names.length > 3 ? ` and ${names.length - 3} more` : ""}`;
   };
+  const pictures = () => [{ id: "auto", label: "To suit the story", about: suits(), art: iconArt(MAKE_ICON.picture) },
+    ...STORY_STYLES.map((st) => ({ id: st.id, label: st.label, art: art("styles", st.id, st.label) }))];
   const catalogues = () => kind === "loop"
     ? { "Music style": [musicTiles(), "music"] }
     : { "Kind of story": [kinds(), "storyKind"], "Picture style": [pictures(), "style"] };
@@ -2751,17 +2757,19 @@ function openMakeDialog(kind, from = "scope") {
   const scrolled = {};
   const strip = (name, idle) => {
     const [choices, key] = catalogues()[name];
-    return makeSection(name, carousel(name, choices, d[key], idle), allLink(name, choices.length),
+    return makeSection(name, carousel(name, centred(choices), d[key], idle), allLink(name, choices.length),
       name === "Music style" ? "composed new for each loop" : "");
   };
   const paint = () => {
     const cats = catalogues();
     for (const row of frame.querySelectorAll(".carousel-row")) scrolled[row.dataset.strip] = row.scrollLeft;
-    const body = d.browsing
-      ? choiceGrid(d.browsing, cats[d.browsing][0], d[cats[d.browsing][1]])
+    const body = d.browsing === "Saved music" ? savedCards(BEDS, d.music)
+      : d.browsing ? choiceGrid(d.browsing, cats[d.browsing][0], d[cats[d.browsing][1]])
       : makeSection("Words", wordPicker(kind, d)) + (kind === "loop"
         ? makeSection("Kind of loop", kindChoices(d)) + savedMusic(d) + strip("Music style", "Saved music chosen above")
-        : strip("Kind of story") + strip("Picture style")
+        : makeSection("Parts", `<div class="word-count"><span class="seg word-count-seg story-parts" role="radiogroup" aria-label="How many parts">${[4, 5, 6].map((n) =>
+            `<button type="button" role="radio" data-parts="${n}" aria-checked="${n === d.parts}" class="${n === d.parts ? "on" : ""}">${n}</button>`).join("")}</span><span class="word-tally"><output>${d.parts} parts</output><small class="word-pool">a picture each</small></span></div>`)
+          + strip("Kind of story") + strip("Picture style")
           + `<textarea class="make-guidance" aria-label="Anything else? (optional)" rows="${d.guidance ? 3 : 1}" maxlength="1000" placeholder="Anything else? Set it on a night train, tell it from the dog’s side…">${esc(d.guidance)}</textarea>`);
     frame.innerHTML = `<header>${d.browsing ? `<button type="button" class="make-back" data-back aria-label="Back to ${rule.title}">${ICON.back}</button>` : ""}
         <h2>${esc(d.browsing || rule.title)}</h2><button class="close" aria-label="Close">×</button></header>
@@ -2780,19 +2788,39 @@ function openMakeDialog(kind, from = "scope") {
       if (Math.abs(row.scrollLeft - left) > 1) row.scrollTo({ left, behavior: name in scrolled ? "smooth" : "auto" });
     }
     paintCarousel(row);
-    let frameId = 0, timer = 0, moved = false;
-    const settle = () => {
+    const key = catalogues()[name][1];
+    let frameId = 0, timer = 0, byHand = false, travel = 0, pause = 0;
+    /* A finger moving the row chooses what passes the middle, in place, without redrawing under it. */
+    const follow = () => {
       const item = nearestItem(row);
-      const key = catalogues()[name][1];
-      if (moved && item.dataset.choice !== d[key]) { d[key] = item.dataset.choice; paint(); }
+      if (item.dataset.choice === d[key]) return;
+      d[key] = item.dataset.choice;
+      for (const one of row.querySelectorAll(".carousel-item")) {
+        one.classList.toggle("on", one === item);
+        one.querySelector("button").setAttribute("aria-checked", String(one === item));
+      }
+      const c = catalogues()[name][0].find((x) => x.id === d[key]);
+      row.closest(".carousel").querySelector(".carousel-caption").innerHTML = `<strong>${esc(c.label)}</strong>${c.about ? `<span>${esc(c.about)}</span>` : ""}`;
     };
-    row.addEventListener("pointerdown", () => { moved = true; });
-    row.addEventListener("wheel", () => { moved = true; }, { passive: true });
-    row.addEventListener("touchstart", () => { moved = true; }, { passive: true });
+    row.addEventListener("touchstart", () => { byHand = true; }, { passive: true });
     row.addEventListener("scroll", () => {
-      cancelAnimationFrame(frameId); frameId = requestAnimationFrame(() => paintCarousel(row));
-      clearTimeout(timer); timer = setTimeout(settle, 120);
+      cancelAnimationFrame(frameId); frameId = requestAnimationFrame(() => { paintCarousel(row); if (byHand) follow(); });
+      clearTimeout(timer); timer = setTimeout(() => { if (byHand) { byHand = false; follow(); paint(); } }, 120);
     }, { passive: true });
+    /* A sideways wheel steps one picture for each 50 px of travel, rather than scrolling the row. */
+    row.addEventListener("wheel", (ev) => {
+      if (Math.abs(ev.deltaX) <= Math.abs(ev.deltaY)) return;
+      ev.preventDefault();
+      travel += ev.deltaX * (ev.deltaMode === 1 ? 40 : 1);
+      clearTimeout(pause); pause = setTimeout(() => { travel = 0; }, 200);
+      let steps = 0;
+      while (Math.abs(travel) >= 50) { const sign = Math.sign(travel); steps += sign; travel -= sign * 50; }
+      if (!steps) return;
+      const items = [...row.querySelectorAll(".carousel-item")];
+      const at = Math.max(0, items.findIndex((item) => item.dataset.choice === d[key]));
+      d[key] = items[Math.max(0, Math.min(items.length - 1, at + steps))].dataset.choice;
+      paint();
+    }, { passive: false });
     row.addEventListener("keydown", (ev) => {
       const items = [...row.querySelectorAll(".carousel-item")];
       const at = Math.max(0, items.findIndex((item) => item.classList.contains("on")));
@@ -2829,16 +2857,17 @@ function openMakeDialog(kind, from = "scope") {
     if (t.dataset.order) { d.choice = t.dataset.order; d.passed = new Set(); return paint(); }
     if (t.dataset.swap) { d.passed.add(t.dataset.swap); return paint(); }
     if (t.matches("[data-redraw]")) { d.ids.forEach((id) => d.passed.add(id)); return paint(); }
+    if (t.dataset.parts) { d.parts = state.storyParts = Number(t.dataset.parts); return paint(); }
     if (t.dataset.countTo) { d.count = Number(t.dataset.countTo); return paint(); }
     if (t.dataset.kind) { const k = loopKinds().find((x) => x.id === t.dataset.kind); d.format = k.formats[0].id; d.switches = {}; state.loopFormat = d.format; return paint(); }
     if (t.dataset.format) { d.format = t.dataset.format; state.loopFormat = d.format; d.optionsOpen = true; return paint(); }
     if (t.dataset.switch) { d.switches[t.dataset.switch] = t.dataset.value; d.optionsOpen = true; return paint(); }
     if (t.dataset.all) { d.browsing = t.dataset.all; return paint(); }
-    if (t.matches("[data-saved-toggle]")) { d.savedOpen = !d.savedOpen; return paint(); }
     if (t.dataset.step) {
       const [choices, key] = catalogues()[t.dataset.strip];
-      const at = Math.max(0, choices.findIndex((c) => c.id === d[key]));
-      d[key] = choices[Math.max(0, Math.min(choices.length - 1, at + Number(t.dataset.step)))].id;
+      const order = centred(choices);
+      const at = Math.max(0, order.findIndex((c) => c.id === d[key]));
+      d[key] = order[Math.max(0, Math.min(order.length - 1, at + Number(t.dataset.step)))].id;
       return paint();
     }
     const tile = t.closest("[data-choice]");

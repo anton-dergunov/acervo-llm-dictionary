@@ -48,9 +48,9 @@ Field rules:
 else, and the end is not where the beginning pointed. A reader who finishes should want to tell
 somebody about it.
 
-**Length.** Each part is two to four sentences. The whole story is between twelve and twenty
-sentences. A part is read on one screen with a picture above it, so a part that runs long is a part
-that has to be scrolled — write shorter rather than trusting this.
+**Length.** Write exactly as many parts as `parts` asks for — not one more or fewer. Each part is two
+to four sentences. A part is read on one screen with a picture above it, so a part that runs long is
+a part that has to be scrolled — write shorter rather than trusting this.
 
 **Shape.** The parts are a single arc: something is established, something changes, it comes to a
 head, and it lands.

@@ -165,7 +165,8 @@ NUMBER_RULES: dict[str, dict[str, tuple[float, float | None]]] = {
         "cue_order": (0, None), "cue_group": (0, None), "take": (0, None),
         "start_seconds": (0, None), "end_seconds": (0, None),
     },
-    "stories": {"story_order": (0, None)},
+    # A story has at least one part; how many may be *asked* for is the story service's to say.
+    "stories": {"story_order": (0, None), "parts": (1, None)},
     "story_parts": {"part_order": (0, None), "attempts": (0, None)},
     "story_words": {"word_order": (0, None)},
     # The loop's own bound, since a favourite's seed is a loop's seed.

@@ -993,6 +993,8 @@ export interface StoryRequest {
   styleId?: string;
   /** The owner's own note to the writer — a setting, a narrator, a tone. Optional. */
   guidance?: string;
+  /** How many parts, within the `minParts`…`maxParts` the types route reports. */
+  parts?: number;
 }
 
 export interface JobRequest {

@@ -19,7 +19,7 @@ const TYPES = {
   ],
   styles: [{ id: "comic-book", label: "Comic book" }, { id: "watercolour-storybook", label: "Watercolour" },
     { id: "film-noir", label: "Film noir" }],
-  minWords: 1, maxWords: 8, minParts: 2, maxParts: 6, defaultParts: 4
+  minWords: 1, maxWords: 8, minParts: 4, maxParts: 6, defaultParts: 4
 } as unknown as StoryTypes;
 
 function open() {
@@ -40,6 +40,25 @@ beforeEach(() => {
 });
 
 afterEach(() => { cleanup(); vi.restoreAllMocks(); localStorage.clear(); });
+
+describe("how many parts", () => {
+  it("offers what the server allows, starting on its default, and sends and remembers the choice", async () => {
+    open();
+    const parts = await screen.findByRole("radiogroup", { name: "How many parts" });
+    expect(within(parts).getAllByRole("radio").map((one) => one.textContent)).toEqual(["4", "5", "6"]);
+    expect(within(parts).getByRole("radio", { name: "4" })).toHaveAttribute("aria-checked", "true");
+    fireEvent.click(within(parts).getByRole("radio", { name: "6" }));
+    const make = screen.getByRole("button", { name: /^Make the story/ });
+    await waitFor(() => expect(make).toBeEnabled());
+    fireEvent.click(make);
+    await waitFor(() => expect(made).toHaveBeenCalled());
+    expect(made.mock.calls[0][0]).toMatchObject({ parts: 6 });
+    cleanup();
+    open();
+    expect(within(await screen.findByRole("radiogroup", { name: "How many parts" })).getByRole("radio", { name: "6" }))
+      .toHaveAttribute("aria-checked", "true");
+  });
+});
 
 describe("the owner's guidance", () => {
   it("is sent, trimmed, when something is written in it", async () => {
@@ -116,12 +135,18 @@ describe("the kind and the pictures", () => {
     expect(made.mock.calls[0][0]).not.toHaveProperty("styleId");
   });
 
-  it("puts the styles a kind suggests first, in its order", async () => {
+  it("keeps the styles in one order whatever the kind, and names the kind's under To suit the story", async () => {
     open();
-    fireEvent.click(await screen.findByRole("radio", { name: "Mystery" }));
-    const styles = within(screen.getByRole("radiogroup", { name: "Picture style" })).getAllByRole("radio")
+    const order = () => within(screen.getByRole("radiogroup", { name: "Picture style" })).getAllByRole("radio")
       .map((one) => one.getAttribute("aria-label"));
-    expect(styles).toEqual(["To suit the story", "Film noir", "Watercolour", "Comic book"]);
+    await screen.findByRole("radio", { name: "Mystery" });
+    // To suit the story sits in the middle, so the row opens with pictures on both sides.
+    const before = order();
+    expect(before).toEqual(["Comic book", "To suit the story", "Watercolour", "Film noir"]);
+    fireEvent.click(screen.getByRole("radio", { name: "Mystery" }));
+    expect(order()).toEqual(before);
+    expect(screen.getByRole("radio", { name: "To suit the story" })).toHaveAttribute(
+      "aria-description", "For Mystery: Film noir, Watercolour");
   });
 
   it("shows every style in a grid, and choosing one returns with it chosen", async () => {

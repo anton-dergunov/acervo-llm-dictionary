@@ -153,8 +153,9 @@ def is_form_of(form: str, headword: str, lemma: str) -> bool:
     return False
 
 
-def parse_reply(payload: Any, wanted: Sequence[Mapping[str, Any]]) -> Written:
-    """The reply, checked against what was asked for. Raises `ValueError` on anything unusable."""
+def parse_reply(payload: Any, wanted: Sequence[Mapping[str, Any]], parts: int | None = None) -> Written:
+    """The reply, checked against what was asked for. Raises `ValueError` on anything unusable,
+    including a story of another length than the `parts` asked for: the owner chose it."""
     if not isinstance(payload, Mapping):
         raise ValueError("the reply was not a JSON object")
 
@@ -171,6 +172,8 @@ def parse_reply(payload: Any, wanted: Sequence[Mapping[str, Any]]) -> Written:
             f"a story has between {MIN_PARTS} and {MAX_PARTS} parts, got "
             f"{len(raw_parts) if isinstance(raw_parts, list) else 'none'}"
         )
+    if parts is not None and len(raw_parts) != parts:
+        raise ValueError(f"{parts} parts were asked for, and the story has {len(raw_parts)}")
 
     parts: list[Part] = []
     for index, entry in enumerate(raw_parts):
@@ -239,7 +242,7 @@ class StoryWriter:
                 raise ProviderUnavailable("empty", "the model returned nothing",
                                           provider_id=candidate.row.id, model=candidate.model)
             try:
-                parse_reply(result.parsed, wanted)
+                parse_reply(result.parsed, wanted, request.get("parts"))
             except StoryRefused:
                 raise  # the writer's own judgement, not a shape failure: do not try another model
             except ValueError as error:
@@ -253,7 +256,7 @@ class StoryWriter:
             "text", [c.named for c in self.candidates], self.catalogue, ask, chain.stamped,
             caller="story.write",
         )
-        return parse_reply(answered.parsed, wanted), {
+        return parse_reply(answered.parsed, wanted, request.get("parts")), {
             "provider": answered.answer.provider_id,
             "model": answered.answer.model,
             "seconds": round(answered.answer.seconds, 2),

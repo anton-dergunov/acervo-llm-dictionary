@@ -205,6 +205,22 @@ export function rememberLoopMusic(key: string): void {
   try { localStorage.setItem(LOOP_MUSIC_KEY, key); } catch { /* a preference, not data */ }
 }
 
+/* How many parts the story dialog last asked for: a device fact for the format's reason. A number
+   outside what the server now offers is simply not used. */
+
+const STORY_PARTS_KEY = "acervo-story-parts";
+
+export function lastStoryParts(): number | null {
+  try {
+    const stored = Number(localStorage.getItem(STORY_PARTS_KEY));
+    return Number.isSafeInteger(stored) && stored > 0 ? stored : null;
+  } catch { return null; }
+}
+
+export function rememberStoryParts(parts: number): void {
+  try { localStorage.setItem(STORY_PARTS_KEY, String(parts)); } catch { /* a preference, not data */ }
+}
+
 /* How the make dialogs last drew their words, per kind: the order and how many. A device fact for
    the format's reason. An order the dialog no longer offers, or a count past what it allows, is
    simply not used. */

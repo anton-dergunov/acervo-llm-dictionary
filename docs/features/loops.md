@@ -493,6 +493,9 @@ Within that the owner chooses the order:
 - **Newest** — the most recently added.
 - **The selection**, when there is one, sent as chosen.
 
+On a phone the orders are one bar of equal segments, the icon over the name, rather than pills that
+wrap onto a second line; the selection's count becomes a badge on its segment.
+
 The order and the count are remembered per kind on this device. Under the count the dialog says how
 many words in scope are not in a loop yet, since that is a fact about how many there are to draw
 from, and beside it how long the loop will run. That is the median seconds per word of this replica's
@@ -645,17 +648,24 @@ generator's own styles without `auto`, which is the absence of a choice and is c
 The kept beds come first, as **Saved music**, a section of its own: each its style's picture, its name
 with the star, when it was kept and the loop it came from in plain view, and a button to hear that
 loop. A kept bed is not a style tile with a small star, because one looks like the style it is a
-piece of and goes unseen. The two most recent show and the rest unfold in place, never sideways, so
-the section is two cards high however many are kept. Under it is **Music style · composed new for
-each loop** — the words are there because a style is a direction to a generator, not a recording —
-as a carousel (`ChoiceCarousel.tsx`): Surprise me, then every style, the chosen one in the middle and
-larger, with its name and sentence under the row, the others shrinking and fading with their
-distance from it. A row whose ends simply stop does not say it scrolls; one whose middle is the point
-does. A swipe or a sideways wheel chooses whatever comes to rest in the middle, a tap brings a
-picture there, ‹ › on the row's edges step one for a desktop without a sideways wheel, and ← →
-step from the keyboard. The size is a transform written as the row scrolls, so the dialog never
-moves with it. While saved music is chosen, nothing in the row is. **All 15 ›** above the row shows
-the styles as a grid in place of the dialog's body, each with its sentence.
+piece of and goes unseen. The two most recent show, and **All** lists every one in place of the
+dialog's body, so the section is two cards high however many are kept; a chosen piece that is not
+among the two takes the second place, so what is chosen is always in sight. Under it is **Music style
+· composed new for each loop** — the words are there because a style is a direction to a generator,
+not a recording — as a carousel (`ChoiceCarousel.tsx`), the chosen style in the middle and larger,
+with its name and sentence under the row, the others shrinking and fading with their distance from
+it. A row whose ends simply stop does not say it scrolls; one whose middle is the point does. Surprise
+me is the middle of the list rather than its start, so the row opens with styles on both sides
+instead of an empty half; the grid keeps it first.
+
+Moving the row is choosing. A swipe chooses as it goes — whatever is in the middle while the finger is
+still moving — and the row is not steered back to it. A sideways wheel steps one style per notch
+rather than scrolling the row: a wheel scrolling a snapping row that was also gliding to its choice
+pulled it back and forth on every small turn. A tap brings a picture to the middle, ‹ › on the row's
+edges step one for a desktop without a sideways wheel, and ← → step from the keyboard. The size is a
+transform written as the row scrolls, so the dialog never moves with it. While saved music is
+chosen, nothing in the row is. **All 15 ›** above the row shows the styles as a grid in place of the
+dialog's body, each with its sentence.
 The dialog opens on the music last asked for on this device, as it does on the format; a kept bed
 let go or a style no longer offered falls back to Surprise me.
 The pictures are `web/src/art/music/<family>.webp`, drawn once by `scripts/draw_dialog_art.py`; a

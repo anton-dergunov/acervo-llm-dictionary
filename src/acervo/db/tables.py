@@ -790,6 +790,9 @@ stories = Table(
     # was never written must write the story that was asked for. Declared last so a database that
     # gained it by `ALTER TABLE` has its columns in the order a fresh one does.
     Column("guidance", Text, nullable=False, default=""),
+    # How many parts the owner asked for, kept for `guidance`'s reason: Try again writes a story of
+    # the same length. Declared last for the same reason as `guidance`.
+    Column("parts", Integer, nullable=False, default=4),
     Index("idx_stories_owner_revision", "owner", "revision"),
     Index("idx_stories_owner_language_order", "owner", "language", "story_order"),
 )

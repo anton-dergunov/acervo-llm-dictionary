@@ -525,6 +525,7 @@ def _project_story(row: Mapping[str, Any]) -> dict[str, Any]:
         "modelId": text_or_none(row["model_id"]),
         "position": to_int(row["story_order"]),
         "guidance": text_or_none(row["guidance"]),
+        "parts": to_int(row["parts"]),
     }
 
 
@@ -539,6 +540,7 @@ def _assign_story(value: Mapping[str, Any]) -> dict[str, Any]:
         "model_id": trimmed(value.get("modelId")),
         "story_order": to_int(value.get("position")),
         "guidance": trimmed(value.get("guidance")),
+        "parts": to_int(value.get("parts")),
     }
 
 

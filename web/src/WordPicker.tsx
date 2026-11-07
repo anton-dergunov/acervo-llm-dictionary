@@ -206,9 +206,9 @@ export function WordPicker({ draw, kind, language, counter, secondsPerWord }: {
         className={`word-order${draw.choice === id ? " on" : ""}`} onClick={() => draw.choose(id)}
       ><Icon />{label}</button>)}
       {draw.selected > 0 && <button
-        type="button" role="radio" aria-checked={fromSelection}
+        type="button" role="radio" aria-checked={fromSelection} aria-label={`Selection · ${draw.selected}`}
         className={`word-order${fromSelection ? " on" : ""}`} onClick={() => draw.choose("selection")}
-      ><SelectIcon on />Selection · {draw.selected}</button>}
+      ><SelectIcon on />Selection<span className="word-order-count">{draw.selected}</span></button>}
     </div>
     {caption && <p className={`word-caption${warn ? " warn" : ""}`}>{caption}</p>}
 

@@ -26,11 +26,11 @@
 
 import { useState } from "react";
 import { AcervoApiError, backendSession, type LoopSchema } from "./api";
-import { AllChoices, ChoiceCarousel, ChoiceGrid } from "./ChoiceCarousel";
+import { AllChoices, ChoiceCarousel, ChoiceGrid, centred } from "./ChoiceCarousel";
 import type { VocabularyGraph } from "./domain";
 import { lastLoopFormat, lastLoopMusic, loopSwitchesFor, rememberLoopFormat, rememberLoopMusic } from "./editorPreferences";
 import { KindChoices, formatUsable, switchesFor } from "./LoopFormat";
-import { SavedMusic, musicChoices, musicKey, musicOf, useLoopSchema } from "./LoopMusic";
+import { SavedCards, SavedMusic, musicChoices, musicKey, musicOf, useLoopSchema } from "./LoopMusic";
 import MakeDialog, { MakeSection } from "./MakeDialog";
 import { loopCandidates, loopEligible, loopSecondsPerWord, favouriteBeds, type ListQuery, type SelectedWord } from "./selectors";
 import { WordPicker, useWordDraw, wordsCount, type WordSource } from "./WordPicker";
@@ -56,7 +56,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
 }) {
   const { schema, trouble } = useLoopSchema(true);
   const [musicPicked, setMusic] = useState<string | null>(lastLoopMusic);
-  const [browsing, setBrowsing] = useState(false);
+  const [browsing, setBrowsing] = useState<null | "styles" | "saved">(null);
   const [asking, setAsking] = useState(false);
   const noSamples = Boolean(schema && !schema.productionBundle);
   const draw = useWordDraw({
@@ -106,12 +106,18 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
     >{asking ? "Asking…" : <>Make the loop<span className="make-go-count"> · {wordsCount(draw.ids.length)}</span></>}</button>
   </>;
 
-  if (browsing) {
-    return <MakeDialog title="Make a loop" back={{ title: "Music style", onBack: () => setBrowsing(false) }} footer={footer} onClose={onClose}>
+  if (browsing === "styles") {
+    return <MakeDialog title="Make a loop" back={{ title: "Music style", onBack: () => setBrowsing(null) }} footer={footer} onClose={onClose}>
       <ChoiceGrid
         label="Music style" choices={tiles.styles} value={musicKey(music)}
-        onChange={(key) => { setMusic(key); setBrowsing(false); }}
+        onChange={(key) => { setMusic(key); setBrowsing(null); }}
       />
+    </MakeDialog>;
+  }
+  if (browsing === "saved") {
+    return <MakeDialog title="Make a loop" back={{ title: "Saved music", onBack: () => setBrowsing(null) }} footer={footer} onClose={onClose}>
+      <SavedCards graph={graph} families={schema?.families ?? []} favourites={tiles.favourites}
+        value={musicKey(music)} onChange={(key) => { setMusic(key); setBrowsing(null); }} />
     </MakeDialog>;
   }
 
@@ -130,12 +136,13 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
     </MakeSection>}
 
     <SavedMusic graph={graph} families={schema?.families ?? []} favourites={tiles.favourites}
-      value={musicKey(music)} onChange={setMusic} />
+      value={musicKey(music)} onChange={setMusic} onAll={() => setBrowsing("saved")} />
 
     <MakeSection label="Music style" note="composed new for each loop"
-      aside={<AllChoices count={tiles.styles.length} label="Music style" onOpen={() => setBrowsing(true)} />}>
+      aside={<AllChoices count={tiles.styles.length} label="Music style" onOpen={() => setBrowsing("styles")} />}>
       <ChoiceCarousel
-        label="Music style" choices={tiles.styles} onChange={setMusic} idle="Saved music chosen above"
+        label="Music style" choices={centred(tiles.styles[0], tiles.styles.slice(1))} onChange={setMusic}
+        idle="Saved music chosen above"
         value={music.kind === "bed" ? null : musicKey(music)}
       />
     </MakeSection>

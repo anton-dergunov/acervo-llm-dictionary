@@ -210,6 +210,18 @@ def test_the_story_is_written_for_the_reader_and_translated_without_them(server,
     assert "## The reader" not in translate and "## The story\n\n{" in translate
 
 
+def test_the_story_is_written_in_as_many_parts_as_were_asked_for_and_keeps_that_number(server, models, runner):
+    """The count is kept on the story, so Try again writes the same length; a reply of another
+    length is unusable, and the next model in the chain is asked."""
+    story = a_story(server, 2, parts=6)
+    assert graph.owned_records(server.owner, "stories", [story["id"]])[story["id"]]["parts"] == 6
+    models.texts = [story_reply(4), story_reply(6), translation_reply(6), brief_reply(6)]
+    runner.run_until_idle()
+
+    assert '"parts": 6' in models.prompts[0]
+    assert len(graph.story_parts(server.owner, story["id"])) == 6
+
+
 def _draw_step(server) -> dict:
     job = [one for one in jobs.recent(server.owner) if one["kind"] == "story"][0]
     return next(step for step in job["steps"] if step["name"] == "story.draw")

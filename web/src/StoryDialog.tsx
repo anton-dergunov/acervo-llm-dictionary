@@ -8,7 +8,9 @@
  * The kinds and the styles are the server's tracked config, read from `GET /stories/types` and never
  * copied into this file: a kind added to `config/story-types.yaml` appears here with nothing
  * changing on this side. Both are carousels of pictures (`ChoiceCarousel.tsx`), the styles each a
- * sample drawn in that style, and the styles a kind suggests come first once a kind is chosen.
+ * sample drawn in that style, in one order whatever the kind: a row that re-ordered itself when the
+ * row above it changed looked as if it had scrolled with it. The styles a kind suggests are named
+ * instead, under To suit the story, which is what picks from them.
  *
  * The count is **one to eight, three by default**, as segments rather than a slider. A story has to
  * weave every word it is given into twenty sentences, and the prose buckles long before a loop's
@@ -21,18 +23,31 @@
 import { useEffect, useState } from "react";
 import { AcervoApiError, backendSession, type StoryTypes } from "./api";
 import { Art } from "./art";
-import { AllChoices, ChoiceCarousel, ChoiceGrid, type CatalogueChoice } from "./ChoiceCarousel";
+import { AllChoices, ChoiceCarousel, ChoiceGrid, centred, type CatalogueChoice } from "./ChoiceCarousel";
 import type { VocabularyGraph } from "./domain";
 import { DiceIcon, PictureIcon } from "./icons";
 import MakeDialog, { MakeSection } from "./MakeDialog";
 import { storyCandidates, storyEligible, type ListQuery, type SelectedWord } from "./selectors";
 import { WordPicker, useWordDraw, wordsCount, type WordSource } from "./WordPicker";
+import { lastStoryParts, rememberStoryParts } from "./editorPreferences";
 
 const DEFAULT_WORDS = 3;
 /** The server's bound (`GUIDANCE_LIMIT`), so the box stops where the route would refuse. */
 const GUIDANCE_LIMIT = 1000;
 
 type Browsing = null | "kind" | "pictures";
+
+/** What To suit the story will pick from: the chosen kind's suggested styles, by name. */
+function suits(offered: StoryTypes | null, kind: string): string {
+  const type = offered?.types.find((one) => one.id === kind);
+  if (!type || !offered) return "A style to suit whichever kind is written";
+  const names = type.styles
+    .map((id) => offered.styles.find((one) => one.id === id)?.label)
+    .filter((name): name is string => Boolean(name));
+  if (!names.length) return `A style to suit ${type.label.toLowerCase()}`;
+  const shown = names.slice(0, 3).join(", ");
+  return `For ${type.label}: ${shown}${names.length > 3 ? ` and ${names.length - 3} more` : ""}`;
+}
 
 /* The kinds and styles last offered, so the dialog opens at its full size while it asks again. */
 let knownTypes: StoryTypes | null = null;
@@ -58,6 +73,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
   const [style, setStyle] = useState("auto");
   const [asking, setAsking] = useState(false);
   const [guidance, setGuidance] = useState("");
+  const [partsPicked, setParts] = useState<number | null>(lastStoryParts);
   const [browsing, setBrowsing] = useState<Browsing>(null);
   const draw = useWordDraw({
     graph, query, kind: "story", candidatesOf: storyCandidates, eligible: storyEligible,
@@ -73,6 +89,12 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
         : "The kinds of story could not be read."));
   }, []);
 
+  // The parts last asked for on this device, while the server still offers that many; else its default.
+  const parts = offered
+    ? partsPicked !== null && partsPicked >= offered.minParts && partsPicked <= offered.maxParts ? partsPicked : offered.defaultParts
+    : null;
+  const lengths = offered ? Array.from({ length: offered.maxParts - offered.minParts + 1 }, (_, index) => offered.minParts + index) : [];
+
   const make = async () => {
     setAsking(true);
     try {
@@ -80,8 +102,10 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
         deviceId, language: query.language, lexemeIds: draw.ids,
         ...(kind === "auto" ? {} : { typeId: kind }),
         ...(style === "auto" ? {} : { styleId: style }),
-        ...(guidance.trim() ? { guidance: guidance.trim() } : {})
+        ...(guidance.trim() ? { guidance: guidance.trim() } : {}),
+        ...(parts ? { parts } : {})
       });
+      if (parts) rememberStoryParts(parts);
       draw.remember();
       onMade(answer.story.id);
       onClose();
@@ -98,18 +122,12 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
       id: one.id, label: one.label, art: <Art group="kinds" id={one.id} label={one.label} emoji={one.emoji} />
     }))
   ];
-  // The styles the chosen kind suggests come first, in its order; the rest keep the table's.
-  const suggested = offered?.types.find((one) => one.id === kind)?.styles ?? [];
-  const styles = (offered?.styles ?? []).slice().sort((left, right) => {
-    const rank = (id: string) => (suggested.includes(id) ? suggested.indexOf(id) : suggested.length);
-    return rank(left.id) - rank(right.id);
-  });
   const pictures: CatalogueChoice[] = [
     // "To suit the story" rather than "Surprise me": the server picks from the styles this kind of
-    // story suggests, which is a judgement rather than a dice roll.
-    { id: "auto", label: "To suit the story", about: "A style this kind of story suits",
+    // story suggests, which is a judgement rather than a dice roll, and the caption names them.
+    { id: "auto", label: "To suit the story", about: suits(offered, kind),
       art: <span className="choice-stand-in icon" aria-hidden="true"><PictureIcon /></span> },
-    ...styles.map((one) => ({ id: one.id, label: one.label, art: <Art group="styles" id={one.id} label={one.label} /> }))
+    ...(offered?.styles ?? []).map((one) => ({ id: one.id, label: one.label, art: <Art group="styles" id={one.id} label={one.label} /> }))
   ];
 
   const footer = <>
@@ -136,14 +154,26 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
       <WordPicker draw={draw} kind="story" language={query.language} counter="segments" />
     </MakeSection>
 
+    {parts !== null && lengths.length > 1 && <MakeSection label="Parts">
+      <div className="word-count">
+        <span className="seg word-count-seg story-parts" role="radiogroup" aria-label="How many parts">
+          {lengths.map((value) => <button
+            key={value} type="button" role="radio" aria-checked={value === parts}
+            className={value === parts ? "on" : ""} onClick={() => setParts(value)}
+          >{value}</button>)}
+        </span>
+        <span className="word-tally"><output>{parts} parts</output><small className="word-pool">a picture each</small></span>
+      </div>
+    </MakeSection>}
+
     <MakeSection label="Kind of story"
       aside={<AllChoices count={kinds.length} label="Kind of story" onOpen={() => setBrowsing("kind")} />}>
-      <ChoiceCarousel label="Kind of story" choices={kinds} value={kind} onChange={setKind} />
+      <ChoiceCarousel label="Kind of story" choices={centred(kinds[0], kinds.slice(1))} value={kind} onChange={setKind} />
     </MakeSection>
 
     <MakeSection label="Picture style"
       aside={<AllChoices count={pictures.length} label="Picture style" onOpen={() => setBrowsing("pictures")} />}>
-      <ChoiceCarousel label="Picture style" choices={pictures} value={style} onChange={setStyle} />
+      <ChoiceCarousel label="Picture style" choices={centred(pictures[0], pictures.slice(1))} value={style} onChange={setStyle} />
     </MakeSection>
 
     <textarea
