@@ -138,9 +138,7 @@ where every one of them is added; there is no file to edit and no deploy
   the same figure Usage shows. A provider whose key was refused is also a notice at the top, with a
   link to its page: nothing is sent to it until the key works, so it must not be missed while
   scrolling.
-- **Add a provider** shows the families this server knows, in the groups the server sends. A family
-  written from the provider's reference that no real call has answered yet says "not yet tried with
-  Acervo" beside its hint. Choosing one
+- **Add a provider** shows the families this server knows, in the groups the server sends. Choosing one
   opens a short form — a name, the few settings the family asks for, the key — and **Check and add**
   makes one call that spends nothing. A refusal is shown on the form in the provider's own words, and
   nothing is added; a key that works opens the new provider's page, empty.

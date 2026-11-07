@@ -12,10 +12,11 @@ import pytest
 
 from acervo.models import google_auth, google_vision
 from acervo.models.call import ocr
-from provider_rows import GOOGLE, google_voices, provider
+from provider_rows import GOOGLE_KEYED, google_voices, provider
 from acervo.models.errors import ProviderRefused, ProviderUnavailable
 
-ROW = provider(GOOGLE)
+# Vision takes a key, and this is the provider a key makes.
+ROW = provider(GOOGLE_KEYED)
 
 
 class _Credentials:
@@ -95,7 +96,7 @@ def test_the_request_asks_for_dense_text_with_the_owners_languages_as_hints(monk
     assert request["imageContext"] == {"languageHints": ["es", "zh"]}
     assert calls[-1]["headers"]["x-goog-api-key"] == ROW.credential.key
     assert [w.text for w in result.words][:2] == ["12:04", "Hola"]
-    assert (result.answer.provider_id, result.answer.model) == ("google-cloud", "document-text-detection")
+    assert (result.answer.provider_id, result.answer.model) == ("google-keyed", "document-text-detection")
 
 
 @pytest.mark.parametrize(

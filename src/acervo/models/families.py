@@ -67,12 +67,15 @@ class Route:
 
     `file_only` is a kind only a credentials file reaches — Vertex, through Google Cloud — and
     `vertex` says LiteLLM is handed that file, its project and its location rather than a key.
+    `file_only_models` names the models of a kind a key does reach that still need the file, by the
+    start of their name.
     """
 
     via: str
     prefix: str = ""
     file_only: bool = False
     vertex: bool = False
+    file_only_models: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -115,10 +118,6 @@ class Family:
     # A route that says whether a key works when the model list does not — OpenRouter lists its
     # models to anyone.
     check_url: str | None = None
-    # Whether a real call has answered through this family. One written from the provider's own
-    # reference alone is offered as not yet tried, because the quirks a family exists to hold are
-    # found by calls that fail, and none has been made.
-    tried: bool = True
 
     def serves(self, kind: str) -> bool:
         return kind in self.routes
@@ -245,7 +244,10 @@ FAMILIES: tuple[Family, ...] = (
         routes=MappingProxyType({
             "text": Route("litellm", "vertex_ai/", file_only=True, vertex=True),
             "image": Route("litellm", "vertex_ai/", file_only=True, vertex=True),
-            "audio": Route("google-tts"),
+            # A Gemini voice on Cloud TTS runs on Vertex, and a key is refused it
+            # ("Permission 'aiplatform.endpoints.predict' denied", measured 6 Nov 2026), even one
+            # that reaches WaveNet and Chirp 3 HD. With a key, Gemini voices are the Gemini API's.
+            "audio": Route("google-tts", file_only_models=("gemini-",)),
             "ocr": Route("google-vision"),
         }),
         fields=(
@@ -296,7 +298,6 @@ FAMILIES: tuple[Family, ...] = (
         lister="azure-speech",
         key_url="https://portal.azure.com/#create/Microsoft.CognitiveServicesSpeechServices",
         usage_url="https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/overview",
-        tried=False,
     ),
     Family(
         id="mistral", label="Mistral", group="Popular", hint="Text",
@@ -350,6 +351,34 @@ FAMILIES: tuple[Family, ...] = (
         audio=_frozen({"format": "wav"}),
         timeouts=MappingProxyType({"audio": 60}),
         lister="speech-server",
+    ),
+    Family(
+        # A Mac drawing with Draw Things, its API server switched on (HTTP, port 7860). It lists
+        # no models, and says which it has loaded; see `a1111.py` for how it differs from A1111.
+        id="draw-things", label="Draw Things", group="On your own machines",
+        hint="Pictures drawn on your Mac",
+        credential="none",
+        routes=MappingProxyType({"image": Route("a1111")}),
+        fields=(Field("baseUrl", "Address", default="http://localhost:7860",
+                      hint="Where Draw Things' API server answers"),),
+        base_url="{baseUrl}",
+        image=_frozen({"size": "native", "seed": "native", "modelField": "model"}),
+        timeouts=MappingProxyType({"image": 300}),
+        lister="draw-things",
+    ),
+    Family(
+        # Forge or A1111 on a machine with a GPU. Written from A1111's API reference and not yet
+        # tried: the same route as Draw Things, choosing its model through `override_settings`.
+        id="a1111", label="Forge or A1111", group="On your own machines",
+        hint="Pictures drawn on a computer with a graphics card",
+        credential="none",
+        routes=MappingProxyType({"image": Route("a1111")}),
+        fields=(Field("baseUrl", "Address", default="http://localhost:7860",
+                      hint="Where its API answers (started with --api)"),),
+        base_url="{baseUrl}",
+        image=_frozen({"size": "native", "seed": "native", "modelField": "override"}),
+        timeouts=MappingProxyType({"image": 300}),
+        lister="a1111",
     ),
     # ── any compatible service ──
     Family(

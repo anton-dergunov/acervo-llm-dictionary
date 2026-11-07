@@ -39,10 +39,13 @@ call that failed — that one text-to-speech route takes `text` where another to
 Vertex refuses `response_format`, that Workers AI truncates at 256 tokens unless told otherwise, that
 the same call answers in under two seconds on a free tier and takes half a minute on Vertex — and
 each is a fact about the provider rather than about anybody's account. The OpenAI-compatible
-services are one family's code with a preset each: a prefix, a base URL and a listing endpoint. A
-family written from the provider's reference alone, with no real call made through it, says so
-(`tried`), and Add a provider marks it "not yet tried": the quirks a family holds are found by calls
-that fail, and none has been made.
+services are one family's code with a preset each: a prefix, a base URL and a listing endpoint.
+
+**Two families are written from the provider's reference and not yet tried with a real call**:
+Azure Speech and Forge or A1111. Their requests follow the reference and their unit tests pin it,
+but the quirks a family holds are found by calls that fail, and none has been made. The key check
+on saving is the first real call, and it says in the provider's words what is wrong. The guide does
+not recommend either until a call has answered.
 
 **What changes with the provider's catalogue comes from the provider** (`models/listing.py`): its
 models, and its voices with their locales and genders, asked for with calls that spend nothing.
@@ -76,7 +79,8 @@ the worker image, which does not install it. What LiteLLM does not cover is reac
 Cloudflare's image and audio models (`cloudflare.py`), Cloud Text-to-Speech (`google_tts.py`), the
 Gemini API's speech (`gemini_tts.py`, the Interactions API), ElevenLabs (`elevenlabs.py`), a speech
 server on OpenAI's route (`openai_speech.py`: Kokoro, Piper behind Speaches), Azure Speech
-(`azure_speech.py`, SSML, not yet tried) and Cloud Vision (`google_vision.py`).
+(`azure_speech.py`, SSML), pictures on your own machine through A1111's route (`a1111.py`: Draw
+Things, Forge, A1111) and Cloud Vision (`google_vision.py`).
 Speech never goes through LiteLLM: reached that way, a Gemini voice drops its direction before the
 request is built.
 
@@ -179,7 +183,10 @@ nothing is stored. Every check is an `activity.log` line, so `admin log --failed
 key with its sentence.
 
 **Google Cloud takes a key or a credentials file.** A key reaches Cloud Text-to-Speech and Cloud
-Vision, sent as `x-goog-api-key` so it is never in an address. A file — a service account's key or a
+Vision, sent as `x-goog-api-key` so it is never in an address. It does not reach a Gemini voice on
+Cloud Text-to-Speech, which runs on Vertex ("Permission 'aiplatform.endpoints.predict' denied",
+measured on 6 Nov 2026 with a key restricted to the two APIs), so the family refuses such a model on
+a provider with only a key; with a key, Gemini voices come through the Gemini API. A file — a service account's key or a
 user's own sign-in — reaches those and Vertex text and pictures, and is handed to LiteLLM per call
 with the provider's project and location, so two Google Cloud providers can be two accounts; its
 access token is cached per provider and credential, and a user's sign-in sends the project as its

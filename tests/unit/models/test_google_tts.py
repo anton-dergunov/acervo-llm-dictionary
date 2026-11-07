@@ -13,7 +13,7 @@ import httpx
 import pytest
 
 from acervo.models import google_auth, google_tts
-from provider_rows import GOOGLE, VERTEX, google_voices, provider
+from provider_rows import GOOGLE, GOOGLE_KEYED, VERTEX, google_voices, provider
 from acervo.models.errors import ProviderRefused, ProviderUnavailable
 
 ROW = provider(GOOGLE)
@@ -116,11 +116,12 @@ def test_a_gemini_voice_carries_its_model_name_and_the_direction_in_a_field_of_i
 def test_a_key_travels_as_a_header_and_never_in_the_address(monkeypatch):
     calls = []
     transport(monkeypatch, audio(), calls)
-    google_tts.speech(ROW, "Standard", "picar", language="es")
+    keyed = provider(GOOGLE_KEYED)
+    google_tts.speech(keyed, "Standard", "picar", language="es")
     headers = calls[-1]["headers"]
-    assert headers["x-goog-api-key"] == ROW.credential.key
+    assert headers["x-goog-api-key"] == keyed.credential.key
     assert "Authorization" not in headers
-    assert ROW.credential.key not in calls[-1]["url"]
+    assert keyed.credential.key not in calls[-1]["url"]
 
 
 def test_with_a_credentials_file_the_project_travels_as_a_quota_header_beside_the_token(monkeypatch):
@@ -183,7 +184,7 @@ def test_a_credentials_file_google_cannot_read_is_a_mistake_to_fix(monkeypatch):
 
 def test_no_credential_at_all_says_so_rather_than_failing_somewhere_else(monkeypatch):
     transport(monkeypatch, audio(), [])
-    keyless = provider(GOOGLE, {})
+    keyless = provider(GOOGLE_KEYED, {})
     with pytest.raises(ProviderRefused) as caught:
         google_tts.speech(keyless, "Wavenet", "picar", language="es", voice="es-ES-Wavenet-F")
     assert caught.value.reason == "unconfigured"

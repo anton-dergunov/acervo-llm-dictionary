@@ -106,7 +106,7 @@ them.
 | **Cloudflare Workers AI** (native `/ai/run`) | — | 10,000 neurons a day, reset at 00:00 UTC: about **170** pictures with FLUX.1 schnell, or **95** with FLUX.2 klein 4B, at 1024² | The free picture provider. Its compatible endpoint does not cover images. |
 | **OpenAI images** (`/v1/images/generations`) | OpenAI, Together, *any other* | none (Together's free FLUX.1 schnell is listed, but whether it is served is unverified) | gpt-image-2 and gpt-image-1-mini are billed by token. |
 | **Gemini image** | through the Gemini API key, or Vertex | **none**: no image model has a free tier | Takes reference pictures, which keep a story's characters the same. Imagen has left the Gemini API. |
-| **A1111** (`/sdapi/v1/txt2img`) | Draw Things on a Mac, Forge or A1111 on a GPU machine | free | The simplest local picture API. ComfyUI is more capable and much harder to drive, so it is left out. |
+| **A1111** (`/sdapi/v1/txt2img`) — *built; Draw Things tried* | Draw Things on a Mac, Forge or A1111 on a GPU machine | free | The simplest local picture API. ComfyUI is more capable and much harder to drive, so it is left out. |
 
 ### Voices
 
@@ -180,11 +180,10 @@ and a fall-back.
   - **The file:** a service account or a user login, uploaded through the form. It adds Vertex text
     and pictures, and it is the only way for someone whose organisation blocks key creation
     ([`../operations/vertex-setup.md`](../operations/vertex-setup.md)).
-  - **Still to check, in S4:** whether a Vertex express-mode key works through LiteLLM's Vertex
-    route, and whether Gemini-TTS on Cloud TTS accepts a key. One live call each, and neither could
-    be made in S1: this machine holds no Google Cloud API key or express key. Until then a key
-    reaches voices and photos, and Vertex needs the file. The form then says which kinds a key
-    unlocks.
+  - **Checked in S4** (6 Nov 2026), with a key restricted to Cloud TTS and Vision on a trial
+    account: WaveNet, Chirp 3 HD and Vision answer; a Gemini voice on Cloud TTS is refused, because
+    it runs on Vertex. Gemini voices with a key are the Gemini API family's. A Vertex express-mode
+    key could not be tried: an account that has used Google Cloud cannot have one.
   - **Checked in S1** (5 Nov 2026): Google's `voices.list` lists the 30 Gemini voices under plain
     names (`Kore`) with their gender, but only under `en-US`, so it cannot say which locales they
     accept. A Gemini voice refuses `es-AR` and a bare `es` and accepts `es-419` and `es-US`. Acervo
@@ -200,8 +199,8 @@ and a fall-back.
 Built in S2 and S3 ([`../features/settings.md`](../features/settings.md) §8). What the mock-ups show
 and is left for later:
 
-- **The new families** (S4): Draw Things or Forge. "Add a
-  provider" lists whatever families the server has, so each appears there when it is built.
+- **The new families** (S4): OpenAI's own speech and pictures. "Add a provider" lists whatever
+  families the server has, so each appears there when it is built.
 
 ## What goes away
 
@@ -246,9 +245,10 @@ picks the orders and voices once more. Nothing reads the old ids.
 3. **S3 · Usage.** *Built* ([`../architecture/models.md`](../architecture/models.md), "Usage"): the
    counters, the sink, the route and the two Usage pages.
 4. **S4 · New families.** Gemini API TTS, ElevenLabs and a speech server on OpenAI's route, tried
-   with Kokoro (*built*, [`../architecture/models.md`](../architecture/models.md)). Azure (plain
-   voices) is built from Microsoft's reference and marked not yet tried: the owner's account cannot
-   create the resource. Left: OpenAI's own speech and images, and A1111. Each one is tried on Acervo's own prompts before the
+   with Kokoro, and Draw Things (*built*, [`../architecture/models.md`](../architecture/models.md)).
+   Azure (plain voices) and Forge or A1111 are built from their references and not yet tried: the
+   owner's Azure account cannot create the resource, and there is no GPU machine. Left: OpenAI's own
+   speech and images. Each one is tried on Acervo's own prompts before the
    guide recommends it, and every failure it adds shows in `admin log` with its sentence.
 5. **S4b · ElevenLabs as the free directed voice.**
    - Put v4 and v3 in the expressive order beside Gemini API TTS.

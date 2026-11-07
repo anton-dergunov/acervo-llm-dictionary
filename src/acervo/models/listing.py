@@ -122,6 +122,15 @@ def _check_azure(provider: "Provider") -> tuple[str, str | None]:
     return f"Works · {len(_azure_voices(provider, fresh=True))} voices", None
 
 
+def _check_draw_things(provider: "Provider") -> tuple[str, str | None]:
+    loaded = _draw_things_models(provider, "image")
+    return (f"Works · {loaded[0]} is loaded" if loaded else "Works · no model is loaded"), None
+
+
+def _check_a1111(provider: "Provider") -> tuple[str, str | None]:
+    return f"Works · {_count(_a1111_models(provider, 'image'))}", None
+
+
 def _count(found: tuple[str, ...]) -> str:
     return f"{len(found)} model{'s' if len(found) != 1 else ''}"
 
@@ -212,6 +221,22 @@ def _address(provider: "Provider") -> str:
     if not base:
         raise ProviderRefused("configuration", f"{provider.label} has no address", provider_id=provider.id)
     return base
+
+
+def _draw_things_models(provider: "Provider", kind: str) -> tuple[str, ...]:
+    """Draw Things has no model list on this route (`/sdapi/v1/sd-models` is a 404); its settings
+    name the model it has loaded, which is the one it can draw with now."""
+    if kind != "image":
+        return ()
+    loaded = _get(provider, f"{_address(provider)}/sdapi/v1/options", {}).json().get("model")
+    return (str(loaded),) if isinstance(loaded, str) and loaded else ()
+
+
+def _a1111_models(provider: "Provider", kind: str) -> tuple[str, ...]:
+    if kind != "image":
+        return ()
+    listed = _get(provider, f"{_address(provider)}/sdapi/v1/sd-models", {}).json()
+    return tuple(str(one["title"]) for one in listed or () if isinstance(one, dict) and one.get("title"))
 
 
 def _google_models(provider: "Provider", kind: str) -> tuple[str, ...]:
@@ -504,14 +529,16 @@ def response_detail(response: httpx.Response) -> str:
         error = payload.get("error")
         if isinstance(error, dict) and error.get("message"):
             return str(error["message"])[:DETAIL_LIMIT]
-        if isinstance(error, str):
+        if isinstance(error, str) and not isinstance(payload.get("detail"), str):
             return error[:DETAIL_LIMIT]
         if payload.get("errors"):
             return json.dumps(payload["errors"], ensure_ascii=False)[:DETAIL_LIMIT]
-        # ElevenLabs: `{"detail": {"code": …, "message": …}}`.
+        # ElevenLabs: `{"detail": {"code": …, "message": …}}`; FastAPI servers: `{"detail": "…"}`.
         detail = payload.get("detail")
         if isinstance(detail, dict) and detail.get("message"):
             return str(detail["message"])[:DETAIL_LIMIT]
+        if isinstance(detail, str) and detail:
+            return detail[:DETAIL_LIMIT]
     return json.dumps(payload, ensure_ascii=False)[:DETAIL_LIMIT]
 
 
@@ -534,6 +561,8 @@ _CHECKS = {
     "elevenlabs": _check_elevenlabs,
     "speech-server": _check_speech_server,
     "azure-speech": _check_azure,
+    "draw-things": _check_draw_things,
+    "a1111": _check_a1111,
 }
 # The kinds each listing code can list, and the ones whose voices it can.
 _LISTS = {
@@ -546,6 +575,8 @@ _LISTS = {
     "elevenlabs": {"audio"},
     "speech-server": {"audio"},
     "azure-speech": {"audio"},
+    "draw-things": {"image"},
+    "a1111": {"image"},
 }
 _VOICES = {
     "google-cloud": _google_voice_list,
@@ -564,4 +595,6 @@ _MODELS = {
     "elevenlabs": _elevenlabs_models,
     "speech-server": _speech_server_models,
     "azure-speech": _azure_models,
+    "draw-things": _draw_things_models,
+    "a1111": _a1111_models,
 }

@@ -24,8 +24,6 @@ const FAMILIES: ProviderFamily[] = [
              { name: "project", label: "Project", needed: "file", default: null, hint: null, choices: [] },
              { name: "location", label: "Location", needed: "file", default: "global", hint: null, choices: ["global", "europe-west1"] }
            ] }),
-  family({ id: "azure-speech", label: "Azure Speech", group: "Popular", kinds: ["audio"],
-           hint: "Voices in over a hundred languages", tried: false }),
   family({ id: "openai-compatible", label: "Any compatible service", group: "Any compatible service", credential: "optional" })
 ];
 
@@ -84,8 +82,6 @@ describe("adding a provider", () => {
     expect(within(free).getByText("Gemini API")).toBeInTheDocument();
     expect(within(free).getByText("Text, with a daily free allowance")).toBeInTheDocument();
     expect(within(screen.getByRole("region", { name: "Popular" })).getByText("Google Cloud")).toBeInTheDocument();
-    // One written from the provider's reference, that no real call has answered, says so.
-    expect(screen.getByText("Voices in over a hundred languages · not yet tried with Acervo")).toBeInTheDocument();
     // A group of one named after its member needs no title of its own.
     expect(screen.queryByRole("region", { name: "Any compatible service" })).toBeNull();
     expect(screen.getByText("Any compatible service")).toBeInTheDocument();

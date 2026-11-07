@@ -14,7 +14,7 @@ import sys
 
 import pytest
 from provider_rows import (
-    CLOUDFLARE, GEMINI, GEMINI_KEY, GOOGLE, SERVICE_ACCOUNT, VERTEX, google_voices, provider,
+    CLOUDFLARE, GEMINI, GEMINI_KEY, GOOGLE, GOOGLE_KEYED, SERVICE_ACCOUNT, VERTEX, google_voices, provider,
 )
 
 from acervo.models import families, listing
@@ -133,7 +133,7 @@ def test_reason_says_what_is_missing_and_never_a_value():
     assert provider(GEMINI).reason() is None
     assert provider(GEMINI, {}).reason() == "Gemini API has no API key"
     assert provider(CLOUDFLARE, settings={}).reason() == "Cloudflare needs its account ID"
-    assert provider(GOOGLE, {}).reason() == "Google Cloud has no key or credentials file"
+    assert provider(GOOGLE_KEYED, {}).reason() == "Google Cloud has no key or credentials file"
     assert provider(VERTEX, settings={}).reason() == "Google Cloud needs its project"
     assert provider({"id": "o", "family": "ollama", "models": {"text": ["llama3.3"]}}).reason() is None
 
@@ -153,7 +153,7 @@ def test_a_key_hint_is_four_characters_at_each_end_and_never_more():
 
 def test_a_service_account_says_whose_it_is_and_a_key_does_not():
     assert provider(VERTEX).identity() == SERVICE_ACCOUNT["client_email"]
-    assert provider(GOOGLE).identity() is None
+    assert provider(GOOGLE_KEYED).identity() is None
     assert provider(VERTEX, {"credentials": {"type": "authorized_user", "refresh_token": "r" * 30}}).identity() is None
 
 
@@ -354,3 +354,10 @@ def test_a_working_key_says_what_it_reached(monkeypatch):
     checked = listing.check(provider(GEMINI))
     assert checked.ok and checked.said == "Works · 1 model"
     assert listing.models(provider(GEMINI), "text") == ("gemini-3.5-flash-lite",)
+
+
+def test_a_gemini_voice_on_google_cloud_needs_the_credentials_file():
+    """Measured: a key that reaches WaveNet and Vision is refused a Gemini voice, which runs on Vertex."""
+    with pytest.raises(DocumentError, match="gemini-2.5-flash-tts needs a credentials file on Google Cloud"):
+        provider(GOOGLE_KEYED, models={"audio": ["Wavenet", {"id": "gemini-2.5-flash-tts", "direction": True}]})
+    assert provider(GOOGLE).models_for("audio")[-1] == "gemini-2.5-flash-tts"

@@ -510,6 +510,10 @@ def parse(document: Mapping[str, Any], secret: Mapping[str, Any] | None = None) 
         if found.routes[kind].file_only and not credential.file:
             raise DocumentError(f"{found.label} reaches {kind} only with a credentials file.")
         parsed = tuple(_model(kind, entry, label) for entry in entries)
+        needs_file = [model.id for model in parsed
+                      if model.id.startswith(found.routes[kind].file_only_models or ("\0",)) and not credential.file]
+        if needs_file:
+            raise DocumentError(f"{needs_file[0]} needs a credentials file on {found.label}: a key does not reach it.")
         if len({model.id for model in parsed}) != len(parsed):
             raise DocumentError(f"{label} lists the same {kind} model twice.")
         models[kind] = parsed

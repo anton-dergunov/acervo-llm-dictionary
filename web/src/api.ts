@@ -135,8 +135,6 @@ export interface ProviderFamily {
   keyUrl: string | null;
   /** Where a model's voices are read, for a provider that cannot list them. */
   voicesUrl: string | null;
-  /** False for a family written from the provider's reference that no real call has answered yet. */
-  tried?: boolean;
   fields: { name: string; label: string; needed: "always" | "file" | "never"; default: string | null;
             hint: string | null; choices: string[] }[];
 }

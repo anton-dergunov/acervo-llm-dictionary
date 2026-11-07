@@ -1,7 +1,6 @@
 """Azure Speech, against a stubbed transport and the shapes in Microsoft's REST reference.
 
-No real call has answered through this family yet (`families.find("azure-speech").tried` is false),
-so these pin what the reference says: SSML naming the voice and its locale, the words escaped rather
+No real call has answered through this family yet, so these pin what the reference says: SSML naming the voice and its locale, the words escaped rather
 than read as markup, the region in both addresses, and a failure said by its status when Azure sends
 no body.
 """
@@ -11,7 +10,7 @@ from __future__ import annotations
 import httpx
 import pytest
 
-from acervo.models import azure_speech, call, families, listing
+from acervo.models import azure_speech, call, listing
 from acervo.models.errors import ProviderRefused, ProviderUnavailable
 from provider_rows import provider
 
@@ -48,10 +47,6 @@ def transport(monkeypatch, response: httpx.Response, calls: list):
         return response
 
     monkeypatch.setattr(azure_speech.httpx, "post", post)
-
-
-def test_it_is_offered_as_not_yet_tried():
-    assert families.find("azure-speech").tried is False
 
 
 def test_the_voice_and_its_locale_are_named_in_the_ssml_and_the_words_are_escaped(monkeypatch):

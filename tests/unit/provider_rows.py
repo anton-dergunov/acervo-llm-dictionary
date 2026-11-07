@@ -40,8 +40,10 @@ CLOUDFLARE: dict[str, Any] = {
         "audio": [{"id": "@cf/deepgram/aura-1", "languages": ["en"]}],
     },
 }
+# Signed in with a credentials file, as the owner runs it: a Gemini voice on Cloud TTS needs one.
 GOOGLE: dict[str, Any] = {
     "id": "google-cloud", "family": "google-cloud",
+    "settings": {"project": "example-project"},
     "models": {
         "audio": [
             "Wavenet", "Standard",
@@ -50,6 +52,11 @@ GOOGLE: dict[str, Any] = {
         ],
         "ocr": ["document-text-detection"],
     },
+}
+# Google Cloud with a key, which reaches WaveNet, Chirp 3 HD and Vision and nothing on Vertex.
+GOOGLE_KEYED: dict[str, Any] = {
+    "id": "google-keyed", "family": "google-cloud",
+    "models": {"audio": ["Wavenet", "Standard"], "ocr": ["document-text-detection"]},
 }
 VERTEX: dict[str, Any] = {
     "id": "vertex", "family": "google-cloud",
@@ -66,7 +73,8 @@ SECRETS: dict[str, dict[str, Any]] = {
     "gemini-api": {"key": GEMINI_KEY},
     "openai": {"key": "test-openai-key-0123456789abcdef"},
     "cloudflare": {"key": CLOUDFLARE_TOKEN},
-    "google-cloud": {"key": GOOGLE_KEY},
+    "google-cloud": {"credentials": SERVICE_ACCOUNT},
+    "google-keyed": {"key": GOOGLE_KEY},
     "vertex": {"credentials": SERVICE_ACCOUNT},
 }
 

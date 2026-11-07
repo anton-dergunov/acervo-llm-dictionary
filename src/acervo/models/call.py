@@ -307,10 +307,10 @@ def image(
             references = tuple(references)[-allowed:]
     if references:
         return _image_with_references(prompt, row, model, size, references, timeout, started, warnings)
-    if row.route("image").via == "cloudflare":
-        from acervo.models import cloudflare
-
-        data, mime = cloudflare.image(row, model, prompt, seed=seed, size=size, timeout=timeout)
+    if row.route("image").via in ("cloudflare", "a1111"):
+        data, mime = _image_adapter(row.route("image").via)(
+            row, model, prompt, seed=seed, size=size, timeout=row.timeout_for("image", timeout)
+        )
         return ImageResult(data=data, mime=mime,
                            answer=_answer(row, model, started, None, warnings, Spent(pictures=1)))
 
@@ -415,6 +415,19 @@ def _image_with_references(prompt: str, row: Row, model: str, size: tuple[int, i
         data=base64.b64decode(encoded), mime=mime,
         answer=_answer(row, model, started, response, warnings, _tokens(response, pictures=1)),
     )
+
+
+def _image_adapter(name: str):
+    """The picture adapters that are not LiteLLM's, by the route a family gives `image`."""
+    if name == "cloudflare":
+        from acervo.models import cloudflare
+
+        return cloudflare.image
+    if name == "a1111":
+        from acervo.models import a1111
+
+        return a1111.image
+    raise ProviderRefused("configuration", f"no image adapter named {name!r}")
 
 
 def _picture_mime(data: bytes) -> str:
