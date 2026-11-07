@@ -2503,9 +2503,9 @@ function paintLoops() {
 }
 
 /* ── make a loop, make a story ──
-   `MakeDialog.tsx`, `WordPicker.tsx`, `ChoiceStrip.tsx`, `LoopFormat.tsx`: one frame for both, the
+   `MakeDialog.tsx`, `WordPicker.tsx`, `ChoiceCarousel.tsx`, `LoopFormat.tsx`: one frame for both, the
    button in a footer that never scrolls away, the words shown before they are sent, and every long
-   catalogue a strip of pictures with All as a grid in place of the body. */
+   catalogue a carousel of pictures with All as a grid in place of the body. */
 const MAKE_ICON = {
   dice: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><g fill="currentColor" stroke="none"><circle cx="8.6" cy="8.6" r="1.35"/><circle cx="15.4" cy="8.6" r="1.35"/><circle cx="12" cy="12" r="1.35"/><circle cx="8.6" cy="15.4" r="1.35"/><circle cx="15.4" cy="15.4" r="1.35"/></g></svg>',
   shuffle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3c2.2 0 3.3 1.2 4.5 3.4l1 1.8c1.2 2.2 2.3 3.8 4.5 3.8H20"/><path d="M4 17h3c1.3 0 2.2-.5 3-1.4M14 8.4c.8-.9 1.7-1.4 3-1.4h3"/><path d="M17.5 4.5L20 7l-2.5 2.5M17.5 14.5L20 17l-2.5 2.5"/></svg>',
@@ -2515,7 +2515,7 @@ const MAKE_ICON = {
   grid: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>',
   redraw: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/></svg>',
   picture: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 16.5l4.5-4 3.5 3 3-2.5 5 4"/></svg>',
-  drill: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8.5" width="8" height="11" rx="1.6"/><rect x="13" y="8.5" width="8" height="11" rx="1.6"/><path d="M6.5 6c1.6-1.9 9.4-1.9 11 0"/><path d="M15.6 3.9l1.9 2.1-2.4 1"/><path d="M5.5 14h3M15.5 14h3"/></svg>',
+  drill: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5V10a4 4 0 0 1 4-4h11.5M16.5 3l3 3-3 3M20 12.5V14a4 4 0 0 1-4 4H4.5M7.5 21l-3-3 3-3"/></svg>',
   mic: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3.5" width="6" height="10.5" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"/><path d="M12 18v2.5M8.5 20.5h7"/></svg>',
   tale: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7C10 5.5 7.5 5 4 5v12.5c3.5 0 6 .5 8 2 2-1.5 4.5-2 8-2V5c-3.5 0-6 .5-8 2z"/><path d="M12 7v12.5"/><path d="M6.5 9h3M6.5 12h3M14.5 9h3M14.5 12h3"/></svg>'
 };
@@ -2589,15 +2589,16 @@ function wordPicker(kind, draw) {
     const fresh = ordered.filter((x) => !draw.passed.has(x.id));
     const words = [...fresh, ...ordered.filter((x) => draw.passed.has(x.id))].slice(0, draw.count);
     draw.ids = words.map((x) => x.id);
-    chips = words.map((x) => makeChip(x, true)).join("");
+    chips = words.map((x) => makeChip(x, true)).join("")
+      + (ordered.length > draw.count ? `<button type="button" class="make-chip other" data-redraw>${MAKE_ICON.redraw}Other words</button>` : "");
+    const pool = draw.choice === "hard" ? `hardest first, from ${ordered.length}`
+      : unused >= draw.count ? `of ${unused} not in a ${kind} yet`
+        : unused ? `${unused} not in a ${kind} yet, then the least used` : `all have been in a ${kind}: the least used first`;
+    const tally = `<span class="word-tally"><output>${wordsCount(draw.count)}${kind === "loop" ? `<small> · about ${Math.max(1, Math.round(draw.count * 40 / 60))} min</small>` : ""}</output><small class="word-pool">${pool}</small></span>`;
     count = kind === "loop"
-      ? `<div class="word-count"><input type="range" data-count min="${least}" max="${most}" value="${draw.count}" aria-label="How many words"><output>${wordsCount(draw.count)}</output></div>`
+      ? `<div class="word-count"><input type="range" data-count min="${least}" max="${most}" value="${draw.count}" aria-label="How many words">${tally}</div>`
       : `<div class="word-count"><span class="seg word-count-seg" role="radiogroup" aria-label="How many words">${Array.from({ length: most - least + 1 }, (_, i) => least + i)
-        .map((n) => `<button type="button" role="radio" data-count-to="${n}" aria-checked="${n === draw.count}" class="${n === draw.count ? "on" : ""}">${n}</button>`).join("")}</span><output>${wordsCount(draw.count)}</output></div>`;
-    note = `<div class="word-foot"><p class="word-note">${draw.choice === "hard" ? `Hardest first, from ${ordered.length}`
-      : unused >= draw.count ? `From ${unused} not in a ${kind} yet`
-        : unused ? `${unused} not in a ${kind} yet, then the least used` : `Every word has been in a ${kind}: the least used first`}</p>${ordered.length > draw.count
-      ? `<button type="button" class="word-redraw" data-redraw>${MAKE_ICON.redraw}Draw again</button>` : ""}</div>`;
+        .map((n) => `<button type="button" role="radio" data-count-to="${n}" aria-checked="${n === draw.count}" class="${n === draw.count ? "on" : ""}">${n}</button>`).join("")}</span>${tally}</div>`;
   }
   return `<div class="word-picker">
     <div class="word-orders" role="radiogroup" aria-label="Which words">${pills}</div>
@@ -2612,40 +2613,65 @@ function art(group, id, label, emoji = "") {
 }
 const iconArt = (svg) => `<span class="choice-stand-in icon" aria-hidden="true">${svg}</span>`;
 
-/* `ChoiceStrip` and `ChoiceGrid`: one tile per choice, the chosen one ringed. */
-function choiceTile(c, value, wide) {
-  const on = c.id === value;
-  return `<div class="choice${on ? " on" : ""}" data-choice="${esc(c.id)}">
-    <button type="button" role="radio" aria-checked="${on}"${wide || !c.about ? "" : ` title="${esc(c.about)}"`}>
-      <span class="choice-art">${c.art}${c.badge ? `<span class="choice-badge">${c.badge}</span>` : ""}</span>
-      <span class="choice-name">${esc(c.label)}</span>${wide && c.about ? `<span class="choice-about">${esc(c.about)}</span>` : ""}
-    </button>${c.extra || ""}</div>`;
-}
-function choiceStrip(name, choices, value) {
-  return `<div class="choice-strip" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${choices.map((c) => choiceTile(c, value, false)).join("")}
-    <div class="choice choice-all"><button type="button" data-all="${esc(name)}" aria-label="All: ${esc(name)}"><span class="choice-art">${MAKE_ICON.grid}</span><span class="choice-name">All</span></button></div></div>`;
+/* `ChoiceCarousel` and `ChoiceGrid`: the choice in the middle of a row of pictures, larger than its
+   neighbours, its name and sentence under the row; and the whole catalogue as a grid. */
+function carousel(name, choices, value, idle = "") {
+  const at = choices.findIndex((c) => c.id === value);
+  const chosen = choices[at];
+  const items = choices.map((c, i) => `<div class="carousel-item${i === at ? " on" : ""}" data-choice="${esc(c.id)}">
+      <button type="button" role="radio" aria-checked="${i === at}" tabindex="${i === Math.max(at, 0) ? 0 : -1}" aria-label="${esc(c.label)}"${i === at ? "" : ` title="${esc(c.label)}"`}><span class="choice-art">${c.art}</span></button></div>`).join("");
+  return `<div class="carousel"><div class="carousel-frame">
+      <div class="carousel-row" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${items}</div>
+      <button type="button" class="carousel-step prev" data-step="-1" data-strip="${esc(name)}" aria-label="Previous: ${esc(name)}"${at <= 0 ? " hidden" : ""}>${ICON.back}</button>
+      <button type="button" class="carousel-step next" data-step="1" data-strip="${esc(name)}" aria-label="Next: ${esc(name)}"${at >= choices.length - 1 ? " hidden" : ""}>${ICON.forward}</button>
+    </div><div class="carousel-caption${choices.some((c) => c.about) ? " described" : ""}" aria-hidden="true">${chosen
+      ? `<strong>${esc(chosen.label)}</strong>${chosen.about ? `<span>${esc(chosen.about)}</span>` : ""}` : `<span>${esc(idle)}</span>`}</div></div>`;
 }
 function choiceGrid(name, choices, value) {
-  return `<div class="choice-grid-view"><div class="choice-grid" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${choices.map((c) => choiceTile(c, value, true)).join("")}</div></div>`;
+  return `<div class="choice-grid" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${choices.map((c) => `<div class="choice${c.id === value ? " on" : ""}" data-choice="${esc(c.id)}">
+    <button type="button" role="radio" aria-checked="${c.id === value}"><span class="choice-art">${c.art}</span>
+      <span class="choice-name">${esc(c.label)}</span>${c.about ? `<span class="choice-about">${esc(c.about)}</span>` : ""}</button></div>`).join("")}</div>`;
 }
+const allLink = (name, count) => `<button type="button" class="make-more" data-all="${esc(name)}" aria-label="All ${count}: ${esc(name)}">All ${count} ›</button>`;
 
-/* `LoopMusic.tsx`: Surprise me and the styles as a strip; the favourites as a row of their own. */
+/* A carousel's pictures sized by their distance from the middle, as `ChoiceCarousel` writes them. */
+function paintCarousel(row) {
+  const centre = row.scrollLeft + row.clientWidth / 2;
+  for (const item of row.querySelectorAll(".carousel-item")) {
+    const dist = Math.abs(item.offsetLeft + item.offsetWidth / 2 - centre) / (item.offsetWidth + 28);
+    const scale = dist <= 1 ? 1.3 - 0.3 * dist : Math.max(0.7, 1 - 0.18 * (dist - 1));
+    const fade = dist <= 1 ? 1 : Math.max(0.35, 1 - 0.32 * (dist - 1));
+    item.style.setProperty("--scale", scale.toFixed(3));
+    item.style.setProperty("--fade", fade.toFixed(3));
+  }
+}
+const centreOf = (row, item) => item.offsetLeft + item.offsetWidth / 2 - row.clientWidth / 2;
+const nearestItem = (row) => [...row.querySelectorAll(".carousel-item")].reduce((best, item) =>
+  Math.abs(centreOf(row, item) - row.scrollLeft) < Math.abs(centreOf(row, best) - row.scrollLeft) ? item : best);
+
+/* `LoopMusic.tsx`: Surprise me and the styles as a carousel; saved music as a section of its own. */
 function musicTiles() {
   return [
     { id: "surprise", label: "Surprise me", about: "New music, in any style", art: iconArt(MAKE_ICON.dice) },
     ...LOOP_SCHEMA.families.map((f) => ({ id: f.id, label: f.label, about: f.description, art: art("music", f.id, f.label) }))
   ];
 }
-function favouriteMusic(value) {
+/* `SavedMusic`: the two most recent, and the rest unfolded in place. */
+function savedMusic(d) {
   if (!BEDS.length) return "";
-  return `<div class="music-favourites" role="radiogroup" aria-label="Favourite music" data-strip="Music">${BEDS.map((bed) => {
-    const id = `bed:${bed.id}`, on = id === value, label = styleLabel(bed.styleId);
+  const keys = BEDS.map((bed) => `bed:${bed.id}`);
+  const open = d.savedOpen || keys.indexOf(d.music) >= 2;
+  const more = BEDS.length - 2;
+  const cards = (open ? BEDS : BEDS.slice(0, 2)).map((bed) => {
+    const id = `bed:${bed.id}`, on = id === d.music, label = styleLabel(bed.styleId);
     return `<div class="favourite${on ? " on" : ""}" data-choice="${id}">
       <button type="button" role="radio" aria-checked="${on}" aria-label="${esc(label)}, ${esc(bedAbout(bed))}">
         <span class="favourite-art">${art("music", bed.styleId, label)}</span>
         <span class="favourite-text"><span class="favourite-name">${ICON.starOn}${esc(label)}</span><span class="favourite-about">${esc(bedAbout(bed))}</span></span>
       </button>${loopOf(bed.sourceLoopId) ? `<button type="button" class="music-preview" aria-label="Hear this music">${ICON.play}</button>` : ""}</div>`;
-  }).join("")}</div>`;
+  }).join("");
+  const toggle = more > 0 ? `<button type="button" class="make-more" data-saved-toggle>${open ? "Show fewer" : `+${more} more ›`}</button>` : "";
+  return makeSection("Saved music", `<div class="music-favourites" role="radiogroup" aria-label="Saved music" data-strip="Music style">${cards}</div>`, toggle);
 }
 
 /* The kinds of loop as three tiles — `LoopFormat.tsx` `KindChoices`. */
@@ -2682,7 +2708,7 @@ function kindChoices(d) {
   return `<div class="kind-choice">
     <div class="kind-tiles" role="radiogroup" aria-label="Kind of loop">${kinds.map((k) => {
       const ok = k.formats.some(usable);
-      return `<button type="button" role="radio" data-kind="${k.id}" aria-checked="${k === kind}" class="kind-tile${k === kind ? " on" : ""}"${ok ? "" : " disabled"}>${k.icon}<span class="kind-name">${esc(k.label)}</span>${ok ? "" : `<span class="kind-needs">Needs ${formatMissing(k.formats[0]).map((n) => NEEDS[n].what).join(" and ")}</span>`}</button>`;
+      return `<button type="button" role="radio" data-kind="${k.id}" aria-checked="${k === kind}" class="kind-tile${k === kind ? " on" : ""}"${ok ? "" : " disabled"}>${k.icon}<span class="kind-text"><span class="kind-name">${esc(k.label)}</span>${ok ? "" : `<span class="kind-needs">Needs ${formatMissing(k.formats[0]).map((n) => NEEDS[n].what).join(" and ")}</span>`}</span></button>`;
     }).join("")}</div>
     <p class="kind-about">${esc(format.description)}${note}</p>
     ${variants.length > 1 || switches.length ? `<details class="kind-options"${d.optionsOpen ? " open" : ""}><summary><span>Options</span><span class="kind-summary">${esc(summary)}</span></summary>
@@ -2697,7 +2723,7 @@ function kindChoices(d) {
   </div>`;
 }
 
-const makeSection = (label, body) => `<section class="make-section" aria-label="${esc(label)}"><div class="make-label"><span>${esc(label)}</span></div>${body}</section>`;
+const makeSection = (label, body, aside = "", note = "") => `<section class="make-section" aria-label="${esc(label)}"><div class="make-label"><span>${esc(label)}${note ? `<span class="make-note"> · ${esc(note)}</span>` : ""}</span>${aside}</div>${body}</section>`;
 
 /* One make dialog, drawn again from its state on every change, as the application re-renders. */
 function openMakeDialog(kind, from = "scope") {
@@ -2719,21 +2745,65 @@ function openMakeDialog(kind, from = "scope") {
       ...STORY_STYLES.slice().sort((a, b) => rank(a.id) - rank(b.id)).map((s) => ({ id: s.id, label: s.label, art: art("styles", s.id, s.label) }))];
   };
   const catalogues = () => kind === "loop"
-    ? { Music: [musicTiles(), "music"] }
-    : { "Kind of story": [kinds(), "storyKind"], Pictures: [pictures(), "style"] };
+    ? { "Music style": [musicTiles(), "music"] }
+    : { "Kind of story": [kinds(), "storyKind"], "Picture style": [pictures(), "style"] };
+  // Where each carousel was before a repaint, so a new choice glides there rather than jumping.
+  const scrolled = {};
+  const strip = (name, idle) => {
+    const [choices, key] = catalogues()[name];
+    return makeSection(name, carousel(name, choices, d[key], idle), allLink(name, choices.length),
+      name === "Music style" ? "composed new for each loop" : "");
+  };
   const paint = () => {
     const cats = catalogues();
+    for (const row of frame.querySelectorAll(".carousel-row")) scrolled[row.dataset.strip] = row.scrollLeft;
     const body = d.browsing
       ? choiceGrid(d.browsing, cats[d.browsing][0], d[cats[d.browsing][1]])
       : makeSection("Words", wordPicker(kind, d)) + (kind === "loop"
-        ? makeSection("Kind of loop", kindChoices(d)) + makeSection("Music", favouriteMusic(d.music) + choiceStrip("Music", cats.Music[0], d.music))
-        : makeSection("Kind of story", choiceStrip("Kind of story", cats["Kind of story"][0], d.storyKind))
-          + makeSection("Pictures", choiceStrip("Pictures", cats.Pictures[0], d.style))
+        ? makeSection("Kind of loop", kindChoices(d)) + savedMusic(d) + strip("Music style", "Saved music chosen above")
+        : strip("Kind of story") + strip("Picture style")
           + `<textarea class="make-guidance" aria-label="Anything else? (optional)" rows="${d.guidance ? 3 : 1}" maxlength="1000" placeholder="Anything else? Set it on a night train, tell it from the dog’s side…">${esc(d.guidance)}</textarea>`);
     frame.innerHTML = `<header>${d.browsing ? `<button type="button" class="make-back" data-back aria-label="Back to ${rule.title}">${ICON.back}</button>` : ""}
         <h2>${esc(d.browsing || rule.title)}</h2><button class="close" aria-label="Close">×</button></header>
       <div class="make-body">${body}</div>
       <footer class="make-footer"><button class="tb-btn primary make-go"${d.ids.length ? "" : " disabled"}>${rule.label}<span class="make-go-count"> · ${wordsCount(d.ids.length)}</span></button></footer>`;
+    for (const row of frame.querySelectorAll(".carousel-row")) placeRow(row);
+  };
+  /* Each carousel: back where it was, then to its choice; sized as it scrolls; a row brought to rest
+     by hand chooses what is in the middle. */
+  const placeRow = (row) => {
+    const name = row.dataset.strip;
+    const on = $(".carousel-item.on", row);
+    if (name in scrolled) row.scrollLeft = scrolled[name];
+    if (on) {
+      const left = centreOf(row, on);
+      if (Math.abs(row.scrollLeft - left) > 1) row.scrollTo({ left, behavior: name in scrolled ? "smooth" : "auto" });
+    }
+    paintCarousel(row);
+    let frameId = 0, timer = 0, moved = false;
+    const settle = () => {
+      const item = nearestItem(row);
+      const key = catalogues()[name][1];
+      if (moved && item.dataset.choice !== d[key]) { d[key] = item.dataset.choice; paint(); }
+    };
+    row.addEventListener("pointerdown", () => { moved = true; });
+    row.addEventListener("wheel", () => { moved = true; }, { passive: true });
+    row.addEventListener("touchstart", () => { moved = true; }, { passive: true });
+    row.addEventListener("scroll", () => {
+      cancelAnimationFrame(frameId); frameId = requestAnimationFrame(() => paintCarousel(row));
+      clearTimeout(timer); timer = setTimeout(settle, 120);
+    }, { passive: true });
+    row.addEventListener("keydown", (ev) => {
+      const items = [...row.querySelectorAll(".carousel-item")];
+      const at = Math.max(0, items.findIndex((item) => item.classList.contains("on")));
+      const to = { ArrowRight: at + 1, ArrowLeft: at - 1, Home: 0, End: items.length - 1 }[ev.key];
+      if (to === undefined) return;
+      ev.preventDefault();
+      const next = items[Math.max(0, Math.min(items.length - 1, to))];
+      d[catalogues()[name][1]] = next.dataset.choice;
+      paint();
+      $(`.carousel-row[data-strip="${name}"] .carousel-item.on button`, frame)?.focus({ preventScroll: true });
+    });
   };
   const shut = () => { node.remove(); document.removeEventListener("keydown", onKey, true); };
   const onKey = (ev) => {
@@ -2764,6 +2834,13 @@ function openMakeDialog(kind, from = "scope") {
     if (t.dataset.format) { d.format = t.dataset.format; state.loopFormat = d.format; d.optionsOpen = true; return paint(); }
     if (t.dataset.switch) { d.switches[t.dataset.switch] = t.dataset.value; d.optionsOpen = true; return paint(); }
     if (t.dataset.all) { d.browsing = t.dataset.all; return paint(); }
+    if (t.matches("[data-saved-toggle]")) { d.savedOpen = !d.savedOpen; return paint(); }
+    if (t.dataset.step) {
+      const [choices, key] = catalogues()[t.dataset.strip];
+      const at = Math.max(0, choices.findIndex((c) => c.id === d[key]));
+      d[key] = choices[Math.max(0, Math.min(choices.length - 1, at + Number(t.dataset.step)))].id;
+      return paint();
+    }
     const tile = t.closest("[data-choice]");
     if (tile) {
       const strip = tile.closest("[data-strip]").dataset.strip;

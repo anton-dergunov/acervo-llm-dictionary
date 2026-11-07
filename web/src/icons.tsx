@@ -121,7 +121,8 @@ export const SparkleIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidt
 /** Every choice at once, as a grid. */
 export const GridIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5" /></svg>;
 /** A drill: a word and its translation, turned over and over. */
-export const DrillIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} strokeLinejoin="round" aria-hidden="true"><rect x="3" y="8.5" width="8" height="11" rx="1.6" /><rect x="13" y="8.5" width="8" height="11" rx="1.6" /><path d="M6.5 6c1.6-1.9 9.4-1.9 11 0" /><path d="M15.6 3.9l1.9 2.1-2.4 1" /><path d="M5.5 14h3M15.5 14h3" /></svg>;
+/** A drill: the same words round and round, as a loop of two arrows. */
+export const DrillIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.8} strokeLinejoin="round" aria-hidden="true"><path d="M4 11.5V10a4 4 0 0 1 4-4h11.5M16.5 3l3 3-3 3M20 12.5V14a4 4 0 0 1-4 4H4.5M7.5 21l-3-3 3-3" /></svg>;
 /** A radio lesson: someone presenting the words. */
 export const MicIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><rect x="9" y="3.5" width="6" height="10.5" rx="3" /><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0" /><path d="M12 18v2.5M8.5 20.5h7" /></svg>;
 /** A story told between the words. */

@@ -548,7 +548,15 @@ describe("drawing words to make something from", () => {
   it("estimates a loop's length per word from the ready loops of that format", () => {
     const graph = testGraph();
     // One ready classic loop: 124.5 seconds over two words.
-    expect(loopSecondsPerWord(graph, "classic")).toBeCloseTo(62.25);
+    expect(loopSecondsPerWord(graph, "classic", { classic: 8 })).toBeCloseTo(62.25);
     expect(loopSecondsPerWord(graph, "radio-lesson")).toBeNull();
+  });
+
+  it("estimates a format never made from its bars, at the pace of the loops there are", () => {
+    const graph = testGraph();
+    // The classic loop took 62.25 s a word over 8 bars; an echo word is 5 bars at that pace.
+    expect(loopSecondsPerWord(graph, "echo", { classic: 8, echo: 5 })).toBeCloseTo(62.25 / 8 * 5);
+    // With no finished loop at all, 100 BPM.
+    expect(loopSecondsPerWord({ ...graph, loops: [] }, "echo", { echo: 5 })).toBeCloseTo(12);
   });
 });

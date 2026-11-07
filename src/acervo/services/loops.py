@@ -117,13 +117,14 @@ def schema(settings: Settings, owner: str | None = None) -> dict[str, Any]:
         "productionBundle": found.production_bundle,
         # Each kind of loop, with the generator's own label and sentence, the switches it offers,
         # what it requires and what it falls back to. Classic first when it is there: it needs
-        # nothing and is the default.
+        # nothing and is the default. `barsPerItem` is how many bars a word takes, which is how
+        # the dialog estimates a format's length before one has been made.
         "formats": [
             {"id": one.id, "label": one.label, "description": one.description,
              "switches": {name: {"label": switch.label, "default": switch.default,
                                  **({"choices": list(switch.choices)} if switch.choices else {})}
                           for name, switch in one.switches.items()},
-             "requires": list(one.requires), "fallback": one.fallback}
+             "requires": list(one.requires), "fallback": one.fallback, "barsPerItem": one.bars_per_item}
             for one in sorted(found.formats, key=lambda one: one.id != "classic")
         ],
         "writerAvailable": _writer_available(settings, owner),

@@ -178,8 +178,10 @@ export function KindChoices({ schema, value, switches, onChoose, onSwitch }: {
           onClick={() => onChoose(usable.find((member) => member.id === variants.current[one.id])?.id ?? usable[0].id)}
         >
           <Icon />
-          <span className="kind-name">{one.label}</span>
-          {blocked && <span className="kind-needs">Needs {blocked.what}</span>}
+          <span className="kind-text">
+            <span className="kind-name">{one.label}</span>
+            {blocked && <span className="kind-needs">Needs {blocked.what}</span>}
+          </span>
         </button>;
       })}
     </div>

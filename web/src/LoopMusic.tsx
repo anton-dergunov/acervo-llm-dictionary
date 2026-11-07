@@ -8,8 +8,9 @@
  * the same request under two names, and the list said both.
  *
  * **A favourite is not a style tile with a star**, because such a tile looks like the style it is a
- * piece of and goes unseen. The favourites are a row of their own above the styles, each saying in
- * plain view when it was kept and which loop it came from, with a button to hear it.
+ * piece of and goes unseen. Saved music is a section of its own above the styles, each piece saying
+ * in plain view when it was kept and which loop it came from, with a button to hear it. The two most
+ * recent show; the rest unfold in place, so the section is two cards high however many are kept.
  *
  * The styles are the generator's catalogue, read from `GET /loops/schema` once per session and never
  * copied here, so a family added in a later version appears with nothing changing on this side.
@@ -19,28 +20,34 @@ import { useEffect, useState } from "react";
 import { backendSession, type LoopFamily, type LoopMusic, type LoopSchema } from "./api";
 import type { Bed, Loop, VocabularyGraph } from "./domain";
 import { Art } from "./art";
-import type { StripChoice } from "./ChoiceStrip";
+import type { CatalogueChoice } from "./ChoiceCarousel";
+import { MakeSection } from "./MakeDialog";
 import { DiceIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
 import * as player from "./loops";
 import { loopIsReady, loopTitle, loopTrackOf, styleLabel } from "./selectors";
 
 let asked: Promise<LoopSchema> | null = null;
+/** The last answer, so a surface opening again starts from it rather than from nothing. */
+let known: LoopSchema | null = null;
 
 /**
  * What the generator offers, asked once and shared; a failure is asked again next time.
  *
  * `fresh` asks again regardless, which is what the make dialog wants: whether the sample pack is
  * installed is a fact about the server that changes when the owner installs it, and a dialog that
- * went on refusing until a reload would be reporting a state that is no longer true.
+ * went on refusing until a reload would be reporting a state that is no longer true. It still starts
+ * from the last answer while it asks, so the dialog opens at its full size instead of growing a
+ * moment later, and the fresh answer replaces it when it comes.
  */
 export function useLoopSchema(fresh = false): { schema: LoopSchema | null; trouble: string | null } {
-  const [schema, setSchema] = useState<LoopSchema | null>(null);
+  const [schema, setSchema] = useState<LoopSchema | null>(known);
   const [trouble, setTrouble] = useState<string | null>(null);
   useEffect(() => {
     let live = true;
     if (fresh) asked = null;
     asked ??= backendSession.loopSchema();
     asked.then((found) => {
+      known = found;
       player.nameFormats(found.formats);
       if (live) setSchema(found);
     }).catch((error: unknown) => {
@@ -52,7 +59,7 @@ export function useLoopSchema(fresh = false): { schema: LoopSchema | null; troub
   return { schema, trouble };
 }
 
-export function resetLoopSchemaForTests(): void { asked = null; }
+export function resetLoopSchemaForTests(): void { asked = null; known = null; }
 
 export type MusicChoice =
   | { kind: "surprise" }
@@ -104,18 +111,18 @@ export function musicKey(choice: MusicChoice): string {
 
 /**
  * The make dialog's music. The favourites, each with its star, what it came from and a button to hear
- * it; then the strip: Surprise me, and every style. Each picture is the style's (`art.tsx`), so a
+ * it; then the styles' carousel: Surprise me, and every style. Each picture is the style's (`art.tsx`), so a
  * favourite looks like the style it is a piece of. `of` reads a remembered key back, and anything it
  * no longer names — a favourite let go, a style the generator dropped — is Surprise me.
  */
 export function musicChoices(graph: VocabularyGraph, families: LoopFamily[], favourites: Bed[]): {
   favourites: Bed[];
-  styles: StripChoice[];
+  styles: CatalogueChoice[];
   of(key: string | null): MusicChoice;
 } {
   const byKey = new Map<string, MusicChoice>();
   for (const bed of favourites) byKey.set(musicKey({ kind: "bed", bed }), { kind: "bed", bed });
-  const tile = (choice: MusicChoice, entry: Omit<StripChoice, "id">): StripChoice => {
+  const tile = (choice: MusicChoice, entry: Omit<CatalogueChoice, "id">): CatalogueChoice => {
     byKey.set(musicKey(choice), choice);
     return { id: musicKey(choice), ...entry };
   };
@@ -132,32 +139,48 @@ export function musicChoices(graph: VocabularyGraph, families: LoopFamily[], fav
   return { favourites, styles, of: (key) => (key && byKey.get(key)) || { kind: "surprise" } };
 }
 
-/** The favourites as a row of their own: the picture, the name with its star, where it came from. */
-export function FavouriteMusic({ graph, families, favourites, value, onChange }: {
+/** How many saved pieces show before the rest are unfolded. */
+const SAVED_SHOWN = 2;
+
+/** Saved music, as a section of its own: the picture, the name with its star, where it came from. */
+export function SavedMusic({ graph, families, favourites, value, onChange }: {
   graph: VocabularyGraph;
   families: LoopFamily[];
   favourites: Bed[];
   value: string;
   onChange(key: string): void;
 }) {
+  const [open, setOpen] = useState(false);
   if (!favourites.length) return null;
-  return <div className="music-favourites" role="radiogroup" aria-label="Favourite music">
-    {favourites.map((bed) => {
-      const key = musicKey({ kind: "bed", bed });
-      const label = styleLabel(families, bed.styleId);
-      return <div key={bed.id} className={`favourite${key === value ? " on" : ""}`}>
-        <button type="button" role="radio" aria-checked={key === value} onClick={() => onChange(key)}
-          aria-label={`${label}, ${bedAbout(graph, bed)}`}>
-          <span className="favourite-art"><Art group="music" id={bed.styleId} label={label} /></span>
-          <span className="favourite-text">
-            <span className="favourite-name"><StarIcon filled />{label}</span>
-            <span className="favourite-about">{bedAbout(graph, bed)}</span>
-          </span>
-        </button>
-        <Preview graph={graph} bed={bed} />
-      </div>;
-    })}
-  </div>;
+  const keys = favourites.map((bed) => musicKey({ kind: "bed", bed }));
+  // A choice among the folded ones unfolds them: what is chosen is never hidden.
+  const unfolded = open || keys.indexOf(value) >= SAVED_SHOWN;
+  const shown = unfolded ? favourites : favourites.slice(0, SAVED_SHOWN);
+  const more = favourites.length - SAVED_SHOWN;
+  const toggle = more > 0
+    ? <button type="button" className="make-more" onClick={() => setOpen(!unfolded)}>
+      {unfolded ? "Show fewer" : `+${more} more ›`}
+    </button>
+    : null;
+  return <MakeSection label="Saved music" aside={toggle}>
+    <div className="music-favourites" role="radiogroup" aria-label="Saved music">
+      {shown.map((bed) => {
+        const key = musicKey({ kind: "bed", bed });
+        const label = styleLabel(families, bed.styleId);
+        return <div key={bed.id} className={`favourite${key === value ? " on" : ""}`}>
+          <button type="button" role="radio" aria-checked={key === value} onClick={() => onChange(key)}
+            aria-label={`${label}, ${bedAbout(graph, bed)}`}>
+            <span className="favourite-art"><Art group="music" id={bed.styleId} label={label} /></span>
+            <span className="favourite-text">
+              <span className="favourite-name"><StarIcon filled />{label}</span>
+              <span className="favourite-about">{bedAbout(graph, bed)}</span>
+            </span>
+          </button>
+          <Preview graph={graph} bed={bed} />
+        </div>;
+      })}
+    </div>
+  </MakeSection>;
 }
 
 /** The player's menu: new music for the loop that is open. Choosing is asking; there is no Apply. */

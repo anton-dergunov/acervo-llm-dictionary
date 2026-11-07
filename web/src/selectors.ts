@@ -804,20 +804,36 @@ export function drawWords(ordered: readonly Lexeme[], count: number, passed: Rea
   return [...fresh, ...turnedDown].slice(0, Math.max(count, 0));
 }
 
+/** A bar of 4/4 at 100 BPM: the estimate before this replica holds any finished loop. */
+const SECONDS_PER_BAR = 2.4;
+
+function median(values: number[]): number | null {
+  if (!values.length) return null;
+  const sorted = values.slice().sort((left, right) => left - right);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+}
+
 /**
- * What a loop of this format has taken per word on this device's replica, as the median of every
- * ready one: the estimate a dialog shows beside its count. Null when there is nothing to go on.
+ * What a word takes in a loop of this format, for the estimate a dialog shows beside its count.
+ *
+ * The median of the finished loops of this format when there are any, since that is what this
+ * owner's loops actually took. Otherwise the generator's bars per word for the format, at the median
+ * pace in seconds a bar of every finished loop of any format — tempo is the music's, not the format's —
+ * or at 100 BPM when there is none. Null only when the format's bars are not known.
  */
-export function loopSecondsPerWord(graph: VocabularyGraph, format: string): number | null {
+export function loopSecondsPerWord(graph: VocabularyGraph, format: string, barsPerItem: Record<string, number> = {}): number | null {
   const items = new Map<string, number>();
   for (const item of live(graph.loopItems)) items.set(item.loopId, (items.get(item.loopId) ?? 0) + 1);
-  const rates = live(graph.loops)
-    .filter((loop) => loop.format === format && loop.durationSeconds && items.get(loop.id))
-    .map((loop) => loop.durationSeconds! / items.get(loop.id)!)
-    .sort((left, right) => left - right);
-  if (!rates.length) return null;
-  const middle = Math.floor(rates.length / 2);
-  return rates.length % 2 ? rates[middle] : (rates[middle - 1] + rates[middle]) / 2;
+  const finished = live(graph.loops).filter((loop) => loop.durationSeconds && items.get(loop.id));
+  const own = median(finished.filter((loop) => loop.format === format)
+    .map((loop) => loop.durationSeconds! / items.get(loop.id)!));
+  if (own !== null) return own;
+  const bars = barsPerItem[format];
+  if (!bars) return null;
+  const pace = median(finished.filter((loop) => barsPerItem[loop.format])
+    .map((loop) => loop.durationSeconds! / (items.get(loop.id)! * barsPerItem[loop.format])));
+  return bars * (pace ?? SECONDS_PER_BAR);
 }
 
 /* ── playing a loop ──────────────────────────────────────────────────────

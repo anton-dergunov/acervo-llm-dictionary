@@ -7,8 +7,8 @@
  *
  * The kinds and the styles are the server's tracked config, read from `GET /stories/types` and never
  * copied into this file: a kind added to `config/story-types.yaml` appears here with nothing
- * changing on this side. Both are strips of pictures (`ChoiceStrip.tsx`), the styles each a sample
- * drawn in that style, and the styles a kind suggests come first once a kind is chosen.
+ * changing on this side. Both are carousels of pictures (`ChoiceCarousel.tsx`), the styles each a
+ * sample drawn in that style, and the styles a kind suggests come first once a kind is chosen.
  *
  * The count is **one to eight, three by default**, as segments rather than a slider. A story has to
  * weave every word it is given into twenty sentences, and the prose buckles long before a loop's
@@ -21,7 +21,7 @@
 import { useEffect, useState } from "react";
 import { AcervoApiError, backendSession, type StoryTypes } from "./api";
 import { Art } from "./art";
-import { ChoiceGrid, ChoiceStrip, type StripChoice } from "./ChoiceStrip";
+import { AllChoices, ChoiceCarousel, ChoiceGrid, type CatalogueChoice } from "./ChoiceCarousel";
 import type { VocabularyGraph } from "./domain";
 import { DiceIcon, PictureIcon } from "./icons";
 import MakeDialog, { MakeSection } from "./MakeDialog";
@@ -33,6 +33,11 @@ const DEFAULT_WORDS = 3;
 const GUIDANCE_LIMIT = 1000;
 
 type Browsing = null | "kind" | "pictures";
+
+/* The kinds and styles last offered, so the dialog opens at its full size while it asks again. */
+let knownTypes: StoryTypes | null = null;
+
+export function resetStoryTypesForTests(): void { knownTypes = null; }
 
 export default function StoryDialog({ graph, query, selection = [], from = "scope", deviceId, onClose, onMade, onNotify }: {
   graph: VocabularyGraph;
@@ -47,7 +52,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
   onMade(storyId: string): void;
   onNotify(message: string): void;
 }) {
-  const [offered, setOffered] = useState<StoryTypes | null>(null);
+  const [offered, setOffered] = useState<StoryTypes | null>(knownTypes);
   const [trouble, setTrouble] = useState<string | null>(null);
   const [kind, setKind] = useState("auto");
   const [style, setStyle] = useState("auto");
@@ -62,7 +67,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
 
   useEffect(() => {
     void backendSession.storyTypes()
-      .then(setOffered)
+      .then((found) => { knownTypes = found; setOffered(found); })
       .catch((error: unknown) => setTrouble(error instanceof AcervoApiError
         ? error.message
         : "The kinds of story could not be read."));
@@ -86,7 +91,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
     }
   };
 
-  const kinds: StripChoice[] = [
+  const kinds: CatalogueChoice[] = [
     { id: "auto", label: "Surprise me", about: "Any kind of story",
       art: <span className="choice-stand-in icon" aria-hidden="true"><DiceIcon /></span> },
     ...(offered?.types ?? []).map((one) => ({
@@ -99,7 +104,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
     const rank = (id: string) => (suggested.includes(id) ? suggested.indexOf(id) : suggested.length);
     return rank(left.id) - rank(right.id);
   });
-  const pictures: StripChoice[] = [
+  const pictures: CatalogueChoice[] = [
     // "To suit the story" rather than "Surprise me": the server picks from the styles this kind of
     // story suggests, which is a judgement rather than a dice roll.
     { id: "auto", label: "To suit the story", about: "A style this kind of story suits",
@@ -119,7 +124,7 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
   if (browsing) {
     const grid = browsing === "kind"
       ? { title: "Kind of story", choices: kinds, value: kind, set: setKind }
-      : { title: "Pictures", choices: pictures, value: style, set: setStyle };
+      : { title: "Picture style", choices: pictures, value: style, set: setStyle };
     return <MakeDialog title="Make a story" back={{ title: grid.title, onBack: () => setBrowsing(null) }} footer={footer} onClose={onClose}>
       <ChoiceGrid label={grid.title} choices={grid.choices} value={grid.value}
         onChange={(id) => { grid.set(id); setBrowsing(null); }} />
@@ -131,12 +136,14 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
       <WordPicker draw={draw} kind="story" language={query.language} counter="segments" />
     </MakeSection>
 
-    <MakeSection label="Kind of story">
-      <ChoiceStrip label="Kind of story" choices={kinds} value={kind} onChange={setKind} onAll={() => setBrowsing("kind")} />
+    <MakeSection label="Kind of story"
+      aside={<AllChoices count={kinds.length} label="Kind of story" onOpen={() => setBrowsing("kind")} />}>
+      <ChoiceCarousel label="Kind of story" choices={kinds} value={kind} onChange={setKind} />
     </MakeSection>
 
-    <MakeSection label="Pictures">
-      <ChoiceStrip label="Pictures" choices={pictures} value={style} onChange={setStyle} onAll={() => setBrowsing("pictures")} />
+    <MakeSection label="Picture style"
+      aside={<AllChoices count={pictures.length} label="Picture style" onOpen={() => setBrowsing("pictures")} />}>
+      <ChoiceCarousel label="Picture style" choices={pictures} value={style} onChange={setStyle} />
     </MakeSection>
 
     <textarea

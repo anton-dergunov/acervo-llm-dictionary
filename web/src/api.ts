@@ -918,6 +918,8 @@ export interface LoopFormat {
   requires: string[];
   /** What is made instead when a requirement is missing, or null when it is then refused. */
   fallback: string | null;
+  /** How many bars a word takes, which is how a length is estimated before one has been made. */
+  barsPerItem: number;
 }
 
 export interface LoopSchema {

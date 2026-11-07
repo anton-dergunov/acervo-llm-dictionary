@@ -10,9 +10,10 @@
  * The kind of loop is three tiles (`LoopFormat.tsx`): a drill, a radio lesson, a story, each with its
  * variants and switches folded under Options, opening on the one last made on this device.
  *
- * The music is the owner's favourites, a row of their own, and then a strip of pictures
- * (`ChoiceStrip.tsx`): Surprise me or one of the generator's styles; All shows every style with the
- * sentence that says what it is. The styles are the generator's catalogue, read from
+ * The music is the owner's saved music, a section of its own, and then a carousel of pictures
+ * (`ChoiceCarousel.tsx`): Surprise me or one of the generator's styles, the chosen one in the middle
+ * with the sentence that says what it is; All shows every style at once. The section says the music
+ * is composed new for each loop, since a style is a direction to a generator, not a recording. The styles are the generator's catalogue, read from
  * `GET /loops/schema` and never copied into Acervo. The music last asked for on this device is chosen
  * when the dialog opens.
  *
@@ -24,17 +25,20 @@
  */
 
 import { useState } from "react";
-import { AcervoApiError, backendSession } from "./api";
-import { ChoiceGrid, ChoiceStrip } from "./ChoiceStrip";
+import { AcervoApiError, backendSession, type LoopSchema } from "./api";
+import { AllChoices, ChoiceCarousel, ChoiceGrid } from "./ChoiceCarousel";
 import type { VocabularyGraph } from "./domain";
 import { lastLoopFormat, lastLoopMusic, loopSwitchesFor, rememberLoopFormat, rememberLoopMusic } from "./editorPreferences";
 import { KindChoices, formatUsable, switchesFor } from "./LoopFormat";
-import { FavouriteMusic, musicChoices, musicKey, musicOf, useLoopSchema } from "./LoopMusic";
+import { SavedMusic, musicChoices, musicKey, musicOf, useLoopSchema } from "./LoopMusic";
 import MakeDialog, { MakeSection } from "./MakeDialog";
 import { loopCandidates, loopEligible, loopSecondsPerWord, favouriteBeds, type ListQuery, type SelectedWord } from "./selectors";
 import { WordPicker, useWordDraw, wordsCount, type WordSource } from "./WordPicker";
 
 const DEFAULT_WORDS = 12;
+
+const barsOf = (schema: LoopSchema): Record<string, number> =>
+  Object.fromEntries(schema.formats.map((one) => [one.id, one.barsPerItem]));
 const FEWEST_WORDS = 4;
 
 export default function LoopDialog({ graph, query, selection = [], from = "scope", deviceId, onClose, onMade, onNotify }: {
@@ -103,9 +107,9 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
   </>;
 
   if (browsing) {
-    return <MakeDialog title="Make a loop" back={{ title: "Music", onBack: () => setBrowsing(false) }} footer={footer} onClose={onClose}>
+    return <MakeDialog title="Make a loop" back={{ title: "Music style", onBack: () => setBrowsing(false) }} footer={footer} onClose={onClose}>
       <ChoiceGrid
-        label="Music" choices={tiles.styles} value={musicKey(music)}
+        label="Music style" choices={tiles.styles} value={musicKey(music)}
         onChange={(key) => { setMusic(key); setBrowsing(false); }}
       />
     </MakeDialog>;
@@ -114,7 +118,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
   return <MakeDialog title="Make a loop" footer={footer} onClose={onClose}>
     <MakeSection label="Words">
       <WordPicker draw={draw} kind="loop" language={query.language} counter="slider"
-        secondsPerWord={format ? loopSecondsPerWord(graph, format.id) : null} />
+        secondsPerWord={format ? loopSecondsPerWord(graph, format.id, barsOf(schema!)) : null} />
     </MakeSection>
 
     {schema && format && <MakeSection label="Kind of loop">
@@ -125,12 +129,14 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
       />
     </MakeSection>}
 
-    <MakeSection label="Music">
-      <FavouriteMusic graph={graph} families={schema?.families ?? []} favourites={tiles.favourites}
-        value={musicKey(music)} onChange={setMusic} />
-      <ChoiceStrip
-        label="Music" choices={tiles.styles} value={musicKey(music)}
-        onChange={setMusic} onAll={() => setBrowsing(true)}
+    <SavedMusic graph={graph} families={schema?.families ?? []} favourites={tiles.favourites}
+      value={musicKey(music)} onChange={setMusic} />
+
+    <MakeSection label="Music style" note="composed new for each loop"
+      aside={<AllChoices count={tiles.styles.length} label="Music style" onOpen={() => setBrowsing(true)} />}>
+      <ChoiceCarousel
+        label="Music style" choices={tiles.styles} onChange={setMusic} idle="Saved music chosen above"
+        value={music.kind === "bed" ? null : musicKey(music)}
       />
     </MakeSection>
   </MakeDialog>;

@@ -19,6 +19,13 @@ written beside the masters to look at before anything is committed.
     .venv/bin/python scripts/draw_dialog_art.py --dry-run
     .venv/bin/python scripts/draw_dialog_art.py --image-chain vertex
     .venv/bin/python scripts/draw_dialog_art.py --only styles/pixel-art --force
+
+When one picture will not come right, draw several versions of it and choose. `--variants N` draws
+N versions of each picture named, as masters beside the others and a sheet of them side by side,
+and changes nothing in the bundle; `--pick group/id=n` makes version n the tile.
+
+    .venv/bin/python scripts/draw_dialog_art.py --only music/meditative --variants 3
+    .venv/bin/python scripts/draw_dialog_art.py --pick music/meditative=2
 """
 
 from __future__ import annotations
@@ -125,6 +132,30 @@ def draw(prompt: str, seed: int, candidates: tuple[chain.Candidate, ...]) -> tup
     raise RuntimeError("; ".join(failures) or "no image model to ask")
 
 
+def install(group: str, key: str, master: bytes) -> int:
+    """Write a master's tile into the bundle and the prototype; returns its size."""
+    small = tile(master)
+    for root in (WEB_ART, PROTOTYPE_ART):
+        (root / group).mkdir(parents=True, exist_ok=True)
+        (root / group / f"{key}.webp").write_bytes(small)
+    return len(small)
+
+
+def variants_sheet(drawn: list[tuple[str, str, int]], path: Path) -> None:
+    """Each picture's versions side by side, numbered as `--pick` takes them."""
+    rows = []
+    for group, key in dict.fromkeys((group, key) for group, key, _ in drawn):
+        cells = "".join(
+            f'<figure><img src="{html.escape(str(MASTERS / group / f"{key}.{n}.webp"))}"><figcaption>{n}</figcaption></figure>'
+            for g, k, n in drawn if (g, k) == (group, key))
+        rows.append(f"<h2>{group}/{key}</h2><div class=g>{cells}</div>")
+    path.write_text(
+        "<!doctype html><meta charset=utf-8><title>Dialog art versions</title><style>"
+        "body{font:14px system-ui;margin:24px;background:#EDF1F0}.g{display:grid;grid-template-columns:repeat(auto-fill,280px);gap:14px}"
+        "img{width:280px;height:280px;border-radius:10px;display:block}figure{margin:0}figcaption{color:#40534E;margin-top:4px}"
+        "</style>" + "".join(rows), encoding="utf-8")
+
+
 def sheet(groups: dict[str, dict[str, str]], path: Path) -> None:
     rows = []
     for group, entries in groups.items():
@@ -147,9 +178,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--dry-run", action="store_true", help="list what would be drawn, and spend nothing")
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--sheet", type=Path, default=MASTERS / "sheet.html")
+    parser.add_argument("--variants", type=int, default=0, help="draw N versions of each, to choose from")
+    parser.add_argument("--pick", nargs="*", default=[], help="group/id=n: make version n the tile")
     args = parser.parse_args(argv)
 
     groups = prompts()
+    if args.pick:
+        for choice in args.pick:
+            name, _, number = choice.partition("=")
+            group, _, key = name.partition("/")
+            master = MASTERS / group / f"{key}.{number}.webp"
+            if not number or not master.exists():
+                raise SystemExit(f"There is no version {number or '?'} of {name}: draw it with --variants first.")
+            (MASTERS / group / f"{key}.webp").write_bytes(master.read_bytes())
+            print(f"{name} is now version {number} ({install(group, key, master.read_bytes()) // 1024} KB)")
+        sheet(groups, args.sheet)
+        return 0
     wanted = []
     for group, entries in groups.items():
         for key, prompt in entries.items():
@@ -157,10 +201,15 @@ def main(argv: list[str] | None = None) -> int:
             exists = (WEB_ART / group / f"{key}.webp").exists()
             if named and (args.force or bool(args.only) or not exists):
                 wanted.append((group, key, prompt))
+    copies = max(1, args.variants)
+    if args.variants:
+        wanted = [(group, key, prompt, n) for group, key, prompt in wanted for n in range(1, copies + 1)]
+    else:
+        wanted = [(group, key, prompt, 0) for group, key, prompt in wanted]
     print(f"{len(wanted)} to draw.")
     if args.dry_run:
-        for group, key, prompt in wanted:
-            print(f"  {group}/{key}: {prompt[:120]}…")
+        for group, key, prompt, n in wanted:
+            print(f"  {group}/{key}{f' version {n}' if n else ''}: {prompt[:120]}…")
         return 0
 
     chosen = [tuple(part.split(":", 1)) if ":" in part else part
@@ -169,25 +218,31 @@ def main(argv: list[str] | None = None) -> int:
     if not candidates:
         raise SystemExit("Nothing in providers.local.json can draw.")
 
-    def one(item: tuple[str, str, str]) -> str:
-        group, key, prompt = item
-        seed = int.from_bytes(hashlib.sha256(f"{group}/{key}".encode()).digest()[:4], "big") % 2_000_000_000
+    def one(item: tuple[str, str, str, int]) -> str:
+        group, key, prompt, n = item
+        named = f"{group}/{key}/{n}" if n else f"{group}/{key}"
+        seed = int.from_bytes(hashlib.sha256(named.encode()).digest()[:4], "big") % 2_000_000_000
         try:
             master, who = draw(prompt, seed, candidates)
         except RuntimeError as error:
             return f"FAILED {group}/{key}: {error}"
         (MASTERS / group).mkdir(parents=True, exist_ok=True)
+        if n:
+            (MASTERS / group / f"{key}.{n}.webp").write_bytes(master)
+            return f"drew {group}/{key} version {n} with {who}"
         (MASTERS / group / f"{key}.webp").write_bytes(master)
-        small = tile(master)
-        for root in (WEB_ART, PROTOTYPE_ART):
-            (root / group).mkdir(parents=True, exist_ok=True)
-            (root / group / f"{key}.webp").write_bytes(small)
-        return f"drew {group}/{key} with {who} ({len(small) // 1024} KB)"
+        return f"drew {group}/{key} with {who} ({install(group, key, master) // 1024} KB)"
 
     with ThreadPoolExecutor(max_workers=max(1, args.workers)) as pool:
         for line in pool.map(one, wanted):
             print(line, flush=True)
     MASTERS.mkdir(parents=True, exist_ok=True)
+    if args.variants:
+        drawn = [(group, key, n) for group, key, _, n in wanted if (MASTERS / group / f"{key}.{n}.webp").exists()]
+        versions = MASTERS / "versions.html"
+        variants_sheet(drawn, versions)
+        print(f"Versions to choose from: {versions}")
+        return 0
     sheet(groups, args.sheet)
     print(f"Contact sheet: {args.sheet}")
     return 0

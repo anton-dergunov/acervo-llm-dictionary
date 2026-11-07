@@ -471,10 +471,10 @@ server change.
 
 **The draw is shown before it is sent, and words not used yet come first** (`WordPicker.tsx`,
 `drawOrder` in `selectors.ts`). The dialog lays the drawn words out as chips, each with its ×: a word
-removed is replaced by the next in the order, so the count stays what was asked for, and **Draw
-again**, a labelled button under the chips, passes over every word showing. Both are labelled because
+removed is replaced by the next in the order, so the count stays what was asked for, and **Other
+words**, a labelled pill after the chips, passes over every word showing. Both are labelled because
 unlabelled they go unnoticed: a chip that is quietly a button, or a bare ⟳ at the end of the row, reads
-as decoration. Every order first
+as decoration. It is not "Draw again": in this application drawing is what a picture model does. Every order first
 sorts the candidates by how many live loops each is already in, fewest first, so each draw deals from
 a deck without putting cards back — every word in scope has its turn before any comes round again,
 and then the least used come first. The count is per kind: a word in a story is still new to loops.
@@ -493,9 +493,12 @@ Within that the owner chooses the order:
 - **Newest** — the most recently added.
 - **The selection**, when there is one, sent as chosen.
 
-The order and the count are remembered per kind on this device. Beside the count the dialog says how
-many words in scope are not in a loop yet, and how long the loop will run: the median seconds per word
-of this replica's ready loops of the same format, left out when there are none.
+The order and the count are remembered per kind on this device. Under the count the dialog says how
+many words in scope are not in a loop yet, since that is a fact about how many there are to draw
+from, and beside it how long the loop will run. That is the median seconds per word of this replica's
+ready loops of the same format; for a format never made, the format's bars per word (`barsPerItem`,
+which the schema route passes on from LexiBeat) at the median seconds a bar of every ready loop,
+since tempo belongs to the music and not to the format; and at 100 BPM when there is no loop at all.
 
 **The style and format catalogues are LexiBeat's**, read from its `schema` route and never copied here
 — the rule [`spoken-clips.md`](spoken-clips.md) §2.10 settled for channels. The dialog offers *Surprise me* or a family
@@ -639,10 +642,20 @@ until the store step replaces both with the new track, so a render that fails ch
 lesson's examples and remarks survive a change of music word for word, every take is found in the
 cache, and new music costs render time and no provider spend. The dialog offers the
 generator's own styles without `auto`, which is the absence of a choice and is called *Surprise me*.
-The kept beds come first, as a row of their own: each its style's picture, its name with the star,
-when it was kept and the loop it came from in plain view, and a button to hear that loop. A kept bed is
-not a style tile with a small star, because one looks like the style it is a piece of and goes unseen. Under them is a strip of pictures one row high — Surprise me, then every style — and **All**
-shows that strip as a grid in place of the dialog's body, each with its sentence (`ChoiceStrip.tsx`).
+The kept beds come first, as **Saved music**, a section of its own: each its style's picture, its name
+with the star, when it was kept and the loop it came from in plain view, and a button to hear that
+loop. A kept bed is not a style tile with a small star, because one looks like the style it is a
+piece of and goes unseen. The two most recent show and the rest unfold in place, never sideways, so
+the section is two cards high however many are kept. Under it is **Music style · composed new for
+each loop** — the words are there because a style is a direction to a generator, not a recording —
+as a carousel (`ChoiceCarousel.tsx`): Surprise me, then every style, the chosen one in the middle and
+larger, with its name and sentence under the row, the others shrinking and fading with their
+distance from it. A row whose ends simply stop does not say it scrolls; one whose middle is the point
+does. A swipe or a sideways wheel chooses whatever comes to rest in the middle, a tap brings a
+picture there, ‹ › on the row's edges step one for a desktop without a sideways wheel, and ← →
+step from the keyboard. The size is a transform written as the row scrolls, so the dialog never
+moves with it. While saved music is chosen, nothing in the row is. **All 15 ›** above the row shows
+the styles as a grid in place of the dialog's body, each with its sentence.
 The dialog opens on the music last asked for on this device, as it does on the format; a kept bed
 let go or a style no longer offered falls back to Surprise me.
 The pictures are `web/src/art/music/<family>.webp`, drawn once by `scripts/draw_dialog_art.py`; a
@@ -665,7 +678,9 @@ safe integer, which is the real constraint.
 
 ### 19 · Formats: chosen in the dialog, written by the owner's text model
 
-**The make dialog offers three kinds of loop as tiles** — Drill, Radio lesson, Story — with the chosen
+**The make dialog offers three kinds of loop as tiles** in one compact row at every width — Drill
+(two arrows going round), Radio lesson, Story, the icon beside the name and above it on a phone —
+with the chosen
 format's sentence beneath and its options folded into one line that reads them out ("3× · Remarks
 about words · Quiz halfway · Final review"). The four ways of drilling — `classic`, `alternating`,
 `echo` and `review` — are one tile and its variants (Pause to recall, Straight through, Say it back,

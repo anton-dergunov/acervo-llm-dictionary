@@ -3,8 +3,10 @@
  *
  * **What is drawn is what is sent.** The words are chips, and the button counts exactly them. Each
  * chip carries its ×, because a chip that is quietly a button goes unnoticed: removing a word puts
- * the next one in the order in its place, so the count stays what was asked for. **Draw again**, a
- * labelled button under the chips, passes over every word showing. Turned-down words come back only
+ * the next one in the order in its place, so the count stays what was asked for. **Other words**, a
+ * labelled pill after the chips, passes over every word showing — not "draw", which in this
+ * application is what a picture model does. Where the words come from is said under the count,
+ * since it is a fact about how many there are to draw from. Turned-down words come back only
  * once nothing else in scope is left.
  *
  * **Words not used yet come first** (`drawOrder` in `selectors.ts`), and the order chosen here
@@ -167,12 +169,12 @@ export function useWordDraw({ graph, query, kind, candidatesOf, eligible, why, m
   };
 }
 
-/** The line under the count: where the words come from, and how much a loop of them lasts. */
+/** The line under the count: where the words come from. */
 function poolNote(draw: WordDraw, kind: MadeKind, choice: Choice): string {
-  if (choice === "hard") return `Hardest first, from ${draw.pool}`;
-  if (draw.unused >= draw.count) return `From ${draw.unused} not in a ${kind} yet`;
+  if (choice === "hard") return `hardest first, from ${draw.pool}`;
+  if (draw.unused >= draw.count) return `of ${draw.unused} not in a ${kind} yet`;
   if (draw.unused > 0) return `${draw.unused} not in a ${kind} yet, then the least used`;
-  return `Every word has been in a ${kind}: the least used first`;
+  return `all have been in a ${kind}: the least used first`;
 }
 
 export function WordPicker({ draw, kind, language, counter, secondsPerWord }: {
@@ -222,7 +224,10 @@ export function WordPicker({ draw, kind, language, counter, secondsPerWord }: {
             className={value === draw.count ? "on" : ""} onClick={() => draw.setCount(value)}
           >{value}</button>)}
         </span>}
-      <output>{wordsCount(draw.count)}{estimate ? <small> · about {estimate} min</small> : null}</output>
+      <span className="word-tally">
+        <output>{wordsCount(draw.count)}{estimate ? <small> · about {estimate} min</small> : null}</output>
+        {draw.pool > 0 && <small className="word-pool">{poolNote(draw, kind, draw.choice)}</small>}
+      </span>
     </div>}
 
     <div className="make-words" aria-live="polite">
@@ -237,13 +242,10 @@ export function WordPicker({ draw, kind, language, counter, secondsPerWord }: {
           <span aria-hidden="true">{chip.emoji || "📄"}</span>{chip.headword}<span className="make-chip-x"><CloseIcon /></span>
         </button>)}
       {hidden > 0 && <button type="button" className="make-chip more" onClick={() => setOpen(true)}>+{hidden}</button>}
-    </div>
-    {!fromSelection && draw.pool > 0 && <div className="word-foot">
-      <p className="word-note">{poolNote(draw, kind, draw.choice)}</p>
-      {draw.pool > draw.count && <button type="button" className="word-redraw" onClick={draw.redraw}>
-        <SyncIcon />Draw again
+      {!fromSelection && draw.pool > draw.count && <button type="button" className="make-chip other" onClick={draw.redraw}>
+        <SyncIcon />Other words
       </button>}
-    </div>}
+    </div>
     {!fromSelection && draw.pool === 0 && <p className="word-note warn">No word here can be in a {kind} yet.</p>}
     {reasons.length > 0 && <p className="word-note">
       {reasons.map((reason) => <span key={reason}>

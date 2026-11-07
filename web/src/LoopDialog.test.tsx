@@ -19,18 +19,18 @@ import { resetRarityForTests } from "./WordPicker";
 const SCHEMA: LoopSchema = {
   apiVersion: "2.0.0", engineVersion: "0.7.0", maxItems: 24,
   formats: [
-    { id: "classic", label: "Classic drill", description: "Word, gap, answer.", switches: {}, requires: [], fallback: null },
-    { id: "echo", label: "Say it back", description: "Hear it, say it, hear it again.", switches: {}, requires: [], fallback: null },
+    { id: "classic", label: "Classic drill", description: "Word, gap, answer.", switches: {}, requires: [], fallback: null, barsPerItem: 8 },
+    { id: "echo", label: "Say it back", description: "Hear it, say it, hear it again.", switches: {}, requires: [], fallback: null, barsPerItem: 8 },
     { id: "radio-lesson", label: "Radio lesson", description: "Examples and remarks between the words.",
       switches: {
         repetitions: { label: "Times each word is said", default: "3", choices: ["2", "3", "4"] },
         remarks: { label: "Remarks about words", default: true }
       },
-      requires: ["writer", "multilingual_voice"], fallback: "classic" },
+      requires: ["writer", "multilingual_voice"], fallback: "classic", barsPerItem: 8 },
     { id: "story", label: "Story", description: "A short story told between the words.", switches: {},
-      requires: ["writer"], fallback: null },
+      requires: ["writer"], fallback: null, barsPerItem: 8 },
     { id: "chant", label: "Chant", description: "Something the generator added later.", switches: {},
-      requires: [], fallback: null }
+      requires: [], fallback: null, barsPerItem: 8 }
   ],
   writerAvailable: true, mixesLanguages: true,
   productionBundle: true,
@@ -92,12 +92,12 @@ describe("the words", () => {
       .toEqual(sent.map((id: string) => testOrWider(id)));
   });
 
-  it("draws again past every word showing, from a button that says so", async () => {
+  it("offers other words past every word showing, from a button that says so", async () => {
     open(wider(14));
     await screen.findByRole("radio", { name: "Drill" });
     const showing = () => screen.getAllByRole("button", { name: /^Remove / }).map((chip) => chip.getAttribute("aria-label"));
     const before = showing();
-    fireEvent.click(screen.getByRole("button", { name: "Draw again" }));
+    fireEvent.click(screen.getByRole("button", { name: "Other words" }));
     const after = showing();
     expect(after).toHaveLength(12);
     // Sixteen words and twelve showing: the four not shown come first, then the least passed over.
@@ -210,25 +210,44 @@ describe("choosing the kind of loop", () => {
 });
 
 describe("choosing the music", () => {
-  it("offers Surprise me once, chosen, and every style as a tile that says what it is", async () => {
+  it("offers Surprise me once, chosen, and every style as a picture that says what it is", async () => {
     open();
-    const music = await screen.findByRole("radiogroup", { name: "Music" });
+    const music = await screen.findByRole("radiogroup", { name: "Music style" });
     await within(music).findByRole("radio", { name: "Meditative" });
     expect(within(music).getAllByRole("radio", { name: /surprise me/i })).toHaveLength(1);
     expect(within(music).getByRole("radio", { name: /surprise me/i })).toHaveAttribute("aria-checked", "true");
-    expect(within(music).getByRole("radio", { name: "Meditative" })).toHaveAttribute("title", "Slow and spacious.");
+    expect(within(music).getByRole("radio", { name: "Meditative" })).toHaveAttribute("aria-description", "Slow and spacious.");
+    // The chosen one is named and described under the row.
+    expect(document.querySelector(".carousel-caption")).toHaveTextContent("Surprise meNew music, in any style");
   });
 
-  it("offers a kept bed in a row of its own, says where it came from, and asks for it by its family and its seed", async () => {
+  it("steps through the styles with the arrows and the keyboard", async () => {
+    open();
+    const music = await screen.findByRole("radiogroup", { name: "Music style" });
+    await within(music).findByRole("radio", { name: "Meditative" });
+    expect(screen.queryByRole("button", { name: "Previous: Music style" })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Next: Music style" }));
+    expect(within(music).getByRole("radio", { name: "Sunlit acoustic" })).toHaveAttribute("aria-checked", "true");
+    fireEvent.keyDown(music, { key: "ArrowRight" });
+    expect(within(music).getByRole("radio", { name: "Meditative" })).toHaveAttribute("aria-checked", "true");
+    expect(screen.queryByRole("button", { name: "Next: Music style" })).toBeNull();
+    fireEvent.keyDown(music, { key: "Home" });
+    expect(within(music).getByRole("radio", { name: /surprise me/i })).toHaveAttribute("aria-checked", "true");
+  });
+
+  it("offers a kept bed as saved music, says where it came from, and asks for it by its family and its seed", async () => {
     const make = made();
     open();
-    const favourites = await screen.findByRole("radiogroup", { name: "Favourite music" });
+    const favourites = await screen.findByRole("radiogroup", { name: "Saved music" });
     const [kept] = within(favourites).getAllByRole("radio");
     expect(kept).toHaveTextContent("Sunlit acoustic");
     expect(kept).toHaveTextContent(/^Sunlit acoustickept /);
-    expect(within(screen.getByRole("radiogroup", { name: "Music" })).queryByRole("radio", { name: /^Sunlit acoustic,/ })).toBeNull();
+    expect(within(screen.getByRole("radiogroup", { name: "Music style" })).queryByRole("radio", { name: /^Sunlit acoustic,/ })).toBeNull();
     fireEvent.click(kept);
     expect(kept).toHaveAttribute("aria-checked", "true");
+    // No style is chosen while saved music is, and the row says so.
+    expect(within(screen.getByRole("radiogroup", { name: "Music style" })).queryByRole("radio", { checked: true })).toBeNull();
+    expect(document.querySelector(".carousel-caption")).toHaveTextContent("Saved music chosen above");
     fireEvent.click(await go());
     await waitFor(() => expect(make).toHaveBeenCalled());
     expect(make.mock.calls[0][0]).toMatchObject({ family: "sunlit-acoustic", seed: 104740 });
@@ -237,21 +256,21 @@ describe("choosing the music", () => {
   it("opens on the music last asked for on this device", async () => {
     made();
     open();
-    const music = await screen.findByRole("radiogroup", { name: "Music" });
+    const music = await screen.findByRole("radiogroup", { name: "Music style" });
     fireEvent.click(await within(music).findByRole("radio", { name: "Meditative" }));
     fireEvent.click(await go());
     await waitFor(() => expect(localStorage.getItem("acervo-loop-music")).toBe("style:meditative"));
     cleanup();
     open();
-    const again = await screen.findByRole("radiogroup", { name: "Music" });
+    const again = await screen.findByRole("radiogroup", { name: "Music style" });
     expect(await within(again).findByRole("radio", { name: "Meditative" })).toHaveAttribute("aria-checked", "true");
   });
 
   it("shows every style in a grid, and choosing one returns with it chosen", async () => {
     const make = made();
     open();
-    fireEvent.click(await screen.findByRole("button", { name: "All: Music" }));
-    const grid = screen.getByRole("radiogroup", { name: "Music" });
+    fireEvent.click(await screen.findByRole("button", { name: "All 3: Music style" }));
+    const grid = screen.getByRole("radiogroup", { name: "Music style" });
     expect(within(grid).getByText("Slow and spacious.")).toBeInTheDocument();
     fireEvent.click(within(grid).getByRole("radio", { name: /Meditative/ }));
     expect(screen.getByRole("heading", { name: "Make a loop" })).toBeInTheDocument();

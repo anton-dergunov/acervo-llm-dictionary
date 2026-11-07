@@ -8,7 +8,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { backendSession, type Job, type StoryTypes } from "./api";
 import type { Story } from "./domain";
-import StoryDialog from "./StoryDialog";
+import StoryDialog, { resetStoryTypesForTests } from "./StoryDialog";
 import { selectedWords } from "./selectors";
 import { testGraph } from "./testGraph";
 
@@ -33,6 +33,7 @@ function open() {
 let made: ReturnType<typeof vi.spyOn>;
 
 beforeEach(() => {
+  resetStoryTypesForTests();
   vi.spyOn(backendSession, "storyTypes").mockResolvedValue(TYPES);
   made = vi.spyOn(backendSession, "makeStory").mockResolvedValue(
     { story: { id: "storynew0000001" } as Story, job: {} as Job });
@@ -118,15 +119,15 @@ describe("the kind and the pictures", () => {
   it("puts the styles a kind suggests first, in its order", async () => {
     open();
     fireEvent.click(await screen.findByRole("radio", { name: "Mystery" }));
-    const styles = within(screen.getByRole("radiogroup", { name: "Pictures" })).getAllByRole("radio")
-      .map((one) => one.querySelector(".choice-name")?.textContent);
+    const styles = within(screen.getByRole("radiogroup", { name: "Picture style" })).getAllByRole("radio")
+      .map((one) => one.getAttribute("aria-label"));
     expect(styles).toEqual(["To suit the story", "Film noir", "Watercolour", "Comic book"]);
   });
 
   it("shows every style in a grid, and choosing one returns with it chosen", async () => {
     open();
-    fireEvent.click(await screen.findByRole("button", { name: "All: Pictures" }));
-    expect(screen.getByRole("heading", { name: "Pictures" })).toBeInTheDocument();
+    fireEvent.click(await screen.findByRole("button", { name: /^All \d+: Picture style$/ }));
+    expect(screen.getByRole("heading", { name: "Picture style" })).toBeInTheDocument();
     fireEvent.click(screen.getByRole("radio", { name: "Film noir" }));
     expect(screen.getByRole("heading", { name: "Make a story" })).toBeInTheDocument();
     const make = screen.getByRole("button", { name: /^Make the story/ });

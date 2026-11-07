@@ -70,9 +70,16 @@ export default function MakeDialog({ title, back, footer, onClose, children }: {
 }
 
 /** One part of a make dialog: a small label over its controls. */
-export function MakeSection({ label, children, aside }: { label: string; children: ReactNode; aside?: ReactNode }) {
+export function MakeSection({ label, note, children, aside }: {
+  label: string;
+  /** A few quiet words beside the label. */
+  note?: string;
+  children: ReactNode;
+  /** A control at the label row's end: the link to a whole catalogue. */
+  aside?: ReactNode;
+}) {
   return <section className="make-section" aria-label={label}>
-    <div className="make-label"><span>{label}</span>{aside}</div>
+    <div className="make-label"><span>{label}{note && <span className="make-note"> · {note}</span>}</span>{aside}</div>
     {children}
   </section>;
 }

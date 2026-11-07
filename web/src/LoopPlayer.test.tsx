@@ -21,9 +21,9 @@ import { aimAt, forgetTaps, TAP } from "./testTap";
 const SCHEMA: LoopSchema = {
   apiVersion: "2.0.0", engineVersion: "0.7.0", maxItems: 24,
   formats: [
-    { id: "classic", label: "Classic drill", description: "Word, gap, answer.", switches: {}, requires: [], fallback: null },
+    { id: "classic", label: "Classic drill", description: "Word, gap, answer.", switches: {}, requires: [], fallback: null, barsPerItem: 8 },
     { id: "radio-lesson", label: "Radio lesson", description: "Examples and remarks.", switches: {},
-      requires: ["writer", "multilingual_voice"], fallback: "classic" }
+      requires: ["writer", "multilingual_voice"], fallback: "classic", barsPerItem: 8 }
   ],
   writerAvailable: true, mixesLanguages: true,
   productionBundle: true,

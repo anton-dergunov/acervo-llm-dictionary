@@ -104,6 +104,8 @@ def test_the_generators_catalogues_are_read_rather_than_copied(server, generator
     assert {"classic", "radio-lesson", "story"} <= set(formats)
     assert formats["radio-lesson"]["requires"] == ["writer", "multilingual_voice"]
     assert (formats["radio-lesson"]["fallback"], formats["story"]["fallback"]) == ("classic", None)
+    # How long a word takes in each, which the dialog's estimate scales by.
+    assert (formats["classic"]["barsPerItem"], formats["echo"]["barsPerItem"]) == (8, 5)
     assert formats["radio-lesson"]["switches"]["repetitions"] == {
         "label": "Times each word is said", "default": "3", "choices": ["2", "3", "4"]}
     # And what only Acervo knows: whether a writing model is set up, and whether the loop voice —
