@@ -16,22 +16,42 @@ candidates, and the guide puts the Gemini API first only because it is the cheap
 
 Which one *sounds* better has not been heard. The order should follow the ear.
 
-## What is already known (measured on 6 Nov 2026)
+## What is already known
 
-- ElevenLabs bills the direction tag character for character. Acervo's direction sentences, written
-  for Gemini, are 136–194 characters, so the adapter sends ElevenLabs the feeling alone as a short
-  tag, and nothing for an accent alone (`pronunciation/speak.Direction`).
-- An accent tag on ElevenLabs changed no accent a transcriber could hear, and made a short text be
-  said twice ("picar, picar"). A feeling tag was heard ("surprised").
-- A month of ElevenLabs credits buys about 100 sentences with a feeling, or 20 story passages.
-- The Gemini API guesses the language from the words, and a single word is guessed wrong without
-  "Say this in Spanish." at the head of the direction, which the adapter always sends.
+**Round 0: the owner's first listening, 7 Nov 2026.** Eight takes from Eleven v4 (one from v3) in
+the same voice (Sarah). The words were "picar", "la calle amarilla", and "¿En serio? No me digas
+que ya terminaste todo el trabajo."
+
+| Take | What was sent | Heard |
+|---|---|---|
+| 1 | "picar", no direction | Good, even, no emotion |
+| 2 | "picar" under Gemini's accent sentence (136 characters) | The instructions are heard; neutral |
+| 3 | The sentence under Gemini's feeling sentence (194 characters) | The instructions are heard, and the reading takes their feeling |
+| 4 | The sentence under `[surprised, amused, Argentine accent]` | No instruction heard, with the feeling |
+| 5 | As 4, on Eleven v3 | No instruction, with the feeling; more serious and louder |
+| 6 | "picar" under `[accent from Argentina]` | Said twice, no emotion |
+| 7 | The sentence under `[surprised and amused; accent from Argentina]` | As 4, and liked best |
+| 8 | "la calle amarilla" under `[accent from Argentina]` | The Argentine "ll", no emotion |
+
+What follows, and is built:
+- A long direction is read aloud, so ElevenLabs is sent a short tag: the feeling, and the accent
+  where one was chosen, in take 7's form (`pronunciation/speak.Direction`).
+- The accent tag works, as take 8 shows, but on a single word it doubled it (take 6). So an accent
+  with no feeling sends nothing for now.
+- A transcriber listening back (Gemini Flash-Lite) heard neither the spoken instructions nor the
+  accent. Whether a voice reads instructions or carries an accent is judged by ear.
+
+**Also measured on 6 Nov 2026:**
+- ElevenLabs bills the tag character for character. A month of credits buys about 100 sentences with
+  a feeling, or 20 story passages.
+- The Gemini API guesses the language from the words, and gets a single word wrong without "Say
+  this in Spanish." at the head of the direction. The adapter always sends it.
 
 ## The experiment
 
 1. **A fixed set**, recorded once through each candidate: 10 words, 15 example sentences with an
-   emotion each, 5 sentences with an accent alone (es-ES and es-AR), and 4 story passages with their
-   directions. It is drawn from the owner's own vocabulary.
+   emotion each, 5 sentences and 5 single words with an accent alone (es-ES and es-AR), and 4 story
+   passages with their directions. It is drawn from the owner's own vocabulary.
 2. **Through each of four pairs**: Gemini 3.8 Flash TTS and 3.8 Flash-Lite TTS, Eleven v4 and v3,
    each with the voice Acervo would choose for the accent.
 3. **Within the free allowances.** ElevenLabs: under 4,000 characters per model, so both fit in one
@@ -47,5 +67,6 @@ Which one *sounds* better has not been heard. The order should follow the ear.
 
 - The order of the expressive voice in the guide's zero-cost set, and whether ElevenLabs is worth an
   account at all.
-- Whether ElevenLabs should be sent an accent in any form, given that the tag did nothing.
+- Whether ElevenLabs may be sent an accent alone on a sentence, where take 8 carried it, while a
+  single word stays untagged, where take 6 doubled it.
 - Whether Flash-Lite TTS is good enough to take the free allowance's load ahead of Flash.

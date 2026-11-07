@@ -81,12 +81,12 @@ class Direction(str):
     """A direction: the sentence a voice that reads instructions is sent, carrying the short form a
     voice that reads a tag in the words is sent instead (`tag`, or None for nothing).
 
-    Two forms because the two kinds of voice differ in what a direction costs and what it can do.
-    Measured on ElevenLabs v4, 6 Nov 2026: the tag is billed character for character, so the
-    136-194 character sentence written for Gemini cost 20-30 times a word; the emotion alone as a
-    tag ("surprised and amused") was heard as clearly as the sentence; and an accent tag changed no
-    accent a transcriber could hear and made a short text be said twice ("picar, picar"). So the
-    tag is the note and nothing else, and an accent alone sends none.
+    Two forms because the two kinds of voice differ in what a direction costs and what it does.
+    Heard by the owner on ElevenLabs v4, 7 Nov 2026: the sentence written for Gemini (136-194
+    characters, each billed) was partly read aloud; a short tag, "surprised and amused; accent from
+    Argentina", was not, and carried both the feeling and the accent ("ll" said the Argentine way);
+    and an accent tag on a single word made it be said twice ("picar, picar"). So the tag is the
+    note, with the accent where one was chosen, and an accent alone sends none.
 
     A `str` so that everything that reads, logs or keys on the sentence goes on doing so.
     """
@@ -118,7 +118,10 @@ def direction(template: str, note: str, language: str) -> Direction:
     filled = filled.replace("{speaker}", speaker(language))
     region = locales.region_name(locales.parse(language).region)
     filled = filled.replace("{accent}", f"Speak with the accent of {speaker(language)}. " if region else "")
-    return Direction(filled.replace("{emotion}", note).replace("{direction}", note), note.strip() or None)
+    tag = note.strip() or None
+    if tag and region:
+        tag = f"{tag}; accent from {region}"
+    return Direction(filled.replace("{emotion}", note).replace("{direction}", note), tag)
 
 
 def asked_of(row, model: str, language: str, style: str | None,
