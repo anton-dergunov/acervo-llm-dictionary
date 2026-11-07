@@ -100,12 +100,15 @@ direction ("Say this in Spanish."), whatever else the direction says. The free t
 speech requests a minute per model, and its 429 says when to come back.
 
 ElevenLabs v3 and v4 take a direction as one free-text tag at the head of the words. A short tag is
-not read out, and a long one partly is: the owner heard Gemini's direction sentence spoken, and
-`[surprised and amused; accent from Argentina] ¿En serio?…` with the feeling and the Argentine "ll"
-and no instruction (7 Nov 2026). So ElevenLabs is sent the short form of a direction, the feeling and
-the accent, and nothing for an accent alone, which made a single word be said twice
-(`pronunciation/speak.Direction`). A transcriber listening back caught neither the spoken
-instructions nor the accent, so the ear decides these, not a model. A month's free credits spent is a 402 `insufficient_credits`, which the bare status
+not read out, and a long one is: the owner heard Gemini's direction sentence spoken before the
+words (7 Nov 2026). `[surprised and amused; accent from Argentina] ¿En serio?…` came with the feeling
+and no instruction, and `[accent from Argentina] la calle amarilla` in a very good Argentine accent.
+So ElevenLabs is sent the short form of a direction, the feeling and the accent, and nothing for an
+accent alone, which made a short text be said twice (`pronunciation/speak.Direction`). A transcriber
+listening back caught neither the spoken instructions nor the accent, so the ear decides these, not
+a model.
+
+A month's free credits spent is a 402 `insufficient_credits`, which the bare status
 table would call a refusal; the adapter says it as an allowance spent, so the expressive order passes
 to the next voice. The free plan allows `wav_24000` as its best master (6 Nov 2026).
 

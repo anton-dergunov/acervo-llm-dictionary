@@ -83,10 +83,11 @@ class Direction(str):
 
     Two forms because the two kinds of voice differ in what a direction costs and what it does.
     Heard by the owner on ElevenLabs v4, 7 Nov 2026: the sentence written for Gemini (136-194
-    characters, each billed) was partly read aloud; a short tag, "surprised and amused; accent from
-    Argentina", was not, and carried both the feeling and the accent ("ll" said the Argentine way);
-    and an accent tag on a single word made it be said twice ("picar, picar"). So the tag is the
-    note, with the accent where one was chosen, and an accent alone sends none.
+    characters, each billed) was read aloud; a short tag, "surprised and amused; accent from
+    Argentina", was not, and carried the feeling, and "accent from Argentina" the accent;
+    and an accent tag alone made a short text be said twice ("picar, picar"; "la calle amarilla",
+    in a very good Argentine accent, twice). So the tag is the note, with the accent where one was
+    chosen, and an accent alone sends none.
 
     A `str` so that everything that reads, logs or keys on the sentence goes on doing so.
     """

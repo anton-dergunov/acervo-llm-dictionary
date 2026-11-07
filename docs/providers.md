@@ -200,8 +200,8 @@ for a billing account even within their free allowance, but at 4 million WaveNet
 **Free allowance:** 10,000 credits a month, for non-commercial use, with attribution. One credit is
 one character, and that includes the direction. Acervo therefore sends ElevenLabs a short tag,
 the feeling and the accent ("surprised and amused; accent from Argentina"), not the full direction
-sentence it sends Gemini, which ElevenLabs partly reads aloud. It sends nothing for an accent alone,
-which made a single word be said twice. A month buys about:
+sentence it sends Gemini, which ElevenLabs reads aloud. It sends nothing for an accent alone,
+which made a short word or phrase be said twice. A month buys about:
 
 | Recording | Credits | A month |
 |---|---|---|

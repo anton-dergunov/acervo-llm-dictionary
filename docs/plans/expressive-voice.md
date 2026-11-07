@@ -25,19 +25,19 @@ que ya terminaste todo el trabajo."
 | Take | What was sent | Heard |
 |---|---|---|
 | 1 | "picar", no direction | Good, even, no emotion |
-| 2 | "picar" under Gemini's accent sentence (136 characters) | The instructions are heard; neutral |
-| 3 | The sentence under Gemini's feeling sentence (194 characters) | The instructions are heard, and the reading takes their feeling |
+| 2 | "picar" under Gemini's accent sentence (136 characters) | The word, then the instruction read aloud, then the word again; neutral |
+| 3 | The sentence under Gemini's feeling sentence (194 characters) | The instruction read aloud, then the sentence, with the instruction's feeling |
 | 4 | The sentence under `[surprised, amused, Argentine accent]` | No instruction heard, with the feeling |
 | 5 | As 4, on Eleven v3 | No instruction, with the feeling; more serious and louder |
 | 6 | "picar" under `[accent from Argentina]` | Said twice, no emotion |
 | 7 | The sentence under `[surprised and amused; accent from Argentina]` | As 4, and liked best |
-| 8 | "la calle amarilla" under `[accent from Argentina]` | The Argentine "ll", no emotion |
+| 8 | "la calle amarilla" under `[accent from Argentina]` | A very good Argentine accent ("ll"), but said twice, in two intonations; no emotion |
 
 What follows, and is built:
 - A long direction is read aloud, so ElevenLabs is sent a short tag: the feeling, and the accent
   where one was chosen, in take 7's form (`pronunciation/speak.Direction`).
-- The accent tag works, as take 8 shows, but on a single word it doubled it (take 6). So an accent
-  with no feeling sends nothing for now.
+- The accent tag works, as take 8 shows, but alone on a short text it doubled it, a word (take 6)
+  and a three-word phrase (take 8) alike. So an accent with no feeling sends nothing for now.
 - A transcriber listening back (Gemini Flash-Lite) heard neither the spoken instructions nor the
   accent. Whether a voice reads instructions or carries an accent is judged by ear.
 
@@ -50,7 +50,7 @@ What follows, and is built:
 ## The experiment
 
 1. **A fixed set**, recorded once through each candidate: 10 words, 15 example sentences with an
-   emotion each, 5 sentences and 5 single words with an accent alone (es-ES and es-AR), and 4 story
+   emotion each, an accent alone on 5 sentences and 5 short phrases (es-ES and es-AR), and 4 story
    passages with their directions. It is drawn from the owner's own vocabulary.
 2. **Through each of four pairs**: Gemini 3.8 Flash TTS and 3.8 Flash-Lite TTS, Eleven v4 and v3,
    each with the voice Acervo would choose for the accent.
@@ -67,6 +67,6 @@ What follows, and is built:
 
 - The order of the expressive voice in the guide's zero-cost set, and whether ElevenLabs is worth an
   account at all.
-- Whether ElevenLabs may be sent an accent alone on a sentence, where take 8 carried it, while a
-  single word stays untagged, where take 6 doubled it.
+- Whether an accent alone is safe on a whole sentence, or how long a text has to be before it stops
+  being said twice (takes 6 and 8 were one and three words).
 - Whether Flash-Lite TTS is good enough to take the free allowance's load ahead of Flash.
