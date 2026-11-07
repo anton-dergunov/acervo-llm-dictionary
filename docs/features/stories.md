@@ -1,7 +1,7 @@
 # Stories · a handful of words told back as an illustrated tale
 
-A story takes one to eight of the owner's words — three by default, from the words on screen or the
-ones marked by hand — and returns four to six parts, each a paragraph, its translation and a picture,
+A story takes one to eight of the owner's words — three by default, from the words on screen (never one set
+aside) or the ones marked by hand — and returns four to six parts, each a paragraph, its translation and a picture,
 read aloud in one voice. It is read as a deck. The package is `src/acervo/stories/`, which stands
 alone on `acervo.models` like `images/`; `services/stories.py` is the binding layer; the job is
 `work/story.py`. Whether the pipeline holds its shape was settled in

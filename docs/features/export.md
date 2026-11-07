@@ -74,8 +74,9 @@ diffing, validation and atomicity every other save gets.
   after the export.
 - **Every id is re-minted**, so a bundle depends on no account and can be handed to someone else.
 - **A word waiting in the Inbox is filed on the way in.** A bundle is chosen from a picker and applied
-  on a button press, so nothing in it arrived unattended; `learned`, `retired` and `suppressed` are
-  curation the owner did and are kept as they are.
+  on a button press, so nothing in it arrived unattended; `aside` is curation the owner did and is
+  kept as it is. A bundle from before version 22 says `learned`, `retired` or `suppressed`, three
+  ways of putting a word out of the way, and each is read as `aside`.
 - **A picture from a bundle is already a master**, so the server stores it byte for byte rather than
   encoding it again ([`../architecture/performance.md`](../architecture/performance.md)).
 

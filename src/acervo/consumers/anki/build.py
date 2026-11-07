@@ -35,11 +35,13 @@ from typing import Any, Iterable
 
 from acervo.article import ArticleView, build_articles, live
 
+from .manifest import SCHEMA_VERSION
 from .naming import slugify_filename
 from .progress import Progress
 
-# A word put away, or not yet taken in, has no cards.
-CARD_STATUSES = ("active", "learned")
+# A word set aside, or not yet taken in, has no cards; one set aside is named in the manifest so the
+# cards it already has are suspended.
+CARD_STATUSES = ("active",)
 DEFAULT_DECK = "{language}::Vocabulary"
 LANGUAGE_NAMES = {
     "es": "Spanish", "en": "English", "ru": "Russian", "zh": "Chinese", "pt": "Portuguese",
@@ -74,9 +76,11 @@ class BuiltManifest:
     notes: list[dict[str, Any]] = field(default_factory=list)
     media: dict[str, Path] = field(default_factory=dict)
     missing: list[str] = field(default_factory=list)
+    # The words set aside, whose cards the robot suspends.
+    aside: list[str] = field(default_factory=list)
 
     def manifest(self) -> dict[str, Any]:
-        return {"schema_version": 2, "notes": self.notes}
+        return {"schema_version": SCHEMA_VERSION, "notes": self.notes, "aside": self.aside}
 
 
 def _escape(value: Any) -> str:
@@ -208,6 +212,10 @@ def build(
         if article.lexeme.get("status") in wanted and (chosen is None or article.language in chosen)
     ]
     articles.sort(key=lambda article: (article.lexeme.get("createdAt") or "", article.id))
+    built.aside = sorted(
+        lexeme["id"] for lexeme in live(changes.get("lexemes", []))
+        if lexeme.get("status") == "aside" and (chosen is None or lexeme.get("language") in chosen)
+    )
     rounds = [_notes_of(article, graph, media, deck) for article in articles]
     for index in range(max((len(notes) for notes in rounds), default=0)):
         built.notes.extend(notes[index] for notes in rounds if index < len(notes))

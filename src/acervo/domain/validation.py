@@ -20,7 +20,7 @@ from acervo.errors import RecordRefused
 POS_VALUES = ("noun", "verb", "adj", "adv", "phrase", "idiom", "expression")
 GENDER_VALUES = ("masculine", "feminine", "common", "neuter")
 REGISTER_VALUES = ("neutral", "formal", "colloquial", "slang", "vulgar")
-STATUS_VALUES = ("inbox", "active", "learned", "retired", "suppressed")
+STATUS_VALUES = ("inbox", "active", "aside")
 # `sign` is text met out in the world rather than read — a street sign, a menu, a label — which a
 # photo is the usual way to keep.
 SOURCE_KIND_VALUES = ("web", "book", "conversation", "video", "lesson", "sign", "unknown")

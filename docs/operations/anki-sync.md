@@ -259,11 +259,11 @@ rebuilds the vocabulary database and leaves Anki alone.
 
 ## Manifest contract
 
-The accepted version-two shape is:
+The accepted version-three shape is:
 
 ```json
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "notes": [{
     "kind": "meaning",
     "note_id": "example00000001",
@@ -279,7 +279,8 @@ The accepted version-two shape is:
     },
     "media": {"Picture": "media/balsa.webp", "HeadwordAudio": "media/balsa.mp3"},
     "tags": ["acervo::topic::travel"]
-  }]
+  }],
+  "aside": ["lexeme000000002"]
 }
 ```
 
@@ -291,11 +292,20 @@ fills none of its gates — `Recognise` or `Produce` for a meaning, a `HeadwordA
 would make no card and is refused. The fields each note type has are in
 `src/acervo/consumers/anki/model.py`.
 
+`aside` names the words set aside. Such a word has no notes in the manifest, and naming one that
+does is refused, as is naming one twice. The robot suspends the cards of their notes that are not
+already suspended and marks each note with `acervo::aside` and a tag per card it suspended
+(`acervo::aside::recognise`, `::produce`, `::listen`); a marked note is left alone on later pushes.
+When a marked note is in the manifest again, the cards its tags name are unsuspended and the rewrite
+drops the tags. A failure says which half refused — `Anki would not suspend the cards of 2 words set
+aside: …` — and fails the push, so `admin log --failed` shows it.
+
 Media paths must be relative to the manifest and cannot escape its directory.
 Media are imported under content-addressed names. Duplicate manifest identities
 or duplicate collection `AcervoNoteId` values fail before any mutation. Notes
-absent from a manifest remain untouched. Notes are added in manifest order,
-which is the order Anki introduces their new cards in.
+absent from a manifest, other than those of a word set aside, remain untouched.
+Notes are added in manifest order, which is the order Anki introduces their new
+cards in.
 
 ## Cards from the vocabulary
 
@@ -310,9 +320,9 @@ not minutes. The first collection is made by hand, on an empty Anki, and switche
 ./deploy.sh --worker anki-push-vocabulary        # the same push the server runs, now
 ```
 
-Every word that is `active` or `learned` becomes notes, in one deck per language
-(`Spanish::Vocabulary`) with its topics as `acervo::topic::…` tags; a word still in the inbox, or put
-away, has none. Pictures go at 768 px rather than the 1024 master. Notes are listed in rounds — every
+Every word that is `active` becomes notes, in one deck per language
+(`Spanish::Vocabulary`) with its topics as `acervo::topic::…` tags; a word still in the inbox has
+none, and one set aside has none and is named so its cards are suspended. Pictures go at 768 px rather than the 1024 master. Notes are listed in rounds — every
 word's first note, then every word's second — so a first push of many words does not bring one
 word's cards all on the same morning.
 

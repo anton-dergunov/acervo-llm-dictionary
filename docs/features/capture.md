@@ -93,7 +93,7 @@ The same word arrives again and again — that is what reading a lot looks like 
 encounter is often *better*: a sharper sentence, a sense not met before. So a capture of a held word
 stops at the duplicate and offers to **fold it in**: it opens the stored article and asks the article
 conversation to add the new sentence, with no extra model call, since resolve has already separated
-the learner's own sentences from anything else. `suppressed` is what keeps a *rejected* word from
+the learner's own sentences from anything else. `aside` is what keeps a *rejected* word from
 arriving forever, and this is what keeps an *accepted* one from arriving twice.
 
 ## The Inbox
@@ -102,7 +102,7 @@ arriving forever, and this is what keeps an *accepted* one from arriving twice.
 captured → processing → review → active         (you added it: you read it before saving)
 captured → processing → inbox  → active         (it arrived unattended: a file, a headless transport)
                           │
-                          └── suppressed
+                          └── aside
 ```
 
 **Processing is immediate even when approval is deferred**: the senses, glosses and examples are fully

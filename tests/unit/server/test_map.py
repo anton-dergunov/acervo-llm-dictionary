@@ -127,10 +127,10 @@ def test_a_deleted_sense_leaves_the_map(server, encoder):
     assert senses[1]["id"] not in {p["sense"] for p in body["points"]} and body["senses"] == 3
 
 
-def test_a_suppressed_word_is_not_on_the_map(server, encoder):
+def test_a_word_set_aside_is_not_on_the_map(server, encoder):
     words(server, 3)
-    unwanted = lexeme(headword="no", lemma="no", status="suppressed")
-    server.push({"lexemes": [unwanted], "senses": [sense(unwanted["id"])]})
+    unwanted = lexeme(headword="no", lemma="no", status="aside")
+    assert server.push({"lexemes": [unwanted], "senses": [sense(unwanted["id"])]}).status_code == 200
     body = server.get("/map/es").json()["data"]
     assert unwanted["id"] not in {p["lexeme"] for p in body["points"]}
 

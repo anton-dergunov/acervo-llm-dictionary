@@ -162,8 +162,9 @@ says what its free allowance means in words and pictures.
 **Free allowance:**
 - **Text:** about 500 requests a day for each Flash-Lite model, so about 1,000 between the two. One
   entry takes two.
-- **Voices:** three requests a minute for each speech model, and a small daily cap. Your own numbers
-  are on AI Studio's [rate limit page](https://aistudio.google.com/rate-limit).
+- **Voices:** three requests a minute for each speech model, and 10 a day (Google's own refusal on
+  3.8 Flash-Lite TTS, 7 Nov 2026). That is a few words a day, not a vocabulary. Your own numbers are
+  on AI Studio's [rate limit page](https://aistudio.google.com/rate-limit).
 - **When it runs out:** Acervo waits as long as Google says and moves to the next provider in the
   order meanwhile.
 

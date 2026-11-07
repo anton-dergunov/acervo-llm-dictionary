@@ -25,8 +25,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Iterable
 
-# An entry the learner has put away is not worth spending a model call on.
-GENERATED_STATUSES = ("inbox", "active", "learned")
+# A word the learner has set aside is not worth spending a model call on.
+GENERATED_STATUSES = ("inbox", "active")
 
 
 def live(records: Iterable[dict]) -> list[dict]:
@@ -127,8 +127,20 @@ def build_articles(changes: dict[str, list[dict]], language: str | None = None) 
 def article_for(changes: dict[str, list[dict]], lexeme_id: str) -> ArticleView | None:
     """The one word a request names, or nothing.
 
-    Nothing covers three cases on purpose — no such word, somebody else's word, and a word put away
+    Nothing covers three cases on purpose — no such word, somebody else's word, and a word set aside
     — because a caller that told them apart would be answering whether an id exists in another
     account.
     """
     return next((view for view in build_articles(changes) if view.id == lexeme_id), None)
+
+
+def set_aside(changes: dict[str, list[dict]], lexeme_id: str) -> bool:
+    """Whether these records — one owner's — hold this word live and set aside.
+
+    Safe to say out loud where `article_for` is not: the records are the owner's own, so the answer
+    is about their word, never about whether an id exists in another account.
+    """
+    return any(
+        lexeme.get("id") == lexeme_id and lexeme.get("status") == "aside"
+        for lexeme in live(changes.get("lexemes", []))
+    )

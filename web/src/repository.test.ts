@@ -405,7 +405,7 @@ describe("loops", () => {
 });
 
 describe("taking words out of the Inbox", () => {
-  const seeded = async (statuses: ("inbox" | "active" | "learned")[]) => {
+  const seeded = async (statuses: ("inbox" | "active" | "aside")[]) => {
     const repository = new LocalAcervoRepository(new MemoryDatabase());
     await repository.load("owner0000000001");
     const remote = fakeRemote();
@@ -430,10 +430,10 @@ describe("taking words out of the Inbox", () => {
   });
 
   it("leaves a word that is not in the Inbox exactly as it is", async () => {
-    const { repository, remote, ids } = await seeded(["inbox", "learned", "active"]);
+    const { repository, remote, ids } = await seeded(["inbox", "aside", "active"]);
     expect(await repository.fileWords(ids)).toBe(1);
     expect(remote.sent[0].lexemes).toHaveLength(1);
-    expect(repository.snapshot().lexemes.map((lexeme) => lexeme.status)).toEqual(["active", "learned", "active"]);
+    expect(repository.snapshot().lexemes.map((lexeme) => lexeme.status)).toEqual(["active", "aside", "active"]);
 
     // Filing twice costs one empty call and never a revision.
     expect(await repository.fileWords(ids)).toBe(0);
@@ -445,5 +445,21 @@ describe("taking words out of the Inbox", () => {
     remote.fail = new Error("Acervo is not connected to the server, so this change was not saved.");
     await expect(repository.fileWords(ids)).rejects.toThrow(/was not saved/);
     expect(repository.snapshot().lexemes.map((lexeme) => lexeme.status)).toEqual(["inbox", "inbox"]);
+  });
+
+  it("sets words aside in one round trip, skipping those already aside, and brings them back as active", async () => {
+    const { repository, remote, ids } = await seeded(["inbox", "active", "aside"]);
+    expect(await repository.setAside(ids, true)).toBe(2);
+    expect(remote.calls).toBe(1);
+    expect(repository.snapshot().lexemes.map((lexeme) => lexeme.status)).toEqual(["aside", "aside", "aside"]);
+    expect(await repository.setAside(ids.slice(0, 1), false)).toBe(1);
+    expect(repository.snapshot().lexemes.map((lexeme) => lexeme.status)).toEqual(["active", "aside", "aside"]);
+  });
+
+  it("sets nothing aside locally when the server refuses", async () => {
+    const { repository, remote, ids } = await seeded(["active"]);
+    remote.fail = new Error("Acervo is not connected to the server, so this change was not saved.");
+    await expect(repository.setAside(ids, true)).rejects.toThrow(/was not saved/);
+    expect(repository.snapshot().lexemes.map((lexeme) => lexeme.status)).toEqual(["active"]);
   });
 });

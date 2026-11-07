@@ -1,7 +1,7 @@
 import {
   validateChanges, validateGraph, type GraphIndex,
   type Attestation, type AttestationInput, type Bed, type BedInput, type EntityKind, type Example, type ExampleInput,
-  type ImagePrompt, type ImagePromptInput, type Lexeme, type LexemeInput, type Loop, type LoopInput,
+  type ImagePrompt, type ImagePromptInput, type Lexeme, type LexemeInput, type LexemeStatus, type Loop, type LoopInput,
   type LoopCue, type LoopItem, type LoopItemInput, type Pronunciation, type Sense, type SenseInput,
   type OwnedFields, type Story, type StoryInput, type StoryPart, type StoryPartInput,
   type StoryWord, type StoryWordInput,
@@ -21,7 +21,7 @@ import type { ArticleDraft } from "./yaml";
  * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`. 21: a study
  * state's `senseId`.
  */
-export const LOCAL_SCHEMA_VERSION = 23;
+export const LOCAL_SCHEMA_VERSION = 24;
 
 export const EMPTY_GRAPH = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],
@@ -106,6 +106,8 @@ export interface AcervoRepository {
   saveBed(input: BedInput, id?: string): Promise<Bed>;
   /** Takes the named words out of the Inbox in one write, and says how many moved. */
   fileWords(ids: readonly string[]): Promise<number>;
+  /** Sets words aside, or brings them back to the words being learned. One write. */
+  setAside(ids: readonly string[], aside: boolean): Promise<number>;
   delete(kind: EntityKind, id: string): Promise<void>;
 }
 
@@ -428,14 +430,28 @@ export class LocalAcervoRepository implements AcervoRepository {
    * empty call and never a revision. The count is what was actually changed.
    */
   async fileWords(ids: readonly string[]): Promise<number> {
+    return this.restatus(ids, ["inbox"], "active");
+  }
+
+  /**
+   * Sets words aside, out of the way — known well enough, or not wanted — or brings them back to
+   * the words being learned. One write, like filing; a word already where it is going is left out.
+   */
+  async setAside(ids: readonly string[], aside: boolean): Promise<number> {
+    return aside
+      ? this.restatus(ids, ["inbox", "active"], "aside")
+      : this.restatus(ids, ["aside"], "active");
+  }
+
+  private async restatus(ids: readonly string[], from: readonly LexemeStatus[], to: LexemeStatus): Promise<number> {
     if (!this.ready) throw new Error("Load the Acervo repository before writing.");
     const wanted = new Set(ids);
-    const filing = this.graph.lexemes
-      .filter((lexeme) => wanted.has(lexeme.id) && !lexeme.deleted && lexeme.status === "inbox")
-      .map((lexeme) => ({ ...lexeme, status: "active", ...this.stamp(lexeme) } as Lexeme));
-    if (!filing.length) return 0;
-    await this.commit({ lexemes: filing });
-    return filing.length;
+    const moving = this.graph.lexemes
+      .filter((lexeme) => wanted.has(lexeme.id) && !lexeme.deleted && from.includes(lexeme.status))
+      .map((lexeme) => ({ ...lexeme, status: to, ...this.stamp(lexeme) } as Lexeme));
+    if (!moving.length) return 0;
+    await this.commit({ lexemes: moving });
+    return moving.length;
   }
 
   /**

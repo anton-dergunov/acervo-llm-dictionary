@@ -461,8 +461,8 @@ repository re-measures it on every run, so the pair cannot drift apart.
 
 ### 12 · Words come from what you are looking at
 
-The interface samples N lexeme ids from the scope on screen — this language, this topic, or everything
-— as a pure selector over the replica, and posts the list. The server never re-derives scope, and the
+The interface samples N lexeme ids from the scope on screen — this language, this topic, or everything,
+never a word set aside — as a pure selector over the replica, and posts the list. The server never re-derives scope, and the
 route takes ids rather than a query.
 
 That is what made the next step cheap: **choosing words by hand is the same route with a different

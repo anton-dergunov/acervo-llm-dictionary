@@ -193,7 +193,7 @@ DEMO_LEXEMES: tuple[dict, ...] = (
         "key": "mejoren", "language": "es", "headword": "que se mejoren", "lemma": "que se mejoren",
         "primary_gloss": "get well soon", "emotion": "warm and sincere, wishing someone well",
         "ipa": "/ke se meˈxoɾen/", "pos": "expression", "register": "neutral", "emoji": "💖",
-        "topics": ["health", "social"], "status": "learned", "short_gloss": "get better; feel better soon",
+        "topics": ["health", "social"], "status": "active", "short_gloss": "get better; feel better soon",
         "created_at": at("01-30"), "edited_at": at("05-19"),
         "notes": ["Plural form; use que te mejores to one person you address informally."],
         "attestations": [
@@ -344,7 +344,7 @@ DEMO_LEXEMES: tuple[dict, ...] = (
         "key": "tobillo", "language": "es", "headword": "el tobillo", "lemma": "tobillo",
         "primary_gloss": "ankle", "emotion": "plain and even, simply naming the thing",
         "ipa": "/toˈβiʎo/", "pos": "noun", "gender": "masculine", "register": "neutral", "emoji": "🦵",
-        "topics": ["health", "appearance"], "status": "learned", "short_gloss": "ankle",
+        "topics": ["health", "appearance"], "status": "aside", "short_gloss": "ankle",
         "created_at": at("01-19"), "edited_at": at("01-19"),
         "senses": [
             {"key": "ankle", "definition": "Parte del cuerpo donde se une el pie con la pierna.",

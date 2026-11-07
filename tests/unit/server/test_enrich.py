@@ -320,6 +320,16 @@ def test_a_word_deleted_before_its_job_ran_is_left_alone(server, runner, corpus)
     assert server.model.calls == []
 
 
+def test_a_word_set_aside_before_its_job_ran_is_left_alone(server, runner, corpus):
+    entry, *_ , written = save(server)
+    stored = next(row for row in held(server, "lexemes") if row["id"] == entry["id"])
+    assert server.push({"lexemes": [{**stored, "status": "aside"}]}).status_code == 200
+    runner.run_until_idle()
+    job = jobs.get(server.owner, written["enrich"][entry["id"]])
+    assert [step["state"] for step in job["steps"]] == ["skipped", "skipped", "skipped"]
+    assert server.model.calls == [] and corpus.calls == []
+
+
 def test_a_brief_the_writer_refuses_suppresses_the_sense_rather_than_failing(
     server, runner, corpus
 ):
@@ -381,6 +391,17 @@ def test_the_backfill_can_be_looked_at_first_and_bounded(server, everything, cap
     assert admin.main(["jobs", "enqueue", "enrich", "--missing", "--owner-email", OWNER_EMAIL,
                        "--limit", "1"]) == 0
     assert len(jobs.open_jobs(server.owner)) == 1
+
+
+def test_the_backfill_leaves_out_a_word_set_aside(server, everything, capsys):
+    word = lexeme(headword="toalla", lemma="toalla", status="aside")
+    assert server.push({"lexemes": [word], "senses": [sense(word["id"])]}).status_code == 200
+    for job in jobs.open_jobs(server.owner):
+        jobs.request_cancel(server.owner, job["id"])
+
+    assert admin.main(["jobs", "enqueue", "enrich", "--missing", "--owner-email", OWNER_EMAIL]) == 0
+    assert "toalla" not in capsys.readouterr().out
+    assert jobs.open_jobs(server.owner) == []
 
 
 def test_the_backfill_takes_one_vocabulary_at_a_time(server, everything, capsys):

@@ -1387,6 +1387,22 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
   content: ""; height: 1px; background: var(--rule-soft); flex: 1;
 }
 .list-sep::before { flex: 0 0 14px; }
+/* The rule over the words set aside is a button that folds them away: the same rule, with a caret
+   that turns as an article section's does. */
+.list-sep.fold {
+  width: 100%; padding: 0; border: 0; background: none; font: inherit; cursor: pointer; text-align: left;
+}
+.list-sep.fold .caret {
+  display: grid; place-items: center; opacity: .8; transition: transform .16s ease, opacity .12s;
+}
+.list-sep.fold .caret svg { width: 11px; height: 11px; }
+.list-sep.fold[aria-expanded="true"] .caret { transform: rotate(90deg); opacity: .45; }
+.list-sep.fold:hover, .list-sep.fold:focus-visible { color: var(--ink-2); }
+.list-sep.fold:hover .caret { opacity: 1; }
+/* A word set aside is faded, the whole row at once, so nothing in it moves. Its swipe buttons sit
+   outside the row and stay at full strength. */
+.row.aside { opacity: .5; }
+.row.aside:hover, .row.aside:focus-visible { opacity: .8; }
 .ext-status {
   font-family: var(--serif); font-style: italic; font-size: 14.5px;
   color: var(--ink-3); margin: 12px 0; padding: 0 2px;
@@ -2555,8 +2571,10 @@ body.tablet .viewport { width: 834px; height: 1000px; }
    The toolbar stays put; under it the word, the chips and the sense each get room to breathe rather
    than being stacked against the toolbar. Nothing in the header depends on which card is showing, so
    swiping through one word's cards never moves it. */
-.art-title, .art-more { display: none; }
+.art-title { display: none; }
 .art-more { position: relative; }
+/* What the bar already shows as buttons is only in its menu on a phone, where the bar folds it in. */
+@container vp (min-width: 721px) { .art-more .menu .phone-only { display: none; } }
 .art-more .menu { right: 0; top: calc(100% + 6px); }
 .menu-sep { height: 1px; background: var(--rule-soft); margin: 5px 8px; }
 .menu button.danger { color: var(--warn); }
@@ -2577,8 +2595,7 @@ body.tablet .viewport { width: 834px; height: 1000px; }
 /* Phone: the word is the toolbar's title in Cards, the views, File it and Delete fold into a menu,
    and a long phrase steps down in size and balances over two lines rather than being cut off. */
 @container vp (max-width: 720px) {
-  .art-views, .art-delete, .art-file, .art-pick { display: none; }
-  .art-more { display: block; }
+  .art-views, .art-file, .art-pick { display: none; }
   .art-bar.carding .spacer { display: none; }
   .art-bar.carding .art-title {
     display: flex; flex: 1; min-width: 0; align-items: center; justify-content: center; gap: 8px;

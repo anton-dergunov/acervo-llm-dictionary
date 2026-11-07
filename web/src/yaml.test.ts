@@ -134,6 +134,12 @@ describe("reading YAML back", () => {
     expect(problemsOf(document)[0]).toContain("document.emojis: is not a field Acervo knows");
   });
 
+  it("knows three statuses: in the Inbox, being learned, and set aside", () => {
+    const document = yamlFor(articleFor(testGraph(), "lexemepicar0001")!);
+    expect(parseArticle(document.replace(/^status: .*$/m, "status: aside")).status).toBe("aside");
+    expect(problemsOf(document.replace(/^status: .*$/m, "status: learned"))[0]).toContain("status");
+  });
+
   it("keeps a picture's state out of the document, so editing YAML cannot rewrite it", () => {
     // `attempts`, `failureReason` and `suppressed` are facts about what the server did, like
     // `revision` — not things a document can assert. They are carried through a save by the

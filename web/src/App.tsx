@@ -34,7 +34,7 @@ import {
   externalEntryOf, EXTERNAL_ROW_LIMIT, mergeHits, referenceTextOf,
   type ExternalEntry, type ExternalRow, type RawHit
 } from "./externalEntries";
-import { BackIcon, FileIcon, GearIcon, MoreIcon, PencilIcon, PlusIcon, SearchIcon, SelectIcon, TrashIcon } from "./icons";
+import { BackIcon, FileIcon, GearIcon, MoreIcon, PencilIcon, PlusIcon, SearchIcon, SelectIcon } from "./icons";
 import { useDefaultArticleView, type ArticleView } from "./editorPreferences";
 import LexemeArticle, {
   type AskSlot, type AskTarget, type ClipSlot, type MarkSlot, type PictureSlot, HeadwordListen
@@ -494,14 +494,14 @@ export default function App() {
     if (!languages.some((option) => option.code === language)) setLanguage(languages[0].code);
   }, [languages, language]);
 
-  const rows = useMemo(
-    () => (snapshot && language ? visibleRows(snapshot, { language, topic, query, sort }) : []),
+  const listed = useMemo(
+    () => (snapshot && language ? visibleRows(snapshot, { language, topic, query, sort }) : { rows: [], aside: [] }),
     [snapshot, language, topic, query, sort]
   );
   /* The rail's "All" count. Memoized like `rows`: it walks every word, and the rail repaints on every
      job the server reports. */
   const allCount = useMemo(
-    () => (snapshot && language ? visibleRows(snapshot, { language, topic: "all", query: "", sort: "recent" }).length : 0),
+    () => (snapshot && language ? visibleRows(snapshot, { language, topic: "all", query: "", sort: "recent" }).rows.length : 0),
     [snapshot, language]
   );
   const topics = useMemo(
@@ -1382,6 +1382,27 @@ export default function App() {
     notify(moved === 1 ? "Filed — it is in its topics now" : `Filed ${moved} words`);
   }
 
+  /**
+   * Set words aside — out of Anki, out of a random loop or story, and no more pictures or clips —
+   * or bring them back. Undone from the toast, since it is one tap from a row.
+   */
+  async function setAside(ids: string[], aside: boolean) {
+    let moved = 0;
+    try {
+      moved = await repository.setAside(ids, aside);
+    } catch (error) {
+      notify(error instanceof Error ? error.message : aside ? "That word could not be set aside." : "That word could not be brought back.");
+      return;
+    }
+    const next = repository.snapshot();
+    setSnapshot(next);
+    if (!moved) return;
+    if (topic === "inbox" && language && !inboxCount(next, language)) setTopic("all");
+    if (aside) notify(moved === 1 ? "Set aside — it waits at the foot of its topics" : `Set ${moved} words aside`,
+      { label: "Undo", run: () => void setAside(ids, false) });
+    else notify(moved === 1 ? "Brought back" : `Brought back ${moved} words`);
+  }
+
   async function signOut() {
     syncEngine.stop();
     jobStream.stop();
@@ -1694,15 +1715,16 @@ export default function App() {
                   onClick={() => toggleSelection(article.lexeme.id, true)}
                 ><SelectIcon on={on} /></button>;
               })()}
-              <button className="icon-btn art-delete" aria-label="Delete" title="Delete" onClick={() => void removeLexeme(article.lexeme.id)}><TrashIcon /></button>
-              {/* A phone has room for one control beside the word, so the views and Delete fold into this. */}
+              {/* Setting aside and Delete live here at every width, rather than as two more buttons in a
+                  bar that has enough; a phone, with room for one control beside the word, folds the
+                  views, File it and the selection in too. */}
               <div className="art-more" onClick={(event) => event.stopPropagation()}>
                 <button className="icon-btn" aria-label="Article menu" aria-haspopup="menu" aria-expanded={articleMenu}
                   onClick={() => setArticleMenu((open) => !open)}><MoreIcon /></button>
                 {articleMenu && <div className="menu open" role="menu">
                   {([["page", "Page"], ["cards", "Cards"], ["yaml", "YAML"]] as const).map(([id, name]) => {
                     const on = id === "yaml" ? mode !== "read" : reading && view === id;
-                    return <button key={id} role="menuitemradio" aria-checked={on} className={on ? "on" : ""}
+                    return <button key={id} role="menuitemradio" aria-checked={on} className={`phone-only${on ? " on" : ""}`}
                       disabled={id === "cards" && (Boolean(proposal) || enriching)}
                       onClick={() => {
                         setArticleMenu(false);
@@ -1710,13 +1732,19 @@ export default function App() {
                         else { setViewChoice(id); setMode("read"); }
                       }}>{name}</button>;
                   })}
-                  <div className="menu-sep" />
-                  {article.lexeme.status === "inbox" && <button role="menuitem"
+                  <div className="menu-sep phone-only" />
+                  {article.lexeme.status === "inbox" && <button role="menuitem" className="phone-only"
                     onClick={() => { setArticleMenu(false); void fileWords([article.lexeme.id]); }}
                   >File it</button>}
-                  {!proposal && <button role="menuitem"
+                  {!proposal && <button role="menuitem" className="phone-only"
                     onClick={() => { setArticleMenu(false); toggleSelection(article.lexeme.id, true); }}
                   >{selectedSet.has(article.lexeme.id) ? "Remove from selection" : "Add to selection"}</button>}
+                  {/* A proposal is an edit of the stored word, and setting it aside would make that edit
+                      stale, so it waits until the proposal is saved or discarded. */}
+                  {!proposal && (article.lexeme.status === "aside"
+                    ? <button role="menuitem" onClick={() => { setArticleMenu(false); void setAside([article.lexeme.id], false); }}>Bring it back</button>
+                    : <button role="menuitem" onClick={() => { setArticleMenu(false); void setAside([article.lexeme.id], true); }}>Set it aside</button>)}
+                  <div className="menu-sep" />
                   <button role="menuitem" className="danger" onClick={() => { setArticleMenu(false); void removeLexeme(article.lexeme.id); }}>Delete this word</button>
                 </div>}
               </div>
@@ -1726,13 +1754,14 @@ export default function App() {
                 same column: a word being looked up is the work, wherever it came from. */}
             {external ? <ExternalArticle entry={external} busy={saving} onAdd={addFromDictionary} />
               : !article ? <LexemeList
-                  rows={rows} languageName={active.name} topic={topic}
+                  rows={listed.rows} aside={listed.aside} languageName={active.name} topic={topic}
                   topicLabel={topicLabel} topicIcon={topicIcon} query={query} sort={sort}
                   onSort={setSort} onOpen={openLexeme} onFileAll={(ids) => void fileWords(ids)}
                   external={externalSearch}
                   working={(id) => isEnriching(jobsStatus, id)}
                   selected={(id) => selectedSet.has(id)}
                   onToggleSelected={(id) => toggleSelection(id)}
+                  onSetAside={(id, aside) => void setAside([id], aside)}
                   onDelete={(id) => void removeLexeme(id)}
                 />
               : mode === "read" ? <LexemeArticle
@@ -1751,7 +1780,7 @@ export default function App() {
                   onTapAway={closeArticleLook}
                   lookSheet={docked ? null
                     : <LookUpSheet state={articleLook} placement={view === "cards" ? "over" : "stuck"} />}
-                  onMap={proposal ? null : (senseId) => {
+                  onMap={proposal || article.lexeme.status === "aside" ? null : (senseId) => {
                     if (article.lexeme.language !== language) setLanguage(article.lexeme.language);
                     setMapSense(senseId);
                     setMapFly(senseId);

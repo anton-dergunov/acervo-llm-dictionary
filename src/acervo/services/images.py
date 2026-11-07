@@ -28,7 +28,7 @@ import os
 from pathlib import Path
 from typing import Any
 
-from acervo.article import ArticleView, article_for
+from acervo.article import ArticleView, article_for, set_aside
 from acervo.domain.ids import now_instant
 from acervo.errors import ApiError
 from acervo.images.brief import BriefWriter, SenseBrief
@@ -537,6 +537,8 @@ def _article(owner: str, lexeme_id: str) -> tuple[ArticleView, dict[str, list[di
     records = graph.article_records(owner, lexeme_id)
     found = article_for(records, lexeme_id)
     if found is None:
+        if set_aside(records, lexeme_id):
+            raise ApiError(409, "set_aside", "That word is set aside; bring it back first.")
         # One message for "no such word", "somebody else's word" and "a word you deleted": telling
         # them apart would answer whether an id exists in another account.
         raise ApiError(404, "not_found", "That word is not in your vocabulary.")

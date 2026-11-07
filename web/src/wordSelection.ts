@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 /**
- * The selection: words put aside by hand to make something from — a loop or a story today.
+ * The selection: words picked by hand to make something from — a loop or a story today.
  *
  * **This device's, and never synced.** It is a working pile rather than part of the vocabulary, so it
  * lives in local storage beside the other per-device state, not in the replicated graph, and it

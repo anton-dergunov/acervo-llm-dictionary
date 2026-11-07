@@ -316,6 +316,16 @@ def test_another_accounts_word_is_not_found(server, other, corpus):
     assert answer.json()["error"]["code"] == "not_found"
 
 
+def test_a_word_set_aside_says_so_to_its_owner_and_nothing_to_anyone_else(server, other, corpus):
+    entry, _itch, _chop = word(server, status="aside")
+    answer = find(server, entry)
+    assert answer.status_code == 409
+    assert answer.json()["error"] == {
+        "code": "set_aside", "message": "That word is set aside; bring it back first."}
+    assert find(other, entry).status_code == 404
+    assert corpus.calls == []
+
+
 # ── settings ────────────────────────────────────────────────────────────────
 
 

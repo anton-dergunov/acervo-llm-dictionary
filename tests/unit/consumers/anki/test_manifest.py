@@ -26,7 +26,7 @@ def meaning(**overrides):
 
 
 def payload(*notes):
-    return {"schema_version": 2, "notes": list(notes) or [meaning()]}
+    return {"schema_version": 3, "notes": list(notes) or [meaning()]}
 
 
 def test_manifest_accepts_the_versioned_contract():
@@ -71,6 +71,18 @@ def test_version_one_is_refused():
 def test_manifest_rejects_duplicate_note_ids():
     with pytest.raises(ValidationError, match="note_id values must be unique"):
         SyncManifest.model_validate(payload(meaning(), meaning()))
+
+
+def test_a_word_set_aside_is_named_once_and_has_no_notes():
+    value = payload()
+    value["aside"] = ["lexeme000000009"]
+    assert SyncManifest.model_validate(value).aside == ["lexeme000000009"]
+    value["aside"] = ["lexeme000000009", "lexeme000000009"]
+    with pytest.raises(ValidationError, match="aside values must be unique"):
+        SyncManifest.model_validate(value)
+    value["aside"] = [meaning()["lexeme_id"]]
+    with pytest.raises(ValidationError, match="a word set aside has no notes"):
+        SyncManifest.model_validate(value)
 
 
 def test_manifest_resolves_media_and_embedded_files_inside_its_directory(tmp_path):

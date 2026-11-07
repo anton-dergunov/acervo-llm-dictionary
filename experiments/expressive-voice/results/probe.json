@@ -1,0 +1,66 @@
+{
+ "routes": {
+  "vertex/gemini-3.1-flash-tts-preview": {
+   "ok": true,
+   "voice": "Achernar",
+   "bytes": 228524,
+   "seconds": 2.88,
+   "sent": "Say it surprised and a little amused."
+  },
+  "vertex/gemini-2.5-flash-tts": {
+   "ok": true,
+   "voice": "Achernar",
+   "bytes": 269370,
+   "seconds": 3.49,
+   "sent": "Say it surprised and a little amused."
+  },
+  "vertex/gemini-3.8-flash-tts": {
+   "ok": false,
+   "error": "ProviderRefused: The model 'gemini-3.8-flash-tts' is not supported.",
+   "seconds": 0.09
+  },
+  "vertex/gemini-3.8-flash-lite-tts": {
+   "ok": false,
+   "error": "ProviderRefused: The model 'gemini-3.8-flash-lite-tts' is not supported.",
+   "seconds": 0.09
+  },
+  "vertex/gemini-2.5-pro-tts": {
+   "ok": true,
+   "voice": "Achernar",
+   "bytes": 190650,
+   "seconds": 4.31,
+   "sent": "Say it surprised and a little amused."
+  },
+  "google-key-as-gemini-api/gemini-3.8-flash-tts": {
+   "ok": false,
+   "error": "ProviderRefused: Requests to this API generativelanguage.googleapis.com method google.learning.gemini.api.interactions.v1beta.VoicesHttpService.ListVoicesHttp are blocked.",
+   "seconds": 0.29
+  },
+  "google-key-as-gemini-api/gemini-3.8-flash-lite-tts": {
+   "ok": false,
+   "error": "ProviderRefused: Requests to this API generativelanguage.googleapis.com method google.learning.gemini.api.interactions.v1beta.VoicesHttpService.ListVoicesHttp are blocked.",
+   "seconds": 0.27
+  }
+ },
+ "free": {
+  "calls": [
+   {
+    "item": "w01",
+    "at": "2026-11-07T01:37:36+0000",
+    "ok": true,
+    "voice": "es-419-advisor-1",
+    "bytes": 79074,
+    "seconds": 4.56,
+    "sent": null
+   },
+   {
+    "item": "w02",
+    "at": "2026-11-07T01:37:53+0000",
+    "ok": false,
+    "error": "ProviderUnavailable: Rate limit exceeded for model gemini-3.8-flash-lite-tts (limit: 10 requests per day on Free Tier). Please retry in 6h21m46s or upgrade your tier at https://ai.dev/rate-limit.",
+    "seconds": 0.29
+   }
+  ],
+  "finding": "Google's own 429 names the limit: 10 speech requests a day per model on the free tier (gemini-3.8-flash-lite-tts). Most of the day's had already gone on earlier checks when this ran, so it refused on the second call."
+ }
+}

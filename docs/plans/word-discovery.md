@@ -15,11 +15,11 @@ Three sources of candidates come before any view:
   them and the converters currently drop them ([`dictionaries.md`](dictionaries.md) §2), and a model
   can write them where a dictionary is silent.
 - **Suggested words.** One model call conditioned on the words already held — their topics, their
-  level, what was suppressed — asked for the words that would be most useful next. Cheap to try, and
+  level, what was set aside — asked for the words that would be most useful next. Cheap to try, and
   the thing every other source here is measured against.
 - **"Which words in this text are new to me?"** Asking a model for "the interesting words" in an
   article fails: it estimates the *average* learner's gaps, and the missing information is not in the
-  article. Against a store of a couple of thousand words, plus what was suppressed, plus Anki's
+  article. Against a store of a couple of thousand words, plus what was set aside, plus Anki's
   difficulty, the question becomes a set difference rather than a guess — the payoff that makes a
   curated store worth keeping.
 

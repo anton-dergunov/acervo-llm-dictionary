@@ -88,12 +88,13 @@ def _payload(settings: Settings, owner: str, progress: Progress) -> tuple[SyncMa
     progress.say(f"Built {len(built.notes)} notes ("
                  + ", ".join(f"{count} {key}" for key, count in sorted(kinds.items()))
                  + f") naming {len(built.media)} media files"
-                 + (f"; {len(built.missing)} files are missing" if built.missing else ""))
+                 + (f"; {len(built.missing)} files are missing" if built.missing else "")
+                 + (f"; {len(built.aside)} words set aside" if built.aside else ""))
     directory = _payload_directory(settings)
     path = write_payload(built, directory, picture_size=PICTURE_SIZE, progress=progress)
     manifest, manifest_dir = SyncManifest.load(path)
     return manifest, manifest_dir, {"notes": len(built.notes), **kinds, "media": len(built.media),
-                                    "missingMedia": len(built.missing)}
+                                    "missingMedia": len(built.missing), "aside": len(built.aside)}
 
 
 def _payload_directory(settings: Settings) -> Path:

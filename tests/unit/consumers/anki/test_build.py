@@ -60,6 +60,17 @@ def test_a_word_not_yet_taken_in_has_no_cards(graph, media_root):
     assert all(note["lexeme_id"] == OBRA for note in build(graph, media_root=media_root).notes)
 
 
+def test_a_word_set_aside_has_no_notes_and_is_named_so_its_cards_are_suspended(graph, media_root):
+    for lexeme in graph["lexemes"]:
+        if lexeme["id"] == OBRA:
+            lexeme["status"] = "aside"
+    built = build(graph, media_root=media_root)
+    assert built.notes == []
+    assert built.aside == [OBRA]
+    assert built.manifest()["aside"] == [OBRA]
+    assert build(graph, media_root=media_root, languages=["en"]).aside == []
+
+
 def test_clips_come_last_and_the_sense_shows_its_most_trusted_sentence(graph, media_root):
     notes = by_id(build(graph, media_root=media_root))
     theatre = notes["senseobrateatr1"]["fields"]

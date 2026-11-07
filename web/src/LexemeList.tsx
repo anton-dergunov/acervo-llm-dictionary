@@ -1,5 +1,7 @@
-import { BookIcon, CheckIcon, GlobeIcon } from "./icons";
-import SwipeRow from "./SwipeRow";
+import { useState } from "react";
+import { asideOpen, setAsideOpen } from "./editorPreferences";
+import { BookIcon, CaretIcon, CheckIcon, GlobeIcon } from "./icons";
+import SwipeRow, { type RowAction } from "./SwipeRow";
 import type { ExternalRow } from "./externalEntries";
 import type { ListRow, SortKey, TopicSelection } from "./selectors";
 
@@ -93,10 +95,12 @@ function ExternalSection({ query, search }: { query: string; search: ExternalSea
 }
 
 export default function LexemeList({
-  rows, languageName, topic, topicLabel, topicIcon, query, sort, onSort, onOpen, onFileAll, external, working,
-  selected, onToggleSelected, onDelete
+  rows, aside = [], languageName, topic, topicLabel, topicIcon, query, sort, onSort, onOpen, onFileAll, external, working,
+  selected, onToggleSelected, onSetAside, onDelete
 }: {
   rows: ListRow[];
+  /** The words set aside, drawn faded under a folded rule after the rest. */
+  aside?: ListRow[];
   languageName: string;
   topic: TopicSelection;
   topicLabel: string;
@@ -116,8 +120,10 @@ export default function LexemeList({
   /* A word's row actions, by right-click or by swipe (`SwipeRow`). Delete asks nothing, exactly as
      the article's Delete asks nothing: it is a tombstone. */
   onToggleSelected?(id: string): void;
+  onSetAside?(id: string, aside: boolean): void;
   onDelete?(id: string): void;
 }) {
+  const [open, setOpen] = useState(asideOpen);
   const trimmed = query.trim();
   let title = topicLabel;
   let icon = topicIcon;
@@ -125,7 +131,8 @@ export default function LexemeList({
   if (trimmed) {
     title = "Search";
     icon = "🔍";
-    sub = `${rows.length} match${rows.length === 1 ? "" : "es"} for “${trimmed}” in ${languageName}`;
+    const found = rows.length + aside.length;
+    sub = `${found} match${found === 1 ? "" : "es"} for “${trimmed}” in ${languageName}`;
   } else if (topic === "inbox") {
     sub = "Captured, processed, waiting for your review";
   } else if (topic === "all") {
@@ -138,6 +145,46 @@ export default function LexemeList({
   // Only the Inbox tab itself, never a search that happens to turn up unreviewed words: those rows
   // are an answer to a question, not a pile to be emptied.
   const fileable = !trimmed && topic === "inbox" ? rows : [];
+
+  const shown = open || Boolean(trimmed);
+
+  function wordRow(row: ListRow) {
+    const on = selected?.(row.id) ?? false;
+    const setAside = row.status === "aside";
+    /* The mark is the plate's ring and a badge on its corner, drawn so nothing in the row moves —
+       not the word, not the gloss, not the row's height. A word set aside is faded the same way. */
+    const line = <button
+      key={row.id}
+      className={`row${row.status === "inbox" ? " inbox" : ""}${setAside ? " aside" : ""}${on ? " picked" : ""}`}
+      onClick={() => onOpen(row.id)}
+    >
+      <span className="plate">
+        {row.emoji || "📄"}
+        {on && <span className="pick-badge" role="img" aria-label="Selected"><CheckIcon /></span>}
+      </span>
+      <span>
+        <span className="word">{row.headword}{row.reading && <span className="rdg">{row.reading}</span>}</span>
+        <span className="gloss">{row.shortGloss}</span>
+      </span>
+      <span className="meta">
+        {working?.(row.id) && <span className="working-mark" role="img" aria-label="Still filling in" title="Still filling in" />}
+        {row.senseCount > 1 && <span className="senses">{row.senseCount} senses</span>}
+        {row.status === "inbox" ? <span className="prov">unreviewed</span> : <Strength row={row} />}
+      </span>
+    </button>;
+    const actions: RowAction[] = [
+      ...(onToggleSelected ? [{
+        label: on ? "Unselect" : "Select", menuLabel: on ? "Remove from selection" : "Add to selection",
+        tone: "pick" as const, run: () => onToggleSelected(row.id)
+      }] : []),
+      ...(onSetAside ? [setAside
+        ? { label: "Bring back", menuLabel: "Bring it back", run: () => onSetAside(row.id, false) }
+        : { label: "Set aside", menuLabel: "Set it aside", run: () => onSetAside(row.id, true) }] : []),
+      ...(onDelete ? [{ label: "Delete", menuLabel: "Delete this word", tone: "danger" as const, run: () => onDelete(row.id) }] : [])
+    ];
+    if (!actions.length) return line;
+    return <SwipeRow key={row.id} actions={actions}>{line}</SwipeRow>;
+  }
 
   return <>
     <div className="list-head">
@@ -158,42 +205,24 @@ export default function LexemeList({
       </div>
     </div>
     <div className="rows">
-      {rows.length ? rows.map((row) => {
-        const on = selected?.(row.id) ?? false;
-        /* The mark is the plate's ring and a badge on its corner, drawn so nothing in the row moves —
-           not the word, not the gloss, not the row's height. */
-        const line = <button
-          key={row.id} className={`row${row.status === "inbox" ? " inbox" : ""}${on ? " picked" : ""}`}
-          onClick={() => onOpen(row.id)}
-        >
-          <span className="plate">
-            {row.emoji || "📄"}
-            {on && <span className="pick-badge" role="img" aria-label="Selected"><CheckIcon /></span>}
-          </span>
-          <span>
-            <span className="word">{row.headword}{row.reading && <span className="rdg">{row.reading}</span>}</span>
-            <span className="gloss">{row.shortGloss}</span>
-          </span>
-          <span className="meta">
-            {working?.(row.id) && <span className="working-mark" role="img" aria-label="Still filling in" title="Still filling in" />}
-            {row.senseCount > 1 && <span className="senses">{row.senseCount} senses</span>}
-            {row.status === "inbox" ? <span className="prov">unreviewed</span> : <Strength row={row} />}
-          </span>
-        </button>;
-        if (!onToggleSelected && !onDelete) return line;
-        return <SwipeRow key={row.id} actions={[
-          ...(onToggleSelected ? [{
-            label: on ? "Unselect" : "Select", menuLabel: on ? "Remove from selection" : "Add to selection",
-            tone: "pick" as const, run: () => onToggleSelected(row.id)
-          }] : []),
-          ...(onDelete ? [{ label: "Delete", menuLabel: "Delete this word", tone: "danger" as const, run: () => onDelete(row.id) }] : [])
-        ]}>{line}</SwipeRow>;
-      })
+      {rows.length ? rows.map(wordRow)
       // With a search running, the dictionaries below are the answer, so this shrinks to a line
       // saying which question it is answering rather than taking the whole page to say "nothing".
+      : aside.length ? null
       : showExternal ? <p className="ext-status none-yours">No words of yours match “{trimmed}”.</p>
       : <p className="empty">Nothing here yet.</p>}
     </div>
+    {/* Below your words and above everyone else's: they are still yours. A search draws them open,
+        since a search is a question and a folded section would hide part of its answer. */}
+    {aside.length > 0 && <div className="aside-section">
+      {trimmed ? <div className="list-sep"><span className="label">Set aside · {aside.length}</span></div>
+        : <button type="button" className="list-sep fold" aria-expanded={open}
+            onClick={() => { setOpen(!open); setAsideOpen(!open); }}>
+            <span className="caret"><CaretIcon /></span>
+            <span className="label">Set aside · {aside.length}</span>
+          </button>}
+      {shown && <div className="rows">{aside.map(wordRow)}</div>}
+    </div>}
     {showExternal && external && <ExternalSection query={trimmed} search={external} />}
   </>;
 }

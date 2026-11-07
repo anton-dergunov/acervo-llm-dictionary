@@ -562,6 +562,17 @@ def test_another_accounts_picture_is_not_found_rather_than_forbidden(server, oth
     assert other.delete(f"/images/prompts/{prompt_id}").status_code == 404
 
 
+def test_a_word_set_aside_is_not_briefed_and_its_owner_is_told_why(server, other):
+    entry, itch, chop, sentence = word(server)
+    stored = next(row for row in server.pull().json()["data"]["changes"]["lexemes"]
+                  if row["id"] == entry["id"])
+    assert server.push({"lexemes": [{**stored, "status": "aside"}]}).status_code == 200
+
+    answer = called(brief_lexeme, server.settings, server.owner, DEVICE, entry["id"])
+    assert answer.status_code == 409 and answer.json()["error"]["code"] == "set_aside"
+    assert called(brief_lexeme, other.settings, other.owner, DEVICE, entry["id"]).status_code == 404
+
+
 def test_the_routes_need_a_signed_in_owner(server):
     entry, *_ = word(server)
     assert server.client.get("/api/acervo/v1/images/settings").status_code == 401

@@ -156,6 +156,13 @@ def test_wire_timestamps_are_exactly_twenty_four_characters(server):
             assert shape.match(record["editedAt"]), record
 
 
+@pytest.mark.parametrize("status", ["learned", "retired", "suppressed"])
+def test_a_word_has_three_statuses_and_no_others(server, status):
+    answer = server.push({"vocabularies": [vocabulary()], "lexemes": [lexeme(status=status)]})
+    assert answer.status_code == 400
+    assert server.push({"vocabularies": [vocabulary()], "lexemes": [lexeme(status="aside")]}).status_code == 200
+
+
 @pytest.mark.parametrize("field", ["createdAt", "editedAt"])
 def test_a_timestamp_without_milliseconds_is_refused(server, field):
     answer = server.push({"topics": [{**topic(), field: "2026-01-01T00:00:00Z"}]})

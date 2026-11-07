@@ -153,8 +153,9 @@ export function inboxCount(graph: VocabularyGraph, language: string): number {
   return lexemesIn(graph, language).filter((lexeme) => lexeme.status === "inbox").length;
 }
 
+/** A topic counts the words being learned in it: not the Inbox's, and not those set aside. */
 export function topicOptions(graph: VocabularyGraph, language: string): TopicOption[] {
-  const filed = lexemesIn(graph, language).filter((lexeme) => lexeme.status !== "inbox");
+  const filed = lexemesIn(graph, language).filter((lexeme) => lexeme.status === "active");
   return live(graph.topics)
     .slice()
     .sort((left, right) => left.order - right.order || left.name.localeCompare(right.name))
@@ -207,7 +208,16 @@ export interface ListQuery {
   sort: SortKey;
 }
 
-export function visibleRows(graph: VocabularyGraph, { language, topic, query, sort }: ListQuery): ListRow[] {
+/**
+ * What a list shows, as two lists: the words being learned, and below them the words set aside —
+ * still in their topic, still found by a search, but out of the way. Both are sorted the same.
+ */
+export interface ListView {
+  rows: ListRow[];
+  aside: ListRow[];
+}
+
+export function visibleRows(graph: VocabularyGraph, { language, topic, query, sort }: ListQuery): ListView {
   const search = query.trim().toLowerCase();
   let rows = lexemesIn(graph, language);
   if (search) {
@@ -224,7 +234,7 @@ export function visibleRows(graph: VocabularyGraph, { language, topic, query, so
     alpha: (left, right) => sortKeyOf(left).localeCompare(sortKeyOf(right), language),
     hard: (left, right) => (studyOf(right)?.difficulty ?? -1) - (studyOf(left)?.difficulty ?? -1)
   };
-  return rows.slice().sort(sorters[sort]).map((lexeme) => {
+  const sorted = rows.slice().sort(sorters[sort]).map((lexeme): ListRow => {
     const study = studyOf(lexeme);
     return {
       id: lexeme.id,
@@ -240,6 +250,10 @@ export function visibleRows(graph: VocabularyGraph, { language, topic, query, so
         : "not scheduled yet"
     };
   });
+  return {
+    rows: sorted.filter((row) => row.status !== "aside"),
+    aside: sorted.filter((row) => row.status === "aside")
+  };
 }
 
 export function studyStateOf(graph: VocabularyGraph, lexemeId: string): StudyState | null {
@@ -663,7 +677,8 @@ export function styleLabel(families: readonly { id: string; label: string }[] | 
  * until something changes, which is what makes "Surprise me" repeatable rather than merely random.
  */
 export function loopCandidates(graph: VocabularyGraph, query: ListQuery): Lexeme[] {
-  const rows = new Set(visibleRows(graph, query).map((row) => row.id));
+  // The words being learned only: one set aside goes into a loop when it is chosen by hand.
+  const rows = new Set(visibleRows(graph, query).rows.map((row) => row.id));
   return live(graph.lexemes).filter((lexeme) => rows.has(lexeme.id) && loopEligible(graph, lexeme));
 }
 
@@ -898,7 +913,7 @@ export function storyWordEntries(graph: VocabularyGraph, storyId: string): Story
  * which is most of the vocabulary.
  */
 export function storyCandidates(graph: VocabularyGraph, query: ListQuery): Lexeme[] {
-  const rows = new Set(visibleRows(graph, query).map((row) => row.id));
+  const rows = new Set(visibleRows(graph, query).rows.map((row) => row.id));
   return live(graph.lexemes).filter((lexeme) => rows.has(lexeme.id) && storyEligible(graph, lexeme));
 }
 
@@ -909,7 +924,7 @@ export function storyEligible(graph: VocabularyGraph, lexeme: Lexeme): boolean {
 }
 
 /* ── the selection ───────────────────────────────────────────────────────
-   Words put aside by hand to make something from. Which ids are selected is `wordSelection.ts`'s,
+   Words picked by hand to make something from. Which ids are selected is `wordSelection.ts`'s,
    kept on this device; what they are is read here, from the replica, every time. */
 
 /** One selected word, as the selection bar, its list and the make dialogs draw it. */

@@ -456,6 +456,22 @@ describe("reading a bundle", () => {
     expect(plan.vocabularies.every((entry) => entry.region === null)).toBe(true);
   });
 
+  it("reads a word its owner had put away, from the version before one status said so, as set aside", () => {
+    const files = bundle().map((file) => {
+      if (file.path === MANIFEST_FILE) {
+        return { ...file, text: file.text.replace(`schemaVersion: ${SCHEMA_VERSION}`, "schemaVersion: 21") };
+      }
+      if (file.path.endsWith("/turmoil.yaml")) return { ...file, text: file.text.replace(/^status: .*$/m, "status: learned") };
+      if (file.path.endsWith("/picar.yaml")) return { ...file, text: file.text.replace(/^status: .*$/m, "status: suppressed") };
+      return file;
+    });
+    const plan = readBundle(files);
+    expect(plan.problems).toEqual([]);
+    const statuses = Object.fromEntries(plan.articles.map((article) => [article.draft.headword, article.draft.status]));
+    expect(statuses.turmoil).toBe("aside");
+    expect(statuses.picar).toBe("aside");
+  });
+
   it("refuses a bundle from another schema version, naming both", () => {
     const files = bundle().map((file) => file.path === MANIFEST_FILE
       ? { ...file, text: file.text.replace(`schemaVersion: ${SCHEMA_VERSION}`, "schemaVersion: 4") }
@@ -648,7 +664,7 @@ describe("importing a bundle", () => {
     const files = bundle().map((file) => file.path.endsWith("/picar.yaml")
       ? { ...file, text: file.text.replace(/^status: .*$/m, "status: inbox") }
       : file.path.endsWith("/turmoil.yaml")
-        ? { ...file, text: file.text.replace(/^status: .*$/m, "status: learned") }
+        ? { ...file, text: file.text.replace(/^status: .*$/m, "status: aside") }
         : file);
 
     const repository = await emptyReplica();
@@ -658,7 +674,7 @@ describe("importing a bundle", () => {
     const statusOf = (headword: string) =>
       restored.lexemes.find((lexeme) => lexeme.headword === headword)!.status;
     expect(statusOf("picar")).toBe("active");
-    expect(statusOf("turmoil")).toBe("learned");
+    expect(statusOf("turmoil")).toBe("aside");
     // Filed *into its topics* — the topic line was always read; the status is what hid it.
     const picar = restored.lexemes.find((lexeme) => lexeme.headword === "picar")!;
     expect(articleFor(restored, picar.id)!.topics.map((topic) => topic.name)).toEqual(["Food"]);

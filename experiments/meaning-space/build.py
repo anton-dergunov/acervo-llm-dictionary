@@ -98,7 +98,7 @@ def read_bundles(paths: list[Path]) -> tuple[dict[str, dict], dict[tuple[str, st
             if not match:
                 continue
             word = yaml.safe_load(bundle.read(name))
-            if not isinstance(word, dict) or word.get("status") == "suppressed":
+            if not isinstance(word, dict) or word.get("status") == "aside":
                 continue
             words[(match.group(1), match.group(2))] = word
     return vocabularies, words, media

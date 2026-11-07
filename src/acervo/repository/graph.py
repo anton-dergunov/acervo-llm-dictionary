@@ -509,8 +509,8 @@ def duplicate_lexemes(owner: str, language: str, headword: str, lemma: str) -> l
 def map_senses(owner: str, language: str) -> list[dict[str, Any]]:
     """Every live sense of every word this owner holds in one language, for the meaning map.
 
-    A suppressed word is one the owner said they do not want, so it is not on their map; every other
-    status is a word they hold. Senses carry no language of their own, so the word is joined in, and
+    A word set aside is one the owner has put out of the way — known well enough, or not wanted — so
+    it is not on their map; every other status is a word they are learning. Senses carry no language of their own, so the word is joined in, and
     the rows come back in a stable order so a map's input is the same list every time it is read.
     """
     lexemes, senses = tables.lexemes, tables.senses
@@ -527,7 +527,7 @@ def map_senses(owner: str, language: str) -> list[dict[str, Any]]:
                 lexemes.c.language == language,
                 lexemes.c.deleted.is_(False),
                 senses.c.deleted.is_(False),
-                lexemes.c.status != "suppressed",
+                lexemes.c.status != "aside",
             )
             .order_by(lexemes.c.id, senses.c.sense_order, senses.c.id)
         ).mappings()

@@ -37,7 +37,7 @@ def changes() -> dict:
              "pos": "noun", "status": "inbox", "topicIds": ["t00000000000001"], "notes": [],
              "shortGloss": "venom", **sync_fields()},
             {"id": "l00000000000002", "language": "es", "headword": "retirado", "lemma": "retirado",
-             "pos": "adj", "status": "retired", "topicIds": [], "notes": [], **sync_fields()},
+             "pos": "adj", "status": "aside", "topicIds": [], "notes": [], **sync_fields()},
             {"id": "l00000000000003", "language": "en", "headword": "venom", "lemma": "venom",
              "pos": "noun", "status": "active", "topicIds": [], "notes": [], **sync_fields()},
         ],

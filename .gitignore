@@ -65,6 +65,12 @@ Caddyfile
 # write-up keeps the numbers; twenty WAVs of the same four sentences are not worth a repository.
 /experiments/pronunciation-encoding/out/
 
+# The expressive-voice test: its audio, the read-only pull of the vocabulary it drew its set from,
+# and — until `run.py report` copies them into results/ — the blind key and the labels, since the
+# key would give the blind away. Its own Whisper environment too.
+/experiments/expressive-voice/out/
+/experiments/expressive-voice/.venv/
+
 # The clip-translation runs: 350-odd raw model replies per run. Every number the experiment claims
 # is in its README, and re-scoring an existing run is free, so the archive is not worth a
 # repository — the same call photo-capture/runs/ made.

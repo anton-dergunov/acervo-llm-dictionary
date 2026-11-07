@@ -448,7 +448,7 @@ export interface BundlePlan {
  * the sentence it illustrates and does not get an anchor invented for it — matching by position or
  * by text would be a guess, and a wrong anchor puts the picture under the wrong sentence.
  */
-const READABLE = new Set([SCHEMA_VERSION, 20, 19, 14, 9, 8, 7, 6]);
+const READABLE = new Set([SCHEMA_VERSION, 21, 20, 19, 14, 9, 8, 7, 6]);
 
 /**
  * Version 15 gave a story part a recording. A story is not in a bundle and no word file changed, so
@@ -462,16 +462,23 @@ const READABLE = new Set([SCHEMA_VERSION, 20, 19, 14, 9, 8, 7, 6]);
  *
  * Version 21 gave a vocabulary a level and a note about its learner, and the same holds: a version
  * 20 bundle states neither, which is what an absent `level` and `learnerNote` read as.
+ *
+ * Version 22 folded a word's `learned`, `retired` and `suppressed` into one status, `aside`: each
+ * meant the owner had put the word out of the way, so each reads as it.
  */
 function upgradeBundle(files: BundleFile[], from: number): BundleFile[] {
-  if (from === SCHEMA_VERSION || from === 20 || from === 19 || from === 14) return files;
+  if (from === SCHEMA_VERSION) return files;
   if (READABLE.has(from)) {
+    const stripped = from <= 9;
     return files.map((file) => isWordFile(file.path)
       ? {
           ...file,
-          text: file.text
-            .replace(/^[ \t]*approved:[ \t]*(?:true|false)[ \t]*\r?\n/gm, "")
-            .replace(/^[ \t]*audioRef:.*\r?\n/gm, "")
+          text: (stripped
+            ? file.text
+              .replace(/^[ \t]*approved:[ \t]*(?:true|false)[ \t]*\r?\n/gm, "")
+              .replace(/^[ \t]*audioRef:.*\r?\n/gm, "")
+            : file.text)
+            .replace(/^status:[ \t]*["']?(?:learned|retired|suppressed)["']?[ \t]*$/gm, "status: aside")
         }
       : file);
   }
@@ -724,9 +731,9 @@ export function remintIds(draft: ArticleDraft): ArticleDraft {
  * `status: inbox`, so honouring the line files a whole vocabulary into a room it has to be emptied
  * out of one word at a time.
  *
- * Only `inbox` is rewritten. `learned`, `retired` and `suppressed` are curation the owner did, and
- * a bundle is a backup of that; the export still writes all four, and the asymmetry is the point —
- * the file records what a word *was*, this decides what it *becomes*.
+ * Only `inbox` is rewritten. `aside` is curation the owner did, and a bundle is a backup of that; the
+ * export still writes all three, and the asymmetry is the point — the file records what a word
+ * *was*, this decides what it *becomes*.
  */
 export function filed(draft: ArticleDraft): ArticleDraft {
   return draft.status === "inbox" ? { ...draft, status: "active" } : draft;

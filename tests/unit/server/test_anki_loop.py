@@ -37,6 +37,7 @@ class Robot:
 
     def __init__(self) -> None:
         self.pushed: list[int] = []
+        self.aside: list[list[str]] = []
         self.backups: list[bool] = []
         self.exported: dict = {"notes": [], "reviews": []}
         self.failure: BaseException | None = None
@@ -45,6 +46,7 @@ class Robot:
         if self.failure:
             raise self.failure
         self.pushed.append(len(manifest.notes))
+        self.aside.append(list(manifest.aside))
         self.backups.append(backup)
         return {"operation": "push", "created": len(manifest.notes), "updated": 0, "notes": [{}]}
 
@@ -158,6 +160,33 @@ def test_a_push_runs_once_the_writes_stop_and_reads_back_after(server, robot):
         ("anki.push", "done"), ("anki.pull", "done")]
     assert robot.pushed == [1], "one word, one sense, no example: one note"
     assert robot.backups == [False], "an automatic push leaves the backup to Anki's own interval"
+
+
+def test_setting_a_word_aside_queues_a_push_that_names_it(server, robot):
+    anki_settings.save(server.owner, push=True)
+    word(server)
+    kept, _ = word(server)
+    for job in pushes(server.owner):
+        jobs.request_cancel(server.owner, job["id"])
+    stored = next(row for row in server.pull().json()["data"]["changes"]["lexemes"]
+                  if row["id"] == kept["id"])
+    assert server.push({"lexemes": [{**stored, "status": "aside"}]}).status_code == 200
+    (queued,) = pushes(server.owner)
+    jobs.hasten(queued["id"])
+    Runner(server.settings).run_until_idle()
+    assert robot.pushed[-1] == 1 and robot.aside[-1] == [kept["id"]]
+
+
+def test_a_suspension_anki_refuses_reaches_the_job_in_its_own_words(server, robot):
+    anki_settings.save(server.owner, push=True)
+    word(server)
+    robot.failure = RuntimeError("Anki would not suspend the cards of 1 word set aside: locked")
+    queued = pushes(server.owner)[0]
+    jobs.hasten(queued["id"])
+    Runner(server.settings).run_until_idle()
+    job = jobs.get(server.owner, queued["id"])
+    assert job["state"] == "failed"
+    assert "would not suspend the cards of 1 word set aside: locked" in job["message"]
 
 
 def test_a_busy_robot_is_waited_for_rather_than_failed(server, robot):

@@ -127,7 +127,7 @@ There are exactly these forms. Every key shown is required unless marked optiona
 | `lexeme` | `pos` | one of: `noun`, `verb`, `adj`, `adv`, `phrase`, `idiom`, `expression` |
 | `lexeme` | `gender` | one of: `masculine`, `feminine`, `common`, `neuter`, or null |
 | `lexeme` | `register` | one of: `neutral`, `formal`, `colloquial`, `slang`, `vulgar`, or null — "informal" is `colloquial` |
-| `lexeme` | `status` | one of: `inbox`, `active`, `learned`, `retired`, `suppressed` |
+| `lexeme` | `status` | one of: `inbox`, `active`, `aside` — `aside` is a word the learner has set aside: known well enough, or not wanted |
 | `lexeme` | `notes` | list of texts — **the whole list**: every line you keep, in order, plus any new one |
 | `lexeme` | `topics` | list of texts — only topics the entry already has |
 | `sense:<id>` | `definition` | text |

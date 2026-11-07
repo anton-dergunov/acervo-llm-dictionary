@@ -1,7 +1,7 @@
 export const PARTS_OF_SPEECH = ["noun", "verb", "adj", "adv", "phrase", "idiom", "expression"] as const;
 export const GENDERS = ["masculine", "feminine", "common", "neuter"] as const;
 export const REGISTERS = ["neutral", "formal", "colloquial", "slang", "vulgar"] as const;
-export const LEXEME_STATUSES = ["inbox", "active", "learned", "retired", "suppressed"] as const;
+export const LEXEME_STATUSES = ["inbox", "active", "aside"] as const;
 /** `sign` is text met out in the world rather than read — a street sign, a menu, a label — usually kept as a photo. */
 export const SOURCE_KINDS = ["web", "book", "conversation", "video", "lesson", "sign", "unknown"] as const;
 export const EXAMPLE_ORIGINS = ["attestation", "llm", "tatoeba", "subtitle", "wiktionary", "manual"] as const;

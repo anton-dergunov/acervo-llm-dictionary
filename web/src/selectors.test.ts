@@ -3,7 +3,7 @@ import { validateGraph, type LoopCue, type LoopItem, type StudyState } from "./d
 import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
   formatLabel, heldWord, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
-  strengthOf, topicOptions, visibleRows, voiceSample, weakestOf
+  storyCandidates, storyEligible, strengthOf, topicOptions, visibleRows, voiceSample, weakestOf
 } from "./selectors";
 import { drillCues, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
@@ -39,31 +39,61 @@ describe("vocabulary selectors", () => {
 
   it("lists one language at a time and keeps the inbox out of the filed collections", () => {
     const graph = testGraph();
-    expect(visibleRows(graph, query).map((row) => row.headword)).toEqual(["picar", "la balsa"]);
+    expect(visibleRows(graph, query).rows.map((row) => row.headword)).toEqual(["picar", "la balsa"]);
     expect(inboxCount(graph, "es")).toBe(1);
-    expect(visibleRows(graph, { ...query, topic: "inbox" }).map((row) => row.headword)).toEqual(["espolvorear"]);
-    expect(visibleRows(graph, { ...query, language: "en" }).map((row) => row.headword)).toEqual(["turmoil"]);
+    expect(visibleRows(graph, { ...query, topic: "inbox" }).rows.map((row) => row.headword)).toEqual(["espolvorear"]);
+    expect(visibleRows(graph, { ...query, language: "en" }).rows.map((row) => row.headword)).toEqual(["turmoil"]);
   });
 
   it("sorts recently added first, alphabetically past the article, and hardest first", () => {
     const graph = testGraph();
-    expect(visibleRows(graph, { ...query, sort: "recent" })[0].headword).toBe("picar");
-    expect(visibleRows(graph, { ...query, sort: "alpha" }).map((row) => row.headword)).toEqual(["la balsa", "picar"]);
-    expect(visibleRows(graph, { ...query, sort: "hard" })[0].headword).toBe("picar");
+    expect(visibleRows(graph, { ...query, sort: "recent" }).rows[0].headword).toBe("picar");
+    expect(visibleRows(graph, { ...query, sort: "alpha" }).rows.map((row) => row.headword)).toEqual(["la balsa", "picar"]);
+    expect(visibleRows(graph, { ...query, sort: "hard" }).rows[0].headword).toBe("picar");
   });
 
   it("searches headwords, definitions and gloss terms", () => {
     const graph = testGraph();
-    expect(visibleRows(graph, { ...query, query: "dice" }).map((row) => row.headword)).toEqual(["picar"]);
-    expect(visibleRows(graph, { ...query, query: "embarcación" }).map((row) => row.headword)).toEqual(["la balsa"]);
+    expect(visibleRows(graph, { ...query, query: "dice" }).rows.map((row) => row.headword)).toEqual(["picar"]);
+    expect(visibleRows(graph, { ...query, query: "embarcación" }).rows.map((row) => row.headword)).toEqual(["la balsa"]);
     // Search reaches the inbox, which the topic collections deliberately exclude.
-    expect(visibleRows(graph, { ...query, query: "espolvorear" })).toHaveLength(1);
+    expect(visibleRows(graph, { ...query, query: "espolvorear" }).rows).toHaveLength(1);
+  });
+
+  it("puts a word set aside after the rest, sorted the same, and out of the counts", () => {
+    const graph = testGraph();
+    const balsa = graph.lexemes.find((lexeme) => lexeme.id === "lexemebalsa0001")!;
+    balsa.status = "aside";
+    const view = visibleRows(graph, { ...query, sort: "alpha" });
+    expect(view.rows.map((row) => row.headword)).toEqual(["picar"]);
+    expect(view.aside.map((row) => row.headword)).toEqual(["la balsa"]);
+    // In its topics still, under the rule, and found by a search — but not counted with the rest.
+    const topic = balsa.topicIds[0];
+    expect(visibleRows(graph, { ...query, topic }).aside.map((row) => row.id)).toEqual([balsa.id]);
+    expect(topicOptions(graph, "es").find((option) => option.id === topic)?.count)
+      .toBe(visibleRows(graph, { ...query, topic }).rows.length || null);
+    expect(visibleRows(graph, { ...query, query: "embarcación" }).aside).toHaveLength(1);
+    // The Inbox is the Inbox.
+    expect(visibleRows(graph, { ...query, topic: "inbox" }).aside).toEqual([]);
+  });
+
+  it("leaves a word set aside out of a random loop or story, but not out of the selection", () => {
+    const graph = testGraph();
+    const picar = graph.lexemes.find((lexeme) => lexeme.id === "lexemepicar0001")!;
+    expect(loopCandidates(graph, query).map((lexeme) => lexeme.id)).toContain(picar.id);
+    expect(storyCandidates(graph, query).map((lexeme) => lexeme.id)).toContain(picar.id);
+    picar.status = "aside";
+    expect(loopCandidates(graph, query).map((lexeme) => lexeme.id)).not.toContain(picar.id);
+    expect(storyCandidates(graph, query).map((lexeme) => lexeme.id)).not.toContain(picar.id);
+    const chosen = chosenFor(graph, selectedWords(graph, "es", [picar.id]),
+      { eligible: storyEligible, why: "", max: 10, noun: "story" });
+    expect(chosen.map((word) => word.skip)).toEqual([""]);
   });
 
   it("excludes tombstoned records everywhere", () => {
     const graph = testGraph();
     graph.lexemes[1].deleted = true;
-    expect(visibleRows(graph, query).map((row) => row.headword)).toEqual(["picar"]);
+    expect(visibleRows(graph, query).rows.map((row) => row.headword)).toEqual(["picar"]);
     graph.senses[1].deleted = true;
     expect(articleFor(graph, "lexemepicar0001")!.senses).toHaveLength(1);
     expect(articleFor(graph, "lexemebalsa0001")).toBeNull();

@@ -68,7 +68,8 @@ each last went — in the robot's own words when it refused.
   after the writes stop. A burst of edits is one push; each write moves it a minute later, but never
   more than ten minutes after it was first asked for, so a long session still reaches Anki. The
   enrichment's picture of a new word is itself such a write, so the word is pushed once it has its
-  picture. A device sees the change the next time it syncs.
+  picture. Setting a word aside, or bringing it back, is a write to the word like any other. A device
+  sees the change the next time it syncs.
 - **A read follows every push, and runs every hour** besides, so reviews reach Acervo within an hour
   of the tablet syncing even on a day nothing is edited. A study state's write is not a change to the
   cards and queues nothing, or every read would queue a push.
@@ -121,8 +122,19 @@ its fields as HTML, the files its media fields show or play, and managed tags in
 namespace. **The manifest's order is the order Anki introduces new cards in.** Media is imported under
 content-addressed names, and a field holds the `<img>` or `<audio>` naming it — which is what Anki's
 Check Media counts as a reference, and what the card script dresses as a player. A duplicate identity
-fails before anything is changed, and notes absent from a manifest are left untouched. The contract
-is in [`../operations/anki-sync.md`](../operations/anki-sync.md), "Manifest contract".
+fails before anything is changed, and notes absent from a manifest are left untouched — a word
+deleted in Acervo keeps its cards until someone deletes them in Anki. The contract is in
+[`../operations/anki-sync.md`](../operations/anki-sync.md), "Manifest contract".
+
+**A word set aside has its cards suspended, and only the robot's suspension is ever undone.** It has
+no notes in the manifest, which names it instead, so its cards stop coming up without losing their
+history. The robot suspends what is not already suspended and tags the note `acervo::aside`, with one
+tag per card it suspended (`acervo::aside::recognise`); when the word comes back and its notes are in
+the manifest again, it unsuspends only those cards and the rewrite drops the tags. The tags are what
+let it leave the owner's own choices alone: a card suspended by hand before stays suspended, one
+unsuspended by hand while the word is aside is not suspended again, and a word deleted while aside
+keeps its cards suspended. The one thing it cannot tell apart is a card the owner suspends by hand
+after the robot already had — that card comes back with the word.
 
 **The join is an explicit hidden field, `AcervoNoteId`, on every note** — never a GUID derived from
 content. A content-derived GUID breaks the day a template improves or a typo is fixed, quietly and

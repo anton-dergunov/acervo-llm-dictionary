@@ -1,6 +1,6 @@
 # Word selection · a working pile of words to make something from
 
-Words put aside by hand, to make something from — today a loop or a story. Without a selection
+Words picked by hand, to make something from — today a loop or a story. Without a selection
 both could only be made from words drawn at random from whatever the list showed, which is fine for
 "give me something to listen to" and useless for "these eight words I keep getting wrong". The store
 is `web/src/wordSelection.ts`; the bar is `SelectionBar.tsx`; the row is `SwipeRow.tsx`; the dialogs'
@@ -47,14 +47,16 @@ to avoid.
 **One row for words, loops and stories** (`SwipeRow.tsx`), because a pointer and a finger do not have
 the same gestures. A pointer right-clicks and gets a menu under it; a finger pushes the row aside, right
 to left, and finds the same actions behind it, with Delete in red. Word rows offer *Add to / Remove from
-selection* and *Delete*; loops and stories offer *Delete*. The swipe is scroll-snap rather than touch
+selection*, *Set aside* (or *Bring back*, on a word already set aside) and *Delete*; loops and stories
+offer *Delete*. The swipe is scroll-snap rather than touch
 handlers — the way the cards already swipe — so there is no pointer arithmetic to get wrong and a
 trackpad gets it free. The scroller and the element the menu hangs off are two elements, because
 `overflow-x` makes the vertical axis a scroller too and a menu inside it would be clipped. The row was
 written out twice, for loops and for stories, before words needed it; there must not be a fourth.
 
-**The article** has a Select toggle beside Delete on a wide screen, and a *Select* item in the ⋯ menu,
-above "Delete this word", on a phone. **The map's peek** has a Select toggle, and selecting there marks
+**The article** has a Select toggle in its bar on a wide screen, and a *Select* item in the ⋯ menu on
+a phone. The ⋯ menu is there at every width, holding *Set it aside* (or *Bring it back*) and "Delete
+this word" below a rule, so neither costs the bar a button of its own. **The map's peek** has a Select toggle, and selecting there marks
 every sense of the word — selection is of words, and a map is of senses.
 
 ## The mark
@@ -109,6 +111,8 @@ own Make button — which is what that button always meant.
 - **The button counts only the words it will send.**
 - **The random draw is the kind's own**: a story draws words a story can use, not words a loop can say
   — sampling a loop's eligible words would give a scope with no single-term glosses no story at all.
+- **The random draw leaves out a word set aside; the selection keeps it.** Setting a word aside says
+  "not this one unless I ask", and choosing it by hand is asking.
 
 **No server change.** `POST /loops` and `POST /stories` already take lexeme ids and never re-derive the
 scope, which is what made choosing words by hand the same route with a different list.

@@ -14,7 +14,7 @@ is [`server.md`](server.md).
 
 Almost every write in Acervo creates or revises a rich article, and almost all of it originates on
 the server anyway: capture and chat call a model, enrichment is a server job, study state arrives from
-Anki. What is left for a device to originate by hand is rare — marking a word learned, correcting a
+Anki. What is left for a device to originate by hand is rare — setting a word aside, correcting a
 generated sentence. Merging two independently edited versions of an article has no honest answer, and
 the machinery to attempt it would buy a case that barely occurs.
 

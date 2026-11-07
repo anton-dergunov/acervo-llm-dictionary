@@ -6,7 +6,7 @@ import html
 import json
 import time
 from contextlib import contextmanager
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Iterator
@@ -20,6 +20,12 @@ from .model import (
     KINDS, MEDIA_FIELDS, CardDesign, create_notetypes, install_fonts, require_notetype,
 )
 
+
+# The tag on a note whose cards the robot suspended because its word was set aside, and its children
+# naming each card it suspended: `acervo::aside::recognise`. The children are what let a word brought
+# back unsuspend only those cards, never one the owner suspended by hand.
+ASIDE_TAG = "acervo::aside"
+SUSPENDED = -1  # anki.consts.QUEUE_TYPE_SUSPENDED
 
 # Anki's `revlog.type`, by value.
 REVIEW_KINDS = {0: "learn", 1: "review", 2: "relearn", 3: "filtered", 4: "manual", 5: "rescheduled"}
@@ -478,6 +484,9 @@ class AnkiRobot:
                 raise DuplicateIdentityError(
                     f"AcervoNoteId {item.note_id} belongs to an unexpected note type"
                 )
+        # Read before the notes are rewritten below, which drops every `acervo::` tag the manifest
+        # does not give — the very marks that say which cards were suspended here.
+        aside = self._aside_plan(existing, manifest)
 
         from anki.collection import AddNoteRequest
 
@@ -552,6 +561,7 @@ class AnkiRobot:
             collection.update_notes(changes)
         for note, deck_id in moves:
             collection.set_deck(note.card_ids(), deck_id)
+        self._apply_aside(collection, aside)
         results = [
             {
                 "note_id": identity,
@@ -572,8 +582,71 @@ class AnkiRobot:
             "unchanged": unchanged,
             "media_added": media_added,
             "cards_removed": len(removed),
+            "words_aside": len(aside.words),
+            "suspended": len(aside.suspend),
+            "unsuspended": len(aside.unsuspend),
             "notes": results,
         }
+
+    @staticmethod
+    def _aside_plan(existing: dict[str, Any], manifest: SyncManifest) -> AsidePlan:
+        """Which cards to suspend because their word was set aside, and which to unsuspend because
+        it came back.
+
+        A note of a word set aside that carries no mark yet has its unsuspended cards suspended and
+        is marked, a tag per card. A marked note whose identity is in the manifest again has only
+        its marked cards unsuspended; rewriting it then drops the marks. Everything else is left as
+        it is — a mark is "dealt with", so a card the owner unsuspended by hand while the word was
+        aside stays unsuspended, one suspended by hand before stays suspended, and a word deleted
+        while aside keeps its cards suspended.
+        """
+        words_aside = set(manifest.aside)
+        wanted = {str(note.note_id) for note in manifest.notes}
+        plan = AsidePlan()
+        for identity, note in existing.items():
+            marks = [tag for tag in note.tags
+                     if tag.casefold() == ASIDE_TAG or tag.casefold().startswith(f"{ASIDE_TAG}::")]
+            if note["AcervoLexemeId"] in words_aside:
+                if marks:
+                    continue
+                cards = [card for card in note.cards() if int(card.queue) != SUSPENDED]
+                plan.suspend.extend(int(card.id) for card in cards)
+                note.tags = [*note.tags, ASIDE_TAG,
+                             *(f"{ASIDE_TAG}::{_card_name(card)}" for card in cards)]
+                plan.marked.append(note)
+                plan.words.add(note["AcervoLexemeId"])
+            elif marks and identity in wanted:
+                named = {tag.casefold().removeprefix(f"{ASIDE_TAG}::") for tag in marks}
+                plan.unsuspend.extend(
+                    int(card.id) for card in note.cards()
+                    if int(card.queue) == SUSPENDED and _card_name(card) in named
+                )
+        return plan
+
+    def _apply_aside(self, collection: Any, plan: AsidePlan) -> None:
+        if not (plan.suspend or plan.unsuspend or plan.marked):
+            return
+        self.progress.say(f"Anki: suspending {_count(len(plan.suspend), 'card')} of "
+                          f"{_count(len(plan.words), 'word')} set aside; "
+                          f"unsuspending {_count(len(plan.unsuspend), 'card')}")
+        if plan.unsuspend:
+            try:
+                collection.sched.unsuspend_cards(plan.unsuspend)
+            except Exception as error:  # noqa: BLE001 - Anki's own sentence is the useful part
+                raise RuntimeError(
+                    f"Anki would not unsuspend {_count(len(plan.unsuspend), 'card')} of words "
+                    f"brought back: {error}"
+                ) from error
+        if plan.suspend or plan.marked:
+            try:
+                if plan.suspend:
+                    collection.sched.suspend_cards(plan.suspend)
+                collection.update_notes(plan.marked)
+            except Exception as error:  # noqa: BLE001
+                raise RuntimeError(
+                    f"Anki would not suspend the cards of {_count(len(plan.words), 'word')} set "
+                    f"aside: {error}"
+                ) from error
 
     @staticmethod
     def _remove_closed_cards(collection: Any, note_ids: set[int]) -> set[int]:
@@ -649,6 +722,23 @@ class AnkiRobot:
                 rendered[field] = EMBEDDED.sub(
                     lambda found: f'src="{names.get(found.group(1), found.group(1))}"', text)
         return rendered, added
+
+
+@dataclass
+class AsidePlan:
+    suspend: list[int] = field(default_factory=list)
+    unsuspend: list[int] = field(default_factory=list)
+    marked: list[Any] = field(default_factory=list)
+    words: set[str] = field(default_factory=set)
+
+
+def _count(number: int, noun: str) -> str:
+    return f"{number} {noun}" + ("" if number == 1 else "s")
+
+
+def _card_name(card: Any) -> str:
+    """A card's template, as a tag can carry it: `recognise`, `produce`, `listen`."""
+    return str(card.template()["name"]).casefold().replace(" ", "-")
 
 
 def result_json(result: dict[str, Any]) -> str:

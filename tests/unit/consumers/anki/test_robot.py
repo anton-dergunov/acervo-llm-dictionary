@@ -59,7 +59,7 @@ def word(**overrides) -> dict:
 
 
 def manifest(*notes: dict) -> SyncManifest:
-    return SyncManifest.model_validate({"schema_version": 2, "notes": list(notes) or [example()]})
+    return SyncManifest.model_validate({"schema_version": 3, "notes": list(notes) or [example()]})
 
 
 @pytest.fixture
@@ -263,3 +263,87 @@ def test_the_review_log_comes_back_as_acervo_reviews(robot, collection, tmp_path
     assert first["durationMs"] == 6000
     assert [item["reviewId"] for item in robot._reviews_since(collection, 1_788_000_000_000)] == [
         1_788_086_400_000]
+
+
+# ── words set aside ─────────────────────────────────────────────────────────
+
+OTHER_LEXEME = "lexeme000000002"
+
+
+def other() -> dict:
+    return example(note_id="example00000002", lexeme_id=OTHER_LEXEME, sense_id="sense0000000002")
+
+
+def aside(*notes: dict, words: tuple[str, ...] = (LEXEME_ID,)) -> SyncManifest:
+    return SyncManifest.model_validate(
+        {"schema_version": 3, "notes": list(notes) or [other()], "aside": list(words)})
+
+
+def suspended(collection, card_id: int) -> bool:
+    return int(collection.get_card(card_id).queue) == -1
+
+
+def test_a_word_set_aside_has_its_cards_suspended_and_marked(robot, collection, tmp_path):
+    both = sense(fields={"Produce": "y", "Recognise": "y", "Headword": "balsa"})
+    first = robot._upsert(collection, manifest(example(), both, other()), tmp_path)
+    cards = [card for note in first["notes"][:2] for card in note["card_ids"]]
+
+    report = robot._upsert(collection, aside(), tmp_path)
+
+    assert (report["words_aside"], report["suspended"], report["unsuspended"]) == (1, 3, 0)
+    assert all(suspended(collection, card) for card in cards)
+    assert not suspended(collection, first["notes"][2]["card_ids"][0])
+    note = collection.get_note(first["notes"][1]["anki_note_id"])
+    assert {"acervo::aside", "acervo::aside::recognise", "acervo::aside::produce"} <= set(note.tags)
+    # Still aside on the next push: nothing more is done.
+    again = robot._upsert(collection, aside(), tmp_path)
+    assert (again["words_aside"], again["suspended"], again["unsuspended"]) == (0, 0, 0)
+
+
+def test_a_word_brought_back_unsuspends_only_the_cards_the_robot_suspended(robot, collection, tmp_path):
+    both = sense(fields={"Produce": "y", "Recognise": "y", "Headword": "balsa"})
+    first = robot._upsert(collection, manifest(both, other()), tmp_path)
+    recognise, produce = first["notes"][0]["card_ids"]
+    # The owner suspended Produce by hand before the word was set aside.
+    collection.sched.suspend_cards([produce])
+
+    robot._upsert(collection, aside(), tmp_path)
+    back = robot._upsert(collection, manifest(both, other()), tmp_path)
+
+    assert back["unsuspended"] == 1
+    assert not suspended(collection, recognise)
+    assert suspended(collection, produce)
+    note = collection.get_note(first["notes"][0]["anki_note_id"])
+    assert not any(tag.startswith("acervo::aside") for tag in note.tags)
+
+
+def test_a_card_unsuspended_by_hand_while_aside_is_left_alone(robot, collection, tmp_path):
+    first = robot._upsert(collection, manifest(example(), other()), tmp_path)
+    card = first["notes"][0]["card_ids"][0]
+    robot._upsert(collection, aside(), tmp_path)
+    collection.sched.unsuspend_cards([card])
+
+    robot._upsert(collection, aside(), tmp_path)
+
+    assert not suspended(collection, card)
+
+
+def test_a_word_deleted_while_aside_keeps_its_cards_suspended(robot, collection, tmp_path):
+    first = robot._upsert(collection, manifest(example(), other()), tmp_path)
+    card = first["notes"][0]["card_ids"][0]
+    robot._upsert(collection, aside(), tmp_path)
+
+    robot._upsert(collection, aside(words=()), tmp_path)
+
+    assert suspended(collection, card)
+
+
+def test_a_suspension_anki_refuses_keeps_its_sentence(robot, collection, tmp_path, monkeypatch):
+    robot._upsert(collection, manifest(example(), other()), tmp_path)
+
+    def refuse(ids):
+        raise ValueError("the collection is read-only")
+
+    monkeypatch.setattr(collection.sched, "suspend_cards", refuse)
+    with pytest.raises(RuntimeError, match="suspend the cards of 1 word set aside: the collection is read-only"):
+        robot._upsert(collection, aside(), tmp_path)

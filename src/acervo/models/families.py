@@ -183,7 +183,8 @@ FAMILIES: tuple[Family, ...] = (
         # default. Speech goes through the Interactions API (`gemini_tts.py`), not LiteLLM: reached
         # through LiteLLM a Gemini voice drops its direction before the request is built. The free
         # tier's speech is three requests a minute per model (measured on Flash-Lite TTS,
-        # 6 Nov 2026), and the 429 says when to come back, which the cooldown reads.
+        # 6 Nov 2026) and ten a day (Google's own 429, 7 Nov 2026), and the 429 says when to come
+        # back, which the cooldown reads.
         id="gemini-api", label="Gemini API", group="Free to start",
         hint="Text, and voices that take a direction",
         routes=MappingProxyType({
@@ -295,6 +296,8 @@ FAMILIES: tuple[Family, ...] = (
             # A Gemini voice on Cloud TTS runs on Vertex, and a key is refused it
             # ("Permission 'aiplatform.endpoints.predict' denied", measured 6 Nov 2026), even one
             # that reaches WaveNet and Chirp 3 HD. With a key, Gemini voices are the Gemini API's.
+            # Cloud TTS has no 3.8 voices: `gemini-3.8-flash-tts` and `-flash-lite-tts` are "not
+            # supported" there (7 Nov 2026); they are the Gemini API's alone.
             "audio": Route("google-tts", file_only_models=("gemini-",)),
             "ocr": Route("google-vision"),
         }),

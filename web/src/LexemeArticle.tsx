@@ -79,7 +79,7 @@ export function grammarWords(lexeme: Lexeme): string {
 
 /** Where the word is filed, as a quiet line rather than a row of chips. */
 function placeLine(article: Article): string {
-  const status = article.lexeme.status === "inbox" ? "Inbox" : article.lexeme.status === "learned" ? "Learned" : null;
+  const status = article.lexeme.status === "inbox" ? "Inbox" : article.lexeme.status === "aside" ? "Set aside" : null;
   return [status, article.topics.map((topic) => topic.name).join(", ")].filter(Boolean).join(" — ");
 }
 

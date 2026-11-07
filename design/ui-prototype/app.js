@@ -230,7 +230,7 @@ function renderExternalArticle(x) {
 
 function inLanguage()  { return LEXEMES.filter((x) => x.language === state.lang); }
 function inboxCount()  { return inLanguage().filter((x) => x.status === "inbox").length; }
-function topicCount(k) { return inLanguage().filter((x) => x.topics.includes(k) && x.status !== "inbox").length; }
+function topicCount(k) { return inLanguage().filter((x) => x.topics.includes(k) && x.status === "active").length; }
 
 /**
  * Out of the Inbox and into its topics — one word, or the whole tab at once.
@@ -245,6 +245,20 @@ function fileWords(ids) {
   if (state.topic === "inbox" && !inboxCount()) state.topic = "all";
   render();
   toast(filing.length === 1 ? "Filed — it is in its topics now" : `Filed ${filing.length} words`);
+}
+
+/* Out of the way — out of Anki, out of a random loop or story, no more pictures or clips — or back.
+   `setAside` in `App.tsx`: one write, undone from the toast. */
+let asideOpen = (() => { try { return localStorage.getItem("acervo-list-aside-open") === "on"; } catch { return false; } })();
+function setAside(ids, aside) {
+  const moving = LEXEMES.filter((x) => ids.includes(x.id) && (aside ? x.status !== "aside" : x.status === "aside"));
+  if (!moving.length) return;
+  moving.forEach((x) => { x.status = aside ? "aside" : "active"; });
+  if (state.topic === "inbox" && !inboxCount()) state.topic = "all";
+  state.rowMenu = null;
+  render();
+  toast(aside ? (moving.length === 1 ? "Set aside — it waits at the foot of its topics" : `Set ${moving.length} words aside`)
+    : (moving.length === 1 ? "Brought back" : `Brought back ${moving.length} words`));
 }
 
 function visible() {
@@ -269,7 +283,10 @@ function visible() {
     alpha:  (a, b) => key(a).localeCompare(key(b), state.lang),
     hard:   (a, b) => (b.study ? b.study.difficulty : 99) - (a.study ? a.study.difficulty : 99)
   };
-  return rows.slice().sort(sorters[state.sort]);
+  // Two lists, sorted the same: the words being learned, and those set aside — still in their topic,
+  // still found by a search, drawn under a folded rule after the rest (`visibleRows`).
+  const sorted = rows.slice().sort(sorters[state.sort]);
+  return { rows: sorted.filter((x) => x.status !== "aside"), aside: sorted.filter((x) => x.status === "aside") };
 }
 
 function shortGlossOf(x) {
@@ -281,7 +298,7 @@ function shortGlossOf(x) {
 }
 
 /* ── the selection ────────────────────────────────────────────────────────
-   Words put aside to make a loop or a story from. A word is *marked* — from a row's menu or swipe,
+   Words picked to make a loop or a story from. A word is *marked* — from a row's menu or swipe,
    the article's bar, or the map's peek — never ticked: a thousand words across a dozen topics is not
    a list anyone ticks through, and a mark survives changing topic, searching and opening things,
    which a checkbox in one view never quite does.
@@ -373,7 +390,7 @@ function renderRail() {
       <span class="ic">${icon}</span><span class="nm">${name}</span>
       ${count !== null ? `<span class="cnt">${count}</span>` : ""}
     </button>`;
-  const all = inLanguage().filter((x) => x.status !== "inbox").length;
+  const all = inLanguage().filter((x) => x.status === "active").length;
   rail.innerHTML =
     tab("all", "\u{1F4D6}", "All", all, state.topic === "all" && !state.map) +
     (inboxCount() ? tab("inbox", "\u{1F4E5}", "Inbox", inboxCount(), state.topic === "inbox" && !state.map) : "") +
@@ -398,12 +415,13 @@ function renderLangButton() {
 /* ── list view ───────────────────────────────────────────────────────── */
 
 function renderList() {
-  const rows = visible();
+  const { rows, aside } = visible();
   const q = state.query.trim();
   let title, icon, sub;
   if (q) {
     title = "Search"; icon = "\u{1F50D}";
-    sub = `${rows.length} match${rows.length === 1 ? "" : "es"} for “${esc(q)}” in ${langOf(state.lang).name}`;
+    const found = rows.length + aside.length;
+    sub = `${found} match${found === 1 ? "" : "es"} for “${esc(q)}” in ${langOf(state.lang).name}`;
   } else if (state.topic === "inbox") {
     title = "Inbox"; icon = "\u{1F4E5}";
     sub = "Captured, processed, waiting for your review";
@@ -427,20 +445,10 @@ function renderList() {
       [1, 2, 3, 4].map((i) => `<i class="${i <= s ? "f" : ""}"></i>`).join("") + "</span>";
   };
 
-  return `
-    <div class="list-head">
-      <div>
-        <h1><span class="ic">${icon}</span>${esc(title)}</h1>
-        <p class="label sub">${sub}</p>
-      </div>
-      <div class="sortbar">
-        ${fileable.length ? `<button class="sort-btn" id="fileAllBtn">File all ${fileable.length}</button>` : ""}
-        ${sortBtn("recent", "Recent")}${sortBtn("alpha", "A–Z")}${sortBtn("hard", "Hardest")}
-      </div>
-    </div>
-    <div class="rows">
-      ${rows.length ? rows.map((x) => { const on = isPicked(x.id); return swipeRow(`word:${x.id}`, `
-        <button class="row${x.status === "inbox" ? " inbox" : ""}${on ? " picked" : ""}" data-open="${x.id}">
+  const wordRow = (x) => {
+    const on = isPicked(x.id);
+    return swipeRow(`word:${x.id}`, `
+        <button class="row${x.status === "inbox" ? " inbox" : ""}${x.status === "aside" ? " aside" : ""}${on ? " picked" : ""}" data-open="${x.id}">
           <span class="plate">${x.emoji || "\u{1F4C4}"}${on ? `<span class="pick-badge" role="img" aria-label="Selected">${ICON.check}</span>` : ""}</span>
           <span>
             <span class="word">${esc(x.headword)}${x.reading ? `<span class="rdg">${esc(x.reading)}</span>` : ""}</span>
@@ -453,11 +461,36 @@ function renderList() {
           </span>
         </button>`, [
           { label: on ? "Unselect" : "Select", menu: on ? "Remove from selection" : "Add to selection", tone: "pick", attrs: `data-pick="${x.id}"` },
+          x.status === "aside"
+            ? { label: "Bring back", menu: "Bring it back", attrs: `data-word-back="${x.id}"` }
+            : { label: "Set aside", menu: "Set it aside", attrs: `data-word-aside="${x.id}"` },
           { label: "Delete", menu: "Delete this word", tone: "danger", attrs: `data-word-delete="${x.id}"`, sep: true }
-        ]); }).join("")
+        ]);
+  };
+
+  return `
+    <div class="list-head">
+      <div>
+        <h1><span class="ic">${icon}</span>${esc(title)}</h1>
+        <p class="label sub">${sub}</p>
+      </div>
+      <div class="sortbar">
+        ${fileable.length ? `<button class="sort-btn" id="fileAllBtn">File all ${fileable.length}</button>` : ""}
+        ${sortBtn("recent", "Recent")}${sortBtn("alpha", "A–Z")}${sortBtn("hard", "Hardest")}
+      </div>
+    </div>
+    <div class="rows">
+      ${rows.length ? rows.map(wordRow).join("")
+      : aside.length ? ""
       : q ? `<p class="ext-status none-yours">No words of yours match “${esc(q)}”.</p>`
           : '<p class="empty">Nothing here yet.</p>'}
     </div>
+    ${aside.length ? `<div class="aside-section">
+      ${q ? `<div class="list-sep"><span class="label">Set aside · ${aside.length}</span></div>`
+        : `<button type="button" class="list-sep fold" id="asideFold" aria-expanded="${asideOpen}">
+            <span class="caret">${ICON.caret}</span><span class="label">Set aside · ${aside.length}</span></button>`}
+      ${q || asideOpen ? `<div class="rows">${aside.map(wordRow).join("")}</div>` : ""}
+    </div>` : ""}
     ${renderExternal()}`;
 }
 
@@ -485,7 +518,7 @@ function grammarWords(x) {
 
 /* Where the word is filed, as a quiet line rather than a row of chips. */
 function placeLine(x) {
-  const status = x.status === "inbox" ? "Inbox" : x.status === "learned" ? "Learned" : null;
+  const status = x.status === "inbox" ? "Inbox" : x.status === "aside" ? "Set aside" : null;
   const topics = x.topics.map((k) => topicOf(k).name).join(", ");
   return [status, topics].filter(Boolean).join(" — ");
 }
@@ -684,8 +717,8 @@ function senseSection(s, i, x) {
     <div class="sense-head">
       <p class="sense-def${state.review && mark.includes("mark-change") ? " field-change" : ""}">${spoken(esc(s.definition), say(s.definition))}</p>
       ${s.images.length ? "" : `<button class="ask-anchor picture-anchor" data-add-picture aria-label="Add a picture" title="Add a picture">${ICON.picture}</button>`}
-      <button class="ask-anchor map-anchor" data-map-show="${esc(x.headword)}" data-map-order="${i}"
-        aria-label="Show on the map" title="Show on the map">${ICON.map}</button>
+      ${x.status === "aside" ? "" : `<button class="ask-anchor map-anchor" data-map-show="${esc(x.headword)}" data-map-order="${i}"
+        aria-label="Show on the map" title="Show on the map">${ICON.map}</button>`}
       <button class="ask-anchor" aria-label="Ask about this meaning">${ICON.ask}</button>
     </div>
     <div class="glosses">${s.glosses.map(glossLine).join("")}</div>
@@ -2470,7 +2503,7 @@ function paintLoops() {
 
 /* ── make a loop ── */
 function loopEligible() {
-  return LEXEMES.filter((x) => x.language === state.lang && x.status !== "inbox" && x.primaryGloss
+  return LEXEMES.filter((x) => x.language === state.lang && x.status === "active" && x.primaryGloss
     && (state.topic === "all" || x.topics.includes(state.topic))).length;
 }
 
@@ -2668,7 +2701,7 @@ function openLoopDialog(from = "scope") {
    sample. */
 function openStoryDialog(from = "scope") {
   const where = state.topic === "all" ? langOf(state.lang).name : `${langOf(state.lang).name} · ${topicOf(state.topic)?.name || "Inbox"}`;
-  const eligible = visible().length;
+  const eligible = visible().rows.length;
   const scope = `<div class="loop-scope">${ICON.book}<span><b>${esc(where)}</b> · ${eligible} words can be in a story</span></div>
         <label class="config-field"><span>How many words</span>
           <span class="loop-count">
@@ -2801,6 +2834,16 @@ $("#main").addEventListener("click", (ev) => {
      was, so the mark it now wears is the first thing seen. */
   const pick = ev.target.closest("[data-pick]");
   if (pick) { state.rowMenu = null; togglePick(pick.dataset.pick); return; }
+  const asideWord = ev.target.closest("[data-word-aside]");
+  if (asideWord) { setAside([asideWord.dataset.wordAside], true); return; }
+  const backWord = ev.target.closest("[data-word-back]");
+  if (backWord) { setAside([backWord.dataset.wordBack], false); return; }
+  if (ev.target.closest("#asideFold")) {
+    asideOpen = !asideOpen;
+    try { localStorage.setItem("acervo-list-aside-open", asideOpen ? "on" : "off"); } catch { /* a preference */ }
+    render();
+    return;
+  }
   const dropWord = ev.target.closest("[data-word-delete]");
   if (dropWord) {
     const id = dropWord.dataset.wordDelete;
@@ -2970,16 +3013,19 @@ function render() {
       ${x.status === "inbox" ? `<button class="icon-btn art-file" id="fileBtn" aria-label="File it" title="File it \u2014 out of the Inbox">${ICON.file}</button>` : ""}
       <button class="icon-btn art-pick${isPicked(x.id) ? " on" : ""}" id="pickBtn" aria-pressed="${isPicked(x.id)}"
         aria-label="${isPicked(x.id) ? "Remove from selection" : "Add to selection"}" title="${isPicked(x.id) ? "In your selection \u2014 remove it" : "Add to selection"}">${isPicked(x.id) ? ICON.selected : ICON.select}</button>
-      <button class="icon-btn art-delete" id="delBtn" aria-label="Delete" title="Delete">${ICON.trash}</button>
+      <!-- Set aside and Delete live in the menu at every width; a phone folds the views, File it and
+           the selection in too. -->
       <div class="art-more">
         <button class="icon-btn" id="moreBtn" aria-label="Article menu">${ICON.more}</button>
         <div class="menu" id="articleMenu">
-          <button data-view="page" class="${view === "page" ? "on" : ""}">Page</button>
-          <button data-view="cards" class="${view === "cards" ? "on" : ""}"${cardsOff}>Cards</button>
-          <button data-mode="yaml" class="${state.mode === "yaml" ? "on" : ""}">YAML</button>
+          <button data-view="page" class="phone-only${view === "page" ? " on" : ""}">Page</button>
+          <button data-view="cards" class="phone-only${view === "cards" ? " on" : ""}"${cardsOff}>Cards</button>
+          <button data-mode="yaml" class="phone-only${state.mode === "yaml" ? " on" : ""}">YAML</button>
+          <div class="menu-sep phone-only"></div>
+          ${x.status === "inbox" ? '<button id="fileBtn2" class="phone-only">File it</button>' : ""}
+          <button id="pickBtn2" class="phone-only">${isPicked(x.id) ? "Remove from selection" : "Add to selection"}</button>
+          ${x.status === "aside" ? '<button id="backBtn2">Bring it back</button>' : '<button id="asideBtn2">Set it aside</button>'}
           <div class="menu-sep"></div>
-          ${x.status === "inbox" ? '<button id="fileBtn2">File it</button>' : ""}
-          <button id="pickBtn2">${isPicked(x.id) ? "Remove from selection" : "Add to selection"}</button>
           <button id="delBtn2" class="danger">Delete this word</button>
         </div>
       </div>`;
@@ -3172,12 +3218,13 @@ document.addEventListener("click", (ev) => {
   if (hit("#editBtn")) { state.mode = "edit"; render(); return; }
   if (hit("#moreBtn")) { $("#articleMenu").classList.toggle("open"); return; }
   if (hit("#delBtn2")) { toast("Delete writes a tombstone — not wired up in the prototype"); return; }
-  if (hit("#delBtn"))  { toast("Delete writes a tombstone — not wired up in the prototype"); return; }
+  if (hit("#asideBtn2")) { setAside([state.openId], true); return; }
+  if (hit("#backBtn2")) { setAside([state.openId], false); return; }
   /* Filing is wired up for real, unlike Delete: it is one field, and what it does to the rail and
      the counts is the whole thing worth looking at. */
   if (hit("#fileBtn") || hit("#fileBtn2")) { fileWords([state.openId]); return; }
   if (hit("#pickBtn") || hit("#pickBtn2")) { togglePick(state.openId); return; }
-  if (hit("#fileAllBtn")) { fileWords(visible().map((x) => x.id)); return; }
+  if (hit("#fileAllBtn")) { fileWords(visible().rows.map((x) => x.id)); return; }
 
   if (hit("[data-add-picture]")) { toast("Opens the picture dialog — brief, Draw, or your own picture"); return; }
   const say = hit("[data-say]");

@@ -12,7 +12,7 @@ from .model import KINDS, MEDIA_FIELDS
 NonEmptyString = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 RecordId = Annotated[str, StringConstraints(pattern=r"^[a-z0-9]{15}$")]
 
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 # A file a content field shows itself — a sense's picture in a word's list of senses.
 EMBEDDED = re.compile(r'\bsrc="([^"]+)"')
 
@@ -78,12 +78,17 @@ class SyncManifestNote(BaseModel):
 
 class SyncManifest(BaseModel):
     """Versioned rendered-note input for the Anki robot. The notes' order is the order new cards
-    are introduced in."""
+    are introduced in.
+
+    `aside` names the words the owner has set aside. They have no notes here, and the robot
+    suspends the cards they already have rather than leaving them to come up.
+    """
 
     model_config = ConfigDict(extra="forbid")
 
     schema_version: int
     notes: list[SyncManifestNote] = Field(min_length=1)
+    aside: list[RecordId] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def validate_version_and_identities(self) -> SyncManifest:
@@ -94,6 +99,11 @@ class SyncManifest(BaseModel):
         identities = [note.note_id for note in self.notes]
         if len(identities) != len(set(identities)):
             raise ValueError("note_id values must be unique within a manifest")
+        if len(self.aside) != len(set(self.aside)):
+            raise ValueError("aside values must be unique within a manifest")
+        both = sorted(set(self.aside) & {note.lexeme_id for note in self.notes})
+        if both:
+            raise ValueError(f"a word set aside has no notes: {', '.join(both)}")
         return self
 
     @classmethod

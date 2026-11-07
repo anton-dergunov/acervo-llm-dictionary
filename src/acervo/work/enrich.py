@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from acervo.article import live
+from acervo.article import GENERATED_STATUSES, live
 from acervo.errors import ApiError
 from acervo.images.ids import image_prompt_id
 from acervo.pronunciation.ids import pronunciation_id
@@ -35,12 +35,19 @@ DEVICE = "acervorunner"
 STEPS = ("clips", "pictures", "pronunciations")
 
 
+def _enriched(records: dict[str, list[dict]], lexeme_id: str) -> dict[str, Any] | None:
+    """The word, if it is one worth enriching: live, and not set aside. A word set aside is treated as
+    absent, so every step skips it and a backfill never queues it."""
+    return next(
+        (row for row in live(records.get("lexemes", []))
+         if row["id"] == lexeme_id and row.get("status") in GENERATED_STATUSES),
+        None,
+    )
+
+
 def _word(context: JobContext) -> tuple[dict[str, Any] | None, dict[str, list[dict]]]:
     records = graph.article_records(context.owner, context.subject_id)
-    lexeme = next(
-        (row for row in live(records.get("lexemes", [])) if row["id"] == context.subject_id), None
-    )
-    return lexeme, records
+    return _enriched(records, context.subject_id), records
 
 
 def _senses(records: dict[str, list[dict]], lexeme_id: str) -> list[dict]:
@@ -189,7 +196,7 @@ def lacking(settings: Settings, owner: str, lexeme_id: str) -> list[str]:
     a backfill needs, and the reason it is one function rather than two sets of rules.
     """
     records = graph.article_records(owner, lexeme_id)
-    lexeme = next((row for row in live(records.get("lexemes", [])) if row["id"] == lexeme_id), None)
+    lexeme = _enriched(records, lexeme_id)
     if lexeme is None:
         return []
     found = []

@@ -21,7 +21,7 @@ def test_input_bundle_contains_only_manifest_and_referenced_media(tmp_path: Path
     manifest.write_text(
         json.dumps(
             {
-                "schema_version": 2,
+                "schema_version": 3,
                 "notes": [
                     {
                         "kind": "meaning",

@@ -19,7 +19,7 @@ from __future__ import annotations
 from typing import Any
 
 from acervo import activity, trace
-from acervo.article import ArticleView, article_for
+from acervo.article import ArticleView, article_for, set_aside
 from acervo.clips.corpus import Candidate, Corpus, CorpusError
 from acervo.clips.ids import clip_example_id
 from acervo.clips.select import ClipSelector, Selection
@@ -142,8 +142,10 @@ def find_clips(settings: Settings, owner: str, device: str, lexeme_id: str) -> d
     records = graph.article_records(owner, lexeme_id)
     article = article_for(records, lexeme_id)
     if article is None:
-        # One message for "no such word", "somebody else's word" and "a word you put away": telling
-        # them apart would answer whether an id exists in another account.
+        if set_aside(records, lexeme_id):
+            raise ApiError(409, "set_aside", "That word is set aside; bring it back first.")
+        # One message for "no such word" and "somebody else's word": telling them apart would answer
+        # whether an id exists in another account.
         raise ApiError(404, "not_found", "That word is not in your vocabulary.")
     if not article.senses:
         raise ApiError(400, "no_senses", "A word with no senses has nothing to illustrate.")

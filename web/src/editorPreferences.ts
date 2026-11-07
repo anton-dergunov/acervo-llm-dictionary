@@ -190,3 +190,17 @@ export function rememberLoopFormat(format: string, switches: Record<string, bool
     localStorage.setItem(LOOP_FORMAT_KEY, format);
   } catch { /* a preference, not data */ }
 }
+
+/**
+ * Whether a list shows its words set aside, remembered per device and for every list at once: they
+ * are folded away by default, which is the point of setting them aside.
+ */
+const ASIDE_OPEN_KEY = "acervo-list-aside-open";
+
+export function asideOpen(): boolean {
+  return readPreference(ASIDE_OPEN_KEY, false);
+}
+
+export function setAsideOpen(open: boolean): void {
+  try { localStorage.setItem(ASIDE_OPEN_KEY, open ? "on" : "off"); } catch { /* a preference, not data */ }
+}

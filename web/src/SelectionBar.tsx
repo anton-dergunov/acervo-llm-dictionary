@@ -1,5 +1,5 @@
 /**
- * The selection bar: the words put aside to make something from, and what they are for.
+ * The selection bar: the words picked to make something from, and what they are for.
  *
  * On the left, what is selected — how many, and as many whole words as fit and then "+N". On the
  * right, the two things a selection is for today, Loop and Story, and × to forget it. The words are

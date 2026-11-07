@@ -41,7 +41,7 @@ def write_manifest(input_dir: Path, *, updated: bool = False) -> None:
     )
     (media / "balsa.mp3").write_bytes(b"ID3-acervo-audio")
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "notes": [
             {
                 "kind": "meaning",

@@ -1374,10 +1374,30 @@ describe("Acervo application", () => {
     await openList();
     acceptWrites();
     fireEvent.click(screen.getByRole("button", { name: /la balsa/ }));
-    fireEvent.click(await screen.findByRole("button", { name: "Delete" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Article menu" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "Delete this word" }));
     expect(await screen.findByText(/tombstone/)).toBeInTheDocument();
     await waitFor(() => expect(screen.queryByRole("button", { name: /la balsa/ })).not.toBeInTheDocument());
     expect(repository.snapshot().lexemes.find((lexeme) => lexeme.id === "lexemebalsa0001")?.deleted).toBe(true);
+  });
+
+  it("sets a word aside from its menu, folds it under the list, and brings it back", async () => {
+    localStorage.removeItem("acervo-list-aside-open");
+    signedIn();
+    await openList();
+    acceptWrites();
+    fireEvent.click(screen.getByRole("button", { name: /la balsa/ }));
+    fireEvent.click(await screen.findByRole("button", { name: "Article menu" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "Set it aside" }));
+    expect(await screen.findByText(/Set aside — it waits/)).toBeInTheDocument();
+    expect(repository.snapshot().lexemes.find((lexeme) => lexeme.id === "lexemebalsa0001")?.status).toBe("aside");
+    // The article says where the word is now, as it says "Inbox".
+    expect(screen.getByText(/^Set aside — /, { selector: ".place" })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Article menu" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "Bring it back" }));
+    await waitFor(() => expect(repository.snapshot().lexemes
+      .find((lexeme) => lexeme.id === "lexemebalsa0001")?.status).toBe("active"));
   });
 
   it("gathers words into the selection from the list and an article, and makes a loop from them", async () => {
@@ -1448,7 +1468,8 @@ describe("Acervo application", () => {
     vi.spyOn(backendSession, "pushGraph")
       .mockRejectedValue(new AcervoApiError("The Acervo server could not be reached. Local vocabulary remains available.", 0, "offline"));
     fireEvent.click(screen.getByRole("button", { name: /la balsa/ }));
-    fireEvent.click(await screen.findByRole("button", { name: "Delete" }));
+    fireEvent.click(await screen.findByRole("button", { name: "Article menu" }));
+    fireEvent.click(screen.getByRole("menuitem", { name: "Delete this word" }));
     expect(await screen.findByText(/could not be reached/)).toBeInTheDocument();
     // The entry is still open, still undeleted, and nothing was queued for later.
     expect(screen.getByRole("heading", { name: /la balsa/ })).toBeInTheDocument();

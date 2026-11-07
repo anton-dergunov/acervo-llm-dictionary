@@ -89,9 +89,15 @@ searched on), `reading` (pinyin or another script aid — **required for Chinese
 - **`emotion`** — how the word itself sounds when said: the same short English direction an example
   carries, one level up.
 
-**`status`** is `inbox → active → learned → retired`, plus **`suppressed`**: without a way to say *"I
-saw this and decided not to learn it"*, the same word arrives through capture forever and a duplicate
-check cannot tell a new word from a rejected one.
+**`status`** is `inbox → active → aside`. **`aside`** is a word the owner has put out of the way —
+known well enough, or not wanted — without deleting it, which is forever. Without it, the same word
+arrives through capture forever and a duplicate check cannot tell a new word from a rejected one.
+"Known well enough" and "not wanted" are one status because everything that reads it does the same
+with both, and how well a word is known is what its study state already measures. A word set aside is
+still held: it counts as a duplicate, stays in its topics, shown faded under a folded rule at the
+foot of each list, and keeps its history, media and study state. It is not enriched, not on the map,
+not drawn into a random loop or story — one chosen by hand still goes — and its Anki cards are
+suspended until it is brought back, which makes it `active` again.
 
 **`clipsSearchedAt`** answers two questions with one field: null means the corpus was never consulted;
 set with no clip means it was, and nothing was good enough. It is written only on a successful
