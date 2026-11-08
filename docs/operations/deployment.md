@@ -411,6 +411,29 @@ with a different schema, by name, rather than half-working.
   the previous server. `--cancel-jobs --transition` is the pair when a schema change waits behind an
   open job. The converter is deleted from the repository once it has run.
 
+### DSM emails "Container acervo-server-1 stopped unexpectedly" after a deploy
+
+Harmless. A deploy stops the old server container itself from the command line (`up -d --build`
+recreates it; `--reset-database` and `--transition` run `compose stop server`), and Container
+Manager's event watcher cannot tell that from a crash, so it raises its "Container stopped
+unexpectedly" notification. The new server starts and passes its healthcheck as usual.
+
+**Silence it:** DSM ▸ Control Panel ▸ Notification ▸ Rules ▸ Advanced ▸ Container Manager ▸
+"Container stopped unexpectedly", and untick Email (and Push/SMS if they also arrive). DSM has no
+per-container opt-out, so the cost is that a real crash of any container no longer emails;
+`restart: unless-stopped` still brings it back and `./deploy.sh --status` shows its health.
+
+**If the emails continue, or a quiet crash alert matters,** make the deploy's stop a clean one. DSM
+only reports a non-zero exit code, so read it on the NAS right after a deploy:
+`sudo docker inspect -f '{{.State.ExitCode}}' acervo-server-1`.
+
+- **137**: Docker killed the server after its 10 s grace, because shutdown waits for the job runner to
+  stop between model calls (`runner.stop()` in `src/acervo/api/app.py`). Add `stop_grace_period: 60s`
+  to the `server` service in `deploy/acervo/compose.yaml`.
+- **143**: SIGTERM went unhandled. Make `serve` in `src/acervo/admin.py` exit 0 on it.
+
+Either way the aim is exit code 0, so DSM sees a normal stop; then turn the notification back on.
+
 ### Accounts
 
 Registration is closed and there is no superuser. One account is made at a time, with the password read
