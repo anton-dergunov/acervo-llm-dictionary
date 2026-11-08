@@ -14,6 +14,7 @@ what it said.
 
 - [`anki.md`](anki.md) — review the cards, show how hard a word is, make Anki optional.
 - [`loops-and-stories.md`](loops-and-stories.md) — choosing the words, favourites, level and length, listening hands-free.
+- [`carousel-spike.md`](carousel-spike.md) — eight ways to choose a picture in the make dialogs, on trial by hand.
 
 **Words and languages**
 

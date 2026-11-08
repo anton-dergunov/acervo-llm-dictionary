@@ -14,6 +14,7 @@
  */
 
 import { useEffect, useId, useRef, type ReactNode } from "react";
+import { CarouselPicker } from "./carousels/CarouselPicker";
 import { BackIcon } from "./icons";
 
 export default function MakeDialog({ title, back, footer, onClose, children }: {
@@ -63,7 +64,7 @@ export default function MakeDialog({ title, back, footer, onClose, children }: {
         <h2 id={id}>{back ? back.title : title}</h2>
         <button className="close" onClick={onClose} aria-label="Close">×</button>
       </header>
-      <div className="make-body">{children}</div>
+      <div className="make-body">{!back && <CarouselPicker />}{children}</div>
       <footer className="make-footer">{footer}</footer>
     </section>
   </div>;
