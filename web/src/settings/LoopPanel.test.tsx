@@ -24,7 +24,7 @@ const GEMINI = {
 const SCHEMA: LoopSchema = {
   apiVersion: "2.0.0", engineVersion: "0.7.0", maxItems: 24,
   formats: [], writerAvailable: true, mixesLanguages: true, productionBundle: true,
-  families: [{ id: "gentle-game", label: "Gentle game", description: "Quick, cheerful arpeggios." }]
+  families: [{ id: "gentle-game", label: "Gentle game", description: "Quick, cheerful arpeggios.", sample: null }]
 };
 
 function settings(loops: "plain" | "expressive" = "expressive"): PronunciationSettings {

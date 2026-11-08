@@ -289,7 +289,8 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
     beds: [
       {
         id: "bedmorning00001", styleId: "sunlit-acoustic", seed: 104740, engineVersion: "1.4.0",
-        bedFingerprint: "90c6ad267d159b0e", sourceLoopId: "loopmorning0001", ...sync("09-03")
+        bedFingerprint: "90c6ad267d159b0e", sourceLoopId: "loopmorning0001",
+        audioRef: null, audioMime: null, durationSeconds: null, ...sync("09-03")
       }
     ]
   };

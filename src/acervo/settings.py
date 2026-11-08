@@ -74,6 +74,12 @@ class Settings(BaseSettings):
         return self.database_path.parent / "takes"
 
     @property
+    def samples_path(self) -> Path:
+        """Each music style's sample, beside the database for the take cache's reasons: a cache,
+        not a record's media, rebuilt by asking again, and served by its own route only."""
+        return self.database_path.parent / "samples"
+
+    @property
     def maps_path(self) -> Path:
         """The meaning map's embedding cache and its drawn maps, beside the database for the take
         cache's reasons: derived, server-local, never served as a file, and needing no new mount."""

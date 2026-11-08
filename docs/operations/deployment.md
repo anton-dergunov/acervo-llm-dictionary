@@ -294,7 +294,7 @@ Everything is under the deployment root, and a deploy replaces only the release 
 
 ```text
 data/server            the vocabulary database, the providers' keys (providers.secrets.json, mode 600),
-                       the take cache and the meaning maps beside it
+                       the take cache, the style samples and the meaning maps beside it
 data/media             pictures and recordings (ACERVO_MEDIA_PATH)
 data/dictionaries      compiled dictionaries, merged in from each release
 data/speech-cache      the corpus's downloaded captions — not regenerable, never deleted

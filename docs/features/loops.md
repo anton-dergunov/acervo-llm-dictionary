@@ -240,6 +240,15 @@ generation in front of the master. It would save one call per word in the plain 
 directed case. `experiments/pronunciation-encoding/` exists to have settled exactly this trade, and
 this is it being settled.
 
+**The style samples are a second cache of the same kind** (`loops/samples.py`), beside the database
+under `samples/` and off the media volume, which is for the owner's data. One short render of each
+family at a fixed seed, **looked up** by a key over the family, seed, length, palette, engine version
+and bundle version — so a new engine or bundle misses and renders afresh, with nothing to invalidate —
+and **served** under `<key>/<family>-<digest of the bytes>.mp3`, which is the rule every client media
+cache lives by. Nothing references a sample and nothing replicates one; `GET /loops/schema` names
+each family's sample, or null while there is none. It is emptied by hand, `admin samples clear`, as
+the takes are.
+
 ### 6 · Three takes, and what actually makes them differ
 
 This deserves its own section because the mechanism is not uniform, and the integration sits on top
@@ -417,9 +426,11 @@ the restart is cheap.
 | `GET /api/v1/health` | `{status, api_version, engine_version, production_bundle}` — liveness only |
 | `GET /api/v1/schema` | formats, profiles, families, energy, rhythm, palette, limits, audio |
 | `POST /api/v1/loops` | `202` with an operation |
+| `POST /api/v1/music` | `202` with an operation: a bed alone, `{family, seed, seconds, palette}` |
 | `GET /api/v1/operations/{id}` | the operation, with `result` once it completes |
 | `DELETE /api/v1/operations/{id}` | cancels between utterances |
 | `GET /api/v1/loops/{id}/audio` | the finished track, `audio/mpeg` |
+| `GET /api/v1/music/{id}/audio` | the music alone, `audio/mpeg` |
 
 The operation is `{operation_id, status, successful, error, progress: {fraction, message},
 created_at, updated_at, result}`, with `status` one of `queued | running | completed | failed |
@@ -436,6 +447,16 @@ collections and the kept script, and nothing else. A cue naming a word the loop 
 refused rather than stored. **The resolved
 BedSpec is deliberately not in it**, on that service's side as well as this one, so there is nothing
 for a host to be tempted into storing.
+
+**Music on its own goes through the same queue.** `POST /api/v1/music` resolves the bed exactly as a
+loop does — same family, seed and palette, so the `bed_fingerprint` it answers is the one the loop
+carried — and renders it with nothing spoken over it, for `seconds` rounded to whole bars and bounded
+by the service's `limits`. Its result is `audio_url`, `style_id`, `seed`, `engine_version`,
+`bed_fingerprint`, `bpm`, `duration_seconds` and `bitrate_kbps`. Because it is listened to alone, it
+starts at full level rather than fading in, keeps its fade out, and is normalised alone to one level
+(−18 LUFS) so styles are compared by ear rather than by how loud each comes out; a bed under a voice
+is untouched. It is an operation rather than an answer because the generator has one worker: a request
+made while a loop renders waits behind it.
 
 ### 11 · MP3, written there and stored untouched
 
@@ -646,8 +667,7 @@ lesson's examples and remarks survive a change of music word for word, every tak
 cache, and new music costs render time and no provider spend. The dialog offers the
 generator's own styles without `auto`, which is the absence of a choice and is called *Surprise me*.
 The kept beds come first, as **Saved music**, a section of its own: each its style's picture, its name
-with the star, when it was kept and the loop it came from in plain view, and a button to hear that
-loop. A kept bed is not a style tile with a small star, because one looks like the style it is a
+with the star, when it was kept and the loop it came from in plain view, and ▶ to hear it. A kept bed is not a style tile with a small star, because one looks like the style it is a
 piece of and goes unseen. The two most recent show, and **All** lists every one in place of the
 dialog's body, so the section is two cards high however many are kept; a chosen piece that is not
 among the two takes the second place, so what is chosen is always in sight. Under it is **Music style
@@ -689,9 +709,42 @@ The pictures are `web/src/art/music/<family>.webp`, drawn once by `scripts/draw_
 family with none yet gets its initial, so a family LexiBeat adds still appears.
 
 **A kept bed is a `beds` record**, not a flag on the loop: `styleId` and `seed` replay it for any
-words, and `sourceLoopId` outlives the loop it came from. The star in the player writes or tombstones
-it as an ordinary client write; the make dialog offers kept beds first and sends one as family *and*
-seed, since a seed read with `auto` may land on another family.
+words, and `sourceLoopId` outlives the loop it came from. The star in the player keeps it as an
+ordinary client write; the make dialog offers kept beds first and sends one as family *and* seed,
+since a seed read with `auto` may land on another family. Letting it go is a route, `DELETE
+/beds/{id}`, for a deleted loop's reason: the bed has music of its own, which only the server can
+remove.
+
+**Music is heard on its own, and it is ready before ▶ is pressed.** The generator renders one thing
+at a time, and a minute of music takes it seconds alone and minutes behind a loop, so nothing is
+rendered on a tap if it can be helped:
+
+- **A kept bed's music is media.** Keeping a bed queues a `music` job in the same transaction as the
+  record arrives. It replays the bed through `POST /api/v1/music` — about a minute of it — and stores
+  the file as `music/<bed>-<digest>.mp3` with the bed's `audioRef`, `audioMime` and
+  `durationSeconds`, file first, then the row. It stores only the bed that was kept: an engine that
+  has moved on since is refused naming both versions, and a fingerprint that comes back different is
+  refused rather than kept as other music under the old name. Saved music's ▶ plays that file, kept
+  on the device and heard offline, and plays the source loop, voice and all, until it has arrived.
+  Beds kept before this are given their music by `admin jobs enqueue enrich --missing` (`./deploy.sh
+  --worker backfill`), the same job; nothing is converted.
+- **Each style has a sample** (the cache in §2.5), 24 seconds at a fixed seed. A `music.samples` job
+  makes every missing one, one family at a time so a loop waits behind at most one sample. A runner
+  tick queues it a minute after the server starts — a deploy is what changes the engine — and hourly
+  after that while any are missing or the generator is away. A tap on a family it has not reached
+  yet makes that one there and then (`POST /loops/samples/{family}`), waiting up to ninety seconds,
+  one render per family however many taps arrive.
+- **▶ sits on the middle picture of the row only**, never on Surprise me, which has no sound of its
+  own. It is a frosted round button (`MusicPlay.tsx`): a turning arc while the bytes are on their
+  way, then ❚❚ with a ring that fills as the sample plays. It fades while the row moves and a press
+  on it never drags the row. **While a sample plays, the row follows**: coming to rest on another
+  style plays that style's sample, and resting on Surprise me stops it, so swiping through the styles
+  is listening through them. The middle sample and its neighbours are fetched before they are asked
+  for. Choosing saved music, Make, or closing the dialog stops it.
+- **It is the preview player's**, `pronunciation.playPreview` — "hear this before choosing it", as a
+  voice is in Settings — so a sample silences a loop or a word and is silenced by them. There is no
+  fourth player. Samples and bed music are kept on the device in a `music` media store of their own,
+  so letting loops go does not let them go.
 
 **A loop is deleted by a route**, `DELETE /loops/{id}`, because the track is megabytes that nothing
 else would ever remove and the row and the file must be written by the same party. The file goes

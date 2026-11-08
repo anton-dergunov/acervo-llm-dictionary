@@ -158,6 +158,24 @@ class Loop:
 
 
 @dataclass(frozen=True)
+class Music:
+    """A bed rendered on its own, with nothing spoken over it.
+
+    The same family and seed replay the bed a loop with them was made over, and `bed_fingerprint`
+    is what proves it did; `engine_version` says which engine was asked.
+    """
+
+    audio_url: str
+    audio_mime: str
+    duration_seconds: float
+    style_id: str
+    seed: int
+    engine_version: str
+    bed_fingerprint: str
+    bpm: float
+
+
+@dataclass(frozen=True)
 class Operation:
     """A render the service is running, as far as Acervo needs to know it."""
 
@@ -167,7 +185,7 @@ class Operation:
     error: str | None
     fraction: float
     message: str
-    result: Loop | None = None
+    result: Loop | Music | None = None
 
     @property
     def finished(self) -> bool:
@@ -247,8 +265,20 @@ class LoopService:
             body["script"] = script
         return _operation(self._send("POST", "/loops", body=body))
 
-    def operation(self, operation_id: str) -> Operation:
-        return _operation(self._send("GET", f"/operations/{operation_id}"))
+    def music(self, *, family: str, seed: int, seconds: float,
+              palette: str = "hybrid") -> Operation:
+        """Ask for a bed on its own: what a kept bed sounds like, or a style's sample.
+
+        The palette is a loop's, so the same family and seed resolve to the bed a loop was made
+        over. Nothing is spoken, so no token goes with it.
+        """
+        body = {"family": family, "seed": seed, "seconds": seconds, "palette": palette}
+        return _operation(self._send("POST", "/music", body=body), _music)
+
+    def operation(self, operation_id: str, *, music: bool = False) -> Operation:
+        """One render, read as a loop's or, with `music`, as a bed on its own."""
+        return _operation(self._send("GET", f"/operations/{operation_id}"),
+                          _music if music else _loop)
 
     def cancel(self, operation_id: str) -> Operation:
         return _operation(self._send("DELETE", f"/operations/{operation_id}"))
@@ -286,7 +316,7 @@ class LoopService:
         return payload
 
 
-def _operation(payload: Any) -> Operation:
+def _operation(payload: Any, read: Any = None) -> Operation:
     if not isinstance(payload, dict) or not _text(payload.get("operation_id")):
         raise LoopError("refused", "The loop generator did not describe the render.")
     successful = payload.get("successful")
@@ -298,7 +328,7 @@ def _operation(payload: Any) -> Operation:
         error=_text(payload.get("error")) or None,
         fraction=_float(progress.get("fraction")),
         message=_text(progress.get("message")),
-        result=_loop(payload.get("result")),
+        result=(read or _loop)(payload.get("result")),
     )
 
 
@@ -339,6 +369,21 @@ def _loop(payload: Any) -> Loop | None:
         items=_items(payload.get("items")),
         cues=_cues(payload.get("cues")),
         script=script if isinstance(script, dict) else None,
+    )
+
+
+def _music(payload: Any) -> Music | None:
+    if not isinstance(payload, dict) or not _text(payload.get("audio_url")):
+        return None
+    return Music(
+        audio_url=_text(payload.get("audio_url")),
+        audio_mime=_text(payload.get("audio_mime")) or "audio/mpeg",
+        duration_seconds=_float(payload.get("duration_seconds")),
+        style_id=_text(payload.get("style_id")),
+        seed=_int(payload.get("seed")),
+        engine_version=_text(payload.get("engine_version")),
+        bed_fingerprint=_text(payload.get("bed_fingerprint")),
+        bpm=_float(payload.get("bpm")),
     )
 
 

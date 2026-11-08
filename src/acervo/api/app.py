@@ -50,6 +50,7 @@ from acervo.services.usage import open_usage
 from acervo.settings import Settings
 from acervo.settings import settings as read_settings
 from acervo.work import anki as anki_jobs
+from acervo.work import music as music_jobs
 from acervo.work import nightly, photos
 from acervo.work.runner import Runner
 
@@ -109,6 +110,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     runner.ticks.append(anki_jobs.timer(settings, runner.clock))
     # Not timed work in that sense: file housekeeping for the photos nobody added.
     runner.ticks.append(photos.timer(settings, runner.clock))
+    # And the music styles' samples, made once a new engine or bundle answers: after a deploy.
+    runner.ticks.append(music_jobs.timer(settings, runner.clock))
 
     @asynccontextmanager
     async def lifespan(_: FastAPI) -> AsyncIterator[None]:

@@ -139,17 +139,24 @@ export function stop(): void {
   update({ playing: null });
 }
 
-async function sound(blob: Blob, key: string): Promise<void> {
+async function sound(blob: Blob, key: string, preview = false): Promise<void> {
   stop();
   silencePlayers();
   const player = audio();
   const url = URL.createObjectURL(blob);
   update({ playing: key });
+  const untrack = preview ? trackProgress(key, player) : null;
+  /* This sound's own handlers, so its ending clears only them: a sound replaced by the next one ends
+     a microtask after the next has set its own, and clearing those left it playing with no end. */
+  let ended: (() => void) | null = null;
+  let resolved: (() => void) | null = null;
   try {
     await new Promise<void>((resolve, reject) => {
+      resolved = resolve;
       finish = resolve;
       // Only this clip's own end: the silence `prime` started may finish after the clip was swapped in.
-      player.onended = () => { if (player.src === url) resolve(); };
+      ended = () => { if (player.src === url) resolve(); };
+      player.onended = ended;
       player.onerror = () => { if (player.src === url) reject(new Error("This device could not play that recording.")); };
       player.src = url;
       player.play().catch((error: unknown) => {
@@ -163,11 +170,14 @@ async function sound(blob: Blob, key: string): Promise<void> {
     console.warn("Acervo: a pronunciation could not be played", { key, type: blob.type, size: blob.size, error });
     throw error;
   } finally {
-    finish = null;
-    player.onended = null;
-    player.onerror = null;
+    if (finish === resolved) finish = null;
+    if (player.onended === ended) {
+      player.onended = null;
+      player.onerror = null;
+    }
     URL.revokeObjectURL(url);
     if (state.playing === key) update({ playing: null });
+    untrack?.();
   }
 }
 
@@ -285,17 +295,21 @@ export async function playRuns(runs: SpokenRun[]): Promise<void> {
   }
 }
 
-/* What a voice sounded like, held for the session: comparing voices means pressing play on the same
-   one again, and that should cost nothing. Never kept on the device — it is not a recording of any
-   record, only a sample. */
+/* What a voice or a piece of music sounded like, held for the session: comparing them means pressing
+   play on the same one again, and that should cost nothing. A voice is never kept on the device — it
+   is not a recording of any record, only a sample; music is kept by its own fetch (`music.ts`). */
 const previews = new Map<string, Blob>();
 
+/** The preview last asked for. One that arrives after another was asked for, or after a stop, is not played. */
+let wanted: string | null = null;
+
 /**
- * Hear a voice before choosing it, through this player like every other sound here. `key` names the
- * voice; pressing the one that is playing stops it.
+ * Hear something before choosing it — a voice, a style's sample, a kept bed's music — through this
+ * player like every other sound here. `key` names it; pressing the one that is playing stops it.
  */
 export async function playPreview(key: string, fetch: () => Promise<Blob>): Promise<void> {
-  if (state.playing === key) { stop(); return; }
+  if (state.playing === key) { stopPreview(); return; }
+  wanted = key;
   prime();
   let blob = previews.get(key);
   if (!blob) {
@@ -307,7 +321,56 @@ export async function playPreview(key: string, fetch: () => Promise<Blob>): Prom
     }
     previews.set(key, blob);
   }
-  await sound(blob, key);
+  if (wanted !== key) return;
+  await sound(blob, key, true);
+}
+
+/** Stop a preview, or one still being fetched, and leave any other sound alone. */
+export function stopPreview(): void {
+  const asked = wanted;
+  wanted = null;
+  if (state.busy === asked) update({ busy: null });
+  if (asked !== null && state.playing === asked) stop();
+}
+
+/* ── how far a preview has got ──
+   Read from the element every frame while a preview plays, and only then, for the ring round its
+   button. A store of its own rather than a field of `SpeechState`, so a frame redraws only the button
+   whose key is playing and never everything that reads what is being said. */
+
+export interface PreviewProgress { at: number; duration: number }
+
+const NO_PROGRESS: PreviewProgress = { at: 0, duration: 0 };
+let progress: { key: string | null; value: PreviewProgress } = { key: null, value: NO_PROGRESS };
+const progressListeners = new Set<() => void>();
+
+function setProgress(key: string | null, value: PreviewProgress): void {
+  progress = { key, value };
+  progressListeners.forEach((listener) => listener());
+}
+
+/* Each sound its own frame: a sound replaced by the next one ends a microtask after the next has
+   started, and must not cancel the frame that one is drawing. */
+function trackProgress(key: string, player: HTMLAudioElement): () => void {
+  let frame = 0;
+  const tick = () => {
+    const duration = Number.isFinite(player.duration) ? player.duration : 0;
+    setProgress(key, { at: player.currentTime, duration });
+    frame = requestAnimationFrame(tick);
+  };
+  frame = requestAnimationFrame(tick);
+  return () => {
+    cancelAnimationFrame(frame);
+    if (progress.key === key && state.playing !== key) setProgress(null, NO_PROGRESS);
+  };
+}
+
+/** How far the preview `key` has got: zero while it is not the one playing. */
+export function usePreviewProgress(key: string): PreviewProgress {
+  return useSyncExternalStore(
+    (listener) => { progressListeners.add(listener); return () => { progressListeners.delete(listener); }; },
+    () => (progress.key === key ? progress.value : NO_PROGRESS)
+  );
 }
 
 /* ── keeping clips ───────────────────────────────────────────────────── */
@@ -366,4 +429,6 @@ export function replaceStoreForTests(replacement: MediaStore): void {
   session.clear();
   state = { busy: null, playing: null };
   element = null;
+  previews.clear();
+  wanted = null;
 }

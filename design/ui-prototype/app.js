@@ -2613,13 +2613,58 @@ function art(group, id, label, emoji = "") {
 }
 const iconArt = (svg) => `<span class="choice-stand-in icon" aria-hidden="true">${svg}</span>`;
 
+/* `MusicPlay.tsx`: ▶ for music heard on its own — a style's sample, a saved piece's music. Here the
+   playback is simulated: a moment of loading, then the ring fills over the sample's 24 seconds. */
+const RING = 2 * Math.PI * 16;
+const hearing = { id: null, loading: false, started: 0, seconds: 24, frame: 0, timer: 0 };
+function musicPlay(id, label, size = "large") {
+  const on = hearing.id === id, loading = on && hearing.loading, playing = on && !loading;
+  const ring = loading ? `<circle class="arc" cx="18" cy="18" r="16" stroke-dasharray="${(RING * 0.28).toFixed(1)} ${RING.toFixed(1)}"/>`
+    : playing ? `<circle class="fill" cx="18" cy="18" r="16" stroke-dasharray="0 ${RING.toFixed(1)}"/>` : "";
+  return `<button type="button" class="music-play ${size}${loading ? " loading" : ""}${playing ? " playing" : ""}" data-hear="${esc(id)}" data-label="${esc(label)}" aria-label="${on ? "Stop" : `Hear ${esc(label)}`}"><svg class="music-play-ring" viewBox="0 0 36 36" aria-hidden="true">${ring}</svg>${playing ? ICON.pause : ICON.play}</button>`;
+}
+function drawHearing() {
+  for (const button of document.querySelectorAll("[data-hear]")) {
+    button.outerHTML = musicPlay(button.dataset.hear, button.dataset.label, button.classList.contains("small") ? "small" : "large");
+  }
+}
+function stopHearing() {
+  cancelAnimationFrame(hearing.frame); clearTimeout(hearing.timer);
+  hearing.id = null; hearing.loading = false;
+  drawHearing();
+}
+function hear(id) {
+  if (hearing.id === id) return stopHearing();
+  cancelAnimationFrame(hearing.frame); clearTimeout(hearing.timer);
+  Object.assign(hearing, { id, loading: true });
+  drawHearing();
+  hearing.timer = setTimeout(() => {
+    if (hearing.id !== id) return;
+    Object.assign(hearing, { loading: false, started: performance.now() });
+    drawHearing();
+    const tick = () => {
+      const share = (performance.now() - hearing.started) / (hearing.seconds * 1000);
+      if (share >= 1) return stopHearing();
+      const fill = document.querySelector(`[data-hear="${CSS.escape(id)}"] .fill`);
+      if (fill) fill.setAttribute("stroke-dasharray", `${(RING * share).toFixed(1)} ${RING.toFixed(1)}`);
+      hearing.frame = requestAnimationFrame(tick);
+    };
+    hearing.frame = requestAnimationFrame(tick);
+  }, 450);
+}
+
 /* `ChoiceCarousel` and `ChoiceGrid`: the choice in the middle of a row of pictures, larger than its
-   neighbours, its name and sentence under the row; and the whole catalogue as a grid. */
-function carousel(name, choices, value, idle = "") {
+   neighbours, its name and sentence under the row; and the whole catalogue as a grid. `action` is a
+   control on the middle picture only — music's ▶ — or nothing. */
+function carousel(name, choices, value, idle = "", action = null) {
   const at = choices.findIndex((c) => c.id === value);
   const chosen = choices[at];
-  const items = choices.map((c, i) => `<div class="carousel-item${i === at ? " on" : ""}" data-choice="${esc(c.id)}">
-      <button type="button" role="radio" aria-checked="${i === at}" tabindex="${i === Math.max(at, 0) ? 0 : -1}" aria-label="${esc(c.label)}"${i === at ? "" : ` title="${esc(c.label)}"`}><span class="choice-art">${c.art}</span></button></div>`).join("");
+  const middle = at >= 0 ? at : Math.floor((choices.length - 1) / 2);
+  const items = choices.map((c, i) => {
+    const control = action && i === middle ? action(c) : "";
+    return `<div class="carousel-item${i === at ? " on" : ""}" data-choice="${esc(c.id)}">
+      <button type="button" role="radio" aria-checked="${i === at}" tabindex="${i === Math.max(at, 0) ? 0 : -1}" aria-label="${esc(c.label)}"${i === at ? "" : ` title="${esc(c.label)}"`}><span class="choice-art">${c.art}</span></button>${control ? `<span class="carousel-action">${control}</span>` : ""}</div>`;
+  }).join("");
   return `<div class="carousel"><div class="carousel-frame">
       <div class="carousel-row" data-row="${esc(name)}"><div class="carousel-track" role="radiogroup" aria-label="${esc(name)}" data-strip="${esc(name)}">${items}</div></div>
       <button type="button" class="carousel-step prev" data-step="-1" data-strip="${esc(name)}" aria-label="Previous: ${esc(name)}"${at <= 0 ? " hidden" : ""}>${ICON.back}</button>
@@ -2648,6 +2693,7 @@ function paintCarousel(embla) {
     if (dist < least) { least = dist; nearest = i; }
     slide.style.setProperty("--scale", (dist <= 1 ? 1.2 - 0.2 * dist : Math.max(0.72, 1 - 0.16 * (dist - 1))).toFixed(3));
     slide.style.setProperty("--fade", (dist <= 1 ? 1 : Math.max(0.35, 1 - 0.32 * (dist - 1))).toFixed(3));
+    slide.style.setProperty("--off", Math.min(1, dist).toFixed(3));
   });
   return nearest;
 }
@@ -2668,7 +2714,7 @@ function savedCards(beds, value) {
       <button type="button" role="radio" aria-checked="${on}" aria-label="${esc(label)}, ${esc(bedAbout(bed))}">
         <span class="favourite-art">${art("music", bed.styleId, label)}</span>
         <span class="favourite-text"><span class="favourite-name">${ICON.starOn}${esc(label)}</span><span class="favourite-about">${esc(bedAbout(bed))}</span></span>
-      </button>${loopOf(bed.sourceLoopId) ? `<button type="button" class="music-preview" aria-label="Hear this music">${ICON.play}</button>` : ""}</div>`;
+      </button>${musicPlay(id, label, "small")}</div>`;
   }).join("")}</div>`;
 }
 function savedMusic(d) {
@@ -2758,7 +2804,8 @@ function openMakeDialog(kind, from = "scope") {
   const rows = {};
   const strip = (name, idle) => {
     const [choices, key] = catalogues()[name];
-    return makeSection(name, carousel(name, centred(choices), d[key], idle), allLink(name, choices.length),
+    const action = name === "Music style" ? (c) => (c.id === "surprise" ? "" : musicPlay(`style:${c.id}`, c.label)) : null;
+    return makeSection(name, carousel(name, centred(choices), d[key], idle, action), allLink(name, choices.length),
       name === "Music style" ? "composed new for each loop" : "");
   };
   const paint = () => {
@@ -2788,7 +2835,8 @@ function openMakeDialog(kind, from = "scope") {
     const order = centred(choices);
     const at = order.findIndex((c) => c.id === d[key]);
     const embla = EmblaCarousel(row, { align: "center", containScroll: false, skipSnaps: true, duration: 22,
-      startIndex: at >= 0 ? at : Math.floor((order.length - 1) / 2) }, [EmblaCarouselWheelGestures()]);
+      startIndex: at >= 0 ? at : Math.floor((order.length - 1) / 2),
+      watchDrag: (_, ev) => !ev.target.closest(".carousel-action") }, [EmblaCarouselWheelGestures()]);
     let moved = false, steering = false;
     const mark = (i) => {
       const c = order[i];
@@ -2810,7 +2858,13 @@ function openMakeDialog(kind, from = "scope") {
       embla.scrollTo(to);
     };
     embla.on("scroll", () => { const n = paintCarousel(embla); if (moved && !steering) mark(n); });
-    embla.on("settle", () => { steering = false; if (moved) { mark(embla.selectedScrollSnap()); paint(); } });
+    /* While a sample plays, the row coming to rest on another style plays that one; on Surprise me, it stops. */
+    const follow = (c) => {
+      if (name !== "Music style" || !hearing.id?.startsWith("style:") || !c) return;
+      if (c.id === "surprise") stopHearing();
+      else if (hearing.id !== `style:${c.id}`) hear(`style:${c.id}`);
+    };
+    embla.on("settle", () => { steering = false; if (moved) { mark(embla.selectedScrollSnap()); paint(); follow(order[embla.selectedScrollSnap()]); } });
     embla.on("pointerDown", () => { moved = true; steering = false; });
     row.addEventListener("wheel", () => { moved = true; steering = false; }, { passive: true });
     row.addEventListener("keydown", (ev) => {
@@ -2825,6 +2879,7 @@ function openMakeDialog(kind, from = "scope") {
     rows[name] = { embla, steer, order, key };
   };
   const shut = () => {
+    if (hearing.id) stopHearing();
     for (const one of Object.values(rows)) one.embla.destroy();
     node.remove(); document.removeEventListener("keydown", onKey, true);
   };
@@ -2847,7 +2902,7 @@ function openMakeDialog(kind, from = "scope") {
     if (t.matches(".close")) return shut();
     if (t.matches("[data-back]")) { d.browsing = null; return paint(); }
     if (t.matches(".make-go")) { if (kind === "loop") state.loopMusic = d.music; shut(); return toast(`Asked for a ${kind} from ${wordsCount(d.ids.length)} — prototype only, nothing was made`); }
-    if (t.matches(".music-preview")) return toast("Plays the loop this music was kept from — prototype only");
+    if (t.dataset.hear) return hear(t.dataset.hear);
     if (t.dataset.order) { d.choice = t.dataset.order; d.passed = new Set(); return paint(); }
     if (t.dataset.swap) { d.passed.add(t.dataset.swap); return paint(); }
     if (t.matches("[data-redraw]")) { d.ids.forEach((id) => d.passed.add(id)); return paint(); }
@@ -2869,6 +2924,7 @@ function openMakeDialog(kind, from = "scope") {
     }
     if (tile) {
       const strip = tile.closest("[data-strip]").dataset.strip;
+      if (tile.dataset.choice.startsWith("bed:") && hearing.id?.startsWith("style:")) stopHearing();
       d[catalogues()[strip][1]] = tile.dataset.choice;
       d.browsing = null;
       return paint();

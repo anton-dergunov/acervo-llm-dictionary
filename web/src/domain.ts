@@ -373,6 +373,10 @@ export interface Bed extends SyncFields, OwnedFields {
   engineVersion: string | null;
   bedFingerprint: string | null;
   sourceLoopId: string;
+  /** Its own music, rendered once by the server after it was kept, to be heard without a voice. */
+  audioRef: string | null;
+  audioMime: string | null;
+  durationSeconds: number | null;
 }
 
 /**
@@ -919,6 +923,12 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     optionalString(record.bedFingerprint, "Kept bed fingerprint");
     // A loop's own bound, since a kept bed's seed is a loop's seed.
     invariant(Number.isSafeInteger(record.seed) && record.seed >= 0, "Kept bed seed is invalid.");
+    // Its music is a track like a loop's, held to the loop's invariant.
+    optionalString(record.audioRef, "Kept bed audio reference");
+    optionalString(record.audioMime, "Kept bed audio type");
+    invariant(Boolean(record.audioRef) === Boolean(record.audioMime), "A kept bed's audio reference and type must be supplied together.");
+    invariant(record.durationSeconds === null || (Number.isFinite(record.durationSeconds) && record.durationSeconds >= 0), "Kept bed duration is invalid.");
+    invariant(Boolean(record.audioRef) || record.durationSeconds === null, "A kept bed with no music has no duration.");
     // Among *all* loops, tombstones included: a favourite outlives the loop it was kept from.
     const loop = find.loops(record.sourceLoopId);
     invariant(loop, "Kept bed references a missing loop.");

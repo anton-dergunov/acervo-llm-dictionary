@@ -760,6 +760,12 @@ beds = Table(
     Column("bed_fingerprint", String(64), nullable=False, default=""),
     Column("source_loop", String(15), ForeignKey("loops.id", ondelete="CASCADE"), nullable=False),
     *_sync_fields(),
+    # A minute of the bed on its own, which is what its ▶ plays: written by the `music` job, and
+    # empty until then, when the loop it was kept from plays instead. Declared last so a database
+    # that gained them by `ALTER TABLE` has the same shape, and the same head, as one built new.
+    Column("audio_ref", String(500), nullable=False, default=""),
+    Column("audio_mime", String(80), nullable=False, default=""),
+    Column("duration_seconds", Float, nullable=False, default=0.0),
     Index("idx_beds_owner_revision", "owner", "revision"),
 )
 

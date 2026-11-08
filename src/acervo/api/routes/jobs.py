@@ -35,6 +35,8 @@ ENQUEUEABLE: dict[str, str] = {
     # an empty `audioRef` is what says it has not been made — so this re-renders rather than creates.
     "loop": "loop",
     "story": "story",
+    # Try again on a kept bed whose music was not made.
+    "music": "bed",
 }
 # Kinds about one fixed thing rather than a record the request names.
 FIXED_SUBJECTS: dict[str, str] = {"corpus.update": "corpus"}
@@ -64,8 +66,8 @@ def _subject(owner: str, kind: str, body: dict[str, Any]) -> str:
     if expected == "imagePrompt":
         if graph.image_prompt(owner, identifier) is None:
             raise ApiError(404, "not_found", "That picture is not in your vocabulary.")
-    elif expected in ("loop", "story"):
-        collection = "loops" if expected == "loop" else "stories"
+    elif expected in ("loop", "story", "bed"):
+        collection = {"loop": "loops", "story": "stories", "bed": "beds"}[expected]
         held = graph.owned_records(owner, collection, [identifier]).get(identifier)
         if held is None or held.get("deleted"):
             raise ApiError(404, "not_found", f"That {expected} is not in your vocabulary.")

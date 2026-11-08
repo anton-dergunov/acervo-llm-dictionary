@@ -450,6 +450,36 @@ def enqueue_missing(settings: Settings, email: str, language: str, limit: int, d
                          subject_kind="lexeme", subject_id=word["id"])
     what = "would be enriched" if dry_run else "queued"
     print(f"{len(words)} word(s) {what}.")
+
+    # And the music kept before a kept bed was given its own: the same `music` job keeping one
+    # queues, replaying the bed from its family and seed. Not per language — a bed belongs to none.
+    beds = [bed for bed in graph.owner_beds(owner["id"]) if not bed.get("audioRef")]
+    for bed in beds:
+        print(f"music  {bed['styleId']}  seed {bed['seed']}  kept {bed['createdAt'][:10]}")
+        if not dry_run:
+            jobs.enqueue(owner["id"], "music", trigger="backfill",
+                         subject_kind="bed", subject_id=bed["id"])
+    what = "would be given their music" if dry_run else "queued for their music"
+    print(f"{len(beds)} kept bed(s) {what}.")
+    return 0
+
+
+def show_samples(settings: Settings) -> int:
+    from acervo.loops import samples
+
+    kept, size = samples.usage(settings.samples_path)
+    print(f"{kept} style samples, {size / 1_000_000:.1f} MB, in {settings.samples_path}")
+    return 0
+
+
+def clear_samples(settings: Settings, dry_run: bool) -> int:
+    """Empty the style samples. The warming job makes them again after the next start, and a tap
+    makes one the job has not reached."""
+    from acervo.loops import samples
+
+    gone, freed = samples.clear(settings.samples_path, dry_run=dry_run)
+    verb = "Would delete" if dry_run else "Deleted"
+    print(f"{verb} {gone} style samples, {freed / 1_000_000:.1f} MB.")
     return 0
 
 
@@ -505,7 +535,8 @@ def main(argv: list[str] | None = None) -> int:
     enqueue_parser = job_commands.add_parser("enqueue", help="queue work for words that lack it")
     enqueue_parser.add_argument("kind", choices=("enrich",))
     enqueue_parser.add_argument("--missing", action="store_true", required=True,
-                                help="every word missing a clip search, a picture or a recording")
+                                help="every word missing a clip search, a picture or a recording, "
+                                     "and every kept bed missing its music")
     enqueue_parser.add_argument("--owner-email", required=True)
     enqueue_parser.add_argument("--language", default="", help="only this vocabulary")
     enqueue_parser.add_argument("--limit", type=int, default=0, help="at most this many words")
@@ -525,6 +556,12 @@ def main(argv: list[str] | None = None) -> int:
     prune_parser.add_argument("--older-than", type=float, default=90,
                               help="in days; a take a render used recently survives")
     prune_parser.add_argument("--dry-run", action="store_true", help="say what would go, delete nothing")
+
+    samples_parser = commands.add_parser("samples", help="the music styles' samples")
+    sample_commands = samples_parser.add_subparsers(dest="sample_command", required=True)
+    sample_commands.add_parser("show", help="how many samples are kept, and what they weigh")
+    clear_parser = sample_commands.add_parser("clear", help="delete every sample")
+    clear_parser.add_argument("--dry-run", action="store_true", help="say what would go, delete nothing")
 
     map_parser = commands.add_parser("map", help="the meaning map")
     map_commands = map_parser.add_subparsers(dest="map_command", required=True)
@@ -563,6 +600,10 @@ def main(argv: list[str] | None = None) -> int:
         if arguments.take_command == "show":
             return show_takes(settings)
         return prune_takes(settings, arguments.older_than, arguments.dry_run)
+    if arguments.command == "samples":
+        if arguments.sample_command == "show":
+            return show_samples(settings)
+        return clear_samples(settings, arguments.dry_run)
     if arguments.command == "jobs":
         if arguments.job_command == "open":
             return open_jobs(settings, arguments.json)

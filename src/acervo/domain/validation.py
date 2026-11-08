@@ -119,7 +119,10 @@ TEXT_RULES: dict[str, dict[str, tuple[bool, int]]] = {
         "audio_provider_id": (False, 120), "audio_model_id": (False, 120), "audio_voice": (False, 120),
     },
     "story_words": {"source_text": (True, 240)},
-    "beds": {"style_id": (True, 120), "engine_version": (False, 64), "bed_fingerprint": (False, 64)},
+    "beds": {
+        "style_id": (True, 120), "engine_version": (False, 64), "bed_fingerprint": (False, 64),
+        "audio_ref": (False, 500), "audio_mime": (False, 80),
+    },
 }
 
 SELECT_RULES: dict[str, dict[str, tuple[tuple[str, ...], bool]]] = {
@@ -170,7 +173,7 @@ NUMBER_RULES: dict[str, dict[str, tuple[float, float | None]]] = {
     "story_parts": {"part_order": (0, None), "attempts": (0, None)},
     "story_words": {"word_order": (0, None)},
     # The loop's own bound, since a favourite's seed is a loop's seed.
-    "beds": {"seed": (0, 9007199254740991)},
+    "beds": {"seed": (0, 9007199254740991), "duration_seconds": (0, None)},
 }
 
 # The row a related id resolves to, or None. Supplied by the repository, so this module never learns
@@ -491,6 +494,12 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
         # be alive: a favourite outlives the loop, and its reference then names a tombstone.
         _same_owner(row, _related(lookup, "loops", _text(row, "source_loop"), "Loop"),
                     "Favourite bed")
+        # Its music is a track like a loop's, held to the loop's invariant.
+        audio_ref = _text(row, "audio_ref")
+        if bool(audio_ref) != bool(_text(row, "audio_mime")):
+            refuse("A kept bed's audio reference and type must be provided together.")
+        if not audio_ref and (row.get("duration_seconds") or 0) > 0:
+            refuse("A kept bed with no music has no duration.")
         return
 
     if name == "loop_items":

@@ -206,11 +206,14 @@ class JobContext:
     def _note(self) -> dict[str, Any]:
         """The identifiers that join this log to somebody else's.
 
-        `operationId` is the loop generator's own handle for a render, and until this line existed
+        `operationId` is the loop generator's own handle for a render — a loop's, a kept bed's or a
+        style sample's — and until this line existed
         it lived in the database and in no log at all — so a failed render here could not be matched
         to its cause there.
         """
-        detail = (self.record("loop.render").get("detail") or {}) if self.kind.name == "loop" else {}
+        first = {"loop": "loop.render", "music": "music.render",
+                 "music.samples": "music.samples"}.get(self.kind.name)
+        detail = (self.record(first).get("detail") or {}) if first else {}
         return {"operationId": detail.get("operationId")}
 
 

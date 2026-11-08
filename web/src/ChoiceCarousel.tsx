@@ -26,6 +26,10 @@
  * plugin, which fakes a drag, did the same. With it, the row lands where the finger and its momentum
  * say. `docs/features/loops.md` §2.18 has what else was tried and why this was kept.
  *
+ * A catalogue may put a control on the middle picture (`action`) — music's ▶ — which fades while the
+ * row moves and takes its own presses rather than starting a drag; `onSettle` says what the row came
+ * to rest on, which is how a sample that is playing follows the row (`LoopDialog.tsx`).
+ *
  * The size of each picture is a transform written as the row moves, never its layout size, and the
  * caption under it has a fixed height, so the dialog keeps its size while the row moves. **All** (the
  * dialog's link above the row) shows the catalogue as a grid in place of the dialog's body
@@ -57,7 +61,7 @@ function look(distance: number): { scale: number; opacity: number } {
   return { scale: Math.max(0.72, 1 - 0.16 * (distance - 1)), opacity: Math.max(0.35, 1 - 0.32 * (distance - 1)) };
 }
 
-export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
+export function ChoiceCarousel({ label, choices, value, onChange, idle, action, onSettle }: {
   label: string;
   choices: CatalogueChoice[];
   /** The chosen id, or null when the choice was made elsewhere (a saved piece of music). */
@@ -65,6 +69,10 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
   onChange(id: string): void;
   /** Said under the row while nothing in it is chosen. */
   idle?: string;
+  /** A control on the middle picture — music's ▶ — or nothing for a choice that has none. */
+  action?(choice: CatalogueChoice): ReactNode;
+  /** The row has come to rest with this choice in the middle. */
+  onSettle?(choice: CatalogueChoice): void;
 }) {
   const index = choices.findIndex((choice) => choice.id === value);
   const chosen = index >= 0 ? choices[index] : null;
@@ -73,7 +81,11 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
   const [viewport, api] = useEmblaCarousel(
     // `watchResize` as the components that measure text do: where there is no ResizeObserver there
     // is no layout to follow (jsdom).
-    { align: "center", containScroll: false, skipSnaps: true, startIndex: opening, duration: 22, watchResize: typeof ResizeObserver === "function" },
+    {
+      align: "center", containScroll: false, skipSnaps: true, startIndex: opening, duration: 22, watchResize: typeof ResizeObserver === "function",
+      // A press on the middle picture's own control is that control's, never a drag of the row.
+      watchDrag: (_, event) => !(event.target instanceof Element && event.target.closest(".carousel-action"))
+    },
     [WheelGesturesPlugin()]
   );
   // The picture in the middle, which is what the arrows and keys step from while nothing is chosen.
@@ -85,8 +97,8 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
   const steering = useRef(false);
   /** The choice came from the row's own movement, so the row is already where it should be. */
   const following = useRef(false);
-  const latest = useRef({ index, choices, onChange });
-  latest.current = { index, choices, onChange };
+  const latest = useRef({ index, choices, onChange, onSettle });
+  latest.current = { index, choices, onChange, onSettle };
 
   /** Writes each picture's size from its distance to the middle of the row; returns the nearest. */
   const paint = useCallback((): number => {
@@ -103,6 +115,8 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
       const { scale, opacity } = look(distance);
       slide.style.setProperty("--scale", scale.toFixed(3));
       slide.style.setProperty("--fade", opacity.toFixed(3));
+      // How far it is from resting in the middle, which is what the middle's control fades by.
+      slide.style.setProperty("--off", Math.min(1, distance).toFixed(3));
     });
     return nearest;
   }, [api]);
@@ -127,7 +141,10 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
     };
     const settle = () => {
       steering.current = false;
-      follow(api.selectedScrollSnap());
+      const found = api.selectedScrollSnap();
+      follow(found);
+      const { choices: list, onSettle: settled } = latest.current;
+      if (list[found]) settled?.(list[found]);
     };
     const touched = () => { moved.current = true; steering.current = false; };
     const frame = api.rootNode();
@@ -169,7 +186,7 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
     <div className="carousel-frame">
       <div className="carousel-row" ref={viewport}>
         <div className="carousel-track" role="radiogroup" aria-label={label} onKeyDown={onKey}>
-          {choices.map((choice, position) => <div
+          {choices.map((choice, position) => { const control = action && position === at ? action(choice) : null; return <div
             key={choice.id} data-choice={choice.id} className={`carousel-item${position === index ? " on" : ""}`}
           >
             <button
@@ -177,7 +194,8 @@ export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
               aria-label={choice.label} aria-description={choice.about} title={position === index ? undefined : choice.label}
               onClick={() => choose(position)}
             ><span className="choice-art">{choice.art}</span></button>
-          </div>)}
+            {control && <span className="carousel-action">{control}</span>}
+          </div>; })}
         </div>
       </div>
       <button type="button" className="carousel-step prev" aria-label={`Previous: ${label}`}

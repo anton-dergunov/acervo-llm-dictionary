@@ -12,6 +12,9 @@ import { AcervoApiError, backendSession, type LoopSchema } from "./api";
 import type { VocabularyGraph } from "./domain";
 import LoopDialog from "./LoopDialog";
 import { resetLoopSchemaForTests } from "./LoopMusic";
+import { MemoryMediaStore } from "./mediaStore";
+import { replaceMusicStoreForTests } from "./music";
+import { replaceStoreForTests as resetSpeechForTests } from "./pronunciation";
 import { selectedWords } from "./selectors";
 import { testGraph } from "./testGraph";
 import { resetRarityForTests } from "./WordPicker";
@@ -35,8 +38,8 @@ const SCHEMA: LoopSchema = {
   writerAvailable: true, mixesLanguages: true,
   productionBundle: true,
   families: [
-    { id: "sunlit-acoustic", label: "Sunlit acoustic", description: "Guitar, harp or plucked strings." },
-    { id: "meditative", label: "Meditative", description: "Slow and spacious." }
+    { id: "sunlit-acoustic", label: "Sunlit acoustic", description: "Guitar, harp or plucked strings.", sample: "k1/sunlit-acoustic-1a2b3c4d.mp3" },
+    { id: "meditative", label: "Meditative", description: "Slow and spacious.", sample: null }
   ]
 };
 
@@ -66,6 +69,8 @@ const go = () => screen.findByRole("button", { name: /^Make the loop/ });
 
 beforeEach(() => {
   resetLoopSchemaForTests();
+  replaceMusicStoreForTests(new MemoryMediaStore());
+  resetSpeechForTests(new MemoryMediaStore());
   resetRarityForTests();
   vi.spyOn(backendSession, "loopSchema").mockResolvedValue(SCHEMA);
 });
@@ -347,5 +352,82 @@ describe("making a loop from the selection", () => {
   it("cannot be made from a selection a loop can use none of", async () => {
     openWith(["lexemeespolv001"]);
     expect(await screen.findByRole("button", { name: "Make the loop · 0 words" })).toBeDisabled();
+  });
+});
+
+describe("hearing the music on its own", () => {
+  const MP3 = () => new Blob(["ID3-music"], { type: "audio/mpeg" });
+  /** Playback that goes on until something stops it, as a 24-second sample does. */
+  const lasting = () => vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve());
+  const row = () => screen.getByRole("radiogroup", { name: "Music style" });
+
+  it("puts ▶ on the middle style only, and never on Surprise me", async () => {
+    open();
+    await within(await screen.findByRole("radiogroup", { name: "Music style" })).findByRole("radio", { name: "Meditative" });
+    expect(document.querySelectorAll(".carousel-action")).toHaveLength(0);
+    fireEvent.click(screen.getByRole("button", { name: "Next: Music style" }));
+    const actions = document.querySelectorAll(".carousel-action");
+    expect(actions).toHaveLength(1);
+    expect(actions[0].closest(".carousel-item")).toHaveAttribute("data-choice", "style:meditative");
+    expect(within(row()).getByRole("button", { name: "Hear Meditative" })).toBeInTheDocument();
+  });
+
+  it("plays a sample the server has by its name, and has one the server has not made yet made", async () => {
+    lasting();
+    const audio = vi.spyOn(backendSession, "sampleAudio").mockResolvedValue(MP3());
+    const make = vi.spyOn(backendSession, "makeSample").mockResolvedValue({ family: "meditative", sample: "k1/meditative-9f8e7d6c.mp3" });
+    open();
+    await within(await screen.findByRole("radiogroup", { name: "Music style" })).findByRole("radio", { name: "Meditative" });
+    fireEvent.keyDown(row(), { key: "Home" });
+    fireEvent.click(within(row()).getByRole("button", { name: "Hear Sunlit acoustic" }));
+    expect(await within(row()).findByRole("button", { name: "Stop" })).toBeInTheDocument();
+    expect(audio).toHaveBeenCalledWith("k1/sunlit-acoustic-1a2b3c4d.mp3");
+    expect(make).not.toHaveBeenCalled();
+    fireEvent.click(within(row()).getByRole("button", { name: "Stop" }));
+    fireEvent.keyDown(row(), { key: "End" });
+    fireEvent.click(within(row()).getByRole("button", { name: "Hear Meditative" }));
+    await waitFor(() => expect(make).toHaveBeenCalledWith("meditative"));
+    await waitFor(() => expect(audio).toHaveBeenCalledWith("k1/meditative-9f8e7d6c.mp3"));
+  });
+
+  it("says why a sample could not be made, and goes back to ▶", async () => {
+    const notify = vi.fn();
+    vi.spyOn(backendSession, "makeSample").mockRejectedValue(new AcervoApiError("The loop generator is busy making a loop.", 503, "loops_busy"));
+    open(testGraph(), { onNotify: notify });
+    await within(await screen.findByRole("radiogroup", { name: "Music style" })).findByRole("radio", { name: "Meditative" });
+    fireEvent.keyDown(row(), { key: "End" });
+    fireEvent.click(within(row()).getByRole("button", { name: "Hear Meditative" }));
+    await waitFor(() => expect(notify).toHaveBeenCalledWith("The loop generator is busy making a loop."));
+    expect(within(row()).getByRole("button", { name: "Hear Meditative" })).toBeInTheDocument();
+  });
+
+  it("plays a kept bed's own music when it has some, from this device once fetched", async () => {
+    lasting();
+    const graph = testGraph();
+    graph.beds = [{ ...graph.beds[0], audioRef: "music/bedmorning00001-0a0b0c0d.mp3", audioMime: "audio/mpeg", durationSeconds: 61 }];
+    vi.spyOn(backendSession, "mediaFileUrl").mockImplementation((reference) => `https://acervo.example.com/media/${reference}`);
+    vi.spyOn(backendSession, "mediaHeaders").mockReturnValue({ Authorization: "Bearer token" });
+    const fetched = vi.fn().mockResolvedValue({ ok: true, status: 200, blob: async () => MP3() });
+    vi.stubGlobal("fetch", fetched);
+    open(graph);
+    const saved = await screen.findByRole("radiogroup", { name: "Saved music" });
+    // Fetched as the dialog opens, so ▶ does not wait on the network.
+    await waitFor(() => expect(fetched).toHaveBeenCalledWith("https://acervo.example.com/media/music/bedmorning00001-0a0b0c0d.mp3", expect.anything()));
+    fireEvent.click(within(saved).getByRole("button", { name: "Hear Sunlit acoustic" }));
+    expect(await within(saved).findByRole("button", { name: "Stop" })).toBeInTheDocument();
+    expect(fetched).toHaveBeenCalledTimes(1);
+    vi.unstubAllGlobals();
+  });
+
+  it("stops a sample when saved music is chosen, and when the dialog closes", async () => {
+    lasting();
+    vi.spyOn(backendSession, "sampleAudio").mockResolvedValue(MP3());
+    open();
+    await within(await screen.findByRole("radiogroup", { name: "Music style" })).findByRole("radio", { name: "Meditative" });
+    fireEvent.keyDown(row(), { key: "Home" });
+    fireEvent.click(within(row()).getByRole("button", { name: "Hear Sunlit acoustic" }));
+    await within(row()).findByRole("button", { name: "Stop" });
+    fireEvent.click(within(screen.getByRole("radiogroup", { name: "Saved music" })).getAllByRole("radio")[0]);
+    await waitFor(() => expect(screen.queryByRole("button", { name: "Stop" })).toBeNull());
   });
 });

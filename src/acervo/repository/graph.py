@@ -326,7 +326,8 @@ def merge_graph(
 ) -> dict[str, Any]:
     """Apply a change set in graph order, so a record's relations always resolve before it lands.
 
-    A word that arrives, or gains a sense, is enqueued for enrichment in the same transaction unless
+    A word that arrives, or gains a sense, is enqueued for enrichment in the same transaction — and a
+    kept bed that arrives, for its music — unless
     `enqueue` is None — which is what an enrichment's own writes pass, and a bundle import that
     restores pictures before it asks for the rest. Editing a sense's text enqueues nothing: a picture
     that no longer fits is the owner's call, through Redraw.
@@ -364,6 +365,7 @@ def _merged(
     with transaction() as connection:
         written: dict[str, list[dict[str, Any]]] = {}
         words: dict[str, None] = {}
+        kept: list[str] = []
         for collection in COLLECTIONS:
             rows = []
             for value in changes.get(collection.key) or []:
@@ -377,6 +379,9 @@ def _merged(
                     words[record["id"]] = None
                 elif arrived and collection.key == "senses":
                     words[record["lexemeId"]] = None
+                elif arrived and collection.key == "beds" and not record.get("deleted") \
+                        and not record.get("audioRef"):
+                    kept.append(record["id"])
             written[collection.key] = rows
         if any(written.get(key) for key in anki_settings.READ_BY_CARDS) and \
                 anki_settings.pushing(connection, owner):
@@ -391,13 +396,19 @@ def _merged(
                 )
                 for lexeme_id in words
                 if _live_lexeme(connection, owner, lexeme_id)
+            ] + [
+                # A bed the owner keeps is given its own minute of music, so its ▶ plays the music
+                # alone rather than the loop it came from (`work/music.py`).
+                jobs.enqueue_in(connection, owner, "music", trigger=enqueue.trigger,
+                                subject_kind="bed", subject_id=bed_id, parent=enqueue.parent)
+                for bed_id in kept
             ]
         sequence = ensure_sequence(connection, owner)
         result = {
             **_envelope(connection, owner, sequence),
             "records": written,
             # Which job will enrich each word this write created, so the caller can follow it.
-            "enrich": {job["subject"]["id"]: job["id"] for job in queued},
+            "enrich": {job["subject"]["id"]: job["id"] for job in queued if job["kind"] == "enrich"},
         }
     return result, queued + ([push] if push else [])
 
@@ -704,6 +715,19 @@ def loop_items(owner: str, loop_id: str) -> list[dict[str, Any]]:
             select(table)
             .where(table.c.owner == owner, table.c.loop == loop_id)
             .order_by(table.c.item_order, table.c.id)
+        ).mappings()
+        return [projected(collection, row) for row in rows]
+
+
+def owner_beds(owner: str) -> list[dict[str, Any]]:
+    """The music this owner kept and has not let go of, in the wire shape, oldest first."""
+    collection = COLLECTION_BY_KEY["beds"]
+    table = collection.table
+    with reading() as connection:
+        rows = connection.execute(
+            select(table)
+            .where(table.c.owner == owner, table.c.deleted.is_(False))
+            .order_by(table.c.created_at, table.c.id)
         ).mappings()
         return [projected(collection, row) for row in rows]
 

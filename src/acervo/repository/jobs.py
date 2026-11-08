@@ -198,32 +198,46 @@ def enqueue(
 ) -> dict[str, Any]:
     """Queue one job in a transaction of its own, and wake the runner."""
     with transaction() as connection:
-        if kind == "enrich":
-            queued = enqueue_enrich(
-                connection, owner, subject_id, trigger=trigger, parent=parent
-            )
-        else:
-            waiting = (
-                _open_for(connection, owner, kind, subject_id)
-                if kind in WHILE_RUNNING and subject_id
-                else _queued_for(connection, owner, kind, subject_id) if subject_id else None
-            )
-            if waiting is not None:
-                # A second request for the same thing before the first has started is the same
-                # request, and the newer wording wins: pressing Draw twice draws once.
-                if waiting["state"] == "queued":
-                    connection.execute(
-                        update(_jobs).where(_jobs.c.id == waiting["id"])
-                        .values(input=dict(input or {}))
-                    )
-                queued = project(_row(connection, waiting["id"]))  # type: ignore[arg-type]
-            else:
-                queued = _insert(
-                    connection, owner, kind, trigger=trigger, subject_kind=subject_kind,
-                    subject_id=subject_id, input=input, parent=parent,
-                )
+        queued = enqueue_in(connection, owner, kind, trigger=trigger, subject_kind=subject_kind,
+                            subject_id=subject_id, input=input, parent=parent)
     notify.queued(owner, queued)
     return queued
+
+
+def enqueue_in(
+    connection: Connection,
+    owner: str,
+    kind: str,
+    *,
+    trigger: str,
+    subject_kind: str = "",
+    subject_id: str = "",
+    input: Mapping[str, Any] | None = None,
+    parent: str | None = None,
+) -> dict[str, Any]:
+    """`enqueue` inside the caller's transaction, for a write that asks for work as it lands.
+
+    The caller publishes the returned job once its transaction has committed.
+    """
+    if kind == "enrich":
+        return enqueue_enrich(connection, owner, subject_id, trigger=trigger, parent=parent)
+    waiting = (
+        _open_for(connection, owner, kind, subject_id)
+        if kind in WHILE_RUNNING and subject_id
+        else _queued_for(connection, owner, kind, subject_id) if subject_id else None
+    )
+    if waiting is not None:
+        # A second request for the same thing before the first has started is the same request,
+        # and the newer wording wins: pressing Draw twice draws once.
+        if waiting["state"] == "queued":
+            connection.execute(
+                update(_jobs).where(_jobs.c.id == waiting["id"]).values(input=dict(input or {}))
+            )
+        return project(_row(connection, waiting["id"]))  # type: ignore[arg-type]
+    return _insert(
+        connection, owner, kind, trigger=trigger, subject_kind=subject_kind,
+        subject_id=subject_id, input=input, parent=parent,
+    )
 
 
 def _open_for(connection: Connection, owner: str, kind: str, subject_id: str) -> Mapping[str, Any] | None:

@@ -17,6 +17,10 @@
   voice can mix languages.
 - `POST /loops/write` is the generator's writer calling home, with its render's token, for a format
   that takes its lines from a model. It answers the owner's text chain's text, and nothing else.
+- `GET /loops/samples/{name}` is one music style's sample, by the name `GET /loops/schema` gave it;
+  `POST /loops/samples/{family}` makes one now, for a tap that got there before the warming job, and
+  answers its name. A sample is a cache beside the database, never media, so it has its own route.
+- `DELETE /beds/{id}` lets go of a kept bed and unlinks its music, for `DELETE /loops/{id}`'s reason.
 
 It answers Acervo's own `{"data": …}` envelope rather than the generator's body verbatim. The speech
 proxy is the one exception in this API, and it exists to keep a packaged typed client working; there
@@ -33,7 +37,7 @@ and are gated there like every other write.
 from __future__ import annotations
 
 from fastapi import APIRouter, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
 from starlette.concurrency import run_in_threadpool
 
 from acervo.api.auth import owner_id, write_owner
@@ -41,6 +45,7 @@ from acervo.api.errors import data
 from acervo.api.payload import json_body
 from acervo.errors import ApiError
 from acervo.repository import graph, jobs
+from acervo.services import music as music_alone
 from acervo.services.loops import create, music, remove, schema, write
 
 router = APIRouter()
@@ -105,4 +110,31 @@ async def drop(loop_id: str, request: Request) -> JSONResponse:
     device = graph.require_device(request.headers.get("x-acervo-device"))
     return data(
         await run_in_threadpool(remove, request.app.state.settings, owner, device, loop_id)
+    )
+
+
+@router.get("/loops/samples/{name:path}")
+async def read_sample(name: str, request: Request) -> FileResponse:
+    """A music style's sample. Its name carries a digest of its bytes, so a device keeps it."""
+    owner_id(request)
+    path = music_alone.sample_file(request.app.state.settings, name)
+    return FileResponse(path, media_type="audio/mpeg")
+
+
+@router.post("/loops/samples/{family}")
+async def make_sample(family: str, request: Request) -> JSONResponse:
+    """A style's sample made now, waited for, and named: the warming job had not reached it."""
+    owner_id(request)
+    name = await run_in_threadpool(music_alone.sample_now, request.app.state.settings, family)
+    return data({"family": family, "sample": name})
+
+
+@router.delete("/beds/{bed_id}")
+async def let_go(bed_id: str, request: Request) -> JSONResponse:
+    """Stop keeping a bed: its row, and its music."""
+    owner = owner_id(request)
+    device = graph.require_device(request.headers.get("x-acervo-device"))
+    return data(
+        await run_in_threadpool(music_alone.remove_bed, request.app.state.settings, owner, device,
+                                bed_id)
     )

@@ -189,12 +189,14 @@ sign has no sentence ([`../features/photo-capture.md`](../features/photo-capture
 them, grouped as the player shows them. **A story** is its kind, style, title and the note the owner gave the writer; **its parts**
 are a paragraph, its translation, a picture and a recording per passage; **its words** are the words
 it was asked to teach and the forms it actually used. **A bed** is a loop's music kept to be asked for
-again. The designs are [`../features/loops.md`](../features/loops.md) and
+again, by its `styleId` and `seed`, with its own minute of that music once the server has rendered it
+(`audioRef`, `audioMime`, `durationSeconds`), to be heard without a voice. The designs are [`../features/loops.md`](../features/loops.md) and
 [`../features/stories.md`](../features/stories.md).
 
 Three rules they share:
 
-- **State is derived, never a status column.** A loop with no `audioRef` is not rendered yet; a story
+- **State is derived, never a status column.** A loop with no `audioRef` is not rendered yet, and a
+  bed with none has no music of its own yet; a story
   with no parts was never written; a part with no passages is not recorded. A status would be one more
   fact to keep in step with the ones that already say it.
 - **What was said is denormalised on purpose.** A loop item's and a story word's `sourceText` record

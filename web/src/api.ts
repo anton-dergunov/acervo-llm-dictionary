@@ -1,4 +1,4 @@
-import type { Loop, PartOfSpeech, PhotoRegion, Pronunciation, SourceKind, Story, StoryPart, VocabularyGraph } from "./domain";
+import type { Bed, Loop, PartOfSpeech, PhotoRegion, Pronunciation, SourceKind, Story, StoryPart, VocabularyGraph } from "./domain";
 import { normalizeServerURL, sessionStore, type StoredSession } from "./session";
 import type { ArticleDraft } from "./yaml";
 
@@ -6,7 +6,7 @@ type Envelope<T> = { data?: T; error?: { code?: string; message?: string } };
 type LoginResponse = { token: string; user: { id: string; email: string } };
 
 /** Shared with the server hook. A mismatch stops synchronisation until the app is updated. */
-export const SCHEMA_VERSION = 22;
+export const SCHEMA_VERSION = 23;
 
 interface SyncEnvelope {
   schemaVersion: number;
@@ -371,6 +371,8 @@ const REQUEST_TIMEOUT = 15_000;
 /* The first map of a language embeds every sense on the server — a minute or more on a small machine,
    once. A device that already holds a map is not waiting on this: it draws what it has. */
 const MAP_TIMEOUT = 240_000;
+/* The server waits up to ninety seconds for a sample LexiBeat has not made yet. */
+const SAMPLE_TIMEOUT = 100_000;
 /** Capture is two model calls deep, so the sync timeout would abort a request that is working. */
 const CAPTURE_TIMEOUT = 300_000;
 // A picture or a clip sent up from this device: a phone photograph over a slow connection.
@@ -898,6 +900,8 @@ export interface LoopFamily {
   id: string;
   label: string;
   description: string;
+  /** The name of its sample, once the server has made one: `GET /loops/samples/{sample}` plays it. */
+  sample: string | null;
 }
 
 /** A choice a format offers: on or off, or one of its named `choices`. */
@@ -1224,6 +1228,26 @@ export const backendSession = {
       `/loops/${encodeURIComponent(loopId)}`,
       { method: "DELETE", headers: { "X-Acervo-Device": deviceId } }
     );
+  },
+  /* A route rather than an ordinary tombstone, for `deleteLoop`'s reason: the kept bed's own music
+     goes with it. */
+  deleteBed(bedId: string, deviceId: string): Promise<Bed> {
+    return client.call<Bed>(
+      `/beds/${encodeURIComponent(bedId)}`,
+      { method: "DELETE", headers: { "X-Acervo-Device": deviceId } }
+    );
+  },
+  /* A style's sample, made now because the server had not reached it yet. It waits for the render,
+     which is seconds alone and longer behind a loop, so it has a longer bound than a request. */
+  makeSample(family: string): Promise<{ family: string; sample: string }> {
+    return client.call<{ family: string; sample: string }>(
+      `/loops/samples/${encodeURIComponent(family)}`, { method: "POST", body: "{}" }, false, SAMPLE_TIMEOUT
+    );
+  },
+  /** A style's sample, by the name the schema gave it. The name carries a digest of its bytes. */
+  async sampleAudio(name: string): Promise<Blob> {
+    const path = name.split("/").map(encodeURIComponent).join("/");
+    return (await client.bytes(`/loops/samples/${path}`)).blob();
   },
   storyTypes(): Promise<StoryTypes> { return client.call<StoryTypes>("/stories/types"); },
   /* A figure about the language rather than the record, so it is asked for, not replicated: the

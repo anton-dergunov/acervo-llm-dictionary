@@ -67,6 +67,7 @@ import {
 import ProgressStrip from "./ProgressStrip";
 import { ImageDialog } from "./ImageDialog";
 import { clearPictures } from "./media";
+import { forgetBedMusic, forgetMusic } from "./music";
 import { fill, forgetPronunciations } from "./pronunciation";
 import { SyncChip } from "./SyncStatus";
 import {
@@ -1325,11 +1326,17 @@ export default function App() {
     const matching = snapshot.beds.filter((bed) => !bed.deleted && bed.styleId === loop.styleId && bed.seed === loop.seed);
     try {
       if (matching.length) {
-        for (const bed of matching) await repository.delete("beds", bed.id);
+        /* A route rather than `repository.delete`, for `removeLoop`'s reason: a kept bed's music is
+           the server's file to remove. A write followed by a pull, then the device forgets its copy. */
+        for (const bed of matching) await backendSession.deleteBed(bed.id, snapshot.deviceId ?? "");
+        for (const bed of matching) if (bed.audioRef) await forgetBedMusic(bed.audioRef);
+        await syncEngine.syncNow();
       } else {
+        // Its own music arrives later: the server queues the render as it stores the record.
         await repository.saveBed({
           styleId: loop.styleId, seed: loop.seed, engineVersion: loop.engineVersion,
-          bedFingerprint: loop.bedFingerprint, sourceLoopId: loop.id
+          bedFingerprint: loop.bedFingerprint, sourceLoopId: loop.id,
+          audioRef: null, audioMime: null, durationSeconds: null
         });
       }
       setSnapshot(repository.snapshot());
@@ -1412,6 +1419,7 @@ export default function App() {
     forgetCachedLookups();
     await clearPictures();
     await forgetPronunciations();
+    await forgetMusic();
     await backendSession.logout();
     await repository.clear();
     forgetPlace();

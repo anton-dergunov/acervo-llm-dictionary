@@ -133,11 +133,18 @@ step; at that hour one
 not stop the next, a night the server missed runs once when it comes back, and missed nights do not
 accumulate. There is no cron and no host scheduler. Reading Anki back is not a nightly step: it is
 queued every hour, for an owner who has it on, by a tick of the runner the way the nightly run is.
+A third tick sets off `music.samples` a minute after the server starts, and hourly after that while
+any style's sample is missing or the loop generator is away, since a deploy is what changes the engine
+the samples were made with ([`../features/loops.md`](../features/loops.md) §2.18).
 
 **A new capability is a new job kind, and nothing else.** A kind declares a name, a subject (a
 lexeme, a set of ids, or none), its steps and its output — always a record or a media file written
 through `merge_graph` — and inherits queuing, retry, pacing, cancellation, the event stream and the
-interface's progress for free. That is how loops and stories were added. A kind may do light CPU
+interface's progress for free. That is how loops and stories were added, and how music on its own
+was: `music` gives a kept bed its own minute of music, queued in the same transaction as the bed
+arrives exactly as `enrich` is with a word, and `music.samples` makes each style's sample one family
+at a time, so a loop waits behind at most one. Both hold the `audio` lane and follow the generator's
+operation as `loop` does. A kind may do light CPU
 work, an encode or a composite; anything heavy is out of scope for the runner.
 
 ## What a job leaves behind

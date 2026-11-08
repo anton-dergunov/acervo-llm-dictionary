@@ -133,10 +133,11 @@ stays small enough for that, and it is the first thing to measure if that change
 mode 600, so a backup of the database, a deploy's copy of it and an export never carry a key
 ([`models.md`](models.md), "Credentials").
 
-**Derived stores live beside the database file and in no table**: the loop take cache (`takes/`)
-and the meaning map's embeddings and drawn maps (`maps/`). Both are server-local and keyed by a digest
-of what they hold, so neither needs a mount, an environment variable or a schema change, and both
-survive a rebuilt database.
+**Derived stores live beside the database file and in no table**: the loop take cache (`takes/`),
+the music styles' samples (`samples/`) and the meaning map's embeddings and drawn maps (`maps/`). All
+are server-local and keyed by a digest of what they hold, so none needs a mount, an environment
+variable or a schema change, and all survive a rebuilt database. The takes and the samples are
+emptied by hand: `admin takes show|prune` and `admin samples show|clear`, each with `--dry-run`.
 
 ### The schema is bootstrapped, not upgraded
 

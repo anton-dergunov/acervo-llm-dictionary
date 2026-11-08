@@ -28,8 +28,8 @@ const SCHEMA: LoopSchema = {
   writerAvailable: true, mixesLanguages: true,
   productionBundle: true,
   families: [
-    { id: "gentle-game", label: "Gentle game", description: "Quick, cheerful arpeggios." },
-    { id: "meditative", label: "Meditative", description: "Slow and spacious." }
+    { id: "gentle-game", label: "Gentle game", description: "Quick, cheerful arpeggios.", sample: null },
+    { id: "meditative", label: "Meditative", description: "Slow and spacious.", sample: null }
   ]
 };
 
@@ -58,7 +58,7 @@ const items = [
 
 const kept: Bed = {
   id: "bedkept00000001", styleId: "gentle-game", seed: 104740, engineVersion: "1.4.0",
-  bedFingerprint: "f35282aaf3c40245", sourceLoopId: loop.id,
+  bedFingerprint: "f35282aaf3c40245", sourceLoopId: loop.id, audioRef: null, audioMime: null, durationSeconds: null,
   ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-17T00:00:00.000Z",
   editedAt: "2026-09-17T00:00:00.000Z", editedBy: "device000000001", revision: 2
 };

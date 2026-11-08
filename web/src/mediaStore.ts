@@ -23,12 +23,13 @@
  *
  * **One object store per kind of media**, so pronunciations can be switched off and forgotten on a
  * device without touching a single picture, and the other way round — and so that loops, which are
- * megabytes each where a clip is kilobytes, can be switched off on their own.
+ * megabytes each where a clip is kilobytes, can be switched off on their own. Music heard on its
+ * own — a kept bed's, a style's sample — is a fourth, so it is kept while loops are not.
  */
 
 const DATABASE_NAME = "acervo-media";
-const DATABASE_VERSION = 3;
-export const MEDIA_KINDS = ["pictures", "pronunciations", "loops"] as const;
+const DATABASE_VERSION = 4;
+export const MEDIA_KINDS = ["pictures", "pronunciations", "loops", "music"] as const;
 export type MediaKind = typeof MEDIA_KINDS[number];
 
 export interface StoredMedia {

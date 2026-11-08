@@ -105,10 +105,13 @@ def schema(settings: Settings, owner: str | None = None) -> dict[str, Any]:
     plus the two things only Acervo knows: whether a writing model is set up, and whether the voice
     the owner chose for loops can mix languages in one line. A format that needs either says so in
     the dialog before it is asked for, instead of falling back without a word."""
+    from acervo.services.music import sample_names
+
     try:
         found = service(settings).schema()
     except LoopError as error:
         raise refusal(error) from None
+    heard = sample_names(settings, found)
     return {
         "apiVersion": found.api_version,
         "engineVersion": found.engine_version,
@@ -130,8 +133,10 @@ def schema(settings: Settings, owner: str | None = None) -> dict[str, Any]:
         "writerAvailable": _writer_available(settings, owner),
         "mixesLanguages": owner is not None and delivery(owner) != "plain",
         # Each with the generator's own label and sentence, so the dialog can say what a kind of
-        # music *is*. "Surprise me" is the dialog's, and not one of these.
-        "families": [{"id": one.id, "label": one.label, "description": one.description}
+        # music *is*, and the name of its sample once one is made. "Surprise me" is the dialog's,
+        # and not one of these.
+        "families": [{"id": one.id, "label": one.label, "description": one.description,
+                      "sample": heard.get(one.id)}
                      for one in found.families],
         "maxItems": min(found.max_items or MAX_WORDS, MAX_WORDS),
     }

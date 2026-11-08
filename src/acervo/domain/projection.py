@@ -432,6 +432,10 @@ def _project_bed(row: Mapping[str, Any]) -> dict[str, Any]:
         "engineVersion": text_or_none(row["engine_version"]),
         "bedFingerprint": text_or_none(row["bed_fingerprint"]),
         "sourceLoopId": row["source_loop"],
+        # Hidden with the reference, as a loop's are: no music yet is not a zero-second track.
+        "audioRef": text_or_none(row["audio_ref"]),
+        "audioMime": text_or_none(row["audio_mime"]) if trimmed(row["audio_ref"]) else None,
+        "durationSeconds": to_float(row["duration_seconds"]) if trimmed(row["audio_ref"]) else None,
     }
 
 
@@ -442,6 +446,9 @@ def _assign_bed(value: Mapping[str, Any]) -> dict[str, Any]:
         "engine_version": trimmed(value.get("engineVersion")),
         "bed_fingerprint": trimmed(value.get("bedFingerprint")),
         "source_loop": trimmed(value.get("sourceLoopId")),
+        "audio_ref": trimmed(value.get("audioRef")),
+        "audio_mime": trimmed(value.get("audioMime")),
+        "duration_seconds": to_float(value.get("durationSeconds")),
     }
 
 

@@ -1,7 +1,8 @@
 """The narrow loop client, against recorded responses from the real service.
 
 `fixtures/*.json` were captured from lexibeat 0.2.0 in-process (`schema.json` from 0.6.0; 0.4.0
-added the `bundle` identity and 0.5.0 `family_details`) — the contract in the only shape
+added the `bundle` identity and 0.5.0 `family_details`; `music_*.json` from 0.8.0, which added
+`POST /music`) — the contract in the only shape
 Acervo consumes. Re-record them when `deploy/acervo/lexibeat/pin.json` moves; the recorder is in
 that commit's message and takes half a minute.
 
@@ -17,7 +18,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from acervo.loops.client import Item, LoopError, LoopService
+from acervo.loops.client import Item, LoopError, LoopService, Music
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -222,3 +223,27 @@ def test_nothing_of_the_service_s_own_shape_escapes():
                                   "source_reveal", "target_reveal"}
     assert set(loop.cues[0]) == {"kind", "section", "group", "item", "side", "role", "language",
                                  "text", "take", "start", "end"}
+
+
+# ── music on its own ────────────────────────────────────────────────────────
+
+
+def test_music_alone_is_asked_for_with_a_family_a_seed_and_a_length_and_no_token():
+    seen: list[httpx.Request] = []
+    operation = service(answering(recorded("music_queued"), 202, seen=seen)).music(
+        family="organic", seed=7, seconds=24)
+    (request,) = seen
+    assert request.method == "POST" and request.url.path == "/api/v1/music"
+    assert json.loads(request.content) == {"family": "organic", "seed": 7, "seconds": 24,
+                                           "palette": "hybrid"}
+    assert operation.status == "queued" and operation.result is None
+
+
+def test_a_finished_music_operation_is_read_as_music_with_its_fingerprint():
+    operation = service(answering(recorded("music_completed"))).operation("x", music=True)
+    assert operation.finished and operation.successful
+    assert isinstance(operation.result, Music)
+    assert operation.result.audio_url.startswith("/api/v1/music/")
+    assert (operation.result.style_id, operation.result.seed) == ("organic", 7)
+    assert operation.result.engine_version and operation.result.bed_fingerprint
+    assert operation.result.duration_seconds > 0

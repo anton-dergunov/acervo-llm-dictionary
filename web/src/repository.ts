@@ -19,9 +19,9 @@ import type { ArticleDraft } from "./yaml";
  * open. 16: a story part's passages became one recording each (`audioRef`, `audioMime`,
  * `durationSeconds`) instead of times into one joined file, and nothing bumped this. 17: `beds`,
  * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`. 21: a study
- * state's `senseId`.
+ * state's `senseId`. 26: a kept bed's own music (`audioRef`, `audioMime`, `durationSeconds`).
  */
-export const LOCAL_SCHEMA_VERSION = 25;
+export const LOCAL_SCHEMA_VERSION = 26;
 
 export const EMPTY_GRAPH = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],

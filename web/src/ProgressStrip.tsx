@@ -75,6 +75,16 @@ function phase(step: JobStep, job?: Job): string | null {
     }
     case "loop.store":
       return "Storing the track";
+    case "music.render":
+      return "Making the music on its own";
+    case "music.store":
+      return "Storing the music";
+    // One style at a time, each in the generator's own words while it renders.
+    case "music.samples": {
+      const doing = typeof step.detail?.doing === "string" ? step.detail.doing : "";
+      const left = typeof step.detail?.left === "number" ? step.detail.left : 0;
+      return `${doing || "Making the style samples"}${left > 1 ? ` · ${left} to go` : ""}`;
+    }
     case "capture": {
       const words = Array.isArray(step.detail?.words) ? step.detail.words.length : 0;
       return `Reading the text${words ? ` · ${words} so far` : ""}${waiting}`;
@@ -104,6 +114,11 @@ function failureOf(step: JobStep): string {
       return step.message
         ? `The loop was made but its track could not be stored — ${step.message}`
         : "The loop was made but its track could not be stored";
+    case "music.render":
+    case "music.store":
+      return step.message ? `The music could not be saved on its own — ${step.message}` : "The music could not be saved on its own";
+    case "music.samples":
+      return step.message ? `The style samples could not be made — ${step.message}` : "The style samples could not be made";
     /* Lead with what happened and then say why, exactly as the loop steps do: a constant here is
        what turns a refusal that named the reason into one that names nothing. */
     case "story.write":

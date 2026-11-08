@@ -22,8 +22,10 @@ import type { Bed, Loop, VocabularyGraph } from "./domain";
 import { Art } from "./art";
 import { AllChoices, type CatalogueChoice } from "./ChoiceCarousel";
 import { MakeSection } from "./MakeDialog";
-import { DiceIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
+import { DiceIcon, StarIcon } from "./icons";
 import * as player from "./loops";
+import { bedMusic, prefetch } from "./music";
+import { MusicButton, MusicPlay } from "./MusicPlay";
 import { loopIsReady, loopTitle, loopTrackOf, styleLabel } from "./selectors";
 
 let asked: Promise<LoopSchema> | null = null;
@@ -89,17 +91,30 @@ export function bedAbout(graph: VocabularyGraph, bed: Bed): string {
   return loop ? `kept ${kept(bed)} · from “${loopTitle(graph, loop)}”` : `kept ${kept(bed)}`;
 }
 
-/** Hear a favourite before choosing it, by playing the loop it was kept from. */
-function Preview({ graph, bed }: { graph: VocabularyGraph; bed: Bed }) {
+/**
+ * Hear a favourite before choosing it: its own music, rendered once by the server after it was kept
+ * and kept on this device. Until that has arrived, the loop it was kept from, voice and all.
+ */
+function Preview({ graph, families, bed, onNotify }: {
+  graph: VocabularyGraph;
+  families: LoopFamily[];
+  bed: Bed;
+  onNotify(message: string): void;
+}) {
   const playback = player.usePlayback();
+  const label = styleLabel(families, bed.styleId);
+  if (bed.audioRef) {
+    return <MusicPlay choice={musicKey({ kind: "bed", bed })} label={label} size="small"
+      fetch={() => bedMusic(bed)} onError={onNotify} />;
+  }
   const loop = sourceOf(graph, bed);
   if (!loop) return null;
   const playing = playback.loopId === loop.id && playback.playing;
-  return <button
-    type="button" className="music-preview"
-    aria-label={playing ? "Stop listening" : "Hear this music"}
+  return <MusicButton
+    label={label} size="small" playing={playing} loading={playback.loopId === loop.id && playback.loading}
+    share={playing && playback.duration > 0 ? Math.min(1, playback.at / playback.duration) : 0}
     onClick={() => (playing ? player.pause() : void player.play(loopTrackOf(graph, loop)))}
-  >{playing ? <PauseIcon /> : <PlayIcon />}</button>;
+  />;
 }
 
 /** A choice as one string, which is what a strip of tiles is keyed by. */
@@ -143,13 +158,17 @@ export function musicChoices(graph: VocabularyGraph, families: LoopFamily[], fav
 const SAVED_SHOWN = 2;
 
 /** Saved pieces as cards: the picture, the name with its star, where it came from, and ▶. */
-export function SavedCards({ graph, families, favourites, value, onChange }: {
+export function SavedCards({ graph, families, favourites, value, onChange, onNotify }: {
   graph: VocabularyGraph;
   families: LoopFamily[];
   favourites: Bed[];
   value: string;
   onChange(key: string): void;
+  onNotify(message: string): void;
 }) {
+  // What is shown is what ▶ will be pressed on, so its music is fetched before it is.
+  const shown = favourites.map((bed) => bed.audioRef ?? "").join();
+  useEffect(() => { void prefetch(favourites, []); }, [shown]);
   return <div className="music-favourites" role="radiogroup" aria-label="Saved music">
     {favourites.map((bed) => {
       const key = musicKey({ kind: "bed", bed });
@@ -163,7 +182,7 @@ export function SavedCards({ graph, families, favourites, value, onChange }: {
             <span className="favourite-about">{bedAbout(graph, bed)}</span>
           </span>
         </button>
-        <Preview graph={graph} bed={bed} />
+        <Preview graph={graph} families={families} bed={bed} onNotify={onNotify} />
       </div>;
     })}
   </div>;
@@ -175,13 +194,14 @@ export function SavedCards({ graph, families, favourites, value, onChange }: {
  * are kept. A chosen piece that is not among the two takes the second place, so what is chosen is
  * always in sight.
  */
-export function SavedMusic({ graph, families, favourites, value, onChange, onAll }: {
+export function SavedMusic({ graph, families, favourites, value, onChange, onAll, onNotify }: {
   graph: VocabularyGraph;
   families: LoopFamily[];
   favourites: Bed[];
   value: string;
   onChange(key: string): void;
   onAll(): void;
+  onNotify(message: string): void;
 }) {
   if (!favourites.length) return null;
   const chosen = favourites.find((bed) => musicKey({ kind: "bed", bed }) === value);
@@ -192,7 +212,7 @@ export function SavedMusic({ graph, families, favourites, value, onChange, onAll
     ? <AllChoices count={favourites.length} label="Saved music" onOpen={onAll} />
     : null;
   return <MakeSection label="Saved music" aside={all}>
-    <SavedCards graph={graph} families={families} favourites={shown} value={value} onChange={onChange} />
+    <SavedCards graph={graph} families={families} favourites={shown} value={value} onChange={onChange} onNotify={onNotify} />
   </MakeSection>;
 }
 

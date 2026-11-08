@@ -1,10 +1,11 @@
+import { act, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { AcervoApiError, backendSession } from "./api";
 import type { Pronunciation } from "./domain";
 import { setPronunciationCacheEnabled } from "./editorPreferences";
 import { MemoryMediaStore } from "./mediaStore";
 import {
-  clipBytes, currentClip, fill, forgetPronunciations, play, replaceStoreForTests
+  clipBytes, currentClip, fill, forgetPronunciations, play, playPreview, replaceStoreForTests, stopPreview, usePreviewProgress
 } from "./pronunciation";
 import { repository } from "./repository";
 import { syncEngine } from "./sync";
@@ -126,3 +127,48 @@ describe("playing a pronunciation", () => {
   });
 });
 
+
+describe("hearing a preview", () => {
+  beforeEach(() => { replaceStoreForTests(new MemoryMediaStore()); });
+  afterEach(() => { vi.restoreAllMocks(); });
+
+  it("reports how far a preview has got while it plays, and nothing once it ends", async () => {
+    let end: (() => void) | null = null;
+    vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(function (this: HTMLMediaElement) {
+      end = () => this.dispatchEvent(new Event("ended"));
+      return Promise.resolve();
+    });
+    vi.spyOn(HTMLMediaElement.prototype, "currentTime", "get").mockReturnValue(6);
+    vi.spyOn(HTMLMediaElement.prototype, "duration", "get").mockReturnValue(24);
+    const { result } = renderHook(() => usePreviewProgress("music:style:organic"));
+    const playing = playPreview("music:style:organic", async () => MP3());
+    await waitFor(() => expect(result.current).toEqual({ at: 6, duration: 24 }));
+    act(() => end!());
+    await playing;
+    await waitFor(() => expect(result.current).toEqual({ at: 0, duration: 0 }));
+  });
+
+  it("does not play a preview stopped while it was being fetched", async () => {
+    const play = vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve());
+    let arrive: ((blob: Blob) => void) | null = null;
+    const playing = playPreview("music:style:organic", () => new Promise<Blob>((done) => { arrive = done; }));
+    stopPreview();
+    arrive!(MP3());
+    await playing;
+    // The press primes the element on silence; the sample itself is never put in it.
+    expect(play.mock.contexts.every((element) => (element as HTMLMediaElement).src.startsWith("data:"))).toBe(true);
+  });
+
+  it("lets the second of two previews end on its own after replacing the first", async () => {
+    vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve());
+    const first = playPreview("music:style:organic", async () => MP3());
+    await waitFor(() => expect(HTMLMediaElement.prototype.play).toHaveBeenCalledTimes(2));
+    const second = playPreview("music:style:meditative", async () => MP3());
+    await first;
+    await waitFor(() => expect(HTMLMediaElement.prototype.play).toHaveBeenCalledTimes(4));
+    // The first one's ending must not have taken the second one's end with it.
+    const element = (vi.mocked(HTMLMediaElement.prototype.play).mock.contexts.at(-1)) as HTMLMediaElement;
+    element.dispatchEvent(new Event("ended"));
+    await expect(second).resolves.toBeUndefined();
+  });
+});
