@@ -169,12 +169,12 @@ export default function StoryDialog({ graph, query, selection = [], from = "scop
 
     <MakeSection label="Kind of story"
       aside={<AllChoices count={kinds.length} label="Kind of story" onOpen={() => setBrowsing("kind")} />}>
-      <ChoiceCarousel label="Kind of story" choices={centred(kinds[0], kinds.slice(1))} value={kind} onChange={setKind} onAll={() => setBrowsing("kind")} />
+      <ChoiceCarousel label="Kind of story" choices={centred(kinds[0], kinds.slice(1))} value={kind} onChange={setKind} />
     </MakeSection>
 
     <MakeSection label="Picture style"
       aside={<AllChoices count={pictures.length} label="Picture style" onOpen={() => setBrowsing("pictures")} />}>
-      <ChoiceCarousel label="Picture style" choices={centred(pictures[0], pictures.slice(1))} value={style} onChange={setStyle} onAll={() => setBrowsing("pictures")} />
+      <ChoiceCarousel label="Picture style" choices={centred(pictures[0], pictures.slice(1))} value={style} onChange={setStyle} />
     </MakeSection>
 
     <textarea

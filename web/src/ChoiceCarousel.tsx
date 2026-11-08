@@ -13,18 +13,18 @@
  * Surprise me, To suit the story — is the middle of its list (`centred`), so the row opens with
  * pictures on both sides rather than an empty half; the grid keeps it first.
  *
- * **Which row is on trial.** The row below is a spike of eight variants (`carousels/`,
- * `docs/plans/carousel-spike.md`), chosen per device from the top of any make dialog; what follows
- * describes the one shipped before it.
- *
  * **The row is Embla** (`embla-carousel-react`, MIT), with its wheel plugin
  * (`embla-carousel-wheel-gestures`, MIT): a swipe, a drag, a sideways wheel or a trackpad moves it
  * smoothly, with momentum, and it settles with a picture in the middle. **Whatever passes the middle
- * is the choice, as it passes**, so the row and the choice never disagree. A wheel stepping one
- * picture per notch, and a native scrolling row steered to its choice, were both tried before this:
- * the first needed a precise hand, and the second could stop with one picture in the middle and
- * another chosen. A tap, ← → from the keyboard, or the ‹ › buttons on the row's edges (for a mouse
- * with no sideways wheel) choose a picture, and the row glides to it.
+ * is the choice, as it passes**, so the row and the choice never disagree. A tap, ← → from the
+ * keyboard, or the ‹ › buttons on the row's edges (for a mouse with no sideways wheel) choose a
+ * picture, and the row glides to it.
+ *
+ * **`skipSnaps: true` is what makes the row usable; do not drop it.** With Embla's default, a release
+ * still moving goes to the picture next to the one the drag *started* on (`DragHandler.allowedForce`),
+ * so a swipe or drag across three pictures jumped back to the first one's neighbour, and the wheel
+ * plugin, which fakes a drag, did the same. With it, the row lands where the finger and its momentum
+ * say. `docs/features/loops.md` §2.18 has what else was tried and why this was kept.
  *
  * The size of each picture is a transform written as the row moves, never its layout size, and the
  * caption under it has a fixed height, so the dialog keeps its size while the row moves. **All** (the
@@ -32,15 +32,10 @@
  * (`MakeDialog`), with every sentence at once.
  */
 
-import { type ReactNode } from "react";
-import { EmblaRow } from "./carousels/EmblaRow";
-import { NativeRow } from "./carousels/NativeRow";
-import { StripRow } from "./carousels/StripRow";
-import { SwiperRow } from "./carousels/SwiperRow";
-import { TileChoice } from "./carousels/TileChoice";
-import type { RowProps } from "./carousels/shared";
-import { useCarouselVariant, type CarouselVariant } from "./carousels/variants";
-import "./carousels/spike.css";
+import useEmblaCarousel from "embla-carousel-react";
+import { WheelGesturesPlugin } from "embla-carousel-wheel-gestures";
+import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { BackIcon, ForwardIcon } from "./icons";
 
 export interface CatalogueChoice {
   id: string;
@@ -56,28 +51,146 @@ export function centred<T>(first: T, rest: T[]): T[] {
   return [...rest.slice(0, half), first, ...rest.slice(half)];
 }
 
-const ROWS: Record<CarouselVariant, (props: RowProps) => ReactNode> = {
-  "embla": (props) => <EmblaRow {...props} skipSnaps={false} />,
-  "embla-fixed": (props) => <EmblaRow {...props} skipSnaps />,
-  "native": (props) => <NativeRow {...props} one={false} />,
-  "native-one": (props) => <NativeRow {...props} one />,
-  "swiper": (props) => <SwiperRow {...props} mode="free" />,
-  "swiper-step": (props) => <SwiperRow {...props} mode="step" />,
-  "strip": (props) => <StripRow {...props} />,
-  "tile": (props) => <TileChoice {...props} />
-};
-
-/**
- * The carousel, in whichever of the spike's variants this device chose (`carousels/variants.ts`).
- * A change of variant mounts a fresh row.
- */
-export function ChoiceCarousel(props: RowProps) {
-  const variant = useCarouselVariant();
-  return <ChoiceRow key={variant} variant={variant} {...props} />;
+/** The size and opacity of a picture `distance` pictures from the middle. */
+function look(distance: number): { scale: number; opacity: number } {
+  if (distance <= 1) return { scale: 1.2 - 0.2 * distance, opacity: 1 };
+  return { scale: Math.max(0.72, 1 - 0.16 * (distance - 1)), opacity: Math.max(0.35, 1 - 0.32 * (distance - 1)) };
 }
 
-function ChoiceRow({ variant, ...props }: RowProps & { variant: CarouselVariant }) {
-  return <>{ROWS[variant](props)}</>;
+export function ChoiceCarousel({ label, choices, value, onChange, idle }: {
+  label: string;
+  choices: CatalogueChoice[];
+  /** The chosen id, or null when the choice was made elsewhere (a saved piece of music). */
+  value: string | null;
+  onChange(id: string): void;
+  /** Said under the row while nothing in it is chosen. */
+  idle?: string;
+}) {
+  const index = choices.findIndex((choice) => choice.id === value);
+  const chosen = index >= 0 ? choices[index] : null;
+  // Where the row opens: on the choice, else on the middle of the list, where its default sits.
+  const [opening] = useState(() => (index >= 0 ? index : Math.floor((choices.length - 1) / 2)));
+  const [viewport, api] = useEmblaCarousel(
+    // `watchResize` as the components that measure text do: where there is no ResizeObserver there
+    // is no layout to follow (jsdom).
+    { align: "center", containScroll: false, skipSnaps: true, startIndex: opening, duration: 22, watchResize: typeof ResizeObserver === "function" },
+    [WheelGesturesPlugin()]
+  );
+  // The picture in the middle, which is what the arrows and keys step from while nothing is chosen.
+  const [middle, setMiddle] = useState(opening);
+  const at = index >= 0 ? index : middle;
+  /** Whether the row has been moved by hand; until then, a row with nothing chosen chooses nothing. */
+  const moved = useRef(false);
+  /** The row is gliding to a choice made elsewhere: what it passes on the way is not chosen. */
+  const steering = useRef(false);
+  /** The choice came from the row's own movement, so the row is already where it should be. */
+  const following = useRef(false);
+  const latest = useRef({ index, choices, onChange });
+  latest.current = { index, choices, onChange };
+
+  /** Writes each picture's size from its distance to the middle of the row; returns the nearest. */
+  const paint = useCallback((): number => {
+    const frame = api?.rootNode();
+    if (!api || !frame) return -1;
+    const box = frame.getBoundingClientRect();
+    const centre = box.left + box.width / 2;
+    let nearest = -1;
+    let least = Infinity;
+    api.slideNodes().forEach((slide, position) => {
+      const rect = slide.getBoundingClientRect();
+      const distance = Math.abs(rect.left + rect.width / 2 - centre) / (rect.width || 1);
+      if (distance < least) { least = distance; nearest = position; }
+      const { scale, opacity } = look(distance);
+      slide.style.setProperty("--scale", scale.toFixed(3));
+      slide.style.setProperty("--fade", opacity.toFixed(3));
+    });
+    return nearest;
+  }, [api]);
+
+  useEffect(() => {
+    if (!api) return;
+    /** Chooses what the row's own movement has brought to the middle, without steering the row. */
+    const follow = (found: number) => {
+      const { index: now, choices: list, onChange: change } = latest.current;
+      if (found < 0 || !list[found]) return;
+      setMiddle(found);
+      if (found !== now && (now >= 0 || moved.current)) {
+        following.current = true;
+        change(list[found].id);
+      }
+    };
+    // While a finger, a wheel or the momentum after them moves the row, the picture passing the
+    // middle is chosen as it passes; while the row glides to a tapped choice, nothing on the way is.
+    const scroll = () => {
+      const nearest = paint();
+      if (!steering.current && moved.current) follow(nearest);
+    };
+    const settle = () => {
+      steering.current = false;
+      follow(api.selectedScrollSnap());
+    };
+    const touched = () => { moved.current = true; steering.current = false; };
+    const frame = api.rootNode();
+    api.on("scroll", scroll).on("settle", settle).on("reInit", paint).on("pointerDown", touched);
+    frame.addEventListener("wheel", touched, { passive: true });
+    paint();
+    return () => {
+      api.off("scroll", scroll).off("settle", settle).off("reInit", paint).off("pointerDown", touched);
+      frame.removeEventListener("wheel", touched);
+    };
+  }, [api, paint]);
+
+  // A choice made by a tap, a key, an arrow or the grid: the row glides to it.
+  useEffect(() => {
+    if (following.current) { following.current = false; return; }
+    if (api && index >= 0 && api.selectedScrollSnap() !== index) {
+      steering.current = true;
+      api.scrollTo(index);
+    }
+  }, [api, index, choices.map((choice) => choice.id).join()]);
+
+  const choose = (position: number, focus = false) => {
+    const { choices: list, onChange: change } = latest.current;
+    const next = Math.max(0, Math.min(list.length - 1, position));
+    moved.current = true;
+    change(list[next].id);
+    if (focus) requestAnimationFrame(() => api?.slideNodes()[next]?.querySelector("button")?.focus({ preventScroll: true }));
+  };
+
+  const onKey = (event: KeyboardEvent<HTMLDivElement>) => {
+    const moves: Record<string, number> = { ArrowRight: at + 1, ArrowDown: at + 1, ArrowLeft: at - 1, ArrowUp: at - 1, Home: 0, End: choices.length - 1 };
+    if (!(event.key in moves)) return;
+    event.preventDefault();
+    choose(moves[event.key], true);
+  };
+
+  const about = choices.some((choice) => choice.about);
+  return <div className="carousel">
+    <div className="carousel-frame">
+      <div className="carousel-row" ref={viewport}>
+        <div className="carousel-track" role="radiogroup" aria-label={label} onKeyDown={onKey}>
+          {choices.map((choice, position) => <div
+            key={choice.id} data-choice={choice.id} className={`carousel-item${position === index ? " on" : ""}`}
+          >
+            <button
+              type="button" role="radio" aria-checked={position === index} tabIndex={position === at ? 0 : -1}
+              aria-label={choice.label} aria-description={choice.about} title={position === index ? undefined : choice.label}
+              onClick={() => choose(position)}
+            ><span className="choice-art">{choice.art}</span></button>
+          </div>)}
+        </div>
+      </div>
+      <button type="button" className="carousel-step prev" aria-label={`Previous: ${label}`}
+        hidden={at <= 0} onClick={() => choose(at - 1)}><BackIcon /></button>
+      <button type="button" className="carousel-step next" aria-label={`Next: ${label}`}
+        hidden={at >= choices.length - 1} onClick={() => choose(at + 1)}><ForwardIcon /></button>
+    </div>
+    <div className={`carousel-caption${about ? " described" : ""}`} aria-hidden="true">
+      {chosen
+        ? <><strong>{chosen.label}</strong>{chosen.about && <span>{chosen.about}</span>}</>
+        : <span>{idle}</span>}
+    </div>
+  </div>;
 }
 
 /** Every choice at once, with what each one is. Choosing one is the whole of what the grid is for. */

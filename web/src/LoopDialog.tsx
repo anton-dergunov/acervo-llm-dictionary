@@ -142,7 +142,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
       aside={<AllChoices count={tiles.styles.length} label="Music style" onOpen={() => setBrowsing("styles")} />}>
       <ChoiceCarousel
         label="Music style" choices={centred(tiles.styles[0], tiles.styles.slice(1))} onChange={setMusic}
-        idle="Saved music chosen above" onAll={() => setBrowsing("styles")}
+        idle="Saved music chosen above"
         value={music.kind === "bed" ? null : musicKey(music)}
       />
     </MakeSection>

@@ -2787,7 +2787,7 @@ function openMakeDialog(kind, from = "scope") {
     const [choices, key] = catalogues()[name];
     const order = centred(choices);
     const at = order.findIndex((c) => c.id === d[key]);
-    const embla = EmblaCarousel(row, { align: "center", containScroll: false, duration: 22,
+    const embla = EmblaCarousel(row, { align: "center", containScroll: false, skipSnaps: true, duration: 22,
       startIndex: at >= 0 ? at : Math.floor((order.length - 1) / 2) }, [EmblaCarouselWheelGestures()]);
     let moved = false, steering = false;
     const mark = (i) => {

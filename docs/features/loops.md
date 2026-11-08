@@ -661,10 +661,23 @@ instead of an empty half; the grid keeps it first.
 Moving the row is choosing, and **whatever passes the middle is the choice as it passes**, so the
 row and the choice never disagree. The row is Embla (`embla-carousel-react` with
 `embla-carousel-wheel-gestures`, both MIT): a swipe, a drag, a sideways wheel or a trackpad moves it
-smoothly, with momentum, and it settles with a picture in the middle. Two hand-written rows came
-before it and are why it is a library: a wheel stepping one picture per notch needed a precise hand
-and skipped two on a fast turn, and a natively scrolling row steered to its choice could come to rest
-with one picture in the middle and another chosen. A tap, ‹ › on the row's edges (for a mouse with no
+smoothly, with momentum, and it settles with a picture in the middle. **It runs with `skipSnaps:
+true`**, and that one option is the difference between a usable row and an unusable one. With Embla's
+default, a release that is still moving goes to the picture next to the one the drag *started* on,
+so a quick swipe on a tablet or a phone, or a mouse drag across three pictures, jumped back to the
+first one's neighbour; the wheel plugin fakes a drag and did the same, so a slow turn moved nothing
+and a faster one landed somewhere unexpected. With it, the row lands where the finger and its
+momentum say.
+
+The row was chosen by hand, on a Mac with a sideways wheel, an iPad and an Android phone, from eight
+built side by side. Embla with `skipSnaps` was the only one right everywhere. Swiper's free mode with
+sticky snapping came second, but its ‹ › buttons and arrow keys would need work of their own. A plain
+strip where scrolling only browses and a tap chooses was acceptable, but gives up the middle as the
+choice. Embla as it first shipped, a natively scrolling row with CSS snapping (free, and one picture
+per swipe), Swiper paged, and a single chosen tile that opens the grid were the rest. Two
+hand-written rows came before all of these and are why the row is a library: a wheel stepping one
+picture per notch needed a precise hand and skipped two on a fast turn, and a natively scrolling row
+steered to its choice could come to rest with one picture in the middle and another chosen. A tap, ‹ › on the row's edges (for a mouse with no
 sideways wheel) or ← → from the keyboard choose a picture, and the row glides to it without choosing
 what it passes. The size is a transform written as the row moves and the caption under it has a
 fixed height, so the dialog never changes size with it. While saved music is chosen, nothing in the
