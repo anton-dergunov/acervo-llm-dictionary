@@ -27,7 +27,7 @@
 import { useEffect, useState } from "react";
 import { AcervoApiError, backendSession, type LoopFamily, type LoopSchema } from "./api";
 import { AllChoices, ChoiceCarousel, ChoiceGrid, centred } from "./ChoiceCarousel";
-import type { VocabularyGraph } from "./domain";
+import type { Bed, VocabularyGraph } from "./domain";
 import { lastLoopFormat, lastLoopMusic, loopSwitchesFor, rememberLoopFormat, rememberLoopMusic } from "./editorPreferences";
 import { KindChoices, formatUsable, switchesFor } from "./LoopFormat";
 import { SavedCards, SavedMusic, musicChoices, musicKey, musicOf, useLoopSchema } from "./LoopMusic";
@@ -47,7 +47,7 @@ const FEWEST_WORDS = 4;
 /** What a style's sample is heard under; a saved piece's key starts differently. */
 const SAMPLE = previewKey("style:");
 
-export default function LoopDialog({ graph, query, selection = [], from = "scope", deviceId, onClose, onMade, onNotify }: {
+export default function LoopDialog({ graph, query, selection = [], from = "scope", deviceId, onClose, onMade, onNotify, onRemoveBed }: {
   graph: VocabularyGraph;
   /** The scope on screen, exactly as the list is drawing it. */
   query: ListQuery;
@@ -59,6 +59,8 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
   onClose(): void;
   onMade(loopId: string): void;
   onNotify(message: string): void;
+  /** Stop keeping a saved piece; the dialog stays open, and the piece leaves it once it is gone. */
+  onRemoveBed?(bed: Bed): void;
 }) {
   const { schema, trouble } = useLoopSchema(true);
   const [musicPicked, setMusic] = useState<string | null>(lastLoopMusic);
@@ -105,6 +107,12 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
     .filter((family): family is LoopFamily => Boolean(family?.sample));
   const nearKey = near.map((family) => family.sample).join();
   useEffect(() => { void prefetch([], near); }, [nearKey]);
+  // A piece being heard stops as it is removed; a chosen one falls back to Surprise me by itself.
+  const remove = onRemoveBed && ((bed: Bed) => {
+    const heard = previewKey(musicKey({ kind: "bed", bed }));
+    if (speech.playing === heard || speech.busy === heard) stopPreview();
+    onRemoveBed(bed);
+  });
   // Closing the dialog, by Make or otherwise, ends what it was playing with it.
   useEffect(() => () => stopPreview(), []);
 
@@ -150,7 +158,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
   }
   if (browsing === "saved") {
     return <MakeDialog title="Make a loop" back={{ title: "Saved music", onBack: () => setBrowsing(null) }} footer={footer} onClose={onClose}>
-      <SavedCards graph={graph} families={families} favourites={tiles.favourites} onNotify={onNotify}
+      <SavedCards graph={graph} families={families} favourites={tiles.favourites} onNotify={onNotify} onRemove={remove}
         value={musicKey(music)} onChange={(key) => { stopSample(); setMusic(key); setBrowsing(null); }} />
     </MakeDialog>;
   }
@@ -169,7 +177,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
       />
     </MakeSection>}
 
-    <SavedMusic graph={graph} families={families} favourites={tiles.favourites} onNotify={onNotify}
+    <SavedMusic graph={graph} families={families} favourites={tiles.favourites} onNotify={onNotify} onRemove={remove}
       value={musicKey(music)} onChange={(key) => { stopSample(); setMusic(key); }} onAll={() => setBrowsing("saved")} />
 
     <MakeSection label="Music style" note="composed new for each loop"

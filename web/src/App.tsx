@@ -1,6 +1,6 @@
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import AddView, { type AddTab, type CaptureSeed } from "./AddView";
-import type { ImagePrompt, Loop } from "./domain";
+import type { Bed, ImagePrompt, Loop } from "./domain";
 import AskDock, { type AskOptions, type Detent } from "./AskDock";
 import ReviewBar from "./ReviewBar";
 import MadeBar from "./MadeBar";
@@ -1317,6 +1317,45 @@ export default function App() {
   }
 
   /**
+   * Stop keeping these beds. A route rather than `repository.delete`, for `removeLoop`'s reason: a
+   * kept bed's music is the server's file to remove. A write followed by a pull, then the device
+   * forgets its copy.
+   */
+  async function letBedsGo(beds: Bed[]) {
+    for (const bed of beds) await backendSession.deleteBed(bed.id, snapshot?.deviceId ?? "");
+    for (const bed of beds) if (bed.audioRef) await forgetBedMusic(bed.audioRef);
+    await syncEngine.syncNow();
+  }
+
+  /**
+   * Remove a saved piece from the make dialog, where it may be the only way left to reach it: its loop
+   * can be gone. Undo keeps it again as a new record with the same style, seed and engine, which is
+   * everything that replays it; its own music is made again, as for any bed just kept.
+   */
+  async function removeBed(bed: Bed) {
+    try {
+      await letBedsGo([bed]);
+    } catch (error) {
+      notify(error instanceof Error ? error.message : "That could not be removed.");
+      return;
+    }
+    setSnapshot(repository.snapshot());
+    notify("Removed from saved music", { label: "Undo", run: () => void (async () => {
+      try {
+        await repository.saveBed({
+          styleId: bed.styleId, seed: bed.seed, engineVersion: bed.engineVersion,
+          bedFingerprint: bed.bedFingerprint, sourceLoopId: bed.sourceLoopId,
+          audioRef: null, audioMime: null, durationSeconds: null
+        });
+        setSnapshot(repository.snapshot());
+        notify("Kept again");
+      } catch (error) {
+        notify(error instanceof Error ? error.message : "That could not be kept again.");
+      }
+    })() });
+  }
+
+  /**
    * Keep a loop's music as a favourite, or stop keeping it. An ordinary write of a `beds` record —
    * online-only and loud when it fails — and unkeeping tombstones every record naming this music, so
    * one kept twice (or from two devices) does not linger as a second star.
@@ -1326,11 +1365,7 @@ export default function App() {
     const matching = snapshot.beds.filter((bed) => !bed.deleted && bed.styleId === loop.styleId && bed.seed === loop.seed);
     try {
       if (matching.length) {
-        /* A route rather than `repository.delete`, for `removeLoop`'s reason: a kept bed's music is
-           the server's file to remove. A write followed by a pull, then the device forgets its copy. */
-        for (const bed of matching) await backendSession.deleteBed(bed.id, snapshot.deviceId ?? "");
-        for (const bed of matching) if (bed.audioRef) await forgetBedMusic(bed.audioRef);
-        await syncEngine.syncNow();
+        await letBedsGo(matching);
       } else {
         // Its own music arrives later: the server queues the render as it stores the record.
         await repository.saveBed({
@@ -1881,6 +1916,7 @@ export default function App() {
       onClose={() => setMakingLoop(null)}
       onMade={() => notify("Making your loop — it takes a few minutes")}
       onNotify={notify}
+      onRemoveBed={(bed) => void removeBed(bed)}
     />}
 
     {settings && <Settings

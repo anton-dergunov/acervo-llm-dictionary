@@ -2714,7 +2714,7 @@ function savedCards(beds, value) {
       <button type="button" role="radio" aria-checked="${on}" aria-label="${esc(label)}, ${esc(bedAbout(bed))}">
         <span class="favourite-art">${art("music", bed.styleId, label)}</span>
         <span class="favourite-text"><span class="favourite-name">${ICON.starOn}${esc(label)}</span><span class="favourite-about">${esc(bedAbout(bed))}</span></span>
-      </button>${musicPlay(id, label, "small")}</div>`;
+      </button>${musicPlay(id, label, "small")}<button type="button" class="favourite-remove" data-unkeep="${esc(bed.id)}" aria-label="Remove ${esc(label)} from saved music" title="Remove from saved music"><span aria-hidden="true">${ICON.close}</span></button></div>`;
   }).join("")}</div>`;
 }
 function savedMusic(d) {
@@ -2903,6 +2903,14 @@ function openMakeDialog(kind, from = "scope") {
     if (t.matches("[data-back]")) { d.browsing = null; return paint(); }
     if (t.matches(".make-go")) { if (kind === "loop") state.loopMusic = d.music; shut(); return toast(`Asked for a ${kind} from ${wordsCount(d.ids.length)} — prototype only, nothing was made`); }
     if (t.dataset.hear) return hear(t.dataset.hear);
+    if (t.dataset.unkeep) {
+      const at = BEDS.findIndex((bed) => bed.id === t.dataset.unkeep);
+      const [bed] = BEDS.splice(at, 1);
+      if (hearing.id === `bed:${bed.id}`) stopHearing();
+      if (d.music === `bed:${bed.id}`) d.music = "surprise";
+      paint();
+      return toast("Removed from saved music", { label: "Undo", run: () => { BEDS.splice(at, 0, bed); paint(); } });
+    }
     if (t.dataset.order) { d.choice = t.dataset.order; d.passed = new Set(); return paint(); }
     if (t.dataset.swap) { d.passed.add(t.dataset.swap); return paint(); }
     if (t.matches("[data-redraw]")) { d.ids.forEach((id) => d.passed.add(id)); return paint(); }

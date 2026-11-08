@@ -1387,11 +1387,11 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
 .carousel-item.on .choice-art { outline: 2px solid var(--core); outline-offset: 2px; }
 /* The middle picture's own control — music's ▶ — on its lower right corner, at the size the middle
    is drawn. It fades as the row moves (`--off`, how far the slide is from resting in the middle) and
-   is back when it rests. Absolute, so it never moves the caption. */
-.carousel-action {
-  position: absolute; right: 6px; bottom: -3px;
-  opacity: clamp(0, calc(1 - var(--off, 0) * 3), 1);
-}
+   is back when it rests. Absolute, so it never moves the caption. The fade is on the control itself,
+   never on this wrapper: an ancestor below full opacity cuts the frosted button off from the picture
+   behind it, so it showed grey for the whole fade and turned dark only when the fade ended. */
+.carousel-action { position: absolute; right: 6px; bottom: -3px; }
+.carousel-action > * { opacity: clamp(0, calc(1 - var(--off, 0) * 3), 1); }
 .carousel-step {
   position: absolute; top: 50%; display: grid; place-items: center; width: 34px; height: 34px; margin-top: -17px;
   border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); color: var(--ink-2);
@@ -1456,6 +1456,22 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
 .favourite.on .favourite-name { color: var(--core); }
 .favourite-about { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 12px; line-height: 1.3; color: var(--ink-3); }
 .favourite .music-play { margin-right: 7px; }
+/* Its corner ×, drawn as a word chip's: a small round mark on the card's top edge, above ▶ and inside the
+   card's width, since a card can touch the edge of the scrolling body and be clipped there; with a
+   larger target than it shows. */
+.favourite { position: relative; }
+.favourite-remove {
+  position: absolute; top: -14px; right: 2px; display: grid; place-items: center;
+  width: 30px; height: 30px; padding: 0; border: 0; background: none; cursor: pointer;
+}
+.favourite-remove > span {
+  display: grid; place-items: center; width: 20px; height: 20px; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--surface); color: var(--ink-3); box-shadow: var(--shadow);
+}
+.favourite-remove svg { width: 10px; height: 10px; }
+.favourite-remove:hover > span { color: var(--surface); background: var(--ink-2); border-color: var(--ink-2); }
+.favourite-remove:focus-visible { outline: none; }
+.favourite-remove:focus-visible > span { outline: 2.5px solid var(--core); outline-offset: 2px; }
 
 /* Anything else: one line until it is used, so an optional box is not the tallest thing on screen. */
 .make-guidance {

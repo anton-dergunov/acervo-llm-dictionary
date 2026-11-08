@@ -419,6 +419,18 @@ describe("hearing the music on its own", () => {
     vi.unstubAllGlobals();
   });
 
+  it("removes a saved piece from its corner, even one whose loop is gone", async () => {
+    const graph = testGraph();
+    graph.loops = graph.loops.map((one) => (one.id === graph.beds[0].sourceLoopId ? { ...one, deleted: true } : one));
+    const remove = vi.fn();
+    open(graph, { onRemoveBed: remove });
+    const saved = await screen.findByRole("radiogroup", { name: "Saved music" });
+    // Nothing left to hear it by, and still a way to let it go.
+    expect(within(saved).queryByRole("button", { name: /^Hear / })).toBeNull();
+    fireEvent.click(within(saved).getByRole("button", { name: "Remove Sunlit acoustic from saved music" }));
+    expect(remove).toHaveBeenCalledWith(expect.objectContaining({ id: "bedmorning00001" }));
+  });
+
   it("stops a sample when saved music is chosen, and when the dialog closes", async () => {
     lasting();
     vi.spyOn(backendSession, "sampleAudio").mockResolvedValue(MP3());

@@ -22,7 +22,7 @@ import type { Bed, Loop, VocabularyGraph } from "./domain";
 import { Art } from "./art";
 import { AllChoices, type CatalogueChoice } from "./ChoiceCarousel";
 import { MakeSection } from "./MakeDialog";
-import { DiceIcon, StarIcon } from "./icons";
+import { CloseIcon, DiceIcon, StarIcon } from "./icons";
 import * as player from "./loops";
 import { bedMusic, prefetch } from "./music";
 import { MusicButton, MusicPlay } from "./MusicPlay";
@@ -158,13 +158,15 @@ export function musicChoices(graph: VocabularyGraph, families: LoopFamily[], fav
 const SAVED_SHOWN = 2;
 
 /** Saved pieces as cards: the picture, the name with its star, where it came from, and ▶. */
-export function SavedCards({ graph, families, favourites, value, onChange, onNotify }: {
+export function SavedCards({ graph, families, favourites, value, onChange, onNotify, onRemove }: {
   graph: VocabularyGraph;
   families: LoopFamily[];
   favourites: Bed[];
   value: string;
   onChange(key: string): void;
   onNotify(message: string): void;
+  /** Stop keeping a piece. Its corner ×, the one way to let go of a piece whose loop is gone. */
+  onRemove?(bed: Bed): void;
 }) {
   // What is shown is what ▶ will be pressed on, so its music is fetched before it is.
   const shown = favourites.map((bed) => bed.audioRef ?? "").join();
@@ -183,6 +185,10 @@ export function SavedCards({ graph, families, favourites, value, onChange, onNot
           </span>
         </button>
         <Preview graph={graph} families={families} bed={bed} onNotify={onNotify} />
+        {onRemove && <button type="button" className="favourite-remove" onClick={() => onRemove(bed)}
+          aria-label={`Remove ${label} from saved music`} title="Remove from saved music">
+          <span aria-hidden="true"><CloseIcon /></span>
+        </button>}
       </div>;
     })}
   </div>;
@@ -194,7 +200,7 @@ export function SavedCards({ graph, families, favourites, value, onChange, onNot
  * are kept. A chosen piece that is not among the two takes the second place, so what is chosen is
  * always in sight.
  */
-export function SavedMusic({ graph, families, favourites, value, onChange, onAll, onNotify }: {
+export function SavedMusic({ graph, families, favourites, value, onChange, onAll, onNotify, onRemove }: {
   graph: VocabularyGraph;
   families: LoopFamily[];
   favourites: Bed[];
@@ -202,6 +208,7 @@ export function SavedMusic({ graph, families, favourites, value, onChange, onAll
   onChange(key: string): void;
   onAll(): void;
   onNotify(message: string): void;
+  onRemove?(bed: Bed): void;
 }) {
   if (!favourites.length) return null;
   const chosen = favourites.find((bed) => musicKey({ kind: "bed", bed }) === value);
@@ -212,7 +219,8 @@ export function SavedMusic({ graph, families, favourites, value, onChange, onAll
     ? <AllChoices count={favourites.length} label="Saved music" onOpen={onAll} />
     : null;
   return <MakeSection label="Saved music" aside={all}>
-    <SavedCards graph={graph} families={families} favourites={shown} value={value} onChange={onChange} onNotify={onNotify} />
+    <SavedCards graph={graph} families={families} favourites={shown} value={value} onChange={onChange}
+      onNotify={onNotify} onRemove={onRemove} />
   </MakeSection>;
 }
 

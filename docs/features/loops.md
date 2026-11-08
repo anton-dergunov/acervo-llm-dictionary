@@ -711,9 +711,10 @@ family with none yet gets its initial, so a family LexiBeat adds still appears.
 **A kept bed is a `beds` record**, not a flag on the loop: `styleId` and `seed` replay it for any
 words, and `sourceLoopId` outlives the loop it came from. The star in the player keeps it as an
 ordinary client write; the make dialog offers kept beds first and sends one as family *and* seed,
-since a seed read with `auto` may land on another family. Letting it go is a route, `DELETE
+since a seed read with `auto` may land on another family. Letting it go — the star again, or the ×
+on its corner in Saved music, which is the one way left once its loop is deleted — is a route, `DELETE
 /beds/{id}`, for a deleted loop's reason: the bed has music of its own, which only the server can
-remove.
+remove. The × offers Undo, which keeps it again by the same style, seed and engine.
 
 **Music is heard on its own, and it is ready before ▶ is pressed.** The generator renders one thing
 at a time, and a minute of music takes it seconds alone and minutes behind a loop, so nothing is
@@ -725,7 +726,8 @@ rendered on a tap if it can be helped:
   `durationSeconds`, file first, then the row. It stores only the bed that was kept: an engine that
   has moved on since is refused naming both versions, and a fingerprint that comes back different is
   refused rather than kept as other music under the old name. Saved music's ▶ plays that file, kept
-  on the device and heard offline, and plays the source loop, voice and all, until it has arrived.
+  on the device and heard offline, and plays the source loop, voice and all, until it has arrived —
+or for good, for a bed kept under an engine the server no longer runs, whose music it will not make.
   Beds kept before this are given their music by `admin jobs enqueue enrich --missing` (`./deploy.sh
   --worker backfill`), the same job; nothing is converted.
 - **Each style has a sample** (the cache in §2.5), 24 seconds at a fixed seed. A `music.samples` job
