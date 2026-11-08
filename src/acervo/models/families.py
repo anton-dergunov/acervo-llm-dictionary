@@ -339,6 +339,10 @@ FAMILIES: tuple[Family, ...] = (
         # every model takes `language_code`. A month's credits spent is a 402
         # `insufficient_credits`, which is an allowance spent rather than a refusal
         # (`elevenlabs.py`). The free plan is for non-commercial use, with attribution.
+        #
+        # Eleven v4 alone is added: heard blind, 7 Nov 2026, it carried a feeling on every example and
+        # read no tag aloud, where v3 lost the feeling on 14 of 15, got 4 of 9 Spanish sentences
+        # wrong and read its tag aloud once (`experiments/expressive-voice/`).
         id="elevenlabs", label="ElevenLabs", group="Popular",
         hint="Voices that take a direction",
         routes=MappingProxyType({"audio": Route("elevenlabs")}),
@@ -347,7 +351,7 @@ FAMILIES: tuple[Family, ...] = (
         audio=_frozen({"format": "wav_24000", "direction": "tag"}),
         timeouts=MappingProxyType({"audio": 30}),
         lister="elevenlabs",
-        ready=(Ready("audio", "eleven_v4", direction=True), Ready("audio", "eleven_v3", direction=True)),
+        ready=(Ready("audio", "eleven_v4", direction=True),),
         key_url="https://elevenlabs.io/app/settings/api-keys",
         usage_url="https://elevenlabs.io/app/usage",
     ),

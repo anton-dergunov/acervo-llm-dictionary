@@ -1,9 +1,11 @@
-"""Does ElevenLabs follow a direction and an accent, and how should it be sent one?
+"""Which settings should Acervo use for ElevenLabs: which model, and what to send for a feeling and
+an accent?
 
-Gemini on Vertex has read the owner's examples and stories with a feeling for a month; ElevenLabs
-was added an hour before this was written and had only round 0 behind it (`README.md`). This records
-one fixed set through both, the way Acervo sends it, plus four ways of sending ElevenLabs an accent
-alone, and leaves the takes for a blind listening on the tablet (`review.py`).
+ElevenLabs was added an hour before this was written and had only round 0 behind it (`README.md`).
+This records one fixed set through Eleven v4 and v3 the way Acervo sends it, plus four ways of
+sending v4 an accent alone, and leaves the takes for a blind listening on the tablet (`review.py`).
+Gemini on Vertex, the default with a month of real use, reads the same set as a reference for what
+a text should sound like; it is not being compared. Round 2, pairs, is `pairs.py`.
 
     .venv/bin/python experiments/expressive-voice/run.py set        # read-only pull, draw set.json
     .venv/bin/python experiments/expressive-voice/run.py probe      # which routes answer; the free cap
@@ -566,7 +568,38 @@ def blind(args: argparse.Namespace) -> None:
 # ── report ──────────────────────────────────────────────────────────────────
 
 
+# The Argentine sound a listener hears: «ll» and «y» before a vowel (sheísmo). A text without one
+# ("decepcionar") sounds the same in every variety, so its accent rating carries nothing.
+SHEISMO = re.compile(r"ll|y[aeiouáéíóú]")
+
+# The owner speaks Argentine Spanish and cannot rate Castilian on its own, so Spain's items are listed
+# and left out of every summary; round 2 hears Spain only as the other half of a pair (`pairs.py`).
+UNJUDGED = ("es-ES",)
+
+SCALE_WORDS = {"right": ("wrong", "a slip", "right"), "feeling": ("flat", "some", "carries it"),
+               "accent": ("not it", "partly", "clearly")}
+
+
+def _mean(values: list[int]) -> str:
+    return f"{sum(values) / len(values):.2f} ({len(values)})" if values else "–"
+
+
+def _count(values: list[int], score: int) -> str:
+    return f"{sum(1 for v in values if v == score)}/{len(values)}" if values else "–"
+
+
+def _top(row: dict[str, Any]) -> bool:
+    """Every scale the take was asked about at its best: what "good" means when Best picks only one."""
+    return all(row.get(scale) == 3 for scale in row["scales"])
+
+
 def report(args: argparse.Namespace) -> None:
+    """Unblind the labels into `results/report.md`, written around ElevenLabs' settings.
+
+    The question is which settings Acervo should use for ElevenLabs. Gemini's takes are the
+    reference for what a text should sound like, not a contestant, so they appear as a last row.
+    A Best pick is the better of several good takes, and no pick means none was good: Best is
+    therefore reported but decides nothing, and "top marks" counts every good take."""
     key = _read(OUT / "key.json", {})
     labels = _read(OUT / "labels.json", {})
     transcripts = {}
@@ -575,64 +608,158 @@ def report(args: argparse.Namespace) -> None:
         for line in path.read_text(encoding="utf-8").splitlines():
             row = json.loads(line)
             transcripts[row["key"]] = row
+    sent = {key_of(row): row.get("sent") for row in done().values()}
     by_item = {item["id"]: item for item in items()}
     rows = []
     for item_id, letters in key.items():
+        item = by_item[item_id]
+        accented = "-" in item["language"]
+        scales = ["right", *(["feeling"] if item["note"] else []), *(["accent"] if accented else [])]
         for letter, source in letters.items():
             label = (labels.get(item_id) or {}).get(letter) or {}
             heard = transcripts.get(f"{item_id}/{source}/1", {})
-            rows.append({"item": item_id, "group": by_item[item_id]["group"], "language": by_item[item_id]["language"],
-                         "words": by_item[item_id]["words"], "source": source, "letter": letter, **label,
+            rows.append({"item": item_id, "group": item["group"], "language": item["language"],
+                         "words": item["words"], "text": item["text"], "source": source, "letter": letter,
+                         "sent": sent.get(f"{item_id}/{source}/1"), "scales": scales,
+                         "audible": bool(SHEISMO.search(item["text"].lower())), **label,
                          "best": (labels.get(item_id) or {}).get("_best") == letter,
                          "whisper": {k: heard.get(k) for k in ("wer", "twice", "instruction", "different", "text")}})
-    lines = ["# Expressive voice — results", ""]
-    rated = [row for row in rows if any(row.get(k) for k in ("right", "feeling", "accent"))]
-    lines.append(f"{len(rated)} of {len(rows)} takes rated, over "
-                 f"{len({row['item'] for row in rated})} of {len(key)} items.")
+    judged = [row for row in rows if row["language"] not in UNJUDGED]
+    flagged = lambda mine, name: f"{sum(1 for r in mine if name in (r.get('flags') or []))}/{len(mine)}"
+    heard = lambda mine, name: f"{sum(1 for r in mine if r['whisper'].get(name))}/{len(mine)}"
+    order = lambda sources: sorted(sources, key=lambda s: (s == "gemini", s))
+
+    lines = ["# Expressive voice, round 1: which settings for ElevenLabs", "",
+             "Unblinded from the owner's labels by `run.py report`. Gemini is the reference for what a text "
+             "should sound like and is the last row of each table; it is not being compared. "
+             f"{len([r for r in rows if r.get('right')])} of {len(rows)} takes rated, over {len(key)} items. "
+             "Scores are 1–3 (wrong / a slip / right; flat / some / carries it; not it / partly / clearly), "
+             "as mean (takes). Spain's items (`es-ES`) are listed at the end and left out of every summary: "
+             "the owner cannot rate Castilian on its own.", ""]
+
+    # 1. The model: everything that was sent the way Acervo sends it.
+    shipped = [r for r in judged if r["group"] in ("feeling", "story", "words")]
+    lines += ["## Which model: feeling, story and word takes", "",
+              "| Take | Right | Wrong | Feeling | Flat | Accent | Top marks | Read aloud (ear) | Said twice (ear) "
+              "| Whisper: tag read aloud | Whisper: other words |", "|---|---|---|---|---|---|---|---|---|---|---|"]
+    for source in order({r["source"] for r in shipped}):
+        mine = [r for r in shipped if r["source"] == source]
+        right = [r["right"] for r in mine if r.get("right")]
+        feeling = [r["feeling"] for r in mine if r.get("feeling")]
+        lines.append(f"| {source} | {_mean(right)} | {_count(right, 1)} | {_mean(feeling)} | {_count(feeling, 1)} "
+                     f"| {_mean([r['accent'] for r in mine if r.get('accent')])} "
+                     f"| {sum(_top(r) for r in mine)}/{len(mine)} | {flagged(mine, 'read aloud')} "
+                     f"| {flagged(mine, 'said twice')} | {heard(mine, 'instruction')} | {heard(mine, 'different')} |")
     lines.append("")
-    mean = lambda values: f"{sum(values) / len(values):.2f} ({len(values)})" if values else "–"
-    share = lambda hits, of: f"{100 * hits / of:.0f}% ({hits}/{of})" if of else "–"
-    for group in ("feeling", "story", "accent", "words"):
-        lines += [f"## {group}", "", "| Take | Right | Feeling | Accent | Best | Read aloud | Twice | Other words | Whisper: twice | Whisper: other words |",
-                  "|---|---|---|---|---|---|---|---|---|---|"]
-        here = [row for row in rows if row["group"] == group]
-        for source in dict.fromkeys(row["source"] for row in here):
-            mine = [row for row in here if row["source"] == source]
-            judged = [row for row in mine if row.get("right")]
-            flag = lambda name: share(sum(1 for row in judged if name in (row.get("flags") or [])), len(judged))
-            lines.append(
-                f"| {source} | {mean([r['right'] for r in mine if r.get('right')])} "
-                f"| {mean([r['feeling'] for r in mine if r.get('feeling')])} "
-                f"| {mean([r['accent'] for r in mine if r.get('accent')])} "
-                f"| {share(sum(r['best'] for r in mine), len({r['item'] for r in judged}))} "
-                f"| {flag('read aloud')} | {flag('said twice')} | {flag('other words')} "
-                f"| {share(sum(1 for r in mine if r['whisper'].get('twice')), sum(1 for r in mine if r['whisper'].get('text') is not None))} "
-                f"| {share(sum(1 for r in mine if r['whisper'].get('different')), sum(1 for r in mine if r['whisper'].get('text') is not None))} |")
+
+    # 2. By group and language: where a feeling or an accent holds and where it does not.
+    lines += ["## By group and language", "", "| Group | Language | Take | Right | Feeling | Accent |", "|---|---|---|---|---|---|"]
+    for group in ("feeling", "story", "words"):
+        for language in sorted({r["language"] for r in shipped if r["group"] == group}):
+            here = [r for r in shipped if r["group"] == group and r["language"] == language]
+            for source in order({r["source"] for r in here}):
+                mine = [r for r in here if r["source"] == source]
+                lines.append(f"| {group} | {language} | {source} | {_mean([r['right'] for r in mine if r.get('right')])} "
+                             f"| {_mean([r['feeling'] for r in mine if r.get('feeling')])} "
+                             f"| {_mean([r['accent'] for r in mine if r.get('accent')])} |")
+    lines.append("")
+
+    # 3. The accent where it can be heard at all.
+    argentine = [r for r in judged if r["language"] == "es-AR" and r.get("accent")]
+    lines += ["## The Argentine accent, where it can be heard", "",
+              "A text with «ll» or «y» before a vowel carries the sound that differs; one without "
+              "(\"decepcionar\") sounds the same in every variety.", "",
+              "| Take | Group | Sent | With ll/y: accent | Not it | Without: accent | Not it |", "|---|---|---|---|---|---|---|"]
+    for group in ("feeling", "story", "words", "accent"):
+        here = [r for r in argentine if r["group"] == group]
+        for source in order({r["source"] for r in here}):
+            mine = [r for r in here if r["source"] == source]
+            tags = sorted({(r["sent"] if source.startswith("v") else "the sentence") or "nothing" for r in mine})
+            what = tags[0] if len(tags) == 1 else ("a feeling; accent from Argentina" if group in ("feeling", "story")
+                                                    else ", ".join(tags))
+            yes = [r["accent"] for r in mine if r["audible"]]
+            no = [r["accent"] for r in mine if not r["audible"]]
+            lines.append(f"| {source} | {group} | {what} | {_mean(yes)} | {_count(yes, 1)} | {_mean(no)} | {_count(no, 1)} |")
+    lines.append("")
+
+    # 4. The accent alone on Eleven v4: four ways, by length.
+    alone = [r for r in judged if r["group"] == "accent"]
+    if alone:
+        lines += ["## Accent alone (es-AR), by what Eleven v4 was sent", "",
+                  "| Take | Sent | Right | Said twice (ear) | Whisper: twice | Accent, ll/y texts | Accent, others |",
+                  "|---|---|---|---|---|---|---|"]
+        for source in order({r["source"] for r in alone}):
+            mine = [r for r in alone if r["source"] == source]
+            tag = (mine[0]["sent"] or "nothing") if source.startswith("v") else "the sentence"
+            lines.append(f"| {source} | {tag} | {_mean([r['right'] for r in mine if r.get('right')])} "
+                         f"| {flagged(mine, 'said twice')} | {heard(mine, 'twice')} "
+                         f"| {_mean([r['accent'] for r in mine if r['audible'] and r.get('accent')])} "
+                         f"| {_mean([r['accent'] for r in mine if not r['audible'] and r.get('accent')])} |")
+        lines += ["", "Said twice by the ear, by length in words:", "",
+                  "| Take | " + " | ".join(str(n) for n in ACCENT_LENGTHS) + " |", "|---|" + "---|" * len(ACCENT_LENGTHS)]
+        for source in order({r["source"] for r in alone}):
+            cells = []
+            for length in ACCENT_LENGTHS:
+                mine = [r for r in alone if r["source"] == source and r["words"] == length]
+                cells.append(f"{sum(1 for r in mine if 'said twice' in (r.get('flags') or []))}/{len(mine)}" if mine else "–")
+            lines.append(f"| {source} | " + " | ".join(cells) + " |")
         lines.append("")
-    # Whisper over every take, Gemini's three included: what was said against what was given.
+
+    # 5. Best picks: the better of several good takes, or none when nothing was good.
+    lines += ["## Best picks", "",
+              "The owner picked the better take where several were good and none where none was. It is "
+              "reported for completeness and decides nothing here.", "",
+              "| Group | Items | No take good enough | " + " | ".join(order({r["source"] for r in rows if r["source"] != "gemini"} | {"gemini"})) + " |",
+              "|---|---|---|" + "---|" * len({r["source"] for r in rows})]
+    every_source = order({r["source"] for r in rows})
+    for group in ("feeling", "story", "words", "accent"):
+        here = [r for r in judged if r["group"] == group]
+        ids = {r["item"] for r in here}
+        none = sum(1 for i in ids if not (labels.get(i) or {}).get("_best"))
+        counts = [str(sum(1 for r in here if r["source"] == s and r["best"])) if any(r["source"] == s for r in here) else "–"
+                  for s in every_source]
+        lines.append(f"| {group} | {len(ids)} | {none} | " + " | ".join(counts) + " |")
+    spain_ids = {r["item"] for r in rows if r["language"] in UNJUDGED}
+    if spain_ids:
+        lines += ["", f"Spain's {len(spain_ids)} accent items are left out: "
+                  f"{sum(1 for i in spain_ids if not (labels.get(i) or {}).get('_best'))} have no pick."]
+    lines.append("")
+
+    # 6. Every note and flag, unblinded.
+    noted = [r for r in rows if r.get("note") or r.get("flags")]
+    lines += ["## Notes and flags", ""]
+    for r in sorted(noted, key=lambda r: (r["item"], r["source"])):
+        bits = [*(r.get("flags") or []), *([f"“{r['note'].strip()}”"] if r.get("note") else [])]
+        lines.append(f"- `{r['item']}` {r['source']} ({r['language']}, “{r['text'][:60]}”): {'; '.join(bits)}")
+    lines.append("")
+
+    # 7. Spain's items, not judged by ear.
+    spain = [r for r in rows if r["language"] in UNJUDGED]
+    if spain:
+        lines += ["## Spain (`es-ES`): rated, not judged", "",
+                  "Listed for the record. The owner cannot rate Castilian on its own, so nothing above uses "
+                  "these; round 2 plays Spain only against Argentina, as a pair.", "",
+                  "| Take | Right | Accent | Said twice (ear) | Whisper: twice |", "|---|---|---|---|---|"]
+        for source in order({r["source"] for r in spain}):
+            mine = [r for r in spain if r["source"] == source]
+            lines.append(f"| {source} | {_mean([r['right'] for r in mine if r.get('right')])} "
+                         f"| {_mean([r['accent'] for r in mine if r.get('accent')])} "
+                         f"| {flagged(mine, 'said twice')} | {heard(mine, 'twice')} |")
+        lines.append("")
+
+    # 8. Whisper over every take, Gemini's three included: what was said against what was given.
     every = list(transcripts.values())
     if every:
         lines += ["## Whisper, every take", "",
-                  "| Take | Takes | Said twice | Instruction read aloud | Other words (WER > 0.25) |", "|---|---|---|---|---|"]
-        for source in sorted({row["key"].split("/")[1] for row in every}):
+                  "| Take | Takes | Said twice | Tag read aloud | Other words (WER > 0.25) |", "|---|---|---|---|---|"]
+        for source in order({row["key"].split("/")[1] for row in every}):
             mine = [row for row in every if row["key"].split("/")[1] == source]
-            lines.append(f"| {source} | {len(mine)} | {share(sum(r['twice'] for r in mine), len(mine))} "
-                         f"| {share(sum(bool(r['instruction']) for r in mine), len(mine))} "
-                         f"| {share(sum(r['different'] for r in mine), len(mine))} |")
-        flagged = [row for row in every if row["twice"] or row["instruction"] or row["different"]]
-        lines += ["", *[f"- `{row['key']}`: “{row['text']}”" for row in flagged], ""]
-    accent = [row for row in rows if row["group"] == "accent" and row.get("right")]
-    if accent:
-        lines += ["## Accent alone: said twice by length (ear)", "",
-                  "| Take | " + " | ".join(str(n) for n in ACCENT_LENGTHS) + " |",
-                  "|---|" + "---|" * len(ACCENT_LENGTHS)]
-        for source in dict.fromkeys(row["source"] for row in accent):
-            cells = []
-            for length in ACCENT_LENGTHS:
-                mine = [row for row in accent if row["source"] == source and row["words"] == length]
-                cells.append(f"{sum(1 for r in mine if 'said twice' in (r.get('flags') or []))}/{len(mine)}")
-            lines.append(f"| {source} | " + " | ".join(cells) + " |")
-        lines.append("")
+            lines.append(f"| {source} | {len(mine)} | {sum(r['twice'] for r in mine)}/{len(mine)} "
+                         f"| {sum(bool(r['instruction']) for r in mine)}/{len(mine)} "
+                         f"| {sum(r['different'] for r in mine)}/{len(mine)} |")
+        caught = [row for row in every if row["twice"] or row["instruction"] or row["different"]]
+        lines += ["", *[f"- `{row['key']}`: “{row['text']}”" for row in caught], ""]
+
     if not labels:
         print("\n".join(lines))
         print("\nNo labels yet: nothing written. Listen on the page first.")
@@ -640,9 +767,8 @@ def report(args: argparse.Namespace) -> None:
     RESULTS.mkdir(exist_ok=True)
     (RESULTS / "report.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     _write(RESULTS / "summary.json", rows)
-    if labels:
-        shutil.copy(OUT / "labels.json", RESULTS / "labels.json")
-        shutil.copy(OUT / "key.json", RESULTS / "key.json")
+    shutil.copy(OUT / "labels.json", RESULTS / "labels.json")
+    shutil.copy(OUT / "key.json", RESULTS / "key.json")
     print("\n".join(lines))
 
 

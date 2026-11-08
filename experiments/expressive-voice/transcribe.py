@@ -13,7 +13,8 @@ transcript, the word error rate against the text, and three flags:
 - `different`: the words differ from the text by more than `DIFFERENT` once a doubling is set aside.
 
 These are a cross-check on the ear, not a verdict: round 0's transcriber missed both an instruction
-read aloud and an accent. Resumable: a take already in `results/transcripts.jsonl` is skipped.
+read aloud and an accent. Resumable: a take already in `results/transcripts.jsonl` is skipped. `--pairs` does the same for
+round 2's English takes, into `results/pairs-transcripts.jsonl`.
 """
 
 from __future__ import annotations
@@ -35,7 +36,7 @@ DIFFERENT = 0.25
 
 # Words that say an instruction was read out even in the item's own language.
 GIVEAWAYS = {"acento", "accent", "argentina", "argentino", "argentine", "españa", "spain", "castilian",
-             "castellano", "native", "speaker", "sounding", "direction", "акцент", "tone", "calm", "natural"}
+             "castellano", "british", "american", "english", "native", "speaker", "sounding", "direction", "акцент", "tone", "calm", "natural"}
 STOP = {"this", "that", "with", "from", "aloud", "read", "would", "words", "sentence", "text", "keep",
         "pace", "explain", "drop", "translate", "story", "passage", "short", "like", "the", "and"}
 
@@ -63,9 +64,12 @@ def instruction(said: list[str], text: list[str], sent: str | None) -> list[str]
 
 
 def main() -> None:
+    # `--pairs`: round 2's English takes (`pairs.py record`), kept apart from round 1's.
+    pairs = "--pairs" in sys.argv[1:]
     items = {item["id"]: item for item in json.loads((HERE / "set.json").read_text(encoding="utf-8"))["items"]}
-    takes = [json.loads(line) for line in (RESULTS / "takes.jsonl").read_text(encoding="utf-8").splitlines() if line]
-    path = RESULTS / "transcripts.jsonl"
+    source = RESULTS / ("pairs-takes.jsonl" if pairs else "takes.jsonl")
+    takes = [json.loads(line) for line in source.read_text(encoding="utf-8").splitlines() if line]
+    path = RESULTS / ("pairs-transcripts.jsonl" if pairs else "transcripts.jsonl")
     done = set()
     if path.exists():
         done = {json.loads(line)["key"] for line in path.read_text(encoding="utf-8").splitlines() if line}

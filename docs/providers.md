@@ -195,8 +195,8 @@ for a billing account even within their free allowance, but at 4 million WaveNet
 
 1. Sign up at [elevenlabs.io](https://elevenlabs.io), with no card, and create a key under
    **Developers ▸ API keys** with access to text to speech, voices and user.
-2. In Acervo, add **ElevenLabs** with the key. **Add the usual models** adds Eleven v4 and v3, which
-   both take a direction.
+2. In Acervo, add **ElevenLabs** with the key. **Add the usual models** adds Eleven v4, which takes
+   a direction. Eleven v3 is left out: heard blind, it mostly lost the feeling it was asked for.
 
 **Free allowance:** 10,000 credits a month, for non-commercial use, with attribution. One credit is
 one character, and that includes the direction. Acervo therefore sends ElevenLabs a short tag,
