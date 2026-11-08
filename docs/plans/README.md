@@ -13,6 +13,7 @@ what it said.
 
 - [`anki.md`](anki.md) — review the cards, show how hard a word is, make Anki optional.
 - [`loops-and-stories.md`](loops-and-stories.md) — choosing the words, favourites, level and length, listening hands-free.
+- [`take-verification.md`](take-verification.md) — record a loop line again when it spoke its direction.
 
 **Words and languages**
 
@@ -35,6 +36,10 @@ what it said.
 - [`first-use/standalone-mac-app.md`](first-use/standalone-mac-app.md) — download, open, use.
 - [`first-use/other-users.md`](first-use/other-users.md) — a few accounts per server, and starter vocabularies.
 - [`first-use/first-run-guide.md`](first-use/first-run-guide.md) — a guide through vocabulary, topics and providers on first use.
+
+**Defects**
+
+- [`issues.md`](issues.md) — small defects, each deleted once fixed.
 
 **Later, kept on purpose**
 

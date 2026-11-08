@@ -298,15 +298,19 @@ async function save(pair, field, value, letter) {
     if (!answer.ok) throw new Error(answer.status);
     document.getElementById("error").textContent = "";
   } catch (e) { document.getElementById("error").textContent = "Not saved — is the laptop awake?"; }
-  render();
+  if (field !== "note" || !typing()) render();
 }
 function play(pair, letter) {
   const src = `/a/${pair.id}/${letter}`;
   if (playing === src && !audio.paused) { audio.pause(); playing = null; render(); return; }
   audio.src = src; playing = src; audio.play(); render();
 }
-audio.addEventListener("ended", () => { playing = null; render(); });
+audio.addEventListener("ended", () => { playing = null; if (!typing()) render(); });
 let noteTimer = null;
+// Redraws nobody tapped for — a note saving, a take ending — wait while a note is being typed:
+// rebuilding the card replaces the focused field, and an iPad closes its keyboard the moment the
+// focused field leaves the page. A tap always redraws.
+const typing = () => document.activeElement && document.activeElement.tagName === "TEXTAREA";
 function render() {
   const done = state.pairs.filter(p => mine(p).pick).length;
   document.getElementById("count").textContent = `${done} of ${state.pairs.length} answered · pair ${state.at + 1}`;

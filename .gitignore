@@ -71,6 +71,12 @@ Caddyfile
 /experiments/expressive-voice/out/
 /experiments/expressive-voice/.venv/
 
+# The take-verification spike: the server's recordings, the call log and the read-only rows they
+# were joined to, the listening copies, and — until `report.py` copies them into results/ — the
+# labels. Its own Whisper environment too.
+/experiments/take-verification/out/
+/experiments/take-verification/.venv/
+
 # The clip-translation runs: 350-odd raw model replies per run. Every number the experiment claims
 # is in its README, and re-scoring an existing run is free, so the archive is not worth a
 # repository — the same call photo-capture/runs/ made.
