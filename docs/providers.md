@@ -199,19 +199,37 @@ for a billing account even within their free allowance, but at 4 million WaveNet
    a direction. Eleven v3 is left out: heard blind, it mostly lost the feeling it was asked for.
 
 **Free allowance:** 10,000 credits a month, for non-commercial use, with attribution. One credit is
-one character, and that includes the direction. Acervo therefore sends ElevenLabs a short tag,
-the feeling and the accent ("surprised and amused; accent from Argentina"), not the full direction
-sentence it sends Gemini, which ElevenLabs reads aloud. It sends nothing for an accent alone,
-which made a short word or phrase be said twice. A month buys about:
+one character, and that includes the direction. Acervo therefore sends ElevenLabs a short tag, not
+the full direction sentence it sends Gemini, which ElevenLabs reads aloud: the feeling and the
+accent ("surprised and amused; accent from Argentina"), or, for an accent with no feeling, "calm and
+natural; accent from Argentina". A month buys about:
 
 | Recording | Credits | A month |
 |---|---|---|
-| A word, read evenly | ~7 | ~1,400 |
+| A word, no accent chosen | ~7 | ~1,400 |
+| A word, in an accent | ~50 | ~200 |
 | A sentence, with a feeling | ~95 | ~100 |
 | A story passage, with a feeling | ~440 | ~20 |
 
+**How well it follows a feeling and an accent.** Heard blind on Eleven v4 with the voice Sarah
+(Nov 2026, [`experiments/expressive-voice/`](../experiments/expressive-voice/README.md)): it carried
+the feeling on every example and never read its tag aloud. The accent comes through clearly in
+Spanish: told "accent from Argentina" or "accent from Spain", the Argentine take was picked in 13 of
+14 pairs and never the Spain one, with a lovely «ll» where the words have one. It may not follow the accent:
+
+- when a variety is *named* ("British English accent", "Argentine Spanish accent"): British and
+  American came out the same, and Argentine and Castilian the same in 3 of 7 pairs. That is why
+  Acervo writes "accent from …";
+- in English, where "accent from United Kingdom" has not yet been heard against American;
+- as strongly, perhaps, under a feeling: the accent was heard in pairs only with "calm and natural"
+  or no feeling in front;
+- in another voice: only Sarah was heard. The free plan's voices are general ones.
+
+Never send it a bare "accent from …" on its own: a one- or two-word text then comes out twice. Acervo
+puts "calm and natural" in front, which stopped it.
+
 So ElevenLabs is worth keeping for expressive sentences, behind the Gemini API in the expressive
-voice's order. The free plan's voices are general ones, and their accent is their own.
+voice's order.
 
 ### Groq: fast text
 

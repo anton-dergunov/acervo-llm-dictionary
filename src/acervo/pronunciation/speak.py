@@ -81,13 +81,17 @@ class Direction(str):
     """A direction: the sentence a voice that reads instructions is sent, carrying the short form a
     voice that reads a tag in the words is sent instead (`tag`, or None for nothing).
 
-    Two forms because the two kinds of voice differ in what a direction costs and what it does.
-    Heard by the owner on ElevenLabs v4, 7 Nov 2026: the sentence written for Gemini (136-194
-    characters, each billed) was read aloud; a short tag, "surprised and amused; accent from
-    Argentina", was not, and carried the feeling, and "accent from Argentina" the accent;
-    and an accent tag alone made a short text be said twice ("picar, picar"; "la calle amarilla",
-    in a very good Argentine accent, twice). So the tag is the note, with the accent where one was
-    chosen, and an accent alone sends none.
+    Two forms because the two kinds of voice differ in what a direction costs and what it does. The
+    tag's wording was settled by ear on Eleven v4 (`experiments/expressive-voice/`, Nov 2026):
+
+    - The sentence written for Gemini (136-194 characters, each billed) was read aloud; a short tag
+      was not, in 61 takes, and carried the feeling on 15 of 15 examples.
+    - "accent from Argentina" moves the accent. Heard blind against the same text tagged "accent from
+      Spain", the Argentine take was picked in 13 of 14 pairs and never the Spain one. The variety
+      by name ("Argentine Spanish accent", "British English accent") moved it less, or not at all.
+    - That form alone made a one- or two-word text be said twice ("Decepcionar. Decepcionar."), in
+      4 of 4 short texts. With a feeling in front it never did, so an accent alone is sent as
+      `ALONE` with the accent: picked as Argentine in 7 of 7 pairs, and doubled nothing.
 
     A `str` so that everything that reads, logs or keys on the sentence goes on doing so.
     """
@@ -98,6 +102,11 @@ class Direction(str):
         made = super().__new__(cls, sentence)
         made.tag = tag
         return made
+
+
+# The feeling a tag carries when only an accent was asked for: a tag of the accent alone made a short
+# text be said twice (`Direction`). Not an emotion, so a take sent it records none (`carried`).
+ALONE = "calm and natural"
 
 
 def carried(sent: str | None, direction: str | None) -> bool:
@@ -119,9 +128,10 @@ def direction(template: str, note: str, language: str) -> Direction:
     filled = filled.replace("{speaker}", speaker(language))
     region = locales.region_name(locales.parse(language).region)
     filled = filled.replace("{accent}", f"Speak with the accent of {speaker(language)}. " if region else "")
-    tag = note.strip() or None
-    if tag and region:
-        tag = f"{tag}; accent from {region}"
+    # A direction may end in a full stop ("picking up the pace."), which would sit before the "; ".
+    tag = note.strip().rstrip(".;, ") or None
+    if region:
+        tag = f"{tag or ALONE}; accent from {region}"
     return Direction(filled.replace("{emotion}", note).replace("{direction}", note), tag)
 
 

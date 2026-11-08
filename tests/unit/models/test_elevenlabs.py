@@ -117,9 +117,9 @@ def test_only_models_that_speak_are_offered(monkeypatch):
     assert listing.models(ROW, "audio") == ("eleven_v4",)
 
 
-def test_a_voice_that_reads_a_tag_is_sent_the_emotion_alone_and_nothing_for_an_accent():
-    """Heard: a long direction is partly read aloud, a short tag carries the feeling and the accent,
-    and an accent tag alone made a word be said twice."""
+def test_a_voice_that_reads_a_tag_is_sent_the_feeling_and_the_accent_and_never_the_accent_bare():
+    """Heard: a long direction is read aloud; "feeling; accent from Argentina" carries both; the bare
+    "accent from Argentina" made a short text be said twice, and "calm and natural" in front did not."""
     from pathlib import Path
 
     from acervo.pronunciation import speak
@@ -131,7 +131,12 @@ def test_a_voice_that_reads_a_tag_is_sent_the_emotion_alone_and_nothing_for_an_a
     assert speak.asked_of(ROW, "eleven_v4", "es-AR", style, no_voice)[1] == "surprised and amused; accent from Argentina"
     plain = speak.direction((root / "acervo_pronounce_style.md").read_text(), "surprised and amused", "es")
     assert speak.asked_of(ROW, "eleven_v4", "es", plain, no_voice)[1] == "surprised and amused"
-    assert speak.asked_of(ROW, "eleven_v4", "es-AR", accent, no_voice)[1] is None
+    assert speak.asked_of(ROW, "eleven_v4", "es-AR", accent, no_voice)[1] == "calm and natural; accent from Argentina"
+    # No accent chosen and no feeling: nothing at all.
+    assert speak.direction((root / "acervo_pronounce_accent.md").read_text(), "", "es").tag is None
+    # A story direction's full stop does not end up before the accent.
+    story = speak.direction((root / "acervo_pronounce_style.md").read_text(), "Curious, picking up the pace.", "es-AR")
+    assert story.tag == "Curious, picking up the pace; accent from Argentina"
     # A voice that reads instructions keeps the whole sentence, accent and all.
     gemini = provider({"id": "gemini-api", "family": "gemini-api",
                        "models": {"audio": [{"id": "gemini-3.8-flash-tts", "direction": True}]}},

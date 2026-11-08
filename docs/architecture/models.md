@@ -101,12 +101,13 @@ speech requests a minute per model, and its 429 says when to come back.
 
 ElevenLabs v3 and v4 take a direction as one free-text tag at the head of the words. A short tag is
 not read out, and a long one is: the owner heard Gemini's direction sentence spoken before the
-words (7 Nov 2026). `[surprised and amused; accent from Argentina] ¿En serio?…` came with the feeling
-and no instruction, and `[accent from Argentina] la calle amarilla` in a very good Argentine accent.
-So ElevenLabs is sent the short form of a direction, the feeling and the accent, and nothing for an
-accent alone, which made a short text be said twice (`pronunciation/speak.Direction`). A transcriber
-listening back caught neither the spoken instructions nor the accent, so the ear decides these, not
-a model.
+words (7 Nov 2026). So ElevenLabs is sent the short form of a direction (`pronunciation/speak.Direction`):
+the feeling and "accent from Argentina", whose accent was told apart from "accent from Spain" in 13 of
+14 blind pairs, where the variety by name ("Argentine Spanish accent") moved it less. An accent alone
+goes as "calm and natural; accent from Argentina", because the bare accent tag made a one- or
+two-word text be said twice. Rating each take on its own scale beside Gemini's undersold the accent;
+heard as pairs it was plain. A transcriber listening back caught neither the spoken instructions nor
+the accent, so the ear decides these, not a model ([`experiments/expressive-voice/`](../../experiments/expressive-voice/README.md)).
 
 A month's free credits spent is a 402 `insufficient_credits`, which the bare status
 table would call a refusal; the adapter says it as an allowance spent, so the expressive order passes

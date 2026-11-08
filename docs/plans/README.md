@@ -8,7 +8,6 @@ what it said.
 
 - [`capture-transports.md`](capture-transports.md) — getting a word in from every device.
 - [`backups.md`](backups.md) — scheduled snapshots, an off-machine export, restore drills.
-- [`expressive-voice.md`](expressive-voice.md) — which settings ElevenLabs is used with: whether it is sent an accent.
 
 **Study material**
 

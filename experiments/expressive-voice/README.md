@@ -6,15 +6,23 @@ send it for a feeling and for an accent. It does not compare ElevenLabs with Gem
 about 200 real calls behind it, stays the default, and its takes are in the set only as a reference
 for what a text should sound like.
 
-Round 0, before this, was the owner's first listening ([`docs/plans/expressive-voice.md`](../../docs/plans/expressive-voice.md)):
+Round 0, before this, was the owner's first listening:
 
 - a long direction was read aloud;
 - an accent tag alone made a word and a three-word phrase come out twice;
 - only "feeling; accent from Argentina" behaved.
 
-**Status:** round 1 recorded, transcribed and labelled 7 Nov 2026; settled the model and the
-feeling tag. Round 2 (pairs, below) recorded 8 Nov 2026, waiting for the owner's ear; it settles
-whether ElevenLabs is sent an accent at all.
+**Status:** closed 8 Nov 2026. Round 1 settled the model and the feeling tag; round 2's pairs settled
+the accent. What Acervo sends is in `pronunciation/speak.Direction` and
+[`docs/providers.md`](../../docs/providers.md) ("ElevenLabs: an expressive voice").
+
+**Settled:**
+- **Eleven v4** is the one model "Add the usual models" adds.
+- **A feeling** goes as the short tag, with the accent: `surprised and amused; accent from Argentina`.
+- **An accent alone** goes as `calm and natural; accent from Argentina`: heard as Argentine in 7 of 7
+  pairs, and never doubled a text.
+- **Never** the bare `accent from …` alone (it doubles one- and two-word texts), and never the
+  variety by name (it moved the accent less, or not at all).
 
 ## Round 1: the set, sent the way Acervo sends it
 
@@ -79,7 +87,8 @@ of a pair.
 **The feeling: the short tag works.** Eleven v4 carried it on every example in all three languages;
 story passages scored 2.0 of 3. A tag with no accent (the Russian examples) behaved the same.
 
-**The accent: no tag was heard to carry it.**
+**The accent: rated on its own, no tag was heard to carry it.** Round 2 showed this was the scale,
+not the voice (below).
 
 | Eleven v4, Argentine texts | With «ll»/«y» | Without |
 |---|---|---|
@@ -87,21 +96,15 @@ story passages scored 2.0 of 3. A tag with no accent (the Russian examples) beha
 | Headwords, nothing sent | 4 of 4 "not it" | 2 of 2 "not it" |
 | Accent alone, any of the four forms, **including no tag** | 2 of 2 "partly", every form | 1.6 to 2.0 of 3 |
 
-The voice reads in its own accent, and on the two accent-alone texts where the sound was there to
-hear, no tag did better than none. Gemini, for reference, was "clearly" Argentine on all 13
-Argentine texts with «ll» or «y».
+Beside Gemini's takes, which were "clearly" Argentine on all 13 texts with «ll» or «y», every
+ElevenLabs take was rated "partly" at best, and no tag did better than none.
 
 **What a tag can break: a short text said twice.** The bare `accent from Argentina` said the 1- and
 2-word texts twice ("Decepcionar. Decepcionar."), by ear and by Whisper, as in round 0: 4 of 4 short
 texts across both rounds. `calm`, `named` and no tag doubled nothing at any length.
 
-**Settled:**
-- Eleven v4 is the one model "Add the usual models" adds (`models/families.py`).
-- A feeling is sent as the short tag.
-- An accent alone is sent as nothing.
-
-**Open, for round 2:** whether the accent part of the feeling tag does anything at all, or should be
-dropped.
+**Settled by round 1:** Eleven v4 as the one usual model, and the short tag for a feeling. Whether the
+tag should carry the accent was left to round 2.
 
 ## Round 2: pairs, by ear (`pairs.py`)
 
@@ -123,6 +126,28 @@ did not fit the credits left. Whisper heard all eight English takes say exactly 
 **Decision rule:** a tag form moves the accent when the tagged variety is picked in at least 6 of its
 7 Spanish pairs (2 of 2 English), and Gemini's pairs reach the same. Otherwise the accent is dropped
 from the ElevenLabs tag and only the feeling is sent.
+
+### What the ear found (`results/pairs.md`)
+
+| Eleven v4, sent | Pairs | Picked the Argentine / British one | The other | The same |
+|---|---|---|---|---|
+| `calm and natural; accent from …` | 7 | **7** | 0 | 0 |
+| `accent from …` | 7 | **6** | 0 | 1 |
+| `Argentine Spanish accent` / `Castilian Spanish accent` | 7 | 4 | 0 | 3 |
+| `British English accent` / `American English accent` | 2 | 0 | 0 | 2 |
+| Gemini, the calibration (Spanish 7, English 2) | 9 | 9 | 0 | 0 |
+
+**The tag moves ElevenLabs' accent, in the "accent from …" form.** The Spain-tagged take was never
+picked as Argentine, in any pair. The owner heard "a very lovely Argentinean accent", strikingly so
+where the words have «ll». The named variety moved it less in Spanish and not at all in English.
+
+So round 1's ratings undersold the accent: asked "is this Argentine?" take by take, beside Gemini, the
+owner gave ElevenLabs "partly"; asked "which of these two?", the answer was plain. An accent is
+judged in pairs.
+
+Not heard yet: English in the "accent from …" form (the credits ran out), and the accent under a
+feeling in pairs (round 1's feeling takes were rated on their own, like the rest of round 1). The
+shipped feeling tag keeps the accent, the form that worked; it never doubled or was read aloud.
 
 ## Routes and allowances found on the way (`results/probe.json`)
 
