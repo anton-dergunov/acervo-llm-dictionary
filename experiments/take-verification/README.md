@@ -16,8 +16,8 @@ store, and that was the target.
 of its *direction* around the text — the direction read out, or one word of it said after the text.
 Nothing else. It fired on 3 of 2,032 loop lines, all three judged wrong by the owner, with every
 model; Whisper base on CTranslate2 is enough, at 2.0 s a take on the NAS. Built into the
-take route ([`docs/features/loops.md`](../../docs/features/loops.md) §2.4); hiding the check behind the
-next take is [`docs/plans/take-verification.md`](../../docs/plans/take-verification.md).
+take route ([`docs/features/loops.md`](../../docs/features/loops.md) §2.4), where it runs while the
+next take is recorded.
 
 ## What was listened to
 

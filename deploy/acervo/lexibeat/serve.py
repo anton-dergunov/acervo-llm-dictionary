@@ -69,11 +69,17 @@ def _capabilities(delivery: str) -> BackendCapabilities:
     **Mixing languages** in one line — a remark in English that quotes the Spanish word — is what an
     instruction-following voice does and a plain one does not, so it follows the same answer. A
     format that needs it renders its plainer fallback on a plain voice, and says so.
+
+    **Two directed takes in flight.** The take route listens to each new directed take before it
+    keeps it (about two seconds of Whisper on the NAS), so LexiBeat asks for take N+1 while the
+    server checks take N, and the check hides behind the next provider call. A plain voice stays at
+    one: nothing it records is checked, and its repetitions all ask for take 0, so two at once could
+    both miss the cache and pay twice for one recording. One `httpx.Client` serves both threads.
     """
     if delivery == PLAIN:
         return BackendCapabilities("post-process", "post-process", "preset", languages=())
     return BackendCapabilities("instruction", "instruction", "preset", languages=(),
-                               mixes_languages=True)
+                               mixes_languages=True, in_flight=2)
 
 
 class AcervoVoice:

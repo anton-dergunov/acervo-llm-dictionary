@@ -135,7 +135,9 @@ learned, `guide` for one in the listener's own. Four things about it are load-be
 by the backend's name string, so an injected backend raised `KeyError` before it spoke a word. Acervo's backend declares
 `BackendCapabilities("instruction", "instruction", "preset", languages=())`, and the empty tuple
 means "any language" — the owner's chain decides what it can speak, not a table in the other
-repository.
+repository. A directed voice also declares `in_flight=2`, so LexiBeat asks for the next take while
+the server checks this one (§2.4); a plain voice declares one, because nothing it records is checked
+and its repetitions share one cached take that two concurrent calls would both pay for.
 
 **`take` is on the request**, which is what makes §2.5's cache key implementable at all: the index
 would otherwise have to be re-derived from the prosody, and two takes can carry identical prosody at
@@ -199,7 +201,10 @@ take whatever it says. Nothing else counts as wrong: an exclamation around the w
 shout is the emotion asked for, and an exclamation is never in the direction, so the rule needs no
 list of them. It fired on exactly the three of 2,032 stored lines the owner judged wrong
 ([`experiments/take-verification/`](../../experiments/take-verification/README.md)). A check costs
-about two seconds on the NAS, and only a take nobody is waiting for can afford it.
+about two seconds on the NAS, and only a take nobody is waiting for can afford it. Nor does the loop
+wait for it: LexiBeat keeps two directed takes in flight, so the server checks take N while the
+provider records take N+1 (2–3.6 s a call), and a render with the check takes about as long as one
+without. The call log shows it: each take's `check_s=` falls inside the next take's provider attempt.
 
 The take's `pronounce-take outcome` line says what happened: `heard=` and `leaked=` with `retook=1`
 when it was recorded again; `result=leaked-twice` (with `reheard=`, `releaked=`) when the second take
