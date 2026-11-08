@@ -185,6 +185,28 @@ server, so the server is up whenever a call comes home.
   language (`pronunciation_settings.guide_voices`, chosen in Settings ▸ Loops), merged over the usual
   voices; unset, the usual voice says it. A role that is neither is refused.
 - **Not uncached.** §2.5.
+- **Not taken on trust.** A new take that was sent a direction is listened to before it is kept, and
+  recorded once more when it spoke part of that direction (below).
+
+**A take may be recorded twice.** Now and then a directed voice says some of its direction instead
+of, or after, its text: «Seek relief from irritation in the throat» for «cough», «to provide **more**»
+for a host "offering more food". A word clip or a story passage has "Record again"; a loop line does
+not. So Whisper base (`src/acervo/hearing/`, CTranslate2 int8, baked into the image) transcribes each
+new directed take, the text is aligned to the closest run of the transcript, and when a word heard
+*outside* that run is a word of the director note (three letters or more, not a stop word, not in the
+text) or an accent word, the route asks the same pair and voice for it once more and keeps the second
+take whatever it says. Nothing else counts as wrong: an exclamation around the word, a laugh or a
+shout is the emotion asked for, and an exclamation is never in the direction, so the rule needs no
+list of them. It fired on exactly the three of 2,032 stored lines the owner judged wrong
+([`experiments/take-verification/`](../../experiments/take-verification/README.md)). A check costs
+about two seconds on the NAS, and only a take nobody is waiting for can afford it.
+
+The take's `pronounce-take outcome` line says what happened: `heard=` and `leaked=` with `retook=1`
+when it was recorded again; `result=leaked-twice` (with `reheard=`, `releaked=`) when the second take
+leaked too, `result=leaked-kept` with `retake=refused:<code>` when the second could not be recorded,
+and `result=unchecked` with `check="<sentence>"` when the check could not run. Those three are
+warnings, so `admin log --failed` shows them. **The check is never why a loop fails**: each of them
+keeps a take and answers it.
 
 **The field is called `direction` on the wire**, not `emotion`. `emotion` is the *record's* field
 name — what §2.8 writes onto a lexeme, and what an example already carries — and it stays that.
@@ -213,6 +235,10 @@ Behind the route sits a content-addressed store of **FLAC masters**, keyed by a 
 voice's are two recordings, never one. The digest *is* the filename, so there is
 no table and no schema. FLAC because it is lossless and about half of WAV: this is the one place in
 Acervo where FLAC is the right answer, and the delivery format is not it.
+
+**The cache holds the checked take.** The second recording of a line that leaked its direction has
+the first one's key — same pair, voice and direction — so the first is never stored, and a take read
+back from the cache is not listened to again: it was when it was recorded.
 
 It pays for itself twice. A word that appears in two loops is recorded once. And a render that dies
 half way — a rate limit, a restart, a deploy — resumes against the takes that already exist, which is
@@ -840,7 +866,8 @@ committed here, for the reason [`spoken-clips.md`](spoken-clips.md) §4 gives.
 By hand, and worth doing after any change to this path:
 
 - **On the NAS, end to end** — make a twelve-word loop, watch its steps, then make a second sharing
-  several words and confirm from the call log that the shared takes cost nothing.
+  several words and confirm from the call log that the shared takes cost nothing, and that each new
+  directed take's line carries a `check_s=` and none says `result=unchecked`.
 - **A plain-voice loop** — set loop delivery to the clear voice and confirm the render succeeds,
   `X-Acervo-Direction: dropped` comes back, and the three takes still differ audibly. A radio lesson
   asked for then is made as a classic drill, and the player says so.

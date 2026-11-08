@@ -30,6 +30,7 @@ src/acervo/
   images/            sense pictures: a brief per lexeme, a picture per sense
   clips/             spoken clips: a corpus search and one selection per lexeme
   pronunciation/     reading a record aloud
+  hearing/           listening to a loop take: did it speak its direction
   meaning/           the meaning map: embed, lay out, cluster, name
   ocr/               photo capture's page: an OCR engine's words to lines and sentences
   stories/, loops/   the story pipeline, and the client for the loop generator
@@ -86,7 +87,7 @@ transport would change the file ingestion's retry behaviour without changing its
 **6 · The pipeline packages stand alone.** `models/` imports no settings, graph, database or Acervo
 wire vocabulary; it decides *what kind of thing* went wrong — a closed seven-value `Reason` — and
 `services/models.py` decides what Acervo's wire calls that. `images/`, `clips/`, `pronunciation/`,
-`meaning/` and `ocr/` may import the provider package and `article.py`, and nothing else of Acervo's, and `frequency/` (how common a word is) imports nothing of Acervo's at all;
+`meaning/` and `ocr/` may import the provider package and `article.py`, and nothing else of Acervo's, and `frequency/` (how common a word is) and `hearing/` (Whisper on a loop take) import nothing of Acervo's at all;
 `services/` is where each meets settings and the graph. This is the rule that breaks most quietly:
 one `from acervo.errors import ApiError` in `models/call.py` and everything still works — the package
 is simply no longer usable without Acervo.

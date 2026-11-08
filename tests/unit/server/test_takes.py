@@ -7,6 +7,7 @@ stubbed is the provider and only the provider, exactly as in `test_pronunciation
 from __future__ import annotations
 
 import io
+import logging
 import math
 import struct
 import wave
@@ -15,6 +16,7 @@ import pytest
 from graph_records import vocabulary
 
 from acervo.api.auth import TAKE_AUDIENCE, mint_render
+from acervo.models import journal
 from acervo.pronunciation import takes
 from acervo.repository import accounts
 from provider_rows import GOOGLE
@@ -329,3 +331,107 @@ def test_the_settings_offer_voices_in_the_language_the_guide_speaks(server):
     refused = server.put("/pronunciations/settings", {
         "guideVoices": {"google-cloud": {GEMINI: {"en": "Nobody"}}}})
     assert refused.json()["error"]["code"] == "unknown_voice"
+
+
+# ── listening to a take ─────────────────────────────────────────────────────
+#
+# Whisper is `conftest.EarStub`, which hears nothing unless told; the default line's direction is
+# "repulsed, recoiling slightly", so hearing «Asco. Repulsed.» is the direction spoken after the text.
+
+LEAK = "Asco. Repulsed."
+
+
+def outcome(caplog) -> logging.LogRecord:
+    return [record for record in caplog.records
+            if record.name == journal.LOGGER and " outcome " in record.getMessage()][-1]
+
+
+def test_a_take_that_spoke_its_direction_is_recorded_once_more_by_the_same_voice(server, ear, caplog, monkeypatch):
+    answers = iter([wav("a"), wav("a much longer second take")])
+    styles = []
+
+    def speech(row, model, words, **kwargs):
+        server.speech.calls.append({"provider": row.id, "model": model, "words": words, **kwargs})
+        styles.append(kwargs.get("style"))
+        return next(answers), "audio/wav"
+
+    monkeypatch.setattr("acervo.models.google_tts.speech", speech)
+    ear.saying = [LEAK]
+    with caplog.at_level(logging.INFO, logger=journal.LOGGER):
+        answer = ask(server)
+
+    assert answer.status_code == 200, answer.text
+    calls = server.speech.calls
+    assert len(calls) == 2 and len(ear.calls) == 2, "recorded exactly once more, and heard again"
+    assert (calls[0]["provider"], calls[0]["model"], calls[0]["voice"]) == \
+        (calls[1]["provider"], calls[1]["model"], calls[1]["voice"])
+    assert styles[0] == styles[1], "asked with the same direction"
+    line = outcome(caplog)
+    assert line.levelno == logging.INFO
+    message = line.getMessage()
+    assert "result=recorded" in message and "retook=1" in message
+    assert 'heard="Asco. Repulsed."' in message and "leaked=repulsed" in message
+    # The second take is the one kept: served from the cache, without a call, and without a check.
+    again = ask(server)
+    assert again.content == answer.content and len(server.speech.calls) == 2 and len(ear.calls) == 2
+
+
+def test_a_second_leak_is_kept_and_logged_as_a_warning(server, ear, caplog):
+    ear.saying = [LEAK, "Asco, recoiling."]
+    with caplog.at_level(logging.INFO, logger=journal.LOGGER):
+        answer = ask(server)
+    assert answer.status_code == 200
+    assert len(server.speech.calls) == 2, "only once more"
+    line = outcome(caplog)
+    assert line.levelno == logging.WARNING
+    message = line.getMessage()
+    assert "result=leaked-twice" in message and "retook=1" in message
+    assert "leaked=repulsed" in message and "releaked=recoiling" in message
+
+
+def test_a_retake_that_cannot_be_recorded_keeps_the_first_and_says_so(server, ear, caplog, monkeypatch):
+    from acervo.models.errors import ProviderUnavailable
+
+    ear.saying = [LEAK]
+    original = server.speech
+
+    def speech(row, model, words, **kwargs):
+        if len(original.calls) >= 1:
+            original.calls.append({"provider": row.id, "model": model, **kwargs})
+            raise ProviderUnavailable("rate_limited", "quota", provider_id=row.id, model=model)
+        return original(row, model, words, **kwargs)
+
+    monkeypatch.setattr("acervo.models.google_tts.speech", speech)
+    with caplog.at_level(logging.INFO, logger=journal.LOGGER):
+        answer = ask(server)
+    assert answer.status_code == 200, answer.text
+    assert answer.content[:4] == b"fLaC"
+    assert len({call["model"] for call in original.calls}) == 1, "the retake asked only the pair that answered"
+    line = outcome(caplog)
+    assert line.levelno == logging.WARNING
+    assert "result=leaked-kept" in line.getMessage() and "retake=refused:" in line.getMessage()
+    assert len(original.calls) == 2
+    assert ask(server).content == answer.content, "the first take was stored"
+
+
+def test_a_cached_take_is_not_heard_again(server, ear):
+    ask(server)
+    ask(server)
+    assert len(ear.calls) == 1
+
+
+def test_a_take_sent_no_direction_is_not_heard(server, ear):
+    assert ask(server, direction=None).headers["x-acervo-direction"] == "none"
+    assert ear.calls == []
+
+
+def test_a_check_that_cannot_run_lets_the_take_through_and_says_why(server, ear, caplog):
+    ear.failure = RuntimeError("Invalid data found when processing input")
+    with caplog.at_level(logging.INFO, logger=journal.LOGGER):
+        answer = ask(server)
+    assert answer.status_code == 200
+    assert len(server.speech.calls) == 1
+    line = outcome(caplog)
+    assert line.levelno == logging.WARNING
+    assert 'result=unchecked check="RuntimeError: Invalid data found when processing input"' in line.getMessage()
+    assert ask(server).content == answer.content, "kept, and not checked again"

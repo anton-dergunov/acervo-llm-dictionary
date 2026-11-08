@@ -47,6 +47,13 @@ pin = json.load(open('/app/models/segmenter.json')); \
 [hf_hub_download(one['model'], name, revision=one['revision']) \
  for one in (pin, pin['tokenizer']) for name in one['files']]" \
     && chmod -R a+rX /opt/huggingface
+# Whisper base, converted for CTranslate2, at the revision `models/hearing.json` pins: what a loop take
+# is listened to with before it is kept. ~145 MB, loaded on the first directed take.
+COPY models/hearing.json /app/models/hearing.json
+RUN python -c "import json; from huggingface_hub import snapshot_download; \
+pin = json.load(open('/app/models/hearing.json')); \
+snapshot_download(pin['model'], revision=pin['revision'], allow_patterns=pin['files'])" \
+    && chmod -R a+rX /opt/huggingface
 ENV HF_HUB_OFFLINE=1 \
     TRANSFORMERS_OFFLINE=1 \
     NUMBA_CACHE_DIR=/tmp/numba

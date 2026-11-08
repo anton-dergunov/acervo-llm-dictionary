@@ -13,7 +13,7 @@ what it said.
 
 - [`anki.md`](anki.md) — review the cards, show how hard a word is, make Anki optional.
 - [`loops-and-stories.md`](loops-and-stories.md) — choosing the words, favourites, level and length, listening hands-free.
-- [`take-verification.md`](take-verification.md) — record a loop line again when it spoke its direction.
+- [`take-verification.md`](take-verification.md) — hide the take check behind the next take (LexiBeat keeps two in flight).
 
 **Words and languages**
 

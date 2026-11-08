@@ -268,6 +268,33 @@ class Server:
         return self.post("/chat", body)
 
 
+class EarStub:
+    """Stands in for Whisper, which every directed take is now heard by. Hears nothing unless told
+    what to hear — `saying` is consumed one take at a time — so no take leaks unless a test says so,
+    and `failure` makes the check unable to run."""
+
+    def __init__(self) -> None:
+        self.saying: list[str] = []
+        self.failure: Exception | None = None
+        self.calls: list[tuple[int, str]] = []
+
+    def hear(self, audio: bytes, language: str) -> str:
+        self.calls.append((len(audio), language))
+        if self.failure is not None:
+            raise self.failure
+        return self.saying.pop(0) if self.saying else ""
+
+
+@pytest.fixture(autouse=True)
+def ear():
+    from acervo import hearing
+
+    stub = EarStub()
+    hearing.use(stub)
+    yield stub
+    hearing.use(None)
+
+
 @pytest.fixture(autouse=True)
 def no_remembered_refusals():
     """A refused provider rests for a while, in process memory. Each test gets a fresh process's

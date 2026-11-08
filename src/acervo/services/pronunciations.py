@@ -24,6 +24,7 @@ import time
 from pathlib import Path
 from typing import Any
 
+from acervo import hearing
 from acervo.domain.ids import is_language, now_instant
 from acervo.errors import ApiError
 from acervo.models import ChainExhausted, ProviderError, journal, locales
@@ -496,6 +497,12 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
     language, model and voice as the clip the article already holds — but that clip is Opus at about
     51 kbps, compressed for a phone, and stretching it would put a second lossy generation in front
     of the master. It would save one call per word in the plain case and none in the directed case.
+
+    **A new take that was sent a direction is listened to before it is kept** (`acervo.hearing`), and
+    recorded once more, by the same pair and voice, when it spoke part of that direction — the one
+    fault the owner cannot fix, since a loop line has no "Record again". The second take is kept
+    whatever it says; a cached take was checked when it was recorded. Only here: a word or a story
+    passage is waited on, and two seconds of Whisper on the NAS is too much for that.
     """
     started = time.monotonic()
     words = str(body.get("text") or "").strip()
@@ -573,6 +580,8 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
 
     if (found := kept(order, style)) is not None:
         return found
+    # What the voice was asked with, kept for a second take of the same line.
+    asked, asked_order = style, order
     try:
         spoken = _speak(
             settings, owner, words, language, order, style, speaking.CALLERS["loops"], failed,
@@ -586,6 +595,7 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
         accent = directed(settings, language, None)
         if (found := kept("plain", accent)) is not None:
             return found
+        asked, asked_order = accent, "plain"
         spoken = _speak(
             settings, owner, words, language, "plain", accent, speaking.CALLERS["loops"], failed,
             preferences=preferences,
@@ -593,12 +603,33 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
     result = spoken.result
     # The master, not Opus: this is the one place in Acervo that keeps audio uncompressed on purpose.
     data, mime = encode.master(result.data, result.mime)
+    heard = _heard(data, language, words, direction_text) if spoken.direction else {}
+    if heard.get("leaked"):
+        # Asked again of the very pair and voice that answered, with the same direction, so the
+        # second take has the first one's key and is the only one ever stored.
+        pinned = (result.answer.provider_id, result.answer.model, spoken.asked_voice)
+        try:
+            again = _speak(settings, owner, words, language, asked_order, asked,
+                           speaking.CALLERS["loops"], lambda *_, **__: None, pinned=pinned)
+        except ApiError as refused:
+            heard.update(result="leaked-kept", failed=True, retake=f"refused:{refused.code}")
+        else:
+            spoken, result = again, again.result
+            data, mime = encode.master(result.data, result.mime)
+            second = _heard(data, language, words, direction_text)
+            heard["retook"] = 1
+            if second.get("leaked"):
+                heard.update(result="leaked-twice", failed=True, reheard=second["heard"],
+                             releaked=second["leaked"])
+            elif second.get("check"):
+                heard.update(result="unchecked", failed=True, check=second["check"])
+            heard["check_s"] = heard.get("check_s", 0.0) + second.get("check_s", 0.0)
     digest = take_store.key(
         text=words, language=language, direction=spoken.direction, take=index,
         provider=result.answer.provider_id, model=result.answer.model, voice=spoken.asked_voice,
     )
     take_store.store(cache, digest, data, mime)
-    log(result="recorded", pair=f"{result.answer.provider_id}:{result.answer.model}",
+    log(**{"result": "recorded", **heard}, pair=f"{result.answer.provider_id}:{result.answer.model}",
         voice=result.voice, bytes=len(data), mime=mime,
         answered=f"{result.mime}:{len(result.data)}",
         style="sent" if spoken.direction else ("dropped" if style else "none"))
@@ -606,6 +637,23 @@ def take(settings: Settings, owner: str, body: dict[str, Any]) -> tuple[bytes, s
         result.answer.provider_id, result.answer.model, spoken.asked_voice, direction_text,
         sent=bool(spoken.direction),
     )
+
+
+def _heard(audio: bytes, language: str, text: str, direction: str) -> dict[str, Any]:
+    """What the take's log line says about listening to it: how long it took; the transcript and the
+    leaked words when it spoke its direction (`acervo.hearing`); and the sentence
+    when the check could not run at all — which lets the take through, because the check is never
+    why a loop fails."""
+    started = time.monotonic()
+    try:
+        found = hearing.check(hearing.shared(), audio, language, text, direction)
+    except Exception as failure:  # noqa: BLE001 — any reason it could not listen is the same answer
+        return {"result": "unchecked", "failed": True, "check": f"{type(failure).__name__}: {failure}",
+                "check_s": time.monotonic() - started}
+    spent = time.monotonic() - started
+    if not found.leaked:
+        return {"check_s": spent}
+    return {"heard": found.heard, "leaked": ",".join(found.leaked), "check_s": spent}
 
 
 def _spoken_headers(provider: str, model: str, voice: str | None, direction: str, *, sent: bool) -> dict[str, str]:

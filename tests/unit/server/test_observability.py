@@ -187,6 +187,31 @@ def test_a_take_asked_for_with_a_renders_token_is_filed_under_that_render(logs, 
     assert all(line.endswith("rid=jobjobjobjob001") for line in written), written
 
 
+@pytest.mark.parametrize(("hearing", "result"), [
+    (["Asco. Repulsed.", "Asco, recoiling."], "result=leaked-twice"),
+    (RuntimeError("Invalid data found when processing input"), 'check="RuntimeError: Invalid data'),
+], ids=["a take that spoke its direction twice", "a check that could not run"])
+def test_a_take_kept_with_a_fault_is_what_admin_log_failed_shows(logs, server, monkeypatch, ear, hearing, result):
+    """Both are kept — the check never fails a loop — so the line is the only place they surface."""
+    server.add_provider(GOOGLE)
+    from test_takes import wav
+
+    monkeypatch.setattr("acervo.models.google_tts.speech",
+                        lambda row, model, words, **_: (wav(words), "audio/wav"))
+    server.push({"vocabularies": [vocabulary()]})
+    if isinstance(hearing, Exception):
+        ear.failure = hearing
+    else:
+        ear.saying = list(hearing)
+    answer = server.post("/pronunciations/take",
+                         {"text": "asco", "language": "es", "direction": "repulsed, recoiling slightly", "take": 0})
+    assert answer.status_code == 200, answer.text
+
+    lines(logs["call"])
+    failed = activity.select(activity.entries(logs), failed=True)
+    assert any("pronounce-take outcome" in text and result in text for _, _, _, text in failed), failed
+
+
 def test_an_id_in_a_token_that_does_not_verify_is_not_taken_up(logs, server):
     token = forged(server, aud=["acervo:pronunciations/take"], rid="jobjobjobjob001",
                    _key=b"another key entirely, long enough to sign with")

@@ -185,6 +185,16 @@ register their pause, and each silences the others before it plays.
   result back into words needs alignment. A request-metered tier is answered by choosing a
   character-metered provider.
 
-Not built, deliberately: speech-to-text, pronunciation assessment (recording the owner and scoring it
-is a product of its own), a second media store, and voices running on the device. A voice on your own
+## Listening to a recording, for loop lines only
+
+A directed voice now and then says part of its direction aloud. A loop line is the one recording the
+owner cannot record again, so each new directed loop take is transcribed by Whisper base on the server
+and recorded once more when a word of its direction is heard around its text
+([`loops.md`](loops.md) §2.4). Not for a word or a story passage: the check costs about two seconds on
+the NAS, the owner is waiting on those, and "Record again" is right there. Not for anything else that
+pulls a transcript away from its text either — an exclamation, a laugh, an accent — since those are
+what the owner asked for ([`experiments/take-verification/`](../../experiments/take-verification/README.md)).
+
+Not built, deliberately: pronunciation assessment (recording the owner and scoring it is a product of
+its own), a second media store, and voices running on the device. A voice on your own
 machine is a provider like the others ([`../providers.md`](../providers.md)).

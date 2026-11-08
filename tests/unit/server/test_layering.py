@@ -16,6 +16,7 @@ Four rules, each of which stops being true silently:
 - `article.py` itself imports nothing of Acervo's at all, which is what makes it safe to be the one
   thing every enrichment shares.
 - `ocr/` turns an OCR engine's words into a page: the provider package and nothing else of Acervo's.
+- `hearing/` listens to a take and says whether it spoke its direction: nothing of Acervo's at all.
 - `speech/` is the translation seam the corpus calls back through: the provider package and nothing
   else of Acervo's, and nothing at all of the retrieval service's.
 - `repository/` stores; it does not know the catalogue.
@@ -111,6 +112,7 @@ def test_the_rules_below_are_not_vacuous():
     assert modules_under("pronunciation"), "no pronunciation/ modules: the stands-alone rule would be vacuous"
     assert modules_under("meaning"), "no meaning/ modules: the stands-alone rule would be vacuous"
     assert modules_under("ocr"), "no ocr/ modules: the stands-alone rule would be vacuous"
+    assert modules_under("hearing"), "no hearing/ modules: the stands-alone rule would be vacuous"
     assert (PACKAGE / "article.py").exists(), "no article.py: the shared-view rule would be vacuous"
     assert modules_under("speech"), "no speech/ modules: the stands-alone rule would be vacuous"
     assert modules_under("repository"), "no repository/ modules"
@@ -285,6 +287,20 @@ def test_the_photo_reader_stands_on_the_provider_package_and_nothing_else(path):
     """
     offenders = {name for name in imports_of(path) if name.startswith(STANDS_ALONE)}
     assert not offenders, f"{path} imports {sorted(offenders)}; the photo reader stands alone"
+
+
+@pytest.mark.parametrize("path", modules_under("hearing"), ids=identify)
+def test_the_hearing_check_imports_nothing_of_acervos(path):
+    """Audio, a text and its direction in; what was heard and what leaked out — and no idea whose
+    take it is, where it is kept, or what is done about a leak.
+
+    Stricter than the other pipelines: it calls no model through the provider package either, since
+    Whisper runs in this process. `services/pronunciations.py` is the binding layer that decides
+    which recordings are checked and records a take again.
+    """
+    offenders = {name for name in imports_of(path)
+                 if name.startswith("acervo") and not name.startswith("acervo.hearing")}
+    assert not offenders, f"{path} imports {sorted(offenders)}; the hearing check stands alone"
 
 
 def test_the_article_view_imports_nothing_of_acervos():

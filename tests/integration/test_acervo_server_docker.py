@@ -278,6 +278,23 @@ def test_a_map_is_drawn_inside_the_image_with_the_encoder_it_carries(running):
     assert {point["sense"] for point in drawn["data"]["points"]} == {s["id"] for s in senses}
 
 
+def test_a_take_is_heard_inside_the_image_with_the_whisper_it_carries(running):
+    """The check a loop take passes through, run in the container offline: the weights are where the
+    pin says, CTranslate2 loads them, and a FLAC master decodes. A tone has no words, so what is
+    heard does not matter — only that hearing it did not raise, which is what would quietly turn every
+    take's line into `result=unchecked`."""
+    probe = docker(
+        "exec", running.name, "python", "-c",
+        "import io, numpy, soundfile; from acervo import hearing; "
+        "tone = (0.2 * numpy.sin(2 * numpy.pi * 220 * numpy.arange(24000) / 24000)).astype('float32'); "
+        "out = io.BytesIO(); soundfile.write(out, tone, 24000, format='FLAC'); "
+        "print(repr(hearing.check(hearing.shared(), out.getvalue(), 'es-AR', 'asco', 'repulsed')))",
+        timeout=240,
+    )
+    assert probe.returncode == 0, probe.stderr
+    assert probe.stdout.startswith("Heard("), probe.stdout
+
+
 def test_a_download_answers_a_byte_range_with_no_credentials(running):
     """The macOS updater reads the archive in chunks, and with no token at all."""
     with AcervoClient(running.base, timeout=15.0) as client:

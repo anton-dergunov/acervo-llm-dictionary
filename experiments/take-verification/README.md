@@ -15,8 +15,9 @@ store, and that was the target.
 **Status:** closed 8 Nov 2026. **Settled:** record a loop line again, once, when Whisper hears a word
 of its *direction* around the text — the direction read out, or one word of it said after the text.
 Nothing else. It fired on 3 of 2,032 loop lines, all three judged wrong by the owner, with every
-model; Whisper base on CTranslate2 is enough, at 2.0 s a take on the NAS. Integration is
-[`docs/plans/take-verification.md`](../../docs/plans/take-verification.md).
+model; Whisper base on CTranslate2 is enough, at 2.0 s a take on the NAS. Built into the
+take route ([`docs/features/loops.md`](../../docs/features/loops.md) §2.4); hiding the check behind the
+next take is [`docs/plans/take-verification.md`](../../docs/plans/take-verification.md).
 
 ## What was listened to
 

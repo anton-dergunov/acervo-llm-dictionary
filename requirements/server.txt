@@ -23,3 +23,13 @@ uvicorn[standard]
 # and its dictionaries, which are not installed, so those two are refused by name.
 wordfreq
 jieba
+
+# Listening to a loop take before it is kept (`acervo/hearing/`): Whisper base on CTranslate2, int8,
+# which transcribes a take in 2.0 s on the NAS against 4.1 s for transformers'
+# (experiments/take-verification/). The take is decoded with soundfile and scipy, already here.
+# OpenCC folds Chinese to simplified characters, since Whisper writes traditional ones. The weights
+# are pinned in models/hearing.json and baked into the image. Licences: faster-whisper and
+# CTranslate2 MIT, the Whisper weights MIT, OpenCC Apache-2.0.
+faster-whisper>=1.2
+ctranslate2>=4.6
+opencc-python-reimplemented
