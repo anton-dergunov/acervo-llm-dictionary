@@ -269,7 +269,7 @@ describe("a format's lines", () => {
   it("names its format, and says so when it fell back", async () => {
     at(3, [], { ...track, loop: { ...radio, format: "classic", fallbackFrom: "radio-lesson" } });
     await act(async () => undefined);
-    expect(screen.getByText(/Classic drill · 1 words/)).toBeInTheDocument();
+    expect(document.querySelector(".bed-about")).toHaveTextContent("Classic drill · 1 words");
     expect(screen.getByText(
       "Classic drill instead of Radio lesson — it needs a writing model and a loop voice that can mix languages"
     )).toBeInTheDocument();

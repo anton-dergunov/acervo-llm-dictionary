@@ -249,7 +249,7 @@ export default function LoopPlayer({ track, graph, onChooseMusic, onToggleKeep }
             title={kept ? "Kept as a favourite" : "Keep this music as a favourite"}
             onClick={onToggleKeep}
           ><StarIcon filled={kept} /></button>
-          <span className="label bed-about"><span className="bed-dot">· </span>{formatLabel(schema?.formats, loop.format)} · {items.length} words</span>
+          <span className="label bed-about"><span className="bed-dot">· </span><span>{formatLabel(schema?.formats, loop.format)}</span><span className="bed-dot"> · </span><span>{items.length} words</span></span>
         </span>
       </div>
     </div>
