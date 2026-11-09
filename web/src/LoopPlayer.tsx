@@ -28,26 +28,25 @@
  * chase to press pause.
  *
  * **The music is changed from its own name.** The style under the transport is a button: it opens
- * `MusicMenu` — new music in this style, a kept favourite, or another style — and choosing one asks
- * the server to render the loop again. The old track goes on playing until the new one lands, and
- * then the player starts it from the beginning. The star beside the name keeps this music as a
+ * New music (`LoopMusicDialog.tsx`), the make dialog's own picker of saved music and styles, and its
+ * button asks the server to render the loop again. The old track goes on playing until the new one
+ * lands, and then the player starts it from the beginning. The star beside the name keeps this music as a
  * favourite, so it is offered the next time a loop is made; nothing asks you to keep the music you
  * are replacing, because replacing it is usually the reason you did not.
  */
 
-import { useContext, useEffect, useRef, useState, useSyncExternalStore, type MouseEvent } from "react";
-import type { LoopMusic } from "./api";
+import { useContext, useEffect, useRef, useSyncExternalStore, type MouseEvent } from "react";
 import type { VocabularyGraph } from "./domain";
 import { setLoopAutoplay, setLoopRepeat, useLoopAutoplay, useLoopRepeat } from "./editorPreferences";
 import { ContinueIcon, DownIcon, NextIcon, PauseIcon, PlayIcon, PreviousIcon, RepeatIcon, StarIcon } from "./icons";
 import { isOpen as jobIsOpen, jobFor, jobStream } from "./jobs";
 import { fallbackNote } from "./LoopFormat";
-import { MusicMenu, useLoopSchema } from "./LoopMusic";
+import { useLoopSchema } from "./LoopMusic";
 import * as player from "./loops";
 import { LookUpContext, LookUpSheet, useLookUp } from "./LookUpSheet";
 import { stripOf } from "./ProgressStrip";
 import {
-  bedOfLoop, favouriteBeds, formatLabel, loopCards, loopIsReady, loopLineShown, loopMomentAt, loopTitle, styleLabel,
+  bedOfLoop, formatLabel, loopCards, loopIsReady, loopLineShown, loopMomentAt, loopTitle, styleLabel,
   type LoopCard, type LoopTrack
 } from "./selectors";
 import { wordAtPoint } from "./tapWord";
@@ -68,11 +67,11 @@ function languageCode(language: string): string {
   return language.split("-")[0].toUpperCase();
 }
 
-export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }: {
+export default function LoopPlayer({ track, graph, onChooseMusic, onToggleKeep }: {
   track: LoopTrack;
   graph: VocabularyGraph;
-  /** Online-only and loud when it fails, like every other write. */
-  onChangeMusic(music: LoopMusic): void;
+  /** Open New music for this loop. */
+  onChooseMusic(): void;
   onToggleKeep(): void;
 }) {
   const playback = player.usePlayback();
@@ -90,7 +89,6 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
   const job = jobFor(live, "loop", loop.id);
   const making = jobIsOpen(job);
   const kept = Boolean(bedOfLoop(graph, loop));
-  const [choosing, setChoosing] = useState(false);
   const heard = useRef(loop.audioRef);
   const lookUp = useLookUp(useContext(LookUpContext));
 
@@ -106,21 +104,6 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
     void player.forget(previous);
     if (wasPlaying) void player.play(track);
   }, [loop.audioRef]);
-
-  useEffect(() => {
-    if (!choosing) return;
-    const away = (event: PointerEvent) => {
-      if (event.target instanceof Element && event.target.closest(".music-menu, .bed-name")) return;
-      setChoosing(false);
-    };
-    const escape = (event: KeyboardEvent) => { if (event.key === "Escape") setChoosing(false); };
-    window.addEventListener("pointerdown", away);
-    window.addEventListener("keydown", escape);
-    return () => {
-      window.removeEventListener("pointerdown", away);
-      window.removeEventListener("keydown", escape);
-    };
-  }, [choosing]);
 
   /* Keep the card being played in the middle of the column. `scrollIntoView` rather than arithmetic
      on `offsetTop`, which is measured from the offset parent and not from the scroller. */
@@ -254,10 +237,10 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
               the sample pack is a question about the server rather than about one loop, and it is
               answered where it can be acted on: Settings ▸ Loops, and the make dialog. */}
           <button
-            className="bed-name label" aria-haspopup="menu" aria-expanded={choosing}
+            className="bed-name label" aria-haspopup="dialog"
             disabled={!loopIsReady(loop) || making}
             title="Choose other music for this loop"
-            onClick={() => setChoosing(!choosing)}
+            onClick={onChooseMusic}
           >{styleLabel(schema?.families, loop.styleId)}<DownIcon /></button>
           <button
             className={`bed-star${kept ? " on" : ""}`} aria-pressed={kept}
@@ -267,11 +250,6 @@ export default function LoopPlayer({ track, graph, onChangeMusic, onToggleKeep }
             onClick={onToggleKeep}
           ><StarIcon filled={kept} /></button>
           <span className="label">· {formatLabel(schema?.formats, loop.format)} · {items.length} words</span>
-          {choosing && <MusicMenu
-            graph={graph} loop={loop} families={schema?.families ?? []}
-            favourites={favouriteBeds(graph)}
-            onChoose={(music) => { setChoosing(false); onChangeMusic(music); }}
-          />}
         </span>
       </div>
     </div>

@@ -15,7 +15,6 @@
  */
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import type { LoopMusic } from "./api";
 import { jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
 import type { Loop, VocabularyGraph } from "./domain";
@@ -31,7 +30,7 @@ function clock(seconds: number | null): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-export default function LoopView({ graph, language, opening = null, onMake, onClose, onDelete, onChangeMusic, onToggleKeep }: {
+export default function LoopView({ graph, language, opening = null, onMake, onClose, onDelete, onChooseMusic, onToggleKeep }: {
   graph: VocabularyGraph;
   language: string;
   /** The loop to open on: the one a word was opened from. Otherwise the one playing, if any. */
@@ -41,7 +40,8 @@ export default function LoopView({ graph, language, opening = null, onMake, onCl
   onClose(): void;
   /** Online-only and loud when it fails, like every other write. */
   onDelete(loopId: string): void;
-  onChangeMusic(loopId: string, music: LoopMusic): void;
+  /** Open New music for this loop. */
+  onChooseMusic(loopId: string): void;
   /** Keep this loop's music as a favourite, or stop keeping it. */
   onToggleKeep(loop: Loop): void;
 }) {
@@ -68,7 +68,7 @@ export default function LoopView({ graph, language, opening = null, onMake, onCl
       </div>
       <LoopPlayer
         track={loopTrackOf(graph, open)} graph={graph}
-        onChangeMusic={(music) => onChangeMusic(open.id, music)}
+        onChooseMusic={() => onChooseMusic(open.id)}
         onToggleKeep={() => onToggleKeep(open)}
       />
     </section>;

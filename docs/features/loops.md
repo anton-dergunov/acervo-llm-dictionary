@@ -626,7 +626,10 @@ driven from `loopCues`.
 One rule: **players stop each other.** Each registers its pause with
 `pronunciation.registerPlayer` and calls `silencePlayers` before it plays — a story's is the third.
 Two audio elements racing for one output is a bug with no good failure mode. The iOS gesture
-priming in `pronunciation.ts` applies here too.
+priming in `pronunciation.ts` applies here too, and **the silence it starts on is not the loop
+ending**: it has no samples, and where the track arrives after it has finished — a phone — its `ended`
+used to put the line on the last card, and with *Play the next one* on, start the next loop instead.
+Only the track the element holds ends a loop.
 
 A signed media URL that would let the browser stream by range is **not** built: a new credential shape
 for a file better held whole.
@@ -736,6 +739,16 @@ row is. **All 15 ›** above the row shows the styles as a grid in place of the 
 with its sentence.
 The dialog opens on the music last asked for on this device, as it does on the format; a kept bed
 let go or a style no longer offered falls back to Surprise me.
+
+**The player changes a loop's music with the same picker.** The style's name under the transport opens
+*New music* (`LoopMusicDialog.tsx`): Saved music and the styles' carousel exactly as above, one
+component in both dialogs, so music is not pictures in one place and a list of names in another. It
+opens on the loop's own style and leaves out the saved piece the loop is already playing. A swipe
+chooses as the row moves, so the request is the footer's *Make new music*: the loop's own style sends
+nothing, which the route reads as this style afresh; another style sends its family; a saved piece its
+family and seed. Surprise me sends a family picked on the device from the styles other than the loop's
+own — for a loop that exists, an empty request already means *this* style. The music last made is the
+make dialog's memory, and New music leaves it alone.
 The pictures are `web/src/art/music/<family>.webp`, drawn once by `scripts/draw_dialog_art.py`; a
 family with none yet gets its initial, so a family LexiBeat adds still appears.
 

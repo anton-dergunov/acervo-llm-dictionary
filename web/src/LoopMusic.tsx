@@ -1,5 +1,5 @@
 /**
- * Choosing a loop's music: the make dialog's tiles and the player's menu.
+ * Choosing a loop's music, the same in the make dialog and in the player's New music.
  *
  * **Three kinds of choice, in the order a person reaches for them.** A favourite — a bed the owner
  * kept, asked for again by its style *and* seed, which is the pair that replays it. Surprise me —
@@ -20,12 +20,13 @@ import { useEffect, useState } from "react";
 import { backendSession, type LoopFamily, type LoopMusic, type LoopSchema } from "./api";
 import type { Bed, Loop, VocabularyGraph } from "./domain";
 import { Art } from "./art";
-import { AllChoices, type CatalogueChoice } from "./ChoiceCarousel";
+import { AllChoices, ChoiceCarousel, ChoiceGrid, centred, type CatalogueChoice } from "./ChoiceCarousel";
 import { MakeSection } from "./MakeDialog";
 import { CloseIcon, DiceIcon, StarIcon } from "./icons";
 import * as player from "./loops";
-import { bedMusic, prefetch } from "./music";
-import { MusicButton, MusicPlay } from "./MusicPlay";
+import { bedMusic, prefetch, sampleMusic } from "./music";
+import { MusicButton, MusicPlay, hear, previewKey } from "./MusicPlay";
+import { stopPreview, useSpeechState } from "./pronunciation";
 import { loopIsReady, loopTitle, loopTrackOf, styleLabel } from "./selectors";
 
 let asked: Promise<LoopSchema> | null = null;
@@ -224,33 +225,106 @@ export function SavedMusic({ graph, families, favourites, value, onChange, onAll
   </MakeSection>;
 }
 
-/** The player's menu: new music for the loop that is open. Choosing is asking; there is no Apply. */
-export function MusicMenu({ graph, loop, families, favourites, onChoose }: {
+/** Which catalogue is shown whole in place of a dialog's body, if one is. */
+export type MusicBrowsing = null | "styles" | "saved";
+
+/** What a style's sample is heard under; a saved piece's key starts differently. */
+const SAMPLE = previewKey("style:");
+
+/**
+ * The music half of a dialog: Saved music, then the styles' carousel — the same in the make dialog
+ * and in the player's New music, so choosing music looks and sounds the same wherever it is chosen.
+ *
+ * Hearing a style: ▶ on the middle picture plays its sample; while one is playing — or on its way —
+ * the row coming to rest on another style plays that one instead, and resting on Surprise me stops
+ * it, so swiping through the styles is listening through them. Choosing saved music stops a sample;
+ * closing the dialog — the dialog's own unmount, not this one's, since All replaces these sections
+ * while the music plays on — ends whatever it was playing.
+ */
+export function MusicSections({ graph, families, favourites, value, onChange, onBrowse, onNotify, onRemove }: {
   graph: VocabularyGraph;
-  loop: Loop;
   families: LoopFamily[];
   favourites: Bed[];
-  onChoose(music: LoopMusic): void;
+  /** The chosen key, as `musicKey` writes it. */
+  value: string;
+  onChange(key: string): void;
+  /** Show a whole catalogue in place of the dialog's body. */
+  onBrowse(browsing: Exclude<MusicBrowsing, null>): void;
+  onNotify(message: string): void;
+  onRemove?(bed: Bed): void;
 }) {
-  const others = favourites.filter((bed) => !(bed.styleId === loop.styleId && bed.seed === loop.seed));
-  return <div className="menu open music-menu" role="menu" aria-label="New music for this loop">
-    <button role="menuitem" onClick={() => onChoose({})}>
-      <span className="music-name">New music in this style</span>
-      <span className="music-about">{styleLabel(families, loop.styleId)}, with a different bed</span>
-    </button>
-    {others.length > 0 && <div className="menu-label label">Favourites</div>}
-    {others.map((bed) => <button key={bed.id} role="menuitem" onClick={() => onChoose(musicOf({ kind: "bed", bed }))}>
-      <span className="music-name"><StarIcon filled />{styleLabel(families, bed.styleId)}</span>
-      <span className="music-about">{bedAbout(graph, bed)}</span>
-    </button>)}
-    <div className="menu-label label">Styles</div>
-    {families.map((family) => <button
-      key={family.id} role="menuitemradio" aria-checked={family.id === loop.styleId}
-      className={family.id === loop.styleId ? "on" : ""}
-      onClick={() => onChoose({ family: family.id })}
-    >
-      <span className="music-name">{family.label}</span>
-      <span className="music-about">{family.description}</span>
-    </button>)}
-  </div>;
+  const tiles = musicChoices(graph, families, favourites);
+  const row = centred(tiles.styles[0], tiles.styles.slice(1));
+  const familyOf = (key: string): LoopFamily | undefined => families.find((family) => `style:${family.id}` === key);
+
+  const speech = useSpeechState();
+  const auditioning = [speech.playing, speech.busy].some((key) => key?.startsWith(SAMPLE));
+  const [resting, setResting] = useState<string | null>(null);
+  const settled = (key: string) => {
+    setResting(key);
+    if (!auditioning || speech.playing === previewKey(key) || speech.busy === previewKey(key)) return;
+    const family = familyOf(key);
+    if (family) hear(key, () => sampleMusic(family), onNotify);
+    else stopPreview();
+  };
+  // The middle sample and its neighbours are what ▶ and a swipe will reach for next.
+  const found = row.findIndex((choice) => choice.id === (resting ?? value));
+  const middle = found >= 0 ? found : Math.floor((row.length - 1) / 2);
+  const near = [row[middle], row[middle - 1], row[middle + 1]].map((choice) => choice && familyOf(choice.id))
+    .filter((family): family is LoopFamily => Boolean(family?.sample));
+  const nearKey = near.map((family) => family.sample).join();
+  useEffect(() => { void prefetch([], near); }, [nearKey]);
+  // A piece being heard stops as it is removed; a chosen one falls back by itself.
+  const remove = onRemove && ((bed: Bed) => {
+    const heard = previewKey(musicKey({ kind: "bed", bed }));
+    if (speech.playing === heard || speech.busy === heard) stopPreview();
+    onRemove(bed);
+  });
+
+  return <>
+    <SavedMusic graph={graph} families={families} favourites={favourites} onNotify={onNotify} onRemove={remove}
+      value={value} onChange={(key) => { if (auditioning) stopPreview(); onChange(key); }} onAll={() => onBrowse("saved")} />
+
+    <MakeSection label="Music style" note="composed new for each loop"
+      aside={<AllChoices count={tiles.styles.length} label="Music style" onOpen={() => onBrowse("styles")} />}>
+      <ChoiceCarousel
+        label="Music style" choices={row} onChange={onChange}
+        idle="Saved music chosen above"
+        value={value.startsWith("bed:") ? null : value}
+        action={(choice) => {
+          const family = familyOf(choice.id);
+          return family && <MusicPlay choice={choice.id} label={family.label}
+            fetch={() => sampleMusic(family)} onError={onNotify} />;
+        }}
+        onSettle={(choice) => settled(choice.id)}
+      />
+    </MakeSection>
+  </>;
+}
+
+/** A whole catalogue in place of the dialog's body: every style as a grid, or every saved piece. */
+export function MusicBrowse({ browsing, graph, families, favourites, value, onChange, onNotify, onRemove }: {
+  browsing: Exclude<MusicBrowsing, null>;
+  graph: VocabularyGraph;
+  families: LoopFamily[];
+  favourites: Bed[];
+  value: string;
+  /** A choice made here also closes the catalogue; that is the dialog's to do. */
+  onChange(key: string): void;
+  onNotify(message: string): void;
+  onRemove?(bed: Bed): void;
+}) {
+  const speech = useSpeechState();
+  if (browsing === "styles") {
+    return <ChoiceGrid label="Music style" choices={musicChoices(graph, families, favourites).styles}
+      value={value} onChange={onChange} />;
+  }
+  const remove = onRemove && ((bed: Bed) => {
+    const heard = previewKey(musicKey({ kind: "bed", bed }));
+    if (speech.playing === heard || speech.busy === heard) stopPreview();
+    onRemove(bed);
+  });
+  return <SavedCards graph={graph} families={families} favourites={favourites} onNotify={onNotify}
+    onRemove={remove} value={value}
+    onChange={(key) => { if ([speech.playing, speech.busy].some((one) => one?.startsWith(SAMPLE))) stopPreview(); onChange(key); }} />;
 }

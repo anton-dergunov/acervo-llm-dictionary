@@ -25,16 +25,13 @@
  */
 
 import { useEffect, useState } from "react";
-import { AcervoApiError, backendSession, type LoopFamily, type LoopSchema } from "./api";
-import { AllChoices, ChoiceCarousel, ChoiceGrid, centred } from "./ChoiceCarousel";
+import { AcervoApiError, backendSession, type LoopSchema } from "./api";
 import type { Bed, VocabularyGraph } from "./domain";
 import { lastLoopFormat, lastLoopMusic, loopSwitchesFor, rememberLoopFormat, rememberLoopMusic } from "./editorPreferences";
 import { KindChoices, formatUsable, switchesFor } from "./LoopFormat";
-import { SavedCards, SavedMusic, musicChoices, musicKey, musicOf, useLoopSchema } from "./LoopMusic";
+import { MusicBrowse, MusicSections, musicChoices, musicKey, musicOf, useLoopSchema, type MusicBrowsing } from "./LoopMusic";
 import MakeDialog, { MakeSection } from "./MakeDialog";
-import { prefetch, sampleMusic } from "./music";
-import { MusicPlay, hear, previewKey } from "./MusicPlay";
-import { stopPreview, useSpeechState } from "./pronunciation";
+import { stopPreview } from "./pronunciation";
 import { loopCandidates, loopEligible, loopSecondsPerWord, favouriteBeds, type ListQuery, type SelectedWord } from "./selectors";
 import { WordPicker, useWordDraw, wordsCount, type WordSource } from "./WordPicker";
 
@@ -43,9 +40,6 @@ const DEFAULT_WORDS = 12;
 const barsOf = (schema: LoopSchema): Record<string, number> =>
   Object.fromEntries(schema.formats.map((one) => [one.id, one.barsPerItem]));
 const FEWEST_WORDS = 4;
-
-/** What a style's sample is heard under; a saved piece's key starts differently. */
-const SAMPLE = previewKey("style:");
 
 export default function LoopDialog({ graph, query, selection = [], from = "scope", deviceId, onClose, onMade, onNotify, onRemoveBed }: {
   graph: VocabularyGraph;
@@ -64,7 +58,7 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
 }) {
   const { schema, trouble } = useLoopSchema(true);
   const [musicPicked, setMusic] = useState<string | null>(lastLoopMusic);
-  const [browsing, setBrowsing] = useState<null | "styles" | "saved">(null);
+  const [browsing, setBrowsing] = useState<MusicBrowsing>(null);
   const [asking, setAsking] = useState(false);
   const noSamples = Boolean(schema && !schema.productionBundle);
   const draw = useWordDraw({
@@ -81,43 +75,16 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
   const [switches, setSwitches] = useState<Record<string, boolean | string>>({});
   const values = format ? switchesFor(format, { ...loopSwitchesFor(format.id), ...switches }) : {};
   const families = schema?.families ?? [];
-  const tiles = musicChoices(graph, families, favouriteBeds(graph));
-  const music = tiles.of(musicPicked);
-  const row = centred(tiles.styles[0], tiles.styles.slice(1));
-  const familyOf = (key: string): LoopFamily | undefined => families.find((family) => `style:${family.id}` === key);
-
-  /* Hearing a style. ▶ on the middle picture plays its sample; while one is playing — or on its way —
-     the row coming to rest on another style plays that one instead, and resting on Surprise me stops
-     it, so swiping through the styles is listening through them. */
-  const speech = useSpeechState();
-  const auditioning = [speech.playing, speech.busy].some((key) => key?.startsWith(SAMPLE));
-  const stopSample = () => { if (auditioning) stopPreview(); };
-  const [resting, setResting] = useState<string | null>(null);
-  const settled = (key: string) => {
-    setResting(key);
-    if (!auditioning || speech.playing === previewKey(key) || speech.busy === previewKey(key)) return;
-    const family = familyOf(key);
-    if (family) hear(key, () => sampleMusic(family), onNotify);
-    else stopPreview();
+  const favourites = favouriteBeds(graph);
+  const music = musicChoices(graph, families, favourites).of(musicPicked);
+  const shared = {
+    graph, families, favourites, value: musicKey(music), onNotify, onRemove: onRemoveBed
   };
-  // The middle sample and its neighbours are what ▶ and a swipe will reach for next.
-  const found = row.findIndex((choice) => choice.id === (resting ?? musicKey(music)));
-  const middle = found >= 0 ? found : Math.floor((row.length - 1) / 2);
-  const near = [row[middle], row[middle - 1], row[middle + 1]].map((choice) => choice && familyOf(choice.id))
-    .filter((family): family is LoopFamily => Boolean(family?.sample));
-  const nearKey = near.map((family) => family.sample).join();
-  useEffect(() => { void prefetch([], near); }, [nearKey]);
-  // A piece being heard stops as it is removed; a chosen one falls back to Surprise me by itself.
-  const remove = onRemoveBed && ((bed: Bed) => {
-    const heard = previewKey(musicKey({ kind: "bed", bed }));
-    if (speech.playing === heard || speech.busy === heard) stopPreview();
-    onRemoveBed(bed);
-  });
   // Closing the dialog, by Make or otherwise, ends what it was playing with it.
   useEffect(() => () => stopPreview(), []);
 
   const make = async () => {
-    stopSample();
+    stopPreview();
     setAsking(true);
     try {
       const answer = await backendSession.makeLoop({
@@ -148,18 +115,10 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
     >{asking ? "Asking…" : <>Make the loop<span className="make-go-count"> · {wordsCount(draw.ids.length)}</span></>}</button>
   </>;
 
-  if (browsing === "styles") {
-    return <MakeDialog title="Make a loop" back={{ title: "Music style", onBack: () => setBrowsing(null) }} footer={footer} onClose={onClose}>
-      <ChoiceGrid
-        label="Music style" choices={tiles.styles} value={musicKey(music)}
-        onChange={(key) => { setMusic(key); setBrowsing(null); }}
-      />
-    </MakeDialog>;
-  }
-  if (browsing === "saved") {
-    return <MakeDialog title="Make a loop" back={{ title: "Saved music", onBack: () => setBrowsing(null) }} footer={footer} onClose={onClose}>
-      <SavedCards graph={graph} families={families} favourites={tiles.favourites} onNotify={onNotify} onRemove={remove}
-        value={musicKey(music)} onChange={(key) => { stopSample(); setMusic(key); setBrowsing(null); }} />
+  if (browsing) {
+    return <MakeDialog title="Make a loop" footer={footer} onClose={onClose}
+      back={{ title: browsing === "styles" ? "Music style" : "Saved music", onBack: () => setBrowsing(null) }}>
+      <MusicBrowse {...shared} browsing={browsing} onChange={(key) => { setMusic(key); setBrowsing(null); }} />
     </MakeDialog>;
   }
 
@@ -177,22 +136,6 @@ export default function LoopDialog({ graph, query, selection = [], from = "scope
       />
     </MakeSection>}
 
-    <SavedMusic graph={graph} families={families} favourites={tiles.favourites} onNotify={onNotify} onRemove={remove}
-      value={musicKey(music)} onChange={(key) => { stopSample(); setMusic(key); }} onAll={() => setBrowsing("saved")} />
-
-    <MakeSection label="Music style" note="composed new for each loop"
-      aside={<AllChoices count={tiles.styles.length} label="Music style" onOpen={() => setBrowsing("styles")} />}>
-      <ChoiceCarousel
-        label="Music style" choices={row} onChange={setMusic}
-        idle="Saved music chosen above"
-        value={music.kind === "bed" ? null : musicKey(music)}
-        action={(choice) => {
-          const family = familyOf(choice.id);
-          return family && <MusicPlay choice={choice.id} label={family.label}
-            fetch={() => sampleMusic(family)} onError={onNotify} />;
-        }}
-        onSettle={(choice) => settled(choice.id)}
-      />
-    </MakeSection>
+    <MusicSections {...shared} onChange={setMusic} onBrowse={setBrowsing} />
   </MakeDialog>;
 }

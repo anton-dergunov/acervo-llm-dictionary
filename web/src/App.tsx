@@ -8,6 +8,7 @@ import SelectionBar from "./SelectionBar";
 import type { WordSource } from "./WordPicker";
 import { clearSelected, restoreSelected, toggleSelected, useSelectedIds } from "./wordSelection";
 import LoopDialog from "./LoopDialog";
+import LoopMusicDialog from "./LoopMusicDialog";
 import LoopView from "./LoopView";
 import { LookUpContext, LookUpSheet, useLookUp, type LookUpServices, type ReadingPlace } from "./LookUpSheet";
 import StoryDialog from "./StoryDialog";
@@ -270,6 +271,8 @@ export default function App() {
   const [loops, setLoops] = useState(false);
   /* Which make dialog is open, and whether it starts on the selection or on a draw from the scope. */
   const [makingLoop, setMakingLoop] = useState<WordSource | null>(null);
+  /** The loop whose New music is open, by id, so it follows the loop as the replica changes. */
+  const [musicFor, setMusicFor] = useState<string | null>(null);
   const [stories, setStories] = useState(false);
   const [makingStory, setMakingStory] = useState<WordSource | null>(null);
   /* The map: whether it is open, the sense it is peeking at, and where it was left in each language.
@@ -1663,7 +1666,7 @@ export default function App() {
           graph={snapshot} language={language} opening={loopPlace} onMake={() => setMakingLoop("scope")}
           onClose={() => setLoops(false)}
           onDelete={removeLoop}
-          onChangeMusic={(loopId, music) => void changeLoopMusic(loopId, music)}
+          onChooseMusic={setMusicFor}
           onToggleKeep={(loop) => void toggleKeptBed(loop)}
         /> : addTab ? <AddView
             // A new composition is a fresh view, not a prop change: remounting is what makes "add
@@ -1918,6 +1921,17 @@ export default function App() {
       onNotify={notify}
       onRemoveBed={(bed) => void removeBed(bed)}
     />}
+
+    {musicFor && snapshot && (() => {
+      const loop = snapshot.loops.find((one) => one.id === musicFor && !one.deleted);
+      return loop && <LoopMusicDialog
+        graph={snapshot} loop={loop}
+        onChoose={(music) => void changeLoopMusic(loop.id, music)}
+        onClose={() => setMusicFor(null)}
+        onNotify={notify}
+        onRemoveBed={(bed) => void removeBed(bed)}
+      />;
+    })()}
 
     {settings && <Settings
       // Directing the dialog at a section is a fresh open, not a prop change: the section and the

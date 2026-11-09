@@ -40,7 +40,7 @@ function view(loops: Loop[]) {
   const onDelete = vi.fn();
   render(<LoopView
     graph={graph} language="es" onMake={() => undefined} onClose={() => undefined}
-    onDelete={onDelete} onChangeMusic={() => undefined} onToggleKeep={() => undefined}
+    onDelete={onDelete} onChooseMusic={() => undefined} onToggleKeep={() => undefined}
   />);
   return onDelete;
 }

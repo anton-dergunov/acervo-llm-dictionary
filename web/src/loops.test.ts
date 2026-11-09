@@ -181,3 +181,33 @@ describe("stopping", () => {
     expect(handlers.size).toBe(0);
   });
 });
+
+describe("the silence a play starts on", () => {
+  it("does not end the loop when it runs out before the track arrives", async () => {
+    // The phone's order of events: the silence `prime()` starts with has no samples in it, and its
+    // `ended` comes while the track is still being fetched. That used to put the line at the end of
+    // the loop — and, with Play the next one on, start the next loop instead of this one.
+    const prefs = await import("./editorPreferences");
+    const other = { ...track, loop: { ...loop, id: "loop00000000002", audioRef: "loops/es/loop00000000002-0b1c2d3e.mp3" } };
+    player.setQueue([track, other]);
+    let arrive: (answer: Response) => void = () => undefined;
+    vi.mocked(fetch).mockReturnValueOnce(new Promise<Response>((resolve) => { arrive = resolve; }));
+
+    const playing = player.play(track);
+    made!.dispatchEvent(new Event("ended"));
+    expect(player.playback().at).toBe(0);
+
+    prefs.setLoopAutoplay(true);
+    made!.dispatchEvent(new Event("ended"));
+    expect(player.nowPlaying()?.loop.id).toBe(loop.id);
+
+    arrive({ ok: true, status: 200, blob: async () => new Blob(["mp3"], { type: "audio/mpeg" }) } as Response);
+    await playing;
+    expect(player.nowPlaying()?.loop.id).toBe(loop.id);
+
+    // The track's own end still ends it.
+    prefs.setLoopAutoplay(false);
+    made!.dispatchEvent(new Event("ended"));
+    expect(player.playback().at).toBe(loop.durationSeconds);
+  });
+});

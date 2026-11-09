@@ -277,6 +277,12 @@ export function stepLoop(by: 1 | -1): void {
 /* What happens at the end is the owner's two switches, in this order: play it again, else play the
    next one, else stop. Both are off by default — a loop that ends is a loop that ends. */
 function ended(): void {
+  /* Only the track ends a loop. `prime()` starts the element on a silence with no samples in it, and
+     where the track takes longer to arrive than the silence takes to finish — a phone, mostly — the
+     silence's own `ended` came first: the line leapt to the last card, then back to the top when the
+     track began, and with Play the next one on it skipped this loop altogether. While a track is on
+     its way the element holds the silence and `held` is still the previous track, or nothing. */
+  if (!held || audio().src !== held) return;
   const repeat = loopRepeatEnabled();
   if (repeat && current) { seek(0); void audio().play().catch(failWith); return; }
   if (loopAutoplayEnabled()) {

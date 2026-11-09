@@ -1701,22 +1701,6 @@ const bedAbout = (bed) => {
   return source ? `kept ${kept} · from “${loopTitle(source)}”` : `kept ${kept}`;
 };
 
-/* The player's menu of other music — `LoopMusic.tsx` `MusicMenu`. Choosing is asking; no Apply. */
-function musicMenu(loop) {
-  const others = BEDS.filter((bed) => !(bed.styleId === loop.styleId && bed.seed === loop.seed));
-  const row = (attrs, name, about, cls = "") => `<button ${attrs}${cls ? ` class="${cls}"` : ""}>
-      <span class="music-name">${name}</span><span class="music-about">${esc(about)}</span></button>`;
-  return `<div class="menu music-menu${state.musicMenu ? " open" : ""}" role="menu" aria-label="New music for this loop">
-    ${row('role="menuitem" data-music=""', "New music in this style", `${styleLabel(loop.styleId)}, with a different bed`)}
-    ${others.length ? '<div class="menu-label label">Favourites</div>' : ""}
-    ${others.map((bed) => row(`role="menuitem" data-music="${bed.styleId}"`, `${ICON.starOn}${esc(styleLabel(bed.styleId))}`, bedAbout(bed))).join("")}
-    <div class="menu-label label">Styles</div>
-    ${LOOP_SCHEMA.families.map((family) => row(
-      `role="menuitemradio" aria-checked="${family.id === loop.styleId}" data-music="${family.id}"`,
-      esc(family.label), family.description, family.id === loop.styleId ? "on" : "")).join("")}
-  </div>`;
-}
-
 function playerBlock(loop) {
   const rows = loopItemsOf(loop.id);
   const kept = Boolean(bedOfLoop(loop));
@@ -1735,12 +1719,11 @@ function playerBlock(loop) {
       ${state.remaking === loop.id ? '<span class="bed-status label">Making new music · 38% · Rendering the music bed</span>'
         : loop.fallbackFrom ? `<span class="bed-status label">${esc(fallbackNote(loop))}</span>` : ""}
       <span class="bed-line">
-        <button class="bed-name label" id="bedName" aria-haspopup="menu" aria-expanded="${Boolean(state.musicMenu)}"
+        <button class="bed-name label" id="bedName" aria-haspopup="dialog"
                 ${state.remaking === loop.id ? "disabled" : ""}>${esc(styleLabel(loop.styleId))}${ICON.down}</button>
         <button class="bed-star${kept ? " on" : ""}" id="bedStar" aria-pressed="${kept}"
                 aria-label="${kept ? "No longer keep this music" : "Keep this music as a favourite"}">${kept ? ICON.starOn : ICON.star}</button>
         <span class="label">· ${esc(formatLabel(loop.format))} · ${rows.length} words</span>
-        ${musicMenu(loop)}
       </span>
     </div>
   </div>`;
@@ -2527,7 +2510,9 @@ const ORDERS = [
 ];
 const MAKE = {
   loop: { max: 24, least: 4, initial: 12, usable: (x) => Boolean(x.primaryGloss), why: "no single term to say", label: "Make the loop", title: "Make a loop" },
-  story: { max: 8, least: 1, initial: 3, usable: () => true, why: "", label: "Make the story", title: "Make a story" }
+  story: { max: 8, least: 1, initial: 3, usable: () => true, why: "", label: "Make the story", title: "Make a story" },
+  /* The player's New music — `LoopMusicDialog.tsx`: the loop dialog's music alone, for the loop open. */
+  music: { label: "Make new music", title: "New music" }
 };
 /* The prototype's stand-in for the rarity figures the server answers (`GET /words/rarity`). */
 const zipfOf = (x) => (x.headword.length * 7919) % 50 / 10;
@@ -2717,11 +2702,11 @@ function savedCards(beds, value) {
       </button>${musicPlay(id, label, "small")}<button type="button" class="favourite-remove" data-unkeep="${esc(bed.id)}" aria-label="Remove ${esc(label)} from saved music" title="Remove from saved music"><span aria-hidden="true">${ICON.close}</span></button></div>`;
   }).join("")}</div>`;
 }
-function savedMusic(d) {
-  if (!BEDS.length) return "";
-  const chosen = BEDS.find((bed) => `bed:${bed.id}` === d.music);
-  const shown = chosen && BEDS.indexOf(chosen) >= 2 ? [BEDS[0], chosen] : BEDS.slice(0, 2);
-  return makeSection("Saved music", savedCards(shown, d.music), BEDS.length > 2 ? allLink("Saved music", BEDS.length) : "");
+function savedMusic(d, beds = BEDS) {
+  if (!beds.length) return "";
+  const chosen = beds.find((bed) => `bed:${bed.id}` === d.music);
+  const shown = chosen && beds.indexOf(chosen) >= 2 ? [beds[0], chosen] : beds.slice(0, 2);
+  return makeSection("Saved music", savedCards(shown, d.music), beds.length > 2 ? allLink("Saved music", beds.length) : "");
 }
 
 /* The kinds of loop as three tiles — `LoopFormat.tsx` `KindChoices`. */
@@ -2781,7 +2766,7 @@ function openMakeDialog(kind, from = "scope") {
   const d = {
     choice: from === "selection" && picked().length ? "selection" : "random", count: rule.initial, seed: Date.now() % 100000,
     passed: new Set(), ids: [], browsing: null, format: state.loopFormat || "classic", switches: {}, optionsOpen: false,
-    music: state.loopMusic || "surprise", storyKind: "auto", style: "auto", guidance: "", parts: state.storyParts || 4
+    music: kind === "music" ? loopOf(state.loopOpen).styleId : state.loopMusic || "surprise", storyKind: "auto", style: "auto", guidance: "", parts: state.storyParts || 4
   };
   const node = el(`<div class="modal-backdrop"><section class="settings make-dialog" role="dialog" aria-modal="true" tabindex="-1"></section></div>`);
   document.body.appendChild(node);
@@ -2797,7 +2782,13 @@ function openMakeDialog(kind, from = "scope") {
   };
   const pictures = () => [{ id: "auto", label: "To suit the story", about: suits(), art: iconArt(MAKE_ICON.picture) },
     ...STORY_STYLES.map((st) => ({ id: st.id, label: st.label, art: art("styles", st.id, st.label) }))];
-  const catalogues = () => kind === "loop"
+  /* What New music offers leaves out the piece the loop is already playing. */
+  const beds = () => {
+    if (kind !== "music") return BEDS;
+    const loop = loopOf(state.loopOpen);
+    return BEDS.filter((bed) => !(bed.styleId === loop.styleId && bed.seed === loop.seed));
+  };
+  const catalogues = () => kind !== "story"
     ? { "Music style": [musicTiles(), "music"] }
     : { "Kind of story": [kinds(), "storyKind"], "Picture style": [pictures(), "style"] };
   // Each carousel's Embla and how to steer it, so a tap, an arrow or a key glides the row.
@@ -2812,8 +2803,9 @@ function openMakeDialog(kind, from = "scope") {
     const cats = catalogues();
     for (const one of Object.values(rows)) one.embla.destroy();
     for (const name of Object.keys(rows)) delete rows[name];
-    const body = d.browsing === "Saved music" ? savedCards(BEDS, d.music)
+    const body = d.browsing === "Saved music" ? savedCards(beds(), d.music)
       : d.browsing ? choiceGrid(d.browsing, cats[d.browsing][0], d[cats[d.browsing][1]])
+      : kind === "music" ? savedMusic(d, beds()) + strip("Music style", "Saved music chosen above")
       : makeSection("Words", wordPicker(kind, d)) + (kind === "loop"
         ? makeSection("Kind of loop", kindChoices(d)) + savedMusic(d) + strip("Music style", "Saved music chosen above")
         : makeSection("Parts", `<div class="word-count"><span class="seg word-count-seg story-parts" role="radiogroup" aria-label="How many parts">${[4, 5, 6].map((n) =>
@@ -2823,7 +2815,7 @@ function openMakeDialog(kind, from = "scope") {
     frame.innerHTML = `<header>${d.browsing ? `<button type="button" class="make-back" data-back aria-label="Back to ${rule.title}">${ICON.back}</button>` : ""}
         <h2>${esc(d.browsing || rule.title)}</h2><button class="close" aria-label="Close">×</button></header>
       <div class="make-body">${body}</div>
-      <footer class="make-footer"><button class="tb-btn primary make-go"${d.ids.length ? "" : " disabled"}>${rule.label}<span class="make-go-count"> · ${wordsCount(d.ids.length)}</span></button></footer>`;
+      <footer class="make-footer"><button class="tb-btn primary make-go"${d.ids.length || kind === "music" ? "" : " disabled"}>${rule.label}${kind === "music" ? "" : `<span class="make-go-count"> · ${wordsCount(d.ids.length)}</span>`}</button></footer>`;
     for (const row of frame.querySelectorAll(".carousel-row")) placeRow(row);
   };
   /* Each carousel: opened on its choice, sized as it moves. Whatever a finger, a wheel or the momentum
@@ -2901,6 +2893,10 @@ function openMakeDialog(kind, from = "scope") {
     if (t.matches("summary")) { d.optionsOpen = !t.parentElement.open; return; }
     if (t.matches(".close")) return shut();
     if (t.matches("[data-back]")) { d.browsing = null; return paint(); }
+    if (t.matches(".make-go") && kind === "music") {
+      shut(); state.remaking = state.loopOpen; render();
+      return toast("Making new music — it takes a few minutes (prototype only)");
+    }
     if (t.matches(".make-go")) { if (kind === "loop") state.loopMusic = d.music; shut(); return toast(`Asked for a ${kind} from ${wordsCount(d.ids.length)} — prototype only, nothing was made`); }
     if (t.dataset.hear) return hear(t.dataset.hear);
     if (t.dataset.unkeep) {
@@ -2943,6 +2939,7 @@ function openMakeDialog(kind, from = "scope") {
 }
 const openLoopDialog = (from = "scope") => openMakeDialog("loop", from);
 const openStoryDialog = (from = "scope") => openMakeDialog("story", from);
+const openMusicDialog = () => openMakeDialog("music");
 
 /* ── wiring ──
    Delegated from the pane, the bar and the top bar, so a re-render never leaves a dead handler. */
@@ -2990,20 +2987,13 @@ $("#main").addEventListener("click", (ev) => {
     return;
   }
   if (ev.target.closest("#playPause")) { player.playing ? loopPause() : loopPlay(); return; }
-  if (ev.target.closest("#bedName")) { state.musicMenu = !state.musicMenu; render(); return; }
+  if (ev.target.closest("#bedName")) { openMusicDialog(); return; }
   if (ev.target.closest("#bedStar")) {
     const loop = loopOf(state.loopOpen);
     const kept = bedOfLoop(loop);
     if (kept) BEDS.splice(BEDS.indexOf(kept), 1);
     else BEDS.unshift({ id: `bd${Date.now()}`, styleId: loop.styleId, seed: loop.seed, sourceLoopId: loop.id, createdAt: "2026-09-23" });
     toast(kept ? "No longer a favourite" : "Kept — offered next time you make a loop");
-    render();
-    return;
-  }
-  const music = ev.target.closest("[data-music]");
-  if (music) {
-    state.musicMenu = false; state.remaking = state.loopOpen;
-    toast("Making new music — it takes a few minutes (prototype only)");
     render();
     return;
   }

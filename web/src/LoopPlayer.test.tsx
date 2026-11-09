@@ -73,7 +73,7 @@ function graphWith(beds: Bed[] = []): VocabularyGraph {
   };
 }
 
-const onChangeMusic = vi.fn();
+const onChooseMusic = vi.fn();
 const onToggleKeep = vi.fn();
 
 const looking: LookUpServices = {
@@ -94,7 +94,7 @@ function at(seconds: number, beds: Bed[] = [], track = { loop, items, cues }) {
   });
   return render(<LookUpContext.Provider value={looking}><LoopPlayer
     track={track} graph={graphWith(beds)}
-    onChangeMusic={onChangeMusic} onToggleKeep={onToggleKeep}
+    onChooseMusic={onChooseMusic} onToggleKeep={onToggleKeep}
   /></LookUpContext.Provider>);
 }
 
@@ -106,39 +106,18 @@ beforeEach(() => {
 /* Unmounted before the mocks are restored: the schema arrives asynchronously, and a player still on
    screen when `usePlayback` stops being mocked would re-render with a different number of hooks. */
 afterEach(() => {
-  cleanup(); vi.restoreAllMocks(); onChangeMusic.mockReset(); onToggleKeep.mockReset();
+  cleanup(); vi.restoreAllMocks(); onChooseMusic.mockReset(); onToggleKeep.mockReset();
   vi.mocked(looking.lookUp).mockClear();
   forgetTaps();
 });
 
 describe("the loop's music", () => {
-  it("is named in words and opens a menu of other music", async () => {
+  it("is named in words, and its name opens New music", async () => {
     at(10);
     const name = await screen.findByRole("button", { name: /gentle game/i });
+    expect(name).toHaveAttribute("aria-haspopup", "dialog");
     fireEvent.click(name);
-    const menu = screen.getByRole("menu", { name: "New music for this loop" });
-    expect(menu).toHaveTextContent("Slow and spacious.");
-    // The music playing is marked, and choosing another style asks for it.
-    expect(screen.getByRole("menuitemradio", { name: /gentle game/i })).toHaveAttribute("aria-checked", "true");
-    fireEvent.click(screen.getByRole("menuitemradio", { name: /meditative/i }));
-    expect(onChangeMusic).toHaveBeenCalledWith({ family: "meditative" });
-  });
-
-  it("asks for new music in the same style with nothing but the loop", async () => {
-    at(10);
-    fireEvent.click(await screen.findByRole("button", { name: /gentle game/i }));
-    fireEvent.click(screen.getByRole("menuitem", { name: /new music in this style/i }));
-    expect(onChangeMusic).toHaveBeenCalledWith({});
-  });
-
-  it("offers another kept bed by its family and seed, and not the one already playing", async () => {
-    const other: Bed = { ...kept, id: "bedkept00000002", styleId: "meditative", seed: 9 };
-    at(10, [kept, other]);
-    fireEvent.click(await screen.findByRole("button", { name: /gentle game/i }));
-    const favourites = screen.getAllByRole("menuitem").filter((item) => /kept/.test(item.textContent ?? ""));
-    expect(favourites).toHaveLength(1);
-    fireEvent.click(favourites[0]);
-    expect(onChangeMusic).toHaveBeenCalledWith({ family: "meditative", seed: 9 });
+    expect(onChooseMusic).toHaveBeenCalledTimes(1);
   });
 
   it("is starred when kept, and the star keeps or unkeeps it", async () => {
