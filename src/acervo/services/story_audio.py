@@ -34,6 +34,15 @@ than the time it gave, so there is nothing to correct against. A file that begin
 begins needs no seek and cannot be wrong. A clear voice records one passage covering the whole part,
 so the shape is the same either way and the reader simply has nothing to tap.
 
+**A passage sent a direction is listened to before it is kept** (`acervo.hearing`), because a voice
+that takes a direction is a language model and now and then says more than it was given: it finished
+the fragment «Sin mostrar ningún temor,» with a sentence of its own, and the fallback voice reads its
+direction aloud — on that fragment in eight takes of ten (`experiments/story-fragments/`). A take heard
+saying more than its passage is recorded once more by the same voice; if that one does too, the
+passage is joined to its neighbour and the two are recorded as one, which is what a short fragment
+needs; if even that says too much, it is kept, since a passage with a word too many is better than a
+part with no voice. Each step is a line in the log. A check that cannot run lets the take through.
+
 Every operation is read (transaction) → calls (**no** transaction, tens of seconds of them) → write
 (transaction), for `services/stories.py`'s reason.
 """
@@ -42,9 +51,11 @@ from __future__ import annotations
 
 import hashlib
 import time
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
 
+from acervo import hearing
 from acervo.domain.ids import now_instant
 from acervo.errors import ApiError
 from acervo.models import journal
@@ -125,8 +136,8 @@ def narrate_part(
 
     segments = _segments(settings, owner, part["text"], language, reading)
     pin = _pin(settings, parts, language)
-    recordings, pin = _record(settings, owner, segments, language, order, reading, preferences, pin,
-                              voices, gate)
+    segments, recordings, pin = _record(settings, owner, story_id, part_id, segments, language, order,
+                                        reading, preferences, pin, voices, gate)
 
     row = _place_and_store(settings, owner, device, story_id, part_id, segments, recordings, pin)
     journal.outcome(
@@ -140,44 +151,149 @@ def narrate_part(
     return row
 
 
-def _record(settings: Settings, owner: str, segments, language: str, order: str, reading: str,
-            preferences, pin: Pin | None, voices, gate) -> tuple[list[tuple[bytes, str]], Pin | None]:
-    """Say every passage, in one voice. The pair that answers the first is asked for the rest.
+@dataclass(frozen=True)
+class _Take:
+    data: bytes
+    # The direction recorded on the row: the passage's own, where one was really sent.
+    said: str
+    # What the voice was sent, the accent included — what the take is keyed on, and why it is heard.
+    sent: str | None
+    pin: Pin
+    # What it was asked with, in every form a voice reads (`speaking.Direction`), and the passage's
+    # own direction within it — so a second take is asked exactly as the first was.
+    style: str | None = None
+    emotional: str | None = None
 
-    **A passage already recorded is not recorded again.** A part is written only once every one of
-    its passages exists, so a part that ran out of allowance halfway used to throw away the passages
-    it had already paid for and buy them again on the next try — on a tier of ten calls a day, that
-    is the difference between finishing a story and never finishing one. The masters go in the same
-    content-addressed store a loop take uses, under the same key, so a retry costs only what is
-    genuinely missing.
+
+def _record(settings: Settings, owner: str, story_id: str, part_id: str, segments, language: str,
+            order: str, reading: str, preferences, pin: Pin | None, voices,
+            gate) -> tuple[tuple[narrate.Segment, ...], list[tuple[bytes, str]], Pin | None]:
+    """Say every passage, in one voice, and answer with the passages as they ended up.
+
+    The pair that answers the first is asked for the rest. **A passage already recorded is not
+    recorded again.** A part is written only once every one of its passages exists, so a part that
+    ran out of allowance halfway used to throw away the passages it had already paid for and buy them
+    again on the next try — on a tier of ten calls a day, that is the difference between finishing a
+    story and never finishing one. The masters go in the same content-addressed store a loop take
+    uses, under the same key, so a retry costs only what is genuinely missing. A take found there is
+    listened to like a new one, so a part recorded again replaces a bad passage rather than reusing it.
+
+    The passages are answered with because a take that says more than its passage can join two of
+    them into one (the module's docstring).
     """
     cache = Path(settings.takes_path)
+    passages = list(segments)
     recordings: list[tuple[bytes, str]] = []
-    for segment in segments:
+    index = 0
+    while index < len(passages):
         if gate is not None:
             gate()
-        text = segment.text.strip()
-        emotional = None
-        if reading == "expressive" and segment.direction:
-            emotional = speaking.direction(
-                stories._template(settings, SPEAK_TEMPLATE), segment.direction, language)
-        # The accent alone where there is no direction to give; it is not recorded as one.
-        style = pronunciations.directed(settings, language, emotional)
-        # A direction is recorded on the row only where one was really sent. A passage found in the
-        # cache was keyed on what was sent; a fresh one says so on its answer.
-        kept = _remembered(cache, text, language, style, pin, voices)
-        if kept is not None:
-            data, pin = kept
-            recordings.append((data, segment.direction if emotional else ""))
-            continue
-        spoken = _say(settings, owner, text, language, order, style, preferences, pin, voices)
-        answered = spoken.result.answer
-        pin = (answered.provider_id, answered.model, spoken.result.voice)
-        master, mime = encode.master(spoken.result.data, spoken.result.mime)
-        take_store.store(cache, _take_key(text, language, spoken.direction, pin), master, mime)
-        sent = speaking.carried(spoken.direction, emotional)
-        recordings.append((spoken.result.data, segment.direction if sent else ""))
-    return recordings, pin
+        segment = passages[index]
+        take = _take(settings, owner, cache, segment, language, order, reading, preferences, pin, voices)
+        pin = take.pin
+        extra = _said_more(take, segment, language)
+        if extra:
+            # Once more, by the same voice: on the model that recorded the stories so far a second
+            # take of the very fragment that went wrong was right twenty times in twenty.
+            take = _retake(settings, owner, cache, segment, language, order, preferences, take, voices)
+            pin = take.pin
+            again = _said_more(take, segment, language)
+            _noted(story_id, part_id, index, segment, extra, "retook" if not again else "retook-again")
+            extra = again
+        before = extra
+        if extra and len(passages) > 1:
+            # A fragment the voice cannot leave unfinished is said whole: joined to the passage after
+            # it — before it, for the last — in the first one's direction, as one passage and one file.
+            if index + 1 < len(passages):
+                joined = narrate.join(segment, passages[index + 1])
+                passages[index:index + 2] = [joined]
+            else:
+                recordings.pop()
+                index -= 1
+                joined = narrate.join(passages[index], segment)
+                passages[index:index + 2] = [joined]
+            take = _take(settings, owner, cache, joined, language, order, reading, preferences, pin, voices)
+            pin = take.pin
+            extra = _said_more(take, joined, language)
+            _noted(story_id, part_id, index, joined, extra or before, "joined" if not extra else "kept")
+        elif extra:
+            _noted(story_id, part_id, index, segment, extra, "kept")
+        recordings.append((take.data, take.said))
+        index += 1
+    return tuple(passages), recordings, pin
+
+
+def _take(settings: Settings, owner: str, cache: Path, segment, language: str, order: str,
+          reading: str, preferences, pin: Pin | None, voices) -> _Take:
+    """This passage, from the take store if it has been paid for, from the voice if not."""
+    text = segment.text.strip()
+    emotional = None
+    if reading == "expressive" and segment.direction:
+        emotional = speaking.direction(
+            stories._template(settings, SPEAK_TEMPLATE), segment.direction, language)
+    # The accent alone where there is no direction to give; it is not recorded as one.
+    style = pronunciations.directed(settings, language, emotional)
+    # A direction is recorded on the row only where one was really sent. A passage found in the
+    # cache was keyed on what was sent; a fresh one says so on its answer.
+    kept = _remembered(cache, text, language, style, pin, voices)
+    if kept is not None:
+        data, pin = kept
+        return _Take(data, segment.direction if emotional else "", style, pin, style, emotional)
+    spoken = _say(settings, owner, text, language, order, style, preferences, pin, voices)
+    return _stored(cache, text, language, spoken, segment.direction, style, emotional)
+
+
+def _retake(settings: Settings, owner: str, cache: Path, segment, language: str, order: str,
+            preferences, first: _Take, voices) -> _Take:
+    """The passage asked for again of the voice that said it, kept under the first take's key, so
+    the store never hands the first one back. A voice that will not answer keeps the first take."""
+    text = segment.text.strip()
+    try:
+        spoken = _say(settings, owner, text, language, order, first.style, preferences, first.pin, voices)
+    except ApiError as refused:
+        journal.outcome("story-audio", True, result="retake-refused", reason=refused.code,
+                        text=text, message=refused.message)
+        return first
+    return _stored(cache, text, language, spoken, segment.direction, first.style, first.emotional)
+
+
+def _stored(cache: Path, text: str, language: str, spoken, direction: str, style, emotional) -> _Take:
+    answered = spoken.result.answer
+    pin = (answered.provider_id, answered.model, spoken.result.voice)
+    master, mime = encode.master(spoken.result.data, spoken.result.mime)
+    take_store.store(cache, _take_key(text, language, spoken.direction, pin), master, mime)
+    sent = speaking.carried(spoken.direction, emotional)
+    return _Take(spoken.result.data, direction if sent else "", spoken.direction, pin, style, emotional)
+
+
+def _said_more(take: _Take, segment, language: str) -> tuple[str, ...]:
+    """The words a take was heard to say beyond its passage; empty when it said its passage, when it
+    was sent no direction (a voice that takes none reads what it is given), or when nobody could
+    listen — which lets it through, because the check is never why a story goes unread."""
+    if not take.sent:
+        return ()
+    try:
+        heard = hearing.check(hearing.shared(), take.data, language, segment.text, str(take.sent))
+    except Exception as failure:  # noqa: BLE001 — any reason it could not listen is the same answer
+        journal.outcome("story-audio", True, result="unchecked", text=segment.text.strip(),
+                        check=f"{type(failure).__name__}: {failure}")
+        return ()
+    return heard.added
+
+
+def _noted(story_id: str, part_id: str, index: int, segment, added: tuple[str, ...], remedy: str) -> None:
+    """One line per passage that said too much: which, what it added, and what was done about it."""
+    outcomes = {
+        "retook": "said more than its passage; recorded once more, and that take said only the passage",
+        "retook-again": "said more than its passage, and so did a second take",
+        "joined": "said more than its passage twice; joined to its neighbour and recorded as one",
+        "kept": "said more than its passage, and nothing more could be done; kept as it is",
+    }
+    journal.outcome(
+        "story-audio", True, result="said-more", remedy=remedy, story=story_id, part=part_id,
+        passage=index, text=segment.text.strip(), added=" ".join(added) or None,
+        message=f"Passage {index + 1} {outcomes[remedy]}.",
+    )
 
 
 def _take_key(text: str, language: str, direction: str | None, pin: Pin) -> str:

@@ -144,6 +144,13 @@ def tile(text: str, returned: Sequence[Segment]) -> Tiled:
     )
 
 
+def join(first: Segment, second: Segment) -> Segment:
+    """Two neighbouring passages as one, in the first one's direction. The texts are put together
+    exactly as they stand — `tile` keeps the space between two passages on the first — so the
+    passages still join back to the part."""
+    return Segment(text=first.text + second.text, direction=first.direction)
+
+
 # What one call to a voice may carry. A Gemini voice takes 4,000 bytes of text, and a part is a few
 # hundred characters, so this is a guard and not a design: it is here so an unusually long part is
 # read in two goes rather than refused by the provider, and it is in bytes because that is the unit

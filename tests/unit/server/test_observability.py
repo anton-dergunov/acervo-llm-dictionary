@@ -311,3 +311,36 @@ def test_a_language_list_that_cannot_be_read_is_logged_in_its_own_words(logs, se
     (line,) = refusals(logs)
     assert "path=/api/acervo/v1/languages" in line
     assert 'message="LookupError: no CLDR data for territory_languages"' in line
+
+
+def test_a_story_passage_that_said_more_than_itself_is_what_admin_log_failed_shows(logs, server, monkeypatch, ear):
+    """Recorded again and put right, so the story shows nothing: the line is where it surfaces."""
+    from test_story_audio import narrate_reply, wav
+    from test_story_jobs import Models, a_story, brief_reply, story_reply, translation_reply
+
+    from acervo.repository import graph, image_settings, pronunciation_settings
+    from acervo.work.runner import Runner
+    from provider_rows import VERTEX_IMAGE
+
+    server.add_provider(GOOGLE)
+    server.add_provider(VERTEX_IMAGE)
+    models = Models()
+    monkeypatch.setattr("acervo.models.call.completion", lambda **kw: models.completion(**kw))
+    monkeypatch.setattr("acervo.models.call.image_generation", lambda **kw: models.image_generation(**kw))
+    monkeypatch.setattr("acervo.models.google_tts.speech", lambda row, model, words, **_: (wav(words), "audio/wav"))
+    image_settings.save(server.owner, story_continuity="off")
+    pronunciation_settings.save(server.owner, pregenerate={"stories": False})
+    story = a_story(server, 2)
+    models.texts = [story_reply(4), translation_reply(4), brief_reply(4)]
+    Runner(server.settings).run_until_idle()
+    part = graph.story_parts(server.owner, story["id"])[0]
+    models.texts = [narrate_reply(part["text"])]
+    ear.saying = ["Marcos vio algo asombroso, y luego se fue a su casa sin decir nada.", "Marcos vio algo asombroso."]
+
+    answer = server.post(f"/stories/{story['id']}/parts/{part['id']}/audio", {"deviceId": "device000000001"})
+    assert answer.status_code == 200, answer.text
+
+    lines(logs["call"])
+    failed = activity.select(activity.entries(logs), failed=True)
+    assert any("story-audio outcome result=said-more remedy=retook" in text
+               and "said more than its passage; recorded once more" in text for _, _, _, text in failed), failed

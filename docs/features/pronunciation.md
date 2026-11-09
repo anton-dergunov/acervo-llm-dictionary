@@ -185,15 +185,25 @@ register their pause, and each silences the others before it plays.
   result back into words needs alignment. A request-metered tier is answered by choosing a
   character-metered provider.
 
-## Listening to a recording, for loop lines only
+## Listening to a recording, for loop lines and story passages
 
-A directed voice now and then says part of its direction aloud. A loop line is the one recording the
-owner cannot record again, so each new directed loop take is transcribed by Whisper base on the server
-and recorded once more when a word of its direction is heard around its text
-([`loops.md`](loops.md) §2.4). Not for a word or a story passage: the check costs about two seconds on
-the NAS, the owner is waiting on those, and "Record again" is right there. Not for anything else that
-pulls a transcript away from its text either — an exclamation, a laugh, an accent — since those are
-what the owner asked for ([`experiments/take-verification/`](../../experiments/take-verification/README.md)).
+A directed voice now and then says more than its text: part of its direction, or words of its own.
+Two kinds of recording are listened to — transcribed by Whisper base on the server — because each is
+made in the background, where two seconds a take is nobody's wait, and neither is easy to put right by
+hand:
+
+- **A loop line**, which the owner cannot record again, is recorded once more when a word of its
+  direction is heard around its text ([`loops.md`](loops.md) §2.4). Nothing else counts against it —
+  an exclamation, a laugh, an accent — since those are what the owner asked for
+  ([`experiments/take-verification/`](../../experiments/take-verification/README.md)).
+- **A story passage** is held to more: three words heard outside its own (six characters, in a
+  script written without spaces) and it is recorded again, then joined to its neighbour
+  ([`stories.md`](stories.md), "Read aloud in one voice"). Narration has no exclamation of its own to
+  allow for, and the fault it has is in no word list: the fallback voice reads its direction aloud in
+  the story's language, which Whisper writes in that language, so the loop rule misses it
+  ([`experiments/story-fragments/`](../../experiments/story-fragments/README.md)).
+
+Not for a word or an example: the owner is waiting on those, and "Record again" is right there.
 
 Not built, deliberately: pronunciation assessment (recording the owner and scoring it is a product of
 its own), a second media store, and voices running on the device. A voice on your own

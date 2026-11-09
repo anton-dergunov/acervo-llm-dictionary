@@ -9,6 +9,7 @@ which voice read a passage, whether a direction reached it, and which pair was n
 from __future__ import annotations
 
 import io
+import logging
 import math
 import struct
 import wave
@@ -347,6 +348,124 @@ def test_a_passage_already_paid_for_is_not_recorded_again(server, models, runner
 
     assert server.speech.calls == [], "every passage came from the take cache"
     assert row["audioSegments"], "and the part was written all the same"
+
+
+# ── a passage that says more than it was given ──────────────────────────────
+#
+# The ear is the conftest's stub: it answers each hearing with the next transcript in `ear.saying`,
+# and with silence once they run out. Each part is «Marcos vio algo asombroso. » and «Numero 0.».
+
+INVENTED = "Marcos vio algo asombroso, y luego se fue a su casa sin decir nada."
+SAID_ITS_DIRECTION = "Numero cero, susurrando y despacio, con un toque de misterio."
+
+
+def said_more(caplog) -> list[str]:
+    return [r.getMessage() for r in caplog.records if "result=said-more" in r.getMessage()]
+
+
+def test_a_passage_heard_saying_more_is_recorded_once_more_by_the_same_voice(server, models, runner, ear, caplog):
+    story = written(server, models, runner, parts=4)
+    part = parts_of(server, story)[0]
+    models.texts = [narrate_reply(part["text"])]
+    ear.saying = [INVENTED, "Marcos vio algo asombroso.", "Numero 0."]
+
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        row = read(server, story, part)
+
+    calls = server.speech.calls
+    assert [call["words"] for call in calls] == ["Marcos vio algo asombroso.", "Marcos vio algo asombroso.", "Numero 0."]
+    assert calls[1]["model"] == calls[0]["model"] and calls[1]["style"] == calls[0]["style"], "asked exactly as before"
+    assert [one["text"] for one in row["audioSegments"]] == ["Marcos vio algo asombroso. ", "Numero 0."]
+    [line] = said_more(caplog)
+    assert "remedy=retook" in line and "passage=0" in line and "added=" in line and "casa" in line
+
+
+def test_a_passage_that_says_more_twice_is_joined_to_the_next_and_heard_once(server, models, runner, ear, caplog):
+    """What a fragment the voice cannot leave unfinished needs. One passage and one file where there
+    were two, so playing the part says the sentence once and tapping it plays all of it."""
+    story = written(server, models, runner, parts=4)
+    part = parts_of(server, story)[0]
+    models.texts = [narrate_reply(part["text"])]
+    ear.saying = [INVENTED, INVENTED, part["text"]]
+
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        row = read(server, story, part)
+
+    assert [call["words"] for call in server.speech.calls] == [
+        "Marcos vio algo asombroso.", "Marcos vio algo asombroso.", part["text"]], "the second passage is never recorded alone"
+    [joined] = row["audioSegments"]
+    assert joined["text"] == part["text"], "the text is still exactly what is written, once"
+    assert joined["direction"] == "Hushed and slow. 0", "in the first passage's direction"
+    assert [line.split("remedy=")[1].split()[0] for line in said_more(caplog)] == ["retook-again", "joined"]
+
+
+def test_the_last_passage_is_joined_to_the_one_before_it(server, models, runner, ear, caplog):
+    story = written(server, models, runner, parts=4)
+    part = parts_of(server, story)[0]
+    models.texts = [narrate_reply(part["text"])]
+    ear.saying = ["Marcos vio algo asombroso.", SAID_ITS_DIRECTION, SAID_ITS_DIRECTION, part["text"]]
+
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        row = read(server, story, part)
+
+    [joined] = row["audioSegments"]
+    assert joined["text"] == part["text"] and joined["direction"] == "Hushed and slow. 0"
+    assert server.speech.calls[-1]["words"] == part["text"]
+    assert "remedy=joined" in said_more(caplog)[-1]
+
+
+def test_a_passage_that_says_more_whatever_is_done_is_kept_and_says_so(server, models, runner, ear, caplog):
+    """A word too many is better than a part with no voice: the check never stops a story."""
+    story = written(server, models, runner, parts=4)
+    part = parts_of(server, story)[0]
+    models.texts = [narrate_reply(part["text"])]
+    ear.saying = [INVENTED, INVENTED, INVENTED]
+
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        row = read(server, story, part)
+
+    assert len(row["audioSegments"]) == 1 and row["audioSegments"][0]["audioRef"]
+    assert "remedy=kept" in said_more(caplog)[-1]
+
+
+def test_a_bad_passage_in_the_take_store_is_heard_and_replaced_when_the_part_is_read_again(server, models, runner, ear):
+    """How the passage already in the owner's store is put right: read the part again. The passage
+    paid for is found, listened to like a new one, and only it is bought again."""
+    story = written(server, models, runner, parts=4)
+    part = parts_of(server, story)[0]
+    models.texts = [narrate_reply(part["text"])]
+    read(server, story, part)
+    server.speech.calls.clear()
+
+    models.texts = [narrate_reply(part["text"])]
+    ear.saying = [INVENTED, "Marcos vio algo asombroso.", "Numero 0."]
+    read(server, story, part)
+
+    assert [call["words"] for call in server.speech.calls] == ["Marcos vio algo asombroso."]
+
+
+def test_a_passage_nobody_could_listen_to_is_kept_and_the_line_says_why(server, models, runner, ear, caplog):
+    story = written(server, models, runner, parts=4)
+    part = parts_of(server, story)[0]
+    models.texts = [narrate_reply(part["text"])]
+    ear.failure = RuntimeError("Invalid data found when processing input")
+
+    with caplog.at_level(logging.INFO, logger="acervo.models.calls"):
+        row = read(server, story, part)
+
+    assert len(row["audioSegments"]) == 2 and len(server.speech.calls) == 2, "nothing was recorded twice"
+    assert any("result=unchecked" in r.getMessage() and "Invalid data" in r.getMessage() for r in caplog.records)
+
+
+def test_a_clear_voice_is_not_listened_to(server, models, runner, ear):
+    """It is sent no direction, so it has nothing of its own to add."""
+    story = written(server, models, runner, parts=4)
+    switch(server, delivery={"stories": "plain"})
+    part = parts_of(server, story)[0]
+
+    read(server, story, part)
+
+    assert ear.calls == []
 
 
 # ── the job ─────────────────────────────────────────────────────────────────

@@ -146,6 +146,26 @@ carrying no direction; that is simpler than throwing the passages away and re-re
   store a loop uses, and a retry probes it for every pair the order offers, because a part is written
   only once all its passages exist and a tier of ten calls a day cannot afford to record the first two
   again.
+- **A passage sent a direction is listened to before it is kept**, by the server's Whisper
+  (`acervo.hearing`, `added`): three words heard outside its own stretch, or six characters in a script
+  written without spaces, and it said more than it was given. A voice that takes a direction is a
+  language model, and it does this two ways: it finished the fragment «Sin mostrar ningún temor,» with a
+  sentence of its own once, and the fallback voice, `gemini-2.5-flash-tts`, read its direction aloud on
+  that fragment in 8 takes of 10 and on a whole sentence in 3 of 10. Such a take is **recorded once more**
+  by the same voice; if that one says too much as well, the passage is **joined to the next** (the last,
+  to the one before) in the first one's direction and recorded as one passage and one file, so the part
+  still plays each sentence once; if even that says too much it is kept, because a word too many is
+  better than a silent part. Each step is a `story-audio … result=said-more remedy=…` line in
+  `admin log --failed`. The voice prompt is not reworded for it: of five templates tried on both voices,
+  none beat the one shipped, and with no accent chosen the fallback fails the fragment in 9 or 10 of 10
+  under each of the three tried, while whole sentences mostly come through — the fragment is the trigger, which is why
+  joining is the remedy. What the check does not catch is a direction said *instead of* a passage's first
+  words («Tenso y dramático, y vio…», 1 take in 40 on the fallback with no accent): a rule for missing
+  words fired as often on lines Whisper simply could not follow. The segmenter is not told to stop cutting a sentence at a comma: seven of the
+  eight passages it cut mid-sentence were read correctly, and a rule about punctuation would hold for
+  some scripts and not others. A take found in the take store is heard like a new one, so recording a
+  part again replaces a bad passage rather than reusing it
+  ([`experiments/story-fragments/`](../../experiments/story-fragments/README.md)).
 - The job step and `POST /stories/{id}/parts/{part}/audio` are the **same function** (`narrate_part`):
   the step reads the `stories` switch in the pronunciation settings (on by default) and the route is
   what runs when it is off. Settings ▸ Stories writes the stories delivery order and that switch.

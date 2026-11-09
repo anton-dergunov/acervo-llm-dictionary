@@ -76,8 +76,9 @@ wrong, 1 unsure (Chinese). The ruling that reshaped the rule:
 One more fault turned up outside loops: a story passage cut as the fragment «Sin mostrar ningún
 temor,» came back as eleven seconds of speech, the voice **inventing** the rest of the sentence («el
 joven luchó contra aquellos seres…», which is in no story). Its duration was the outlier of the whole
-store (z = 10.1; next 4.8), so a free duration check could catch it — one case, a lead and not a
-result ([`docs/plans/issues.md`](../../docs/plans/issues.md)).
+store (z = 10.1; next 4.8). Followed up in [`story-fragments/`](../story-fragments/README.md), which
+found the fallback voice doing worse and length too weak a signal to catch it: story passages are now
+heard by Whisper and held to the words outside their own.
 
 ## Results
 
