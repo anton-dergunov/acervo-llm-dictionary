@@ -1723,7 +1723,7 @@ function playerBlock(loop) {
                 ${state.remaking === loop.id ? "disabled" : ""}>${esc(styleLabel(loop.styleId))}${ICON.down}</button>
         <button class="bed-star${kept ? " on" : ""}" id="bedStar" aria-pressed="${kept}"
                 aria-label="${kept ? "No longer keep this music" : "Keep this music as a favourite"}">${kept ? ICON.starOn : ICON.star}</button>
-        <span class="label">· ${esc(formatLabel(loop.format))} · ${rows.length} words</span>
+        <span class="label bed-about"><span class="bed-dot">· </span>${esc(formatLabel(loop.format))} · ${rows.length} words</span>
       </span>
     </div>
   </div>`;
