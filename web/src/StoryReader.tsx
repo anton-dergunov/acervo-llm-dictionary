@@ -6,8 +6,7 @@
  * see what a swipe would show whole. It is the same deck a word's cards are (`deck.tsx`), and so it
  * moves the same way: a swipe that follows the finger, a horizontal scroll, the arrow keys, and two
  * arrows that sit beside the column when there is margin for them and under it when there is not.
- * There are no dots and no footer — where you are is the counter in the header, and a control that
- * needs its own row is a row the story does not get. The ivy leaves are for the wide layout only,
+ * Where you are is the counter in the header. The ivy leaves are for the wide layout only,
  * where they fill the space the picture leaves the words; narrow, the picture opens the page.
  *
  * **The translation is never drawn before it is asked for**, which is `LoopPlayer`'s rule about an
@@ -19,13 +18,15 @@
  * the translator reported, and a story translated before that was asked for simply has none.
  * See `selectors.ts`.
  *
- * **A part can be read aloud**, by the button beside its heading. Pressing it while it plays pauses it
- * and pressing it again carries on; there is no scrubber, because swiping to another part and back is
- * the way to begin again — a page that stops being the one on screen stops its audio and forgets the
- * position. A part read by a directed voice also knows where its passages are, and each is then a
- * place to start: started while nothing plays it plays that passage alone, started while it plays it
- * moves there. The passage that is sounding is tinted, and **nothing about it moves the text** — the
- * tint is a background, never padding, weight or size. See `storyAudio.ts`.
+ * **The story is read aloud from a footer**, the loop player's shape so the thing reached for never
+ * moves: a segment per part filling as it is read, the part before and the next, play, and the loop
+ * player's two switches — read it again, and go on to the next story. It reads **part after part**,
+ * and the deck follows the voice; a swipe while it reads moves the voice to that part, and leaving the
+ * reader does not stop it — the bar, the rail's card and the lock screen are what it reads behind.
+ * There is no scrubber: a passage is never seeked. Each passage is a place to start: touched while
+ * nothing of the story sounds it plays alone, touched while it sounds the voice moves there. The
+ * passage that is sounding is tinted, and **nothing about it moves the text** — the tint is a
+ * background, never padding, weight or size. See `storyAudio.ts`.
  *
  * **A tap on a word looks it up and plays nothing** (`LookUpSheet.tsx`): the passage it is in is the
  * sheet's button instead, and a tap on anything else in a passage — its punctuation, a gap — starts
@@ -39,15 +40,15 @@
 import { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { DeckEdges, Hedera, useDeck } from "./deck";
 import type { Story, StoryPart, StoryWord } from "./domain";
-import { BackIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
-import { recordPlay } from "./plays";
+import { setStoryAutoplay, setStoryRepeat, useStoryAutoplay, useStoryRepeat } from "./editorPreferences";
+import { BackIcon, ContinueIcon, NextIcon, PauseIcon, PlayIcon, PreviousIcon, RepeatIcon, StarIcon } from "./icons";
 import { LookUpContext, LookUpSheet, useLookUp, type LookUpAction } from "./LookUpSheet";
 import { usePicture } from "./picture";
 import { playRuns } from "./pronunciation";
 import { SelectionPill } from "./SelectionPill";
 import { runsOf } from "./selectionSpeech";
 import { segmentSpans, storySpans, type StorySpan, type StoryWordEntry } from "./selectors";
-import { playSegment, stopPart, toggle, useStoryAudio } from "./storyAudio";
+import { beginReading, noteRead, playSegment, readFrom, stepPart, toggleStory, useStoryAudio } from "./storyAudio";
 import { wordAtPoint, wordInSelection, type TappedWord } from "./tapWord";
 
 function Picture({ part, title, near }: { part: StoryPart; title: string; near: boolean }) {
@@ -76,17 +77,15 @@ function Runs({ spans }: { spans: StorySpan[] }) {
   ))}</>;
 }
 
-function PartPage({ story, part, number, words, near, active, recording, revealed, onReveal, onHide, onLook, onLookAway }: {
+function PartPage({ story, part, number, words, near, revealed, onPassage, onReveal, onHide, onLook, onLookAway }: {
   story: Story;
   part: StoryPart;
   number: number;
   words: StoryWord[];
   near: boolean;
-  /** Whether this is the page on screen. The audio of any other page is stopped. */
-  active: boolean;
-  /** The story is still being made and this part's recording is one of the things it will do. */
-  recording: boolean;
   revealed: boolean;
+  /** A passage touched: played alone, or the voice moved there if the story is sounding. */
+  onPassage(passage: number): void;
   onReveal(): void;
   onHide(): void;
   /** A word was tapped, with what the tap would otherwise have played. */
@@ -98,20 +97,8 @@ function PartPage({ story, part, number, words, near, active, recording, reveale
     () => segmentSpans(part.text, words, part.audioSegments), [part.text, words, part.audioSegments]);
   const tappable = runs.some((run) => run.segment !== null);
   const audio = useStoryAudio();
-  const mine = audio.partId === part.id;
+  const mine = audio.storyId === story.id && audio.partId === part.id;
   const status = mine ? audio.status : "idle";
-  // The page that is no longer on screen stops, and so does one that is unmounted. A stopped part
-  // forgets its position, so coming back to it starts from the top.
-  useEffect(() => { if (!active) stopPart(part.id); }, [active, part.id]);
-  useEffect(() => () => stopPart(part.id), [part.id]);
-  /* **Never disabled while the story's job has it in hand.** It was, and that was wrong in the one
-     case it mattered: a job resting out a daily quota holds the part for twenty-five minutes, and a
-     dead button with no explanation is all you get. Pressing it records the part now, through the
-     same function the job would have used; the job then finds it done and moves on. */
-  const queued = recording && !part.audioSegments.length && status === "idle";
-  const label = status === "busy" ? (part.audioSegments.length ? "Loading the recording" : "Recording this part — press to cancel")
-    : status === "playing" ? "Pause" : status === "paused" ? "Carry on"
-      : queued ? "Waiting to be recorded — press to record it now" : "Read this part aloud";
   /* A tap on a word looks it up and plays nothing; the passage it is in is the sheet's button. A tap
      on anything else in a passage — its punctuation, a gap — plays it, as a tap always did. */
   const touch = (event: MouseEvent<HTMLParagraphElement>) => {
@@ -124,11 +111,11 @@ function PartPage({ story, part, number, words, near, active, recording, reveale
     if (tapped) {
       const sounding = status === "playing" || status === "paused";
       onLook(tapped, index === null ? null
-        : { label: sounding ? "From here" : "This passage", run: () => playSegment(part, index) });
+        : { label: sounding ? "From here" : "This passage", run: () => onPassage(index) });
       return;
     }
     onLookAway();
-    if (index !== null) playSegment(part, index);
+    if (index !== null) onPassage(index);
   };
   // The same word in the reader's own language, where the translator said what it became.
   const translated = useMemo(
@@ -140,11 +127,6 @@ function PartPage({ story, part, number, words, near, active, recording, reveale
         <Hedera side="above" />
         <h3 className="story-head">
           {part.heading && <><span className="story-no">{number}</span> · {part.heading}</>}
-          <button
-            type="button" className={`say head always story-listen${status === "playing" || status === "paused" ? " playing" : ""}${status === "busy" || queued ? " busy" : ""}`}
-            aria-label={label} aria-busy={status === "busy"} title={label}
-            onClick={() => toggle(part)}
-          >{status === "playing" ? <PauseIcon /> : <PlayIcon />}</button>
         </h3>
         {mine && audio.failed && <p className="story-audio-note" role="status">{audio.failed}</p>}
         <p className={`story-text${tappable ? " tappable" : ""}`} lang={story.language} onClick={touch}>
@@ -231,14 +213,35 @@ export default function StoryReader({ story, title, parts, words, entries, recor
   const lookUp = useLookUp(services);
   const { open: look, close: lookAway } = lookUp;
   /* A read is an opening that reaches the second part, so one that goes no further than the first
-     page — an accidental tap — is not counted. Once per opening: this reader is mounted afresh each
-     time the story is opened. */
-  const counted = useRef<string | null>(null);
+     page — an accidental tap — is not counted. Once per opening, whether the page was turned or the
+     voice got there (`noteRead`): this reader is mounted afresh each time the story is opened. */
+  useEffect(() => { beginReading(story.id); }, [story.id]);
   useEffect(() => {
-    if (at < 1 || at >= parts.length || counted.current === story.id) return;
-    counted.current = story.id;
-    recordPlay("story", story.id);
+    if (at >= 1 && at < parts.length) noteRead(story.id);
   }, [at, parts.length, story.id]);
+
+  /* **The deck follows the voice**, and **a swipe moves the voice**. `following` marks a move as the
+     voice's, so the scroll it causes is not read back as a swipe; a page reached on the way to it is
+     passed over. */
+  const audio = useStoryAudio();
+  const loaded = audio.storyId === story.id;
+  const following = useRef<number | null>(null);
+  useEffect(() => {
+    if (!loaded || audio.status === "idle" || audio.partIndex === at) return;
+    following.current = audio.partIndex;
+    go(audio.partIndex);
+  }, [loaded, audio.partIndex, audio.status]);
+  const previousAt = useRef<number | null>(null);
+  useEffect(() => {
+    const before = previousAt.current;
+    previousAt.current = at;
+    if (before === null || before === at) return;
+    if (following.current !== null) {
+      if (at === following.current) following.current = null;
+      return;
+    }
+    if (loaded && audio.status === "playing" && at < parts.length && at !== audio.partIndex) readFrom(story, parts, at);
+  }, [at]);
   // The sheet belongs to the page it was opened on.
   useEffect(() => lookAway(), [at, lookAway]);
   const lookAt = (tapped: TappedWord, play: LookUpAction | null) => look({
@@ -292,8 +295,9 @@ export default function StoryReader({ story, title, parts, words, entries, recor
         <div className="cards-track" ref={track} onScroll={onScroll}>
           {parts.map((part, index) => <PartPage
             key={part.id} story={story} part={part} number={index + 1} words={words}
-            near={Math.abs(index - at) <= 1} active={index === at} recording={recording}
+            near={Math.abs(index - at) <= 1}
             revealed={shown.has(part.id)} onReveal={() => reveal(part.id)} onHide={() => hide(part.id)}
+            onPassage={(passage) => playSegment(story, parts, index, passage)}
             onLook={lookAt}
             onLookAway={lookAway}
           />)}
@@ -305,5 +309,67 @@ export default function StoryReader({ story, title, parts, words, entries, recor
       && <DeckEdges at={at} count={pages} go={go} previous="The part before" next="The next part" />}
     <SelectionPill root={root} onListen={listenToSelection} onLookUp={lookUpSelection} />
     <LookUpSheet state={lookUp} placement="over" />
+    {parts.length > 0 && <ReaderControls story={story} parts={parts} at={at} go={go} recording={recording} />}
+  </div>;
+}
+
+/**
+ * The reader's footer. Before this story is loaded, play reads it from the page on screen and the
+ * part before and the next only turn the page; once it is, they step the voice a part at a time. The
+ * segments fill as each part is read — a passage at a time, which is all there is to fill by, since
+ * nothing is ever seeked — and a tap on one goes to that part.
+ */
+function ReaderControls({ story, parts, at, go, recording }: {
+  story: Story;
+  parts: StoryPart[];
+  at: number;
+  go(page: number): void;
+  recording: boolean;
+}) {
+  const audio = useStoryAudio();
+  const repeat = useStoryRepeat();
+  const onward = useStoryAutoplay();
+  const loaded = audio.storyId === story.id;
+  const status = loaded ? audio.status : "idle";
+  const active = loaded && status !== "idle";
+  const page = Math.min(at, parts.length - 1);
+  const current = active ? audio.partIndex : page;
+  /* **Never disabled while the story's job has it in hand.** A job resting out a daily quota holds a
+     part for twenty-five minutes, and a dead button with no explanation is all that gave. Pressing it
+     records the part now, through the same function the job would have used. */
+  const queued = recording && !parts[page].audioSegments.length && !active;
+  const label = status === "busy" ? (parts[current].audioSegments.length ? "Loading the recording" : "Recording this part — press to cancel")
+    : status === "playing" ? "Pause" : status === "paused" ? "Carry on"
+      : queued ? "Waiting to be recorded — press to record it now" : "Read it aloud";
+  const step = (by: 1 | -1) => { if (active) stepPart(by); else go(at + by); };
+  const filled = (index: number) => {
+    if (!active || index > audio.partIndex) return 0;
+    if (index < audio.partIndex) return 1;
+    return audio.passages ? ((audio.segment ?? 0) + (status === "playing" ? 0.5 : 0)) / audio.passages : 0;
+  };
+  return <div className="player story-player">
+    <div className="sp-parts">
+      {parts.map((part, index) => <button
+        key={part.id} className="sp-part" aria-label={`Part ${index + 1}${part.heading ? `: ${part.heading}` : ""}`}
+        onClick={() => { if (loaded && status === "playing") readFrom(story, parts, index); else go(index); }}
+      ><span className="sp-fill" style={{ width: `${Math.min(1, filled(index)) * 100}%` }} /></button>)}
+    </div>
+    <div className="transport">
+      <button className={`switch${repeat ? " on" : ""}`} aria-pressed={repeat}
+        aria-label="Read this story again when it ends" title="Read this story again when it ends"
+        onClick={() => setStoryRepeat(!repeat)}><RepeatIcon /></button>
+      <button aria-label="Previous part" title="The part before" disabled={current === 0 && !active}
+        onClick={() => step(-1)}><PreviousIcon /></button>
+      <button className={`big${status === "busy" || queued ? " busy" : ""}`} aria-label={label} aria-busy={status === "busy"} title={label}
+        onClick={() => toggleStory(story, parts, page)}>{status === "playing" ? <PauseIcon /> : <PlayIcon />}</button>
+      <button aria-label="Next part" title="The next part" disabled={current >= parts.length - 1}
+        onClick={() => step(1)}><NextIcon /></button>
+      <button className={`switch${onward ? " on" : ""}`} aria-pressed={onward}
+        aria-label="Go on to the next story when this one ends" title="Go on to the next story when this one ends"
+        onClick={() => setStoryAutoplay(!onward)}><ContinueIcon /></button>
+    </div>
+    <p className="label sp-where">{active
+      ? `Part ${audio.partIndex + 1} of ${parts.length}${parts[audio.partIndex]?.heading ? ` · ${parts[audio.partIndex].heading}` : ""}`
+      : `${parts.length} parts`}</p>
   </div>;
 }

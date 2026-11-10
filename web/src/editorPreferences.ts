@@ -134,10 +134,16 @@ export function usePronunciationCache(): boolean {
 const LOOP_CACHE_KEY = "acervo-loop-cache";
 const LOOP_REPEAT_KEY = "acervo-loop-repeat";
 const LOOP_AUTOPLAY_KEY = "acervo-loop-autoplay";
+/* A story's two switches, the loop player's: read it again, and go on to the next story. Their own
+   keys, because a loop heard on repeat while walking is not a story read on repeat. Off by default. */
+const STORY_REPEAT_KEY = "acervo-story-repeat";
+const STORY_AUTOPLAY_KEY = "acervo-story-autoplay";
 
 export function loopCacheEnabled(): boolean { return readPreference(LOOP_CACHE_KEY, false); }
 export function loopRepeatEnabled(): boolean { return readPreference(LOOP_REPEAT_KEY, false); }
 export function loopAutoplayEnabled(): boolean { return readPreference(LOOP_AUTOPLAY_KEY, false); }
+export function storyRepeatEnabled(): boolean { return readPreference(STORY_REPEAT_KEY, false); }
+export function storyAutoplayEnabled(): boolean { return readPreference(STORY_AUTOPLAY_KEY, false); }
 
 function writePreference(key: string, value: boolean): void {
   try { localStorage.setItem(key, value ? "on" : "off"); } catch { /* a preference, not data */ }
@@ -147,6 +153,8 @@ function writePreference(key: string, value: boolean): void {
 export function setLoopCacheEnabled(value: boolean): void { writePreference(LOOP_CACHE_KEY, value); }
 export function setLoopRepeat(value: boolean): void { writePreference(LOOP_REPEAT_KEY, value); }
 export function setLoopAutoplay(value: boolean): void { writePreference(LOOP_AUTOPLAY_KEY, value); }
+export function setStoryRepeat(value: boolean): void { writePreference(STORY_REPEAT_KEY, value); }
+export function setStoryAutoplay(value: boolean): void { writePreference(STORY_AUTOPLAY_KEY, value); }
 
 function usePreference(read: () => boolean): boolean {
   const [value, setValue] = useState(read);
@@ -161,6 +169,8 @@ function usePreference(read: () => boolean): boolean {
 export function useLoopCache(): boolean { return usePreference(loopCacheEnabled); }
 export function useLoopRepeat(): boolean { return usePreference(loopRepeatEnabled); }
 export function useLoopAutoplay(): boolean { return usePreference(loopAutoplayEnabled); }
+export function useStoryRepeat(): boolean { return usePreference(storyRepeatEnabled); }
+export function useStoryAutoplay(): boolean { return usePreference(storyAutoplayEnabled); }
 
 /* ── the make dialog ──
    The format last made on this device, and each format's switches as they were last set. A device

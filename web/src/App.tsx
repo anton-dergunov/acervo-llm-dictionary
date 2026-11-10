@@ -334,6 +334,11 @@ export default function App() {
     setExternal(null);
     setAddTab(null);
   }, []);
+  /* What is playing, opened: the story being read, at the part being read. */
+  const openPlayingStory = useCallback((storyId: string, page: number) => {
+    openStories();
+    setStoryPlace({ storyId, page });
+  }, [openStories]);
   const openMap = useCallback(() => {
     setMap(true);
     setLoops(false);
@@ -1593,11 +1598,11 @@ export default function App() {
             <PlusIcon /><span className="wide-only">{loops ? "Make a loop" : stories ? "Make a story" : "Add"}</span>
           </button>
 
-          {/* Wide windows only: on a phone this is the bar at the foot instead, which is where a
-              player belongs on a device held in one hand. `styles.css` picks which. */}
+          {/* What is playing, here only on a tablet-sized window whose rail an article has hidden: a
+              phone has the bar at the foot and a wider window the rail's card. `styles.css` picks. */}
           {snapshot && language && <MadeBar
-            graph={snapshot} language={language} chip
-            onLoops={openLoops} onStories={openStories}
+            graph={snapshot} language={language} skin="chip"
+            onLoops={openLoops} onStories={openStories} onOpenStory={openPlayingStory}
           />}
 
           {/* Opens Settings ▸ Sync, which is where someone goes to find out why a device stopped. */}
@@ -1662,15 +1667,21 @@ export default function App() {
             onClick={openLoops}
           >
             <span className="ic">♪</span><span className="nm">Loops</span>
-            <span className="cnt">{snapshot && language ? loopsIn(snapshot, language).length : 0}</span>
+            <span className="cnt">{snapshot && language ? loopsIn(snapshot, language).filter((one) => !one.archived).length : 0}</span>
           </button>
           <button
             className={`tab ${stories ? "on" : ""}`} title="Stories" aria-label="Stories"
             onClick={openStories}
           >
             <span className="ic">📖</span><span className="nm">Stories</span>
-            <span className="cnt">{snapshot && language ? storiesIn(snapshot, language).length : 0}</span>
+            <span className="cnt">{snapshot && language ? storiesIn(snapshot, language).filter((one) => !one.archived).length : 0}</span>
           </button>
+          {/* What is playing, at the foot of the rail: where the ways in are, and on screen at every
+              width a list is. A phone draws the bar at the foot instead. */}
+          {snapshot && language && <MadeBar
+            graph={snapshot} language={language} skin="rail"
+            onLoops={openLoops} onStories={openStories} onOpenStory={openPlayingStory}
+          />}
         </nav>
 
         {/* Composing replaces the list rather than covering it: the entry you are writing is the
@@ -1926,15 +1937,15 @@ export default function App() {
             onLoop={() => setMakingLoop("selection")}
             onStory={() => setMakingStory("selection")}
           />}
-          {/* The Made bar is drawn over the list and nowhere else: the article column already
-              carries the view segments, the delete control, the progress strip and the ask dock,
-              and `docs/features/loops.md` §2.13 forbids a second one there. Narrow windows only — a
-              wide one has the chip in the top bar instead, and `styles.css` is what picks. With a
-              selection it gives the selection bar its place and draws only a loop that is playing.
-              */}
-          {!article && !external && !addTab && !loops && !stories && !map && <MadeBar
-            graph={snapshot} language={language} chip={false} playerOnly={showSelection}
-            onLoops={openLoops} onStories={openStories} onMap={openMap}
+          {/* The Made bar is drawn over the list, and over the Loops and Stories lists while
+              something plays; never over an article, whose column already carries the view segments,
+              the delete control, the progress strip and the ask dock (`docs/features/loops.md`
+              §2.13). Narrow windows only — a wider one has the rail's card, and `styles.css` is what
+              picks; it steps aside while what is playing is open in its own player. With a selection
+              it gives the selection bar its place and draws only what is playing. */}
+          {!article && !external && !addTab && !map && <MadeBar
+            graph={snapshot} language={language} skin="bar" playerOnly={showSelection || made}
+            onLoops={openLoops} onStories={openStories} onMap={openMap} onOpenStory={openPlayingStory}
           />}
         </div>}
       </div>

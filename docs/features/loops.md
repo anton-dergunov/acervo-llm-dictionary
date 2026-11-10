@@ -568,15 +568,24 @@ order takes a direction — so the dialog can say what a format needs before it 
 
 ### 13 · The way in, and no second bar over an article
 
-Loops have their own surface, and the way in is **one component in two skins** (`MadeBar.tsx`, shared
-with stories and the map), so what the two say cannot disagree:
+Loops have their own surface, and the way in — and what is playing, **a loop or a story, whichever was
+started last** (`listening.ts`) — is **one component in three skins**, one per device shape
+(`MadeBar.tsx`, shared with stories and the map), so what they say cannot disagree:
 
-- **On a phone, a bar at the foot of the window, split in three — Loops, Stories and the Map** — where
-  these belong on a device held in one hand. `.app` grows that third grid row **only when no article,
-  external entry or Add view is open**.
-- **On a desktop, a button at the foot of the topic rail, beside Stories**, and a chip in the top bar
-  **only while something is sounding**. The top bar already holds search, scope, Add, sync, settings and
-  the language menu, and a way in to every learning method would crowd it.
+- **On a phone, a bar at the foot of the window.** Resting, it is split in three — Loops, Stories and
+  the Map — where these belong on a device held in one hand. Playing, it is one row: the transport,
+  what it is and how far it has got, the next one in the list it was started from, and close. `.app`
+  grows that third grid row **only when no article, external entry or Add view is open**; on the Loops
+  and Stories lists it is drawn only while something plays.
+- **On a tablet or a desktop, a card at the foot of the topic rail**, under Loops and Stories: the
+  transport ringed by how far it has got, what is playing in two lines, and Next. The rail is where the
+  ways in already are and is on screen at every width a list is, so the top bar — search, Add, sync,
+  settings and the language menu — no longer has to make room for a player.
+- **A chip in the top bar only where neither is drawn**: a tablet-sized window (721–900 px) whose rail
+  an article has hidden. The article's own bar was the other candidate, and is already full.
+
+Each steps aside while the thing playing is open in its own player (`.own-player`), which carries every
+control already: the mini-player every music player hides while its own screen is open.
 
 **No second bar over an article.** The article pane is 780 px of column already carrying the view
 segments, the delete control, the progress strip and `AskDock`, and a second dock there is prohibited.
@@ -584,11 +593,11 @@ It cannot collide by accident: `AskDock` renders only when an article is open an
 is not. The bar has no **+**: on each surface the top bar's Add makes what it holds (§2.20), and a bar
 whose job is to be a way in should not also be a way to start something.
 
-A loop keeps playing while you read a word — the audio element is not the surface — and the now-playing
-row is on the bar when you come back. **There is no mini-player over an article.** The phone's
-now-playing row has a close control: it stops the loop and forgets it as the one playing, deleting
-nothing, and the bar is the way in again. Without it a loop heard once held the foot of the list for
-the rest of the session.
+A loop keeps playing while you read a word — the audio element is not the surface — and so does a story
+([`stories.md`](stories.md), "The reader"). **There is no mini-player over an article on a phone**; the
+lock screen is there. The phone's now-playing row has a close control: it stops what is playing and
+forgets it as the one playing, deleting nothing, and the bar is the way in again. Without it a loop
+heard once held the foot of the list for the rest of the session.
 
 The word selection's bar is the one deliberate exception to the no-second-bar rule, and only on a wide
 window while the ask dock rests. The topic rail stays wherever there is room for it and goes only on a phone,
@@ -620,11 +629,18 @@ picture is fetched as a blob.
 
 The constraint is the better design. A whole track in memory means **nothing touches the network during
 playback**, which is what a locked screen and a lift need. `mediaStore.ts` keeps loops as a kind of their own,
-so a device can keep or forget loops without touching a picture or a pronunciation; `loops.ts` sets
-MediaSession metadata — the format's name among it — and action handlers, and the display is
+so a device can keep or forget loops without touching a picture or a pronunciation, and the display is
 driven from `loopCues`.
 
-One rule: **players stop each other.** Each registers its pause with
+**The lock screen belongs to whichever was started last** (`listening.ts`): a loop and a story each
+claim it when they start — the format's name in a loop's metadata, the part and its picture in a
+story's — and each lets go only of its own claim, so a loop stopped after a story started cannot take
+the story's handlers with it. A paused loop's handlers used to stay there while a story played, and its
+play button started the loop again. **Next and Previous there move through the queue** — the list a
+loop was started from, in the order shown — because in a pocket the next loop is what "next" means;
+Previous goes back to the top of this one first. In the player they step a card.
+
+Another rule: **players stop each other.** Each registers its pause with
 `pronunciation.registerPlayer` and calls `silencePlayers` before it plays — a story's is the third.
 Two audio elements racing for one output is a bug with no good failure mode. The iOS gesture
 priming in `pronunciation.ts` applies here too, and **the silence it starts on is not the loop

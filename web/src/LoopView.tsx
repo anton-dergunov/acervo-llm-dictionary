@@ -24,6 +24,7 @@ import { jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
 import type { Loop, VocabularyGraph } from "./domain";
 import { BackIcon, HourglassIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
+import { useListening } from "./listening";
 import { formatIcon } from "./LoopFormat";
 import * as player from "./loops";
 import { useLoopSchema } from "./LoopMusic";
@@ -57,6 +58,7 @@ export default function LoopView({ graph, language, languageName, query = "", op
   onToggleKeep(loop: Loop): void;
 }) {
   const playback = player.usePlayback();
+  const listening = useListening();
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
   const order = useMadeList(graph, "loop", language, query);
   const loops = order.list.rows;
@@ -132,7 +134,8 @@ export default function LoopView({ graph, language, languageName, query = "", op
   }
 
   if (open) {
-    return <section className="loops">
+    /* `own-player` while this is the loop playing: the bar and the rail's card step aside. */
+    return <section className={`loops${open.id === playback.loopId && listening === "loop" ? " own-player" : ""}`}>
       <div className="loops-back">
         <button className="icon-btn" onClick={() => setOpenId(null)} aria-label="Back to the loops"><BackIcon /></button>
         <span className="label">Loops</span>

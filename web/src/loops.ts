@@ -24,6 +24,7 @@
  */
 
 import { useSyncExternalStore } from "react";
+import { claim, release as releaseLockScreen } from "./listening";
 import { recordPlay } from "./plays";
 import { AcervoApiError, backendSession } from "./api";
 import { loopAutoplayEnabled, loopCacheEnabled, loopRepeatEnabled } from "./editorPreferences";
@@ -200,6 +201,7 @@ export async function play(track: LoopTrack, { at }: { at?: number } = {}): Prom
        took to answer, and the line followed the element. */
     update({ failed: null });
     if (at !== undefined) seek(at);
+    describe(track);
     await audio().play().catch(failWith);
     return;
   }
@@ -248,7 +250,7 @@ export function stop(): void {
   if (held) { URL.revokeObjectURL(held); held = null; }
   if (element) element.removeAttribute("src");
   update(EMPTY);
-  forgetLockScreen();
+  releaseLockScreen("loop");
 }
 
 export function seek(seconds: number): void {
@@ -298,36 +300,21 @@ function ended(): void {
 }
 
 /* ── the lock screen ──
-   What the phone shows, and the buttons on the headphones. The first use of MediaSession here, and
-   worth it: this is the one surface in Acervo you are meant to leave running. */
+   What the phone shows, and the buttons on the headphones — this is the one surface in Acervo you
+   are meant to leave running. Claimed through `listening.ts`, which a story claims too, so whichever
+   was started last is the one described. Next and Previous there move through the queue, a loop at
+   a time: in a pocket, the next loop is what "next" means. In the player they step a card. */
 function describe(track: LoopTrack): void {
-  const media = navigator.mediaSession;
-  if (!media) return;
   const title = track.items.slice(0, 3).map((item) => item.sourceText).join(", ");
-  try {
-    media.metadata = new MediaMetadata({
-      title: title || "Loop",
-      artist: `${formatLabel(formatNames, track.loop.format)} · ${track.items.length} words`,
-      album: "Acervo"
-    });
-    media.setActionHandler("play", () => { void play(track); });
-    media.setActionHandler("pause", () => pause());
-    media.setActionHandler("previoustrack", () => stepCard(-1));
-    media.setActionHandler("nexttrack", () => stepCard(1));
-    media.setActionHandler("seekto", (event) => { if (event.seekTime !== undefined) seek(event.seekTime); });
-  } catch { /* an older browser, or one that refuses a handler it does not implement */ }
-}
-
-/* A stopped loop leaves nothing on the lock screen: its play button would start the track again. */
-function forgetLockScreen(): void {
-  const media = navigator.mediaSession;
-  if (!media) return;
-  try {
-    media.metadata = null;
-    for (const action of ["play", "pause", "previoustrack", "nexttrack", "seekto"] as const) {
-      media.setActionHandler(action, null);
-    }
-  } catch { /* an older browser, or one that refuses a handler it does not implement */ }
+  claim("loop", {
+    title: title || "Loop",
+    artist: `${formatLabel(formatNames, track.loop.format)} · ${track.items.length} words`,
+    play: () => { void play(track, { at: state.at }); },
+    pause: () => pause(),
+    previous: () => { if (state.at > 3 || !neighbour(-1)) seek(0); else stepLoop(-1); },
+    next: () => stepLoop(1),
+    seek: (seconds) => seek(seconds)
+  });
 }
 
 /* ── the device ──────────────────────────────────────────────────────── */

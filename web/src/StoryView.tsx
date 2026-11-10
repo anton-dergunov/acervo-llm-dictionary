@@ -16,14 +16,16 @@
  * simply reads as one that was asked for and not written, and Try again queues another.
  */
 
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { isRecording, jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
 import type { Story, VocabularyGraph } from "./domain";
-import { BackIcon, HourglassIcon } from "./icons";
+import { BackIcon, HourglassIcon, PauseIcon, PlayIcon } from "./icons";
+import { useListening } from "./listening";
 import FitWords from "./FitWords";
 import { ArchivedFold, MadeHead, MatchLine, StarMark, madeActions, useMadeList } from "./MadeList";
 import StoryReader from "./StoryReader";
+import { setStoryQueue, useStoryAudio } from "./storyAudio";
 import SwipeRow from "./SwipeRow";
 import {
   storiesIn, storyIsWritten, storyPartsOf, storyPictures, storyTitle, storyWordEntries, storyWordsOf
@@ -53,8 +55,27 @@ export default function StoryView({ graph, language, languageName, query = "", o
   const stories = order.list.rows;
   const [openId, setOpenId] = useState<string | null>(opening?.storyId ?? null);
   const open = storiesIn(graph, language).find((story) => story.id === openId) ?? null;
+  // Asked to open one — what is playing, from the bar or the rail — while already here.
+  useEffect(() => { if (opening) setOpenId(opening.storyId); }, [opening]);
   // A search is answered by the list, so an open story gives way to it.
   useEffect(() => { if (query.trim()) setOpenId(null); }, [query]);
+  /* "The next story" is the next in this list as it is shown, archived ones left out; the player
+     keeps it, so leaving the list does not end it. Only written ones can be read aloud. */
+  useEffect(() => {
+    setStoryQueue(stories.filter((story) => storyIsWritten(graph, story.id)).map((story) => story.id));
+  }, [graph, stories.map((story) => story.id).join()]);
+  const playback = useStoryAudio();
+  /* The reader goes on with the voice: when the story open here is read to its end and the next one
+     begins, the next one opens. Only from the story that was sounding — opening another story while
+     one plays elsewhere is not followed away from. */
+  const sounded = useRef<string | null>(null);
+  useEffect(() => {
+    const before = sounded.current;
+    sounded.current = playback.storyId;
+    if (before && playback.storyId && before !== playback.storyId && openId === before) setOpenId(playback.storyId);
+  }, [playback.storyId]);
+  const listening = useListening();
+  const sounding = (id: string) => listening === "story" && playback.storyId === id;
 
   function row(story: Story) {
         const written = storyIsWritten(graph, story.id);
@@ -70,11 +91,13 @@ export default function StoryView({ graph, language, languageName, query = "", o
           actions={madeActions("story", story, { onMark: (marks) => onMark(story.id, marks), onDelete: () => onDelete(story.id) })}
         >
           <button
-            className={`loop-row${story.archived ? " archived" : ""}`} aria-disabled={!written}
+            className={`loop-row${sounding(story.id) ? " on" : ""}${story.archived ? " archived" : ""}`} aria-disabled={!written}
             onClick={() => { if (written) setOpenId(story.id); }}
           >
-            <span className={`loop-go story-go${written ? "" : " pending"}`}>
-              {written ? (story.emoji || "📖") : <HourglassIcon />}
+            {/* The story's own emoji, until it is the one being read aloud: then the transport, as a
+                loop's badge is while it plays. */}
+            <span className={`loop-go${sounding(story.id) ? "" : " story-go"}${written ? "" : " pending"}`}>
+              {!written ? <HourglassIcon /> : sounding(story.id) ? (playback.status === "playing" ? <PauseIcon /> : <PlayIcon />) : (story.emoji || "📖")}
             </span>
             <span className="loop-main">
               <span className="loop-title">{storyTitle(graph, story)}<StarMark on={story.starred} /></span>
@@ -113,7 +136,9 @@ export default function StoryView({ graph, language, languageName, query = "", o
   if (open) {
     /* `reading` widens the column: a story is read beside its picture where there is room, and that
        is wider than the list's measure. The reader owns its own header, where the counter lives. */
-    return <section className="loops stories reading">
+    /* `own-player` while the story being read aloud is this one: the bar at the foot and the rail's
+       card step aside, as a music player's mini-player does while its own screen is open. */
+    return <section className={`loops stories reading${sounding(open.id) ? " own-player" : ""}`}>
       <StoryReader
         story={open}
         title={storyTitle(graph, open)}
@@ -121,7 +146,7 @@ export default function StoryView({ graph, language, languageName, query = "", o
         words={storyWordsOf(graph, open.id)}
         entries={storyWordEntries(graph, open.id)}
         recording={isRecording(jobFor(live, "story", open.id))}
-        startAt={open.id === opening?.storyId ? opening.page : 0}
+        startAt={open.id === opening?.storyId ? opening.page : open.id === playback.storyId ? playback.partIndex : 0}
         onBack={() => setOpenId(null)}
         onStar={() => onMark(open.id, { starred: !open.starred })}
       />

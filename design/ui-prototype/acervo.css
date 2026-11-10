@@ -2997,7 +2997,7 @@ body.tablet .viewport { width: 834px; height: 1000px; }
 .sp-part { position: relative; flex: 1 1 0; height: 18px; border: 0; padding: 0; background: none; cursor: pointer; }
 .sp-part::before, .sp-fill { position: absolute; left: 0; top: 7px; height: 4px; border-radius: 999px; }
 .sp-part::before { content: ""; right: 0; background: var(--rule-soft); }
-.sp-fill { background: var(--core); width: 0; }
+.sp-fill { background: var(--core); width: 0; transition: width .3s ease; }
 .sp-where { margin: 0; text-align: center; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @container vp (max-width: 480px) {
   .story-player { gap: 4px; padding-top: 6px; }
@@ -3082,19 +3082,13 @@ body.tablet .viewport { width: 834px; height: 1000px; }
    paragraph ripple as the eye passes it. */
 .story-mark { font-weight: 700; color: var(--core); }
 
-/* **A part read aloud.** The button sits at the end of the heading, in the size of the headword's own,
-   a little smaller for a line of 17px text. Pressed, it is lit; while the recording is being made or
-   fetched it breathes, and it is dimmed and dead while the story's own job is about to record it. */
-.story-head .say.head { width: 28px; height: 28px; margin-left: .55em; vertical-align: middle; }
-.story-head .say.head svg { width: 10px; height: 10px; }
-.story-listen.busy { animation: story-listen 1.1s ease-in-out infinite alternate; }
-.story-listen:disabled { opacity: .4; cursor: default; }
 .story-audio-note {
   margin: 0 0 8px; text-align: center;
   font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--ink-3);
 }
 @keyframes story-listen { from { opacity: 1; } to { opacity: .45; } }
-@media (prefers-reduced-motion: reduce) { .story-listen.busy { animation: none; } }
+.story-player .transport .big.busy { animation: story-listen 1.1s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .story-player .transport .big.busy { animation: none; } }
 
 /* **A passage is a place to start**, and **no mark may change where body text sits**, so nothing here
    touches padding, margin, weight or size: the sounding passage and the one under the pointer are a

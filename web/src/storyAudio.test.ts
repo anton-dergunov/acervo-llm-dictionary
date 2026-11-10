@@ -1,5 +1,6 @@
 /**
- * Hearing a story: what a press does at each state of the part, and what leaving does.
+ * Hearing a story: what a press does at each state, how it reads on from part to part and story to
+ * story, and what a passage touched does.
  *
  * The element is played the way a browser plays it rather than the way `testSetup` fakes it — there,
  * a clip "plays" by ending on the next tick, which would finish every part before a test could look
@@ -9,7 +10,7 @@
  */
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { StoryPart } from "./domain";
+import type { Story, StoryPart, VocabularyGraph } from "./domain";
 import { MemoryMediaStore } from "./mediaStore";
 import { testGraph } from "./testGraph";
 
@@ -31,8 +32,15 @@ type Speech = typeof import("./pronunciation");
 let player: Player;
 let speech: Speech;
 let api: typeof import("./api");
+let counted: { recordPlay: ReturnType<typeof vi.fn> };
+let listening: typeof import("./listening");
 
-const [recorded, unrecorded] = testGraph().storyParts;
+vi.mock("./plays", () => ({ recordPlay: vi.fn() }));
+
+const graph = testGraph();
+const story = graph.stories.find((one) => one.id === "storypicada0001")!;
+const [recorded, unrecorded] = graph.storyParts;
+const parts = [recorded, unrecorded];
 
 /** One passage of a part the server has just recorded. */
 const fresh = (digest: string) => ({
@@ -92,6 +100,10 @@ beforeEach(async () => {
   player.replaceForTests();
   vi.spyOn(api.backendSession, "mediaFileUrl").mockImplementation((reference) => `https://acervo.example.com/media/${reference}`);
   vi.spyOn(api.backendSession, "mediaHeaders").mockReturnValue({ Authorization: "Bearer token" });
+  counted = await import("./plays") as unknown as { recordPlay: ReturnType<typeof vi.fn> };
+  counted.recordPlay.mockClear();
+  listening = await import("./listening");
+  listening.resetListeningForTests();
   const sync = await import("./sync");
   vi.spyOn(sync.syncEngine, "syncNow").mockResolvedValue(sync.syncEngine.getStatus());
 });
@@ -107,12 +119,26 @@ afterEach(() => {
   Reflect.deleteProperty(HTMLMediaElement.prototype, "readyState");
 });
 
-describe("pressing the button on a part", () => {
-  it("plays a recorded part from the start, fetching the recording once", async () => {
-    player.toggle(recorded);
+/** The passage that just ended, so the next one starts — what a browser does at the end of a file. */
+const ended = () => made!.dispatchEvent(new Event("ended"));
+
+/** A part of three passages, so "read on" has somewhere to go within a part. */
+const three: StoryPart = {
+  ...recorded,
+  audioSegments: [0, 1, 2].map((index) => ({
+    text: `Passage ${index}. `, direction: "", audioMime: "audio/ogg", durationSeconds: 1,
+    audioRef: `stories/storypicada0001/storypart000001-0${index}-aaaa000${index}.ogg`
+  }))
+};
+/** The second part, recorded, so a story reads on into it without asking the server. */
+const second: StoryPart = { ...unrecorded, audioSegments: [fresh("bbbb2222")] };
+
+describe("pressing play", () => {
+  it("reads a recorded part from the start, fetching its recording once", async () => {
+    player.toggleStory(story, [recorded], 0);
     await playing();
 
-    expect(player.storyPlayback().partId).toBe(recorded.id);
+    expect(player.storyPlayback()).toMatchObject({ storyId: story.id, partId: recorded.id, partIndex: 0, passages: 2 });
     // Every passage is fetched before the first sounds, so the swap between them is an assignment.
     expect(fetch).toHaveBeenCalledTimes(2);
     expect(String((fetch as unknown as { mock: { calls: string[][] } }).mock.calls[0][0]))
@@ -120,76 +146,129 @@ describe("pressing the button on a part", () => {
   });
 
   it("pauses when it is playing and carries on from where it was when pressed again", async () => {
-    player.toggle(recorded);
+    player.toggleStory(story, parts, 0);
     await playing();
     reported = 1.4;
 
-    player.toggle(recorded);
+    player.toggleStory(story, parts, 0);
     expect(player.storyPlayback().status).toBe("paused");
     expect(paused).toBe(true);
 
-    player.toggle(recorded);
+    player.toggleStory(story, parts, 0);
     expect(player.storyPlayback().status).toBe("playing");
-  });
-
-  it("stops and forgets the position when its page stops being the one on screen", async () => {
-    player.toggle(recorded);
-    await playing();
-
-    player.stopPart("some-other-part");
-    expect(player.storyPlayback().status).toBe("playing");
-
-    player.stopPart(recorded.id);
-    expect(player.storyPlayback()).toMatchObject({ partId: null, status: "idle", segment: null });
-    expect(paused).toBe(true);
-
-    // Coming back to it starts from the top, which is what swiping away and back is for.
-    player.toggle(recorded);
-    await playing();
-    expect(player.storyPlayback().segment).toBe(0);
   });
 
   it("is not ended by the silence that was started to keep the gesture", async () => {
     let arrive: (row: StoryPart) => void = () => undefined;
     vi.spyOn(api.backendSession, "recordStoryPart").mockReturnValue(new Promise((resolve) => { arrive = resolve; }));
 
-    player.toggle(unrecorded);
+    player.toggleStory(story, parts, 1);
     expect(player.storyPlayback().status).toBe("busy");
-    made!.dispatchEvent(new Event("ended"));   // the silence finishing, long before the part exists
+    ended();   // the silence finishing, long before the part exists
     expect(player.storyPlayback()).toMatchObject({ status: "busy", partId: unrecorded.id });
 
     arrive({ ...unrecorded, audioSegments: [fresh("aaaa1111")] });
     await playing();
   });
 
-  it("pressing it while the part is still being recorded cancels that", async () => {
+  it("pressing it while a part is still being recorded cancels that", async () => {
     vi.spyOn(api.backendSession, "recordStoryPart").mockReturnValue(new Promise(() => undefined));
 
-    player.toggle(unrecorded);
-    player.toggle(unrecorded);
+    player.toggleStory(story, parts, 1);
+    player.toggleStory(story, parts, 1);
 
-    expect(player.storyPlayback()).toMatchObject({ status: "idle", partId: null });
+    expect(player.storyPlayback()).toMatchObject({ status: "idle", storyId: null });
+  });
+
+  it("is what the lock screen speaks for, until it is stopped", async () => {
+    player.toggleStory(story, parts, 0);
+    await playing();
+    expect(listening.listening()).toBe("story");
+
+    player.stop();
+    expect(listening.listening()).toBeNull();
   });
 });
 
-describe("a part that has not been recorded", () => {
-  it("is recorded by the server when it is pressed, and plays the row that comes back", async () => {
-    const row: StoryPart = { ...unrecorded, audioSegments: [fresh("aaaa1111")] };
-    const record = vi.spyOn(api.backendSession, "recordStoryPart").mockResolvedValue(row);
-
-    player.toggle(unrecorded);
+describe("reading on", () => {
+  it("goes on to the next part when a part ends, and counts the read on reaching it", async () => {
+    player.toggleStory(story, [recorded, second], 0);
     await playing();
+    expect(counted.recordPlay).not.toHaveBeenCalled();
 
-    expect(record).toHaveBeenCalledWith(unrecorded.storyId, unrecorded.id, expect.any(String));
-    expect(String((fetch as unknown as { mock: { calls: string[][] } }).mock.calls[0][0]))
-      .toBe(`https://acervo.example.com/media/${row.audioSegments[0].audioRef}`);
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(1));
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback()).toMatchObject({ partIndex: 1, partId: second.id, status: "playing" }));
+    expect(counted.recordPlay).toHaveBeenCalledWith("story", story.id);
   });
 
-  it("says why when the server could not, and leaves the button pressable", async () => {
+  it("records a part on the way that has no recording, and reads it", async () => {
+    const record = vi.spyOn(api.backendSession, "recordStoryPart").mockResolvedValue(second);
+    player.toggleStory(story, parts, 0);
+    await playing();
+
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(1));
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback()).toMatchObject({ partIndex: 1, status: "playing" }));
+    expect(record).toHaveBeenCalledWith(unrecorded.storyId, unrecorded.id, expect.any(String));
+  });
+
+  it("rests at the end with the story still loaded, so play reads it again", async () => {
+    player.toggleStory(story, [three], 0);
+    await playing();
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(1));
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(2));
+    ended();
+
+    expect(player.storyPlayback()).toMatchObject({ storyId: story.id, status: "idle", segment: null });
+    player.toggleStory(story, [three], 0);
+    await playing();
+    expect(player.storyPlayback().segment).toBe(0);
+  });
+
+  it("goes on to the next story in the list when asked to, and only then", async () => {
+    const next: Story = { ...story, id: "storysecond0001", title: "La segunda" };
+    const nextPart: StoryPart = { ...second, id: "storypartsecond", storyId: next.id };
+    const repository = await import("./repository");
+    vi.spyOn(repository.repository, "snapshot").mockReturnValue({
+      ...graph, stories: [story, next], storyParts: [recorded, nextPart]
+    } as VocabularyGraph as ReturnType<typeof repository.repository.snapshot>);
+    const preferences = await import("./editorPreferences");
+    player.setStoryQueue([story.id, next.id]);
+    expect((() => { player.toggleStory(story, [recorded], 0); return player.hasNextStory(); })()).toBe(true);
+    await playing();
+
+    preferences.setStoryAutoplay(true);
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(1));
+    ended();
+    await vi.waitFor(() => expect(player.storyPlayback()).toMatchObject({ storyId: next.id, status: "playing" }));
+    preferences.setStoryAutoplay(false);
+  });
+
+  it("steps a part at a time, back to the top of this one first", async () => {
+    player.toggleStory(story, [recorded, second], 1);
+    await playing();
+    reported = 5;
+
+    player.stepPart(-1);
+    await vi.waitFor(() => expect(player.storyPlayback()).toMatchObject({ partIndex: 1, segment: 0, status: "playing" }));
+    reported = 0;
+    player.stepPart(-1);
+    await vi.waitFor(() => expect(player.storyPlayback()).toMatchObject({ partIndex: 0, status: "playing" }));
+  });
+});
+
+describe("a part that cannot be recorded", () => {
+  it("says why when the server could not, and leaves play pressable", async () => {
     vi.spyOn(api.backendSession, "recordStoryPart")
       .mockRejectedValue(new api.AcervoApiError("The speech model is temporarily rate limited.", 503, "llm_rate_limited"));
 
-    player.toggle(unrecorded);
+    player.toggleStory(story, parts, 1);
     await vi.waitFor(() => expect(player.storyPlayback().failed).not.toBeNull());
 
     expect(player.storyPlayback()).toMatchObject({
@@ -202,76 +281,37 @@ describe("a part that has not been recorded", () => {
     vi.spyOn(api.backendSession, "recordStoryPart")
       .mockRejectedValue(new api.AcervoApiError("offline", 0, "offline"));
 
-    player.toggle(unrecorded);
+    player.toggleStory(story, parts, 1);
     await vi.waitFor(() => expect(player.storyPlayback().failed).toMatch(/needs the server/));
   });
 });
 
-describe("the passages of a part", () => {
-  /** A part of three passages, so "carry on to the end" has somewhere to carry on to. */
-  const three: StoryPart = {
-    ...recorded,
-    audioSegments: [0, 1, 2].map((index) => ({
-      text: `Passage ${index}. `, direction: "", audioMime: "audio/ogg", durationSeconds: 1,
-      audioRef: `stories/storypicada0001/storypart000001-0${index}-aaaa000${index}.ogg`
-    }))
-  };
-  /** The passage that just ended, so the next one starts — what a browser does at the end of a file. */
-  const ended = () => made!.dispatchEvent(new Event("ended"));
-
-  it("marks the passage that is sounding, and moves the mark when that file ends", async () => {
-    player.toggle(recorded);
-    await playing();
-    expect(player.storyPlayback().segment).toBe(0);
-
-    ended();
-    await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(1));
-  });
-
-  it("plays only the passage that was touched when nothing of the part is playing", async () => {
-    player.playSegment(three, 1);
+describe("a passage touched", () => {
+  it("plays only that passage when nothing of the story is sounding, and is not a read", async () => {
+    player.playSegment(story, [three], 0, 1);
     await playing();
 
     expect(player.storyPlayback().segment).toBe(1);
-    // Only that passage was even fetched: the point of a file each is that nothing else is needed.
-    expect(fetch).toHaveBeenCalledTimes(1);
-    expect(String((fetch as unknown as { mock: { calls: string[][] } }).mock.calls[0][0]))
-      .toContain("storypart000001-01-");
-
     ended();
 
-    expect(player.storyPlayback()).toMatchObject({ status: "idle", partId: null });
+    expect(player.storyPlayback()).toMatchObject({ status: "idle", segment: null });
+    expect(counted.recordPlay).not.toHaveBeenCalled();
   });
 
-  it("carries on to the end of the part when a passage is touched while it is playing", async () => {
-    player.toggle(three);
+  it("moves the voice there and reads on when the story is sounding", async () => {
+    player.toggleStory(story, [three], 0);
     await playing();
-    (fetch as unknown as { mockClear(): void }).mockClear();
 
-    player.playSegment(three, 1);
+    player.playSegment(story, [three], 0, 1);
     await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(1));
-
     ended();
     await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(2));
-    ended();
-    expect(player.storyPlayback()).toMatchObject({ status: "idle", partId: null });
   });
 
   it("ignores a passage the part does not have", () => {
-    player.playSegment(recorded, 7);
+    player.playSegment(story, [recorded], 0, 7);
     expect(player.storyPlayback().status).toBe("idle");
     expect(fetch).not.toHaveBeenCalled();
-  });
-
-  it("ends when the last passage does", async () => {
-    player.toggle(recorded);
-    await playing();
-
-    ended();                                   // the first passage; the second follows
-    await vi.waitFor(() => expect(player.storyPlayback().segment).toBe(1));
-    ended();                                   // the last
-
-    expect(player.storyPlayback()).toMatchObject({ status: "idle", partId: null });
   });
 });
 
@@ -281,7 +321,7 @@ describe("one sound at a time", () => {
     const other = vi.fn();
     speech.registerPlayer(other);
 
-    player.toggle(recorded);
+    player.toggleStory(story, parts, 0);
     await playing();
 
     expect(stopSpeech).toHaveBeenCalled();
@@ -289,7 +329,7 @@ describe("one sound at a time", () => {
   });
 
   it("is paused by whatever else starts to play", async () => {
-    player.toggle(recorded);
+    player.toggleStory(story, parts, 0);
     await playing();
 
     speech.silencePlayers();   // what a word being read, or a loop, does before it makes a sound
@@ -298,24 +338,13 @@ describe("one sound at a time", () => {
     expect(paused).toBe(true);
   });
 
-  it("is not paused by itself", async () => {
-    player.toggle(recorded);
-    await playing();
-
-    speech.silencePlayers(player.pause);
-
-    expect(player.storyPlayback().status).toBe("playing");
-  });
-});
-
-describe("resuming", () => {
-  it("presses that only pause and resume do not fetch again", async () => {
-    player.toggle(recorded);
+  it("does not fetch again to pause and carry on", async () => {
+    player.toggleStory(story, parts, 0);
     await playing();
     (fetch as unknown as { mockClear(): void }).mockClear();
 
-    player.toggle(recorded);
-    player.toggle(recorded);
+    player.toggleStory(story, parts, 0);
+    player.toggleStory(story, parts, 0);
 
     expect(fetch).not.toHaveBeenCalled();
     expect(plays).toBeGreaterThanOrEqual(2);

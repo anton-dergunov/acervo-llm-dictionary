@@ -16,27 +16,34 @@ vi.mock("./picture", () => ({ usePicture: (reference: string | null) => picture(
 
 /* What is heard is `storyAudio.test.ts`'s business. Here the player is only a state the reader reads
    and three calls it makes, so a test can say what the reader does at each state of a part. */
-let heard: StoryPlayback = { partId: null, status: "idle", segment: null, failed: null };
-const toggle = vi.fn();
+const SILENT: StoryPlayback = { storyId: null, partId: null, partIndex: 0, status: "idle", segment: null, passages: 0, failed: null };
+let heard: StoryPlayback = SILENT;
+/** The story playing, at a part, in a state. */
+const sounding = (partIndex: number, status: StoryPlayback["status"], segment: number | null = 0): StoryPlayback =>
+  ({ storyId: "storypicada0001", partId: `storypart00000${partIndex + 1}`, partIndex, status, segment, passages: 2, failed: null });
+const toggleStory = vi.fn();
 const playSegment = vi.fn();
-const stopPart = vi.fn();
+const readFrom = vi.fn();
+const stepPart = vi.fn();
+const noteRead = vi.fn();
 vi.mock("./storyAudio", () => ({
   useStoryAudio: () => heard,
-  toggle: (...args: unknown[]) => toggle(...args),
+  toggleStory: (...args: unknown[]) => toggleStory(...args),
   playSegment: (...args: unknown[]) => playSegment(...args),
-  stopPart: (...args: unknown[]) => stopPart(...args)
+  readFrom: (...args: unknown[]) => readFrom(...args),
+  stepPart: (...args: unknown[]) => stepPart(...args),
+  noteRead: (...args: unknown[]) => noteRead(...args),
+  beginReading: () => undefined
 }));
 
-const recordPlay = vi.fn();
-vi.mock("./plays", () => ({ recordPlay: (...args: unknown[]) => recordPlay(...args) }));
 
 /* jsdom does no layout, so a deck that snaps under the finger has to be faked: every page is one
    hundred wide, and scrolling to an offset is a scroll event at that offset. The reader reads only
    `scrollLeft / clientWidth`, which is all a real snap track would tell it too. */
 beforeEach(() => {
   picture.mockClear();
-  toggle.mockClear(); playSegment.mockClear(); stopPart.mockClear();
-  heard = { partId: null, status: "idle", segment: null, failed: null };
+  [toggleStory, playSegment, readFrom, stepPart, noteRead].forEach((one) => one.mockClear());
+  heard = SILENT;
   Object.defineProperty(HTMLElement.prototype, "clientWidth", { configurable: true, value: 100 });
   Element.prototype.scrollTo = function scrollTo(this: Element, options?: ScrollToOptions | number) {
     this.scrollLeft = typeof options === "object" ? options.left ?? 0 : 0;
@@ -98,16 +105,12 @@ const position = () => document.querySelector(".story-bar-count")?.textContent;
 const translation = () => document.querySelector(".story-tr")?.textContent ?? "";
 
 describe("reading a story", () => {
-  /* A read is an opening that reaches the second part — once, however far it goes after that. */
-  it("counts a read when the second part is reached, once per opening", () => {
-    recordPlay.mockClear();
+  /* A read is an opening that reaches the second part; once per opening is `noteRead`'s to keep. */
+  it("counts a read when the second part is reached", () => {
     reader();
-    expect(recordPlay).not.toHaveBeenCalled();
+    expect(noteRead).not.toHaveBeenCalled();
     next();
-    expect(recordPlay).toHaveBeenCalledWith("story", "storypicada0001");
-    previous();
-    next();
-    expect(recordPlay).toHaveBeenCalledTimes(1);
+    expect(noteRead).toHaveBeenCalledWith("storypicada0001");
   });
 
   it("says which story it is and where you are in it, in the header", () => {
@@ -289,69 +292,81 @@ describe("pictures", () => {
 });
 
 
-describe("reading a part aloud", () => {
-  const first = () => testGraph().storyParts[0];
-  const listen = (index = 0) => screen.getAllByRole("button", { name: /read this part aloud|pause|carry on|waiting to be recorded|recording this part|loading/i })[index];
+describe("reading a story aloud", () => {
+  const play = () => screen.getByRole("button", { name: /read it aloud|pause|carry on|waiting to be recorded|recording this part|loading/i });
 
-  it("puts a button in each part's heading, and pressing it asks for that part", () => {
+  it("has one play button, in a footer, which reads the story from the page on screen", () => {
     reader();
-    expect(screen.getAllByRole("button", { name: "Read this part aloud" })).toHaveLength(2);
+    fireEvent.click(play());
+    expect(toggleStory).toHaveBeenCalledTimes(1);
+    expect(toggleStory.mock.calls[0][0]).toMatchObject({ id: "storypicada0001" });
+    expect(toggleStory.mock.calls[0][2]).toBe(0);
 
-    fireEvent.click(listen(0));
-
-    expect(toggle).toHaveBeenCalledTimes(1);
-    expect(toggle.mock.calls[0][0]).toMatchObject({ id: first().id });
+    next();
+    fireEvent.click(play());
+    expect(toggleStory.mock.calls[1][2]).toBe(1);
   });
 
-  it("says pause while the part plays", () => {
-    heard = { partId: first().id, status: "playing", segment: 0, failed: null };
+  it("says pause while the story is read, and carry on while it is paused", () => {
+    heard = sounding(0, "playing");
+    const { unmount } = reader();
+    expect(play()).toHaveAccessibleName("Pause");
+    expect(screen.getByText(/Part 1 of 2/)).toBeInTheDocument();
+    unmount();
+    heard = sounding(0, "paused");
     reader();
-    expect(listen(0)).toHaveAccessibleName("Pause");
-    expect(listen(0)).toHaveClass("playing");
-    expect(listen(1)).toHaveAccessibleName("Read this part aloud");
-  });
-
-  it("says carry on while it is paused, and stays lit", () => {
-    heard = { partId: first().id, status: "paused", segment: 0, failed: null };
-    reader();
-    expect(listen(0)).toHaveAccessibleName("Carry on");
-    expect(listen(0)).toHaveClass("playing");
+    expect(play()).toHaveAccessibleName("Carry on");
   });
 
   it("offers to record a part the job has not reached, rather than disabling it", () => {
     /* A job resting out a daily quota holds a part for twenty-five minutes. A dead button with no
        explanation was all you got; now it says what is happening and records it on the spot. */
     reader("storypicada0001", () => undefined, true);
+    next();
 
-    expect(listen(1)).not.toBeDisabled();
-    expect(listen(1)).toHaveAccessibleName("Waiting to be recorded — press to record it now");
-    fireEvent.click(listen(1));
-    expect(toggle.mock.calls[0][0]).toMatchObject({ id: "storypart000002" });
+    expect(play()).not.toBeDisabled();
+    expect(play()).toHaveAccessibleName("Waiting to be recorded — press to record it now");
+    fireEvent.click(play());
+    expect(toggleStory.mock.calls[0][2]).toBe(1);
   });
 
   it("says why a recording could not be made, under the heading of that part", () => {
-    heard = { partId: "storypart000002", status: "idle", segment: null, failed: "The speech model is temporarily rate limited." };
+    heard = { ...sounding(1, "idle", null), failed: "The speech model is temporarily rate limited." };
     reader();
     expect(screen.getByRole("status")).toHaveTextContent("The speech model is temporarily rate limited.");
   });
 
-  it("stops the audio of a page that is no longer the one on screen", () => {
+  /* Pause is pause and leaving is not stop: the bar, the rail's card and the lock screen are what a
+     story reads behind. */
+  it("follows the voice to the part it is reading", () => {
+    heard = sounding(1, "playing");
     reader();
-    stopPart.mockClear();
-
-    next();
-
-    expect(stopPart).toHaveBeenCalledWith("storypart000001");
-    expect(stopPart).not.toHaveBeenCalledWith("storypart000002");
+    expect(position()).toBe("2 / 3");
+    expect(readFrom).not.toHaveBeenCalled();
   });
 
-  it("stops what it was playing when it is left", () => {
-    const { unmount } = reader();
-    stopPart.mockClear();
+  it("moves the voice to the part swiped to while it reads", () => {
+    heard = sounding(0, "playing");
+    reader();
+    next();
+    expect(readFrom).toHaveBeenCalledTimes(1);
+    expect(readFrom.mock.calls[0][2]).toBe(1);
+  });
 
-    unmount();
+  it("only turns the page when nothing is being read", () => {
+    reader();
+    next();
+    expect(readFrom).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole("button", { name: "Previous part" }));
+    expect(position()).toBe("1 / 3");
+    expect(stepPart).not.toHaveBeenCalled();
+  });
 
-    expect(stopPart).toHaveBeenCalledWith("storypart000001");
+  it("steps the voice a part at a time once it is reading", () => {
+    heard = sounding(0, "playing");
+    reader();
+    fireEvent.click(screen.getByRole("button", { name: "Next part" }));
+    expect(stepPart).toHaveBeenCalledWith(1);
   });
 });
 
@@ -378,19 +393,19 @@ describe("the passages of a part read aloud", () => {
   });
 
   it("tints the passage that is sounding, and only while that part is heard", () => {
-    heard = { partId: "storypart000001", status: "playing", segment: 1, failed: null };
+    heard = sounding(0, "playing", 1);
     reader();
     expect(passages().map((one) => one.classList.contains("on"))).toEqual([false, true]);
   });
 
   it("keeps the tint on the passage where a paused part stopped", () => {
-    heard = { partId: "storypart000001", status: "paused", segment: 0, failed: null };
+    heard = sounding(0, "paused", 0);
     reader();
     expect(passages()[0]).toHaveClass("on");
   });
 
   it("tints nothing when it is another part that is playing", () => {
-    heard = { partId: "storypart000002", status: "playing", segment: 0, failed: null };
+    heard = sounding(1, "playing", 0);
     reader();
     expect(passages().some((one) => one.classList.contains("on"))).toBe(false);
   });
@@ -401,14 +416,14 @@ describe("the passages of a part read aloud", () => {
     fireEvent.click(passages()[1]);
 
     expect(playSegment).toHaveBeenCalledTimes(1);
-    expect(playSegment.mock.calls[0][0]).toMatchObject({ id: "storypart000001" });
-    expect(playSegment.mock.calls[0][1]).toBe(1);
+    expect(playSegment.mock.calls[0][2]).toBe(0);
+    expect(playSegment.mock.calls[0][3]).toBe(1);
   });
 
   it("plays the passage a tap off any word lands in", () => {
     reader();
     fireEvent.click(passages()[0].querySelector(".story-mark")!);
-    expect(playSegment.mock.calls[0][1]).toBe(0);
+    expect(playSegment.mock.calls[0][3]).toBe(0);
   });
 
   it("does not take the end of a text selection for a touch", () => {
@@ -434,7 +449,7 @@ describe("the passages of a part read aloud", () => {
     expect(sheet).toHaveTextContent("in your words");
 
     fireEvent.click(within(sheet).getByRole("button", { name: "This passage" }));
-    expect(playSegment.mock.calls[0][1]).toBe(0);
+    expect(playSegment.mock.calls[0][3]).toBe(0);
 
     fireEvent.click(within(sheet).getByRole("button", { name: "Open la balsa" }));
     expect(looking.open).toHaveBeenCalledWith("lexemebalsa0001", { kind: "story", storyId: "storypicada0001", page: 0 });
@@ -484,7 +499,7 @@ describe("the passages of a part read aloud", () => {
     forgetTaps();
     fireEvent.click(passages()[1]);
     expect(screen.queryByRole("dialog", { name: "Look up a word" })).toBeNull();
-    expect(playSegment.mock.calls[0][1]).toBe(1);
+    expect(playSegment.mock.calls[0][3]).toBe(1);
   });
 
   it("opens on the page it is asked to", () => {

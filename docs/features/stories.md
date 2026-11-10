@@ -192,11 +192,30 @@ rather than dropped. The translation is hidden until asked for, and travels with
 that waited on the network would not be a reveal.
 
 **Playback** is `storyAudio.ts`, the third audio element, registered with the others so they stop each
-other. **Pause is pause and leaving is stop**: there is no scrubber, and a page that stops being the one
-on screen stops its part and forgets the position, so swiping away and back begins it again. **A tap on a
-word looks it up and plays nothing** ([`look-up.md`](look-up.md)); the passage it is in is the sheet's
-button, and a tap on anything else in a passage plays it. A passage started while nothing plays is played
-alone; started while the part plays, the recording moves there and carries on. `segmentSpans` cuts the marks at the passages and refuses passages that do not join to the
+other. The use it is designed for is a phone in a pocket: one tap, and it reads to the end.
+
+- **A story plays part after part.** Each part's passages in turn, then the next part's; a part with
+  no recording yet is recorded on demand on the way, as a tap on it always was. While a part plays the
+  next part's passages are read too, so a locked phone goes on without asking the network for anything.
+- **At the end, the loop player's two switches**, in its order: read it again, else **go on to the next
+  story** in the list it was started from (in the order shown, archived ones left out), else rest with it
+  still loaded, so play reads it again. Both are off by default and remembered on the device.
+- **Pause is pause, and leaving is not stop.** Going back to the list, opening a word, locking the
+  screen — none of them stops it, any more than they stop a loop; the bar, the rail's card and the lock
+  screen are what it reads behind ([`loops.md`](loops.md) §2.13). It used to be "leaving is stop", which
+  made the pocket impossible.
+- **The reader follows the voice, and a swipe moves it.** The deck goes to the part being read, and to
+  the next story when it begins; a swipe while it reads moves the voice to that part.
+- **The controls are a footer**, the loop player's shape so the thing reached for never moves: a
+  segment per part filling as it is read and a tap on one going there, the part before and the next,
+  play, and the two switches. There is no scrubber: a passage is never seeked.
+- **The lock screen** names the story and the part, with the part's picture as artwork; Previous and
+  Next there move a part at a time, and Next from the last part goes on to the next story.
+
+**A tap on a word looks it up and plays nothing** ([`look-up.md`](look-up.md)); the passage it is in is
+the sheet's button, and a tap on anything else in a passage plays it. A passage touched while nothing of
+the story sounds is played alone, and is not a read; touched while it sounds, the voice moves there and
+reads on. `segmentSpans` cuts the marks at the passages and refuses passages that do not join to the
 text, so a recording made from words since changed paints nothing. The sounding passage is tinted with a
 background, never padding, weight or size. Recordings are kept on the device with the other clips, so a
 story plays on a plane.
