@@ -40,7 +40,7 @@ metadata = MetaData()
 # anywhere after `lexemes`. Last is where they go anyway, because that is what puts them inside the
 # word reset: a loop every one of whose captions names a deleted word is a track nothing describes,
 # and a story whose every word is gone is one nothing asked for. A favourite bed follows the loop it
-# was kept from, and goes with it in that reset.
+# was kept from, and goes with it in that reset; so does a play, after the loop or story it names.
 REPLICATED = (
     "vocabularies",
     "topics",
@@ -58,6 +58,7 @@ REPLICATED = (
     "story_parts",
     "story_words",
     "beds",
+    "plays",
 )
 
 
@@ -669,6 +670,12 @@ loops = Table(
     # than enforced, which is the data rule for every replicated collection.
     Column("loop_order", Integer, nullable=False, default=0),
     *_sync_fields(),
+    # The owner's two marks on a loop: liked, which leads every order of the list, and archived,
+    # which folds it away at the foot and out of the player's queue. Marks a person set, not state
+    # derived from anything, so they are columns. Declared after the sync fields so a database that
+    # gained them by `ALTER TABLE` has its columns in the order a fresh one does.
+    Column("starred", Boolean, nullable=False, default=False),
+    Column("archived", Boolean, nullable=False, default=False),
     Index("idx_loops_owner_revision", "owner", "revision"),
     Index("idx_loops_owner_language_order", "owner", "language", "loop_order"),
 )
@@ -769,6 +776,23 @@ beds = Table(
     Index("idx_beds_owner_revision", "owner", "revision"),
 )
 
+# One play of a loop, or one read of a story: created once, on the device it happened on, and never
+# edited. How often something has been played is counted from these and never stored as a number,
+# which is what lets a play made offline wait on the device and arrive later — there is no version of
+# a play to have been edited from, so nothing it could conflict with (`docs/architecture/sync.md`).
+# `created_at` is when it happened. Exactly one of the two references is set; neither is required to
+# be alive, so deleting a loop leaves its plays naming a tombstone, as a loop item does a deleted word.
+plays = Table(
+    "plays",
+    metadata,
+    Column("id", String(15), primary_key=True),
+    _owner(),
+    Column("loop", String(15), ForeignKey("loops.id", ondelete="CASCADE"), nullable=True),
+    Column("story", String(15), ForeignKey("stories.id", ondelete="CASCADE"), nullable=True),
+    *_sync_fields(),
+    Index("idx_plays_owner_revision", "owner", "revision"),
+)
+
 stories = Table(
     "stories",
     metadata,
@@ -799,6 +823,9 @@ stories = Table(
     # How many parts the owner asked for, kept for `guidance`'s reason: Try again writes a story of
     # the same length. Declared last for the same reason as `guidance`.
     Column("parts", Integer, nullable=False, default=4),
+    # The owner's two marks, as on `loops`, and declared last for `guidance`'s reason.
+    Column("starred", Boolean, nullable=False, default=False),
+    Column("archived", Boolean, nullable=False, default=False),
     Index("idx_stories_owner_revision", "owner", "revision"),
     Index("idx_stories_owner_language_order", "owner", "language", "story_order"),
 )

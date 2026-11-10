@@ -21,7 +21,7 @@ const loop = (over: Partial<Loop>): Loop => ({
   id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
   engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
-  durationSeconds: 90, position: 1, ...stamp, ...over
+  durationSeconds: 90, position: 1, starred: false, archived: false, ...stamp, ...over
 });
 
 const item = (loopId: string): LoopItem => ({
@@ -30,16 +30,16 @@ const item = (loopId: string): LoopItem => ({
   startSeconds: 0, sourceRevealSeconds: 0, targetRevealSeconds: 8, endSeconds: 20, ...stamp
 });
 
-function view(loops: Loop[], query = "") {
+function view(loops: Loop[], query = "", onMark: (id: string, marks: object) => void = () => undefined) {
   const graph: VocabularyGraph = {
     vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [],
     imagePrompts: [], pronunciations: [], studyStates: [],
     loops, loopItems: loops.map((one) => item(one.id)), loopCues: [],
-    stories: [], storyParts: [], storyWords: [], beds: []
+    stories: [], storyParts: [], storyWords: [], beds: [], plays: []
   };
   const onDelete = vi.fn();
   render(<LoopView
-    graph={graph} language="es" languageName="Spanish" query={query} onClose={() => undefined}
+    graph={graph} language="es" languageName="Spanish" query={query} onClose={() => undefined} onMark={onMark}
     onDelete={onDelete} onChooseMusic={() => undefined} onToggleKeep={() => undefined}
   />);
   return onDelete;
@@ -48,6 +48,28 @@ function view(loops: Loop[], query = "") {
 afterEach(() => vi.restoreAllMocks());
 
 describe("the loops list", () => {
+  /* Star, Archive and Delete on every row, and each says what it would do to this one. */
+  it("stars and archives from the row, and offers to take either back", () => {
+    const onMark = vi.fn();
+    view([loop({ starred: true })], "", onMark);
+    fireEvent.click(screen.getByRole("button", { name: "Unstar" }));
+    expect(onMark).toHaveBeenCalledWith("loop00000000001", { starred: false });
+    fireEvent.click(screen.getByRole("button", { name: "Archive" }));
+    expect(onMark).toHaveBeenCalledWith("loop00000000001", { archived: true });
+    expect(screen.getByRole("img", { name: "Starred" })).toBeInTheDocument();
+  });
+
+  /* Archived rows fold away at the foot, as set-aside words do, and a search opens the fold. */
+  it("folds the archived loops under a rule at the foot", () => {
+    view([loop({}), loop({ id: "loop00000000002", position: 2, archived: true })]);
+    const fold = screen.getByRole("button", { name: /Archived · 1/ });
+    expect(fold).toHaveAttribute("aria-expanded", "false");
+    expect(document.querySelectorAll(".loop-row")).toHaveLength(1);
+    fireEvent.click(fold);
+    expect(document.querySelectorAll(".loop-row.archived")).toHaveLength(1);
+    expect(screen.getByText("1 in Spanish · 1 archived")).toBeInTheDocument();
+  });
+
   /* The badge says what kind of loop a row is, as the make dialog's tile does, until it is loaded. */
   it("marks each loop with its kind", () => {
     view([loop({}), loop({ id: "loop00000000002", position: 2, format: "radio-lesson" })]);

@@ -19,14 +19,15 @@ import type { ArticleDraft } from "./yaml";
  * open. 16: a story part's passages became one recording each (`audioRef`, `audioMime`,
  * `durationSeconds`) instead of times into one joined file, and nothing bumped this. 17: `beds`,
  * the loop music the owner keeps. 18: an attestation's `photoRef` and `photoRegion`. 21: a study
- * state's `senseId`. 26: a kept bed's own music (`audioRef`, `audioMime`, `durationSeconds`).
+ * state's `senseId`. 26: a kept bed's own music (`audioRef`, `audioMime`, `durationSeconds`). 27: a
+ * loop's and a story's `starred` and `archived`, and `plays`.
  */
-export const LOCAL_SCHEMA_VERSION = 26;
+export const LOCAL_SCHEMA_VERSION = 27;
 
 export const EMPTY_GRAPH = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],
   pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [],
-  storyWords: [], beds: []
+  storyWords: [], beds: [], plays: []
 });
 
 export type Entity = Vocabulary | Topic | Lexeme | Sense | Attestation | Example | ImagePrompt | Pronunciation | StudyState | Loop | LoopItem | LoopCue | Story | StoryPart | StoryWord | Bed;
@@ -104,6 +105,8 @@ export interface AcervoRepository {
   saveStudyState(input: StudyStateInput, id?: string): Promise<StudyState>;
   saveLoop(input: LoopInput, id?: string): Promise<Loop>;
   saveBed(input: BedInput, id?: string): Promise<Bed>;
+  /** Star or archive a loop or a story: the owner's marks, one ordinary write each. */
+  markMade(kind: "loops" | "stories", id: string, marks: Partial<Pick<Loop, "starred" | "archived">>): Promise<void>;
   /** Takes the named words out of the Inbox in one write, and says how many moved. */
   fileWords(ids: readonly string[]): Promise<number>;
   /** Sets words aside, or brings them back to the words being learned. One write. */
@@ -195,7 +198,8 @@ export class LocalAcervoRepository implements AcervoRepository {
       stories: contents.stories,
       storyParts: contents.storyParts,
       storyWords: contents.storyWords,
-      beds: contents.beds
+      beds: contents.beds,
+      plays: contents.plays
     } : null;
     const refusal = graph ? refusalOf(graph, ownerId) : null;
     if (!graph || refusal) {
@@ -418,6 +422,19 @@ export class LocalAcervoRepository implements AcervoRepository {
   saveLoop(input: LoopInput, id?: string) { return this.save("loops", input, id) as Promise<Loop>; }
   /** Keep a loop's music as a favourite. Unkeeping it is `delete("beds", id)`, a tombstone. */
   saveBed(input: BedInput, id?: string) { return this.save("beds", input, id) as Promise<Bed>; }
+
+  /**
+   * Star or archive a loop or a story, or take either back. An ordinary write — online and loud when
+   * it fails — of the record as held, with only the marks changed. Nothing is written when it already
+   * says so.
+   */
+  async markMade(kind: "loops" | "stories", id: string, marks: Partial<Pick<Loop, "starred" | "archived">>): Promise<void> {
+    if (!this.ready) throw new Error("Load the Acervo repository before writing.");
+    const held = this.held(kind, id) as Loop | Story | undefined;
+    if (!held || held.deleted) throw new Error("That is no longer in your vocabulary.");
+    if (Object.entries(marks).every(([name, value]) => held[name as "starred" | "archived"] === value)) return;
+    await this.commit({ [kind]: [{ ...held, ...marks, ...this.stamp(held) }] });
+  }
 
   /**
    * Takes words out of the Inbox, as one write.

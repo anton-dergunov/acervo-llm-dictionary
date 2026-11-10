@@ -1455,6 +1455,24 @@ export default function App() {
     else notify(moved === 1 ? "Brought back" : `Brought back ${moved} words`);
   }
 
+  /**
+   * Star or archive a loop or a story, or take either back. Archiving is undone from the toast, as
+   * setting a word aside is, since it is one tap from a row and moves the row out of sight.
+   */
+  async function markMade(kind: "loops" | "stories", id: string, marks: { starred?: boolean; archived?: boolean }) {
+    const noun = kind === "loops" ? "loop" : "story";
+    try {
+      await repository.markMade(kind, id, marks);
+    } catch (error) {
+      notify(error instanceof Error ? error.message : `That ${noun} could not be changed.`);
+      return;
+    }
+    setSnapshot(repository.snapshot());
+    if (marks.archived === true) {
+      notify("Archived — it waits at the foot of the list", { label: "Undo", run: () => void markMade(kind, id, { archived: false }) });
+    } else if (marks.archived === false) notify("Unarchived");
+  }
+
   async function signOut() {
     syncEngine.stop();
     jobStream.stop();
@@ -1678,10 +1696,12 @@ export default function App() {
         /> : stories && snapshot && language ? <StoryView
           graph={snapshot} language={language} languageName={active.name} query={madeQuery} opening={storyPlace}
           onClose={() => { setStories(false); setMadeQuery(""); }}
+          onMark={(id, marks) => void markMade("stories", id, marks)}
           onDelete={removeStory}
         /> : loops && snapshot && language ? <LoopView
           graph={snapshot} language={language} languageName={active.name} query={madeQuery} opening={loopPlace}
           onClose={() => { setLoops(false); setMadeQuery(""); }}
+          onMark={(id, marks) => void markMade("loops", id, marks)}
           onDelete={removeLoop}
           onChooseMusic={setMusicFor}
           onToggleKeep={(loop) => void toggleKeptBed(loop)}

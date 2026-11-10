@@ -12,7 +12,7 @@ export type Register = typeof REGISTERS[number];
 export type LexemeStatus = typeof LEXEME_STATUSES[number];
 export type SourceKind = typeof SOURCE_KINDS[number];
 export type ExampleOrigin = typeof EXAMPLE_ORIGINS[number];
-export type EntityKind = "vocabularies" | "topics" | "lexemes" | "senses" | "attestations" | "examples" | "imagePrompts" | "pronunciations" | "studyStates" | "loops" | "loopItems" | "loopCues" | "stories" | "storyParts" | "storyWords" | "beds";
+export type EntityKind = "vocabularies" | "topics" | "lexemes" | "senses" | "attestations" | "examples" | "imagePrompts" | "pronunciations" | "studyStates" | "loops" | "loopItems" | "loopCues" | "stories" | "storyParts" | "storyWords" | "beds" | "plays";
 /** What a pronunciation reads: a lexeme's headword, a sense's definition, an example's or an attestation's text. */
 export const PRONUNCIATION_TARGETS = ["lexeme", "sense", "example", "attestation"] as const;
 export type PronunciationTarget = typeof PRONUNCIATION_TARGETS[number];
@@ -302,6 +302,10 @@ export interface Loop extends SyncFields, OwnedFields {
   durationSeconds: number | null;
   /** Sparse, renumbered on reorder. Ordering is respected rather than enforced. */
   position: number;
+  /** The owner's marks: liked, which leads every order of the list, and folded away at its foot,
+   *  out of the player's queue. Marks a person set, so fields rather than anything derived. */
+  starred: boolean;
+  archived: boolean;
 }
 
 /**
@@ -380,6 +384,20 @@ export interface Bed extends SyncFields, OwnedFields {
 }
 
 /**
+ * One play of a loop, or one read of a story: made once, on the device it happened on, and never
+ * edited. How often something has been played is counted from these, never stored as a number, which
+ * is what lets a play made offline wait on the device and go up later — there is no version of it to
+ * have been edited from, so nothing for it to conflict with (`docs/architecture/sync.md`). Its
+ * `createdAt` is when it happened. Exactly one of the two references is set; the loop or story may
+ * since have been deleted, and the play still happened.
+ */
+export interface Play extends SyncFields, OwnedFields {
+  id: string;
+  loopId: string | null;
+  storyId: string | null;
+}
+
+/**
  * A story: a handful of words told back to you as a short illustrated tale.
  *
  * **Its state is derived and there is no status column**, exactly as for a `Loop`. A story with no
@@ -407,6 +425,9 @@ export interface Story extends SyncFields, OwnedFields {
   guidance: string | null;
   /** How many parts the owner asked for, so Try again writes a story of the same length. */
   parts: number;
+  /** The owner's marks, as on a `Loop`. */
+  starred: boolean;
+  archived: boolean;
 }
 
 /**
@@ -507,6 +528,7 @@ export interface VocabularyGraph {
   storyParts: StoryPart[];
   storyWords: StoryWord[];
   beds: Bed[];
+  plays: Play[];
 }
 
 export type VocabularyInput = Omit<Vocabulary, "id" | keyof SyncFields | keyof OwnedFields>;
@@ -802,6 +824,7 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
        seed that can reach this replica intact is 2^53 − 1. The generator mints 64-bit seeds when it
        is not given one, which is why Acervo sends it one. */
     invariant(Number.isSafeInteger(record.seed) && record.seed >= 0, "Loop seed is invalid.");
+    invariant(typeof record.starred === "boolean" && typeof record.archived === "boolean", "A loop's marks are on or off.");
     invariant(Number.isSafeInteger(record.position) && record.position >= 0, "Loop position is invalid.");
     optionalString(record.audioRef, "Loop audio reference");
     optionalString(record.audioMime, "Loop audio type");
@@ -864,6 +887,7 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
     optionalString(record.guidance, "Story guidance");
     invariant(Number.isSafeInteger(record.position) && record.position >= 0, "Story position is invalid.");
     invariant(Number.isSafeInteger(record.parts) && record.parts >= 1, "Story part count is invalid.");
+    invariant(typeof record.starred === "boolean" && typeof record.archived === "boolean", "A story's marks are on or off.");
   },
   storyParts(record: StoryPart, find: Find): void {
     const story = find.stories(record.storyId);
@@ -916,6 +940,13 @@ const CHECKS: { [K in EntityKind]: (record: VocabularyGraph[K][number], find: Fi
       Array.isArray(record.translationForms) && record.translationForms.every((one) => typeof one === "string"),
       "Story word translated forms are invalid."
     );
+  },
+  plays(record: Play, find: Find): void {
+    invariant((record.loopId === null) !== (record.storyId === null), "A play is of one loop or one story.");
+    // Among all loops and stories, tombstones included: the play happened whatever became of them.
+    const played = record.loopId !== null ? find.loops(record.loopId) : find.stories(record.storyId!);
+    invariant(played, "A play references a missing loop or story.");
+    invariant(record.ownerId === played.ownerId, "A play and what it played must have the same owner.");
   },
   beds(record: Bed, find: Find): void {
     invariant(typeof record.styleId === "string" && record.styleId.length > 0, "A kept bed names its style.");
@@ -1053,7 +1084,7 @@ export function validateChanges(
 const EMPTY_KINDS = (): VocabularyGraph => ({
   vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [],
   pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [], storyWords: [],
-  beds: []
+  beds: [], plays: []
 });
 
 /** The graph with the change set laid over it, a replaced record keeping its place. */

@@ -175,8 +175,10 @@ carrying no direction; that is simpler than throwing the passages away and re-re
 ## The list
 
 The stories list is the loops list ([`loops.md`](loops.md) §2.20): the word list's head with the orders
-— Recent, Hardest, Rarest — the top bar's search searching the words in the stories, and the top bar's
-Add making one. A row keeps the story's emoji as its badge.
+— Recent, Hardest, Rarest, Least played — starred stories first and archived ones folded at the foot,
+the top bar's search searching the words in the stories, and the top bar's Add making one. A row keeps
+the story's emoji as its badge and says how often it was read; a read is an opening that reaches the
+second part. The reader's top line carries the star.
 
 ## The reader
 

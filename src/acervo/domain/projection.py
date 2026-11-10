@@ -387,6 +387,8 @@ def _project_loop(row: Mapping[str, Any]) -> dict[str, Any]:
         "audioMime": text_or_none(row["audio_mime"]) if trimmed(row["audio_ref"]) else None,
         "durationSeconds": to_float(row["duration_seconds"]) if trimmed(row["audio_ref"]) else None,
         "position": to_int(row["loop_order"]),
+        "starred": bool(row["starred"]),
+        "archived": bool(row["archived"]),
     }
 
 
@@ -404,6 +406,8 @@ def _assign_loop(value: Mapping[str, Any]) -> dict[str, Any]:
         "audio_mime": trimmed(value.get("audioMime")),
         "duration_seconds": to_float(value.get("durationSeconds")),
         "loop_order": to_int(value.get("position")),
+        "starred": value.get("starred") is True,
+        "archived": value.get("archived") is True,
     }
 
 
@@ -533,6 +537,8 @@ def _project_story(row: Mapping[str, Any]) -> dict[str, Any]:
         "position": to_int(row["story_order"]),
         "guidance": text_or_none(row["guidance"]),
         "parts": to_int(row["parts"]),
+        "starred": bool(row["starred"]),
+        "archived": bool(row["archived"]),
     }
 
 
@@ -548,7 +554,18 @@ def _assign_story(value: Mapping[str, Any]) -> dict[str, Any]:
         "story_order": to_int(value.get("position")),
         "guidance": trimmed(value.get("guidance")),
         "parts": to_int(value.get("parts")),
+        "starred": value.get("starred") is True,
+        "archived": value.get("archived") is True,
     }
+
+
+def _project_play(row: Mapping[str, Any]) -> dict[str, Any]:
+    return {"loopId": text_or_none(row["loop"]), "storyId": text_or_none(row["story"])}
+
+
+def _assign_play(value: Mapping[str, Any]) -> dict[str, Any]:
+    # An empty reference is stored as no reference: the column is a foreign key.
+    return {"loop": trimmed(value.get("loopId")) or None, "story": trimmed(value.get("storyId")) or None}
 
 
 def _project_story_part(row: Mapping[str, Any]) -> dict[str, Any]:
@@ -665,6 +682,7 @@ COLLECTIONS: tuple[Collection, ...] = (
     Collection("storyParts", tables.story_parts, _project_story_part, _assign_story_part),
     Collection("storyWords", tables.story_words, _project_story_word, _assign_story_word),
     Collection("beds", tables.beds, _project_bed, _assign_bed),
+    Collection("plays", tables.plays, _project_play, _assign_play),
 )
 
 COLLECTION_BY_KEY = {collection.key: collection for collection in COLLECTIONS}

@@ -36,10 +36,11 @@
  * story of six should not ask for six at once to read the first.
  */
 
-import { useContext, useEffect, useLayoutEffect, useMemo, useState, type MouseEvent } from "react";
+import { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { DeckEdges, Hedera, useDeck } from "./deck";
 import type { Story, StoryPart, StoryWord } from "./domain";
-import { BackIcon, PauseIcon, PlayIcon } from "./icons";
+import { BackIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
+import { recordPlay } from "./plays";
 import { LookUpContext, LookUpSheet, useLookUp, type LookUpAction } from "./LookUpSheet";
 import { usePicture } from "./picture";
 import { playRuns } from "./pronunciation";
@@ -208,7 +209,7 @@ function WordsPage({ entries }: { entries: StoryWordEntry[] }) {
   </article>;
 }
 
-export default function StoryReader({ story, title, parts, words, entries, recording = false, startAt = 0, onBack }: {
+export default function StoryReader({ story, title, parts, words, entries, recording = false, startAt = 0, onBack, onStar }: {
   story: Story;
   /** What the header calls it: its own title, or the words it was asked to teach. */
   title: string;
@@ -220,6 +221,8 @@ export default function StoryReader({ story, title, parts, words, entries, recor
   /** The page to open on: where the owner was, coming back from a word opened from this story. */
   startAt?: number;
   onBack(): void;
+  /** Star the story, or take the star back. */
+  onStar?(): void;
 }) {
   const pages = parts.length ? parts.length + 1 : 0;
   const { root, track, at, go, jump, beside, onScroll } = useDeck(story.id);
@@ -227,6 +230,15 @@ export default function StoryReader({ story, title, parts, words, entries, recor
   const services = useContext(LookUpContext);
   const lookUp = useLookUp(services);
   const { open: look, close: lookAway } = lookUp;
+  /* A read is an opening that reaches the second part, so one that goes no further than the first
+     page — an accidental tap — is not counted. Once per opening: this reader is mounted afresh each
+     time the story is opened. */
+  const counted = useRef<string | null>(null);
+  useEffect(() => {
+    if (at < 1 || at >= parts.length || counted.current === story.id) return;
+    counted.current = story.id;
+    recordPlay("story", story.id);
+  }, [at, parts.length, story.id]);
   // The sheet belongs to the page it was opened on.
   useEffect(() => lookAway(), [at, lookAway]);
   const lookAt = (tapped: TappedWord, play: LookUpAction | null) => look({
@@ -264,9 +276,14 @@ export default function StoryReader({ story, title, parts, words, entries, recor
       </span>
       <span className="story-bar-title">{title}</span>
       {/* An empty cell when there is no counter, so the title stays in the middle column. */}
-      {pages > 0
-        ? <span className="story-bar-count">{Math.min(at + 1, pages)} / {pages}</span>
-        : <span />}
+      <span className="story-bar-end">
+        {pages > 0 && <span className="story-bar-count">{Math.min(at + 1, pages)} / {pages}</span>}
+        {onStar && <button
+          className={`icon-btn made-star-btn${story.starred ? " on" : ""}`} aria-pressed={story.starred}
+          aria-label={story.starred ? "Unstar this story" : "Star this story"} title={story.starred ? "Starred" : "Star"}
+          onClick={onStar}
+        ><StarIcon filled={story.starred} /></button>}
+      </span>
     </div>
 
     {parts.length === 0

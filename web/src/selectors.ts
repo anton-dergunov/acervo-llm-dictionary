@@ -8,7 +8,7 @@
 import {
   effectiveShortGloss,
   type Attestation, type Example, type ImagePrompt, type Lexeme, type LexemeStatus,
-  type AudioSegment, type Bed, type Loop, type LoopCue, type LoopItem, type OwnedFields, type Sense, type Story, type StoryPart,
+  type AudioSegment, type Bed, type Loop, type LoopCue, type LoopItem, type OwnedFields, type Play, type Sense, type Story, type StoryPart,
   type StoryWord, type StudyState, type SyncFields,
   type Topic, type Vocabulary, type VocabularyGraph
 } from "./domain";
@@ -967,9 +967,9 @@ export function storyWordsOf(graph: VocabularyGraph, storyId: string): StoryWord
    and glosses). Not its definitions, which mention other words and would match for no reason the
    row could show. */
 
-/** The orders a made list offers. */
-export type MadeSort = "recent" | "hard" | "rare";
-export const MADE_SORTS: readonly MadeSort[] = ["recent", "hard", "rare"];
+/** The orders a made list offers. Least played rather than most: it is there for variety. */
+export type MadeSort = "recent" | "hard" | "rare" | "least";
+export const MADE_SORTS: readonly MadeSort[] = ["recent", "hard", "rare", "least"];
 
 /** A word a loop or a story was made from: as it was said or used, and what it means there. */
 export interface MadeWord {
@@ -984,10 +984,17 @@ export interface MadeQuery {
   sort: MadeSort;
   /** Zipf figure per word, lower is rarer (`GET /words/rarity`); without it Rarest has nothing to go by. */
   rarity?: Readonly<Record<string, number>> | null;
+  /** How often each loop or story has been played (`playCounts`); what Least played reads. */
+  plays?: ReadonlyMap<string, number>;
 }
 
+/**
+ * **Starred lead, archived fold**: in every order the starred rows come first, then the rest, and the
+ * archived ones are a list of their own, sorted the same, that the surface folds away at its foot.
+ */
 export interface MadeList<T> {
   rows: T[];
+  archived: T[];
   /** For each row a search kept, the words that matched. Empty while nothing is searched. */
   matches: ReadonlyMap<string, MadeWord[]>;
 }
@@ -1017,8 +1024,8 @@ export function madeStories(graph: VocabularyGraph, query: MadeQuery): MadeList<
   return madeRows(graph, storiesIn(graph, query.language), words, query);
 }
 
-function madeRows<T extends { id: string; createdAt: string }>(
-  graph: VocabularyGraph, all: T[], words: Map<string, Searchable[]>, { query, sort, rarity }: MadeQuery
+function madeRows<T extends { id: string; createdAt: string; starred: boolean; archived: boolean }>(
+  graph: VocabularyGraph, all: T[], words: Map<string, Searchable[]>, { query, sort, rarity, plays }: MadeQuery
 ): MadeList<T> {
   const search = query.trim().toLowerCase();
   const matches = new Map<string, MadeWord[]>();
@@ -1052,8 +1059,33 @@ function madeRows<T extends { id: string; createdAt: string }>(
     order = scored((id) => difficulty.get(id) ?? null, true);
   } else if (sort === "rare" && rarity) {
     order = scored((id) => rarity[id] ?? null, false);
+  } else if (sort === "least") {
+    const played = (one: T) => plays?.get(one.id) ?? 0;
+    order = (left, right) => played(left) - played(right) || recent(left, right);
   }
-  return { rows: rows.slice().sort(order), matches };
+  const sorted = rows.slice().sort(order);
+  const kept = sorted.filter((one) => !one.archived);
+  return {
+    rows: [...kept.filter((one) => one.starred), ...kept.filter((one) => !one.starred)],
+    archived: sorted.filter((one) => one.archived),
+    matches
+  };
+}
+
+/**
+ * How often each loop and story has been played: the replica's plays and the ones still waiting on
+ * this device to be sent, which count the moment they happen (`plays.ts`). Counted, never stored.
+ */
+export function playCounts(graph: VocabularyGraph, pending: readonly Play[] = []): Map<string, number> {
+  const counts = new Map<string, number>();
+  const seen = new Set<string>();
+  for (const play of [...live(graph.plays), ...pending]) {
+    if (seen.has(play.id)) continue;
+    seen.add(play.id);
+    const id = play.loopId ?? play.storyId;
+    if (id) counts.set(id, (counts.get(id) ?? 0) + 1);
+  }
+  return counts;
 }
 
 /** Each word you hold as text a made-list search reads: headword, lemma, reading, short gloss, glosses. */

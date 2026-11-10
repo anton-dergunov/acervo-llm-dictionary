@@ -24,6 +24,7 @@
  */
 
 import { useSyncExternalStore } from "react";
+import { recordPlay } from "./plays";
 import { AcervoApiError, backendSession } from "./api";
 import { loopAutoplayEnabled, loopCacheEnabled, loopRepeatEnabled } from "./editorPreferences";
 import { createMediaStore, type MediaStore } from "./mediaStore";
@@ -215,6 +216,9 @@ export async function play(track: LoopTrack, { at }: { at?: number } = {}): Prom
     player.currentTime = at ?? 0;
     update({ loading: false });
     describe(track);
+    // A play is a start from the top: what Least played counts. A resume, or a start from a line
+    // tapped mid-track, is not another one.
+    if (!at) recordPlay("loop", loop.id);
     await player.play().catch(failWith);
   } catch (error) {
     // Nothing is going to arrive at that position now, so the clock stops being overruled by it.
@@ -284,7 +288,7 @@ function ended(): void {
      its way the element holds the silence and `held` is still the previous track, or nothing. */
   if (!held || audio().src !== held) return;
   const repeat = loopRepeatEnabled();
-  if (repeat && current) { seek(0); void audio().play().catch(failWith); return; }
+  if (repeat && current) { recordPlay("loop", current.loop.id); seek(0); void audio().play().catch(failWith); return; }
   if (loopAutoplayEnabled()) {
     const next = neighbour(1);
     if (next) { void play(next); return; }

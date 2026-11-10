@@ -195,13 +195,13 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
         id: "loopmorning0001", language: "es", styleId: "sunlit-acoustic", seed: 104740,
         engineVersion: "1.4.0", bedFingerprint: "90c6ad267d159b0e", format: "classic", switches: {}, fallbackFrom: null,
         audioRef: "loops/es/90c6ad267d159b0e.mp3", audioMime: "audio/mpeg",
-        durationSeconds: 124.5, position: 0, ...sync("09-01")
+        durationSeconds: 124.5, position: 0, starred: false, archived: false, ...sync("09-01")
       },
       {
         // Queued but not rendered: an absent reference is the whole of what says so.
         id: "loopqueued00001", language: "es", styleId: null, seed: 0, engineVersion: null,
         bedFingerprint: null, format: "classic", switches: {}, fallbackFrom: null, audioRef: null, audioMime: null,
-        durationSeconds: null, position: 1, ...sync("09-02")
+        durationSeconds: null, position: 1, starred: false, archived: false, ...sync("09-02")
       }
     ],
     loopItems: [
@@ -223,13 +223,13 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
       {
         id: "storypicada0001", language: "es", typeId: "funny", styleId: "comic-book",
         title: "La balsa que picaba", titleTranslation: "The raft that stung",
-        emoji: "\u{1F6F6}", modelId: "gemini/gemini-3.5-flash-lite", position: 0, guidance: null, parts: 4,
+        emoji: "\u{1F6F6}", modelId: "gemini/gemini-3.5-flash-lite", position: 0, guidance: null, parts: 4, starred: false, archived: false,
         ...sync("09-03")
       },
       {
         // Asked for and never written: having no parts is the whole of what says so.
         id: "storyqueued0001", language: "es", typeId: "mystery", styleId: "film-noir",
-        title: null, titleTranslation: null, emoji: "\u{1F575}", modelId: null, guidance: null, parts: 4,
+        title: null, titleTranslation: null, emoji: "\u{1F575}", modelId: null, guidance: null, parts: 4, starred: false, archived: false,
         position: 1, ...sync("09-04")
       }
     ],
@@ -292,6 +292,7 @@ function recorded(): Omit<VocabularyGraph, "loopCues"> {
         bedFingerprint: "90c6ad267d159b0e", sourceLoopId: "loopmorning0001",
         audioRef: null, audioMime: null, durationSeconds: null, ...sync("09-03")
       }
-    ]
+    ],
+    plays: []
   };
 }

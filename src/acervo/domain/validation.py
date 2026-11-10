@@ -502,6 +502,19 @@ def validate(name: str, row: Mapping[str, Any], lookup: Lookup) -> None:
             refuse("A kept bed with no music has no duration.")
         return
 
+    if name == "plays":
+        # One of the two, never both or neither: a play is of one thing. Same-owner, and not
+        # required to be alive — a play made offline may arrive after its loop was deleted, and it
+        # still happened.
+        loop, story = _text(row, "loop"), _text(row, "story")
+        if bool(loop) == bool(story):
+            refuse("A play is of one loop or one story.")
+        if loop:
+            _same_owner(row, _related(lookup, "loops", loop, "Loop"), "Play")
+        else:
+            _same_owner(row, _related(lookup, "stories", story, "Story"), "Play")
+        return
+
     if name == "loop_items":
         loop = _related(lookup, "loops", _text(row, "loop"), "Loop")
         _same_owner(row, loop, "Loop item")

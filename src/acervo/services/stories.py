@@ -304,6 +304,9 @@ def write_story(settings: Settings, owner: str, device: str, story_id: str) -> d
     at = now_instant()
     stamp = {"ownerId": owner, "deleted": False, "createdAt": at, "editedAt": at,
              "editedBy": device, "revision": 0}
+    # Read again now, not before the model call: the owner may have starred or archived it while
+    # it was being written, and the copy from before would be refused as stale and fail the job.
+    story = _story(owner, story_id)
     graph.merge_graph(owner, device, {
         "stories": [{**story, "title": written.title,
                      "emoji": written.emoji or story.get("emoji") or story_type.emoji,
@@ -367,6 +370,7 @@ def translate_story(settings: Settings, owner: str, device: str, story_id: str) 
         raise refusal(error, "text") from None
 
     at = now_instant()
+    story = _story(owner, story_id)   # again after the model call, as `write_story` does
     graph.merge_graph(owner, device, {
         "stories": [{**story, "titleTranslation": done.title, "editedAt": at, "editedBy": device}],
         "storyParts": [

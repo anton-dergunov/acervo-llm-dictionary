@@ -394,7 +394,8 @@ wrong, and a comparison of two arms is blind to a defect they share.
 ### 9 · A loop is three collections, and its state is derived
 
 `loops` — `language`, `format`, `switches`, `fallbackFrom`, `styleId`, `seed`, `engineVersion`,
-`bedFingerprint`, `audioRef`, `audioMime`, `durationSeconds`, `position`. `loopItems` — `loopId`,
+`bedFingerprint`, `audioRef`, `audioMime`, `durationSeconds`, `position`, `starred`, `archived`.
+`loopItems` — `loopId`,
 `lexemeId`, `position`, `sourceText`, `targetText`, `emotion`, `startSeconds`,
 `sourceRevealSeconds`, `targetRevealSeconds`, `endSeconds`. `loopCues` — `loopId`, `position`,
 `group`, `kind`, `section`, `loopItemId`, `side`, `role`, `language`, `text`, `take`, `startSeconds`,
@@ -853,10 +854,27 @@ cluster themselves move rows between them as the list grows. Orders do the work 
   reviewed; the figure the word list's "Hardest" and the draw's Hard read.
 - **Rarest** — the mean Zipf figure of its words, lowest first, from the same once-a-session
   `GET /words/rarity` the draw's Rare reads (`rarity.ts`).
+- **Least played**, fewest first, for variety: what has had its turn least. Not Most played, which
+  would keep handing back the favourites the star already puts first.
+
+**Starred lead, archived fold.** In every order the starred rows come first, then the rest; archived
+ones fold greyed under a rule at the foot, as set-aside words do, opened by hand or by any search, and
+leave the player's queue. Both are the owner's marks, `starred` and `archived`, fields on the loop and
+on the story rather than anything derived, written as ordinary edits. A row's actions are Star,
+Archive and Delete, by swipe or right-click, and an open loop or story has its star at the far end of
+its top line — liking one is decided while hearing it. The star means only this; kept music is a
+bookmark holding a note, so one screen never shows two stars meaning two things.
+
+**A play is a record**, one per play, in `plays`, and how often something was played is counted from
+them, never stored. A loop's play is a start from the top, and each time Repeat starts it again; a
+resume, or a start from a line tapped mid-track, is not another. A story's is an opening that reaches
+its second part, by page or by voice, once per opening, so an accidental tap is not a read. Rows say
+`played 9×` and `read 3×`. A play made offline waits on the device and counts at once — the one write
+that may wait, because it is never edited ([`../architecture/sync.md`](../architecture/sync.md)).
 
 A row with no figure for any of its words goes last, and an order with nothing to go by says so under
 the head rather than leaving a list that looks unsorted. The order is remembered per list on the
-device, and the player's queue is the list in the order shown.
+device, and the player's queue is the list in the order shown, archived ones left out.
 
 **While Loops or Stories is open, the top bar is theirs.** Its search searches the words in their
 loops or stories — as said or used, what they mean there, and the word as you hold it (headword,

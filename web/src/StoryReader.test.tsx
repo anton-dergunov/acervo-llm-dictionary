@@ -27,6 +27,9 @@ vi.mock("./storyAudio", () => ({
   stopPart: (...args: unknown[]) => stopPart(...args)
 }));
 
+const recordPlay = vi.fn();
+vi.mock("./plays", () => ({ recordPlay: (...args: unknown[]) => recordPlay(...args) }));
+
 /* jsdom does no layout, so a deck that snaps under the finger has to be faked: every page is one
    hundred wide, and scrolling to an offset is a scroll event at that offset. The reader reads only
    `scrollLeft / clientWidth`, which is all a real snap track would tell it too. */
@@ -95,6 +98,18 @@ const position = () => document.querySelector(".story-bar-count")?.textContent;
 const translation = () => document.querySelector(".story-tr")?.textContent ?? "";
 
 describe("reading a story", () => {
+  /* A read is an opening that reaches the second part — once, however far it goes after that. */
+  it("counts a read when the second part is reached, once per opening", () => {
+    recordPlay.mockClear();
+    reader();
+    expect(recordPlay).not.toHaveBeenCalled();
+    next();
+    expect(recordPlay).toHaveBeenCalledWith("story", "storypicada0001");
+    previous();
+    next();
+    expect(recordPlay).toHaveBeenCalledTimes(1);
+  });
+
   it("says which story it is and where you are in it, in the header", () => {
     reader();
     expect(document.querySelector(".story-bar-title")).toHaveTextContent("La balsa que picaba");

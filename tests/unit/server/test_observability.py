@@ -344,3 +344,13 @@ def test_a_story_passage_that_said_more_than_itself_is_what_admin_log_failed_sho
     failed = activity.select(activity.entries(logs), failed=True)
     assert any("story-audio outcome result=said-more remedy=retook" in text
                and "said more than its passage; recorded once more" in text for _, _, _, text in failed), failed
+
+
+def test_a_refused_play_is_what_admin_log_shows_with_its_sentence(logs, server):
+    """A play sent from a device's queue fails where nobody is watching: the line is the only witness."""
+    from graph_records import play
+
+    answer = server.push({"plays": [play()]})
+    assert answer.status_code == 400
+    (line,) = refusals(logs)
+    assert "code=invalid_record" in line and "A play is of one loop or one story." in line

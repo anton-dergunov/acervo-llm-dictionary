@@ -12,7 +12,7 @@ vi.mock("./picture", () => ({
 function view(overrides: Partial<Parameters<typeof StoryView>[0]> = {}) {
   const props = {
     graph: testGraph(), language: "es", languageName: "Spanish",
-    onClose: vi.fn(), onDelete: vi.fn(),
+    onClose: vi.fn(), onDelete: vi.fn(), onMark: vi.fn(),
     ...overrides
   };
   return { ...render(<StoryView {...props} />), props };

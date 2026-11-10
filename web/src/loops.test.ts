@@ -20,7 +20,7 @@ const loop: Loop = {
   id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
   engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
   audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg",
-  durationSeconds: 90, position: 1,
+  durationSeconds: 90, position: 1, starred: false, archived: false,
   ownerId: "owner0000000001", deleted: false, createdAt: "2026-09-16T00:00:00.000Z",
   editedAt: "2026-09-16T00:00:00.000Z", editedBy: "device000000001", revision: 1
 };

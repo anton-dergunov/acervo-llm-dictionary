@@ -1,13 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { AcervoApiError, backendSession, SCHEMA_VERSION } from "./api";
-import type { VocabularyGraph } from "./domain";
+import type { Play, VocabularyGraph } from "./domain";
+import { pendingPlays, recordPlay, resetPlaysForTests } from "./plays";
 import { repository } from "./repository";
 import { syncEngine } from "./sync";
 import { TEST_OWNER, testGraph } from "./testGraph";
 
 const DATASET = "dataset00000001";
 const EMPTY = (): VocabularyGraph => ({
-  vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [], pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [], storyWords: [], beds: []
+  vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [], imagePrompts: [], pronunciations: [], studyStates: [], loops: [], loopItems: [], loopCues: [], stories: [], storyParts: [], storyWords: [], beds: [], plays: []
 });
 
 /** The server numbers every row it hands back; the cursor is the highest of them. */
@@ -265,5 +266,49 @@ describe("writing through the server", () => {
     const before = repository.snapshot();
     await expect(repository.saveTopic({ name: "Slang", icon: null, order: 2 })).rejects.toThrow("not connected");
     expect(repository.snapshot().topics).toEqual(before.topics);
+  });
+});
+
+/* Plays are the one write that waits on the device (`plays.ts`): sent after a pull, quietly, and
+   forgotten once the server has them or has refused them for good. */
+describe("sending the plays that waited", () => {
+  beforeEach(async () => {
+    resetPlaysForTests();
+    await repository.clear();
+    await repository.load(TEST_OWNER);
+    signedIn();
+    syncEngine.start();
+    const { graph, cursor } = numbered();
+    vi.spyOn(backendSession, "pullGraph").mockResolvedValue(pullResponse(graph, cursor));
+    await syncEngine.syncNow(true);
+  });
+  afterEach(() => { syncEngine.stop(); vi.restoreAllMocks(); resetPlaysForTests(); });
+
+  const stored = (play: Play) => ({ ...play, revision: 900 });
+
+  it("sends a play after the pull, keeps the server's copy, and forgets its own", async () => {
+    recordPlay("loop", "loopmorning0001");
+    const [waiting] = pendingPlays();
+    const push = vi.spyOn(backendSession, "pushGraph").mockResolvedValue(
+      { schemaVersion: SCHEMA_VERSION, datasetId: DATASET, cursor: 900, serverTime: "", records: { plays: [stored(waiting)] } } as never);
+    await syncEngine.syncNow(true);
+    expect(push).toHaveBeenCalledWith(expect.any(String), { plays: [waiting] });
+    expect(pendingPlays()).toEqual([]);
+    expect(repository.snapshot().plays.map((play) => play.id)).toEqual([waiting.id]);
+  });
+
+  it("keeps a play it could not send, and says nothing about it", async () => {
+    recordPlay("loop", "loopmorning0001");
+    vi.spyOn(backendSession, "pushGraph").mockRejectedValue(new TypeError("Failed to fetch"));
+    await syncEngine.syncNow(true);
+    expect(pendingPlays()).toHaveLength(1);
+    expect(syncEngine.getStatus().state).toBe("idle");
+  });
+
+  it("forgets a play the server refused, which could never succeed", async () => {
+    recordPlay("loop", "loopmorning0001");
+    vi.spyOn(backendSession, "pushGraph").mockRejectedValue(new AcervoApiError("Refused.", 409, "stale_record"));
+    await syncEngine.syncNow(true);
+    expect(pendingPlays()).toEqual([]);
   });
 });

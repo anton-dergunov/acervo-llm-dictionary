@@ -27,9 +27,10 @@ order always resolves, and tombstones cascade in the reverse order.
 | `loops`, `loopItems`, `loopCues` | a rendered track, each word in it, and every line it says | hang off no word |
 | `stories`, `storyParts`, `storyWords` | an illustrated story, its parts, and the words it was asked to teach | |
 | `beds` | a loop's music, kept to be asked for again | outlives the loop it came from |
+| `plays` | one play of a loop, or one read of a story | made once and never edited; the one write a device may hold back |
 
-Loops, stories and beds sit last because they hang off no word; that is also what puts them inside
-"Delete all words".
+Loops, stories, beds and plays sit last because they hang off no word; that is also what puts them
+inside "Delete all words".
 
 ### Fields on every record
 
@@ -190,7 +191,8 @@ them, grouped as the player shows them. **A story** is its kind, style, title an
 are a paragraph, its translation, a picture and a recording per passage; **its words** are the words
 it was asked to teach and the forms it actually used. **A bed** is a loop's music kept to be asked for
 again, by its `styleId` and `seed`, with its own minute of that music once the server has rendered it
-(`audioRef`, `audioMime`, `durationSeconds`), to be heard without a voice. The designs are [`../features/loops.md`](../features/loops.md) and
+(`audioRef`, `audioMime`, `durationSeconds`), to be heard without a voice. **A play** names the loop
+or the story it was of, and its `createdAt` is when it happened. The designs are [`../features/loops.md`](../features/loops.md) and
 [`../features/stories.md`](../features/stories.md).
 
 Three rules they share:
@@ -198,7 +200,9 @@ Three rules they share:
 - **State is derived, never a status column.** A loop with no `audioRef` is not rendered yet, and a
   bed with none has no music of its own yet; a story
   with no parts was never written; a part with no passages is not recorded. A status would be one more
-  fact to keep in step with the ones that already say it.
+  fact to keep in step with the ones that already say it. How often a loop was played is counted from
+  its `plays`, never stored. What *is* stored is what the owner decided — a loop's or a story's
+  `starred` and `archived` — because nothing could derive a mark a person set.
 - **What was said is denormalised on purpose.** A loop item's and a story word's `sourceText` record
   what was spoken or asked for, so editing the word afterwards cannot make a caption describe a
   recording it does not match. Deleting the word leaves these rows alone, pointing at a tombstone.

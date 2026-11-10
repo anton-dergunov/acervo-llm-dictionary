@@ -19,10 +19,10 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { isRecording, jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
-import type { VocabularyGraph } from "./domain";
+import type { Story, VocabularyGraph } from "./domain";
 import { BackIcon, HourglassIcon } from "./icons";
 import FitWords from "./FitWords";
-import { MadeHead, MatchLine, useMadeList } from "./MadeList";
+import { ArchivedFold, MadeHead, MatchLine, StarMark, madeActions, useMadeList } from "./MadeList";
 import StoryReader from "./StoryReader";
 import SwipeRow from "./SwipeRow";
 import {
@@ -33,7 +33,7 @@ function count(amount: number, noun: string): string {
   return `${amount} ${noun}${amount === 1 ? "" : "s"}`;
 }
 
-export default function StoryView({ graph, language, languageName, query = "", opening = null, onClose, onDelete }: {
+export default function StoryView({ graph, language, languageName, query = "", opening = null, onClose, onDelete, onMark }: {
   graph: VocabularyGraph;
   language: string;
   languageName: string;
@@ -45,6 +45,8 @@ export default function StoryView({ graph, language, languageName, query = "", o
   onClose(): void;
   /** Online-only and loud when it fails, like every other write. */
   onDelete(storyId: string): void;
+  /** Star or archive a story, or take either back. Online-only and loud, like every write. */
+  onMark(storyId: string, marks: Partial<Pick<Story, "starred" | "archived">>): void;
 }) {
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
   const order = useMadeList(graph, "story", language, query);
@@ -54,41 +56,7 @@ export default function StoryView({ graph, language, languageName, query = "", o
   // A search is answered by the list, so an open story gives way to it.
   useEffect(() => { if (query.trim()) setOpenId(null); }, [query]);
 
-  if (open) {
-    /* `reading` widens the column: a story is read beside its picture where there is room, and that
-       is wider than the list's measure. The reader owns its own header, where the counter lives. */
-    return <section className="loops stories reading">
-      <StoryReader
-        story={open}
-        title={storyTitle(graph, open)}
-        parts={storyPartsOf(graph, open.id)}
-        words={storyWordsOf(graph, open.id)}
-        entries={storyWordEntries(graph, open.id)}
-        recording={isRecording(jobFor(live, "story", open.id))}
-        startAt={open.id === opening?.storyId ? opening.page : 0}
-        onBack={() => setOpenId(null)}
-      />
-    </section>;
-  }
-
-  return <section className="loops stories">
-    <div className="loops-back">
-      <button className="icon-btn" onClick={onClose} aria-label="Back to the list"><BackIcon /></button>
-      <span className="label">Your words</span>
-      <span className="spacer" />
-    </div>
-
-    <MadeHead kind="story" icon="📖" title="Stories" count={stories.length} languageName={languageName} query={query} order={order} />
-
-    {stories.length === 0 && (query.trim()
-      ? <p className="ext-status none-yours">No story of yours uses “{query.trim()}”.</p>
-      : <p className="empty">
-        No stories yet. A story takes a few of your words and tells them back to you as something
-        worth reading, which is how they stick. Make a story, at the top, to start one.
-      </p>)}
-
-    <div className="loops-list">
-      {stories.map((story) => {
+  function row(story: Story) {
         const written = storyIsWritten(graph, story.id);
         const pictures = storyPictures(graph, story.id);
         const words = storyWordsOf(graph, story.id);
@@ -99,17 +67,17 @@ export default function StoryView({ graph, language, languageName, query = "", o
           : "";
         return <SwipeRow
           key={story.id} shellClassName="story-shell"
-          actions={[{ label: "Delete", menuLabel: "Delete this story", tone: "danger", run: () => onDelete(story.id) }]}
+          actions={madeActions("story", story, { onMark: (marks) => onMark(story.id, marks), onDelete: () => onDelete(story.id) })}
         >
           <button
-            className="loop-row" aria-disabled={!written}
+            className={`loop-row${story.archived ? " archived" : ""}`} aria-disabled={!written}
             onClick={() => { if (written) setOpenId(story.id); }}
           >
             <span className={`loop-go story-go${written ? "" : " pending"}`}>
               {written ? (story.emoji || "📖") : <HourglassIcon />}
             </span>
             <span className="loop-main">
-              <span className="loop-title">{storyTitle(graph, story)}</span>
+              <span className="loop-title">{storyTitle(graph, story)}<StarMark on={story.starred} /></span>
               <span className="loop-sub">
                 {making
                   /* **One figure while it is being made**, whether or not it can be read yet. The
@@ -133,13 +101,55 @@ export default function StoryView({ graph, language, languageName, query = "", o
                 ? written && <span className="story-ready">Ready to read</span>
                 : written && <>
                   <span className="story-counts">{count(pictures.total, "part")} · {count(words.length, "word")}</span>
+                  {(order.plays.get(story.id) ?? 0) > 0 && <span className="story-plays">read {order.plays.get(story.id)}×</span>}
                   {pictures.drawn < pictures.total
                     && <span className="warn">{pictures.drawn} of {pictures.total} drawn</span>}
                 </>}
             </span>
           </button>
         </SwipeRow>;
-      })}
+      }
+
+  if (open) {
+    /* `reading` widens the column: a story is read beside its picture where there is room, and that
+       is wider than the list's measure. The reader owns its own header, where the counter lives. */
+    return <section className="loops stories reading">
+      <StoryReader
+        story={open}
+        title={storyTitle(graph, open)}
+        parts={storyPartsOf(graph, open.id)}
+        words={storyWordsOf(graph, open.id)}
+        entries={storyWordEntries(graph, open.id)}
+        recording={isRecording(jobFor(live, "story", open.id))}
+        startAt={open.id === opening?.storyId ? opening.page : 0}
+        onBack={() => setOpenId(null)}
+        onStar={() => onMark(open.id, { starred: !open.starred })}
+      />
+    </section>;
+  }
+
+  return <section className="loops stories">
+    <div className="loops-back">
+      <button className="icon-btn" onClick={onClose} aria-label="Back to the list"><BackIcon /></button>
+      <span className="label">Your words</span>
+      <span className="spacer" />
+    </div>
+
+    <MadeHead kind="story" icon="📖" title="Stories" count={stories.length} archived={order.list.archived.length}
+      languageName={languageName} query={query} order={order} />
+
+    {stories.length === 0 && !order.list.archived.length && (query.trim()
+      ? <p className="ext-status none-yours">No story of yours uses “{query.trim()}”.</p>
+      : <p className="empty">
+        No stories yet. A story takes a few of your words and tells them back to you as something
+        worth reading, which is how they stick. Make a story, at the top, to start one.
+      </p>)}
+
+    <div className="loops-list">
+      {stories.map(row)}
+      <ArchivedFold count={order.list.archived.length} searching={Boolean(query.trim())}>
+        {order.list.archived.map(row)}
+      </ArchivedFold>
     </div>
   </section>;
 }

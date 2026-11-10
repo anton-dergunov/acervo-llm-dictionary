@@ -342,7 +342,7 @@ describe("loops", () => {
     language: "es", styleId: "sunlit-acoustic", seed: 104740, engineVersion: "1.4.0",
     bedFingerprint: "90c6ad267d159b0e", format: "classic", switches: {}, fallbackFrom: null,
     audioRef: "loops/es/90c6ad267d159b0e.mp3", audioMime: "audio/mpeg",
-    durationSeconds: 124.5, position: 0
+    durationSeconds: 124.5, position: 0, starred: false, archived: false
   };
 
   const itemInput = {

@@ -403,6 +403,9 @@ def store(settings: Settings, owner: str, device: str, loop_id: str, rendered: L
                        "The render spoke a word this loop does not have, so it was not stored.")
     stamp = {"ownerId": owner, "deleted": False, "createdAt": at, "editedAt": at,
              "editedBy": device, "revision": 0}
+    # Read again after the track was fetched: a star or an archive set while it was rendering must
+    # be kept, and the copy from before would be refused as stale.
+    loop = graph.owned_records(owner, "loops", [loop_id]).get(loop_id) or loop
     stale = [row for row in graph.loop_cues(owner, loop_id) if not row.get("deleted")]
     changes = {
         "loops": [{

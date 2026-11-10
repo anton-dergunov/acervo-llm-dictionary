@@ -1209,6 +1209,16 @@ details.fold .fold-body { padding: 4px 0 18px; }
    alike. The make dialog's own icons. */
 .loop-go.kind { border-radius: 9px; background: var(--surface-2); border: 1px solid var(--rule-soft); color: var(--core); }
 .loop-go.kind svg { width: 19px; height: 19px; }
+/* Archived: greyed and folded at the foot, as a word set aside is. */
+.loop-row.archived { opacity: .5; }
+.loop-row.archived:hover, .loop-row.archived:focus-visible { opacity: .8; }
+.made-archive > .swipe-item + .swipe-item { border-top: 1px solid var(--rule-soft); }
+.made-archive { margin-top: 6px; }
+/* Starred: a small star after the title, in the title's line, so a row does not change shape. */
+.made-star { display: inline-grid; vertical-align: -1px; margin-left: 6px; color: var(--core); }
+.made-star svg { width: 12px; height: 12px; }
+.made-star-btn.on { color: var(--core); }
+.nowrap { white-space: nowrap; }
 /* The head is the word list's own, above the rows so it stays put while they scroll. */
 .made-head { flex: none; margin-bottom: 8px; }
 .made-head .sortbar { flex-wrap: wrap; }
@@ -2975,6 +2985,7 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
   color: var(--ink-3); white-space: nowrap;
 }
 .story-meta .warn { color: var(--warn); }
+.story-plays { color: var(--ink-3); }
 /* The row is its own container, so what to drop is decided by how much room *it* has and not by the
    window: counts are the first thing to go, and the warning about undrawn pictures is not. */
 .story-shell { container: story-row / inline-size; }
@@ -3010,8 +3021,9 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
   min-width: 0; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
   text-align: center; font: 700 19px/1.25 var(--serif); color: var(--ink);
 }
+.story-bar-end { justify-self: end; display: flex; align-items: center; gap: 12px; }
 .story-bar-count {
-  justify-self: end; white-space: nowrap; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3);
+  white-space: nowrap; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3);
 }
 
 .story-read .cards-stage { container-type: inline-size; container-name: deck; }

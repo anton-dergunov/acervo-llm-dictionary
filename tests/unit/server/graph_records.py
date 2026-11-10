@@ -92,9 +92,9 @@ def loop(**overrides: Any) -> dict[str, Any]:
     """A rendered loop. Pass `audioRef=None, audioMime=None` for one the job has not finished."""
     return {
         "id": new_record_id(), "language": "es", "styleId": "sunlit-acoustic", "seed": 104740,
-        "engineVersion": "1.4.0", "bedFingerprint": "90c6ad267d159b0e", "pattern": "retrieval",
+        "engineVersion": "1.4.0", "bedFingerprint": "90c6ad267d159b0e", "format": "classic", "switches": {}, "fallbackFrom": None,
         "audioRef": "loops/es/90c6ad267d159b0e.mp3", "audioMime": "audio/mpeg",
-        "durationSeconds": 124.5, "position": 0, **stamp(), **overrides,
+        "durationSeconds": 124.5, "position": 0, "starred": False, "archived": False, **stamp(), **overrides,
     }
 
 
@@ -105,3 +105,17 @@ def loop_item(loop_id: str, lexeme_id: str, **overrides: Any) -> dict[str, Any]:
         "startSeconds": 8.82, "sourceRevealSeconds": 8.82, "targetRevealSeconds": 17.65,
         "endSeconds": 44.12, **stamp(), **overrides,
     }
+
+
+def story(**overrides: Any) -> dict[str, Any]:
+    """A story as it is asked for, before anything is written."""
+    return {
+        "id": new_record_id(), "language": "es", "typeId": "funny", "styleId": "comic-book",
+        "title": None, "titleTranslation": None, "emoji": None, "modelId": None, "position": 0,
+        "guidance": None, "parts": 4, "starred": False, "archived": False, **stamp(), **overrides,
+    }
+
+
+def play(**overrides: Any) -> dict[str, Any]:
+    """One play. Name the loop or the story it was of."""
+    return {"id": new_record_id(), "loopId": None, "storyId": None, **stamp(), **overrides}

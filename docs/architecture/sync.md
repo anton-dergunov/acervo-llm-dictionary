@@ -2,7 +2,7 @@
 
 > **DECISION: every read is served from the device's replica and works with the server unreachable.
 > Every write — create, edit, delete, reset — is a synchronous round trip that fails loudly when
-> offline and leaves the replica untouched. Nothing is ever queued.**
+> offline and leaves the replica untouched. Nothing is queued but a play (below).**
 
 The server is the durable store; IndexedDB holds a complete owner-scoped replica on each device and is
 the only store the interface reads. The records are [`data-model.md`](data-model.md); the server side
@@ -30,8 +30,24 @@ is simply refused — an interactive save can be retried, where a queued one cou
 | Concurrent edit | **Refused — `409 stale_record`** | An interactive save can be retried; a queued one cannot |
 | Pull and push | **Separate** | There is nothing to push at poll time |
 | Partial failure | **All or nothing per batch** | One save is one article; half an article is worse than none |
-| Pending queue | **Does not exist** | Nothing is ever unsent |
+| Pending queue | **Plays only** | A play has no version to be stale against; every other write is sent or refused |
 | Rebuilt server | **Stop and ask** | Nothing is re-pushed, so wiping the replica could destroy the last full copy |
+
+### The one write that waits: a play
+
+A play of a loop or a read of a story (`plays`) happens where no other write does — on a phone in a
+pocket, often out of reach of the server — and Least played needs to have heard about it. It is also
+the one record the argument above does not touch: it is **made once and never edited**, so it carries
+no revision it was edited *from*, and there is nothing it could be stale against or conflict with.
+Sending it an hour late is the same write as sending it at once.
+
+So a play waits in a small outbox on the device, under the account it was made in (`plays.ts`), and
+counts the moment it happens. The sync engine sends what waits after each pull, one at a time: a play
+the replica already holds is forgotten, one the server stores is merged and forgotten, and one it
+refuses — sent twice when the first answer was lost, or of something this account does not hold — is
+forgotten too, because it could never succeed; the refusal is in the activity log. Anything else, an
+unreachable server above all, leaves it for the next sync, and says nothing: being unable to send a
+play is not a sync failure. Nothing else may use this path, and a record that can be edited never can.
 
 ---
 

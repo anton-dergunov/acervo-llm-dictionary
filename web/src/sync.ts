@@ -5,6 +5,7 @@ import {
 } from "./repository";
 import type { ArticleDraft } from "./yaml";
 import { isNativeHost } from "./pwa";
+import { dropPlays, onPlayRecorded, pendingPlays } from "./plays";
 
 /**
  * A word captured a minute ago does not need to arrive this second, and a pull that finds nothing
@@ -68,6 +69,8 @@ class SyncEngine implements RemoteGraph {
     window.addEventListener("online", trigger);
     document.addEventListener("visibilitychange", whenVisible);
     this.stops.push(
+      // A play is sent with the next sync, and asks for one: online, it reaches the server at once.
+      onPlayRecorded(trigger),
       () => window.removeEventListener("focus", whenVisible),
       () => window.removeEventListener("online", trigger),
       () => document.removeEventListener("visibilitychange", whenVisible)
@@ -121,6 +124,7 @@ class SyncEngine implements RemoteGraph {
     else this.announce = window.setTimeout(() => this.update({ state: "syncing" }), SYNCING_VISIBLE_AFTER);
     try {
       await this.pull();
+      await this.sendPlays();
       this.update({ state: "idle", message: null });
     } catch (error) {
       this.update(this.failure(error));
@@ -140,6 +144,32 @@ class SyncEngine implements RemoteGraph {
     // A delta is not a whole graph and cannot be validated as one — half its relations point at
     // records the replica already holds. `applyRemote` validates the merged result instead.
     await repository.applyRemote(response.changes, response.cursor, response.datasetId);
+  }
+
+  /**
+   * The plays made on this device that the server has not got yet (`plays.ts`), one at a time, after
+   * a pull — so one already pulled back is recognised and not sent twice. Quiet on purpose: a play is
+   * the one write that may wait, so being unable to send one is not a sync failure. A refusal — a
+   * play already stored, or of something this account does not hold — can never succeed and is
+   * dropped; the server has written it down. Anything else leaves it for the next sync.
+   */
+  private async sendPlays(): Promise<void> {
+    const replica = repository.state();
+    const waiting = pendingPlays(replica.ownerId);
+    if (!waiting.length) return;
+    const held = new Set(repository.snapshot().plays.map((play) => play.id));
+    dropPlays(waiting.filter((play) => held.has(play.id)).map((play) => play.id));
+    for (const play of waiting.filter((one) => !held.has(one.id))) {
+      try {
+        const response = await backendSession.pushGraph(replica.deviceId, { plays: [play] });
+        this.guardDataset(replica.datasetId, response.datasetId);
+        await repository.applyRemote(response.records, repository.state().cursor, response.datasetId);
+        dropPlays([play.id]);
+      } catch (error) {
+        if (error instanceof AcervoApiError && error.status >= 400 && error.status < 500) dropPlays([play.id]);
+        else return;
+      }
+    }
   }
 
   /**

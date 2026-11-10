@@ -23,12 +23,12 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
 import type { Loop, VocabularyGraph } from "./domain";
-import { BackIcon, HourglassIcon, PauseIcon, PlayIcon } from "./icons";
+import { BackIcon, HourglassIcon, PauseIcon, PlayIcon, StarIcon } from "./icons";
 import { formatIcon } from "./LoopFormat";
 import * as player from "./loops";
 import { useLoopSchema } from "./LoopMusic";
 import LoopPlayer from "./LoopPlayer";
-import { MadeHead, MatchLine, useMadeList } from "./MadeList";
+import { ArchivedFold, MadeHead, MatchLine, StarMark, madeActions, useMadeList } from "./MadeList";
 import SwipeRow from "./SwipeRow";
 import { formatLabel, loopIsReady, loopItemsOf, loopTitle, loopTrackOf, loopsIn } from "./selectors";
 
@@ -37,7 +37,7 @@ function clock(seconds: number | null): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-export default function LoopView({ graph, language, languageName, query = "", opening = null, onClose, onDelete, onChooseMusic, onToggleKeep }: {
+export default function LoopView({ graph, language, languageName, query = "", opening = null, onClose, onDelete, onMark, onChooseMusic, onToggleKeep }: {
   graph: VocabularyGraph;
   language: string;
   languageName: string;
@@ -49,6 +49,8 @@ export default function LoopView({ graph, language, languageName, query = "", op
   onClose(): void;
   /** Online-only and loud when it fails, like every other write. */
   onDelete(loopId: string): void;
+  /** Star or archive a loop, or take either back. Online-only and loud, like every write. */
+  onMark(loopId: string, marks: Partial<Pick<Loop, "starred" | "archived">>): void;
   /** Open New music for this loop. */
   onChooseMusic(loopId: string): void;
   /** Keep this loop's music as a favourite, or stop keeping it. */
@@ -71,12 +73,76 @@ export default function LoopView({ graph, language, languageName, query = "", op
     player.setQueue(loops.map((loop) => loopTrackOf(graph, loop)));
   }, [graph, loops.map((loop) => loop.id).join()]);
 
+  function row(loop: Loop) {
+    const items = loopItemsOf(graph, loop.id);
+    const ready = loopIsReady(loop);
+    const job = jobFor(live, "loop", loop.id);
+    const making = jobIsOpen(job);
+    const failure = job?.state === "failed"
+      ? job.message || stripOf(job)?.failure || job.error || ""
+      : "";
+    const loaded = playback.loopId === loop.id;
+    const here = loaded && playback.playing;
+    const Kind = formatIcon(loop.format);
+    const plays = order.plays.get(loop.id) ?? 0;
+    /* Star, Archive and Delete, by right-click or by swipe (`SwipeRow`). The row itself is not
+       `disabled` even when there is nothing to play: a loop that was never made is the one you most
+       want rid of, and a disabled button answers no gesture at all. */
+    return <SwipeRow
+      key={loop.id}
+      actions={madeActions("loop", loop, { onMark: (marks) => onMark(loop.id, marks), onDelete: () => onDelete(loop.id) })}
+    >
+      <button
+        className={`loop-row${loaded ? " on" : ""}${loop.archived ? " archived" : ""}`}
+        aria-disabled={!ready}
+        onClick={() => {
+          if (!ready) return;
+          setOpenId(loop.id);
+          if (!here) void player.play(loopTrackOf(graph, loop));
+        }}
+      >
+        {/* The kind of loop, until it is the one loaded: then the transport. A plate rather than a
+            disc, so a row that says what it is never looks like one that plays. */}
+        <span className={`loop-go${ready ? "" : " pending"}${ready && !loaded ? " kind" : ""}`}
+              title={formatLabel(schema?.formats, loop.format)}>
+          {!ready ? <HourglassIcon /> : loaded ? (here ? <PauseIcon /> : <PlayIcon />) : <Kind />}
+        </span>
+        <span className="loop-main">
+          <span className="loop-title">{loopTitle(graph, loop)}<StarMark on={loop.starred} /></span>
+          <span className="loop-sub">
+            {ready && making
+              /* New music being made for a loop that already plays: it goes on playing the
+                 old track until this finishes, so the row says both. */
+              ? <span className="doing">New music · {stripOf(job)?.phases.map((phase) => phase.text).join(" · ") || "queued"}</span>
+              : ready
+              ? <>{formatLabel(schema?.formats, loop.format)} · {items.length} words · {clock(loop.durationSeconds)}
+                {plays > 0 && <> · <span className="nowrap">played {plays}×</span></>}</>
+              : making
+                /* What it is *doing*, in the generator's own words — this is a four-minute
+                   operation and "being made" says nothing you could not already see. */
+                ? <span className="doing">{stripOf(job)?.phases.map((phase) => phase.text).join(" · ") || "Being made…"}</span>
+                /* Why, not only that. The reason is on the job the whole time; saying "never
+                   made" and nothing else is what left a failure with no next step. */
+                : <span className="warn">{failure ? `Never made · ${failure}` : "Never made"}</span>}
+          </span>
+          <MatchLine words={order.list.matches.get(loop.id)} query={query} language={language} />
+        </span>
+      </button>
+    </SwipeRow>;
+  }
+
   if (open) {
     return <section className="loops">
       <div className="loops-back">
         <button className="icon-btn" onClick={() => setOpenId(null)} aria-label="Back to the loops"><BackIcon /></button>
         <span className="label">Loops</span>
         <span className="spacer" />
+        {/* Liking one is decided while hearing it, so the star is here too, at the line's far end. */}
+        <button
+          className={`icon-btn made-star-btn${open.starred ? " on" : ""}`} aria-pressed={open.starred}
+          aria-label={open.starred ? "Unstar this loop" : "Star this loop"} title={open.starred ? "Starred" : "Star"}
+          onClick={() => onMark(open.id, { starred: !open.starred })}
+        ><StarIcon filled={open.starred} /></button>
       </div>
       <LoopPlayer
         track={loopTrackOf(graph, open)} graph={graph}
@@ -93,9 +159,10 @@ export default function LoopView({ graph, language, languageName, query = "", op
       <span className="spacer" />
     </div>
 
-    <MadeHead kind="loop" icon="♪" title="Loops" count={loops.length} languageName={languageName} query={query} order={order} />
+    <MadeHead kind="loop" icon="♪" title="Loops" count={loops.length} archived={order.list.archived.length}
+      languageName={languageName} query={query} order={order} />
 
-    {loops.length === 0 && (query.trim()
+    {loops.length === 0 && !order.list.archived.length && (query.trim()
       ? <p className="ext-status none-yours">No loop of yours uses “{query.trim()}”.</p>
       : <p className="empty">
         No loops yet. A loop takes a handful of your words and sets them to music, so they are learned
@@ -103,61 +170,10 @@ export default function LoopView({ graph, language, languageName, query = "", op
       </p>)}
 
     <div className="loops-list">
-      {loops.map((loop) => {
-        const items = loopItemsOf(graph, loop.id);
-        const ready = loopIsReady(loop);
-        const job = jobFor(live, "loop", loop.id);
-        const making = jobIsOpen(job);
-        const failure = job?.state === "failed"
-          ? job.message || stripOf(job)?.failure || job.error || ""
-          : "";
-        const loaded = playback.loopId === loop.id;
-        const here = loaded && playback.playing;
-        const Kind = formatIcon(loop.format);
-        /* Delete is the row's one action, by right-click or by swipe (`SwipeRow`). The row itself is
-           not `disabled` even when there is nothing to play: a loop that was never made is the one
-           you most want rid of, and a disabled button answers no gesture at all. */
-        return <SwipeRow
-          key={loop.id}
-          actions={[{ label: "Delete", menuLabel: "Delete this loop", tone: "danger", run: () => onDelete(loop.id) }]}
-        >
-          <button
-            className={`loop-row${playback.loopId === loop.id ? " on" : ""}`}
-            aria-disabled={!ready}
-            onClick={() => {
-              if (!ready) return;
-              setOpenId(loop.id);
-              if (!here) void player.play(loopTrackOf(graph, loop));
-            }}
-          >
-            {/* The kind of loop, until it is the one loaded: then the transport. A plate rather than a
-                disc, so a row that says what it is never looks like one that plays. */}
-            <span className={`loop-go${ready ? "" : " pending"}${ready && !loaded ? " kind" : ""}`}
-                  title={formatLabel(schema?.formats, loop.format)}>
-              {!ready ? <HourglassIcon /> : loaded ? (here ? <PauseIcon /> : <PlayIcon />) : <Kind />}
-            </span>
-            <span className="loop-main">
-              <span className="loop-title">{loopTitle(graph, loop)}</span>
-              <span className="loop-sub">
-                {ready && making
-                  /* New music being made for a loop that already plays: it goes on playing the
-                     old track until this finishes, so the row says both. */
-                  ? <span className="doing">New music · {stripOf(job)?.phases.map((phase) => phase.text).join(" · ") || "queued"}</span>
-                  : ready
-                  ? `${formatLabel(schema?.formats, loop.format)} · ${items.length} words · ${clock(loop.durationSeconds)}`
-                  : making
-                    /* What it is *doing*, in the generator's own words — this is a four-minute
-                       operation and "being made" says nothing you could not already see. */
-                    ? <span className="doing">{stripOf(job)?.phases.map((phase) => phase.text).join(" · ") || "Being made…"}</span>
-                    /* Why, not only that. The reason is on the job the whole time; saying "never
-                       made" and nothing else is what left a failure with no next step. */
-                    : <span className="warn">{failure ? `Never made · ${failure}` : "Never made"}</span>}
-              </span>
-              <MatchLine words={order.list.matches.get(loop.id)} query={query} language={language} />
-            </span>
-          </button>
-        </SwipeRow>;
-      })}
+      {loops.map(row)}
+      <ArchivedFold count={order.list.archived.length} searching={Boolean(query.trim())}>
+        {order.list.archived.map(row)}
+      </ArchivedFold>
     </div>
 
     {playback.failed && <p className="config-help warn">{playback.failed}</p>}

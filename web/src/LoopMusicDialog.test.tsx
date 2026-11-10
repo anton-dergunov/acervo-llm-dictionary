@@ -33,7 +33,7 @@ const record = {
 const loop: Loop = {
   id: "loop00000000001", language: "es", styleId: "gentle-game", seed: 104740,
   engineVersion: "1.4.0", bedFingerprint: "f35282aaf3c40245", format: "classic", switches: {}, fallbackFrom: null,
-  audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg", durationSeconds: 90, position: 1, ...record
+  audioRef: "loops/es/loop00000000001-6ad2f019.mp3", audioMime: "audio/mpeg", durationSeconds: 90, position: 1, starred: false, archived: false, ...record
 };
 
 const bed = (over: Partial<Bed>): Bed => ({
@@ -50,7 +50,7 @@ function graphWith(beds: Bed[]): VocabularyGraph {
   return {
     vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [],
     imagePrompts: [], pronunciations: [], studyStates: [], loops: [loop], loopItems: [], loopCues: [],
-    stories: [], storyParts: [], storyWords: [], beds
+    stories: [], storyParts: [], storyWords: [], beds, plays: []
   };
 }
 

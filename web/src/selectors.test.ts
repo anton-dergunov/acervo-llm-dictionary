@@ -4,7 +4,7 @@ import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
   formatLabel, heldWord, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
   storyCandidates, storyEligible, strengthOf, topicOptions, visibleRows, voiceSample, weakestOf,
-  drawOrder, drawWords, hasReviewState, loopSecondsPerWord, usageCounts, madeLoops, madeStories
+  drawOrder, drawWords, hasReviewState, loopSecondsPerWord, usageCounts, madeLoops, madeStories, playCounts
 } from "./selectors";
 import { drillCues, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
@@ -604,5 +604,35 @@ describe("made lists", () => {
     const made = madeStories(testGraph(), { language: "es", query: "raft", sort: "recent" });
     expect(ids(made.rows)).toEqual(["storypicada0001"]);
     expect(made.matches.get("storypicada0001")?.[0]).toMatchObject({ source: "la balsa", target: "raft" });
+  });
+
+  /* Starred lead in every order; archived ones are a list of their own, sorted the same. */
+  it("puts the starred first in any order, and keeps the archived apart", () => {
+    const graph = testGraph();
+    const [morning, queued] = graph.loops;
+    const marked = { ...graph, loops: [{ ...morning, starred: true }, { ...queued, archived: true }] };
+    const made = madeLoops(marked, { language: "es", query: "", sort: "recent" });
+    expect(ids(made.rows)).toEqual(["loopmorning0001"]);
+    expect(ids(made.archived)).toEqual(["loopqueued00001"]);
+    const both = { ...graph, loops: [{ ...morning, starred: true }, queued] };
+    expect(ids(madeLoops(both, { language: "es", query: "", sort: "recent" }).rows)).toEqual(["loopmorning0001", "loopqueued00001"]);
+  });
+
+  /* For variety: what has had its turn least comes first. */
+  it("orders Least played by the plays counted, fewest first", () => {
+    const plays = new Map([["loopqueued00001", 3]]);
+    expect(ids(madeLoops(testGraph(), { language: "es", query: "", sort: "least", plays }).rows))
+      .toEqual(["loopmorning0001", "loopqueued00001"]);
+  });
+
+  it("counts the replica's plays and the ones still waiting on the device, each once", () => {
+    const graph = testGraph();
+    const stamp = { ownerId: graph.loops[0].ownerId, deleted: false, createdAt: "2026-11-01T00:00:00.000Z",
+      editedAt: "2026-11-01T00:00:00.000Z", editedBy: "device000000001", revision: 4 };
+    const held = { id: "playheld0000001", loopId: "loopmorning0001", storyId: null, ...stamp };
+    const gone = { ...held, id: "playgone0000001", deleted: true };
+    const waiting = { ...held, id: "playwaiting0001", revision: 0 };
+    const counts = playCounts({ ...graph, plays: [held, gone] }, [waiting, held]);
+    expect(counts.get("loopmorning0001")).toBe(2);
   });
 });
