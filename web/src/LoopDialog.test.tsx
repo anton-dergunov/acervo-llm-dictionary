@@ -17,7 +17,7 @@ import { replaceMusicStoreForTests } from "./music";
 import { replaceStoreForTests as resetSpeechForTests } from "./pronunciation";
 import { selectedWords } from "./selectors";
 import { testGraph } from "./testGraph";
-import { resetRarityForTests } from "./WordPicker";
+import { resetRarityForTests } from "./rarity";
 
 const SCHEMA: LoopSchema = {
   apiVersion: "2.0.0", engineVersion: "0.7.0", maxItems: 24,

@@ -580,8 +580,8 @@ with stories and the map), so what the two say cannot disagree:
 **No second bar over an article.** The article pane is 780 px of column already carrying the view
 segments, the delete control, the progress strip and `AskDock`, and a second dock there is prohibited.
 It cannot collide by accident: `AskDock` renders only when an article is open and the bar only when one
-is not. The bar has no **+**: each surface carries its own Make button in its own header, and a bar whose
-job is to be a way in should not also be a way to start something.
+is not. The bar has no **+**: on each surface the top bar's Add makes what it holds (§2.20), and a bar
+whose job is to be a way in should not also be a way to start something.
 
 A loop keeps playing while you read a word — the audio element is not the surface — and the now-playing
 row is on the bar when you come back. **There is no mini-player over an article.** The phone's
@@ -838,6 +838,39 @@ Acervo's. **The reply is plain text**, never JSON mode or a schema ([`models.md`
 on constrained decoding): LexiBeat's parser checks every part it relies on and refuses the reply
 naming the first fault, and a refusal's sentence survives every hand-off. One writer call per render,
 and none for new music.
+
+### 20 · The list: orders, search, and Make in the top bar
+
+The Loops and the Stories lists are one design (`MadeList.tsx`, and `madeLoops` / `madeStories` in
+`selectors.ts`), and **their head is the word list's**: the title and a count on the left, the orders on
+the right over the rule. Folders and grouping were considered and not built — loops and stories arrive
+one tap at a time from a dialog, so anything that needs filing by hand stays unfiled, and groups that
+cluster themselves move rows between them as the list grows. Orders do the work instead:
+
+- **Recent**, newest first, the default. Nothing sets a record's `position`, so the order the list
+  used to draw by was creation order anyway.
+- **Hardest** — the mean Anki difficulty of the words it was made from, over the words Anki has
+  reviewed; the figure the word list's "Hardest" and the draw's Hard read.
+- **Rarest** — the mean Zipf figure of its words, lowest first, from the same once-a-session
+  `GET /words/rarity` the draw's Rare reads (`rarity.ts`).
+
+A row with no figure for any of its words goes last, and an order with nothing to go by says so under
+the head rather than leaving a list that looks unsorted. The order is remembered per list on the
+device, and the player's queue is the list in the order shown.
+
+**While Loops or Stories is open, the top bar is theirs.** Its search searches the words in their
+loops or stories — as said or used, what they mean there, and the word as you hold it (headword,
+lemma, reading and glosses), but not its definitions, which mention other words and would match for a
+reason the row could not show. Each row it keeps says which of its words matched, the matched letters
+marked by a background only. It has its own text: the word list's search is as it was when the surface
+is left, and a make dialog opened there draws from the scope with no hidden filter. ⌘K stays on the
+surface, and ⏎ reaches no dictionary. **Add becomes Make a loop or Make a story**, which is why the
+surfaces carry no Make button of their own and their heads have room for the orders.
+
+A loop's badge is **the kind of loop it is** — the make dialog's own icon for a drill, a radio lesson
+or a story (`formatIcon` in `LoopFormat.tsx`), drawn on a plate — until it is the one loaded, when it is
+the round transport; a row that only says what it is never looks like one that plays. A story's badge
+stays its own emoji.
 
 ---
 

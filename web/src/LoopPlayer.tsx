@@ -38,7 +38,7 @@
 import { useContext, useEffect, useRef, useSyncExternalStore, type MouseEvent } from "react";
 import type { VocabularyGraph } from "./domain";
 import { setLoopAutoplay, setLoopRepeat, useLoopAutoplay, useLoopRepeat } from "./editorPreferences";
-import { ContinueIcon, DownIcon, NextIcon, PauseIcon, PlayIcon, PreviousIcon, RepeatIcon, StarIcon } from "./icons";
+import { ContinueIcon, DownIcon, KeepIcon, NextIcon, PauseIcon, PlayIcon, PreviousIcon, RepeatIcon } from "./icons";
 import { isOpen as jobIsOpen, jobFor, jobStream } from "./jobs";
 import { fallbackNote } from "./LoopFormat";
 import { useLoopSchema } from "./LoopMusic";
@@ -248,7 +248,7 @@ export default function LoopPlayer({ track, graph, onChooseMusic, onToggleKeep }
             aria-label={kept ? "No longer keep this music" : "Keep this music as a favourite"}
             title={kept ? "Kept as a favourite" : "Keep this music as a favourite"}
             onClick={onToggleKeep}
-          ><StarIcon filled={kept} /></button>
+          ><KeepIcon filled={kept} /></button>
           <span className="label bed-about"><span className="bed-dot">· </span><span>{formatLabel(schema?.formats, loop.format)}</span><span className="bed-dot"> · </span><span>{items.length} words</span></span>
         </span>
       </div>

@@ -19,12 +19,12 @@
  * dialog opens on the selection when it was opened from the selection bar.
  */
 
-import { useEffect, useMemo, useState, type ReactNode } from "react";
-import { AcervoApiError, backendSession } from "./api";
+import { useMemo, useState, type ReactNode } from "react";
 import type { Lexeme, VocabularyGraph } from "./domain";
 import { lastDraw, rememberDraw } from "./editorPreferences";
 import { CloseIcon, GemIcon, PeakIcon, SelectIcon, ShuffleIcon, SparkleIcon, SyncIcon } from "./icons";
 import { languageOf } from "./languages";
+import { useRarity, type Rarity } from "./rarity";
 import {
   chosenFor, drawOrder, drawWords, hasReviewState, usageCounts,
   type ChosenWord, type DrawOrder, type ListQuery, type MadeKind, type SelectedWord
@@ -45,35 +45,6 @@ const SHOWN = 12;
 
 export function wordsCount(count: number): string {
   return `${count} word${count === 1 ? "" : "s"}`;
-}
-
-/* Rarity is a figure about the language, so it is asked for once a session per language. */
-const rarities = new Map<string, Promise<Record<string, number>>>();
-
-export function resetRarityForTests(): void { rarities.clear(); }
-
-type Rarity = { state: "idle" | "asking" } | { state: "ready"; zipf: Record<string, number> } | { state: "refused"; why: string };
-
-function useRarity(language: string, wanted: boolean): Rarity {
-  const [rarity, setRarity] = useState<Rarity>({ state: "idle" });
-  useEffect(() => {
-    if (!wanted) return;
-    let live = true;
-    if (!rarities.has(language)) {
-      const asked = backendSession.wordRarity(language).then((answer) => answer.zipf);
-      asked.catch(() => rarities.delete(language));
-      rarities.set(language, asked);
-    }
-    setRarity((now) => (now.state === "ready" ? now : { state: "asking" }));
-    rarities.get(language)!.then(
-      (zipf) => { if (live) setRarity({ state: "ready", zipf }); },
-      (error: unknown) => {
-        if (live) setRarity({ state: "refused", why: error instanceof AcervoApiError ? error.message : "How rare each word is could not be read." });
-      }
-    );
-    return () => { live = false; };
-  }, [language, wanted]);
-  return rarity;
 }
 
 export interface WordDraw {

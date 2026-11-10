@@ -9,6 +9,11 @@
  * every width for the reason that one is — a surface that replaces the list has to carry the way
  * back out of itself, and a phone has no rail to fall back on.
  *
+ * **The list is drawn as the word list is** (`MadeList.tsx`): its head carries the orders, and the
+ * top bar's search, while this surface is open, searches the words in its loops — each row it keeps
+ * says which matched. Make is the top bar's Add here. A row's badge is the kind of loop it is, the
+ * make dialog's own icon, until it is the one loaded, when it is the transport.
+ *
  * A loop's state is derived and there is no status column: an empty `audioRef` is the whole of what
  * "not rendered yet" means, and the job says how far along it is. So a loop whose render failed
  * simply reads as one that was asked for and not made, and Try again queues another.
@@ -18,10 +23,12 @@ import { useEffect, useState, useSyncExternalStore } from "react";
 import { jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
 import type { Loop, VocabularyGraph } from "./domain";
-import { BackIcon, HourglassIcon, PauseIcon, PlayIcon, PlusIcon } from "./icons";
+import { BackIcon, HourglassIcon, PauseIcon, PlayIcon } from "./icons";
+import { formatIcon } from "./LoopFormat";
 import * as player from "./loops";
 import { useLoopSchema } from "./LoopMusic";
 import LoopPlayer from "./LoopPlayer";
+import { MadeHead, MatchLine, useMadeList } from "./MadeList";
 import SwipeRow from "./SwipeRow";
 import { formatLabel, loopIsReady, loopItemsOf, loopTitle, loopTrackOf, loopsIn } from "./selectors";
 
@@ -30,12 +37,14 @@ function clock(seconds: number | null): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, "0")}`;
 }
 
-export default function LoopView({ graph, language, opening = null, onMake, onClose, onDelete, onChooseMusic, onToggleKeep }: {
+export default function LoopView({ graph, language, languageName, query = "", opening = null, onClose, onDelete, onChooseMusic, onToggleKeep }: {
   graph: VocabularyGraph;
   language: string;
+  languageName: string;
+  /** The top bar's search, which on this surface searches the words in its loops. */
+  query?: string;
   /** The loop to open on: the one a word was opened from. Otherwise the one playing, if any. */
   opening?: string | null;
-  onMake(): void;
   /** Back to the words. The loop keeps playing; the bar and the chip are what it plays behind. */
   onClose(): void;
   /** Online-only and loud when it fails, like every other write. */
@@ -47,14 +56,17 @@ export default function LoopView({ graph, language, opening = null, onMake, onCl
 }) {
   const playback = player.usePlayback();
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
-  const loops = loopsIn(graph, language);
+  const order = useMadeList(graph, "loop", language, query);
+  const loops = order.list.rows;
   const [openId, setOpenId] = useState<string | null>(opening ?? playback.loopId);
-  const open = loops.find((loop) => loop.id === openId) ?? null;
+  const open = loopsIn(graph, language).find((loop) => loop.id === openId) ?? null;
   const { schema } = useLoopSchema();
+  // A search is answered by the list, so an open player gives way to it.
+  useEffect(() => { if (query.trim()) setOpenId(null); }, [query]);
 
-  /* The queue the player moves through when Next, or Play the next one, asks for another. Kept in
-     the player rather than here, so leaving this surface does not end it: a loop goes on playing
-     while you read a word, which is most of the point of having one. */
+  /* The queue the player moves through when Next, or Play the next one, asks for another: the list
+     in the order it is shown. Kept in the player rather than here, so leaving this surface does not
+     end it: a loop goes on playing while you read a word, which is most of the point of having one. */
   useEffect(() => {
     player.setQueue(loops.map((loop) => loopTrackOf(graph, loop)));
   }, [graph, loops.map((loop) => loop.id).join()]);
@@ -81,16 +93,14 @@ export default function LoopView({ graph, language, opening = null, onMake, onCl
       <span className="spacer" />
     </div>
 
-    <div className="loops-head">
-      <h2>Loops</h2>
-      <span className="spacer" />
-      <button className="tb-btn primary" onClick={onMake}><PlusIcon /><span>Make a loop</span></button>
-    </div>
+    <MadeHead kind="loop" icon="♪" title="Loops" count={loops.length} languageName={languageName} query={query} order={order} />
 
-    {loops.length === 0 && <p className="empty">
-      No loops yet. A loop takes a handful of your words and sets them to music, so they are learned
-      while you are doing something else.
-    </p>}
+    {loops.length === 0 && (query.trim()
+      ? <p className="ext-status none-yours">No loop of yours uses “{query.trim()}”.</p>
+      : <p className="empty">
+        No loops yet. A loop takes a handful of your words and sets them to music, so they are learned
+        while you are doing something else. Make a loop, at the top, to start one.
+      </p>)}
 
     <div className="loops-list">
       {loops.map((loop) => {
@@ -101,7 +111,9 @@ export default function LoopView({ graph, language, opening = null, onMake, onCl
         const failure = job?.state === "failed"
           ? job.message || stripOf(job)?.failure || job.error || ""
           : "";
-        const here = playback.loopId === loop.id && playback.playing;
+        const loaded = playback.loopId === loop.id;
+        const here = loaded && playback.playing;
+        const Kind = formatIcon(loop.format);
         /* Delete is the row's one action, by right-click or by swipe (`SwipeRow`). The row itself is
            not `disabled` even when there is nothing to play: a loop that was never made is the one
            you most want rid of, and a disabled button answers no gesture at all. */
@@ -118,8 +130,11 @@ export default function LoopView({ graph, language, opening = null, onMake, onCl
               if (!here) void player.play(loopTrackOf(graph, loop));
             }}
           >
-            <span className={`loop-go${ready ? "" : " pending"}`}>
-              {ready ? (here ? <PauseIcon /> : <PlayIcon />) : <HourglassIcon />}
+            {/* The kind of loop, until it is the one loaded: then the transport. A plate rather than a
+                disc, so a row that says what it is never looks like one that plays. */}
+            <span className={`loop-go${ready ? "" : " pending"}${ready && !loaded ? " kind" : ""}`}
+                  title={formatLabel(schema?.formats, loop.format)}>
+              {!ready ? <HourglassIcon /> : loaded ? (here ? <PauseIcon /> : <PlayIcon />) : <Kind />}
             </span>
             <span className="loop-main">
               <span className="loop-title">{loopTitle(graph, loop)}</span>
@@ -138,6 +153,7 @@ export default function LoopView({ graph, language, opening = null, onMake, onCl
                        made" and nothing else is what left a failure with no next step. */
                     : <span className="warn">{failure ? `Never made · ${failure}` : "Never made"}</span>}
               </span>
+              <MatchLine words={order.list.matches.get(loop.id)} query={query} language={language} />
             </span>
           </button>
         </SwipeRow>;

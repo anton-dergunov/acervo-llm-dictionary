@@ -12,7 +12,7 @@ what it said.
 **Study material**
 
 - [`anki.md`](anki.md) — review the cards, show how hard a word is, make Anki optional.
-- [`loops-and-stories.md`](loops-and-stories.md) — choosing the words, favourites, level and length, listening hands-free.
+- [`loops-and-stories.md`](loops-and-stories.md) — drawing favourites, stars, archive and play counts, level, listening hands-free.
 
 **Words and languages**
 

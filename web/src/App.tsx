@@ -177,6 +177,10 @@ export default function App() {
   const [topic, setTopic] = useState<TopicSelection>("all");
   const [sort, setSort] = useState<SortKey>("recent");
   const [query, setQuery] = useState("");
+  /* What the top bar's search holds while Loops or Stories is open: the words in their loops or
+     stories, not yours. Its own text, so a search there neither filters the words a make dialog
+     draws from nor reaches the dictionaries; opening either surface starts it empty. */
+  const [madeQuery, setMadeQuery] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
   const [mode, setMode] = useState<Mode>("read");
   /* Which view an article is read in. The device's default comes from Settings; the switch above an
@@ -274,6 +278,8 @@ export default function App() {
   /** The loop whose New music is open, by id, so it follows the loop as the replica changes. */
   const [musicFor, setMusicFor] = useState<string | null>(null);
   const [stories, setStories] = useState(false);
+  /* Loops or Stories is open: the top bar's search and Add are theirs. */
+  const made = loops || stories;
   const [makingStory, setMakingStory] = useState<WordSource | null>(null);
   /* The map: whether it is open, the sense it is peeking at, and where it was left in each language.
      All three outlive a trip to an article opened from the map, which is what makes Back from that
@@ -309,6 +315,7 @@ export default function App() {
   const openLoops = useCallback(() => {
     readingReturn.current = null;
     setLoopPlace(null);
+    setMadeQuery("");
     setLoops(true);
     setStories(false);
     setMap(false);
@@ -319,6 +326,7 @@ export default function App() {
   const openStories = useCallback(() => {
     readingReturn.current = null;
     setStoryPlace(null);
+    setMadeQuery("");
     setStories(true);
     setLoops(false);
     setMap(false);
@@ -863,10 +871,8 @@ export default function App() {
     const onKey = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key === "k") {
         event.preventDefault();
-        // Reaching for search is asking for the list, and the list is not drawn while a loop
-        // surface owns the pane. The loop itself plays on; the bar is what it plays behind.
-        setLoops(false);
-        setStories(false);
+        // On Loops and Stories the box searches them, so reaching for it stays there. Anywhere else
+        // it is asking for the list, which the map does not draw; the map is left for it.
         setMap(false);
         // On the map the bar holds the map's row, so the search box exists only once it has left.
         setSearchSoon(true);
@@ -1516,17 +1522,22 @@ export default function App() {
           {/* The map draws its row here, through a portal, so the bar is the top bar itself — the same
               box, rule and surface — rather than a card floating over the map. */}
           {map ? <div className="map-bar" ref={setMapBar} /> : <>
-          <div className={`search ${query.trim() ? "searching" : ""}`}>
+          <div className={`search ${(made ? madeQuery : query).trim() ? "searching" : ""}`}>
             <SearchIcon />
             <input
-              ref={search} type="search" placeholder="Search your words…" autoComplete="off" spellCheck={false}
-              value={query}
-              // Typing is asking for the list, so it leaves the loops surface. Whatever is playing
-              // keeps playing — that is what the bar and the chip are for.
-              onChange={(event) => { setQuery(event.target.value); setOpenId(null); setExternal(null); setLoops(false); setStories(false); setMap(false); }}
+              ref={search} type="search" autoComplete="off" spellCheck={false}
+              placeholder={loops ? "Search your loops…" : stories ? "Search your stories…" : "Search your words…"}
+              value={made ? madeQuery : query}
+              // On Loops and Stories the box searches the words in them, and the surface answers.
+              // Anywhere else typing is asking for the word list. Whatever is playing keeps playing
+              // — that is what the bar and the chip are for.
+              onChange={(event) => {
+                if (made) { setMadeQuery(event.target.value); return; }
+                setQuery(event.target.value); setOpenId(null); setExternal(null); setMap(false);
+              }}
               // ⏎ is the only thing that ever reaches an online dictionary. Everything else here
               // answers off this device or off your own server.
-              onKeyDown={(event) => { if (event.key === "Enter") { setLoops(false); setStories(false); setMap(false); searchOnline(); } }}
+              onKeyDown={(event) => { if (event.key === "Enter" && !made) { setMap(false); searchOnline(); } }}
             />
             <span className="kbd">⌘K</span>
             <button
@@ -1551,11 +1562,17 @@ export default function App() {
               of them is "start something new": pressing it mid-composition returns you to the
               capture box with what you typed still in it, which is how you correct the word after
               reading the article it produced and process it again. */}
+          {/* On Loops and Stories, Add makes what the surface holds, as the box beside it searches it. */}
           <button
-            className="tb-btn primary"
-            onClick={() => { if (addTab) setAddTab("capture"); else openCapture(null); }}
+            className="tb-btn primary" aria-label={loops ? "Make a loop" : stories ? "Make a story" : undefined}
+            onClick={() => {
+              if (loops) setMakingLoop("scope");
+              else if (stories) setMakingStory("scope");
+              else if (addTab) setAddTab("capture");
+              else openCapture(null);
+            }}
           >
-            <PlusIcon /><span className="wide-only">Add</span>
+            <PlusIcon /><span className="wide-only">{loops ? "Make a loop" : stories ? "Make a story" : "Add"}</span>
           </button>
 
           {/* Wide windows only: on a phone this is the bar at the foot instead, which is where a
@@ -1659,12 +1676,12 @@ export default function App() {
             if (back) openLexeme(back.lexeme, back.sense);
           }}
         /> : stories && snapshot && language ? <StoryView
-          graph={snapshot} language={language} opening={storyPlace} onMake={() => setMakingStory("scope")}
-          onClose={() => setStories(false)}
+          graph={snapshot} language={language} languageName={active.name} query={madeQuery} opening={storyPlace}
+          onClose={() => { setStories(false); setMadeQuery(""); }}
           onDelete={removeStory}
         /> : loops && snapshot && language ? <LoopView
-          graph={snapshot} language={language} opening={loopPlace} onMake={() => setMakingLoop("scope")}
-          onClose={() => setLoops(false)}
+          graph={snapshot} language={language} languageName={active.name} query={madeQuery} opening={loopPlace}
+          onClose={() => { setLoops(false); setMadeQuery(""); }}
           onDelete={removeLoop}
           onChooseMusic={setMusicFor}
           onToggleKeep={(loop) => void toggleKeptBed(loop)}
@@ -1905,7 +1922,7 @@ export default function App() {
 
     {makingStory && snapshot && language && <StoryDialog
       graph={snapshot}
-      query={{ language, topic, query, sort }}
+      query={{ language, topic, query: made ? "" : query, sort }}
       selection={selection} from={makingStory}
       deviceId={snapshot.deviceId ?? ""}
       onClose={() => setMakingStory(null)}
@@ -1914,7 +1931,7 @@ export default function App() {
     />}
 
     {makingLoop && snapshot && language && <LoopDialog
-      graph={snapshot} query={{ language, topic, query, sort }} deviceId={snapshot.deviceId}
+      graph={snapshot} query={{ language, topic, query: made ? "" : query, sort }} deviceId={snapshot.deviceId}
       selection={selection} from={makingLoop}
       onClose={() => setMakingLoop(null)}
       onMade={() => notify("Making your loop — it takes a few minutes")}

@@ -30,7 +30,7 @@ const item = (loopId: string): LoopItem => ({
   startSeconds: 0, sourceRevealSeconds: 0, targetRevealSeconds: 8, endSeconds: 20, ...stamp
 });
 
-function view(loops: Loop[]) {
+function view(loops: Loop[], query = "") {
   const graph: VocabularyGraph = {
     vocabularies: [], topics: [], lexemes: [], senses: [], attestations: [], examples: [],
     imagePrompts: [], pronunciations: [], studyStates: [],
@@ -39,7 +39,7 @@ function view(loops: Loop[]) {
   };
   const onDelete = vi.fn();
   render(<LoopView
-    graph={graph} language="es" onMake={() => undefined} onClose={() => undefined}
+    graph={graph} language="es" languageName="Spanish" query={query} onClose={() => undefined}
     onDelete={onDelete} onChooseMusic={() => undefined} onToggleKeep={() => undefined}
   />);
   return onDelete;
@@ -48,6 +48,25 @@ function view(loops: Loop[]) {
 afterEach(() => vi.restoreAllMocks());
 
 describe("the loops list", () => {
+  /* The badge says what kind of loop a row is, as the make dialog's tile does, until it is loaded. */
+  it("marks each loop with its kind", () => {
+    view([loop({}), loop({ id: "loop00000000002", position: 2, format: "radio-lesson" })]);
+    const kinds = [...document.querySelectorAll(".loop-go.kind")].map((badge) => badge.getAttribute("title"));
+    expect(kinds).toHaveLength(2);
+    expect(new Set(kinds).size).toBe(2);
+  });
+
+  it("keeps only the loops whose words match the search, and marks the letters that did", () => {
+    view([loop({})], "disg");
+    expect(screen.getByText("1 loop with “disg”")).toBeInTheDocument();
+    expect(document.querySelector(".made-match mark")?.textContent).toBe("disg");
+  });
+
+  it("says so when no loop uses the word searched for", () => {
+    view([loop({})], "zzz");
+    expect(screen.getByText("No loop of yours uses “zzz”.")).toBeInTheDocument();
+  });
+
   it("offers Delete on every row, including one that was never made", () => {
     view([loop({}), loop({ id: "loop00000000002", position: 2, audioRef: null, durationSeconds: null })]);
     expect(screen.getAllByRole("button", { name: "Delete" })).toHaveLength(2);

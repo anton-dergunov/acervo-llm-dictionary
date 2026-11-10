@@ -959,6 +959,128 @@ export function storyWordsOf(graph: VocabularyGraph, storyId: string): StoryWord
     .sort((left, right) => left.position - right.position || left.id.localeCompare(right.id));
 }
 
+/* ── the made lists ──
+   Loops and stories are listed the same way: in one of a few orders, and — while the surface's search
+   has something in it — only those with a word that matches, each with the words that did, so a row
+   never turns up with no visible reason. What is searched is the *words*: as the loop said them or
+   the story used them, what they mean there, and the word as you hold it (headword, lemma, reading
+   and glosses). Not its definitions, which mention other words and would match for no reason the
+   row could show. */
+
+/** The orders a made list offers. */
+export type MadeSort = "recent" | "hard" | "rare";
+export const MADE_SORTS: readonly MadeSort[] = ["recent", "hard", "rare"];
+
+/** A word a loop or a story was made from: as it was said or used, and what it means there. */
+export interface MadeWord {
+  lexemeId: string;
+  source: string;
+  target: string;
+}
+
+export interface MadeQuery {
+  language: string;
+  query: string;
+  sort: MadeSort;
+  /** Zipf figure per word, lower is rarer (`GET /words/rarity`); without it Rarest has nothing to go by. */
+  rarity?: Readonly<Record<string, number>> | null;
+}
+
+export interface MadeList<T> {
+  rows: T[];
+  /** For each row a search kept, the words that matched. Empty while nothing is searched. */
+  matches: ReadonlyMap<string, MadeWord[]>;
+}
+
+type Searchable = MadeWord & { also: string[] };
+
+export function madeLoops(graph: VocabularyGraph, query: MadeQuery): MadeList<Loop> {
+  const words = new Map<string, Searchable[]>();
+  for (const item of live(graph.loopItems).sort((left, right) => left.position - right.position)) {
+    const list = words.get(item.loopId) ?? [];
+    list.push({ lexemeId: item.lexemeId, source: item.sourceText, target: item.targetText, also: [] });
+    words.set(item.loopId, list);
+  }
+  return madeRows(graph, loopsIn(graph, query.language), words, query);
+}
+
+export function madeStories(graph: VocabularyGraph, query: MadeQuery): MadeList<Story> {
+  const words = new Map<string, Searchable[]>();
+  for (const word of live(graph.storyWords).sort((left, right) => left.position - right.position)) {
+    const list = words.get(word.storyId) ?? [];
+    list.push({
+      lexemeId: word.lexemeId, source: word.sourceText, target: word.translationForms.join(", "),
+      also: [...word.forms, ...word.translationForms]
+    });
+    words.set(word.storyId, list);
+  }
+  return madeRows(graph, storiesIn(graph, query.language), words, query);
+}
+
+function madeRows<T extends { id: string; createdAt: string }>(
+  graph: VocabularyGraph, all: T[], words: Map<string, Searchable[]>, { query, sort, rarity }: MadeQuery
+): MadeList<T> {
+  const search = query.trim().toLowerCase();
+  const matches = new Map<string, MadeWord[]>();
+  let rows = all;
+  if (search) {
+    const held = heldWordText(graph);
+    rows = all.filter((one) => {
+      const hits = (words.get(one.id) ?? []).filter((word) =>
+        [word.source, word.target, ...word.also, held.get(word.lexemeId) ?? ""].join(" ").toLowerCase().includes(search));
+      if (hits.length) matches.set(one.id, hits.map(({ lexemeId, source, target }) => ({ lexemeId, source, target })));
+      return hits.length > 0;
+    });
+  }
+  const recent = (left: T, right: T) => right.createdAt.localeCompare(left.createdAt);
+  /* A mean over the words that have a figure; a row with none has nothing to sort by and goes last. */
+  const scored = (figure: (lexemeId: string) => number | null, highFirst: boolean) => {
+    const score = new Map(rows.map((one) => {
+      const known = (words.get(one.id) ?? []).map((word) => figure(word.lexemeId)).filter((n): n is number => n !== null);
+      return [one.id, known.length ? known.reduce((a, b) => a + b, 0) / known.length : null] as const;
+    }));
+    return (left: T, right: T) => {
+      const a = score.get(left.id) ?? null;
+      const b = score.get(right.id) ?? null;
+      if (a === null || b === null) return a === b ? recent(left, right) : a === null ? 1 : -1;
+      return (highFirst ? b - a : a - b) || recent(left, right);
+    };
+  };
+  let order = recent;
+  if (sort === "hard") {
+    const difficulty = reviewedDifficulty(graph);
+    order = scored((id) => difficulty.get(id) ?? null, true);
+  } else if (sort === "rare" && rarity) {
+    order = scored((id) => rarity[id] ?? null, false);
+  }
+  return { rows: rows.slice().sort(order), matches };
+}
+
+/** Each word you hold as text a made-list search reads: headword, lemma, reading, short gloss, glosses. */
+function heldWordText(graph: VocabularyGraph): Map<string, string> {
+  const glosses = new Map<string, string[]>();
+  for (const sense of live(graph.senses)) {
+    const list = glosses.get(sense.lexemeId) ?? [];
+    list.push(...sense.glosses.flatMap((gloss) => gloss.terms));
+    glosses.set(sense.lexemeId, list);
+  }
+  return new Map(live(graph.lexemes).map((lexeme) => [lexeme.id, [
+    lexeme.headword, lexeme.lemma, lexeme.reading ?? "", lexeme.shortGloss ?? "", ...(glosses.get(lexeme.id) ?? [])
+  ].join(" ")]));
+}
+
+/** Anki's difficulty for each word it has reviewed, from the word's weakest reviewed card. */
+function reviewedDifficulty(graph: VocabularyGraph): Map<string, number> {
+  const byWord = new Map<string, StudyState[]>();
+  for (const state of live(graph.studyStates)) {
+    if (state.reps <= 0) continue;
+    const list = byWord.get(state.lexemeId) ?? [];
+    list.push(state);
+    byWord.set(state.lexemeId, list);
+  }
+  return new Map([...byWord].map(([id, states]) => [id, weakestOf(states)!.difficulty]));
+}
+
 /**
  * Whether a story has been written. Having no parts is the whole of what says it has not.
  *

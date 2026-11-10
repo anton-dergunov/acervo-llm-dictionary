@@ -22,7 +22,7 @@ import type { Bed, Loop, VocabularyGraph } from "./domain";
 import { Art } from "./art";
 import { AllChoices, ChoiceCarousel, ChoiceGrid, centred, type CatalogueChoice } from "./ChoiceCarousel";
 import { MakeSection } from "./MakeDialog";
-import { CloseIcon, DiceIcon, StarIcon } from "./icons";
+import { CloseIcon, DiceIcon, KeepIcon } from "./icons";
 import * as player from "./loops";
 import { bedMusic, prefetch, sampleMusic } from "./music";
 import { MusicButton, MusicPlay, hear, previewKey } from "./MusicPlay";
@@ -181,7 +181,7 @@ export function SavedCards({ graph, families, favourites, value, onChange, onNot
           aria-label={`${label}, ${bedAbout(graph, bed)}`}>
           <span className="favourite-art"><Art group="music" id={bed.styleId} label={label} /></span>
           <span className="favourite-text">
-            <span className="favourite-name"><StarIcon filled />{label}</span>
+            <span className="favourite-name"><KeepIcon filled />{label}</span>
             <span className="favourite-about">{bedAbout(graph, bed)}</span>
           </span>
         </button>

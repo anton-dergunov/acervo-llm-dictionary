@@ -71,9 +71,18 @@ export const NextIcon = () => <svg viewBox="0 0 24 24" fill="currentColor" aria-
 export const RepeatIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.9} strokeLinejoin="round" aria-hidden="true"><path d="M6 7h11a3 3 0 0 1 3 3v1" /><path d="M18 17H7a3 3 0 0 1-3-3v-1" /><path d="M8.5 4.5L6 7l2.5 2.5" /><path d="M15.5 19.5L18 17l-2.5-2.5" /></svg>;
 /* And on to the next one: a queue with a play mark, which is how a player says continuous play. */
 export const ContinueIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.9} strokeLinejoin="round" aria-hidden="true"><path d="M4 7h11M4 12h8M4 17h8" /><path d="M16 11.5v7l5.5-3.5z" fill="currentColor" strokeWidth={1} /></svg>;
-/* Keeping a loop's music: a star, filled once it is kept. The only mark in the app that means
-   "favourite", so it is not borrowed for anything else. */
+/* A star, filled when it is on. */
 export const StarIcon = ({ filled = false }: { filled?: boolean }) => <svg viewBox="0 0 24 24" {...stroke} fill={filled ? "currentColor" : "none"} strokeWidth={1.8} strokeLinejoin="round" aria-hidden="true"><path d="M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z" /></svg>;
+/* Keeping a loop's music: a bookmark holding a note, outlined, and filled once it is kept. Not the
+   star, which is a mark on a loop or a story itself; one mark meaning two things on one screen was
+   the trouble with it. */
+export const KeepIcon = ({ filled = false }: { filled?: boolean }) => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.8} strokeLinejoin="round" aria-hidden="true">
+  <path d="M5.5 2.8h13v18.6L12 16.9l-6.5 4.5z" fill={filled ? "currentColor" : "none"} />
+  <g style={filled ? { stroke: "var(--surface)" } : undefined}>
+    <circle cx="10.6" cy="12.2" r="1.8" style={filled ? { fill: "var(--surface)" } : undefined} />
+    <path d="M12.4 12.2V6.6l2.7 1.1" />
+  </g>
+</svg>;
 /* Opens a menu below or above: the caret turned down. */
 export const DownIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={2.2} strokeLinejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6" /></svg>;
 /* Selecting a word: a circle with a plus, and the same circle with a check once it is selected. */

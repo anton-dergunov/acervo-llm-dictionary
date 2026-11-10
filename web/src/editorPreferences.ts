@@ -260,3 +260,23 @@ export function asideOpen(): boolean {
 export function setAsideOpen(open: boolean): void {
   try { localStorage.setItem(ASIDE_OPEN_KEY, open ? "on" : "off"); } catch { /* a preference, not data */ }
 }
+
+/**
+ * The order the Loops and the Stories lists are drawn in, remembered per list on this device. An
+ * order the list no longer offers is simply not used.
+ */
+const MADE_SORT_KEY = "acervo-made-sort";
+
+export function madeSortFor(kind: "loop" | "story"): string | undefined {
+  try {
+    const stored = JSON.parse(localStorage.getItem(MADE_SORT_KEY) || "{}") as Record<string, unknown>;
+    return typeof stored[kind] === "string" ? stored[kind] as string : undefined;
+  } catch { return undefined; }
+}
+
+export function rememberMadeSort(kind: "loop" | "story", sort: string): void {
+  try {
+    const stored = JSON.parse(localStorage.getItem(MADE_SORT_KEY) || "{}") as Record<string, unknown>;
+    localStorage.setItem(MADE_SORT_KEY, JSON.stringify({ ...stored, [kind]: sort }));
+  } catch { /* a preference, not data */ }
+}

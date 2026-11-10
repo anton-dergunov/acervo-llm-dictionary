@@ -79,8 +79,9 @@ it again among a thousand.
 
 **Where it is drawn** is the part with the most judgement in it:
 
-- **Over the list, the map and an article; never over Add, the loops or the stories.** Those surfaces
-  have their own Make buttons, and the Make buttons offer the selection.
+- **Over the list, the map and an article; never over Add, the loops or the stories.** On those two
+  surfaces the top bar's Add is Make a loop or Make a story ([`loops.md`](loops.md) §2.20), and the
+  dialog it opens offers the selection.
 - **Over an article, only on a wide window and only while the ask dock rests.** This is a deliberate
   exception to the rule that the article column carries no second bar ([`loops.md`](loops.md) §2.13):
   the owner reads words in order to gather them, and a wide window has the height to spare.
@@ -101,7 +102,7 @@ twenty words gathered over an hour, and one mistaken tap should not throw that a
 Loop and Story open the ordinary make dialogs, and **the dialogs say exactly what will be sent.** When a
 selection exists it is one more way of choosing words, **Selection · N**, beside the draws from the
 scope on screen (Random, Hard, Rare, Newest — [`loops.md`](loops.md) §2.12). It is chosen when the
-dialog was opened from the bar, and a draw is chosen when opened from a surface's own Make button —
+dialog was opened from the bar, and a draw is chosen when opened from the top bar's Make on a surface —
 which is what that button always meant.
 
 - **The selection is drawn as chips, in the order chosen.**

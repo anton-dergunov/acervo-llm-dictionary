@@ -1121,12 +1121,26 @@ describe("Acervo application", () => {
       expect(await screen.findByRole("heading", { name: /All words/ })).toBeInTheDocument();
     });
 
-    it("leaves when you type in the search box, because that is asking for the list", async () => {
+    /* On Loops the box searches the words in its loops, so typing stays there — and what was typed
+       is not the word list's search, which is as it was when the surface is left. */
+    it("searches the words in its loops when you type, and stays", async () => {
       signedIn();
       await openList();
       await openLoops();
-      fireEvent.change(screen.getByPlaceholderText("Search your words…"), { target: { value: "itch" } });
-      expect(await screen.findByRole("heading", { name: /Search/ })).toBeInTheDocument();
+      fireEvent.change(screen.getByPlaceholderText("Search your loops…"), { target: { value: "itch" } });
+      expect(screen.getByRole("heading", { name: "Loops" })).toBeInTheDocument();
+      fireEvent.click(screen.getByRole("button", { name: "Back to the list" }));
+      expect(await screen.findByRole("heading", { name: /All words/ })).toBeInTheDocument();
+      expect(screen.getByPlaceholderText("Search your words…")).toHaveValue("");
+    });
+
+    /* Add makes what the surface holds. */
+    it("turns Add into Make a loop", async () => {
+      signedIn();
+      await openList();
+      await openLoops();
+      fireEvent.click(screen.getByRole("button", { name: "Make a loop" }));
+      expect(await screen.findByRole("heading", { name: "Make a loop" })).toBeInTheDocument();
     });
 
     it("leaves on Escape, like every other surface that replaces the list", async () => {

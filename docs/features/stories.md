@@ -172,6 +172,12 @@ carrying no direction; that is simpler than throwing the passages away and re-re
 - `python -m acervo.admin stories show <id>` prints a story's parts, passages and directions — the one
   way to see whether a passage carries its direction or an empty one.
 
+## The list
+
+The stories list is the loops list ([`loops.md`](loops.md) §2.20): the word list's head with the orders
+— Recent, Hardest, Rarest — the top bar's search searching the words in the stories, and the top bar's
+Add making one. A row keeps the story's emoji as its badge.
+
 ## The reader
 
 **A story is read as a deck**, the same deck a word's cards are (`deck.tsx`): a native scroll-snap track,

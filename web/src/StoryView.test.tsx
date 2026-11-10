@@ -11,8 +11,8 @@ vi.mock("./picture", () => ({
 
 function view(overrides: Partial<Parameters<typeof StoryView>[0]> = {}) {
   const props = {
-    graph: testGraph(), language: "es",
-    onMake: vi.fn(), onClose: vi.fn(), onDelete: vi.fn(),
+    graph: testGraph(), language: "es", languageName: "Spanish",
+    onClose: vi.fn(), onDelete: vi.fn(),
     ...overrides
   };
   return { ...render(<StoryView {...props} />), props };
@@ -71,10 +71,27 @@ describe("the stories surface", () => {
     expect(props.onClose).toHaveBeenCalled();
   });
 
-  it("asks for a new story from its own header", () => {
-    const { props } = view();
-    fireEvent.click(screen.getByRole("button", { name: /Make a story/ }));
-    expect(props.onMake).toHaveBeenCalled();
+  /* The head is the word list's: a count, and the orders. Make is the top bar's Add here. */
+  it("counts its stories and offers the orders, with no Make button of its own", () => {
+    view();
+    expect(screen.getByText("2 in Spanish")).toBeInTheDocument();
+    for (const order of ["Recent", "Hardest", "Rarest"]) expect(screen.getByRole("button", { name: order })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Make a story/ })).not.toBeInTheDocument();
+  });
+
+  /* The top bar's search, on this surface, searches the words in its stories — and each story it
+     keeps says which of its words matched, so none turns up for no visible reason. */
+  it("keeps the stories whose words match the search, and says which word matched", () => {
+    view({ query: "balsa" });
+    expect(screen.getByText("1 story with “balsa”")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /La balsa que picaba/ })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /^picar/ })).not.toBeInTheDocument();
+    expect(document.querySelector(".made-match mark")?.textContent).toBe("balsa");
+  });
+
+  it("says so when no story uses the word searched for", () => {
+    view({ query: "zzz" });
+    expect(screen.getByText("No story of yours uses “zzz”.")).toBeInTheDocument();
   });
 
   it("deletes from the right-click menu", () => {

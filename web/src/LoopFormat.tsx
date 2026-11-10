@@ -92,6 +92,13 @@ export function loopKinds(formats: readonly LoopFormat[]): LoopKind[] {
   return kinds;
 }
 
+/** The icon a list row draws for a loop: its kind's, as the make dialog's tile has it. Needs no
+    schema, so a row is drawn before the generator has answered, and a format it no longer offers
+    still has one. */
+export function formatIcon(formatId: string): () => ReactNode {
+  return DRILL.includes(formatId) ? DrillIcon : ICONS[formatId] ?? NoteIcon;
+}
+
 export function variantLabel(format: LoopFormat): string {
   return VARIANTS[format.id] ?? format.label;
 }

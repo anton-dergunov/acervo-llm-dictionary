@@ -4,7 +4,7 @@ import {
   articleFor, articleFromDraft, bedOfLoop, chosenFor, favouriteBeds, loopEligible, selectedWords, inboxCount, styleLabel, languageOptions, loopCandidates, loopIsReady,
   formatLabel, heldWord, loopCards, loopItemsOf, loopLineShown, loopMomentAt, loopTitle, loopWordAt, loopsIn, sampleLexemeIds, shortGlossOf,
   storyCandidates, storyEligible, strengthOf, topicOptions, visibleRows, voiceSample, weakestOf,
-  drawOrder, drawWords, hasReviewState, loopSecondsPerWord, usageCounts
+  drawOrder, drawWords, hasReviewState, loopSecondsPerWord, usageCounts, madeLoops, madeStories
 } from "./selectors";
 import { drillCues, testGraph } from "./testGraph";
 import { draftFor, parseArticle, yamlFor } from "./yaml";
@@ -558,5 +558,51 @@ describe("drawing words to make something from", () => {
     expect(loopSecondsPerWord(graph, "echo", { classic: 8, echo: 5 })).toBeCloseTo(62.25 / 8 * 5);
     // With no finished loop at all, 100 BPM.
     expect(loopSecondsPerWord({ ...graph, loops: [] }, "echo", { echo: 5 })).toBeCloseTo(12);
+  });
+});
+
+/* The made lists: an order, and a search over the words a loop or story was made from. */
+describe("made lists", () => {
+  const ids = (rows: { id: string }[]) => rows.map((one) => one.id);
+
+  it("puts the newest first under Recent", () => {
+    expect(ids(madeLoops(testGraph(), { language: "es", query: "", sort: "recent" }).rows))
+      .toEqual(["loopqueued00001", "loopmorning0001"]);
+  });
+
+  /* A loop with no figure for any of its words has nothing to sort by, so it goes last. */
+  it("puts a loop whose words Anki finds hard first, and one with nothing to go by last", () => {
+    expect(ids(madeLoops(testGraph(), { language: "es", query: "", sort: "hard" }).rows))
+      .toEqual(["loopmorning0001", "loopqueued00001"]);
+  });
+
+  it("sorts Rarest by the mean Zipf figure of the words, lowest first, and Recent without the figures", () => {
+    const graph = testGraph();
+    const second = { ...graph.loops[0], id: "loopsecond00001", createdAt: "2026-08-01T00:00:00.000Z" };
+    const withTwo = { ...graph, loops: [...graph.loops, second],
+      loopItems: [...graph.loopItems, { ...graph.loopItems[1], id: "loopitemsecond1", loopId: second.id }] };
+    const rarity = { lexemepicar0001: 3.5, lexemebalsa0001: 2.1 };
+    expect(ids(madeLoops(withTwo, { language: "es", query: "", sort: "rare", rarity }).rows))
+      .toEqual(["loopsecond00001", "loopmorning0001", "loopqueued00001"]);
+    expect(ids(madeLoops(withTwo, { language: "es", query: "", sort: "rare", rarity: null }).rows)[0]).toBe("loopqueued00001");
+  });
+
+  it("keeps the loops with a matching word, and says which word matched", () => {
+    const made = madeLoops(testGraph(), { language: "es", query: "STING", sort: "recent" });
+    expect(ids(made.rows)).toEqual(["loopmorning0001"]);
+    expect(made.matches.get("loopmorning0001")).toEqual([{ lexemeId: "lexemepicar0001", source: "picar", target: "to sting" }]);
+  });
+
+  /* The word as you hold it counts — another of its glosses — but not its definition, which talks
+     about other words and would match for no reason the row could show. */
+  it("finds a loop by another gloss of a word in it, but not by the word's definition", () => {
+    expect(ids(madeLoops(testGraph(), { language: "es", query: "chop", sort: "recent" }).rows)).toEqual(["loopmorning0001"]);
+    expect(madeLoops(testGraph(), { language: "es", query: "comezón", sort: "recent" }).rows).toEqual([]);
+  });
+
+  it("searches the forms a story used and what they became", () => {
+    const made = madeStories(testGraph(), { language: "es", query: "raft", sort: "recent" });
+    expect(ids(made.rows)).toEqual(["storypicada0001"]);
+    expect(made.matches.get("storypicada0001")?.[0]).toMatchObject({ source: "la balsa", target: "raft" });
   });
 });

@@ -900,6 +900,9 @@ details.fold .fold-body { padding: 4px 0 18px; }
    The bar goes, though: the controls are already on screen, and a second set of them at the foot is
    the mini-player every music player hides while its own screen is open. */
 .app.loops-open .loopbar { display: none; }
+/* What search covers is a question about your words and the dictionaries past them; on these two
+   surfaces it covers the words in your loops or stories, and nothing else. */
+.app.loops-open .search .scope { display: none; }
 
 /* ── the bar at the foot ──
    Its own row of `.app`, over the list and nowhere else: loops §2.13 forbids a second dock in the
@@ -1043,10 +1046,8 @@ details.fold .fold-body { padding: 4px 0 18px; }
   height: 100%; display: flex; flex-direction: column;
   width: 100%; max-width: 780px; margin: 0 auto; padding: 24px 26px 0;
 }
-.loops-head { display: flex; align-items: baseline; gap: 12px; flex: none; margin-bottom: 16px; }
-.loops-head h2 { margin: 0; font: 700 25px/1.2 var(--serif); letter-spacing: -.01em; }
-.loops-head .spacer { flex: 1; }
 .loops-back { display: flex; align-items: center; gap: 8px; flex: none; margin-bottom: 8px; }
+.loops-back .spacer { flex: 1; }
 .loops-list { overflow-y: auto; overscroll-behavior: contain; padding-bottom: 24px; }
 .loops .empty { color: var(--ink-3); font-size: 14px; line-height: 1.5; max-width: 46ch; }
 .loop-play { flex: 1; min-height: 0; display: flex; flex-direction: column; }
@@ -1145,12 +1146,12 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .bed-name:hover:not([disabled]) { background: var(--surface-2); color: var(--ink); }
 .bed-name[disabled] { cursor: default; }
 .bed-name svg { width: 13px; height: 13px; }
-.bed-star { display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 999px;
+.bed-star { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 999px;
             background: none; color: var(--ink-3); cursor: pointer; }
 .bed-star:hover:not([disabled]) { color: var(--ink); }
 .bed-star.on { color: var(--core); }
 .bed-star[disabled] { opacity: .3; cursor: default; }
-.bed-star svg { width: 18px; height: 18px; }
+.bed-star svg { width: 23px; height: 23px; }
 
 /* ── a row with actions: a word, a loop, a story ── */
 /* Two ways to the same actions, because a pointer and a finger do not have the same gestures. A
@@ -1203,6 +1204,23 @@ details.fold .fold-body { padding: 4px 0 18px; }
 .loop-row.on .loop-go { background: var(--core); color: var(--on-core); }
 .loop-go svg { width: 16px; height: 16px; }
 .loop-go.pending { background: none; border: 1px dashed var(--rule); color: var(--ink-3); }
+/* What kind of loop it is, until it is the one loaded: a plate, as a word's emoji is, rather than the
+   round transport it becomes — so a row that plays and a row that only says what it is never look
+   alike. The make dialog's own icons. */
+.loop-go.kind { border-radius: 9px; background: var(--surface-2); border: 1px solid var(--rule-soft); color: var(--core); }
+.loop-go.kind svg { width: 19px; height: 19px; }
+/* The head is the word list's own, above the rows so it stays put while they scroll. */
+.made-head { flex: none; margin-bottom: 8px; }
+.made-head .sortbar { flex-wrap: wrap; }
+.made-note { flex: none; margin: 0 0 8px; font-size: 13px; line-height: 1.4; color: var(--ink-3); }
+/* Which of its words a search matched: the word and what it means, the letters matched marked by a
+   background and nothing else. */
+.made-match {
+  display: flex; flex-wrap: wrap; gap: 2px 12px; margin-top: 5px;
+  font: 13px/1.35 var(--sans); color: var(--ink-2);
+}
+.made-hit.more { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+.made-match mark { background: var(--core-soft); color: inherit; border-radius: 3px; }
 .loop-main { flex: 1; min-width: 0; }
 /* Two lines rather than one: the words a loop teaches can be long, and a title that runs into its
    own word count is a row that reads differently on a phone than it does on a laptop. */

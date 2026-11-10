@@ -8,17 +8,21 @@
  * stories, and on the stories it returns to your words. Present at every width for the reason the
  * loops one is — a surface that replaces the list has to carry the way back out of itself.
  *
+ * The list is the loops' list (`MadeList.tsx`): the orders in its head, the top bar's search
+ * searching the words in its stories, and the top bar's Add making one.
+ *
  * A story's state is derived and there is no status column: having no parts is the whole of what
  * "not written yet" means, and the job says how far along it is. So a story whose writing failed
  * simply reads as one that was asked for and not written, and Try again queues another.
  */
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { isRecording, jobFor, jobStream, isOpen as jobIsOpen } from "./jobs";
 import { stripOf } from "./ProgressStrip";
 import type { VocabularyGraph } from "./domain";
-import { BackIcon, HourglassIcon, PlusIcon } from "./icons";
+import { BackIcon, HourglassIcon } from "./icons";
 import FitWords from "./FitWords";
+import { MadeHead, MatchLine, useMadeList } from "./MadeList";
 import StoryReader from "./StoryReader";
 import SwipeRow from "./SwipeRow";
 import {
@@ -29,21 +33,26 @@ function count(amount: number, noun: string): string {
   return `${amount} ${noun}${amount === 1 ? "" : "s"}`;
 }
 
-export default function StoryView({ graph, language, opening = null, onMake, onClose, onDelete }: {
+export default function StoryView({ graph, language, languageName, query = "", opening = null, onClose, onDelete }: {
   graph: VocabularyGraph;
   language: string;
+  languageName: string;
+  /** The top bar's search, which on this surface searches the words in its stories. */
+  query?: string;
   /** The story and page to open on: where the owner was, coming back from a word opened from it. */
   opening?: { storyId: string; page: number } | null;
-  onMake(): void;
   /** Back to the words. */
   onClose(): void;
   /** Online-only and loud when it fails, like every other write. */
   onDelete(storyId: string): void;
 }) {
   const live = useSyncExternalStore(jobStream.subscribe, jobStream.getStatus);
-  const stories = storiesIn(graph, language);
+  const order = useMadeList(graph, "story", language, query);
+  const stories = order.list.rows;
   const [openId, setOpenId] = useState<string | null>(opening?.storyId ?? null);
-  const open = stories.find((story) => story.id === openId) ?? null;
+  const open = storiesIn(graph, language).find((story) => story.id === openId) ?? null;
+  // A search is answered by the list, so an open story gives way to it.
+  useEffect(() => { if (query.trim()) setOpenId(null); }, [query]);
 
   if (open) {
     /* `reading` widens the column: a story is read beside its picture where there is room, and that
@@ -69,16 +78,14 @@ export default function StoryView({ graph, language, opening = null, onMake, onC
       <span className="spacer" />
     </div>
 
-    <div className="loops-head">
-      <h2>Stories</h2>
-      <span className="spacer" />
-      <button className="tb-btn primary" onClick={onMake}><PlusIcon /><span>Make a story</span></button>
-    </div>
+    <MadeHead kind="story" icon="📖" title="Stories" count={stories.length} languageName={languageName} query={query} order={order} />
 
-    {stories.length === 0 && <p className="empty">
-      No stories yet. A story takes a few of your words and tells them back to you as something
-      worth reading, which is how they stick.
-    </p>}
+    {stories.length === 0 && (query.trim()
+      ? <p className="ext-status none-yours">No story of yours uses “{query.trim()}”.</p>
+      : <p className="empty">
+        No stories yet. A story takes a few of your words and tells them back to you as something
+        worth reading, which is how they stick. Make a story, at the top, to start one.
+      </p>)}
 
     <div className="loops-list">
       {stories.map((story) => {
@@ -116,6 +123,7 @@ export default function StoryView({ graph, language, opening = null, onMake, onC
                     /* Why, not only that: the reason is on the job the whole time. */
                     : <span className="warn">{failure ? `Never written · ${failure}` : "Never written"}</span>}
               </span>
+              <MatchLine words={order.list.matches.get(story.id)} query={query} language={language} />
             </span>
             <span className="story-meta">
               {/* **Readable is worth saying while the rest is still being made**: a story has all

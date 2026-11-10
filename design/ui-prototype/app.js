@@ -3711,7 +3711,7 @@ function render() {
   $(".app").classList.toggle("article-open", Boolean((state.openId || state.openExt) && !state.add));
   $(".app").classList.toggle("now-loaded", nowLoaded());
   $(".app").classList.toggle("own-player", nowLoaded() && nowOwnOpen());
-  $("#q").placeholder = state.loops ? "Search the words in your loops…" : state.stories ? "Search the words in your stories…" : "Search your words…";
+  $("#q").placeholder = state.loops ? "Search your loops…" : state.stories ? "Search your stories…" : "Search your words…";
   /* Add makes what the surface holds: a word on the list, a loop on Loops, a story on Stories. */
   const making = state.loops ? "Make a loop" : state.stories ? "Make a story" : "Add";
   $("#addBtn .wide-only").textContent = making;
