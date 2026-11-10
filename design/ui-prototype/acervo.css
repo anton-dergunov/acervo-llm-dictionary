@@ -893,9 +893,14 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
    want in reach; only a phone, which has room for one thing at a time, drops the rail — and there
    it drops it for an article too, so the two surfaces behave alike where it matters.
 
-   The bar goes, though: the controls are already on screen, and a second set of them at the foot is
-   the mini-player every music player hides while its own screen is open. */
-.app.loops-open .loopbar { display: none; }
+   The bar goes while the thing playing is open in its own player: the controls are already on
+   screen, and a second set of them at the foot is the mini-player every music player hides while
+   its own screen is open. On the lists it stays when something plays — the list is not its player —
+   and it never offers the three ways in on a surface you are already in, or on the map. */
+.app.loops-open:not(.now-loaded) .loopbar, .app.own-player .loopbar, .app.map-open .loopbar { display: none; }
+/* What search covers is a question about your words and the dictionaries past them; on these two
+   surfaces it covers the words in your loops or stories, and nothing else. */
+.app.loops-open .search .scope { display: none; }
 
 /* ── the bar at the foot ──
    Its own row of `.app`, over the list and nowhere else: loops §2.13 forbids a second dock in the
@@ -917,6 +922,8 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
 .loopbar-play svg { width: 17px; height: 17px; }
 .loopbar-main { flex: 1; min-width: 0; text-align: left; background: none; border: 0; padding: 0; cursor: pointer; }
 .loopbar-close { flex: none; border: 0; background: none; color: var(--ink-3); }
+.loopbar-next { flex: none; border: 0; background: none; color: var(--ink-2); }
+.loopbar-next[disabled] { opacity: .3; cursor: default; }
 .loopbar-title { display: block; font: 500 14px/1.3 var(--sans); color: var(--ink);
                  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .loopbar-sub { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em;
@@ -1013,10 +1020,10 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
 .menu .sel-drop:hover { color: var(--warn); }
 .sel-drop svg { width: 14px; height: 14px; }
 
-/* ── the chip in the top bar ──
-   A bar across the foot of a wide window is a lot of furniture for one line of text, and the top bar
-   is already where everything reachable from anywhere lives. Idle it is one icon; playing it widens
-   to say what you are hearing. */
+/* ── the chip ──
+   What is playing, for the one window that has neither the bar nor the rail: a tablet-sized one
+   whose rail an article has hidden. In the top bar, which has room for a title — the article's own
+   bar is already full — and nowhere else, since a wider window has the rail's card. */
 .loop-chip { padding: 0 10px; gap: 7px; }
 .loop-chip.playing { padding: 0 10px 0 4px; background: var(--core-soft); border-color: transparent; }
 .loop-chip-play { display: grid; place-items: center; width: 30px; height: 30px; flex: none;
@@ -1027,9 +1034,49 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
 .loop-chip-word { max-width: 20ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
                   font: 500 13.5px/1 var(--sans); }
 .loop-chip-at { font-family: var(--mono); font-size: 11px; opacity: .75; }
-/* One of the two, never both: the bar is for a device you hold, the chip for one you sit at. */
-@container vp (max-width: 720px) { .loop-chip { display: none; } }
+.loop-chip-play .glyph, .loopbar-play .glyph, .rail-now-play .glyph { display: grid; place-items: center; }
+.loop-chip.playing { display: none; }
+@container vp (min-width: 720.01px) and (max-width: 900px) {
+  .app.article-open .topbar .loop-chip.playing { display: inline-flex; }
+}
+/* The bar is for a device you hold; a wider window has the rail's card. */
 @container vp (min-width: 720.01px) { .loopbar { display: none; } }
+
+/* ── the rail's card ──
+   At the foot of the rail on a tablet or a desktop, as the bar is at the foot of a phone: the rail is
+   where the way in already is and is on screen at every width a list is. 88 px across, so it is a
+   column — the transport ringed by how far it has got, what is playing in two lines, and Next. */
+.rail-now {
+  position: sticky; z-index: 1; bottom: -24px; margin: auto 0 -24px; padding: 10px 10px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: var(--surface); border-top: 1px solid var(--rule-soft);
+}
+.rail-now-play {
+  --at: 0%;
+  position: relative; width: 46px; height: 46px; border: 0; border-radius: 999px; cursor: pointer;
+  display: grid; place-items: center; color: var(--on-core);
+  background: conic-gradient(var(--core) var(--at), var(--core-soft) 0);
+}
+.rail-now-play::before { content: ""; position: absolute; inset: 3px; border-radius: inherit; background: var(--core); }
+.rail-now-play .glyph { position: relative; }
+.rail-now-play svg { width: 17px; height: 17px; }
+.rail-now-what {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%;
+  border: 0; background: none; padding: 0; cursor: pointer; color: var(--ink);
+}
+.rail-now-title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font: 500 11.5px/1.3 var(--sans); text-align: center; overflow-wrap: anywhere;
+}
+.rail-now-sub { font-family: var(--mono); font-size: 9.5px; letter-spacing: .05em; color: var(--ink-3); }
+.rail-now-next {
+  width: 32px; height: 32px; display: grid; place-items: center; border: 0; border-radius: 999px;
+  background: none; color: var(--ink-2); cursor: pointer;
+}
+.rail-now-next svg { width: 17px; height: 17px; }
+.rail-now-next[disabled] { opacity: .3; cursor: default; }
+.app.own-player .rail-now { display: none; }
+@container vp (max-width: 720px) { .rail-now { display: none; } }
 
 /* ── the surface ──
    It owns its height and scrolls inside itself, which is the whole of why the controls cannot drift:
@@ -1043,6 +1090,7 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
 .loops-head h2 { margin: 0; font: 700 25px/1.2 var(--serif); letter-spacing: -.01em; }
 .loops-head .spacer { flex: 1; }
 .loops-back { display: flex; align-items: center; gap: 8px; flex: none; margin-bottom: 8px; }
+.loops-back .spacer { flex: 1; }
 .loops-list { overflow-y: auto; overscroll-behavior: contain; padding-bottom: 24px; }
 .loops .empty { color: var(--ink-3); font-size: 14px; line-height: 1.5; max-width: 46ch; }
 .loop-play { flex: 1; min-height: 0; display: flex; flex-direction: column; }
@@ -1141,12 +1189,12 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
 .bed-name:hover:not([disabled]) { background: var(--surface-2); color: var(--ink); }
 .bed-name[disabled] { cursor: default; }
 .bed-name svg { width: 13px; height: 13px; }
-.bed-star { display: grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 999px;
+.bed-star { display: grid; place-items: center; width: 40px; height: 40px; border: 0; border-radius: 999px;
             background: none; color: var(--ink-3); cursor: pointer; }
 .bed-star:hover:not([disabled]) { color: var(--ink); }
 .bed-star.on { color: var(--core); }
 .bed-star[disabled] { opacity: .3; cursor: default; }
-.bed-star svg { width: 18px; height: 18px; }
+.bed-star svg { width: 23px; height: 23px; }
 
 /* ── a row with actions: a word, a loop, a story ── */
 /* Two ways to the same actions, because a pointer and a finger do not have the same gestures. A
@@ -1199,6 +1247,31 @@ body.phone .cards-edges, body.tablet .cards-edges { display: none; }
 .loop-row.on .loop-go { background: var(--core); color: var(--on-core); }
 .loop-go svg { width: 16px; height: 16px; }
 .loop-go.pending { background: none; border: 1px dashed var(--rule); color: var(--ink-3); }
+/* What kind of loop it is, until it is the one loaded: a plate, as a word's emoji is, rather than the
+   round transport it becomes — so a row that plays and a row that only says what it is never look
+   alike. The make dialog's own icons. */
+.loop-go.kind { border-radius: 9px; background: var(--surface-2); border: 1px solid var(--rule-soft); color: var(--core); }
+.loop-go.kind svg { width: 19px; height: 19px; }
+.loop-row.archived { opacity: .5; }
+.loop-row.archived:hover, .loop-row.archived:focus-visible { opacity: .8; }
+.made-archive > .swipe-item + .swipe-item { border-top: 1px solid var(--rule-soft); }
+.made-archive { margin-top: 6px; }
+/* Starred: a small star after the title, in the title's line, so a row does not change shape. */
+.made-star { display: inline-grid; vertical-align: -1px; margin-left: 6px; color: var(--core); }
+.made-star svg { width: 12px; height: 12px; }
+.made-star-btn.on { color: var(--core); }
+/* The head is the word list's own, above the rows so it stays put while they scroll. */
+.made-head { flex: none; margin-bottom: 8px; }
+.made-head .sortbar { flex-wrap: wrap; }
+.made-note { flex: none; margin: 0 0 8px; font-size: 13px; line-height: 1.4; color: var(--ink-3); }
+/* Which of its words a search matched: the word and what it means, the letters matched marked by a
+   background and nothing else. */
+.made-match {
+  display: flex; flex-wrap: wrap; gap: 2px 12px; margin-top: 5px;
+  font: 13px/1.35 var(--sans); color: var(--ink-2);
+}
+.made-hit.more { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+.made-match mark { background: var(--core-soft); color: inherit; border-radius: 3px; }
 .loop-main { flex: 1; min-width: 0; }
 /* Two lines rather than one: the words a loop teaches can be long, and a title that runs into its
    own word count is a row that reads differently on a phone than it does on a laptop. */
@@ -2898,6 +2971,7 @@ body.tablet .viewport { width: 834px; height: 1000px; }
   color: var(--ink-3); white-space: nowrap;
 }
 .story-meta .warn { color: var(--warn); }
+.story-plays { color: var(--ink-3); }
 /* The row is its own container, so what to drop is decided by how much room *it* has and not by the
    window: counts are the first thing to go, and the warning about undrawn pictures is not. */
 .story-shell { container: story-row / inline-size; }
@@ -2915,7 +2989,24 @@ body.tablet .viewport { width: 834px; height: 1000px; }
 
 /* Wider than the list: beside its picture a story wants more than the list's 780px. */
 .loops.stories.reading { max-width: 1080px; }
-.story-read { flex: 1; min-height: 0; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+.story-read { flex: 1; min-height: 0; padding-bottom: 4px; }
+
+/* The reader's own controls, the loop player's footer and the loop player's rule: a footer of a
+   column that owns its height, so the thing reached for never moves. Shorter than a loop's — a
+   story's page needs the height for its picture and its words — with one segment per part in place
+   of a seek line, because a passage is never seeked. */
+.story-player { gap: 8px; padding-top: 10px; width: min(560px, 100%); }
+.sp-parts { display: flex; gap: 5px; }
+.sp-part { position: relative; flex: 1 1 0; height: 18px; border: 0; padding: 0; background: none; cursor: pointer; }
+.sp-part::before, .sp-fill { position: absolute; left: 0; top: 7px; height: 4px; border-radius: 999px; }
+.sp-part::before { content: ""; right: 0; background: var(--rule-soft); }
+.sp-fill { background: var(--core); width: 0; }
+.sp-where { margin: 0; text-align: center; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+@container vp (max-width: 480px) {
+  .story-player { gap: 4px; padding-top: 6px; }
+  .story-player .transport { gap: 10px; }
+  .story-player .transport .big { width: 50px; height: 50px; }
+}
 
 /* Where you are and what it is, in the line the back arrow already owns. The title is the part that
    gives way, cut short before the counter is. */
@@ -2933,8 +3024,9 @@ body.tablet .viewport { width: 834px; height: 1000px; }
   min-width: 0; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
   text-align: center; font: 700 19px/1.25 var(--serif); color: var(--ink);
 }
+.story-bar-end { justify-self: end; display: flex; align-items: center; gap: 12px; }
 .story-bar-count {
-  justify-self: end; white-space: nowrap; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3);
+  white-space: nowrap; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-3);
 }
 
 .story-read .cards-stage { container-type: inline-size; container-name: deck; }
@@ -3083,6 +3175,9 @@ body.tablet .viewport { width: 834px; height: 1000px; }
   .story-bar .label { display: none; }
   .story-text { font-size: 18.5px; }
   .story-tr { font-size: 15px; }
+  /* The reader's footer takes about a seventh of a phone's height, and it comes out of the picture:
+     the words of a part still fit without scrolling. */
+  .story-pic { width: min(100%, 34vh); width: min(100%, 34dvh); }
 }
 
 /* ══════════════════════════ the meaning map ══════════════════════════
@@ -3587,3 +3682,4 @@ a.tb-btn { text-decoration: none; }
   background: var(--ink); color: var(--surface); font-size: 12.5px; white-space: nowrap; box-shadow: var(--shadow);
 }
 .pref-axis { display: flex; justify-content: space-between; padding-left: 22px; font-size: 11.5px; color: var(--ink-3); }
+.nowrap { white-space: nowrap; }

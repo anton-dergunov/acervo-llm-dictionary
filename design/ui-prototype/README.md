@@ -29,8 +29,8 @@ It also carries the switches for the article redesign spike:
 …and the two for the loops surface:
 
 - **Loops** — opens and closes it.
-- **1× / 4× / 12×** — winds the loop's clock on. A word really takes twenty-two
-  seconds; at 1× the reveal has its true rhythm, and at 12× a whole loop can be
+- **1× / 4× / 12×** — winds the clock on, for a loop and for a story read aloud. A word really
+  takes twenty-two seconds; at 1× the reveal has its true rhythm, and at 12× a whole loop can be
   watched through in twenty seconds.
 
 There is no audio and there will not be: a fake clock stands in for the track, so
@@ -45,8 +45,43 @@ plus `tr=on`, `theme=dark`, and `size=375x667` to resize the frame.
 
 Stories open the same way: `?story=1&part=0` reads the first written story from its first page
 (the last page is the words), `stories=1` alone opens the list, and `reveal=1` turns every
-translation over. The first part is drawn as if it were being read aloud: its button lit and its
-first sentence tinted, as the application tints the passage that is sounding.
+translation over. `listen=1` reads the opened story aloud: a fake clock steps through each part's
+sentences, tinting the one sounding, then goes on to the next part, and the deck follows.
+
+## Loops and stories: the lists and listening
+
+Both lists are drawn the same way. **Starred ones lead, archived ones fold**: a starred row carries a
+small star after its title and comes first in every order, and archived ones sit greyed under a
+folded "Archived" rule at the foot, as set-aside words do. A row's actions, by swipe or right-click,
+are Star, Archive and Delete; an open loop or story has its own star in its top line. Four orders sit
+at the right of each list's head, as the word list's are — Recent, Hardest (the mean Anki difficulty
+of its words), Rarest (their mean Zipf figure) and Least played, which is there for variety — and
+each row says how often it was played (`played 9×`) or read
+(`read 3×`). A loop's badge is the kind of loop it is, the make dialog's own icon, until it is the
+one playing.
+
+**Search, on these two surfaces, searches the words in them**: typing filters the list instead of
+leaving it, and each row it keeps says which of its words matched and what they mean, the matched
+letters marked by a background. It opens the archived fold, as a word search opens the set-aside one.
+
+**A story plays part after part**, with a footer like the loop player's: a segment per part,
+previous and next part, read it again, and go on to the next story. Leaving the reader does not stop
+it. What is playing — a loop or a story — is shown, per device shape, by the bar at the foot of a
+phone (with Next and close), by a card at the foot of the rail on a tablet or a desktop, and, only on
+a tablet whose rail an article has hidden, by a chip in the top bar. Each is hidden while the thing playing is open
+in its own player.
+
+Kept music is marked by a bookmark holding a note, outlined or filled, so the star means one thing.
+While Loops or Stories is open, the top bar's Add becomes Make a loop or Make a story, as its search
+box becomes theirs.
+
+The lock screen cannot be drawn here. It should name what is playing (a story's title and part, or a
+loop's current word and kind), show a story part's picture as the artwork, and give Next and Previous
+the next and previous loop or story in the list it was started from.
+
+Deep links: `msort=recent|hard|rare|least`, `q=<letters>` (a search on the surface the link opens),
+`archived=1` (both folds open), `listen=story` and `listen=loop` (the first one playing in the
+background), `go=1` ("go on to the next" on for both), `speed=4` (the clock, for stories as for loops) and `rarity=offline`.
 
 A word can be looked up by tapping it: in a story's text, in a loop's lines in the language being
 learned, and in an article's definitions and examples. The tap moves nothing — the story does not

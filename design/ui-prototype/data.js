@@ -796,14 +796,14 @@ const LOOPS = [
     id: "lp7k2md90xqv4b1", language: "es", position: 1,
     styleId: "gentle-game", seed: 104740, engineVersion: "0.7.0", bedFingerprint: "f35282aaf3c40245",
     format: "classic", switches: {}, fallbackFrom: null, audioRef: "loops/es/lp7k2md90xqv4b1-6ad2f019.mp3", audioMime: "audio/mpeg",
-    durationSeconds: endOf("lp7k2md90xqv4b1"), createdAt: "2026-09-16", editedAt: "2026-09-16"
+    durationSeconds: endOf("lp7k2md90xqv4b1"), starred: false, archived: false, createdAt: "2026-09-16", editedAt: "2026-09-16"
   },
   {
     id: "lp3f81nzc6yh5t2", language: "es", position: 2,
     styleId: "acoustic-flow", seed: 88213, engineVersion: "0.7.0", bedFingerprint: "b1d9042ce7f3aa88",
     format: "radio-lesson", switches: { repetitions: "3", remarks: true, quiz: true, review: false }, fallbackFrom: null,
     audioRef: "loops/es/lp3f81nzc6yh5t2-91c47b3e.mp3", audioMime: "audio/mpeg",
-    durationSeconds: RADIO.duration, createdAt: "2026-09-12", editedAt: "2026-09-12"
+    durationSeconds: RADIO.duration, starred: true, archived: false, createdAt: "2026-09-12", editedAt: "2026-09-12"
   },
   /* Asked for and not made: no reference, so no duration and no bed either — all three arrive
      together when the render lands. The job is what says how far along it is. */
@@ -811,14 +811,14 @@ const LOOPS = [
     id: "lp9w45bqj2mk7d3", language: "es", position: 3,
     styleId: null, seed: 41207, engineVersion: null, bedFingerprint: null,
     format: "story", switches: {}, fallbackFrom: null, audioRef: null, audioMime: null,
-    durationSeconds: null, createdAt: "2026-09-18", editedAt: "2026-09-18"
+    durationSeconds: null, starred: false, archived: false, createdAt: "2026-09-18", editedAt: "2026-09-18"
   },
   {
     id: "lp2h63vxr8ns1g4", language: "es", position: 4,
     styleId: "bright-pastoral", seed: 22910, engineVersion: "0.7.0", bedFingerprint: "44aa1c0b9e21f7d6",
     // Asked for as a radio lesson on a day the loop voice was the clear, even one: made as a drill.
     format: "classic", switches: {}, fallbackFrom: "radio-lesson", audioRef: "loops/es/lp2h63vxr8ns1g4-2f70d4aa.mp3", audioMime: "audio/mpeg",
-    durationSeconds: endOf("lp2h63vxr8ns1g4"), createdAt: "2026-08-30", editedAt: "2026-08-30"
+    durationSeconds: endOf("lp2h63vxr8ns1g4"), starred: false, archived: true, createdAt: "2026-08-30", editedAt: "2026-08-30"
   }
 ];
 
@@ -879,18 +879,24 @@ const STORIES = [
   {
     id: "st4m19pqb7wzx2c", language: "es", position: 1, typeId: "funny", styleId: "comic-book",
     title: "El perro de la panadería", titleTranslation: "The bakery dog", emoji: "\u{1F415}",
-    modelId: "gemini/gemini-3.5-flash-lite", createdAt: "2026-09-19", editedAt: "2026-09-19"
+    modelId: "gemini/gemini-3.5-flash-lite", starred: false, archived: false, createdAt: "2026-09-21", editedAt: "2026-09-21"
   },
   {
     id: "st8c50fkd3vnr6h", language: "es", position: 2, typeId: "everyday", styleId: "golden-hour",
     title: "El café de las siete", titleTranslation: "The seven o'clock coffee", emoji: "☕",
-    modelId: "gemini/gemini-3.5-flash-lite", createdAt: "2026-09-19", editedAt: "2026-09-19"
+    modelId: "gemini/gemini-3.5-flash-lite", starred: true, archived: false, createdAt: "2026-09-19", editedAt: "2026-09-19"
   },
   /* Asked for and never written: no parts at all, which is the whole of what says so. */
   {
     id: "st2v77hjs9blm4k", language: "es", position: 3, typeId: "mystery", styleId: "film-noir",
     title: null, titleTranslation: null, emoji: "\u{1F575}", modelId: null,
-    createdAt: "2026-09-19", editedAt: "2026-09-19"
+    starred: false, archived: false, createdAt: "2026-09-22", editedAt: "2026-09-22"
+  },
+  /* Archived: read, done with, and folded under the list rather than deleted. */
+  {
+    id: "st6r02nwe5ckt8p", language: "es", position: 4, typeId: "travel", styleId: "watercolour-storybook",
+    title: "La balsa del río", titleTranslation: "The river raft", emoji: "\u{1F6F6}",
+    modelId: "gemini/gemini-3.5-flash-lite", starred: false, archived: true, createdAt: "2026-09-02", editedAt: "2026-09-02"
   }
 ];
 
@@ -916,6 +922,27 @@ const STORY_PARTS = [
     text: "Al final del mes, el perro regresa con una cartera llena de billetes en la boca. Don Mateo comprendió demasiado tarde que su mejor cliente tenía un restaurante propio.",
     translation: "At the end of the month, the dog comes back with a wallet full of notes in his mouth. Don Mateo understood too late that his best customer had a restaurant of his own.",
     imageRef: null, imageModelId: null, attempts: 0, failureReason: null
+  },
+  {
+    id: "sp11", storyId: "st8c50fkd3vnr6h", position: 0,
+    heading: "La primera taza", headingTranslation: "The first cup",
+    text: "Todos los días, a las siete, Lucía abre el café de la plaza. Enciende la cafetera, que tarda en calentarse, y pone las tazas en fila sobre la barra. El primer cliente siempre es el cartero.",
+    translation: "Every day at seven, Lucía opens the café on the square. She switches on the coffee machine, which takes a while to warm up, and lines the cups up on the bar. The first customer is always the postman.",
+    imageRef: "img/sense-b.webp", imageModelId: "openai/gpt-image-1", attempts: 1, failureReason: null
+  },
+  {
+    id: "sp12", storyId: "st8c50fkd3vnr6h", position: 1,
+    heading: "Una carta sin sello", headingTranslation: "A letter with no stamp",
+    text: "Hoy el cartero no pide nada. Deja sobre la barra una carta sin sello, con el nombre de Lucía escrito a mano. Ella reconoce enseguida la letra de su abuela.",
+    translation: "Today the postman orders nothing. He leaves a letter with no stamp on the bar, with Lucía's name written by hand. She recognises her grandmother's handwriting at once.",
+    imageRef: "img/sense-c.webp", imageModelId: "openai/gpt-image-1", attempts: 1, failureReason: null
+  },
+  {
+    id: "sp21", storyId: "st6r02nwe5ckt8p", position: 0,
+    heading: "Al amanecer", headingTranslation: "At dawn",
+    text: "La balsa cruza el río despacio. Nadie habla; solo se oye el agua contra la madera.",
+    translation: "The raft crosses the river slowly. Nobody speaks; all you can hear is the water against the wood.",
+    imageRef: "img/sense-d.webp", imageModelId: "openai/gpt-image-1", attempts: 1, failureReason: null
   }
 ];
 
@@ -926,5 +953,26 @@ const STORY_WORDS = [
   { id: "sw01", storyId: "st4m19pqb7wzx2c", lexemeId: "wd1", position: 0, sourceText: "la panadería", forms: ["panadería"], translationForms: ["bakery"], emoji: "\u{1F35E}", gloss: "bakery" },
   { id: "sw02", storyId: "st4m19pqb7wzx2c", lexemeId: "wd2", position: 1, sourceText: "ladrar", forms: ["ladrar"], translationForms: ["barking"], emoji: "\u{1F415}", gloss: "to bark" },
   { id: "sw03", storyId: "st4m19pqb7wzx2c", lexemeId: "wd3", position: 2, sourceText: "el mostrador", forms: ["mostrador"], translationForms: ["counter"], emoji: "\u{1F6D2}", gloss: "counter" },
-  { id: "sw04", storyId: "st2v77hjs9blm4k", lexemeId: "wd2", position: 0, sourceText: "ladrar", forms: [], translationForms: [], emoji: "\u{1F415}", gloss: "to bark" }
+  { id: "sw04", storyId: "st2v77hjs9blm4k", lexemeId: "wd2", position: 0, sourceText: "ladrar", forms: [], translationForms: [], emoji: "\u{1F415}", gloss: "to bark" },
+  { id: "sw11", storyId: "st8c50fkd3vnr6h", lexemeId: "wd4", position: 0, sourceText: "la cafetera", forms: ["cafetera"], translationForms: ["coffee machine"], emoji: "\u2615", gloss: "coffee machine" },
+  { id: "sw12", storyId: "st8c50fkd3vnr6h", lexemeId: "wd5", position: 1, sourceText: "la barra", forms: ["barra"], translationForms: ["bar"], emoji: "\u{1F378}", gloss: "bar, counter" },
+  { id: "sw13", storyId: "st8c50fkd3vnr6h", lexemeId: "wd6", position: 2, sourceText: "el sello", forms: ["sello"], translationForms: ["stamp"], emoji: "\u{1F4EE}", gloss: "stamp" },
+  { id: "sw21", storyId: "st6r02nwe5ckt8p", lexemeId: "f6k39xzb8n2ph7m", position: 0, sourceText: "la balsa", forms: ["balsa"], translationForms: ["raft"], emoji: "\u{1F6F6}", gloss: "raft" }
 ];
+
+/* How often each loop and story has been played or read. In the application this is counted from
+   the replicated `plays` records — one per play, written by whichever device it happened on — and
+   never stored as a number; here the counts are simply given, and playing one adds to them. */
+const PLAY_COUNTS = { lp7k2md90xqv4b1: 9, lp3f81nzc6yh5t2: 4, lp2h63vxr8ns1g4: 14, st4m19pqb7wzx2c: 3, st8c50fkd3vnr6h: 1, st6r02nwe5ckt8p: 6 };
+
+/* What the Hardest and Rarest orders read for words the fixtures hold only inside a story: Anki's
+   difficulty (`studyStates`) and wordfreq’s Zipf figure (`GET /words/rarity`). A word in `LEXEMES`
+   takes its difficulty from its own `study`; its Zipf figure is here too, keyed by lexeme id. */
+const WORD_FACTS = {
+  wd1: { difficulty: 3.1, zipf: 3.9 }, wd2: { difficulty: 6.8, zipf: 3.2 }, wd3: { difficulty: 5.0, zipf: 3.4 },
+  wd4: { difficulty: 2.6, zipf: 3.3 }, wd5: { difficulty: 4.2, zipf: 4.4 }, wd6: { difficulty: 3.8, zipf: 3.6 },
+  k3m91xq7d0a2vbe: { zipf: 3.5 }, "3vu6u4sqccfs6fl": { zipf: 5.1 }, "9tmbiepw0yjey3j": { zipf: 3.4 },
+  b7t42naz9c6uk1p: { zipf: 2.9 }, q8v53mrb2e7wl4d: { zipf: 2.6 }, z1c64pdw8f3hj7s: { zipf: 4.0 },
+  m5r18kts4b9gy2n: { zipf: 3.3 }, w9h27fjc5d1qx8v: { zipf: 3.0 }, d4y96wlq1m8sz5b: { zipf: 2.4 },
+  f6k39xzb8n2ph7m: { zipf: 3.7 }, n7s24bqk6v9dm3t: { zipf: 4.3 }, v8j51ctr3x7bn6q: { zipf: 3.6 }, g3q76mwd9j5fk1z: { zipf: 3.1 }
+};

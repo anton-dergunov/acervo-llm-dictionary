@@ -149,20 +149,20 @@ describe("reading a story", () => {
   it("never draws a translation until it is asked for", () => {
     reader();
     expect(translation()).toBe("");
-    fireEvent.click(screen.getAllByRole("button", { name: /read it in your own language/i })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: /see the translation/i })[0]);
     expect(translation()).toContain("Marcos climbed onto the raft");
   });
 
   it("does not reveal the next part's translation with this one's", () => {
     reader();
-    fireEvent.click(screen.getAllByRole("button", { name: /read it in your own language/i })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: /see the translation/i })[0]);
     expect(screen.queryByText(/Something began to sting/)).not.toBeInTheDocument();
-    expect(screen.getAllByRole("button", { name: /read it in your own language/i })).toHaveLength(1);
+    expect(screen.getAllByRole("button", { name: /see the translation/i })).toHaveLength(1);
   });
 
   it("keeps a revealed translation revealed when you come back to it", () => {
     reader();
-    fireEvent.click(screen.getAllByRole("button", { name: /read it in your own language/i })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: /see the translation/i })[0]);
     next();
     previous();
     expect(translation()).toContain("Marcos climbed onto the raft");
@@ -170,20 +170,20 @@ describe("reading a story", () => {
 
   it("can hide a translation again once it has been read", () => {
     reader();
-    fireEvent.click(screen.getAllByRole("button", { name: /read it in your own language/i })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: /see the translation/i })[0]);
     expect(translation()).toContain("Marcos climbed onto the raft");
 
     fireEvent.click(screen.getByRole("button", { name: "Hide the translation" }));
 
     expect(translation()).toBe("");
     // Back to the withheld state, ready to be asked for again.
-    expect(screen.getAllByRole("button", { name: /read it in your own language/i })).toHaveLength(2);
+    expect(screen.getAllByRole("button", { name: /see the translation/i })).toHaveLength(2);
     expect(screen.queryByRole("button", { name: "Hide the translation" })).not.toBeInTheDocument();
   });
 
   it("hides only the translation it was pressed on", () => {
     reader();
-    const reveals = () => screen.getAllByRole("button", { name: /read it in your own language/i });
+    const reveals = () => screen.getAllByRole("button", { name: /see the translation/i });
     fireEvent.click(reveals()[0]);
     fireEvent.click(reveals()[0]);
     expect(document.querySelectorAll(".story-tr")).toHaveLength(2);
@@ -207,7 +207,7 @@ describe("reading a story", () => {
 
   it("marks the word in the translation too, once it has been asked for", () => {
     const { container } = reader();
-    fireEvent.click(screen.getAllByRole("button", { name: /read it in your own language/i })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: /see the translation/i })[0]);
     const marks = Array.from(container.querySelectorAll(".story-tr .story-mark")).map((one) => one.textContent);
     expect(marks).toEqual(["raft"]);
   });
@@ -216,7 +216,7 @@ describe("reading a story", () => {
     const { container } = reader("storypicada0001", (graph) => {
       graph.storyWords.forEach((word) => { word.translationForms = []; });
     });
-    fireEvent.click(screen.getAllByRole("button", { name: /read it in your own language/i })[0]);
+    fireEvent.click(screen.getAllByRole("button", { name: /see the translation/i })[0]);
     expect(translation()).toContain("Marcos climbed onto the raft");
     expect(container.querySelectorAll(".story-tr .story-mark")).toHaveLength(0);
   });

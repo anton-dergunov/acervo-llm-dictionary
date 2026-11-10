@@ -173,7 +173,7 @@ function PartPage({ story, part, number, words, near, active, recording, reveale
               <button className="story-hide" onClick={onHide} aria-label="Hide the translation">Hide</button>
             </>
             : <button className="story-reveal" onClick={onReveal} disabled={!part.translation}>
-              {part.translation ? "Tap to read it in your own language" : "Not translated yet"}
+              {part.translation ? "Tap to see the translation" : "Not translated yet"}
             </button>}
         </div>
         <Hedera side="below" />

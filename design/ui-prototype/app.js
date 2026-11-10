@@ -65,7 +65,10 @@ const state = {
   mapStyle: "atlas",
   mapLabels: "model",
   mapState: null,
-  mapSample: false
+  mapSample: false,
+  /* The order each made list is drawn in, per surface and remembered per device: Recent, Hardest,
+     Rarest or Least played. Starred ones lead in every order and archived ones fold at the foot. */
+  madeSort: { loop: "recent", story: "recent" }
 };
 
 const $  = (sel, root = document) => root.querySelector(sel);
@@ -117,6 +120,11 @@ const ICON = {
      label to be understood. */
   star:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/></svg>',
   starOn: '<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8z"/></svg>',
+  /* Keeping a loop's music: a bookmark holding a note — the star now means liking a loop or a story,
+     and two stars on one screen meaning two things was the problem. Outline when not kept, filled
+     when kept. */
+  keep:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.8h13v18.6L12 16.9l-6.5 4.5z"/><circle cx="10.6" cy="12.2" r="1.8"/><path d="M12.4 12.2V6.6l2.7 1.1"/></svg>',
+  keepOn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 2.8h13v18.6L12 16.9l-6.5 4.5z" fill="currentColor"/><g style="stroke:var(--surface)"><circle cx="10.6" cy="12.2" r="1.8" style="fill:var(--surface)"/><path d="M12.4 12.2V6.6l2.7 1.1"/></g></svg>',
   down:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   repeat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h11a3 3 0 0 1 3 3v1"/><path d="M18 17H7a3 3 0 0 1-3-3v-1"/><path d="M8.5 4.5L6 7l2.5 2.5"/><path d="M15.5 19.5L18 17l-2.5-2.5"/></svg>',
   continue:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h11M4 12h8M4 17h8"/><path d="M16 11.5v7l5.5-3.5z" fill="currentColor" stroke-width="1"/></svg>',
@@ -391,14 +399,36 @@ function renderRail() {
       ${count !== null ? `<span class="cnt">${count}</span>` : ""}
     </button>`;
   const all = inLanguage().filter((x) => x.status === "active").length;
+  /* A topic is "on" only while the list is what is showing, not behind a surface of its own. */
+  const listing = !state.map && !state.loops && !state.stories;
   rail.innerHTML =
-    tab("all", "\u{1F4D6}", "All", all, state.topic === "all" && !state.map) +
-    (inboxCount() ? tab("inbox", "\u{1F4E5}", "Inbox", inboxCount(), state.topic === "inbox" && !state.map) : "") +
+    tab("all", "\u{1F4D6}", "All", all, state.topic === "all" && listing) +
+    (inboxCount() ? tab("inbox", "\u{1F4E5}", "Inbox", inboxCount(), state.topic === "inbox" && listing) : "") +
     /* A view of every word rather than a topic, so it sits with All and not among the topics. */
     `<button class="tab ${state.map ? "on" : ""}" data-map-open title="Map">
       <span class="ic">\u{1F5FA}\uFE0F</span><span class="nm">Map</span></button>` +
     '<div class="rail-sep"></div>' +
-    TOPICS.map((t) => tab(t.key, t.icon, t.name, topicCount(t.key) || null, state.topic === t.key && !state.map)).join("");
+    TOPICS.map((t) => tab(t.key, t.icon, t.name, topicCount(t.key) || null, state.topic === t.key && listing)).join("") +
+    /* Made for you, as the application's rail has it: the things built out of your words. Counted
+       without the archived ones, which are kept but are not what the list is for. */
+    '<div class="rail-sep"></div>' +
+    `<button class="tab ${state.loops ? "on" : ""}" data-surface="loops" title="Loops">
+      <span class="ic">\u266A</span><span class="nm">Loops</span><span class="cnt">${loopsIn(state.lang).filter((one) => !one.archived).length}</span></button>` +
+    `<button class="tab ${state.stories ? "on" : ""}" data-surface="stories" title="Stories">
+      <span class="ic">\u{1F4D6}</span><span class="nm">Stories</span><span class="cnt">${storiesIn(state.lang).filter((one) => !one.archived).length}</span></button>` +
+    (nowLoaded() ? railNow() : "");
+}
+
+/* What is playing, at the foot of the rail on a tablet or a desktop: the rail is where the way in
+   already is, and it is on screen at every width a list is — so the top bar, which carries search,
+   Add, sync and the language, no longer has to make room. The ring is how far it has got. */
+function railNow() {
+  const next = nowNext();
+  return `<div class="rail-now" role="group" aria-label="Now playing">
+    <button class="rail-now-play" id="railPlay" aria-label="Play"><span class="glyph">${ICON.play}</span></button>
+    <button class="rail-now-what" id="railOpen" title="Open it"><span class="rail-now-title"></span><span class="rail-now-sub"></span></button>
+    <button class="rail-now-next" id="railNext" aria-label="${listening === "story" ? "The next story" : "The next loop"}"${next ? "" : " disabled"}>${ICON.next}</button>
+  </div>`;
 }
 
 function renderLangButton() {
@@ -1035,7 +1065,15 @@ function wireStories() {
 
 function syncStory(track) {
   const at = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+  const moved = at !== state.storyAt;
   state.storyAt = at;
+  /* A swipe while it reads moves the voice to that part; the deck following the voice is not a
+     swipe. Reaching the second part by hand is a read, as reaching it by ear is. */
+  if (moved && reader.storyId === state.storyOpen) {
+    if (reader.following !== null) { if (at === reader.following) reader.following = null; }
+    else if (reader.playing && at < partsOf(state.storyOpen).length) storyPlay(state.storyOpen, at);
+  }
+  if (at >= 1 && at < partsOf(state.storyOpen).length) noteStoryPart(state.storyOpen, at);
   $(".story-bar-count").textContent = `${at + 1} / ${track.children.length}`;
   $(".cards-edge.prev").disabled = at === 0;
   $(".cards-edge.next").disabled = at === track.children.length - 1;
@@ -1530,6 +1568,9 @@ function toast(msg, action) {
 
 const player = { loopId: null, at: 0, playing: false, speed: 1, frame: null, last: 0, scrubbing: false,
                  repeat: false, autoplay: false };
+/* Which of the two players the bar, the rail, the chip and the lock screen speak for: the one
+   started last. They stop each other, so there is never more than one sounding. */
+let listening = null;   // "loop" | "story" | null
 
 function loopsIn(lang) { return LOOPS.filter((l) => l.language === lang).sort((a, b) => a.position - b.position); }
 function loopItemsOf(id) { return LOOP_ITEMS.filter((r) => r.loopId === id).sort((a, b) => a.position - b.position); }
@@ -1607,12 +1648,17 @@ function loopWordAt(rows, cards, at) {
 function loopLoad(id, { play = false, at = 0 } = {}) {
   player.loopId = id;
   player.at = at;
+  listening = "loop";
+  /* A play is a start from the top, never a resume: what Least played counts. */
+  if (play && at === 0) PLAY_COUNTS[id] = playsOf(id) + 1;
   if (play) loopPlay(); else loopPause();
 }
 
 function loopPlay() {
   const loop = loopOf(player.loopId);
   if (!loop || !loopIsReady(loop)) return;
+  if (reader.playing) storyPause();
+  listening = "loop";
   player.playing = true;
   player.last = performance.now();
   if (!player.frame) player.frame = requestAnimationFrame(loopFrame);
@@ -1638,7 +1684,7 @@ function loopFrame(now) {
 /* What happens at the end, in this order: play it again, else play the next one, else stop. Both
    switches are off by default — a loop that ends is a loop that ends. */
 function loopEnded() {
-  if (player.repeat) { player.at = 0; player.last = performance.now(); player.frame = requestAnimationFrame(loopFrame); return; }
+  if (player.repeat) { PLAY_COUNTS[player.loopId] = playsOf(player.loopId) + 1; player.at = 0; player.last = performance.now(); player.frame = requestAnimationFrame(loopFrame); return; }
   if (player.autoplay) {
     const next = loopNeighbour(1);
     if (next) { loopLoad(next.id, { play: true }); render(); return; }
@@ -1646,8 +1692,10 @@ function loopEnded() {
   loopPause();
 }
 
+/* The queue is the list the loop was started from, in the order it is shown — starred first, the
+   chosen order, the search — and never an archived one. */
 function loopNeighbour(by) {
-  const queue = loopsIn(state.lang).filter(loopIsReady);
+  const queue = madeList("loop").rows.filter(loopIsReady);
   const at = queue.findIndex((loop) => loop.id === player.loopId);
   return at < 0 ? null : queue[at + by] || null;
 }
@@ -1722,12 +1770,15 @@ function playerBlock(loop) {
         <button class="bed-name label" id="bedName" aria-haspopup="dialog"
                 ${state.remaking === loop.id ? "disabled" : ""}>${esc(styleLabel(loop.styleId))}${ICON.down}</button>
         <button class="bed-star${kept ? " on" : ""}" id="bedStar" aria-pressed="${kept}"
-                aria-label="${kept ? "No longer keep this music" : "Keep this music as a favourite"}">${kept ? ICON.starOn : ICON.star}</button>
+                aria-label="${kept ? "No longer keep this music" : "Keep this music"}" title="${kept ? "Kept — offered when you make a loop" : "Keep this music"}">${keepGlyph(kept)}</button>
         <span class="label bed-about"><span class="bed-dot">· </span><span>${esc(formatLabel(loop.format))}</span><span class="bed-dot"> · </span><span>${rows.length} words</span></span>
       </span>
     </div>
   </div>`;
 }
+
+/* The mark for kept music, outlined or filled. */
+const keepGlyph = (kept) => (kept ? ICON.keepOn : ICON.keep);
 
 /* What a format needs, said as what the owner would set up, and where — `LoopFormat.tsx`. */
 const NEEDS = {
@@ -1764,18 +1815,190 @@ function loopSub(loop) {
   return `${esc(formatLabel(loop.format))} · ${loopItemsOf(loop.id).length} words · ${clock(loop.durationSeconds)}`;
 }
 
-/* A loop is a `swipeRow` whose one action is Delete. The row is never `disabled`: a loop that was
-   never made is the one you most want rid of, and a disabled button answers no gesture at all. */
-function loopRow(loop) {
+/* ── the made lists: loops and stories ──────────────────────────────────────
+   One shape for both lists, as `SwipeRow` is one row for both. **Starred lead, archived fold**: every
+   order draws the starred ones first, then the rest, then a folded rule over the archived ones,
+   greyed — the set-aside fold of the word list, reused rather than invented. The order is one of
+   four — Recent, Hardest, Rarest, Least played — remembered per surface on the device.
+
+   Search, while one of these surfaces is open, searches **the words in its loops or stories**
+   instead of closing the surface, and every row it keeps says which of its words matched, so a loop
+   never turns up with no visible reason. The derivations are `selectors.ts` `madeRows` in the
+   application; every count and every figure here is read from the fixtures, as the application
+   reads them from the replica. */
+
+/* Least played rather than most: the order is there for variety — what has had its turn least. */
+const MADE_SORTS = [["recent", "Recent"], ["hard", "Hardest"], ["rare", "Rarest"], ["least", "Least played"]];
+/* `rarity=offline` in the link stands in for a session that has not reached the server yet: how
+   rare a word is is asked of it once a session, not replicated. */
+const RARITY_OFF = new URLSearchParams(location.search).get("rarity") === "offline";
+const archOpen = (() => {
+  const read = (key) => { try { return localStorage.getItem(key) === "on"; } catch { return false; } };
+  return { loop: read("acervo-loops-archive-open"), story: read("acervo-stories-archive-open") };
+})();
+
+const playsOf = (id) => PLAY_COUNTS[id] || 0;
+
+/* Anki's difficulty and wordfreq's Zipf figure for one word: from the word itself where it has a
+   review state, else from `WORD_FACTS`. Null is "nothing to sort by", which sorts last. */
+function factOf(lexemeId) {
+  const own = LEXEMES.find((x) => x.id === lexemeId);
+  const extra = WORD_FACTS[lexemeId] || {};
+  return {
+    difficulty: own && own.study ? own.study.difficulty : (extra.difficulty ?? null),
+    zipf: RARITY_OFF ? null : (extra.zipf ?? null)
+  };
+}
+const meanOf = (values) => {
+  const known = values.filter((v) => v !== null && v !== undefined);
+  return known.length ? known.reduce((a, b) => a + b, 0) / known.length : null;
+};
+
+/* What a loop or a story was made from, in one shape: the word as it was said, what it means, and
+   — for a story — the forms the text used, which are what a search finds. */
+function madeWords(kind, id) {
+  return kind === "loop"
+    ? loopItemsOf(id).map((row) => ({ lexemeId: row.lexemeId, source: row.sourceText, target: row.targetText, forms: [] }))
+    : wordsOf(id).map((word) => ({ lexemeId: word.lexemeId, source: word.sourceText,
+        target: word.gloss || word.translationForms[0] || "", forms: [...word.forms, ...word.translationForms] }));
+}
+
+/* The word as you hold it — headword, lemma, reading and glosses — so a search for another form or
+   another gloss of a word still finds the loop it is in. Not its definitions: this searches the
+   *words* in loops, and a definition that happens to contain the letters is not a reason a loop
+   matched. */
+function haystackOf(lexemeId) {
+  const x = LEXEMES.find((one) => one.id === lexemeId);
+  if (!x) return "";
+  return fold([x.headword, x.lemma, x.reading || "", x.shortGloss || "",
+    ...x.senses.flatMap((s) => s.glosses.flatMap((g) => g.terms))].join(" "));
+}
+function madeMatches(kind, id, q) {
+  return madeWords(kind, id).filter((word) =>
+    fold([word.source, word.target, ...word.forms].join(" ")).includes(q) || haystackOf(word.lexemeId).includes(q));
+}
+
+function madeList(kind) {
+  const all = kind === "loop" ? loopsIn(state.lang) : storiesIn(state.lang);
+  const q = fold(state.query.trim());
+  const matches = new Map();
+  const rows = !q ? all : all.filter((one) => {
+    const hit = madeMatches(kind, one.id, q);
+    if (hit.length) matches.set(one.id, hit);
+    return hit.length > 0;
+  });
+  const mean = (one, field) => meanOf(madeWords(kind, one.id).map((word) => factOf(word.lexemeId)[field]));
+  const recent = (a, b) => b.createdAt.localeCompare(a.createdAt);
+  const by = (score, highFirst) => (a, b) => {
+    const x = score(a), y = score(b);
+    if (x === null && y === null) return recent(a, b);
+    if (x === null) return 1;
+    if (y === null) return -1;
+    return (highFirst ? y - x : x - y) || recent(a, b);
+  };
+  const sort = state.madeSort[kind];
+  const orders = {
+    recent,
+    hard: by((one) => mean(one, "difficulty"), true),
+    rare: by((one) => mean(one, "zipf"), false),
+    least: (a, b) => (playsOf(a.id) - playsOf(b.id)) || recent(a, b)
+  };
+  const sorted = rows.slice().sort(orders[sort]);
+  /* Said under the orders when the one chosen has nothing to sort by, rather than leaving a list
+     that looks unsorted. */
+  const blind = (field) => !all.some((one) => mean(one, field) !== null);
+  const note = sort === "hard" && blind("difficulty") ? "Hardest needs Anki’s review history, and none has come back yet."
+    : sort === "rare" && RARITY_OFF ? "How rare a word is comes from the server, which can’t be reached right now."
+    : "";
+  const live = sorted.filter((one) => !one.archived);
+  return { rows: [...live.filter((one) => one.starred), ...live.filter((one) => !one.starred)],
+           archived: sorted.filter((one) => one.archived), matches, q, note };
+}
+
+/* The head of a made list, drawn as the word list's is: the title and a count on the left — or, while
+   searching, how many the search kept — and the orders on the right. Make is not here: it is the top
+   bar's Add while this surface is open, as the search box there is this surface's search. */
+function madeHead(kind, list) {
+  const found = list.rows.length + list.archived.length;
+  const many = kind === "loop" ? (n) => (n === 1 ? "loop" : "loops") : (n) => (n === 1 ? "story" : "stories");
+  const sub = list.q ? `${found} ${many(found)} with “${esc(state.query.trim())}”`
+    : `${list.rows.length} in ${langOf(state.lang).name}${list.archived.length ? ` · ${list.archived.length} archived` : ""}`;
+  return `<div class="list-head made-head">
+      <div>
+        <h1><span class="ic">${kind === "loop" ? "\u266A" : "\u{1F4D6}"}</span>${kind === "loop" ? "Loops" : "Stories"}</h1>
+        <p class="label sub">${sub}</p>
+      </div>
+      <div class="sortbar">${MADE_SORTS.map(([id, label]) =>
+        `<button class="sort-btn${state.madeSort[kind] === id ? " on" : ""}" data-made-sort="${kind}:${id}">${label}</button>`).join("")}</div>
+    </div>
+    ${list.note ? `<p class="made-note">${esc(list.note)}</p>` : ""}`;
+}
+
+/* Which of a row's words the search matched: the word and what it means, the matched letters
+   marked by a background and nothing else. A word found through its definition is named plainly. */
+function matchLine(hits) {
+  if (!hits || !hits.length) return "";
+  const q = fold(state.query.trim());
+  const mark = (text) => {
+    const at = fold(text).indexOf(q);
+    return at < 0 ? esc(text) : `${esc(text.slice(0, at))}<mark>${esc(text.slice(at, at + q.length))}</mark>${esc(text.slice(at + q.length))}`;
+  };
+  return `<span class="made-match">${hits.slice(0, 3).map((word) =>
+    `<span class="made-hit"><span lang="${state.lang}">${mark(word.source)}</span> · ${mark(word.target)}</span>`).join("")}${
+    hits.length > 3 ? `<span class="made-hit more">+${hits.length - 3}</span>` : ""}</span>`;
+}
+
+/* The archived ones: a folded rule at the foot, opened by hand or by any search. */
+function archivedFold(kind, list, rowOf) {
+  if (!list.archived.length) return "";
+  const n = list.archived.length;
+  return `<div class="aside-section made-archive">
+    ${list.q ? `<div class="list-sep"><span class="label">Archived · ${n}</span></div>`
+      : `<button type="button" class="list-sep fold" data-arch-fold="${kind}" aria-expanded="${archOpen[kind]}">
+          <span class="caret">${ICON.caret}</span><span class="label">Archived · ${n}</span></button>`}
+    ${list.q || archOpen[kind] ? list.archived.map((one) => rowOf(one, list.matches.get(one.id))).join("") : ""}
+  </div>`;
+}
+
+/* A row's actions, in this order on both lists: Star, Archive, Delete. */
+function madeActions(kind, one) {
+  const noun = kind === "loop" ? "loop" : "story";
+  return [
+    { label: one.starred ? "Unstar" : "Star", menu: one.starred ? `Unstar this ${noun}` : `Star this ${noun}`, tone: "pick", attrs: `data-made-star="${kind}:${one.id}"` },
+    { label: one.archived ? "Unarchive" : "Archive", menu: one.archived ? `Unarchive this ${noun}` : `Archive this ${noun}`, attrs: `data-made-archive="${kind}:${one.id}"` },
+    { label: "Delete", menu: `Delete this ${noun}`, tone: "danger", attrs: `data-${noun}-delete="${one.id}"`, sep: true }
+  ];
+}
+const starMark = (one) => one.starred ? `<span class="made-star" role="img" aria-label="Starred" title="Starred">${ICON.starOn}</span>` : "";
+
+/* The kind of loop, as the make dialog draws it: the drill's arrows, the radio lesson's microphone,
+   the story's open book. What it is drawn by is what was *made* — `format`, not `fallbackFrom`. */
+function formatIcon(formatId) {
+  const kind = loopKinds().find((one) => one.formats.some((format) => format.id === formatId));
+  return kind ? kind.icon : ICON.note;
+}
+
+function loopSub(loop) {
+  if (!loopIsReady(loop)) return '<span class="doing">Being made…</span>';
+  const plays = playsOf(loop.id);
+  return `${esc(formatLabel(loop.format))} · ${loopItemsOf(loop.id).length} words · ${clock(loop.durationSeconds)}${plays ? ` · <span class="nowrap">played ${plays}×</span>` : ""}`;
+}
+
+/* A loop is a `swipeRow`. Its badge is the kind of loop it is, until it is the one loaded: then it
+   is the transport, as it always was. The row is never `disabled`: a loop that was never made is
+   the one you most want rid of, and a disabled button answers no gesture at all. */
+function loopRow(loop, hits) {
   const ready = loopIsReady(loop);
-  const on = loop.id === player.loopId;
-  return swipeRow(`loop:${loop.id}`, `<button class="loop-row${on ? " on" : ""}" data-loop="${loop.id}" aria-disabled="${ready ? "false" : "true"}">
-        <span class="loop-go${ready ? "" : " pending"}">${ready ? (on && player.playing ? ICON.pause : ICON.play) : ICON.hourglass}</span>
+  const on = listening === "loop" && loop.id === player.loopId;
+  const badge = !ready ? ICON.hourglass : on ? (player.playing ? ICON.pause : ICON.play) : formatIcon(loop.format);
+  return swipeRow(`loop:${loop.id}`, `<button class="loop-row${on ? " on" : ""}${loop.archived ? " archived" : ""}" data-loop="${loop.id}" aria-disabled="${ready ? "false" : "true"}">
+        <span class="loop-go${ready ? "" : " pending"}${ready && !on ? " kind" : ""}" title="${esc(formatLabel(loop.format))}">${badge}</span>
         <span class="loop-main">
-          <span class="loop-title">${esc(loopTitle(loop))}</span>
+          <span class="loop-title">${esc(loopTitle(loop))}${starMark(loop)}</span>
           <span class="loop-sub">${loopSub(loop)}</span>
+          ${matchLine(hits)}
         </span>
-      </button>`, [{ label: "Delete", menu: "Delete this loop", tone: "danger", attrs: `data-loop-delete="${loop.id}"` }]);
+      </button>`, madeActions("loop", loop));
 }
 
 /* ── stories ───────────────────────────────────────────────────────────────
@@ -1813,28 +2036,178 @@ function markWords(text, words, field = "forms") {
   return esc(text).replace(pattern, (form) => `<b class="story-mark" data-lexeme="${owner.get(form.toLowerCase()) || ""}">${form}</b>`);
 }
 
-function storyRow(story) {
+function storyRow(story, hits) {
   const parts = partsOf(story.id);
   const written = parts.length > 0;
   const drawn = parts.filter((one) => one.imageRef).length;
   const words = wordsOf(story.id);
   const plural = (n, noun) => `${n} ${noun}${n === 1 ? "" : "s"}`;
   const names = words.map((w) => w.sourceText);
+  const on = listening === "story" && reader.storyId === story.id;
+  const plays = playsOf(story.id);
   const sub = written
-    ? `<span class="story-words" data-words="${esc(names.join("|"))}" title="${esc(names.join(", "))}"><span class="fit-text">${esc(names.join(" \u00b7 "))}</span></span>`
+    ? `<span class="story-words" data-words="${esc(names.join("|"))}" title="${esc(names.join(", "))}"><span class="fit-text">${esc(names.join(" · "))}</span></span>`
     : '<span class="warn">Never written</span>';
   const meta = written
-    ? `<span class="story-meta"><span class="story-counts">${plural(parts.length, "part")} \u00b7 ${plural(words.length, "word")}</span>${
+    ? `<span class="story-meta"><span class="story-counts">${plural(parts.length, "part")} · ${plural(words.length, "word")}</span>${
+      plays ? `<span class="story-plays">read ${plays}×</span>` : ""}${
       drawn < parts.length ? `<span class="warn">${drawn} of ${parts.length} drawn</span>` : ""}</span>`
     : "";
-  return swipeRow(`story:${story.id}`, `<button class="loop-row" data-story="${story.id}" aria-disabled="${!written}">
-        <span class="loop-go story-go${written ? "" : " pending"}">${written ? story.emoji : ICON.hourglass}</span>
+  /* The story's own emoji, until it is the one being read aloud: then the transport, as a loop's. */
+  const badge = !written ? ICON.hourglass : on ? (reader.playing ? ICON.pause : ICON.play) : story.emoji;
+  return swipeRow(`story:${story.id}`, `<button class="loop-row${on ? " on" : ""}${story.archived ? " archived" : ""}" data-story="${story.id}" aria-disabled="${!written}">
+        <span class="loop-go${on ? "" : " story-go"}${written ? "" : " pending"}">${badge}</span>
         <span class="loop-main">
-          <span class="loop-title">${esc(storyTitle(story))}</span>
+          <span class="loop-title">${esc(storyTitle(story))}${starMark(story)}</span>
           <span class="loop-sub">${sub}</span>
+          ${matchLine(hits)}
         </span>
         ${meta}
-      </button>`, [{ label: "Delete", menu: "Delete this story", tone: "danger", attrs: `data-story-delete="${story.id}"` }], "story-shell");
+      </button>`, madeActions("story", story), "story-shell");
+}
+
+/* ── reading a story aloud ─────────────────────────────────────────────────
+   A story plays **part after part**: each part's passages in turn, then the next part, the deck
+   following the voice when the screen is on; at the end, the next story in the list if "go on" is
+   switched on, exactly as a loop goes on to the next loop. **Pause is pause, and leaving is not
+   stop**: going back to the list, or to a word, leaves the story reading, with the bar at the foot
+   (a phone) or the rail's foot (a tablet or a desktop) to pause it — the way a loop has always gone
+   on while you read a word. Swiping to another part while it reads moves the voice there; a tap on
+   a passage starts from it.
+
+   One file per passage in the application, played in turn and never seeked. Here a fake clock
+   stands in for each, its length the sentence's, at the harness's speed. `storyAudio.ts` is the
+   counterpart. */
+const reader = { storyId: null, part: 0, passage: 0, at: 0, playing: false, frame: null, last: 0,
+                 repeat: false, autoplay: false, following: null, counted: null };
+
+/* A part's passages: its sentences, as a directed voice's recording is cut. */
+function passagesOf(part) {
+  return part.text.match(/[^.!?…]+[.!?…]+["»”]?\s*/g) || [part.text];
+}
+const passageSeconds = (text) => Math.max(2.5, text.length * 0.065);
+const writtenStories = () => madeList("story").rows.filter((one) => partsOf(one.id).length);
+
+function storyPlay(storyId, part = 0, passage = 0) {
+  if (player.playing) loopPause();
+  if (reader.storyId !== storyId) reader.counted = null;
+  listening = "story";
+  Object.assign(reader, { storyId, part, passage, at: 0, playing: true, last: performance.now() });
+  noteStoryPart();
+  if (!reader.frame) reader.frame = requestAnimationFrame(storyFrame);
+  followDeck();
+  paintStory();
+}
+function storyResume() {
+  if (!reader.storyId) return;
+  if (player.playing) loopPause();
+  listening = "story";
+  reader.playing = true; reader.last = performance.now();
+  if (!reader.frame) reader.frame = requestAnimationFrame(storyFrame);
+  paintStory();
+}
+function storyPause() {
+  reader.playing = false;
+  if (reader.frame) { cancelAnimationFrame(reader.frame); reader.frame = null; }
+  paintStory();
+}
+function storyStop() {
+  storyPause();
+  Object.assign(reader, { storyId: null, part: 0, passage: 0, at: 0 });
+  if (listening === "story") listening = null;
+}
+
+/* A story counts as read once per opening, when it reaches its second part — by the voice or by a
+   swipe — so an opening that goes no further than the first page is not a read. */
+function noteStoryPart(storyId = reader.storyId, part = reader.part) {
+  if (part < 1 || reader.counted === storyId) return;
+  reader.counted = storyId;
+  PLAY_COUNTS[storyId] = playsOf(storyId) + 1;
+}
+
+function storyFrame(now) {
+  reader.at += ((now - reader.last) / 1000) * player.speed;
+  reader.last = now;
+  const parts = partsOf(reader.storyId);
+  const passages = passagesOf(parts[reader.part]);
+  if (reader.at >= passageSeconds(passages[reader.passage])) {
+    reader.at = 0;
+    if (reader.passage + 1 < passages.length) reader.passage += 1;
+    else if (reader.part + 1 < parts.length) { reader.part += 1; reader.passage = 0; noteStoryPart(); followDeck(); }
+    else { storyEnded(); return; }
+  }
+  paintStory();
+  reader.frame = requestAnimationFrame(storyFrame);
+}
+
+/* The end, in the loop's order: read it again, else the next story, else stop where it ended. */
+function storyEnded() {
+  reader.frame = null;
+  if (reader.repeat) { storyPlay(reader.storyId); return; }
+  if (reader.autoplay) {
+    const queue = writtenStories();
+    const next = queue[queue.findIndex((one) => one.id === reader.storyId) + 1];
+    if (next) {
+      const showing = state.stories && state.storyOpen === reader.storyId;
+      storyPlay(next.id);
+      if (showing) { state.storyOpen = next.id; state.storyAt = 0; render(); }
+      else render();
+      return;
+    }
+  }
+  reader.playing = false;
+  render();
+}
+
+/* Previous and Next step a part, as a loop's step a card: back to the top of this one unless it has
+   only just begun. */
+function storyStep(by) {
+  if (!reader.storyId) return;
+  const parts = partsOf(reader.storyId);
+  const fresh = reader.passage === 0 && reader.at < 3;
+  const want = by < 0 ? (fresh ? reader.part - 1 : reader.part) : reader.part + 1;
+  if (want < 0 || want >= parts.length) return;
+  storyPlay(reader.storyId, want);
+}
+
+/* The deck follows the voice when it is on screen. `following` marks the scroll as the voice's,
+   so the scroll it causes is not read back as a swipe that moves the voice. */
+function followDeck() {
+  if (!(state.stories && state.storyOpen === reader.storyId) || state.storyAt === reader.part) return;
+  reader.following = reader.part;
+  goStory(reader.part);
+}
+
+/* Everything the clock moves in a story, and nothing else, as `paintLoops` is for a loop. */
+function paintStory() {
+  const mine = state.stories && state.storyOpen === reader.storyId && reader.storyId;
+  document.querySelectorAll(".story-seg").forEach((seg) => {
+    const on = Boolean(mine) && Number(seg.dataset.part) === reader.part && Number(seg.dataset.passage) === reader.passage;
+    if (seg.classList.contains("on") !== on) seg.classList.toggle("on", on);
+  });
+  const play = $("#storyPlay");
+  if (play) {
+    const here = mine && reader.playing;
+    if (play.dataset.glyph !== String(here)) {
+      play.dataset.glyph = String(here);
+      play.innerHTML = here ? ICON.pause : ICON.play;
+      play.setAttribute("aria-label", here ? "Pause" : "Read it aloud");
+    }
+  }
+  if (mine) {
+    const parts = partsOf(reader.storyId);
+    document.querySelectorAll(".sp-part").forEach((bar, index) => {
+      const passages = passagesOf(parts[index]);
+      const total = passages.reduce((sum, text) => sum + passageSeconds(text), 0);
+      const done = index < reader.part ? total : index > reader.part ? 0
+        : passages.slice(0, reader.passage).reduce((sum, text) => sum + passageSeconds(text), 0) + reader.at;
+      bar.firstElementChild.style.width = `${Math.min(100, (done / total) * 100)}%`;
+    });
+    const where = $(".sp-where");
+    const text = `Part ${reader.part + 1} of ${parts.length} · ${parts[reader.part].heading}`;
+    if (where && where.textContent !== text) where.textContent = text;
+  }
+  paintNow();
 }
 
 function renderStories() {
@@ -1844,16 +2217,12 @@ function renderStories() {
     const words = wordsOf(open.id);
     const pages = parts.length + 1;
     const at = Math.min(state.storyAt, pages - 1);
-    /* A part read by a directed voice knows where its passages are, and each is a place to start: the
-       one that is sounding is tinted, and touching another moves there. The application reads them
-       off the recording; this picture cuts the first part at its first sentence and lights it, as if
-       it were playing. A clear voice has no passages, so the other parts are plain text. */
-    const passages = (part, words, language, playing) => {
-      if (!playing) return `<p class="story-text" lang="${language}">${markWords(part.text, words)}</p>`;
-      const cut = part.text.search(/[.!?]\s/) + 2;
-      const seg = (text, on, index) => `<span class="story-seg${on ? " on" : ""}" data-passage="${index}">${markWords(text, words)}</span>`;
-      return `<p class="story-text tappable" lang="${language}">${seg(part.text.slice(0, cut), true, 0)}${seg(part.text.slice(cut), false, 1)}</p>`;
-    };
+    /* A part's passages, each a place to start: the one sounding is tinted, and a tap on another
+       (anywhere but on a word, which looks the word up) moves the voice there. The application reads
+       them off the recording; this picture cuts each part at its sentences. */
+    const loaded = reader.storyId === open.id;
+    const passages = (part, index, language) => `<p class="story-text tappable" lang="${language}">${passagesOf(part).map((text, number) =>
+      `<span class="story-seg${loaded && reader.part === index && reader.passage === number ? " on" : ""}" data-part="${index}" data-passage="${number}">${markWords(text, words)}</span>`).join("")}</p>`;
     const partPage = (part, index) => {
       const shown = Boolean(state.storyShown[part.id]);
       return `<article class="card story-card" aria-label="Part ${index + 1}">
@@ -1863,12 +2232,12 @@ function renderStories() {
             : `<span class="story-pic-note">${part.failureReason ? "No picture for this part" : "Drawing\u2026"}</span>`}</div>
           <div class="story-copy">
             <span class="card-ornament above" aria-hidden="true">${ICON.hedera}</span>
-            <h3 class="story-head"><span class="story-no">${index + 1}</span> \u00b7 ${esc(part.heading)}<button class="say head always story-listen${index === 0 ? " playing" : ""}" data-say="${esc(strip(part.text))}" aria-label="Read this part aloud">${ICON.play}</button></h3>
-            ${passages(part, words, open.language, index === 0)}
+            <h3 class="story-head"><span class="story-no">${index + 1}</span> \u00b7 ${esc(part.heading)}</h3>
+            ${passages(part, index, open.language)}
             <div class="story-tr-slot">${shown
               ? `<p class="story-tr"><span class="story-tr-head">${esc(part.headingTranslation)}. </span>${markWords(part.translation, words, "translationForms")}</p>
                 <button class="story-hide" data-hide="${part.id}" aria-label="Hide the translation">Hide</button>`
-              : `<button class="story-reveal" data-reveal="${part.id}">Tap to read it in your own language</button>`}</div>
+              : `<button class="story-reveal" data-reveal="${part.id}">Tap to see the translation</button>`}</div>
             <span class="card-ornament below" aria-hidden="true">${ICON.hedera}</span>
           </div>
         </div>
@@ -1895,7 +2264,10 @@ function renderStories() {
             <span class="label">Stories</span>
           </span>
           <span class="story-bar-title">${esc(storyTitle(open))}</span>
-          <span class="story-bar-count">${at + 1} / ${pages}</span>
+          <span class="story-bar-end">
+            <span class="story-bar-count">${at + 1} / ${pages}</span>
+            ${madeStarButton("story", open)}
+          </span>
         </div>
         <div class="cards-stage">
           <div class="cards-track" id="storyTrack">${parts.map(partPage).join("")}${wordsPage}</div>
@@ -1905,20 +2277,55 @@ function renderStories() {
           <button class="cards-edge next" data-story-step="1" aria-label="The next part">${ICON.back}</button>
         </div>
       </div>
+      ${storyPlayerBlock(open, parts)}
     </section>`;
   }
+  const list = madeList("story");
   return `<section class="loops stories">
     <div class="loops-back">
       <button class="icon-btn" id="storiesClose" aria-label="Back to the list">${ICON.back}</button>
       <span class="label">Your words</span><span class="spacer"></span>
     </div>
-    <div class="loops-head"><h2>Stories</h2><span class="spacer"></span>
-      <button class="tb-btn primary" id="makeStory">${ICON.plus}<span>Make a story</span></button></div>
-    <div class="loops-list">${storiesIn(state.lang).map(storyRow).join("")}</div>
+    ${madeHead("story", list)}
+    <div class="loops-list">${list.rows.map((one) => storyRow(one, list.matches.get(one.id))).join("")}${
+      list.q && !list.rows.length && !list.archived.length ? `<p class="ext-status">No story of yours uses “${esc(state.query.trim())}”.</p>` : ""}${
+      archivedFold("story", list, storyRow)}</div>
   </section>`;
 }
 
+/* The star on an open loop or story, in its own top line: liking one is decided while hearing it. */
+function madeStarButton(kind, one) {
+  const noun = kind === "loop" ? "loop" : "story";
+  return `<button class="icon-btn made-star-btn${one.starred ? " on" : ""}" data-made-star="${kind}:${one.id}" aria-pressed="${one.starred}"
+    aria-label="${one.starred ? `Unstar this ${noun}` : `Star this ${noun}`}" title="${one.starred ? "Starred — unstar" : "Star"}">${one.starred ? ICON.starOn : ICON.star}</button>`;
+}
+
+/* The reader's own controls: a footer under the deck, the loop player's shape, so the thing reached
+   for never moves. No scrubber — a passage is never seeked — but one segment per part, filling as it
+   is read, and a tap on one goes there. The two switches are the loop's: read it again, and go on to
+   the next story. */
+function storyPlayerBlock(story, parts) {
+  const loaded = reader.storyId === story.id;
+  const total = parts.reduce((sum, part) => sum + passagesOf(part).reduce((n, text) => n + passageSeconds(text), 0), 0);
+  return `<div class="player story-player">
+    <div class="sp-parts">${parts.map((part, index) =>
+      `<button class="sp-part" data-sp-part="${index}" aria-label="Part ${index + 1}: ${esc(part.heading)}"><span class="sp-fill" style="width:${loaded && index < reader.part ? 100 : 0}%"></span></button>`).join("")}</div>
+    <div class="transport">
+      <button class="switch${reader.repeat ? " on" : ""}" data-sp-switch="repeat"
+              aria-pressed="${reader.repeat}" aria-label="Read this story again when it ends">${ICON.repeat}</button>
+      <button data-sp-step="-1" aria-label="The part before">${ICON.prev}</button>
+      <button class="big" id="storyPlay" aria-label="Read it aloud">${ICON.play}</button>
+      <button data-sp-step="1" aria-label="The next part">${ICON.next}</button>
+      <button class="switch${reader.autoplay ? " on" : ""}" data-sp-switch="autoplay"
+              aria-pressed="${reader.autoplay}" aria-label="Go on to the next story when this one ends">${ICON.continue}</button>
+    </div>
+    <p class="label sp-where">${loaded ? `Part ${reader.part + 1} of ${parts.length} · ${esc(parts[reader.part].heading)}`
+      : `${parts.length} parts · ${clock(total)}`}</p>
+  </div>`;
+}
+
 function openStories() {
+  clearQuery();
   state.stories = true; state.loops = false; state.map = false;
   state.openId = null; state.openExt = null; state.add = false;
   render();
@@ -2239,34 +2646,35 @@ function playMapUpdate() {
 }
 
 function renderLoops() {
-  const loops = loopsIn(state.lang);
   const open = state.loopOpen ? loopOf(state.loopOpen) : null;
   if (open) {
     return `<section class="loops">
       <div class="loops-back">
         <button class="icon-btn" id="loopBack" aria-label="Back to the loops">${ICON.back}</button>
         <span class="label">Loops</span><span class="spacer"></span>
+        ${madeStarButton("loop", open)}
       </div>
       <div class="loop-play">${lyricBlock(open)}${playerBlock(open)}</div>
     </section>`;
   }
+  const list = madeList("loop");
   return `<section class="loops">
     <div class="loops-back">
       <button class="icon-btn" id="loopsClose" aria-label="Back to the list">${ICON.back}</button>
       <span class="label">Your words</span><span class="spacer"></span>
     </div>
-    <div class="loops-head"><h2>Loops</h2><span class="spacer"></span>
-      <button class="tb-btn primary" id="makeLoop">${ICON.plus}<span>Make a loop</span></button></div>
-    <div class="loops-list">${loops.map(loopRow).join("")}</div>
+    ${madeHead("loop", list)}
+    <div class="loops-list">${list.rows.map((one) => loopRow(one, list.matches.get(one.id))).join("")}${
+      list.q && !list.rows.length && !list.archived.length ? `<p class="ext-status">No loop of yours uses “${esc(state.query.trim())}”.</p>` : ""}${
+      archivedFold("loop", list, loopRow)}</div>
   </section>`;
 }
 
 /* The bar at the foot for a phone or a tablet, and the chip in the top bar for a desktop. Two skins
    of one thing, so what they say can never disagree; `acervo.css` picks which is drawn. */
 function renderLoopBar() {
-  const loops = loopsIn(state.lang);
-  const loop = player.loopId ? loopOf(player.loopId) : null;
-  if (!loop) {
+  const loops = loopsIn(state.lang).filter((one) => !one.archived);
+  if (!nowLoaded()) {
     /* Split in two, and **no `+`**: both surfaces carry their own Make button in their own header,
        and a bar whose job is to be a way in should not also be a way to start something. */
     return `<button class="madebar-half" id="openLoops">
@@ -2277,7 +2685,7 @@ function renderLoopBar() {
       <button class="madebar-half" id="openStories">
         <span class="madebar-ic">\u{1F4D6}</span>
         <span class="loopbar-title">Stories</span>
-        <span class="loopbar-sub">${storiesIn(state.lang).length}</span>
+        <span class="loopbar-sub">${storiesIn(state.lang).filter((one) => !one.archived).length}</span>
       </button>
       <button class="madebar-half" id="openMap">
         <span class="madebar-ic">${ICON.map}</span>
@@ -2285,13 +2693,127 @@ function renderLoopBar() {
         <span class="loopbar-sub">${(() => { const d = mapData(); return d ? count(d.senses) : "\u2014"; })()}</span>
       </button>`;
   }
+  /* Playing — a loop or a story, whichever was started last: the transport, what it is and how far
+     it has got, the next one in the list it was started from, and close. */
+  const next = nowNext();
+  const noun = listening === "story" ? "story" : "loop";
   return `<span class="loopbar-line" style="width:0"></span>
-    <button class="loopbar-play" id="barPlay" aria-label="Play">${ICON.play}</button>
-    <button class="loopbar-main" id="openLoops">
+    <button class="loopbar-play" id="barPlay" aria-label="Play"><span class="glyph">${ICON.play}</span></button>
+    <button class="loopbar-main" id="barOpen">
       <span class="loopbar-title"></span>
       <span class="loopbar-sub"></span>
     </button>
+    <button class="icon-btn loopbar-next" id="barNext" aria-label="The next ${noun}" title="${next ? `Next: ${esc(nowTitleOf(next))}` : `No ${noun} after this one`}"${next ? "" : " disabled"}>${ICON.next}</button>
     <button class="icon-btn loopbar-close" id="barClose" aria-label="Stop and close" title="Stop and close">${ICON.close}</button>`;
+}
+
+/* ── now playing, everywhere it is shown ──
+   One thing is playing at a time, and three places say what it is, each for one device shape: the
+   bar at the foot of a phone, the card at the foot of the rail on a tablet or a desktop, and — only
+   while an article has hidden the rail on a tablet — a chip in the top bar, which has the room for
+   a title that the article's own bar does not. Each is hidden while the thing playing is open in its
+   own player, which already carries every control. */
+function nowLoaded() {
+  return listening === "loop" ? Boolean(player.loopId) : listening === "story" ? Boolean(reader.storyId) : false;
+}
+function nowPlaying() { return listening === "loop" ? player.playing : listening === "story" ? reader.playing : false; }
+function nowOwnOpen() {
+  return (listening === "loop" && state.loops && state.loopOpen === player.loopId)
+    || (listening === "story" && state.stories && state.storyOpen === reader.storyId);
+}
+function nowNext() {
+  if (listening === "loop") return loopNeighbour(1);
+  if (listening === "story") {
+    const queue = writtenStories();
+    return queue[queue.findIndex((one) => one.id === reader.storyId) + 1] || null;
+  }
+  return null;
+}
+const nowTitleOf = (one) => (one.id.startsWith("st") ? storyTitle(one) : loopTitle(one));
+
+/* What is said about it: for a loop the word being taught and the clock, for a story its title and
+   the part. `short` is the chip's and the rail's, which have room for one figure. */
+function nowText() {
+  if (listening === "story") {
+    const story = storyOf(reader.storyId);
+    const parts = partsOf(reader.storyId);
+    const seconds = (part) => passagesOf(part).reduce((sum, text) => sum + passageSeconds(text), 0);
+    const total = parts.reduce((sum, part) => sum + seconds(part), 0);
+    const done = parts.slice(0, reader.part).reduce((sum, part) => sum + seconds(part), 0)
+      + passagesOf(parts[reader.part]).slice(0, reader.passage).reduce((sum, text) => sum + passageSeconds(text), 0) + reader.at;
+    return { title: storyTitle(story), sub: `Story · part ${reader.part + 1} of ${parts.length}`,
+             short: `${reader.part + 1} / ${parts.length}`, fraction: total ? done / total : 0 };
+  }
+  const loop = loopOf(player.loopId);
+  const current = loopWordAt(loopItemsOf(loop.id), loopCards(loopCuesOf(loop.id)), player.at);
+  return { title: current ? current.sourceText : loopTitle(loop, 2), sub: `${clock(player.at)} / ${clock(loop.durationSeconds)}`,
+           short: clock(player.at), fraction: loop.durationSeconds ? player.at / loop.durationSeconds : 0 };
+}
+
+function paintNow() {
+  const playing = nowPlaying();
+  ["#barPlay", "#chipPlay", "#railPlay"].forEach((id) => {
+    const button = $(id);
+    if (button && button.dataset.glyph !== String(playing)) {
+      button.dataset.glyph = String(playing);
+      button.querySelector(".glyph").innerHTML = playing ? ICON.pause : ICON.play;
+      button.setAttribute("aria-label", playing ? "Pause" : "Play");
+    }
+  });
+  if (!nowLoaded()) return;
+  const t = nowText();
+  const set = (sel, text) => document.querySelectorAll(sel).forEach((node) => { if (node.textContent !== text) node.textContent = text; });
+  set(".loopbar-title, .loop-chip-word, .rail-now-title", t.title);
+  set(".loopbar-sub", t.sub);
+  set(".loop-chip-at, .rail-now-sub", t.short);
+  const percent = `${Math.max(0, Math.min(1, t.fraction)) * 100}%`;
+  const line = $(".loopbar-line"); if (line) line.style.width = percent;
+  const ring = $("#railPlay"); if (ring) ring.style.setProperty("--at", percent);
+}
+
+function toggleNow() {
+  if (listening === "loop") { player.playing ? loopPause() : loopPlay(); }
+  else if (listening === "story") { reader.playing ? storyPause() : storyResume(); }
+  if (state.loops || state.stories) render();
+}
+function nextNow() {
+  const next = nowNext();
+  if (!next) return;
+  if (listening === "loop") {
+    const showing = state.loops && state.loopOpen === player.loopId;
+    loopLoad(next.id, { play: true });
+    if (showing) state.loopOpen = next.id;
+  } else {
+    const showing = state.stories && state.storyOpen === reader.storyId;
+    storyPlay(next.id);
+    if (showing) { state.storyOpen = next.id; state.storyAt = 0; }
+  }
+  render();
+}
+function stopNow() {
+  if (listening === "loop") { loopPause(); player.loopId = null; player.at = 0; listening = null; }
+  else if (listening === "story") storyStop();
+}
+/* Opens what is playing in its own player: the loop, or the story at the part being read. */
+function openNow() {
+  if (listening === "story") {
+    clearQuery();
+    state.stories = true; state.loops = false; state.map = false;
+    state.openId = null; state.openExt = null; state.add = false;
+    state.storyOpen = reader.storyId; state.storyAt = reader.part;
+    render();
+    return;
+  }
+  state.loopOpen = player.loopId;
+  openLoops();
+}
+/* The chip in the top bar: play/pause, and what it is, which opens it. */
+function nowChip(prefix) {
+  return `<span class="tb-btn loop-chip playing">
+    <button class="loop-chip-play" id="${prefix}Play" aria-label="Play"><span class="glyph">${ICON.play}</span></button>
+    <button class="loop-chip-what" id="${prefix}Open">
+      <span class="loop-chip-word"></span><span class="loop-chip-at"></span>
+    </button></span>`;
 }
 
 /* The selection bar. It says how many words are selected and which, as many whole words as fit and
@@ -2403,22 +2925,16 @@ function paintSelBar() {
      entry or Add neither is drawn, as in the application (`MadeBar.tsx`): that column's foot is the
      ask dock's. */
   const elsewhere = Boolean(state.openId || state.openExt || state.add);
-  $("#loopbar").style.display = elsewhere || (shown && !player.loopId) ? "none" : "";
+  $("#loopbar").style.display = elsewhere || (shown && !nowLoaded()) ? "none" : "";
   /* Split in three only while nothing plays, as `MadeBar.tsx` draws it; the player is one row. */
-  $("#loopbar").classList.toggle("madebar", !player.loopId);
+  $("#loopbar").classList.toggle("madebar", !nowLoaded());
   if (shown) fitSelWords();
 }
 
+/* Shown by `acervo.css` only on a tablet-sized window whose rail an article has hidden. A desktop
+   reads the rail's card instead. */
 function renderLoopChip() {
-  const loops = loopsIn(state.lang);
-  const loop = player.loopId ? loopOf(player.loopId) : null;
-  if (!loop) return `<button class="tb-btn loop-chip" id="chipOpen" aria-label="Loops" title="Loops">
-    ${ICON.note}${loops.length ? `<span class="wide-only">${loops.length}</span>` : ""}</button>`;
-  return `<span class="tb-btn loop-chip playing">
-    <button class="loop-chip-play" id="chipPlay" aria-label="Play">${ICON.play}</button>
-    <button class="loop-chip-what" id="chipOpen">
-      <span class="loop-chip-word"></span><span class="loop-chip-at"></span>
-    </button></span>`;
+  return nowLoaded() ? nowChip("chip") : "";
 }
 
 /* Everything that moves with the clock, and nothing else: re-rendering the surface sixty times a
@@ -2426,15 +2942,13 @@ function renderLoopChip() {
    guarded by a comparison, so a frame in which nothing changed touches no DOM. */
 function paintLoops() {
   const loop = player.loopId ? loopOf(player.loopId) : null;
-  const glyph = player.playing ? ICON.pause : ICON.play;
-  ["#playPause", "#barPlay", "#chipPlay"].forEach((id) => {
-    const button = $(id);
-    if (button && button.dataset.glyph !== String(player.playing)) {
-      button.dataset.glyph = String(player.playing);
-      button.innerHTML = glyph;
-      button.setAttribute("aria-label", player.playing ? "Pause" : "Play");
-    }
-  });
+  const button = $("#playPause");
+  if (button && button.dataset.glyph !== String(player.playing)) {
+    button.dataset.glyph = String(player.playing);
+    button.innerHTML = player.playing ? ICON.pause : ICON.play;
+    button.setAttribute("aria-label", player.playing ? "Pause" : "Play");
+  }
+  paintNow();
   if (!loop) return;
 
   const fraction = loop.durationSeconds ? player.at / loop.durationSeconds : 0;
@@ -2442,7 +2956,6 @@ function paintLoops() {
   const fill = $(".seek-fill"); if (fill) fill.style.width = percent;
   const knob = $(".seek-knob"); if (knob) knob.style.left = percent;
   const at = $(".seek-times .at"); if (at && at.textContent !== clock(player.at)) at.textContent = clock(player.at);
-  const line = $(".loopbar-line"); if (line) line.style.width = percent;
 
   const rows = loopItemsOf(loop.id);
   const cards = loopCards(loopCuesOf(loop.id));
@@ -2471,18 +2984,6 @@ function paintLoops() {
     });
   });
 
-  const current = loopWordAt(rows, cards, player.at);
-  const word = current ? current.sourceText : loopTitle(loop, 2);
-  [".loopbar-title", ".loop-chip-word"].forEach((sel) => {
-    const node = $(sel); if (node && node.textContent !== word) node.textContent = word;
-  });
-  const sub = $(".loopbar-sub");
-  if (sub) {
-    const text = `${clock(player.at)} / ${clock(loop.durationSeconds)}`;
-    if (sub.textContent !== text) sub.textContent = text;
-  }
-  const chipAt = $(".loop-chip-at");
-  if (chipAt && chipAt.textContent !== clock(player.at)) chipAt.textContent = clock(player.at);
 }
 
 /* ── make a loop, make a story ──
@@ -2698,7 +3199,7 @@ function savedCards(beds, value) {
     return `<div class="favourite${on ? " on" : ""}" data-choice="${id}">
       <button type="button" role="radio" aria-checked="${on}" aria-label="${esc(label)}, ${esc(bedAbout(bed))}">
         <span class="favourite-art">${art("music", bed.styleId, label)}</span>
-        <span class="favourite-text"><span class="favourite-name">${ICON.starOn}${esc(label)}</span><span class="favourite-about">${esc(bedAbout(bed))}</span></span>
+        <span class="favourite-text"><span class="favourite-name">${keepGlyph(true)}${esc(label)}</span><span class="favourite-about">${esc(bedAbout(bed))}</span></span>
       </button>${musicPlay(id, label, "small")}<button type="button" class="favourite-remove" data-unkeep="${esc(bed.id)}" aria-label="Remove ${esc(label)} from saved music" title="Remove from saved music"><span aria-hidden="true">${ICON.close}</span></button></div>`;
   }).join("")}</div>`;
 }
@@ -2970,11 +3471,85 @@ function wireLoops() {
 }
 
 function openLoops() {
-  state.loops = true; state.map = false; state.openId = null; state.openExt = null; state.add = false;
+  clearQuery();
+  state.loops = true; state.stories = false; state.map = false; state.openId = null; state.openExt = null; state.add = false;
   render();
 }
 
+/* Opening or leaving a surface starts its search afresh: the box searches words in one place and the
+   words in loops or stories in the other, and a query carried across would mean something else. */
+function clearQuery() {
+  state.query = "";
+  $("#q").value = "";
+  $("#search").classList.remove("searching");
+}
+
 $("#main").addEventListener("click", (ev) => {
+  const madeSort = ev.target.closest("[data-made-sort]");
+  if (madeSort) {
+    const [kind, sort] = madeSort.dataset.madeSort.split(":");
+    state.madeSort[kind] = sort;
+    render();
+    return;
+  }
+  const archFold = ev.target.closest("[data-arch-fold]");
+  if (archFold) {
+    const kind = archFold.dataset.archFold;
+    archOpen[kind] = !archOpen[kind];
+    try { localStorage.setItem(kind === "loop" ? "acervo-loops-archive-open" : "acervo-stories-archive-open", archOpen[kind] ? "on" : "off"); } catch { /* a preference */ }
+    render();
+    return;
+  }
+  const madeStar = ev.target.closest("[data-made-star]");
+  if (madeStar) {
+    const [kind, id] = madeStar.dataset.madeStar.split(":");
+    const one = kind === "loop" ? loopOf(id) : storyOf(id);
+    one.starred = !one.starred;
+    state.rowMenu = null;
+    render();
+    toast(one.starred ? "Starred — it leads the list" : "Unstarred");
+    return;
+  }
+  const madeArchive = ev.target.closest("[data-made-archive]");
+  if (madeArchive) {
+    const [kind, id] = madeArchive.dataset.madeArchive.split(":");
+    const one = kind === "loop" ? loopOf(id) : storyOf(id);
+    const flip = () => { one.archived = !one.archived; render(); };
+    state.rowMenu = null;
+    flip();
+    toast(one.archived ? "Archived — it waits at the foot of the list" : "Unarchived", { label: "Undo", run: flip });
+    return;
+  }
+  /* The reader's footer. Before anything is loaded, Previous and Next only turn the page. */
+  if (ev.target.closest("#storyPlay")) {
+    const open = state.storyOpen;
+    if (reader.storyId === open) { reader.playing ? storyPause() : storyResume(); }
+    else storyPlay(open, Math.min(state.storyAt, partsOf(open).length - 1));
+    return;
+  }
+  const spStep = ev.target.closest("[data-sp-step]");
+  if (spStep) {
+    const by = Number(spStep.dataset.spStep);
+    if (reader.storyId === state.storyOpen) storyStep(by); else goStory(state.storyAt + by);
+    return;
+  }
+  const spSwitch = ev.target.closest("[data-sp-switch]");
+  if (spSwitch) {
+    const key = spSwitch.dataset.spSwitch;
+    reader[key] = !reader[key];
+    spSwitch.classList.toggle("on", reader[key]);
+    spSwitch.setAttribute("aria-pressed", String(reader[key]));
+    return;
+  }
+  const spPart = ev.target.closest("[data-sp-part]");
+  if (spPart) {
+    const at = Number(spPart.dataset.spPart);
+    if (reader.storyId === state.storyOpen && reader.playing) storyPlay(state.storyOpen, at); else goStory(at);
+    return;
+  }
+  /* A tap on a passage, anywhere but on a word (the look-up has those first), reads from it. */
+  const passage = ev.target.closest(".story-seg[data-passage]");
+  if (passage) { storyPlay(state.storyOpen, Number(passage.dataset.part), Number(passage.dataset.passage)); return; }
   const row = ev.target.closest(".lyric-row");
   if (row) { loopSeek(Number(row.dataset.seek)); if (!player.playing) loopPlay(); return; }
   const step = ev.target.closest("[data-step]");
@@ -3008,6 +3583,7 @@ $("#main").addEventListener("click", (ev) => {
   const drop = ev.target.closest("[data-loop-delete]");
   if (drop) {
     const id = drop.dataset.loopDelete;
+    if (listening === "loop" && player.loopId === id) stopNow();
     const items = new Set(LOOP_ITEMS.filter((row) => row.loopId === id).map((row) => row.id));
     LOOPS.splice(LOOPS.findIndex((row) => row.id === id), 1);
     for (let index = LOOP_ITEMS.length - 1; index >= 0; index -= 1) {
@@ -3021,6 +3597,7 @@ $("#main").addEventListener("click", (ev) => {
   const dropStory = ev.target.closest("[data-story-delete]");
   if (dropStory) {
     const id = dropStory.dataset.storyDelete;
+    if (listening === "story" && reader.storyId === id) stopNow();
     STORIES.splice(STORIES.findIndex((row) => row.id === id), 1);
     state.rowMenu = null;
     render();
@@ -3051,11 +3628,9 @@ $("#main").addEventListener("click", (ev) => {
     toast("Deleted everywhere \u2014 the entry is kept as a tombstone");
     return;
   }
-  if (ev.target.closest("#makeLoop")) { openLoopDialog(); return; }
-  if (ev.target.closest("#makeStory")) { openStoryDialog(); return; }
   if (ev.target.closest("#loopBack")) { state.loopOpen = null; render(); return; }
-  if (ev.target.closest("#loopsClose")) { state.loops = false; state.loopOpen = null; render(); }
-  if (ev.target.closest("#storiesClose")) { state.stories = false; state.storyOpen = null; render(); return; }
+  if (ev.target.closest("#loopsClose")) { clearQuery(); state.loops = false; state.loopOpen = null; render(); }
+  if (ev.target.closest("#storiesClose")) { clearQuery(); state.stories = false; state.storyOpen = null; render(); return; }
   if (ev.target.closest("#storyBack")) { state.storyOpen = null; state.storyAt = 0; render(); return; }
   const storyStep = ev.target.closest("[data-story-step]");
   if (storyStep) { goStory(state.storyAt + Number(storyStep.dataset.storyStep)); return; }
@@ -3065,8 +3640,12 @@ $("#main").addEventListener("click", (ev) => {
   if (hide) { delete state.storyShown[hide.dataset.hide]; render(); return; }
   const storyRowEl = ev.target.closest("[data-story]");
   if (storyRowEl) {
-    if (partsOf(storyRowEl.dataset.story).length) {
-      state.storyOpen = storyRowEl.dataset.story; state.storyAt = 0; render();
+    const id = storyRowEl.dataset.story;
+    if (partsOf(id).length) {
+      if (reader.storyId !== id) reader.counted = reader.counted === id ? null : reader.counted;
+      state.storyOpen = id;
+      state.storyAt = reader.storyId === id ? reader.part : 0;
+      render();
     }
     return;
   }
@@ -3087,28 +3666,20 @@ $("#main").addEventListener("contextmenu", (ev) => {
 
 function wireLoopControls(root) {
   root.addEventListener("click", (ev) => {
-    if (ev.target.closest("#barPlay") || ev.target.closest("#chipPlay")) {
-      player.playing ? loopPause() : loopPlay();
-      return;
-    }
-    /* Stops the loop and forgets it as the one playing; the loop itself is untouched. */
-    if (ev.target.closest("#barClose")) {
-      loopPause();
-      player.loopId = null;
-      player.at = 0;
-      render();
-      return;
-    }
-    if (ev.target.closest("#openStories")) { openStories(); return; }
-    if (ev.target.closest("#openMap")) { openMap(); return; }
-    if (ev.target.closest("#openLoops") || ev.target.closest("#chipOpen")) {
-      state.loopOpen = player.loopId;
-      openLoops();
-    }
+    const hit = (sel) => ev.target.closest(sel);
+    if (hit("#barPlay, #chipPlay, #railPlay")) { toggleNow(); return; }
+    if (hit("#barNext, #railNext")) { nextNow(); return; }
+    /* Stops it and forgets it as the one playing; the loop or story itself is untouched. */
+    if (hit("#barClose")) { stopNow(); render(); return; }
+    if (hit("#openStories")) { openStories(); return; }
+    if (hit("#openMap")) { openMap(); return; }
+    if (hit("#openLoops")) { state.loopOpen = null; openLoops(); return; }
+    if (hit("#barOpen, #chipOpen, #railOpen")) openNow();
   });
 }
 wireLoopControls($("#loopbar"));
 wireLoopControls($("#loopChip"));
+wireLoopControls($("#rail"));
 
 /* ── render ──────────────────────────────────────────────────────────── */
 
@@ -3138,6 +3709,13 @@ function render() {
   // they took is worth more than they are.
   $(".app").classList.toggle("map-open", state.map);
   $(".app").classList.toggle("article-open", Boolean((state.openId || state.openExt) && !state.add));
+  $(".app").classList.toggle("now-loaded", nowLoaded());
+  $(".app").classList.toggle("own-player", nowLoaded() && nowOwnOpen());
+  $("#q").placeholder = state.loops ? "Search the words in your loops…" : state.stories ? "Search the words in your stories…" : "Search your words…";
+  /* Add makes what the surface holds: a word on the list, a loop on Loops, a story on Stories. */
+  const making = state.loops ? "Make a loop" : state.stories ? "Make a story" : "Add";
+  $("#addBtn .wide-only").textContent = making;
+  $("#addBtn").setAttribute("aria-label", making === "Add" ? "Add a word" : making);
   $("#loopbar").innerHTML = renderLoopBar();
   $("#loopChip").innerHTML = renderLoopChip();
   paintSelBar();
@@ -3335,6 +3913,8 @@ document.addEventListener("click", (ev) => {
   if (hit("[data-picture]")) { toast("The picture dialog is out of scope for this spike"); return; }
 
   if (hit("[data-map-open]")) { openMap(); return; }
+  const surface = hit("[data-surface]");
+  if (surface) { if (surface.dataset.surface === "loops") { state.loopOpen = null; openLoops(); } else { state.storyOpen = null; openStories(); } return; }
   const topicBtn = hit("[data-topic]");
   if (topicBtn) { state.map = false; state.mapReturn = false; state.topic = topicBtn.dataset.topic; state.openId = null; state.query = ""; $("#q").value = ""; $("#search").classList.remove("searching"); render(); return; }
 
@@ -3433,7 +4013,12 @@ document.addEventListener("click", (ev) => {
   }
   if (hit("[data-clip]")) { toast("Opens the clip dialog — removing a clip moves there"); return; }
 
-  if (hit("#addBtn")) { openSheet("capture"); return; }
+  if (hit("#addBtn")) {
+    if (state.loops) { openLoopDialog(); return; }
+    if (state.stories) { openStoryDialog(); return; }
+    openSheet("capture");
+    return;
+  }
 
   if (hit("#langBtn")) { $("#langMenu").classList.toggle("open"); return; }
   const langItem = hit("[data-lang]");
@@ -3445,8 +4030,10 @@ document.addEventListener("click", (ev) => {
 });
 
 $("#q").addEventListener("input", (ev) => {
-  state.loops = false;
-  state.map = false;
+  /* On the Loops or Stories surface the box searches the words in them, and an open player gives way
+     to the list it answers with. Anywhere else it searches your words, as it always has. */
+  if (state.loops || state.stories) { state.loopOpen = null; state.storyOpen = null; }
+  else state.map = false;
   state.query = ev.target.value;
   state.openId = null;
   state.openExt = null;
@@ -3562,6 +4149,7 @@ $("#harness").addEventListener("click", (ev) => {
   else if (b.id === "mapUpdateBtn") { if (!state.map) openMap(); playMapUpdate(); paintSwitches(); return; }
   else if (b.id === "mapSampleBtn") { state.mapSample = !state.mapSample; state.mapSel = -1; delete mapCameras[state.lang]; mapGrown.delete(state.lang); }
   else if (b.id === "speedBtn") { player.speed = player.speed === 1 ? 4 : player.speed === 4 ? 12 : 1; }
+
   else if (b.dataset.frame) {
     document.body.className = b.dataset.frame === "desktop" ? "" : `framed ${b.dataset.frame}`;
     $("#harness").querySelectorAll("button[data-frame]").forEach((x) => x.classList.toggle("on", x === b));
@@ -3755,11 +4343,9 @@ function playFor(hit) {
   if (hit.surface === "story") {
     const passage = hit.range.startContainer.parentElement.closest("[data-passage]");
     if (!passage) return null;   // a part read whole has no passages; its ▷ reads it
-    const sounding = passage.closest(".story-card") === document.querySelector(".story-card");   // the first part plays
-    return { label: sounding ? "From here" : "This passage", run: () => {
-      document.querySelectorAll(".story-seg.on").forEach((one) => one.classList.remove("on"));
-      passage.classList.add("on");
-      toast("♪ Reading on from this passage");
+    const sounding = reader.playing && reader.storyId === state.storyOpen;
+    return { label: sounding ? "From here" : "Read from here", run: () => {
+      storyPlay(state.storyOpen, Number(passage.dataset.part), Number(passage.dataset.passage));
     } };
   }
   if (hit.surface === "loop") {
@@ -4024,7 +4610,6 @@ if (params.get("loops") === "1" || params.get("loop") || params.get("t")) {
     state.loopOpen = picked.id;
     loopLoad(picked.id, { at: Number(params.get("t")) || 0 });
   }
-  if (params.get("speed")) player.speed = Number(params.get("speed")) || 1;
   if (params.get("play") === "1") loopPlay();
 }
 if (params.get("make") === "1") { state.loops = true; setTimeout(openLoopDialog, 0); }
@@ -4092,8 +4677,25 @@ if (params.get("map") === "1" || params.get("focus") || params.get("mapstate")) 
   if (params.get("z") || params.get("update") === "1") mapGrown.add(state.lang);
 }
 
+/* The made lists and listening: `msort=recent|hard|rare|least` the order of both lists; `q=` a search on
+   the surface a link opens; `archived=1` opens both folds; `listen=1` reads the opened story aloud
+   (or plays the opened loop), `listen=story` and `listen=loop` start the first one in the
+   background; `go=1` switches "go on to the next" on for both; `rarity=offline` is a session that
+   has not reached the server. */
+if (MADE_SORTS.some(([id]) => id === params.get("msort"))) { state.madeSort.loop = params.get("msort"); state.madeSort.story = params.get("msort"); }
+if (params.get("q")) { state.query = params.get("q"); $("#q").value = state.query; $("#search").classList.add("searching"); }
+if (params.get("archived") === "1") { archOpen.loop = true; archOpen.story = true; }
+if (params.get("go") === "1") { player.autoplay = true; reader.autoplay = true; }
+/* The harness's clock, for loops and stories alike. */
+if (params.get("speed")) player.speed = Number(params.get("speed")) || 1;
+
 paintSwitches();
 render();
+if (params.get("listen") === "1" && state.storyOpen) storyPlay(state.storyOpen, Math.min(state.storyAt, partsOf(state.storyOpen).length - 1));
+else if (params.get("listen") === "1" && state.loopOpen) loopLoad(state.loopOpen, { play: true, at: player.at });
+else if (params.get("listen") === "story") storyPlay(writtenStories()[0].id, Number(params.get("part")) || 0);
+else if (params.get("listen") === "loop") loopLoad(madeList("loop").rows.find(loopIsReady).id, { play: true, at: Number(params.get("t")) || 0 });
+if (params.get("listen")) render();
 /* `tap=<word>` waits for the story's page to be scrolled to before it taps. */
 if (params.get("tap")) setTimeout(() => tapByLink(params.get("tap")), 250);
 
