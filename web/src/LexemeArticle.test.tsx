@@ -379,6 +379,18 @@ describe("a Mandarin word's reading", () => {
     expect(container.querySelector(".masthead .reading")).toBeNull();
   });
 
+  it("draws a neutral syllable's dot where the tone before it leaves the voice", () => {
+    const classes = (headword: string, reading: string) => {
+      const { container, unmount } = render(<LexemeArticle article={chinese(headword, reading)} onNotify={() => undefined} />);
+      const found = [...container.querySelectorAll(".hz")].map((column) => column.className);
+      unmount();
+      return found;
+    };
+    expect(classes("豆腐", "dòu fu")).toEqual(["hz tone-4", "hz tone-5 after-4"]);
+    expect(classes("东西", "dōng xi")).toEqual(["hz tone-1", "hz tone-5 after-1"]);
+    expect(classes("朋友", "péng you")).toEqual(["hz tone-2", "hz tone-5 after-2"]);
+  });
+
   it("falls back to one line, still marked and coloured, when the syllables do not pair", () => {
     const { container } = render(<LexemeArticle article={chinese("卡拉OK", "kǎlā ōukèi")} onNotify={() => undefined} />);
     expect(container.querySelector(".hz")).toBeNull();

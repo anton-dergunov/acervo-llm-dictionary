@@ -824,8 +824,11 @@ function masthead(x) {
         <div class="emoji-plate">${x.emoji || "\u{1F4C4}"}</div>
         <div class="head-text">
           ${hanziColumns(x)
-            ? `<div class="head-line hanzi"><h1 class="headword" aria-label="${esc(x.headword)}">${hanziColumns(x).map(({ c, s }) =>
-                `<span class="hz tone-${toneOf(s)}" data-reading="${esc(s)}">${esc(c)}</span>`).join("")}</h1>${say(x.headword, "always head")}</div>`
+            ? `<div class="head-line hanzi"><h1 class="headword" aria-label="${esc(x.headword)}">${hanziColumns(x).map(({ c, s }, i, all) => {
+                const tone = toneOf(s);
+                const before = all.slice(0, i).map((one) => toneOf(one.s)).filter((t) => t !== 5).pop();
+                return `<span class="hz tone-${tone}${tone === 5 && before ? ` after-${before}` : ""}" data-reading="${esc(s)}">${esc(c)}</span>`;
+              }).join("")}</h1>${say(x.headword, "always head")}</div>`
             : `<div class="head-line"><h1 class="headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}</div>
           ${x.reading ? `<div class="reading">${readingHtml(x)}</div>` : ""}`}
           <div class="pron-row">

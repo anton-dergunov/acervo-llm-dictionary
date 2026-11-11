@@ -28,10 +28,18 @@ export function hanziColumns(lexeme: Readable): HanziColumn[] | null {
  * selection reads aloud, and what can be copied.
  */
 export function HanziColumns({ columns }: { columns: readonly HanziColumn[] }) {
-  return <>{columns.map((column, index) =>
-    <span key={index} className={`hz tone-${column.syllable.tone}`} data-reading={column.syllable.text}>
+  let lastFull: number | null = null;
+  return <>{columns.map((column, index) => {
+    const { tone } = column.syllable;
+    // A neutral syllable has no pitch of its own: it lands where the full tone before it leaves the
+    // voice, so its dot is drawn at that height (`after-1`…`after-4`). A run of neutral syllables
+    // stays at the height of the first; one with no full tone before it sits in the middle.
+    const after = tone === 5 && lastFull ? ` after-${lastFull}` : "";
+    if (tone !== 5) lastFull = tone;
+    return <span key={index} className={`hz tone-${tone}${after}`} data-reading={column.syllable.text}>
       {column.characters}
-    </span>)}</>;
+    </span>;
+  })}</>;
 }
 
 /** A reading on one line: Mandarin syllables tone-marked and coloured by tone, anything else as written. */

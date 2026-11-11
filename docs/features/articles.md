@@ -39,8 +39,9 @@ one mark per syllable). So a reading typed with digits needs no conversion, and 
 `Reading.tsx` is the one renderer.
 
 - **On the page**, each character of the headword stands over its own syllable, with its tone's pitch
-  contour above it: Chao's values on a five-level scale (55 level, 35 rising, 214 dipping, 51 falling;
-  a dot for the neutral tone). The syllable and the contour are generated content from `data-reading`
+  contour above it: Chao's values on a five-level scale (55 level, 35 rising, 214 dipping, 51 falling).
+  The neutral tone has no contour of its own, so it is a dot at the height the tone before it leaves
+  the voice: half-low after the 1st, mid after the 2nd, half-high after the 3rd, low after the 4th. The syllable and the contour are generated content from `data-reading`
   and the tone class, so the heading's text is still exactly the headword: a selection of it reads
   the characters aloud, and the separate reading line is not drawn. A syllable with erhua takes the
   儿 after it as one column.

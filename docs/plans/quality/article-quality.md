@@ -264,6 +264,12 @@ asking a model for it.** Spanish is such a language; English is emphatically not
 mechanically derivable is a field no model should be asked to produce — and the experiment worth
 running first is simply how often each model's `ipa` disagrees with the dictionary's, per language.
 
+**Mandarin is the clearest case, through its `reading`.** Pinyin is a phonemic romanization: every one
+of its ~410 syllables has one broad IPA form (`dou` → `tou̯`, `xi` → `ɕi`), and every tone one Chao
+value (4 → `˥˩`, neutral unmarked). So a Mandarin `ipa` derived from a checked `reading` by a table is
+as right as the reading, written the same way every time, and costs no call — which is defect 3's fix.
+`web/src/pinyin.ts` already cuts a reading into syllables with tones; the table is what is missing.
+
 ---
 
 ## §4 · Cross-model consensus, cascades, and confidence without logprobs
@@ -502,6 +508,7 @@ Wide on purpose. Nothing here is scheduled.
 | 8 | Does decontextualised verification beat in-context review? | CoVe-style independent questions versus "is this right?" | ~$2 | Tests the mechanism, not just the outcome. |
 | 9 | What does the grounding we shipped do? | §6, three arms, sense-count negative check | ~$3 | Evaluates a shipped, disliked, unmeasured feature. |
 | 10 | Is a judge measuring correctness or fluency? | Judge scores versus ground-truth field accuracy on the same articles | ~$2 | Tests [2410.21819](https://arxiv.org/abs/2410.21819)'s perplexity explanation where truth is known. |
+| 13 | How often does a Mandarin `ipa` disagree with its own `reading`? | Derive IPA from the reading by syllable table (§3), compare with the generated one, per pair | free | Whether to derive Mandarin `ipa` and stop asking for it; a disagreement also flags a wrong reading. |
 | 12 | Does a per-field rubric agree with itself across raters? | The same articles scored twice, by a model and by hand | time | Establishes whether §0's rubric is usable before it is relied on. |
 
 ---
@@ -564,6 +571,22 @@ tones. Cloudflare and Vertex were correct every time, and so was gemini in its o
 
 Low frequency, but `reading` is **required** for Chinese and is the field a learner leans on hardest,
 since the characters give them nothing. CC-CEDICT closes it mechanically (§3).
+
+### 3 · Mandarin IPA that drops sounds, in a notation of its own
+
+`豆腐` (`dòu fu`) was written `/tô.fu/` by `gemini-3.5-flash-lite`, first in the text chain, on a real
+capture. Two faults in one line:
+
+- **A sound dropped.** `dou` is the diphthong `/tou̯/`; `/to/` is a different syllable.
+- **The notation changes from word to word.** It marked the falling tone with an IPA diacritic (`ô`),
+  while the same vocabulary's `书` is `/ʂu˥/` and `东西` is `/tʊŋ˥ ɕi/`, both with Chao tone letters.
+  A fourth word, `图书馆`, has no `ipa` at all. A learner cannot compare transcriptions written in
+  different notations.
+
+It was corrected by hand to `/tou̯˥˩ fu/`, in the tone-letter notation the others use. The `reading`
+was right, which is the point: the transcription contradicted a correct reading of the same word.
+Deriving Mandarin `ipa` from the reading (§3, backlog row 13) closes this class of error, both faults
+at once; a prompt sentence would at best fix the notation.
 
 ### What is already good, so it is not re-litigated
 
