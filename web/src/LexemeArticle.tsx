@@ -31,6 +31,7 @@ import { CardPicture, EmptySenseImage, SenseImage, imageStateOf } from "./SenseI
 import { keyOf, play, playRuns, useSpeechState, type SayTarget } from "./pronunciation";
 import { runsOf } from "./selectionSpeech";
 import { SelectionPill } from "./SelectionPill";
+import { HanziColumns, ReadingText, hanziColumns } from "./Reading";
 import { wordAtPoint, wordInSelection, type TappedWord } from "./tapWord";
 import { DeckEdges, Hedera, isTyping, useDeck } from "./deck";
 
@@ -689,7 +690,7 @@ function ArticleCards({ article, pictures, onListen, onPlayClip, onReference, fo
         </div>
         {/* No transcription on a card: the play button is how a word is heard, and the line it took
             is room the card needs more. A reading (pinyin) is part of the word, so it stays. */}
-        {lexeme.reading && <span className="reading">{lexeme.reading}</span>}
+        {lexeme.reading && <span className="reading"><ReadingText reading={lexeme.reading} language={lexeme.language} /></span>}
       </div>
       <nav className="cards-nav" aria-label="Senses and sections" ref={nav}>
         {groups.map((group, index) => <Fragment key={group.group}>
@@ -923,6 +924,7 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
 
   const head = (field: string) => marks?.field(lexeme.id, field) ?? null;
   const place = placeLine(article);
+  const columns = useMemo(() => hanziColumns(lexeme), [lexeme]);
   const met = looseAttestations(article);
   const dialog = playing && playingClip && <ClipDialog
     stored={playingClip}
@@ -970,13 +972,21 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
               about the word, so it stays in view, but it should not cost a line of its own. */}
           {/* Inline rather than flex: `vertical-align: middle` centres the button on the word's
               lowercase letters, which is where the eye reads the word, at every size it wraps to. */}
-          <div className="head-line">
-            <h1 className={`headword${tint(head("headword"))}`} lang={lexeme.language} data-say={`lexeme:${lexeme.id}`}>
-              <DiffText text={lexeme.headword} form={null} words={head("headword")?.words ?? null} />
+          {/* A Mandarin word whose syllables pair with its characters stands each character over its
+              own syllable, and the separate reading line goes: the two are one thing to read. A change
+              to either marks the word as a whole, since the columns cannot carry a word diff. */}
+          <div className={`head-line${columns ? " hanzi" : ""}`}>
+            <h1 className={`headword${tint(head("headword") ?? (columns ? head("reading") : null))}`} lang={lexeme.language}
+              data-say={`lexeme:${lexeme.id}`} aria-label={columns ? lexeme.headword : undefined}>
+              {columns
+                ? <HanziColumns columns={columns} />
+                : <DiffText text={lexeme.headword} form={null} words={head("headword")?.words ?? null} />}
             </h1>
             <Say head label={`Listen to ${lexeme.headword}`} target={headwordTarget(lexeme)} onListen={listen} />
           </div>
-          {lexeme.reading && <div className={`reading${tint(head("reading"))}`}>{lexeme.reading}</div>}
+          {lexeme.reading && !columns && <div className={`reading${tint(head("reading"))}`}>
+            <ReadingText reading={lexeme.reading} language={lexeme.language} />
+          </div>}
           <div className="pron-row">
             {lexeme.ipa && <span className={`ipa${tint(head("ipa"))}`}>{lexeme.ipa}</span>}
             <span className={`gram${tint(head("pos") ?? head("gender") ?? head("register") ?? head("dialect"))}`}>

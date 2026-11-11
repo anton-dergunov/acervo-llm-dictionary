@@ -22,7 +22,8 @@
  */
 
 import type { Example, Lexeme, VocabularyGraph } from "./domain";
-import { languageOf } from "./languages";
+import { isMandarin, languageOf } from "./languages";
+import { accentedPinyin } from "./pinyin";
 import { articleReader, lexemesIn, shortGlossOf, type Article } from "./selectors";
 
 /** Words waiting to be filed, which the rail also keeps out of every topic. */
@@ -69,7 +70,7 @@ export function entryFor(graph: VocabularyGraph, article: Article): string {
   const { lexeme, senses } = article;
   const heading = [
     `##### **${lexeme.headword}**`,
-    lexeme.reading ? `*${lexeme.reading}*` : "",
+    lexeme.reading ? `*${isMandarin(lexeme.language) ? accentedPinyin(lexeme.reading) : lexeme.reading}*` : "",
     lexeme.emoji ?? ""
   ].filter(Boolean).join(" ");
 

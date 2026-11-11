@@ -78,6 +78,24 @@ const langOf  = (code) => LANGUAGES.find((l) => l.code === code);
 const strip   = (s) => String(s).replace(/<[^>]+>/g, "");
 const esc     = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+/* A Mandarin reading, as the app draws it (`web/src/Reading.tsx`). The prototype's readings are
+   already tone-marked and spaced one syllable to a character, so the tone is read off the mark and
+   the columns are a split; the app also reads numbered and run-together Pinyin. */
+const TONE_MARKS = ["āēīōūǖ", "áéíóúǘ", "ǎěǐǒǔǚ", "àèìòùǜ"];
+const toneOf = (syllable) => {
+  const at = TONE_MARKS.findIndex((marks) => [...syllable.toLowerCase()].some((c) => marks.includes(c)));
+  return at < 0 ? 5 : at + 1;
+};
+const isMandarin = (x) => /^zh/i.test(x.language || "");
+const readingHtml = (x) => isMandarin(x)
+  ? x.reading.split(" ").map((s) => `<span class="tone-${toneOf(s)}">${esc(s)}</span>`).join(" ")
+  : esc(x.reading);
+const hanziColumns = (x) => {
+  if (!isMandarin(x) || !x.reading) return null;
+  const chars = [...x.headword], syllables = x.reading.split(" ");
+  return chars.length === syllables.length ? chars.map((c, i) => ({ c, s: syllables[i] })) : null;
+};
+
 const ICON = {
   search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>',
   back:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>',
@@ -481,7 +499,7 @@ function renderList() {
         <button class="row${x.status === "inbox" ? " inbox" : ""}${x.status === "aside" ? " aside" : ""}${on ? " picked" : ""}" data-open="${x.id}">
           <span class="plate">${x.emoji || "\u{1F4C4}"}${on ? `<span class="pick-badge" role="img" aria-label="Selected">${ICON.check}</span>` : ""}</span>
           <span>
-            <span class="word">${esc(x.headword)}${x.reading ? `<span class="rdg">${esc(x.reading)}</span>` : ""}</span>
+            <span class="word">${esc(x.headword)}${x.reading ? `<span class="rdg">${readingHtml(x)}</span>` : ""}</span>
             <span class="gloss">${esc(shortGlossOf(x))}</span>
           </span>
           <span class="meta">
@@ -805,8 +823,11 @@ function masthead(x) {
       <div class="head-row">
         <div class="emoji-plate">${x.emoji || "\u{1F4C4}"}</div>
         <div class="head-text">
-          <div class="head-line"><h1 class="headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}</div>
-          ${x.reading ? `<div class="reading">${esc(x.reading)}</div>` : ""}
+          ${hanziColumns(x)
+            ? `<div class="head-line hanzi"><h1 class="headword" aria-label="${esc(x.headword)}">${hanziColumns(x).map(({ c, s }) =>
+                `<span class="hz tone-${toneOf(s)}" data-reading="${esc(s)}">${esc(c)}</span>`).join("")}</h1>${say(x.headword, "always head")}</div>`
+            : `<div class="head-line"><h1 class="headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}</div>
+          ${x.reading ? `<div class="reading">${readingHtml(x)}</div>` : ""}`}
           <div class="pron-row">
             ${x.ipa ? `<span class="ipa">${esc(x.ipa)}</span>` : ""}
             <span class="gram">${esc(grammarWords(x))}</span>
@@ -991,7 +1012,7 @@ function renderCards(x) {
         <div class="cards-word">
           <span class="cw-emoji">${x.emoji || "\u{1F4C4}"}</span>
           <div class="cw-line" data-length="${x.headword.length > 24 ? "long" : x.headword.length > 14 ? "mid" : "short"}"><h1 class="cw-headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}</div>
-          ${x.reading ? `<span class="reading">${esc(x.reading)}</span>` : ""}
+          ${x.reading ? `<span class="reading">${readingHtml(x)}</span>` : ""}
         </div>
         <nav class="cards-nav" aria-label="Senses and sections">
           ${groups.map(([group, g], index) => `${!group.startsWith("s") && index > 0 && groups[index - 1][0].startsWith("s") ? '<span class="cards-sep" aria-hidden="true"></span>' : ""}<button class="cards-chip${group === current ? " on" : ""}${group.startsWith("s") ? "" : " aside"}"

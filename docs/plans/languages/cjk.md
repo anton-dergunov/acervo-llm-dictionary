@@ -50,13 +50,10 @@ measure words, a corpus for Chinese in the retrieval service, photo capture's ta
 
 What a Chinese word needs before anything is built on top of it — part of making every feature work in
 every language ([`language-support.md`](language-support.md)), but specific enough to list here.
-
-- **Tones shown as tones.** A reading is written with tone marks, never trailing digits, everywhere a
-  reading appears; dictionary entries already are (`web/src/pinyin.ts`). Beyond the mark, a small
-  picture of each syllable's contour — level, rising, dipping, falling — is what a European ear
-  actually needs to remember it.
-- **Search by pinyin properly**: with marks, with digits, or with no tones at all (`tushu` finding
-  图书) — today it is the numbered form that finds a word.
+Tones shown as tones, and Pinyin search with or without them, are built
+([`../../features/articles.md`](../../features/articles.md), "Readings"); a reading is still rendered,
+not checked (the pinyin defect in [`article-quality.md`](../quality/article-quality.md)). How other
+scripts would show what their spelling hides is [`readings.md`](readings.md).
 
 ### Learning the characters: a spike
 

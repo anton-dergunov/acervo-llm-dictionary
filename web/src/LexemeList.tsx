@@ -2,6 +2,7 @@ import { useState } from "react";
 import { asideOpen, setAsideOpen } from "./editorPreferences";
 import { BookIcon, CaretIcon, CheckIcon, GlobeIcon } from "./icons";
 import SwipeRow, { type RowAction } from "./SwipeRow";
+import { ReadingText } from "./Reading";
 import type { ExternalRow } from "./externalEntries";
 import type { ListRow, SortKey, TopicSelection } from "./selectors";
 
@@ -163,7 +164,7 @@ export default function LexemeList({
         {on && <span className="pick-badge" role="img" aria-label="Selected"><CheckIcon /></span>}
       </span>
       <span>
-        <span className="word">{row.headword}{row.reading && <span className="rdg">{row.reading}</span>}</span>
+        <span className="word">{row.headword}{row.reading && <span className="rdg"><ReadingText reading={row.reading} language={row.language} /></span>}</span>
         <span className="gloss">{row.shortGloss}</span>
       </span>
       <span className="meta">

@@ -12,7 +12,8 @@ import {
   type StoryWord, type StudyState, type SyncFields,
   type Topic, type Vocabulary, type VocabularyGraph
 } from "./domain";
-import { glossLanguagesFor, languageOf, notesLanguageFor, presentationOf, type LanguagePresentation } from "./languages";
+import { glossLanguagesFor, isMandarin, languageOf, notesLanguageFor, presentationOf, type LanguagePresentation } from "./languages";
+import { pinyinSearchForms } from "./pinyin";
 // Type-only, so it is erased at build time and the cycle with `yaml.ts` — which imports `Article`
 // from here — never exists at runtime.
 import type { ArticleDraft, AttestationDraft, ExampleDraft, SenseDraft } from "./yaml";
@@ -25,6 +26,8 @@ export type TopicSelection = "all" | "inbox" | string;
 
 export interface ListRow {
   id: string;
+  /** The lexeme's own, which says how its reading is written (`isMandarin`). */
+  language: string;
   headword: string;
   reading: string | null;
   emoji: string | null;
@@ -192,10 +195,20 @@ export function shortGlossOf(graph: VocabularyGraph, lexeme: Lexeme): string {
   return effectiveShortGloss(graph, lexeme.id) ?? "";
 }
 
+/**
+ * A reading as search finds it: as written, and for Mandarin every way Pinyin is typed — marked,
+ * numbered, toneless — so `tushu`, `tú shū` and `tu2` all find 图书馆 however its reading is stored.
+ */
+function searchableReading(lexeme: Lexeme): string {
+  if (!lexeme.reading) return "";
+  if (!isMandarin(lexeme.language)) return lexeme.reading;
+  return [lexeme.reading, ...pinyinSearchForms(lexeme.reading)].join(" ");
+}
+
 function searchHaystack(graph: VocabularyGraph, lexeme: Lexeme): string {
   const senses = sensesOf(graph, lexeme.id);
   return [
-    lexeme.headword, lexeme.lemma, lexeme.reading ?? "", lexeme.shortGloss ?? "",
+    lexeme.headword, lexeme.lemma, searchableReading(lexeme), lexeme.shortGloss ?? "",
     ...senses.map((sense) => sense.definition),
     ...senses.flatMap((sense) => sense.glosses.flatMap((gloss) => gloss.terms))
   ].join(" ").toLowerCase();
@@ -238,6 +251,7 @@ export function visibleRows(graph: VocabularyGraph, { language, topic, query, so
     const study = studyOf(lexeme);
     return {
       id: lexeme.id,
+      language: lexeme.language,
       headword: lexeme.headword,
       reading: lexeme.reading,
       emoji: lexeme.emoji,
@@ -1097,7 +1111,7 @@ function heldWordText(graph: VocabularyGraph): Map<string, string> {
     glosses.set(sense.lexemeId, list);
   }
   return new Map(live(graph.lexemes).map((lexeme) => [lexeme.id, [
-    lexeme.headword, lexeme.lemma, lexeme.reading ?? "", lexeme.shortGloss ?? "", ...(glosses.get(lexeme.id) ?? [])
+    lexeme.headword, lexeme.lemma, searchableReading(lexeme), lexeme.shortGloss ?? "", ...(glosses.get(lexeme.id) ?? [])
   ].join(" ")]));
 }
 

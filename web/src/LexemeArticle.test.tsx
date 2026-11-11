@@ -362,3 +362,39 @@ describe("looking a word up", () => {
     }
   });
 });
+
+describe("a Mandarin word's reading", () => {
+  const chinese = (headword: string, reading: string) => {
+    const article = picar();
+    return { ...article, lexeme: { ...article.lexeme, language: "zh-Hans", headword, reading } };
+  };
+
+  it("stands each character over its syllable in its tone, and the heading still reads as the word", () => {
+    const { container } = render(<LexemeArticle article={chinese("图书馆", "tu2 shu1 guan3")} onNotify={() => undefined} />);
+    const heading = screen.getByRole("heading", { level: 1, name: "图书馆" });
+    // The syllables are generated content: a selection of the heading reads the characters alone.
+    expect(heading.textContent).toBe("图书馆");
+    expect([...heading.querySelectorAll(".hz")].map((column) => [column.textContent, column.getAttribute("data-reading"), column.className]))
+      .toEqual([["图", "tú", "hz tone-2"], ["书", "shū", "hz tone-1"], ["馆", "guǎn", "hz tone-3"]]);
+    expect(container.querySelector(".masthead .reading")).toBeNull();
+  });
+
+  it("falls back to one line, still marked and coloured, when the syllables do not pair", () => {
+    const { container } = render(<LexemeArticle article={chinese("卡拉OK", "kǎlā ōukèi")} onNotify={() => undefined} />);
+    expect(container.querySelector(".hz")).toBeNull();
+    const line = container.querySelector(".masthead .reading")!;
+    expect(line.textContent).toBe("kǎlā ōukèi");
+    expect([...line.querySelectorAll("span")].map((one) => one.className)).toEqual(["tone-3", "tone-1", "tone-1", "tone-4"]);
+  });
+
+  it("shows the card's reading marked, on one line", () => {
+    const { container } = render(<LexemeArticle article={chinese("图书馆", "tu2 shu1 guan3")} onNotify={() => undefined} view="cards" />);
+    expect(container.querySelector(".cards-word .reading")?.textContent).toBe("tú shū guǎn");
+  });
+
+  it("leaves a reading that is not Mandarin as it was written", () => {
+    const article = picar();
+    const { container } = render(<LexemeArticle article={{ ...article, lexeme: { ...article.lexeme, reading: "pi1 car" } }} onNotify={() => undefined} />);
+    expect(container.querySelector(".masthead .reading")?.textContent).toBe("pi1 car");
+  });
+});

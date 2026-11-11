@@ -77,3 +77,32 @@ describe("words set aside", () => {
     expect(onSetAside).toHaveBeenCalledWith("lexemebalsa0001", false);
   });
 });
+
+describe("a Mandarin word's row", () => {
+  function chineseList(query = "") {
+    const graph = testGraph();
+    const word = graph.lexemes.find((lexeme) => lexeme.id === "lexemepicar0001")!;
+    Object.assign(word, { language: "zh-Hans", headword: "图书馆", reading: "tu2 shu1 guan3" });
+    const view = visibleRows(graph, { language: "zh-Hans", topic: "all", query, sort: "alpha" });
+    render(<LexemeList
+      rows={view.rows} aside={view.aside} languageName="Chinese" topic="all" topicLabel="All words" topicIcon="📖"
+      query={query} sort="alpha" onSort={() => undefined} selected={() => false}
+      onOpen={vi.fn()} onToggleSelected={vi.fn()} onSetAside={vi.fn()} onDelete={vi.fn()}
+    />);
+    return view.rows;
+  }
+
+  it("shows the reading with tone marks, each syllable in its tone's colour", () => {
+    chineseList();
+    const reading = document.querySelector(".rdg")!;
+    expect(reading.textContent).toBe("tú shū guǎn");
+    expect([...reading.querySelectorAll("span")].map((one) => one.className)).toEqual(["tone-2", "tone-1", "tone-3"]);
+  });
+
+  it("is found by Pinyin typed with marks, with digits, or with no tones at all", () => {
+    for (const query of ["tushu", "tú shū", "tu2 shu1", "tu shu guan"]) {
+      expect(chineseList(query).map((row) => row.headword)).toEqual(["图书馆"]);
+      cleanup();
+    }
+  });
+});

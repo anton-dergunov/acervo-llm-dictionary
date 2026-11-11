@@ -79,7 +79,9 @@ pivot Spanish is glossed in. Every language-bearing field names *which* language
 ### Lexeme
 
 `language` (BCP-47), `headword`, `lemma` (the dictionary form, and the key a corpus or dictionary is
-searched on), `reading` (pinyin or another script aid — **required for Chinese**, on a prefix test),
+searched on), `reading` (pinyin or another script aid — **required for Chinese**, on a prefix test; Pinyin is
+written with tone marks, one spaced syllable per character, but digits are read too — see
+[`../features/articles.md`](../features/articles.md), "Readings"),
 `ipa`, `pos`, `gender`, `register`, `dialect`, `emoji`, `topicIds`, `status`, `notes`,
 `clipsSearchedAt`, and three gloss-shaped fields that are not interchangeable:
 

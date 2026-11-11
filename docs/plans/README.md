@@ -20,6 +20,7 @@ what it said.
 - [`word-discovery.md`](word-discovery.md) — finding the words worth knowing next.
 - [`languages/language-support.md`](languages/language-support.md) — every feature in the languages people learn.
 - [`languages/cjk.md`](languages/cjk.md) — Chinese, Japanese and Korean: words without spaces (Rare, taps), the characters, the tones, and photos.
+- [`languages/readings.md`](languages/readings.md) — showing what spelling hides in other languages: tones, pitch accent, stress, vowels.
 - [`languages/accents.md`](languages/accents.md) — clips following a vocabulary's variety, and recording again when it changes.
 
 **Quality** — the research track: whether what the models write is right.

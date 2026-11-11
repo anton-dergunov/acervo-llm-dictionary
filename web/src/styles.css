@@ -28,6 +28,10 @@
   --map-coast:   #AFC1BC;
   --map-contour: #D5DFDC;
   --map-halo:    #F7F9F8;
+  /* Mandarin's tones, after the colours Pleco and MDBG made a learner's convention — 1 red, 2 orange,
+     3 green, 4 blue, neutral grey — taken down to this palette's weight. Each is text on paper at
+     4.5:1 or better in both themes. */
+  --tone-1: #B5372C; --tone-2: #9E5500; --tone-3: #3D7A1C; --tone-4: #2F5DAF; --tone-5: #5F716C;
 
   /* The CJK faces sit *after* `system-ui`, which is not cosmetic ordering. A stack is consulted
      per character, so any glyph the first family lacks is drawn by the next family that has it —
@@ -54,6 +58,7 @@
     --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
 
     --map-sea: #0A1110; --map-land: #131C1B; --map-coast: #34504B; --map-contour: #1E2B29; --map-halo: #131C1B;
+    --tone-1: #F08A7E; --tone-2: #E5A65E; --tone-3: #97C46E; --tone-4: #86A9F0; --tone-5: #8FA19C;
   }
 }
 :root[data-theme="dark"] {
@@ -67,6 +72,7 @@
   --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
 
   --map-sea: #0A1110; --map-land: #131C1B; --map-coast: #34504B; --map-contour: #1E2B29; --map-halo: #131C1B;
+  --tone-1: #F08A7E; --tone-2: #E5A65E; --tone-3: #97C46E; --tone-4: #86A9F0; --tone-5: #8FA19C;
 }
 
 * { box-sizing: border-box; }
@@ -360,6 +366,14 @@ input, textarea { font: inherit; color: inherit; }
 .reading { font-family: var(--mono); font-size: 15px; color: var(--core); margin: -2px 0 6px; }
 .pron-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 0; }
 .ipa { font-family: var(--mono); font-size: 13.5px; color: var(--ink-3); }
+/* A syllable's tone: its colour wherever a reading is shown, and on the word page the contour drawn
+   over its character. The contours are Chao's pitch values on a five-level scale — 55 high level,
+   35 rising, 214 dipping, 51 falling — and the neutral tone, which has none, a dot. */
+.tone-1 { color: var(--tone-1); --contour: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M3 2H21' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.tone-2 { color: var(--tone-2); --contour: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M3 9L21 2' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.tone-3 { color: var(--tone-3); --contour: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M3 12.5Q8 17.6 11.5 15.6T21 5.5' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.tone-4 { color: var(--tone-4); --contour: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M3 2L21 16' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+.tone-5 { color: var(--tone-5); --contour: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Ccircle cx='12' cy='9' r='2.2'/%3E%3C/svg%3E"); }
 .play {
   display: inline-flex; align-items: center; gap: 6px;
   height: 28px; padding: 0 11px 0 9px; border-radius: 999px;
@@ -538,6 +552,20 @@ details.fold .fold-body { padding: 4px 0 18px; }
 }
 .head-line .headword { display: inline; margin: 0; font-size: inherit; }
 .head-line .say.head { vertical-align: middle; margin: 0 0 0 .28em; }
+/* A Mandarin headword: each character a column, its tone's contour above it and its syllable below,
+   all in the tone's colour. The contour and the syllable are generated content, so the heading's text
+   is still only the characters — what a selection reads aloud and what is copied. A column is as wide
+   as the wider of the two, so a long syllable (zhuāng) pushes its neighbours apart rather than into
+   them. Flex rather than the inline line above: the button centres on the whole column block. */
+.head-line.hanzi { display: flex; align-items: center; flex-wrap: wrap; row-gap: 6px; }
+.head-line.hanzi .headword { display: flex; flex-wrap: wrap; letter-spacing: 0; }
+.head-line.hanzi .say.head { margin-left: .3em; }
+.hz { display: inline-flex; flex-direction: column; align-items: center; padding: 0 .07em; }
+.hz::before {
+  content: ""; width: .62em; height: .46em; margin-bottom: .04em; background: currentColor;
+  -webkit-mask: var(--contour) center / contain no-repeat; mask: var(--contour) center / contain no-repeat;
+}
+.hz::after { content: attr(data-reading); font: 500 15px/1.3 var(--mono); letter-spacing: 0; margin-top: 3px; }
 /* Baseline, not centre: a mono IPA, an italic serif and a small mono filing line only look level when
    their letters sit on one line. */
 .pron-row { align-items: baseline; column-gap: 14px; row-gap: 2px; margin-top: 8px; }

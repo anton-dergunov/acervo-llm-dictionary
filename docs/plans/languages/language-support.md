@@ -15,6 +15,7 @@ Russian, Japanese, Chinese, Korean and English — each checked against every fe
 | Capture and compose | an article that is right in the language's own terms: gender, aspect, reading, script |
 | Search | finding a word by its lemma, an inflected form, a transliteration |
 | Fonts and layout | every script renders in the article, the list, loops, stories and Anki cards |
+| Reading | what the spelling hides is shown — tones, pitch accent, stress, unwritten vowels ([`readings.md`](readings.md)) |
 | Pictures | a brief that understands the sense |
 | Voices | a voice exists on the chain for the language, plain and expressive |
 | Clips | the corpus holds the language at all |

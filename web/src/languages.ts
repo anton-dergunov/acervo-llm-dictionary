@@ -123,3 +123,16 @@ export function varietyOptions(choices: readonly string[], declared: Iterable<st
   }
   return regions.map((region) => ({ value: region, label: `${flagOf(region)} ${regionName(region)}` }));
 }
+
+/**
+ * Whether a lexeme's reading is Hanyu Pinyin: Mandarin, written in either script.
+ *
+ * The same prefix test that makes a reading required for Chinese, less Cantonese, whose reading is
+ * Jyutping with six tones and must never be given Mandarin's marks. A Cantonese reading under a
+ * plain `zh` tag is safe anyway: it does not parse as Pinyin, so it is shown as written.
+ */
+export function isMandarin(language: string): boolean {
+  const lower = language.toLowerCase();
+  if (lower.startsWith("cmn")) return true;
+  return lower.startsWith("zh") && !/^zh-yue\b/.test(lower);
+}

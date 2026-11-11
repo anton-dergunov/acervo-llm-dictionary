@@ -29,6 +29,39 @@ above an article changes it for that sitting only. After a save the word opens i
 where the reserved slots keep the layout still while clips and pictures arrive
 ([`../architecture/jobs.md`](../architecture/jobs.md), "What the interface shows").
 
+## Readings
+
+A word's `reading` is shown as a learner reads it, never as it happens to be stored. For Mandarin
+(`isMandarin`: every `zh` tag but Cantonese) the reading is parsed into syllables with tones by
+`web/src/pinyin.ts`, which accepts numbered Pinyin (`tu2 shu1 guan3`, CC-CEDICT's `r5` for 儿),
+tone-marked Pinyin, and marked syllables run together (`túshūguǎn`, cut against the syllable table,
+one mark per syllable). So a reading typed with digits needs no conversion, and none is stored.
+`Reading.tsx` is the one renderer.
+
+- **On the page**, each character of the headword stands over its own syllable, with its tone's pitch
+  contour above it: Chao's values on a five-level scale (55 level, 35 rising, 214 dipping, 51 falling;
+  a dot for the neutral tone). The syllable and the contour are generated content from `data-reading`
+  and the tone class, so the heading's text is still exactly the headword: a selection of it reads
+  the characters aloud, and the separate reading line is not drawn. A syllable with erhua takes the
+  儿 after it as one column.
+- **When the syllables and characters do not pair** — a Latin letter in the word (卡拉OK), a count that
+  differs — the headword is drawn as usual and the reading as one line underneath. A column that
+  guessed would teach a wrong tone.
+- **Everywhere a reading is a line** (the fallback, a card, a list row) each syllable is tone-marked and
+  coloured by its tone. The colours follow the convention Pleco and MDBG made familiar (1 red, 2
+  orange, 3 green, 4 blue, neutral grey), as the `--tone-*` tokens, at 4.5:1 or better in both themes.
+  The page's columns colour the characters too, but a row's characters stay ink.
+- **Tones are citation tones**, as a dictionary prints them: 一 is `yī` and 不 is `bù` wherever they
+  stand, and third-tone sandhi is not drawn.
+- **Search** reads a Mandarin reading in every way it is typed. `tushu`, `tú shū` and `tu2 shu1` all
+  find 图书馆.
+- **Outside the interface** the reading leaves tone-marked too: the Obsidian mirror, and Anki's
+  `Reading` field through `acervo/pinyin.py`, the Python twin of the numbered-to-marked step. The two
+  are held to one case file, `web/src/testFixtures/pinyinVectors.json`.
+
+Any other language's reading is shown as written. What other scripts would gain from the same
+treatment is [`../plans/languages/readings.md`](../plans/languages/readings.md).
+
 ## The document
 
 **The YAML is a projection of the records, not a storage format.** Markdown and extended-article JSON

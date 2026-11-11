@@ -120,6 +120,15 @@ def test_the_word_is_shown_whole_on_every_meaning(graph, media_root):
     assert 'src="media/imgobraart00001-a1b2c3d4.webp"' in word["Senses"]
 
 
+def test_a_mandarin_reading_reaches_the_card_with_tone_marks(graph, media_root):
+    """However it was typed: Anki shows a reading as written, so digits would reach the learner."""
+    lexeme = next(record for record in graph["lexemes"] if record["id"] == OBRA)
+    lexeme.update(language="zh-Hans", reading="tu2 shu1 guan3")
+    assert by_id(build(graph, media_root=media_root))[OBRA]["fields"]["Reading"] == "tú shū guǎn"
+    lexeme.update(language="yue", reading="tou4 syu1 gun2")
+    assert by_id(build(graph, media_root=media_root))[OBRA]["fields"]["Reading"] == "tou4 syu1 gun2"
+
+
 def test_decks_are_per_language_and_topics_are_tags(graph, media_root):
     note = build(graph, media_root=media_root).notes[0]
     assert note["deck"] == "Spanish::Vocabulary"

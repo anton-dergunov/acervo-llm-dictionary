@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from acervo.article import ArticleView, build_articles, live
+from acervo.pinyin import accented_pinyin, is_mandarin
 
 from .manifest import SCHEMA_VERSION
 from .naming import slugify_filename
@@ -249,7 +250,9 @@ def _notes_of(article: ArticleView, graph: _Graph, media: _Media, deck: str) -> 
         "Language": _escape(article.language),
         "Article": _escape(article_word),
         "Headword": _escape(bare),
-        "Reading": _escape(lexeme.get("reading")),
+        # Mandarin as it is read, with tone marks, however the reading was typed.
+        "Reading": _escape(accented_pinyin(lexeme.get("reading") or "")
+                           if is_mandarin(article.language) else lexeme.get("reading")),
         "IPA": _escape(lexeme.get("ipa")),
         "Grammar": _escape(grammar_of(lexeme)),
     }

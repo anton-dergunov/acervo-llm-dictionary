@@ -430,7 +430,7 @@ DEMO_LEXEMES: tuple[dict, ...] = (
     {
         "key": "library", "language": "zh-Hans", "headword": "图书馆", "lemma": "图书馆",
         "primary_gloss": "library", "emotion": "calm and quiet, as if keeping your voice down",
-        "reading": "tu2 shu1 guan3", "pos": "noun", "register": "neutral", "emoji": "📚",
+        "reading": "tú shū guǎn", "pos": "noun", "register": "neutral", "emoji": "📚",
         "topics": ["places", "culture"], "status": "active", "short_gloss": "библиотека; library",
         "created_at": at("06-11"), "edited_at": at("06-11"),
         "notes": ["图 (picture) + 书 (book) + 馆 (public building) — the third character recurs in 博物馆 and 体育馆."],
