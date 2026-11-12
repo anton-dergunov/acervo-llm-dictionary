@@ -96,8 +96,9 @@ nothing recurs.
   asked for ids as well, the brief writer stopped restating the cast, which a part drawn with no
   references depends on. The call is opportunistic — if it fails the story is drawn without references.
 - **Whether a model can take references is its family's fact** (`image.references` in
-  `models/families.py`); a pair without it is sent the plain brief. References go over LiteLLM's chat route, since
-  `image_generation` takes no image for Vertex Gemini, and `prompts/acervo_story_reference.md` puts the
+  `models/families.py`); a pair without it is sent the plain brief. For Vertex Gemini, references go over LiteLLM's chat route, since
+  `image_generation` takes no image there; Cloudflare's FLUX.2 klein takes up to four in its own multipart
+  request, each shrunk under 512 pixels a side, the most it accepts. `prompts/acervo_story_reference.md` puts the
   picture first and the references second, because a conditioned photograph came out matching and
   stiffer the other way round.
 - **Settings ▸ Stories** chooses `all` (the default), `artwork` (every style not marked

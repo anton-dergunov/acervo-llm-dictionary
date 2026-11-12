@@ -221,7 +221,10 @@ FAMILIES: tuple[Family, ...] = (
         params=_frozen({"text": {"max_tokens": 4096}}),
         # Aura takes `text` where MeloTTS took `prompt`, and refuses `prompt`.
         audio=_frozen({"inputField": "text"}),
-        image=_frozen({"size": "native", "seed": "native"}),
+        # FLUX.2 klein takes up to four input pictures as `input_image_0…3`, each smaller than
+        # 512×512 (Cloudflare's FLUX.2 klein 9B launch note, 28 Jan 2026); `referenceSide` is
+        # what the adapter shrinks a larger one to, since a story's pictures are 1024 wide.
+        image=_frozen({"size": "native", "seed": "native", "references": 4, "referenceSide": 511}),
         lister="cloudflare",
         ready=(
             Ready("text", "@cf/meta/llama-3.3-70b-instruct-fp8-fast"),

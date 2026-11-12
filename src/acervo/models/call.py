@@ -305,11 +305,16 @@ def image(
         elif len(references) > allowed:
             warnings.append(f"this provider takes {allowed} reference pictures; the rest were not sent")
             references = tuple(references)[-allowed:]
-    if references:
+    via = row.route("image").via
+    if references and via != "cloudflare":
         return _image_with_references(prompt, row, model, size, references, timeout, started, warnings)
-    if row.route("image").via in ("cloudflare", "a1111"):
-        data, mime = _image_adapter(row.route("image").via)(
-            row, model, prompt, seed=seed, size=size, timeout=row.timeout_for("image", timeout)
+    if via in ("cloudflare", "a1111"):
+        # Cloudflare takes its references in the same multipart body as the prompt; A1111 is never
+        # handed any, since its family declares none.
+        extra = {"references": tuple(references)} if references else {}
+        data, mime = _image_adapter(via)(
+            row, model, prompt, seed=seed, size=size, timeout=row.timeout_for("image", timeout),
+            **extra,
         )
         return ImageResult(data=data, mime=mime,
                            answer=_answer(row, model, started, None, warnings, Spent(pictures=1)))

@@ -1,6 +1,8 @@
 # Pictures over pictographic characters · an experiment first
 
-**Status:** not started. Written down when the Write sheet was built
+**Status:** the experiment is built and drawing
+([`experiments/character-pictures/`](../../../experiments/character-pictures/README.md)); judging is
+next. Written down when the Write sheet was built
 ([`../../features/writing.md`](../../features/writing.md)), as the owner's next idea for the characters.
 
 ## The idea
@@ -25,23 +27,28 @@ Two limits come with it, and each would cost trust if ignored:
 ## The experiment
 
 Whether any image model can do this at all is the open question, and it is answered before anything
-is built. It lives in `experiments/character-pictures/` when run, scored on its own page
-(as every labelling follow-up is).
+is built. It lives in [`experiments/character-pictures/`](../../../experiments/character-pictures/README.md),
+scored on its own page (as every labelling follow-up is).
 
-- **Characters.** About twenty with an undisputed pictographic origin: 人 大 山 水 木 口 目 日 月 火 雨 田
-  鱼 马 门 刀 牛 羊 鸟 竹, plus two compounds of them (林, 明), to see whether composition survives.
-- **What each depicts.** Make Me a Hanzi's `dictionary.txt` carries an etymology per character: its
-  type (pictographic, ideographic, pictophonetic) and a hint of what it shows. That is the source of
-  both the selection and the prompt; its licence is checked before it is used.
-- **Models.** Every image model the owner has a provider for, including Gemini's image models
-  ("Nano Banana"), each at the settings its own experiment finds best, not ranked against each other.
-- **Two ways to ask.** By text alone ("a standing person whose two legs form the character 人"), and by
-  editing: the character's own strokes rendered from the stroke data the server already holds,
-  handed to the model as the image to draw over. The second is the likelier to keep the strokes where
-  they are, and is the reason this needs the stroke data at all.
-- **Judged on two questions**, by the owner, per picture: do the strokes stay where the character's
-  strokes are, legible as the character; and does the picture show what the character really
-  depicts.
+- **Characters.** 22 whose modern form still looks like the object: 人 大 从 休 山 水 木 林 森 口 日 月
+  明 火 雨 田 门 竹 井 册 羊 凸. They include compounds (林 森 明 休 从), to see whether composition survives.
+  鱼 马 鸟 and 目 are left out because simplification or rotation erased the drawing.
+- **What each depicts.** Make Me a Hanzi's `dictionary.txt` (LGPL-3.0 or later, checked) carries an
+  etymology per character: its type and a hint of what it shows. That is the source of the
+  selection. 刀 has none there and was replaced by 凸.
+- **A stroke script per character.** Asked plainly, a chat image model pastes the character onto a
+  scene. Told which stroke is which part, it draws 人 and 大 right. So every prompt carries, for each
+  stroke, where it lies and which part of the object it becomes, written from the source's hint and
+  the oldest forms.
+- **Models.** Nano Banana 2 and Nano Banana Pro on Vertex, and a sample on Cloudflare's FLUX.2 klein,
+  which the free allowance limits. Each is asked at its family's own settings and not ranked against
+  the others.
+- **Two ways to ask.** By text alone, and by editing: the character's strokes are rendered from the
+  stroke data the server already holds, **each stroke in its own colour**, named in the prompt.
+- **Judged on three questions**, by the owner, per picture, blind:
+  1. do the strokes stay where the character's strokes are, legible as the character;
+  2. does the picture show what the character really depicts;
+  3. would it help to remember the character, linking its strokes to that meaning?
 
 The likeliest outcomes are that editing works for the simplest pictographs and nothing else, or that
 nothing works well enough. Either is an answer: the first sizes a small feature, and the second

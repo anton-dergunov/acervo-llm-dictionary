@@ -152,3 +152,41 @@ def test_a_provider_whose_account_is_missing_is_refused_rather_than_called(monke
         cloudflare.image(provider(CLOUDFLARE, settings={}), MODEL, "a hook")
     assert caught.value.reason == "unconfigured"
     assert caught.value.detail == "Cloudflare needs its account ID"
+
+
+def _picture(width: int, height: int) -> bytes:
+    from io import BytesIO
+
+    from PIL import Image
+
+    out = BytesIO()
+    Image.new("RGB", (width, height), "white").save(out, format="WEBP")
+    return out.getvalue()
+
+
+def test_reference_pictures_are_numbered_input_images_under_512_a_side(monkeypatch):
+    """Klein reads `input_image_0…3`, and refuses one of 512×512 or more; a story's pictures are
+    1024 wide, so the adapter shrinks them, keeping the aspect ratio, rather than be refused."""
+    from io import BytesIO
+
+    from PIL import Image
+
+    calls: list = []
+    transport(monkeypatch, answered(headers={"content-type": "image/png"}, content=b"PNG"), calls)
+    cloudflare.image(ROW, MODEL, "a hook", size=(1024, 1024),
+                     references=[_picture(1024, 1024), _picture(1024, 512)])
+    fields = calls[0]["files"]
+    assert "input_image_2" not in fields
+    sizes = []
+    for index in (0, 1):
+        name, data, mime = fields[f"input_image_{index}"]
+        assert name == f"input_image_{index}.png" and mime == "image/png"
+        sizes.append(Image.open(BytesIO(data)).size)
+    assert sizes == [(511, 511), (511, 256)]
+
+
+def test_a_request_with_no_reference_pictures_sends_no_input_image(monkeypatch):
+    calls: list = []
+    transport(monkeypatch, answered(headers={"content-type": "image/png"}, content=b"PNG"), calls)
+    cloudflare.image(ROW, MODEL, "a hook")
+    assert not any(name.startswith("input_image") for name in calls[0]["files"])

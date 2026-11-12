@@ -385,14 +385,38 @@ def test_reference_pictures_go_over_the_chat_route_with_the_rows_resolution(monk
 
 
 def test_reference_pictures_a_row_cannot_read_are_dropped_with_a_warning(monkeypatch):
-    calls = []
-    payload = litellm.ImageResponse(data=[{"b64_json": base64.b64encode(b"PNG").decode()}])
-    monkeypatch.setattr(call, "image_generation", _recording(calls, payload))
+    sent = []
     monkeypatch.setattr(call, "completion", _raising(AssertionError("the chat route")))
-    monkeypatch.setattr("acervo.models.cloudflare.image", lambda *a, **k: (b"PNG", "image/png"))
-    result = call.image("a hook", row=CLOUDFLARE, references=[b"one"])
+    monkeypatch.setattr("acervo.models.a1111.image",
+                        lambda *a, **k: sent.append(k) or (b"PNG", "image/png"))
+    row = provider({"id": "draw-things", "family": "draw-things",
+                    "models": {"image": ["sd_xl_turbo"]}}, {})
+    result = call.image("a hook", row=row, references=[b"one"])
     assert result.data == b"PNG"
+    assert "references" not in sent[0]
     assert any("no reference pictures" in warning for warning in result.answer.warnings)
+
+
+def test_cloudflare_takes_its_reference_pictures_in_its_own_request(monkeypatch):
+    """FLUX.2 klein reads input pictures from the same multipart body as the prompt, so they go to
+    the adapter rather than over the chat route Vertex Gemini needs."""
+    sent = []
+    monkeypatch.setattr(call, "completion", _raising(AssertionError("the chat route")))
+    monkeypatch.setattr("acervo.models.cloudflare.image",
+                        lambda *a, **k: sent.append(k) or (b"PNG", "image/png"))
+    result = call.image("a hook", row=CLOUDFLARE, references=[b"one", b"two"])
+    assert result.data == b"PNG"
+    assert sent[0]["references"] == (b"one", b"two")
+    assert not any("reference" in warning for warning in result.answer.warnings)
+
+
+def test_more_reference_pictures_than_cloudflare_takes_keeps_the_latest(monkeypatch):
+    sent = []
+    monkeypatch.setattr("acervo.models.cloudflare.image",
+                        lambda *a, **k: sent.append(k) or (b"PNG", "image/png"))
+    result = call.image("a hook", row=CLOUDFLARE, references=[b"1", b"2", b"3", b"4", b"5"])
+    assert sent[0]["references"] == (b"2", b"3", b"4", b"5")
+    assert any("takes 4 reference pictures" in warning for warning in result.answer.warnings)
 
 
 def test_a_chat_reply_with_no_picture_is_a_refusal_rather_than_an_empty_image(monkeypatch):

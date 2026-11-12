@@ -26,10 +26,13 @@ Cloudflare 429 and a Gemini 429 are the same kind of thing to the chain above.
 from __future__ import annotations
 
 import base64
+import io
 import json
+from collections.abc import Sequence
 from typing import TYPE_CHECKING, Any
 
 import httpx
+from PIL import Image
 
 from acervo.models.errors import RETRYABLE, ProviderRefused, ProviderUnavailable
 
@@ -47,6 +50,7 @@ def image(
     *,
     seed: int | None = None,
     size: tuple[int, int] | None = None,
+    references: Sequence[bytes] = (),
     timeout: float = 120.0,
 ) -> tuple[bytes, str]:
     width, height = size or (512, 512)
@@ -58,8 +62,24 @@ def image(
     }
     if seed is not None:
         fields["seed"] = (None, str(int(seed)))
+    side = int(row.image_capabilities().get("referenceSide") or 511)
+    for index, data in enumerate(references):
+        fields[f"input_image_{index}"] = (f"input_image_{index}.png", _fitted(data, side), "image/png")
     payload = _run(row, model, fields=fields, timeout=timeout)
     return _image_bytes(row, model, payload)
+
+
+def _fitted(data: bytes, side: int) -> bytes:
+    """A reference picture as a PNG no larger than `side` either way, its aspect ratio kept.
+
+    Klein refuses an input picture of 512×512 or more, and a story's pictures are 1024 wide.
+    """
+    with Image.open(io.BytesIO(data)) as picture:
+        picture = picture.convert("RGB")
+        picture.thumbnail((side, side), Image.Resampling.LANCZOS)
+        out = io.BytesIO()
+        picture.save(out, format="PNG")
+        return out.getvalue()
 
 
 def speech(

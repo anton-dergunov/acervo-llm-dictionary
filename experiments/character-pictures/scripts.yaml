@@ -1,0 +1,448 @@
+# The stroke script for every character: what it depicted, where each stroke lies, and which part
+# of that object each stroke becomes. This is what the prompts are made of; read the README first.
+#
+# - `object` is what the character depicted, from Make Me a Hanzi's etymology hint
+#   (results/characters.json carries the hint itself) and the character's oldest forms, never a
+#   fresh mnemonic.
+# - `strokes` are in the stroke order of the pinned stroke data, one entry per stroke; `prepare`
+#   refuses a character whose count differs. `where` is as the viewer sees the square: left is
+#   the viewer's left. `part` is what that stroke becomes.
+# - `history` says how the modern form drifted from the drawing, where that helps the picture.
+# - `layout` says how the object fills the square the way the character fills it.
+
+人:
+  object: a person standing, seen from the front, legs apart
+  history: >-
+    The oldest forms drew a person in profile, bending slightly forward; the two strokes that
+    remain are the body and the legs.
+  layout: >-
+    The person fills the square from head to feet. The small head sits just above the top of the
+    first stroke; the arms hang loosely at the sides and are pale, so that only the body and the
+    legs are ink.
+  strokes:
+    - where: a long sweep from the top centre down and out to the bottom left
+      part: the body, running down into the left leg
+    - where: a long sweep from the middle of the first stroke down and out to the bottom right
+      part: the right leg
+
+大:
+  object: a grown person standing facing you, arms stretched out wide and legs apart, making themself as big as they can
+  history: >-
+    The oldest forms drew exactly this: a person seen from the front with arms and legs spread.
+  layout: >-
+    The head sits at the top centre, just above where the second stroke begins; the hands are at
+    the two ends of the first stroke; the feet are at the bottom ends of the second and third.
+  strokes:
+    - where: a long straight line across the middle, from near the left edge to near the right edge
+      part: both arms, stretched straight out to the sides from hand to hand
+    - where: a long sweep from the top centre, straight down through the centre, then curving out to the bottom left
+      part: the neck and body, running down into the left leg
+    - where: a long sweep from the centre down and out to the bottom right
+      part: the right leg
+
+从:
+  object: one person walking behind another, both seen from the side, both walking to the right
+  history: >-
+    The oldest forms drew two people in profile, one following the other; the meaning "to follow"
+    comes from that.
+  layout: >-
+    The follower is on the left and a little smaller; the leader is on the right. Each head sits
+    just above the top of that person's first stroke. Both stride to the right.
+  strokes:
+    - where: a long sweep from the top left curving down to the bottom left
+      part: the follower's body and back leg
+    - where: a short stroke from the middle of the left half slanting down to the right, ending near the bottom centre
+      part: the follower's front leg, stepping forward
+    - where: a long sweep from the top centre curving down to the bottom left of the right half
+      part: the leader's body and back leg
+    - where: a long sweep from the centre down and out to the bottom right
+      part: the leader's front leg, striding out
+
+休:
+  object: a person resting, leaning with their back against a tree
+  history: >-
+    The oldest forms drew a person beside a tree: to rest is to lean against one.
+  layout: >-
+    The person stands in the narrow left part of the square, the tree fills the wider right part.
+    The person's small head sits at the top of the first stroke, tilted towards the tree. The
+    tree's leafy crown is pale and spreads around the top of its trunk.
+  strokes:
+    - where: a short slanting stroke at the top left, running down to the left
+      part: the person's head and shoulders, tilted as they lean back
+    - where: a straight line from the middle of the left side down to the bottom left
+      part: the person's body and legs, standing upright
+    - where: a line across the upper middle of the right part
+      part: the tree's main branches, spreading left and right
+    - where: a long straight line from the top of the right part down to the bottom, in its middle
+      part: the tree's trunk, from the crown down to the ground
+    - where: a stroke from the middle of the trunk slanting down to the left
+      part: a root spreading out to the left
+    - where: a short stroke from the middle of the trunk slanting down to the right
+      part: a root spreading out to the right
+
+山:
+  object: a mountain range of three peaks rising from one base, the middle peak the tallest
+  history: >-
+    The oldest forms drew three peaks on a common base.
+  layout: >-
+    The three peaks fill the square. Each vertical stroke is the ridge of a peak, its top end the
+    summit, with pale rocky slopes falling away on both sides of it. The base runs along the
+    bottom.
+  strokes:
+    - where: a long straight line down the centre, from the top centre to the bottom
+      part: the ridge of the tallest, middle peak, its top end the summit
+    - where: a line from the middle of the left side down to the bottom left, turning there to run along the bottom to the bottom right
+      part: the ridge of the left peak, then the base of the whole range along the ground
+    - where: a straight line from the middle of the right side down to the bottom right
+      part: the ridge of the right peak
+
+水:
+  object: a river running down between its banks, the water splashing out to both sides
+  history: >-
+    The oldest forms drew a winding stream in the middle with drops and side currents on both
+    sides; the modern side strokes are those splashes.
+  layout: >-
+    The water flows from the top of the square to the bottom. Every stroke is a bold current of
+    water; around them the water is a pale blue wash with a few pale drops.
+  strokes:
+    - where: a long line straight down the centre from the top, ending at the bottom in a small hook to the left
+      part: the main stream flowing down, curling into a small eddy at the bottom
+    - where: a line from the middle left running across to the centre, then turning to sweep down to the bottom left
+      part: a side current branching off to the left and splashing down
+    - where: a short slanting stroke at the upper right, running down towards the centre
+      part: a spray of water splashing up from the stream on the right
+    - where: a long sweep from the centre down and out to the bottom right
+      part: a current flowing out to the right
+
+木:
+  object: a tree, with its branches above and its roots below
+  history: >-
+    The oldest forms drew a trunk with branches spreading up and roots spreading down; the modern
+    form flattened the branches into one line across.
+  layout: >-
+    The tree fills the square. A pale leafy crown surrounds the top of the trunk and the branches;
+    the roots spread into pale earth at the bottom.
+  strokes:
+    - where: a line across the upper part, from left to right
+      part: the main branches, spreading out to both sides
+    - where: a long straight line down the middle, from the top to the bottom
+      part: the trunk
+    - where: a sweep from the centre of the trunk down and out to the bottom left
+      part: the root spreading out to the left
+    - where: a sweep from the centre of the trunk down and out to the bottom right
+      part: the root spreading out to the right
+
+林:
+  object: two trees standing side by side, a grove
+  history: >-
+    The oldest forms drew two trees side by side: a wood.
+  layout: >-
+    The left tree is a little narrower, as its character is; its right root is short so that it
+    does not reach the other tree. Pale leafy crowns surround both treetops.
+  strokes:
+    - where: a line across the upper part of the left half
+      part: the left tree's branches
+    - where: a long straight line down the middle of the left half
+      part: the left tree's trunk
+    - where: a sweep from the centre of the left trunk down to the bottom left
+      part: the left tree's root, spreading left
+    - where: a short dot-like stroke beside the left trunk, slanting down to the right
+      part: the left tree's short right root
+    - where: a line across the upper part of the right half
+      part: the right tree's branches
+    - where: a long straight line down the middle of the right half
+      part: the right tree's trunk
+    - where: a sweep from the centre of the right trunk down to the left
+      part: the right tree's root, spreading left
+    - where: a sweep from the centre of the right trunk down and out to the bottom right
+      part: the right tree's root, spreading right
+
+森:
+  object: three trees, one standing higher up behind and two in front, a forest
+  history: >-
+    The oldest forms drew three trees: many trees, a forest.
+  layout: >-
+    One tree in the upper half, centred; two trees side by side in the lower half. The upper tree
+    stands further back, higher on a pale slope. Pale leafy crowns surround the treetops.
+  strokes:
+    - where: a line across the upper part of the top half
+      part: the top tree's branches
+    - where: a straight line down the centre of the top half
+      part: the top tree's trunk
+    - where: a short sweep from the top tree's trunk down to the left
+      part: the top tree's root, spreading left
+    - where: a short stroke from the top tree's trunk down to the right
+      part: the top tree's root, spreading right
+    - where: a line across the lower left quarter, near its top
+      part: the lower left tree's branches
+    - where: a straight line down the middle of the lower left quarter
+      part: the lower left tree's trunk
+    - where: a sweep from the lower left trunk down to the bottom left
+      part: the lower left tree's root, spreading left
+    - where: a short dot-like stroke beside the lower left trunk
+      part: the lower left tree's short right root
+    - where: a line across the lower right quarter, near its top
+      part: the lower right tree's branches
+    - where: a straight line down the middle of the lower right quarter
+      part: the lower right tree's trunk
+    - where: a sweep from the lower right trunk down to the left
+      part: the lower right tree's root, spreading left
+    - where: a sweep from the lower right trunk down and out to the bottom right
+      part: the lower right tree's root, spreading right
+
+口:
+  object: a wide-open mouth, seen from the front
+  history: >-
+    The oldest forms drew a rounded open mouth; the modern form squared it.
+  layout: >-
+    The open mouth fills most of the square, as a rounded square. A pale face may be hinted around
+    it — a nose above, a chin below — but faint. The inside of the mouth is pale pink, never dark.
+  strokes:
+    - where: a straight line down the left side
+      part: the left corner and left side of the open lips
+    - where: a line across the top from left to right, turning down at the top right to run down the right side
+      part: the upper lip, curving down into the right corner of the mouth
+    - where: a line across the bottom from left to right
+      part: the lower lip
+
+日:
+  object: the sun
+  history: >-
+    The oldest forms drew a circle with a dot in its middle; the modern form squared the circle
+    and stretched the dot into a line.
+  layout: >-
+    The sun fills the square; its rim is the outline the strokes make, a little rounded at the
+    corners. Inside it is a pale warm yellow. Thin pale rays may shine around it, never black.
+  strokes:
+    - where: a long straight line down the left side
+      part: the left rim of the sun
+    - where: a line across the top, turning down at the top right to run down the right side
+      part: the top and the right rim of the sun
+    - where: a short line across the middle
+      part: the bright spot at the sun's heart, a band of light across its centre
+    - where: a line across the bottom
+      part: the bottom rim of the sun
+
+月:
+  object: a crescent moon, standing upright
+  history: >-
+    The oldest forms drew a crescent moon with a mark inside it; the modern form made it tall and
+    narrow and turned the mark into two short lines.
+  layout: >-
+    A tall crescent fills the square from top to bottom, its back on the left, its two horns
+    pointing right at the top and bottom. Inside it is a pale silver-yellow; around it a pale night
+    sky with a few faint stars.
+  strokes:
+    - where: a long line down the left side, curving slightly out to the bottom left at its foot
+      part: the outer curve, the back, of the crescent
+    - where: a line across the top, turning down at the top right to run down the right side, ending in a small hook to the left at the bottom
+      part: the top horn and the inner edge of the crescent, curling at the bottom into the lower horn
+    - where: a short line across, in the upper middle
+      part: a shadowed crater on the moon's face
+    - where: a short line across, in the lower middle
+      part: a second crater on the moon's face
+
+明:
+  object: the sun on the left and the crescent moon on the right, shining together
+  history: >-
+    Sun and moon side by side: their light is brightness, and so "bright" and "clear".
+  layout: >-
+    The sun is small and narrow in the left part, a little higher up; the tall crescent moon fills
+    the right part. A pale sky behind them, warm on the left and cool on the right.
+  strokes:
+    - where: a straight line down the left side of the left part, upper half
+      part: the left rim of the sun
+    - where: a line across the top of the left part, turning down to run down its right side
+      part: the top and the right rim of the sun
+    - where: a short line across the middle of the left part
+      part: the bright spot at the sun's heart
+    - where: a short line across the left part, below the middle
+      part: the bottom rim of the sun
+    - where: a long line down the left side of the right part, curving out to the bottom left at its foot
+      part: the outer curve, the back, of the crescent moon
+    - where: a line across the top of the right part, turning down to run down its right side, ending in a small hook to the left at the bottom
+      part: the top horn and the inner edge of the crescent, curling into the lower horn
+    - where: a short line across the right part, in its upper middle
+      part: a shadowed crater on the moon's face
+    - where: a short line across the right part, in its lower middle
+      part: a second crater on the moon's face
+
+火:
+  object: a fire, a big flame leaping up with sparks flying off on both sides
+  history: >-
+    The oldest forms drew tongues of flame rising; the modern two side strokes are the smaller
+    flames, the long pair the main one.
+  layout: >-
+    The flames rise from the bottom of the square, the tip of the big flame at the top centre where
+    the third stroke begins. The flame is a pale orange and red wash inside its ink edges; a few
+    pale logs may lie at its foot.
+  strokes:
+    - where: a short dot-like stroke in the upper left, slanting down to the right
+      part: a small flame or spark leaping off to the left
+    - where: a short stroke in the upper right, slanting down to the left
+      part: a small flame or spark leaping off to the right
+    - where: a long sweep from the top centre down and out to the bottom left
+      part: the left edge of the big flame, from its tip down to its base
+    - where: a long sweep from the centre down and out to the bottom right
+      part: the right edge of the big flame, flaring out at its base
+
+雨:
+  object: rain falling from a cloud that hangs across the sky
+  history: >-
+    The oldest forms drew drops falling from a line of sky or cloud; the frame is the cloud, the
+    four short strokes the drops.
+  layout: >-
+    The cloud spans the top of the square and hangs down its sides, a pale grey wash inside the
+    frame of strokes. The raindrops fall inside it; a pale curtain of rain below.
+  strokes:
+    - where: a line across the very top, from left to right
+      part: the top of the sky, the upper edge of the cloud
+    - where: a line from below the top line, down the left side
+      part: the left edge of the cloud, hanging down
+    - where: a line across, below the top line, turning down at the right to run down the right side, ending in a small hook at the bottom
+      part: the body of the cloud and its right edge, hanging down
+    - where: a straight line down the centre, from the top line to the middle
+      part: a stream of rain pouring from the middle of the cloud
+    - where: a short dot in the left half, upper
+      part: a raindrop
+    - where: a short dot in the left half, lower
+      part: a raindrop
+    - where: a short dot in the right half, upper
+      part: a raindrop
+    - where: a short dot in the right half, lower
+      part: a raindrop
+
+田:
+  object: a rice paddy seen from above, divided by raised banks into four plots
+  history: >-
+    The oldest forms drew a field divided into plots; it has hardly changed.
+  layout: >-
+    A bird's-eye view: the field fills the square, its banks are the strokes, and each of the four
+    plots is pale green with rows of young rice, or pale blue with water.
+  strokes:
+    - where: a straight line down the left side
+      part: the bank along the left edge of the field
+    - where: a line across the top, turning down at the top right to run down the right side
+      part: the banks along the top and the right edge
+    - where: a line across the middle
+      part: the bank dividing the upper plots from the lower
+    - where: a straight line down the middle
+      part: the bank dividing the left plots from the right
+    - where: a line across the bottom
+      part: the bank along the bottom edge
+
+门:
+  object: a gateway, two posts under a crossbeam
+  history: >-
+    The traditional form 門 drew the two leaves of a gate. The simplified 门 keeps the posts and the
+    beam; its dot is what is left of the left leaf, as a latch.
+  layout: >-
+    The gateway fills the square, seen straight on. Through it a pale path and a pale courtyard;
+    the posts and the beam are the ink strokes.
+  strokes:
+    - where: a short dot at the top left, slanting down to the right
+      part: an iron latch at the top of the left post
+    - where: a long straight line down the left side
+      part: the left gatepost
+    - where: a line across the top, turning down at the top right to run down the right side, ending in a small hook to the left at the bottom
+      part: the crossbeam and the right gatepost, its foot set in the ground
+竹:
+  object: two bamboo stalks with their leaves hanging down
+  history: >-
+    The oldest forms drew two stalks of bamboo with leaves drooping from them.
+  layout: >-
+    Two stalks stand side by side, the left one shorter. The leaves are bold where the strokes are
+    and pale green elsewhere; the stalks show pale joints.
+  strokes:
+    - where: a short slanting stroke at the top left, running down to the left
+      part: a leaf hanging from the top of the left stalk
+    - where: a short line across, in the upper left
+      part: a second leaf or twig on the left stalk
+    - where: a straight line down the left side, from the middle to the bottom
+      part: the left bamboo stalk
+    - where: a short slanting stroke at the top of the right half, running down to the left
+      part: a leaf hanging from the top of the right stalk
+    - where: a short line across, in the upper right
+      part: a second leaf or twig on the right stalk
+    - where: a long straight line down the right side, from the middle to the bottom, ending in a small hook to the left
+      part: the right bamboo stalk, its foot curving where it meets the ground
+
+井:
+  object: the wooden frame around the mouth of a well, seen from above
+  history: >-
+    The oldest forms drew four logs crossing to frame a well, sometimes with a bucket in the
+    middle.
+  layout: >-
+    A bird's-eye view: four logs cross like a frame, their ends sticking out past each other. In the
+    square they enclose, pale blue water, perhaps a small pale bucket. Pale stones or grass around.
+  strokes:
+    - where: a line across the upper part, from left to right
+      part: the upper log of the frame
+    - where: a longer line across the lower part, from left to right
+      part: the lower log of the frame
+    - where: a long line down the left of centre, from the top, slanting slightly out to the bottom left
+      part: the left log of the frame
+    - where: a long straight line down the right of centre, from the top to the bottom
+      part: the right log of the frame
+
+册:
+  object: an ancient book, a row of bamboo slips bound together by a cord
+  history: >-
+    Before paper, books were written on bamboo slips tied together; the oldest forms drew upright
+    slips with a cord through them.
+  layout: >-
+    The bound slips stand upright and fill the square; each vertical stroke is the edge of a slip.
+    Faint pale writing may run down the slips, never legible characters.
+  strokes:
+    - where: a long straight line down the left side
+      part: the first bamboo slip
+    - where: a line across the top of the left half, turning down to run to the bottom, ending in a small hook
+      part: the top edge of the first pair of slips and the second slip
+    - where: a long straight line down the right of centre
+      part: the third bamboo slip
+    - where: a line across the top of the right half, turning down at the right to run to the bottom, ending in a small hook
+      part: the top edge of the second pair of slips and the fourth slip
+    - where: a long line across the middle, from the left edge to the right edge
+      part: the cord that binds all the slips together
+
+羊:
+  object: the head of a ram, seen from the front, with its horns
+  history: >-
+    The oldest forms drew a sheep's head from the front: horns curving down on both sides of a long
+    face. The two short strokes at the top are the horns.
+  layout: >-
+    The head fills the square: the horns at the top, the long face down the middle to a narrow
+    chin. Pale woolly curls around the face.
+  strokes:
+    - where: a short stroke at the top left, slanting down to the right
+      part: the left horn
+    - where: a short stroke at the top right, slanting down to the left
+      part: the right horn
+    - where: a line across, below the horns
+      part: the brow, across the top of the face
+    - where: a shorter line across the middle
+      part: the eyes, as one line across the face
+    - where: a long line across, below the middle, wider than the others
+      part: the ears, sticking out to both sides
+    - where: a long straight line down the centre, from below the horns to the bottom
+      part: the long face and nose, down to the chin
+
+凸:
+  object: a stone block with a raised part bulging up from the middle of its top, like a podium
+  history: >-
+    A simple ideogram: the shape itself, a rectangle with a bulge, means "to protrude" and
+    "convex".
+  layout: >-
+    The block fills the bottom of the square, the raised part rises from its middle to the top. It
+    is pale grey stone inside the ink outline.
+  strokes:
+    - where: a short straight line from the top, left of centre, down to the middle
+      part: the left side of the raised part
+    - where: a short line across the middle, from the left edge to the first stroke
+      part: the top of the block on the left
+    - where: a straight line from the middle of the left side down to the bottom left
+      part: the left side of the block
+    - where: a line across the top of the raised part, down its right side, out across the middle and down the right side to the bottom
+      part: the top and right side of the raised part, then the top and right side of the block
+    - where: a line across the bottom
+      part: the base of the block, on the ground
