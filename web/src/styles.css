@@ -2989,7 +2989,9 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
 .writing-grid rect { fill: var(--surface); stroke: var(--rule); stroke-width: 1px; vector-effect: non-scaling-stroke; }
 .writing-grid .guide { fill: none; stroke: var(--rule); stroke-width: 1px; stroke-dasharray: 6 5; vector-effect: non-scaling-stroke; }
 .writing-outline path { fill: color-mix(in srgb, var(--ink) 11%, transparent); }
-.writing-strokes path { fill: var(--ink); animation: writing-appear .26s ease-out; }
+.writing-strokes path { fill: var(--ink); }
+/* Only the stroke your ink became: one shown being written is already there, and would blink. */
+.writing-strokes path.appear { animation: writing-appear .26s ease-out; }
 .writing-strokes path.radical { fill: var(--corpus); }
 .writing-anim {
   fill: none; stroke: var(--ink); stroke-width: 200; stroke-linecap: round; stroke-linejoin: round;
@@ -3012,7 +3014,7 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
 @keyframes writing-pulse { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(1.9); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) {
   .writing-anim { animation: none; stroke-dashoffset: 0; }
-  .writing-strokes path, .writing-pulse { animation: none; }
+  .writing-strokes path.appear, .writing-pulse { animation: none; }
 }
 
 .writing-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }

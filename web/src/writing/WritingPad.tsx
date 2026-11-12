@@ -100,8 +100,13 @@ export function WritingPad({ character, outline, written, animate = null, number
   const fadeId = useRef(0);
   const [live, setLive] = useState<{ points: InkPoint[]; simulated: boolean } | null>(null);
   const [fading, setFading] = useState<Fading[]>([]);
+  /* The stroke your ink was just accepted as, which fades in as the ink fades out. Only that one: a
+     stroke that arrives by being shown written — every stroke in Watch, one written in for you — is
+     already on screen when it turns solid, and fading it in from nothing made it blink. */
+  const [appearing, setAppearing] = useState<number | null>(null);
 
   useEffect(() => () => { if (frame.current !== null) cancelAnimationFrame(frame.current); }, []);
+  useEffect(() => setAppearing(null), [character]);
 
   const paint = useCallback(() => {
     if (frame.current !== null) return;
@@ -151,6 +156,7 @@ export function WritingPad({ character, outline, written, animate = null, number
     setLive(null);
     if (!kept || stroke.points.length < 2) return;
     const accepted = onStroke ? onStroke(stroke.points) : false;
+    if (accepted) setAppearing(written);
     const fade = { id: (fadeId.current += 1), d: inkOutline(stroke.points, stroke.type !== "pen", true), accepted };
     setFading((current) => [...current, fade]);
     window.setTimeout(() => setFading((current) => current.filter((one) => one.id !== fade.id)), accepted ? 320 : 650);
@@ -188,7 +194,8 @@ export function WritingPad({ character, outline, written, animate = null, number
       {outline && <g className="writing-outline">{strokes.map((stroke) =>
         <path key={stroke.index} d={stroke.outline} />)}</g>}
       <g className="writing-strokes">{solid.map((stroke) =>
-        <path key={stroke.index} d={stroke.outline} className={radical && stroke.inRadical ? "radical" : undefined} />)}</g>
+        <path key={stroke.index} d={stroke.outline} className={[radical && stroke.inRadical ? "radical" : "",
+          stroke.index === appearing ? "appear" : ""].filter(Boolean).join(" ") || undefined} />)}</g>
     </g>
     {animating && path && <path
       key={`${animate!.key}-${animate!.stroke}`}

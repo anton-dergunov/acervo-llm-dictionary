@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { StrokeAnswer } from "./api";
 import { WritingDialog } from "./WritingDialog";
@@ -103,6 +103,22 @@ describe("the Write sheet", () => {
     expect(said()).toBe("Stroke 2 of 3");
     draw(target, traced(kou[1]), "pen", 3);
     expect(said()).toBe("Stroke 3 of 3");
+  });
+
+  it("fades in only the stroke your ink became, so a stroke shown being written does not blink", async () => {
+    const target = await open("口", "trace");
+    draw(target, traced(kou[0]));
+    expect(document.querySelector(".writing-strokes path")?.getAttribute("class")).toBe("appear");
+    draw(target, traced(kou[1]));
+    expect([...document.querySelectorAll(".writing-strokes path")].map((one) => one.getAttribute("class")))
+      .toEqual([null, "appear"]);
+  });
+
+  it("turns a watched stroke solid without fading it in again", async () => {
+    await open("口", "watch");
+    // The first stroke is shown being written, then becomes part of the character.
+    await waitFor(() => expect(document.querySelectorAll(".writing-strokes path")).toHaveLength(1), { timeout: 3000 });
+    expect(document.querySelector(".writing-strokes path")?.getAttribute("class")).toBeNull();
   });
 
   it("takes nothing while watching", async () => {
