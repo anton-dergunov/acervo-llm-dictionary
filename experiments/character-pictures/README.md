@@ -86,13 +86,21 @@ the positions are written by hand.
 That makes 192 pictures, about $18 on Vertex.
 
 **Judging** (`review.py`). The owner judges on the tablet, **blind**. Each character's pictures are
-shuffled into letters, with the key kept in `out/key.json`. Each picture gets three questions,
-answered *yes / partly / no*:
+shuffled into letters, with the key kept in `out/key.json`. Each page shows one character, with all
+its pictures side by side so they can be compared:
 
-1. **Strokes**: do its parts lie where the character's strokes are, so that it still reads as the
-   character?
-2. **Depicts**: does it show what the character depicted?
-3. **Remember**: would it help you remember the character, by linking its strokes to that meaning?
+- **A score from 1 to 5** under each picture: how much the owner likes it, all things considered.
+  Some pictures are much prettier than others, and the questions below do not capture that.
+- **★ one best picture** per character. A full ranking of 8–10 pictures would be slow, and the order
+  among the weaker ones would mostly be noise; the star settles the top, where preference matters.
+- **Three questions** per picture, in a table below the grid, each answered *yes / partly / no*:
+  1. **Strokes**: do its parts lie where the character's strokes are, so that it still reads as the
+     character?
+  2. **Depicts**: does it show what the character depicted?
+  3. **Remember**: would it help you remember the character, by linking its strokes to that meaning?
+
+Tapping a picture opens it full screen, with arrows to step through the character's other pictures
+at that size.
 
 An "Overlay strokes" switch lays the character's exact strokes over every picture. That answers
 question 1 at a glance, and it previews a cheap option for a feature: drawing the exact strokes over
@@ -139,7 +147,8 @@ to see new pictures:
 **Afterwards**, `run.py report` unblinds the labels and writes the files below to `results/`. Then
 write up the result here and put the decision in the plan.
 - `report.md` and `summary.json`: for each model and way, the share answering yes / partly / no on
-  each question and on all three; per character, which combinations got yes on all three.
+  each question and on all three, the mean score, and how often it drew the starred picture; per
+  character, the starred picture, the combinations that got yes on all three, and the top score.
 - `labels.json`, `key.json` and `draws.jsonl`.
 
 ## Licences

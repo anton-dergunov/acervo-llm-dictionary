@@ -408,47 +408,64 @@ def draw(args: argparse.Namespace) -> None:
 
 QUESTIONS = ("strokes", "depicts", "remember")
 ANSWERS = ("yes", "partly", "no")
+# How much the owner likes the picture, 1 to 5, as a string; and one best picture per character.
+SCORES = ("1", "2", "3", "4", "5")
 
 
 def report(_: argparse.Namespace) -> None:
     key = json.loads((OUT / "key.json").read_text(encoding="utf-8"))
     labels = json.loads((OUT / "labels.json").read_text(encoding="utf-8"))
     rows: list[dict[str, Any]] = []
+    best_of: dict[str, str] = {}
     for character, letters in key.items():
-        judged = (labels.get(character) or {}).get("pictures") or {}
+        label = labels.get(character) or {}
+        judged = label.get("pictures") or {}
+        if label.get("best") in letters:
+            best_of[character] = letters[label["best"]]
         for letter, name in letters.items():
             answers = judged.get(letter) or {}
             if not all(answers.get(q) in ANSWERS for q in QUESTIONS):
                 continue
             model, way, take = name.split("/")
             rows.append({"character": character, "model": model, "way": way, "take": int(take),
+                         "name": name, "score": int(answers["score"]) if answers.get("score") else None,
                          **{q: answers[q] for q in QUESTIONS}})
     if not rows:
         sys.exit("Nothing judged yet.")
     groups: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         groups[(row["model"], row["way"])].append(row)
+    starred = Counter("/".join(name.split("/")[:2]) for name in best_of.values())
 
     lines = ["# Character pictures — results", "",
-             f"{len(rows)} pictures judged, of {sum(len(v) for v in key.values())} drawn. "
-             "Each answer is the share of that model's pictures, asked that way.", "",
+             f"{len(rows)} pictures judged, of {sum(len(v) for v in key.values())} planned. "
+             "Each answer is the share of that model's pictures, asked that way; the score is the "
+             "owner's 1–5 liking, and ★ counts the characters where that model and way drew the "
+             "picture starred best. Klein drew a sample of 8 characters, one take each, so its ★ "
+             "count is out of fewer chances.", "",
              "| Model | Way | n | Strokes yes / partly | Depicts yes / partly | Remember yes / partly "
-             "| All three yes |",
-             "| --- | --- | --: | --: | --: | --: | --: |"]
+             "| All three yes | Mean score | ★ best |",
+             "| --- | --- | --: | --: | --: | --: | --: | --: | --: |"]
     summary = {}
     for (model, way), group in sorted(groups.items()):
         n = len(group)
         counts = {q: Counter(row[q] for row in group) for q in QUESTIONS}
         all_yes = sum(all(row[q] == "yes" for q in QUESTIONS) for row in group)
-        summary[f"{model}/{way}"] = {"n": n, "allYes": all_yes,
+        scores = [row["score"] for row in group if row["score"]]
+        mean = sum(scores) / len(scores) if scores else None
+        summary[f"{model}/{way}"] = {"n": n, "allYes": all_yes, "meanScore": mean,
+                                     "scores": dict(Counter(scores)),
+                                     "best": starred[f"{model}/{way}"],
                                      **{q: dict(counts[q]) for q in QUESTIONS}}
         cells = " | ".join(f"{counts[q]['yes'] / n:.0%} / {counts[q]['partly'] / n:.0%}"
                            for q in QUESTIONS)
-        lines.append(f"| {model} | {way} | {n} | {cells} | {all_yes / n:.0%} |")
+        lines.append(f"| {model} | {way} | {n} | {cells} | {all_yes / n:.0%} | "
+                     f"{f'{mean:.1f}' if mean else '—'} | {starred[f'{model}/{way}']} |")
 
     lines += ["", "## Per character", "",
-              "Which model and way drew at least one picture judged yes on all three questions.", "",
-              "| Character | Yes on all three | Best answers seen |", "| --- | --- | --- |"]
+              "The picture starred best, which model and way drew a picture judged yes on all three "
+              "questions, and the highest score seen.", "",
+              "| Character | ★ best | Yes on all three | Top score |", "| --- | --- | --- | --: |"]
     by_character: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         by_character[row["character"]].append(row)
@@ -457,9 +474,10 @@ def report(_: argparse.Namespace) -> None:
         group = by_character[character]
         winners = sorted({f"{row['model']} {row['way']}" for row in group
                           if all(row[q] == "yes" for q in QUESTIONS)})
-        best = max(group, key=lambda row: sum(2 - ANSWERS.index(row[q]) for q in QUESTIONS))
-        lines.append(f"| {character} | {', '.join(winners) or '—'} | "
-                     + " · ".join(f"{q} {best[q]}" for q in QUESTIONS) + " |")
+        best = best_of.get(character, "")
+        top = max((row["score"] for row in group if row["score"]), default=None)
+        lines.append(f"| {character} | {best.replace('/', ' ') or '—'} | {', '.join(winners) or '—'} "
+                     f"| {top or '—'} |")
     notes = {c: (labels.get(c) or {}).get("note") for c in key if (labels.get(c) or {}).get("note")}
     if notes:
         lines += ["", "## Notes", ""] + [f"- **{c}**: {note}" for c, note in notes.items()]
@@ -480,7 +498,7 @@ def _copy_draws() -> None:
     if not source.exists():
         return
     text = source.read_text(encoding="utf-8")
-    if re.search(r"/Users/|/home/|@|https?://", text):
+    if re.search(r"/Users/|/home/|[\w.+-]+@[\w-]+\.\w|https?://|projects/(?!…)", text):
         print("draws.jsonl names a path, an address or a URL; not copied — look at it first")
         return
     (RESULTS / "draws.jsonl").write_text(text, encoding="utf-8")
