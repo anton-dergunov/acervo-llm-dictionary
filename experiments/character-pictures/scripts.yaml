@@ -2,13 +2,17 @@
 # of that object each stroke becomes. This is what the prompts are made of; read the README first.
 #
 # - `object` is what the character depicted, from Make Me a Hanzi's etymology hint
-#   (results/characters.json carries the hint itself) and the character's oldest forms, never a
-#   fresh mnemonic.
+#   (results/round-N/characters.json carries the hint itself) and the character's oldest forms,
+#   never a fresh mnemonic.
 # - `strokes` are in the stroke order of the pinned stroke data, one entry per stroke; `prepare`
 #   refuses a character whose count differs. `where` is as the viewer sees the square: left is
 #   the viewer's left. `part` is what that stroke becomes.
 # - `history` says how the modern form drifted from the drawing, where that helps the picture.
 # - `layout` says how the object fills the square the way the character fills it.
+# - `exact` (optional) lists details of the character's shape that a picture must keep: which
+#   strokes touch, cross or stand apart, and which end in a hook or a plain point. They are read
+#   from the pinned stroke outlines, not from memory, because round 1's pictures most often broke
+#   exactly these.
 
 人:
   object: a person standing, seen from the front, legs apart
@@ -122,6 +126,10 @@
   layout: >-
     The tree fills the square. A pale leafy crown surrounds the top of the trunk and the branches;
     the roots spread into pale earth at the bottom.
+  exact:
+    - The trunk is one straight vertical line that ends in a plain point at the bottom, with no hook.
+    - The trunk crosses the line across a little above the middle; the line across is straight and has nothing growing from it.
+    - The two lower sweeps both start where the trunk crosses the line across, touching the trunk, and spread apart downwards without crossing.
   strokes:
     - where: a line across the upper part, from left to right
       part: the main branches, spreading out to both sides
@@ -139,6 +147,12 @@
   layout: >-
     The left tree is a little narrower, as its character is; its right root is short so that it
     does not reach the other tree. Pale leafy crowns surround both treetops.
+  exact:
+    - Both trunks are straight vertical lines ending in a plain point at the bottom, with no hook.
+    - The left tree's line across is short and rises a little to the right; it stops before the right tree.
+    - The left tree's last stroke is a short dot touching its trunk just below the crossing, not a long sweep.
+    - The right tree's two lower sweeps both start where its trunk crosses its line across.
+    - The two trees do not touch each other.
   strokes:
     - where: a line across the upper part of the left half
       part: the left tree's branches
@@ -164,6 +178,11 @@
   layout: >-
     One tree in the upper half, centred; two trees side by side in the lower half. The upper tree
     stands further back, higher on a pale slope. Pale leafy crowns surround the treetops.
+  exact:
+    - All three trunks are straight vertical lines ending in a plain point at the bottom, with no hook.
+    - In every tree, the strokes below the line across start where the trunk crosses it, touching the trunk.
+    - The lower left tree's last stroke is a short dot touching its trunk, not a long sweep.
+    - The three trees do not touch one another.
   strokes:
     - where: a line across the upper part of the top half
       part: the top tree's branches
@@ -232,6 +251,10 @@
     A tall crescent fills the square from top to bottom, its back on the left, its two horns
     pointing right at the top and bottom. Inside it is a pale silver-yellow; around it a pale night
     sky with a few faint stars.
+  exact:
+    - The line across the top starts at the top of the long left stroke, touching it.
+    - Both short lines inside touch the long left stroke and stop just short of the right side; they never float free of the left stroke.
+    - The right side runs straight down and ends in a small hook to the left; the left stroke curves out to the bottom left.
   strokes:
     - where: a long line down the left side, curving slightly out to the bottom left at its foot
       part: the outer curve, the back, of the crescent
@@ -249,6 +272,10 @@
   layout: >-
     The sun is small and narrow in the left part, a little higher up; the tall crescent moon fills
     the right part. A pale sky behind them, warm on the left and cool on the right.
+  exact:
+    - In the sun, the top line starts at the top of the left side, touching it; the short middle line touches the left side and stops short of the right side; the bottom line touches both sides and closes the box.
+    - In the moon, both short lines inside touch the long left stroke and stop just short of the right side; they never float free of the left stroke.
+    - The sun part is shorter than the moon part and sits higher; the two parts do not touch.
   strokes:
     - where: a straight line down the left side of the left part, upper half
       part: the left rim of the sun
@@ -351,8 +378,13 @@
   history: >-
     The oldest forms drew two stalks of bamboo with leaves drooping from them.
   layout: >-
-    Two stalks stand side by side, the left one shorter. The leaves are bold where the strokes are
-    and pale green elsewhere; the stalks show pale joints.
+    Two stalks stand side by side, the right one a little higher up. The leaves are bold where the
+    strokes are and pale green elsewhere; the stalks show pale joints.
+  exact:
+    - The right half sits a little higher than the left; its line across is higher than the left one, and the left stalk reaches a little lower at the bottom than the right one.
+    - In each half, the slanting stroke at the top touches the line across, and the stalk hangs from the line across, touching it.
+    - The left stalk is straight and ends in a plain point; the right stalk ends in a small hook to the left.
+    - The two halves do not touch.
   strokes:
     - where: a short slanting stroke at the top left, running down to the left
       part: a leaf hanging from the top of the left stalk
@@ -444,5 +476,486 @@
       part: the left side of the block
     - where: a line across the top of the raised part, down its right side, out across the middle and down the right side to the bottom
       part: the top and right side of the raised part, then the top and right side of the block
+    - where: a line across the bottom
+      part: the base of the block, on the ground
+
+# ── Round 2: twenty new characters ──────────────────────────────────────────
+
+子:
+  object: a baby wrapped in swaddling cloth, its arms stretched out wide
+  history: >-
+    The oldest forms drew a baby with a big head and outstretched arms, its legs bundled in a
+    wrap; the modern form keeps the head on top, the arms across and the wrapped body.
+  layout: >-
+    The baby fills the square: the head at the top, the arms across the middle, the wrapped body
+    down to the bottom. The face is pale inside the head; the wrap is pale cloth around the body.
+  exact:
+    - The first stroke runs across the top and turns back down to the left, ending where the long vertical begins, touching it.
+    - The long vertical runs down the centre and ends at the bottom in a hook to the left.
+    - The line across crosses the vertical a little below the middle and is the widest stroke.
+  strokes:
+    - where: a line across the top, turning back down to the left to end at the centre
+      part: the baby's head, its top and right side, closing at the chin
+    - where: a long line down the centre from below the top, ending at the bottom in a hook to the left
+      part: the body bundled in its wrap, the hook its bundled feet
+    - where: a long line across the middle, from near the left edge to near the right edge
+      part: both arms, stretched out wide
+
+女:
+  object: a woman kneeling, seen from the side, her arms crossed in front of her
+  history: >-
+    The oldest forms drew a woman kneeling in profile with her arms crossed in front of her; the
+    modern form turned her body and crossed arms into three crossing strokes.
+  layout: >-
+    The woman fills the square, her head at the top centre where the first stroke begins and her
+    knees at the bottom. Her face, hair and dress are pale.
+  exact:
+    - The first stroke goes down a little to the left, then turns at a sharp angle and sweeps down to the bottom right.
+    - The three strokes cross one another below the middle; the line across is the widest and reaches past both other strokes.
+  strokes:
+    - where: a stroke from the top centre down a little to the left, turning sharply at the lower left to sweep down to the bottom right
+      part: her head and back, running down to her hip, then her thigh folded forward to the knee
+    - where: a sweep from the right of the middle down to the bottom left
+      part: one arm, reaching down across her body
+    - where: a long line across, just below the middle, from the left edge to the right edge
+      part: her other arm, held across in front of her
+
+耳:
+  object: a human ear, seen from the side
+  history: >-
+    The oldest forms drew an ear with its curved rim; the modern form squared the rim into lines
+    and kept two folds inside it.
+  layout: >-
+    The ear fills the square, as if seen on the side of a head: rim at the top, lobe at the bottom.
+    Skin is pale, with a hint of pale hair at the edges.
+  exact:
+    - The line across the top touches the tops of both verticals.
+    - The two short lines inside touch the left vertical and stop short of the right one.
+    - The right vertical is much longer than the left one and runs to the bottom of the square.
+    - The last stroke rises gently to the right, touching the foot of the left vertical, and crosses the right vertical.
+  strokes:
+    - where: a line across the top
+      part: the top of the ear's rim
+    - where: a short straight line down the left side, from the top to below the middle
+      part: the front edge of the ear, where it meets the cheek
+    - where: a long straight line down the right of centre, from the top to the bottom
+      part: the back of the ear's rim, running down into the hanging lobe
+    - where: a short line across, in the upper middle, from the left vertical
+      part: the upper fold inside the ear
+    - where: a short line across, in the middle, from the left vertical
+      part: the lower fold inside the ear
+    - where: a long line rising gently from the lower left to the right, below the middle
+      part: the bottom of the ear's bowl, curving round to the back
+
+手:
+  object: an open hand, fingers spread, seen from the palm side with the wrist below
+  history: >-
+    The oldest forms drew a hand with its five fingers spread; the modern form keeps the fingers as
+    lines across and one line down through the palm.
+  layout: >-
+    The hand fills the square, fingers spread and pointing up, the wrist at the bottom. The palm
+    and the fingers that are not strokes are pale skin.
+  exact:
+    - The first stroke is short and slants down to the left across the top; the vertical starts from it, touching it.
+    - The vertical crosses both lines across and ends at the bottom with a hook to the left.
+    - The lowest line across is the widest; the middle one is shorter.
+  strokes:
+    - where: a short slanting stroke across the top, running down from right to left
+      part: the fingertips of the top fingers, bending over
+    - where: a line across, in the upper middle
+      part: fingers spreading out to both sides
+    - where: a long line across, below the middle
+      part: the thumb and little finger, spread wide
+    - where: a long line down the centre from the top to the bottom, ending in a hook to the left
+      part: the middle finger running down through the palm to the wrist, the hook where the wrist turns
+
+心:
+  object: a human heart, drawn simply, with its vessels rising from the top
+  history: >-
+    The oldest forms drew the heart as an organ with its chambers; the modern form kept a curved
+    body and three separate dots.
+  layout: >-
+    The heart fills the middle of the square, a soft pale red body inside the curve; the vessels
+    rise above it.
+  exact:
+    - The four strokes never touch one another; the three dots stand apart from the curve.
+    - The middle dot sits highest, above the curve; the right dot is higher than the left one.
+    - The curve runs down and along the bottom and ends in a hook pointing up and to the left.
+  strokes:
+    - where: a short stroke on the left, from the middle down a little to the left
+      part: the left edge of the heart
+    - where: a long curve from left of centre down to the bottom, along the bottom to the right and up, ending in a hook up to the left
+      part: the rounded lower body of the heart, its tip turning in at the right
+    - where: a short dot near the top centre, slanting down to the right
+      part: a vessel rising from the top of the heart
+    - where: a short dot at the upper right, slanting down to the right
+      part: a second vessel at the heart's upper right
+
+弓:
+  object: a hunting bow, standing upright, its wooden limbs bending in and out
+  history: >-
+    The oldest forms drew a bow in profile, sometimes with its string; the modern form kept the
+    bent wood and folded its curves into corners.
+  layout: >-
+    The bow stands tall in the square, its tips at the top and at the bottom. The bowstring is a
+    thin pale line; the wood is pale brown where it is not a stroke.
+  exact:
+    - The three strokes join end to end into one zigzag line, with sharp corners at every turn.
+    - The last stroke ends at the bottom with a hook to the left.
+  strokes:
+    - where: a short line across the top, turning down at the right
+      part: the bow's upper tip, curving back
+    - where: a line across the upper middle, from left to right, meeting the end of the first stroke
+      part: the upper limb of the bow, bending back towards the grip
+    - where: a line down the left from above the middle, across to the right below the middle, then down the right to the bottom, ending in a hook to the left
+      part: the grip, then the long lower limb curving out and down to the lower tip
+
+伞:
+  object: an open umbrella seen from the side, its ribs under the canopy and its shaft down the middle
+  history: >-
+    The simplified form keeps the outline of the traditional 傘: a canopy over its ribs and its
+    shaft.
+  layout: >-
+    The canopy spreads over the top half of the square; the shaft runs down the centre to the
+    bottom. The canopy cloth is a pale colour.
+  exact:
+    - The two canopy strokes meet at the top centre and do not cross.
+    - The two short strokes under the canopy touch nothing; the left one slants down to the right, the right one down to the left.
+    - The shaft starts below the canopy without touching it, crosses the low line across and runs to the bottom.
+  strokes:
+    - where: a long sweep from the top centre down and out to the left, ending below the middle
+      part: the left half of the canopy
+    - where: a long sweep from the top centre down and out to the right
+      part: the right half of the canopy
+    - where: a short stroke under the left of the canopy, slanting down to the right
+      part: a rib under the canopy on the left
+    - where: a short stroke under the right of the canopy, slanting down to the left
+      part: a rib under the canopy on the right
+    - where: a line across, below the middle
+      part: the crossbar that holds the frame open
+    - where: a long straight line down the centre, from under the canopy to the bottom
+      part: the shaft and the handle
+
+网:
+  object: a fishing net held open in its frame, its cords crossing
+  history: >-
+    The oldest forms drew a net with crossed cords; the simplified form keeps a frame and two
+    crossings (the traditional 網 added more).
+  layout: >-
+    The frame fills the square: its top bar along the top, its poles down both sides. The net hangs
+    between them; its finer mesh is thin pale lines, and a pale fish may be caught in it.
+  exact:
+    - The left pole and the top bar meet at the top left corner.
+    - The two crossings inside touch neither the frame nor each other.
+    - The right pole runs down to the bottom and ends with a small hook to the left.
+  strokes:
+    - where: a straight line down the left side, from the top to the bottom
+      part: the left pole of the frame
+    - where: a line across the top, turning down at the top right to run down the right side, ending in a small hook to the left
+      part: the top bar and the right pole of the frame
+    - where: a sweep inside the left half, from the top down to the lower left
+      part: a cord of the net, slanting one way
+    - where: a stroke inside the left half, from the upper left down to the lower right, crossing the previous one
+      part: a cord of the net, crossing the first
+    - where: a sweep inside the right half, from the top down to the lower left
+      part: a cord of the net, slanting one way
+    - where: a stroke inside the right half, from the upper left down to the lower right, crossing the previous one
+      part: a cord of the net, crossing the third
+
+禾:
+  object: a stalk of grain, its heavy ear drooping over at the top
+  history: >-
+    The oldest forms drew a grain plant with its ear drooping at the top; the modern form is 木, a
+    plant, with that drooping ear on top.
+  layout: >-
+    The plant fills the square: the drooping ear at the top, the leaves across the middle, the
+    roots in pale earth at the bottom. The grain is pale gold.
+  exact:
+    - The stalk is a straight vertical line ending in a plain point at the bottom, with no hook.
+    - The first stroke sits on top of the stalk and slants down to the left, touching it.
+    - The two lower sweeps both start where the stalk crosses the line across, touching the stalk.
+  strokes:
+    - where: a short slanting stroke across the top, running down from right to left
+      part: the ear of grain, drooping over to the left
+    - where: a line across, a little above the middle
+      part: the leaves, spreading to both sides
+    - where: a long straight line down the middle, from near the top to the bottom
+      part: the stalk
+    - where: a sweep from the centre of the stalk down and out to the bottom left
+      part: the root spreading out to the left
+    - where: a sweep from the centre of the stalk down and out to the bottom right
+      part: the root spreading out to the right
+
+米:
+  object: a stalk of rice with its grains, branches of grain spreading from it
+  history: >-
+    The oldest forms drew grains of rice as dots above and below a line; the modern form joined the
+    lower grains into two sweeps around a stalk.
+  layout: >-
+    The stalk runs down the centre of the square; its branches of grain spread out, with small
+    pale grains around them.
+  exact:
+    - The stalk is a straight vertical line ending in a plain point, with no hook, and it crosses the line across.
+    - The two short strokes at the top touch nothing; the left one slants down to the right and the right one down to the left, both pointing at the centre.
+    - The two lower sweeps both start where the stalk crosses the line across.
+  strokes:
+    - where: a short stroke at the upper left, slanting down to the right
+      part: a grain of rice, upper left
+    - where: a short stroke at the upper right, slanting down to the left
+      part: a grain of rice, upper right
+    - where: a line across, a little below the middle
+      part: a branch of the rice, held out to both sides
+    - where: a long straight line down the middle, from the top to the bottom
+      part: the rice stalk
+    - where: a sweep from the centre of the stalk down and out to the bottom left
+      part: a branch of grains drooping to the bottom left
+    - where: a sweep from the centre of the stalk down and out to the bottom right
+      part: a branch of grains drooping to the bottom right
+
+爪:
+  object: a bird's foot reaching down, its claws spread to grasp
+  history: >-
+    The oldest forms drew a hand or claw reaching down from above to grasp; the modern form keeps
+    the claws hanging below.
+  layout: >-
+    The foot reaches down from the top of the square, the claws spreading to the bottom. Its scaly
+    skin is pale; the claws grasp nothing, so no branch competes with the strokes.
+  exact:
+    - The first stroke lies across the top, slanting down to the left; the left claw and the middle claw hang from it, touching it.
+    - The middle claw is straight, with no hook.
+    - The right sweep starts on the middle claw, below the top stroke, touching it.
+  strokes:
+    - where: a short stroke across the top, slanting down from right to left
+      part: the top of the foot, where the claws join
+    - where: a long sweep from the left end of the first stroke down and out to the bottom left
+      part: the left claw
+    - where: a long straight line down the middle, from the first stroke to the bottom
+      part: the middle claw
+    - where: a long sweep from the middle claw down and out to the bottom right
+      part: the right claw
+
+舟:
+  object: a small wooden boat seen from above, its prow at the top, an oar laid across it
+  history: >-
+    The oldest forms drew a boat seen from above with planks across it; the modern form keeps the
+    hull, two short planks as dots and one long crossbeam.
+  layout: >-
+    The boat fills the square from top to bottom, prow at the top. Pale water ripples around it;
+    its planks are pale wood.
+  exact:
+    - The short top stroke touches the tops of both sides of the hull.
+    - The long line across crosses both sides of the hull and reaches beyond them on both sides.
+    - The two dots touch nothing; one is above the long line and one below it.
+    - The left side curves out to the bottom left; the right side runs straight down and ends in a hook to the left.
+  strokes:
+    - where: a short slanting stroke at the top centre, running down to the left
+      part: the pointed prow
+    - where: a long line down the left side, curving out to the bottom left
+      part: the left side of the hull, out to the stern
+    - where: a line across the top, turning down to run down the right side, ending in a hook to the left at the bottom
+      part: the right side of the hull, its stern turning in
+    - where: a short dot inside the hull, above the middle
+      part: a seat plank near the prow
+    - where: a long line across the middle, wider than the boat
+      part: an oar laid across the boat, sticking out on both sides
+    - where: a short dot inside the hull, below the middle
+      part: a seat plank near the stern
+
+立:
+  object: a person standing upright on the ground, facing you, arms held out
+  history: >-
+    The oldest forms drew 大, a person with arms and legs apart, standing on a line for the ground;
+    the modern form shrank the person to a dot for the head, a line for the arms and two short
+    legs.
+  layout: >-
+    The person stands in the middle of the square on the ground at the bottom: the head at the top,
+    the arms across the middle. The body between them is pale.
+  exact:
+    - The dot on top and the line across touch nothing.
+    - The two legs slant towards each other; the left leg stops short of the ground, and only the right leg touches it.
+    - The ground line is the widest stroke.
+  strokes:
+    - where: a short dot at the top centre, slanting down to the right
+      part: the head
+    - where: a line across, a little above the middle
+      part: the arms, held out to both sides
+    - where: a short stroke at the lower left, slanting down to the right
+      part: the left leg
+    - where: a short stroke at the lower right, slanting down to the left to the bottom line
+      part: the right leg, standing on the ground
+    - where: a long line across the bottom
+      part: the ground
+
+川:
+  object: a river flowing down between its two banks
+  history: >-
+    The oldest forms drew water running between two banks; the modern form straightened them into
+    three lines.
+  layout: >-
+    The river flows from the top of the square to the bottom. The water between the banks is pale
+    blue; beyond the banks is pale grass.
+  exact:
+    - The three strokes stand apart and never touch.
+    - The middle one is the shortest; the right one is the longest, starting higher than the others and reaching the bottom; the left one curves out to the bottom left.
+  strokes:
+    - where: a long line down the left side, curving out to the bottom left
+      part: the left bank, bending away at the bottom
+    - where: a short straight line down the middle
+      part: the water flowing down the middle of the river
+    - where: a long straight line down the right side, from the top to the bottom
+      part: the right bank
+
+旦:
+  object: the sun rising above the horizon at dawn
+  history: >-
+    The sun 日 over a line for the horizon: daybreak.
+  layout: >-
+    The sun sits in the middle of the square, above the horizon near the bottom. Pale dawn colours
+    fill the sky; pale earth or sea lies below the horizon.
+  exact:
+    - The top line of the sun starts at the top of its left side, touching it; the middle line touches the left side and stops short of the right side; the sun's bottom line touches both sides.
+    - The horizon is the widest stroke and does not touch the sun; a gap of sky lies between them.
+  strokes:
+    - where: a straight line down the left of the upper part
+      part: the left rim of the sun
+    - where: a line across the top of the upper part, turning down to run down its right side
+      part: the top and the right rim of the sun
+    - where: a short line across the middle of the sun
+      part: a band of light across the sun's face
+    - where: a short line across, below it
+      part: the bottom rim of the sun
+    - where: a long line across the bottom, from the left edge to the right edge
+      part: the horizon
+
+本:
+  object: a tree with a mark across the foot of its trunk, pointing at its roots
+  history: >-
+    A simple ideogram: 木, a tree, with a mark at its foot pointing at the root, and so "root" and
+    "origin".
+  layout: >-
+    The tree fills the square like 木. The roots are the point: they spread into pale earth at the
+    bottom, and the mark lies across the trunk where they begin.
+  exact:
+    - The trunk is one straight vertical line ending in a plain point at the bottom, with no hook.
+    - The two sweeps both start where the trunk crosses the upper line across.
+    - The short lower line crosses the trunk near its foot, between the two sweeps, and touches neither sweep.
+  strokes:
+    - where: a line across the upper part, from left to right
+      part: the branches, spreading out to both sides
+    - where: a long straight line down the middle, from the top to the bottom
+      part: the trunk
+    - where: a sweep from the centre of the trunk down and out to the bottom left
+      part: a root spreading out to the left
+    - where: a sweep from the centre of the trunk down and out to the bottom right
+      part: a root spreading out to the right
+    - where: a short line across the trunk near the bottom
+      part: the mark at the foot of the trunk, where the roots begin
+
+果:
+  object: a tree with a big round fruit at its top
+  history: >-
+    The oldest forms drew a tree with round fruit on it; the fruit was squared into 田, which here
+    is not a field.
+  layout: >-
+    The fruit fills the top half, a round pale-coloured fruit inside its box; the tree's branches
+    run across below it and its roots spread at the bottom. A few pale leaves.
+  exact:
+    - The trunk is one straight vertical line from the top of the fruit's box, through it, to the bottom, ending in a plain point with no hook.
+    - The fruit's middle line crosses the trunk and stops short of both sides of the box; the box's bottom line touches both sides and the trunk.
+    - The two lower sweeps start where the trunk crosses the long line across.
+  strokes:
+    - where: a short line down the left of the upper half
+      part: the left side of the fruit
+    - where: a line across the top of the upper half, turning down to run down its right side
+      part: the top and the right side of the fruit
+    - where: a short line across the middle of the upper half
+      part: a line across the fruit, between its segments
+    - where: a short line across the bottom of the upper half
+      part: the bottom of the fruit
+    - where: a long line across, just below the middle
+      part: the tree's branches
+    - where: a long straight line down the centre, from the top of the fruit to the bottom
+      part: the trunk, holding the fruit
+    - where: a sweep from the trunk down and out to the bottom left
+      part: a root spreading out to the left
+    - where: a sweep from the trunk down and out to the bottom right
+      part: a root spreading out to the right
+
+众:
+  object: three people, one standing behind and two in front, a crowd
+  history: >-
+    Three 人, people: many people, a crowd.
+  layout: >-
+    One person stands at the top centre, behind; two stand side by side in front, in the lower
+    half. Each small head sits just above the top of that person's first stroke; faces and clothes
+    are pale.
+  exact:
+    - The three people do not touch one another.
+    - In each person, the second stroke starts partway down the first, not at its top.
+    - The lower left person's second stroke is short, ending like a dot rather than a long sweep.
+  strokes:
+    - where: a long sweep from the top centre down and out to the left, ending above the middle
+      part: the body and left leg of the person at the back
+    - where: a sweep from partway down the first stroke out to the right
+      part: that person's right leg
+    - where: a sweep from the middle left down to the bottom left
+      part: the body and left leg of the person in front on the left
+    - where: a short stroke from the lower part of the previous stroke, slanting down to the right
+      part: that person's right leg, short
+    - where: a long sweep from right of centre, a little below the middle, down to the bottom
+      part: the body and left leg of the person in front on the right
+    - where: a sweep from partway down the previous stroke out to the bottom right
+      part: that person's right leg
+
+炎:
+  object: two fires, one above the other, their flames leaping up
+  history: >-
+    Two 火, fires, one over the other: blazing flames, heat.
+  layout: >-
+    The upper fire burns in the top half and is a little smaller; the bigger lower fire burns in
+    the bottom half. The flames are pale orange and red washes.
+  exact:
+    - The upper fire's two main strokes do not touch; its right one is a short stroke beside the left sweep, not a long sweep.
+    - In the lower fire, the right sweep starts on the left sweep, touching it.
+    - The four short sparks touch nothing, and the two fires do not touch each other.
+  strokes:
+    - where: a short stroke at the upper left, slanting down to the right
+      part: a spark leaping off to the left of the upper fire
+    - where: a short stroke at the upper right, slanting down to the left
+      part: a spark leaping off to the right of the upper fire
+    - where: a sweep from the top centre down to the left, ending a little above the middle
+      part: the left edge of the upper flame
+    - where: a short stroke right of centre, in the upper half, slanting down to the right
+      part: the right edge of the upper flame
+    - where: a short stroke at the left, below the middle, slanting down to the right
+      part: a spark leaping off to the left of the lower fire
+    - where: a short stroke at the right, just below the middle, slanting down to the left
+      part: a spark leaping off to the right of the lower fire
+    - where: a long sweep from the centre down and out to the bottom left
+      part: the left edge of the big lower flame
+    - where: a long sweep from the lower part of the previous stroke down and out to the bottom right
+      part: the right edge of the lower flame, flaring at its base
+
+凹:
+  object: a stone block with a hollow cut down into the middle of its top, like a trough
+  history: >-
+    A simple ideogram and the pair of 凸: the shape itself, a rectangle with a hollow, means
+    "concave" and "hollow".
+  layout: >-
+    The block fills the square up from the bottom; the hollow cut into its top reaches down to
+    about the middle. It is pale grey stone; the hollow may hold a little pale water.
+  exact:
+    - The hollow is open at the top; nothing closes it.
+    - The floor of the hollow touches the foot of the hollow's right wall, and the top of that wall touches the start of the top right line.
+    - The left side and the right side both reach the base line and touch it.
+  strokes:
+    - where: a straight line down the left side, from near the top to the bottom
+      part: the left side of the block
+    - where: a short line across the top left, turning down into the middle, then across to the right as the floor of the hollow
+      part: the top of the left part, the hollow's left wall and its floor
+    - where: a short line down from the top, right of centre, to the floor of the hollow
+      part: the hollow's right wall
+    - where: a short line across the top right, turning down to run down the right side to the bottom
+      part: the top of the right part and the right side of the block
     - where: a line across the bottom
       part: the base of the block, on the ground

@@ -1,16 +1,16 @@
 """The blind scoring page: one character at a time, all its pictures side by side.
 
-Each picture gets a score from 1 to 5 and three yes / partly / no questions; one picture per
+Each picture gets a score from 1 to 5 and two yes / partly / no questions; one picture per
 character can be starred as the best.
 
     .venv/bin/python experiments/character-pictures/review.py --host "$(tailscale ip -4)"
 
 On first start every character's planned pictures — each model, way and take — are shuffled into
-letters with a fixed seed and written to `out/key.json`; the page is never told which letter is
-which, and a picture's URL is `/img/<character index>/<letter>`, so nothing on screen gives it
-away. A picture appears once it is drawn, so the page can be opened while `run.py draw` is still
-running; reload to see new ones. Answers go to `out/labels.json` on every tap, so closing the tab
-loses nothing. `run.py report` unblinds them.
+letters with a fixed seed and written to the round's `key.json` (`out/round-N/`); the page is never
+told which letter is which, and a picture's URL is `/img/<character index>/<letter>`, so nothing on
+screen gives it away. A picture appears once it is drawn, so the page can be opened while
+`run.py draw` is still running; reload to see new ones. Answers go to the round's `labels.json` on
+every tap, so closing the tab loses nothing. `run.py report` unblinds them.
 """
 
 from __future__ import annotations
@@ -289,7 +289,7 @@ textarea { width: 100%; min-height: 50px; font: inherit; border: 1px solid var(-
     <button data-step="-1">‹</button><button data-step="1">›</button><button data-close>✕</button></div>
   <div class="frame"><img alt=""></div></div>
 <script>
-const QUESTIONS = [["strokes", "Strokes"], ["depicts", "Depicts"], ["remember", "Remember"]];
+const QUESTIONS = [["strokes", "Strokes"], ["depicts", "Depicts"]];
 const ANSWERS = ["yes", "partly", "no"];
 const SCORES = ["1", "2", "3", "4", "5"];
 const SVGNS = "http://www.w3.org/2000/svg";
@@ -453,12 +453,11 @@ function render() {
     for (const [l, t] of Object.entries(tiles)) t.badge.className = "badge" + (complete(c, l) ? " done" : "");
   }
 
-  // The three questions, one row a picture.
-  page.append($("h3", {}, "Three questions per picture"),
+  // The two questions, one row a picture.
+  page.append($("h3", {}, "Two questions per picture"),
     $("ol", { class: "legend" },
       $("li", {}, `Strokes — do its parts lie where ${c}'s strokes are, so it still reads as ${c}?`),
-      $("li", {}, `Depicts — does it show what ${c} depicted: ${item.object}?`),
-      $("li", {}, `Remember — would it help you remember ${c}, linking its strokes to that meaning?`)));
+      $("li", {}, `Depicts — does it show what ${c} depicted: ${item.object}?`)));
   const table = $("table", {}, $("tr", {}, $("th", {}), $("th", {}),
     ...QUESTIONS.map(([, name]) => $("th", {}, name))));
   item.letters.forEach((letter, i) => {

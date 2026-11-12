@@ -14,6 +14,10 @@ character's strokes, each in its own colour; `review.py` is where the owner judg
 
 `draw` resumes: a picture already on disk is not drawn again, so after any stop the same command
 carries on. Nothing here writes to the server.
+
+This is round 2. Round 1 (22 characters, three models, numbered strokes, a coloured reference) was
+drawn and judged with this script as it stood at commit 8bdb68f; its results are in
+`results/round-1/`, and the README says what changed since.
 """
 
 from __future__ import annotations
@@ -38,15 +42,18 @@ import yaml
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
-OUT = HERE / "out"
-RESULTS = HERE / "results"
+# Each round is drawn and judged on its own; the fetched dictionary in out/cache/ is shared.
+ROUND = 2
+OUT = HERE / "out" / f"round-{ROUND}"
+RESULTS = HERE / "results" / f"round-{ROUND}"
 PROMPTS = HERE / "prompts"
 STROKES = REPO / "vendor" / "strokes"
-DICTIONARY = OUT / "cache" / "dictionary.txt"
+DICTIONARY = HERE / "out" / "cache" / "dictionary.txt"
 
-# The characters, in the order the page shows them. Each must be pictographic or a simple
-# ideogram by Make Me a Hanzi's own etymology; `prepare` drops one the source disagrees with.
-CHARACTERS = "人大从休山水木林森口日月明火雨田门竹井册羊凸"
+# The characters, in the order the page shows them. Each must be pictographic or ideographic by
+# Make Me a Hanzi's own etymology; `prepare` drops one the source disagrees with. Round 2 redraws
+# the five that round 1 left without a correct picture, then draws twenty new ones.
+CHARACTERS = "木林森月明" + "子女耳手心弓伞网禾米爪舟立川旦本果众炎凹"
 KINDS = ("pictographic", "ideographic")
 WAYS = ("text", "edit")
 
@@ -64,13 +71,11 @@ class Model:
 MODELS = (
     Model("nano-banana-2", "vertex", "gemini-3.1-flash-image", takes=2, usd=0.067),
     Model("nano-banana-pro", "vertex", "gemini-3-pro-image", takes=2, usd=0.134),
-    # A sample only: Cloudflare's free allowance is about 95 pictures a day at 1024 px, and an
-    # input picture costs more. The simplest characters, both ways, one take.
-    Model("flux-2-klein", "cloudflare", "@cf/black-forest-labs/flux-2-klein-4b", takes=1,
-          characters="人山木日月口田林"),
+    # FLUX.2 klein drew a sample in round 1 and was dropped: mean score 2.0, 9 of 16 scored 1.
 )
 
-# Fixed and well apart, by stroke index. Named in the prompt, so each must have a plain name.
+# Fixed and well apart, by stroke index. Only the judging page's overlay uses them now: the models
+# get the strokes in black, because a coloured reference came back as coloured ink in round 1.
 COLOURS = (
     ("red", "#e53935"), ("blue", "#1e6fd9"), ("green", "#2e9e44"), ("orange", "#f28c00"),
     ("purple", "#8e24aa"), ("cyan", "#00acc1"), ("magenta", "#e91e8c"), ("brown", "#7b4a2a"),
@@ -146,7 +151,8 @@ def svg(character: str, *, coloured: bool = True) -> str:
 def _render(character: str) -> bytes:
     import resvg_py  # the experiment's own requirement: requirements.txt here
 
-    return bytes(resvg_py.svg_to_bytes(svg_string=svg(character), width=SIZE, height=SIZE))
+    return bytes(resvg_py.svg_to_bytes(svg_string=svg(character, coloured=False),
+                                       width=SIZE, height=SIZE))
 
 
 # ── prepare ─────────────────────────────────────────────────────────────────
@@ -211,20 +217,20 @@ def prepare(_: argparse.Namespace) -> None:
         for way in WAYS:
             (OUT / "prompts" / f"{item['character']}-{way}.md").write_text(
                 prompt(item, scripts[item["character"]], way) + "\n", encoding="utf-8")
-    print(f"{len(kept)} characters ready; strokes in out/strokes/, prompts in out/prompts/")
+    print(f"{len(kept)} characters ready; strokes and prompts in {OUT.relative_to(HERE)}/")
     total = sum(len(_wanted(model, kept)) for model in MODELS)
     usd = sum(len(_wanted(model, kept)) * model.usd for model in MODELS)
     print(f"a full draw is {total} pictures, about ${usd:.0f}")
 
 
 def prompt(item: dict[str, Any], script: dict[str, Any], way: str) -> str:
-    """The whole prompt for one character and one way of asking."""
-    if way == "text":
-        lines = "\n".join(f"- Stroke {i}, {line['where']}: {line['part']}"
-                          for i, line in enumerate(item["lines"], 1))
-    else:
-        lines = "\n".join(f"- Stroke {i}, the {line['colour']} one, {line['where']}: {line['part']}"
-                          for i, line in enumerate(item["lines"], 1))
+    """The whole prompt for one character and one way of asking.
+
+    The strokes are listed in stroke order but never numbered: in round 1, numbered strokes came
+    back as stroke-order numbers drawn into the picture.
+    """
+    lines = "\n".join(f"- {line['where']}: {line['part']}" for line in item["lines"])
+    exact = [line.strip() for line in script.get("exact") or []]
     fields = {
         "character": item["character"],
         "count": str(item["strokes"]),
@@ -232,6 +238,8 @@ def prompt(item: dict[str, Any], script: dict[str, Any], way: str) -> str:
         "strokes": lines,
         "history": (script.get("history") or "").strip(),
         "layout": (script.get("layout") or "").strip(),
+        "exact": ("Keep these details of the character's shape exactly:\n"
+                  + "\n".join(f"- {line}" for line in exact)) if exact else "",
     }
     direction = Template(_template("direction")).substitute(fields)
     text = Template(_template(way)).substitute(fields, direction=direction)
@@ -406,7 +414,8 @@ def draw(args: argparse.Namespace) -> None:
 
 # ── report ──────────────────────────────────────────────────────────────────
 
-QUESTIONS = ("strokes", "depicts", "remember")
+# Round 1 also asked "remember"; it was too subjective to answer apart from the score.
+QUESTIONS = ("strokes", "depicts")
 ANSWERS = ("yes", "partly", "no")
 # How much the owner likes the picture, 1 to 5, as a string; and one best picture per character.
 SCORES = ("1", "2", "3", "4", "5")
@@ -441,11 +450,10 @@ def report(_: argparse.Namespace) -> None:
              f"{len(rows)} pictures judged, of {sum(len(v) for v in key.values())} planned. "
              "Each answer is the share of that model's pictures, asked that way; the score is the "
              "owner's 1–5 liking, and ★ counts the characters where that model and way drew the "
-             "picture starred best. Klein drew a sample of 8 characters, one take each, so its ★ "
-             "count is out of fewer chances.", "",
-             "| Model | Way | n | Strokes yes / partly | Depicts yes / partly | Remember yes / partly "
-             "| All three yes | Mean score | ★ best |",
-             "| --- | --- | --: | --: | --: | --: | --: | --: | --: |"]
+             "picture starred best. A score of 1 is a rejection.", "",
+             "| Model | Way | n | Strokes yes / partly | Depicts yes / partly | Both yes "
+             "| Mean score | Scored 4–5 | Scored 1 | ★ best |",
+             "| --- | --- | --: | --: | --: | --: | --: | --: | --: | --: |"]
     summary = {}
     for (model, way), group in sorted(groups.items()):
         n = len(group)
@@ -453,19 +461,22 @@ def report(_: argparse.Namespace) -> None:
         all_yes = sum(all(row[q] == "yes" for q in QUESTIONS) for row in group)
         scores = [row["score"] for row in group if row["score"]]
         mean = sum(scores) / len(scores) if scores else None
-        summary[f"{model}/{way}"] = {"n": n, "allYes": all_yes, "meanScore": mean,
+        summary[f"{model}/{way}"] = {"n": n, "bothYes": all_yes, "meanScore": mean,
                                      "scores": dict(Counter(scores)),
                                      "best": starred[f"{model}/{way}"],
                                      **{q: dict(counts[q]) for q in QUESTIONS}}
         cells = " | ".join(f"{counts[q]['yes'] / n:.0%} / {counts[q]['partly'] / n:.0%}"
                            for q in QUESTIONS)
+        high = sum(score >= 4 for score in scores) / len(scores) if scores else 0
+        low = sum(score == 1 for score in scores) / len(scores) if scores else 0
         lines.append(f"| {model} | {way} | {n} | {cells} | {all_yes / n:.0%} | "
-                     f"{f'{mean:.1f}' if mean else '—'} | {starred[f'{model}/{way}']} |")
+                     f"{f'{mean:.2f}' if mean else '—'} | {high:.0%} | {low:.0%} | "
+                     f"{starred[f'{model}/{way}']} |")
 
     lines += ["", "## Per character", "",
-              "The picture starred best, which model and way drew a picture judged yes on all three "
+              "The picture starred best, which model and way drew a picture judged yes on both "
               "questions, and the highest score seen.", "",
-              "| Character | ★ best | Yes on all three | Top score |", "| --- | --- | --- | --: |"]
+              "| Character | ★ best | Yes on both | Top score |", "| --- | --- | --- | --: |"]
     by_character: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         by_character[row["character"]].append(row)

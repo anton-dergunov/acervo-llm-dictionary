@@ -1,8 +1,10 @@
 # Pictures over pictographic characters · an experiment first
 
-**Status:** the experiment is built and drawing
-([`experiments/character-pictures/`](../../../experiments/character-pictures/README.md)); judging is
-next. Written down when the Write sheet was built
+**Status:** round 1 of the experiment is judged
+([`experiments/character-pictures/`](../../../experiments/character-pictures/README.md)). The idea
+works: 18 of 22 characters got a picture the owner liked, and most failures came from the prompt,
+which has been tightened. Round 2 (20 new characters and five redraws) is prepared for the owner to
+draw. Written down when the Write sheet was built
 ([`../../features/writing.md`](../../features/writing.md)), as the owner's next idea for the characters.
 
 ## The idea
@@ -45,11 +47,24 @@ scored on its own page (as every labelling follow-up is).
   the others.
 - **Two ways to ask.** By text alone, and by editing: the character's strokes are rendered from the
   stroke data the server already holds, **each stroke in its own colour**, named in the prompt.
-- **Judged on three questions**, by the owner, per picture, blind:
-  1. do the strokes stay where the character's strokes are, legible as the character;
-  2. does the picture show what the character really depicts;
-  3. would it help to remember the character, linking its strokes to that meaning?
+- **Judged blind** by the owner: a 1–5 score per picture, one starred best per character, and two
+  questions per picture — do the strokes stay where the character's strokes are, legible as the
+  character; does the picture show what the character really depicts. (Round 1 also asked whether
+  it would help to remember the character; that was too subjective to answer apart from the score.)
 
 The likeliest outcomes are that editing works for the simplest pictographs and nothing else, or that
 nothing works well enough. Either is an answer: the first sizes a small feature, and the second
 closes this plan.
+
+## The full run, after round 2
+
+If round 2 holds up, every pictographic or ideographic character in the source gets pictures:
+around 3,300 characters. The choice between Nano Banana 2 and Pro is made from round 2, since the
+full run costs per picture. Judging that many must be quick:
+
+- **One character at a time, its pictures side by side**, each marked **good**, **usable but not
+  perfect**, or **not usable**. There are no questions and no 1–5 score.
+- **Regeneration by priority.** A rerun first redraws characters with nothing usable, then those
+  with only usable-but-not-perfect pictures, and leaves characters that have a good one.
+- **A check that strokes are correct** before a picture is shown in an article. A joined or hooked stroke
+  is easy to miss at a glance, as round 1 showed for 月 and 明.

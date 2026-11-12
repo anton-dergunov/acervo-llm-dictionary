@@ -1,7 +1,9 @@
-The image you are given is the Chinese character $character, written with $count strokes on white. Each stroke has its own colour only so that you can tell the strokes apart; the colours are labels and must not appear in your picture.
+The image you are given is the Chinese character $character, written in black with $count strokes on white.
 
-Turn this character into a picture of what it once depicted: $object. Each coloured stroke becomes one part of the picture, exactly where the stroke is now and with its shape:
+Turn this character into a picture of what it once depicted: $object. Each stroke becomes one part of the picture, exactly where the stroke is now and with its shape. The strokes, in the order they are written:
 $strokes
+
+$exact
 
 $history
 
