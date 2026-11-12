@@ -48,6 +48,10 @@ Stories open the same way: `?story=1&part=0` reads the first written story from 
 translation over. `listen=1` reads the opened story aloud: a fake clock steps through each part's
 sentences, tinting the one sounding, then goes on to the next part, and the deck follows.
 
+The Write sheet opens over a Mandarin word: `?open=图书馆&write=trace` (or `watch`, `write`), or the
+brush beside its listen button. It is a still, `writing.js`, with 书's real strokes in each mode; the
+checking is the application's ([`../../docs/features/writing.md`](../../docs/features/writing.md)).
+
 ## Loops and stories: the lists and listening
 
 Both lists are drawn the same way. **Starred ones lead, archived ones fold**: a starred row carries a

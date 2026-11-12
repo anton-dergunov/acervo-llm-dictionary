@@ -55,23 +55,29 @@ Tones shown as tones, and Pinyin search with or without them, are built
 not checked (the pinyin defect in [`article-quality.md`](../quality/article-quality.md)). How other
 scripts would show what their spelling hides is [`readings.md`](readings.md).
 
-### Learning the characters: a spike
+### Learning the characters
 
 For a European learner the characters are the hard part, and the one thing a vocabulary tool can do
 that a dictionary does not: **help remember them**. Not a second Pleco — the dictionary exists and is
-good — but what is useful *in the owner's own vocabulary*, next to words they chose. A spike first,
-to find out what that is:
+good — but what is useful *in the owner's own vocabulary*, next to words they chose.
 
+How a character is written, and practising it with the strokes checked as they are drawn, are built:
+the Write sheet ([`../../features/writing.md`](../../features/writing.md)). Still to do:
+
+- **Writing practice as a queue.** A Write tab beside Loops and Stories, worth building once the sheet
+  has been used on the iPad: the owner's characters, each drawn from memory when it is due. It needs
+  attempts recorded. An attempt is made once and never edited, so it can wait on the device the way a
+  play does ([`../../architecture/sync.md`](../../architecture/sync.md)). It would be per *character*
+  rather than per word, since characters recur across words, and the schedule would be read from the
+  attempts rather than stored. It is a new replicated record, so a schema change carried across by a
+  throwaway converter.
+- **Taiwan's stroke order** for Traditional characters, where it differs from the mainland's. It
+  needs a second dataset, and is worth it only if Traditional is ever learned in earnest.
+- **Pictures over pictographic characters** — a person drawn so that its legs are the strokes of 人 —
+  with an experiment first: [`character-pictures.md`](character-pictures.md).
 - **What a character is made of** — its components, and which one carries the meaning and which the
   sound, from the composition relation above.
-- **How it is drawn** — stroke order, animated, from an open dataset of stroke data rather than
-  generated.
-- **Drawing it** — practising with a pencil on the iPad, which is where the owner uses Acervo, with the
-  strokes checked as they are drawn.
 - **Recognising it** — the character alone, without the word around it.
-
-What can be taken from existing datasets and what would have to be generated, checked or drawn is
-the spike's first answer.
 
 ## Photos of Chinese and Japanese
 

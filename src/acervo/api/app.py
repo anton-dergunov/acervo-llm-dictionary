@@ -41,6 +41,7 @@ from acervo.api.routes import (
     session,
     speech,
     stories,
+    strokes,
     usage,
     words,
 )
@@ -163,7 +164,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     api = APIRouter(prefix=API_ROOT)
     for module in (health, session, graph, anki, articles, capture, chat, clips, companion, dictionaries,
                    events, images, jobs, languages, loops, mac_release, meaning, models, photo,
-                   pronunciations, providers, reviews, rules, schedule, speech, stories, usage,
+                   pronunciations, providers, reviews, rules, schedule, speech, stories, strokes, usage,
                    words):
         api.include_router(module.router)
     app.include_router(api)

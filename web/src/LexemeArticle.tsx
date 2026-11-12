@@ -24,7 +24,7 @@ import { formatDay } from "./format";
 import { DictionaryEntries } from "./ExternalArticle";
 import type { ExternalEntry } from "./externalEntries";
 import type { Change, Mark } from "./articleEdit";
-import { AskIcon, BookIcon, CaretIcon, FilmIcon, HederaIcon, InfoIcon, MapIcon, OpenIcon, PictureIcon, PlayIcon } from "./icons";
+import { AskIcon, BookIcon, BrushIcon, CaretIcon, FilmIcon, HederaIcon, InfoIcon, MapIcon, OpenIcon, PictureIcon, PlayIcon } from "./icons";
 import type { DiffPart } from "./wordDiff";
 import type { Article, ArticleSense } from "./selectors";
 import { CardPicture, EmptySenseImage, SenseImage, imageStateOf } from "./SenseImage";
@@ -34,6 +34,9 @@ import { SelectionPill } from "./SelectionPill";
 import { HanziColumns, ReadingText, hanziColumns } from "./Reading";
 import { wordAtPoint, wordInSelection, type TappedWord } from "./tapWord";
 import { DeckEdges, Hedera, isTyping, useDeck } from "./deck";
+import { isMandarin } from "./languages";
+import { WritingDialog } from "./WritingDialog";
+import { hanCharacters } from "./writing/strokeData";
 
 /* Plain words rather than a grammarian's abbreviations: "noun, feminine", not "n. · f.". */
 const POS_WORD: Record<string, string> = {
@@ -194,6 +197,22 @@ function Say({ label = "Listen", head = false, target, onListen }: {
     type="button" className={`say${head ? " always head" : ""}${on ? " playing" : ""}`} aria-label={label}
     aria-busy={speech.busy === key} onClick={() => onListen(target)}
   ><PlayIcon /></button>;
+}
+
+/** Opens the Write sheet for a Mandarin word, beside the word's own listen button. */
+function WriteButton({ headword, onWrite }: { headword: string; onWrite(): void }) {
+  return <button type="button" className="say always head write" aria-label={`Write ${headword}`}
+    title="Practise writing it" onClick={onWrite}><BrushIcon /></button>;
+}
+
+/** The word's gloss for the Write sheet's prompt: the curated short gloss, else the first sense's. */
+function glossForWriting(article: Article): string | null {
+  if (article.lexeme.shortGloss?.trim()) return article.lexeme.shortGloss.trim();
+  const sense = article.senses[0]?.sense;
+  if (!sense) return null;
+  const gloss = article.glossLangs.map((lang) => sense.glosses.find((one) => one.lang === lang)).find(Boolean)
+    ?? sense.glosses[0];
+  return gloss ? gloss.terms.join("; ") : null;
 }
 
 /**
@@ -546,9 +565,11 @@ interface Card {
  * picture is the part that gives way when a card is short of room; a card whose words alone do not
  * fit scrolls on its own, as the exception, and nothing forbids it.
  */
-function ArticleCards({ article, pictures, onListen, onPlayClip, onReference, focusSense = null, onMap = null }: {
+function ArticleCards({ article, pictures, onListen, onPlayClip, onReference, focusSense = null, onMap = null, onWrite = null }: {
   article: Article; pictures: PictureSlot | null;
   onListen: Listen; onPlayClip(example: Example): void;
+  /** Open the Write sheet; absent for a word that is not Mandarin. */
+  onWrite?: (() => void) | null;
   onReference?(entry: ExternalEntry | null): void;
   focusSense?: string | null;
   onMap?: ((senseId: string) => void) | null;
@@ -687,6 +708,7 @@ function ArticleCards({ article, pictures, onListen, onPlayClip, onReference, fo
         <div className="cw-line" data-length={lexeme.headword.length > 24 ? "long" : lexeme.headword.length > 14 ? "mid" : "short"}>
           <h1 className="cw-headword" lang={lexeme.language} data-say={`lexeme:${lexeme.id}`}>{lexeme.headword}</h1>
           <Say head label={`Listen to ${lexeme.headword}`} target={headwordTarget(lexeme)} onListen={onListen} />
+          {onWrite && <WriteButton headword={lexeme.headword} onWrite={onWrite} />}
         </div>
         {/* No transcription on a card: the play button is how a word is heard, and the line it took
             is room the card needs more. A reading (pinyin) is part of the word, so it stays. */}
@@ -926,6 +948,18 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
   const place = placeLine(article);
   const columns = useMemo(() => hanziColumns(lexeme), [lexeme]);
   const met = looseAttestations(article);
+  /* The Write sheet, here for the clip dialog's reason: it is only shown, and stores nothing. */
+  const [writing, setWriting] = useState(false);
+  const writable = isMandarin(lexeme.language) && hanCharacters(lexeme.headword).length > 0;
+  const openWriting = writable ? () => setWriting(true) : null;
+  const writingDialog = writing && writable && <WritingDialog
+    headword={lexeme.headword}
+    reading={lexeme.reading}
+    language={lexeme.language}
+    gloss={glossForWriting(article)}
+    listen={<Say head label={`Listen to ${lexeme.headword}`} target={headwordTarget(lexeme)} onListen={listen} />}
+    onClose={() => setWriting(false)}
+  />;
   const dialog = playing && playingClip && <ClipDialog
     stored={playingClip}
     headword={lexeme.headword}
@@ -954,10 +988,11 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
   if (view === "cards") {
     return <Photos.Provider value={photos}><div className="article-root cards-root" ref={root} onClick={tap}>
       <ArticleCards article={article} pictures={pictures} onListen={listen} onPlayClip={setPlaying} onReference={onReference}
-        focusSense={focusSense} onMap={stored ? onMap : null} />
+        focusSense={focusSense} onMap={stored ? onMap : null} onWrite={openWriting} />
       <SelectionPill root={root} onListen={listenToSelection} onLookUp={lookUpSelection} />
       {lookSheet}
       {dialog}
+      {writingDialog}
       {photoDialog}
     </div></Photos.Provider>;
   }
@@ -983,6 +1018,7 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
                 : <DiffText text={lexeme.headword} form={null} words={head("headword")?.words ?? null} />}
             </h1>
             <Say head label={`Listen to ${lexeme.headword}`} target={headwordTarget(lexeme)} onListen={listen} />
+            {openWriting && <WriteButton headword={lexeme.headword} onWrite={openWriting} />}
           </div>
           {lexeme.reading && !columns && <div className={`reading${tint(head("reading"))}`}>
             <ReadingText reading={lexeme.reading} language={lexeme.language} />
@@ -1051,6 +1087,7 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
     <SelectionPill root={root} onListen={listenToSelection} onLookUp={lookUpSelection} />
     {lookSheet}
     {dialog}
+    {writingDialog}
     {photoDialog}
   </div></Photos.Provider>;
 }

@@ -90,6 +90,7 @@ Even **10,000 fully structured words** with no media are only tens of megabytes.
 - [`features/capture.md`](features/capture.md) — getting a word in: resolve, compose, review.
 - [`features/photo-capture.md`](features/photo-capture.md) — tap a word in a photographed page.
 - [`features/look-up.md`](features/look-up.md) — tap a word in a story, a loop or an article, and add it.
+- [`features/writing.md`](features/writing.md) — practise writing a Mandarin word's characters, stroke by stroke.
 - [`features/article-chat.md`](features/article-chat.md) — ask about an article; its answer is a proposed revision.
 - [`features/sense-images.md`](features/sense-images.md) — one picture per sense, briefed together per word.
 - [`features/pronunciation.md`](features/pronunciation.md) — every spoken field, recorded and replicated.

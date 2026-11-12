@@ -316,7 +316,13 @@ build repopulates; they are never committed.
 ## The containers
 
 - **`acervo-server`** packages `src/acervo/`, the prompts and the built interface, and serves `/` and
-  the whole API on one port. **Its healthcheck asserts an HTTP 200**, not a TCP connect, and the command
+  the whole API on one port. It also carries the **stroke data** the Write sheet checks characters
+  against — about 32 MB of small files — fetched while the image is built from the version and digest
+  in `deploy/acervo/strokes/pin.json`, in a layer above Acervo's code, so a deploy fetches it again
+  only when the pin changes and the release archive never carries it. The build needs the npm registry
+  for that one step, as it needs Hugging Face for the encoder. A laptop running the server locally
+  fetches the same files with `python3 deploy/acervo/strokes/fetch.py` into `vendor/strokes/` and
+  points `ACERVO_STROKES_PATH` at it. **Its healthcheck asserts an HTTP 200**, not a TCP connect, and the command
   it runs must be one the image actually has: a container whose healthcheck binary is missing reports
   unhealthy forever while serving perfectly, and the installer then fails a working deployment.
 - **The companions** — the Anki sync server, the spoken-usage corpus and the loop generator — each have

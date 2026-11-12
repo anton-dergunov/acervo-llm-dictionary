@@ -1,6 +1,7 @@
 import type { Bed, Loop, PartOfSpeech, PhotoRegion, Pronunciation, SourceKind, Story, StoryPart, VocabularyGraph } from "./domain";
 import { normalizeServerURL, sessionStore, type StoredSession } from "./session";
 import type { ArticleDraft } from "./yaml";
+import type { CharacterStrokes } from "./writing/strokeData";
 
 type Envelope<T> = { data?: T; error?: { code?: string; message?: string } };
 type LoginResponse = { token: string; user: { id: string; email: string } };
@@ -352,6 +353,13 @@ export interface ServerHealth {
   build: string;
   schemaVersion: number;
   capture: CaptureHealth;
+}
+
+/** The stroke data for a batch of characters (`GET /strokes`). */
+export interface StrokeAnswer {
+  dataset: string;
+  characters: Record<string, CharacterStrokes>;
+  missing: string[];
 }
 
 export type PullResponse = SyncEnvelope & { changes: VocabularyGraph };
@@ -1622,6 +1630,12 @@ export const backendSession = {
       false,
       UPLOAD_TIMEOUT
     );
+  },
+
+  /* How characters are written, from the pinned stroke data the server holds. Reference data, kept
+     on the device by `writing/strokeStore.ts`; a character the dataset lacks comes back in `missing`. */
+  strokes(characters: string): Promise<StrokeAnswer> {
+    return client.call<StrokeAnswer>(`/strokes?characters=${encodeURIComponent(characters)}`);
   },
 
   listDictionaries(): Promise<{ dictionaries: RemoteDictionary[] }> {

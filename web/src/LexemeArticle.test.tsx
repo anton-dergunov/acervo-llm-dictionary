@@ -404,6 +404,23 @@ describe("a Mandarin word's reading", () => {
     expect(container.querySelector(".cards-word .reading")?.textContent).toBe("tú shū guǎn");
   });
 
+  it("offers to write the word, on the page and on a card, and opens the sheet for it", async () => {
+    const { unmount } = render(<LexemeArticle article={chinese("图书馆", "tu2 shu1 guan3")} onNotify={() => undefined} />);
+    fireEvent.click(screen.getByRole("button", { name: "Write 图书馆" }));
+    expect(await screen.findByRole("dialog", { name: "Write 图书馆" })).toBeInTheDocument();
+    unmount();
+    render(<LexemeArticle article={chinese("图书馆", "tu2 shu1 guan3")} onNotify={() => undefined} view="cards" />);
+    expect(screen.getByRole("button", { name: "Write 图书馆" })).toBeInTheDocument();
+  });
+
+  it("does not offer to write a word that is not Mandarin, or has no characters", () => {
+    const { unmount } = render(<LexemeArticle article={picar()} onNotify={() => undefined} />);
+    expect(screen.queryByRole("button", { name: /^Write / })).toBeNull();
+    unmount();
+    render(<LexemeArticle article={chinese("OK", "ōukèi")} onNotify={() => undefined} />);
+    expect(screen.queryByRole("button", { name: /^Write / })).toBeNull();
+  });
+
   it("leaves a reading that is not Mandarin as it was written", () => {
     const article = picar();
     const { container } = render(<LexemeArticle article={{ ...article, lexeme: { ...article.lexeme, reading: "pi1 car" } }} onNotify={() => undefined} />);

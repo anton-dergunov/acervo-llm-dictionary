@@ -183,7 +183,7 @@ DESCRIPTIVE = ("COPY", "ENV", "EXPOSE", "CMD", "ENTRYPOINT", "FROM", "WORKDIR", 
 # Pins and requirement lists, which change when a dependency does. A step after one of these is the
 # install it names, and is meant to run again when it changes.
 DEPENDENCY_INPUTS = ("vendor/", "requirements", "models/encoder.json", "models/segmenter.json",
-                     "models/hearing.json")
+                     "models/hearing.json", "deploy/acervo/strokes")
 
 
 def test_every_image_leaves_its_own_files_readable_by_the_user_it_runs_as():

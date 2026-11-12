@@ -133,6 +133,8 @@ export const GridIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={
 /** A drill: the same words round and round, as a loop of two arrows. */
 export const DrillIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.8} strokeLinejoin="round" aria-hidden="true"><path d="M4 11.5V10a4 4 0 0 1 4-4h11.5M16.5 3l3 3-3 3M20 12.5V14a4 4 0 0 1-4 4H4.5M7.5 21l-3-3 3-3" /></svg>;
 /** A radio lesson: someone presenting the words. */
+/** Writing a character: a brush, its tip down, for the Write sheet — not a pencil, which is editing. */
+export const BrushIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><path d="M20 4l-8.6 8.6" /><path d="M11.4 12.6c-1.7-.6-3.6.3-4.2 2.1-.5 1.5-1.4 2.6-3 3.1 2.9 1.2 6.3.6 7.8-1.3.9-1.2.8-2.7-.6-3.9z" /></svg>;
 export const MicIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.7} strokeLinejoin="round" aria-hidden="true"><rect x="9" y="3.5" width="6" height="10.5" rx="3" /><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0" /><path d="M12 18v2.5M8.5 20.5h7" /></svg>;
 /** A story told between the words. */
 export const TaleIcon = () => <svg viewBox="0 0 24 24" {...stroke} strokeWidth={1.6} strokeLinejoin="round" aria-hidden="true"><path d="M12 7C10 5.5 7.5 5 4 5v12.5c3.5 0 6 .5 8 2 2-1.5 4.5-2 8-2V5c-3.5 0-6 .5-8 2z" /><path d="M12 7v12.5" /><path d="M6.5 9h3M6.5 12h3M14.5 9h3M14.5 12h3" /></svg>;

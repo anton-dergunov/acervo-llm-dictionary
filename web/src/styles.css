@@ -2950,6 +2950,87 @@ button.make-chip.other:hover { background: var(--core-soft); border-color: color
 }
 .clip-dialog-actions { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--rule-soft); font-size: 13px; }
 
+/* ══════════════════════════ writing a character ══════════════════════════
+   The Write sheet (`docs/features/writing.md`): the clip dialog's shell, taller, because the pad is
+   the point of it and wants as much of the screen as the screen has. The pad is a square sized by
+   both the sheet's width and the window's height, so the controls under it stay on screen. */
+.say.head.write svg { width: 15px; height: 15px; margin: 0; }
+.writing-dialog { width: min(680px, 100%); max-height: min(1040px, 100%); }
+.writing-body { gap: 12px; }
+.writing-top { display: flex; align-items: center; justify-content: space-between; gap: 10px 14px; flex-wrap: wrap; }
+.writing-prompt { display: flex; align-items: center; gap: 6px 12px; flex-wrap: wrap; min-width: 0; }
+.writing-reading { display: inline-flex; gap: .4em; font: 500 20px/1.2 var(--mono); }
+/* The syllable of the character being written, in Write, where the characters themselves are hidden. */
+.writing-reading .now { text-decoration: underline 2px; text-underline-offset: 5px; }
+.writing-gloss { font-size: 15px; color: var(--ink-2); }
+.writing-modes { flex: none; }
+
+.writing-chars { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.writing-char {
+  position: relative; width: 50px; height: 50px; display: grid; place-items: center;
+  border: 1px solid var(--rule-soft); border-radius: 8px; background: var(--surface);
+  font-size: 27px; line-height: 1; color: var(--ink-2);
+}
+.writing-char.on { border-color: var(--core); background: var(--core-soft); color: var(--ink); }
+.writing-char.done .glyph { color: var(--ink); }
+.writing-char .score {
+  position: absolute; right: -7px; bottom: -7px; padding: 0 4px; border-radius: 8px;
+  font: 600 10px/16px var(--mono); background: var(--surface); border: 1px solid var(--rule); color: var(--ink-2);
+}
+
+.writing-stage { display: grid; place-items: center; min-height: 120px; }
+.writing-pad {
+  display: block; width: min(100%, 580px, calc(100dvh - 410px)); min-width: 240px; aspect-ratio: 1;
+  border-radius: 10px; background: var(--surface); box-shadow: var(--shadow);
+  /* Nothing on the pad may scroll, zoom, select or open a callout: every touch is ink. */
+  touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+}
+.writing-pad.drawing { cursor: crosshair; }
+.writing-grid rect { fill: var(--surface); stroke: var(--rule); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.writing-grid .guide { fill: none; stroke: var(--rule); stroke-width: 1px; stroke-dasharray: 6 5; vector-effect: non-scaling-stroke; }
+.writing-outline path { fill: color-mix(in srgb, var(--ink) 11%, transparent); }
+.writing-strokes path { fill: var(--ink); animation: writing-appear .26s ease-out; }
+.writing-strokes path.radical { fill: var(--corpus); }
+.writing-anim {
+  fill: none; stroke: var(--ink); stroke-width: 200; stroke-linecap: round; stroke-linejoin: round;
+  animation-name: writing-draw; animation-timing-function: linear; animation-fill-mode: forwards;
+}
+.writing-anim.radical { stroke: var(--corpus); }
+.writing-anim.hint { stroke: var(--core); animation-name: writing-draw, writing-fade; animation-timing-function: linear, ease; }
+.writing-ink path { fill: var(--ink); }
+.writing-ink path.accepted { animation: writing-fade .3s ease forwards; }
+.writing-ink path.refused { fill: var(--warn); animation: writing-fade .5s ease .15s forwards; }
+/* Compare: the model faint, what the hand drew over it. */
+.writing-pad.comparing .writing-strokes path { fill: color-mix(in srgb, var(--ink) 20%, transparent); animation: none; }
+.writing-compare path { fill: none; stroke: var(--core); stroke-width: 3px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.writing-number circle { fill: var(--surface); stroke: var(--rule); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.writing-number text { font: 600 36px var(--mono); text-anchor: middle; fill: var(--ink-2); }
+.writing-pulse { fill: var(--warn); transform-box: fill-box; transform-origin: center; animation: writing-pulse .9s ease-out 2; }
+@keyframes writing-draw { to { stroke-dashoffset: 0; } }
+@keyframes writing-fade { to { opacity: 0; } }
+@keyframes writing-appear { from { opacity: 0; } }
+@keyframes writing-pulse { 0% { transform: scale(.6); opacity: 1; } 100% { transform: scale(1.9); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .writing-anim { animation: none; stroke-dashoffset: 0; }
+  .writing-strokes path, .writing-pulse { animation: none; }
+}
+
+.writing-dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.writing-dots li { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--rule); }
+.writing-dots li.next { border-color: var(--ink-2); }
+.writing-dots li.clean { background: var(--core); border-color: var(--core); }
+.writing-dots li.helped { background: var(--corpus); border-color: var(--corpus); }
+.writing-dots li.filled { background: var(--warn); border-color: var(--warn); }
+.writing-said { margin: 0; min-height: 1.5em; text-align: center; font-size: 14.5px; line-height: 1.45; color: var(--ink-2); }
+.writing-controls { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
+.writing-controls .tb-btn.on { color: var(--core); background: var(--core-soft); border-color: color-mix(in srgb, var(--core) 45%, transparent); }
+.writing-controls .icon-btn:disabled { opacity: .4; cursor: default; }
+.writing-count { min-width: 11ch; text-align: center; font: 12px var(--mono); color: var(--ink-3); }
+@media (max-width: 760px) {
+  .writing-dialog .settings-body { padding: 12px; }
+  .writing-pad { width: min(100%, calc(100dvh - 360px)); }
+}
+
 /* ══ Cards: proportions ══
    The toolbar stays put; under it the word, the chips and the sense each get room to breathe rather
    than being stacked against the toolbar. Nothing in the header depends on which card is showing, so

@@ -54,6 +54,13 @@ RUN python -c "import json; from huggingface_hub import snapshot_download; \
 pin = json.load(open('/app/models/hearing.json')); \
 snapshot_download(pin['model'], revision=pin['revision'], allow_patterns=pin['files'])" \
     && chmod -R a+rX /opt/huggingface
+# The stroke data the Write sheet draws and checks characters with — Make Me a Hanzi, as packaged by
+# hanzi-writer-data — at the version and digest `deploy/acervo/strokes/pin.json` names, fetched and
+# verified by the script beside it. ~32 MB of small JSON files, above Acervo's own code, so a deploy
+# fetches it only when the pin changes, and never inside the release archive.
+COPY deploy/acervo/strokes /app/strokes-pin
+RUN python /app/strokes-pin/fetch.py /app/strokes --pin /app/strokes-pin/pin.json \
+    && chmod -R a+rX /app/strokes
 ENV HF_HUB_OFFLINE=1 \
     TRANSFORMERS_OFFLINE=1 \
     NUMBA_CACHE_DIR=/tmp/numba

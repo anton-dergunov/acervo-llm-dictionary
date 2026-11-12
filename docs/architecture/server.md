@@ -134,6 +134,12 @@ stays small enough for that, and it is the first thing to measure if that change
 mode 600, so a backup of the database, a deploy's copy of it and an export never carry a key
 ([`models.md`](models.md), "Credentials").
 
+**Reference data built into the image lives in no table either**: the stroke data the Write sheet
+draws and checks characters with, at `/app/strokes` (`ACERVO_STROKES_PATH`). It is somebody else's
+dataset, pinned by version and digest in `deploy/acervo/strokes/pin.json` and fetched by the script
+beside the pin while the image is built, so nothing backs it up and a rebuilt image brings it back
+([`../features/writing.md`](../features/writing.md)).
+
 **Derived stores live beside the database file and in no table**: the loop take cache (`takes/`),
 the music styles' samples (`samples/`) and the meaning map's embeddings and drawn maps (`maps/`). All
 are server-local and keyed by a digest of what they hold, so none needs a mount, an environment
@@ -201,6 +207,7 @@ The routes, under `/api/acervo/v1` unless shown:
 | Anki | `GET /anki`, `PUT /anki/settings`, `POST /anki/push`, `POST /anki/pull` (due at once) |
 | Clips and the corpus | `GET`/`PUT /clips/settings`, `GET /clips/corpus` (what the corpus holds, asked of it with a short timeout), and the allow-listed proxy under `/speech/…` |
 | Dictionaries | `GET /dictionaries`, `GET /dictionaries/online/{source}` |
+| Writing | `GET /strokes?characters=` (at most 200; how each is written, from the pinned stroke data) |
 | Settings | `GET /models`, `PUT /models/selection`, `POST /providers`, `PUT`/`DELETE /providers/{id}`, `POST /providers/{id}/check`, `GET /usage`, `GET`/`PUT /rules`, `GET`/`PUT /schedule/settings` |
 | Companions | `POST /companion/text` (the operator token), `POST /loops/write` and `POST /pronunciations/take` (a render token) |
 | Static | `GET /api/acervo/media/{path}` (bearer), `GET /api/acervo/dictionaries/{file}` (bearer), `GET /api/acervo/downloads/{file}` (none), `GET /api/acervo/v1/mac-release` (none), `GET /` (the PWA) |

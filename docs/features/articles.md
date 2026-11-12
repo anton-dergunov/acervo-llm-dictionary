@@ -60,6 +60,11 @@ one mark per syllable). So a reading typed with digits needs no conversion, and 
   `Reading` field through `acervo/pinyin.py`, the Python twin of the numbered-to-marked step. The two
   are held to one case file, `web/src/testFixtures/pinyinVectors.json`.
 
+**Beside a Mandarin headword's listen button is Write** — a brush, on the page and on a card — which
+opens the sheet for practising the word's characters stroke by stroke
+([`writing.md`](writing.md)). It sits beside the heading, never inside it, for the reason the columns
+are generated content: the heading's text is the word.
+
 Any other language's reading is shown as written. What other scripts would gain from the same
 treatment is [`../plans/languages/readings.md`](../plans/languages/readings.md).
 

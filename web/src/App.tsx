@@ -41,7 +41,8 @@ import LexemeArticle, {
   type AskSlot, type AskTarget, type ClipSlot, type MarkSlot, type PictureSlot, HeadwordListen
 } from "./LexemeArticle";
 import LexemeList, { type ExternalSearch } from "./LexemeList";
-import { languageOf } from "./languages";
+import { isMandarin, languageOf } from "./languages";
+import { strokeStore } from "./writing/strokeStore";
 import {
   alreadyInstalledOnThisDevice, canPromptInstall, detectedInstallPlatform,
   INSTALL_AVAILABLE_EVENT, INSTALLED_EVENT, promptInstall,
@@ -434,6 +435,16 @@ export default function App() {
      another device, or in advance, plays on a plane. `fill` does nothing while keeping is off. */
   useEffect(() => {
     if (syncStatus.lastPulledAt) void fill();
+  }, [syncStatus.lastPulledAt]);
+
+  /* And how every Mandarin word's characters are written, so the Write sheet works offline too. Only
+     what this device lacks is asked for, and a character is fetched once (`writing/strokeStore.ts`). */
+  const snapshotRef = useRef(snapshot);
+  snapshotRef.current = snapshot;
+  useEffect(() => {
+    const lexemes = snapshotRef.current?.lexemes;
+    if (!syncStatus.lastPulledAt || !lexemes) return;
+    void strokeStore().keep(lexemes.filter((one) => !one.deleted && isMandarin(one.language)).map((one) => one.headword));
   }, [syncStatus.lastPulledAt]);
 
   useEffect(() => {

@@ -90,6 +90,9 @@ const isMandarin = (x) => /^zh/i.test(x.language || "");
 const readingHtml = (x) => isMandarin(x)
   ? x.reading.split(" ").map((s) => `<span class="tone-${toneOf(s)}">${esc(s)}</span>`).join(" ")
   : esc(x.reading);
+/* The Write sheet's door, beside the word's listen button: Mandarin words only (`writing.js`). */
+const writeButton = (x) => /^(zh(?!-yue)|cmn)/.test(x.language) && /\p{Script=Han}/u.test(x.headword)
+  ? `<button class="say always head write" data-write aria-label="Write ${esc(x.headword)}">${ICON.brush}</button>` : "";
 const hanziColumns = (x) => {
   if (!isMandarin(x) || !x.reading) return null;
   const chars = [...x.headword], syllables = x.reading.split(" ");
@@ -102,6 +105,7 @@ const ICON = {
   forward:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
   plus:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
   play:   '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>',
+  brush:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4l-8.6 8.6"/><path d="M11.4 12.6c-1.7-.6-3.6.3-4.2 2.1-.5 1.5-1.4 2.6-3 3.1 2.9 1.2 6.3.6 7.8-1.3.9-1.2.8-2.7-.6-3.9z"/></svg>',
   caret:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
   pencil: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
   trash:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V5h6v2M6 7l1 13h10l1-13"/></svg>',
@@ -828,7 +832,7 @@ function masthead(x) {
                 const tone = toneOf(s);
                 const before = all.slice(0, i).map((one) => toneOf(one.s)).filter((t) => t !== 5).pop();
                 return `<span class="hz tone-${tone}${tone === 5 && before ? ` after-${before}` : ""}" data-reading="${esc(s)}">${esc(c)}</span>`;
-              }).join("")}</h1>${say(x.headword, "always head")}</div>`
+              }).join("")}</h1>${say(x.headword, "always head")}${writeButton(x)}</div>`
             : `<div class="head-line"><h1 class="headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}</div>
           ${x.reading ? `<div class="reading">${readingHtml(x)}</div>` : ""}`}
           <div class="pron-row">
@@ -1014,7 +1018,7 @@ function renderCards(x) {
       <header class="cards-head">
         <div class="cards-word">
           <span class="cw-emoji">${x.emoji || "\u{1F4C4}"}</span>
-          <div class="cw-line" data-length="${x.headword.length > 24 ? "long" : x.headword.length > 14 ? "mid" : "short"}"><h1 class="cw-headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}</div>
+          <div class="cw-line" data-length="${x.headword.length > 24 ? "long" : x.headword.length > 14 ? "mid" : "short"}"><h1 class="cw-headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}${writeButton(x)}</div>
           ${x.reading ? `<span class="reading">${readingHtml(x)}</span>` : ""}
         </div>
         <nav class="cards-nav" aria-label="Senses and sections">
@@ -4028,6 +4032,7 @@ document.addEventListener("click", (ev) => {
   if (hit("#fileAllBtn")) { fileWords(visible().rows.map((x) => x.id)); return; }
 
   if (hit("[data-add-picture]")) { toast("Opens the picture dialog — brief, Draw, or your own picture"); return; }
+  if (hit("[data-write]")) { openWriting(LEXEMES.find((x) => x.id === state.openId)); return; }
   const say = hit("[data-say]");
   if (say) {
     say.classList.add("playing");
@@ -4620,6 +4625,8 @@ if (params.get("open")) {
   if (ask === "full") state.ask = "full";
   if (params.get("focus")) state.askFocus = params.get("focus");
   if (params.get("review") === "1") state.review = true;
+  // `write=watch|trace|write` opens the Write sheet over a Mandarin word, in that mode.
+  if (hit && params.get("write")) setTimeout(() => openWriting(hit, params.get("write")), 0);
 }
 /* `loops=1` opens the surface, `layout=` picks the shape, `loop=` which one, and `t=` how far in —
    so "mid-word, one translation up and the next still withheld" is a link rather than a description.

@@ -33,6 +33,9 @@ class Settings(BaseSettings):
     # interface: behind auth, Range-capable, and outside anything a service worker precaches.
     media_path: Path = Field(default=Path("/var/lib/acervo/media"), alias="ACERVO_MEDIA_PATH")
     prompts_path: Path = Field(default=Path("/app/prompts"), alias="ACERVO_PROMPTS_PATH")
+    # The pinned stroke data, fetched into the image at build time (`deploy/acervo/strokes/`). A
+    # laptop points this at `vendor/strokes`, which the same script writes.
+    strokes_path: Path = Field(default=Path("/app/strokes"), alias="ACERVO_STROKES_PATH")
 
     # Every model call, one line each, rotating. Beside the database rather than on a mount of its
     # own: it is small, it is bounded, and it belongs to the same deployment the database does.
