@@ -118,6 +118,16 @@ def test_the_fetcher_checks_a_directory_against_the_pin(tmp_path):
     assert module.check(tmp_path, pin) is None
 
 
+def test_the_fetcher_runs_where_the_image_puts_it(tmp_path):
+    """The image copies it to `/app/strokes-pin/fetch.py`, two directories from the root, with no
+    checkout around it. A first version found the checkout's `vendor/` while it was imported, and the
+    build failed there and nowhere else."""
+    source = (PIN.parent / "fetch.py").read_text(encoding="utf-8")
+    module: dict = {"__file__": "/app/strokes-pin/fetch.py", "__name__": "strokes_fetch_in_image"}
+    exec(compile(source, "/app/strokes-pin/fetch.py", "exec"), module)
+    assert module["main"]([str(tmp_path / "strokes"), "--pin", str(PIN), "--check"]) == 1
+
+
 def test_the_interface_expects_the_dataset_the_pin_names():
     """The device keys what it keeps by dataset, so a pin moved without the interface would leave
     every device asking for records it can never find under the name it uses."""

@@ -29,10 +29,14 @@ import urllib.request
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[2]
 PIN = HERE / "pin.json"
-DEFAULT_DESTINATION = ROOT / "vendor" / "strokes"
 MANIFEST = "dataset.json"
+
+
+def laptop_destination() -> Path:
+    """`vendor/strokes/` in the checkout this script sits in. Only asked for when no destination is
+    given: in the image the script is two directories from the root, and there is no checkout."""
+    return HERE.parents[2] / "vendor" / "strokes"
 
 
 def dataset_name(pin: dict) -> str:
@@ -107,13 +111,14 @@ def fetch(destination: Path, pin: dict) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    parser.add_argument("destination", nargs="?", type=Path, default=DEFAULT_DESTINATION)
+    parser.add_argument("destination", nargs="?", type=Path, help="default: vendor/strokes in this checkout")
     parser.add_argument("--pin", type=Path, default=PIN)
     parser.add_argument("--check", action="store_true", help="verify only; never touch the network")
     parser.add_argument("--force", action="store_true", help="fetch even when the directory verifies")
     arguments = parser.parse_args(argv)
 
     pin = json.loads(arguments.pin.read_text(encoding="utf-8"))
+    arguments.destination = arguments.destination or laptop_destination()
     problem = check(arguments.destination, pin)
     if arguments.check:
         if problem:
