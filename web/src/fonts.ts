@@ -52,7 +52,8 @@ import "@fontsource/ibm-plex-mono/cyrillic-500.css";
 import "@fontsource/ibm-plex-mono/cyrillic-600.css";
 
 /* IPA. Plex Mono has no phonetic letters, tone letters or combining marks; macOS quietly fills them
-   from a system face and Android does not, so a transcription came out as empty boxes. `.ipa`
-   names this family after Plex Mono. */
-import "@fontsource/noto-sans/latin-400.css";
-import "@fontsource/noto-sans/latin-ext-400.css";
+   from a system face and Android does not, so a transcription came out as empty boxes. A letter and
+   the marks on it are drawn from one face, so the fallback must hold every mark, not just the common
+   ones — the packaged Noto Sans subsets do not (U+032F in ʊ̯ boxed its ʊ too). `.ipa` names this face
+   after Plex Mono; scripts/build_ipa_font.py builds it. */
+import "./fonts/ipa.css";
