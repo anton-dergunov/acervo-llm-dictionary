@@ -7,8 +7,9 @@ character can be starred as the best.
 
 On first start every character's planned pictures — each model, way and take — are shuffled into
 letters with a fixed seed and written to the round's `key.json` (`out/round-N/`); the page is never
-told which letter is which, and a picture's URL is `/img/<character index>/<letter>`, so nothing on
-screen gives it away. A picture appears once it is drawn, so the page can be opened while
+told which letter is which, and a picture's URL is `/img/<round>/<character index>/<letter>`, so
+nothing on screen gives it away. The round is in the URL because pictures are cached for a day: without
+it a browser shows the previous round's picture at the same index and letter. A picture appears once it is drawn, so the page can be opened while
 `run.py draw` is still running; reload to see new ones. Answers go to the round's `labels.json` on
 every tap, so closing the tab loses nothing. `run.py report` unblinds them.
 """
@@ -118,14 +119,17 @@ class Handler(BaseHTTPRequestHandler):
                 drawn = [letter for letter in item["letters"]
                          if (file := _picture(self.key, item["character"], letter)) and file.exists()]
                 characters.append({**item, "letters": drawn})
-            body = {"characters": characters, "labels": _read(OUT / "labels.json", {})}
+            body = {"round": run.ROUND, "characters": characters,
+                    "labels": _read(OUT / "labels.json", {})}
             self._send(200, json.dumps(body, ensure_ascii=False).encode(), "application/json")
         elif self.path.startswith(("/img/", "/ref/")):
             try:
-                parts = self.path.split("/")
-                item = self.characters[int(parts[2])]
+                parts = self.path.split("/")  # /img/<round>/<index>/<letter>, /ref/<round>/<index>
+                if int(parts[2]) != run.ROUND:
+                    raise ValueError(parts[2])
+                item = self.characters[int(parts[3])]
                 file = (OUT / "strokes" / f"{item['character']}.png" if parts[1] == "ref"
-                        else _picture(self.key, item["character"], parts[3]))
+                        else _picture(self.key, item["character"], parts[4]))
             except (ValueError, IndexError):
                 file = None
             if not file or not file.exists():
@@ -388,7 +392,7 @@ function render() {
   document.getElementById("prev").disabled = HERE === 0;
   document.getElementById("next").disabled = HERE === DATA.characters.length - 1;
   statusLine = $("div", { class: "saved" });
-  const pictures = item.letters.map(letter => [`/img/${item.index}/${letter}`, letter]);
+  const pictures = item.letters.map(letter => [`/img/${DATA.round}/${item.index}/${letter}`, letter]);
 
   const script = $("details", {}, $("summary", {}, "Stroke script and history"));
   const list = $("ol");
@@ -403,8 +407,8 @@ function render() {
       $("div", {}, item.object),
       $("div", { class: "def" }, item.definition),
       $("div", { class: "hint" }, `Source: ${item.type} — “${item.hint}”`)),
-    $("img", { class: "ref", src: `/ref/${item.index}`, alt: `${c}, its strokes coloured`,
-      onclick: () => zoom(item, [[`/ref/${item.index}`, "the strokes as sent"]], 0) })), script);
+    $("img", { class: "ref", src: `/ref/${DATA.round}/${item.index}`, alt: `${c}, its strokes coloured`,
+      onclick: () => zoom(item, [[`/ref/${DATA.round}/${item.index}`, "the strokes as sent"]], 0) })), script);
 
   if (!item.letters.length) {
     page.append($("p", { class: "empty" }, "Nothing drawn yet for this character."));
