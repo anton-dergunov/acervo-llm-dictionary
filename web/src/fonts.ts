@@ -50,3 +50,9 @@ import "@fontsource/ibm-plex-mono/latin-ext-600.css";
 import "@fontsource/ibm-plex-mono/cyrillic-400.css";
 import "@fontsource/ibm-plex-mono/cyrillic-500.css";
 import "@fontsource/ibm-plex-mono/cyrillic-600.css";
+
+/* IPA. Plex Mono has no phonetic letters, tone letters or combining marks; macOS quietly fills them
+   from a system face and Android does not, so a transcription came out as empty boxes. `.ipa`
+   names this family after Plex Mono. */
+import "@fontsource/noto-sans/latin-400.css";
+import "@fontsource/noto-sans/latin-ext-400.css";
