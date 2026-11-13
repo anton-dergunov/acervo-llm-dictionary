@@ -446,10 +446,14 @@ function ProviderView({ provider, family, write, onOpen, onRemoved, onNotify }: 
   const keptModels = (next: "key" | "file") => Object.fromEntries(Object.entries(provider.models)
     .filter(([kind]) => next === "file" || !family?.fileOnly.includes(kind)));
 
+  // A setting edited but not yet saved goes with a new key or file, in one change checked once.
+  // Saved one at a time, each would be checked against the other's old value: a new sign-in for
+  // another project against the old project, and the new project against the old sign-in.
   async function replaceKey() {
     if (!key.trim()) { setRefused(`Paste the new ${family?.keyLabel ?? "key"} first.`); return; }
     const body: ProviderBody = { key: key.trim() };
-    if (switching) Object.assign(body, { models: keptModels("key"), settings: filled(values, family!, "key") });
+    if (switching) Object.assign(body, { models: keptModels("key") });
+    if ((switching || draft !== null) && family) body.settings = filled(values, family, "key");
     if (await run("key", () => backendSession.changeProvider(provider.id, body), true)) {
       setKey(""); setReplacing(false); setDraft(null);
     }
@@ -457,7 +461,7 @@ function ProviderView({ provider, family, write, onOpen, onRemoved, onNotify }: 
 
   async function replaceFile(text: string) {
     const body: ProviderBody = { credentials: text };
-    if (switching && family) {
+    if ((switching || draft !== null) && family) {
       body.settings = filled(values, family, "file");
       if (!body.settings.project) { setFile({ text, name: "" }); setRefused("Give the project first, then choose the file."); return; }
     }

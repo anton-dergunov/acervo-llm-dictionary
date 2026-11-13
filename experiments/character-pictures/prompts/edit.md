@@ -11,4 +11,4 @@ $layout
 
 $direction
 
-Keep the picture the same square, with every stroke's part in the same place as in the image you were given.
+Keep the picture the same square. The black strokes in your picture lie on the strokes of the image you were given: the same size, the same place, the same angle and the same proportions. Do not redraw the character larger, smaller, wider, narrower or moved.

@@ -3,9 +3,9 @@
 The question and the method are in the README. In short: every character gets a stroke script
 (`scripts.yaml`) saying where each stroke lies and which part of the object it becomes; `prepare`
 checks it against the pinned stroke data and the etymology source, renders the strokes, and writes
-every prompt before anything is spent; `draw` asks each model two ways — by text alone, and by editing a picture of the
-character's strokes, each in its own colour; `review.py` is where the owner judges them, blind;
-`report` unblinds the labels.
+every prompt before anything is spent; `draw` asks the model to draw over a picture of the
+character's strokes in black, with the script as its prompt; `review.py` is where the owner judges
+them, blind; `report` unblinds the labels.
 
     .venv/bin/python experiments/character-pictures/run.py fetch
     .venv/bin/python experiments/character-pictures/run.py prepare
@@ -15,9 +15,10 @@ character's strokes, each in its own colour; `review.py` is where the owner judg
 `draw` resumes: a picture already on disk is not drawn again, so after any stop the same command
 carries on. Nothing here writes to the server.
 
-This is round 2. Round 1 (22 characters, three models, numbered strokes, a coloured reference) was
-drawn and judged with this script as it stood at commit 8bdb68f; its results are in
-`results/round-1/`, and the README says what changed since.
+This is round 3. Round 1 (22 characters, three models, numbered strokes, a coloured reference) was
+drawn and judged with this script as it stood at commit 8bdb68f; round 2 (25 characters, two models,
+by text and by editing) at commit cffc334. Their results are in `results/round-N/`, and the README
+says what changed since.
 """
 
 from __future__ import annotations
@@ -32,7 +33,7 @@ import threading
 import time
 import urllib.request
 from collections import Counter, defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
 from string import Template
@@ -43,7 +44,7 @@ import yaml
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
 # Each round is drawn and judged on its own; the fetched dictionary in out/cache/ is shared.
-ROUND = 2
+ROUND = 3
 OUT = HERE / "out" / f"round-{ROUND}"
 RESULTS = HERE / "results" / f"round-{ROUND}"
 PROMPTS = HERE / "prompts"
@@ -51,11 +52,13 @@ STROKES = REPO / "vendor" / "strokes"
 DICTIONARY = HERE / "out" / "cache" / "dictionary.txt"
 
 # The characters, in the order the page shows them. Each must be pictographic or ideographic by
-# Make Me a Hanzi's own etymology; `prepare` drops one the source disagrees with. Round 2 redraws
-# the five that round 1 left without a correct picture, then draws twenty new ones.
-CHARACTERS = "木林森月明" + "子女耳手心弓伞网禾米爪舟立川旦本果众炎凹"
+# Make Me a Hanzi's own etymology; `prepare` drops one the source disagrees with. Round 3 redraws
+# 月, which round 2's script turned the wrong way, then draws thirty new ones: sixteen pictographs,
+# then fourteen ideographs, among them the pairs 上/下 and 末/未.
+CHARACTERS = "月" + "牛贝衣自角瓜云户犬羽车巾穴豆兔龟" + "上下天尖男好采看苗灭坐末未岩"
 KINDS = ("pictographic", "ideographic")
-WAYS = ("text", "edit")
+# Round 2 also asked by text alone: it broke the strokes in 8 of 25 characters, editing in 2.
+WAYS = ("edit",)
 
 
 @dataclass(frozen=True)
@@ -66,11 +69,17 @@ class Model:
     takes: int
     characters: str | None = None  # None: every character
     usd: float = 0.0         # per picture, for the running total
+    pace: float = 0.0        # seconds between the starts of two calls; 0 calls as fast as answered
 
 
 MODELS = (
-    Model("nano-banana-2", "vertex", "gemini-3.1-flash-image", takes=2, usd=0.067),
-    Model("nano-banana-pro", "vertex", "gemini-3-pro-image", takes=2, usd=0.134),
+    # Vertex lets this model draw about one picture a minute (1.07 a minute over round 2's 92
+    # minutes, 1.29 early in round 3, on two different projects), with bursts of up to four. A call
+    # answers in 8–9 s, so unpaced calls burst, then hit 429 and rest: about one call in two was
+    # refused. Starting one call every 50 s keeps under the limit at the same speed.
+    Model("nano-banana-2", "vertex", "gemini-3.1-flash-image", takes=8, usd=0.067, pace=50.0),
+    # Nano Banana Pro ("gemini-3-pro-image") was dropped after round 2: by editing it scored 3.28
+    # against Nano Banana 2's 3.71 and drew 6 stars to its 11, at twice the price.
     # FLUX.2 klein drew a sample in round 1 and was dropped: mean score 2.0, 9 of 16 scored 1.
 )
 
@@ -86,10 +95,12 @@ COLOURS = (
 BOX, TOP = 1024, 900
 SIZE = 1024
 
-FIRST_REST, LONGEST_REST = 30.0, 600.0
+# After a 429 the limit needs about a minute to let one more call through; a 30 s rest was nearly
+# always refused again.
+FIRST_REST, LONGEST_REST = 60.0, 600.0
 # A picture still unavailable after this many tries is left for the next run: about an hour of rests.
 ATTEMPTS = 9
-LOGIN_HINT = ("The Google login has expired. Run `gcp-personal` (or `gcloud auth "
+LOGIN_HINT = ("The Google login has expired. Run `gcp-digest` (or `gcloud auth "
               "application-default login` with the account that should pay), then rerun.")
 
 
@@ -149,10 +160,29 @@ def svg(character: str, *, coloured: bool = True) -> str:
 
 
 def _render(character: str) -> bytes:
+    """The reference picture the model draws over: solid black strokes on white, nothing else.
+
+    Hard rule: no colour, no numbers, no labels, no grid. Round 1's coloured reference came back
+    as coloured ink, and its numbered strokes as stroke-order numbers drawn into the picture. The
+    coloured, numbered sheets a session draws to write a script are for that session's eyes only.
+    """
     import resvg_py  # the experiment's own requirement: requirements.txt here
 
-    return bytes(resvg_py.svg_to_bytes(svg_string=svg(character, coloured=False),
-                                       width=SIZE, height=SIZE))
+    drawing = svg(character, coloured=False)
+    data = bytes(resvg_py.svg_to_bytes(svg_string=drawing, width=SIZE, height=SIZE))
+    _check_reference(data, character)
+    return data
+
+
+def _check_reference(data: bytes, character: str) -> None:
+    """Refuse a reference picture that is not pure black and white, before anything is spent."""
+    import io
+
+    from PIL import Image
+
+    pixels = Image.open(io.BytesIO(data)).convert("RGB")
+    if any(len(set(rgb)) > 1 for _count, rgb in pixels.getcolors(maxcolors=1 << 16) or [(0, (0, 1, 2))]):
+        sys.exit(f"The reference for {character} has colour in it; references must be black on white.")
 
 
 # ── prepare ─────────────────────────────────────────────────────────────────
@@ -224,7 +254,7 @@ def prepare(_: argparse.Namespace) -> None:
 
 
 def prompt(item: dict[str, Any], script: dict[str, Any], way: str) -> str:
-    """The whole prompt for one character and one way of asking.
+    """The whole prompt for one character and one way of asking (`prompts/<way>.md`).
 
     The strokes are listed in stroke order but never numbered: in round 1, numbered strokes came
     back as stroke-order numbers drawn into the picture.
@@ -300,6 +330,19 @@ def _login_expired(error: Exception) -> bool:
     return "Reauthentication is needed" in str(error) or "RefreshError" in str(error)
 
 
+_next_call: dict[str, float] = {}
+
+
+def _wait_turn(model: Model) -> None:
+    """Wait until this model may start another call: `pace` seconds after the last one started."""
+    if model.pace <= 0:
+        return
+    delay = _next_call.get(model.id, 0.0) - time.monotonic()
+    if delay > 0:
+        _stop.wait(delay)
+    _next_call[model.id] = time.monotonic() + model.pace
+
+
 def _draw_one(row: Any, model: Model, text: str, references: list[bytes], seed: int,
               entry: dict[str, Any], halted: threading.Event) -> Any:
     """One picture, resting on a busy provider. None when the provider refused this picture."""
@@ -309,6 +352,7 @@ def _draw_one(row: Any, model: Model, text: str, references: list[bytes], seed: 
 
     rest = FIRST_REST
     for _attempt in range(ATTEMPTS):
+        _wait_turn(model)
         if _stop.is_set() or halted.is_set():
             return None
         try:
@@ -374,9 +418,15 @@ def draw(args: argparse.Namespace) -> None:
     if args.characters:
         items = [item for item in items if item["character"] in args.characters]
     chosen = [m for m in MODELS if not args.models or m.id in args.models.split(",")]
+    if args.pace is not None:
+        chosen = [replace(m, pace=args.pace) for m in chosen]
     scripts = _scripts()
     prompts = {(item["character"], way): prompt(item, scripts[item["character"]], way)
                for item in items for way in WAYS}
+    if "edit" in WAYS:
+        for item in items:
+            _check_reference((OUT / "strokes" / f"{item['character']}.png").read_bytes(),
+                             item["character"])
     catalogue = load_local()
     plans = []
     for model in chosen:
@@ -388,7 +438,9 @@ def draw(args: argparse.Namespace) -> None:
         if args.limit:
             jobs = [job for job in jobs if job[2] <= args.limit]
         left = [job for job in jobs if not picture_path(job[0], model.id, job[1], job[2]).exists()]
-        _say(f"{model.id}: {len(left)} of {len(jobs)} pictures to draw ({model.model})")
+        paced = (f", one call every {model.pace:.0f} s: at least {len(left) * model.pace / 3600:.1f} h"
+                 if model.pace and left else "")
+        _say(f"{model.id}: {len(left)} of {len(jobs)} pictures to draw ({model.model}){paced}")
         plans.append((model, row, jobs))
     OUT.mkdir(exist_ok=True)
     spent: list[float] = []
@@ -406,6 +458,11 @@ def draw(args: argparse.Namespace) -> None:
         for thread in threads:
             thread.join(timeout=200)
     _say(f"done: {len(spent)} pictures drawn now, about ${sum(spent):.2f}")
+    missing = sum(not picture_path(character, model.id, way, take).exists()
+                  for model, _row, jobs in plans for character, way, take in jobs)
+    if missing and not _stopped:
+        _say(f"{missing} pictures still missing (a refusal, or a provider that stayed busy); "
+             "run the same command again to try them")
     if _stopped:
         for reason in _stopped:
             print(f"STOPPED: {reason}", flush=True)
@@ -473,6 +530,33 @@ def report(_: argparse.Namespace) -> None:
                      f"{f'{mean:.2f}' if mean else '—'} | {high:.0%} | {low:.0%} | "
                      f"{starred[f'{model}/{way}']} |")
 
+    starred_pairs = set(best_of.items())
+    for question in QUESTIONS:
+        lines += ["", f"## Score by the {question} answer", "",
+                  f"How the score and the star go with the answer to *{question}*, over every "
+                  "judged picture.", "",
+                  "| Answer | n | Mean score | Scored 4–5 | Scored 1 | ★ best |",
+                  "| --- | --: | --: | --: | --: | --: |"]
+        for answer in ANSWERS:
+            group = [row for row in rows if row[question] == answer]
+            scores = [row["score"] for row in group if row["score"]]
+            if not scores:
+                continue
+            stars = sum((row["character"], row["name"]) in starred_pairs for row in group)
+            lines.append(f"| {answer} | {len(group)} | {sum(scores) / len(scores):.2f} | "
+                         f"{sum(s >= 4 for s in scores) / len(scores):.0%} | "
+                         f"{sum(s == 1 for s in scores) / len(scores):.0%} | {stars} |")
+    broken = []
+    for way in sorted({row["way"] for row in rows}):
+        failing = [c for c in key if sum(row["character"] == c and row["way"] == way
+                                         and row["strokes"] == "no" for row in rows) >= 2]
+        broken.append(f"{way} {len(failing)}" + (f" ({' '.join(failing)})" if failing else ""))
+    lines += ["", "Characters with two or more pictures answered *strokes: no*, by way: "
+              + "; ".join(broken) + "."]
+    redraw = [c for c in key if (labels.get(c) or {}).get("redraw")]
+    if redraw:
+        lines += ["", f"Marked to redraw later: {' '.join(redraw)}."]
+
     lines += ["", "## Per character", "",
               "The picture starred best, which model and way drew a picture judged yes on both "
               "questions, and the highest score seen.", "",
@@ -528,6 +612,8 @@ def main(argv: list[str] | None = None) -> None:
                          + ", ".join(m.id for m in MODELS))
     drawing.add_argument("--characters", help="only these characters, e.g. 人大山")
     drawing.add_argument("--limit", type=int, help="at most this many takes per character and way")
+    drawing.add_argument("--pace", type=float, help="seconds between the starts of two calls, "
+                         "overriding each model's own (0: as fast as the provider answers)")
     commands.add_parser("report", help="unblind the labels and write results/")
     args = parser.parse_args(argv)
     {"fetch": fetch, "prepare": prepare, "draw": draw, "report": report}[args.command](args)

@@ -1,7 +1,7 @@
 """The blind scoring page: one character at a time, all its pictures side by side.
 
 Each picture gets a score from 1 to 5 and two yes / partly / no questions; one picture per
-character can be starred as the best.
+character can be starred as the best, and a character can be marked to redraw in a later pass.
 
     .venv/bin/python experiments/character-pictures/review.py --host "$(tailscale ip -4)"
 
@@ -160,6 +160,8 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError(update)
             if "best" in update and update["best"] not in ("", *self.key[character]):
                 raise ValueError(update)
+            if "redraw" in update and not isinstance(update["redraw"], bool):
+                raise ValueError(update)
         except (ValueError, KeyError, TypeError):
             self._send(HTTPStatus.BAD_REQUEST, b"", "text/plain")
             return
@@ -176,6 +178,8 @@ class Handler(BaseHTTPRequestHandler):
                 label["best"] = update["best"]
             if "note" in update:
                 label["note"] = str(update["note"])[:2000]
+            if "redraw" in update:
+                label["redraw"] = update["redraw"]
             _write(OUT / "labels.json", labels)
         self._send(200, b"{}", "application/json")
 
@@ -246,6 +250,9 @@ body.overlay .frame svg { display: block; }
   font-size: 18px; line-height: 1; background: rgba(255,255,255,.85); color: #999; border: none; }
 .star.on { color: var(--star); background: rgba(255,255,255,.95); }
 .tile.best .frame img { box-shadow: 0 0 0 3px var(--star); }
+.redraw-row { display: flex; gap: 10px; align-items: center; margin: 14px 0 6px; color: var(--muted);
+  font-size: 14px; }
+.redraw-row button { flex: none; }
 .scores { display: flex; gap: 3px; margin-top: 5px; }
 .scores button { flex: 1; min-height: 34px; padding: 0; border-radius: 8px; font-size: 15px; }
 .scores button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--card); }
@@ -487,6 +494,17 @@ function render() {
   });
   page.append(table);
 
+  // Marked for the later pass that redraws characters not yet good enough; the star stays.
+  const redraw = $("button", { class: "redraw" + (label(c).redraw ? " on" : ""),
+    "aria-pressed": String(!!label(c).redraw) }, "↻ Redraw later");
+  redraw.onclick = () => {
+    label(c).redraw = !label(c).redraw;
+    redraw.classList.toggle("on", label(c).redraw);
+    redraw.setAttribute("aria-pressed", String(label(c).redraw));
+    save({ character: c, redraw: label(c).redraw });
+  };
+  page.append($("div", { class: "redraw-row" }, redraw,
+    $("span", {}, "Not good enough yet: draw it again in a later pass, keeping the ★.")));
   const note = $("textarea", { placeholder: `Note on ${c} (optional)` });
   note.value = label(c).note || "";
   let timer;

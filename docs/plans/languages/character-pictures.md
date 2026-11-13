@@ -1,10 +1,10 @@
 # Pictures over pictographic characters · an experiment first
 
-**Status:** round 1 of the experiment is judged
-([`experiments/character-pictures/`](../../../experiments/character-pictures/README.md)). The idea
-works: 18 of 22 characters got a picture the owner liked, and most failures came from the prompt,
-which has been tightened. Round 2 (20 new characters and five redraws) is prepared for the owner to
-draw. Written down when the Write sheet was built
+**Status:** rounds 1 and 2 of the experiment are judged
+([`experiments/character-pictures/`](../../../experiments/character-pictures/README.md)).
+- The idea works: 24 of 25 characters in round 2 got a picture the owner starred.
+- The way is settled: Nano Banana 2, drawing over the character's strokes.
+- Round 3 (月 again and thirty new characters) is prepared for the owner to draw. Written down when the Write sheet was built
 ([`../../features/writing.md`](../../features/writing.md)), as the owner's next idea for the characters.
 
 ## The idea
@@ -42,11 +42,13 @@ scored on its own page (as every labelling follow-up is).
   scene. Told which stroke is which part, it draws 人 and 大 right. So every prompt carries, for each
   stroke, where it lies and which part of the object it becomes, written from the source's hint and
   the oldest forms.
-- **Models.** Nano Banana 2 and Nano Banana Pro on Vertex, and a sample on Cloudflare's FLUX.2 klein,
-  which the free allowance limits. Each is asked at its family's own settings and not ranked against
-  the others.
-- **Two ways to ask.** By text alone, and by editing: the character's strokes are rendered from the
-  stroke data the server already holds, **each stroke in its own colour**, named in the prompt.
+- **Models.** Nano Banana 2 and Nano Banana Pro on Vertex in rounds 1–2, and a sample on Cloudflare's
+  FLUX.2 klein in round 1, which the free allowance limits. Klein was dropped after round 1 and Pro
+  after round 2. Since round 3 only Nano Banana 2 draws.
+- **The way to ask: editing.** The character's strokes are rendered in solid black on white from the
+  stroke data the server already holds, and sent with the stroke script as the prompt.
+  - Rounds 1–2 also asked by text alone. Round 2 showed it breaks the strokes far more often: in 8 of
+    25 characters, against 2 when editing.
 - **Judged blind** by the owner: a 1–5 score per picture, one starred best per character, and two
   questions per picture — do the strokes stay where the character's strokes are, legible as the
   character; does the picture show what the character really depicts. (Round 1 also asked whether
@@ -56,11 +58,16 @@ The likeliest outcomes are that editing works for the simplest pictographs and n
 nothing works well enough. Either is an answer: the first sizes a small feature, and the second
 closes this plan.
 
-## The full run, after round 2
+## The full run, after round 3
 
-If round 2 holds up, every pictographic or ideographic character in the source gets pictures:
-around 3,300 characters. The choice between Nano Banana 2 and Pro is made from round 2, since the
-full run costs per picture. Judging that many must be quick:
+After round 3, every pictographic or ideographic character in the source gets pictures: around 3,300
+characters.
+- Nano Banana 2 drawing over the strokes is the choice, made from round 2. It scored best and costs
+  half of Pro, about $0.07 a picture.
+- Before the full run, the owner goes once over every character drawn so far and redraws those marked
+  "redraw later", keeping each one's star.
+
+Judging that many must be quick:
 
 - **One character at a time, its pictures side by side**, each marked **good**, **usable but not
   perfect**, or **not usable**. There are no questions and no 1–5 score.

@@ -226,6 +226,22 @@ describe("a credentials file the dialog cannot reach", () => {
     fireEvent.click(screen.getByRole("button", { name: "Use it" }));
     await waitFor(() => expect(change).toHaveBeenCalledWith("google-cloud", { credentials: file }));
   });
+
+  it("sends a project typed but not yet saved with the replacement file, so both are checked together", async () => {
+    const vertex: ModelProvider = { ...GOOGLE, credential: { kind: "file", hint: null, account: "acervo@project.example.com" },
+      settings: { project: "old-project" } };
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue([vertex]));
+    const change = vi.spyOn(backendSession, "changeProvider").mockResolvedValue(answer([vertex], "google-cloud"));
+    await openProvider("Google Cloud");
+    fireEvent.change(screen.getByDisplayValue("old-project"), { target: { value: "new-project" } });
+    const file = JSON.stringify({ type: "authorized_user", client_id: "x", client_secret: "y", refresh_token: "z" });
+    fireEvent.click(screen.getByRole("button", { name: "Paste…" }));
+    fireEvent.change(screen.getByLabelText("The credentials file’s contents"), { target: { value: file } });
+    fireEvent.click(screen.getByRole("button", { name: "Use it" }));
+    await waitFor(() => expect(change).toHaveBeenCalledTimes(1));
+    expect(change).toHaveBeenCalledWith("google-cloud",
+      { credentials: file, settings: expect.objectContaining({ project: "new-project" }) });
+  });
 });
 
 describe("a provider's page", () => {
