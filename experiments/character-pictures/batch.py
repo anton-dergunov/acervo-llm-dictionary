@@ -347,9 +347,7 @@ def _plan(args: argparse.Namespace, chosen: list[dict[str, Any]], state: dict[st
     in_flight = {key for job in state["jobs"] if not job.get("harvested") for key in job["requests"]}
     refused = _refusals()
     plan = []
-    for character, _way, take in run._wanted(run.MODEL, chosen, redraw=args.redraw):
-        if args.takes and take > args.takes and not args.redraw:
-            continue
+    for character, _way, take in run._wanted(run.MODEL, chosen, redraw=args.redraw, takes=args.takes):
         key = f"{character}/{take}"
         if key in in_flight or run.picture_path(character, run.MODEL.id, "edit", take).exists():
             continue
@@ -389,6 +387,20 @@ def _rows() -> dict[str, Any]:
 
 
 ADC = Path.home() / ".config" / "gcloud" / "application_default_credentials.json"
+# The one Google Cloud project this experiment may bill, in an ignored file: a project id is private.
+BILLING = run.HERE / "billing.local.json"
+
+
+def guard(row: Any) -> None:
+    """Refuse to bill any project but the one `billing.local.json` names."""
+    if not BILLING.exists():
+        raise Stop(f"no {BILLING.name} beside run.py: write {{\"project\": \"<id>\"}} naming the one Google "
+                   "Cloud project this experiment may bill")
+    allowed = json.loads(BILLING.read_text(encoding="utf-8")).get("project")
+    project = row.setting("project")
+    if not allowed or project != allowed:
+        raise Stop(f"this would bill project {project}, but {BILLING.name} allows only {allowed}. Switch the "
+                   f"shell's account (`gcp-<profile>`) or pass the right `--provider`/`--project`.")
 
 
 def account(project: str | None, credentials: str | None) -> tuple[Any, dict[str, str]]:
@@ -514,6 +526,7 @@ def run_batch(args: argparse.Namespace) -> None:
     chosen = run.prepare(args)
     rows = _rows()
     row, remembered = resolve(args, rows)
+    guard(row)
     state = load()
     prompts = run.prompts_for(chosen)
 
@@ -563,8 +576,7 @@ def run_batch(args: argparse.Namespace) -> None:
         time.sleep(args.poll)
         running = _collect(state, rows)
     missing = sum(not run.picture_path(c, run.MODEL.id, "edit", t).exists()
-                  for c, _w, t in run._wanted(run.MODEL, chosen, redraw=args.redraw)
-                  if not (args.takes and t > args.takes and not args.redraw))
+                  for c, _w, t in run._wanted(run.MODEL, chosen, redraw=args.redraw, takes=args.takes))
     run.say(f"done; {missing} pictures of this set still missing"
             + (" — run the same command again to submit them" if missing else ""))
 

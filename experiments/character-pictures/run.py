@@ -66,7 +66,8 @@ WAYS = ("edit",)
 # Japanese (character frequency summed over wordfreq's word lists). A coarse order on purpose: the
 # most used are drawn and chosen first, and the rare ones are a set of their own.
 GROUPS = (("g1", 1000), ("g2", 2000), ("g3", 3000), ("g4", None))
-SETS = {"common": ("g1", "g2", "g3"), "rare": ("g4",)}
+# g4, the rarer characters, is not drawn: a learner aiming at moderate Chinese meets them almost never.
+SETS = {"common": ("g1", "g2", "g3")}
 
 
 @dataclass(frozen=True)
@@ -527,26 +528,29 @@ def choices() -> dict[str, dict[str, Any]]:
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
-def wanted_takes(character: str, *, redraw: bool, marked: dict[str, dict[str, Any]]) -> list[int]:
+def wanted_takes(character: str, *, redraw: bool, marked: dict[str, dict[str, Any]],
+                 takes: int | None = None) -> list[int]:
     """The takes to draw for one character: the first four, or four more after a redraw mark.
 
     A redraw mark records how many takes the owner had seen (`redrawFrom`); the next four follow
     them. Marking it again after those are chosen from asks for four more after that.
     """
+    count = takes or MODEL.takes
     if not redraw:
-        return list(range(1, MODEL.takes + 1))
+        return list(range(1, count + 1))
     label = marked.get(character) or {}
     if not label.get("redraw"):
         return []
     start = int(label.get("redrawFrom") or MODEL.takes)
-    return list(range(start + 1, start + MODEL.takes + 1))
+    return list(range(start + 1, start + count + 1))
 
 
-def _wanted(model: Model, chosen: list[dict[str, Any]], *, redraw: bool = False) -> list[tuple[str, str, int]]:
+def _wanted(model: Model, chosen: list[dict[str, Any]], *, redraw: bool = False,
+            takes: int | None = None) -> list[tuple[str, str, int]]:
     """Every picture a model is to draw: character, way, take."""
     marked = choices() if redraw else {}
     return [(entry["character"], way, take) for entry in chosen for way in WAYS
-            for take in wanted_takes(entry["character"], redraw=redraw, marked=marked)]
+            for take in wanted_takes(entry["character"], redraw=redraw, marked=marked, takes=takes)]
 
 
 # ── prepare ─────────────────────────────────────────────────────────────────
@@ -715,6 +719,12 @@ def draw(args: argparse.Namespace) -> None:
     chosen = prepare(args)
     model = replace(MODEL, pace=args.pace) if args.pace is not None else MODEL
     row = provider_row(args.provider or model.provider)
+    import batch
+
+    try:
+        batch.guard(row)
+    except batch.Stop as stop:
+        sys.exit(f"STOPPED: {stop}")
     prompts = prompts_for(chosen)
     jobs = _wanted(model, chosen, redraw=args.redraw)
     if args.limit:
@@ -769,7 +779,7 @@ def _group_table() -> list[str]:
         pictures = sum(len(drawn_takes(c)) for c in members)
         chosen = sum(1 for c in members if (marked.get(c) or {}).get("best"))
         redraw = sum(1 for c in members if (marked.get(c) or {}).get("redraw"))
-        label = f"{name} (top {limit:,})" if limit else f"{name} (rarer)"
+        label = f"{name} (top {limit:,})" if limit else f"{name} (rarer, not drawn)"
         lines.append(f"| {label} | {len(members)} | {sum(c in scripts for c in members)} | {len(drawn)} | "
                      f"{pictures} | {sum(c in in_flight for c in members)} | {chosen} | {redraw} |")
     return lines
@@ -873,7 +883,8 @@ def main(argv: list[str] | None = None) -> None:
     batching.add_argument("--budget", type=float, help="submit at most this many dollars' worth in this run")
     batching.add_argument("--job-size", type=int, default=500, help="requests per batch job (default 500)")
     batching.add_argument("--redraw", action="store_true", help="four more takes for characters marked to redraw")
-    batching.add_argument("--takes", type=int, help="at most this many takes per character (a pilot)")
+    batching.add_argument("--takes", type=int, help=f"takes per character (default {MODEL.takes}); "
+                          "with --redraw, how many more")
     batching.add_argument("--dry-run", action="store_true", help="say what would be submitted, and stop")
     batching.add_argument("--no-wait", action="store_true", help="submit and collect what is done, then stop")
     batching.add_argument("--poll", type=float, default=300.0, help="seconds between checks (default 300)")

@@ -70,9 +70,10 @@ they are written in Simplified Chinese, Traditional Chinese or Japanese, whichev
 - g1, the top 1,000: 584 characters;
 - g2, 1,000 to 2,000: 410;
 - g3, 2,000 to 3,000: 254;
-- g4, the rest: 747, a set of its own (`rare`).
+- g4, the rest: 747. **Not drawn**: a learner aiming at moderate Chinese almost never meets a
+  character outside the top 3,000, and even HSK 3.0's full syllabus stops there.
 
-They are drawn and chosen in that order.
+They are drawn and chosen in that order: 1,248 characters in all.
 
 **Shared across languages.**
 - A picture belongs to a character's strokes, so it serves every language that writes the character
@@ -93,7 +94,7 @@ They are drawn and chosen in that order.
   takes 67% of the time, and one scored 4 or more 90% of the time.
 - **In Vertex batch jobs**: half the price ($0.034 a picture, measured), and no limit of one picture a
   minute.
-- About $165 for the common set, $105 for the rare one, and around $70 for redraws.
+- About $170 for the 1,248 characters at four takes ($255 at six), and around $45 for redraws.
 - The scripts are written from measured fact sheets, by a brief that carries every rule the rounds
   produced (`scripts/GUIDE.md` in the experiment).
 
@@ -104,15 +105,44 @@ mind: only the best picture is ever shown, so only the best needs marking.
 
 ## What is left
 
-- **Scripts** for the characters still without one. `run.py status` in the experiment counts them per
-  group, and `run.py facts --group <g> --unscripted` writes their fact sheets. The writing follows
-  the experiment README, "The full run".
-- **Drawing** each set (`run.py batch --set common`, then `--set rare`), and **choosing**.
-- **Redrawing** the marked characters: revise their scripts from the notes, then `batch --redraw`.
-- **The feature itself**: an extra card in the word's article for each character that has a chosen
-  picture, outside the Write sheet. It needs a decision on where the chosen pictures live (pinned
-  data, like the strokes, rather than per-owner media) and a check that a picture's strokes are right
-  before it is shown. A picture's ink can be compared with the character's strokes by machine; the
-  pilot's four pictures had 93–98% of the strokes inked. That could flag a broken picture before the
-  owner sees it.
-- **Japanese-only forms**, if Japanese is learned in earnest (above).
+In this order. Every Google Cloud call bills the one project the experiment's ignored
+`billing.local.json` names; `batch` refuses any other.
+
+1. **Fact-check the scripts against a scholarly origin.** Make Me a Hanzi's hint is sometimes a
+   traditional folk explanation rather than current scholarship: g1's 王 is "a person joining heaven
+   and earth", where scholars read an axe head. The scenes and stroke roles were written by models
+   from their own knowledge, and some invent things (會's hall).
+   - For each script, give Argon (Gemini, batched) the script, its fact sheet and the character's
+     "Glyph origin" text from Wiktionary (CC BY-SA, citing scholarly sources).
+   - Argon corrects `object` and `history` where they contradict that origin, and flags strokes
+     whose part no longer fits. The fact sheet and `run.py check` still bind the strokes.
+   - Do g1 **before** drawing it, so no picture is spent on a wrong object.
+   - About $30 for every script, at Pro-like promotional prices in batch; to be measured on a pilot.
+2. **Draw g1** (`run.py batch --set common --provider current` after switching to the billing
+   account): about $80 at four takes.
+3. **Write g2 and g3 with Argon** from the same fact sheets and `scripts/GUIDE.md`, then fact-check
+   them the same way. About $25. A writer and checker reached through `acervo.models` or the batch
+   code here; the owner's other research project has a batch script for Argon to copy from.
+4. **Choose**, on the tablet, and **redraw** the marked characters after revising their scripts
+   from the notes.
+5. **The feature**:
+   - Tap a character in a Chinese headword for a card with its picture, what it depicted, its
+     components and a link to the Write sheet. Or show the word's characters as a row of thumbnails
+     under the headword.
+   - About 80% of characters are sound-plus-meaning compounds with no picture of their own. Their
+     card shows their components' pictures (妈: 女's picture, "sounds like 马"), so nearly every
+     character a learner meets gets some picture. Measure that coverage first.
+   - The chosen pictures ship as pinned data fetched to the device, like the strokes: one picture a
+     character, about 30 KB, so about 40 MB in all.
+   - A picture's ink can be compared with the character's strokes by machine (the pilot inked 93–98%
+     of them), to flag a broken picture before it is shown.
+6. **Japanese-only forms**, if Japanese is learned in earnest (above).
+
+**Cost of the whole run**, at about $0.034 a picture in batch:
+
+| Takes | Pictures | Drawing | Redraws | Argon | Total |
+| --- | --: | --: | --: | --: | --: |
+| 4 | 4,988 | $171 | ~$45 | ~$55 | **~$270** |
+| 6 | 7,484 | $256 | ~$25 | ~$55 | **~$335** |
+
+Six takes for g1 only, four for the rest, comes to about $310.

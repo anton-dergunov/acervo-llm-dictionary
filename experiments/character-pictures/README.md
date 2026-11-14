@@ -215,7 +215,7 @@ Chinese or Japanese, whichever is highest, from wordfreq's word lists, and put i
 | g1 | top 1,000 | 584 | `common` |
 | g2 | 1,000–2,000 | 410 | `common` |
 | g3 | 2,000–3,000 | 254 | `common` |
-| g4 | rarer | 747 | `rare` |
+| g4 | rarer | 747 | not drawn |
 
 - One picture serves every language that writes the character with the same strokes: 人 for Chinese
   and Japanese alike, 車 for Traditional Chinese and Japanese.
@@ -246,7 +246,11 @@ caffeinate -i .venv/bin/python experiments/character-pictures/run.py batch --set
   minutes, and writes each finished job's pictures to `out/full/pictures/`.
 - **Cost and time.** About $0.034 a picture: half the normal price, measured on the pilot. Google says
   most jobs finish within 24 hours of starting. The pilot's four pictures took 12 minutes.
-- **The rare set** is the same command with `--set rare`.
+- **g4 is not drawn.** A learner aiming at moderate Chinese almost never meets a character outside
+  the top 3,000.
+- **Billing guard**: `batch` and `draw` bill only the Google Cloud project named in the ignored
+  `billing.local.json` beside `run.py` (`{"project": "<id>"}`), and stop on any other.
+- **Takes**: `--takes 6` draws six a character instead of four.
 - **Before spending**: `--dry-run` says how many pictures and how much, and stops.
 - **Stop and resume**: Ctrl-C at any time, then run the same command again.
   - Jobs keep running at Google meanwhile. `out/full/batches.json` remembers them, so the rerun
