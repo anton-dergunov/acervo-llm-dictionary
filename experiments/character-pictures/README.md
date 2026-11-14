@@ -1,10 +1,9 @@
 # Pictures whose strokes are the character
 
-**Status: round 2 judged 13 Nov 2026. Nano Banana 2 drawing over the character's strokes is the
-way forward. Round 3 (月 again and thirty new characters, that model and way only) is prepared and
-ready to draw.** The plan this serves is
-[`docs/plans/languages/character-pictures.md`](../../docs/plans/languages/character-pictures.md);
-it stays there until the owner decides.
+**Status: round 3 judged 14 Nov 2026; every one of its 31 characters got a picture scored 5. The
+full run is under way: every other character the source calls pictographic or ideographic, 1,995 in
+all, four takes each in Vertex batch jobs, chosen on the tablet.** The plan this serves is
+[`docs/plans/languages/character-pictures.md`](../../docs/plans/languages/character-pictures.md).
 
 ## Question
 
@@ -53,8 +52,8 @@ not a model**: `prepare` drops any character the source disagrees with. Each rou
   - 舌, 戈, 又, 矢 and 丘 were considered and left out, because their strokes do not map cleanly onto
     the parts of one picture.
 
-**The stroke script** ([`scripts.yaml`](scripts.yaml)), one per character, written by hand from the
-source's hint and the character's oldest forms:
+**The stroke script** ([`scripts/`](scripts/): rounds 1–3 in `rounds.yaml`, the full run one file per
+writing batch), one per character, written from the source's hint and the character's oldest forms:
 - `object`: what the character depicted.
 - `strokes`: one entry per stroke, in the pinned stroke order, each saying **where the stroke lies**
   and **which part of the object it becomes**. `prepare` refuses a script whose count differs from
@@ -161,7 +160,7 @@ a reference with any colour in it.)*
 - Never ask for text.
 - Always send the reference picture and the script together. Text alone breaks the strokes.
 
-**A stroke script** (`scripts.yaml`):
+**A stroke script** (`scripts/`; the writers' brief is [`scripts/GUIDE.md`](scripts/GUIDE.md)):
 - **`object`** comes from the source's hint and the oldest forms, never a fresh mnemonic.
   - Where the owner has a picture in mind, the script follows it: 月 waxes on the right.
   - Name a direction whenever one matters: which way a person faces, which way a crescent curves.
@@ -173,6 +172,12 @@ a reference with any colour in it.)*
   - Name the hooks and plain ends (木's trunk has no hook).
   - Name the lengths that tell the character apart (末/未).
   - Name the sizes of a compound's parts (林's taller right tree).
+- **Lengths that tell characters apart** go in `exact` as a comparison in words, read from the
+  measured outlines: "the top line is clearly shorter than the one below it, about two thirds of
+  it". Never digits. Round 3's 未 shows a bare "shorter" is not enough.
+- **A compound ideograph** is one concrete scene. `object` names it and what each component is in it;
+  `layout` puts each component's thing on that component's own strokes, side by side or one above the
+  other as in the box. Round 3's compound scenes were the worst depicted.
 - **`layout`**:
   - Put the object behind the strokes, each part on its own stroke.
   - Keep ground and water below the lowest stroke.
@@ -183,6 +188,10 @@ a reference with any colour in it.)*
 **Judging**:
 - The strokes decide the score; check them against the overlay before starring.
 - A detached, hooked or straightened stroke is easy to miss at a glance.
+- The first picture on a page gets more stars than chance gives; look at every picture first.
+
+**Takes**: 4 a character, then 4 more for those marked to redraw. They are independent samples, not
+seeds.
 
 ## Running it
 
@@ -192,58 +201,116 @@ On the laptop, from the repository root:
 uv pip install -r experiments/character-pictures/requirements.txt   # resvg-py, for the strokes
 python3 deploy/acervo/strokes/fetch.py                               # the pinned stroke data
 .venv/bin/python experiments/character-pictures/run.py fetch         # dictionary.txt, verified
-.venv/bin/python experiments/character-pictures/run.py prepare       # strokes, prompts, characters.json
 ```
 
-**The draw takes about three and a half hours.** Vertex lets Nano Banana 2 draw about one picture a
-minute, with short bursts of up to four. That held on two projects: 1.07 a minute over round 2, 1.29
-early in round 3.
-- So `draw` starts one call every 50 s (the model's `pace` in `run.py`, or `--pace` for one run),
-  instead of calling as fast as answers come.
-- Unpaced, about one call in two was refused with a 429.
-- A 429 that still comes rests 60 s, then longer.
+### The full run
 
-Run it in your own terminal:
+**Which characters** (`run.py select`, into `results/full/characters.json`): every character Make Me a
+Hanzi calls pictographic or ideographic and the pinned stroke data has, apart from the 72 of rounds
+1–3. That is 1,995. Each is ranked by how often it is written in Simplified Chinese, Traditional
+Chinese or Japanese, whichever is highest, from wordfreq's word lists, and put in a group:
+
+| Group | Rank | Characters | Set |
+| --- | --- | --: | --- |
+| g1 | top 1,000 | 584 | `common` |
+| g2 | 1,000–2,000 | 410 | `common` |
+| g3 | 2,000–3,000 | 254 | `common` |
+| g4 | rarer | 747 | `rare` |
+
+- One picture serves every language that writes the character with the same strokes: 人 for Chinese
+  and Japanese alike, 車 for Traditional Chinese and Japanese.
+- A Traditional and a Simplified form (車 and 车) are two characters with two pictures, since their
+  strokes differ; their scripts share the object.
+- Japanese-only forms (気, 歩, 黒, 戸, 亀, …) are not in the pinned data, so they are not drawn.
+
+**Writing the scripts.** `run.py facts --group g1` writes a fact sheet per character for the writer,
+into `out/full/facts/` (`facts.py` measures them):
+- each stroke's kind and place, from its median;
+- the touches, crossings and small gaps, measured on the strokes rendered one by one;
+- the length ratios of strokes running the same way;
+- the components with their boxes, and the script already written for each.
+
+The writer follows [`scripts/GUIDE.md`](scripts/GUIDE.md) and writes one file per batch,
+`scripts/<group>-<nn>.yaml`. `run.py check` refuses a script with a wrong stroke count, a missing
+field, a digit or a numbered stroke.
+
+**Drawing: one command per set, in your own terminal.**
 
 ```bash
-caffeinate -i .venv/bin/python experiments/character-pictures/run.py draw 2>&1 \
-  | tee -a experiments/character-pictures/out/round-3/draw.log
+caffeinate -i .venv/bin/python experiments/character-pictures/run.py batch --set common 2>&1 \
+  | tee -a experiments/character-pictures/out/full/batch.log
 ```
 
-- **Watch it**: `tail -f experiments/character-pictures/out/round-3/draw.log`. There is one line per
-  picture, and one per rest when a provider is busy.
-- **A picture refused**: once in round 2, the model answered with a sentence instead of an image.
-  The last line then says how many pictures are missing; run the same command again for them.
-- **Resume**: run the same command again. A picture already on disk is never drawn twice, so a stop,
-  a crash or a closed lid costs only the call in flight.
-- **It stops on its own** when a provider refuses for a reason that is not about one picture: a key,
-  a model id, an expired login, or a dropped reference picture. It says why, as a `STOPPED:` line at the end.
-- **If Vertex says the Google login has expired**, run `gcp-digest` (or `gcloud auth
-  application-default login`), then rerun.
-- **Only some characters**: `--characters 月牛`. **Fewer takes**: `--limit 4`. **Another pace**:
-  `--pace 40`; a log full of `rate_limited` lines means the pace is too fast.
-  Every call is logged to `out/round-3/draws.jsonl` with its time and cost.
+- **What it does.** It draws every scripted character's four takes that are not on disk yet, in
+  Vertex batch jobs of 500 pictures, the most popular group first. Then it waits, checking every 5
+  minutes, and writes each finished job's pictures to `out/full/pictures/`.
+- **Cost and time.** About $0.034 a picture: half the normal price, measured on the pilot. Google says
+  most jobs finish within 24 hours of starting. The pilot's four pictures took 12 minutes.
+- **The rare set** is the same command with `--set rare`.
+- **Before spending**: `--dry-run` says how many pictures and how much, and stops.
+- **Stop and resume**: Ctrl-C at any time, then run the same command again.
+  - Jobs keep running at Google meanwhile. `out/full/batches.json` remembers them, so the rerun
+    collects them and never submits the same pictures twice.
+  - Characters scripted since the last run are submitted by the rerun.
+- **Several Google Cloud accounts.**
+  - `--provider current` uses the shell's current account: the one `gcp-<profile>` switched to
+    (`GOOGLE_APPLICATION_CREDENTIALS`, and the project from `GOOGLE_CLOUD_PROJECT` or gcloud's
+    active configuration).
+  - `--project <id>` names the project, signed in with that same file; `--credentials <file>` names
+    another file.
+  - `--provider <id>` uses a row of `providers.local.json` instead (the default is `vertex`).
+  - `--cap 40` spends at most $40 in all on that account. It counts what the call log says was
+    already spent there and what is in flight, and submits the most popular characters first.
+    `--budget 40` limits only this run's new submissions.
+  - A job remembers its account, so after switching, the earlier jobs are still collected from where
+    they ran.
+  - When an account cannot pay, the run stops with a `STOPPED:` line naming it. Pictures already
+    finished are written, and a rerun with another account submits the rest.
+- **It stops on its own**, with a `STOPPED:` line, on an expired login (run `gcp-digest` or
+  `gcloud auth application-default login`, then rerun) or a refused setting.
+- **A refusal**: the model sometimes answers with a sentence instead of a picture. The take stays
+  missing and the next run asks again; a character refused twice is skipped unless named with
+  `--characters`.
+- **Files**: the bucket `gs://<project>-character-pictures` is created on first use and holds the
+  references and each job's files. A job's files are deleted once its pictures are written.
+- **Watching**: `run.py status` shows per group what is scripted, drawn, in flight and chosen, and the
+  money spent per account. Every picture is logged to `out/full/draws.jsonl` with its tokens and cost.
+- **The fallback**: `run.py draw --set common` draws one call at a time at the full price, about one
+  picture a minute, and takes the same `--provider`.
 
-**Judging**, from the tablet over Tailscale. It can start before the draw has finished; reload the page
-to see new pictures:
+**Choosing**, from the tablet over Tailscale. It can start as soon as the first job is collected;
+reload the page to see new pictures:
 
 ```bash
-.venv/bin/python experiments/character-pictures/review.py --host "$(tailscale ip -4)"
+.venv/bin/python experiments/character-pictures/review.py --choose --host "$(tailscale ip -4)"
 ```
 
-**Afterwards**, `run.py report` unblinds the labels and writes the round's `results/round-N/`:
-- `report.md` and `summary.json`: for each model and way, the share answering yes / partly / no on
-  each question, the mean score, the shares scored 4–5 and 1, and how often it drew the starred
-  picture. How the score and the star go with each answer to *strokes* and *depicts*. Per character:
-  the starred picture, the combinations that got yes on both questions, and the top score. The
-  characters marked to redraw.
-- `labels.json`, `key.json` and `draws.jsonl`.
+- One character a page, its four takes side by side, and an overlay of the exact strokes.
+- **★** marks the best picture. **↻ None good — redraw** asks for four more takes; a note can say
+  what is wrong.
+- Characters come group by group. "Next to choose ›" skips the ones done, and the filters show what
+  is left to choose or marked to redraw.
+- Every tap is saved to `out/full/choices.json`.
 
-Then write up the result here and put the decision in the plan.
+**Redrawing.** A session reads the notes in `choices.json` and revises those scripts. Then:
 
-Each round was drawn and judged with `run.py` and the prompts as they stood at one commit:
+```bash
+caffeinate -i .venv/bin/python experiments/character-pictures/run.py batch --set common --redraw
+```
+
+This draws takes 5–8 for every character marked to redraw. They appear on the same page, marked
+"new", beside the first four.
+
+**Afterwards**, `run.py report` writes `results/full/report.md` (per group: scripted, drawn, chosen,
+marked to redraw, and the notes) and copies `choices.json` and `draws.jsonl` beside it.
+
+### Rounds 1–3
+
+Each round was drawn and judged with `run.py`, `review.py` (the blind scoring page, still there
+without `--choose`) and the prompts as they stood at one commit:
 - round 1 at `8bdb68f`, with numbered strokes and a coloured reference;
-- round 2 at `cffc334`, by text and by editing, with both models.
+- round 2 at `cffc334`, by text and by editing, with both models;
+- round 3 at `b86636b`, editing only, with Nano Banana 2.
 
 Their pictures are kept, ignored, in `out/round-N/`.
 
@@ -252,8 +319,9 @@ Their pictures are kept, ignored, in `out/round-N/`.
 - **Stroke data**: Make Me a Hanzi's strokes as packaged by `hanzi-writer-data@2.0.1`, under the
   Arphic Public License (`deploy/acervo/strokes/pin.json`).
 - **Etymology**: Make Me a Hanzi's `dictionary.txt`, under the GNU LGPL v3 or later (its `COPYING`).
-  It is fetched pinned into `out/cache/` and never committed. `results/round-N/characters.json` quotes
-  the hints for that round's characters, with attribution.
+  It is fetched pinned into `out/cache/` and never committed. `results/round-N/characters.json` and
+  `results/full/characters.json` quote the hints for their characters, with attribution.
+- **Character frequencies**: wordfreq's word lists (`requirements/server.txt`), summed per character.
 - **Pictures**: they are media, regenerable, and stay in the ignored `out/`.
 
 ## Results
@@ -421,4 +489,42 @@ What changed, from round 2:
 - **Thirty new characters**, their `exact` lines measured on the outlines.
 - **The judging page can mark a character to redraw later.**
 
-Not yet drawn.
+### Round 3 (14 Nov 2026)
+
+[`results/round-3/report.md`](results/round-3/report.md) has the full report. The owner left no
+written notes this time, only the labels, so what follows is read from them.
+
+All 248 pictures were drawn and judged: 31 characters, 8 takes each, Nano Banana 2 drawing over the
+strokes.
+
+| Kind | Characters | Mean score | Scored 4–5 | Scored 1 | 5s per character | Strokes *no* |
+| --- | --: | --: | --: | --: | --: | --: |
+| Pictographs | 17 | 3.38 | 50% | 13% | 1.82 | 15% |
+| Ideographs | 14 | 3.15 | 42% | 13% | 1.57 | 21% |
+| All | 31 | 3.28 | 46% | 13% | 1.71 | 18% |
+
+- **Every character got a picture scored 5, and a star.** There were 53 fives, 1.71 a character
+  (the owner guessed about 1.5). No character was marked to redraw. 月 is right at last: its waxing
+  crescent got a 5 and the star.
+- **The strokes decide, again.** By the strokes answer:
+  - *yes*: 155 pictures, mean 3.87, and 29 of the 31 stars;
+  - *partly*: 3.04, and the other 2 stars (男, 灭);
+  - *no*: 1.45, and two thirds of them scored 1.
+
+  Every star answered *depicts: yes*. Yes on both averaged 4.15, with 77% scored 4–5.
+- **Four takes would have been enough for most characters.** Over random subsets of the 8 takes, a
+  character has a picture scored 5 within 4 takes 67% of the time and one scored 4 or more 90% of the
+  time; within 6, 87% and 98%. So the full run draws 4 takes, then 4 more for the characters the owner
+  marks to redraw.
+- **The hardest details are still the lengths that tell characters apart.** 未 had 5 of 8 pictures with
+  strokes *no*, 角 4, 末 3 and 上 3. The pictures made 未's top line as long as the lower one, which turns
+  it into 末.
+- **Compound scenes depict less well.** 苗 and 坐 had 5 of 8 pictures not answering *depicts: yes*, and 看,
+  灭 and 犬 4. Their strokes were mostly right; the scene of several things was not.
+- **The takes are not seeded.** `run.py` passes the take number as a seed, but the route that sends a
+  reference picture sends no seed (`src/acervo/models/call.py`, `_image_with_references`). So the takes are
+  independent samples. Fives lean to takes 5–8 (32 of 53), which is within chance.
+- **The first picture on the page was favoured.** Letter A, shown first, got 13 of the 31 stars where
+  chance gives about 4, and a mean of 3.81 against about 3.2 for the other letters. Its pictures were
+  random takes, so this is how a page is judged, not what was drawn. The choosing page shows takes in
+  order; looking at every picture before starring is what keeps this harmless.

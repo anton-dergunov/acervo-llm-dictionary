@@ -1,7 +1,15 @@
-"""The blind scoring page: one character at a time, all its pictures side by side.
+"""The review pages: one character at a time, all its pictures side by side.
 
-Each picture gets a score from 1 to 5 and two yes / partly / no questions; one picture per
-character can be starred as the best, and a character can be marked to redraw in a later pass.
+**`--choose`** (the full run): tap ★ on the best picture, or mark the character "none good —
+redraw" with an optional note saying what is wrong. Nothing is scored. Choices go to
+`out/full/choices.json` on every tap; `run.py batch --redraw` draws four more takes for the marked
+characters, and they appear here beside the first four.
+
+    .venv/bin/python experiments/character-pictures/review.py --choose --host "$(tailscale ip -4)"
+
+**Without it**, the blind scoring page of rounds 1–3: each picture gets a score from 1 to 5 and two
+yes / partly / no questions; one picture per character can be starred as the best, and a character
+can be marked to redraw in a later pass.
 
     .venv/bin/python experiments/character-pictures/review.py --host "$(tailscale ip -4)"
 
@@ -21,6 +29,7 @@ import json
 import random
 import string
 import threading
+from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -112,20 +121,20 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self) -> None:  # noqa: N802
         if self.path in ("/", "/index.html"):
-            self._send(200, PAGE.encode(), "text/html; charset=utf-8")
+            self._send(200, PAGE.replace("__STYLE__", STYLE).encode(), "text/html; charset=utf-8")
         elif self.path == "/data":
             characters = []
             for item in self.characters:
                 drawn = [letter for letter in item["letters"]
                          if (file := _picture(self.key, item["character"], letter)) and file.exists()]
                 characters.append({**item, "letters": drawn})
-            body = {"round": run.ROUND, "characters": characters,
+            body = {"round": run.STAGE, "characters": characters,
                     "labels": _read(OUT / "labels.json", {})}
             self._send(200, json.dumps(body, ensure_ascii=False).encode(), "application/json")
         elif self.path.startswith(("/img/", "/ref/")):
             try:
                 parts = self.path.split("/")  # /img/<round>/<index>/<letter>, /ref/<round>/<index>
-                if int(parts[2]) != run.ROUND:
+                if parts[2] != run.STAGE:
                     raise ValueError(parts[2])
                 item = self.characters[int(parts[3])]
                 file = (OUT / "strokes" / f"{item['character']}.png" if parts[1] == "ref"
@@ -184,14 +193,7 @@ class Handler(BaseHTTPRequestHandler):
         self._send(200, b"{}", "application/json")
 
 
-PAGE = r"""<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Character pictures, blind</title>
-<style>
-:root {
+STYLE = r""":root {
   --bg: #f6f2ea; --card: #fffdf8; --ink: #2a2622; --muted: #7a7166; --rule: #e2dacd;
   --accent: #3f6b4f; --accent-soft: #dfeadf; --mid: #a07a1f; --mid-soft: #f4ead2;
   --warn: #9a4b2f; --warn-soft: #f3e1d8; --star: #c98a00;
@@ -283,7 +285,16 @@ textarea { width: 100%; min-height: 50px; font: inherit; border: 1px solid var(-
   align-items: center; color: #ddd; z-index: 1; }
 #zoom .top .label { margin-right: auto; }
 #zoom .top button { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.3); }
-</style>
+"""
+
+PAGE = r"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Character pictures, blind</title>
+<style>
+__STYLE__</style>
 </head>
 <body>
 <header class="bar">
@@ -562,19 +573,435 @@ fetch("/data").then(r => r.json()).then(data => {
 """
 
 
+# ── choosing: the full run ──────────────────────────────────────────────────
+
+
+def choosable() -> list[dict[str, Any]]:
+    """Every character of the full run, by its place in the catalogue (a stable index). The page
+    lists those with pictures, looked up on every load, so new ones appear on a reload."""
+    return [{"index": index, "character": entry["character"], "group": entry["group"]}
+            for index, entry in enumerate(run.catalogue())]
+
+
+class ChooseHandler(BaseHTTPRequestHandler):
+    characters: list[dict[str, Any]] = []
+    by_index: dict[int, dict[str, Any]] = {}
+
+    def log_message(self, *_: Any) -> None:
+        pass
+
+    def _send(self, status: int, body: bytes, kind: str, cache: bool = False) -> None:
+        self.send_response(status)
+        self.send_header("Content-Type", kind)
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "max-age=86400" if cache else "no-store")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _json(self, value: Any) -> None:
+        self._send(200, json.dumps(value, ensure_ascii=False).encode(), "application/json")
+
+    def do_GET(self) -> None:  # noqa: N802
+        parts = self.path.split("?")[0].split("/")
+        if self.path in ("/", "/index.html"):
+            self._send(200, CHOOSE_PAGE.replace("__STYLE__", STYLE).encode(), "text/html; charset=utf-8")
+        elif self.path == "/data":
+            listed = [{**item, "takes": takes} for item in self.characters
+                      if (takes := run.drawn_takes(item["character"]))]
+            self._json({"stage": run.STAGE, "groups": [name for name, _ in run.GROUPS],
+                        "characters": listed, "choices": run.choices()})
+        elif len(parts) == 3 and parts[1] == "char":
+            try:
+                item = self.by_index[int(parts[2])]
+            except (ValueError, KeyError):
+                self._send(404, b"", "text/plain")
+                return
+            character = item["character"]
+            script = run._scripts()[character]
+            entry = run.catalogue()[item["index"]]
+            strokes = run._strokes(character)["strokes"]
+            self._json({
+                "character": character, "definition": entry["definition"], "hint": entry["hint"],
+                "type": entry["type"], "object": str(script.get("object") or "").strip(),
+                "history": str(script.get("history") or "").strip(),
+                "lines": [{"where": str(line["where"]).strip(), "part": str(line["part"]).strip()}
+                          for line in script.get("strokes") or []],
+                "colours": [run.COLOURS[i % len(run.COLOURS)][1] for i in range(len(strokes))],
+                "outlines": strokes,
+            })
+        elif len(parts) >= 4 and parts[1] in ("img", "ref") and parts[2] == run.STAGE:
+            try:
+                character = self.by_index[int(parts[3])]["character"]
+                file = (run.reference(character) if parts[1] == "ref"
+                        else run.picture_path(character, run.MODEL.id, "edit", int(parts[4])))
+            except (ValueError, KeyError, IndexError):
+                file = None
+            if not file or not file.exists():
+                self._send(404, b"", "text/plain")
+                return
+            self._send(200, file.read_bytes(), "image/png" if file.suffix == ".png" else "image/webp", cache=True)
+        else:
+            self._send(404, b"", "text/plain")
+
+    def do_POST(self) -> None:  # noqa: N802
+        if self.path != "/choose":
+            self._send(404, b"", "text/plain")
+            return
+        try:
+            update = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)))
+            character = update["character"]
+            takes = run.drawn_takes(character)
+            if not takes:
+                raise KeyError(character)
+            if "best" in update and update["best"] not in (0, *takes):
+                raise ValueError(update)
+            if "redraw" in update and not isinstance(update["redraw"], bool):
+                raise ValueError(update)
+        except (ValueError, KeyError, TypeError):
+            self._send(HTTPStatus.BAD_REQUEST, b"", "text/plain")
+            return
+        with _lock:
+            marked = run.choices()
+            label = marked.setdefault(character, {"best": 0, "redraw": False, "note": ""})
+            if "best" in update:
+                label["best"] = update["best"]
+            if "redraw" in update:
+                label["redraw"] = update["redraw"]
+                # The redraw follows the takes seen when it was asked for (`run.wanted_takes`).
+                label["redrawFrom"] = max(takes) if update["redraw"] else label.get("redrawFrom")
+            if "note" in update:
+                label["note"] = str(update["note"])[:2000]
+            label["at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            _write(run.OUT / "choices.json", marked)
+        self._json(label)
+
+
+CHOOSE_PAGE = r"""<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Character pictures</title>
+<style>
+__STYLE__
+.groups { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 4px; align-items: center; }
+.groups .sep { width: 10px; }
+.groups button { font-size: 14px; min-height: 34px; }
+.picker summary { font-size: 14px; margin: 4px 0; }
+.tile .take { position: absolute; left: 5px; top: 5px; background: rgba(0,0,0,.6); color: #fff;
+  font-size: 13px; font-weight: 700; border-radius: 999px; padding: 0 8px; pointer-events: none; }
+.tile .take.new { background: var(--mid); }
+.choose-row { display: flex; gap: 10px; align-items: center; margin: 14px 0 6px; flex-wrap: wrap; }
+.choose-row .hint { color: var(--muted); font-size: 14px; }
+button.redraw.on { background: var(--warn-soft); border-color: var(--warn); color: var(--warn); }
+.strip button.redraw { background: var(--warn-soft); border-color: var(--warn); }
+.foot { gap: 8px; }
+.foot .grow { flex: 1; }
+#zoom .top button.on { color: var(--star); border-color: var(--star); }
+</style>
+</head>
+<body>
+<header class="bar">
+  <button id="prev" aria-label="Previous character">‹</button>
+  <span class="where" id="where">Loading…</span>
+  <span class="count" id="count"></span>
+  <button id="size" title="Pictures per row">▦ 2</button>
+  <button id="overlay" title="Lay the exact strokes over every picture">Strokes</button>
+  <button id="next" aria-label="Next character">›</button>
+</header>
+<main>
+  <div class="groups" id="groups"></div>
+  <details class="picker" id="picker"><summary id="pickerLabel">Characters</summary><div class="strip" id="strip"></div></details>
+  <div id="page"></div>
+</main>
+<div id="zoom" role="dialog" aria-label="Picture">
+  <div class="top"><span class="label"></span>
+    <button data-star>★ Best</button><button data-step="-1">‹</button><button data-step="1">›</button><button data-close>✕</button></div>
+  <div class="frame"><img alt=""></div></div>
+<script>
+const SVGNS = "http://www.w3.org/2000/svg";
+const NAMES = { g1: "Top 1,000", g2: "1,000–2,000", g3: "2,000–3,000", g4: "Rarer" };
+let DATA, CHOICES, LIST = [], HERE = 0, GROUP = "g1", FILTER = "all", DETAIL = null;
+const cache = new Map();
+const $ = (tag, attrs = {}, ...kids) => {
+  const node = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === "class") node.className = v; else if (k.startsWith("on")) node[k] = v;
+    else node.setAttribute(k, v);
+  }
+  for (const kid of kids) node.append(kid);
+  return node;
+};
+const store = (k, v) => { try { v === undefined ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} };
+const recall = k => { try { return localStorage.getItem(k); } catch { return null; } };
+const choice = c => CHOICES[c] ??= { best: 0, redraw: false, note: "" };
+
+// "redraw": asked for, its pictures not drawn yet; once they are, the character is undecided again.
+function state(item) {
+  const label = CHOICES[item.character];
+  if (label?.redraw) return Math.max(...item.takes) > (label.redrawFrom || 0) ? "undecided" : "redraw";
+  return label?.best ? "chosen" : "undecided";
+}
+const inGroup = () => DATA.characters.filter(item => item.group === GROUP);
+function rebuild() {
+  LIST = inGroup().filter(item => FILTER === "all" || state(item) === FILTER);
+}
+
+function overlaySvg(detail) {
+  const svg = document.createElementNS(SVGNS, "svg");
+  svg.setAttribute("viewBox", "0 0 1024 1024");
+  const g = document.createElementNS(SVGNS, "g");
+  g.setAttribute("transform", "translate(0 900) scale(1 -1)");
+  for (const d of detail.outlines) {
+    const path = document.createElementNS(SVGNS, "path");
+    path.setAttribute("d", d);
+    path.setAttribute("fill", "rgba(233, 30, 99, 0.38)");
+    path.setAttribute("stroke", "rgba(233, 30, 99, 0.9)");
+    path.setAttribute("stroke-width", "6");
+    g.append(path);
+  }
+  svg.append(g);
+  return svg;
+}
+
+let statusLine;
+async function save(body) {
+  statusLine.textContent = "Saving…";
+  try {
+    const response = await fetch("/choose", { method: "POST",
+      headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    if (!response.ok) throw new Error(response.status);
+    CHOICES[body.character] = await response.json();
+    statusLine.textContent = "Saved";
+  } catch (error) { statusLine.textContent = "Not saved — is the laptop awake? (" + error.message + ")"; }
+  updateCounts();
+}
+
+function updateCounts() {
+  const items = inGroup();
+  const chosen = items.filter(i => state(i) === "chosen").length;
+  const redraw = items.filter(i => state(i) === "redraw").length;
+  document.getElementById("count").textContent = `${chosen} / ${items.length} chosen · ${redraw} redraw`;
+  document.querySelectorAll("#strip button").forEach((b, i) => {
+    const item = LIST[i];
+    b.className = [state(item) === "chosen" ? "done" : state(item) === "redraw" ? "redraw" : "",
+                   i === HERE ? "here" : ""].join(" ");
+  });
+  document.querySelectorAll("#groups button[data-group]").forEach(b => {
+    const members = DATA.characters.filter(i => i.group === b.dataset.group);
+    const left = members.filter(i => state(i) === "undecided").length;
+    b.textContent = `${NAMES[b.dataset.group]} · ${left ? left + " to choose" : "done"}`;
+  });
+}
+
+function drawControls() {
+  const groups = document.getElementById("groups");
+  groups.replaceChildren();
+  for (const name of DATA.groups) {
+    if (!DATA.characters.some(i => i.group === name)) continue;
+    groups.append($("button", { "data-group": name, class: name === GROUP ? "on" : "",
+      onclick: () => { GROUP = name; store("cp-group", name); rebuild(); drawControls(); go(0); } }));
+  }
+  groups.append($("span", { class: "sep" }));
+  for (const [key, label] of [["all", "All"], ["undecided", "To choose"], ["redraw", "Redraw"], ["chosen", "Chosen"]]) {
+    groups.append($("button", { class: key === FILTER ? "on" : "",
+      onclick: () => { FILTER = key; store("cp-filter", key); rebuild(); drawControls(); go(0); } }, label));
+  }
+  const strip = document.getElementById("strip");
+  strip.replaceChildren(...LIST.map((item, i) =>
+    $("button", { lang: "zh", onclick: () => { go(i); document.getElementById("picker").open = false; } }, item.character)));
+  document.getElementById("pickerLabel").textContent = `Characters (${LIST.length})`;
+  updateCounts();
+}
+
+// ── the full-screen view ──
+let zoomAt = 0;
+const zoomBox = document.getElementById("zoom");
+function zoom(at) { zoomAt = at; showZoom(); zoomBox.classList.add("open"); }
+function showZoom() {
+  const item = LIST[HERE], take = item.takes[zoomAt];
+  const frame = zoomBox.querySelector(".frame");
+  frame.querySelector("img").src = `/img/${DATA.stage}/${item.index}/${take}`;
+  frame.querySelector("svg")?.remove();
+  if (document.body.classList.contains("overlay") && DETAIL) frame.append(overlaySvg(DETAIL));
+  zoomBox.querySelector(".label").textContent = `${item.character} · take ${take} (${zoomAt + 1} of ${item.takes.length})`;
+  zoomBox.querySelector("[data-star]").classList.toggle("on", choice(item.character).best === take);
+}
+zoomBox.querySelectorAll("[data-step]").forEach(b => b.onclick = e => {
+  e.stopPropagation();
+  const n = LIST[HERE].takes.length;
+  zoomAt = (zoomAt + Number(b.dataset.step) + n) % n; showZoom();
+});
+zoomBox.querySelector("[data-star]").onclick = e => {
+  e.stopPropagation(); pick(LIST[HERE].takes[zoomAt]); showZoom();
+};
+zoomBox.querySelector("[data-close]").onclick = () => zoomBox.classList.remove("open");
+zoomBox.querySelector("img").onclick = () => zoomBox.classList.remove("open");
+
+let tiles = {};
+function pick(take) {
+  const c = LIST[HERE].character;
+  const next = choice(c).best === take ? 0 : take;
+  choice(c).best = next;
+  for (const [t, tile] of Object.entries(tiles)) {
+    tile.classList.toggle("best", Number(t) === next);
+    tile.querySelector(".star").classList.toggle("on", Number(t) === next);
+  }
+  save({ character: c, best: next });
+}
+
+async function detail(item) {
+  if (!cache.has(item.index)) cache.set(item.index, fetch(`/char/${item.index}`).then(r => r.json()));
+  return cache.get(item.index);
+}
+
+async function render() {
+  const page = document.getElementById("page");
+  if (!LIST.length) {
+    page.replaceChildren($("p", { class: "empty" }, "Nothing here: every character in this view is done, or none is drawn yet."));
+    document.getElementById("where").textContent = NAMES[GROUP];
+    updateCounts();
+    return;
+  }
+  const item = LIST[HERE], c = item.character;
+  document.getElementById("where").textContent = `${c}  ·  ${HERE + 1} of ${LIST.length}`;
+  document.getElementById("prev").disabled = HERE === 0;
+  document.getElementById("next").disabled = HERE === LIST.length - 1;
+  DETAIL = await detail(item);
+  if (LIST[HERE] !== item) return;  // moved on while it loaded
+  page.replaceChildren();
+  statusLine = $("div", { class: "saved" });
+  const script = $("details", {}, $("summary", {}, "Stroke script and history"));
+  const list = $("ol");
+  DETAIL.lines.forEach((line, i) => list.append($("li", {},
+    $("span", { class: "dot", style: `background:${DETAIL.colours[i]}` }), `${line.part} — `,
+    $("span", { style: "color:var(--muted)" }, line.where))));
+  script.append(list);
+  if (DETAIL.history) script.append($("p", {}, DETAIL.history));
+  page.append($("div", { class: "head" },
+    $("div", { class: "glyph", lang: "zh" }, c),
+    $("div", { class: "facts" },
+      $("div", {}, DETAIL.object),
+      $("div", { class: "def" }, DETAIL.definition),
+      $("div", { class: "hint" }, `Source: ${DETAIL.type} — “${DETAIL.hint}”`)),
+    $("img", { class: "ref", src: `/ref/${DATA.stage}/${item.index}`, alt: `${c}, its strokes` })), script);
+
+  page.append($("h3", {}, "★ the best one — or none, and ask for a redraw"));
+  const grid = $("div", { class: "grid" });
+  tiles = {};
+  const label = choice(c);
+  item.takes.forEach((take, i) => {
+    const star = $("button", { class: "star" + (label.best === take ? " on" : ""), "aria-label": `Best: take ${take}` }, "★");
+    star.onclick = () => pick(take);
+    const fresh = label.redrawFrom && take > label.redrawFrom;
+    const tile = $("figure", { class: "tile" + (label.best === take ? " best" : "") },
+      $("div", { class: "frame" },
+        $("img", { src: `/img/${DATA.stage}/${item.index}/${take}`, alt: `${c}, take ${take}`, onclick: () => zoom(i) }),
+        overlaySvg(DETAIL), $("span", { class: "take" + (fresh ? " new" : "") }, fresh ? `${take} new` : String(take)), star));
+    tiles[take] = tile;
+    grid.append(tile);
+  });
+  page.append(grid);
+
+  const redraw = $("button", { class: "redraw" + (label.redraw ? " on" : ""), "aria-pressed": String(!!label.redraw) },
+    "↻ None good — redraw");
+  redraw.onclick = () => {
+    label.redraw = !label.redraw;
+    redraw.classList.toggle("on", label.redraw);
+    redraw.setAttribute("aria-pressed", String(label.redraw));
+    save({ character: c, redraw: label.redraw });
+  };
+  page.append($("div", { class: "choose-row" }, redraw,
+    $("span", { class: "hint" }, "Four more takes are drawn; the ★ stays if you set one.")));
+  const note = $("textarea", { placeholder: `What is wrong with ${c}'s pictures (optional)` });
+  note.value = label.note || "";
+  let timer;
+  note.oninput = () => { clearTimeout(timer); timer = setTimeout(() => {
+    label.note = note.value; save({ character: c, note: note.value }); }, 700); };
+  const nextUndecided = () => {
+    const at = LIST.findIndex((other, i) => i > HERE && state(other) === "undecided");
+    go(at >= 0 ? at : HERE + 1);
+  };
+  page.append(note, statusLine, $("div", { class: "foot" },
+    $("button", { onclick: () => go(HERE - 1), ...(HERE === 0 ? { disabled: "" } : {}) }, "‹ Previous"),
+    $("span", { class: "grow" }),
+    $("button", { onclick: nextUndecided }, "Next to choose ›"),
+    $("button", { onclick: () => go(HERE + 1), ...(HERE === LIST.length - 1 ? { disabled: "" } : {}) }, "Next ›")));
+  updateCounts();
+  // The next character's pictures, fetched while this one is looked at.
+  const ahead = LIST[HERE + 1];
+  if (ahead) { detail(ahead); for (const take of ahead.takes) new Image().src = `/img/${DATA.stage}/${ahead.index}/${take}`; }
+}
+
+function go(index) {
+  if (LIST.length && (index < 0 || index >= LIST.length)) return;
+  HERE = Math.max(0, index);
+  if (LIST[HERE]) { store("cp-at", LIST[HERE].character); history.replaceState(null, "", "#" + LIST[HERE].character); }
+  render(); window.scrollTo(0, 0);
+}
+document.getElementById("prev").onclick = () => go(HERE - 1);
+document.getElementById("next").onclick = () => go(HERE + 1);
+
+const overlayButton = document.getElementById("overlay");
+function setOverlay(on) {
+  document.body.classList.toggle("overlay", on);
+  overlayButton.classList.toggle("on", on);
+  store("cp-overlay", on ? "1" : undefined);
+}
+overlayButton.onclick = () => setOverlay(!document.body.classList.contains("overlay"));
+setOverlay(!!recall("cp-overlay"));
+
+const sizeButton = document.getElementById("size");
+function setColumns(n) {
+  document.documentElement.style.setProperty("--columns", n);
+  sizeButton.textContent = `▦ ${n}`;
+  store("cp-columns", String(n));
+}
+sizeButton.onclick = () => {
+  const now = Number(getComputedStyle(document.documentElement).getPropertyValue("--columns")) || 2;
+  setColumns(now >= 4 ? 1 : now + 1);
+};
+setColumns(Number(recall("cp-columns")) || 2);
+
+fetch("/data").then(r => r.json()).then(data => {
+  DATA = data; CHOICES = data.choices || {};
+  const wanted = decodeURIComponent(location.hash.slice(1)) || recall("cp-at");
+  const found = DATA.characters.find(i => i.character === wanted);
+  GROUP = found?.group || recall("cp-group") || DATA.characters[0]?.group || "g1";
+  FILTER = found ? "all" : recall("cp-filter") || "all";
+  rebuild(); drawControls();
+  const at = found ? LIST.findIndex(i => i.character === found.character) : 0;
+  go(at >= 0 ? at : 0);
+});
+</script>
+</body>
+</html>
+"""
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--host", default="127.0.0.1",
                         help="address to listen on; the laptop's Tailscale IP to reach it from a tablet")
     parser.add_argument("--port", type=int, default=8770)
+    parser.add_argument("--choose", action="store_true",
+                        help="the full run: choose the best picture or ask for a redraw; no scoring")
     args = parser.parse_args(argv)
-    Handler.characters, Handler.key = build()
-    drawn = sum(1 for item in Handler.characters for letter in item["letters"]
-                if (file := _picture(Handler.key, item["character"], letter)) and file.exists())
-    print(f"{len(Handler.characters)} characters, {drawn} pictures drawn so far")
-    print(f"open http://{args.host}:{args.port}/  — Ctrl-C to stop; answers are saved as you tap")
-    ThreadingHTTPServer((args.host, args.port), Handler).serve_forever()
-
+    if args.choose:
+        ChooseHandler.characters = choosable()
+        ChooseHandler.by_index = {item["index"]: item for item in ChooseHandler.characters}
+        drawn = sum(1 for item in ChooseHandler.characters if run.drawn_takes(item["character"]))
+        print(f"{drawn} of {len(ChooseHandler.characters)} characters have pictures so far; "
+              "reload the page to see new ones")
+        handler: type[BaseHTTPRequestHandler] = ChooseHandler
+    else:
+        Handler.characters, Handler.key = build()
+        drawn = sum(1 for item in Handler.characters for letter in item["letters"]
+                    if (file := _picture(Handler.key, item["character"], letter)) and file.exists())
+        print(f"{len(Handler.characters)} characters, {drawn} pictures drawn so far")
+        handler = Handler
+    print(f"open http://{args.host}:{args.port}/  — Ctrl-C to stop; every tap is saved")
+    ThreadingHTTPServer((args.host, args.port), handler).serve_forever()
 
 if __name__ == "__main__":
     main()
