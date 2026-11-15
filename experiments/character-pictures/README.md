@@ -1,8 +1,8 @@
 # Pictures whose strokes are the character
 
 **Status: round 3 judged 14 Nov 2026; every one of its 31 characters got a picture scored 5. The
-full run is under way: every other character the source calls pictographic or ideographic, 1,995 in
-all, four takes each in Vertex batch jobs, chosen on the tablet.** The plan this serves is
+full run is under way: every other character the source calls pictographic or ideographic and the
+scholarly origin confirms, in g1–g3, six takes each in Vertex batch jobs, chosen on the tablet.** The plan this serves is
 [`docs/plans/languages/character-pictures.md`](../../docs/plans/languages/character-pictures.md).
 
 ## Question
@@ -232,55 +232,91 @@ into `out/full/facts/` (`facts.py` measures them):
 
 The writer follows [`scripts/GUIDE.md`](scripts/GUIDE.md) and writes one file per batch,
 `scripts/<group>-<nn>.yaml`. `run.py check` refuses a script with a wrong stroke count, a missing
-field, a digit or a numbered stroke.
+field, a digit or a numbered stroke. g1 was written by agent sessions; g2 and g3 by Argon (below).
 
-**Drawing: one command per set, in your own terminal.**
+**The scholarly origin** (`origins.py`, `run.py origins`). Make Me a Hanzi's hint is sometimes a
+traditional folk explanation: 王 is "a man joining heaven and earth" there, where scholars read the
+head of a ceremonial axe. The "Glyph origin" section of each character's English Wiktionary entry
+summarises current scholarship and cites it, in prose and in templates that class the character
+(`{{liushu|p}}`, `{{Han compound|合|𡆧|ls=psc}}`). It is fetched once into `out/cache/wiktionary/`,
+with the section of a related Traditional or Simplified form when the page points there. Of g1–g3,
+1,202 of 1,248 characters have one that says what the character is.
+
+**Fact-checking and writing with Argon** (`argon.py`). Gemini's Argon, in Vertex batch jobs:
+- `run.py factcheck` gives it the guide, the fact sheet, the script and the origin
+  ([`prompts/factcheck.md`](prompts/factcheck.md)). It keeps the script, corrects its object and
+  history and what follows from them, or **drops** a character the origin calls phono-semantic with
+  no pictographic or ideographic reading, since its picture would teach a false etymology.
+  Ideogrammic compounds and phonetic loans stay.
+- `run.py write` gives it the guide, the fact sheet, the origin and the numbered drawing of the
+  strokes ([`prompts/write.md`](prompts/write.md)), and it writes the script or drops the character
+  the same way. Written scripts are fact-checked like the rest.
+- The answer is a YAML block. Every stroke's `where` must stay the fact sheet's word for word, `exact`
+  keeps its items, and `run.py check` must pass; otherwise it is asked again with the problems
+  listed, at most three times.
+- A correction is spliced into its file in place: untouched scripts stay byte-identical, so
+  `git diff scripts/` shows exactly what Argon changed. A checked script carries `checked: argon`,
+  and **only checked scripts are drawn**; a dropped one carries `dropped: <reason>` and is never drawn.
+- Every reply, with its verdict, the origin in one line, the reason and the object before and after,
+  is kept in `results/full/argon/<kind>.jsonl`; each call's tokens and cost in `out/full/argon.jsonl`.
+
+**Everything in one command**, in your own terminal, after `gcp use <profile>`:
 
 ```bash
-caffeinate -i .venv/bin/python experiments/character-pictures/run.py batch --set common 2>&1 \
-  | tee -a experiments/character-pictures/out/full/batch.log
+caffeinate -i experiments/character-pictures/full_run.sh 2>&1 | tee -a experiments/character-pictures/out/full/full.log
 ```
 
-- **What it does.** It draws every scripted character's four takes that are not on disk yet, in
+- **What it does.** Every 5 minutes it collects every finished job and submits whatever may start:
+  the fact-check of g1; once g1 is checked, its drawing and the writing of g2 and g3 at once; the
+  fact-check of what was written; its drawing. It stops when nothing is left to submit or in flight.
+  Pictures of g1 can be chosen while g2 and g3 are written.
+- **The account** is the one `billing.local.json` beside `run.py` names (ignored):
+  `{"project": "<id>", "account": "<email>", "profile": "<gcp profile>", "cap": <dollars>}`.
+  - `full_run.sh` checks the shell's profile, `GOOGLE_APPLICATION_CREDENTIALS` and gcloud's active
+    account and project before anything starts.
+  - Then every request to Google checks again: the project it bills, and the account the
+    credentials sign in as (asked of Google once per file, and each new token is checked to come
+    from that file).
+  - A job is created only under the project number of the experiment's own bucket; one created
+    elsewhere is cancelled at once and the run stops.
+- **The cap**: nothing is submitted that would take the account past `cap`, counting what both call
+  logs say was spent and an upper bound for every request in flight ($0.04 a picture, $0.13 an Argon
+  request: its input and every token it may answer with).
+- **Six takes a character** (`--takes`; `--takes-for g1=8` for one group). Raising it later draws
+  only the extra takes. `--dry-run` says what would be submitted now, and stops. Ctrl-C at any time,
+  then the same command carries on.
+
+**Drawing on its own** (`run.py batch --set common`; `full_run.sh` does this for you):
+
+- **What it does.** It draws every checked character's four takes that are not on disk yet, in
   Vertex batch jobs of 500 pictures, the most popular group first. Then it waits, checking every 5
   minutes, and writes each finished job's pictures to `out/full/pictures/`.
 - **Cost and time.** About $0.034 a picture: half the normal price, measured on the pilot. Google says
   most jobs finish within 24 hours of starting. The pilot's four pictures took 12 minutes.
 - **g4 is not drawn.** A learner aiming at moderate Chinese almost never meets a character outside
   the top 3,000.
-- **Billing guard**: `batch` and `draw` bill only the Google Cloud project named in the ignored
-  `billing.local.json` beside `run.py` (`{"project": "<id>"}`), and stop on any other.
+- **Account and cap**: the shell's current account (`GOOGLE_APPLICATION_CREDENTIALS`, the project
+  from `GOOGLE_CLOUD_PROJECT` or gcloud's active configuration), checked as above; `--cap 40` lowers
+  the cap for this run, `--budget 40` limits only this run's new submissions.
 - **Takes**: `--takes 6` draws six a character instead of four.
 - **Before spending**: `--dry-run` says how many pictures and how much, and stops.
 - **Stop and resume**: Ctrl-C at any time, then run the same command again.
   - Jobs keep running at Google meanwhile. `out/full/batches.json` remembers them, so the rerun
     collects them and never submits the same pictures twice.
-  - Characters scripted since the last run are submitted by the rerun.
-- **Several Google Cloud accounts.**
-  - `--provider current` uses the shell's current account: the one `gcp-<profile>` switched to
-    (`GOOGLE_APPLICATION_CREDENTIALS`, and the project from `GOOGLE_CLOUD_PROJECT` or gcloud's
-    active configuration).
-  - `--project <id>` names the project, signed in with that same file; `--credentials <file>` names
-    another file.
-  - `--provider <id>` uses a row of `providers.local.json` instead (the default is `vertex`).
-  - `--cap 40` spends at most $40 in all on that account. It counts what the call log says was
-    already spent there and what is in flight, and submits the most popular characters first.
-    `--budget 40` limits only this run's new submissions.
-  - A job remembers its account, so after switching, the earlier jobs are still collected from where
-    they ran.
-  - When an account cannot pay, the run stops with a `STOPPED:` line naming it. Pictures already
-    finished are written, and a rerun with another account submits the rest.
-- **It stops on its own**, with a `STOPPED:` line, on an expired login (run `gcp-digest` or
-  `gcloud auth application-default login`, then rerun) or a refused setting.
+  - Characters checked since the last run are submitted by the rerun.
+- **It stops on its own**, with a `STOPPED:` line, on an expired login (run `gcp use <profile>` or
+  `gcloud auth application-default login`, then rerun), an account that cannot pay, or a refused
+  setting. Pictures already finished are written.
 - **A refusal**: the model sometimes answers with a sentence instead of a picture. The take stays
   missing and the next run asks again; a character refused twice is skipped unless named with
   `--characters`.
 - **Files**: the bucket `gs://<project>-character-pictures` is created on first use and holds the
   references and each job's files. A job's files are deleted once its pictures are written.
-- **Watching**: `run.py status` shows per group what is scripted, drawn, in flight and chosen, and the
-  money spent per account. Every picture is logged to `out/full/draws.jsonl` with its tokens and cost.
+- **Watching**: `run.py status` shows per group what is scripted, drawn, in flight and chosen, Argon's
+  verdicts, and the money spent per account. Every picture is logged to `out/full/draws.jsonl` with
+  its tokens and cost.
 - **The fallback**: `run.py draw --set common` draws one call at a time at the full price, about one
-  picture a minute, and takes the same `--provider`.
+  picture a minute, through a `providers.local.json` row of the same project.
 
 **Choosing**, from the tablet over Tailscale. It can start as soon as the first job is collected;
 reload the page to see new pictures:
@@ -289,7 +325,7 @@ reload the page to see new pictures:
 .venv/bin/python experiments/character-pictures/review.py --choose --host "$(tailscale ip -4)"
 ```
 
-- One character a page, its four takes side by side, and an overlay of the exact strokes.
+- One character a page, its takes side by side, and an overlay of the exact strokes.
 - **★** marks the best picture. **↻ None good — redraw** asks for four more takes; a note can say
   what is wrong.
 - Characters come group by group. "Next to choose ›" skips the ones done, and the filters show what
@@ -325,6 +361,9 @@ Their pictures are kept, ignored, in `out/round-N/`.
 - **Etymology**: Make Me a Hanzi's `dictionary.txt`, under the GNU LGPL v3 or later (its `COPYING`).
   It is fetched pinned into `out/cache/` and never committed. `results/round-N/characters.json` and
   `results/full/characters.json` quote the hints for their characters, with attribution.
+- **Scholarly origins**: the "Glyph origin" sections of English Wiktionary, under CC BY-SA 4.0. They
+  are fetched into the ignored `out/cache/wiktionary/` and never committed; Argon's one-line summary
+  of each, in `results/full/argon/`, is attributed to Wiktionary there.
 - **Character frequencies**: wordfreq's word lists (`requirements/server.txt`), summed per character.
 - **Pictures**: they are media, regenerable, and stay in the ignored `out/`.
 

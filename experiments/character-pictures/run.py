@@ -340,6 +340,8 @@ def problems(character: str, script: Any) -> list[str]:
     found = []
     if not isinstance(script, dict):
         return [f"{character}: the script is not a mapping"]
+    if script.get("dropped"):
+        return []  # never drawn: its scholarly origin is sound plus meaning, not a picture
     for field in REQUIRED:
         if not script.get(field):
             found.append(f"{character}: no `{field}`")
@@ -378,6 +380,8 @@ def item(character: str, script: dict[str, Any], entry: dict[str, Any] | None = 
         "hint": source.get("hint") or (etymology.get("hint") or "").replace("\xa0", " "),
         "definition": source.get("definition") or (_dictionary().get(character) or {}).get("definition") or "",
         "group": source.get("group") or "",
+        # Fact-checked by Argon against the scholarly origin (`argon.py`); only these are drawn.
+        "checked": bool(script.get("checked")),
         "strokes": len(_strokes(character)["strokes"]),
         "object": script["object"].strip(),
         "lines": [{"colour": COLOURS[i % len(COLOURS)][0], "where": line["where"].strip(),
@@ -393,8 +397,8 @@ def items(*, set_name: str | None = None, group: str | None = None,
     found, bad = [], []
     for entry in in_scope(set_name=set_name, group=group, characters=characters):
         script = scripts.get(entry["character"])
-        if script is None:
-            continue
+        if script is None or (isinstance(script, dict) and script.get("dropped")):
+            continue  # a dropped script: its scholarly origin is sound plus meaning, not a picture
         wrong = problems(entry["character"], script)
         if wrong:
             bad += wrong
@@ -449,19 +453,31 @@ def prompts_for(chosen: list[dict[str, Any]]) -> dict[str, str]:
 
 
 def facts_command(args: argparse.Namespace) -> None:
+    chosen = in_scope(set_name=args.set, group=args.group, characters=args.characters)
+    if args.unscripted:
+        chosen = [entry for entry in chosen if entry["character"] not in _scripts()]
+    written = write_fact_sheets(chosen, Path(args.sheets) if args.sheets else None)
+    print(f"{written} fact sheets in {(OUT / 'facts').relative_to(HERE)}/"
+          + (f"; numbered drawings in {args.sheets}" if args.sheets else ""))
+    if args.list:
+        Path(args.list).write_text("".join(entry["character"] for entry in chosen) + "\n", encoding="utf-8")
+
+
+def fact_sheet_path(entry: dict[str, Any]) -> Path:
+    return OUT / "facts" / entry["group"] / f"{entry['character']}.md"
+
+
+def write_fact_sheets(chosen: list[dict[str, Any]], sheets: Path | None = None) -> int:
+    """A fact sheet per character, showing the scripts its components have now."""
     import facts
 
     from wordfreq.chinese import simplify_chinese
 
-    chosen = in_scope(set_name=args.set, group=args.group, characters=args.characters)
-    if args.unscripted:
-        chosen = [entry for entry in chosen if entry["character"] not in _scripts()]
     scripts = _scripts()
     variants: dict[str, list[str]] = defaultdict(list)
     for entry in catalogue():
         if entry.get("simplified"):
             variants[entry["simplified"]].append(entry["character"])
-    sheets = Path(args.sheets) if args.sheets else None
     written = 0
     for entry in chosen:
         character = entry["character"]
@@ -478,17 +494,15 @@ def facts_command(args: argparse.Namespace) -> None:
                 counterpart += f" ({done[0]} already scripted: “{scripts[done[0]]['object'].strip()}”)"
         text = facts.sheet(character, _dictionary()[character], _strokes(character), entry,
                            {k: v for k, v in scripts.items() if k != character}, counterpart, _dictionary())
-        target = OUT / "facts" / entry["group"] / f"{character}.md"
+        target = fact_sheet_path(entry)
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(text, encoding="utf-8")
+        if not target.exists() or target.read_text(encoding="utf-8") != text:
+            target.write_text(text, encoding="utf-8")
         if sheets:
             sheets.mkdir(parents=True, exist_ok=True)
             (sheets / f"{character}.png").write_bytes(facts.numbered_sheet(_strokes(character)))
         written += 1
-    print(f"{written} fact sheets in {(OUT / 'facts').relative_to(HERE)}/"
-          + (f"; numbered drawings in {sheets}" if sheets else ""))
-    if args.list:
-        Path(args.list).write_text("".join(entry["character"] for entry in chosen) + "\n", encoding="utf-8")
+    return written
 
 
 def check(args: argparse.Namespace) -> None:
@@ -786,22 +800,27 @@ def _group_table() -> list[str]:
 
 
 def _spent() -> list[str]:
-    path = OUT / "draws.jsonl"
-    if not path.exists():
-        return ["Nothing drawn yet."]
     spent: dict[str, float] = defaultdict(float)
     count: Counter[str] = Counter()
-    for line in path.read_text(encoding="utf-8").splitlines():
-        entry = json.loads(line)
-        if entry.get("costUsd"):
-            key = f"{entry.get('provider', '?')} ({entry.get('route', 'online')})"
-            spent[key] += entry["costUsd"]
-            count[key] += 1
-    return [f"- {key}: {count[key]} pictures, ${usd:.2f}" for key, usd in spent.items()] or ["Nothing paid yet."]
+    for path, unit in ((OUT / "draws.jsonl", "pictures"), (OUT / "argon.jsonl", "Argon answers")):
+        if not path.exists():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            entry = json.loads(line)
+            if entry.get("costUsd"):
+                key = f"{entry.get('provider', '?')} ({entry.get('route', 'batch' if 'kind' in entry else 'online')}): {unit}"
+                spent[key] += entry["costUsd"]
+                count[key] += 1
+    return [f"- {key}: {count[key]}, ${usd:.2f}" for key, usd in spent.items()] or ["Nothing paid yet."]
 
 
 def status(_: argparse.Namespace) -> None:
+    import argon
+
     print("\n".join(_group_table()))
+    lines = argon.summary()
+    if lines:
+        print("\n" + "\n".join(lines))
     print("\nSpent, by provider:")
     print("\n".join(_spent()))
 
@@ -889,11 +908,51 @@ def main(argv: list[str] | None = None) -> None:
     batching.add_argument("--no-wait", action="store_true", help="submit and collect what is done, then stop")
     batching.add_argument("--poll", type=float, default=300.0, help="seconds between checks (default 300)")
 
+    origin = commands.add_parser("origins", help="Wiktionary's Glyph origin of every character, cached")
+    origin.add_argument("--set", choices=sorted(SETS), default="common")
+    origin.add_argument("--group", choices=[name for name, _ in GROUPS])
+    origin.add_argument("--characters", help="only these characters, e.g. 人大山")
+
+    for name, text in (("factcheck", "check scripts against their scholarly origin, with Argon in batch"),
+                       ("write", "write the missing scripts with Argon in batch")):
+        stage = commands.add_parser(name, help=text)
+        stage.add_argument("--group", choices=[g for g, _ in GROUPS if g in SETS["common"]],
+                           action="append", help="these groups (default: g1–g3)")
+        stage.add_argument("--characters", help="only these characters, e.g. 人大山")
+        stage.add_argument("--job-size", type=int, default=200, help="requests per batch job (default 200)")
+        stage.add_argument("--dry-run", action="store_true", help="say what would be submitted, and stop")
+        stage.add_argument("--no-wait", action="store_true", help="submit and collect what is done, then stop")
+        stage.add_argument("--poll", type=float, default=120.0, help="seconds between checks (default 120)")
+
+    whole = commands.add_parser("full", help="everything left, in order: check g1, draw it, write and "
+                                "check g2–g3, draw them; under the cap in billing.local.json")
+    # Six for the full run, the owner's choice once Argon's checks turned out cheap; a redraw adds four.
+    whole.add_argument("--takes", type=int, default=6, help="takes per character (default 6)")
+    whole.add_argument("--takes-for", action="append", metavar="GROUP=N",
+                       help="another number of takes for one group, e.g. g1=6; raising it later draws the extra takes")
+    whole.add_argument("--job-size", type=int, default=500, help="pictures per batch job (default 500)")
+    whole.add_argument("--text-job-size", type=int, default=200, help="Argon requests per batch job (default 200)")
+    whole.add_argument("--dry-run", action="store_true", help="say what would be submitted now, and stop")
+    whole.add_argument("--poll", type=float, default=300.0, help="seconds between checks (default 300)")
+
     commands.add_parser("status", help="per group: scripted, drawn, in flight, chosen; money spent")
     commands.add_parser("report", help="the full run's state and the owner's choices into results/full/")
     args = parser.parse_args(argv)
     {"fetch": fetch, "select": select, "facts": facts_command, "check": check, "prepare": prepare,
-     "draw": draw, "batch": batch_command, "status": status, "report": report}[args.command](args)
+     "draw": draw, "batch": batch_command, "status": status, "report": report,
+     "origins": _origins, "factcheck": _argon, "write": _argon, "full": _argon}[args.command](args)
+
+
+def _origins(args: argparse.Namespace) -> None:
+    import origins
+
+    origins.origins_command(args)
+
+
+def _argon(args: argparse.Namespace) -> None:
+    import argon
+
+    argon.main(args)
 
 
 if __name__ == "__main__":

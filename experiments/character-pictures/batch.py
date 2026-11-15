@@ -47,6 +47,9 @@ RUNNING = {"JOB_STATE_QUEUED", "JOB_STATE_PENDING", "JOB_STATE_RUNNING", "JOB_ST
 # Vertex list prices for Gemini 3.1 Flash Image, per million tokens: $0.50 in, $3 text out, $60
 # picture out (a 1K picture is 1,120 tokens, $0.067). A batch job is billed at half.
 PRICE_IN, PRICE_TEXT, PRICE_IMAGE, BATCH = 0.50, 3.0, 60.0, 0.5
+# What a picture in flight holds back from the cap until its real cost is logged: above the $0.0336
+# measured, so the cap is never crossed by an estimate.
+PICTURE_RESERVE = 0.04
 STORAGE = "https://storage.googleapis.com"
 TIMEOUT = 120.0
 
@@ -63,11 +66,13 @@ def _headers(row: Any) -> dict[str, str]:
     from acervo.models.errors import ProviderRefused
 
     try:
-        return google_auth.headers(row, run.MODEL.model)
+        found = google_auth.headers(row, run.MODEL.model)
     except ProviderRefused as refused:
         if refused.reason == "authentication":
             raise Stop(run.LOGIN_HINT) from None
         raise Stop(f"{row.id}: {refused}") from None
+    guard(row, found)
+    return found
 
 
 def _request(row: Any, method: str, url: str, **kwargs: Any) -> httpx.Response:
@@ -115,7 +120,8 @@ def _project(row: Any) -> str:
 def bucket_for(row: Any) -> str:
     """Acervo's own bucket in the provider's project, created on first use. Nothing else is touched."""
     name = f"{_project(row)}-character-pictures"
-    if _request(row, "GET", f"{STORAGE}/storage/v1/b/{name}").status_code == 404:
+    response = _request(row, "GET", f"{STORAGE}/storage/v1/b/{name}")
+    if response.status_code == 404:
         run.say(f"creating the bucket gs://{name} (location US) for the batch jobs' files")
         response = _request(row, "POST", f"{STORAGE}/storage/v1/b",
                             params={"project": _project(row)},
@@ -123,6 +129,10 @@ def bucket_for(row: Any) -> str:
                                   "iamConfiguration": {"uniformBucketLevelAccess": {"enabled": True}}})
         if response.status_code == 404:
             raise Stop(f"could not create gs://{name}: the project was not found")
+    number = str(response.json().get("projectNumber") or "")
+    if not number:
+        raise Stop(f"gs://{name} does not say which project it belongs to")
+    _numbers[row.id] = number
     return name
 
 
@@ -215,11 +225,21 @@ def submit(row: Any, job: dict[str, Any], prompts: dict[str, str], known_refs: s
             known_refs.add(name)
     body = "\n".join(json.dumps(_request_line(row, bucket, key.split("/")[0], prompts[key.split("/")[0]]),
                                 ensure_ascii=False) for key in job["requests"]) + "\n"
+    create_job(row, job, body, run.MODEL.model)
+
+
+def create_job(row: Any, job: dict[str, Any], body: str, model: str) -> None:
+    """Upload a job's requests and create it; the state is saved by the caller.
+
+    A job created under any project number but the bucket's (the allowed project's) is cancelled
+    at once and the run stops.
+    """
+    bucket = job["bucket"]
     _upload(row, bucket, f"{job['prefix']}/input.jsonl", body.encode("utf-8"), "application/jsonl")
     base, _ = _endpoint(row)
     created = _request(row, "POST", f"{base}/batchPredictionJobs", json={
         "displayName": job["display"],
-        "model": f"publishers/google/models/{run.MODEL.model}",
+        "model": f"publishers/google/models/{model}",
         "inputConfig": {"instancesFormat": "jsonl",
                         "gcsSource": {"uris": [f"gs://{bucket}/{job['prefix']}/input.jsonl"]}},
         "outputConfig": {"predictionsFormat": "jsonl",
@@ -227,6 +247,12 @@ def submit(row: Any, job: dict[str, Any], prompts: dict[str, str], known_refs: s
     }).json()
     job["name"] = created["name"]
     job["state"] = created.get("state", "JOB_STATE_PENDING")
+    number = _numbers.get(row.id)
+    if not number or not job["name"].startswith(f"projects/{number}/"):
+        host = base.split("/v1/")[0]
+        _request(row, "POST", f"{host}/v1/{job['name']}:cancel")
+        raise Stop(f"job {job['display']} was created outside the allowed project (its bucket's project "
+                   "number differs); it was cancelled at once")
 
 
 def refresh(row: Any, job: dict[str, Any]) -> None:
@@ -347,6 +373,8 @@ def _plan(args: argparse.Namespace, chosen: list[dict[str, Any]], state: dict[st
     in_flight = {key for job in state["jobs"] if not job.get("harvested") for key in job["requests"]}
     refused = _refusals()
     plan = []
+    # A full-run script is drawn only once Argon has checked it against the scholarly origin.
+    chosen = [entry for entry in chosen if entry.get("checked")]
     for character, _way, take in run._wanted(run.MODEL, chosen, redraw=args.redraw, takes=args.takes):
         key = f"{character}/{take}"
         if key in in_flight or run.picture_path(character, run.MODEL.id, "edit", take).exists():
@@ -354,10 +382,10 @@ def _plan(args: argparse.Namespace, chosen: list[dict[str, Any]], state: dict[st
         if refused.get(character, 0) >= 2 and not args.characters:
             continue
         plan.append((next(e["group"] for e in chosen if e["character"] == character), key))
-    if args.budget is not None:
-        plan = plan[: max(0, math.floor(args.budget / run.MODEL.batch_usd))]
+    if getattr(args, "budget", None) is not None:
+        plan = plan[: max(0, math.floor(args.budget / PICTURE_RESERVE))]
     if allowance is not None:
-        plan = plan[: max(0, math.floor(allowance / run.MODEL.batch_usd))]
+        plan = plan[: max(0, math.floor(allowance / PICTURE_RESERVE))]
     return plan
 
 
@@ -391,16 +419,101 @@ ADC = Path.home() / ".config" / "gcloud" / "application_default_credentials.json
 BILLING = run.HERE / "billing.local.json"
 
 
-def guard(row: Any) -> None:
-    """Refuse to bill any project but the one `billing.local.json` names."""
+_numbers: dict[str, str] = {}   # provider id → the allowed project's number, read off its bucket
+_verified: set[str] = set()     # digests of access tokens whose account was checked
+
+
+def _tokeninfo(token: str) -> dict[str, Any]:
+    try:
+        answer = httpx.post("https://oauth2.googleapis.com/tokeninfo", data={"access_token": token}, timeout=60.0)
+    except httpx.HTTPError as error:
+        raise ConnectionError(f"asking Google whose sign-in this is: {error}") from None
+    return answer.json() if answer.is_success else {}
+
+
+_accounts: dict[str, str | None] = {}
+
+
+def _account_of(info: dict[str, Any]) -> str | None:
+    """The account a credentials file signs in as. A billing token is scoped to Cloud only and names
+    no account, so a second token is asked for from the same file, scoped to the account's email."""
+    if info.get("type") == "service_account":
+        return info.get("client_email")
+    key = hashlib.sha256(json.dumps(info, sort_keys=True).encode()).hexdigest()
+    if key not in _accounts:
+        import google.auth.exceptions
+        import google.auth.transport.requests
+        from google.oauth2 import credentials as user
+
+        try:
+            found = user.Credentials.from_authorized_user_info(
+                info, scopes=["openid", "https://www.googleapis.com/auth/userinfo.email"])
+            found.refresh(google.auth.transport.requests.Request())
+        except google.auth.exceptions.RefreshError:
+            raise Stop(run.LOGIN_HINT) from None
+        except (ValueError, google.auth.exceptions.GoogleAuthError) as error:
+            raise Stop(f"the credentials file could not be read: {error}") from None
+        _accounts[key] = _tokeninfo(str(found.token)).get("email")
+    return _accounts[key]
+
+
+def billing() -> dict[str, Any]:
+    """The one Google Cloud account this experiment may bill, and the most it may spend there.
+
+    `{"project": "<id>", "account": "<email>", "profile": "<gcp profile>", "cap": <dollars>}`, in an
+    ignored file: a project id and an email are private.
+    """
     if not BILLING.exists():
-        raise Stop(f"no {BILLING.name} beside run.py: write {{\"project\": \"<id>\"}} naming the one Google "
-                   "Cloud project this experiment may bill")
-    allowed = json.loads(BILLING.read_text(encoding="utf-8")).get("project")
+        raise Stop(f"no {BILLING.name} beside run.py: write {{\"project\": \"<id>\", \"account\": \"<email>\", "
+                   "\"cap\": <dollars>}} naming the one Google Cloud account this experiment may bill")
+    settings = json.loads(BILLING.read_text(encoding="utf-8"))
+    for field in ("project", "account", "cap"):
+        if not settings.get(field):
+            raise Stop(f"{BILLING.name} names no `{field}`")
+    return settings
+
+
+def guard(row: Any, headers: dict[str, str] | None = None) -> None:
+    """Refuse to bill any project, or sign in as any account, but the ones `billing.local.json` names.
+
+    Called before anything is planned and again by every signed-in request (`_headers`): the
+    project the request bills, the shell's profile, and the account the token itself belongs to
+    (asked of Google once per credentials file; each new token is checked to come from it).
+    """
+    import os
+
+    settings = billing()
     project = row.setting("project")
-    if not allowed or project != allowed:
-        raise Stop(f"this would bill project {project}, but {BILLING.name} allows only {allowed}. Switch the "
-                   f"shell's account (`gcp-<profile>`) or pass the right `--provider`/`--project`.")
+    if project != settings["project"]:
+        raise Stop(f"this would bill project {project}, but {BILLING.name} allows only {settings['project']}. "
+                   "Switch the shell's account (`gcp use <profile>`) and use `--provider current`.")
+    if settings.get("profile") and os.environ.get("GCP_PROFILE") != settings["profile"]:
+        raise Stop(f"the shell's Google Cloud profile is {os.environ.get('GCP_PROFILE') or 'not set'}, but "
+                   f"{BILLING.name} allows only {settings['profile']}: run `gcp use {settings['profile']}` first")
+    if headers is None:
+        headers = _headers(row)  # comes back here with the token
+        return
+    if "x-goog-api-key" in headers:
+        raise Stop(f"provider {row.id} signs in with a key, which cannot be tied to an account; "
+                   "use the account's own sign-in (`--provider current`)")
+    if headers.get("x-goog-user-project") != settings["project"]:
+        raise Stop(f"the request would charge quota project {headers.get('x-goog-user-project')}, "
+                   f"not {settings['project']}")
+    token = headers.get("Authorization", "").removeprefix("Bearer ")
+    digest = hashlib.sha256(token.encode()).hexdigest()
+    if digest in _verified:
+        return
+    info = dict(row.credential.file or {})
+    email = _account_of(info)
+    if email != settings["account"]:
+        raise Stop(f"the credentials sign in as {email or 'an unknown account'}, but {BILLING.name} allows "
+                   f"only {settings['account']}: run `gcp use {settings.get('profile') or '<profile>'}`")
+    # The token that bills was minted from that same file: Google names the client it was issued to.
+    issued = _tokeninfo(token)
+    expected = info.get("client_id") if info.get("type") == "authorized_user" else info.get("client_id") or issued.get("azp")
+    if not issued or issued.get("azp") != expected:
+        raise Stop("Google could not confirm that the billing token comes from the checked credentials")
+    _verified.add(digest)
 
 
 def account(project: str | None, credentials: str | None) -> tuple[Any, dict[str, str]]:
@@ -493,12 +606,12 @@ def _collect(state: dict[str, Any], rows: dict[str, Any]) -> list[dict[str, Any]
 
 def resolve(args: argparse.Namespace, rows: dict[str, Any]) -> tuple[Any, dict[str, str] | None]:
     """The account to submit to: `--provider current`, `--project`, or a providers.local.json id."""
-    if args.provider == "current" or args.project or args.credentials:
+    if args.provider in (None, "current") or args.project or args.credentials:
         row, remembered = account(args.project, args.credentials)
         rows[row.id] = row
         run.say(f"account: Google Cloud project {remembered['project']}, credentials {Path(remembered['credentials']).name}")
         return row, remembered
-    provider = args.provider or run.MODEL.provider
+    provider = args.provider
     if provider not in rows:
         sys.exit(f"No provider {provider!r} in providers.local.json; its ids are: {', '.join(rows)}, "
                  "or `--provider current` for the shell's current Google Cloud account")
@@ -508,18 +621,77 @@ def resolve(args: argparse.Namespace, rows: dict[str, Any]) -> tuple[Any, dict[s
     return row, None
 
 
-def spent_through(provider: str, state: dict[str, Any]) -> tuple[float, float]:
-    """Dollars already spent through a provider (the call log), and still in flight there."""
+ARGON_STATE = run.OUT / "argon.json"
+ARGON_LOG = run.OUT / "argon.jsonl"
+# What an Argon request in flight holds back from the cap: its input plus its `maxOutputTokens`, at
+# the batch price, an upper bound (`argon.RESERVE`, kept here so the ledger needs no import).
+ARGON_RESERVE = 0.13
+
+
+def spent_through(provider: str, state: dict[str, Any] | None = None) -> tuple[float, float]:
+    """Dollars already spent through a provider (both call logs), and held back for what is in
+    flight there (pictures and Argon requests), each at its upper bound."""
     spent = 0.0
-    path = run.OUT / "draws.jsonl"
-    if path.exists():
-        for line in path.read_text(encoding="utf-8").splitlines():
-            entry = json.loads(line)
-            if entry.get("provider") == provider and entry.get("costUsd"):
-                spent += entry["costUsd"]
+    for path in (run.OUT / "draws.jsonl", ARGON_LOG):
+        if path.exists():
+            for line in path.read_text(encoding="utf-8").splitlines():
+                entry = json.loads(line)
+                if entry.get("provider") == provider and entry.get("costUsd"):
+                    spent += entry["costUsd"]
+    state = state if state is not None else load()
     flying = sum(len(job["requests"]) for job in state["jobs"]
-                 if job["provider"] == provider and not job.get("harvested")) * run.MODEL.batch_usd
+                 if job["provider"] == provider and not job.get("harvested")) * PICTURE_RESERVE
+    if ARGON_STATE.exists():
+        text_jobs = json.loads(ARGON_STATE.read_text(encoding="utf-8")).get("jobs", [])
+        flying += sum(len(job["requests"]) for job in text_jobs
+                      if job["provider"] == provider and not job.get("harvested")) * ARGON_RESERVE
     return spent, flying
+
+
+def allowance(row: Any, state: dict[str, Any] | None = None, cap: float | None = None) -> float:
+    """Dollars that may still be submitted on this account: the cap in billing.local.json (or a
+    lower `--cap`), less what was spent and what is in flight."""
+    limit = float(billing()["cap"])
+    if cap is not None:
+        limit = min(limit, cap)
+    spent, flying = spent_through(row.id, state)
+    return max(0.0, limit - spent - flying)
+
+
+def submit_pictures(row: Any, remembered: dict[str, str] | None, args: argparse.Namespace,
+                    chosen: list[dict[str, Any]], state: dict[str, Any], prompts: dict[str, str],
+                    dry_run: bool = False) -> list[dict[str, Any]]:
+    """Submit every picture still wanted that the cap allows, most popular first. The jobs made."""
+    left = allowance(row, state, getattr(args, "cap", None))
+    plan = _plan(args, chosen, state, left)
+    unchecked = sum(1 for entry in chosen if not entry.get("checked"))
+    groups: dict[str, int] = defaultdict(int)
+    for group, _key in plan:
+        groups[group] += 1
+    if plan or dry_run:
+        run.say(f"pictures to submit: {len(plan)}, holding ${len(plan) * PICTURE_RESERVE:.2f} of the "
+                f"${left:.2f} the cap leaves; " + (", ".join(f"{g} {n}" for g, n in groups.items()) or "none")
+                + (f"; {unchecked} scripts wait for the fact-check" if unchecked else ""))
+    if dry_run or not plan:
+        return []
+    bucket = bucket_for(row)
+    known = set(_list(row, bucket, "refs/"))
+    made = []
+    for job in _new_jobs(row, bucket, plan, args.job_size, state, remembered):
+        state["jobs"].append(job)
+        save(state)  # before creating it: a stop in between is found again by its name
+        try:
+            submit(row, job, prompts, known)
+        except ConnectionError as error:
+            # Most likely the limit on jobs at once: leave it for the next round of collecting.
+            state["jobs"].remove(job)
+            save(state)
+            run.say(f"could not submit {job['display']} now ({error}); a rerun submits it")
+            break
+        save(state)
+        made.append(job)
+        run.say(f"submitted {job['display']}: {len(job['requests'])} pictures")
+    return made
 
 
 def run_batch(args: argparse.Namespace) -> None:
@@ -531,40 +703,14 @@ def run_batch(args: argparse.Namespace) -> None:
     prompts = run.prompts_for(chosen)
 
     running = _collect(state, rows)
-    allowance = None
-    if args.cap is not None:
-        spent, flying = spent_through(row.id, state)
-        allowance = max(0.0, args.cap - spent - flying)
-        run.say(f"cap ${args.cap:.2f} on this account: ${spent:.2f} spent, ${flying:.2f} in flight, "
-                f"${allowance:.2f} left to submit")
-    plan = _plan(args, chosen, state, allowance)
-    usd = len(plan) * run.MODEL.batch_usd
-    groups = defaultdict(int)
-    for group, _key in plan:
-        groups[group] += 1
-    run.say(f"to submit: {len(plan)} pictures, about ${usd:.2f} in batch, "
-            + (", ".join(f"{g} {n}" for g, n in groups.items()) or "nothing")
-            + f"; {sum(len(j['requests']) for j in running)} pictures in {len(running)} jobs already in flight")
+    spent, flying = spent_through(row.id, state)
+    run.say(f"cap ${float(billing()['cap']):.2f} on this account"
+            + (f" (this run: ${args.cap:.2f})" if args.cap is not None else "")
+            + f": ${spent:.2f} spent, ${flying:.2f} held for jobs in flight; "
+            f"{sum(len(j['requests']) for j in running)} pictures in {len(running)} jobs already in flight")
+    running += submit_pictures(row, remembered, args, chosen, state, prompts, dry_run=args.dry_run)
     if args.dry_run:
         return
-    if plan:
-        bucket = bucket_for(row)
-        known = set(_list(row, bucket, "refs/"))
-        pending = _new_jobs(row, bucket, plan, args.job_size, state, remembered)
-        for job in pending:
-            state["jobs"].append(job)
-            save(state)  # before creating it: a stop in between is found again by its name
-            try:
-                submit(row, job, prompts, known)
-            except ConnectionError as error:
-                # Most likely the limit on jobs at once: leave it for the next round of collecting.
-                state["jobs"].remove(job)
-                save(state)
-                run.say(f"could not submit {job['display']} now ({error}); a rerun submits it")
-                break
-            save(state)
-            running.append(job)
-            run.say(f"submitted {job['display']}: {len(job['requests'])} pictures")
     if args.no_wait:
         run.say("not waiting; rerun the same command to collect the jobs when they are done")
         return

@@ -3,8 +3,9 @@
 **Status:** the experiment is done
 ([`experiments/character-pictures/`](../../../experiments/character-pictures/README.md)): over three
 rounds, the idea works and the way is settled. Round 3 gave every one of its 31 characters a picture
-the owner scored 5. **The full run is under way**: every other pictographic or ideographic character,
-drawn four times each and chosen on the tablet. What is left is at the end. Written down when the
+the owner scored 5. **The full run is under way**: every other pictographic or ideographic character
+of the commonest 3,000 whose scholarly origin confirms it, drawn six times each and chosen on the
+tablet. What is left is at the end. Written down when the
 Write sheet was built ([`../../features/writing.md`](../../features/writing.md)), as the owner's next
 idea for the characters.
 
@@ -73,7 +74,24 @@ they are written in Simplified Chinese, Traditional Chinese or Japanese, whichev
 - g4, the rest: 747. **Not drawn**: a learner aiming at moderate Chinese almost never meets a
   character outside the top 3,000, and even HSK 3.0's full syllabus stops there.
 
-They are drawn and chosen in that order: 1,248 characters in all.
+They are drawn and chosen in that order: 1,248 characters in all, less those the scholarly origin
+rules out (below).
+
+**Checked against scholarship.** Make Me a Hanzi's hint is sometimes a traditional folk explanation:
+王 is "a man joining heaven and earth" there, where scholars read the head of a ceremonial axe. And
+the scripts' scenes were written by models from their own knowledge, some inventing things (會's
+hall). So every script is checked by Argon against the "Glyph origin" of the character's English
+Wiktionary entry, which summarises current scholarship and cites it (95% of g1–g3 have one that says
+what the character is).
+- Argon keeps a script, corrects its object and history (and the parts that follow from them), or
+  **drops** a character the origin calls phono-semantic with no pictographic or ideographic reading:
+  its picture would teach a false etymology, the first limit above.
+- The strokes stay bound by the fact sheet: a correction may not change where any stroke lies.
+- Of g1's 584: 248 kept, 144 corrected (王 an axe head, 古 a shield over a mouth, 具 hands lifting a
+  cauldron), **192 dropped** (深, 命, 字, 會…). Make Me a Hanzi's "ideographic" is often a
+  phono-semantic compound in current scholarship.
+- g2 and g3 are written by Argon from the same fact sheets and origin, then checked the same way.
+- About $0.016 a check in batch, measured.
 
 **Shared across languages.**
 - A picture belongs to a character's strokes, so it serves every language that writes the character
@@ -90,42 +108,32 @@ They are drawn and chosen in that order: 1,248 characters in all.
 
 **How.**
 - Nano Banana 2 draws over the strokes, as in rounds 2 and 3.
-- **Four takes a character.** In round 3, a character had a picture scored 5 within four of its eight
-  takes 67% of the time, and one scored 4 or more 90% of the time.
+- **Six takes a character**, the owner's choice once the checks proved cheap and the drops shrank
+  the run. In round 3, a character had a picture scored 5 within four of its eight takes 67% of the
+  time, and one scored 4 or more 90% of the time; six gives more to choose from.
 - **In Vertex batch jobs**: half the price ($0.034 a picture, measured), and no limit of one picture a
   minute.
-- About $170 for the 1,248 characters at four takes ($255 at six), and around $45 for redraws.
+- About $200 for the characters left after the drops at six takes, Argon's checking and writing
+  about $40, and what remains of the account's $295 cap for redraws.
 - The scripts are written from measured fact sheets, by a brief that carries every rule the rounds
   produced (`scripts/GUIDE.md` in the experiment).
 
-**Choosing.** The owner's page shows one character at a time with its four pictures. A tap stars the
+**Choosing.** The owner's page shows one character at a time with its pictures. A tap stars the
 best; "none good — redraw" asks for four more, with an optional note saying what is wrong. Nothing is
 scored, unlike the rounds. This replaces the "good / usable / not usable" marks this plan first had in
 mind: only the best picture is ever shown, so only the best needs marking.
 
 ## What is left
 
-In this order. Every Google Cloud call bills the one project the experiment's ignored
-`billing.local.json` names; `batch` refuses any other.
+In this order. Every Google Cloud call bills the one account the experiment's ignored
+`billing.local.json` names (project, account and profile, checked on every request), and never more
+than its cap.
 
-1. **Fact-check the scripts against a scholarly origin.** Make Me a Hanzi's hint is sometimes a
-   traditional folk explanation rather than current scholarship: g1's 王 is "a person joining heaven
-   and earth", where scholars read an axe head. The scenes and stroke roles were written by models
-   from their own knowledge, and some invent things (會's hall).
-   - For each script, give Argon (Gemini, batched) the script, its fact sheet and the character's
-     "Glyph origin" text from Wiktionary (CC BY-SA, citing scholarly sources).
-   - Argon corrects `object` and `history` where they contradict that origin, and flags strokes
-     whose part no longer fits. The fact sheet and `run.py check` still bind the strokes.
-   - Do g1 **before** drawing it, so no picture is spent on a wrong object.
-   - About $30 for every script, at Pro-like promotional prices in batch; to be measured on a pilot.
-2. **Draw g1** (`run.py batch --set common --provider current` after switching to the billing
-   account): about $80 at four takes.
-3. **Write g2 and g3 with Argon** from the same fact sheets and `scripts/GUIDE.md`, then fact-check
-   them the same way. About $25. A writer and checker reached through `acervo.models` or the batch
-   code here; the owner's other research project has a batch script for Argon to copy from.
-4. **Choose**, on the tablet, and **redraw** the marked characters after revising their scripts
+1. **Finish the full run**: `full_run.sh` in the experiment, one command, safe to rerun. It
+   fact-checks g1 (done), draws it while Argon writes g2 and g3, checks those and draws them.
+2. **Choose**, on the tablet, and **redraw** the marked characters after revising their scripts
    from the notes.
-5. **The feature**:
+3. **The feature**:
    - Tap a character in a Chinese headword for a card with its picture, what it depicted, its
      components and a link to the Write sheet. Or show the word's characters as a row of thumbnails
      under the headword.
@@ -136,13 +144,4 @@ In this order. Every Google Cloud call bills the one project the experiment's ig
      character, about 30 KB, so about 40 MB in all.
    - A picture's ink can be compared with the character's strokes by machine (the pilot inked 93–98%
      of them), to flag a broken picture before it is shown.
-6. **Japanese-only forms**, if Japanese is learned in earnest (above).
-
-**Cost of the whole run**, at about $0.034 a picture in batch:
-
-| Takes | Pictures | Drawing | Redraws | Argon | Total |
-| --- | --: | --: | --: | --: | --: |
-| 4 | 4,988 | $171 | ~$45 | ~$55 | **~$270** |
-| 6 | 7,484 | $256 | ~$25 | ~$55 | **~$335** |
-
-Six takes for g1 only, four for the rest, comes to about $310.
+4. **Japanese-only forms**, if Japanese is learned in earnest (above).
