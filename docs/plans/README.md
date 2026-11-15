@@ -31,11 +31,15 @@ what it said.
 - [`quality/clip-selection.md`](quality/clip-selection.md) — tuning the clip-selection prompt, then curating its picks.
 - [`quality/translation-completeness-check.md`](quality/translation-completeness-check.md) — catching a translation that stopped early.
 - [`quality/grounding-spike.md`](quality/grounding-spike.md) — whether a dictionary reference makes a better article.
+- [`quality/compose-checks.md`](quality/compose-checks.md) — rule checks on what compose writes, passing a failed answer to the next model.
+- [`quality/mandarin-ipa.md`](quality/mandarin-ipa.md) — Mandarin IPA derived from the reading by a table.
+- [`quality/dictionary-checks.md`](quality/dictionary-checks.md) — readings, IPA and gender checked against installed dictionaries.
 
 **For other people**
 
 - [`first-use/standalone-mac-app.md`](first-use/standalone-mac-app.md) — download, open, use.
 - [`first-use/other-users.md`](first-use/other-users.md) — a few accounts per server, and starter vocabularies.
+- [`first-use/starter-vocabularies.md`](first-use/starter-vocabularies.md) — demo vocabularies with shared pictures, stories and loops; its concept list is [`first-use/starter-concepts.yaml`](first-use/starter-concepts.yaml).
 - [`first-use/first-run-guide.md`](first-use/first-run-guide.md) — a guide through vocabulary, topics and providers on first use.
 
 **Defects**

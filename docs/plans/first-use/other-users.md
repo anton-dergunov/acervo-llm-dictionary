@@ -37,7 +37,8 @@ A new user opens an empty vocabulary, and every word they add costs model calls,
 recordings before it is pleasant to study. **Starter vocabularies** — a few hundred common words per
 language and level, with articles, pictures and recordings already made — would let them start the
 same day. An export bundle is already the format ([`../../features/export.md`](../../features/export.md)),
-so a starter vocabulary is a published bundle, imported like any other.
+so a starter vocabulary is a published bundle, imported like any other. Which ones, and how they are
+made: [`starter-vocabularies.md`](starter-vocabularies.md).
 
 ## Other platforms
 

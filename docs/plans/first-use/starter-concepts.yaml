@@ -1,0 +1,576 @@
+# The shared concept list for the starter vocabularies — a draft for review.
+#
+# Plan: docs/plans/first-use/starter-vocabularies.md. This file is the freeze point for pictures:
+# once reviewed, each concept's picture is drawn once and reused by every vocabulary.
+#
+# A concept is one MEANING, not one word. English is only the label language. Where languages cut a
+# meaning differently, the concepts are cut finer, so each one still has one picture:
+#   - fish-animal and fish-food (Spanish pez / pescado)
+#   - know-fact and know-person (saber / conocer, wissen / kennen)
+#   - play-game and play-instrument (jugar / tocar)
+# The other direction works too: Russian рука is one word with two senses, arm and hand, and each
+# sense takes its concept's picture.
+#
+# Fields
+#   id     the concept's stable key: an English label, with a suffix where one label has several
+#          concepts (fish-animal, fish-food)
+#   sense  the meaning, in a few English words: what decides which sense of a word it matches
+#   pos    noun | verb | adj | adv | conj | prep | expr
+#   level  A1 | A2 | B1 (rough CEFR). Chinese uses the A1 concepts only.
+#   pic    omitted = one shared picture. none = no shared picture (grammar words, and a few that no
+#          picture can carry); a vocabulary may still draw its own.
+#   note   how languages differ here, or why the picture needs care
+#   also   further topics the word is filed under
+
+people:
+  - {id: mother, sense: "a female parent", pos: noun, level: A1}
+  - {id: father, sense: "a male parent", pos: noun, level: A1}
+  - {id: parents, sense: "mother and father together", pos: noun, level: A1}
+  - {id: child, sense: "a young person, not yet grown up", pos: noun, level: A1}
+  - {id: son, sense: "a person's male child", pos: noun, level: A1}
+  - {id: daughter, sense: "a person's female child", pos: noun, level: A1}
+  - {id: brother, sense: "a male sibling", pos: noun, level: A1}
+  - {id: sister, sense: "a female sibling", pos: noun, level: A1}
+  - {id: grandmother, sense: "the mother of a parent", pos: noun, level: A1}
+  - {id: grandfather, sense: "the father of a parent", pos: noun, level: A1}
+  - {id: uncle, sense: "the brother of a parent", pos: noun, level: A2}
+  - {id: aunt, sense: "the sister of a parent", pos: noun, level: A2}
+  - {id: cousin, sense: "the child of an uncle or aunt", pos: noun, level: A2}
+  - {id: baby, sense: "a very young child", pos: noun, level: A1}
+  - {id: husband, sense: "the man a person is married to", pos: noun, level: A1}
+  - {id: wife, sense: "the woman a person is married to", pos: noun, level: A1}
+  - {id: family, sense: "parents, children and relatives", pos: noun, level: A1}
+  - {id: friend, sense: "a person you like and know well", pos: noun, level: A1}
+  - {id: man, sense: "an adult male person", pos: noun, level: A1}
+  - {id: woman, sense: "an adult female person", pos: noun, level: A1}
+  - {id: boy, sense: "a male child", pos: noun, level: A1}
+  - {id: girl, sense: "a female child", pos: noun, level: A1}
+  - {id: person, sense: "a human being", pos: noun, level: A1}
+  - {id: teenager, sense: "a person between thirteen and nineteen", pos: noun, level: A2}
+  - {id: adult, sense: "a grown-up person", pos: noun, level: A2}
+  - {id: neighbour, sense: "a person who lives next door", pos: noun, level: A2}
+  - {id: guest, sense: "a person invited to your home or event", pos: noun, level: A2}
+  - {id: couple, sense: "two people in a relationship", pos: noun, level: A2}
+  - {id: stranger, sense: "a person you do not know", pos: noun, level: B1}
+  - {id: wedding, sense: "the ceremony of getting married", pos: noun, level: A2, note: "culture — keep the scene unspecific"}
+  - {id: name, sense: "what a person is called", pos: noun, level: A1, pic: none, note: "a picture would have to show the answer written"}
+
+body:
+  - {id: head, sense: "the top part of the body", pos: noun, level: A1}
+  - {id: face, sense: "the front of the head", pos: noun, level: A1}
+  - {id: eye, sense: "the organ you see with", pos: noun, level: A1}
+  - {id: ear, sense: "the organ you hear with", pos: noun, level: A1}
+  - {id: nose, sense: "the part of the face you smell with", pos: noun, level: A1}
+  - {id: mouth, sense: "the opening in the face for eating and speaking", pos: noun, level: A1}
+  - {id: tooth, sense: "one of the hard white things in the mouth", pos: noun, level: A1}
+  - {id: hair, sense: "what grows on the head", pos: noun, level: A1}
+  - {id: hand, sense: "the end of the arm, with fingers", pos: noun, level: A1, note: "Russian рука is arm and hand — two senses, two pictures"}
+  - {id: arm, sense: "the limb from shoulder to hand", pos: noun, level: A1}
+  - {id: finger, sense: "one of the five parts at the end of the hand", pos: noun, level: A1, note: "Spanish dedo is finger and toe"}
+  - {id: leg, sense: "the limb you walk on", pos: noun, level: A1, note: "Russian нога is leg and foot"}
+  - {id: foot, sense: "the part of the leg you stand on", pos: noun, level: A1}
+  - {id: back-body, sense: "the back of the body, from neck to hips", pos: noun, level: A2}
+  - {id: stomach, sense: "the belly; where food goes", pos: noun, level: A2}
+  - {id: heart, sense: "the organ that pumps blood", pos: noun, level: A2}
+  - {id: skin, sense: "the outer covering of the body", pos: noun, level: A2}
+  - {id: blood, sense: "the red liquid in the body", pos: noun, level: A2}
+  - {id: pain, sense: "the feeling when part of the body hurts", pos: noun, level: A2}
+  - {id: headache, sense: "a pain in the head", pos: noun, level: A2}
+  - {id: fever, sense: "a body temperature higher than normal", pos: noun, level: A2}
+  - {id: cold-illness, sense: "a common illness with a runny nose", pos: noun, level: A2}
+  - {id: cough, sense: "pushing air out of the throat with a noise", pos: noun, level: B1}
+  - {id: sick, sense: "not well; ill", pos: adj, level: A1}
+  - {id: healthy, sense: "well and strong in body", pos: adj, level: A2}
+  - {id: hurt, sense: "to feel or cause pain", pos: verb, level: A2}
+  - {id: doctor, sense: "a person who treats sick people", pos: noun, level: A1, also: [work]}
+  - {id: dentist, sense: "a doctor for teeth", pos: noun, level: A2, also: [work]}
+  - {id: hospital, sense: "a building where sick people are treated", pos: noun, level: A1, also: [city]}
+  - {id: pharmacy, sense: "a shop that sells medicine", pos: noun, level: A2, also: [city]}
+  - {id: medicine, sense: "a pill or liquid you take when ill", pos: noun, level: A2}
+
+food:
+  - {id: water, sense: "the clear liquid you drink", pos: noun, level: A1}
+  - {id: bread, sense: "a baked food made from flour", pos: noun, level: A1}
+  - {id: milk, sense: "the white drink from cows", pos: noun, level: A1}
+  - {id: coffee, sense: "the hot dark drink from roasted beans", pos: noun, level: A1}
+  - {id: tea, sense: "the hot drink made from leaves", pos: noun, level: A1}
+  - {id: juice, sense: "the drink pressed from fruit", pos: noun, level: A1}
+  - {id: wine, sense: "the alcoholic drink made from grapes", pos: noun, level: A1}
+  - {id: beer, sense: "the alcoholic drink made from grain", pos: noun, level: A1}
+  - {id: egg, sense: "the oval food a hen lays", pos: noun, level: A1}
+  - {id: cheese, sense: "a food made from milk", pos: noun, level: A1}
+  - {id: butter, sense: "the yellow fat made from milk", pos: noun, level: A2}
+  - {id: meat, sense: "an animal's flesh as food", pos: noun, level: A1}
+  - {id: chicken-food, sense: "chicken as meat on a plate", pos: noun, level: A1, note: "Spanish pollo; the bird is hen"}
+  - {id: fish-food, sense: "fish as food on a plate", pos: noun, level: A1, note: "Spanish pescado; the live animal is pez"}
+  - {id: rice, sense: "the small white grains eaten cooked", pos: noun, level: A1}
+  - {id: pasta, sense: "food made from flour and water, like spaghetti", pos: noun, level: A1}
+  - {id: soup, sense: "a hot liquid food", pos: noun, level: A1}
+  - {id: salad, sense: "a cold dish of raw vegetables", pos: noun, level: A1}
+  - {id: sandwich, sense: "food between two slices of bread", pos: noun, level: A1}
+  - {id: apple, sense: "the round fruit of the apple tree", pos: noun, level: A1}
+  - {id: banana, sense: "the long yellow fruit", pos: noun, level: A1}
+  - {id: orange-fruit, sense: "the round orange citrus fruit", pos: noun, level: A1}
+  - {id: lemon, sense: "the sour yellow citrus fruit", pos: noun, level: A2}
+  - {id: grape, sense: "the small round fruit wine is made from", pos: noun, level: A2}
+  - {id: strawberry, sense: "the small red fruit with seeds outside", pos: noun, level: A2}
+  - {id: potato, sense: "the vegetable grown underground", pos: noun, level: A1}
+  - {id: tomato, sense: "the soft red fruit used as a vegetable", pos: noun, level: A1}
+  - {id: onion, sense: "the round vegetable that makes you cry", pos: noun, level: A2}
+  - {id: carrot, sense: "the long orange root vegetable", pos: noun, level: A2}
+  - {id: vegetable, sense: "a plant eaten as food", pos: noun, level: A1}
+  - {id: fruit, sense: "the sweet part of a plant with seeds", pos: noun, level: A1}
+  - {id: salt, sense: "the white powder that makes food salty", pos: noun, level: A1}
+  - {id: sugar, sense: "the sweet white powder", pos: noun, level: A1}
+  - {id: oil-cooking, sense: "the liquid fat used for cooking", pos: noun, level: A2}
+  - {id: cake, sense: "a sweet baked food", pos: noun, level: A1}
+  - {id: chocolate, sense: "the sweet brown food made from cocoa", pos: noun, level: A1}
+  - {id: ice-cream, sense: "a frozen sweet food", pos: noun, level: A1}
+  - {id: breakfast, sense: "the first meal of the day", pos: noun, level: A1, note: "culture — not one country's breakfast"}
+  - {id: lunch, sense: "the meal in the middle of the day", pos: noun, level: A1}
+  - {id: dinner, sense: "the main evening meal", pos: noun, level: A1}
+  - {id: meal, sense: "food eaten at one time", pos: noun, level: A2}
+  - {id: menu, sense: "the list of dishes in a restaurant", pos: noun, level: A2}
+  - {id: waiter, sense: "a person who serves food in a restaurant", pos: noun, level: A2, also: [work]}
+  - {id: bill-restaurant, sense: "the paper that says what you owe for a meal", pos: noun, level: A2}
+  - {id: glass-cup, sense: "a glass container you drink from", pos: noun, level: A1, note: "not the material glass"}
+  - {id: cup, sense: "a small container with a handle, for hot drinks", pos: noun, level: A1}
+  - {id: plate, sense: "a flat dish you eat from", pos: noun, level: A1}
+  - {id: bowl, sense: "a round deep dish", pos: noun, level: A2}
+  - {id: knife, sense: "a tool for cutting", pos: noun, level: A1}
+  - {id: fork, sense: "a tool with points for eating", pos: noun, level: A1}
+  - {id: spoon, sense: "a tool for eating soup", pos: noun, level: A1}
+  - {id: chopsticks, sense: "two sticks for eating", pos: noun, level: A2, note: "needed for Chinese, Japanese, Korean"}
+  - {id: bottle, sense: "a container for liquid with a narrow neck", pos: noun, level: A1}
+  - {id: hungry, sense: "wanting to eat", pos: adj, level: A1}
+  - {id: thirsty, sense: "wanting to drink", pos: adj, level: A1}
+  - {id: delicious, sense: "tasting very good", pos: adj, level: A2}
+  - {id: sweet, sense: "tasting of sugar", pos: adj, level: A2}
+  - {id: spicy, sense: "hot-tasting, like chilli", pos: adj, level: A2}
+  - {id: cook, sense: "to make food hot and ready to eat", pos: verb, level: A1, also: [actions]}
+  - {id: eat, sense: "to put food in your mouth and swallow it", pos: verb, level: A1, also: [actions]}
+  - {id: drink, sense: "to swallow a liquid", pos: verb, level: A1, also: [actions]}
+  - {id: taste, sense: "to try the flavour of food", pos: verb, level: B1}
+  - {id: smell, sense: "to notice something with your nose", pos: verb, level: A2}
+
+home:
+  - {id: house, sense: "a building where a family lives", pos: noun, level: A1}
+  - {id: flat, sense: "a home on one floor of a bigger building", pos: noun, level: A1}
+  - {id: room, sense: "one space in a building, with walls", pos: noun, level: A1}
+  - {id: kitchen, sense: "the room where you cook", pos: noun, level: A1}
+  - {id: bedroom, sense: "the room where you sleep", pos: noun, level: A1}
+  - {id: bathroom, sense: "the room with a bath or shower", pos: noun, level: A1}
+  - {id: living-room, sense: "the room for sitting and relaxing", pos: noun, level: A1}
+  - {id: door, sense: "what you open to go into a room", pos: noun, level: A1}
+  - {id: window, sense: "the glass opening in a wall", pos: noun, level: A1}
+  - {id: wall, sense: "a side of a room or building", pos: noun, level: A1}
+  - {id: floor-ground, sense: "the surface you walk on in a room", pos: noun, level: A1, note: "Spanish suelo; a level of a building is piso"}
+  - {id: floor-storey, sense: "one level of a building", pos: noun, level: A2}
+  - {id: roof, sense: "the top covering of a building", pos: noun, level: A2}
+  - {id: stairs, sense: "steps going up or down", pos: noun, level: A1}
+  - {id: garden, sense: "land by a house with flowers or grass", pos: noun, level: A1}
+  - {id: table, sense: "a piece of furniture with a flat top and legs", pos: noun, level: A1}
+  - {id: chair, sense: "a seat for one person, with a back", pos: noun, level: A1}
+  - {id: bed, sense: "the furniture you sleep on", pos: noun, level: A1}
+  - {id: sofa, sense: "a long soft seat for several people", pos: noun, level: A2}
+  - {id: lamp, sense: "an object that gives light", pos: noun, level: A2}
+  - {id: light, sense: "the brightness that lets you see", pos: noun, level: A1}
+  - {id: fridge, sense: "a cold cupboard for food", pos: noun, level: A2}
+  - {id: shower, sense: "water sprayed on you to wash", pos: noun, level: A1}
+  - {id: bath, sense: "a long container you sit in to wash", pos: noun, level: A1}
+  - {id: toilet, sense: "the seat you use to get rid of waste", pos: noun, level: A1}
+  - {id: towel, sense: "a cloth for drying yourself", pos: noun, level: A2}
+  - {id: mirror, sense: "glass that shows your reflection", pos: noun, level: A2}
+  - {id: key, sense: "a small metal object that opens a lock", pos: noun, level: A1}
+  - {id: clock, sense: "an object on a wall that shows the time", pos: noun, level: A1, also: [time], note: "Spanish reloj is clock and watch"}
+  - {id: painting, sense: "a picture made with paint", pos: noun, level: A2}
+  - {id: box, sense: "a container with flat sides", pos: noun, level: A1}
+  - {id: bag, sense: "a container of cloth or plastic you carry things in", pos: noun, level: A1}
+  - {id: phone, sense: "a device for calling people", pos: noun, level: A1}
+  - {id: computer, sense: "an electronic machine for work and the internet", pos: noun, level: A1, also: [work]}
+  - {id: television, sense: "a screen for watching programmes", pos: noun, level: A1}
+  - {id: book, sense: "pages with writing, bound together", pos: noun, level: A1, also: [work]}
+  - {id: letter-mail, sense: "a written message sent by post", pos: noun, level: A2, note: "not a letter of the alphabet"}
+  - {id: pillow, sense: "a soft bag for your head in bed", pos: noun, level: B1}
+  - {id: blanket, sense: "a thick cover that keeps you warm in bed", pos: noun, level: B1}
+
+clothes:
+  - {id: clothes, sense: "the things you wear", pos: noun, level: A1}
+  - {id: shirt, sense: "a top with buttons and a collar", pos: noun, level: A1}
+  - {id: t-shirt, sense: "a simple cotton top with short sleeves", pos: noun, level: A1}
+  - {id: trousers, sense: "clothing covering each leg separately", pos: noun, level: A1}
+  - {id: dress, sense: "a one-piece garment with a skirt", pos: noun, level: A1}
+  - {id: skirt, sense: "a garment hanging from the waist", pos: noun, level: A1}
+  - {id: coat, sense: "a long warm garment worn outside", pos: noun, level: A1}
+  - {id: jacket, sense: "a short coat", pos: noun, level: A1}
+  - {id: sweater, sense: "a warm knitted top", pos: noun, level: A2}
+  - {id: shoe, sense: "what you wear on your foot", pos: noun, level: A1}
+  - {id: sock, sense: "soft clothing for the foot, inside a shoe", pos: noun, level: A1}
+  - {id: hat, sense: "something worn on the head", pos: noun, level: A1}
+  - {id: glasses, sense: "lenses in a frame worn to see better", pos: noun, level: A1}
+  - {id: umbrella, sense: "what you hold over you in the rain", pos: noun, level: A2}
+  - {id: watch, sense: "a small clock worn on the wrist", pos: noun, level: A1}
+  - {id: ring, sense: "a circle of metal worn on a finger", pos: noun, level: A2}
+  - {id: pocket, sense: "a small bag sewn into clothes", pos: noun, level: B1}
+  - {id: wear, sense: "to have clothes on your body", pos: verb, level: A1, also: [actions]}
+
+city:
+  - {id: city, sense: "a large town", pos: noun, level: A1}
+  - {id: village, sense: "a very small town in the country", pos: noun, level: A2}
+  - {id: street, sense: "a road in a town with buildings", pos: noun, level: A1}
+  - {id: road, sense: "a way for cars between places", pos: noun, level: A1}
+  - {id: square, sense: "an open public place in a town", pos: noun, level: A2}
+  - {id: corner-street, sense: "where two streets meet", pos: noun, level: A2, note: "Spanish esquina; the inside corner of a room is rincón"}
+  - {id: bridge, sense: "a structure that crosses a river or road", pos: noun, level: A2}
+  - {id: park, sense: "a public garden in a town", pos: noun, level: A1}
+  - {id: building, sense: "a structure with walls and a roof", pos: noun, level: A2}
+  - {id: shop, sense: "a place where things are sold", pos: noun, level: A1, also: [shopping]}
+  - {id: market, sense: "an open place with stalls selling food and goods", pos: noun, level: A1, also: [shopping]}
+  - {id: supermarket, sense: "a big shop selling food", pos: noun, level: A1, also: [shopping]}
+  - {id: bank-money, sense: "a place that keeps money", pos: noun, level: A1, also: [shopping]}
+  - {id: post-office, sense: "where you send letters and parcels", pos: noun, level: A2}
+  - {id: museum, sense: "a building where old or valuable things are shown", pos: noun, level: A1, also: [travel]}
+  - {id: restaurant, sense: "a place where you pay to eat a meal", pos: noun, level: A1, also: [food]}
+  - {id: cafe, sense: "a small place for coffee and snacks", pos: noun, level: A1}
+  - {id: station, sense: "where trains or buses stop", pos: noun, level: A1}
+  - {id: airport, sense: "where planes take off and land", pos: noun, level: A1, also: [travel]}
+  - {id: car, sense: "a vehicle with four wheels and an engine", pos: noun, level: A1}
+  - {id: bus, sense: "a big vehicle carrying many passengers", pos: noun, level: A1}
+  - {id: train, sense: "a line of carriages on rails", pos: noun, level: A1}
+  - {id: bicycle, sense: "a vehicle with two wheels and pedals", pos: noun, level: A1}
+  - {id: taxi, sense: "a car you pay to drive you", pos: noun, level: A1}
+  - {id: plane, sense: "a vehicle that flies", pos: noun, level: A1}
+  - {id: boat, sense: "a vehicle that travels on water", pos: noun, level: A1, note: "many languages have one word for boat and ship"}
+  - {id: ticket, sense: "a paper that lets you travel or enter", pos: noun, level: A1}
+  - {id: traffic-light, sense: "lights that tell cars when to stop", pos: noun, level: A2}
+  - {id: police-officer, sense: "a person whose job is to keep the law", pos: noun, level: A2, also: [work]}
+
+travel:
+  - {id: holiday, sense: "time off when you travel or rest", pos: noun, level: A1}
+  - {id: trip, sense: "a journey to a place and back", pos: noun, level: A2}
+  - {id: hotel, sense: "a building where you pay to sleep", pos: noun, level: A1}
+  - {id: passport, sense: "the document you show at a border", pos: noun, level: A2}
+  - {id: suitcase, sense: "a case for carrying clothes when travelling", pos: noun, level: A2}
+  - {id: map, sense: "a drawing of an area that shows the way", pos: noun, level: A1}
+  - {id: tourist, sense: "a person visiting a place for pleasure", pos: noun, level: A2}
+  - {id: photo, sense: "a picture taken with a camera", pos: noun, level: A1}
+  - {id: country-nation, sense: "a nation with its own government", pos: noun, level: A1}
+  - {id: countryside, sense: "land outside towns, with fields", pos: noun, level: A2, note: "Spanish campo also means field"}
+  - {id: world, sense: "the earth and all its countries", pos: noun, level: A2}
+  - {id: border, sense: "the line between two countries", pos: noun, level: B1}
+  - {id: abroad, sense: "in or to a foreign country", pos: adv, level: B1}
+
+nature:
+  - {id: sun, sense: "the star that gives us light by day", pos: noun, level: A1}
+  - {id: moon, sense: "what shines in the night sky", pos: noun, level: A1}
+  - {id: star, sense: "a point of light in the night sky", pos: noun, level: A1}
+  - {id: sky, sense: "the space above the earth", pos: noun, level: A1}
+  - {id: cloud, sense: "a white or grey mass in the sky", pos: noun, level: A1}
+  - {id: rain, sense: "water falling from clouds", pos: noun, level: A1}
+  - {id: snow, sense: "soft white frozen water falling from the sky", pos: noun, level: A1}
+  - {id: wind, sense: "moving air", pos: noun, level: A1}
+  - {id: storm, sense: "very bad weather with wind and rain", pos: noun, level: A2}
+  - {id: weather, sense: "the state of the air — sun, rain, wind", pos: noun, level: A1}
+  - {id: ice, sense: "frozen water", pos: noun, level: A2}
+  - {id: hot-weather, sense: "(of the weather) very warm", pos: adj, level: A1, note: "Spanish hace calor; hot to the touch is caliente"}
+  - {id: cold-weather, sense: "(of the weather) with a low temperature", pos: adj, level: A1}
+  - {id: sea, sense: "the large area of salt water", pos: noun, level: A1, also: [travel]}
+  - {id: beach, sense: "the sand or stones by the sea", pos: noun, level: A1, also: [travel]}
+  - {id: river, sense: "water flowing across land", pos: noun, level: A1}
+  - {id: lake, sense: "water with land all around it", pos: noun, level: A1}
+  - {id: mountain, sense: "a very high hill", pos: noun, level: A1, also: [travel]}
+  - {id: island, sense: "land with water all around it", pos: noun, level: A2}
+  - {id: forest, sense: "a large area of trees", pos: noun, level: A2}
+  - {id: desert, sense: "a dry sandy land with little rain", pos: noun, level: B1}
+  - {id: tree, sense: "a tall plant with a trunk and branches", pos: noun, level: A1}
+  - {id: flower, sense: "the coloured part of a plant", pos: noun, level: A1}
+  - {id: grass, sense: "the thin green plants covering a lawn", pos: noun, level: A1}
+  - {id: leaf, sense: "a flat green part of a plant", pos: noun, level: A2}
+  - {id: plant, sense: "a living thing that grows in soil", pos: noun, level: A2}
+  - {id: stone, sense: "a small hard piece of rock", pos: noun, level: A2}
+  - {id: fire, sense: "flames that burn", pos: noun, level: A2}
+
+animals:
+  - {id: animal, sense: "a living creature that is not a plant", pos: noun, level: A1}
+  - {id: dog, sense: "the animal that barks, kept as a pet", pos: noun, level: A1}
+  - {id: cat, sense: "the small furry pet that meows", pos: noun, level: A1}
+  - {id: horse, sense: "the large animal people ride", pos: noun, level: A1}
+  - {id: cow, sense: "the farm animal that gives milk", pos: noun, level: A1}
+  - {id: pig, sense: "the pink farm animal", pos: noun, level: A1}
+  - {id: sheep, sense: "the farm animal with wool", pos: noun, level: A2}
+  - {id: hen, sense: "the farm bird that lays eggs", pos: noun, level: A2, note: "Spanish gallina; as meat it is chicken-food"}
+  - {id: bird, sense: "an animal with feathers and wings", pos: noun, level: A1}
+  - {id: fish-animal, sense: "a live animal that swims in water", pos: noun, level: A1, note: "Spanish pez; as food it is fish-food"}
+  - {id: mouse, sense: "a small grey animal with a long tail", pos: noun, level: A2}
+  - {id: rabbit, sense: "a small animal with long ears", pos: noun, level: A2}
+  - {id: duck, sense: "a water bird with a flat beak", pos: noun, level: A2}
+  - {id: lion, sense: "the big wild cat with a mane", pos: noun, level: A2}
+  - {id: elephant, sense: "the huge grey animal with a trunk", pos: noun, level: A2}
+  - {id: monkey, sense: "the animal that climbs trees, with a long tail", pos: noun, level: A2}
+  - {id: bear, sense: "the big heavy furry wild animal", pos: noun, level: A2}
+  - {id: snake, sense: "the long animal with no legs", pos: noun, level: A2}
+  - {id: spider, sense: "the small creature with eight legs", pos: noun, level: A2}
+  - {id: butterfly, sense: "the insect with large coloured wings", pos: noun, level: A2}
+  - {id: bee, sense: "the insect that makes honey", pos: noun, level: B1}
+  - {id: pet, sense: "an animal kept at home", pos: noun, level: A2}
+
+time:
+  - {id: day, sense: "twenty-four hours; the light part of them", pos: noun, level: A1}
+  - {id: night, sense: "the dark part of the day", pos: noun, level: A1}
+  - {id: morning, sense: "the early part of the day", pos: noun, level: A1}
+  - {id: afternoon, sense: "the part of the day after noon", pos: noun, level: A1}
+  - {id: evening, sense: "the end of the day, before night", pos: noun, level: A1}
+  - {id: week, sense: "seven days", pos: noun, level: A1}
+  - {id: weekend, sense: "Saturday and Sunday", pos: noun, level: A1}
+  - {id: month, sense: "one of the twelve parts of a year", pos: noun, level: A1}
+  - {id: year, sense: "twelve months", pos: noun, level: A1}
+  - {id: hour, sense: "sixty minutes", pos: noun, level: A1}
+  - {id: minute, sense: "sixty seconds", pos: noun, level: A1}
+  - {id: spring, sense: "the season after winter", pos: noun, level: A1, note: "no hemisphere-specific month in the picture"}
+  - {id: summer, sense: "the warmest season", pos: noun, level: A1}
+  - {id: autumn, sense: "the season when leaves fall", pos: noun, level: A1}
+  - {id: winter, sense: "the coldest season", pos: noun, level: A1}
+  - {id: birthday, sense: "the day each year you were born on", pos: noun, level: A1, also: [people]}
+  - {id: calendar, sense: "a page of days, weeks and months", pos: noun, level: A2}
+  - {id: today, sense: "on this day", pos: adv, level: A1, pic: none}
+  - {id: tomorrow, sense: "on the day after today", pos: adv, level: A1, pic: none}
+  - {id: yesterday, sense: "on the day before today", pos: adv, level: A1, pic: none}
+  - {id: early, sense: "before the usual or expected time", pos: adj, level: A1}
+  - {id: late, sense: "after the expected time", pos: adj, level: A1}
+
+work:
+  - {id: job, sense: "the work you are paid for", pos: noun, level: A1}
+  - {id: office, sense: "a room or building where people work at desks", pos: noun, level: A1}
+  - {id: meeting, sense: "people coming together to talk about work", pos: noun, level: A2}
+  - {id: company, sense: "a business that sells goods or services", pos: noun, level: A2}
+  - {id: boss, sense: "the person in charge of you at work", pos: noun, level: A2}
+  - {id: colleague, sense: "a person you work with", pos: noun, level: B1}
+  - {id: salary, sense: "the money you are paid for your job", pos: noun, level: B1}
+  - {id: interview, sense: "a meeting where you are asked questions for a job", pos: noun, level: B1}
+  - {id: email, sense: "a message sent over the internet", pos: noun, level: A1}
+  - {id: teacher, sense: "a person who teaches at a school", pos: noun, level: A1}
+  - {id: student, sense: "a person who studies", pos: noun, level: A1}
+  - {id: school, sense: "a place where children learn", pos: noun, level: A1}
+  - {id: university, sense: "a place for study after school", pos: noun, level: A1}
+  - {id: lesson, sense: "a time when someone is taught", pos: noun, level: A1}
+  - {id: homework, sense: "school work done at home", pos: noun, level: A1}
+  - {id: exam, sense: "a test of what you know", pos: noun, level: A2}
+  - {id: pen, sense: "a tool for writing with ink", pos: noun, level: A1}
+  - {id: pencil, sense: "a tool for writing, made of wood", pos: noun, level: A1}
+  - {id: paper, sense: "the thin material you write on", pos: noun, level: A1}
+  - {id: desk, sense: "a table you work or study at", pos: noun, level: A2}
+  - {id: nurse, sense: "a person who cares for sick people", pos: noun, level: A2}
+  - {id: farmer, sense: "a person who grows food or keeps animals", pos: noun, level: A2}
+  - {id: chef, sense: "a person who cooks in a restaurant", pos: noun, level: A2}
+  - {id: mistake, sense: "something done wrong", pos: noun, level: A2}
+
+shopping:
+  - {id: money, sense: "coins and notes used to buy things", pos: noun, level: A1}
+  - {id: price, sense: "how much something costs", pos: noun, level: A1}
+  - {id: cash, sense: "money as coins and notes, not a card", pos: noun, level: A2}
+  - {id: card-bank, sense: "a plastic card you pay with", pos: noun, level: A2}
+  - {id: coin, sense: "a round piece of metal money", pos: noun, level: B1}
+  - {id: wallet, sense: "a small case for money and cards", pos: noun, level: A2}
+  - {id: gift, sense: "something you give to someone", pos: noun, level: A2}
+  - {id: queue, sense: "a line of people waiting", pos: noun, level: B1}
+  - {id: cheap, sense: "costing little money", pos: adj, level: A1}
+  - {id: expensive, sense: "costing a lot of money", pos: adj, level: A1}
+  - {id: free-cost, sense: "costing nothing", pos: adj, level: A2, note: "Spanish gratis; free to do as you like is libre"}
+  - {id: buy, sense: "to get something by paying for it", pos: verb, level: A1, also: [actions]}
+  - {id: sell, sense: "to give something for money", pos: verb, level: A1, also: [actions]}
+  - {id: pay, sense: "to give money for something", pos: verb, level: A1, also: [actions]}
+
+feelings:
+  - {id: happy, sense: "feeling pleased and good", pos: adj, level: A1}
+  - {id: sad, sense: "unhappy", pos: adj, level: A1}
+  - {id: angry, sense: "feeling strong displeasure", pos: adj, level: A1}
+  - {id: afraid, sense: "feeling fear", pos: adj, level: A2}
+  - {id: tired, sense: "needing rest or sleep", pos: adj, level: A1}
+  - {id: bored, sense: "tired of having nothing interesting to do", pos: adj, level: A2}
+  - {id: surprised, sense: "feeling something unexpected happened", pos: adj, level: A2}
+  - {id: worried, sense: "thinking about problems and feeling uneasy", pos: adj, level: A2}
+  - {id: nervous, sense: "anxious before something", pos: adj, level: A2}
+  - {id: excited, sense: "very happy and eager", pos: adj, level: A2}
+  - {id: calm, sense: "peaceful, not worried or excited", pos: adj, level: B1}
+  - {id: proud, sense: "pleased about what you or others did", pos: adj, level: B1}
+  - {id: jealous, sense: "unhappy that someone has what you want", pos: adj, level: B1}
+  - {id: embarrassed, sense: "feeling shy and uncomfortable in front of others", pos: adj, level: B1}
+  - {id: lonely, sense: "sad because you are alone", pos: adj, level: B1}
+  - {id: friendly, sense: "kind and pleasant to others", pos: adj, level: A2}
+  - {id: kind, sense: "caring and generous", pos: adj, level: A2}
+  - {id: funny, sense: "making people laugh", pos: adj, level: A1}
+  - {id: lazy, sense: "not wanting to work", pos: adj, level: A2}
+  - {id: shy, sense: "nervous with other people", pos: adj, level: A2}
+  - {id: polite, sense: "behaving well towards others", pos: adj, level: B1}
+  - {id: rude, sense: "not polite", pos: adj, level: B1}
+  - {id: brave, sense: "not afraid of danger", pos: adj, level: B1}
+  - {id: love, sense: "to like someone very much", pos: verb, level: A1, also: [actions]}
+  - {id: like, sense: "to find something pleasant", pos: verb, level: A1, also: [actions]}
+  - {id: hate, sense: "to dislike very much", pos: verb, level: A2, also: [actions]}
+  - {id: hope, sense: "to want something to happen", pos: verb, level: A2, note: "Spanish esperar is hope and wait — two senses, two pictures"}
+  - {id: miss-someone, sense: "to feel sad because someone is not with you", pos: verb, level: B1, note: "Spanish extrañar or echar de menos"}
+  - {id: smile, sense: "to make a happy face", pos: verb, level: A2, also: [actions]}
+  - {id: laugh, sense: "to make sounds because something is funny", pos: verb, level: A2, also: [actions]}
+  - {id: cry, sense: "to have tears from your eyes", pos: verb, level: A2, also: [actions]}
+  - {id: dream-sleep, sense: "pictures in your mind while you sleep", pos: noun, level: A2}
+  - {id: fear, sense: "the feeling of being afraid", pos: noun, level: B1}
+  - {id: luck, sense: "good things that happen by chance", pos: noun, level: B1}
+  - {id: secret, sense: "something you keep from others", pos: noun, level: B1}
+
+actions:
+  - {id: be-identity, sense: "to be (what someone or something is)", pos: verb, level: A1, pic: none, note: "Spanish ser vs estar; Russian has no present tense of it"}
+  - {id: be-state, sense: "to be (how or where someone is now)", pos: verb, level: A1, pic: none, note: "Spanish estar"}
+  - {id: have, sense: "to own or hold something", pos: verb, level: A1, pic: none}
+  - {id: go, sense: "to move to another place", pos: verb, level: A1, note: "Russian splits идти and ехать (on foot / by vehicle)"}
+  - {id: come, sense: "to move towards here", pos: verb, level: A1}
+  - {id: walk, sense: "to move on foot at a normal speed", pos: verb, level: A1}
+  - {id: run, sense: "to move quickly on foot", pos: verb, level: A1}
+  - {id: swim, sense: "to move through water", pos: verb, level: A1}
+  - {id: fly, sense: "to move through the air", pos: verb, level: A2}
+  - {id: drive, sense: "to control a car", pos: verb, level: A1}
+  - {id: sit, sense: "to rest on a chair", pos: verb, level: A1}
+  - {id: stand, sense: "to be upright on your feet", pos: verb, level: A1}
+  - {id: sleep, sense: "to rest with your eyes closed", pos: verb, level: A1}
+  - {id: wake-up, sense: "to stop sleeping", pos: verb, level: A1}
+  - {id: wash, sense: "to clean with water", pos: verb, level: A1}
+  - {id: clean, sense: "to make something not dirty", pos: verb, level: A1}
+  - {id: open, sense: "to move something so it is not shut", pos: verb, level: A1}
+  - {id: close, sense: "to shut", pos: verb, level: A1}
+  - {id: give, sense: "to hand something to someone", pos: verb, level: A1}
+  - {id: take, sense: "to get hold of something and move it", pos: verb, level: A1}
+  - {id: bring, sense: "to carry something here", pos: verb, level: A1}
+  - {id: carry, sense: "to hold something while moving", pos: verb, level: A2}
+  - {id: put, sense: "to place something somewhere", pos: verb, level: A1}
+  - {id: find, sense: "to discover where something is", pos: verb, level: A1}
+  - {id: lose-object, sense: "to not know where something is any more", pos: verb, level: A1}
+  - {id: look-at, sense: "to turn your eyes towards something", pos: verb, level: A1}
+  - {id: see, sense: "to notice with your eyes", pos: verb, level: A1}
+  - {id: watch-verb, sense: "to look at something for a time, like a film", pos: verb, level: A1}
+  - {id: listen, sense: "to pay attention to a sound", pos: verb, level: A1}
+  - {id: hear, sense: "to notice a sound", pos: verb, level: A1}
+  - {id: speak, sense: "to say words aloud", pos: verb, level: A1}
+  - {id: tell, sense: "to give someone information in words", pos: verb, level: A1}
+  - {id: ask, sense: "to put a question to someone", pos: verb, level: A1}
+  - {id: answer, sense: "to reply to a question", pos: verb, level: A1}
+  - {id: read, sense: "to look at words and understand them", pos: verb, level: A1}
+  - {id: write, sense: "to put words on paper or a screen", pos: verb, level: A1}
+  - {id: draw, sense: "to make a picture with a pencil", pos: verb, level: A1}
+  - {id: sing, sense: "to make music with your voice", pos: verb, level: A1}
+  - {id: dance, sense: "to move to music", pos: verb, level: A1}
+  - {id: play-game, sense: "to take part in a game or sport", pos: verb, level: A1, note: "Spanish jugar; an instrument is tocar"}
+  - {id: play-instrument, sense: "to make music on an instrument", pos: verb, level: A1}
+  - {id: work-verb, sense: "to do your job", pos: verb, level: A1}
+  - {id: study, sense: "to spend time learning", pos: verb, level: A1}
+  - {id: learn, sense: "to get knowledge or a skill", pos: verb, level: A1}
+  - {id: teach, sense: "to help someone learn", pos: verb, level: A1}
+  - {id: know-fact, sense: "to have information in your mind", pos: verb, level: A1, pic: none, note: "Spanish saber, German wissen"}
+  - {id: know-person, sense: "to be familiar with a person or place", pos: verb, level: A1, note: "Spanish conocer, German kennen"}
+  - {id: think, sense: "to use your mind; to have an opinion", pos: verb, level: A1}
+  - {id: understand, sense: "to know what something means", pos: verb, level: A1}
+  - {id: remember, sense: "to keep something in your mind", pos: verb, level: A1}
+  - {id: forget, sense: "to not remember", pos: verb, level: A1}
+  - {id: want, sense: "to wish to have or do something", pos: verb, level: A1}
+  - {id: need, sense: "to have to have something", pos: verb, level: A1}
+  - {id: help, sense: "to make something easier for someone", pos: verb, level: A1}
+  - {id: wait, sense: "to stay until something happens", pos: verb, level: A1}
+  - {id: meet, sense: "to come together with someone", pos: verb, level: A1}
+  - {id: visit, sense: "to go to see a person or place", pos: verb, level: A1}
+  - {id: call-phone, sense: "to telephone someone", pos: verb, level: A1}
+  - {id: send, sense: "to make something go to someone", pos: verb, level: A1}
+  - {id: live, sense: "to have your home somewhere", pos: verb, level: A1}
+  - {id: start, sense: "to begin", pos: verb, level: A1}
+  - {id: finish, sense: "to come to the end of something", pos: verb, level: A1}
+  - {id: stop, sense: "to no longer move or do something", pos: verb, level: A1}
+  - {id: break, sense: "to make something fall into pieces", pos: verb, level: A2}
+  - {id: repair, sense: "to make something broken work again", pos: verb, level: A2}
+  - {id: build, sense: "to make something by putting parts together", pos: verb, level: A2}
+  - {id: fall, sense: "to drop to the ground", pos: verb, level: A2}
+  - {id: jump, sense: "to push yourself off the ground", pos: verb, level: A2}
+  - {id: throw, sense: "to send something through the air from your hand", pos: verb, level: A2}
+  - {id: catch, sense: "to take something moving in your hands", pos: verb, level: A2}
+  - {id: cut, sense: "to open or divide with a knife", pos: verb, level: A2}
+  - {id: win, sense: "to come first in a game", pos: verb, level: A2}
+  - {id: lose-game, sense: "to not win", pos: verb, level: A2, note: "Spanish perder covers both lose senses"}
+  - {id: travel, sense: "to go from place to place", pos: verb, level: A1, also: [travel]}
+  - {id: arrive, sense: "to reach a place", pos: verb, level: A1}
+  - {id: leave, sense: "to go away from a place", pos: verb, level: A1}
+  - {id: choose, sense: "to decide which one you want", pos: verb, level: A2}
+  - {id: kiss, sense: "to touch someone with your lips", pos: verb, level: A2}
+  - {id: hug, sense: "to hold someone close in your arms", pos: verb, level: B1}
+  - {id: climb, sense: "to go up using hands and feet", pos: verb, level: B1}
+  - {id: push, sense: "to press something away from you", pos: verb, level: B1}
+  - {id: pull, sense: "to move something towards you", pos: verb, level: B1}
+
+describing:
+  - {id: big, sense: "large in size", pos: adj, level: A1}
+  - {id: small, sense: "little in size", pos: adj, level: A1}
+  - {id: long, sense: "measuring a lot from end to end", pos: adj, level: A1}
+  - {id: short-length, sense: "not long", pos: adj, level: A1, note: "Spanish corto; a short person is bajo"}
+  - {id: short-height, sense: "(of a person) not tall", pos: adj, level: A1}
+  - {id: tall, sense: "(of a person) of more than average height", pos: adj, level: A1}
+  - {id: old, sense: "having lived or existed a long time", pos: adj, level: A1}
+  - {id: young, sense: "not old", pos: adj, level: A1}
+  - {id: new, sense: "recently made or bought", pos: adj, level: A1}
+  - {id: good, sense: "of high quality; pleasant", pos: adj, level: A1}
+  - {id: bad, sense: "not good", pos: adj, level: A1}
+  - {id: hot-touch, sense: "(of a thing) very warm to touch", pos: adj, level: A1}
+  - {id: cold-touch, sense: "(of a thing) with a low temperature", pos: adj, level: A1}
+  - {id: warm, sense: "pleasantly hot", pos: adj, level: A1}
+  - {id: full, sense: "holding as much as it can", pos: adj, level: A2}
+  - {id: empty, sense: "with nothing inside", pos: adj, level: A2}
+  - {id: clean-adj, sense: "not dirty", pos: adj, level: A1}
+  - {id: dirty, sense: "covered in dirt", pos: adj, level: A1}
+  - {id: fast, sense: "moving quickly", pos: adj, level: A1}
+  - {id: slow, sense: "not fast", pos: adj, level: A1}
+  - {id: heavy, sense: "weighing a lot", pos: adj, level: A2}
+  - {id: light-weight, sense: "weighing little", pos: adj, level: A2}
+  - {id: strong, sense: "having great physical power", pos: adj, level: A2}
+  - {id: weak, sense: "not strong", pos: adj, level: A2}
+  - {id: easy, sense: "not difficult", pos: adj, level: A1}
+  - {id: difficult, sense: "not easy", pos: adj, level: A1}
+  - {id: beautiful, sense: "very pleasant to look at", pos: adj, level: A1}
+  - {id: ugly, sense: "unpleasant to look at", pos: adj, level: A2}
+  - {id: rich, sense: "having a lot of money", pos: adj, level: A2}
+  - {id: poor, sense: "having little money", pos: adj, level: A2}
+  - {id: wet, sense: "covered in water", pos: adj, level: A2}
+  - {id: dry, sense: "not wet", pos: adj, level: A2}
+  - {id: soft, sense: "not hard; easy to press", pos: adj, level: A2}
+  - {id: hard, sense: "firm; not soft", pos: adj, level: A2}
+  - {id: quiet, sense: "making little noise", pos: adj, level: A1}
+  - {id: loud, sense: "making a lot of noise", pos: adj, level: A2}
+  - {id: dark, sense: "with little or no light", pos: adj, level: A1}
+  - {id: dangerous, sense: "able to hurt you", pos: adj, level: A2}
+  - {id: safe, sense: "protected from danger", pos: adj, level: B1}
+  - {id: busy, sense: "having a lot to do", pos: adj, level: A2}
+  - {id: free-time, sense: "not busy; available", pos: adj, level: A2, note: "Spanish libre"}
+  - {id: right-correct, sense: "correct; true", pos: adj, level: A1, note: "not the direction"}
+  - {id: wrong, sense: "not correct", pos: adj, level: A1}
+  - {id: red, sense: "the colour of blood", pos: adj, level: A1}
+  - {id: blue, sense: "the colour of a clear sky", pos: adj, level: A1}
+  - {id: green, sense: "the colour of grass", pos: adj, level: A1}
+  - {id: yellow, sense: "the colour of a lemon", pos: adj, level: A1}
+  - {id: black, sense: "the darkest colour", pos: adj, level: A1}
+  - {id: white, sense: "the colour of snow", pos: adj, level: A1}
+
+little-words:
+  - {id: hello, sense: "a word said when you meet someone", pos: expr, level: A1}
+  - {id: goodbye, sense: "a word said when you leave", pos: expr, level: A1}
+  - {id: please, sense: "a polite word when asking", pos: expr, level: A1}
+  - {id: thank-you, sense: "words said to show you are grateful", pos: expr, level: A1}
+  - {id: sorry, sense: "a word said when you have done something wrong", pos: expr, level: A1}
+  - {id: "yes", sense: "the word for agreeing", pos: expr, level: A1, pic: none}
+  - {id: "no", sense: "the word for refusing or disagreeing", pos: expr, level: A1, pic: none}
+  - {id: but, sense: "a word that joins two contrasting ideas", pos: conj, level: A1, pic: none}
+  - {id: because, sense: "for the reason that", pos: conj, level: A1, pic: none}
+  - {id: with, sense: "together with", pos: prep, level: A1, pic: none}
+  - {id: without, sense: "not having", pos: prep, level: A2, pic: none}
+  - {id: always, sense: "at all times", pos: adv, level: A1, pic: none}
+  - {id: never, sense: "at no time", pos: adv, level: A1, pic: none}
+  - {id: often, sense: "many times", pos: adv, level: A1, pic: none}
+  - {id: sometimes, sense: "on some occasions", pos: adv, level: A1, pic: none}
+  - {id: very, sense: "to a high degree", pos: adv, level: A1, pic: none}
+  - {id: here, sense: "in this place", pos: adv, level: A1, pic: none}
+  - {id: there, sense: "in that place", pos: adv, level: A1, pic: none}
+  - {id: now, sense: "at this moment", pos: adv, level: A1, pic: none}
+  - {id: maybe, sense: "perhaps", pos: adv, level: A2, pic: none}
+  - {id: already, sense: "before now", pos: adv, level: A2, pic: none}

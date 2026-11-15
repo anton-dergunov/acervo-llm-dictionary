@@ -473,7 +473,8 @@ def write_fact_sheets(chosen: list[dict[str, Any]], sheets: Path | None = None) 
 
     from wordfreq.chinese import simplify_chinese
 
-    scripts = _scripts()
+    # A dropped script has no picture to reuse, so a sheet never offers one as a counterpart or component.
+    scripts = {k: v for k, v in _scripts().items() if not v.get("dropped")}
     variants: dict[str, list[str]] = defaultdict(list)
     for entry in catalogue():
         if entry.get("simplified"):
