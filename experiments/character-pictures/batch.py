@@ -283,8 +283,14 @@ def _cost(usage: dict[str, Any]) -> float:
     return round(spent * BATCH, 5)
 
 
-def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int]:
+def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int, int]:
     """Write every picture a finished job drew; a refusal or failure is logged and left missing.
+    (drawn, refused, unfinished).
+
+    A row the model never answered (no candidate and no prompt feedback) is `unfinished`, not
+    refused: Vertex ends a job 24 hours after it starts and returns its unprocessed rows empty. Only
+    a refusal counts toward skipping a character (`_refusals`); an unfinished take is simply asked
+    for again.
 
     The k-th answer for a character fills that character's k-th take in the job, in the output's own
     order, and a take already on disk is skipped, so reading a job twice writes nothing twice.
@@ -296,7 +302,7 @@ def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int]:
         character, take = key.split("/")
         wanted[character].append(int(take))
     seen: dict[str, int] = defaultdict(int)
-    drawn = refused = 0
+    drawn = refused = unfinished = 0
     names = _list(row, job["bucket"], f"{job['prefix']}/output")
     for name in sorted(n for n in names if n.endswith(".jsonl")):
         for raw in _lines(row, job["bucket"], name):
@@ -321,6 +327,11 @@ def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int]:
             candidate = (response.get("candidates") or [{}])[0]
             image = next((p["inlineData"] for p in (candidate.get("content") or {}).get("parts") or []
                           if "inlineData" in p and str(p["inlineData"].get("mimeType", "")).startswith("image/")), None)
+            if not image and not candidate and not response.get("promptFeedback"):
+                why = line.get("status") or job.get("error") or "the job ended before this row ran"
+                run.log({**entry, "error": "unfinished", "message": why})
+                unfinished += 1
+                continue
             if not image:
                 said = " ".join(p.get("text", "") for p in (candidate.get("content") or {}).get("parts") or [])
                 reason = line.get("status") or candidate.get("finishReason") or "no image"
@@ -333,9 +344,9 @@ def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int]:
                      "tokens": response.get("usageMetadata") or {}})
             drawn += 1
     job["harvested"] = True
-    job["drawn"], job["refused"] = drawn, refused
+    job["drawn"], job["refused"], job["unfinished"] = drawn, refused, unfinished
     _delete(row, job["bucket"], names + [f"{job['prefix']}/input.jsonl"])
-    return drawn, refused
+    return drawn, refused, unfinished
 
 
 # ── the state ───────────────────────────────────────────────────────────────
@@ -593,11 +604,11 @@ def _collect(state: dict[str, Any], rows: dict[str, Any]) -> list[dict[str, Any]
         if job["state"] in RUNNING:
             running.append(job)
             continue
-        drawn, refused = harvest(row, job)
+        drawn, refused, unfinished = harvest(row, job)
         save(state)
         note = f"; {job['error']}" if job.get("error") else ""
         run.say(f"{job['display']}: {job['state'].removeprefix('JOB_STATE_').lower()}, "
-                f"{drawn} pictures written, {refused} refused{note}")
+                f"{drawn} pictures written, {refused} refused, {unfinished} unfinished (asked for again){note}")
         if job.get("error") and any(word in job["error"].lower() for word in ("billing", "credit", "payment")):
             raise Stop(f"job {job['display']} stopped because the account behind {row.id} cannot pay: "
                        f"{job['error']}. Its finished pictures are written. Switch with `--provider <id>`.")

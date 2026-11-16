@@ -310,6 +310,9 @@ caffeinate -i experiments/character-pictures/full_run.sh 2>&1 | tee -a experimen
 - **A refusal**: the model sometimes answers with a sentence instead of a picture. The take stays
   missing and the next run asks again; a character refused twice is skipped unless named with
   `--characters`.
+- **The 24-hour limit**: Vertex ends a batch job 24 hours after it starts and returns the rows it did
+  not reach empty. Those takes are logged `unfinished`, not refused, and the next submission asks for
+  them again, so a job that ran out of time needs nothing done.
 - **Files**: the bucket `gs://<project>-character-pictures` is created on first use and holds the
   references and each job's files. A job's files are deleted once its pictures are written.
 - **Watching**: `run.py status` shows per group what is scripted, drawn, in flight and chosen, Argon's
