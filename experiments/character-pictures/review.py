@@ -7,14 +7,18 @@ characters, and they appear here beside the first four.
 
     .venv/bin/python experiments/character-pictures/review.py --choose --host "$(tailscale ip -4)"
 
-**Without it**, the blind scoring page of rounds 1–3: each picture gets a score from 1 to 5 and two
-yes / partly / no questions; one picture per character can be starred as the best, and a character
-can be marked to redraw in a later pass.
+The choose page shows every model's pictures of a character side by side, numbered by place, not
+by model or take; a choice names its picture as `<model>/<take>`.
 
-    .venv/bin/python experiments/character-pictures/review.py --host "$(tailscale ip -4)"
+**`--round trial`**, the blind scoring page of rounds 1–3, for the Flex and Nano Banana 2.1 trial
+(`trial.py`): each picture gets a score from 1 to 5 and two yes / partly / no questions; one picture
+per character can be starred as the best. `trial.py report` unblinds the scores and makes each star
+that character's choice for the full run.
+
+    .venv/bin/python experiments/character-pictures/review.py --round trial --host "$(tailscale ip -4)"
 
 On first start every character's planned pictures — each model, way and take — are shuffled into
-letters with a fixed seed and written to the round's `key.json` (`out/round-N/`); the page is never
+letters with a fixed seed and written to the round's `key.json` (`out/full/trial/`); the page is never
 told which letter is which, and a picture's URL is `/img/<round>/<character index>/<letter>`, so
 nothing on screen gives it away. The round is in the URL because pictures are cached for a day: without
 it a browser shows the previous round's picture at the same index and letter. A picture appears once it is drawn, so the page can be opened while
@@ -56,26 +60,25 @@ def _write(path: Path, value: Any) -> None:
     temporary.replace(path)
 
 
-def build() -> tuple[list[dict[str, Any]], dict[str, dict[str, str]]]:
-    """The characters, and each one's letter → `model/way/take` key.
+def build(items: list[dict[str, Any]], planned: list[str],
+          folder: Path) -> tuple[list[dict[str, Any]], dict[str, dict[str, str]]]:
+    """The characters, and each one's letter → `model/way/take` key (`planned`, the same for each).
 
-    The key is kept across restarts. A picture planned later — a model added to `MODELS` — is
-    given the next free letter, so a letter that has been judged never comes to mean another one.
+    The key is kept across restarts. A picture planned later is given the next free letter, so a
+    letter that has been judged never comes to mean another one.
     """
-    items = run.selected()
     scripts = run._scripts()
-    key: dict[str, dict[str, str]] = _read(OUT / "key.json", {})
+    key: dict[str, dict[str, str]] = _read(folder / "key.json", {})
     for item in items:
         character = item["character"]
-        planned = [f"{model.id}/{way}/{take}" for model in run.MODELS
-                   for c, way, take in run._wanted(model, [item])]
         held = key.setdefault(character, {})
         new = [name for name in planned if name not in held.values()]
         random.Random(f"{SEED}:{character}:{len(held)}").shuffle(new)
         free = (letter for letter in string.ascii_uppercase if letter not in held)
         for name in new:
             held[next(free)] = name
-    _write(OUT / "key.json", key)
+    folder.mkdir(parents=True, exist_ok=True)
+    _write(folder / "key.json", key)
     shown = []
     for index, item in enumerate(items):
         character = item["character"]
@@ -107,6 +110,8 @@ def _picture(key: dict[str, dict[str, str]], character: str, letter: str) -> Pat
 class Handler(BaseHTTPRequestHandler):
     characters: list[dict[str, Any]] = []
     key: dict[str, dict[str, str]] = {}
+    round = ""
+    folder = OUT
 
     def log_message(self, *_: Any) -> None:  # the terminal is for errors, not every picture
         pass
@@ -128,13 +133,13 @@ class Handler(BaseHTTPRequestHandler):
                 drawn = [letter for letter in item["letters"]
                          if (file := _picture(self.key, item["character"], letter)) and file.exists()]
                 characters.append({**item, "letters": drawn})
-            body = {"round": run.STAGE, "characters": characters,
-                    "labels": _read(OUT / "labels.json", {})}
+            body = {"round": self.round, "characters": characters,
+                    "labels": _read(self.folder / "labels.json", {})}
             self._send(200, json.dumps(body, ensure_ascii=False).encode(), "application/json")
         elif self.path.startswith(("/img/", "/ref/")):
             try:
                 parts = self.path.split("/")  # /img/<round>/<index>/<letter>, /ref/<round>/<index>
-                if parts[2] != run.STAGE:
+                if parts[2] != self.round:
                     raise ValueError(parts[2])
                 item = self.characters[int(parts[3])]
                 file = (OUT / "strokes" / f"{item['character']}.png" if parts[1] == "ref"
@@ -175,7 +180,7 @@ class Handler(BaseHTTPRequestHandler):
             self._send(HTTPStatus.BAD_REQUEST, b"", "text/plain")
             return
         with _lock:
-            labels = _read(OUT / "labels.json", {})
+            labels = _read(self.folder / "labels.json", {})
             label = labels.setdefault(character, {"pictures": {}, "best": "", "note": ""})
             if "answer" in update:
                 answers = label["pictures"].setdefault(update["letter"], {})
@@ -189,7 +194,7 @@ class Handler(BaseHTTPRequestHandler):
                 label["note"] = str(update["note"])[:2000]
             if "redraw" in update:
                 label["redraw"] = update["redraw"]
-            _write(OUT / "labels.json", labels)
+            _write(self.folder / "labels.json", labels)
         self._send(200, b"{}", "application/json")
 
 
@@ -606,10 +611,10 @@ class ChooseHandler(BaseHTTPRequestHandler):
         if self.path in ("/", "/index.html"):
             self._send(200, CHOOSE_PAGE.replace("__STYLE__", STYLE).encode(), "text/html; charset=utf-8")
         elif self.path == "/data":
-            listed = [{**item, "takes": takes} for item in self.characters
-                      if (takes := run.drawn_takes(item["character"]))]
+            listed = [{**item, "takes": takes, "newest": max(run.drawn_takes(item["character"]) or [0])}
+                      for item in self.characters if (takes := run.drawn_pictures(item["character"]))]
             self._json({"stage": run.STAGE, "groups": [name for name, _ in run.GROUPS],
-                        "characters": listed, "choices": run.choices()})
+                        "redrawModel": run.MODEL.id, "characters": listed, "choices": run.choices()})
         elif len(parts) == 3 and parts[1] == "char":
             try:
                 item = self.by_index[int(parts[2])]
@@ -632,8 +637,10 @@ class ChooseHandler(BaseHTTPRequestHandler):
         elif len(parts) >= 4 and parts[1] in ("img", "ref") and parts[2] == run.STAGE:
             try:
                 character = self.by_index[int(parts[3])]["character"]
+                if parts[1] == "img" and parts[4] not in {model.id for model in run.MODELS}:
+                    raise ValueError(parts[4])
                 file = (run.reference(character) if parts[1] == "ref"
-                        else run.picture_path(character, run.MODEL.id, "edit", int(parts[4])))
+                        else run.picture_path(character, parts[4], "edit", int(parts[5])))
             except (ValueError, KeyError, IndexError):
                 file = None
             if not file or not file.exists():
@@ -650,10 +657,10 @@ class ChooseHandler(BaseHTTPRequestHandler):
         try:
             update = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)))
             character = update["character"]
-            takes = run.drawn_takes(character)
-            if not takes:
+            pictures = run.drawn_pictures(character)
+            if not pictures:
                 raise KeyError(character)
-            if "best" in update and update["best"] not in (0, *takes):
+            if "best" in update and update["best"] not in ("", *pictures):
                 raise ValueError(update)
             if "redraw" in update and not isinstance(update["redraw"], bool):
                 raise ValueError(update)
@@ -662,13 +669,14 @@ class ChooseHandler(BaseHTTPRequestHandler):
             return
         with _lock:
             marked = run.choices()
-            label = marked.setdefault(character, {"best": 0, "redraw": False, "note": ""})
+            label = marked.setdefault(character, {"best": "", "redraw": False, "note": ""})
             if "best" in update:
                 label["best"] = update["best"]
             if "redraw" in update:
                 label["redraw"] = update["redraw"]
                 # The redraw follows the takes seen when it was asked for (`run.wanted_takes`).
-                label["redrawFrom"] = max(takes) if update["redraw"] else label.get("redrawFrom")
+                label["redrawFrom"] = (max(run.drawn_takes(character) or [0]) if update["redraw"]
+                                       else label.get("redrawFrom"))
             if "note" in update:
                 label["note"] = str(update["note"])[:2000]
             label["at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -734,12 +742,15 @@ const $ = (tag, attrs = {}, ...kids) => {
 };
 const store = (k, v) => { try { v === undefined ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} };
 const recall = k => { try { return localStorage.getItem(k); } catch { return null; } };
-const choice = c => CHOICES[c] ??= { best: 0, redraw: false, note: "" };
+const choice = c => CHOICES[c] ??= { best: "", redraw: false, note: "" };
+// A picture is `<model>/<take>`; the page numbers them by place and never says which model drew one.
+const takeOf = name => Number(name.split("/").pop());
+const isFresh = (label, name) => label.redrawFrom && name.startsWith(DATA.redrawModel + "/") && takeOf(name) > label.redrawFrom;
 
 // "redraw": asked for, its pictures not drawn yet; once they are, the character is undecided again.
 function state(item) {
   const label = CHOICES[item.character];
-  if (label?.redraw) return Math.max(...item.takes) > (label.redrawFrom || 0) ? "undecided" : "redraw";
+  if (label?.redraw) return item.newest > (label.redrawFrom || 0) ? "undecided" : "redraw";
   return label?.best ? "chosen" : "undecided";
 }
 const inGroup = () => DATA.characters.filter(item => item.group === GROUP);
@@ -821,10 +832,10 @@ function zoom(at) { zoomAt = at; showZoom(); zoomBox.classList.add("open"); }
 function showZoom() {
   const item = LIST[HERE], take = item.takes[zoomAt];
   const frame = zoomBox.querySelector(".frame");
-  frame.querySelector("img").src = `/img/${DATA.stage}/${item.index}/${take}`;
+  frame.querySelector("img").src = `/img/${DATA.stage}/${item.index}/${take}`;  // take: <model>/<take>
   frame.querySelector("svg")?.remove();
   if (document.body.classList.contains("overlay") && DETAIL) frame.append(overlaySvg(DETAIL));
-  zoomBox.querySelector(".label").textContent = `${item.character} · take ${take} (${zoomAt + 1} of ${item.takes.length})`;
+  zoomBox.querySelector(".label").textContent = `${item.character} · picture ${zoomAt + 1} of ${item.takes.length}`;
   zoomBox.querySelector("[data-star]").classList.toggle("on", choice(item.character).best === take);
 }
 zoomBox.querySelectorAll("[data-step]").forEach(b => b.onclick = e => {
@@ -841,11 +852,11 @@ zoomBox.querySelector("img").onclick = () => zoomBox.classList.remove("open");
 let tiles = {};
 function pick(take) {
   const c = LIST[HERE].character;
-  const next = choice(c).best === take ? 0 : take;
+  const next = choice(c).best === take ? "" : take;
   choice(c).best = next;
   for (const [t, tile] of Object.entries(tiles)) {
-    tile.classList.toggle("best", Number(t) === next);
-    tile.querySelector(".star").classList.toggle("on", Number(t) === next);
+    tile.classList.toggle("best", t === next);
+    tile.querySelector(".star").classList.toggle("on", t === next);
   }
   save({ character: c, best: next });
 }
@@ -891,13 +902,13 @@ async function render() {
   tiles = {};
   const label = choice(c);
   item.takes.forEach((take, i) => {
-    const star = $("button", { class: "star" + (label.best === take ? " on" : ""), "aria-label": `Best: take ${take}` }, "★");
+    const star = $("button", { class: "star" + (label.best === take ? " on" : ""), "aria-label": `Best: picture ${i + 1}` }, "★");
     star.onclick = () => pick(take);
-    const fresh = label.redrawFrom && take > label.redrawFrom;
+    const fresh = isFresh(label, take);
     const tile = $("figure", { class: "tile" + (label.best === take ? " best" : "") },
       $("div", { class: "frame" },
-        $("img", { src: `/img/${DATA.stage}/${item.index}/${take}`, alt: `${c}, take ${take}`, onclick: () => zoom(i) }),
-        overlaySvg(DETAIL), $("span", { class: "take" + (fresh ? " new" : "") }, fresh ? `${take} new` : String(take)), star));
+        $("img", { src: `/img/${DATA.stage}/${item.index}/${take}`, alt: `${c}, picture ${i + 1}`, onclick: () => zoom(i) }),
+        overlaySvg(DETAIL), $("span", { class: "take" + (fresh ? " new" : "") }, fresh ? `${i + 1} new` : String(i + 1)), star));
     tiles[take] = tile;
     grid.append(tile);
   });
@@ -986,7 +997,11 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--port", type=int, default=8770)
     parser.add_argument("--choose", action="store_true",
                         help="the full run: choose the best picture or ask for a redraw; no scoring")
+    parser.add_argument("--round", choices=["trial"],
+                        help="a blind scoring page: `trial`, Nano Banana 2 against 2.1 (trial.py)")
     args = parser.parse_args(argv)
+    if not args.choose and not args.round:
+        parser.error("say --choose (the full run) or --round trial (the blind scoring page)")
     if args.choose:
         ChooseHandler.characters = choosable()
         ChooseHandler.by_index = {item["index"]: item for item in ChooseHandler.characters}
@@ -995,7 +1010,10 @@ def main(argv: list[str] | None = None) -> None:
               "reload the page to see new ones")
         handler: type[BaseHTTPRequestHandler] = ChooseHandler
     else:
-        Handler.characters, Handler.key = build()
+        import trial
+
+        Handler.round, Handler.folder = args.round, trial.TRIAL
+        Handler.characters, Handler.key = build(trial.items(), trial.planned(), trial.TRIAL)
         drawn = sum(1 for item in Handler.characters for letter in item["letters"]
                     if (file := _picture(Handler.key, item["character"], letter)) and file.exists())
         print(f"{len(Handler.characters)} characters, {drawn} pictures drawn so far")

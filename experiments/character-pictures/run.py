@@ -79,6 +79,11 @@ class Model:
     usd: float = 0.0         # per picture, called one at a time
     batch_usd: float = 0.0   # per picture, in a Vertex batch job (half)
     pace: float = 0.0        # seconds between the starts of two calls; 0 calls as fast as answered
+    # Vertex list prices per million tokens at the standard tier (the billing account's price list):
+    # input, text out (thinking included), picture out. A batch job or a Flex call is billed at half.
+    price_in: float = 0.0
+    price_text: float = 0.0
+    price_image: float = 0.0
 
 
 MODELS = (
@@ -87,11 +92,21 @@ MODELS = (
     # Four takes: in round 3, a character had a picture scored 5 within 4 of its 8 takes 67% of the
     # time, and one scored 4 or more 90% of the time. The ones marked to redraw get 4 more.
     Model("nano-banana-2", "vertex", "gemini-3.1-flash-image", takes=4, usd=0.067,
-          batch_usd=0.0336, pace=50.0),
+          batch_usd=0.0336, pace=50.0, price_in=0.50, price_text=3.0, price_image=60.0),
+    # An update to Nano Banana 2 (6 Oct 2026), the one that draws now. In its trial (17 Nov 2026) one
+    # batch job drew 50 pictures in 56 minutes at $0.0244 each (it thinks, so not half of Nano Banana
+    # 2's $0.0348), while Nano Banana 2's jobs drew about 3 an hour; the owner looked at the pictures
+    # and moved the run over. Nano Banana 2's pictures stay and count toward a character's takes.
+    Model("nano-banana-2.1", "vertex", "gemini-nano-banana-2.1", takes=6, usd=0.0336,
+          batch_usd=0.0168, price_in=1.50, price_text=7.50, price_image=30.0),
     # Nano Banana Pro was dropped after round 2 (3.28 against 3.71, at twice the price), FLUX.2
     # klein after round 1 (mean 2.0, 9 of 16 scored 1).
 )
-MODEL = MODELS[0]
+MODEL = MODELS[1]
+
+
+def model_by_id(model_id: str) -> Model:
+    return next(model for model in MODELS if model.id == model_id)
 
 # Fixed and well apart, by stroke index. Only the review page's overlay and the writers' sheets use
 # them: the models get the strokes in black, because a coloured reference came back as coloured ink.
@@ -538,6 +553,28 @@ def drawn_takes(character: str) -> list[int]:
     return sorted(int(path.stem.split("-")[1]) for path in folder.glob("edit-*.webp"))
 
 
+def other_pictures(character: str) -> int:
+    """How many pictures of a character models other than `MODEL` drew: they count toward its takes."""
+    return sum(1 for name in drawn_pictures(character) if not name.startswith(f"{MODEL.id}/"))
+
+
+def drawn_pictures(character: str) -> list[str]:
+    """Every picture of a character, from any model, as `<model>/<take>`: what the choose page shows."""
+    found = []
+    for model in MODELS:
+        folder = OUT / "pictures" / character / model.id
+        if folder.exists():
+            found += [f"{model.id}/{take}" for take in
+                      sorted(int(path.stem.split("-")[1]) for path in folder.glob("edit-*.webp"))]
+    return found
+
+
+def picture_of(character: str, name: str) -> Path:
+    """The file of a `<model>/<take>` picture name."""
+    model, take = name.rsplit("/", 1)
+    return picture_path(character, model, "edit", int(take))
+
+
 def choices() -> dict[str, dict[str, Any]]:
     path = OUT / "choices.json"
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
@@ -545,14 +582,16 @@ def choices() -> dict[str, dict[str, Any]]:
 
 def wanted_takes(character: str, *, redraw: bool, marked: dict[str, dict[str, Any]],
                  takes: int | None = None) -> list[int]:
-    """The takes to draw for one character: the first four, or four more after a redraw mark.
+    """The takes to draw for one character: the first ones, or more after a redraw mark.
 
-    A redraw mark records how many takes the owner had seen (`redrawFrom`); the next four follow
-    them. Marking it again after those are chosen from asks for four more after that.
+    The first ones are as many as `takes`, less the pictures other models already drew of it: a
+    character Nano Banana 2 drew 2 pictures of gets 4 from `MODEL`, one it drew 6 of gets none.
+    A redraw mark records how many takes the owner had seen (`redrawFrom`); the next ones follow
+    them. Marking it again after those are chosen from asks for more after that.
     """
     count = takes or MODEL.takes
     if not redraw:
-        return list(range(1, count + 1))
+        return list(range(1, max(0, count - other_pictures(character)) + 1))
     label = marked.get(character) or {}
     if not label.get("redraw"):
         return []
@@ -774,6 +813,12 @@ def batch_command(args: argparse.Namespace) -> None:
     batch.main(args)
 
 
+def cancel_command(args: argparse.Namespace) -> None:
+    import batch
+
+    batch.cancel_command(args)
+
+
 # ── status and report ───────────────────────────────────────────────────────
 
 
@@ -790,8 +835,8 @@ def _group_table() -> list[str]:
              "| --- | --: | --: | --: | --: | --: | --: | --: |"]
     for name, limit in GROUPS:
         members = [entry["character"] for entry in catalogue() if entry["group"] == name]
-        drawn = [c for c in members if drawn_takes(c)]
-        pictures = sum(len(drawn_takes(c)) for c in members)
+        drawn = [c for c in members if drawn_pictures(c)]
+        pictures = sum(len(drawn_pictures(c)) for c in members)
         chosen = sum(1 for c in members if (marked.get(c) or {}).get("best"))
         redraw = sum(1 for c in members if (marked.get(c) or {}).get("redraw"))
         label = f"{name} (top {limit:,})" if limit else f"{name} (rarer, not drawn)"
@@ -909,6 +954,10 @@ def main(argv: list[str] | None = None) -> None:
     batching.add_argument("--no-wait", action="store_true", help="submit and collect what is done, then stop")
     batching.add_argument("--poll", type=float, default=300.0, help="seconds between checks (default 300)")
 
+    cancelling = commands.add_parser("cancel", help="cancel every picture job in flight on the account "
+                                     "billing.local.json names; the next collect keeps what each drew")
+    cancelling.add_argument("--dry-run", action="store_true", help="say which jobs would be cancelled, and stop")
+
     origin = commands.add_parser("origins", help="Wiktionary's Glyph origin of every character, cached")
     origin.add_argument("--set", choices=sorted(SETS), default="common")
     origin.add_argument("--group", choices=[name for name, _ in GROUPS])
@@ -940,7 +989,7 @@ def main(argv: list[str] | None = None) -> None:
     commands.add_parser("report", help="the full run's state and the owner's choices into results/full/")
     args = parser.parse_args(argv)
     {"fetch": fetch, "select": select, "facts": facts_command, "check": check, "prepare": prepare,
-     "draw": draw, "batch": batch_command, "status": status, "report": report,
+     "draw": draw, "batch": batch_command, "cancel": cancel_command, "status": status, "report": report,
      "origins": _origins, "factcheck": _argon, "write": _argon, "full": _argon}[args.command](args)
 
 

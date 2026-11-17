@@ -107,12 +107,15 @@ what the character is).
     the mainland strokes.
 
 **How.**
-- Nano Banana 2 draws over the strokes, as in rounds 2 and 3.
+- Nano Banana 2.1 draws over the strokes, as Nano Banana 2 did in rounds 2 and 3. Nano Banana 2 drew
+  the run's first 1,200 pictures. Then its batch queue fell to about 3 pictures an hour. In one trial
+  job 2.1 drew 50 in 56 minutes at $0.024 a picture, and the owner moved the run over on sight.
+  Nano Banana 2's pictures stay and count toward a character's takes.
 - **Six takes a character**, the owner's choice once the checks proved cheap and the drops shrank
   the run. In round 3, a character had a picture scored 5 within four of its eight takes 67% of the
   time, and one scored 4 or more 90% of the time; six gives more to choose from.
-- **In Vertex batch jobs**: half the price ($0.034 a picture, measured), and no limit of one picture a
-  minute.
+- **In Vertex batch jobs**: half the price ($0.024 a picture with 2.1, $0.035 with Nano Banana 2,
+  measured), and no limit of one picture a minute.
 - About $200 for the characters left after the drops at six takes, Argon's checking and writing
   about $40, and what remains of the account's $295 cap for redraws.
 - The scripts are written from measured fact sheets, by a brief that carries every rule the rounds
@@ -130,7 +133,10 @@ In this order. Every Google Cloud call bills the one account the experiment's ig
 than its cap.
 
 1. **Finish the full run**: `full_run.sh` in the experiment, one command, safe to rerun. It
-   fact-checks g1 (done), draws it while Argon writes g2 and g3, checks those and draws them.
+   fact-checks g1 (done), draws it while Argon writes g2 and g3, checks those and draws them. Argon's
+   work is done. Nano Banana 2's batch queue slowed to a few pictures an hour two days in. Flex
+   answered only "resource exhausted", so Nano Banana 2.1 draws the 3,204 pictures left, about $78
+   (README, "Nano Banana 2.1 draws the rest").
 2. **Choose**, on the tablet, and **redraw** the marked characters after revising their scripts
    from the notes.
 3. **The feature**:

@@ -321,6 +321,69 @@ caffeinate -i experiments/character-pictures/full_run.sh 2>&1 | tee -a experimen
 - **The fallback**: `run.py draw --set common` draws one call at a time at the full price, about one
   picture a minute, through a `providers.local.json` row of the same project.
 
+**The batch queue slowed down.** The first jobs drew 792 pictures in their 24 hours (14–15 Nov 2026).
+Two days later, jobs drew about 3 pictures an hour, and jobs of 6 and 96 pictures drew none in 24
+hours. So job size is not the cause, whatever Google's message about a smaller batch size says.
+Every job started within a minute of being submitted; Google gives no cause.
+
+**Nano Banana 2.1 draws the rest** since 17 Nov 2026, the result of the trial below. Its one batch
+job drew all 50 pictures in 56 minutes, about one a minute, and refused none. Each cost $0.0244 on
+average ($0.019–$0.029): it thinks about 1,450 tokens a picture at a higher text price, so it is
+about 30% cheaper than Nano Banana 2's $0.0348, not half. Flex answered every call "429 Resource
+exhausted" from 11:48 on and drew nothing. The owner looked at the 2.1 pictures, found them good,
+and moved the run over without blind scoring. `run.py cancel` stopped the nine Nano Banana 2 jobs in
+flight; in about 19 hours they had drawn 55 of their 3,309 pictures, which were kept, and only those
+were billed. Nano Banana 2's pictures stay and count toward a character's six takes, so 2.1 draws
+only the rest: 3,204 pictures, about $78.
+
+```bash
+.venv/bin/python experiments/character-pictures/run.py cancel --dry-run   # the jobs it would cancel
+.venv/bin/python experiments/character-pictures/run.py cancel             # after `gcp use blog`
+```
+
+`cancel` signs in as the shell's current account and runs every check `guard` makes. It refuses to
+send a single cancel if any job in flight names another provider or another project number. The
+next collect reads what each cancelled job drew.
+
+**The Flex and Nano Banana 2.1 trial** (`trial.py`) tried two other ways at the same price or less.
+It drew 25 g2 characters that had no picture yet, two pictures each way:
+- **Flex PayGo, Nano Banana 2**: single calls served from spare capacity, at the batch price ($0.034
+  a picture), on the global endpoint only. The trial draws takes 7 and 8, since the full run's jobs
+  already hold takes 1–6 of these characters. It measures how fast Flex draws.
+- **Nano Banana 2.1, in a batch job**: Google's update to Nano Banana 2 (6 Oct 2026), at half its
+  batch price ($0.017 a picture, plus thinking tokens), with no Flex price. It had never been judged
+  on this task; the blind scoring below was planned and skipped once the owner had seen its pictures.
+
+Prices are from the billing account's own price list, picture output per million tokens:
+
+| Model | Standard | Batch | Flex |
+| --- | --: | --: | --: |
+| Nano Banana 2 (`gemini-3.1-flash-image`) | $60 | $30 | $30 |
+| Nano Banana 2.1 (`gemini-nano-banana-2.1`) | $30 | $15 | — |
+
+```bash
+.venv/bin/python experiments/character-pictures/trial.py pick            # the 25 characters, once
+.venv/bin/python experiments/character-pictures/trial.py run --dry-run   # what it would draw and hold
+caffeinate -i .venv/bin/python experiments/character-pictures/trial.py run
+.venv/bin/python experiments/character-pictures/trial.py status
+.venv/bin/python experiments/character-pictures/review.py --round trial --host "$(tailscale ip -4)"
+.venv/bin/python experiments/character-pictures/trial.py report
+```
+
+- **Kept apart from the full run.** The trial's job lives in `out/full/trial/batches.json`. The full
+  run collects whatever its own state names, and would mistake the trial's job for its own. The call
+  log is shared, so the cap counts the trial's spending.
+- **Flex**: four calls at a time. The server may hold a call up to 30 minutes waiting for capacity.
+  A busy answer costs nothing, so each picture is asked for again, resting up to 10 minutes between
+  tries, for 24 hours (`--flex-hours`). The first test call, on 17 Nov at 11:48, was answered "429
+  Resource exhausted" four times running. An answer not billed as Flex (`trafficType` other than
+  `ON_DEMAND_FLEX`) stops the trial, since it may cost twice as much.
+- **Scoring**: the blind page of rounds 1–3. The four pictures of each character are shuffled under
+  letters; each gets a 1–5 score and two yes / partly / no questions, and one can be starred.
+- **The report** (`results/full/trial/report.md`, with the labels and key): pictures drawn, time and
+  cost each way, and the scores unblinded per model. Each starred picture becomes that character's
+  choice in the full run, unless one was already chosen.
+
 **Choosing**, from the tablet over Tailscale. It can start as soon as the first job is collected;
 reload the page to see new pictures:
 
@@ -328,7 +391,9 @@ reload the page to see new pictures:
 .venv/bin/python experiments/character-pictures/review.py --choose --host "$(tailscale ip -4)"
 ```
 
-- One character a page, its takes side by side, and an overlay of the exact strokes.
+- One character a page, its pictures side by side, and an overlay of the exact strokes. Pictures
+  from every model are shown together, numbered by place, and the page does not say which model
+  drew which; a choice is saved as `<model>/<take>`.
 - **★** marks the best picture. **↻ None good — redraw** asks for four more takes; a note can say
   what is wrong.
 - Characters come group by group. "Next to choose ›" skips the ones done, and the filters show what
@@ -349,8 +414,8 @@ marked to redraw, and the notes) and copies `choices.json` and `draws.jsonl` bes
 
 ### Rounds 1–3
 
-Each round was drawn and judged with `run.py`, `review.py` (the blind scoring page, still there
-without `--choose`) and the prompts as they stood at one commit:
+Each round was drawn and judged with `run.py`, `review.py` (the blind scoring page, now
+`--round trial`) and the prompts as they stood at one commit:
 - round 1 at `8bdb68f`, with numbered strokes and a coloured reference;
 - round 2 at `cffc334`, by text and by editing, with both models;
 - round 3 at `b86636b`, editing only, with Nano Banana 2.

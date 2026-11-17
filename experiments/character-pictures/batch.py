@@ -30,9 +30,10 @@ import hashlib
 import json
 import math
 import sys
+import threading
 import time
 import urllib.parse
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 from datetime import datetime, timezone
 from typing import Any
@@ -44,9 +45,9 @@ import run
 STATE = run.OUT / "batches.json"
 RUNNING = {"JOB_STATE_QUEUED", "JOB_STATE_PENDING", "JOB_STATE_RUNNING", "JOB_STATE_CANCELLING",
            "JOB_STATE_UPDATING", "JOB_STATE_PAUSED", "JOB_STATE_UNSPECIFIED"}
-# Vertex list prices for Gemini 3.1 Flash Image, per million tokens: $0.50 in, $3 text out, $60
-# picture out (a 1K picture is 1,120 tokens, $0.067). A batch job is billed at half.
-PRICE_IN, PRICE_TEXT, PRICE_IMAGE, BATCH = 0.50, 3.0, 60.0, 0.5
+# A batch job or a Flex call is billed at half each model's list price (`run.Model`; a 1K picture is
+# 1,120 tokens, $0.067 from Nano Banana 2 at the standard tier).
+BATCH = 0.5
 # What a picture in flight holds back from the cap until its real cost is logged: above the $0.0336
 # measured, so the cap is never crossed by an estimate.
 PICTURE_RESERVE = 0.04
@@ -75,11 +76,11 @@ def _headers(row: Any) -> dict[str, str]:
     return found
 
 
-def _request(row: Any, method: str, url: str, **kwargs: Any) -> httpx.Response:
+def _request(row: Any, method: str, url: str, timeout: float = TIMEOUT, **kwargs: Any) -> httpx.Response:
     """One call to a Google API, with the reasons to stop told apart from the reasons to wait."""
     headers = {**_headers(row), **kwargs.pop("headers", {})}
     try:
-        response = httpx.request(method, url, headers=headers, timeout=TIMEOUT, **kwargs)
+        response = httpx.request(method, url, headers=headers, timeout=timeout, **kwargs)
     except httpx.HTTPError as error:
         raise ConnectionError(f"{method} {url.split('?')[0]}: {error}") from None
     if response.is_success or response.status_code == 404:
@@ -225,7 +226,12 @@ def submit(row: Any, job: dict[str, Any], prompts: dict[str, str], known_refs: s
             known_refs.add(name)
     body = "\n".join(json.dumps(_request_line(row, bucket, key.split("/")[0], prompts[key.split("/")[0]]),
                                 ensure_ascii=False) for key in job["requests"]) + "\n"
-    create_job(row, job, body, run.MODEL.model)
+    create_job(row, job, body, job_model(job).model)
+
+
+def job_model(job: dict[str, Any]) -> run.Model:
+    """The model a picture job draws with, which every job names."""
+    return run.model_by_id(job["model"])
 
 
 def create_job(row: Any, job: dict[str, Any], body: str, model: str) -> None:
@@ -272,15 +278,36 @@ def refresh(row: Any, job: dict[str, Any]) -> None:
         job["error"] = run._scrubbed(str(payload["error"].get("message") or payload["error"]))
 
 
-def _cost(usage: dict[str, Any]) -> float:
+def _cost(usage: dict[str, Any], model: run.Model | None = None) -> float:
+    """What one answer cost in a batch job or through Flex (both half the list price)."""
+    model = model or run.MODEL
     if not usage:
-        return run.MODEL.batch_usd
+        return model.batch_usd
     image = sum(int(d.get("tokenCount") or 0) for d in usage.get("candidatesTokensDetails") or []
                 if d.get("modality") == "IMAGE")
     text = int(usage.get("candidatesTokenCount") or 0) - image + int(usage.get("thoughtsTokenCount") or 0)
-    spent = (int(usage.get("promptTokenCount") or 0) * PRICE_IN + max(text, 0) * PRICE_TEXT
-             + image * PRICE_IMAGE) / 1e6
+    spent = (int(usage.get("promptTokenCount") or 0) * model.price_in + max(text, 0) * model.price_text
+             + image * model.price_image) / 1e6
     return round(spent * BATCH, 5)
+
+
+def _picture_of(line: dict[str, Any], job_error: str | None = None) -> tuple[str, Any]:
+    """What one answer holds: ("image", bytes), ("refused", why) or ("unfinished", why).
+
+    A row the model never answered (no candidate and no prompt feedback) is unfinished, not refused.
+    `line` is a batch output line, or `{"response": ...}` for a single call.
+    """
+    response = line.get("response") or {}
+    candidate = (response.get("candidates") or [{}])[0]
+    image = next((p["inlineData"] for p in (candidate.get("content") or {}).get("parts") or []
+                  if "inlineData" in p and str(p["inlineData"].get("mimeType", "")).startswith("image/")), None)
+    if not image and not candidate and not response.get("promptFeedback"):
+        return "unfinished", line.get("status") or job_error or "the job ended before this row ran"
+    if not image:
+        said = " ".join(p.get("text", "") for p in (candidate.get("content") or {}).get("parts") or [])
+        reason = line.get("status") or candidate.get("finishReason") or (response.get("promptFeedback") or {}).get("blockReason") or "no image"
+        return "refused", f"{reason}: {said}".strip()
+    return "image", base64.b64decode(image["data"])
 
 
 def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int, int]:
@@ -297,6 +324,7 @@ def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int, int]:
     """
     from acervo.images.render import encode_master
 
+    model = job_model(job)
     wanted: dict[str, list[int]] = defaultdict(list)
     for key in job["requests"]:
         character, take = key.split("/")
@@ -317,31 +345,25 @@ def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int, int]:
             if index >= len(wanted[character]):
                 continue
             take = wanted[character][index]
-            target = run.picture_path(character, run.MODEL.id, "edit", take)
+            target = run.picture_path(character, model.id, "edit", take)
             if target.exists():
                 continue
-            entry = {"at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "model": run.MODEL.id,
-                     "wire": run.MODEL.model, "route": "batch", "provider": row.id, "job": job["display"],
+            entry = {"at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "model": model.id,
+                     "wire": model.model, "route": "batch", "provider": row.id, "job": job["display"],
                      "character": character, "way": "edit", "take": take}
-            response = line.get("response") or {}
-            candidate = (response.get("candidates") or [{}])[0]
-            image = next((p["inlineData"] for p in (candidate.get("content") or {}).get("parts") or []
-                          if "inlineData" in p and str(p["inlineData"].get("mimeType", "")).startswith("image/")), None)
-            if not image and not candidate and not response.get("promptFeedback"):
-                why = line.get("status") or job.get("error") or "the job ended before this row ran"
-                run.log({**entry, "error": "unfinished", "message": why})
+            kind, found = _picture_of(line, job.get("error"))
+            if kind == "unfinished":
+                run.log({**entry, "error": "unfinished", "message": found})
                 unfinished += 1
                 continue
-            if not image:
-                said = " ".join(p.get("text", "") for p in (candidate.get("content") or {}).get("parts") or [])
-                reason = line.get("status") or candidate.get("finishReason") or "no image"
-                run.log({**entry, "error": "refused", "message": f"{reason}: {said}".strip()})
+            if kind == "refused":
+                run.log({**entry, "error": "refused", "message": found})
                 refused += 1
                 continue
+            usage = (line.get("response") or {}).get("usageMetadata") or {}
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(encode_master(base64.b64decode(image["data"])))
-            run.log({**entry, "costUsd": _cost(response.get("usageMetadata") or {}),
-                     "tokens": response.get("usageMetadata") or {}})
+            target.write_bytes(encode_master(found))
+            run.log({**entry, "costUsd": _cost(usage, model), "tokens": usage})
             drawn += 1
     job["harvested"] = True
     job["drawn"], job["refused"], job["unfinished"] = drawn, refused, unfinished
@@ -349,18 +371,125 @@ def harvest(row: Any, job: dict[str, Any]) -> tuple[int, int, int]:
     return drawn, refused, unfinished
 
 
+# ── Flex PayGo: single calls at the batch price ─────────────────────────────
+
+# Flex only, never the standard tier: without `shared`, a project with Provisioned Throughput would
+# spend that first. The server waits up to 30 minutes for capacity (its maximum).
+FLEX_HEADERS = {"X-Vertex-AI-LLM-Request-Type": "shared",
+                "X-Vertex-AI-LLM-Shared-Request-Type": "flex",
+                "X-Server-Timeout": "1800"}
+FLEX_TIMEOUT = 1860.0
+
+
+def _traffic(payload: dict[str, Any]) -> str:
+    return str(payload.get("trafficType") or (payload.get("usageMetadata") or {}).get("trafficType") or "")
+
+
+def flex_one(row: Any, model: run.Model, bucket: str, character: str, take: int, text: str,
+             stop: Any, deadline: float) -> str:
+    """Draw one picture through Flex PayGo: "drawn", "refused" or "gave up". Raises Stop when the
+    answer was not billed as Flex (it would be at twice the price) or the account cannot go on.
+
+    A busy answer (429, 5xx, a dropped connection) costs nothing, so it is asked again until the
+    deadline (`time.monotonic()`), resting 1 minute, then twice as long each time, at most 10."""
+    from acervo.images.render import encode_master
+
+    base, location = _endpoint(row)
+    if location != "global":
+        raise Stop(f"Flex PayGo is served on the global endpoint only, not {location}")
+    url = f"{base}/publishers/google/models/{model.model}:generateContent"
+    body = _request_line(row, bucket, character, text)["request"]
+    entry = {"model": model.id, "wire": model.model, "route": "flex", "provider": row.id,
+             "character": character, "way": "edit", "take": take}
+    rest, began = run.FIRST_REST, time.monotonic()
+    while time.monotonic() < deadline:
+        if stop.is_set():
+            return "gave up"
+        started = time.monotonic()
+        try:
+            response = _request(row, "POST", url, timeout=FLEX_TIMEOUT, json=body, headers=FLEX_HEADERS)
+        except ConnectionError as error:
+            run.log({**entry, "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                     "error": "busy", "message": str(error),
+                     "seconds": round(time.monotonic() - started, 1)})
+            run.say(f"flex {character}-{take}: {run._scrubbed(str(error))[:120]}; resting {rest:.0f} s")
+            stop.wait(rest)
+            rest = min(rest * 2, run.LONGEST_REST)
+            continue
+        if response.status_code == 404:
+            raise Stop(f"{model.model} is not served through Flex here: {run._scrubbed(_message(response))}")
+        payload = response.json()
+        traffic = _traffic(payload)
+        if traffic != "ON_DEMAND_FLEX":
+            raise Stop(f"a Flex call for {character} was served as {traffic or 'an unnamed tier'}, "
+                       "not ON_DEMAND_FLEX, so it may be billed at full price; stopped")
+        usage = payload.get("usageMetadata") or {}
+        line = {**entry, "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                "seconds": round(time.monotonic() - started, 1),
+                "waited": round(time.monotonic() - began, 1), "trafficType": traffic,
+                "costUsd": _cost(usage, model), "tokens": usage}
+        kind, found = _picture_of({"response": payload})
+        if kind != "image":
+            run.log({**line, "error": "refused", "message": found})
+            run.say(f"flex {character}-{take}: no picture ({run._scrubbed(str(found))[:120]})")
+            return "refused"
+        target = run.picture_path(character, model.id, "edit", take)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(encode_master(found))
+        run.log(line)
+        run.say(f"flex {character}-{take} in {line['seconds']:.0f} s (${line['costUsd']:.4f})")
+        return "drawn"
+    run.say(f"flex {character}-{take}: still busy at the deadline; a rerun tries it again")
+    return "gave up"
+
+
+def flex(row: Any, model: run.Model, work: list[tuple[str, int]], prompts: dict[str, str],
+         workers: int = 4, hours: float = 1.0) -> Counter:
+    """Draw (character, take) pairs through Flex, a few calls at once, asking again on a busy answer
+    for at most `hours`. Counts of each outcome."""
+    deadline = time.monotonic() + hours * 3600
+    from concurrent.futures import ThreadPoolExecutor
+
+    bucket = bucket_for(row)
+    known = set(_list(row, bucket, "refs/"))
+    for character in sorted({c for c, _t in work}):
+        name = reference_name(character)
+        if name not in known:
+            _upload(row, bucket, name, run.reference(character).read_bytes(), "image/png")
+            known.add(name)
+    stop = threading.Event()
+    stopped: list[Stop] = []
+
+    def one(pair: tuple[str, int]) -> str:
+        character, take = pair
+        if run.picture_path(character, model.id, "edit", take).exists():
+            return "on disk"
+        try:
+            return flex_one(row, model, bucket, character, take, prompts[character], stop, deadline)
+        except Stop as reason:
+            stopped.append(reason)
+            stop.set()
+            return "stopped"
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        outcomes = Counter(pool.map(one, work))
+    if stopped:
+        raise stopped[0]
+    return outcomes
+
+
 # ── the state ───────────────────────────────────────────────────────────────
 
 
-def load() -> dict[str, Any]:
-    return json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() else {"jobs": []}
+def load(path: Path = STATE) -> dict[str, Any]:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {"jobs": []}
 
 
-def save(state: dict[str, Any]) -> None:
-    STATE.parent.mkdir(parents=True, exist_ok=True)
-    temporary = STATE.with_suffix(".tmp")
+def save(state: dict[str, Any], path: Path = STATE) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(".tmp")
     temporary.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
-    temporary.replace(STATE)
+    temporary.replace(path)
 
 
 def _refusals() -> dict[str, int]:
@@ -370,7 +499,7 @@ def _refusals() -> dict[str, int]:
     if path.exists():
         for line in path.read_text(encoding="utf-8").splitlines():
             entry = json.loads(line)
-            if entry.get("error") == "refused":
+            if entry.get("error") == "refused" and entry.get("model", run.MODEL.id) == run.MODEL.id:
                 counts[entry["character"]] += 1
     return counts
 
@@ -413,7 +542,7 @@ def _new_jobs(row: Any, bucket: str, plan: list[tuple[str, str]], size: int,
             number += 1
             display = f"character-pictures-{group}-{number:03d}-{stamp}"
             jobs.append({"display": display, "group": group, "provider": row.id, "bucket": bucket,
-                         "prefix": f"jobs/{display}", "requests": keys[start:start + size],
+                         "prefix": f"jobs/{display}", "requests": keys[start:start + size], "model": run.MODEL.id,
                          "name": None, "state": "SUBMITTING", "harvested": False, "account": remembered,
                          "submitted": datetime.now(timezone.utc).isoformat(timespec="seconds")})
     return jobs
@@ -577,7 +706,7 @@ def _row_for(job: dict[str, Any], rows: dict[str, Any]) -> Any:
     return None
 
 
-def _collect(state: dict[str, Any], rows: dict[str, Any]) -> list[dict[str, Any]]:
+def _collect(state: dict[str, Any], rows: dict[str, Any], path: Path = STATE) -> list[dict[str, Any]]:
     """Ask every job in flight for its state; collect the finished ones. The ones still running."""
     running = []
     for job in state["jobs"]:
@@ -592,7 +721,7 @@ def _collect(state: dict[str, Any], rows: dict[str, Any]) -> list[dict[str, Any]
             if not found:
                 # Saved before creation and never created: nothing to collect, nothing spent.
                 job["harvested"], job["state"] = True, "NEVER_CREATED"
-                save(state)
+                save(state, path)
                 continue
             job["name"] = found["name"]
         try:
@@ -605,7 +734,7 @@ def _collect(state: dict[str, Any], rows: dict[str, Any]) -> list[dict[str, Any]
             running.append(job)
             continue
         drawn, refused, unfinished = harvest(row, job)
-        save(state)
+        save(state, path)
         note = f"; {job['error']}" if job.get("error") else ""
         run.say(f"{job['display']}: {job['state'].removeprefix('JOB_STATE_').lower()}, "
                 f"{drawn} pictures written, {refused} refused, {unfinished} unfinished (asked for again){note}")
@@ -736,6 +865,50 @@ def run_batch(args: argparse.Namespace) -> None:
                   for c, _w, t in run._wanted(run.MODEL, chosen, redraw=args.redraw, takes=args.takes))
     run.say(f"done; {missing} pictures of this set still missing"
             + (" — run the same command again to submit them" if missing else ""))
+
+
+def cancel(args: argparse.Namespace) -> None:
+    """Cancel every picture job in flight. Only on the account billing.local.json names: the shell's
+    current sign-in, checked by `guard`, and only jobs whose provider is that account and whose
+    resource name carries its project number. Any other job in flight stops the command before a
+    single cancel is sent. What a cancelled job drew is billed and kept: the next collect reads it."""
+    row, remembered = account(None, None)
+    run.say(f"account: Google Cloud project {remembered['project']}, credentials {Path(remembered['credentials']).name}")
+    guard(row)
+    bucket_for(row)  # learns the allowed project's number, read off its bucket
+    number = _numbers[row.id]
+    state = load()
+    flying = [job for job in state["jobs"] if not job.get("harvested")]
+    for job in flying:
+        if job["provider"] != row.id or not (job.get("name") or "").startswith(f"projects/{number}/"):
+            raise Stop(f"job {job['display']} in flight is not on the account {BILLING.name} names "
+                       f"(provider {job['provider']}); nothing was cancelled")
+    if not flying:
+        run.say("no picture job in flight; nothing to cancel")
+        return
+    host = _endpoint(row)[0].split("/v1/")[0]
+    for job in flying:
+        refresh(row, job)
+        state_name = job["state"].removeprefix("JOB_STATE_").lower()
+        if job["state"] not in RUNNING or job["state"] == "JOB_STATE_CANCELLING":
+            run.say(f"{job['display']}: {state_name}, {job.get('done', 0)}/{len(job['requests'])}; left as it is")
+            continue
+        if args.dry_run:
+            run.say(f"{job['display']}: {state_name}, {job.get('done', 0)}/{len(job['requests'])}; would cancel")
+            continue
+        _request(row, "POST", f"{host}/v1/{job['name']}:cancel")
+        refresh(row, job)
+        save(state)
+        run.say(f"{job['display']}: cancel asked ({job['state'].removeprefix('JOB_STATE_').lower()}), "
+                f"{job.get('done', 0)} of {len(job['requests'])} drawn; the next collect keeps them")
+
+
+def cancel_command(args: argparse.Namespace) -> None:
+    try:
+        cancel(args)
+    except Stop as stop:
+        print(f"STOPPED: {stop}", flush=True)
+        sys.exit(1)
 
 
 def main(args: argparse.Namespace) -> None:
