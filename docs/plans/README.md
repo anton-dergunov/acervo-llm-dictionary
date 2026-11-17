@@ -31,7 +31,6 @@ what it said.
 - [`quality/clip-selection.md`](quality/clip-selection.md) — tuning the clip-selection prompt, then curating its picks.
 - [`quality/translation-completeness-check.md`](quality/translation-completeness-check.md) — catching a translation that stopped early.
 - [`quality/grounding-spike.md`](quality/grounding-spike.md) — whether a dictionary reference makes a better article.
-- [`quality/compose-checks.md`](quality/compose-checks.md) — rule checks on what compose writes, passing a failed answer to the next model.
 - [`quality/mandarin-ipa.md`](quality/mandarin-ipa.md) — Mandarin IPA derived from the reading by a table.
 - [`quality/dictionary-checks.md`](quality/dictionary-checks.md) — readings, IPA and gender checked against installed dictionaries.
 

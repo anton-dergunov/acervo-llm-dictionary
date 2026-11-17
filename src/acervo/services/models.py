@@ -26,7 +26,8 @@ deployment keeps its files, so this module is where the handler is attached.
 from __future__ import annotations
 
 import logging
-from typing import Any, Mapping
+from dataclasses import replace
+from typing import Any, Callable, Mapping
 
 from acervo import logfiles
 from acervo.errors import ApiError
@@ -208,10 +209,26 @@ def capture_health(settings: Settings) -> dict[str, Any]:
     return chain_readout(settings, None, "text")
 
 
+class Unusable(ValueError):
+    """A caller's check refusing one model's answer: that pair is passed over and the next is asked.
+
+    `str()` is the sentence the call log keeps — "the glosses are in Latin script, and the vocabulary
+    glosses into Russian first" — and it never reaches the owner. `refusal` is what the owner reads
+    when *every* pair failed a check and the last one failed this one: the refusal the caller would
+    have raised had there been no chain, so a capture that cannot be built says why in the words it
+    always used, rather than a generic "the model did not answer usably".
+    """
+
+    def __init__(self, sentence: str, refusal: ApiError | None = None) -> None:
+        super().__init__(sentence)
+        self.refusal = refusal
+
+
 def llm_json(settings: Settings, owner: str | None, system: str, user: str,
              caller: str = "text", hedge_after: float | None = None,
              params: Mapping[str, Any] | None = None, kind: str = "text",
-             timeout: float | None = None) -> tuple[Any, Answer]:
+             timeout: float | None = None,
+             check: Callable[[Any], Any] | None = None) -> tuple[Any, Answer]:
     """One constrained call: pass text, get JSON and the model that produced it, or a code saying why not.
 
     Returning the `Answer` rather than a model id is not decoration. The locked contract is that the
@@ -236,6 +253,13 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
     `kind` is which chain is walked, and only text-drawing chains make sense here: `text`, or the
     `quick` order a photo tap asks. `timeout` bounds each pair when the caller has a tighter budget
     than a whole article's.
+
+    `check` judges the parsed reply **inside** the walk, so a model whose answer fails it is passed
+    over and the next pair answers, exactly as a reply that is not JSON is. It is called once per
+    pair on that pair's own reply (raced pairs each check their own, so it must be pure), raises
+    `ValueError` — `Unusable` to carry a refusal for the owner — to pass the pair over, and returns
+    what `llm_json` returns in place of the parsed reply: a check may hand back a corrected answer
+    and a note of what it corrected.
     """
     def ask(candidate: chain.Candidate) -> TextResult:
         result = provider.text(
@@ -255,7 +279,17 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
                 "unusable", "the model did not answer with JSON: " + journal.excerpt(result.text),
                 provider_id=candidate.row.id, model=candidate.model,
             )
-        return result
+        if check is None:
+            return result
+        try:
+            checked = check(result.parsed)
+        except ValueError as unusable:
+            # `from unusable`, not `from None`: the cause is how the walk's last failure still knows,
+            # after the walk, which refusal the owner should read.
+            raise ProviderUnavailable(
+                "unusable", str(unusable), provider_id=candidate.row.id, model=candidate.model,
+            ) from unusable
+        return replace(result, parsed=checked)
 
     try:
         result: TextResult = chain.walk(
@@ -263,6 +297,14 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
             chain.stamped, caller=caller, hedge_after=hedge_after,
         )
     except ChainExhausted as exhausted:
+        cause = exhausted.last.__cause__
+        if isinstance(cause, Unusable) and cause.refusal is not None:
+            # The last pair failed the caller's own check, so the owner reads the caller's sentence;
+            # a 429 at the last pair still reads as one, which is what the retry contract needs.
+            refused = cause.refusal
+            raise ApiError(refused.status, refused.code, refused.message, refused.waiting_on,
+                           {**refused.noted, "detail": str(cause),
+                            "passedOver": waiting_on(exhausted)}) from None
         raise refusal(exhausted, kind) from None
     except ProviderError as error:
         raise refusal(error, kind) from None

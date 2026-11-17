@@ -45,6 +45,9 @@ class ModelStub:
 
     resolution: dict[str, Any] = field(default_factory=dict)
     article: dict[str, Any] = field(default_factory=dict)
+    # A compose answer for one model, by the model id LiteLLM is sent: how a chain test makes the
+    # first pair's answer fail a check while the second pair's passes.
+    articles: dict[str, dict[str, Any]] = field(default_factory=dict)
     # The image brief writer, which is told apart by carrying no system message at all: capture
     # puts its instructions there and the brief writer puts the whole template in the user turn.
     brief: dict[str, Any] = field(default_factory=dict)
@@ -99,7 +102,7 @@ class ModelStub:
             elif "You help a learner read" in system:
                 body = _dumped(self.chat_reference)
             else:
-                body = _dumped(self.article)
+                body = _dumped(self.articles.get(kwargs["model"], self.article))
         answered = ModelResponse(
             model=kwargs["model"],
             choices=[

@@ -60,6 +60,40 @@ the faster `quick` chain.
 carries the model that wrote it. Both are created by one save, which is why a document that names no
 stored entry may carry ids its producer minted.
 
+### Compose's checks
+
+Compose's answer is judged **inside the chain**, in the callback that asks each pair
+(`services/capture/vet.py`, through `llm_json`'s `check`). A model whose answer fails a check is passed
+over and the next pair in the owner's order answers. If the check ran after the walk instead, one weak
+answer from the head of the chain would refuse the capture while a stronger model behind it was never
+asked. Each rule has one of four dispositions:
+
+| Check | Disposition |
+| --- | --- |
+| Not an object, no senses, a Chinese entry with no reading | refuse and demote |
+| Glosses (`primaryGloss`, `shortGloss`, `domain`, the first gloss language's terms) in a script `glossLangs[0]` is not written in | demote |
+| Notes (the word's and its examples') in a script `notesLang` is not written in, the word itself left out | demote |
+| `primaryGloss` is one term: no `;`, `,` or `/` | coerce to the first term |
+| An emoji is one grapheme cluster | coerce to the first cluster |
+| `domain` is one or two lower-case words, distinct between the senses of one word | lower-case; drop the field if longer or repeated |
+| The word's `emotion` is 3–12 words, has no emoji, and does not repeat one of its examples' emotions | drop the field |
+
+- **The refusals are the draft's own.** The three conditions live once, in `draft.refusal_of`, and are
+  read by both the check and `draft_from`, so the check can never accept what the draft would refuse.
+  When every pair fails, the owner reads the refusal a single model always gave ("…returned an entry
+  with no meanings, so nothing was created").
+- **Script is a proxy for language.** It can be checked mechanically, and it catches the measured
+  failure: `llama-3.3-70b` glossed in English 28% of the time for Russian-first vocabularies
+  (`experiments/compose-lesson-line/`). A language's scripts come from its likeliest script in CLDR, so
+  no language is listed by hand. Two languages written in one script are never told apart, so the check
+  cannot fire for Spanish glossed into English.
+- **The checks judge a model's answer, not a record.** That is why they are not in
+  `domain/validation.py` or `web/src/domain.ts`, and why a hand-typed article is never refused by them.
+- **Observable both ways.** A demotion is the pair's `unusable` line in the call log, with its sentence
+  ("the glosses are in Latin script, and the vocabulary glosses into Russian first"), so it shows in
+  `admin log --failed`. A correction is counted on a `compose outcome pair=… fixed=… dropped=…` line,
+  and `admin calls` totals the corrections per model. Neither reaches the owner's message.
+
 ### Grounding on a reference
 
 A capture may carry a **reference** — a dictionary entry the owner chose to promote — with one of two

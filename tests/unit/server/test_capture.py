@@ -701,6 +701,74 @@ def test_a_provider_that_refused_both_calls_is_reported_once(seeded, cloudflare_
     assert len(body["passedOver"]) <= 1
 
 
+# ── compose's checks run inside the chain ───────────────────────────────────
+
+RUSSIAN_FIRST = {"language": "es", "definitionLang": "es", "glossLangs": ["ru", "en"], "notesLang": "ru",
+                 "displayName": "Spanish"}
+
+IN_RUSSIAN = {
+    **ARTICLE, "shortGloss": "крюк", "primaryGloss": "крюк", "notes": ["Не путать с el gancho."],
+    "senses": [{**ARTICLE["senses"][0], "domain": "инструменты",
+                "glosses": [{"lang": "ru", "terms": ["крюк"]}, {"lang": "en", "terms": ["hook"]}]}],
+}
+# What the measured failure looks like: a Russian-first vocabulary glossed in English throughout.
+IN_ENGLISH = {
+    **IN_RUSSIAN, "shortGloss": "hook", "primaryGloss": "hook",
+    "senses": [{**IN_RUSSIAN["senses"][0], "domain": "tools",
+                "glosses": [{"lang": "ru", "terms": ["hook"]}, {"lang": "en", "terms": ["hook"]}]}],
+}
+
+
+@pytest.fixture
+def russian_first(seeded, cloudflare_too, monkeypatch):
+    from acervo.repository import graph
+
+    monkeypatch.setattr(graph, "owner_vocabularies", lambda _owner: [dict(RUSSIAN_FIRST)])
+    select(seeded, {"text": [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
+    ]})
+    return seeded
+
+
+def test_an_answer_in_the_wrong_language_passes_to_the_next_model(russian_first):
+    """The first pair glosses in English for a vocabulary that glosses into Russian first; it is
+    passed over inside the walk, and the second pair's answer is the one the draft is built from."""
+    russian_first.model.articles = {WIRE_CLOUDFLARE: IN_ENGLISH, WIRE_SECOND: IN_RUSSIAN}
+
+    body = russian_first.capture().json()["data"]
+    assert body["passedOver"] == [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL, "reason": "unusable"}
+    ]
+    assert body["draft"]["primaryGloss"] == "крюк"
+    _own, invented = body["draft"]["senses"][0]["examples"]
+    assert invented["modelId"] == GEMINI_SECOND
+
+
+def test_an_entry_no_model_could_build_keeps_its_own_sentence(seeded, cloudflare_too):
+    """Every pair failed the check, so the refusal is the one a single model always gave."""
+    select(seeded, {"text": [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
+    ]})
+    seeded.model.article = {"headword": "el garfio", "senses": []}
+    error = seeded.capture().json()["error"]
+    assert error["code"] == "llm_unusable"
+    assert error["message"] == (
+        "The language model returned an entry with no meanings, so nothing was created."
+    )
+    composing = [call for call in seeded.model.calls
+                 if not any("You decide what a learner" in str(m["content"]) for m in call["messages"])]
+    assert {call["model"] for call in composing} == {WIRE_CLOUDFLARE, WIRE_SECOND}
+
+
+def test_a_coerced_field_is_saved_as_coerced(seeded):
+    seeded.model.article = {**ARTICLE, "primaryGloss": "hook; gaff", "emoji": "\U0001FA9D\U0001F3A3"}
+    draft = seeded.capture().json()["data"]["draft"]
+    assert draft["primaryGloss"] == "hook"
+    assert draft["emoji"] == "\U0001FA9D"
+
+
 # ── the fold-in: what a repeat capture carried that the stored entry may not have ───
 
 

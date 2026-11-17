@@ -280,6 +280,14 @@ def call_timings(settings: Settings) -> int:
     slowest = max(row.at(1.0) for row in rows)
     print(f"\nSlowest answer seen: {slowest:.2f}s. A timeout wants headroom over that, not over a "
           f"guess — and a call past it is not slow, it is gone.")
+    # What each model's answers needed correcting, from the checks that run inside the chain. A pair
+    # passed over by a check is a `fail` above, with its sentence in `admin log --failed`.
+    corrected = journal.fixes(lines)
+    if corrected:
+        print(f"\n{'job':10} {'provider:model':46} {'ok':>4}  corrected")
+        for fixed in corrected:
+            listed = ", ".join(f"{label} ×{count}" for label, count in fixed.fields.items())
+            print(f"{fixed.caller:10} {fixed.pair:46} {fixed.answers:4d}  {listed}")
     return 0
 
 

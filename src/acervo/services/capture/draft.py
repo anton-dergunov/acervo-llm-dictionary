@@ -47,6 +47,40 @@ def emotion_of(value: Any) -> str | None:
     return cut or text[:EMOTION_LIMIT]
 
 
+def usable_senses(answer: dict[str, Any]) -> list[dict[str, Any]]:
+    """The senses a draft is built from: objects with a definition. Anything else is skipped."""
+    return [
+        raw for raw in answer.get("senses") or []
+        if isinstance(raw, dict) and trimmed(raw.get("definition"))
+    ]
+
+
+def refusal_of(answer: Any, resolution: dict[str, Any]) -> ApiError | None:
+    """Why this answer cannot become a draft at all, or `None` when it can.
+
+    One place for the three conditions, read twice: by `draft_from`, and by compose's check inside
+    the chain (`vet.py`), which passes the model over so the next pair answers. Two copies would let
+    the check accept what the draft then refuses, which is the terminal refusal this exists to avoid.
+    """
+    if not isinstance(answer, dict):
+        return ApiError(
+            502, "llm_unusable", "The language model did not return an entry, so nothing was created."
+        )
+    if not usable_senses(answer):
+        return ApiError(
+            502, "llm_unusable", "The language model returned an entry with no meanings, so nothing was created."
+        )
+    # Chinese records are refused without a reading. Saying which field is missing beats letting the
+    # save fail later with a validation message about a field nobody was shown.
+    if resolution["language"].lower().startswith("zh") and not trimmed(answer.get("reading")):
+        return ApiError(
+            502,
+            "llm_unusable",
+            "The language model returned a Chinese entry with no reading, so nothing was created.",
+        )
+    return None
+
+
 def _from_sentence(claimed: Any, attestations: list[dict[str, Any]]) -> dict[str, Any] | None:
     # `Number(null)` is 0, so a plain numeric read here would take "I invented this" for "this is
     # sentence 0" and quietly credit the learner with every example the model wrote.
@@ -70,6 +104,9 @@ def draft_from(
     topics: list[dict[str, Any]],
     model_id: str,
 ) -> dict[str, Any]:
+    refused = refusal_of(answer, resolution)
+    if refused is not None:
+        raise refused
     captured_at = now_instant()
     topic_names = {topic["name"].lower(): topic["name"] for topic in topics}
 
@@ -111,12 +148,8 @@ def draft_from(
 
     gloss_langs = vocabulary["glossLangs"]
     senses: list[dict[str, Any]] = []
-    for index, raw in enumerate(answer.get("senses") or []):
-        if not isinstance(raw, dict):
-            continue
+    for raw in usable_senses(answer):
         definition = trimmed(raw.get("definition"))
-        if not definition:
-            continue
 
         glosses: list[dict[str, Any]] = []
         seen: set[str] = set()
@@ -193,20 +226,7 @@ def draft_from(
             }
         )
 
-    if not senses:
-        raise ApiError(
-            502, "llm_unusable", "The language model returned an entry with no meanings, so nothing was created."
-        )
-
     reading = trimmed(answer.get("reading")) or None
-    # Chinese records are refused without a reading. Saying which field is missing beats letting the
-    # save fail later with a validation message about a field nobody was shown.
-    if resolution["language"].lower().startswith("zh") and not reading:
-        raise ApiError(
-            502,
-            "llm_unusable",
-            "The language model returned a Chinese entry with no reading, so nothing was created.",
-        )
 
     return {
         "id": None,

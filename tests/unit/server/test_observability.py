@@ -354,3 +354,35 @@ def test_a_refused_play_is_what_admin_log_shows_with_its_sentence(logs, server):
     assert answer.status_code == 400
     (line,) = refusals(logs)
     assert "code=invalid_record" in line and "A play is of one loop or one story." in line
+
+
+def test_a_compose_answer_passed_over_by_its_check_is_what_admin_log_and_calls_show(logs, server, capsys):
+    """A demotion inside the chain leaves the pair's line with its sentence, and a corrected field
+    is counted per model in `admin calls`."""
+    from test_capture import (CLOUDFLARE_MODEL, GEMINI_SECOND, IN_ENGLISH, IN_RUSSIAN, RESOLUTION,
+                              WIRE_CLOUDFLARE, WIRE_SECOND)
+    from provider_rows import CLOUDFLARE
+
+    from acervo.admin import call_timings
+    from acervo.settings import settings as read_settings
+
+    server.add_provider(CLOUDFLARE)
+    server.push({"vocabularies": [vocabulary(glossLangs=["ru", "en"], notesLang="ru")]})
+    server.client.put(f"{API}/models/selection", headers=server.auth, json={"chains": {"text": [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
+    ]}})
+    server.model.resolution = dict(RESOLUTION)
+    server.model.articles = {WIRE_CLOUDFLARE: IN_ENGLISH,
+                             WIRE_SECOND: {**IN_RUSSIAN, "primaryGloss": "крюк; багор"}}
+    assert server.capture().status_code == 200
+
+    lines(logs["call"])
+    failed = [text for _, _, _, text in activity.select(activity.entries(logs), failed=True)]
+    assert any(f"compose cloudflare:{CLOUDFLARE_MODEL} unusable" in text
+               and "the glosses are in Latin script, and the vocabulary glosses into Russian first" in text
+               for text in failed), failed
+
+    assert call_timings(read_settings()) == 0
+    shown = capsys.readouterr().out
+    assert f"gemini-api:{GEMINI_SECOND}" in shown and "fixed primaryGloss ×1" in shown, shown

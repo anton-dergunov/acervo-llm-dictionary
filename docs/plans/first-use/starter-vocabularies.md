@@ -147,7 +147,7 @@ senses to concepts, the review.
    draft the §0 rubric of [`../quality/article-quality.md`](../quality/article-quality.md) for the
    owner to approve.
 5. **Check and review.** The deterministic checks
-   ([`../quality/compose-checks.md`](../quality/compose-checks.md),
+   ([`../../features/capture.md`](../../features/capture.md), "Compose's checks";
    [`../quality/mandarin-ipa.md`](../quality/mandarin-ipa.md),
    [`../quality/dictionary-checks.md`](../quality/dictionary-checks.md)) run over the composed
    words, Claude reviews against the rubric and corrects, and the owner spot-checks about 20 words each

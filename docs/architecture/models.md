@@ -140,7 +140,11 @@ connection, and an answer the caller declares unusable — and on nothing else.*
   and `empty` are the two reasons a *caller* raises, from inside the `ask` callback so the walk can see
   them — `llm_json` when a reply is not JSON, `images/brief.py` when a brief will not parse, the clip
   selector when its reply does not validate — and the pair lands in `passed_over` like any other, so
-  nothing is hidden.
+  nothing is hidden. `llm_json` takes a caller's `check` for the same purpose. It is called on each
+  pair's parsed reply, a `ValueError` it raises passes that pair over with the error's sentence, and
+  what it returns is what `llm_json` returns, so a check may hand back a corrected answer. An `Unusable`
+  may carry the refusal the owner reads if the last pair fails it. Compose's checks are the first user
+  ([`../features/capture.md`](../features/capture.md), "Compose's checks").
 - **`cooldown.py` remembers a refusal** so an exhausted allowance is not re-probed on every word — as an
   ordering hint only. When every pair is resting the hints are ignored and the chain runs as written,
   which makes recovery automatic without knowing any provider's reset hour. A 429 does not say whether a
@@ -299,7 +303,9 @@ pages switch period without asking again.
 Every model call is one `key=value` line in a rotating file beside the database
 (`ACERVO_CALL_LOG_PATH`), naming the pair that answered, how long it took, what it used up — `in=` and
 `out=` tokens, `characters=`, `pictures=`, `photos=`, `cost=` — and what the caller did with the
-answer. `python -m acervo.admin calls` reads it back per job and per model, and it is where every
+answer. A caller whose check corrected the answer says so on its `outcome` line
+(`pair=… fixed=primaryGloss dropped=domain`). `python -m acervo.admin calls` reads the log back per job
+and per model, with a second table of those corrections per model, and it is where every
 timeout here is set from: a bound is read from the log rather than guessed. Each line ends with the id
 of the request or job that made the call, added where the file is opened — the package itself emits
 and knows nothing of it ([`observability.md`](observability.md) §2).

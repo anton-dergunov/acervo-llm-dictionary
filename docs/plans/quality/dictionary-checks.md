@@ -1,6 +1,7 @@
 # Readings, IPA and gender checked against installed dictionaries
 
-**Status:** ready to build after [`compose-checks.md`](compose-checks.md), whose chain hook it uses.
+**Status:** ready to build. It uses `llm_json`'s `check` hook, which compose's checks already use
+([`../../features/capture.md`](../../features/capture.md), "Compose's checks").
 This covers defects 1 and 2 and §3 of [`article-quality.md`](article-quality.md). Each check starts
 with a **free measurement** on the owner's words, because a dictionary can legitimately disagree with
 a correct answer, and the measurement shows how often. That measurement is backlog row 2. One or two

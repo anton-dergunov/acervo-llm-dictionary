@@ -16,6 +16,10 @@
 # is its one reader, and choosing a voice for an accent is the reason. `langcodes` (with its
 # `language-data`) carries CLDR's speaker counts, which Babel does not, so the accents a language is
 # offered come most-spoken first. Both MIT.
+# `regex` is what compose's check reads a model's answer with (`services/capture/vet.py`): grapheme
+# clusters (`\X`), so a flag or a skin-toned emoji is one emoji, and Unicode script properties
+# (`\p{sc=Cyrl}`), so a gloss in the wrong script is caught for any language. The stdlib `re` has
+# neither. Named rather than left to arrive with LiteLLM's tokeniser. Apache-2.0.
 PyYAML
 babel
 langcodes
@@ -27,3 +31,4 @@ litellm
 pillow
 pydantic>=2,<3
 python-slugify
+regex

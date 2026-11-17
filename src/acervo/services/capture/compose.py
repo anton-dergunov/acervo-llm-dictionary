@@ -11,10 +11,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from acervo.errors import ApiError
-from acervo.models import Answer
+from acervo.models import Answer, journal
 from acervo.models.call import HEDGE_SECONDS
 from acervo.services.capture.coerce import reference_of, text_list, trimmed
+from acervo.services.capture.vet import Vetted, vet
 from acervo.services.models import llm_json
 from acervo.services.prompts import prompt_text
 from acervo.services.reader import with_reader
@@ -99,12 +99,15 @@ def compose(
 ) -> tuple[dict[str, Any], Answer]:
     user = build_user_message(resolution, request, vocabulary, topics)
 
-    answer, call = llm_json(
+    # Judged inside the walk (`vet.py`): a model whose answer could not become a draft, or is in the
+    # wrong language, is passed over and the next pair in the order answers.
+    vetted, call = llm_json(
         settings, owner, with_reader(prompt_text(settings.prompts_path, "acervo_compose"), owner, vocabulary), user,
-        caller="compose", hedge_after=HEDGE_SECONDS,
+        caller="compose", hedge_after=HEDGE_SECONDS, check=vet(vocabulary, resolution),
     )
-    if not isinstance(answer, dict):
-        raise ApiError(
-            502, "llm_unusable", "The language model did not return an entry, so nothing was created."
-        )
-    return answer, call
+    assert isinstance(vetted, Vetted)
+    if vetted.fixed or vetted.dropped:
+        # Counted per model, so `admin calls` can say how often each one needs correcting, and where.
+        journal.outcome("compose", pair=f"{call.provider_id}:{call.model}",
+                        fixed=",".join(vetted.fixed), dropped=",".join(vetted.dropped))
+    return vetted.answer, call
