@@ -341,6 +341,19 @@ only the rest: 3,204 pictures, about $78.
 .venv/bin/python experiments/character-pictures/run.py cancel             # after `gcp use blog`
 ```
 
+**One job at a time** (17 Nov 2026, measured on Nano Banana 2.1). Seven jobs of about 500 pictures
+submitted together all showed RUNNING from the first minute, but one drew 327 pictures in 6½ hours and
+the other six 7–14 each: 384 in all, about 55 an hour, the pace of the trial's lone job. Four jobs of
+25 submitted together: one drew all 25 in 6 minutes and the other three drew 0, 0 and 1 in 20
+minutes. One job of 100 alone: about one a minute (37 in the first 40 minutes). So jobs submitted
+together share one lane and add no speed; Google gives no cause. `run.py full` keeps one picture job
+in flight and submits the next only when it has ended, in jobs of 250 (about 4 hours; `--job-size`),
+most popular group first. The earlier look of being stuck was the run's own: it saved a job's state
+only when the job ended and printed no count, so the state file said PENDING for hours. Each check
+(every 5 minutes) now saves the live state and prints the job's count, the last hour's gain, the age
+of the last picture, the pace and the time left, and says `STALLED?` after 90 minutes without a new
+picture (a note only: nothing is cancelled). `run.py status` shows the same from the saved state.
+
 `cancel` signs in as the shell's current account and runs every check `guard` makes. It refuses to
 send a single cancel if any job in flight names another provider or another project number. The
 next collect reads what each cancelled job drew.

@@ -545,13 +545,21 @@ def full(args: argparse.Namespace) -> None:
                                text_state, args.text_job_size, args.dry_run)
             chosen = run.prepare(argparse.Namespace(set="common", characters=None))
             pictures = []
-            for group in common:  # most popular first, each with its own number of takes
+            # One picture job at a time: Vertex serves about one and leaves the rest at 0 (README, "One
+            # job at a time"), so a second only waits. The next goes out when this one has ended.
+            for group in common if not picture_running else ():  # most popular first, each with its own takes
                 members = [entry for entry in chosen if entry["group"] == group]
                 picture_args = argparse.Namespace(redraw=False, takes=takes[group], characters=None,
                                                   budget=None, cap=None, job_size=args.job_size)
                 pictures += batch.submit_pictures(
                     row, remembered, picture_args, members, picture_state,
-                    run.prompts_for([entry for entry in members if entry["checked"]]), dry_run=args.dry_run)
+                    run.prompts_for([entry for entry in members if entry["checked"]]),
+                    dry_run=args.dry_run, max_jobs=1)
+                if pictures:
+                    break
+            ready = [entry for entry in chosen if entry["checked"]]
+            wanted = sum(takes[entry["group"]] for entry in ready)
+            drawn = sum(min(len(run.drawn_pictures(entry["character"])), takes[entry["group"]]) for entry in ready)
         except ConnectionError as error:
             run.say(f"a call failed ({error}); trying again in {args.poll:.0f} s")
             time.sleep(args.poll)
@@ -561,6 +569,8 @@ def full(args: argparse.Namespace) -> None:
         run.say(f"in flight: {sum(len(j['requests']) for j in text_running)} Argon requests in "
                 f"{len(text_running)} jobs, {sum(len(j['requests']) for j in picture_running)} pictures in "
                 f"{len(picture_running)} jobs; {_ledger(row)}")
+        for line in batch.progress_lines(picture_running, drawn, wanted):
+            run.say(line)
         if args.dry_run:
             return
         if not text_running and not picture_running:

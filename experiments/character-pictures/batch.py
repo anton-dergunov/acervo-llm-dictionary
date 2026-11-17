@@ -53,6 +53,8 @@ BATCH = 0.5
 PICTURE_RESERVE = 0.04
 STORAGE = "https://storage.googleapis.com"
 TIMEOUT = 120.0
+HISTORY = 50            # how many changes of a job's picture count are kept, for its progress line
+STALL_MINUTES = 90      # a running job with no new picture for this long is called stalled
 
 
 class Stop(Exception):
@@ -274,6 +276,10 @@ def refresh(row: Any, job: dict[str, Any]) -> None:
     stats = payload.get("completionStats") or {}
     job["done"] = int(stats.get("successfulCount") or 0)
     job["failed"] = int(stats.get("failedCount") or 0)
+    history = job.setdefault("progress", [])
+    if not history or history[-1][1] != job["done"]:
+        history.append([_now().isoformat(timespec="seconds"), job["done"]])
+        del history[:-HISTORY]
     if payload.get("error"):
         job["error"] = run._scrubbed(str(payload["error"].get("message") or payload["error"]))
 
@@ -731,6 +737,7 @@ def _collect(state: dict[str, Any], rows: dict[str, Any], path: Path = STATE) ->
             running.append(job)
             continue
         if job["state"] in RUNNING:
+            save(state, path)  # so batches.json and `run.py status` show the live count, not the state at submit
             running.append(job)
             continue
         drawn, refused, unfinished = harvest(row, job)
@@ -742,6 +749,71 @@ def _collect(state: dict[str, Any], rows: dict[str, Any], path: Path = STATE) ->
             raise Stop(f"job {job['display']} stopped because the account behind {row.id} cannot pay: "
                        f"{job['error']}. Its finished pictures are written. Switch with `--provider <id>`.")
     return running
+
+
+def _now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def _minutes(since: str, now: datetime) -> int:
+    return max(0, int((now - datetime.fromisoformat(since)).total_seconds() // 60))
+
+
+def _span(minutes: int) -> str:
+    if minutes < 90:
+        return f"{minutes} min"
+    if minutes < 48 * 60:
+        return f"{minutes / 60:.1f} h"
+    return f"{minutes / 1440:.1f} d"
+
+
+def running_jobs(path: Path = STATE) -> list[dict[str, Any]]:
+    """The picture jobs not yet collected, as the run last saved them."""
+    return [job for job in load(path)["jobs"] if not job.get("harvested")]
+
+
+def job_progress(job: dict[str, Any], now: datetime | None = None) -> str:
+    """One line on a running picture job: how far it is, the last hour, how long since a picture.
+
+    Says STALLED? after `STALL_MINUTES` without a new picture (a job still at 0 counts from its
+    submission). Only information: nothing is cancelled.
+    """
+    now = now or _now()
+    done, total = int(job.get("done") or 0), len(job["requests"])
+    history = job.get("progress") or []
+    hour_ago = [count for when, count in history if _minutes(when, now) >= 60]
+    gained = done - (hour_ago[-1] if hour_ago else 0)  # a job's history starts near 0
+    last = history[-1][0] if history and history[-1][1] > 0 else job["submitted"]
+    idle = _minutes(last, now)
+    state = job.get("state", "?").removeprefix("JOB_STATE_").lower()
+    name = "-".join(job["display"].split("-")[2:4])
+    line = f"picture job {name}: {state} {done}/{total}, +{gained} in the last hour"
+    line += f", last picture {_span(idle)} ago" if done else f", none yet after {_span(idle)}"
+    if idle >= STALL_MINUTES and state in ("running", "pending"):
+        line += f"; STALLED? no new picture for {_span(idle)}, Google may be throttling"
+    return line
+
+
+def progress_lines(running: list[dict[str, Any]], drawn: int, wanted: int,
+                   now: datetime | None = None) -> list[str]:
+    """What `full` prints each poll for pictures: a line per job and one for the whole run.
+
+    `drawn` counts pictures on disk, `wanted` all of them. The pace is the running job's pictures
+    over the time since it was submitted, so it is the pace of one lone job.
+    """
+    now = now or _now()
+    lines = [job_progress(job, now) for job in running]
+    total = f"pictures on disk: {drawn:,} of {wanted:,} ({100 * drawn // max(wanted, 1)}%)"
+    job = running[0] if running else None
+    hours = _minutes(job["submitted"], now) / 60 if job else 0
+    done = int(job.get("done") or 0) if job else 0
+    if job and done >= 10 and hours > 0:
+        pace = done / hours
+        left = wanted - drawn - done  # the job's pictures reach the disk only when it ends
+        total += f"; this job draws about {pace:.0f} an hour, so the rest takes about {_span(int(left / pace * 60))}"
+    elif job:
+        total += "; pace not known yet"
+    return lines + [total]
 
 
 def resolve(args: argparse.Namespace, rows: dict[str, Any]) -> tuple[Any, dict[str, str] | None]:
@@ -800,8 +872,12 @@ def allowance(row: Any, state: dict[str, Any] | None = None, cap: float | None =
 
 def submit_pictures(row: Any, remembered: dict[str, str] | None, args: argparse.Namespace,
                     chosen: list[dict[str, Any]], state: dict[str, Any], prompts: dict[str, str],
-                    dry_run: bool = False) -> list[dict[str, Any]]:
-    """Submit every picture still wanted that the cap allows, most popular first. The jobs made."""
+                    dry_run: bool = False, max_jobs: int | None = None) -> list[dict[str, Any]]:
+    """Submit the pictures still wanted that the cap allows, most popular first. The jobs made.
+
+    `max_jobs` stops after that many jobs: Vertex serves about one picture job at a time and leaves
+    the others at 0, so the full run keeps one in flight.
+    """
     left = allowance(row, state, getattr(args, "cap", None))
     plan = _plan(args, chosen, state, left)
     unchecked = sum(1 for entry in chosen if not entry.get("checked"))
@@ -818,6 +894,8 @@ def submit_pictures(row: Any, remembered: dict[str, str] | None, args: argparse.
     known = set(_list(row, bucket, "refs/"))
     made = []
     for job in _new_jobs(row, bucket, plan, args.job_size, state, remembered):
+        if max_jobs is not None and len(made) >= max_jobs:
+            break
         state["jobs"].append(job)
         save(state)  # before creating it: a stop in between is found again by its name
         try:

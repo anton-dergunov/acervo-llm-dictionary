@@ -862,8 +862,13 @@ def _spent() -> list[str]:
 
 def status(_: argparse.Namespace) -> None:
     import argon
+    import batch
 
     print("\n".join(_group_table()))
+    flying = batch.running_jobs()
+    if flying:
+        print("\nPicture jobs in flight (as of the run's last check):\n"
+              + "\n".join("- " + batch.job_progress(job) for job in flying))
     lines = argon.summary()
     if lines:
         print("\n" + "\n".join(lines))
@@ -980,7 +985,8 @@ def main(argv: list[str] | None = None) -> None:
     whole.add_argument("--takes", type=int, default=6, help="takes per character (default 6)")
     whole.add_argument("--takes-for", action="append", metavar="GROUP=N",
                        help="another number of takes for one group, e.g. g1=6; raising it later draws the extra takes")
-    whole.add_argument("--job-size", type=int, default=500, help="pictures per batch job (default 500)")
+    whole.add_argument("--job-size", type=int, default=250,
+                       help="pictures per batch job, one job at a time (default 250, about 4 hours)")
     whole.add_argument("--text-job-size", type=int, default=200, help="Argon requests per batch job (default 200)")
     whole.add_argument("--dry-run", action="store_true", help="say what would be submitted now, and stop")
     whole.add_argument("--poll", type=float, default=300.0, help="seconds between checks (default 300)")
