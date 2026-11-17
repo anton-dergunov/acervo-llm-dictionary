@@ -7,12 +7,14 @@ a stand-in for it.
 
 from __future__ import annotations
 
+import logging
 import re
 
 import httpx
 import litellm
 import pytest
 from acervo.models import call as provider_call
+from acervo.models import journal
 from graph_records import lexeme, topic, vocabulary
 from provider_rows import CLOUDFLARE, CLOUDFLARE_ACCOUNT, CLOUDFLARE_TOKEN, GEMINI, GEMINI_KEY
 
@@ -299,6 +301,36 @@ def test_a_chinese_entry_with_no_reading_is_refused_before_it_reaches_the_valida
     answer = seeded.capture(text="钩子")
     assert answer.json()["error"]["code"] == "llm_unusable"
     assert "reading" in answer.json()["error"]["message"]
+
+
+def chinese(seeded, reading, ipa):
+    seeded.push({"vocabularies": [vocabulary(language="zh-Hans", definitionLang="en", order=1)]})
+    seeded.model.resolution = {**RESOLUTION, "language": "zh-Hans", "headword": "豆腐", "lemma": "豆腐",
+                               "sentences": []}
+    seeded.model.article = {
+        **ARTICLE, "headword": "豆腐", "lemma": "豆腐", "reading": reading, "ipa": ipa, "gender": None,
+        "senses": [{"definition": "Soft curd made from soy milk.", "glosses": [{"lang": "en", "terms": ["tofu"]}],
+                    "examples": [{"text": "我喜欢吃豆腐。", "translation": "I like eating tofu."}]}],
+    }
+    answer = seeded.capture(text="豆腐")
+    assert answer.status_code == 200, answer.text
+    return answer.json()["data"]["draft"]
+
+
+def test_a_mandarin_ipa_is_derived_from_the_reading_not_taken_from_the_model(seeded):
+    """`/tô.fu/` drops the diphthong and marks the tone in a notation of its own; the reading was right."""
+    assert chinese(seeded, "dòu fu", "/tô.fu/")["ipa"] == "/tou̯˥˩ fu/"
+
+
+def test_a_mandarin_reading_that_is_not_pinyin_leaves_the_ipa_empty_and_says_so(seeded, caplog):
+    with caplog.at_level(logging.INFO, logger=journal.LOGGER):
+        draft = chinese(seeded, "dou fu", "/tou˥˩ fu/")
+    assert draft["ipa"] is None, "never the model's, and never a guess"
+    [line] = [record for record in caplog.records
+              if record.name == journal.LOGGER and "compose outcome" in record.getMessage()
+              and "ipa=unparsed" in record.getMessage()]
+    assert line.levelno == logging.WARNING
+    assert 'reading="dou fu"' in line.getMessage() and "has no IPA" in line.getMessage()
 
 
 # ── the stream ──────────────────────────────────────────────────────────────

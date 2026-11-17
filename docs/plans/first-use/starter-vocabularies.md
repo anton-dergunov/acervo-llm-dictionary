@@ -148,7 +148,7 @@ senses to concepts, the review.
    owner to approve.
 5. **Check and review.** The deterministic checks
    ([`../../features/capture.md`](../../features/capture.md), "Compose's checks";
-   [`../quality/mandarin-ipa.md`](../quality/mandarin-ipa.md),
+   [`../../features/articles.md`](../../features/articles.md), "Readings", for Mandarin IPA;
    [`../quality/dictionary-checks.md`](../quality/dictionary-checks.md)) run over the composed
    words, Claude reviews against the rubric and corrects, and the owner spot-checks about 20 words each
    in Spanish, English and Russian. **Keep all three layers**: the raw model output, Claude's

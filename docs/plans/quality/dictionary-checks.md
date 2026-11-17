@@ -13,8 +13,8 @@ are never committed, so an installation without one has no check, and nothing sa
 ## 1 · `reading` against CC-CEDICT (defect 2: `麻烦` as `máfán`)
 
 - CC-CEDICT carries numbered pinyin per entry (`src/acervo/dictionaries/converters.py`, `convert_cc_cedict`
-  at about line 202). Compare in numbered form, using the syllable parser from
-  [`mandarin-ipa.md`](mandarin-ipa.md).
+  at about line 202). Compare in numbered form, using the syllable parser
+  `pinyin_syllables` in `src/acervo/pinyin.py`.
 - A word may have several entries (多音字). A reading that matches any of them passes.
 - **The neutral tone is where both sides can be right.** `东西` is `dōngxi` (thing) and `dōngxī`
   (east and west): two entries, two meanings. Measure first how often the model and the dictionary

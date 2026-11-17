@@ -54,6 +54,27 @@ one mark per syllable). So a reading typed with digits needs no conversion, and 
   The page's columns colour the characters too, but a row's characters stay ink.
 - **Tones are citation tones**, as a dictionary prints them: 一 is `yī` and 不 is `bù` wherever they
   stand, and third-tone sandhi is not drawn.
+- **A Mandarin `ipa` is derived from the reading, never asked of a model.** Pinyin is phonemic, so
+  compose cuts the reading into syllables (`acervo/pinyin.py`, the Python twin of `pinyinSyllables`,
+  both held to `web/src/testFixtures/pinyinSyllableVectors.json`) and writes each one's broad IPA from
+  a table (`acervo/mandarin_ipa.py`). A transcription is then as right as the reading and always in
+  one notation, and the prompt asks for `null`. The values are Wikipedia's "Standard Chinese
+  phonology" and "Erhua" articles, written like this:
+  - Syllables are separated by spaces, and each ends in its tone's Chao letters: 1 `˥`, 2 `˧˥`,
+    3 `˨˩˦`, 4 `˥˩`, neutral unmarked. `豆腐` `dòu fu` is `/tou̯˥˩ fu/`, `东西` `dōng xi` is
+    `/tʊŋ˥ ɕi/`. The tones are citation tones, like the reading's: no sandhi (`nǐ hǎo` is
+    `/ni˨˩˦ xau̯˨˩˦/`).
+  - A non-syllabic vowel is marked with `̯`: `ai̯`, `i̯a`, `u̯o`, `y̯ɛn`. There are no tie bars
+    (`tɕ`, `ʈʂ`, `ts`).
+  - The apical vowels are `ɻ̩` after zh ch sh r and `ɹ̩` after z c s (`shì` `/ʂɻ̩˥˩/`, `sī` `/sɹ̩˥/`).
+  - Erhua drops a coda `i̯` or `n` (`diǎnr` `/ti̯ɐ˞˨˩˦/`). It nasalises the vowel of a dropped `ŋ`
+    (`kòngr` `/kʰʊ̃˞˥˩/`), and turns a high or apical vowel into `ɚ` (`shìr` `/ʂɚ˥˩/`, `jīr`
+    `/tɕi̯ɚ˥/`). It marks any other vowel rhotic with `˞` (`huār` `/xu̯a˞˥/`).
+
+  A reading that does not cut into syllables leaves `ipa` empty rather than guessed, and
+  `admin log --failed` shows the word and its reading. Derivation happens on the compose path only.
+  An `ipa` typed in the editor or changed in chat is saved as written, and words composed earlier
+  keep theirs.
 - **Search** reads a Mandarin reading in every way it is typed. `tushu`, `tú shū` and `tu2 shu1` all
   find 图书馆.
 - **Outside the interface** the reading leaves tone-marked too: the Obsidian mirror, and Anki's

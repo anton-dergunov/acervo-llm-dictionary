@@ -19,6 +19,9 @@ from acervo.domain.validation import (
     SOURCE_KIND_VALUES,
 )
 from acervo.errors import ApiError
+from acervo.mandarin_ipa import mandarin_ipa
+from acervo.models import journal
+from acervo.pinyin import is_mandarin
 from acervo.services.capture.coerce import (
     language_or_none,
     pick_choice,
@@ -227,6 +230,15 @@ def draft_from(
         )
 
     reading = trimmed(answer.get("reading")) or None
+    ipa = trimmed(answer.get("ipa")) or None
+    if is_mandarin(resolution["language"]):
+        # Derived from the reading, never the model's: Pinyin is phonemic, so a table is as right as
+        # the reading and always in one notation (articles.md, "Readings"). A reading that does not
+        # cut into syllables leaves the field empty rather than guessed.
+        ipa = mandarin_ipa(reading or "")
+        if ipa is None:
+            journal.outcome("compose", failed=True, ipa="unparsed", model=model_id, reading=reading,
+                            reason="the reading is not Pinyin syllables, so the word has no IPA")
 
     return {
         "id": None,
@@ -234,7 +246,7 @@ def draft_from(
         "headword": trimmed(answer.get("headword")) or resolution["headword"],
         "lemma": trimmed(answer.get("lemma")) or resolution["lemma"],
         "reading": reading,
-        "ipa": trimmed(answer.get("ipa")) or None,
+        "ipa": ipa,
         "pos": pick_choice(answer.get("pos"), POS_VALUES, resolution["pos"]),
         "gender": pick_optional_choice(answer.get("gender"), GENDER_VALUES),
         "register": pick_optional_choice(answer.get("register"), REGISTER_VALUES),

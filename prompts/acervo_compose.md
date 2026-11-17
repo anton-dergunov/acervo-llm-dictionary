@@ -52,7 +52,8 @@ Field rules:
   neutral-tone syllable has no mark (`妈妈` → `mā ma`); the `儿` of erhua is an `r` on the syllable
   before it (`好玩儿` → `hǎo wánr`). Write each syllable's own dictionary tone, not the tone it
   changes to in speech (`一` is `yī`, `不` is `bù`).
-- `ipa` — the broad transcription, or `null` if you are not confident.
+- `ipa` — the broad transcription, or `null` if you are not confident. `null` for Mandarin Chinese:
+  its transcription is derived from the reading.
 - `pos` — exactly one of: noun, verb, adj, adv, phrase, idiom, expression.
 - `gender` — masculine, feminine, common, neuter, or `null` where the language has no gender or the
   part of speech does not carry one.

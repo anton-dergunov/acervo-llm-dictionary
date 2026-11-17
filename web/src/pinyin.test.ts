@@ -3,6 +3,7 @@ import { isMandarin } from "./languages";
 import {
   accentedPinyin, accentedPinyinInText, alignHanzi, isNumberedPinyin, pinyinSearchForms, pinyinSyllables
 } from "./pinyin";
+import syllableVectors from "./testFixtures/pinyinSyllableVectors.json";
 import vectors from "./testFixtures/pinyinVectors.json";
 
 describe("accentedPinyin", () => {
@@ -53,6 +54,17 @@ describe("accentedPinyin", () => {
 const shown = (reading: string) => pinyinSyllables(reading)?.map((one) => `${one.before}${one.text}${one.tone}`).join("|");
 
 describe("pinyinSyllables", () => {
+  it("agrees with the server's copy on every shared case", () => {
+    // `tests/unit/test_pinyin.py` reads the same file: compose derives a Mandarin IPA from the Python twin.
+    for (const [reading, expected] of syllableVectors.cases) expect(shown(reading as string) ?? null).toBe(expected);
+    for (const [reading, erhua] of syllableVectors.erhua) {
+      expect(pinyinSyllables(reading as string)!.map((one) => one.erhua)).toEqual(erhua);
+    }
+    for (const syllable of syllableVectors.inventory) {
+      expect(pinyinSyllables(`${syllable}1`), syllable).toHaveLength(1);
+    }
+  });
+
   it("reads numbered and marked Pinyin as the same syllables", () => {
     expect(shown("tu2 shu1 guan3")).toBe("tú2| shū1| guǎn3");
     expect(shown("tú shū guǎn")).toBe("tú2| shū1| guǎn3");

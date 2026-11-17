@@ -386,3 +386,19 @@ def test_a_compose_answer_passed_over_by_its_check_is_what_admin_log_and_calls_s
     assert call_timings(read_settings()) == 0
     shown = capsys.readouterr().out
     assert f"gemini-api:{GEMINI_SECOND}" in shown and "fixed primaryGloss ×1" in shown, shown
+
+
+def test_a_mandarin_word_saved_without_ipa_is_what_admin_log_failed_shows(logs, server):
+    """A reading that is not Pinyin leaves the derived IPA empty: the line says which word and why."""
+    from test_capture import ARTICLE, RESOLUTION, chinese
+
+    server.push({"vocabularies": [vocabulary()]})
+    server.model.resolution = dict(RESOLUTION)
+    server.model.article = dict(ARTICLE)
+    assert chinese(server, "dou fu", "/tou˥˩ fu/")["ipa"] is None
+
+    lines(logs["call"])
+    failed = [text for _, _, _, text in activity.select(activity.entries(logs), failed=True)]
+    assert any("compose outcome" in text and "ipa=unparsed" in text and 'reading="dou fu"' in text
+               and "the reading is not Pinyin syllables, so the word has no IPA" in text
+               for text in failed), failed
