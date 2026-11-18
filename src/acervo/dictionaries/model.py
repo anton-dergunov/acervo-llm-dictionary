@@ -41,6 +41,9 @@ REGISTER_TAGS = {
 
 GRAMMAR_TAGS = {"transitive", "intransitive", "reflexive", "pronominal"}
 
+#: `GENDER_VALUES` in `domain/validation.py`: the genders an entry may say a noun has.
+GENDERS = ("masculine", "feminine", "common", "neuter")
+
 
 @dataclass
 class Example:
@@ -68,10 +71,17 @@ class Entry:
     lemma: str | None = None
     definitionLang: str | None = None
     ipa: str | None = None
+    #: Every distinct transcription the source gives, `ipa` first, when there is more than one.
+    #: Wiktionary lists one per variety (`calle` is /ˈkaʝe/, /ˈkaʎe/, /ˈkaʃe/…) without saying which
+    #: is which, so a transcription is attested when it is any of them.
+    ipas: list[str] = field(default_factory=list)
     reading: str | None = None
     pos: str | None = None
     posLabel: str | None = None
     register: str | None = None
+    #: The noun's genders, in `GENDERS`, in the order the source gives them: several when homographs
+    #: differ (French `livre` is masculine as a book and feminine as a pound).
+    genders: list[str] = field(default_factory=list)
     aliases: list[str] = field(default_factory=list)
 
     def payload(self) -> bytes:

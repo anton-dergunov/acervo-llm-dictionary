@@ -3,7 +3,7 @@ import type { DictionaryArticle } from "./dictionary";
 import { lookup } from "./dictionaries";
 import { CaretIcon } from "./icons";
 import {
-  externalEntryOf, referenceTextOf, type ExternalEntry, type ExternalSection
+  externalEntryOf, genderOf, referenceTextOf, type ExternalEntry, type ExternalSection
 } from "./externalEntries";
 import { BookIcon, GlobeIcon } from "./icons";
 import { languageOf } from "./languages";
@@ -73,7 +73,9 @@ function GrammarLine({ article, entry }: { article: DictionaryArticle; entry: Ex
   // that are stored, and bucketing `preposition` into `expression` to satisfy it would be a lie.
   const pos = article.posLabel ?? article.pos;
   const language = article.language && article.language !== entry.language ? article.language : null;
-  const bits = [pos && pos !== entry.posLabel ? pos : null, language, article.register ?? null]
+  const gender = genderOf(article);
+  const bits = [pos && pos !== entry.posLabel ? pos : null, gender && gender !== entry.gender ? gender : null,
+                language, article.register ?? null]
     .filter((bit): bit is string => Boolean(bit));
   if (!bits.length) return null;
   return <p className="gram">{bits.map((bit, index) =>
@@ -215,7 +217,7 @@ export default function ExternalArticle({ entry, onAdd, busy = false }: {
           {entry.reading && <div className="reading">{entry.reading}</div>}
           {entry.ipa && <div className="pron-row"><span className="ipa">{entry.ipa}</span></div>}
           <p className="gram">
-            {[entry.posLabel, language?.name, "external dictionary"]
+            {[entry.posLabel, entry.gender, language?.name, "external dictionary"]
               .filter((bit): bit is string => Boolean(bit))
               .map((bit, index) => <span key={bit}>{index > 0 && <span className="sep">·</span>}{bit}</span>)}
           </p>

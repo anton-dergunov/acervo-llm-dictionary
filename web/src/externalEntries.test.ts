@@ -172,4 +172,29 @@ describe("referenceTextOf", () => {
     expect(text).toContain("Picar cebollas. — To chop onions.");
     expect(text).not.toContain("<");
   });
+
+  it("names a noun's genders, so a grounded article is told them", () => {
+    const text = referenceTextOf(externalEntryOf("livre", [{
+      dictionaryId: "kaikki-fr-en", name: "Wiktionary (fr→en)", attribution: "Wiktionary",
+      licence: "CC BY-SA 4.0", origin: "device", sourceLang: "fr",
+      entry: { dictionaryId: "kaikki-fr-en", word: "livre", tier: "fields", articles: [{
+        headword: "livre", posLabel: "noun", genders: ["masculine", "feminine"],
+        senses: [{ definition: "book" }, { definition: "pound" }]
+      }] }
+    }]));
+    expect(text).toContain("livre · noun · masculine / feminine");
+  });
+});
+
+describe("the masthead's gender", () => {
+  it("comes from the first source that gives one", () => {
+    const entry = externalEntryOf("asco", [{
+      dictionaryId: "kaikki-es-en", name: "Wiktionary", attribution: "Wiktionary",
+      licence: "CC BY-SA 4.0", origin: "device", sourceLang: "es",
+      entry: { dictionaryId: "kaikki-es-en", word: "asco", tier: "fields", articles: [{
+        headword: "asco", posLabel: "noun", genders: ["masculine"], senses: [{ definition: "disgust" }]
+      }] }
+    }]);
+    expect(entry.gender).toBe("masculine");
+  });
 });

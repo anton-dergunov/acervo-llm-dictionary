@@ -110,9 +110,17 @@ lookup keys — with a lookup at ~0.2 ms and one decoded frame, ~65 KiB, of memo
   source's own part of speech as free text in `posLabel`, which that parser rejects — so YAML would buy
   no reuse and cost a parser call per lookup. `definitionLang` is hoisted to the entry, and senses carry
   no `order`, since an array is ordered.
+- **A wiktextract entry keeps every transcription and the noun's genders.** `ipa` is the one shown;
+  `ipas` lists every transcription when there is more than one, because Wiktionary gives one per
+  variety without saying which (`calle` is `/ˈkaʝe/`, `/ˈkaʎe/`, `/ˈkaʃe/`…), so a transcription in
+  any variety counts as attested. `genders` comes from wiktextract's gender tags, or from the headword
+  line where it tagged none (Russian in the English edition tags 5% of nouns). It is a list because
+  homographs differ: French `livre` is masculine as a book and feminine as a pound. The external
+  article shows the genders after the part of speech, and the reference text sent for grounding
+  carries them. An artifact built before these fields has neither, and shows nothing.
 
-**The format is described twice**, in `container.py` and `web/src/dictionary.ts`, so a change to either
-is a change to both: `tests/unit/dictionaries/test_fixture.py` builds a small artifact and
+**The format is described twice**, in `container.py` (which also holds the server's reader) and
+`web/src/dictionary.ts`, so a change to either is a change to both: `tests/unit/dictionaries/test_fixture.py` builds a small artifact and
 `web/src/dictionary.test.ts` opens those same bytes with the real reader.
 
 ## On the device and the server
@@ -122,6 +130,12 @@ does not hold is still usable when the server has it and is reachable. It is the
 through the network on purpose, and it does not contradict online-only sync: a dictionary is not the
 replica, so a failure degrades a reference surface rather than losing data.
 
+- **The server reads an artifact only to check what a model wrote** (`services/dictionaries/lookup.py`
+  over `container.Artifact`: the blob memory-mapped, the index parsed once per build). Only `fields`
+  artifacts whose `sourceLang` has the word's primary subtag are read, under the headword, then the
+  headword without its first word (`el asco` → `asco`), then the lemma. With no dictionary installed,
+  an unreadable one or no entry, the answer is empty, and an unreadable artifact writes one
+  `dictionary_unreadable` activity line. No route exposes it.
 - **There is no server-side lookup route.** The artifact is served as a static file that answers byte
   ranges (`GET /api/acervo/dictionaries/{file}`, behind bearer auth), so a dictionary the device has not
   stored is read by the *same* reader over an HTTP byte source. A lookup route would be a second

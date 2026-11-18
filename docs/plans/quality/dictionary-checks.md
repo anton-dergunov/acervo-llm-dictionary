@@ -4,8 +4,13 @@
 ([`../../features/capture.md`](../../features/capture.md), "Compose's checks").
 This covers defects 1 and 2 and §3 of [`article-quality.md`](article-quality.md). Each check starts
 with a **free measurement** on the owner's words, because a dictionary can legitimately disagree with
-a correct answer, and the measurement shows how often. That measurement is backlog row 2. One or two
-Claude Code sessions.
+a correct answer, and the measurement shows how often. That measurement is backlog row 2.
+
+**Measured 17 Nov 2026** ([`experiments/dictionary-checks/`](../../../experiments/dictionary-checks/README.md)):
+the gender and every-transcription fields are in the converter, the server has a reader, and the
+comparisons are in `services/capture/dictionary_check.py`. What is left is wiring the checks into
+compose with the dispositions the owner chooses from those numbers. A disagreement never refuses a
+capture: it asks the next model, and keeps the first answer if none agrees.
 
 A check runs only where the matching dictionary is installed on the server. Compiled dictionaries
 are never committed, so an installation without one has no check, and nothing says it failed.

@@ -16,7 +16,7 @@ what it said.
 
 **Words and languages**
 
-- [`dictionaries.md`](dictionaries.md) — better sources, and what the converters strip.
+- [`dictionaries.md`](dictionaries.md) — better sources, what the converters strip, and dictionaries shipped with the app.
 - [`word-discovery.md`](word-discovery.md) — finding the words worth knowing next.
 - [`languages/language-support.md`](languages/language-support.md) — every feature in the languages people learn.
 - [`languages/cjk.md`](languages/cjk.md) — Chinese, Japanese and Korean: words without spaces (Rare, taps), the characters, the tones, and photos.

@@ -4,8 +4,10 @@ Chosen by measurement in `docs/research/external-dictionaries.md` §11 — a pac
 index beat SQLite by 1.53x on total device bytes for the same corpus, and DEFLATE in frames of 256
 entries beats per-entry compression by 57 % while keeping a lookup to one ~65 KiB frame decode.
 
-`web/src/dictionary.ts` reads what this writes. The two files are the same format described twice,
-so a change here is a change there.
+`web/src/dictionary.ts` reads what this writes, and so does `Artifact` below for the server's own
+checks. The two files are the same format described twice, so a change here is a change there. A
+`fields` payload is the JSON of `model.Entry`: besides the fields it always had, a wiktextract entry
+may carry `ipas` (every transcription, one per variety, when there is more than one) and `genders`.
 
 Two details that are load-bearing and easy to get subtly wrong:
 
@@ -371,12 +373,11 @@ def _sha256(path: Path) -> str:
 
 
 def read_artifact_entry(blob: bytes, index: bytes, word: str) -> bytes | None:
-    """A reference implementation of a lookup, used by the tests to prove the format round-trips.
+    """One lookup over an artifact held in memory: what the tests use to prove the format round-trips."""
+    return _payload(parse_index(index), blob, word)
 
-    The application reads through `web/src/dictionary.ts`; this exists so a Python test can assert
-    that what the compiler wrote is what that reader will find, without a browser.
-    """
-    layout = parse_index(index)
+
+def _payload(layout: "IndexLayout", blob: bytes | mmap.mmap, word: str) -> bytes | None:
     entry = layout.find(word)
     if entry is None:
         return None
@@ -384,6 +385,23 @@ def read_artifact_entry(blob: bytes, index: bytes, word: str) -> bytes | None:
     start = layout.frame_starts[frame_number]
     frame = zlib.decompressobj(-15).decompress(blob[start:start + layout.frame_lengths[frame_number]])
     return frame[offset:offset + length]
+
+
+class Artifact:
+    """An installed artifact, opened once for the server's lookups.
+
+    The index is parsed once and the blob is mapped rather than read, so a lookup decodes one frame
+    and the process never holds a dictionary of a hundred megabytes. Reads only: safe across threads.
+    """
+
+    def __init__(self, blob_path: Path, index_path: Path) -> None:
+        self.layout = parse_index(index_path.read_bytes())
+        with open(blob_path, "rb") as handle:
+            self._blob = (mmap.mmap(handle.fileno(), 0, access=mmap.ACCESS_READ)
+                          if blob_path.stat().st_size else b"")
+
+    def payload(self, word: str) -> bytes | None:
+        return _payload(self.layout, self._blob, word)
 
 
 @dataclass

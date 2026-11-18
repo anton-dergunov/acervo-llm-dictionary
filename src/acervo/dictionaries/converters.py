@@ -32,7 +32,7 @@ from typing import Callable, Iterator
 
 from .catalogue import CatalogueEntry
 from .container import BuildReport, SourceEntry
-from .model import GRAMMAR_TAGS, REGISTER_TAGS, Entry, Example, Sense, resolve_pos
+from .model import GENDERS, GRAMMAR_TAGS, REGISTER_TAGS, Entry, Example, Sense, resolve_pos
 
 Converter = Callable[[Path, CatalogueEntry, BuildReport], Iterator[Entry]]
 
@@ -136,6 +136,53 @@ def _ipa_of(record: dict) -> str | None:
     return None
 
 
+def _ipas_of(group: list[dict]) -> list[str]:
+    """Every distinct transcription of a headword, phonemic (`/…/`) before phonetic (`[…]`)."""
+    found: list[str] = []
+    for record in group:
+        for sound in record.get("sounds") or []:
+            raw = (sound.get("ipa") or "").strip()
+            if raw and raw not in found:
+                found.append(raw)
+    return sorted(found, key=lambda item: not item.startswith("/"))
+
+
+#: The gender letters of a Wiktionary headword line (`asco m (plural ascos)`, `соба́ка • (sobáka) f anim`).
+_HEAD_GENDER = {"m": "masculine", "f": "feminine", "n": "neuter", "c": "common"}
+_PARENTHESISED = re.compile(r"\([^()]*\)")
+_NOUN_POS = {"noun", "name"}
+
+
+def _genders_of(group: list[dict]) -> list[str]:
+    """A headword's genders, from its noun records.
+
+    wiktextract normalises gender into `tags`, on the record or on each sense, for most editions and
+    languages; where it does not (Russian in the English edition tags 5 % of nouns), the headword
+    line still shows it, so a record with no gender tag is read from its `head_templates` expansion:
+    parenthesised parts removed, the headword's own words skipped, and the letters left mapped.
+    """
+    genders: list[str] = []
+    for record in group:
+        if record.get("pos") not in _NOUN_POS:
+            continue
+        tags = list(record.get("tags") or [])
+        for sense in record.get("senses") or []:
+            tags.extend(sense.get("tags") or [])
+        found = [tag for tag in tags if tag in GENDERS]
+        if not found:
+            skip = len(str(record.get("word") or "").split())
+            for template in record.get("head_templates") or []:
+                line = str(template.get("expansion") or "")
+                while _PARENTHESISED.search(line):
+                    line = _PARENTHESISED.sub(" ", line)
+                tokens = re.split(r"[\s,/]+", line.strip())[skip:]
+                found.extend(_HEAD_GENDER[token] for token in tokens if token in _HEAD_GENDER)
+        for gender in found:
+            if gender not in genders:
+                genders.append(gender)
+    return genders
+
+
 def convert_wiktextract(path: Path, row: CatalogueEntry, report: BuildReport) -> Iterator[Entry]:
     """The only load-bearing converter: ~20 Wiktionary editions and hundreds of languages.
 
@@ -183,10 +230,15 @@ def convert_wiktextract(path: Path, row: CatalogueEntry, report: BuildReport) ->
         if not senses:
             report.skipped += 1
             continue
+        ipa = _ipa_of(head)
+        ipas = _ipas_of(group)
+        if ipa:
+            ipas = [ipa, *(item for item in ipas if item != ipa)]
         yield Entry(
             headword=head["word"], lemma=head["word"], language=language,
             definitionLang=definition_lang, senses=senses,
-            ipa=_ipa_of(head), pos=pos, posLabel=pos_label, register=register,
+            ipa=ipa, ipas=ipas if ipas != ([ipa] if ipa else []) else [],
+            pos=pos, posLabel=pos_label, register=register, genders=_genders_of(group),
         )
 
 

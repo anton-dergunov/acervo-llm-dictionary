@@ -166,29 +166,15 @@ model: gemini's `/ˈaska/` fails the check, gemini is demoted, and Vertex — co
 touching the locked contract that a record names the model that did the work, because exactly one
 model still produces the field.
 
-**But not for compose yet, which is where these fields are written.** Routing works where the
-caller parses inside the `ask` callback: `clips/select.py` and `images/brief.py`. Compose goes
-through `services/models.llm_json`, which raises `unusable` only when a reply is not JSON and takes
-no validation hook; compose's own refusals — no senses, a Chinese entry with no reading, a reply
-that is not an object — are raised as `ApiError` after the chain has finished, so they are terminal
-and no stronger model is asked. **An in-chain compose check first needs `llm_json` to accept a
-validation callback**; with that, the gloss-script check (backlog row 3) is the first check to add
-and the template for the IPA one.
+Compose now judges its answer the same way, through `llm_json`'s `check`
+([`../../features/capture.md`](../../features/capture.md), "Compose's checks"): glosses or notes in
+the wrong script demote the pair, and its refusals no longer end the chain. Checking `reading`, `ipa`
+and `gender` against installed dictionaries is the next use of that hook
+([`dictionary-checks.md`](dictionary-checks.md)).
 
-### The rule-decidable checks not yet written
+### The rule-decidable check still to write
 
-Each needs nothing but the reply and the request:
-
-- **gloss script against `glossLangs[0]`** — `llama-3.3-70b` answered in English 28% of the time for
-  vocabularies that gloss into Russian first. `score_of`/`script_of` in the experiment's `score.py`
-  is already a working implementation.
-- `primaryGloss` is a single term — no `;`, `,` or `/`.
-- `emotion` is 3–12 words, carries no emoji, and is not identical to one of the article's own example
-  emotions.
-- `domain` shape, and distinctness between the senses of one word.
-- `emoji` is one grapheme cluster, not a run of them.
 - `lemma` versus `headword` for languages where the relation is mechanical (`el disfraz` → `disfraz`).
-- notes language by script, the same way as glosses.
 
 ### Where a check can live, and what each home costs
 
@@ -263,12 +249,8 @@ For a language whose orthography determines its transcription, **deriving or omi
 asking a model for it.** Spanish is such a language; English is emphatically not. A field that is
 mechanically derivable is a field no model should be asked to produce — and the experiment worth
 running first is simply how often each model's `ipa` disagrees with the dictionary's, per language.
-
-**Mandarin is the clearest case, through its `reading`.** Pinyin is a phonemic romanization: every one
-of its ~410 syllables has one broad IPA form (`dou` → `tou̯`, `xi` → `ɕi`), and every tone one Chao
-value (4 → `˥˩`, neutral unmarked). So a Mandarin `ipa` derived from a checked `reading` by a table is
-as right as the reading, written the same way every time, and costs no call — which is defect 3's fix.
-`web/src/pinyin.ts` already cuts a reading into syllables with tones; the table is what is missing.
+Mandarin `ipa` is already derived this way, from the reading
+([`../../features/articles.md`](../../features/articles.md), "Readings").
 
 ---
 
@@ -500,7 +482,7 @@ Wide on purpose. Nothing here is scheduled.
 | --- | --- | --- | --- | --- |
 | 1 | How often is each model wrong, per field? | §1 ground-truth harness, 30–50 words × 3–4 pairs | ~$2 | The prerequisite for every other row. A null result says quality is not the bottleneck. |
 | 2 | Does a dictionary disagree with the model about `ipa`, and how often? | Compare generated `ipa` against `kaikki-*`, per language | free | Whether §3 closes issue 1, or whether the dictionary is the one that is wrong. |
-| 3 | Does an in-chain check route to a better model, in practice? | Add the gloss-script check, measure how often a pair is demoted and whether the next answers correctly | free | Whether quality cascades work at all on real traffic. A null result (the next model is wrong too) is equally informative. |
+| 3 | Does an in-chain check route to a better model, in practice? | Read `admin calls` on real captures: how often a pair is demoted by the gloss-script check, and whether the next answers correctly | free | Whether quality cascades work at all on real traffic. A null result (the next model is wrong too) is equally informative. |
 | 4 | Can sampling detect a wrong field? | k samples from one model per field, agreement versus truth | ~$1 | Expected to **fail**, given 6-of-6 on `/ˈaska/`. A clean counterexample to SelfCheckGPT's assumption on structured fields. |
 | 5 | Can cross-model voting detect it? | 3 pairs per field, majority versus truth | ~$3 | The counterpart to row 4, and the tension with Self-MoA. |
 | 6 | Does check-triggered repair fix the field without damaging the rest? | CRITIC-shaped correction call, with a re-score of the whole article | ~$1 | Tests whether a narrow repair stays narrow. |
@@ -508,7 +490,6 @@ Wide on purpose. Nothing here is scheduled.
 | 8 | Does decontextualised verification beat in-context review? | CoVe-style independent questions versus "is this right?" | ~$2 | Tests the mechanism, not just the outcome. |
 | 9 | What does the grounding we shipped do? | §6, three arms, sense-count negative check | ~$3 | Evaluates a shipped, disliked, unmeasured feature. |
 | 10 | Is a judge measuring correctness or fluency? | Judge scores versus ground-truth field accuracy on the same articles | ~$2 | Tests [2410.21819](https://arxiv.org/abs/2410.21819)'s perplexity explanation where truth is known. |
-| 13 | How often does a Mandarin `ipa` disagree with its own `reading`? | Derive IPA from the reading by syllable table (§3), compare with the generated one, per pair | free | Whether to derive Mandarin `ipa` and stop asking for it; a disagreement also flags a wrong reading. |
 | 12 | Does a per-field rubric agree with itself across raters? | The same articles scored twice, by a model and by hand | time | Establishes whether §0's rubric is usable before it is relied on. |
 
 ---
@@ -571,22 +552,6 @@ tones. Cloudflare and Vertex were correct every time, and so was gemini in its o
 
 Low frequency, but `reading` is **required** for Chinese and is the field a learner leans on hardest,
 since the characters give them nothing. CC-CEDICT closes it mechanically (§3).
-
-### 3 · Mandarin IPA that drops sounds, in a notation of its own
-
-`豆腐` (`dòu fu`) was written `/tô.fu/` by `gemini-3.5-flash-lite`, first in the text chain, on a real
-capture. Two faults in one line:
-
-- **A sound dropped.** `dou` is the diphthong `/tou̯/`; `/to/` is a different syllable.
-- **The notation changes from word to word.** It marked the falling tone with an IPA diacritic (`ô`),
-  while the same vocabulary's `书` is `/ʂu˥/` and `东西` is `/tʊŋ˥ ɕi/`, both with Chao tone letters.
-  A fourth word, `图书馆`, has no `ipa` at all. A learner cannot compare transcriptions written in
-  different notations.
-
-It was corrected by hand to `/tou̯˥˩ fu/`, in the tone-letter notation the others use. The `reading`
-was right, which is the point: the transcription contradicted a correct reading of the same word.
-Deriving Mandarin `ipa` from the reading (§3, backlog row 13) closes this class of error, both faults
-at once; a prompt sentence would at best fix the notation.
 
 ### What is already good, so it is not re-litigated
 

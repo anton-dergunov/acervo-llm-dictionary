@@ -240,3 +240,77 @@ def test_the_catalogue_keeps_unclear_provenance_out():
     add it themselves; Acervo should not suggest it."""
     identifiers = {entry.id for entry in load_catalogue()}
     assert not {identifier for identifier in identifiers if "bkrs" in identifier.lower()}
+
+
+# ------------------------------------------------------------------- wiktextract: gender and variants
+
+def _kaikki(tmp_path, records) -> Path:
+    path = tmp_path / "gendered.jsonl"
+    path.write_text("\n".join(json.dumps(record, ensure_ascii=False) for record in records), encoding="utf-8")
+    return path
+
+
+def test_wiktextract_reads_gender_from_the_tags_it_normalised(tmp_path):
+    path = _kaikki(tmp_path, [{
+        "word": "asco", "pos": "noun", "lang_code": "es",
+        "head_templates": [{"name": "es-noun", "args": {"1": "m"}, "expansion": "asco m (plural ascos)"}],
+        "sounds": [{"ipa": "/ˈasko/"}, {"ipa": "[ˈas.ko]"}],
+        "senses": [{"glosses": ["disgust"], "tags": ["masculine"]}],
+    }])
+    [entry], _ = convert(path, row(format="wiktextract"))
+    assert entry.genders == ["masculine"]
+    assert entry.ipa == "/ˈasko/" and entry.ipas == ["/ˈasko/", "[ˈas.ko]"]
+
+
+def test_wiktextract_keeps_both_genders_of_a_homograph(tmp_path):
+    path = _kaikki(tmp_path, [
+        {"word": "livre", "pos": "noun", "lang_code": "fr", "tags": ["masculine"],
+         "senses": [{"glosses": ["book"]}]},
+        {"word": "livre", "pos": "noun", "lang_code": "fr", "tags": ["feminine"],
+         "senses": [{"glosses": ["pound"]}]},
+    ])
+    [entry], _ = convert(path, row(format="wiktextract", sourceLang="fr"))
+    assert entry.genders == ["masculine", "feminine"]
+
+
+def test_wiktextract_reads_gender_off_the_headword_line_when_nothing_is_tagged(tmp_path):
+    # Russian in the English edition: the gender is only in the line `соба́ка • (sobáka) f anim (…)`.
+    path = _kaikki(tmp_path, [{
+        "word": "собака", "pos": "noun", "lang_code": "ru",
+        "head_templates": [{"name": "ru-noun+", "expansion":
+                            "соба́ка • (sobáka) f anim (genitive соба́ки, male equivalent соба́кен (sobáken))"}],
+        "senses": [{"glosses": ["dog"]}],
+    }])
+    [entry], _ = convert(path, row(format="wiktextract", sourceLang="ru"))
+    assert entry.genders == ["feminine"]
+
+
+def test_wiktextract_gives_no_gender_outside_nouns(tmp_path):
+    path = _kaikki(tmp_path, [{
+        "word": "asqueroso", "pos": "adj", "lang_code": "es",
+        "head_templates": [{"expansion": "asqueroso (feminine asquerosa, masculine plural asquerosos)"}],
+        "senses": [{"glosses": ["disgusting"], "tags": ["masculine"]}],
+    }])
+    [entry], _ = convert(path, row(format="wiktextract"))
+    assert entry.genders == []
+
+
+def test_wiktextract_keeps_every_variant_transcription_with_the_displayed_one_first(tmp_path):
+    path = _kaikki(tmp_path, [{
+        "word": "calle", "pos": "noun", "lang_code": "es", "tags": ["feminine"],
+        "sounds": [{"ipa": "/ˈkaʝe/"}, {"ipa": "[ˈka.ʝe]"}, {"ipa": "/ˈkaʎe/"}, {"ipa": "/ˈkaʃe/"},
+                   {"ipa": "/ˈkaʝe/"}],
+        "senses": [{"glosses": ["street"]}],
+    }])
+    [entry], _ = convert(path, row(format="wiktextract"))
+    assert entry.ipa == "/ˈkaʝe/"
+    assert entry.ipas == ["/ˈkaʝe/", "/ˈkaʎe/", "/ˈkaʃe/", "[ˈka.ʝe]"]
+    payload = json.loads(entry.payload())[0]
+    assert payload["genders"] == ["feminine"] and payload["ipas"][2] == "/ˈkaʃe/"
+
+
+def test_a_single_transcription_is_not_repeated_as_a_list(tmp_path):
+    path = _kaikki(tmp_path, [{"word": "sol", "pos": "noun", "lang_code": "es", "sounds": [{"ipa": "/ˈsol/"}],
+                               "senses": [{"glosses": ["sun"]}]}])
+    [entry], _ = convert(path, row(format="wiktextract"))
+    assert "ipas" not in json.loads(entry.payload())[0]

@@ -34,10 +34,14 @@ export interface DictionaryArticle {
   language?: string;
   definitionLang?: string;
   ipa?: string;
+  /** Every transcription the source gives, `ipa` first, when there is more than one (one per variety). */
+  ipas?: string[];
   reading?: string;
   pos?: string;
   posLabel?: string;
   register?: string;
+  /** A noun's genders, in Acervo's values; several when homographs differ (French `livre`). */
+  genders?: string[];
   senses: { definition: string; definitionLang?: string; domain?: string;
             examples?: { text: string; textLang?: string; translation?: string; translationLang?: string }[] }[];
 }

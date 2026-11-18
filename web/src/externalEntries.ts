@@ -60,8 +60,14 @@ export interface ExternalEntry {
   reading: string | null;
   ipa: string | null;
   posLabel: string | null;
+  /** The first source's genders, joined: `masculine / feminine`. */
+  gender: string | null;
   sections: ExternalSection[];
 }
+
+/** A noun's genders as one line, or `null` when the source gives none. */
+export const genderOf = (article: DictionaryArticle): string | null =>
+  article.genders?.length ? article.genders.join(" / ") : null;
 
 /* ── ordering ───────────────────────────────────────────────────────────
    Nearest source first, everywhere: what this device holds answers before what the server holds,
@@ -343,6 +349,7 @@ export function externalEntryOf(word: string, results: LookupResult[]): External
     reading: firstOf((article) => article.reading),
     ipa: firstOf((article) => article.ipa),
     posLabel: firstOf((article) => article.posLabel ?? article.pos),
+    gender: firstOf((article) => genderOf(article) ?? undefined),
     sections
   };
 }
@@ -359,7 +366,7 @@ export function referenceTextOf(entry: ExternalEntry): string {
     lines.push(`## ${section.name}`);
     for (const article of section.articles) {
       const heading = [article.headword, article.reading, article.ipa,
-                       article.posLabel ?? article.pos].filter(Boolean).join(" · ");
+                       article.posLabel ?? article.pos, genderOf(article)].filter(Boolean).join(" · ");
       if (heading) lines.push(heading);
       article.senses.forEach((sense, index) => {
         lines.push(`${index + 1}. ${sense.definition}${sense.domain ? ` (${sense.domain})` : ""}`);
