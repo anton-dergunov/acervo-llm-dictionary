@@ -23,6 +23,7 @@ what it said.
 - [`languages/character-pictures.md`](languages/character-pictures.md) — a picture over a pictographic character, after an experiment on whether a model can draw one.
 - [`languages/readings.md`](languages/readings.md) — showing what spelling hides in other languages: tones, pitch accent, stress, vowels.
 - [`languages/accents.md`](languages/accents.md) — clips following a vocabulary's variety, and recording again when it changes.
+- [`languages/ipa-guide.md`](languages/ipa-guide.md) — tap a transcription to see what each symbol means, with a recording of each sound.
 
 **Quality** — the research track: whether what the models write is right.
 

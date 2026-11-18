@@ -1,0 +1,1097 @@
+# What each IPA symbol is, in plain English, for a learner who has never read IPA.
+#
+# One entry per symbol on the IPA chart (revised to 2020), plus the affricates and r-coloured vowels
+# transcriptions write without a tie bar, and the Pinyin letters with the IPA they stand for. The
+# panel planned in docs/plans/languages/ipa-guide.md reads this table; review.py shows it with the
+# candidate recordings so the owner can pick one per symbol.
+#
+# Fields:
+#   symbol   the symbol as written; a diacritic or tone mark is the combining character alone
+#   example  for a diacritic: the mark on a letter, as it is shown
+#   name     the chart's name for it
+#   how      how to make it, in one or two plain sentences
+#   like     the nearest English sound, with a word; null when English has none
+#   heard    a word in another language that has it, when English does not (or not clearly)
+#   audio    phrases to find recordings by on Wikimedia Commons, when the name alone does not
+#   files    Commons files named outright, for sounds a name search cannot find
+#   aliases  other ways the same symbol is typed
+#
+# The analogies are written once and checked against Wikipedia's article for each sound (its
+# "Occurrence" table) and the 2020 chart; nothing here is generated per word.
+
+consonants:
+  # Plosives: the air is stopped completely, then released.
+  - symbol: p
+    name: voiceless bilabial plosive
+    how: Close both lips, then open them, with no voice.
+    like: '"p" in "spin". At the start of a word English adds a puff of air (pʰ), as in "pin".'
+  - symbol: b
+    name: voiced bilabial plosive
+    how: Like p, with the voice on.
+    like: '"b" in "bed".'
+  - symbol: t
+    name: voiceless alveolar plosive
+    how: The tongue tip stops the air at the ridge behind the upper teeth, then lets go, with no voice.
+    like: '"t" in "stop". English "top" adds a puff of air (tʰ).'
+    audio: [voiceless alveolar plosive, voiceless dental and alveolar plosives]
+  - symbol: d
+    name: voiced alveolar plosive
+    how: Like t, with the voice on.
+    like: '"d" in "dog".'
+    audio: [voiced alveolar plosive, voiced dental and alveolar plosives]
+  - symbol: ʈ
+    name: voiceless retroflex plosive
+    how: Like t, but with the tongue tip curled back to touch the roof of the mouth behind the ridge.
+    like: null
+    heard: 'Hindi ट, as in टमाटर ṭamāṭar (tomato).'
+  - symbol: ɖ
+    name: voiced retroflex plosive
+    how: Like d, with the tongue tip curled back.
+    like: null
+    heard: 'Hindi ड, as in डाक ḍāk (mail).'
+  - symbol: c
+    name: voiceless palatal plosive
+    how: The middle of the tongue presses against the hard palate, where it is for "y", then lets go, with no voice.
+    like: 'Close to the "k" in "key", made further forward.'
+    heard: 'Hungarian ty, as in tyúk (hen).'
+  - symbol: ɟ
+    name: voiced palatal plosive
+    how: Like c, with the voice on.
+    like: 'Close to the "g" in "geese", made further forward.'
+    heard: 'Hungarian gy, as in magyar (Hungarian).'
+  - symbol: k
+    name: voiceless velar plosive
+    how: The back of the tongue stops the air against the soft palate, then lets go, with no voice.
+    like: '"k" in "skin". English "kin" adds a puff of air (kʰ).'
+  - symbol: ɡ
+    aliases: [g]
+    name: voiced velar plosive
+    how: Like k, with the voice on.
+    like: '"g" in "go".'
+  - symbol: q
+    name: voiceless uvular plosive
+    how: Like k, but further back in the throat, with the back of the tongue against the uvula.
+    like: null
+    heard: 'Arabic ق, as in قلب qalb (heart).'
+  - symbol: ɢ
+    name: voiced uvular plosive
+    how: Like q, with the voice on. Rare.
+    like: null
+  - symbol: ʔ
+    name: glottal stop
+    how: The vocal folds shut and open again, a catch in the throat.
+    like: 'The catch in the middle of "uh-oh", or in place of the "t" in many speakers'' "button".'
+
+  # Nasals: the mouth is closed and the air goes out through the nose.
+  - symbol: m
+    name: bilabial nasal
+    how: Lips closed, air through the nose.
+    like: '"m" in "man".'
+  - symbol: ɱ
+    name: labiodental nasal
+    how: An m made with the lower lip against the upper teeth.
+    like: 'The "m" in "symphony" or "comfort", said at normal speed.'
+  - symbol: n
+    name: alveolar nasal
+    how: The tongue tip on the ridge behind the upper teeth, air through the nose.
+    like: '"n" in "no".'
+    audio: [alveolar nasal, dental and alveolar nasals]
+  - symbol: ɳ
+    name: retroflex nasal
+    how: An n with the tongue tip curled back.
+    like: null
+    heard: 'Swedish rn, as in barn (child).'
+  - symbol: ɲ
+    name: palatal nasal
+    how: The middle of the tongue against the hard palate, air through the nose.
+    like: 'Close to the "ny" in "canyon", said as one sound.'
+    heard: 'Spanish ñ, as in año (year); French gn, as in agneau (lamb).'
+  - symbol: ŋ
+    name: velar nasal
+    how: The back of the tongue against the soft palate, air through the nose.
+    like: '"ng" in "sing".'
+  - symbol: ɴ
+    name: uvular nasal
+    how: Like ŋ, but further back, against the uvula.
+    like: null
+    heard: 'Spanish n before j in Spain, as in enjuto (shriveled). Japanese ん at the end of a word is often written ɴ.'
+
+  # Trills: something vibrates in the air stream.
+  - symbol: ʙ
+    name: voiced bilabial trill
+    how: The lips vibrate.
+    like: 'The "brrr" people say when they are cold.'
+  - symbol: r
+    name: alveolar trill
+    how: The tongue tip vibrates against the ridge behind the upper teeth, the rolled r.
+    like: null
+    heard: 'Spanish rr, as in perro (dog); Russian р, as in рыба (fish).'
+    audio: [voiced alveolar trill, alveolar trill, dental alveolar and postalveolar trills]
+  - symbol: ʀ
+    name: uvular trill
+    how: The uvula vibrates against the back of the tongue.
+    like: null
+    heard: 'The r of some German speakers, as in rot (red), and of some French dialects; most say ʁ instead.'
+
+  # Taps and flaps: one quick touch.
+  - symbol: ⱱ
+    name: labiodental flap
+    how: The lower lip flicks once against the upper teeth. Found in some languages of Africa.
+    like: null
+  - symbol: ɾ
+    name: alveolar tap
+    how: The tongue tip taps the ridge behind the upper teeth once, quickly.
+    like: 'The "tt" in American "butter".'
+    heard: 'Spanish r between vowels, as in pero (but).'
+    audio: [alveolar tap, alveolar flap, dental and alveolar taps and flaps]
+  - symbol: ɽ
+    name: retroflex flap
+    how: The tongue tip curls back and flicks forward once.
+    like: null
+    heard: 'Hindi ड़, as in बड़ा baṛā (big).'
+
+  # Fricatives: the air is squeezed through a narrow gap and hisses.
+  - symbol: ɸ
+    name: voiceless bilabial fricative
+    how: Blow through lips that almost touch, as when blowing out a candle.
+    like: null
+    heard: 'Japanese f, as in 富士 Fuji.'
+  - symbol: β
+    name: voiced bilabial fricative
+    how: Like ɸ, with the voice on, a soft b where the lips do not close.
+    like: null
+    heard: 'Spanish b or v between vowels, as in lobo (wolf).'
+  - symbol: f
+    name: voiceless labiodental fricative
+    how: The lower lip against the upper teeth, air pushed through.
+    like: '"f" in "fan".'
+  - symbol: v
+    name: voiced labiodental fricative
+    how: Like f, with the voice on.
+    like: '"v" in "van".'
+  - symbol: θ
+    name: voiceless dental fricative
+    how: The tongue tip at the upper teeth, air pushed through.
+    like: '"th" in "thin".'
+  - symbol: ð
+    name: voiced dental fricative
+    how: Like θ, with the voice on.
+    like: '"th" in "this".'
+  - symbol: s
+    name: voiceless alveolar fricative
+    how: The tongue tip near the ridge behind the upper teeth, a hiss.
+    like: '"s" in "see".'
+    audio: [voiceless alveolar sibilant, voiceless alveolar fricative]
+  - symbol: z
+    name: voiced alveolar fricative
+    how: Like s, with the voice on.
+    like: '"z" in "zoo".'
+    audio: [voiced alveolar sibilant, voiced alveolar fricative]
+  - symbol: ʃ
+    name: voiceless postalveolar fricative
+    how: The tongue a little further back than for s, lips slightly pushed out.
+    like: '"sh" in "she".'
+    audio: [voiceless palato-alveolar sibilant, voiceless postalveolar fricative, voiceless palato-alveolar fricative]
+  - symbol: ʒ
+    name: voiced postalveolar fricative
+    how: Like ʃ, with the voice on.
+    like: '"s" in "measure".'
+    audio: [voiced palato-alveolar sibilant, voiced postalveolar fricative, voiced palato-alveolar fricative]
+  - symbol: ʂ
+    name: voiceless retroflex fricative
+    how: Like "sh", but with the tongue tip curled back behind the ridge.
+    like: 'Close to "sh" in "shoe", with the tongue curled back.'
+    heard: 'Mandarin sh, as in 书 shū (book); Russian ш, as in шар (ball).'
+    audio: [voiceless retroflex sibilant, voiceless retroflex fricative]
+  - symbol: ʐ
+    name: voiced retroflex fricative
+    how: Like ʂ, with the voice on.
+    like: 'Close to the "s" in "measure", with the tongue curled back.'
+    heard: 'Russian ж, as in жук (beetle); Mandarin r, as in 热 rè (hot).'
+    audio: [voiced retroflex sibilant, voiced retroflex fricative]
+  - symbol: ç
+    name: voiceless palatal fricative
+    how: Air hissing between the middle of the tongue and the hard palate, as for a whispered "y".
+    like: 'The "h" in "hue" for many British and Australian speakers, said with a hiss.'
+    heard: 'German ch after front vowels, as in ich (I).'
+  - symbol: ʝ
+    name: voiced palatal fricative
+    how: Like ç, with the voice on, a "y" with friction.
+    like: null
+    heard: 'Spanish y between vowels for many speakers, as in mayo (May).'
+  - symbol: x
+    name: voiceless velar fricative
+    how: Air hissing between the back of the tongue and the soft palate.
+    like: '"ch" in Scottish "loch".'
+    heard: 'German ch, as in Buch (book); Spanish j, as in jamón (ham); Russian х; Mandarin h, as in 好 hǎo (good).'
+  - symbol: ɣ
+    name: voiced velar fricative
+    how: Like x, with the voice on.
+    like: null
+    heard: 'Spanish g between vowels, as in lago (lake); Greek γ, as in γάλα (milk).'
+  - symbol: χ
+    name: voiceless uvular fricative
+    how: Like x, but further back, with the uvula.
+    like: null
+    heard: 'German ch after a, o or u, as in Dach (roof); Dutch ch, as in acht (eight); Spanish j in Spain, as in juego (game).'
+  - symbol: ʁ
+    name: voiced uvular fricative
+    how: Like χ, with the voice on.
+    like: null
+    heard: 'French r, as in rouge (red); German r, as in rot (red).'
+  - symbol: ħ
+    name: voiceless pharyngeal fricative
+    how: A strong, breathy h made by squeezing the throat.
+    like: null
+    heard: 'Arabic ح, as in حبيب ḥabīb (beloved).'
+  - symbol: ʕ
+    name: voiced pharyngeal fricative
+    how: Like ħ, with the voice on; usually closer to a squeezed vowel than a hiss.
+    like: null
+    heard: 'Arabic ع, as in عرب ʿarab (Arabs).'
+  - symbol: h
+    name: voiceless glottal fricative
+    how: Air through the open throat, no shape in the mouth.
+    like: '"h" in "hat".'
+  - symbol: ɦ
+    name: voiced glottal fricative
+    how: A breathy h with the voice on.
+    like: 'The "h" in "behind" for many speakers, between two voiced sounds.'
+    heard: 'Czech h, as in hora (mountain).'
+  - symbol: ɬ
+    name: voiceless alveolar lateral fricative
+    how: Put the tongue where it is for l, and blow air past its sides with no voice.
+    like: null
+    heard: 'Welsh ll, as in Llanelli.'
+  - symbol: ɮ
+    name: voiced alveolar lateral fricative
+    how: Like ɬ, with the voice on.
+    like: null
+    heard: 'Zulu dl, as in dlala (play).'
+
+  # Approximants: the tongue shapes the air without hissing.
+  - symbol: ʋ
+    name: labiodental approximant
+    how: The lower lip near the upper teeth, softer than v, with no hiss.
+    like: 'Between "v" and "w".'
+    heard: 'Dutch w, as in wat (what).'
+  - symbol: ɹ
+    name: alveolar approximant
+    how: The tongue tip raised towards the ridge behind the teeth without touching it.
+    like: '"r" in "red".'
+  - symbol: ɻ
+    name: retroflex approximant
+    how: An r with the tongue tip curled back.
+    like: 'A strongly curled American "r".'
+    heard: 'Mandarin r for many speakers, as in 人 rén (person).'
+  - symbol: j
+    name: palatal approximant
+    how: The middle of the tongue raised towards the hard palate.
+    like: '"y" in "yes". It is never the English "j".'
+  - symbol: ɰ
+    name: velar approximant
+    how: The back of the tongue raised towards the soft palate, like a w with spread lips.
+    like: null
+  - symbol: l
+    name: alveolar lateral approximant
+    how: The tongue tip on the ridge behind the upper teeth, air past its sides.
+    like: '"l" in "leaf".'
+    audio: [alveolar lateral approximant, voiced alveolar lateral approximant, dental alveolar and postalveolar lateral approximants]
+  - symbol: ɭ
+    name: retroflex lateral approximant
+    how: An l with the tongue tip curled back.
+    like: null
+    heard: 'Swedish rl, as in sorl (murmur).'
+  - symbol: ʎ
+    name: palatal lateral approximant
+    how: An l made with the middle of the tongue against the hard palate.
+    like: 'Close to the "lli" in "million", said as one sound.'
+    heard: 'Italian gl, as in figlio (son).'
+  - symbol: ʟ
+    name: velar lateral approximant
+    how: An l made with the back of the tongue against the soft palate. Rare.
+    like: null
+
+  # Other symbols on the chart.
+  - symbol: ʍ
+    name: voiceless labial-velar fricative
+    how: A w with no voice, blown through rounded lips.
+    like: 'The "wh" in "which", for speakers who say it differently from "witch".'
+    audio: [voiceless labio-velar fricative, voiceless labial-velar fricative, voiceless labio-velar approximant]
+  - symbol: w
+    name: voiced labial-velar approximant
+    how: Rounded lips with the back of the tongue raised.
+    like: '"w" in "we".'
+    audio: [voiced labio-velar approximant, voiced labial-velar approximant, labio-velar approximant]
+  - symbol: ɥ
+    name: voiced labial-palatal approximant
+    how: A "y" said with rounded lips, as if "y" and "w" at once.
+    like: null
+    heard: 'French u before a vowel, as in huit (eight).'
+    audio: [labial-palatal approximant, voiced labial-palatal approximant, labio-palatal approximant]
+  - symbol: ʜ
+    name: voiceless epiglottal fricative
+    how: A harsh hiss made deep in the throat, below ħ. Rare.
+    like: null
+  - symbol: ʢ
+    name: voiced epiglottal fricative
+    how: Like ʜ, with the voice on. Rare.
+    like: null
+  - symbol: ʡ
+    name: epiglottal plosive
+    how: A stop made deep in the throat with the epiglottis. Rare.
+    like: null
+  - symbol: ɕ
+    name: voiceless alveolo-palatal fricative
+    how: Between s and sh, with the tongue flat and the lips spread.
+    like: 'Between "s" in "see" and "sh" in "she".'
+    heard: 'Mandarin x, as in 谢谢 xièxie (thanks); Japanese し shi; Russian щ (long).'
+    audio: [voiceless alveolo-palatal sibilant, voiceless alveolo-palatal fricative]
+  - symbol: ʑ
+    name: voiced alveolo-palatal fricative
+    how: Like ɕ, with the voice on.
+    like: null
+    heard: 'Polish ź, as in źle (badly).'
+    audio: [voiced alveolo-palatal sibilant, voiced alveolo-palatal fricative]
+  - symbol: ɺ
+    name: alveolar lateral flap
+    how: One quick flick of the tongue, between an l and a tapped r.
+    like: null
+    heard: 'Japanese r for many speakers, as in ラーメン rāmen.'
+  - symbol: ɧ
+    name: voiceless dorso-palatal velar fricative
+    how: Two hisses at once, sh-like and at the back of the mouth. Swedish only.
+    like: null
+    heard: 'Swedish sj, as in sju (seven).'
+    audio: [voiceless dorso-palatal velar fricative, sj-sound, voiceless palatal-velar fricative]
+  - symbol: ɫ
+    name: velarized alveolar lateral approximant
+    how: An l with the back of the tongue raised as well, a "dark" l.
+    like: '"l" in "full" or "milk".'
+    heard: 'Russian л, as in лампа (lamp).'
+
+affricates:
+  # A stop released into a hiss, counted as one sound. The chart writes them with a tie bar (t͡s);
+  # most transcriptions, Acervo's Mandarin among them, leave it out.
+  - symbol: ts
+    aliases: [t͡s, ʦ]
+    name: voiceless alveolar affricate
+    how: t and s run together as one sound.
+    like: '"ts" in "cats", but able to start a word.'
+    heard: 'German z, as in Zeit (time); Mandarin z, as in 在 zài; Russian ц.'
+    audio: [voiceless alveolar sibilant affricate, voiceless alveolar affricate]
+  - symbol: dz
+    aliases: [d͡z, ʣ]
+    name: voiced alveolar affricate
+    how: d and z run together as one sound.
+    like: '"ds" in "beds".'
+    heard: 'Italian z, as in zero.'
+    audio: [voiced alveolar sibilant affricate, voiced alveolar affricate]
+  - symbol: tʃ
+    aliases: [t͡ʃ, ʧ]
+    name: voiceless postalveolar affricate
+    how: t and sh run together as one sound.
+    like: '"ch" in "church".'
+    audio: [voiceless palato-alveolar affricate, voiceless postalveolar affricate]
+  - symbol: dʒ
+    aliases: [d͡ʒ, ʤ]
+    name: voiced postalveolar affricate
+    how: d and the "s" of "measure" run together as one sound.
+    like: '"j" in "jam".'
+    audio: [voiced palato-alveolar affricate, voiced postalveolar affricate]
+  - symbol: tɕ
+    aliases: [t͡ɕ, ʨ]
+    name: voiceless alveolo-palatal affricate
+    how: A t released into ɕ, the tongue flat and the lips spread.
+    like: 'Between "ts" and "ch", softer than "ch" in "cheap".'
+    heard: 'Mandarin j, as in 家 jiā (home); Polish ć, as in być (to be); Japanese ち chi.'
+    files: [Voiceless alveolo-palatal affricate by Chinese native speaker.ogg]
+  - symbol: dʑ
+    aliases: [d͡ʑ, ʥ]
+    name: voiced alveolo-palatal affricate
+    how: Like tɕ, with the voice on.
+    like: null
+    heard: 'Polish dź, as in dźwięk (sound).'
+  - symbol: ʈʂ
+    aliases: [ʈ͡ʂ]
+    name: voiceless retroflex affricate
+    how: A t released into ʂ, the tongue tip curled back.
+    like: 'Close to "ch" in "church", with the tongue curled back.'
+    heard: 'Mandarin zh, as in 中 zhōng (middle); Polish cz, as in czas (time).'
+  - symbol: ɖʐ
+    aliases: [ɖ͡ʐ]
+    name: voiced retroflex affricate
+    how: Like ʈʂ, with the voice on.
+    like: 'Close to "j" in "jam", with the tongue curled back.'
+    heard: 'Polish dż, as in dżem (jam).'
+  - symbol: pf
+    aliases: [p͡f]
+    name: voiceless labiodental affricate
+    how: p released into f, as one sound.
+    like: null
+    heard: 'German pf, as in Pferd (horse).'
+
+vowels:
+  # Close: the tongue high, the mouth nearly closed.
+  - symbol: i
+    name: close front unrounded vowel
+    how: The tongue high and forward, lips spread.
+    like: '"ee" in "see", without any glide.'
+  - symbol: y
+    name: close front rounded vowel
+    how: Say "ee", then round the lips as for "oo" without moving the tongue.
+    like: null
+    heard: 'French u, as in tu (you); German ü, as in über; Mandarin ü, as in 绿 lǜ (green).'
+  - symbol: ɨ
+    name: close central unrounded vowel
+    how: Like "ee" with the tongue pulled back to the middle.
+    like: null
+    heard: 'Russian ы, as in ты (you).'
+  - symbol: ʉ
+    name: close central rounded vowel
+    how: Like "oo" with the tongue pushed forward to the middle.
+    like: 'The "oo" in "goose" in many younger British and Australian speakers.'
+    heard: 'Norwegian u, as in hus (house).'
+  - symbol: ɯ
+    name: close back unrounded vowel
+    how: '"oo" without rounding the lips.'
+    like: null
+    heard: 'Turkish ı, as in kız (girl); Korean ㅡ.'
+  - symbol: u
+    name: close back rounded vowel
+    how: The tongue high and back, lips rounded.
+    like: '"oo" in "food", without any glide.'
+  # Near-close.
+  - symbol: ɪ
+    name: near-close near-front unrounded vowel
+    how: A relaxed, slightly lower "ee".
+    like: '"i" in "sit".'
+  - symbol: ʏ
+    name: near-close near-front rounded vowel
+    how: ɪ with rounded lips.
+    like: null
+    heard: 'German ü in a short syllable, as in hübsch (pretty).'
+  - symbol: ʊ
+    name: near-close near-back rounded vowel
+    how: A relaxed, slightly lower "oo".
+    like: '"oo" in "foot".'
+  # Close-mid.
+  - symbol: e
+    name: close-mid front unrounded vowel
+    how: The tongue a little lower than for "ee", lips spread.
+    like: 'The "a" in "say", without the glide into "y".'
+    heard: 'French é, as in été (summer); German ee, as in See (lake).'
+  - symbol: ø
+    name: close-mid front rounded vowel
+    how: Say e, then round the lips.
+    like: null
+    heard: 'French eu, as in peu (little); German ö, as in schön (beautiful).'
+  - symbol: ɘ
+    name: close-mid central unrounded vowel
+    how: Between e and the "uh" of ə, a little higher than ə. Rare as a sound of its own.
+    like: null
+  - symbol: ɵ
+    name: close-mid central rounded vowel
+    how: ɘ with rounded lips.
+    like: null
+    heard: 'Swedish u in a short syllable, as in full (full).'
+  - symbol: ɤ
+    name: close-mid back unrounded vowel
+    how: An "o" with the lips spread instead of rounded.
+    like: null
+    heard: 'Mandarin e, as in 饿 è (hungry) and 喝 hē (drink).'
+  - symbol: o
+    name: close-mid back rounded vowel
+    how: The tongue back, lips rounded, a little lower than "oo".
+    like: 'The "o" in "go", without the glide into "w".'
+    heard: 'French eau (water); German o, as in so.'
+  # Mid.
+  - symbol: ə
+    name: mid central vowel
+    how: The tongue at rest in the middle of the mouth, the "schwa".
+    like: '"a" in "about".'
+  # Open-mid.
+  - symbol: ɛ
+    name: open-mid front unrounded vowel
+    how: The tongue a little lower than for e.
+    like: '"e" in "bed".'
+  - symbol: œ
+    name: open-mid front rounded vowel
+    how: Say ɛ, then round the lips.
+    like: null
+    heard: 'French eu, as in peur (fear); German ö, as in Hölle (hell).'
+  - symbol: ɜ
+    name: open-mid central unrounded vowel
+    how: A relaxed vowel in the middle of the mouth, lower than ə.
+    like: 'The "ir" in British "bird" (written ɜː, since it is long).'
+  - symbol: ɞ
+    name: open-mid central rounded vowel
+    how: ɜ with rounded lips. Rare.
+    like: null
+  - symbol: ʌ
+    name: open-mid back unrounded vowel
+    how: The tongue low and back, lips spread.
+    like: 'The "u" in American "cup"; many British speakers say it further forward (ɐ).'
+  - symbol: ɔ
+    name: open-mid back rounded vowel
+    how: The tongue low and back, lips rounded.
+    like: 'The "ou" in British "thought" (written ɔː, since it is long).'
+    heard: 'French o, as in porte (door).'
+  # Near-open.
+  - symbol: æ
+    name: near-open front unrounded vowel
+    how: The mouth open, the tongue forward.
+    like: '"a" in "cat".'
+  - symbol: ɐ
+    name: near-open central vowel
+    how: A short, relaxed "ah" in the middle of the mouth.
+    like: 'The "u" in "cup" in many British speakers.'
+    heard: 'German -er, as in besser (better); Portuguese a, as in cama (bed).'
+  # Open.
+  - symbol: a
+    name: open front unrounded vowel
+    how: The mouth wide open, the tongue low and forward. Many transcriptions use it for the "ah" of the middle of the mouth.
+    like: 'Between the "a" in "cat" and the "a" in "father".'
+    heard: 'Spanish a, as in casa (house).'
+  - symbol: ɶ
+    name: open front rounded vowel
+    how: a with rounded lips. Rare.
+    like: null
+  - symbol: ɑ
+    name: open back unrounded vowel
+    how: The mouth wide open, the tongue low and back.
+    like: '"a" in "father".'
+  - symbol: ɒ
+    name: open back rounded vowel
+    how: ɑ with the lips rounded.
+    like: 'The "o" in British "lot".'
+  # R-coloured vowels, written in most English transcriptions.
+  - symbol: ɚ
+    name: r-coloured mid central vowel
+    how: ə said with the tongue curled or bunched as for an American r.
+    like: 'The "er" in American "butter".'
+    heard: 'Mandarin er, as in 儿 ér (child).'
+    audio: [r-colored mid central vowel, mid central r-colored vowel, rhotacized schwa]
+  - symbol: ɝ
+    name: r-coloured open-mid central vowel
+    how: ɜ with an American r colour.
+    like: 'The "ir" in American "bird".'
+    audio: [r-colored open-mid central unrounded vowel, rhotacized open-mid central vowel]
+
+diacritics:
+  # A mark changes the letter it is written on. The panel shows it with that letter.
+  - symbol: "̥"
+    aliases: ["̊"]
+    example: n̥
+    name: voiceless
+    how: Said without the voice.
+  - symbol: "̬"
+    example: s̬
+    name: voiced
+    how: Said with the voice on.
+  - symbol: ʰ
+    example: pʰ
+    name: aspirated
+    how: 'Followed by a puff of air. English "pin" is pʰ and "spin" is p. In Mandarin the puff is what tells Pinyin p (pʰ) from b (p).'
+    audio: [aspirated voiceless bilabial plosive, voiceless bilabial plosive aspirated]
+  - symbol: "̹"
+    example: ɔ̹
+    name: more rounded
+    how: Lips rounded more than usual.
+  - symbol: "̜"
+    example: ɔ̜
+    name: less rounded
+    how: Lips rounded less than usual.
+  - symbol: "̟"
+    example: u̟
+    name: advanced
+    how: The tongue a little further forward.
+  - symbol: "̠"
+    example: e̠
+    name: retracted
+    how: The tongue a little further back.
+  - symbol: "̈"
+    example: ë
+    name: centralized
+    how: Moved towards the middle of the mouth.
+  - symbol: "̽"
+    example: e̽
+    name: mid-centralized
+    how: Moved towards ə, the relaxed middle vowel.
+  - symbol: "̩"
+    aliases: ["̍"]
+    example: n̩
+    name: syllabic
+    how: 'A consonant that makes a syllable by itself, with no vowel. The "n" in "button" (ˈbʌtn̩). Mandarin shì is ʂɻ̩: its vowel is a held r-sound.'
+  - symbol: "̯"
+    aliases: ["̑"]
+    example: i̯
+    name: non-syllabic
+    how: 'A vowel that does not make a syllable of its own: it glides into or out of its neighbour. The "i̯" of ai̯ is the "y" at the end of "eye", the "u̯" of ou̯ the "w" at the end of "go".'
+  - symbol: ˞
+    example: ə˞
+    name: rhoticity
+    how: Said with an r colour, the tongue curled or bunched as for an American r. Mandarin erhua adds it to a syllable.
+  - symbol: "̤"
+    example: b̤
+    name: breathy voiced
+    how: Voice with a lot of breath, a murmur.
+  - symbol: "̰"
+    example: b̰
+    name: creaky voiced
+    how: A low, creaking voice, as at the end of a tired sentence.
+  - symbol: "̼"
+    example: t̼
+    name: linguolabial
+    how: The tongue tip against the upper lip.
+  - symbol: ʷ
+    example: kʷ
+    name: labialized
+    how: 'With rounded lips, a "w" colour. The "qu" in "queen" is kʷ.'
+  - symbol: ʲ
+    example: tʲ
+    name: palatalized
+    how: 'With the middle of the tongue raised, a "y" colour. Russian soft consonants, as in нет (nʲet, no).'
+  - symbol: ˠ
+    example: tˠ
+    name: velarized
+    how: With the back of the tongue raised.
+  - symbol: ˤ
+    example: tˤ
+    name: pharyngealized
+    how: With the throat squeezed. Arabic "emphatic" consonants.
+  - symbol: "̴"
+    example: ɫ
+    name: velarized or pharyngealized
+    how: A dark sound, made deep in the mouth or throat. The dark l, ɫ, has it built in.
+  - symbol: "̝"
+    example: e̝
+    name: raised
+    how: The tongue a little higher than usual.
+  - symbol: "̞"
+    example: e̞
+    name: lowered
+    how: 'The tongue a little lower than usual. Spanish e and o are e̞ and o̞, between e and ɛ, o and ɔ.'
+  - symbol: "̘"
+    example: e̘
+    name: advanced tongue root
+    how: The root of the tongue pushed forward, widening the throat.
+  - symbol: "̙"
+    example: e̙
+    name: retracted tongue root
+    how: The root of the tongue pulled back.
+  - symbol: "̪"
+    example: t̪
+    name: dental
+    how: 'Made against the teeth rather than the ridge behind them. Spanish, French and Russian t and d.'
+  - symbol: "̺"
+    example: t̺
+    name: apical
+    how: Made with the very tip of the tongue.
+  - symbol: "̻"
+    example: t̻
+    name: laminal
+    how: Made with the flat blade of the tongue, just behind the tip.
+  - symbol: "̃"
+    example: ẽ
+    name: nasalized
+    how: 'Air through the nose as well as the mouth. French bon (bɔ̃) and vin (vɛ̃); Portuguese mãe (mɐ̃j̃).'
+  - symbol: ⁿ
+    example: dⁿ
+    name: nasal release
+    how: Released through the nose, as the "dn" in "sudden".
+  - symbol: ˡ
+    example: dˡ
+    name: lateral release
+    how: Released past the sides of the tongue, as the "dl" in "middle".
+  - symbol: "̚"
+    example: d̚
+    name: no audible release
+    how: Stopped and never released, as the "p" at the end of a quick "yep".
+  - symbol: "͡"
+    aliases: ["͜"]
+    example: t͡s
+    name: tie bar
+    how: The two letters it joins are one sound.
+
+suprasegmentals:
+  - symbol: ˈ
+    name: primary stress
+    how: The syllable after it is stressed. "about" is əˈbaʊt.
+  - symbol: ˌ
+    name: secondary stress
+    how: The syllable after it has a lighter stress. "pronunciation" is prəˌnʌnsiˈeɪʃən.
+  - symbol: ː
+    aliases: [":"]
+    name: long
+    how: The sound before it is held longer. "see" is siː.
+  - symbol: ˑ
+    name: half-long
+    how: The sound before it is a little longer than usual.
+  - symbol: "̆"
+    example: ĕ
+    name: extra-short
+    how: The sound is shorter than usual.
+  - symbol: .
+    name: syllable break
+    how: A new syllable starts here.
+  - symbol: "|"
+    name: minor (foot) group
+    how: A short pause or break in the phrase.
+  - symbol: ‖
+    name: major (intonation) group
+    how: The end of a phrase.
+  - symbol: ‿
+    name: linking
+    how: No break between the words it joins.
+  - symbol: ↓
+    aliases: [ꜜ]
+    name: downstep
+    how: The pitch steps down from here on.
+  - symbol: ↑
+    aliases: [ꜛ]
+    name: upstep
+    how: The pitch steps up from here on.
+  - symbol: ↗
+    name: global rise
+    how: The phrase rises in pitch.
+  - symbol: ↘
+    name: global fall
+    how: The phrase falls in pitch.
+
+tones:
+  # Chao tone letters: each is a bar with a mark at a pitch from 1 (lowest) to 5 (highest). A run of
+  # them is one tone, read left to right as the pitch moves; a font joins them into one line.
+  letters:
+    - symbol: ˥
+      level: 5
+      name: extra high
+    - symbol: ˦
+      level: 4
+      name: high
+    - symbol: ˧
+      level: 3
+      name: mid
+    - symbol: ˨
+      level: 2
+      name: low
+    - symbol: ˩
+      level: 1
+      name: extra low
+  # Contours the panel names. Any other run is described from its levels.
+  contours:
+    - letters: ˥
+      name: high level
+      how: The pitch stays high and even.
+      mandarin: 1st tone, as in 妈 mā (mother).
+      files: [Zh-bā.ogg, Mandarin Chinese-巴-pronunciation.wav]
+    - letters: ˧˥
+      name: rising
+      how: The pitch rises from the middle to the top, as in a surprised "what?".
+      mandarin: 2nd tone, as in 麻 má (hemp).
+      files: [Zh-má.ogg, Mandarin Chinese-拔.wav]
+    - letters: ˨˩˦
+      name: dipping
+      how: The pitch dips low, then rises. In running speech it often stays low (˨˩).
+      mandarin: 3rd tone, as in 马 mǎ (horse).
+      files: [Zh-mǎ.ogg, Zh-ma3.ogg, Mandarin Chinese-third tone-把-pronunciation.wav]
+    - letters: ˥˩
+      name: falling
+      how: The pitch falls from the top to the bottom, as in a firm "No!".
+      mandarin: 4th tone, as in 骂 mà (to scold).
+      files: [Zh-mà.ogg, Zh-ma4.ogg, Mandarin Chinese-fourth tone-吧-pronunciation.wav]
+  # Tone written as a mark over a vowel instead of letters.
+  marks:
+    - symbol: "̋"
+      example: e̋
+      name: extra high
+    - symbol: "́"
+      example: é
+      name: high
+    - symbol: "̄"
+      example: ē
+      name: mid
+    - symbol: "̀"
+      example: è
+      name: low
+    - symbol: "̏"
+      example: ȅ
+      name: extra low
+    - symbol: "̌"
+      example: ě
+      name: rising
+    - symbol: "̂"
+      example: ê
+      name: falling
+    - symbol: "᷄"
+      example: e᷄
+      name: high rising
+    - symbol: "᷅"
+      example: e᷅
+      name: low rising
+    - symbol: "᷈"
+      example: e᷈
+      name: rising-falling
+
+pinyin:
+  # Pinyin letters and the IPA acervo/mandarin_ipa.py writes for them (check.py holds the two
+  # together). `example` is a syllable that has the sound; its recording is Commons' Zh-<syllable>.
+  initials:
+    - letters: b
+      ipa: p
+      how: 'Like "p" in "spin": no puff of air. It is not voiced like English b, but sounds close to it.'
+      example: bā
+    - letters: p
+      ipa: pʰ
+      how: '"p" in "pin", with a strong puff of air.'
+      example: pà
+    - letters: m
+      ipa: m
+      how: '"m" in "man".'
+      example: mǎ
+    - letters: f
+      ipa: f
+      how: '"f" in "fan".'
+      example: fēi
+    - letters: d
+      ipa: t
+      how: 'Like "t" in "stop": no puff of air.'
+      example: dà
+    - letters: t
+      ipa: tʰ
+      how: '"t" in "top", with a strong puff of air.'
+      example: tā
+    - letters: n
+      ipa: n
+      how: '"n" in "no".'
+      example: nǐ
+    - letters: l
+      ipa: l
+      how: '"l" in "leaf".'
+      example: lái
+    - letters: g
+      ipa: k
+      how: 'Like "k" in "skin": no puff of air.'
+      example: gē
+    - letters: k
+      ipa: kʰ
+      how: '"k" in "kin", with a strong puff of air.'
+      example: kàn
+    - letters: h
+      ipa: x
+      how: 'A hiss at the back of the mouth, like a soft "ch" in Scottish "loch". Not the English "h".'
+      example: hǎo
+    - letters: j
+      ipa: tɕ
+      how: 'Like "j" in "jeep" with the tongue tip down behind the lower teeth. No puff of air.'
+      example: jiā
+    - letters: q
+      ipa: tɕʰ
+      how: 'Like "ch" in "cheap" with the tongue tip down, and a puff of air. Never "kw".'
+      example: qī
+    - letters: x
+      ipa: ɕ
+      how: 'Between "s" and "sh", the tongue tip down and the lips spread. Never "ks".'
+      example: xiè
+    - letters: zh
+      ipa: ʈʂ
+      how: 'Like "j" in "judge" with the tongue tip curled back. No puff of air.'
+      example: zhōng
+    - letters: ch
+      ipa: ʈʂʰ
+      how: 'Like "ch" in "church" with the tongue tip curled back, and a puff of air.'
+      example: chī
+    - letters: sh
+      ipa: ʂ
+      how: '"sh" with the tongue tip curled back.'
+      example: shū
+    - letters: r
+      ipa: ʐ
+      how: 'Like the "s" in "measure" with the tongue curled back; many speakers make it close to an English "r".'
+      example: rè
+    - letters: z
+      ipa: ts
+      how: 'Like "ds" in "beds": no puff of air. Never the English "z".'
+      example: zài
+    - letters: c
+      ipa: tsʰ
+      how: 'Like "ts" in "cats", with a strong puff of air. Never "k" or "s".'
+      example: cài
+    - letters: s
+      ipa: s
+      how: '"s" in "see".'
+      example: sān
+  finals:
+    - letters: a
+      ipa: a
+      how: '"a" in "father", shorter.'
+      example: bā
+    - letters: o
+      ipa: o
+      how: 'Only after b, p, m and f, where it is said "uo": bo is pu̯o, like "bwo".'
+      example: bō
+    - letters: e
+      ipa: ɤ
+      how: 'An "o" with spread lips, close to the "u" in "duh" said far back. Not the English "e".'
+      example: è
+    - letters: er
+      ipa: ɚ
+      how: 'The "ar" in American "are", or the "er" in "butter".'
+      example: èr
+    - letters: ai
+      ipa: ai̯
+      how: '"eye".'
+      example: ài
+    - letters: ei
+      ipa: ei̯
+      how: '"ay" in "say".'
+      example: fēi
+    - letters: ao
+      ipa: au̯
+      how: '"ow" in "cow".'
+      example: hǎo
+    - letters: ou
+      ipa: ou̯
+      how: '"o" in "go".'
+      example: dòu
+    - letters: an
+      ipa: an
+      how: '"an" with the "a" of "father": "ahn".'
+      example: sān
+    - letters: en
+      ipa: ən
+      how: 'The "en" in "taken", with a relaxed vowel.'
+      example: rén
+    - letters: ang
+      ipa: aŋ
+      how: '"ahng", the "a" of "father" and the "ng" of "sing".'
+      example: máng
+    - letters: eng
+      ipa: əŋ
+      how: 'The "ung" in "sung", with a relaxed vowel.'
+      example: lěng
+    - letters: ong
+      ipa: ʊŋ
+      how: 'The "oo" of "foot" and the "ng" of "sing".'
+      example: zhōng
+    - letters: i
+      ipa: i
+      how: '"ee" in "see". After zh, ch, sh, r, z, c and s it is a different sound: see -i below.'
+      example: nǐ
+    - letters: ia
+      ipa: i̯a
+      how: '"ya" in "yard".'
+      example: jiā
+    - letters: ie
+      ipa: i̯e
+      how: '"ye" in "yes", with a tenser e.'
+      example: xiè
+    - letters: iao
+      ipa: i̯au̯
+      how: '"yow" in "yowl".'
+      example: xiǎo
+    - letters: iu
+      ipa: i̯ou̯
+      how: 'Spelt iu, said "yo" as in "yo-yo": the full spelling is iou.'
+      example: liù
+    - letters: ian
+      ipa: i̯ɛn
+      how: '"yen": the a is said like "e" in "bed".'
+      example: tiān
+    - letters: in
+      ipa: in
+      how: '"een" in "seen", short.'
+      example: xīn
+    - letters: iang
+      ipa: i̯aŋ
+      how: '"yahng".'
+      example: liǎng
+    - letters: ing
+      ipa: iŋ
+      how: '"ing" in "sing".'
+      example: tīng
+    - letters: iong
+      ipa: i̯ʊŋ
+      how: '"y" and ong: "yoong".'
+      example: xióng
+    - letters: u
+      ipa: u
+      how: '"oo" in "food". After j, q, x and y it is spelt u but said ü (y).'
+      example: bù
+    - letters: ua
+      ipa: u̯a
+      how: '"wah".'
+      example: huā
+    - letters: uo
+      ipa: u̯o
+      how: '"waw", the w and an "o" without a glide.'
+      example: duō
+    - letters: uai
+      ipa: u̯ai̯
+      how: '"why".'
+      example: kuài
+    - letters: ui
+      ipa: u̯ei̯
+      how: 'Spelt ui, said "way": the full spelling is uei.'
+      example: duì
+    - letters: uan
+      ipa: u̯an
+      how: '"wahn".'
+      example: duǎn
+    - letters: un
+      ipa: u̯ən
+      how: 'Spelt un, said "wun" with a relaxed vowel: the full spelling is uen.'
+      example: chūn
+    - letters: uang
+      ipa: u̯aŋ
+      how: '"wahng".'
+      example: huáng
+    - letters: ü
+      ipa: y
+      how: 'Say "ee" with rounded lips, like French u. Spelt u after j, q, x and y.'
+      example: lǜ
+    - letters: üe
+      ipa: y̯e
+      how: 'ü gliding into a tense "e". Spelt ue after j, q, x and y.'
+      example: xué
+    - letters: üan
+      ipa: y̯ɛn
+      how: 'ü gliding into "en" as in "bed". Spelt uan after j, q, x and y.'
+      example: yuán
+    - letters: ün
+      ipa: yn
+      how: 'ü followed by n. Spelt un after j, q, x and y.'
+      example: yún
+    - letters: -i (zh ch sh r)
+      ipa: ɻ̩
+      how: 'Not "ee": hold the tongue where it was for zh, ch, sh or r and let the voice buzz through it.'
+      example: shì
+    - letters: -i (z c s)
+      ipa: ɹ̩
+      how: 'Not "ee": hold the tongue where it was for z, c or s and let the voice buzz through it, a voiced "zzz".'
+      example: sì
+    - letters: r (erhua)
+      ipa: ˞
+      how: 'An r curled onto the end of the syllable, as in 哪儿 nǎr (where). It can swallow an n or i before it.'
+      example: nǎr
+  tones:
+    - mark: ā
+      number: 1
+      ipa: ˥
+      how: High and level.
+    - mark: á
+      number: 2
+      ipa: ˧˥
+      how: Rising, as in a surprised "what?".
+    - mark: ǎ
+      number: 3
+      ipa: ˨˩˦
+      how: Low, dipping, then rising; in running speech often just low.
+    - mark: à
+      number: 4
+      ipa: ˥˩
+      how: Falling sharply from high to low, as in a firm "No!".
+    - mark: a
+      number: 5
+      ipa: ''
+      how: 'Neutral: short and light, its pitch set by the tone before it. IPA writes no tone letter.'
