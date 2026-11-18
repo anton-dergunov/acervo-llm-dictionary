@@ -31,6 +31,7 @@ what it said.
 - [`quality/clip-selection.md`](quality/clip-selection.md) — tuning the clip-selection prompt, then curating its picks.
 - [`quality/translation-completeness-check.md`](quality/translation-completeness-check.md) — catching a translation that stopped early.
 - [`quality/grounding-spike.md`](quality/grounding-spike.md) — whether a dictionary reference makes a better article.
+- [`quality/dictionary-checks-languages.md`](quality/dictionary-checks-languages.md) — measuring the dictionary checks in Russian, German, French, Italian, Portuguese, Japanese and Cantonese.
 
 **For other people**
 

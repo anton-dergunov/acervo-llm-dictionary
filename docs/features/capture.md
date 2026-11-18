@@ -99,7 +99,9 @@ asked. Each rule has one of five dispositions:
   so a disagreement raises `Demoted` rather than refusing: the next pair is asked, and if every pair is
   passed over and at least one was only demoted, the first of those in chain order is kept and the
   capture goes ahead. Its sentence names the dictionary ("kaikki-es-en reads el asco as /ˈasko/; the
-  model wrote /ˈaska/"). With no dictionary installed, nothing is compared.
+  model wrote /ˈaska/"). With no dictionary installed, nothing is compared. The other languages a
+  check fires on are not measured yet
+  ([`../plans/quality/dictionary-checks-languages.md`](../plans/quality/dictionary-checks-languages.md)).
 - **"Check what models write"**, in Settings ▸ Providers beside the Text order, turns compose's checks
   off for one owner (`model_selection.check_answers`, on by default). Models improve fast, and a check
   that helps today may only cost a call tomorrow, or misfire for one language or one broken dictionary.
