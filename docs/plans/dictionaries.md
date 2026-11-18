@@ -35,7 +35,7 @@ measurement over the Spanish data, as a starting point:
 | `etymology_text` | ~10 MB, 1% | Real prose, not templates. It is also an inconsistency worth fixing: `wty-es-en` shows an Etymology fold on the same words where `kaikki-es-en` shows nothing, because the Yomitan build baked it into HTML and our mapper drops it. Cheap. |
 | `synonyms` / `antonyms` | ~3.5 MB | Cheap, useful beside a definition, and a source for word discovery ([`word-discovery.md`](word-discovery.md)). |
 | `forms` | 235 MB | Not reading material — Acervo's articles show no conjugation tables. Its value is search: indexed as aliases, *piqué* would find *picar*. That is an index cost, not a payload cost: `wikdict-de-en` has 1.4 M keys for 77 k entries, a 15.1 MiB index over 5.0 MiB of payloads. Decide deliberately. |
-| `head_templates` | — | Carries grammatical gender where wiktextract's tags do not (Russian in the English edition). Read for gender by [`quality/dictionary-checks.md`](quality/dictionary-checks.md); the templates themselves stay dropped. |
+| `head_templates` | — | Carries grammatical gender where wiktextract's tags do not (Russian in the English edition). Read for gender by the converter, which compose checks a model's gender against ([`../features/capture.md`](../features/capture.md), "Compose's checks"); the templates themselves stay dropped. |
 
 For each field: whether to keep it, where the reader shows it, and whether the artifact format has to
 change for it — which means changing `container.py` and `dictionary.ts` together and rebuilding the
@@ -45,7 +45,7 @@ affected dictionaries. Then the same question for the other converter families.
 
 Today a server holds only the dictionaries its owner compiled and installed, so a language with none
 gets no readings, transcriptions or genders to check a model's answer against
-([`quality/dictionary-checks.md`](quality/dictionary-checks.md)), and no reference to read beside an
+([`../features/capture.md`](../features/capture.md), "Compose's checks"), and no reference to read beside an
 article. Once task 1 has picked the sources, ship a compiled dictionary for each of the popular
 languages people learn, installed with the app, so these work in a new vocabulary from the start.
 How they travel (in the release, or fetched on first use of a language) is part of the task.

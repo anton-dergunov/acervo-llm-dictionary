@@ -66,7 +66,7 @@ Compose's answer is judged **inside the chain**, in the callback that asks each 
 (`services/capture/vet.py`, through `llm_json`'s `check`). A model whose answer fails a check is passed
 over and the next pair in the owner's order answers. If the check ran after the walk instead, one weak
 answer from the head of the chain would refuse the capture while a stronger model behind it was never
-asked. Each rule has one of four dispositions:
+asked. Each rule has one of five dispositions:
 
 | Check | Disposition |
 | --- | --- |
@@ -77,6 +77,9 @@ asked. Each rule has one of four dispositions:
 | An emoji is one grapheme cluster | coerce to the first cluster |
 | `domain` is one or two lower-case words, distinct between the senses of one word | lower-case; drop the field if longer or repeated |
 | The word's `emotion` is 3–12 words, has no emoji, and does not repeat one of its examples' emotions | drop the field |
+| A Mandarin `reading` against an installed dictionary's, Pinyin on both sides | demote softly on `neutral-only`, `tone-mismatch`, `mismatch`; pass `match` and `sandhi-only` |
+| `ipa` against a dictionary entry of the same form, any of its variants (not Mandarin, whose IPA is derived from the reading) | demote softly when the phone error rate is over 0.2 |
+| A noun's `gender` against the dictionary's genders | demote softly on a mismatch; no gender from the model passes |
 
 - **The refusals are the draft's own.** The three conditions live once, in `draft.refusal_of`, and are
   read by both the check and `draft_from`, so the check can never accept what the draft would refuse.
@@ -87,12 +90,30 @@ asked. Each rule has one of four dispositions:
   (`experiments/compose-lesson-line/`). A language's scripts come from its likeliest script in CLDR, so
   no language is listed by hand. Two languages written in one script are never told apart, so the check
   cannot fire for Spanish glossed into English.
+- **A dictionary is asked, softly.** Compose reads every installed `fields` dictionary of the word's
+  language once before the walk (`services/dictionaries/lookup.articles_for`), under the headword, the
+  headword without its first word (`el asco`, `se va`) and the lemma. The comparisons are
+  `services/capture/dictionary_check.py`, and the classes that demote were chosen on their measured
+  false alarms on stored words (`experiments/dictionary-checks/`): about 1.7% for readings, 0% (Spanish)
+  and 1.5% (English) for transcriptions, 0% for genders. A dictionary can be wrong about a right answer,
+  so a disagreement raises `Demoted` rather than refusing: the next pair is asked, and if every pair is
+  passed over and at least one was only demoted, the first of those in chain order is kept and the
+  capture goes ahead. Its sentence names the dictionary ("kaikki-es-en reads el asco as /ˈasko/; the
+  model wrote /ˈaska/"). With no dictionary installed, nothing is compared.
+- **"Check what models write"**, in Settings ▸ Providers beside the Text order, turns compose's checks
+  off for one owner (`model_selection.check_answers`, on by default). Models improve fast, and a check
+  that helps today may only cost a call tomorrow, or misfire for one language or one broken dictionary.
+  Off, only the refusals stay, because no draft can be built without them; the script checks, the
+  coercions and drops, and the dictionary checks are skipped, and no dictionary is read. Deriving a
+  Mandarin `ipa` from the reading is not a check and stays.
 - **The checks judge a model's answer, not a record.** That is why they are not in
   `domain/validation.py` or `web/src/domain.ts`, and why a hand-typed article is never refused by them.
 - **Observable both ways.** A demotion is the pair's `unusable` line in the call log, with its sentence
   ("the glosses are in Latin script, and the vocabulary glosses into Russian first"), so it shows in
   `admin log --failed`. A correction is counted on a `compose outcome pair=… fixed=… dropped=…` line,
-  and `admin calls` totals the corrections per model. Neither reaches the owner's message.
+  an answer kept in doubt on `compose outcome kept=dictionary pair=… detail=…`, and an answer nobody
+  checked on `compose outcome pair=… checks=off`. `admin calls` totals all of them per model. None of
+  it reaches the owner's message.
 
 ### Grounding on a reference
 

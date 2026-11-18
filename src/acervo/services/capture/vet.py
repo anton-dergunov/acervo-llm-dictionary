@@ -3,7 +3,7 @@
 Run from `llm_json`'s `ask` callback, so a model whose answer fails is passed over and the next pair
 in the owner's order answers — rather than the refusal being raised after the walk, where one weak
 answer from the head of the chain refused the capture while a stronger model behind it was never
-asked. Each rule has one of four dispositions (`docs/features/capture.md`, "Compose's checks"):
+asked. Each rule has one of five dispositions (`docs/features/capture.md`, "Compose's checks"):
 
 - **refuse and demote** where no draft could be built: not an object, no senses, a Chinese entry
   with no reading — the very conditions `draft.refusal_of` holds, read from there so the two cannot
@@ -13,7 +13,14 @@ asked. Each rule has one of four dispositions (`docs/features/capture.md`, "Comp
 - **coerce** where a fallback exists: `primaryGloss` to its first term, an emoji to its first
   grapheme cluster, a domain to lower case;
 - **drop the field, keep the record** where the field is decoration: a domain too long or repeated
-  between the senses, a word-level `emotion` out of shape.
+  between the senses, a word-level `emotion` out of shape;
+- **demote softly** where an installed dictionary disagrees: a Mandarin reading, a transcription or a
+  noun's gender (`dictionary_check.py`, measured in `experiments/dictionary-checks/`). A dictionary
+  can be wrong about a right answer, so this raises `Demoted`: the next pair is asked, and if none
+  does better the first demoted answer is kept rather than the capture refused.
+
+All of it but the refusal is the owner's to switch off ("Check what models write"): with checks off,
+only what no draft could be built from is refused.
 
 These judge a *model's answer*, not a record, which is why they live here and not in
 `domain/validation.py`: a hand-typed article is never refused by them, and nothing in
@@ -31,9 +38,15 @@ from typing import Any, Callable
 
 import regex
 
-from acervo.services.capture.coerce import language_or_none, trimmed
+from acervo.domain.validation import GENDER_VALUES
+from acervo.pinyin import is_mandarin
+from acervo.services.capture.coerce import language_or_none, pick_optional_choice, trimmed
+from acervo.services.capture.dictionary_check import (
+    attested, gender_verdict, ipa_verdict, reading_verdict, transcription_to_judge, variants,
+)
 from acervo.services.capture.draft import refusal_of, usable_senses
-from acervo.services.models import Unusable
+from acervo.services.dictionaries.lookup import Found
+from acervo.services.models import Demoted, Unusable
 
 # A script check is only worth its verdict over enough letters to have a majority: "3D", "TV" or a
 # lone CJK character say nothing about what language a field is in.
@@ -50,6 +63,12 @@ COMPOSITE_SCRIPTS = {
 
 DOMAIN_WORDS = 2
 EMOTION_WORDS = (3, 12)
+
+# Which classes demote, chosen by the owner on the measured false-alarm rates on stored words
+# (`docs/features/capture.md`, "Compose's checks"). Everything else passes.
+DEMOTING_READINGS = {"neutral-only", "tone-mismatch", "mismatch"}
+DEMOTING_TRANSCRIPTIONS = {"mismatch"}
+DEMOTING_GENDERS = {"mismatch"}
 
 _TERM_BREAK = regex.compile(r"[;,/]")
 _GRAPHEME = regex.compile(r"\X")
@@ -148,20 +167,77 @@ def _without(text: str, quoted: list[str]) -> str:
     return text
 
 
-def vet(vocabulary: dict[str, Any], resolution: dict[str, Any]) -> Callable[[Any], Vetted]:
+def _holding(found: list[Found], value: str | None, which: int) -> str:
+    """The first dictionary whose articles give `value` — a reading (`which` 0) or a transcription
+    (1), one of whose variants it may be — so a sentence names the dictionary that disagreed."""
+    for item in found:
+        for held in attested(item.articles)[which]:
+            if held == value or (which == 1 and value in variants(held)):
+                return item.dictionary_id
+    return found[0].dictionary_id if found else "the dictionary"
+
+
+def disagreement(answer: dict[str, Any], resolution: dict[str, Any], found: list[Found]) -> str | None:
+    """The sentence for the first installed dictionary that disagrees with the answer, or `None`.
+
+    A reading is compared only for Mandarin, the language whose readings are Pinyin; its `ipa` is
+    derived from the reading (`draft.py`), so it is not compared. A transcription is compared only
+    against an entry of the same form (`transcription_to_judge`).
+    """
+    if not found:
+        return None
+    headword = trimmed(resolution.get("headword"))
+    language = str(resolution.get("language") or "")
+    readings, _, genders = ([value for item in found for value in attested(item.articles)[index]]
+                            for index in range(3))
+
+    reading = trimmed(answer.get("reading"))
+    if is_mandarin(language) and reading:
+        verdict = reading_verdict(reading, readings)
+        if verdict.kind in DEMOTING_READINGS:
+            return (f"{_holding(found, verdict.nearest, 0)} reads {headword} as {verdict.nearest}; "
+                    f"the model wrote {reading}")
+
+    ipa = trimmed(answer.get("ipa"))
+    if not is_mandarin(language) and ipa:
+        judged = transcription_to_judge(headword, ipa, found)
+        if judged is not None:
+            part, ipas = judged
+            verdict = ipa_verdict(part, ipas)
+            if verdict.kind in DEMOTING_TRANSCRIPTIONS:
+                return (f"{_holding(found, verdict.nearest, 1)} reads {headword} as {verdict.nearest}; "
+                        f"the model wrote {part}")
+
+    gender = pick_optional_choice(answer.get("gender"), GENDER_VALUES)
+    verdict = gender_verdict(gender, genders)
+    if verdict.kind in DEMOTING_GENDERS:
+        holder = next((item.dictionary_id for item in found if attested(item.articles)[2]), "")
+        return f"{holder} has {headword} as {verdict.nearest}; the model wrote {gender}"
+    return None
+
+
+def vet(vocabulary: dict[str, Any], resolution: dict[str, Any], found: list[Found] | None = None,
+        checking: bool = True) -> Callable[[Any], Vetted]:
     """The check compose passes to `llm_json`, for one word in one vocabulary.
+
+    `found` is what the installed dictionaries hold for the word (`lookup.articles_for`), fetched once
+    by the caller so this stays pure. `checking` is the owner's "Check what models write": off, only
+    an answer no draft could be built from is refused, and nothing is corrected.
 
     Pure, and called once per pair on that pair's own reply: raced pairs each check their own.
     """
     gloss_langs = vocabulary.get("glossLangs") or []
     gloss_lang = gloss_langs[0] if gloss_langs else None
     notes_lang = vocabulary.get("notesLang") or gloss_lang
+    entries = found or []
 
     def check(parsed: Any) -> Vetted:
         refused = refusal_of(parsed, resolution)
         if refused is not None:
             raise Unusable(refused.message, refusal=refused)
         answer: dict[str, Any] = copy.deepcopy(parsed)
+        if not checking:
+            return Vetted(answer)
         fixed: list[str] = []
         dropped: list[str] = []
         senses = usable_senses(answer)
@@ -226,6 +302,11 @@ def vet(vocabulary: dict[str, Any], resolution: dict[str, Any]) -> Callable[[Any
                     or _fold(emotion) in spoken:
                 answer["emotion"] = None
                 dropped.append("emotion")
+
+        # ── demote softly: an installed dictionary disagrees ────────────────
+        doubted = disagreement(answer, resolution, entries)
+        if doubted:
+            raise Demoted(doubted, Vetted(answer, fixed, dropped), by="dictionary")
 
         return Vetted(answer, fixed, dropped)
 

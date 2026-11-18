@@ -26,6 +26,7 @@ deployment keeps its files, so this module is where the handler is attached.
 from __future__ import annotations
 
 import logging
+import threading
 from dataclasses import replace
 from typing import Any, Callable, Mapping
 
@@ -224,6 +225,24 @@ class Unusable(ValueError):
         self.refusal = refusal
 
 
+class Demoted(Unusable):
+    """A caller's check doubting one model's answer, not refusing it: the pair is passed over, and
+    the answer is kept aside in case no pair does better.
+
+    For a judgement that can be wrong about a right answer — a dictionary disagreeing with a model
+    (`services/capture/vet.py`) is right far more often than not, but not always. So a disagreement
+    asks the next pair, and if every pair is passed over and at least one was only demoted, the first
+    of those in chain order is what `llm_json` returns, rather than a capture refused over a doubt.
+    `checked` is what the check would have returned had it passed; `by` names the check, for the
+    `kept=` field of the outcome line.
+    """
+
+    def __init__(self, sentence: str, checked: Any, by: str) -> None:
+        super().__init__(sentence)
+        self.checked = checked
+        self.by = by
+
+
 def llm_json(settings: Settings, owner: str | None, system: str, user: str,
              caller: str = "text", hedge_after: float | None = None,
              params: Mapping[str, Any] | None = None, kind: str = "text",
@@ -259,8 +278,15 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
     pair on that pair's own reply (raced pairs each check their own, so it must be pure), raises
     `ValueError` — `Unusable` to carry a refusal for the owner — to pass the pair over, and returns
     what `llm_json` returns in place of the parsed reply: a check may hand back a corrected answer
-    and a note of what it corrected.
+    and a note of what it corrected. A check that raises `Demoted` passes the pair over too, but its
+    answer is kept: when every pair is passed over, the first demoted one in chain order is returned
+    and the outcome line says `kept=`.
     """
+    # (pair, the result as checked, the sentence, the check's name) for every demoted answer. Raced
+    # pairs call `ask` from worker threads, hence the lock.
+    demoted: list[tuple[tuple[str, str], TextResult, str, str]] = []
+    holding = threading.Lock()
+
     def ask(candidate: chain.Candidate) -> TextResult:
         result = provider.text(
             user, row=candidate.row, model=candidate.model, system=system, as_json=True,
@@ -283,6 +309,13 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
             return result
         try:
             checked = check(result.parsed)
+        except Demoted as doubted:
+            with holding:
+                demoted.append((candidate.named, replace(result, parsed=doubted.checked), str(doubted),
+                                doubted.by))
+            raise ProviderUnavailable(
+                "unusable", str(doubted), provider_id=candidate.row.id, model=candidate.model,
+            ) from doubted
         except ValueError as unusable:
             # `from unusable`, not `from None`: the cause is how the walk's last failure still knows,
             # after the walk, which refusal the owner should read.
@@ -297,6 +330,8 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
             chain.stamped, caller=caller, hedge_after=hedge_after,
         )
     except ChainExhausted as exhausted:
+        if demoted:
+            return _kept(caller, exhausted, demoted)
         cause = exhausted.last.__cause__
         if isinstance(cause, Unusable) and cause.refusal is not None:
             # The last pair failed the caller's own check, so the owner reads the caller's sentence;
@@ -310,6 +345,23 @@ def llm_json(settings: Settings, owner: str | None, system: str, user: str,
         raise refusal(error, kind) from None
 
     assert result.parsed is not None  # `ask` refuses anything else, so the chain cannot return one
+    return result.parsed, result.answer
+
+
+def _kept(caller: str, exhausted: ChainExhausted,
+          demoted: list[tuple[tuple[str, str], TextResult, str, str]]) -> tuple[Any, Answer]:
+    """The first demoted answer in chain order, stamped as the answer, with its outcome line.
+
+    Chain order rather than the order the answers arrived in, so a raced walk keeps what a sequential
+    one would have. Every other pair stays in `passed_over`, so the entry's provenance still says a
+    fall-through happened.
+    """
+    order = {pair: index for index, pair in enumerate(exhausted.attempts)}
+    pair, result, sentence, by = min(demoted, key=lambda item: order.get(item[0], len(order)))
+    others = tuple(item for item in exhausted.passed_over if (item[0], item[1]) != pair)
+    result = chain.stamped(result, exhausted.attempts, others)
+    journal.outcome(caller, kept=by, pair=f"{pair[0]}:{pair[1]}", detail=sentence)
+    assert result.parsed is not None
     return result.parsed, result.answer
 
 
@@ -484,12 +536,13 @@ def _chain_view(settings: Settings, owner: str, kind: str, catalogue: Providers)
 
 def catalogue_view(settings: Settings, owner: str) -> dict[str, Any]:
     """Everything Settings ▸ Providers renders: the families a provider can be added from, the
-    providers, and this owner's chains."""
+    providers, this owner's chains, and whether compose checks what they write."""
     catalogue = load(settings)
     return {
         "families": stored_providers.families_view(),
         "providers": [stored_providers.provider_view(row) for row in catalogue],
         "chains": {kind: _chain_view(settings, owner, kind, catalogue) for kind in KINDS},
+        "checkAnswers": model_selection.check_answers(owner),
     }
 
 
@@ -532,25 +585,31 @@ def _submitted(kind: str, value: Any, catalogue: Providers) -> list[tuple[str, s
 
 
 def apply_selection(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, Any]:
-    """Store the chains this request names, then answer with what `GET /models` would say.
+    """Store the chains this request names, and the checks when it names them, then answer with what
+    `GET /models` would say.
 
-    Every kind is validated before anything is written, so a bad second kind cannot leave the first
+    Everything is validated before anything is written, so a bad second kind cannot leave the first
     one stored. Answering with the full view means the interface renders the server's answer instead
     of its own optimism.
     """
     submitted = body.get("chains")
-    if not isinstance(submitted, dict) or not submitted:
+    checking = body.get("checkAnswers")
+    if submitted is None and checking is None:
+        raise ApiError(400, "invalid_input", "Say which chains to change, or whether to check answers.")
+    if submitted is not None and (not isinstance(submitted, dict) or not submitted):
         raise ApiError(400, "invalid_input", "Say which chains to change.")
+    if checking is not None and not isinstance(checking, bool):
+        raise ApiError(400, "invalid_input", "Checking answers is either on or off.")
 
     catalogue = load(settings)
     changes: dict[str, list[tuple[str, str]] | None] = {}
-    for kind, value in submitted.items():
+    for kind, value in (submitted or {}).items():
         if kind not in KINDS:
             raise ApiError(400, "unsupported_kind", f"There is no {kind} chain.")
         # `null` forgets a kind and returns it to the providers' own order.
         changes[kind] = None if value is None else _submitted(kind, value, catalogue)
 
-    model_selection.save(owner, changes)
+    model_selection.save(owner, changes, check_answers=checking)
     return catalogue_view(settings, owner)
 
 

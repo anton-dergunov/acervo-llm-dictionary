@@ -219,6 +219,52 @@ def test_a_pair_whose_key_was_refused_is_kept_and_skipped_when_the_chain_is_walk
     assert [call["model"] for call in server.model.calls][:1] == [f"gemini/{GEMINI}"]
 
 
+# ── "Check what models write" ───────────────────────────────────────────────
+
+
+def check_answers(server, value):
+    return server.client.put(
+        "/api/acervo/v1/models/selection", headers=server.auth, json={"checkAnswers": value}
+    )
+
+
+def test_checks_are_on_for_an_owner_who_never_chose(server):
+    assert models(server)["checkAnswers"] is True
+
+
+def test_switching_checks_off_alone_is_stored_and_leaves_every_chain_to_the_default(server):
+    answer = check_answers(server, False)
+    assert answer.status_code == 200, answer.text
+    assert answer.json()["data"]["checkAnswers"] is False
+    readout = models(server)
+    assert readout["checkAnswers"] is False
+    assert readout["chains"]["text"]["source"] == "default"
+
+
+def test_forgetting_every_chain_keeps_checks_off(server):
+    """A row holding only "off" is a choice: forgetting the last chain must not delete it."""
+    choose(server, {"text": [pair("gemini-api", GEMINI_SECOND)]})
+    check_answers(server, False)
+    choose(server, {"text": None})
+    assert models(server)["checkAnswers"] is False
+    check_answers(server, True)
+    assert models(server)["checkAnswers"] is True
+
+
+def test_saving_a_chain_leaves_the_checks_as_they_were(server):
+    check_answers(server, False)
+    choose(server, {"text": [pair("gemini-api", GEMINI_SECOND)]})
+    assert models(server)["checkAnswers"] is False
+
+
+@pytest.mark.parametrize("body", [{}, {"checkAnswers": "no"}, {"checkAnswers": 0}])
+def test_a_selection_naming_nothing_or_a_non_boolean_is_refused(server, body):
+    answer = server.client.put("/api/acervo/v1/models/selection", headers=server.auth, json=body)
+    assert answer.status_code == 400
+    assert answer.json()["error"]["code"] == "invalid_input"
+    assert models(server)["checkAnswers"] is True
+
+
 # ── refusals ────────────────────────────────────────────────────────────────
 
 

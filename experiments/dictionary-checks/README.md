@@ -3,12 +3,12 @@
 Compose writes a word's `reading`, `ipa` and `gender` from memory, and the register in
 [`article-quality.md`](../../docs/plans/quality/article-quality.md) holds two cases where that went
 wrong: `el asco` as `/ˈaska/` (6 of 6 calls on the head model) and `麻烦` as `máfán`. Installed
-dictionaries attest all three fields, and [`dictionary-checks.md`](../../docs/plans/quality/dictionary-checks.md)
-plans to demote a model whose answer disagrees. But a dictionary can disagree with a right answer
+dictionaries attest all three fields, and compose now demotes a model whose answer disagrees
+([`capture.md`](../../docs/features/capture.md), "Compose's checks"). But a dictionary can disagree with a right answer
 too: 东西 is both `dōngxi` and `dōngxī`, and Wiktionary lists one transcription per variety without
 saying which. This measurement counts how often, and in which way, before any check is switched on.
 
-**Status:** measured 17 Nov 2026. The dispositions are the owner's to choose (below).
+**Status:** measured 17 Nov 2026. The owner chose the first reading row, the first ipa row and the gender row below (18 Nov 2026); they are built.
 
 ## Method
 

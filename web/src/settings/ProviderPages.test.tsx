@@ -49,7 +49,8 @@ function catalogue(providers: ModelProvider[] = [GEMINI, GOOGLE]): ModelCatalogu
   return {
     families: FAMILIES, providers,
     chains: Object.fromEntries(["text", "quick", "image", "audioPlain", "audioExpressive", "ocr"]
-      .map((kind) => [kind, { source: "default" as const, reason: null, pairs: [] }]))
+      .map((kind) => [kind, { source: "default" as const, reason: null, pairs: [] }])),
+    checkAnswers: true
   };
 }
 

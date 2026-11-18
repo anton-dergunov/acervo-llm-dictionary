@@ -8,7 +8,8 @@ from __future__ import annotations
 import pytest
 
 from acervo.services.capture.vet import vet
-from acervo.services.models import Unusable
+from acervo.services.dictionaries.lookup import Found
+from acervo.services.models import Demoted, Unusable
 
 SPANISH = {"language": "es", "headword": "el garfio", "lemma": "garfio"}
 CHINESE = {"language": "zh-Hans", "headword": "钩子", "lemma": "钩子"}
@@ -184,3 +185,102 @@ def test_a_word_emotion_out_of_shape_is_dropped(emotion):
 def test_a_word_with_no_emotion_is_left_alone():
     vetted = checked(article(emotion=None))
     assert vetted.answer["emotion"] is None and vetted.dropped == []
+
+
+# ── demote softly: an installed dictionary disagrees ────────────────────────
+
+MANDARIN = {"language": "zh-Hans", "headword": "麻烦", "lemma": "麻烦"}
+ASCO = {"language": "es", "headword": "el asco", "lemma": "asco"}
+TO_ENGLISH_ZH = {**TO_ENGLISH, "language": "zh-Hans"}
+
+
+def found(dictionary_id="kaikki-es-en", key="asco", **article):
+    return [Found(dictionary_id, key, [article])]
+
+
+def judged(answer, entries, resolution=ASCO, vocabulary=TO_ENGLISH, checking=True):
+    return vet(vocabulary, resolution, entries, checking)(answer)
+
+
+def chinese_article(reading, **overrides):
+    return article(**{"headword": "麻烦", "reading": reading, "ipa": "/ma˧˥ fan/", **overrides})
+
+
+def test_a_mandarin_reading_off_by_a_tone_is_demoted_naming_the_dictionary():
+    with pytest.raises(Demoted) as doubted:
+        judged(chinese_article("máfán"), found("cc-cedict", "麻烦", reading="ma2 fan5"),
+               MANDARIN, TO_ENGLISH_ZH)
+    assert str(doubted.value) == "cc-cedict reads 麻烦 as ma2 fan5; the model wrote máfán"
+    # What the check would have returned is carried, so it can be kept if no model does better.
+    assert doubted.value.checked.answer["reading"] == "máfán"
+
+
+def test_a_mandarin_reading_differing_only_by_sandhi_passes():
+    vetted = judged(chinese_article("yíyàng"), found("cc-cedict", "一样", reading="yi1 yang4"),
+                    {**MANDARIN, "headword": "一样", "lemma": "一样"}, TO_ENGLISH_ZH)
+    assert vetted.answer["reading"] == "yíyàng"
+
+
+def test_a_mandarin_ipa_is_never_compared_because_it_is_derived():
+    vetted = judged(chinese_article("máfan", ipa="/xxxxx/"),
+                    found("cc-cedict", "麻烦", reading="ma2 fan5", ipas=["/ma˧˥ fan/"]),
+                    MANDARIN, TO_ENGLISH_ZH)
+    assert vetted.answer["ipa"] == "/xxxxx/"
+
+
+def test_a_transcription_far_from_every_variant_is_demoted():
+    with pytest.raises(Demoted) as doubted:
+        judged(article(headword="el asco", ipa="/ˈaska/"), found(ipas=["/ˈasko/"]))
+    assert str(doubted.value) == "kaikki-es-en reads el asco as /ˈasko/; the model wrote /ˈaska/"
+
+
+def test_a_transcription_matching_any_variant_passes():
+    vetted = judged(article(headword="el asco", ipa="/ˈasko/"), found(ipas=["/ˈas.ko/", "[ˈah.ko]"]))
+    assert vetted.answer["ipa"] == "/ˈasko/"
+
+
+def test_a_transcription_of_another_form_is_not_compared():
+    """Found under the lemma only (`asustar` for `asustado`): another word's sound."""
+    vetted = judged(article(headword="asustado", ipa="/asusˈtado/"), found(key="asustar", ipas=["/asusˈtaɾ/"]),
+                    {"language": "es", "headword": "asustado", "lemma": "asustar"})
+    assert vetted.answer["ipa"] == "/asusˈtado/"
+
+
+def test_a_gender_the_dictionary_does_not_give_is_demoted():
+    with pytest.raises(Demoted) as doubted:
+        judged(article(gender="feminine"), found(genders=["masculine"]))
+    assert str(doubted.value) == "kaikki-es-en has el asco as masculine; the model wrote feminine"
+
+
+@pytest.mark.parametrize("gender", ["masculine", None])
+def test_a_matching_or_absent_gender_passes(gender):
+    assert judged(article(gender=gender), found(genders=["masculine"])).answer["gender"] == gender
+
+
+def test_with_no_dictionary_installed_nothing_is_compared():
+    vetted = judged(article(gender="feminine", ipa="/ˈaska/"), [])
+    assert vetted.answer["gender"] == "feminine"
+
+
+def test_a_demoted_answer_carries_what_the_check_corrected():
+    with pytest.raises(Demoted) as doubted:
+        judged(article(gender="feminine", primaryGloss="hook; gaff"), found(genders=["masculine"]))
+    assert doubted.value.checked.answer["primaryGloss"] == "hook"
+    assert doubted.value.checked.fixed == ["primaryGloss"]
+
+
+# ── checks off ──────────────────────────────────────────────────────────────
+
+
+def test_with_checks_off_a_wrong_script_answer_passes_uncorrected():
+    answer = russian(primaryGloss="hook; gaff", shortGloss="hook",
+                     sense={"glosses": [{"lang": "ru", "terms": ["hook"]}]})
+    vetted = judged(answer, found(genders=["feminine"]), SPANISH, TO_RUSSIAN, checking=False)
+    assert vetted.answer == answer
+    assert vetted.fixed == [] and vetted.dropped == []
+
+
+def test_with_checks_off_an_answer_no_draft_could_be_built_from_is_still_refused():
+    with pytest.raises(Unusable) as refused:
+        judged({"headword": "el garfio", "senses": []}, [], SPANISH, checking=False)
+    assert "no meanings" in refused.value.refusal.message

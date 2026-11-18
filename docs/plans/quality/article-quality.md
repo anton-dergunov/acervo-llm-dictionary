@@ -168,9 +168,9 @@ model still produces the field.
 
 Compose now judges its answer the same way, through `llm_json`'s `check`
 ([`../../features/capture.md`](../../features/capture.md), "Compose's checks"): glosses or notes in
-the wrong script demote the pair, and its refusals no longer end the chain. Checking `reading`, `ipa`
-and `gender` against installed dictionaries is the next use of that hook
-([`dictionary-checks.md`](dictionary-checks.md)).
+the wrong script demote the pair, and its refusals no longer end the chain. A `reading`, `ipa` or
+`gender` an installed dictionary disagrees with demotes it softly: the next pair is asked, and the first
+answer is kept if none agrees.
 
 ### The rule-decidable check still to write
 
@@ -217,7 +217,9 @@ def _ipa_of(record: dict) -> str | None:
 
 So `kaikki-es-en` and `kaikki-es-es` carry Spanish IPA, `kaikki-ru-*` Russian, `kaikki-en-*` English.
 This is the register's "only option that actually closes it", and it is **free, offline, and already
-built** — the compiled dictionary is a local file answering byte ranges.
+built** — the compiled dictionary is a local file answering byte ranges. **Built:** the converter now
+keeps every transcription (`ipas`), and compose demotes a model whose `ipa` is far from all of an
+entry's of the same form ([`../../features/capture.md`](../../features/capture.md), "Compose's checks").
 
 ### `reading` has a better source than a model
 
@@ -225,14 +227,14 @@ CC-CEDICT carries numbered pinyin per entry, which is deterministic where a mode
 `web/src/pinyin.ts` is a **renderer, not a validator**: it converts `ma2 fan5` to `máfan` for
 display, and cannot detect `máfán`, which is already accented and passes through untouched. Its own
 docstring says it is "deliberately not a transliterator and deliberately not a word segmenter".
+**Built:** compose compares a Mandarin reading with the installed dictionaries' syllable by syllable
+and demotes on a tone or neutral-tone difference that is not sandhi.
 
-### `gender` is available and discarded
+### `gender` was available and discarded
 
-Wiktextract carries gender in `head_templates`, and `head_templates` is in `WIKTEXTRACT_DROP`. So the
-only mechanical source for `lexemes.gender` is one converter change away — and
-`experiments/external-dictionaries/spike.py` already listed `gender` among its draft keys, so this
-was noticed and not done. Adding it costs an `Entry` field, a `DictionaryArticle` field and a
-converter branch.
+Wiktextract carries gender in its tags and in `head_templates`, which is in `WIKTEXTRACT_DROP`.
+**Built:** the converter now keeps a noun's genders (`genders`), and compose demotes a model whose
+gender the dictionary does not give.
 
 ### No phonetics tooling exists
 
@@ -481,7 +483,7 @@ Wide on purpose. Nothing here is scheduled.
 | # | question | instrument | cost | what it teaches, including on a null result |
 | --- | --- | --- | --- | --- |
 | 1 | How often is each model wrong, per field? | §1 ground-truth harness, 30–50 words × 3–4 pairs | ~$2 | The prerequisite for every other row. A null result says quality is not the bottleneck. |
-| 2 | Does a dictionary disagree with the model about `ipa`, and how often? | Compare generated `ipa` against `kaikki-*`, per language | free | Whether §3 closes issue 1, or whether the dictionary is the one that is wrong. |
+| 2 | Does a dictionary disagree with the model about `ipa`, and how often? | Compare generated `ipa` against `kaikki-*`, per language | free | **Done 17 Nov 2026** (`experiments/dictionary-checks/`): against any variant of the same form, Spanish 0.2% mismatch (both real model errors), English 1.5% (mostly notation); genders 383/383; readings differ between two published sources in 1.7% of words. Built as soft demotions. |
 | 3 | Does an in-chain check route to a better model, in practice? | Read `admin calls` on real captures: how often a pair is demoted by the gloss-script check, and whether the next answers correctly | free | Whether quality cascades work at all on real traffic. A null result (the next model is wrong too) is equally informative. |
 | 4 | Can sampling detect a wrong field? | k samples from one model per field, agreement versus truth | ~$1 | Expected to **fail**, given 6-of-6 on `/ˈaska/`. A clean counterexample to SelfCheckGPT's assumption on structured fields. |
 | 5 | Can cross-model voting detect it? | 3 pairs per field, majority versus truth | ~$3 | The counterpart to row 4, and the tension with Self-MoA. |
@@ -545,6 +547,9 @@ omitting** `ipa` for languages whose orthography determines it; validating again
 dictionary (§3); or the in-chain check that demotes the model (§2). The last two are the only ones
 that close it.
 
+**Caught now** by the dictionary check: `kaikki-es-en` reads `asco` as `/ˈasko/`, so `/ˈaska/` is a
+`mismatch` and the pair is demoted.
+
 ### 2 · A pinyin tone error, not reproducibly
 
 `麻烦` is `máfan` — second tone then neutral. `gemini-free` wrote `máfán` once in six calls, two second
@@ -552,6 +557,9 @@ tones. Cloudflare and Vertex were correct every time, and so was gemini in its o
 
 Low frequency, but `reading` is **required** for Chinese and is the field a learner leans on hardest,
 since the characters give them nothing. CC-CEDICT closes it mechanically (§3).
+
+**Caught now** by the dictionary check: `cc-cedict` reads 麻烦 as `ma2 fan5`, so `máfán` is a
+`neutral-only` difference and the pair is demoted.
 
 ### What is already good, so it is not re-litigated
 

@@ -1,4 +1,5 @@
-"""The owner's model chains. One row per owner, or none — and none is a real answer.
+"""The owner's model chains, and whether compose checks what they write. One row per owner, or none —
+and none is a real answer: the deployment default for every chain, and checks on.
 
 Unlike `sync_state`, absence here is not a gap to be filled: no record means "use the deployment
 default". Nothing creates a row eagerly and there is no `ensure_` function, so every read is a pure
@@ -69,8 +70,21 @@ def chains(owner: str) -> dict[str, Pairs]:
     return _document(row["chains"]) if row is not None else {}
 
 
-def save(owner: str, changes: Mapping[str, Sequence[tuple[str, str]] | None]) -> dict[str, Pairs]:
-    """Change only the kinds named. `None` forgets one, and the row goes when nothing is left.
+def check_answers(owner: str) -> bool:
+    """Whether compose judges this owner's answers. On unless the owner switched it off."""
+    with reading() as connection:
+        row = connection.execute(
+            select(tables.model_selection.c.check_answers)
+            .where(tables.model_selection.c.owner == owner)
+        ).first()
+    return True if row is None else bool(row[0])
+
+
+def save(owner: str, changes: Mapping[str, Sequence[tuple[str, str]] | None],
+         check_answers: bool | None = None) -> dict[str, Pairs]:
+    """Change only the kinds named, and the checks when `check_answers` is given. `None` forgets a
+    kind, and the row goes when no chain is left and checks are on — the two defaults. A row holding
+    only "checks off" is a choice, and stays.
 
     Forgetting matters: without it, once an owner has saved there is no way back to following the
     providers' own order, because unchecking everything is refused as an empty chain. The two states
@@ -98,7 +112,10 @@ def save(owner: str, changes: Mapping[str, Sequence[tuple[str, str]] | None]) ->
             for kind, pairs in document.items()
         }
 
-        if not stored:
+        checking = (row["check_answers"] if row is not None else True) if check_answers is None \
+            else check_answers
+
+        if not stored and checking:
             if row is not None:
                 connection.execute(
                     tables.model_selection.delete().where(
@@ -110,13 +127,14 @@ def save(owner: str, changes: Mapping[str, Sequence[tuple[str, str]] | None]) ->
         if row is None:
             connection.execute(
                 tables.model_selection.insert().values(
-                    id=new_record_id(), owner=owner, chains=stored, edited_at=now_instant()
+                    id=new_record_id(), owner=owner, chains=stored, check_answers=checking,
+                    edited_at=now_instant(),
                 )
             )
         else:
             connection.execute(
                 tables.model_selection.update()
                 .where(tables.model_selection.c.id == row["id"])
-                .values(chains=stored, edited_at=now_instant())
+                .values(chains=stored, check_answers=checking, edited_at=now_instant())
             )
         return document

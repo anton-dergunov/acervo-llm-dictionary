@@ -143,7 +143,11 @@ connection, and an answer the caller declares unusable — and on nothing else.*
   nothing is hidden. `llm_json` takes a caller's `check` for the same purpose. It is called on each
   pair's parsed reply, a `ValueError` it raises passes that pair over with the error's sentence, and
   what it returns is what `llm_json` returns, so a check may hand back a corrected answer. An `Unusable`
-  may carry the refusal the owner reads if the last pair fails it. Compose's checks are the first user
+  may carry the refusal the owner reads if the last pair fails it. A `Demoted` is a doubt, not a
+  refusal: it passes the pair over the same way but carries what the check would have returned, and
+  when every pair is passed over and one was only demoted, `llm_json` returns the first such answer in
+  chain order and writes `outcome kept=… pair=… detail=…`, so a judgement that can be wrong about a
+  right answer never refuses on its own. Compose's checks are the first user
   ([`../features/capture.md`](../features/capture.md), "Compose's checks").
 - **`cooldown.py` remembers a refusal** so an exhausted allowance is not re-probed on every word — as an
   ordering hint only. When every pair is resting the hints are ignored and the chain runs as written,
@@ -170,7 +174,9 @@ replicated, and **no row means "follow the providers' own order"**, a legitimate
 gap, so nothing creates one eagerly. A chain has **three states**: absent follows that order, an
 explicitly empty one means "generate nothing of this kind", and a list is an order. Collapsing the
 first two would make unticking the last model look like switching a kind off while the server
-carried on with its own order.
+carried on with its own order. The same row holds `check_answers`, the owner's "Check what models
+write" ([`../features/capture.md`](../features/capture.md), "Compose's checks"), so a row may hold no
+chain and only that switch turned off; it goes when neither differs from the default.
 
 **A pair whose provider cannot be asked is kept and skipped**, not refused: no key, a missing
 setting, or a key the provider refused when it was last checked. A chain is a preference and a
@@ -304,8 +310,9 @@ Every model call is one `key=value` line in a rotating file beside the database
 (`ACERVO_CALL_LOG_PATH`), naming the pair that answered, how long it took, what it used up — `in=` and
 `out=` tokens, `characters=`, `pictures=`, `photos=`, `cost=` — and what the caller did with the
 answer. A caller whose check corrected the answer says so on its `outcome` line
-(`pair=… fixed=primaryGloss dropped=domain`). `python -m acervo.admin calls` reads the log back per job
-and per model, with a second table of those corrections per model, and it is where every
+(`pair=… fixed=primaryGloss dropped=domain`), as does one that kept an answer in doubt (`kept=`) or did
+not check at all (`checks=off`). `python -m acervo.admin calls` reads the log back per job and per
+model, with a second table of those per model, and it is where every
 timeout here is set from: a bound is read from the log rather than guessed. Each line ends with the id
 of the request or job that made the call, added where the file is opened — the package itself emits
 and knows nothing of it ([`observability.md`](observability.md) §2).

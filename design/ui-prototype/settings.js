@@ -302,7 +302,12 @@ Never use the word "literally" in a gloss.</textarea>
       ["Clear voice", [["Google Cloud", "Chirp 3 HD", "212k of 1M characters this month", true], ["Google Cloud", "WaveNet", "", true]]],
       ["Expressive voice", [["Gemini API", "gemini-3.8-flash-tts", "9 of 10 today", true], ["ElevenLabs", "eleven_v4", "3.1k of 10k characters this month", true]]],
       ["Reading photos", [["Google Cloud", "document-text-detection", "41 of 1,000 this month", true]]]
-    ].map(([kind, rows]) => group(kind, rows.map(([provider, model, used, on, badge = ""]) => pair(provider, model, used, on, badge))))
+    ].flatMap(([kind, rows]) => [
+      group(kind, rows.map(([provider, model, used, on, badge = ""]) => pair(provider, model, used, on, badge))),
+      /* Beside the order that writes entries, since that is what the checks judge. */
+      ...(kind === "Text" ? [group("", [toggle("Check what models write",
+        "Passes a word to the next model when its glosses are in the wrong language, or its reading, IPA or gender disagree with an installed dictionary.", true)])] : [])
+    ])
   ],
 
   activity: () => [

@@ -13,8 +13,11 @@ from typing import Any
 
 from acervo.models import Answer, journal
 from acervo.models.call import HEDGE_SECONDS
+from acervo.repository import model_selection
 from acervo.services.capture.coerce import reference_of, text_list, trimmed
+from acervo.services.capture.dictionary_check import keys_for
 from acervo.services.capture.vet import Vetted, vet
+from acervo.services.dictionaries.lookup import articles_for
 from acervo.services.models import llm_json
 from acervo.services.prompts import prompt_text
 from acervo.services.reader import with_reader
@@ -99,14 +102,21 @@ def compose(
 ) -> tuple[dict[str, Any], Answer]:
     user = build_user_message(resolution, request, vocabulary, topics)
 
-    # Judged inside the walk (`vet.py`): a model whose answer could not become a draft, or is in the
-    # wrong language, is passed over and the next pair in the order answers.
+    # Judged inside the walk (`vet.py`): a model whose answer could not become a draft, is in the
+    # wrong language or disagrees with an installed dictionary is passed over and the next pair in
+    # the order answers. The dictionaries are read once here, not once per pair.
+    checking = model_selection.check_answers(owner)
+    found = articles_for(settings.dictionaries_path, resolution["language"],
+                         keys_for(resolution["headword"], resolution["lemma"])) if checking else []
     vetted, call = llm_json(
         settings, owner, with_reader(prompt_text(settings.prompts_path, "acervo_compose"), owner, vocabulary), user,
-        caller="compose", hedge_after=HEDGE_SECONDS, check=vet(vocabulary, resolution),
+        caller="compose", hedge_after=HEDGE_SECONDS, check=vet(vocabulary, resolution, found, checking),
     )
     assert isinstance(vetted, Vetted)
-    if vetted.fixed or vetted.dropped:
+    if not checking:
+        # So `admin calls` can tell an answer nobody checked from one that passed.
+        journal.outcome("compose", pair=f"{call.provider_id}:{call.model}", checks="off")
+    elif vetted.fixed or vetted.dropped:
         # Counted per model, so `admin calls` can say how often each one needs correcting, and where.
         journal.outcome("compose", pair=f"{call.provider_id}:{call.model}",
                         fixed=",".join(vetted.fixed), dropped=",".join(vetted.dropped))

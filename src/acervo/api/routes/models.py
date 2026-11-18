@@ -28,7 +28,8 @@ router = APIRouter()
 
 @router.get("/models")
 def listing(request: Request) -> JSONResponse:
-    """The providers, the families they can be added from, and this owner's chains.
+    """The providers, the families they can be added from, this owner's chains, and whether compose
+    checks what their models write.
 
     Owner-scoped: `chains` is this account's, and another account's choice is invisible here.
     """
@@ -38,7 +39,7 @@ def listing(request: Request) -> JSONResponse:
 
 @router.put("/models/selection")
 async def selection(request: Request) -> JSONResponse:
-    """Change the chains this request names, and answer with the whole readout.
+    """Change the chains this request names, or the checks, and answer with the whole readout.
 
     Validation, the write and the view are one threadpool call rather than three: the providers'
     keys are read from a file and the records from SQLite, and neither belongs on the event loop.

@@ -147,9 +147,9 @@ senses to concepts, the review.
    draft the §0 rubric of [`../quality/article-quality.md`](../quality/article-quality.md) for the
    owner to approve.
 5. **Check and review.** The deterministic checks
-   ([`../../features/capture.md`](../../features/capture.md), "Compose's checks";
-   [`../../features/articles.md`](../../features/articles.md), "Readings", for Mandarin IPA;
-   [`../quality/dictionary-checks.md`](../quality/dictionary-checks.md)) run over the composed
+   ([`../../features/capture.md`](../../features/capture.md), "Compose's checks", the dictionary
+   checks among them; [`../../features/articles.md`](../../features/articles.md), "Readings", for
+   Mandarin IPA) run over the composed
    words, Claude reviews against the rubric and corrects, and the owner spot-checks about 20 words each
    in Spanish, English and Russian. **Keep all three layers**: the raw model output, Claude's
    corrections as diffs, and the owner's corrections. Together they are the labelled dataset for

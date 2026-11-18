@@ -196,6 +196,8 @@ def summarise(lines: Iterable[str]) -> list[Timing]:
 
 _OUTCOME = re.compile(r"^\S+ \S+ \w+ (?P<caller>\S+) outcome (?P<fields>.*)$")
 _FIELD = re.compile(r"(?P<name>\w+)=(?P<value>\S+)")
+# The outcome fields `fixes` totals: what a check corrected, dropped, kept in doubt, or never judged.
+DISPOSITIONS = ("fixed", "dropped", "kept", "checks")
 
 
 @dataclass(frozen=True)
@@ -203,7 +205,9 @@ class Fixes:
     """What a caller's check corrected in one (caller, pair)'s answers, over every call in the log.
 
     `fields` maps `"fixed primaryGloss"` or `"dropped domain"` to how many times — a sense's field
-    once per sense — so "how often does each model need fixing, and where" is one table.
+    once per sense — so "how often does each model need fixing, and where" is one table. Beside them,
+    `"kept dictionary"` counts answers kept although a check doubted them (every pair was demoted),
+    and `"checks off"` answers nobody checked.
     """
 
     caller: str
@@ -213,11 +217,12 @@ class Fixes:
 
 
 def fixes(lines: Iterable[str]) -> list[Fixes]:
-    """Every (caller, pair) whose outcome lines name a `fixed=` or `dropped=` field, most-fixed first.
+    """Every (caller, pair) whose outcome lines name a `fixed=`, `dropped=`, `kept=` or `checks=`
+    field, most-fixed first.
 
     `answers` is that pair's `ok` count from the same lines, so a count reads against how often the
-    model answered rather than on its own. Generic over callers: any check that writes `pair=`,
-    `fixed=` and `dropped=` on its outcome line is counted here.
+    model answered rather than on its own. Generic over callers: any check that writes `pair=` and
+    those fields on its outcome line is counted here.
     """
     answered: dict[tuple[str, str], int] = {}
     counted: dict[tuple[str, str], dict[str, int]] = {}
@@ -227,10 +232,10 @@ def fixes(lines: Iterable[str]) -> list[Fixes]:
             answered[key] = answered.get(key, 0) + 1
         elif match := _OUTCOME.match(line):
             found = {item["name"]: item["value"] for item in _FIELD.finditer(match["fields"])}
-            if "pair" not in found or not ({"fixed", "dropped"} & found.keys()):
+            if "pair" not in found or not (set(DISPOSITIONS) & found.keys()):
                 continue
             into = counted.setdefault((match["caller"], found["pair"]), {})
-            for disposition in ("fixed", "dropped"):
+            for disposition in DISPOSITIONS:
                 for name in filter(None, found.get(disposition, "").split(",")):
                     label = f"{disposition} {name}"
                     into[label] = into.get(label, 0) + 1

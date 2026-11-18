@@ -801,6 +801,94 @@ def test_a_coerced_field_is_saved_as_coerced(seeded):
     assert draft["emoji"] == "\U0001FA9D"
 
 
+# ── an installed dictionary disagreeing: a soft demotion ─────────────────────
+
+
+@pytest.fixture
+def two_pairs_and_a_dictionary(seeded, cloudflare_too, monkeypatch):
+    """Cloudflare first, Gemini second, and a dictionary that says `garfio` is masculine."""
+    from acervo.services.capture import compose
+    from acervo.services.dictionaries.lookup import Found
+
+    looked_up: list[list[str]] = []
+
+    def articles_for(_directory, language, keys):
+        looked_up.append(keys)
+        return [Found("kaikki-es-en", "garfio", [{"genders": ["masculine"]}])] if language == "es" else []
+
+    monkeypatch.setattr(compose, "articles_for", articles_for)
+    select(seeded, {"text": [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
+    ]})
+    seeded.looked_up = looked_up
+    return seeded
+
+
+def test_an_answer_a_dictionary_disagrees_with_passes_to_the_next_model(two_pairs_and_a_dictionary):
+    server = two_pairs_and_a_dictionary
+    server.model.articles = {WIRE_CLOUDFLARE: {**ARTICLE, "gender": "feminine"}, WIRE_SECOND: ARTICLE}
+    body = server.capture().json()["data"]
+    assert body["passedOver"] == [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL, "reason": "unusable"}
+    ]
+    assert body["draft"]["gender"] == "masculine"
+    # Looked up once for the walk, under the headword, the headword's last words and the lemma.
+    assert server.looked_up == [["el garfio", "garfio"]]
+
+
+def test_when_every_model_is_demoted_the_first_answer_is_kept_and_logged(two_pairs_and_a_dictionary, caplog):
+    """A dictionary can be wrong about a right answer, so a doubt never refuses a capture."""
+    server = two_pairs_and_a_dictionary
+    server.model.article = {**ARTICLE, "gender": "feminine", "primaryGloss": "hook; gaff"}
+    with caplog.at_level(logging.INFO, logger=journal.LOGGER):
+        answered = server.capture()
+    assert answered.status_code == 200, answered.text
+    body = answered.json()["data"]
+    assert body["draft"]["gender"] == "feminine"
+    # The first pair's answer, as checked, and the second pair is what was passed over on the way.
+    assert body["draft"]["primaryGloss"] == "hook"
+    _own, invented = body["draft"]["senses"][0]["examples"]
+    assert invented["modelId"] == CLOUDFLARE_MODEL
+    assert body["passedOver"] == [
+        {"provider": "gemini-api", "model": GEMINI_SECOND, "reason": "unusable"}
+    ]
+    kept = [record.getMessage() for record in caplog.records if "compose outcome kept=" in record.getMessage()]
+    assert kept == [f'compose outcome kept=dictionary pair=cloudflare:{CLOUDFLARE_MODEL} '
+                    f'detail="kaikki-es-en has el garfio as masculine; the model wrote feminine"']
+
+
+def test_a_demoted_answer_is_still_kept_when_the_last_model_could_build_nothing(two_pairs_and_a_dictionary):
+    server = two_pairs_and_a_dictionary
+    server.model.articles = {WIRE_CLOUDFLARE: {**ARTICLE, "gender": "feminine"},
+                             WIRE_SECOND: {"headword": "el garfio", "senses": []}}
+    body = server.capture().json()["data"]
+    assert body["draft"]["gender"] == "feminine"
+
+
+def test_with_checks_off_nothing_is_looked_up_or_judged_and_the_line_says_so(
+        two_pairs_and_a_dictionary, caplog):
+    server = two_pairs_and_a_dictionary
+    server.client.put("/api/acervo/v1/models/selection", headers=server.auth, json={"checkAnswers": False})
+    server.model.article = {**ARTICLE, "gender": "feminine", "primaryGloss": "hook; gaff"}
+    with caplog.at_level(logging.INFO, logger=journal.LOGGER):
+        body = server.capture().json()["data"]
+    assert body["passedOver"] == []
+    assert body["draft"]["gender"] == "feminine"
+    assert body["draft"]["primaryGloss"] == "hook; gaff"
+    assert server.looked_up == []
+    assert any(f"compose outcome pair=cloudflare:{CLOUDFLARE_MODEL} checks=off" in record.getMessage()
+               for record in caplog.records)
+
+
+def test_with_checks_off_an_entry_no_model_could_build_is_still_refused(two_pairs_and_a_dictionary):
+    server = two_pairs_and_a_dictionary
+    server.client.put("/api/acervo/v1/models/selection", headers=server.auth, json={"checkAnswers": False})
+    server.model.article = {"headword": "el garfio", "senses": []}
+    error = server.capture().json()["error"]
+    assert error["code"] == "llm_unusable"
+
+
 # ── the fold-in: what a repeat capture carried that the stored entry may not have ───
 
 

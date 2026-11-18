@@ -9,7 +9,7 @@ import {
   type UsageReadout
 } from "../api";
 import { refresh, SETTINGS, useServerSetting } from "./cache";
-import { Action, Group, Link, Notice, Placeholder, Reorder, Row, StateMark, useSubPage } from "./kit";
+import { Action, Group, Link, Notice, Placeholder, Reorder, Row, StateMark, Toggle, useSubPage } from "./kit";
 import {
   ADD_PROVIDER, gaugeWords, KIND_TITLES, parseSub, ProviderSubPage, providerPage, stateOf, todayWords, USAGE_PAGES,
   usagePage, type Write
@@ -233,6 +233,16 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
     } finally { setWorking(false); }
   }
 
+  /** The checks on what models write: one write, answered by the server's readout like a chain. */
+  async function saveChecks(on: boolean) {
+    setWorking(true);
+    try {
+      set(await backendSession.saveCheckAnswers(on));
+    } catch (error) {
+      onNotify(failure(error, "That choice could not be saved."));
+    } finally { setWorking(false); }
+  }
+
   /** A provider write: the readout it answers replaces the cached one, orders and all. Voice
       choices live on Pronunciation's settings, and losing a model can change them too; an
       allowance is what Usage's gauges measure against. */
@@ -266,9 +276,20 @@ export default function ModelPanel({ onNotify }: { onNotify(message: string): vo
     {catalogue.providers.length > 0 && <Group>
       <Link label="Usage" hint={todayWords(usage?.totals.today)} onOpen={() => open(usagePage())} />
     </Group>}
-    {KINDS.map((entry) => <KindSection
-      key={entry.id} {...entry} kind={entry.id} catalogue={catalogue} usage={usage}
-      onChange={(kind, pairs) => void save(kind, pairs)}
-    />)}
+    {KINDS.map((entry) => [
+      <KindSection
+        key={entry.id} {...entry} kind={entry.id} catalogue={catalogue} usage={usage}
+        onChange={(kind, pairs) => void save(kind, pairs)}
+      />,
+      /* Beside the order that writes entries, since that is what the checks judge. */
+      entry.id === "text" && catalogue.providers.length > 0 && <Group key="checks">
+        <Toggle
+          label="Check what models write"
+          hint="Passes a word to the next model when its glosses are in the wrong language, or its reading, IPA or gender disagree with an installed dictionary."
+          checked={catalogue.checkAnswers} disabled={working}
+          onChange={(on) => void saveChecks(on)}
+        />
+      </Group>
+    ])}
   </div>;
 }

@@ -127,6 +127,9 @@ model_selection = Table(
     # Ordering *is* the content here, which in rows would be a `position` integer renumbered on
     # every save; `vocabularies.gloss_langs` is the same call already made in this schema.
     Column("chains", JSON, nullable=False, default=dict),
+    # Whether compose judges what a model wrote before it becomes a draft (`services/capture/vet.py`,
+    # `docs/features/capture.md`, "Compose's checks"). A preference of the chain, so it lives with it.
+    Column("check_answers", Boolean, nullable=False, default=True),
     Column("edited_at", String(24), nullable=False),
     Index("idx_model_selection_owner", "owner", unique=True),
 )

@@ -388,6 +388,42 @@ def test_a_compose_answer_passed_over_by_its_check_is_what_admin_log_and_calls_s
     assert f"gemini-api:{GEMINI_SECOND}" in shown and "fixed primaryGloss ×1" in shown, shown
 
 
+def test_a_dictionary_demotion_is_what_admin_log_shows_and_admin_calls_counts_what_was_kept(
+        logs, server, capsys, monkeypatch):
+    """Every pair disagrees with the dictionary: each pass keeps its sentence in `admin log --failed`,
+    and the kept answer is counted per model in `admin calls`."""
+    from test_capture import ARTICLE, CLOUDFLARE_MODEL, GEMINI_SECOND, RESOLUTION
+    from provider_rows import CLOUDFLARE
+
+    from acervo.admin import call_timings
+    from acervo.services.capture import compose
+    from acervo.services.dictionaries.lookup import Found
+    from acervo.settings import settings as read_settings
+
+    monkeypatch.setattr(compose, "articles_for", lambda _directory, _language, _keys: [
+        Found("kaikki-es-en", "garfio", [{"genders": ["masculine"]}])])
+    server.add_provider(CLOUDFLARE)
+    server.push({"vocabularies": [vocabulary()]})
+    server.client.put(f"{API}/models/selection", headers=server.auth, json={"chains": {"text": [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
+    ]}})
+    server.model.resolution = dict(RESOLUTION)
+    server.model.article = {**ARTICLE, "gender": "feminine"}
+    assert server.capture().status_code == 200
+
+    lines(logs["call"])
+    failed = [text for _, _, _, text in activity.select(activity.entries(logs), failed=True)]
+    assert any(f"compose gemini-api:{GEMINI_SECOND} unusable" in text
+               and "kaikki-es-en has el garfio as masculine; the model wrote feminine" in text
+               for text in failed), failed
+
+    assert call_timings(read_settings()) == 0
+    shown = capsys.readouterr().out
+    assert any(f"cloudflare:{CLOUDFLARE_MODEL}" in line and "kept dictionary ×1" in line
+               for line in shown.splitlines()), shown
+
+
 def test_a_mandarin_word_saved_without_ipa_is_what_admin_log_failed_shows(logs, server):
     """A reading that is not Pinyin leaves the derived IPA empty: the line says which word and why."""
     from test_capture import ARTICLE, RESOLUTION, chinese

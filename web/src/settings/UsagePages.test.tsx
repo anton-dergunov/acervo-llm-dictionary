@@ -26,7 +26,8 @@ function catalogue(providers: ModelProvider[] = [GEMINI, CLOUDFLARE]): ModelCata
   return {
     families: [], providers,
     chains: Object.fromEntries(["text", "quick", "image", "audioPlain", "audioExpressive", "ocr"]
-      .map((kind) => [kind, { source: "default" as const, reason: null, pairs: [] }]))
+      .map((kind) => [kind, { source: "default" as const, reason: null, pairs: [] }])),
+    checkAnswers: true
   };
 }
 

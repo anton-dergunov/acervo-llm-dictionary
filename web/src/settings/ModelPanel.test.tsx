@@ -46,6 +46,7 @@ function catalogue(overrides: Partial<ModelCatalogue> = {}): ModelCatalogue {
       audioPlain: { source: "default", reason: null, pairs: [] },
       audioExpressive: { source: "default", reason: null, pairs: [] }
     },
+    checkAnswers: true,
     ...overrides
   };
 }
@@ -115,6 +116,24 @@ describe("the Providers pane", () => {
     expect(save).toHaveBeenCalledWith({
       text: [pair("gemini-api", GEMINI), pair("gemini-api", GEMINI_SECOND)]
     });
+  });
+
+  it("shows whether models' answers are checked, and switching it off is one write", async () => {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue());
+    const save = vi.spyOn(backendSession, "saveCheckAnswers").mockResolvedValue(catalogue({ checkAnswers: false }));
+    panel();
+    const toggle = await screen.findByRole("switch", { name: "Check what models write" });
+    expect(toggle).toBeChecked();
+    fireEvent.click(toggle);
+    await waitFor(() => expect(save).toHaveBeenCalledWith(false));
+    await waitFor(() => expect(screen.getByRole("switch", { name: "Check what models write" })).not.toBeChecked());
+  });
+
+  it("offers no checks while there is no provider to check", async () => {
+    vi.spyOn(backendSession, "fetchModels").mockResolvedValue(catalogue({ providers: [] }));
+    panel();
+    await screen.findByText(/no provider yet/);
+    expect(screen.queryByRole("switch", { name: "Check what models write" })).not.toBeInTheDocument();
   });
 
   it("marks an unavailable row with a badge and not only with dimmed text", async () => {

@@ -326,6 +326,8 @@ export interface ModelCatalogue {
   families: ProviderFamily[];
   providers: ModelProvider[];
   chains: Record<string, ModelChain>;
+  /** Whether the server judges what a model wrote before it becomes an entry ("Check what models write"). */
+  checkAnswers: boolean;
 }
 
 /** What a provider write answers: the whole readout, and the id of the provider it changed. */
@@ -1471,6 +1473,12 @@ export const backendSession = {
   saveModelSelection(chains: Record<string, ModelPair[] | null>): Promise<ModelCatalogue> {
     return client.call<ModelCatalogue>("/models/selection", {
       method: "PUT", body: JSON.stringify({ chains })
+    });
+  },
+  /** Switches the server's checks on what models write on or off, and returns the whole readout. */
+  saveCheckAnswers(on: boolean): Promise<ModelCatalogue> {
+    return client.call<ModelCatalogue>("/models/selection", {
+      method: "PUT", body: JSON.stringify({ checkAnswers: on })
     });
   },
 

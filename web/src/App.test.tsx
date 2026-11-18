@@ -1559,7 +1559,7 @@ describe("Acervo application", () => {
 
     // A provider added in Settings ▸ Providers: its save is what changes the server's answer.
     serverHealth();
-    act(() => store(SETTINGS.models, { families: [], providers: [], chains: {} }));
+    act(() => store(SETTINGS.models, { families: [], providers: [], chains: {}, checkAnswers: true }));
     await waitFor(() => expect(settings.queryByText(/This server cannot build entries/)).not.toBeInTheDocument());
   });
 
@@ -1591,7 +1591,8 @@ describe("Acervo application", () => {
         text: { source: "default", reason: null, pairs: [] },
         image: { source: "default", reason: null, pairs: [] },
         audio: { source: "default", reason: null, pairs: [] }
-      }
+      },
+      checkAnswers: true
     });
     await openList();
     fireEvent.click(screen.getByRole("button", { name: "Open settings" }));
