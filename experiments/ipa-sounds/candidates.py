@@ -116,6 +116,9 @@ def entries(table: dict, wikipedia: dict) -> list[dict]:
             rows.append({"id": entry["symbol"], "symbol": entry["symbol"],
                          "phrases": list(dict.fromkeys([entry["name"], *(entry.get("audio") or [])])),
                          "files": [*infobox, *(f"File:{f}" for f in entry.get("files", []))]})
+    for entry in table["combinations"]:
+        rows.append({"id": entry["symbol"], "symbol": entry["symbol"], "phrases": [],
+                     "files": [f"File:{f}" for f in entry["files"]]})
     for entry in table["diacritics"]:
         if entry.get("audio"):
             rows.append({"id": entry["example"], "symbol": entry["example"], "phrases": entry["audio"], "files": []})
@@ -126,6 +129,10 @@ def entries(table: dict, wikipedia: dict) -> list[dict]:
         for row in table["pinyin"][part]:
             rows.append({"id": f"pinyin {row['letters']}", "symbol": row["letters"], "phrases": [],
                          "files": [f"File:Zh-{row['example']}.ogg", f"File:Zh-{row['example']}.oga"]})
+    contour_files = {c["letters"]: c.get("files", []) for c in table["tones"]["contours"]}
+    for tone in table["pinyin"]["tones"]:
+        rows.append({"id": f"pinyin tone {tone['number']}", "symbol": tone["mark"], "phrases": [],
+                     "files": [f"File:{f}" for f in [*contour_files.get(tone["ipa"], []), *tone.get("files", [])]]})
     return rows
 
 
@@ -221,7 +228,10 @@ def main() -> int:
     }
     result["nearMisses"] = {k: v for k, v in result["nearMisses"].items() if v}
     out = HERE / "results" / "candidates.json"
-    out.write_text(json.dumps(result, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    # Written whole and swapped in, so a review page reading it meanwhile never sees half a file.
+    temporary = out.with_suffix(".tmp")
+    temporary.write_text(json.dumps(result, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    temporary.replace(out)
     covered = sum(1 for files in result["rows"].values() if any(f["free"] for f in files))
     several = sum(1 for files in result["rows"].values() if sum(f["free"] for f in files) > 1)
     empty = [row_id for row_id, files in result["rows"].items() if not any(f["free"] for f in files)]

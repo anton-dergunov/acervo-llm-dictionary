@@ -85,11 +85,20 @@ read against the Occurrence rows of the sound's Wikipedia article.
 
 ## Outcome so far
 
-- 172 of 173 rows have at least one freely licensed recording, 34 more than one (licences: CC BY-SA
+- The chart rows: 172 of 173 have at least one freely licensed recording, 34 more than one (licences: CC BY-SA
   3.0 115, CC BY 2.0 fr 52 — the `Zh-` syllables —, CC BY-SA 4.0 29, CC BY-SA 3.0 us 8, CC0 5,
   public domain 3, CC BY-SA 2.0 uk 2). No candidate is GFDL-only: the chart recordings are dual
   GFDL and CC BY-SA 3.0. Every one has an MP3 copy.
-- **ɚ has none** on Commons; the same sound is heard on the Pinyin *er* card (`Zh-èr`).
+- **ɚ** has no chart recording; its candidate is `En-us-er.ogg` (American "er"), the file the
+  Wikipedia article "R-colored vowel" plays.
+- **Letters with a mark** (`combinations` in the table): Commons has recorded a few as one sound,
+  and these are the ones that matter in common languages: aspirated `tʰ` and `tɕʰ` (Mandarin *t*,
+  *q*; `pʰ` is on the aspiration card) and the French nasal vowels `ɛ̃ ɔ̃ ɑ̃`. There is no `kʰ`.
+- **Pinyin tones** play the recordings of the contour with their letters; the neutral tone has
+  `Zh-ma.ogg`, to be confirmed by ear.
 - Commons has no `Zh-mā`, so Pinyin *m* uses `mǎ`, *a* uses `bā`, and the first tone `Zh-bā`.
+- Every row that can have a recording has one (183 of 183). The 53 cards without one are marks
+  with no sound of their own: stress, length and phrasing (13), tone marks over a vowel (10) and
+  diacritics on their own (30). Their text is all they need.
 - Near-misses (labialized, lateral, nasalised and Spanish-word variants) stay in `nearMisses`; none
   is a recording of the bare sound.

@@ -60,6 +60,9 @@ def cards() -> list[dict[str, Any]]:
             add(section, e["symbol"], e["symbol"], e["name"],
                 [("How", e["how"]), ("Like", e.get("like")), ("Heard in", e.get("heard")),
                  ("Also written", aliases)])
+    for e in table["combinations"]:
+        add("letters with a mark", e["symbol"], e["symbol"], e["name"],
+            [("How", e["how"]), ("Like", e.get("like")), ("Heard in", e.get("heard"))])
     for e in table["diacritics"]:
         add("diacritics", e["example"], e["example"], e["name"], [("How", e["how"])])
     for e in table["suprasegmentals"]:
