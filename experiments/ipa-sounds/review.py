@@ -11,7 +11,8 @@ picked. Every tap goes to results/labels.json, keyed by the row's id:
 
     {"ʂ": {"pick": "Voiceless retroflex sibilant.ogg", "text": "fine", "note": ""}, ...}
 
-`pick` is a file name or "none" (nothing fits); `text` is fine, unclear or wrong.
+`pick` is a file name or "none" (nothing fits); `text` is fine, unclear or wrong, and optional: no
+verdict means the wording read fine. "Next to pick" walks through the cards still without a pick.
 """
 
 from __future__ import annotations
@@ -212,7 +213,7 @@ textarea { width: 100%; font: inherit; font-size: 15px; color: var(--ink); backg
   <span class="count" id="count">Loading…</span>
   <span class="error" id="error"></span>
   <select id="jump" aria-label="Section"></select>
-  <button id="todo">Next to do</button>
+  <button id="todo">Next to pick</button>
 </header>
 <main id="main"></main>
 <script>
@@ -229,7 +230,8 @@ const $ = (tag, attrs = {}, ...kids) => {
 };
 const label = card => state.labels[card.id] || {};
 const free = card => card.candidates.filter(c => c.free);
-const done = card => !!label(card).text && (!free(card).length || !!label(card).pick);
+// A card is done once it has a pick; the wording verdict is optional (no verdict means it read fine).
+const done = card => !free(card).length || !!label(card).pick;
 // Redraws nobody tapped for wait while a note is being typed: an iPad closes its keyboard the
 // moment the focused field leaves the page.
 const typing = () => document.activeElement && document.activeElement.tagName === "TEXTAREA";
@@ -255,7 +257,8 @@ const playable = c => c.mp3 || (/\.(mp3|wav)$/i.test(c.original) ? c.original : 
 function render() {
   const total = state.cards.length, finished = state.cards.filter(done).length;
   const card = state.cards[state.at];
-  document.getElementById("count").textContent = `${finished} of ${total} done · card ${state.at + 1}`;
+  document.getElementById("count").textContent = `${total - finished} left to pick · card ${state.at + 1} of ${total}`;
+  document.getElementById("todo").textContent = finished === total ? "All picked" : `Next to pick (${total - finished})`;
   document.getElementById("jump").value = card ? card.section : "";
   const main = document.getElementById("main");
   if (!card) { main.textContent = "Nothing to review."; return; }

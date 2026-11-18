@@ -4,7 +4,8 @@
 say about each symbol, and which openly licensed recording should it play? The table is written once
 by hand and checked; the owner picks one recording per sound and judges the wording on a review page.
 
-**Status:** table written and checked; candidates gathered; waiting for the owner's review.
+**Status:** table written and checked; the owner picked a recording for 176 cards on 18 Nov 2026 and
+found the wording good; 8 cards (the marked letters, ŋ, ɚ) and two re-picks (ts, pʰ) remain.
 
 ## The table (`symbols.yaml`)
 
@@ -55,8 +56,9 @@ IPA" is sold, not openly licensed, and no licence was found for the IPA's own ch
 ```
 
 One card per row: the symbol in the app's IPA font, its wording, every candidate with ▶, licence and
-author, "Pick" (only for a free licence) or "None fits", and a verdict on the wording (fine, unclear,
-wrong) with a note. Every tap is saved to `results/labels.json`.
+author, "Pick" (only for a free licence) or "None fits", and an optional verdict on the wording (fine,
+unclear, wrong) with a note. "Next to pick" walks through the cards still without a pick. Every tap
+is saved to `results/labels.json`.
 
 ## Fact-check (18 Nov 2026)
 
@@ -93,7 +95,7 @@ read against the Occurrence rows of the sound's Wikipedia article.
   Wikipedia article "R-colored vowel" plays.
 - **Letters with a mark** (`combinations` in the table): Commons has recorded a few as one sound,
   and these are the ones that matter in common languages: aspirated `tʰ` and `tɕʰ` (Mandarin *t*,
-  *q*; `pʰ` is on the aspiration card) and the French nasal vowels `ɛ̃ ɔ̃ ɑ̃`. There is no `kʰ`.
+  *q*; `pʰ` is on the aspiration card), `kʰ`, and the French nasal vowels `ɛ̃ ɔ̃ ɑ̃`.
 - **Pinyin tones** play the recordings of the contour with their letters; the neutral tone has
   `Zh-ma.ogg`, to be confirmed by ear.
 - Commons has no `Zh-mā`, so Pinyin *m* uses `mǎ`, *a* uses `bā`, and the first tone `Zh-bā`.
@@ -102,3 +104,22 @@ read against the Occurrence rows of the sound's Wikipedia article.
   diacritics on their own (30). Their text is all they need.
 - Near-misses (labialized, lateral, nasalised and Spanish-word variants) stay in `nearMisses`; none
   is a recording of the bare sound.
+
+## Second round: better recordings and fuller wording (18 Nov 2026)
+
+The owner's review found the wording good and two recordings poor (`ts`: "not best"; `pʰ`: "not
+best at all"), both cards with a single candidate. A few paced Commons searches found:
+
+- **University of Glasgow's phonetics teaching recordings** ("UofG Language Modules", CC BY-SA 4.0):
+  `Ph aspiration.wav` and `Kh aspiration.wav` (which gave the missing `kʰ` card), French nasal vowels
+  by a native speaker (`A-nasal`, `E-nasal`, `C-nasal`, and the words *blanc*, *bon*, *main*,
+  *camp*) and German words such as *Katze*. Their other uploads are words in French, Italian,
+  Spanish and German.
+- **Example words** where an isolated sound is hard to hear: the American minimal triad `En-us-pin
+  spin bin.ogg` (pʰ, p, b), *pin* alone, German *Zeit* (three speakers), and the Mandarin syllables
+  `Zh-pà`, `Zh-tā`, `Zh-kàn`, `Zh-qī`, `Zh-zài`.
+
+The table names them in `files`, the isolated recording first, then the words. On the owner's ask,
+the shortest explanations were expanded (78 values): every Pinyin final now says what it is made of,
+the usual slip where there is one, and how it is written at the start of a syllable (*wa*, *yan* …);
+"with the voice on" says the throat buzzes; terse vowel and consonant lines say what moves.

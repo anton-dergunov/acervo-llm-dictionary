@@ -121,7 +121,8 @@ def entries(table: dict, wikipedia: dict) -> list[dict]:
                      "files": [f"File:{f}" for f in entry["files"]]})
     for entry in table["diacritics"]:
         if entry.get("audio"):
-            rows.append({"id": entry["example"], "symbol": entry["example"], "phrases": entry["audio"], "files": []})
+            rows.append({"id": entry["example"], "symbol": entry["example"], "phrases": entry["audio"],
+                         "files": [f"File:{f}" for f in entry.get("files", [])]})
     for contour in table["tones"]["contours"]:
         rows.append({"id": f"tone {contour['letters']}", "symbol": contour["letters"], "phrases": [],
                      "files": [f"File:{f}" for f in contour.get("files", [])]})
