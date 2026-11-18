@@ -191,6 +191,7 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
 
   async function run(plan: BundlePlan, pictures: Map<string, Uint8Array>, recordings: Map<string, Uint8Array>) {
     cancel.current = { cancelled: false };
+    const chosen = stage;
     setStage({ at: "running", done: 0, total: 0 });
     const deviceId = repository.state().deviceId;
     let restored = 0;
@@ -229,7 +230,13 @@ export function ImportPanel({ onChanged }: { onChanged(): void }) {
       (lexemeId) => backendSession.enqueueJob({
         kind: "enrich", subject: { kind: "lexeme", id: lexemeId }, trigger: "import"
       })
-    );
+    ).catch((error: unknown) => {
+      // Refused because a run started earlier from this window is still going.
+      setStage(chosen);
+      setProblem(error instanceof Error ? error.message : String(error));
+      return null;
+    });
+    if (!report) return;
 
     // And once at the end, so "import finished" means every picture is here, not merely uploaded.
     if (restored > 0) await syncEngine.syncNow();

@@ -71,7 +71,11 @@ generated example are left out, so do not enrich it.
 diffing, validation and atomicity every other save gets.
 
 - **A word already held is skipped**, never merged or overwritten: an import must not cost curation done
-  after the export.
+  after the export. "Held" is asked of the replica at each word, not of a list taken when the run
+  started, and **one import runs at a time in a window**: a run outlives the Settings window that
+  started it, and the replicated collections carry no uniqueness constraint
+  ([`../architecture/data-model.md`](../architecture/data-model.md)), so two runs deciding from their
+  starting lists would each add every word. A second run is refused, naming the one still going.
 - **Every id is re-minted**, so a bundle depends on no account and can be handed to someone else.
 - **A word waiting in the Inbox is filed on the way in.** A bundle is chosen from a picker and applied
   on a button press, so nothing in it arrived unattended; `aside` is curation the owner did and is

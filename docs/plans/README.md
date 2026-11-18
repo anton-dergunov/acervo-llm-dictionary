@@ -43,7 +43,6 @@ what it said.
 **Defects**
 
 - [`issues.md`](issues.md) — small defects, each deleted once fixed.
-- [`duplicate-words.md`](duplicate-words.md) — 227 English words held twice since a doubled import; find the cause, then keep one of each.
 
 **Later, kept on purpose**
 

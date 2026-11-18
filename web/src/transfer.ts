@@ -748,8 +748,28 @@ const key = (language: string, headword: string) => `${language}\n${headword.tri
  * never cost you curation you did after the export, and the report says exactly what it left alone.
  * A word that fails is reported by file and the run continues — during the phase where the schema
  * moves, knowing which three of four hundred entries were refused is the whole value.
+ *
+ * **One run at a time in a window, and "already held" is asked of the replica at each word.** The
+ * replicated collections carry no uniqueness constraint, so nothing on the server stops a second
+ * copy. A run outlives the Settings window that started it, so reopening Settings could start a
+ * second, and two runs deciding from lists taken when they started would each add every word. A
+ * second run is refused, and the per-word check also skips what another tab's run has saved once a
+ * pull has brought it in.
  */
-export async function importBundle(
+export async function importBundle(...args: Parameters<typeof importOnce>): Promise<ImportReport> {
+  if (importing) throw new Error(IMPORT_RUNNING);
+  importing = true;
+  try {
+    return await importOnce(...args);
+  } finally {
+    importing = false;
+  }
+}
+
+export const IMPORT_RUNNING = "An import is already running in this window.";
+let importing = false;
+
+async function importOnce(
   repository: AcervoRepository,
   plan: BundlePlan,
   onProgress: (done: number, total: number) => void = () => {},
@@ -768,7 +788,10 @@ export async function importBundle(
   const live = <T extends { deleted: boolean }>(records: T[]) => records.filter((record) => !record.deleted);
   const languages = new Set(live(snapshot.vocabularies).map((entry) => entry.language));
   const topics = new Set(live(snapshot.topics).map((topic) => topic.name.trim().toLowerCase()));
-  const words = new Set(live(snapshot.lexemes).map((lexeme) => key(lexeme.language, lexeme.headword)));
+  /* Asked of the replica as it is now, never of the snapshot above: this run's own saves and
+     whatever a pull brought in since it started both count. */
+  const held = (identity: string) => repository.snapshot().lexemes
+    .some((lexeme) => !lexeme.deleted && key(lexeme.language, lexeme.headword) === identity);
 
   const total = plan.vocabularies.length + plan.topics.length + plan.articles.length;
   let done = 0;
@@ -813,7 +836,7 @@ export async function importBundle(
   for (const { path, draft } of plan.articles) {
     if (signal.cancelled) return { ...report, aborted: true };
     const identity = key(draft.language, draft.headword);
-    if (words.has(identity)) {
+    if (held(identity)) {
       report.skipped.push({ language: draft.language, headword: draft.headword });
       step();
       continue;
@@ -822,7 +845,6 @@ export async function importBundle(
       // Enrichment is asked for once the bundle's pictures and clips are back, so the server fills
       // in only what the bundle did not carry and never draws over a picture it is about to get.
       const lexemeId = await repository.saveArticle(filed(remintIds(draft)), undefined, { enrich: false });
-      words.add(identity);
       report.added += 1;
       // After the word exists, because a picture belongs to a sense that has to be there first —
       // and the sense ids are the ones just minted, which only the replica knows.

@@ -8,8 +8,8 @@ import { articleFor, lexemesIn } from "./selectors";
 import { testGraph, TEST_OWNER } from "./testGraph";
 import { fakeRemote } from "./testRemote";
 import {
-  BUNDLE_FORMAT, bundleName, exportBundle, importBundle, MANIFEST_FILE, picturesIn, pronunciationsIn,
-  readBundle, remintIds, slugFor, TOPICS_FILE, VOCABULARIES_FILE, type BundleFile, type ExportOptions
+  BUNDLE_FORMAT, bundleName, exportBundle, filed, IMPORT_RUNNING, importBundle, MANIFEST_FILE, picturesIn,
+  pronunciationsIn, readBundle, remintIds, slugFor, TOPICS_FILE, VOCABULARIES_FILE, type BundleFile, type ExportOptions
 } from "./transfer";
 import { imagePromptId } from "./ids";
 import { draftFor, parseArticle } from "./yaml";
@@ -690,6 +690,34 @@ describe("importing a bundle", () => {
     expect(second.skipped.map((entry) => entry.headword).sort())
       .toEqual(["espolvorear", "la balsa", "picar", "turmoil"]);
     expect(repository.snapshot().lexemes.filter((lexeme) => !lexeme.deleted)).toHaveLength(4);
+  });
+
+  it("refuses a second run while one is going, so no word is added twice", async () => {
+    const repository = await emptyReplica();
+    const first = importBundle(repository, readBundle(bundle()));
+    await expect(importBundle(repository, readBundle(bundle()))).rejects.toThrow(IMPORT_RUNNING);
+
+    expect((await first).added).toBe(4);
+    expect(repository.snapshot().lexemes.filter((lexeme) => !lexeme.deleted)).toHaveLength(4);
+    // Released once the run ends.
+    expect((await importBundle(repository, readBundle(bundle()))).added).toBe(0);
+  });
+
+  it("skips a word that reached the replica after the run started", async () => {
+    const repository = await emptyReplica();
+    const plan = readBundle(bundle());
+    const last = plan.articles[plan.articles.length - 1].draft;
+    let savedElsewhere = false;
+    // Stands in for another tab's run, whose word a pull brings in mid-import.
+    const report = await importBundle(repository, plan, undefined, undefined, undefined, null, null, async () => {
+      if (savedElsewhere) return;
+      savedElsewhere = true;
+      await repository.saveArticle(filed(remintIds(last)), undefined, { enrich: false });
+    });
+
+    expect(report.skipped.map((entry) => entry.headword)).toEqual([last.headword]);
+    expect(repository.snapshot().lexemes.filter((lexeme) => !lexeme.deleted && lexeme.headword === last.headword))
+      .toHaveLength(1);
   });
 
   it("reports one refused word by file and imports the others", async () => {

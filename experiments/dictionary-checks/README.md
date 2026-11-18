@@ -16,7 +16,8 @@ Free: no model is called.
 
 - **The words** are every live word in the owner's store, pulled read-only (`extract_remote.py`):
   936 Spanish, 801 English, 4 Chinese. The English vocabulary holds 227 words twice, identical, so
-  each word is counted once (574 English). All were written before varieties existed, so they are in
+  each word is counted once (574 English). The duplicates were removed
+  from the store on 18 Nov 2026 by [`remove_duplicates.py`](remove_duplicates.py) ([`remove_duplicates.txt`](remove_duplicates.txt)). All were written before varieties existed, so they are in
   each language's default variety. Most were written by `gemini-3.7-flash`, and some were corrected by
   hand. They are mostly right, so **a disagreement here is mostly a false alarm the check would raise**.
 - **The dictionaries** are the wiktextract ones rebuilt with this change (`kaikki-es-en`,
