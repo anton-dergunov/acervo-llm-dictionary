@@ -11,6 +11,7 @@ picked. Every tap goes to results/labels.json, keyed by the row's id:
 
     {"ʂ": {"pick": "Voiceless retroflex sibilant.ogg", "text": "fine", "note": ""}, ...}
 
+`revisit: true`, set by hand, sends a card back to "Next to pick" until a new pick is made.
 `pick` is a file name or "none" (nothing fits); `text` is fine, unclear or wrong, and optional: no
 verdict means the wording read fine. "Next to pick" walks through the cards still without a pick.
 """
@@ -131,6 +132,8 @@ class Handler(BaseHTTPRequestHandler):
                 mine.pop(field, None)
             else:
                 mine[field] = str(value)[:2000]
+            if field == "pick" and value:
+                mine.pop("revisit", None)  # a new pick answers the flag
             if not mine:
                 labels.pop(row_id)
             _write(RESULTS / "labels.json", labels)
@@ -231,13 +234,15 @@ const $ = (tag, attrs = {}, ...kids) => {
 const label = card => state.labels[card.id] || {};
 const free = card => card.candidates.filter(c => c.free);
 // A card is done once it has a pick; the wording verdict is optional (no verdict means it read fine).
-const done = card => !free(card).length || !!label(card).pick;
+// A card flagged `revisit` (set by hand in labels.json) counts as still to pick until a pick is made.
+const done = card => !label(card).revisit && (!free(card).length || !!label(card).pick);
 // Redraws nobody tapped for wait while a note is being typed: an iPad closes its keyboard the
 // moment the focused field leaves the page.
 const typing = () => document.activeElement && document.activeElement.tagName === "TEXTAREA";
 async function save(card, field, value) {
   const mine = state.labels[card.id] = { ...label(card) };
   if (value == null || value === "") delete mine[field]; else mine[field] = value;
+  if (field === "pick" && value) delete mine.revisit;
   try {
     const answer = await fetch("/label", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: card.id, field, value }) });

@@ -123,3 +123,42 @@ The table names them in `files`, the isolated recording first, then the words. O
 the shortest explanations were expanded (78 values): every Pinyin final now says what it is made of,
 the usual slip where there is one, and how it is written at the start of a syllable (*wa*, *yan* …);
 "with the voice on" says the throat buzzes; terse vowel and consonant lines say what moves.
+
+## Third round: cleaning and levelling the chosen recordings
+
+The picked recordings carry audible hiss (noise floors around −53 to −59 dBFS on the first ones
+measured) and differ in level by several dB. `process.py` downloads each picked original (to the
+ignored `out/`; Wikimedia's media servers throttle bursts, so it goes one file every 8 s through curl)
+and builds three versions, treated alike apart from the noise:
+
+- `plain`: as recorded;
+- `gate`: stationary spectral gating (noisereduce), its noise profile from the recording's own
+  quietest stretches, reducing the noise by 80% rather than to nothing. A first build gated every
+  recording and took 14 dB off nine vowels: where a vowel is cut tight there is no silence to learn
+  the noise from, and where the silence is digital zeros the gate takes the sound for noise. So it
+  now leaves a recording as it is when its SNR is under 25 dB (21 recordings), when its silence is
+  digital (2), or when gating would take more than 1.5 dB off the sound itself (none); the most it
+  takes off any sound is 1.4 dB;
+- `dfn`: DeepFilterNet 3 (MIT/Apache), its attenuation capped at 24 dB. It takes more than 1.5 dB off
+  six sounds, the breathy and throat ones: Pinyin *uai* (−6.7 dB) and *p* (−4.0, the aspiration of
+  `Zh-pà`), `ɰ ʢ ʡ pf`. Left in, for the ear to judge.
+
+Levelling: every version reaches −20 LUFS except `ʒ` and `ç`, held under 1 dB short by the peak
+ceiling. After levelling the noise floor is around −55 dBFS as recorded and −68 (gate) or −66
+(DeepFilterNet) cleaned, median over the 184.
+
+Each is cut to the sound with 120 ms before and 200 ms after (the same bounds for all three),
+faded over 10 ms, and set to −20 LUFS (BS.1770 on 100 ms blocks, since many recordings are shorter
+than the standard 400 ms) unless that would take the true peak past −1 dBTP; then it stays quieter
+rather than clip. Loudness is matched so that a louder version cannot win the comparison.
+
+`compare.py` plays the Commons original as a reference and the three versions blind (letters
+shuffled per card), noisiest first; the owner picks the best or "all the same", saved to
+`results/processing-labels.json`, and `process.py report` unblinds them into
+`results/processing-summary.json`.
+
+**Licences allow it.** Public domain and CC0 have no conditions. CC BY and CC BY-SA (2.0 to 4.0) allow
+changed versions with credit, a link to the licence and a statement that the file was changed; under
+BY-SA the changed file stays under the same licence. That binds the audio file, not the app that
+ships it alongside its code. The credits list therefore says, per file, "trimmed, noise-reduced and
+level-adjusted".
