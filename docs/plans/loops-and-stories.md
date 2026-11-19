@@ -1,20 +1,20 @@
 # Loops and stories · what is still to do
 
-**Status:** open. The designs as built are [`../features/loops.md`](../features/loops.md) and
-[`../features/stories.md`](../features/stories.md). Two pieces, each usable alone. A finished render
-stays silent on purpose: the loop or story is in its list when the owner goes back to it.
+**Status:** open, undecided. The designs as built are [`../features/loops.md`](../features/loops.md) and
+[`../features/stories.md`](../features/stories.md).
 
-## 1 · Drawing the favourites
+## A level for loops
 
-One more order for the make dialogs' draw ([`../features/loops.md`](../features/loops.md) §2.12):
-**Favourites**, the starred words first. It needs a star on words, which loops and stories have
-([`../features/loops.md`](../features/loops.md) §2.20) and words do not yet: an owner's mark on the
-lexeme, so a schema change of its own.
+A vocabulary has a level, and compose, chat and a story's text read it
+([`../features/standing-rules.md`](../features/standing-rules.md), "The reader"). A loop does not: the
+lines a loop speaks beyond the word and its gloss are written by LexiBeat, whose prompt reaches the
+owner's text chain through `POST /loops/write` (`services/loops.write`) untouched — neither the reader
+nor the standing rules are added there.
 
-## 2 · Level
-
-- **A level for loops.** A vocabulary has a level now, and compose, chat and a story's text read it
-  ([`../features/standing-rules.md`](../features/standing-rules.md), "The reader"). A loop's sentences
-  are written by LexiBeat, so following it there means sending it in `render_request` and a change on
-  that side.
-- **A level for one story**, overriding the language's, in the story dialog.
+- **What it would change.** Only the formats that speak written lines: a radio lesson, a story, and
+  any format's examples, remarks or intro. `classic`, `alternating`, `echo` and `review` speak the
+  headword and its `primaryGloss` only, so a level changes nothing in them.
+- **Two ways to do it.** Send the level in `render_request` and have LexiBeat's prompt use it (a
+  LexiBeat release and re-pin), or join the reader and standing rules onto the prompt in
+  `services/loops.write`, as every other writer does, which needs that route to know the loop's
+  vocabulary. The second keeps LexiBeat ignorant of the reader and brings the standing rules along.

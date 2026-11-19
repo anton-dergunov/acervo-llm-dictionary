@@ -35,7 +35,7 @@ One figure per word, from Anki, shown the same way wherever the word appears.
   retrievability — computed when shown, from stability and the days since the last review, rather
   than read at pull time and left to go stale. Which one, or which blend, is the open question; the
   figure should be the one the "hardest words" choice for loops and stories uses too
-  ([`loops-and-stories.md`](loops-and-stories.md) §1).
+  ([`../features/loops.md`](../features/loops.md) §2.12).
 - **Not scheduled yet** stays distinct from **weak**: a word with no card shows empty bars and says so.
 
 ## 3 · Anki is optional
