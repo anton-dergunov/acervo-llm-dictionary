@@ -856,6 +856,13 @@ on constrained decoding): LexiBeat's parser checks every part it relies on and r
 naming the first fault, and a refusal's sentence survives every hand-off. One writer call per render,
 and none for new music.
 
+**Acervo tells the writer who it writes for, and LexiBeat never learns of it.** `services/loops.write`
+joins the prompt, after LexiBeat's own text, with the reader section of the loop's vocabulary — its
+level and variety, in the words a story's writer is told, but not the learner's note — and the standing
+rules ([`standing-rules.md`](standing-rules.md), "The reader"). The loop is the one the render token was
+minted for, read from its signed `render` claim; a session caller names none and is told the rules
+alone. A loop that already has lines keeps them on new music, so only fresh writing follows a change.
+
 ### 20 · The list: orders, search, and Make in the top bar
 
 The Loops and the Stories lists are one design (`MadeList.tsx`, and `madeLoops` / `madeStories` in

@@ -32,6 +32,7 @@ from acervo.errors import ApiError
 from acervo.loops.client import Item, Loop, LoopError, LoopService, Operation
 from acervo.repository import accounts, graph, loop_scripts, pronunciation_settings
 from acervo.services import media as media_files
+from acervo.services.reader import vocabulary_for, with_reader
 from acervo.settings import Settings
 from acervo.tokens import mint_render, resolve_secret
 
@@ -497,7 +498,7 @@ def remove(settings: Settings, owner: str, device: str, loop_id: str) -> dict[st
 PROMPT_LIMIT = 60_000
 
 
-def write(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, str]:
+def write(settings: Settings, owner: str, body: dict[str, Any], loop_id: str | None = None) -> dict[str, str]:
     """The lines of one render, from the owner's text chain: the generator's writer, calling home.
 
     The generator holds no credential, so a format that takes its lines from a writer — a radio
@@ -505,6 +506,11 @@ def write(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, str
     prompt it assembled and gets the model's text back; it reads that text itself, which is why this
     asks for text and not for JSON (`services/models.llm_text`). A chain that cannot answer is
     refused with its own sentence, which the render keeps and the job's progress shows.
+
+    The prompt is joined here, as every writer's is, with who it writes for: the level and variety of
+    the loop's vocabulary — not the learner's note (`services/reader`) — and the standing rules.
+    `loop_id` is the loop the render token was minted for; a session names none, and a loop deleted
+    mid-render has no vocabulary, so either is told the rules alone. The generator never learns of it.
     """
     prompt = body.get("prompt")
     if not isinstance(prompt, str) or not prompt.strip():
@@ -514,6 +520,9 @@ def write(settings: Settings, owner: str, body: dict[str, Any]) -> dict[str, str
     purpose = str(body.get("purpose") or "programme").strip()[:40] or "programme"
     from acervo.services.models import llm_text
 
+    loop = graph.owned_records(owner, "loops", [loop_id]).get(loop_id) if loop_id else None
+    vocabulary = vocabulary_for(graph.owner_vocabularies(owner), loop["language"]) if loop else None
+    prompt = with_reader(prompt, owner, vocabulary, note=False)
     text, answer = llm_text(settings, owner, prompt, caller=f"loop-{purpose}")
     return {"text": text, "provider": answer.provider_id, "model": answer.model}
 

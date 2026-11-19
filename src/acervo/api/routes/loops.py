@@ -40,7 +40,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import FileResponse, JSONResponse
 from starlette.concurrency import run_in_threadpool
 
-from acervo.api.auth import owner_id, write_owner
+from acervo.api.auth import owner_id, write_caller
 from acervo.api.errors import data
 from acervo.api.payload import json_body
 from acervo.errors import ApiError
@@ -61,9 +61,9 @@ async def read_schema(request: Request) -> JSONResponse:
 @router.post("/loops/write")
 async def write_lines(request: Request) -> JSONResponse:
     """A render's lines, written by the owner's text chain. Accepts a render token or a session."""
-    owner = write_owner(request)["id"]
+    account, loop = write_caller(request)
     body = await json_body(request)
-    return data(await run_in_threadpool(write, request.app.state.settings, owner, body))
+    return data(await run_in_threadpool(write, request.app.state.settings, account["id"], body, loop))
 
 
 @router.post("/loops")

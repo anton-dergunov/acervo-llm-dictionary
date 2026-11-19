@@ -16,6 +16,7 @@ never replicated, and joined to prompts in one place, `services/rules.with_rules
 | Clip selection | yes | it chooses which real speech the owner hears |
 | The picture brief | yes | it decides what a picture shows |
 | A story's write, translate and brief | yes | all three write what is read and seen |
+| A loop's written lines | yes | its examples, remarks and story are heard |
 | Resolve | **no** | it only names the word a scrap of text is about |
 | Story narration | **no** | it cuts a story into passages and may not change a word |
 | Naming the map's regions | **no** | it only labels what is already there |
@@ -36,7 +37,11 @@ firmest first:
 | **About you** (`learnerNote`) | background, not a subject: at most one example in an entry or one detail in a story, often none; never mentioned, never bent toward | told "a trip to Argentina", a writer asked for *cactus* must still write about cacti |
 
 It goes where a writer writes in that language for the learner to read: **compose**, **the article
-conversation** (both prompts, for the language the device names) and **a story's text**. Not the
+conversation** (both prompts, for the language the device names), **a story's text**, and **a loop's
+written lines**, where LexiBeat's prompt is joined in `services/loops.write` with the vocabulary of the
+loop its render token was minted for. A loop is told the level and the variety but **not the note**: it
+writes one short line for each word, which is exactly where the note pulls an example off its word, and
+LexiBeat's own rules (a few plain words a line) already keep the lines light. Not the
 story's translation, briefs or narration, the picture brief or the clip choice, whose subject is the
 word or a text already written — and the note is exactly what would turn every picture toward
 Argentina. The weights are measured, not argued: [`../../experiments/learner-context/`](../../experiments/learner-context/README.md)

@@ -34,6 +34,15 @@ def test_only_what_is_set_is_said():
     assert "level" not in section and "own words" not in section
 
 
+def test_without_the_note_the_rest_is_said_in_the_same_words():
+    """A loop's lines are told level and variety only: one short line a word is where a note bleeds."""
+    section = reader_section(LEARNER, note=False)
+    assert section == reader_section({**LEARNER, "learnerNote": None})
+    assert "B1, intermediate" in section and "Spanish of Argentina" in section
+    assert "own words" not in section and "Preparing" not in section
+    assert reader_section({"language": "es", "learnerNote": NOTE}, note=False) == ""
+
+
 def test_the_reader_comes_before_the_standing_rules(server):
     assert server.put("/rules", {"rules": RULES}).status_code == 200
     joined = with_reader("The prompt.", server.owner, LEARNER)

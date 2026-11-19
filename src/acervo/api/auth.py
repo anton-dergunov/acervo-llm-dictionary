@@ -33,7 +33,7 @@ from acervo.tokens import (
 __all__ = [
     "ALGORITHM", "RENDER_LIFETIME", "TAKE_AUDIENCE", "UNAUTHENTICATED", "WRITE_AUDIENCE",
     "account_for", "bearer_token", "mint", "mint_render", "owner", "owner_id",
-    "resolve_secret", "take_owner", "write_owner",
+    "resolve_secret", "take_owner", "write_caller",
 ]
 
 UNAUTHENTICATED = ApiError(401, "unauthenticated", "Sign in to continue.")
@@ -74,6 +74,11 @@ def account_for(secret: str, token: str, audience: str | None = None) -> Mapping
     accepts one, and leave it off everywhere else. A token carrying an audience is refused wherever
     it is not named, which is what keeps a render token from becoming a session.
     """
+    return _verified(secret, token, audience)[0]
+
+
+def _verified(secret: str, token: str, audience: str | None) -> tuple[Mapping[str, Any], Mapping[str, Any]]:
+    """The account a token names and the claims it carries, both only once its signature holds."""
     if not token:
         raise _unauthenticated("missing")
     try:
@@ -106,7 +111,7 @@ def account_for(secret: str, token: str, audience: str | None = None) -> Mapping
     # A render's token says which piece of work it was minted for. Only now, with the signature
     # checked, is that taken up — so the takes a render asks for are filed under the job that asked.
     trace.adopt(claimed.get("rid"))
-    return user
+    return user, claimed
 
 
 def owner(request: Request) -> Mapping[str, Any]:
@@ -124,9 +129,15 @@ def take_owner(request: Request) -> Mapping[str, Any]:
     return account_for(request.app.state.jwt_secret, bearer_token(request), audience=TAKE_AUDIENCE)
 
 
-def write_owner(request: Request) -> Mapping[str, Any]:
-    """The account behind a writer request: a session, or a render-scoped token, as `take_owner`."""
-    return account_for(request.app.state.jwt_secret, bearer_token(request), audience=WRITE_AUDIENCE)
+def write_caller(request: Request) -> tuple[Mapping[str, Any], str | None]:
+    """The account behind a writer request, and the loop its render token was minted for.
+
+    A session or a render-scoped token, as `take_owner`. The loop is what lets the writer be told
+    who it writes for (`services/loops.write`); a session names none, and is answered without.
+    """
+    user, claims = _verified(request.app.state.jwt_secret, bearer_token(request), WRITE_AUDIENCE)
+    render = claims.get("render")
+    return user, (str(render) if render else None)
 
 
 def owner_id(request: Request) -> str:

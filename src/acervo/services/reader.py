@@ -2,7 +2,9 @@
 
 A vocabulary carries three facts about its learner — a level, a variety and a note in their own words
 — and the calls that write what they will read in that language are told all three: an entry, the
-article conversation, and a story. Each is said with its own weight, firmest first:
+article conversation, and a story. A loop's written lines are told the first two only: a loop writes
+one short line for each word, which is where the note most often pulls an example off its word. Each
+is said with its own weight, firmest first:
 
 - **the level** steers every sentence, because a sentence out of reach teaches nothing;
 - **the variety** is a preference where the language differs by region, never a filter: the other
@@ -36,15 +38,18 @@ LEVELS = {
 _HEADING = "## The reader"
 
 
-def reader_section(vocabulary: Mapping[str, Any] | None) -> str:
-    """The section for one vocabulary's learner, or "" when it says nothing about them."""
+def reader_section(vocabulary: Mapping[str, Any] | None, *, note: bool = True) -> str:
+    """The section for one vocabulary's learner, or "" when it says nothing about them.
+
+    `note=False` leaves the learner's note out and says the rest in the same words.
+    """
     if not vocabulary:
         return ""
     language = locales.language_name(str(vocabulary.get("language") or ""))
     level = str(vocabulary.get("level") or "").strip().upper()
     region = str(vocabulary.get("region") or "").strip().upper()
     place = locales.region_name(region) if region else None
-    note = str(vocabulary.get("learnerNote") or "").strip()
+    said = str(vocabulary.get("learnerNote") or "").strip() if note else ""
     lines: list[str] = []
     if level in LEVELS:
         lines.append(
@@ -61,8 +66,8 @@ def reader_section(vocabulary: Mapping[str, Any] | None) -> str:
             f"mention {place}, only when the word itself differs there. The variety decides the words, "
             "not the setting: nothing you write needs to happen there."
         )
-    if note:
-        quoted = "\n".join(f"  > {line}" if line.strip() else "  >" for line in note.splitlines())
+    if said:
+        quoted = "\n".join(f"  > {line}" if line.strip() else "  >" for line in said.splitlines())
         lines.append(
             "- **What they say about themselves**, in their own words:\n\n"
             f"{quoted}\n\n"
@@ -81,9 +86,9 @@ def reader_section(vocabulary: Mapping[str, Any] | None) -> str:
     ])
 
 
-def with_reader(text: str, owner: str, vocabulary: Mapping[str, Any] | None) -> str:
+def with_reader(text: str, owner: str, vocabulary: Mapping[str, Any] | None, *, note: bool = True) -> str:
     """The prompt with the learner's section, then the owner's standing rules, each only if set."""
-    section = reader_section(vocabulary)
+    section = reader_section(vocabulary, note=note)
     return with_rules(f"{text}\n\n{section}" if section else text, owner)
 
 

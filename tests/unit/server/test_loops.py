@@ -410,6 +410,40 @@ def test_a_render_token_may_write_and_take_but_do_nothing_else(server, monkeypat
     assert server.client.get("/api/acervo/v1/loops/schema", headers=headers).status_code == 401
 
 
+def test_a_render_s_writer_is_told_its_vocabulary_s_level_and_variety_and_the_rules(
+        server, generator, monkeypatch):
+    """As a story's writer is, lightly and in the same words — but never the learner's note."""
+    from acervo.models.results import Answer
+    from acervo.repository import accounts
+    from acervo.services.reader import reader_section
+    from acervo.tokens import mint_render, resolve_secret
+    from test_prompt_rules import RULES
+
+    note = "Preparing for a trip to Argentina in March."
+    server.push({"vocabularies": [vocabulary(level="B1", region="AR", learnerNote=note)]})
+    entry = lexeme(headword="palabra", lemma="palabra", status="active", primaryGloss="word",
+                   emotion="plainly")
+    server.push({"lexemes": [entry], "senses": [sense(entry["id"])]})
+    loop = ask(server, [entry["id"]]).json()["data"]["loop"]
+    assert server.put("/rules", {"rules": RULES}).status_code == 200
+
+    asked = []
+    monkeypatch.setattr("acervo.services.models.llm_text",
+                        lambda settings, owner, prompt, **k: (asked.append(prompt) or "lines",
+                                                              Answer("p", "m", 0.0, None)))
+    token = mint_render(resolve_secret(server.settings), accounts.by_id(server.owner), loop["id"])
+    wrote = server.client.post("/api/acervo/v1/loops/write", json={"prompt": "Write the lines."},
+                               headers={"Authorization": f"Bearer {token}"})
+    assert wrote.status_code == 200, wrote.text
+
+    prompt = asked[0]
+    section = reader_section({"language": "es", "level": "B1", "region": "AR"})
+    assert prompt.startswith(f"Write the lines.\n\n{section}\n\n"), "LexiBeat's prompt first, untouched"
+    assert "B1, intermediate" in prompt and "Spanish of Argentina" in prompt
+    assert note not in prompt and "own words" not in prompt
+    assert prompt.endswith(RULES)
+
+
 def test_a_writer_asked_nothing_is_refused(server):
     assert server.post("/loops/write", {"prompt": "  "}).status_code == 400
     assert server.post("/loops/write", {"prompt": "x" * 70_000}).status_code == 400
