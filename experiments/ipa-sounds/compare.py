@@ -6,7 +6,9 @@ Standard library and PyYAML (the project's interpreter). For every card with a p
 the Commons original as a labelled reference, then the three versions process.py built (as
 recorded, gated, DeepFilterNet; all trimmed and set to the same loudness) under letters shuffled
 per card, so nothing on screen or in an address says which is which. The noisiest recordings come
-first. Each tap goes to results/processing-labels.json:
+first. With `--watch`, only the cards in WATCH, where DeepFilterNet takes most off the sound itself,
+and the question is whether a version has lost part of the sound. Each tap goes to
+results/processing-labels.json:
 
     {"ʂ": {"best": "B", "note": ""}, ...}
 
@@ -34,12 +36,17 @@ FONT = HERE.parents[1] / "web" / "src" / "fonts" / "acervo-ipa.woff2"
 
 _lock = threading.Lock()
 
+# The cards where DeepFilterNet removes most from the sound itself rather than the hiss (energy taken
+# off the sound overall and above 4 kHz, before levelling): breath, friction and throat rasp, which a
+# speech model can take for noise. Measured once after the first 17 labels; README, "Third round".
+WATCH = ("pinyin uai", "pinyin p", "pʰ", "ʢ", "ʜ", "ʡ", "pf", "ɤ", "ɰ", "ɧ", "ħ", "ɸ")
+
 
 def _read(path: Path, default: Any) -> Any:
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else default
 
 
-def items() -> list[dict[str, Any]]:
+def items(watch: bool = False) -> list[dict[str, Any]]:
     key = _read(COMPARE / "key.json", {})
     stats = _read(COMPARE / "stats.json", {})
     cards = {card["id"]: card for card in review.cards()}
@@ -50,10 +57,14 @@ def items() -> list[dict[str, Any]]:
         found.append({"id": row_id, "n": entry["n"], "shown": card["shown"], "title": card["title"],
                       "section": card["section"], "file": picked["file"], "reference": picked["mp3"],
                       "letters": sorted(entry["letters"]), "snr": stats[row_id]["snr"]})
+    if watch:
+        return sorted((item for item in found if item["id"] in WATCH), key=lambda item: WATCH.index(item["id"]))
     return sorted(found, key=lambda item: item["snr"])
 
 
 class Handler(BaseHTTPRequestHandler):
+    watch = False
+
     def log_message(self, *_: Any) -> None:
         pass
 
@@ -71,7 +82,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.path in ("/", "/index.html"):
             return self._send(200, PAGE.encode("utf-8"), "text/html; charset=utf-8")
         if self.path == "/data":
-            body = {"items": items(), "labels": _read(LABELS, {})}
+            body = {"items": items(self.watch), "labels": _read(LABELS, {}), "watch": self.watch}
             return self._send(200, json.dumps(body, ensure_ascii=False).encode("utf-8"), "application/json")
         if self.path == "/ipa.woff2":
             return self._send(200, FONT.read_bytes(), "font/woff2")
@@ -184,7 +195,8 @@ textarea { width: 100%; font: inherit; font-size: 15px; color: var(--ink); backg
 </header>
 <main id="main"></main>
 <script>
-const state = { items: [], labels: {}, at: 0 };
+const state = { items: [], labels: {}, at: 0, watch: false };
+const place = () => state.watch ? "ipa-cleanup-watch-at" : "ipa-cleanup-at";
 const audio = new Audio();
 let playing = null, noteTimer = null;
 const $ = (tag, attrs = {}, ...kids) => {
@@ -228,7 +240,9 @@ function render() {
     $("h2", {}, "Reference"),
     $("div", { class: "ref" }, playButton(item.reference, "▶ Commons original")),
     $("h2", {}, "Versions"),
-    $("p", { class: "legend" }, "Same length and loudness; only the noise handling differs. Which sounds best?"),
+    $("p", { class: "legend" }, state.watch
+      ? "Listen at normal volume, not for hiss: has any version lost part of the sound (the breath, friction or rasp)? Pick the best; same if none has."
+      : "Same length and loudness; only the noise handling differs. Which sounds best?"),
     $("div", { class: "versions" }, item.letters.map(letter => {
       const src = `/a/${item.n}/${letter}`;
       return $("div", { class: "version" + (mine.best === letter ? " chosen" : "") },
@@ -252,7 +266,7 @@ function render() {
 }
 function go(n) {
   audio.pause(); playing = null; state.at = n;
-  try { localStorage.setItem("ipa-cleanup-at", String(n)); } catch (e) {}
+  try { localStorage.setItem(place(), String(n)); } catch (e) {}
   render(); window.scrollTo(0, 0);
 }
 document.getElementById("todo").addEventListener("click", () => {
@@ -262,7 +276,7 @@ document.getElementById("todo").addEventListener("click", () => {
 fetch("/data").then(r => r.json()).then(data => {
   Object.assign(state, data);
   let at = 0;
-  try { at = Number(localStorage.getItem("ipa-cleanup-at")) || 0; } catch (e) {}
+  try { at = Number(localStorage.getItem(place())) || 0; } catch (e) {}
   state.at = Math.min(at, Math.max(0, state.items.length - 1));
   render();
 });
@@ -276,7 +290,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Serve the blind page comparing the processed recordings.")
     parser.add_argument("--host", default="127.0.0.1", help="the laptop's Tailscale IP to reach it from a tablet")
     parser.add_argument("--port", type=int, default=8773)
+    parser.add_argument("--watch", action="store_true", help="only the cards where DeepFilterNet takes most off the sound")
     args = parser.parse_args()
+    Handler.watch = args.watch
     if not (COMPARE / "key.json").exists():
         raise SystemExit("no out/compare/key.json: run process.py build first")
     print(f"http://{args.host}:{args.port}/")

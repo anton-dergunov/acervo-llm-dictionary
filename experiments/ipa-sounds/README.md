@@ -157,6 +157,19 @@ shuffled per card), noisiest first; the owner picks the best or "all the same", 
 `results/processing-labels.json`, and `process.py report` unblinds them into
 `results/processing-summary.json`.
 
+**First 17 labels (20 Nov 2026):** the noisiest cards are the ones the gate leaves as recorded, so
+there `gate` and `plain` are the same file and the owner heard them as the same; DeepFilterNet was
+picked on 15, `gate` on 1 (ɘ, the first card it ran on), no difference on 1. The hiss is heard only
+at high volume. That settles the hiss; what remains is whether DeepFilterNet takes part of the sound
+with it. Measured per card before levelling (energy it removes from the sound, overall and above
+4 kHz), it stays under 1 dB on most and stands out on 12, the breathy, fricative and throat sounds:
+Pinyin *uai* (10 dB overall) and *p* (10 dB above 4 kHz), `pʰ`, `ʢ ʜ ʡ pf ɤ` (10–14 dB above 4 kHz),
+`ɰ ɧ ħ ɸ`. Those 12 get their own listen, at normal volume, for a lost breath, friction or rasp:
+
+```
+.venv/bin/python experiments/ipa-sounds/compare.py --watch --host "$(tailscale ip -4)" --port 8773
+```
+
 **Licences allow it.** Public domain and CC0 have no conditions. CC BY and CC BY-SA (2.0 to 4.0) allow
 changed versions with credit, a link to the licence and a statement that the file was changed; under
 BY-SA the changed file stays under the same licence. That binds the audio file, not the app that
