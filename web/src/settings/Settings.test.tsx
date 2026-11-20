@@ -29,11 +29,20 @@ const nav = () => within(screen.getByRole("navigation", { name: "Settings sectio
 afterEach(() => { vi.restoreAllMocks(); });
 
 describe("the Settings window", () => {
-  it("lists every page in five groups", () => {
+  it("lists every page in six groups", () => {
     open();
     expect(nav().getAllByRole("heading").map((heading) => heading.textContent))
-      .toEqual(["General", "Vocabulary", "Media", "Server", "Data"]);
-    expect(nav().getAllByRole("button")).toHaveLength(16);
+      .toEqual(["General", "Vocabulary", "Media", "Server", "Data", "About"]);
+    expect(nav().getAllByRole("button")).toHaveLength(17);
+  });
+
+  it("credits every recording the IPA guide plays on its About page", async () => {
+    const dialog = open("about");
+    expect(await within(dialog).findByText("Sounds in the IPA guide")).toBeTruthy();
+    fireEvent.click(within(dialog).getByRole("button", { name: /Sounds in the IPA guide/ }));
+    const recordings = await within(dialog).findByRole("region", { name: "Recordings" });
+    expect(within(recordings).getAllByText(/trimmed/)).toHaveLength(165);
+    expect(within(recordings).getByText(/^tʰ · Pinyin t$/)).toBeTruthy();
   });
 
   it("opens on the list when nothing asked for a page, and drills in and back out", () => {

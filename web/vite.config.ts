@@ -42,7 +42,9 @@ export default defineConfig({
       ]
     },
     workbox: {
-      globPatterns: ["**/*.{html,js,css,svg,png,ico,woff,woff2,webmanifest}"],
+      // Everything the app reads offline: the IPA guide's recordings (ogg) and the make dialogs'
+      // pictures (webp) are files in the build like its fonts, so they are precached with it.
+      globPatterns: ["**/*.{html,js,css,svg,png,ico,woff,woff2,webmanifest,ogg,webp}"],
       navigateFallback: "index.html",
       navigateFallbackDenylist: [/^\/api\//, /^\/_\//],
       runtimeCaching: []

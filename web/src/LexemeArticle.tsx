@@ -21,6 +21,7 @@ import { storedClipOf, type StoredClip } from "./clips";
 import type { Attestation, Example, Gloss, ImagePrompt, Lexeme, Sense } from "./domain";
 import type { ArticleView } from "./editorPreferences";
 import { formatDay } from "./format";
+import { Transcription } from "./ipa/Transcription";
 import { DictionaryEntries } from "./ExternalArticle";
 import type { ExternalEntry } from "./externalEntries";
 import type { Change, Mark } from "./articleEdit";
@@ -1024,7 +1025,8 @@ export default function LexemeArticle({ article, onNotify, meta = true, view = "
             <ReadingText reading={lexeme.reading} language={lexeme.language} />
           </div>}
           <div className="pron-row">
-            {lexeme.ipa && <span className={`ipa${tint(head("ipa"))}`}>{lexeme.ipa}</span>}
+            {lexeme.ipa && <Transcription ipa={lexeme.ipa} reading={lexeme.reading} language={lexeme.language}
+              className={tint(head("ipa"))} />}
             <span className={`gram${tint(head("pos") ?? head("gender") ?? head("register") ?? head("dialect"))}`}>
               {grammarWords(lexeme)}
             </span>

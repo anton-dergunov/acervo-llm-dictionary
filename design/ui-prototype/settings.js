@@ -26,6 +26,7 @@ const ICON = {
   anki: svg('<rect x="4" y="6.5" width="12" height="14" rx="2"/><path d="M8 3.5h10a2 2 0 0 1 2 2V17"/>'),
   sync: svg('<path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v5h-5"/>'),
   data: svg('<path d="M4 7.5h16v12H4z"/><path d="M3 4h18v3.5H3z"/><path d="M10 11.5h4"/>'),
+  about: svg('<circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><path d="M12 7.6v.1"/>'),
   chev: svg('<path d="M9 5l7 7-7 7"/>'),
   back: svg('<path d="M15 5l-7 7 7 7"/>'),
   close: svg('<path d="M6 6l12 12M18 6L6 18"/>'),
@@ -41,7 +42,8 @@ const GROUPS = [
   { title: "Vocabulary", pages: [["vocabularies", "Vocabularies"], ["topics", "Topics"], ["rules", "Rules"]] },
   { title: "Media", pages: [["pictures", "Pictures"], ["pronunciation", "Pronunciation"], ["clips", "Clips"], ["loops", "Loops"], ["stories", "Stories"]] },
   { title: "Server", pages: [["providers", "Providers"], ["activity", "Activity"], ["anki", "Anki"]] },
-  { title: "Data", pages: [["sync", "Sync"], ["data", "Data"]] }
+  { title: "Data", pages: [["sync", "Sync"], ["data", "Data"]] },
+  { title: "About", pages: [["about", "About"]] }
 ];
 const TITLES = Object.fromEntries(GROUPS.flatMap((group) => group.pages));
 
@@ -171,6 +173,10 @@ const PAGES = {
 
   reading: () => [
     group("Articles", [segmented("Open words as", "Cards on a touch screen, Page with a mouse", ["Automatic", "Page", "Cards"], "Automatic")]),
+    group("IPA guide (trial)", [
+      segmented("On a phone", "Slides up over the lower part of the screen", ["Sheet", "Full screen", "Inline"], "Sheet"),
+      segmented("Marks", "ʰ, ̯ or ː explained under their letter; stress at the top", ["In the letter's row", "Rows of their own"], "In the letter's row")
+    ], "Tap a transcription to try them. Kept until one of each is chosen."),
     group("YAML editor", [
       toggle("Wrap long lines", "", true),
       toggle("Show line numbers", "Errors name the line they are on", false)
@@ -348,10 +354,30 @@ Never use the word "literally" in a gloss.</textarea>
     ]),
     group("Import", [action("Choose a file…")], "Words already here are updated, not duplicated."),
     group("", [action("Delete all words…", "danger")])
+  ],
+
+  about: () => [
+    group("Acervo", [row("Version", "", `<span class="pref-value mono">0.1.0 (202611201600)</span>`)]),
+    group("Credits", [
+      link("Sounds in the IPA guide", "165", "aboutSounds", "Who recorded each sound, and under what licence"),
+      row("Mandarin stroke data", "Make Me a Hanzi, via hanzi-writer-data 2.0.1 · Arphic Public License"),
+      row("Fonts", "Literata, IBM Plex Sans and IBM Plex Mono; the IPA face, built from Noto Sans; the ivy leaf ❧, drawn from EB Garamond · all SIL Open Font License 1.1")
+    ]),
+    group("Dictionaries", [
+      row("Wiktionary Spanish (English definitions)", "Wiktionary contributors, via kaikki.org (wiktextract). CC BY-SA 4.0."),
+      row("CC-CEDICT", "MDBG and CC-CEDICT contributors. CC BY-SA 4.0.")
+    ], "Only the list ships with the app; a dictionary is downloaded when you add it.")
   ]
 };
 
 const SUBPAGES = {
+  aboutSounds: { parent: "about", title: "Sounds in the IPA guide", render: () => [
+    group("Recordings", [
+      row("p", "Peter Isotalo · CC BY-SA 3.0 · Voiceless bilabial plosive.ogg · trimmed, noise-reduced and level-adjusted"),
+      row("tʰ · Pinyin t", "Wei Gao, Vion Nicolas · CC BY 2.0 fr · Zh-tā.ogg · trimmed, noise-reduced and level-adjusted"),
+      row("ɑ̃", "UofG Language Modules · CC BY-SA 4.0 · A-nasal.wav · trimmed, noise-reduced and level-adjusted")
+    ], "From Wikimedia Commons. A recording under CC BY-SA keeps that licence in its changed form.", "165")
+  ] },
   voice: { parent: "pronunciation", title: "Spanish · Clear voice", render: () => [
     group("United States", [
       choice("Wavenet-A · female", "Google Cloud Text-to-Speech · wavenet", true),

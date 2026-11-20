@@ -112,6 +112,7 @@ export const ChipIcon = page(<><rect x="6" y="6" width="12" height="12" rx="2" /
 export const PulseIcon = page(<path d="M3.5 12h4l2.5-6 4 12 2.5-6h4" />);
 export const CardsIcon = page(<><rect x="4" y="6.5" width="12" height="14" rx="2" /><path d="M8 3.5h10a2 2 0 0 1 2 2V17" /></>);
 export const ArchiveIcon = page(<><path d="M4 7.5h16v12H4z" /><path d="M3 4h18v3.5H3z" /><path d="M10 11.5h4" /></>);
+export const AboutIcon = page(<><circle cx="12" cy="12" r="8.5" /><path d="M12 11v5.5" /><path d="M12 7.6v.1" /></>);
 
 /* ── the make dialogs ──
    How words are drawn, the three kinds of loop, and the strip's own controls. */

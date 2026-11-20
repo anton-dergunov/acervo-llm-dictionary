@@ -52,3 +52,17 @@ def test_holds_the_interfaces_syllable_table():
     assert INVENTORY == frozenset(SYLLABLE_VECTORS["inventory"])
     for syllable in INVENTORY:
         assert len(pinyin_syllables(f"{syllable}1")) == 1, syllable
+
+
+PARTS_VECTORS = json.loads(
+    (Path(__file__).resolve().parents[2] / "web" / "src" / "testFixtures" / "pinyinPartsVectors.json")
+    .read_text(encoding="utf-8")
+)["parts"]
+
+
+def test_cuts_every_syllable_into_the_initial_and_final_the_ipa_guide_shows():
+    from acervo.mandarin_ipa import _initial_and_final
+
+    assert {syllable for syllable, *_ in PARTS_VECTORS} == INVENTORY
+    for syllable, initial, final in PARTS_VECTORS:
+        assert _initial_and_final(syllable) == (initial, final), syllable

@@ -4,7 +4,7 @@ One window, the same on every device, holding every setting Acervo has — the v
 device's, the server's, and on the Mac the application's own. The code is `web/src/settings/`; the
 design is `design/ui-prototype/settings.html`, whose stylesheet is shared with the app's.
 
-## 1 · Sixteen pages in five groups
+## 1 · Seventeen pages in six groups
 
 | Group | Pages |
 |---|---|
@@ -13,6 +13,7 @@ design is `design/ui-prototype/settings.html`, whose stylesheet is shared with t
 | Media | Pictures · Pronunciation · Clips · Loops · Stories |
 | Server | Providers · Activity · Anki |
 | Data | Sync · Data |
+| About | About |
 
 The pages were seventeen tabs in one row that scrolled sideways, with nothing to say which belonged
 together; the owner could not find things. A group is what a page is *about*, so a new setting goes on
@@ -20,6 +21,12 @@ the page of the thing it changes — a voice for loops on Loops, not on Pronunci
 goes in the group it belongs to. The nightly run is on Activity, beside the record of what it did,
 rather than on a page of its own. Docs and the interface name a page as **Settings ▸ Page**, so a page
 is not renamed lightly.
+
+**About** is last, with a group of its own because it is about the app rather than anything in it:
+the version, and the credit for what the app ships that others made — each IPA guide recording's
+author, licence and source (a sub-page; CC BY and BY-SA ask for it on every changed copy), the
+Mandarin stroke data, the fonts, and the dictionaries in the catalogue. It is static and loaded when
+opened, since the recordings' credits live in the IPA guide's table.
 
 A page may open **sub-pages**: Clips ▸ Channels, a provider's own page, a vocabulary or a topic being
 edited. They share the window's back button and title (`useSubPage` in `kit.tsx`), so a page that grows

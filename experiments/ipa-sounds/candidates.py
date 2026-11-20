@@ -1,12 +1,13 @@
-"""Gather the Wikimedia Commons recordings of each sound in symbols.yaml, with licence and author.
+"""Gather the Wikimedia Commons recordings of each sound in the table (web/src/ipa/symbols.json),
+with licence and author.
 
-    uv run --no-project --with beautifulsoup4,pyyaml python experiments/ipa-sounds/wikipedia.py   # first
+    uv run --no-project --with beautifulsoup4 python experiments/ipa-sounds/wikipedia.py   # first
     .venv/bin/python experiments/ipa-sounds/candidates.py [--search]
 
-Standard library and PyYAML only. A row's candidates come, in this order, from:
+Standard library only. A row's candidates come, in this order, from:
 
 1. the recordings its Wikipedia article's infobox embeds (results/wikipedia.json, from wikipedia.py);
-2. the files symbols.yaml names outright (`files`), and `Zh-<syllable>` for a Pinyin example;
+2. the files the table names outright (`files`), and `Zh-<syllable>` for a Pinyin example;
 3. the members of the Commons categories that hold IPA recordings (CATEGORIES), kept when the title
    is the sound's name and nothing more ("Voiceless retroflex sibilant (2).ogg" yes, "Labialized
    voiceless retroflex sibilant.ogg" no); titles that hold the name plus other words go to
@@ -33,9 +34,9 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-import yaml
 
 HERE = Path(__file__).resolve().parent
+TABLE = HERE.parents[1] / "web" / "src" / "ipa" / "symbols.json"
 API = "https://commons.wikimedia.org/w/api.php"
 USER_AGENT = "AcervoIPASurvey/0.1 (one-off survey of IPA recordings for a language-learning app)"
 PAUSE = 1.5
@@ -176,7 +177,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     parser.add_argument("--search", action="store_true", help="search Commons for rows still without a recording")
     args = parser.parse_args()
-    table = yaml.safe_load((HERE / "symbols.yaml").read_text(encoding="utf-8"))
+    table = json.loads(TABLE.read_text(encoding="utf-8"))
     wikipedia_path = HERE / "results" / "wikipedia.json"
     if not wikipedia_path.exists():
         raise SystemExit("no results/wikipedia.json: run wikipedia.py first")
@@ -217,7 +218,7 @@ def main() -> int:
         described |= describe(sorted({t for titles in titles_for.values() for t in titles} - set(described)))
 
     result = {
-        "about": "Commons recordings per symbols.yaml row, from candidates.py: Wikipedia's infobox files first, "
+        "about": "Commons recordings per table row, from candidates.py: Wikipedia's infobox files first, "
                  "then named files, then category members named for exactly the sound. nearMisses hold the "
                  "name plus other words, kept for a look by eye. `free` is false for a licence the app "
                  "cannot ship (GFDL alone, or anything not public domain, CC0, CC BY or CC BY-SA).",

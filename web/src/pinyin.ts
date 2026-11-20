@@ -145,6 +145,12 @@ function unmark(text: string): { bare: string; tone: Tone | null; marks: number 
   return { bare, tone, marks };
 }
 
+/** A syllable as `INVENTORY` writes it: lowercase, without its tone mark or the `r` of erhua. */
+export function tonelessSyllable(syllable: Pick<Syllable, "text" | "erhua">): string {
+  const bare = unmark(syllable.text.normalize("NFC")).bare.toLowerCase();
+  return syllable.erhua ? bare.slice(0, -1) : bare;
+}
+
 /** A bare syllable (any case) is one Pinyin has, or one with the `r` of erhua after it. */
 function syllableShape(bare: string): { erhua: boolean } | null {
   const lower = bare.toLowerCase();

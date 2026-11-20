@@ -6,28 +6,27 @@ by hand and checked; the owner picks one recording per sound and judges the word
 
 **Status:** done 20 Nov 2026. Table written and checked, the wording judged good, a recording picked
 for all 184 cards, and each cleaned and levelled by the method the owner's blind listening chose:
-165 files, 1.72 MB of Ogg Opus, with a credit per file (`results/recordings.json`). What is left is
-the app build in the plan.
+165 files, 1.72 MB of Ogg Opus, with a credit per file. The table and the files now live in the app,
+`web/src/ipa/`, where the guide is built.
 
-## The table (`symbols.yaml`)
+## The table (now `web/src/ipa/symbols.json`)
+
+Written here as YAML and moved into the app as JSON when the guide was built (the app reads YAML only
+for articles); every script here reads it from there.
 
 - The 2020 IPA chart: 70 consonants, 30 vowels (plus `ɚ ɝ ɫ`, which English transcriptions use),
   32 diacritics, 13 marks for stress, length and phrasing, the five tone letters with four named
   contours (the Mandarin tones), and tone marks.
 - 9 affricates written without a tie bar (`ts`, `tɕ`, `ʈʂ` …), as most transcriptions and Acervo's
   Mandarin write them.
-- Pinyin: 21 initials, 38 finals and 5 tones, each with the IPA it stands for.
+- Pinyin: 21 initials, 40 finals and 5 tones, each with the IPA it stands for (`io` and `ueng` were
+  added during the build, so every final the server can produce has a row).
 - Per symbol: `name`, `how` (how to make it), `like` (the nearest English sound) or `heard` (a word
   in a language that has it), and for the search, `audio` phrases or named `files`.
 
-`check.py` holds the table to what Acervo writes: every Pinyin row's IPA equals what
-`acervo/mandarin_ipa.py` derives for its example, and every character Mandarin IPA can produce (all
-411 syllables, with and without erhua) is in the table.
-
-```
-.venv/bin/python experiments/ipa-sounds/check.py
-ok: 21 initials, 38 finals, 411 syllables covered
-```
+`tests/unit/test_ipa_table.py` holds the table to what Acervo writes: every Pinyin row's IPA equals
+what `acervo/mandarin_ipa.py` derives for its example, and every character Mandarin IPA can produce
+(all 411 syllables, with and without erhua) is in the table.
 
 ## The analogies, checked against Wikipedia
 
@@ -187,12 +186,13 @@ they made one; it agrees with 26 of the 28 labels and the other two are those pi
 | Silence is digital zeros (ç, ə), or the owner's pick (`pʰ`) | as recorded | 3 |
 
 **The files.** `process.py final` encodes each chosen version, once per recording, to Ogg Opus the
-way the app stores pronunciations (libsndfile, compression 0.8) into `out/final/`, named by a digest
-of the bytes; the Opus files are regenerable from `out/originals/` and stay ignored until the build
-moves them into the app. 165 files for 184 cards (Mandarin syllables serve several cards),
-**1.72 MB** in all: 0.4–2.8 s, 4–21 KB each (median 8 KB), 60–76 kbps. Through the codec they keep
-−20 LUFS within 1 dB and peaks under −0.9 dBTP. `results/recordings.json` maps each card to its file
-and gives per file the Commons source, author, licence and its link, and the changes ("trimmed and
+way the app stores pronunciations (libsndfile, compression 0.8) straight into the app,
+`web/src/ipa/sounds/` (committed, so a release needs no download from Commons), named by a digest of
+the bytes, and writes each row's `sound` and the credits into the app's table. 165 files for 184
+cards (Mandarin syllables serve several cards), **1.72 MB** in all: 0.4–2.8 s, 4–21 KB each (median
+8 KB), 60–76 kbps. Through the codec they keep −20 LUFS within 1 dB and peaks under −0.9 dBTP.
+`results/recordings.json` records what it did: each card's version and file, and per file the
+Commons source, author, licence and its link, size, length and the changes ("trimmed and
 level-adjusted", plus "noise-reduced" where cleaned). 47 files had no author in Commons' metadata;
 their description pages say "Recorded by Peter Isotalo" (one names no recorder and is in his
 uploads), kept in `results/authors.json`.

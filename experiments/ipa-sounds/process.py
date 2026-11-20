@@ -29,10 +29,11 @@ The versions go to out/compare/<n>/ under letters shuffled per card (out/compare
 compare.py. `report` writes results/processing-summary.json: per card the version the owner chose,
 the noise floor and signal-to-noise ratio measured, and the gain applied.
 
-`final` encodes the version each card ships (`chosen`) to out/final/, as Ogg Opus the way stored
-pronunciations are (`acervo/pronunciation/encode.py`: libsndfile, compression 0.8), each named by a
-digest of its bytes, and writes results/recordings.json: per card its file, and per file the credit
-its licence asks for.
+`final` encodes the version each card ships (`chosen`) into the app, web/src/ipa/sounds/, as Ogg
+Opus the way stored pronunciations are (`acervo/pronunciation/encode.py`: libsndfile, compression
+0.8), each named by a digest of its bytes. It writes each row's `sound` and the credits
+(`recordings`) into the app's table, web/src/ipa/symbols.json, and the record of what it did, per
+card the version and file and per file its size and length, into results/recordings.json.
 """
 
 from __future__ import annotations
@@ -55,6 +56,7 @@ from scipy.signal import resample_poly
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 RESULTS = HERE / "results"
+APP = HERE.parents[1] / "web" / "src" / "ipa"
 RATE = 48000
 TARGET_LUFS = -20.0
 PEAK_CEILING = -1.0  # dBTP
@@ -281,6 +283,26 @@ def author(candidate: dict, recorded: dict[str, str]) -> str:
     return raw
 
 
+def table_rows(table: dict):
+    """Every row of the app's table with the id its card has here (review.py's ids)."""
+    for section in ("consonants", "affricates", "combinations", "vowels"):
+        for entry in table[section]:
+            yield entry["symbol"], entry
+    for entry in table["diacritics"]:
+        yield entry["example"], entry
+    for entry in table["suprasegmentals"]:
+        yield f"mark {entry['symbol']}", entry
+    for entry in table["tones"]["contours"]:
+        yield f"tone {entry['letters']}", entry
+    for entry in table["tones"]["marks"]:
+        yield f"tone mark {entry['example']}", entry
+    for part in ("initials", "finals"):
+        for entry in table["pinyin"][part]:
+            yield f"pinyin {entry['letters']}", entry
+    for entry in table["pinyin"]["tones"]:
+        yield f"pinyin tone {entry['number']}", entry
+
+
 def final() -> None:
     """Encode the chosen version of every card, once per distinct file, and write the credits."""
     key = json.loads((OUT / "compare" / "key.json").read_text(encoding="utf-8"))
@@ -288,7 +310,7 @@ def final() -> None:
     labels_path = RESULTS / "processing-labels.json"
     labels = json.loads(labels_path.read_text(encoding="utf-8")) if labels_path.exists() else {}
     recorded = json.loads((RESULTS / "authors.json").read_text(encoding="utf-8"))["authors"]
-    target = OUT / "final"
+    target = APP / "sounds"
     if target.exists():
         for old in target.glob("*.ogg"):
             old.unlink()
@@ -321,11 +343,22 @@ def final() -> None:
     tally: dict[str, int] = {}
     for card in cards.values():
         tally[card["version"]] = tally.get(card["version"], 0) + 1
-    manifest = {"about": "The recording each card plays (`file`, in out/final/, named by a digest of its bytes) and "
+    manifest = {"about": "The recording each card plays (`file`, in web/src/ipa/sounds/, named by a digest of its bytes) and "
                          "the version of it chosen (README, \"Third round\"); per file its Commons source, author, "
                          "licence, how it was changed, size and length. Ogg Opus, as the app's pronunciations.",
                 "codec": "Ogg Opus, libsndfile compression 0.8, mono 48 kHz", "tally": tally,
                 "totalBytes": total, "cards": cards, "files": dict(sorted(files.items()))}
+    table_path = APP / "symbols.json"
+    table = json.loads(table_path.read_text(encoding="utf-8"))
+    for row_id, entry in table_rows(table):
+        entry.pop("sound", None)
+        # A diacritic's card is its example (pʰ for aspiration, ɫ for velarization, which is also
+        # the letter ɫ's card): it plays that example.
+        if row_id in cards:
+            entry["sound"] = cards[row_id]["file"]
+    table["recordings"] = {name: {k: file[k] for k in ("source", "author", "licence", "licenceUrl", "page", "changes")}
+                           for name, file in sorted(files.items())}
+    table_path.write_text(json.dumps(table, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (RESULTS / "recordings.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     print(json.dumps(tally), f"{len(files)} files, {total / 1e6:.2f} MB, in {target}")
 

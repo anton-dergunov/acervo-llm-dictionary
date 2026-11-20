@@ -39,6 +39,13 @@ def main() -> None:
     )
     assert "clientsClaim" not in service_worker, "updates must remain explicit"
     assert r"/^\/api\//" in service_worker and r"/^\/_\//" in service_worker
+    # The IPA guide's recordings and the make dialogs' pictures are read offline like every other
+    # read, so every one of them must be in the precache list, not only fetched when first needed.
+    for kind in ("*.ogg", "*.webp"):
+        built = sorted((DIST / "assets").glob(kind))
+        assert built or kind == "*.webp", f"no {kind} in the build: the IPA guide's recordings are missing"
+        missing = [path.name for path in built if f"assets/{path.name}" not in service_worker]
+        assert not missing, f"{len(missing)} {kind} files are not precached, e.g. {missing[:3]}"
     assert not any(path.suffix == ".zip" for path in DIST.rglob("*")), (
         "native downloads must not be staged into the PWA"
     )

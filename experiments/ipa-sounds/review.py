@@ -2,9 +2,9 @@
 
     .venv/bin/python experiments/ipa-sounds/review.py --host "$(tailscale ip -4)" --port 8771
 
-Standard library and PyYAML only. Each card shows a row of symbols.yaml as the app would (the symbol
-in the app's IPA font, which joins tone letters into one line), then every candidate recording from
-results/candidates.json with its licence and author. Recordings play straight from Commons' MP3
+Standard library only. Each card shows a row of the table (web/src/ipa/symbols.json) as the app
+would (the symbol in the app's IPA font, which joins tone letters into one line), then every
+candidate recording from results/candidates.json with its licence and author. Recordings play straight from Commons' MP3
 copies on upload.wikimedia.org (an iPad will not play Ogg); nothing is served from the laptop but the
 page, its data and the font. A file under a licence the app cannot ship is shown but cannot be
 picked. Every tap goes to results/labels.json, keyed by the row's id:
@@ -26,9 +26,9 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
-import yaml
 
 HERE = Path(__file__).resolve().parent
+TABLE = HERE.parents[1] / "web" / "src" / "ipa" / "symbols.json"
 RESULTS = HERE / "results"
 FONT = HERE.parents[1] / "web" / "src" / "fonts" / "acervo-ipa.woff2"
 VERDICTS = ("fine", "unclear", "wrong")
@@ -48,7 +48,7 @@ def _write(path: Path, value: Any) -> None:
 
 def cards() -> list[dict[str, Any]]:
     """Every row of the table as the page shows it; ids match candidates.py's."""
-    table = yaml.safe_load((HERE / "symbols.yaml").read_text(encoding="utf-8"))
+    table = json.loads(TABLE.read_text(encoding="utf-8"))
     found = _read(RESULTS / "candidates.json", {"rows": {}})["rows"]
     out: list[dict[str, Any]] = []
 

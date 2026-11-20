@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { DictionaryArticle } from "./dictionary";
 import { lookup } from "./dictionaries";
+import { Transcription } from "./ipa/Transcription";
 import { CaretIcon } from "./icons";
 import {
   externalEntryOf, genderOf, referenceTextOf, type ExternalEntry, type ExternalSection
@@ -215,7 +216,9 @@ export default function ExternalArticle({ entry, onAdd, busy = false }: {
         <div className="head-text">
           <h1 className="headword">{entry.word}</h1>
           {entry.reading && <div className="reading">{entry.reading}</div>}
-          {entry.ipa && <div className="pron-row"><span className="ipa">{entry.ipa}</span></div>}
+          {entry.ipa && <div className="pron-row">
+            <Transcription ipa={entry.ipa} reading={entry.reading} language={entry.language} />
+          </div>}
           <p className="gram">
             {[entry.posLabel, entry.gender, language?.name, "external dictionary"]
               .filter((bit): bit is string => Boolean(bit))

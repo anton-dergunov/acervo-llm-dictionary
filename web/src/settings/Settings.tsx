@@ -1,5 +1,5 @@
 /**
- * Settings: one window of a fixed size, its pages listed in five groups.
+ * Settings: one window of a fixed size, its pages listed in six groups.
  *
  * The design is `docs/features/settings.md`, and the prototype is `design/ui-prototype/settings.html`.
  * Three things here are load-bearing:
@@ -14,10 +14,10 @@
  *   a page and coming back costs nothing and nothing flashes.
  */
 
-import { useEffect, useLayoutEffect, useRef, useState, type ComponentType, type RefObject } from "react";
+import { lazy, Suspense, useEffect, useLayoutEffect, useRef, useState, type ComponentType, type RefObject } from "react";
 import type { CaptureHealth } from "../api";
 import {
-  ArchiveIcon, BackIcon, BookIcon, CardsIcon, ChipIcon, CloseIcon, FlagIcon, ForwardIcon, GlobeIcon,
+  AboutIcon, ArchiveIcon, BackIcon, BookIcon, CardsIcon, ChipIcon, CloseIcon, FlagIcon, ForwardIcon, GlobeIcon,
   OpenBookIcon, PencilIcon, PictureIcon, PulseIcon, RepeatIcon, SpeakerIcon, SunIcon, SyncIcon, TagIcon,
   VideoIcon
 } from "../icons";
@@ -42,12 +42,16 @@ import ReadingPage from "./ReadingPage";
 import RulesPanel from "./RulesPanel";
 import StoryPanel from "./StoryPanel";
 
+/* Its credits list carries the IPA guide's table, which only this page and the guide need. */
+const AboutPage = lazy(() => import("./AboutPage"));
+
 export type Page =
   | "general" | "reading" | "dictionaries"
   | "vocabularies" | "topics" | "rules"
   | "pictures" | "pronunciation" | "clips" | "loops" | "stories"
   | "providers" | "activity" | "anki"
-  | "sync" | "data";
+  | "sync" | "data"
+  | "about";
 
 const GROUPS: { title: string; pages: { id: Page; label: string; icon: ComponentType }[] }[] = [
   { title: "General", pages: [
@@ -75,6 +79,9 @@ const GROUPS: { title: string; pages: { id: Page; label: string; icon: Component
   { title: "Data", pages: [
     { id: "sync", label: "Sync", icon: SyncIcon },
     { id: "data", label: "Data", icon: ArchiveIcon }
+  ] },
+  { title: "About", pages: [
+    { id: "about", label: "About", icon: AboutIcon }
   ] }
 ];
 
@@ -215,6 +222,7 @@ export default function Settings({ update, email, status, snapshot, language, ca
         onSyncNow={() => void syncNow()} onDownloadAgain={() => void downloadAgain()}
       />;
       case "data": return <DataPage snapshot={snapshot} arm={arm} onNotify={onNotify} onChanged={onChanged} />;
+      case "about": return <Suspense fallback={<Placeholder />}><AboutPage /></Suspense>;
     }
   })();
 

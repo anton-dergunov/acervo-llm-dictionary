@@ -1,9 +1,9 @@
 """Read each sound's English Wikipedia article: its infobox recording and its Occurrence table.
 
-    uv run --no-project --with beautifulsoup4,pyyaml python experiments/ipa-sounds/wikipedia.py
+    uv run --no-project --with beautifulsoup4 python experiments/ipa-sounds/wikipedia.py
 
-For every consonant, affricate and vowel in symbols.yaml it fetches the article named by the row's
-`name` (or, failing that, its `audio` phrases), through the REST endpoint, paced and honouring
+For every consonant, affricate and vowel in the table (web/src/ipa/symbols.json) it fetches the
+article named by the row's `name` (or, failing that, its `audio` phrases), through the REST endpoint, paced and honouring
 Retry-After, and caches the page under out/wikipedia/ so a rerun asks for nothing. From each page it
 keeps:
 
@@ -26,10 +26,10 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-import yaml
 from bs4 import BeautifulSoup
 
 HERE = Path(__file__).resolve().parent
+TABLE = HERE.parents[1] / "web" / "src" / "ipa" / "symbols.json"
 CACHE = HERE / "out" / "wikipedia"
 REST = "https://en.wikipedia.org/api/rest_v1/page/html/"
 USER_AGENT = "AcervoIPASurvey/0.1 (one-off survey of IPA analogies for a language-learning app)"
@@ -104,7 +104,7 @@ def cited_languages(entry: dict) -> set[str]:
 
 
 def main() -> int:
-    table = yaml.safe_load((HERE / "symbols.yaml").read_text(encoding="utf-8"))
+    table = json.loads(TABLE.read_text(encoding="utf-8"))
     entries = [e for section in ("consonants", "affricates", "vowels") for e in table[section]]
     result: dict[str, dict] = {}
     for number, entry in enumerate(entries, 1):
