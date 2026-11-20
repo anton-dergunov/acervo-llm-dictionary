@@ -7,13 +7,13 @@ import importlib.util
 import json
 import re
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-from acervo.models.errors import ProviderUnavailable
+from acervo.models.errors import ProviderRefused, ProviderUnavailable
 from acervo.models.results import Answer, Spent, TextResult
 from acervo.services.capture.compose import compose_parts
 from acervo.services.models import Demoted, Unusable
@@ -75,6 +75,7 @@ class Model:
 def setup(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> tuple[Path, Model]:
     monkeypatch.setattr(build, "load_concepts", lambda path=None: CONCEPTS)
     monkeypatch.setattr(build, "PER_MINUTE", 0)
+    monkeypatch.delenv(build.KEYS_ENV, raising=False)
     monkeypatch.setattr(build, "DICTIONARIES", tmp_path / "no-dictionaries")
 
     class Row:
@@ -85,7 +86,8 @@ def setup(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> tuple[Path, Model]
 
 
 def run(out: Path, model: Model, **options: Any) -> int:
-    args = argparse.Namespace(only="ru", max_calls=None, workers=1, dry_run=False)
+    args = argparse.Namespace(only="ru", max_calls=None, workers=1, dry_run=False, keys=None,
+                              parallel_keys=3, no_fallback=False, wait=False)
     for name, value in options.items():
         setattr(args, name, value)
     return build.run(args, out=out, send=model)
@@ -120,27 +122,30 @@ def test_a_daily_refusal_moves_to_the_second_model_then_stops_the_day(setup: tup
     assert run(out, model) == 0
     assert {m for m, _ in model.calls} == {FIRST, SECOND}
     assert (out / "ru" / "words.json").exists()
-    assert FIRST in json.loads((out / "spent.json").read_text())
+    assert f"k1/{FIRST}" in json.loads((out / "spent.json").read_text())
 
     model.refuse[SECOND] = model.refuse[FIRST]
     build.review(argparse.Namespace(vocabulary="ru"), out=out)
     asked = len(model.calls)
     assert run(out, model) == 0
-    assert set(json.loads((out / "spent.json").read_text())) == {FIRST, SECOND}
+    assert set(json.loads((out / "spent.json").read_text())) == {f"k1/{FIRST}", f"k1/{SECOND}"}
     assert not list((out / "ru").glob("compose/*.json"))
     assert run(out, model) == 0
     assert len(model.calls) == asked + 1, "a spent model is not asked again the same day"
 
 
-def test_spent_models_open_again_after_midnight_in_california(tmp_path: Path) -> None:
+def test_spent_lanes_open_again_after_midnight_in_california(tmp_path: Path) -> None:
     moment = [datetime(2026, 11, 20, 20, 0, tzinfo=timezone.utc)]
-    allowance = build.Allowance(tmp_path / "spent.json", build.MODELS, clock=lambda: moment[0])
-    allowance.spend(FIRST, "test")
-    assert allowance.open() == [SECOND]
+    lanes = [f"k1/{FIRST}", f"k1/{SECOND}"]
+    allowance = build.Allowance(tmp_path / "spent.json", lanes, clock=lambda: moment[0])
+    allowance.spend(lanes[0], "test")
+    assert [allowance.is_open(lane) for lane in lanes] == [False, True]
     moment[0] = datetime(2026, 11, 21, 7, 59, tzinfo=timezone.utc)   # 23:59 in California
-    assert allowance.open() == [SECOND]
+    assert [allowance.is_open(lane) for lane in lanes] == [False, True]
+    assert allowance.next_open() == datetime(2026, 11, 21, 8, 0, tzinfo=timezone.utc)
     moment[0] = datetime(2026, 11, 21, 8, 1, tzinfo=timezone.utc)
-    assert build.Allowance(tmp_path / "spent.json", build.MODELS, clock=lambda: moment[0]).open() == list(build.MODELS)
+    again = build.Allowance(tmp_path / "spent.json", lanes, clock=lambda: moment[0])
+    assert all(again.is_open(lane) for lane in lanes) and again.next_open() is None
 
 
 def _compose_with(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, verdicts: dict[str, Exception | None]) -> Path:
@@ -160,8 +165,9 @@ def _compose_with(monkeypatch: pytest.MonkeyPatch, tmp_path: Path, verdicts: dic
 
     monkeypatch.setattr(build, "compose_parts", parts)
     tmp_path.mkdir(parents=True, exist_ok=True)
-    caller = build.Caller(row=None, allowance=build.Allowance(tmp_path / "spent.json", build.MODELS),
-                          log=tmp_path / "calls.jsonl", gate=build.Pace(0))
+    key = build.Key("k1", None)
+    caller = build.Caller(keys=[key], allowance=build.Allowance(tmp_path / "spent.json", [key.lane(m) for m in build.MODELS]),
+                          log=tmp_path / "calls.jsonl")
     caller.send = send
     word = {"key": "mat", "headword": "мать", "lemma": "мать", "pos": "noun", "concepts": ["mother"],
             "senses": ["a female parent"], "topics": ["People"]}
@@ -224,3 +230,108 @@ def test_the_builder_sends_composes_own_prompt_and_reader_section(tmp_path: Path
     system, user, _ = compose_parts(REPO_ROOT / "prompts", tmp_path, resolution, {}, vocabulary, [])
     assert system == prompt_text(REPO_ROOT / "prompts", "acervo_compose") + "\n\n" + reader_section(vocabulary)
     assert "Headword: la madre" in user
+
+
+# ── several keys ────────────────────────────────────────────────────────────
+
+
+KEYS = "\n".join(["# a comment", "", *(f"# account {n}\nGEMINI_API_KEY_{n}=AQ.key{n}abcdefgh" for n in range(1, 6))])
+
+
+def keys_file(tmp_path: Path, text: str = KEYS) -> Path:
+    path = tmp_path / "keys.env"
+    path.write_text(text)
+    return path
+
+
+def test_keys_are_read_in_file_order_and_the_last_is_the_fallback(tmp_path: Path) -> None:
+    assert [label for label, _ in build.read_keys(keys_file(tmp_path))] == ["k1", "k2", "k3", "k4", "k5"]
+    keys = build.keys_for(str(keys_file(tmp_path)))
+    assert [k.fallback for k in keys] == [False] * 4 + [True]
+    assert [k.label for k in build.keys_for(str(keys_file(tmp_path)), fallback=False)] == ["k1", "k2", "k3", "k4"]
+    assert build.shown("AQ.key1abcdefgh") == "AQ.k…efgh"
+
+
+@pytest.mark.parametrize("text", ["GEMINI_API_KEY_1=AQ.a\nGEMINI_API_KEY_1=AQ.b", "GEMINI_API_KEY_1=AQ.a\nGEMINI_API_KEY_2=AQ.a",
+                                  "SOMETHING=AQ.a"])
+def test_a_keys_file_with_a_duplicate_or_a_stray_line_is_refused(tmp_path: Path, text: str) -> None:
+    with pytest.raises(ValueError):
+        build.read_keys(keys_file(tmp_path, text))
+
+
+def test_only_the_keys_in_parallel_are_asked_and_the_next_takes_over_when_one_is_spent(
+        setup: tuple[Path, Model], tmp_path: Path) -> None:
+    out, model = setup
+    keys = build.keys_for(str(keys_file(tmp_path)))
+    asked: list[str] = []
+
+    def send(user: str, *, row: Any, model: str, **_: Any) -> TextResult:
+        asked.append(row.id)
+        if row.id == "gemini-k1":
+            raise ProviderUnavailable("rate_limited", "Quota: GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+                                      provider_id=row.id, model=model)
+        return Model()(user, row=row, model=model, system="", as_json=True, timeout=1)
+
+    caller = build.Caller(keys=keys, allowance=build.Allowance(out / "spent.json", [k.lane(m) for k in keys for m in build.MODELS]),
+                          log=tmp_path / "calls.jsonl", parallel_keys=2)
+    caller.send = send
+    for _ in range(6):
+        caller.ask("s", "Concepts (id | part of speech | meaning | note)\narm | noun | y", step="t", vocabulary="v", item="i")
+    # k1 is spent on both models, so k2 and k3 are the two in use; k4, k5 (fallback) are never asked.
+    assert set(asked) <= {"gemini-k1", "gemini-k2", "gemini-k3"} and "gemini-k4" not in asked
+    assert {r for r in asked[2:]} <= {"gemini-k2", "gemini-k3"}
+    assert json.loads((tmp_path / "calls.jsonl").read_text().splitlines()[-1])["key"] in {"k2", "k3"}
+
+
+def test_the_fallback_is_asked_only_when_the_other_keys_are_spent(tmp_path: Path) -> None:
+    keys = [build.Key("k1", None), build.Key("k2", None, fallback=True)]
+    allowance = build.Allowance(tmp_path / "spent.json", [k.lane(m) for k in keys for m in build.MODELS])
+    caller = build.Caller(keys=keys, allowance=allowance, log=tmp_path / "calls.jsonl")
+    assert [k.label for k, _ in caller.eligible(())] == ["k1"]
+    for model in build.MODELS:
+        allowance.spend(keys[0].lane(model), "test")
+    assert [k.label for k, _ in caller.eligible(())] == ["k2"]
+    for model in build.MODELS:
+        allowance.spend(keys[1].lane(model), "test")
+    assert not caller.any_open()
+
+
+def test_a_rejected_key_is_dropped_and_the_others_carry_on(tmp_path: Path) -> None:
+    keys = [build.Key("k1", "bad"), build.Key("k2", "good")]
+    caller = build.Caller(keys=keys, allowance=build.Allowance(tmp_path / "spent.json", [k.lane(m) for k in keys for m in build.MODELS]),
+                          log=tmp_path / "calls.jsonl")
+
+    def send(user: str, *, row: Any, model: str, **_: Any) -> TextResult:
+        if row == "bad":
+            raise ProviderRefused("auth", "API key not valid", provider_id="gemini-api", model=model)
+        return Model()(user, row=row, model=model, system="", as_json=True, timeout=1)
+
+    caller.send = send
+    caller.ask("s", "Concepts (id | part of speech | meaning | note)\narm | noun | y", step="t", vocabulary="v", item="i")
+    assert caller.dropped == {"k1"} and not caller.stopped.is_set()
+    lines = [json.loads(line) for line in (tmp_path / "calls.jsonl").read_text().splitlines()]
+    assert [(line["key"], line["ok"]) for line in lines] == [("k1", False), ("k2", True)]
+
+
+def test_wait_sleeps_to_the_reset_and_then_carries_on(setup: tuple[Path, Model], tmp_path: Path) -> None:
+    out, model = setup
+    moment = [datetime(2026, 11, 20, 20, 0, tzinfo=timezone.utc)]
+    slept: list[float] = []
+
+    def sleep(seconds: float) -> None:
+        slept.append(seconds)
+        moment[0] += timedelta(seconds=seconds)
+
+    model.refuse[FIRST] = model.refuse[SECOND] = "Quota exceeded: GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+    original = model.__call__
+
+    def send(*args: Any, **kwargs: Any) -> TextResult:
+        if moment[0] >= datetime(2026, 11, 21, 8, 0, tzinfo=timezone.utc):
+            model.refuse.clear()
+        return original(*args, **kwargs)
+
+    args = argparse.Namespace(only="ru", max_calls=None, workers=1, dry_run=False, keys=None,
+                              parallel_keys=3, no_fallback=False, wait=True)
+    assert build.run(args, out=out, send=send, clock=lambda: moment[0], sleep=sleep) == 0
+    assert sum(slept) >= 12 * 3600 and max(slept) <= 30.0
+    assert (out / "ru" / "words.json").exists(), "after the reset the words were asked for"

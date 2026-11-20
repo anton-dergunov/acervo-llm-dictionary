@@ -122,6 +122,13 @@ come later, as translations (step 8).
 Text costs nothing: about 11,000 calls (≈10,400 composes, 320 word-list and 320 match calls) on the
 free key's two Flash-Lite models, about 1,000 a day, so roughly 11 days of daily runs.
 
+More free keys (one per Google account, each its own project, so each with its own daily allowance and
+8-a-minute meter) shorten that. `build.py run --keys FILE` reads a dotenv file of `GEMINI_API_KEY_<n>`
+lines and asks at most three keys at once (`--parallel-keys`), in file order; the last key is a
+fallback, used only when the others are spent (`--no-fallback` leaves it out). `--wait` sleeps until
+Google's reset at midnight in California and carries on, so one run can be left for days. Three keys
+is about 3,000 calls a day, so roughly four days.
+
 The **$280 is trial credit** on the `digest` Google Cloud project: free money, used or lost, which
 lasts roughly until mid-February 2027 but could end sooner. So spend it early rather than late.
 **Do not ask Google for a higher quota, or contact Google about these credits at all.** They are

@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Build the starter vocabularies' words on the free Gemini key, a day's allowance at a time.
+"""Build the starter vocabularies' words on free Gemini keys, a day's allowance at a time.
 
     .venv/bin/python scripts/starter/build.py run                # the next work, until the day's calls are spent
+    .venv/bin/python scripts/starter/build.py run --keys keys.env --wait   # several keys; sleep through the reset
     .venv/bin/python scripts/starter/build.py run --only es-MX --max-calls 20
     .venv/bin/python scripts/starter/build.py run --dry-run      # print what would be asked, call nothing
     .venv/bin/python scripts/starter/build.py status
@@ -24,10 +25,17 @@ stopped:
 3. **Match**, once every word is composed: one call per topic maps each sense to a concept or to
    none (`prompts/match.md`).
 
-The free key has two Flash-Lite models, each with its own daily allowance (about 500 calls). A model
-is spent for the day when its 429 names a per-day quota, or after five rests in a row; when both
-are, the run stops and says so. Spent models are remembered until midnight in California, when
-Google resets them, so a second run the same day does not knock on a closed door.
+A free key has two Flash-Lite models, each with its own daily allowance (about 500 calls), and a
+per-minute meter of its own. A model is spent for the day when its 429 names a per-day quota, or after
+five rests in a row; when every model of every key is, the run stops and says so. Spent models are
+remembered until midnight in California, when Google resets them (08:00 UTC in winter), so a second
+run the same day does not knock on a closed door. `--wait` sleeps until then and carries on.
+
+Keys: `--keys FILE` (or the environment variable `STARTER_GEMINI_KEYS`) names a dotenv file of
+`GEMINI_API_KEY_<n>=…` lines, one per Google account. Without either, the one `gemini-api` key in
+`providers.local.json` is used. At most `--parallel-keys` keys (default 3) are asked at once, in file
+order; when one is spent the next takes its place. The last key is a fallback, asked only when no other
+key has an open model; `--no-fallback` leaves it out. A key's label (`k<n>`) is all that is logged.
 
 Everything is written under `data/starter/` (ignored): per vocabulary `words/<topic>.json`,
 `words.json`, `compose/<word>.json` (the request, the raw reply, the check's verdict, the draft),
@@ -40,6 +48,8 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
+import re
 import sys
 import threading
 import time
@@ -64,6 +74,7 @@ from acervo.models.errors import ProviderError, ProviderRefused  # noqa: E402
 from acervo.models.local import load_local  # noqa: E402
 from acervo.models.locales import language_name  # noqa: E402
 from acervo.models.pacing import Pace  # noqa: E402
+from acervo.models.providers import DocumentError, parse as parse_provider  # noqa: E402
 from acervo.services.capture.compose import compose_parts  # noqa: E402
 from acervo.services.capture.draft import draft_from  # noqa: E402
 from acervo.services.models import Demoted, Unusable  # noqa: E402
@@ -79,7 +90,10 @@ OUT = ROOT / "data" / "starter"
 PROVIDER = "gemini-api"
 MODELS = ("gemini-3.5-flash-lite", "gemini-3.1-flash-lite")
 PER_MINUTE = 8          # the free tier meters the key, not the model (experiments/compose-lesson-line)
-WORKERS = 3             # a compose takes 10-20 s, so one at a time would use half the minute's calls
+WORKERS_PER_KEY = 3     # a compose takes 10-20 s, so one at a time would use half the minute's calls
+PARALLEL_KEYS = 3       # keys asked at once; one account's quota is not asked to carry the others'
+KEYS_ENV = "STARTER_GEMINI_KEYS"
+RESET_MARGIN = timedelta(minutes=1)   # waited past the reset, so the first call is not early
 TIMEOUT = 120.0
 RESTS_TO_SPEND = 5      # rests in a row that mark a model spent when Google never said "per day"
 FAILURES_TO_STOP = 10   # failures in a row, of any model, that mean something is broken
@@ -152,6 +166,68 @@ def record_for(vocabulary: dict[str, Any]) -> dict[str, Any]:
     return {key: vocabulary[key] for key in keys if vocabulary.get(key) is not None}
 
 
+# ── the keys ────────────────────────────────────────────────────────────────
+
+
+@dataclass(frozen=True)
+class Key:
+    """One free key: a label for the logs (`k3`), the provider row that holds it, and whether it is held back."""
+
+    label: str
+    row: Any
+    fallback: bool = False
+
+    def lane(self, model: str) -> str:
+        return f"{self.label}/{model}"
+
+
+KEY_LINE = re.compile(r"^GEMINI_API_KEY_(\d+)\s*=\s*(\S+)\s*$")
+
+
+def read_keys(path: Path) -> list[tuple[str, str]]:
+    """`(label, key)` for each `GEMINI_API_KEY_<n>=…` line, in file order; anything else is a comment."""
+    found: list[tuple[str, str]] = []
+    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        text = line.strip()
+        if not text or text.startswith("#"):
+            continue
+        matched = KEY_LINE.match(text.strip("'\""))
+        if not matched:
+            raise ValueError(f"{path}:{number}: expected GEMINI_API_KEY_<n>=<key>, a comment or a blank line")
+        label, value = f"k{int(matched[1])}", matched[2].strip("'\"")
+        if any(label == one or value == key for one, key in found):
+            raise ValueError(f"{path}:{number}: {label} or its key appears twice")
+        found.append((label, value))
+    return found
+
+
+def keys_for(file: str | None, *, fallback: bool = True) -> list[Key]:
+    """The keys to use: the file named, or the one in the environment, or the laptop's one gemini-api key."""
+    file = file or os.environ.get(KEYS_ENV)
+    if not file:
+        return [Key("k1", load_local().find(PROVIDER))]
+    held = read_keys(Path(file).expanduser())
+    if not held:
+        raise ValueError(f"{file} holds no GEMINI_API_KEY_<n> line")
+    keys = []
+    for label, value in held:
+        document = {"id": f"gemini-{label}", "family": PROVIDER, "models": {"text": list(MODELS)}}
+        try:
+            keys.append(Key(label, parse_provider(document, {"key": value})))
+        except DocumentError as error:
+            raise ValueError(f"{label}: {error}") from None
+    if len(keys) > 1:
+        keys[-1] = Key(keys[-1].label, keys[-1].row, fallback=True)
+        if not fallback:
+            keys.pop()
+    return keys
+
+
+def shown(key: str) -> str:
+    """A key's first and last four characters, which is all of it that is ever printed."""
+    return f"{key[:4]}…{key[-4:]}"
+
+
 # ── the day's allowance ─────────────────────────────────────────────────────
 
 
@@ -160,7 +236,7 @@ class DayOver(Exception):
 
 
 class Broken(Exception):
-    """A failure no retry fixes: a rejected key, an unknown model, or failure after failure."""
+    """A failure no retry fixes: every key rejected, an unknown model, or failure after failure."""
 
 
 class NoModel(Exception):
@@ -179,40 +255,47 @@ def per_day(detail: str) -> bool:
 
 
 class Allowance:
-    """Which models may still be asked today, remembered across runs in `spent.json`."""
+    """Which lanes (`k1/gemini-3.5-flash-lite`: a key's model) may still be asked today, remembered
+    across runs in `spent.json`."""
 
-    def __init__(self, path: Path, models: Iterable[str], clock: Callable[[], datetime] | None = None) -> None:
+    def __init__(self, path: Path, lanes: Iterable[str], clock: Callable[[], datetime] | None = None) -> None:
         self.path = path
-        self.models = tuple(models)
+        self.lanes = tuple(lanes)
         self.clock = clock or (lambda: datetime.now(timezone.utc))
         self.lock = threading.Lock()
-        self.rests: dict[str, int] = {model: 0 for model in self.models}
+        self.rests: dict[str, int] = {lane: 0 for lane in self.lanes}
         held = read_json(path) if path.exists() else {}
-        self.until: dict[str, datetime] = {model: datetime.fromisoformat(value) for model, value in held.items()}
+        self.until: dict[str, datetime] = {lane: datetime.fromisoformat(value) for lane, value in held.items()}
 
-    def open(self, exclude: Iterable[str] = ()) -> list[str]:
+    def is_open(self, lane: str) -> bool:
         with self.lock:
             moment = self.clock()
-            return [model for model in self.models
-                    if model not in exclude and self.until.get(model, moment) <= moment]
+            return self.until.get(lane, moment) <= moment
 
-    def spend(self, model: str, why: str) -> None:
+    def spend(self, lane: str, why: str) -> None:
         with self.lock:
-            if self.until.get(model, self.clock()) > self.clock():
+            if self.until.get(lane, self.clock()) > self.clock():
                 return
-            self.until[model] = next_reset(self.clock())
+            self.until[lane] = next_reset(self.clock())
             write_json(self.path, {name: value.isoformat() for name, value in self.until.items()})
-        print(f"  {model} is spent for today ({why}); it resets at "
-              f"{self.until[model].astimezone(RESET_ZONE):%H:%M %Z}", flush=True)
+        print(f"  {lane} is spent for today ({why}); it resets at "
+              f"{self.until[lane].astimezone(RESET_ZONE):%H:%M %Z}", flush=True)
 
-    def rested(self, model: str) -> int:
+    def rested(self, lane: str) -> int:
         with self.lock:
-            self.rests[model] += 1
-            return self.rests[model]
+            self.rests[lane] = self.rests.get(lane, 0) + 1
+            return self.rests[lane]
 
-    def answered(self, model: str) -> None:
+    def answered(self, lane: str) -> None:
         with self.lock:
-            self.rests[model] = 0
+            self.rests[lane] = 0
+
+    def next_open(self) -> datetime | None:
+        """When the first lane now spent opens again, or None if none is spent."""
+        with self.lock:
+            moment = self.clock()
+            later = [self.until[lane] for lane in self.lanes if self.until.get(lane, moment) > moment]
+            return min(later) if later else None
 
 
 # ── one call ────────────────────────────────────────────────────────────────
@@ -238,59 +321,98 @@ class Failed(Exception):
 
 @dataclass
 class Caller:
-    """The key, the pace, the allowance and the call log, shared by every worker of a run."""
+    """The keys, their paces, the allowance and the call log, shared by every worker of a run."""
 
-    row: Any
+    keys: list[Key]
     allowance: Allowance
     log: Path
     max_calls: int | None = None
-    gate: Pace = field(default_factory=lambda: Pace(PER_MINUTE, cooldown=30.0, cap=600.0))
+    parallel_keys: int = PARALLEL_KEYS
+    gates: dict[str, Pace] = field(default_factory=dict)
+    dropped: set[str] = field(default_factory=set)
     calls: int = 0
     failures: int = 0
     lock: threading.Lock = field(default_factory=threading.Lock)
     stopped: threading.Event = field(default_factory=threading.Event)
     send: Callable[..., Any] = call.text
 
+    def __post_init__(self) -> None:
+        # The free tier meters the key, not the model, so one gate per key.
+        for key in self.keys:
+            self.gates.setdefault(key.label, Pace(PER_MINUTE, cooldown=30.0, cap=600.0))
+
     def note(self, line: dict[str, Any]) -> None:
         with self.lock, self.log.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(line, ensure_ascii=False) + "\n")
 
+    def open_lanes(self, key: Key) -> list[str]:
+        return [model for model in MODELS if self.allowance.is_open(key.lane(model))]
+
+    def any_open(self) -> bool:
+        return any(self.open_lanes(key) for key in self.keys if key.label not in self.dropped)
+
+    def eligible(self, exclude: Iterable[str]) -> list[tuple[Key, str]]:
+        """The keys that may be asked now, in order, each with the model to ask: at most `parallel_keys`
+        of them, and the fallback only when no other key has an open model."""
+        live = [key for key in self.keys if key.label not in self.dropped and self.open_lanes(key)]
+        main = [key for key in live if not key.fallback]
+        chosen = []
+        for key in main or live:
+            model = next((m for m in self.open_lanes(key) if m not in exclude), None)
+            if model is not None:
+                chosen.append((key, model))
+        return chosen[:self.parallel_keys]
+
     def ask(self, system: str, user: str, *, step: str, vocabulary: str, item: str,
             exclude: Iterable[str] = ()) -> Asked:
-        """One answer from the first open model not in `exclude`, waiting out per-minute refusals."""
+        """One answer from the first free key's first open model not in `exclude`, waiting out per-minute refusals."""
+        exclude = tuple(exclude)
         while True:
             if self.stopped.is_set():
                 raise DayOver()
-            models = self.allowance.open(exclude)
-            if not models:
-                if not self.allowance.open():
-                    self.stopped.set()
-                    raise DayOver()
+            if not self.any_open():
+                self.stopped.set()
+                raise DayOver()
+            candidates = self.eligible(exclude)
+            if not candidates:
                 raise NoModel()
-            model = models[0]
+            taken = next(((key, model) for key, model in candidates if self.gates[key.label].try_acquire()), None)
+            if taken is None:
+                time.sleep(0.25)
+                continue
+            key, model = taken
+            lane = key.lane(model)
             with self.lock:
                 if self.max_calls is not None and self.calls >= self.max_calls:
                     self.stopped.set()
                     raise DayOver()
                 self.calls += 1
-            self.gate.acquire()
-            line = {"at": now(), "step": step, "vocabulary": vocabulary, "item": item, "model": model}
+            line = {"at": now(), "step": step, "vocabulary": vocabulary, "item": item, "key": key.label, "model": model}
             started = time.monotonic()
             try:
-                result = self.send(user, row=self.row, model=model, system=system, as_json=True, timeout=TIMEOUT)
+                result = self.send(user, row=key.row, model=model, system=system, as_json=True, timeout=TIMEOUT)
             except ProviderError as error:
                 seconds = round(time.monotonic() - started, 2)
                 self.note(line | {"ok": False, "reason": error.reason, "seconds": seconds, "detail": error.detail[:600]})
                 if isinstance(error, ProviderRefused):
-                    self.stopped.set()
-                    raise Broken(f"{model} refused the call ({error.reason}): {error.detail[:300]}") from None
+                    # A rejected key is left out; the others carry on.
+                    with self.lock:
+                        self.dropped.add(key.label)
+                        left = [k for k in self.keys if k.label not in self.dropped]
+                    print(f"  {key.label} is dropped: {model} refused the call ({error.reason}): "
+                          f"{error.detail[:200]}", flush=True)
+                    if not left:
+                        self.stopped.set()
+                        raise Broken(f"every key was refused; the last said ({error.reason}): "
+                                     f"{error.detail[:300]}") from None
+                    continue
                 if error.reason == "rate_limited":
                     if per_day(error.detail):
-                        self.allowance.spend(model, "Google says its daily allowance is used")
-                    elif self.allowance.rested(model) >= RESTS_TO_SPEND:
-                        self.allowance.spend(model, f"{RESTS_TO_SPEND} refusals in a row")
+                        self.allowance.spend(lane, "Google says its daily allowance is used")
+                    elif self.allowance.rested(lane) >= RESTS_TO_SPEND:
+                        self.allowance.spend(lane, f"{RESTS_TO_SPEND} refusals in a row")
                     else:
-                        self.gate.penalise(retry_after_of(error))
+                        self.gates[key.label].penalise(retry_after_of(error))
                     continue
                 self.failed()
                 raise Failed(model, error.reason, error.detail, retry=True) from None
@@ -299,8 +421,8 @@ class Caller:
             self.note(line | {"ok": True, "seconds": seconds, "costUsd": result.answer.cost_usd,
                               "in": spent.input_tokens, "out": spent.output_tokens,
                               "json": result.parsed is not None})
-            self.gate.succeeded()
-            self.allowance.answered(model)
+            self.gates[key.label].succeeded()
+            self.allowance.answered(lane)
             return Asked(model, result.parsed, result.text, seconds, result.answer.cost_usd,
                          (spent.input_tokens, spent.output_tokens))
 
@@ -650,7 +772,7 @@ def selected(vocabularies: list[dict[str, Any]], only: str | None) -> list[dict[
 
 
 def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] | None = None,
-        clock: Callable[[], datetime] | None = None) -> int:
+        clock: Callable[[], datetime] | None = None, sleep: Callable[[float], None] = time.sleep) -> int:
     concepts = load_concepts()
     vocabularies, topic_names = load_vocabularies()
     chosen = selected(vocabularies, args.only)
@@ -672,21 +794,70 @@ def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] |
         print(f"── compose: {first['id']}, after the compose prompt ──\n{reader}\n\n{user}")
         return 0
 
-    row = load_local().find(PROVIDER)
-    if not row.available:
-        print(f"{PROVIDER} cannot be called here: {row.reason()}", file=sys.stderr)
+    try:
+        keys = keys_for(args.keys, fallback=not args.no_fallback)
+    except (ValueError, OSError) as error:
+        print(f"The keys cannot be read: {error}", file=sys.stderr)
+        return 1
+    unusable = [key for key in keys if not key.row.available]
+    for key in unusable:
+        print(f"{key.label} cannot be called here: {key.row.reason()}", file=sys.stderr)
+    keys = [key for key in keys if key not in unusable]
+    if not keys:
         return 1
     out.mkdir(parents=True, exist_ok=True)
-    caller = Caller(row=row, allowance=Allowance(out / "spent.json", MODELS, clock), log=out / "calls.jsonl",
-                    max_calls=args.max_calls)
-    if send is not None:
-        caller.send = send
-    if not caller.allowance.open():
-        print("Both models are spent for today; run again after midnight in California.")
-        return 0
+    allowance = Allowance(out / "spent.json", [key.lane(model) for key in keys for model in MODELS], clock)
+    workers = args.workers or WORKERS_PER_KEY * min(args.parallel_keys, len(keys))
+    print("keys: " + ", ".join(f"{key.label}{' (fallback)' if key.fallback else ''}" for key in keys)
+          + f"; {args.parallel_keys} at a time, {workers} workers")
     write_json(out / "manifest.json", {"concepts": digest(CONCEPTS.read_text(encoding="utf-8")),
                                        "prompts": {"headwords": digest(headword_system), "match": digest(match_system),
                                                    "acervo_compose": digest(prompt_text(APP_PROMPTS, "acervo_compose"))}})
+    asked = 0
+    while True:
+        caller = Caller(keys=keys, allowance=allowance, log=out / "calls.jsonl", parallel_keys=args.parallel_keys,
+                        max_calls=None if args.max_calls is None else args.max_calls - asked)
+        if send is not None:
+            caller.send = send
+        if not caller.any_open():
+            outcome = "spent"
+        else:
+            outcome = one_pass(caller, workers, args, out, chosen, concepts, topic_names, topics,
+                               headword_system, match_system)
+            if outcome == "broken":
+                return 1
+        asked += caller.calls
+        if outcome == "limit":
+            print(f"\nStopped after {asked} call(s): the call limit for this run.")
+        elif outcome == "spent":
+            if args.wait:
+                wait_for_reset(allowance, clock or (lambda: datetime.now(timezone.utc)), sleep)
+                continue
+            print(f"\nStopped after {asked} call(s): today's allowance is used; run again tomorrow, "
+                  "or use --wait to sleep until the reset.")
+        else:
+            print(f"\nNothing left that can be done now, after {asked} call(s).")
+        break
+    status(args, out=out)
+    return 0
+
+
+def wait_for_reset(allowance: Allowance, clock: Callable[[], datetime], sleep: Callable[[float], None]) -> None:
+    """Sleep until the first spent lane opens, judged by the wall clock so a sleeping laptop does not lose it."""
+    opens = allowance.next_open()
+    if opens is None:
+        return
+    target = opens + RESET_MARGIN
+    print(f"\nEvery key is spent for today. Resuming at {target.astimezone(RESET_ZONE):%H:%M %Z} "
+          f"({target:%H:%M} UTC, {target.astimezone():%H:%M} here); Ctrl-C to stop.", flush=True)
+    while (left := (target - clock()).total_seconds()) > 0:
+        sleep(min(30.0, left))
+
+
+def one_pass(caller: Caller, workers: int, args: argparse.Namespace, out: Path, chosen: list[dict[str, Any]],
+             concepts: dict[str, list[Concept]], topic_names: dict[str, str], topics: list[dict[str, str]],
+             headword_system: str, match_system: str) -> str:
+    """The next work until it is done or the keys are spent: "idle", "spent", "limit" or "broken"."""
 
     def each(jobs: list[Callable[[], None]]) -> None:
         """The jobs on a few workers; the first DayOver or Broken stops the rest."""
@@ -701,7 +872,7 @@ def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] |
                 caller.stopped.set()
                 problems.append(stop)
 
-        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
             list(pool.map(wrapped, jobs))
         broken = next((p for p in problems if isinstance(p, Broken)), None)
         if broken:
@@ -735,17 +906,12 @@ def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] |
                   match_job(caller, v, t, c, s, match_system, f)
                   for topic, (cands, senses) in batches.items() if topic not in state.matched])
     except DayOver:
-        print(f"\nStopped after {caller.calls} call(s): "
-              + ("the call limit for this run." if args.max_calls is not None and caller.calls >= args.max_calls
-                 else "today's allowance is used; run again tomorrow."))
+        return "limit" if caller.max_calls is not None and caller.calls >= caller.max_calls else "spent"
     except Broken as broken:
         print(f"\nStopped: {broken}", file=sys.stderr)
         status(args, out=out)
-        return 1
-    else:
-        print(f"\nNothing left that can be done now, after {caller.calls} call(s).")
-    status(args, out=out)
-    return 0
+        return "broken"
+    return "idle"
 
 
 def status(args: argparse.Namespace, *, out: Path = OUT) -> int:
@@ -778,7 +944,17 @@ def status(args: argparse.Namespace, *, out: Path = OUT) -> int:
         asked = [line for line in lines if "ok" in line]
         cost = sum(line.get("costUsd") or 0 for line in asked)
         print(f"\ncalls: {sum(1 for line in asked if on_reset_day(line))} today (California day), "
-              f"{len(asked)} in all; list price ${cost:.2f} (the free key pays nothing)")
+              f"{len(asked)} in all; list price ${cost:.2f} (the free keys pay nothing)")
+        per_key: dict[str, int] = {}
+        for line in asked:
+            if line.get("key") and line.get("ok") and on_reset_day(line):
+                per_key[line["key"]] = per_key.get(line["key"], 0) + 1
+        spent = read_json(out / "spent.json") if (out / "spent.json").exists() else {}
+        moment = datetime.now(timezone.utc)
+        closed = sorted(lane for lane, until in spent.items() if datetime.fromisoformat(until) > moment)
+        if per_key or closed:
+            print("answered today per key: " + (", ".join(f"{k} {n}" for k, n in sorted(per_key.items())) or "none"))
+            print("spent until the reset: " + (", ".join(closed) or "nothing"))
     return 0
 
 
@@ -800,7 +976,11 @@ def main(argv: list[str] | None = None) -> int:
     running = commands.add_parser("run", help="do the next work until the day's allowance is used")
     running.add_argument("--only", help="vocabulary ids, comma-separated (es-MX,ru)")
     running.add_argument("--max-calls", type=int, help="stop after this many calls")
-    running.add_argument("--workers", type=int, default=WORKERS)
+    running.add_argument("--workers", type=int, help=f"default {WORKERS_PER_KEY} per key asked at once")
+    running.add_argument("--keys", help=f"a dotenv file of GEMINI_API_KEY_<n> lines (or ${KEYS_ENV})")
+    running.add_argument("--parallel-keys", type=int, default=PARALLEL_KEYS, help="keys asked at once")
+    running.add_argument("--no-fallback", action="store_true", help="never use the last key in the file")
+    running.add_argument("--wait", action="store_true", help="when every key is spent, sleep until the reset and go on")
     running.add_argument("--dry-run", action="store_true", help="print what would be asked; call nothing")
     showing = commands.add_parser("status", help="what is done, per vocabulary")
     showing.add_argument("--only")
