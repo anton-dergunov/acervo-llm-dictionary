@@ -1,8 +1,9 @@
 # IPA guide · what each symbol in a transcription means
 
-**Status:** not started. The table and the candidate recordings are being prepared in
-[`experiments/ipa-sounds/`](../../../experiments/ipa-sounds/README.md): the owner picks one recording
-per sound and checks the wording on its review page before anything here is built.
+**Status:** the content is ready, the app part is not started. The table, the owner's pick of a
+recording for every sound and the cleaned files are in
+[`experiments/ipa-sounds/`](../../../experiments/ipa-sounds/README.md) (`symbols.yaml`,
+`results/recordings.json`, and the files `process.py final` makes).
 
 A learner who has never read IPA sees `/tʰu˧˥ ʂu˥ ku̯an˨˩˦/` and learns nothing from it. The guide
 explains a transcription where it is shown: tap it, and a panel lists each sound in it with a plain
@@ -58,11 +59,26 @@ each stands for and an English hint. That answers the question a learner of Mand
   `ɑ̃` …, the table's `combinations`), and otherwise its bare letter's, with the mark's text saying
   what differs. Marks with no sound of their own (stress, length, tone marks, a diacritic alone)
   have text and no recording.
-- **Recordings come from openly licensed sources** (public domain, CC0, CC BY, CC BY-SA). The chosen
-  ones are converted to the format pronunciations already use and shipped as static files, so the
-  guide works offline like every other read.
-- **Credits:** CC BY and CC BY-SA require attribution, so the app shows a credits list (author,
-  licence and source per file).
+- **Recordings come from openly licensed sources** (public domain, CC0, CC BY, CC BY-SA), cleaned and
+  levelled (the experiment's "Third round"): 165 files for 184 cards, **1.72 MB** of Ogg Opus, the
+  codec and setting stored pronunciations use, each named by a digest of its bytes.
+- **They ship with the app, not with the vocabulary.** The same for every account and never edited,
+  so they are not records: no replica, no server route, no sync. They are static files in the build,
+  precached by the service worker with the rest of the app (`ogg` added to the precache patterns),
+  so every device has all of them after one install, offline from the first tap, at 1.7 MB once.
+  Fetching each on first play instead would leave a sound unheard offline until it had been played
+  online, the one thing an offline-first read must not do. A digest name means a new build re-downloads
+  only a file that changed.
+- **Played as a blob, like every other recording in the app.** Safari asks for audio in byte ranges,
+  which a precached response does not answer; the panel fetches the file (from the precache) and
+  plays an object URL, as `mediaStore.ts`' clips are played, and stops other players through
+  `pronunciation.registerPlayer`.
+- **The table reaches the app as JSON or TypeScript, not YAML**: `yaml.ts` is the only place YAML is
+  understood, and it is the article format's. A build step or a checked-in conversion turns
+  `symbols.yaml` and `recordings.json` into one module, tested against both.
+- **Credits:** CC BY and CC BY-SA require attribution, so the app shows a credits list: per file the
+  author, the licence with its link, the Commons page and how the file was changed (all in
+  `recordings.json`). BY-SA also keeps a changed file under its licence, which the list says.
 
 ## Open questions
 
@@ -70,3 +86,4 @@ each stands for and an English hint. That answers the question a learner of Mand
 - Whether cards and the other places that show IPA open it too, or only the article.
 - Diacritics and stress marks: explained inside their letter's row (the proposal above), or rows of
   their own.
+- Where the credits list lives: a page in Settings, or a link at the foot of the panel.

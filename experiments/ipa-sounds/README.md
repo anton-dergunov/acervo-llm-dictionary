@@ -4,8 +4,10 @@
 say about each symbol, and which openly licensed recording should it play? The table is written once
 by hand and checked; the owner picks one recording per sound and judges the wording on a review page.
 
-**Status:** table written and checked; the owner picked a recording for 176 cards on 18 Nov 2026 and
-found the wording good; 8 cards (the marked letters, ŋ, ɚ) and two re-picks (ts, pʰ) remain.
+**Status:** done 20 Nov 2026. Table written and checked, the wording judged good, a recording picked
+for all 184 cards, and each cleaned and levelled by the method the owner's blind listening chose:
+165 files, 1.72 MB of Ogg Opus, with a credit per file (`results/recordings.json`). What is left is
+the app build in the plan.
 
 ## The table (`symbols.yaml`)
 
@@ -170,8 +172,37 @@ Pinyin *uai* (10 dB overall) and *p* (10 dB above 4 kHz), `pʰ`, `ʢ ʜ ʡ pf ɤ
 .venv/bin/python experiments/ipa-sounds/compare.py --watch --host "$(tailscale ip -4)" --port 8773
 ```
 
+**Outcome (28 labels).** On the 12 cards DeepFilterNet changes most, the owner picked the gate on
+10, DeepFilterNet on Pinyin *uai* (what it took off there was low hum, not the syllable) and the
+recording as it was on `pʰ`, whose breath is the sound. Their notes name DeepFilterNet's version
+every time something was missing: "less bright", "removed that H sound", "removes those last sounds
+just a bit too much", "changes character"; the gate's was "just enough". So it is not one method for
+all, but a rule by what the recording allows (`process.chosen`), with the owner's pick winning where
+they made one; it agrees with 26 of the 28 labels and the other two are those picks:
+
+| Recordings | Version | Cards |
+|---|---|---|
+| The gate ran (silence to learn the hiss from) | gate | 160 |
+| No silence around the sound (vowels cut tight) | DeepFilterNet, the only version without the hiss | 21 |
+| Silence is digital zeros (ç, ə), or the owner's pick (`pʰ`) | as recorded | 3 |
+
+**The files.** `process.py final` encodes each chosen version, once per recording, to Ogg Opus the
+way the app stores pronunciations (libsndfile, compression 0.8) into `out/final/`, named by a digest
+of the bytes; the Opus files are regenerable from `out/originals/` and stay ignored until the build
+moves them into the app. 165 files for 184 cards (Mandarin syllables serve several cards),
+**1.72 MB** in all: 0.4–2.8 s, 4–21 KB each (median 8 KB), 60–76 kbps. Through the codec they keep
+−20 LUFS within 1 dB and peaks under −0.9 dBTP. `results/recordings.json` maps each card to its file
+and gives per file the Commons source, author, licence and its link, and the changes ("trimmed and
+level-adjusted", plus "noise-reduced" where cleaned). 47 files had no author in Commons' metadata;
+their description pages say "Recorded by Peter Isotalo" (one names no recorder and is in his
+uploads), kept in `results/authors.json`.
+
+```
+experiments/ipa-sounds/.venv/bin/python experiments/ipa-sounds/process.py report   # unblind
+experiments/ipa-sounds/.venv/bin/python experiments/ipa-sounds/process.py final    # encode and credit
+```
+
 **Licences allow it.** Public domain and CC0 have no conditions. CC BY and CC BY-SA (2.0 to 4.0) allow
 changed versions with credit, a link to the licence and a statement that the file was changed; under
 BY-SA the changed file stays under the same licence. That binds the audio file, not the app that
-ships it alongside its code. The credits list therefore says, per file, "trimmed, noise-reduced and
-level-adjusted".
+ships it alongside its code. The credits list therefore says, per file, how it was changed.

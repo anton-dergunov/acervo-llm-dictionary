@@ -3,6 +3,7 @@
     experiments/ipa-sounds/.venv/bin/python experiments/ipa-sounds/process.py fetch    # download the picks
     experiments/ipa-sounds/.venv/bin/python experiments/ipa-sounds/process.py build    # three versions each
     experiments/ipa-sounds/.venv/bin/python experiments/ipa-sounds/process.py report   # unblind the labels
+    experiments/ipa-sounds/.venv/bin/python experiments/ipa-sounds/process.py final    # the files to ship
 
 The experiment's own environment (`.venv` here: numpy, scipy, soundfile, pyloudnorm, noisereduce,
 deepfilternet with torch) keeps the denoiser out of the project's requirements.
@@ -27,11 +28,18 @@ reach the target without clipping stays quieter, and the report names it.
 The versions go to out/compare/<n>/ under letters shuffled per card (out/compare/key.json), for
 compare.py. `report` writes results/processing-summary.json: per card the version the owner chose,
 the noise floor and signal-to-noise ratio measured, and the gain applied.
+
+`final` encodes the version each card ships (`chosen`) to out/final/, as Ogg Opus the way stored
+pronunciations are (`acervo/pronunciation/encode.py`: libsndfile, compression 0.8), each named by a
+digest of its bytes, and writes results/recordings.json: per card its file, and per file the credit
+its licence asks for.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
+import io
 import json
 import random
 import subprocess
@@ -52,6 +60,9 @@ TARGET_LUFS = -20.0
 PEAK_CEILING = -1.0  # dBTP
 USER_AGENT = "AcervoIPASurvey/0.1 (one-off survey of IPA recordings for a language-learning app)"
 VERSIONS = ("plain", "gate", "dfn")
+OPUS_COMPRESSION = 0.8  # acervo/pronunciation/encode.py's COMPRESSION: the app's pronunciations, same codec and setting
+CHANGED = {"plain": "trimmed and level-adjusted", "gate": "trimmed, noise-reduced and level-adjusted",
+           "dfn": "trimmed, noise-reduced and level-adjusted"}
 
 
 def picks() -> list[dict]:
@@ -238,10 +249,91 @@ def report() -> None:
     print(json.dumps(tally), f"wrote {out}")
 
 
+def chosen(row_id: str, stats: dict, key: dict, labels: dict) -> str:
+    """The version a card ships: the owner's blind pick where they made one, else the rule their picks
+    settled (README, "Third round"). The gate where it ran: it keeps breath, friction and rasp that
+    DeepFilterNet takes for noise (10 of 12 picks on the cards it changes most). DeepFilterNet where
+    the gate had no silence to learn from: the only version without the hiss (15 of 16 picks). As
+    recorded where the silence is digital zeros, since there is no hiss to remove."""
+    best = labels.get(row_id, {}).get("best")
+    if best in key[row_id]["letters"]:
+        return key[row_id]["letters"][best]
+    skipped = stats[row_id]["gateSkipped"]
+    if skipped is None:
+        return "gate"
+    return "plain" if skipped.startswith("digital") else "dfn"
+
+
+def author(candidate: dict, recorded: dict[str, str]) -> str:
+    """The author as a credit line should name them: Commons' metadata, cleaned of the sentences its
+    tools wrap round a name, or for the files whose metadata names nobody, the recorder their
+    description page states (results/authors.json)."""
+    import re
+    raw = " ".join(candidate["author"].split())
+    if not raw:
+        return recorded[candidate["file"]]
+    for pattern in (r"No machine-readable author provided\. (.+) assumed \(based on copyright claims\)\.",
+                    r"Recorded by (.+?)\.?", r"Speaker: (\S+) Recorder: \1", r"User:(.+)",
+                    r"The original uploader was (.+) at English Wikipedia\."):
+        found = re.fullmatch(pattern, raw)
+        if found:
+            return found[1]
+    return raw
+
+
+def final() -> None:
+    """Encode the chosen version of every card, once per distinct file, and write the credits."""
+    key = json.loads((OUT / "compare" / "key.json").read_text(encoding="utf-8"))
+    stats = json.loads((OUT / "compare" / "stats.json").read_text(encoding="utf-8"))
+    labels_path = RESULTS / "processing-labels.json"
+    labels = json.loads(labels_path.read_text(encoding="utf-8")) if labels_path.exists() else {}
+    recorded = json.loads((RESULTS / "authors.json").read_text(encoding="utf-8"))["authors"]
+    target = OUT / "final"
+    if target.exists():
+        for old in target.glob("*.ogg"):
+            old.unlink()
+    target.mkdir(parents=True, exist_ok=True)
+    # Once per recording and version, not per card: cards share recordings (the Mandarin syllables
+    # especially), and an Ogg stream carries a random serial number, so encoding the same audio twice
+    # gives two files with different digests.
+    cards, files, encoded, total = {}, {}, {}, 0
+    for pick in picks():
+        row_id = pick["id"]
+        version = chosen(row_id, stats, key, labels)
+        if (pick["file"], version) in encoded:
+            cards[row_id] = {"file": encoded[pick["file"], version], "version": version}
+            continue
+        letter = next(k for k, v in key[row_id]["letters"].items() if v == version)
+        samples, rate = soundfile.read(OUT / "compare" / str(key[row_id]["n"]) / f"{letter}.wav", dtype="float32")
+        out = io.BytesIO()
+        with soundfile.SoundFile(out, "w", samplerate=rate, channels=1, format="OGG", subtype="OPUS",
+                                 compression_level=OPUS_COMPRESSION) as writing:
+            writing.write(samples)
+        data = out.getvalue()
+        name = hashlib.sha256(data).hexdigest()[:16] + ".ogg"
+        encoded[pick["file"], version] = name
+        (target / name).write_bytes(data)
+        total += len(data)
+        files[name] = {"source": pick["file"], "author": author(pick, recorded), "licence": pick["license"],
+                       "licenceUrl": pick.get("licenseUrl"), "page": pick["page"], "changes": CHANGED[version],
+                       "bytes": len(data), "seconds": round(len(samples) / rate, 2)}
+        cards[row_id] = {"file": name, "version": version}
+    tally: dict[str, int] = {}
+    for card in cards.values():
+        tally[card["version"]] = tally.get(card["version"], 0) + 1
+    manifest = {"about": "The recording each card plays (`file`, in out/final/, named by a digest of its bytes) and "
+                         "the version of it chosen (README, \"Third round\"); per file its Commons source, author, "
+                         "licence, how it was changed, size and length. Ogg Opus, as the app's pronunciations.",
+                "codec": "Ogg Opus, libsndfile compression 0.8, mono 48 kHz", "tally": tally,
+                "totalBytes": total, "cards": cards, "files": dict(sorted(files.items()))}
+    (RESULTS / "recordings.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(json.dumps(tally), f"{len(files)} files, {total / 1e6:.2f} MB, in {target}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("step", choices=("fetch", "build", "report"))
-    {"fetch": fetch, "build": build, "report": report}[parser.parse_args().step]()
+    parser.add_argument("step", choices=("fetch", "build", "report", "final"))
+    {"fetch": fetch, "build": build, "report": report, "final": final}[parser.parse_args().step]()
     return 0
 
 
