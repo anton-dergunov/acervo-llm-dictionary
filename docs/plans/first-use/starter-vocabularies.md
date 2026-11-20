@@ -1,7 +1,8 @@
 # Starter vocabularies
 
-**Status:** started 15 Nov 2026. The concept list is drafted and waiting for the owner's review
-([`starter-concepts.yaml`](starter-concepts.yaml)); nothing is generated yet.
+**Status:** the concept list ([`starter-concepts.yaml`](starter-concepts.yaml), 521 concepts in 16
+topics) was accepted unchanged on 20 Nov 2026. The builder (`scripts/starter/build.py`) is written;
+next is the owner's daily runs, starting with the word lists.
 
 A new user opens an empty Acervo, and every word costs model calls, pictures and recordings before it
 is pleasant to study ([`other-users.md`](other-users.md), "Starting with words already there"). A few
@@ -68,98 +69,110 @@ There is little hard data; here is what it supports.
 
 ## The vocabularies
 
-| Wave | Learn | For speakers of | Level | Variety | Who checks it |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Spanish | English | A2 | Latin American (Mexico) | the owner |
-| 1 | English | Spanish, Russian | A2 | US | the owner |
-| 1 | Russian | English | A2 | — | the owner |
-| 1 | Chinese (Mandarin, simplified) | English | A1, about 150 words | mainland | machine-checked; the owner tries it as a learner |
-| 2 | German | English | A2 | Germany | machine-checked; **the owner's own test as a learner** |
-| 2 | French, Italian, Japanese, Korean | English | A2 | France, Italy, Japan, Seoul | machine-checked |
-| 2 | Portuguese | English | A2 | Brazil | machine-checked |
-| 2 | Spanish | English | A2 | Castilian (Spain) | the owner |
-| 3 | Spanish, English | as wave 1 | B1, about 250 words, own concepts | as wave 1 | the owner |
+Twenty, built from the whole concept list at A2. Each is for English speakers, with definitions,
+glosses and notes in English, except English, which is for Spanish speakers. Other support languages
+come later, as translations (step 8).
 
-- **Definitions** are written in the support language at A2 and in the target language at B1.
-- **Chinese** takes about 150 of the A1 concepts, the most concrete, chosen after the concept review.
-  Korean and Japanese wait on [`../languages/cjk.md`](../languages/cjk.md) for what does not yet work
-  in them (Rare needs MeCab).
-- **German** is the owner's own test as a learner: they know very little German, which is exactly
-  what an A2 set is for. French or Italian at B1 would make a second test, since they know more of
-  those.
-- **Wave 2 doubles as the audit** in [`../languages/language-support.md`](../languages/language-support.md)
-  §1: building a vocabulary in a language shows what in Acervo does not work in it.
+| Learn | Variety (`region`) | What building it tests in Acervo |
+| --- | --- | --- |
+| Spanish | Mexico (MX) | the baseline the owner can check |
+| Spanish | Spain (ES) | a variety pair with Mexico: *coche* / *carro*, *vosotros* |
+| English | US (US) | the reversed direction: definitions in Spanish |
+| French | France (FR) | gender, liaison, nasal vowels in IPA |
+| German | Germany (DE) | three genders, cases, capitalised nouns; the owner's own test as a learner |
+| Italian | Italy (IT) | double consonants, gender |
+| Portuguese | Brazil (BR) | nasal vowels; close to Spanish, so Spanish must not leak in |
+| Russian | — | stress, aspect pairs, cases; the owner can check it |
+| Mandarin, simplified | mainland (CN) | tones and Pinyin; no spaces between words |
+| Japanese | Tokyo (JP) | furigana, segmentation, Rare refused until MeCab ([`../languages/cjk.md`](../languages/cjk.md)) |
+| Korean | Seoul (KR) | pronunciation that differs from spelling; MeCab |
+| Arabic | Modern Standard (none) | right-to-left in every view; vowels unwritten; root morphology |
+| Hindi | standard (IN) | Devanagari conjuncts in fonts; gender, postpositions |
+| Turkish | Istanbul (TR) | stacked suffixes for search; the dotless ı / İ in case conversion |
+| Vietnamese | Hanoi (VN) | tones as stacked accents; Unicode normalisation; spaces between syllables, not words |
+| Indonesian | — (ID) | the simple case: no inflection, reduplication (*anak-anak*) |
+| Polish | — (PL) | seven cases, a Slavic language in Latin script |
+| Dutch | Netherlands (NL) | close to German and English, so mix-ups show; *de* / *het* |
+| Greek | — (GR) | its own alphabet, written stress, final ς |
+| Thai | — (TH) | no spaces between words at all; five tones; vowels above and below |
+
+- **Standard Arabic**, not Egyptian: courses teach it first, everything written is in it, and a
+  dictionary can check it. The variety is a preference, so notes can still name the Egyptian word.
+  An Egyptian set could follow as a variety pair.
+- **`region` is a country**, so it cannot say Hanoi or Standard Arabic; the word lists are told the
+  variety in words. Check which variety the Vietnamese voices speak.
+- **Who checks it:** the owner checks Spanish, English and Russian. The others are machine-checked,
+  labelled so, and ship only once the audit in [`../languages/language-support.md`](../languages/language-support.md)
+  §1 passes for them. Building them is that audit.
 
 ## What each vocabulary carries
 
-- **Words:** the concept list's words in that language, A2, filed under the list's topics.
-- **Pictures:** one per concept, shared. A language's own senses with no concept get pictures in wave
-  order while credits last.
-- **Recordings:** clear voices for every headword, definition and example in the target language.
-  These come free under WaveNet's 4M characters a month. A vocabulary is about 250k characters.
-- **Stories:** the same ten in every language. Each is written once in English at A2 from shared
-  concepts, briefed and drawn once (about 50 pictures), then translated into each target language and
-  narrated with the clear voice. It does not have to be how the app makes a story; it has to read
-  well.
-- **Loops:** ten per target language, made in the app from shared concepts with the clear voice.
-  Directed voices are used only if credits remain at the end.
+- **Words:** about 450–520 per language. A concept may need two words (Japanese 着る and 履く for
+  *wear*) and one word may serve two concepts (Russian рука, *arm* and *hand*). Each word is filed
+  under its concepts' topics.
+- **Senses matched to concepts**, so a matched sense takes the concept's shared picture.
+- **Recordings**, made by the server's enrich after import, with clear voices for every headword,
+  definition and example in the target language. They come free under WaveNet's 4M characters a month.
+- **Pictures**, as separate steps: shared ones first, then possibly a language's own senses.
 - **Not carried:** spoken clips from the corpus (other people's audio), and anything from the owner's
-  own vocabulary or standing rules.
+  own vocabulary or standing rules. Stories and loops come later (step 9).
 
 ## Budget
 
+Text costs nothing: about 11,000 calls (≈10,400 composes, 320 word-list and 320 match calls) on the
+free key's two Flash-Lite models, about 1,000 a day, so roughly 11 days of daily runs.
+
 The **$280 is trial credit** on the `digest` Google Cloud project: free money, used or lost, which
 lasts roughly until mid-February 2027 but could end sooner. So spend it early rather than late.
-Without credits, the owner would spend around $30 at most, and would drop directed voices.
-
 **Do not ask Google for a higher quota, or contact Google about these credits at all.** They are
 trial credits on a reduced tier, and a request risks a review that takes them away. Throughput is
-whatever the default quota gives: about one picture a minute, so the shared core is a day of drawing.
+whatever the default quota gives: about one picture a minute.
 
-| Item | Pictures | Cost at ~$0.034 |
-| --- | ---: | ---: |
-| Shared concepts (521 drafted, 497 with a picture) | ~500 | ~$17 |
-| Ten shared stories | ~50 | ~$2 |
-| Wave 1 languages' own senses | ~4 × 500 | up to ~$70 |
-| Wave 2 languages' own senses, if credits remain | | the rest |
-
-Text goes through the Gemini free tier (500 calls a day on each of two models), so compose costs
-about a day per language. Claude does the work that needs judgement: the concept list, matching
-senses to concepts, the review.
+| Item | Cost |
+| --- | ---: |
+| Shared concept pictures (497 of the 521 have one), at ~$0.034 | ~$17 |
+| A judge on Gemini Pro, if Claude is not used, at ~$0.01 a word | up to ~$100 |
+| Pictures for senses with no concept | decided once counted (step 4) |
+| Ten shared stories, later | ~$2 |
 
 ## Order of work
 
-1. ~~**Concept list.**~~ Drafted: [`starter-concepts.yaml`](starter-concepts.yaml), 521 concepts in 16
-   topics (337 A1, 152 A2, 32 B1). The owner reviews it on a review page (link in the session that
-   made it, and in Claude's project memory). Marks, notes and missing words are stored in the page's
-   database: collections `verdicts` (one document per concept id: `verdict` drop/unsure/keep and
-   `comment`), `topics` (`missing`, one word per line) and `notes/general` (`text`). **Next session
-   starts here:** read them with the artifact data tool, apply them to the YAML, and say what changed.
-   After this, the concepts do not change.
-2. **Pilot pictures.** Thirty concepts drawn from their concept cards with `src/acervo/images/` called
-   directly, so pictures depend on no vocabulary. The review is the existing review sheet
-   (`scripts/generate_images.py sheet`). For a shared picture, the sheet also rejects any picture
-   with lettering, which the brief prompt otherwise allows.
-3. **The shared pictures,** then the ten stories, written, briefed and drawn.
-4. **Compose wave 1**, in parallel with drawing, on a dedicated starter account per support language.
-   That account has picture drawing switched off, no standing rules and no "About you", and the
-   vocabulary's level and variety set. Then match each sense to a concept (one call per word), and
-   draft the §0 rubric of [`../quality/article-quality.md`](../quality/article-quality.md) for the
-   owner to approve.
-5. **Check and review.** The deterministic checks
-   ([`../../features/capture.md`](../../features/capture.md), "Compose's checks", the dictionary
-   checks among them; [`../../features/articles.md`](../../features/articles.md), "Readings", for
-   Mandarin IPA) run over the composed
-   words, Claude reviews against the rubric and corrects, and the owner spot-checks about 20 words each
-   in Spanish, English and Russian. **Keep all three layers**: the raw model output, Claude's
-   corrections as diffs, and the owner's corrections. Together they are the labelled dataset for
-   §1 of `article-quality.md`, with the same concepts across eight or more languages. Claude must not
-   later judge its own corrections (`article-quality.md` §5).
-6. **Each language's own pictures**, in wave order.
-7. **Stories and loops in bundles** (below). Then import each vocabulary into a fresh account as the
-   end-to-end test.
-8. **Support-language variants:** translate definitions, glosses and notes.
-9. **Wave 2**, one or two languages a day; then wave 3.
+1. ~~**Concept list.**~~ Accepted unchanged on 20 Nov 2026.
+2. **Word lists.** `build.py run` picks each vocabulary's word(s) per concept, one call per topic
+   per vocabulary, and merges them into `data/starter/<id>/words.json`. Claude reviews all twenty
+   in a session and the owner checks Spanish, English and Russian. Corrections go straight into
+   `words.json`, then `build.py review <id>`; a vocabulary is composed only after that.
+3. **Compose**, by the same daily runs: one call per word. The builder asks exactly what compose
+   asks and judges it with compose's own checks (`compose_parts`, [`../../features/capture.md`](../../features/capture.md),
+   "Compose's checks"); resolve is skipped because the word list gives headword, lemma and part of
+   speech, and the concept's meaning goes in as the learner's note. One or two vocabularies a day.
+4. **Match senses to concepts**, by the same runs once a vocabulary is composed: one call per topic.
+   `build.py status` counts the senses with no concept and the concepts no sense covers. **The owner
+   then decides** whether to draw pictures for the unmatched senses.
+5. **Judge and correct.** The checks already ran at compose. Then a judge from another family than
+   the composer flags words against fixed rubric items: wrong gloss, wrong gender, unnatural
+   example, above the level, a sense that misses its concept. It gives no score (in
+   `experiments/compose-lesson-line/` a judge marked identical pairs different half the time). It is
+   Claude on the subscription or Gemini Pro on credits, whichever is available, and is calibrated on
+   Spanish, English and Russian against about 50 owner-labelled words each. Drafting the rubric is
+   §0 of [`../quality/article-quality.md`](../quality/article-quality.md). **Keep all three layers**:
+   the raw model output (the builder's compose files), the corrections as diffs, and the owner's
+   corrections. Together they are the labelled dataset for §1 of `article-quality.md`, with the same
+   concepts across twenty vocabularies. Whoever corrects does not judge the corrections (§5).
+6. **Pictures**, alongside steps 3–5: a pilot of thirty concepts drawn from their concept cards with
+   `src/acervo/images/` called directly, reviewed on the existing sheet
+   (`scripts/generate_images.py sheet`), which also rejects any shared picture with lettering; then
+   the shared ~500.
+7. **Bundles and import.** A bundle writer turns the drafts into `acervo-export/1` bundles
+   ([`../../features/export.md`](../../features/export.md)). Each is imported into a starter
+   account per support language (picture drawing off, no standing rules, no "About you"), where
+   enrich makes the recordings. The shared pictures are then placed on the matched senses. Import
+   re-mints ids, so a match is found again by headword and definition. Importing into a fresh
+   account is the end-to-end test.
+8. **Support-language variants:** translate definitions, glosses and notes. The translation sees the
+   target word and its sense, never the English alone: *conocer* glossed *know* would become
+   Russian знать, which is wrong.
+9. **Later:** stories and loops, once bundles carry them; B1 sets per language.
 
 ## What the app needs
 
@@ -167,9 +180,9 @@ senses to concepts, the review.
   ([`../../features/export.md`](../../features/export.md) lists what a bundle holds; today it holds
   neither). This is product work, not a converter, and is useful beyond starters: it is how a story
   or loop moves between servers.
-- **A laptop builder** next to `scripts/generate_images.py`. It draws concept pictures, places them
-  into exported bundles for the matched senses (import already restores a bundle's pictures through
-  the attach route, sense-images "The import puts the pictures back"), translates support-language
-  fields, and writes the dataset layers. It is a tool, not part of the shipped app.
+- **The laptop builder**, `scripts/starter/`: word lists, compose and matching today; drawing concept
+  pictures, writing bundles and placing pictures to come. It is a tool, not part of the shipped app.
+- **A part of speech for conjunctions and prepositions.** The app's list has none, so *but* and
+  *with* are filed as `expression`.
 - **A way to install a starter** from the first-run guide
   ([`first-run-guide.md`](first-run-guide.md)). Until then, Settings ▸ Data ▸ Import is enough.

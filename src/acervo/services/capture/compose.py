@@ -9,7 +9,8 @@ instead — which is what this route did while there was only ever one provider 
 
 from __future__ import annotations
 
-from typing import Any
+from pathlib import Path
+from typing import Any, Callable
 
 from acervo.models import Answer, journal
 from acervo.models.call import HEDGE_SECONDS
@@ -20,7 +21,8 @@ from acervo.services.capture.vet import Vetted, vet
 from acervo.services.dictionaries.lookup import articles_for
 from acervo.services.models import llm_json
 from acervo.services.prompts import prompt_text
-from acervo.services.reader import with_reader
+from acervo.services.reader import reader_section
+from acervo.services.rules import with_rules
 from acervo.settings import Settings
 
 
@@ -92,6 +94,31 @@ def build_user_message(
     return user
 
 
+def compose_parts(
+    prompts: Path,
+    dictionaries: Path,
+    resolution: dict[str, Any],
+    request: dict[str, Any],
+    vocabulary: dict[str, Any],
+    topics: list[dict[str, Any]],
+    *,
+    checking: bool = True,
+) -> tuple[str, str, Callable[[Any], Vetted]]:
+    """The system prompt before the owner's standing rules, the user message and the check.
+
+    Everything compose sends and judges that needs no database, so the starter builder
+    (`scripts/starter/`) asks a model exactly what compose asks and checks the reply the same way.
+    """
+    section = reader_section(vocabulary)
+    template = prompt_text(prompts, "acervo_compose")
+    system = f"{template}\n\n{section}" if section else template
+    user = build_user_message(resolution, request, vocabulary, topics)
+    # The dictionaries are read once here, not once per pair.
+    found = articles_for(dictionaries, resolution["language"],
+                         keys_for(resolution["headword"], resolution["lemma"])) if checking else []
+    return system, user, vet(vocabulary, resolution, found, checking)
+
+
 def compose(
     settings: Settings,
     owner: str,
@@ -100,17 +127,15 @@ def compose(
     vocabulary: dict[str, Any],
     topics: list[dict[str, Any]],
 ) -> tuple[dict[str, Any], Answer]:
-    user = build_user_message(resolution, request, vocabulary, topics)
-
     # Judged inside the walk (`vet.py`): a model whose answer could not become a draft, is in the
     # wrong language or disagrees with an installed dictionary is passed over and the next pair in
-    # the order answers. The dictionaries are read once here, not once per pair.
+    # the order answers.
     checking = model_selection.check_answers(owner)
-    found = articles_for(settings.dictionaries_path, resolution["language"],
-                         keys_for(resolution["headword"], resolution["lemma"])) if checking else []
+    system, user, check = compose_parts(settings.prompts_path, settings.dictionaries_path, resolution,
+                                        request, vocabulary, topics, checking=checking)
     vetted, call = llm_json(
-        settings, owner, with_reader(prompt_text(settings.prompts_path, "acervo_compose"), owner, vocabulary), user,
-        caller="compose", hedge_after=HEDGE_SECONDS, check=vet(vocabulary, resolution, found, checking),
+        settings, owner, with_rules(system, owner), user,
+        caller="compose", hedge_after=HEDGE_SECONDS, check=check,
     )
     assert isinstance(vetted, Vetted)
     if not checking:

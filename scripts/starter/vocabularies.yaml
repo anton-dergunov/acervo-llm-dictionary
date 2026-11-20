@@ -1,0 +1,54 @@
+# The starter vocabularies the builder makes (docs/plans/first-use/starter-vocabularies.md).
+#
+# Each record is what compose is told about the vocabulary (`language`, `definitionLang`,
+# `glossLangs`, `notesLang`, `level`, `region`) plus what only the builder uses:
+#   id       the folder under data/starter/, and what --only names
+#   variety  said to the headword writer in words, because `region` is a country and some
+#            varieties are not one (Standard Arabic, the Vietnamese of Hanoi)
+#   flag, displayName   for the bundle's vocabularies.yaml later
+# The list is in compose order: the vocabularies the owner can check first.
+
+vocabularies:
+  - {id: es-MX, language: es, region: MX, variety: "the Spanish of Mexico", displayName: "Spanish (Mexico)", flag: "🇲🇽"}
+  - {id: en-US, language: en, region: US, variety: "the English of the United States", displayName: "English (US)", flag: "🇺🇸",
+     definitionLang: es, glossLangs: [es], notesLang: es}
+  - {id: ru, language: ru, variety: "standard Russian", displayName: "Russian", flag: "🇷🇺"}
+  - {id: es-ES, language: es, region: ES, variety: "the Spanish of Spain (Castilian)", displayName: "Spanish (Spain)", flag: "🇪🇸"}
+  - {id: de-DE, language: de, region: DE, variety: "the German of Germany", displayName: "German", flag: "🇩🇪"}
+  - {id: zh-CN, language: zh, region: CN, variety: "Mandarin of mainland China, in simplified characters", displayName: "Chinese (Mandarin)", flag: "🇨🇳"}
+  - {id: fr-FR, language: fr, region: FR, variety: "the French of France", displayName: "French", flag: "🇫🇷"}
+  - {id: it-IT, language: it, region: IT, variety: "the Italian of Italy", displayName: "Italian", flag: "🇮🇹"}
+  - {id: pt-BR, language: pt, region: BR, variety: "the Portuguese of Brazil", displayName: "Portuguese (Brazil)", flag: "🇧🇷"}
+  - {id: ja-JP, language: ja, region: JP, variety: "standard (Tokyo) Japanese", displayName: "Japanese", flag: "🇯🇵"}
+  - {id: ko-KR, language: ko, region: KR, variety: "standard (Seoul) Korean", displayName: "Korean", flag: "🇰🇷"}
+  - {id: ar, language: ar, variety: "Modern Standard Arabic", displayName: "Arabic", flag: "🌍"}
+  - {id: hi-IN, language: hi, region: IN, variety: "standard Hindi, in Devanagari", displayName: "Hindi", flag: "🇮🇳"}
+  - {id: tr-TR, language: tr, region: TR, variety: "standard (Istanbul) Turkish", displayName: "Turkish", flag: "🇹🇷"}
+  - {id: vi-VN, language: vi, region: VN, variety: "northern (Hanoi) Vietnamese", displayName: "Vietnamese", flag: "🇻🇳"}
+  - {id: id-ID, language: id, region: ID, variety: "standard Indonesian", displayName: "Indonesian", flag: "🇮🇩"}
+  - {id: pl-PL, language: pl, region: PL, variety: "standard Polish", displayName: "Polish", flag: "🇵🇱"}
+  - {id: nl-NL, language: nl, region: NL, variety: "the Dutch of the Netherlands", displayName: "Dutch", flag: "🇳🇱"}
+  - {id: el-GR, language: el, region: GR, variety: "standard Modern Greek", displayName: "Greek", flag: "🇬🇷"}
+  - {id: th-TH, language: th, region: TH, variety: "standard (central) Thai", displayName: "Thai", flag: "🇹🇭"}
+
+# Unless a record says otherwise.
+defaults: {level: A2, definitionLang: en, glossLangs: [en], notesLang: en}
+
+# The concept list's topics, as a learner reads them.
+topics:
+  people: People
+  body: Body
+  food: Food and drink
+  home: Home
+  clothes: Clothes
+  city: City
+  travel: Travel
+  nature: Nature
+  animals: Animals
+  time: Time
+  work: Work
+  shopping: Shopping
+  feelings: Feelings
+  actions: Actions
+  describing: Describing
+  little-words: Little words

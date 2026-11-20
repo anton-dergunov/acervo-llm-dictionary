@@ -66,7 +66,9 @@ Compose's answer is judged **inside the chain**, in the callback that asks each 
 (`services/capture/vet.py`, through `llm_json`'s `check`). A model whose answer fails a check is passed
 over and the next pair in the owner's order answers. If the check ran after the walk instead, one weak
 answer from the head of the chain would refuse the capture while a stronger model behind it was never
-asked. Each rule has one of five dispositions:
+asked. What compose sends and the check it passes are built by one pure function, `compose_parts`,
+so the starter builder (`scripts/starter/`) asks a model exactly what compose asks and judges the
+reply the same way. Each rule has one of five dispositions:
 
 | Check | Disposition |
 | --- | --- |
