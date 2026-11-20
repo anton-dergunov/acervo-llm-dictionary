@@ -3,9 +3,14 @@
  * nearest English sound or a word that has it, and ▶. A tone is drawn as a pitch line and named; a
  * Mandarin word also lists its Pinyin letters with the IPA each stands for.
  *
- * Under the transcription on a tablet or desktop. On a phone, while the layout is being tried, a
- * bottom sheet, a full screen, or inline in the article (`trial.ts`); and a mark is explained inside
- * its letter's row or on a row of its own.
+ * Under the transcription on a tablet or desktop; on a phone a sheet over the lower part of the
+ * screen, so the word it explains stays in view above it. A mark is explained inside its letter's
+ * row (`u̯` is one row, with a line for ̯); stress and phrasing marks are rows of their own, where the
+ * transcription has them, and stress is lit in the panel's copy of the transcription. Both were
+ * chosen by trying the alternatives on a tablet and a phone (docs/features/ipa-guide.md).
+ *
+ * Many recordings are a word rather than the sound alone (a Pinyin letter is heard in a syllable,
+ * `Zh-dà` for d), so a row says what its recording says.
  */
 
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
@@ -16,8 +21,7 @@ import { useSpeechState } from "../pronunciation";
 import { pinyinParts } from "./pinyinParts";
 import { soundKey, playSound } from "./sounds";
 import { distinctUnits, soundOf, splitTranscription, type MarkUse, type Unit } from "./split";
-import { readTone, STRESS, type LetterRow, type MarkRow } from "./table";
-import { useIpaTrial, type MarksLayout } from "./trial";
+import { readTone, recordingSays, STRESS, type LetterRow } from "./table";
 
 const PHONE = "(max-width: 720px)";
 
@@ -36,6 +40,9 @@ function usePhone(): boolean {
 
 /** A combining mark is shown on a dotted circle, as the chart prints it, and a stress mark before one. */
 const onCircle = (mark: string) => /\p{M}/u.test(mark) ? `◌${mark}` : STRESS.has(mark) ? `${mark}◌` : mark;
+
+/** A Pinyin tone as its mark alone (`ā` → ◌̄), so it is not read as the letter a. */
+const toneMark = (marked: string) => `◌${marked.normalize("NFD").replace(/\P{M}/gu, "")}`;
 
 function Play({ sound, label, onError }: { sound?: string; label: string; onError(message: string): void }) {
   const speech = useSpeechState();
@@ -64,9 +71,13 @@ function Pitch({ levels }: { levels: number[] }) {
 function Row({ symbol, children, sound, label, onError }: {
   symbol: ReactNode; children: ReactNode; sound?: string; label: string; onError(message: string): void;
 }) {
+  const says = recordingSays(sound);
   return <li className="ipa-row">
     <span className="ipa-sym">{symbol}</span>
-    <div className="ipa-text">{children}</div>
+    <div className="ipa-text">
+      {children}
+      {says && <p className="ipa-says">The recording says <span className="ipa-said-word">{says}</span>.</p>}
+    </div>
     <Play sound={sound} label={label} onError={onError} />
   </li>;
 }
@@ -87,21 +98,17 @@ function MarkLine({ use }: { use: MarkUse }) {
   </p>;
 }
 
-function MarkRowItem({ text, row, onError }: { text: string; row: MarkRow; onError(message: string): void }) {
-  return <Row symbol={onCircle(text)} sound={row.sound} label={`Listen to ${row.name}`} onError={onError}>
-    <p className="ipa-how"><b>{row.name}</b>{row.how ? `: ${row.how}` : ""}</p>
-  </Row>;
-}
-
-function UnitRows({ unit, marks, mandarin, onError }: {
-  unit: Unit; marks: MarksLayout; mandarin: boolean; onError(message: string): void;
-}) {
+function UnitRow({ unit, mandarin, onError }: { unit: Unit; mandarin: boolean; onError(message: string): void }) {
+  if (unit.kind === "mark") {
+    return <Row symbol={onCircle(unit.text)} label="" onError={onError}>
+      <p className="ipa-how"><b>{unit.row.name[0].toUpperCase() + unit.row.name.slice(1)}.</b> {unit.row.how}</p>
+    </Row>;
+  }
   if (unit.kind === "unknown") {
     return <Row symbol={unit.text} label="" onError={onError}>
       <p className="ipa-how">Not a symbol this guide explains.</p>
     </Row>;
   }
-  if (unit.kind === "mark") return <MarkRowItem text={unit.text} row={unit.row} onError={onError} />;
   if (unit.kind === "tone") {
     const tone = readTone(unit.text);
     return <Row symbol={<span className="ipa-tone"><span>{unit.text}</span><Pitch levels={tone.levels} /></span>}
@@ -110,26 +117,20 @@ function UnitRows({ unit, marks, mandarin, onError }: {
       {mandarin && tone.mandarin && <p className="ipa-like">Mandarin {tone.mandarin}</p>}
     </Row>;
   }
-  const letters = unit.rows.map((row) => row.symbol).join("");
-  const inside = marks === "inside";
-  const ownMarks = unit.marks.filter((use) => !(unit.rows.length > 1 && use.row.name === "tie bar"));
-  return <>
-    <Row symbol={inside ? unit.text : letters} sound={soundOf(unit)} label={`Listen to ${unit.rows[0].name}`} onError={onError}>
-      {unit.rows.length === 1
-        ? <LetterLines row={unit.rows[0]} />
-        : <>
-            <p className="ipa-how">{unit.rows.map((row) => row.symbol).join(" and ")} said together, as one sound.</p>
-            {unit.rows.map((row) => <p key={row.symbol} className="ipa-like"><span className="ipa-mark-sym">{row.symbol}</span> {row.how}</p>)}
-          </>}
-      {inside && ownMarks.map((use, index) => <MarkLine key={index} use={use} />)}
-    </Row>
-    {!inside && ownMarks.map((use, index) => <MarkRowItem key={index} text={use.text} row={use.row} onError={onError} />)}
-  </>;
+  const marks = unit.marks.filter((use) => !(unit.rows.length > 1 && use.row.name === "tie bar"));
+  return <Row symbol={unit.text} sound={soundOf(unit)} label={`Listen to ${unit.rows[0].name}`} onError={onError}>
+    {unit.rows.length === 1
+      ? <LetterLines row={unit.rows[0]} />
+      : <>
+          <p className="ipa-how">{unit.rows.map((row) => row.symbol).join(" and ")} said together, as one sound.</p>
+          {unit.rows.map((row) => <p key={row.symbol} className="ipa-like"><span className="ipa-mark-sym">{row.symbol}</span> {row.how}</p>)}
+        </>}
+    {marks.map((use, index) => <MarkLine key={index} use={use} />)}
+  </Row>;
 }
 
-/** The transcription at the top of the panel; in the inside layout, its stress marks lit. */
-function Heading({ ipa, lit }: { ipa: string; lit: boolean }) {
-  if (!lit) return <span className="ipa-heading">{ipa}</span>;
+/** The transcription at the top of the panel, its stress marks lit. */
+function Heading({ ipa }: { ipa: string }) {
   return <span className="ipa-heading">
     {Array.from(ipa).map((character, index) => STRESS.has(character)
       ? <span key={index} className="ipa-stress">{character}</span>
@@ -150,7 +151,7 @@ function PinyinRows({ reading, onError }: { reading: string; onError(message: st
           sound={row.sound} label={`Listen to Pinyin ${row.letters}`} onError={onError}>
           <p className="ipa-how"><span className="ipa-said">/{row.ipa}/</span> {row.how}</p>
         </Row>)}
-        {part.tone && <Row symbol={<span className={`ipa-pinyin-letters tone-${part.tone.number}`}>{part.tone.mark}</span>}
+        {part.tone && <Row symbol={<span className={`ipa-tone-mark tone-${part.tone.number}`}>{toneMark(part.tone.mark)}</span>}
           sound={part.tone.sound} label={`Listen to tone ${part.tone.number}`} onError={onError}>
           <p className="ipa-how"><b>{part.tone.number === 5 ? "Neutral tone" : `Tone ${part.tone.number}`}</b>
             {part.tone.ipa && <> <span className="ipa-said">{part.tone.ipa}</span></>}. {part.tone.how}</p>
@@ -163,49 +164,36 @@ function PinyinRows({ reading, onError }: { reading: string; onError(message: st
 export default function SoundsPanel({ ipa, reading, language, onClose }: {
   ipa: string; reading: string | null; language: string | null; onClose(): void;
 }) {
-  const trial = useIpaTrial();
   const phone = usePhone();
   const panel = useRef<HTMLElement>(null);
   const [error, setError] = useState<string | null>(null);
   const units = useMemo(() => distinctUnits(splitTranscription(ipa)), [ipa]);
   const mandarin = Boolean(language && isMandarin(language));
-  const inside = trial.marks === "inside";
-  const standing = units.filter((unit): unit is Extract<Unit, { kind: "mark" }> => unit.kind === "mark");
-  const listed = inside ? units.filter((unit) => unit.kind !== "mark") : units;
-  const layout = phone ? trial.phone : "pop";
 
   useEffect(() => {
     const key = (event: KeyboardEvent) => { if (event.key === "Escape") onClose(); };
     const away = (event: PointerEvent) => {
       const target = event.target as Element | null;
       if (!target || panel.current?.contains(target) || target.closest(".ipa-open")) return;
-      if (layout === "pop" || layout === "inline") onClose();
+      if (!phone) onClose();
     };
     window.addEventListener("keydown", key);
     document.addEventListener("pointerdown", away);
     return () => { window.removeEventListener("keydown", key); document.removeEventListener("pointerdown", away); };
-  }, [onClose, layout]);
+  }, [onClose, phone]);
 
-  const body = <section ref={panel} className={`ipa-panel ${layout}`} role="dialog" aria-label={`Sounds in ${ipa}`}>
+  const body = <section ref={panel} className={`ipa-panel ${phone ? "sheet" : "pop"}`} role="dialog" aria-label={`Sounds in ${ipa}`}>
     <header className="ipa-head">
-      <Heading ipa={ipa} lit={inside && standing.some((unit) => STRESS.has(unit.text))} />
+      <Heading ipa={ipa} />
       <button type="button" className="icon-btn ipa-close" aria-label="Close" onClick={onClose}><CloseIcon /></button>
     </header>
     {error && <p className="ipa-error" role="status">{error}</p>}
-    {inside && standing.length > 0 && <div className="ipa-marks-note">
-      {standing.map((unit) => <MarkLine key={unit.text} use={{ text: unit.text, row: unit.row }} />)}
-    </div>}
     <ul className="ipa-rows">
-      {listed.map((unit, index) => <UnitRows key={index} unit={unit} marks={trial.marks} mandarin={mandarin} onError={setError} />)}
+      {units.map((unit, index) => <UnitRow key={index} unit={unit} mandarin={mandarin} onError={setError} />)}
     </ul>
     {mandarin && reading && <PinyinRows reading={reading} onError={setError} />}
   </section>;
 
-  if (layout === "sheet" || layout === "full") {
-    return createPortal(<>
-      {layout === "sheet" && <div className="ipa-backdrop" onClick={onClose} />}
-      {body}
-    </>, document.body);
-  }
-  return body;
+  /* A sheet goes to the document, so nothing the article is inside can clip or move it. */
+  return phone ? createPortal(<><div className="ipa-backdrop" onClick={onClose} />{body}</>, document.body) : body;
 }

@@ -559,7 +559,7 @@ const LEXEMES = [
     pos: "noun", gender: null, register: "neutral", dialect: null,
     emoji: "\u{1F4DA}", topics: ["places", "culture"],
     status: "active", shortGloss: "библиотека; library",
-    ipa: null,
+    ipa: "/tʰu˧˥ ʂu˥ ku̯an˨˩˦/",
     notes: ["图 (picture) + 书 (book) + 馆 (public building) — the third character recurs in 博物馆 and 体育馆."],
     createdAt: "2026-06-11", editedAt: "2026-06-11", revision: 1,
     senses: [{

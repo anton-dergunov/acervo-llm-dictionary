@@ -1,6 +1,6 @@
 # IPA sounds: a plain description and a recording for every symbol
 
-**Question.** What should the IPA guide ([`docs/plans/languages/ipa-guide.md`](../../docs/plans/languages/ipa-guide.md))
+**Question.** What should the IPA guide ([`docs/features/ipa-guide.md`](../../docs/features/ipa-guide.md))
 say about each symbol, and which openly licensed recording should it play? The table is written once
 by hand and checked; the owner picks one recording per sound and judges the wording on a review page.
 

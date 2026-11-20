@@ -173,10 +173,6 @@ const PAGES = {
 
   reading: () => [
     group("Articles", [segmented("Open words as", "Cards on a touch screen, Page with a mouse", ["Automatic", "Page", "Cards"], "Automatic")]),
-    group("IPA guide (trial)", [
-      segmented("On a phone", "Slides up over the lower part of the screen", ["Sheet", "Full screen", "Inline"], "Sheet"),
-      segmented("Marks", "ʰ, ̯ or ː explained under their letter; stress at the top", ["In the letter's row", "Rows of their own"], "In the letter's row")
-    ], "Tap a transcription to try them. Kept until one of each is chosen."),
     group("YAML editor", [
       toggle("Wrap long lines", "", true),
       toggle("Show line numbers", "Errors name the line they are on", false)

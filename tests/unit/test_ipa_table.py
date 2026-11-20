@@ -8,7 +8,8 @@ to their files and credits.
    a symbol, alias, diacritic or tone letter in the table, so the panel never meets one it cannot
    explain.
 3. Every `sound` is a file in web/src/ipa/sounds/, every file there is played by some row, and every
-   file carries the credit its licence asks for (docs/plans/languages/ipa-guide.md, "Data").
+   file carries the credit its licence asks for; and every character the table can draw is in the
+   IPA face the app ships (docs/features/ipa-guide.md §4).
 """
 
 from __future__ import annotations
@@ -94,3 +95,31 @@ def test_every_recording_carries_its_credit():
         assert credit["licenceUrl"] or credit["licence"] == "Public domain", name
         assert credit["page"].startswith("https://commons.wikimedia.org/wiki/File:"), name
         assert credit["changes"].startswith("trimmed"), name
+
+
+# Drawn from the device: Noto Sans has no arrows, and these four intonation marks (upstep, downstep,
+# global rise and fall) are all but absent from dictionary transcriptions.
+SYSTEM_GLYPHS = set("↑↓↗↘")
+
+
+def test_every_character_the_guide_draws_is_in_the_ipa_face():
+    """Android may lack a glyph every other device has, and a mark missing from the face boxes its
+    letter too, so every character the table can put on screen must be in the face the app ships."""
+    from fontTools.ttLib import TTFont
+
+    cmap = TTFont(GUIDE.parent / "fonts" / "acervo-ipa.woff2").getBestCmap()
+    drawn: set[str] = set("◌")
+
+    def walk(value, key=None):
+        if isinstance(value, dict):
+            for name, inner in value.items():
+                walk(inner, name)
+        elif isinstance(value, list):
+            for inner in value:
+                walk(inner, key)
+        elif isinstance(value, str) and key in ("symbol", "aliases", "example", "letters", "ipa", "mark"):
+            drawn.update(value)
+
+    walk({name: value for name, value in TABLE.items() if name not in ("fields", "notes", "recordings")})
+    missing = {ch for ch in drawn - SYSTEM_GLYPHS if not ch.isspace() and ord(ch) not in cmap}
+    assert not missing, sorted(f"U+{ord(ch):04X} {ch}" for ch in missing)

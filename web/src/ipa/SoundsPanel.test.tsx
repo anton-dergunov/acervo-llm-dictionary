@@ -1,8 +1,7 @@
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import * as pronunciation from "../pronunciation";
 import { Transcription } from "./Transcription";
-import { setIpaTrial } from "./trial";
 
 async function openPanel(ipa: string, reading: string | null = null, language: string | null = null) {
   render(<div className="pron-row"><Transcription ipa={ipa} reading={reading} language={language} /></div>);
@@ -25,21 +24,27 @@ describe("the IPA guide's panel", () => {
     expect([...pinyin.querySelectorAll(".ipa-syllable-name")].map((name) => name.textContent)).toEqual(["tú", "shū", "guǎn"]);
   });
 
-  it("explains a mark inside its letter's row, or on a row of its own", async () => {
-    const inside = await openPanel("/ku̯a/");
-    expect(symbols(inside)).toEqual(["k", "u̯", "a"]);
-    expect(within(inside).getByText("non-syllabic")).toBeTruthy();
-    act(() => setIpaTrial("marks", "rows"));
-    expect(symbols(inside)).toEqual(["k", "u", "◌̯", "a"]);
+  it("explains a mark inside its letter's row, on a dotted circle", async () => {
+    const panel = await openPanel("/ku̯a/");
+    expect(symbols(panel)).toEqual(["k", "u̯", "a"]);
+    expect(panel.querySelector(".ipa-mark-line .ipa-mark-sym")?.textContent).toBe("◌̯");
+    expect(within(panel).getByText("non-syllabic")).toBeTruthy();
   });
 
-  it("names stress once at the top inside, and as rows of their own otherwise", async () => {
+  it("puts stress on a row of its own where the transcription has it, and lights it at the top", async () => {
     const panel = await openPanel("/əˈbaʊt/");
     expect(panel.querySelector(".ipa-stress")?.textContent).toBe("ˈ");
-    expect(within(panel.querySelector(".ipa-marks-note") as HTMLElement).getByText("primary stress")).toBeTruthy();
-    act(() => setIpaTrial("marks", "rows"));
-    expect(symbols(panel)[0]).toBe("ə");
-    expect(symbols(panel)).toContain("ˈ◌");
+    expect(symbols(panel).slice(0, 3)).toEqual(["ə", "ˈ◌", "b"]);
+    expect(within(panel).getByText(/^Primary stress\./)).toBeTruthy();
+  });
+
+  it("says what a recording says when it is a syllable, and shows a Pinyin tone by its mark", async () => {
+    const panel = await openPanel("/tou̯˥˩ fu/", "dòufu", "zh-Hans");
+    const pinyin = within(panel).getByRole("region", { name: "Pinyin" });
+    const [initial] = pinyin.querySelectorAll(".ipa-row");
+    expect(initial.textContent).toContain("The recording says dà.");
+    expect([...pinyin.querySelectorAll(".ipa-tone-mark")].map((mark) => mark.textContent)).toEqual(["◌̀", "◌"]);
+    expect(within(panel).getAllByText(/The recording says/).length).toBeGreaterThan(3);
   });
 
   it("plays a sound's recording through the app's one player", async () => {

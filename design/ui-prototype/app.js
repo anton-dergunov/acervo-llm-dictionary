@@ -239,7 +239,7 @@ function renderExternalArticle(x) {
         <div class="emoji-plate ext">${x.online ? ICON.globe : ICON.book}</div>
         <div class="head-text">
           <h1 class="headword">${esc(x.word)}</h1>
-          ${x.ipa ? `<div class="pron-row"><span class="ipa">${esc(x.ipa)}</span></div>` : ""}
+          ${x.ipa ? `<div class="pron-row"><button class="ipa ipa-open" data-ipa aria-haspopup="dialog" aria-expanded="false">${esc(x.ipa)}</button></div>` : ""}
           <p class="gram"><span>${esc(x.posLabel || "")}</span><span class="sep">·</span>
             <span>${esc(langOf(state.lang).name)}</span><span class="sep">·</span><span>external dictionary</span></p>
         </div>
@@ -836,7 +836,7 @@ function masthead(x) {
             : `<div class="head-line"><h1 class="headword">${esc(x.headword)}</h1>${say(x.headword, "always head")}</div>
           ${x.reading ? `<div class="reading">${readingHtml(x)}</div>` : ""}`}
           <div class="pron-row">
-            ${x.ipa ? `<span class="ipa">${esc(x.ipa)}</span>` : ""}
+            ${x.ipa ? `<button class="ipa ipa-open" data-ipa aria-haspopup="dialog" aria-expanded="false">${esc(x.ipa)}</button>` : ""}
             <span class="gram">${esc(grammarWords(x))}</span>
             ${place ? `<span class="place">${esc(place)}</span>` : ""}
           </div>
@@ -4033,6 +4033,14 @@ document.addEventListener("click", (ev) => {
 
   if (hit("[data-add-picture]")) { toast("Opens the picture dialog — brief, Draw, or your own picture"); return; }
   if (hit("[data-write]")) { openWriting(LEXEMES.find((x) => x.id === state.openId)); return; }
+  /* The IPA guide's panel (ipa.js): the transcription toggles it; ✕, the backdrop and Escape close it. */
+  if (hit("[data-ipa-close]")) { closeIpa(); return; }
+  if (hit("[data-ipa]")) {
+    if (document.getElementById("ipaPanel")) closeIpa();
+    else openIpa(LEXEMES.find((x) => x.id === state.openId) || { ipa: hit("[data-ipa]").textContent });
+    return;
+  }
+  if (hit("#ipaPanel")) return;
   const say = hit("[data-say]");
   if (say) {
     say.classList.add("playing");
@@ -4627,6 +4635,8 @@ if (params.get("open")) {
   if (params.get("review") === "1") state.review = true;
   // `write=watch|trace|write` opens the Write sheet over a Mandarin word, in that mode.
   if (hit && params.get("write")) setTimeout(() => openWriting(hit, params.get("write")), 0);
+  // `ipa=1` opens the IPA guide's panel over the word's transcription.
+  if (hit && params.get("ipa")) setTimeout(() => openIpa(hit), 0);
 }
 /* `loops=1` opens the surface, `layout=` picks the shape, `loop=` which one, and `t=` how far in —
    so "mid-word, one translation up and the next still withheld" is a link rather than a description.

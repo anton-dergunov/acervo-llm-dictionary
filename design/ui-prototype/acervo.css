@@ -757,6 +757,70 @@ details.fold .fold-body { padding: 4px 0 18px; }
   .look-sheet.over.top { top: 48px; border-radius: 0 0 16px 16px; border-bottom: 1px solid var(--rule-soft); border-top: 0; }
 }
 
+/* ── the IPA guide ──
+   A transcription is a button that opens a panel of its sounds. The button keeps the transcription's
+   own type and place; only a dotted underline, which moves no letter, says it can be tapped. The
+   panel hangs under the transcription's row on a tablet or desktop; on a phone it is a sheet over the
+   lower part of the screen, the word it explains still in view above it. */
+.pron-row { position: relative; }
+.ipa-open {
+  padding: 0; border: 0; background: none; cursor: pointer; text-align: left;
+  text-decoration: underline dotted var(--rule); text-underline-offset: 4px; text-decoration-thickness: 1.5px;
+}
+.ipa-open:hover, .ipa-open[aria-expanded="true"] { color: var(--core); text-decoration-color: currentColor; }
+.ipa-panel {
+  font-family: var(--sans); letter-spacing: normal; text-transform: none; text-align: left;
+  z-index: 20; padding: 0 14px 12px; border-radius: 13px; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--surface); border: 1px solid var(--rule-soft); box-shadow: var(--shadow); color: var(--ink);
+}
+.ipa-panel.pop {
+  position: absolute; top: calc(100% + 8px); left: -6px;
+  width: min(480px, calc(100vw - 32px)); max-height: min(62vh, 560px);
+}
+.ipa-backdrop { position: fixed; inset: 0; z-index: 40; background: color-mix(in srgb, var(--ink) 22%, transparent); }
+.ipa-panel.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 41; max-height: 68dvh;
+  border-radius: 16px 16px 0 0; border-bottom: 0; padding-bottom: max(14px, env(safe-area-inset-bottom));
+}
+.ipa-head {
+  position: sticky; top: 0; z-index: 1; display: flex; align-items: center; gap: 8px;
+  margin: 0 -14px; padding: 10px 8px 8px 14px; background: var(--surface); border-bottom: 1px solid var(--rule-soft);
+}
+.ipa-heading { flex: 1; min-width: 0; font: 400 19px/1.3 var(--mono-ipa); color: var(--ink); overflow-wrap: anywhere; }
+.ipa-stress { color: var(--core); font-weight: 700; }
+.ipa-close { flex: none; }
+.ipa-error { margin: 10px 0 0; color: var(--warn); font-size: 14px; }
+.ipa-rows { list-style: none; margin: 0; padding: 0; }
+.ipa-row {
+  display: grid; grid-template-columns: 52px minmax(0, 1fr) 26px; gap: 0 10px; align-items: start;
+  padding: 10px 0; border-bottom: 1px solid var(--rule-soft);
+}
+.ipa-rows > .ipa-row:last-child { border-bottom: 0; }
+.ipa-row .say { margin: 2px 0 0; width: 26px; height: 26px; }
+.ipa-row .say svg { width: 10px; height: 10px; }
+.ipa-play-none { width: 26px; }
+.ipa-sym { font: 400 24px/1.15 var(--mono-ipa); color: var(--ink); overflow-wrap: anywhere; }
+.ipa-tone { display: inline-flex; flex-direction: column; gap: 2px; }
+.ipa-pitch { width: 30px; height: 20px; fill: none; stroke: var(--core); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.ipa-pitch line { stroke: var(--rule); stroke-width: 1; }
+.ipa-text p { margin: 0; }
+.ipa-how { font-size: 15px; line-height: 1.4; color: var(--ink); }
+.ipa-like { margin-top: 3px !important; font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+.ipa-name { margin-top: 4px !important; font: 400 11.5px/1.3 var(--mono); color: var(--ink-3); }
+.ipa-mark-line { margin-top: 6px !important; font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+.ipa-mark-line b, .ipa-how b { font-weight: 600; color: var(--ink); }
+.ipa-mark-sym { font-family: var(--mono-ipa); font-size: 21px; line-height: 1; color: var(--ink); }
+.ipa-said { font-family: var(--mono-ipa); color: var(--ink-2); }
+.ipa-pinyin h3 {
+  margin: 14px 0 0; font: 600 11px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3);
+}
+.ipa-syllable-name { margin: 10px 0 0; font: 500 18px/1.2 var(--mono); }
+.ipa-pinyin-letters { font: 500 20px/1.2 var(--mono); }
+/* A Pinyin tone's mark on a dotted circle, from the IPA face, which has both. */
+.ipa-tone-mark { font: 400 26px/1.1 var(--mono-ipa); }
+.ipa-says { margin-top: 4px !important; font-size: 13.5px; line-height: 1.4; color: var(--ink-3); }
+.ipa-said-word { font-family: var(--mono); color: var(--ink-2); }
+
 /* ══ Cards ══
    The pane stops scrolling and becomes a column: the article bar, the word, the selector, then a
    track of full-width cards snapped left to right. A card is itself a column whose picture is the
@@ -2191,6 +2255,9 @@ body.framed .viewport {
   box-shadow: 0 18px 50px -22px rgba(19,34,32,.55);
 }
 body.phone  .viewport { width: 402px; height: 874px; }
+/* The IPA guide's sheet is fixed to the screen in the app; here the screen is the frame. */
+body.framed .viewport { position: relative; }
+body.framed .viewport > .ipa-panel.sheet, body.framed .viewport > .ipa-backdrop { position: absolute; }
 body.tablet .viewport { width: 834px; height: 1000px; }
 
 /* ══════════════════════════ launch ══════════════════════════ */
@@ -3791,3 +3858,7 @@ a.tb-btn { text-decoration: none; }
 }
 .pref-axis { display: flex; justify-content: space-between; padding-left: 22px; font-size: 11.5px; color: var(--ink-3); }
 .nowrap { white-space: nowrap; }
+
+/* Settings ▸ About: what each recording plays for is written in IPA. */
+.about-plays { font-family: var(--mono-ipa); }
+.pref-hint a { color: inherit; text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 2px; }

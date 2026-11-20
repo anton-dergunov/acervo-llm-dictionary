@@ -109,6 +109,17 @@ export function readTone(letters: string): ToneReading {
   return { name: steps.length === 2 ? (steps[1] > steps[0] ? "rising" : "falling") : "contour", how: `The pitch moves from ${path}.`, levels };
 }
 
+/**
+ * What a recording says when it is a word rather than the sound on its own: a Mandarin syllable
+ * (`Zh-dà.ogg`, which every Pinyin row plays) or an English word (`En-us-er.ogg`). `null` for a
+ * recording of the sound itself.
+ */
+export function recordingSays(sound: string | undefined): string | null {
+  const source = sound ? TABLE.recordings[sound]?.source : undefined;
+  const found = source?.match(/^(?:Zh|En-us)-(.+)\.og[ga]$/);
+  return found ? found[1].normalize("NFC") : null;
+}
+
 /** The recording a file name stands for, and the credit it carries. */
 export function creditOf(sound: string): Credit | null {
   return TABLE.recordings[sound] ?? null;

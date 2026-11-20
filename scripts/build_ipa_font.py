@@ -32,10 +32,15 @@ RANGES = [
     (0x0250, 0x02AF),  # IPA Extensions
     (0x02B0, 0x02FF),  # Spacing Modifier Letters: ʰ ː ˈ ˌ and the tone letters ˥ ˦ ˧ ˨ ˩
     (0x0300, 0x036F),  # Combining Diacritical Marks
+    (0x0370, 0x03FF),  # Greek, for the IPA letters taken from it: β θ χ
     (0x1D00, 0x1DBF),  # Phonetic Extensions and their supplement
     (0x1DC0, 0x1DFF),  # Combining Diacritical Marks Supplement
+    (0x1E00, 0x1EFF),  # Latin Extended Additional: precomposed ẽ and its kind
     (0x2016, 0x2016),  # ‖ major group
     (0x203F, 0x203F),  # ‿ linking
+    (0x2070, 0x209F),  # Superscripts: ⁿ nasal release
+    (0x25CC, 0x25CC),  # ◌ the dotted circle a mark is shown on by itself (the IPA guide, ◌̯ ◌́)
+    (0x2C60, 0x2C7F),  # Latin Extended-C: ⱱ labiodental flap
     (0xA700, 0xA71F),  # Modifier Tone Letters
 ]
 
