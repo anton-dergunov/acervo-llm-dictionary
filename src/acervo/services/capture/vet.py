@@ -8,16 +8,18 @@ asked. Each rule has one of five dispositions (`docs/features/capture.md`, "Comp
 - **refuse and demote** where no draft could be built: not an object, no senses, a Chinese entry
   with no reading — the very conditions `draft.refusal_of` holds, read from there so the two cannot
   drift;
-- **demote** where the article would be in the wrong language: glosses or notes in a script the
-  vocabulary's language is not written in;
+- **demote** where the article would be in the wrong language: glosses, notes or a definition in a
+  script the vocabulary's language is not written in;
 - **coerce** where a fallback exists: `primaryGloss` to its first term, an emoji to its first
   grapheme cluster, a domain to lower case;
 - **drop the field, keep the record** where the field is decoration: a domain too long or repeated
   between the senses, a word-level `emotion` out of shape;
-- **demote softly** where an installed dictionary disagrees: a Mandarin reading, a transcription or a
-  noun's gender (`dictionary_check.py`, measured in `experiments/dictionary-checks/`). A dictionary
-  can be wrong about a right answer, so this raises `Demoted`: the next pair is asked, and if none
-  does better the first demoted answer is kept rather than the capture refused.
+- **demote softly** where a judge that can be wrong doubts the answer: a definition a language
+  identifier reads as another of the vocabulary's languages written in the same script
+  (`definition_doubt`, measured in `experiments/definition-language/`), or an installed dictionary
+  disagreeing with a Mandarin reading, a transcription or a noun's gender (`dictionary_check.py`,
+  measured in `experiments/dictionary-checks/`). This raises `Demoted`: the next pair is asked, and
+  if none does better the first demoted answer is kept rather than the capture refused.
 
 All of it but the refusal is the owner's to switch off ("Check what models write"): with checks off,
 only what no draft could be built from is refused.
@@ -63,6 +65,13 @@ COMPOSITE_SCRIPTS = {
 
 DOMAIN_WORDS = 2
 EMOTION_WORDS = (3, 12)
+
+# How sure the language identifier must be that a definition is in another of the vocabulary's
+# languages before it doubts it. Measured on 5,763 Latin-script starter definitions and 1,467 of the
+# owner's Spanish ones (`experiments/definition-language/`): English read as Italian or French reached
+# 0.64 on four-word definitions, and of the 110 read between 0.5 and 0.95, every one at 0.7 or more
+# was in another language.
+DEFINITION_CONFIDENCE = 0.7
 
 # Which classes demote, chosen by the owner on the measured false-alarm rates on stored words
 # (`docs/features/capture.md`, "Compose's checks"). Everything else passes.
@@ -145,6 +154,73 @@ def wrong_script(text: str, language: str | None) -> str | None:
     if sum(1 for letter in letters if pattern.match(letter)) * 2 >= len(letters):
         return None
     return _name_of_script(text)
+
+
+def _base(language: str | None) -> str | None:
+    """`zh-Hans` → `zh`: the language a language identifier can name, or `None`."""
+    import langcodes
+
+    try:
+        return langcodes.Language.get(language).language if language else None
+    except (ValueError, LookupError):
+        return None
+
+
+@lru_cache(maxsize=64)
+def _detector(languages: tuple[str, ...]) -> Any:
+    """A lingua detector that chooses among exactly these languages, or `None` if it knows < two.
+
+    Built per set of languages, not over every language lingua knows: asked among dozens, a short
+    English definition spreads its confidence so thin that nothing can be read from it, and the
+    detector's models for every Latin-script language cost the server ~230 MB.
+    """
+    from lingua import IsoCode639_1, Language, LanguageDetectorBuilder
+
+    known = []
+    for code in languages:
+        try:
+            known.append(Language.from_iso_code_639_1(getattr(IsoCode639_1, code.upper())))
+        except (AttributeError, ValueError):
+            continue
+    return LanguageDetectorBuilder.from_languages(*known).build() if len(known) >= 2 else None
+
+
+def definition_doubt(definition: str, vocabulary: dict[str, Any], resolution: dict[str, Any],
+                     quoted: list[str] | None = None) -> tuple[str, bool] | None:
+    """Why one definition is not in the vocabulary's `definitionLang`, and whether that is certain.
+
+    `(sentence, True)` when it is in another script than `definitionLang`'s: certain, and the answer
+    is passed over. `(sentence, False)` when a language identifier, choosing only among the
+    vocabulary's own languages that share that script (the word's, the definitions', the first
+    gloss language, the notes'), finds another with at least `DEFINITION_CONFIDENCE`: a doubt. The
+    measured failure is a definition in the word's own language for a vocabulary that defines in
+    the learner's (`experiments/definition-language/`). `quoted` is the word itself, taken out first.
+    """
+    target = vocabulary.get("definitionLang")
+    text = _without(trimmed(definition), [item for item in quoted or [] if item])
+    script = wrong_script(text, target)
+    if script:
+        return (f"the definitions are in {script} script, and the vocabulary defines its senses in "
+                f"{_language_name(target or '')}"), True
+    base = _base(target)
+    if base is None:
+        return None
+    gloss_langs = vocabulary.get("glossLangs") or []
+    candidates = {_base(item) for item in (resolution.get("language"), *gloss_langs[:1], vocabulary.get("notesLang"))}
+    others = sorted(item for item in candidates - {None, base} if scripts_of(item) == scripts_of(base))
+    if not others or len(_LETTER.findall(text)) < FEWEST_LETTERS:
+        return None
+    detector = _detector((base, *others))
+    if detector is None:
+        return None
+    confidence = {value.language.iso_code_639_1.name.lower(): value.value
+                  for value in detector.compute_language_confidence_values(text)}
+    other = max(others, key=lambda item: confidence.get(item, 0.0))
+    if confidence.get(other, 0.0) < DEFINITION_CONFIDENCE:
+        return None
+    headword = trimmed(resolution.get("headword"))
+    return (f"a definition of {headword} reads as {_language_name(other)}, and the vocabulary defines "
+            f"its senses in {_language_name(target or '')}"), False
 
 
 def first_term(value: str) -> str:
@@ -267,6 +343,15 @@ def vet(vocabulary: dict[str, Any], resolution: dict[str, Any], found: list[Foun
             raise Unusable(f"the notes are in {found} script, and the vocabulary writes its notes in "
                            f"{_language_name(notes_lang or '')}")
 
+        # ── demote: a definition in another language than `definitionLang` ──
+        quoted = [trimmed(item) for item in word]
+        misdefined: str | None = None
+        for sense in senses:
+            doubt = definition_doubt(sense.get("definition"), vocabulary, resolution, quoted)
+            if doubt and doubt[1]:
+                raise Unusable(doubt[0])
+            misdefined = misdefined or (doubt[0] if doubt else None)
+
         # ── coerce: one term, one emoji ─────────────────────────────────────
         primary = trimmed(answer.get("primaryGloss"))
         if primary and first_term(primary) != primary:
@@ -303,7 +388,9 @@ def vet(vocabulary: dict[str, Any], resolution: dict[str, Any], found: list[Foun
                 answer["emotion"] = None
                 dropped.append("emotion")
 
-        # ── demote softly: an installed dictionary disagrees ────────────────
+        # ── demote softly: the language identifier or a dictionary doubts it ─
+        if misdefined:
+            raise Demoted(misdefined, Vetted(answer, fixed, dropped), by="language")
         doubted = disagreement(answer, resolution, entries)
         if doubted:
             raise Demoted(doubted, Vetted(answer, fixed, dropped), by="dictionary")

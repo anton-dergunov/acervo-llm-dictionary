@@ -37,11 +37,11 @@ CONCEPTS = {
 HEADWORDS = {"arm": "рука", "hand": "рука", "mother": "мать"}
 
 
-def article(headword: str) -> dict[str, Any]:
+def article(headword: str, definition: str | None = None) -> dict[str, Any]:
     return {
         "headword": headword, "lemma": headword, "pos": "noun", "gender": None, "emoji": "🙂",
         "topics": ["Body"], "shortGloss": "word", "primaryGloss": "word", "notes": [],
-        "senses": [{"definition": f"a meaning of {headword}", "emoji": "🙂",
+        "senses": [{"definition": definition or f"a meaning of {headword}", "emoji": "🙂",
                     "glosses": [{"lang": "en", "terms": ["word"]}], "examples": []}],
     }
 
@@ -52,6 +52,8 @@ class Model:
     def __init__(self) -> None:
         self.calls: list[tuple[str, str]] = []
         self.refuse: dict[str, str] = {}   # model -> detail of a 429 it answers with
+        self.definition: str | None = None  # what compose defines every sense as, if not English
+        self.translation = "A meaning in English."  # what translate answers for every sense
 
     def __call__(self, user: str, *, row: Any, model: str, system: str, as_json: bool, timeout: float) -> TextResult:
         self.calls.append((model, user))
@@ -61,12 +63,15 @@ class Model:
             ids = re.findall(r"^([a-z-]+) \|", user, re.M)
             parsed: Any = {"words": [{"concept": i, "headword": HEADWORDS[i], "lemma": HEADWORDS[i], "pos": "noun"}
                                      for i in ids]}
+        elif "Write every definition in:" in user:
+            sense_ids = re.findall(r"^([a-z0-9]{15}) \|", user, re.M)
+            parsed = {"definitions": {sense: self.translation for sense in sense_ids}}
         elif "Senses (sense id" in user:
             sense_ids = re.findall(r"^([a-z0-9]{15}) \|", user, re.M)
             parsed = {"matches": {sense: ("mother" if "мать" in line else None)
                                   for sense, line in zip(sense_ids, re.findall(r"^[a-z0-9]{15} \|.*$", user, re.M))}}
         else:
-            parsed = article(re.search(r"^Headword: (.+)$", user, re.M).group(1))
+            parsed = article(re.search(r"^Headword: (.+)$", user, re.M).group(1), self.definition)
         answer = Answer(provider_id="gemini-api", model=model, seconds=0.1, cost_usd=0.001, spent=Spent(10, 20))
         return TextResult(text=json.dumps(parsed, ensure_ascii=False), parsed=parsed, answer=answer)
 
@@ -114,6 +119,88 @@ def test_a_word_list_waits_for_review_then_composes_and_matches(setup: tuple[Pat
     asked = len(model.calls)
     assert run(out, model) == 0
     assert len(model.calls) == asked, "a finished vocabulary is never asked again"
+
+
+def _composed_before_the_check(out: Path, model: Model, definition: str) -> None:
+    """A composed, unmatched vocabulary whose drafts define in the wrong language, as the words
+    composed before compose checked a definition's language do."""
+    assert run(out, model) == 0
+    build.review(argparse.Namespace(vocabulary="ru"), out=out)
+    assert run(out, model) == 0
+    for path in (out / "ru" / "compose").glob("*.json"):
+        composed = json.loads(path.read_text())
+        for sense in composed["draft"]["senses"]:
+            sense["definition"] = definition
+        path.write_text(json.dumps(composed, ensure_ascii=False))
+    for path in (out / "ru" / "match").glob("*.json"):
+        path.unlink()
+
+
+def test_definitions_in_the_wrong_language_are_translated_before_the_senses_are_matched(
+        setup: tuple[Path, Model]) -> None:
+    out, model = setup
+    _composed_before_the_check(out, model, "Часть тела от плеча до кисти.")
+    asked = len(model.calls)
+    assert run(out, model) == 0
+    steps = ["translate" if "Write every definition in:" in user else "match" for _, user in model.calls[asked:]]
+    assert "translate" in steps and "match" in steps
+    assert steps == sorted(steps, key=lambda step: step != "translate"), "every translation comes before a match"
+
+    composed = [json.loads(p.read_text()) for p in (out / "ru" / "compose").glob("*.json")]
+    assert all(s["definition"] == "A meaning in English." for c in composed for s in c["draft"]["senses"])
+    (record,) = composed[0]["translations"]
+    assert record["from"] == "Часть тела от плеча до кисти." and record["to"] == "A meaning in English."
+    assert all("Часть тела" not in reply["text"] for c in composed for reply in c["replies"]), \
+        "the raw replies are what the model said, and are not rewritten"
+    matches = [m for p in (out / "ru" / "match").glob("*.json") for m in json.loads(p.read_text())["matches"]]
+    assert matches and all(m["definition"] == "A meaning in English." for m in matches)
+
+    asked = len(model.calls)
+    assert run(out, model) == 0
+    assert len(model.calls) == asked, "nothing is translated twice"
+
+
+def test_a_translated_match_file_is_updated_in_place(setup: tuple[Path, Model]) -> None:
+    """A vocabulary matched before its definitions were translated keeps its matches, with the new text."""
+    out, model = setup
+    assert run(out, model) == 0
+    build.review(argparse.Namespace(vocabulary="ru"), out=out)
+    assert run(out, model) == 0
+    for path in (out / "ru" / "compose").glob("*.json"):
+        composed = json.loads(path.read_text())
+        composed["draft"]["senses"][0]["definition"] = "Часть тела."
+        path.write_text(json.dumps(composed, ensure_ascii=False))
+    before = {p.name: json.loads(p.read_text())["matches"] for p in (out / "ru" / "match").glob("*.json")}
+    assert run(out, model) == 0
+    after = {p.name: json.loads(p.read_text())["matches"] for p in (out / "ru" / "match").glob("*.json")}
+    assert {n: [m["concept"] for m in ms] for n, ms in after.items()} == \
+        {n: [m["concept"] for m in ms] for n, ms in before.items()}
+    assert all(m["definition"] == "A meaning in English." for ms in after.values() for m in ms)
+
+
+def test_a_translation_still_in_the_wrong_language_is_tried_again_then_left_for_matching(
+        setup: tuple[Path, Model]) -> None:
+    out, model = setup
+    _composed_before_the_check(out, model, "Часть тела от плеча до кисти.")
+    model.translation = "Часть тела."
+    assert run(out, model) == 0
+    attempts = json.loads((out / "ru" / "translate.failed.json").read_text())
+    assert attempts and set(attempts.values()) == {build.GIVE_UP_AFTER}
+    assert list((out / "ru" / "match").glob("*.json")), "a definition no model translates does not block matching"
+    composed = [json.loads(p.read_text()) for p in (out / "ru" / "compose").glob("*.json")]
+    assert all("translations" not in c for c in composed)
+
+
+def test_a_translation_reply_naming_an_unknown_sense_is_refused_and_one_left_out_is_counted() -> None:
+    vocabulary = {"id": "ru", "language": "ru", "definitionLang": "en", "glossLangs": ["en"], "level": "A2"}
+    items = [{"id": "a" * 15, "headword": "рука"}, {"id": "b" * 15, "headword": "мать"}]
+    with pytest.raises(ValueError, match="unknown sense"):
+        build.read_translations({"definitions": {"c" * 15: "A hand."}}, items, vocabulary)
+    usable, refused = build.read_translations({"definitions": {"a" * 15: "The arm and the hand."}}, items, vocabulary)
+    assert usable == {"a" * 15: "The arm and the hand."} and refused == {"b" * 15: "left out"}
+    usable, refused = build.read_translations({"definitions": {"a" * 15: "Рука.", "b" * 15: "A female parent."}},
+                                              items, vocabulary)
+    assert list(usable) == ["b" * 15] and "Cyrillic script" in refused["a" * 15]
 
 
 def test_a_daily_refusal_moves_to_the_second_model_then_stops_the_day(setup: tuple[Path, Model]) -> None:

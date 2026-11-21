@@ -97,16 +97,18 @@ Field rules:
   word the learner will confuse it with. This is the part no dictionary gives them, so it is worth
   real effort — but only when there is something to say. An empty list is better than filler.
   Write them in the language you are told to WRITE NOTES IN, which is usually not the language of
-  the word. A definition is short and formulaic, so it is left in the language being learned; a
-  note is unbounded prose about a distinction, and it is the part of the article the learner skims.
-  Do not switch languages between one note and the next, and do not translate a note into a second
-  one. An example's `note` follows the same rule.
+  the word: a note is unbounded prose about a distinction, and it is the part of the article the
+  learner skims. Do not switch languages between one note and the next, and do not translate a note
+  into a second one. An example's `note` follows the same rule.
 
 ## Senses
 
-- `definition` is written IN THE LANGUAGE YOU ARE TOLD TO DEFINE SENSES IN — usually the language
-  of the word itself, but not always, so read the instruction rather than assuming. Write it in the
-  style of a learner's dictionary: plain, short, using simpler words than the one being defined.
+- `definition` is written in the language named on the `Define senses in:` line, and in no other.
+  That is often NOT the language of the word: for a learner told to define senses in English,
+  `la silla` is defined "A seat for one person, with a back.", never "Asiento con respaldo para una
+  persona." Define EVERY sense of the word in that one language; do not switch between senses. Write
+  it in the style of a learner's dictionary: plain, short, using simpler words than the one being
+  defined.
 - `domain` is ONE word, occasionally two, naming what this meaning is about — the label a learner
   taps to jump to it. For `la obra`: `art`, `theater`, `construction`. For `picar`: `itch`, `spicy`,
   `chop`, `snack`, `bite`. Give one to EVERY sense, including the only sense of a word

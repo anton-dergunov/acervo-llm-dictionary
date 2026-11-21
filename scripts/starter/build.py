@@ -10,7 +10,7 @@
 
 The plan is `docs/plans/first-use/starter-vocabularies.md`; the concepts are
 `docs/plans/first-use/starter-concepts.yaml`, the vocabularies `scripts/starter/vocabularies.yaml`.
-Three steps, each skipped where its file already exists, so a run picks up wherever the last one
+Four steps, each skipped where its work is already done, so a run picks up wherever the last one
 stopped:
 
 1. **Words**: one call per (vocabulary, topic) picks the word(s) for each concept
@@ -22,8 +22,14 @@ stopped:
    into a draft by `draft_from`. Resolve is skipped: the word list already says the headword, lemma
    and part of speech. The concept's meaning goes in as the learner's note, so the sense the picture
    is for is not left out.
-3. **Match**, once every word is composed: one call per topic maps each sense to a concept or to
-   none (`prompts/match.md`).
+3. **Translate**, once every word is composed: the definitions compose's check now doubts or refuses
+   for their language (`vet.definition_doubt`) are written again in `definitionLang`, one call per
+   topic (`prompts/translate.md`), seeing each sense's word, glosses and other definitions. The draft
+   and the match files take the new text; the compose file keeps what it replaced under
+   `translations`, and its `replies` are never touched. A sense no model translates after three tries
+   is left as it is (`translate.failed.json`), so it cannot stop matching.
+4. **Match**, once nothing is left to translate: one call per topic maps each sense to a concept or
+   to none (`prompts/match.md`).
 
 A free key has two Flash-Lite models, each with its own daily allowance (about 500 calls), and a
 per-minute meter of its own. A model is spent for the day when its 429 names a per-day quota, or after
@@ -37,10 +43,10 @@ Keys: `--keys FILE` (or the environment variable `STARTER_GEMINI_KEYS`) names a 
 order; when one is spent the next takes its place. The last key is a fallback, asked only when no other
 key has an open model; `--no-fallback` leaves it out. A key's label (`k<n>`) is all that is logged.
 
-Everything is written under `data/starter/` (ignored): per vocabulary `words/<topic>.json`,
-`words.json`, `compose/<word>.json` (the request, the raw reply, the check's verdict, the draft),
-`match/<topic>.json`; and `calls.jsonl`, one line per call. Prices in it are list prices: the free
-key is not charged.
+Everything is written under `data/starter/`, and committed as the build's raw results: per
+vocabulary `words/<topic>.json`, `words.json`, `compose/<word>.json` (the request, the raw reply, the
+check's verdict, the draft, and any `translations`), `match/<topic>.json`, `translate.failed.json`;
+and `calls.jsonl`, one line per call. Prices in it are list prices: the free key is not charged.
 """
 
 from __future__ import annotations
@@ -77,6 +83,7 @@ from acervo.models.pacing import Pace  # noqa: E402
 from acervo.models.providers import DocumentError, parse as parse_provider  # noqa: E402
 from acervo.services.capture.compose import compose_parts  # noqa: E402
 from acervo.services.capture.draft import draft_from  # noqa: E402
+from acervo.services.capture.vet import definition_doubt  # noqa: E402
 from acervo.services.models import Demoted, Unusable  # noqa: E402
 from acervo.services.prompts import prompt_text  # noqa: E402
 
@@ -609,15 +616,17 @@ def compose_job(caller: Caller, vocabulary: dict[str, Any], word: dict[str, Any]
 # ── step 3: match ───────────────────────────────────────────────────────────
 
 
+def composed_files(folder: Path) -> list[Path]:
+    return [path for path in sorted((folder / "compose").glob("*.json")) if not path.name.endswith(".failed.json")]
+
+
 def match_batches(folder: Path, concepts: dict[str, list[Concept]], topic_names: dict[str, str]
                   ) -> dict[str, tuple[list[Concept], list[dict[str, Any]]]]:
     """Per topic, its candidate concepts and the senses of the words chosen for its concepts."""
     by_id = {c.id: c for items in concepts.values() for c in items}
     senses_of: dict[str, list[dict[str, Any]]] = {}
     reach: dict[str, set[str]] = {}
-    for path in sorted((folder / "compose").glob("*.json")):
-        if path.name.endswith(".failed.json"):
-            continue
+    for path in composed_files(folder):
         composed = read_json(path)
         chosen_for = [by_id[c] for c in composed["word"]["concepts"]]
         home = chosen_for[0].topic
@@ -696,6 +705,175 @@ def match_job(caller: Caller, vocabulary: dict[str, Any], topic: str, candidates
         print(f"[{vocabulary['id']}] match {topic}: {sum(1 for v in matches.values() if v)} of "
               f"{len(matches)} senses matched", flush=True)
         return
+
+
+# ── step 2b: translate the definitions written in the wrong language ────────
+
+TRANSLATE_BATCH = 40          # senses in one call, at most; a word's senses are never split
+WRITING = threading.Lock()    # two batches of one topic both update its match file
+
+
+def misdefined(composed: dict[str, Any], vocabulary: dict[str, Any]) -> list[dict[str, Any]]:
+    """The draft's senses compose's check now doubts or refuses for their language
+    (`vet.definition_doubt`): what compose would no longer let through unremarked."""
+    resolution = composed["request"]["resolution"]
+    draft = composed["draft"]
+    quoted = [resolution["headword"], resolution["lemma"], draft.get("headword") or "", draft.get("reading") or ""]
+    record = record_for(vocabulary)
+    return [sense for sense in draft["senses"]
+            if definition_doubt(sense["definition"], record, resolution, quoted) is not None]
+
+
+def translate_attempts(folder: Path) -> dict[str, int]:
+    path = folder / "translate.failed.json"
+    return read_json(path) if path.exists() else {}
+
+
+def translate_batches(folder: Path, vocabulary: dict[str, Any], concepts: dict[str, list[Concept]]
+                      ) -> dict[str, list[dict[str, Any]]]:
+    """Per batch (`<topic>` or `<topic>.<n>`), the senses to translate, each with what the translation
+    sees: the word, its glosses and its other definitions. A sense tried `GIVE_UP_AFTER` times is left."""
+    by_id = {c.id: c for items in concepts.values() for c in items}
+    attempts = translate_attempts(folder)
+    per_topic: dict[str, list[list[dict[str, Any]]]] = {}
+    for path in composed_files(folder):
+        composed = read_json(path)
+        wrong = [s for s in misdefined(composed, vocabulary) if attempts.get(s["id"], 0) < GIVE_UP_AFTER]
+        if not wrong:
+            continue
+        draft = composed["draft"]
+        home = by_id[composed["word"]["concepts"][0]].topic
+        per_topic.setdefault(home, []).append([
+            {"id": sense["id"], "file": path.name, "headword": draft["headword"], "pos": draft["pos"],
+             "glosses": "; ".join(", ".join(g["terms"]) for g in sense["glosses"]),
+             "definition": sense["definition"],
+             "others": [s["definition"] for s in draft["senses"] if s["id"] != sense["id"]]}
+            for sense in wrong])
+    batches: dict[str, list[dict[str, Any]]] = {}
+    for topic, words in per_topic.items():
+        chunk: list[dict[str, Any]] = []
+        chunks = [chunk]
+        for senses in words:
+            if chunk and len(chunk) + len(senses) > TRANSLATE_BATCH:
+                chunk = []
+                chunks.append(chunk)
+            chunk.extend(senses)
+        for index, items in enumerate(chunks):
+            batches[topic if index == 0 else f"{topic}.{index + 1}"] = items
+    return batches
+
+
+def translate_message(vocabulary: dict[str, Any], items: list[dict[str, Any]]) -> str:
+    target = record_for(vocabulary)["definitionLang"]
+    return "\n".join([
+        f"Language of the words: {language_name(vocabulary['language'])} ({vocabulary['language']})",
+        f"Write every definition in: {language_name(target)} ({target})",
+        "",
+        "Senses (sense id | headword | part of speech | glosses | definition as written | "
+        "the word's other definitions):",
+        *(f"{s['id']} | {s['headword']} | {s['pos']} | {s['glosses']} | {s['definition']} | "
+          + (" / ".join(s["others"]) or "(none)") for s in items),
+    ])
+
+
+def read_translations(parsed: Any, items: list[dict[str, Any]], vocabulary: dict[str, Any]
+                      ) -> tuple[dict[str, str], dict[str, str]]:
+    """The usable translations by sense id, and why each other sense was not translated. A reply
+    naming a sense it was not given is refused whole, as a match is."""
+    if not isinstance(parsed, dict) or not isinstance(parsed.get("definitions"), dict):
+        raise ValueError("the reply has no `definitions` object")
+    sent = {s["id"]: s for s in items}
+    unknown = set(parsed["definitions"]) - set(sent)
+    if unknown:
+        raise ValueError(f"unknown sense id {sorted(unknown)[0]!r}")
+    record = record_for(vocabulary)
+    usable: dict[str, str] = {}
+    refused: dict[str, str] = {}
+    for sense_id, item in sent.items():
+        text = parsed["definitions"].get(sense_id)
+        if not isinstance(text, str) or not text.strip():
+            refused[sense_id] = "left out"
+            continue
+        resolution = {"language": vocabulary["language"], "headword": item["headword"]}
+        doubt = definition_doubt(text.strip(), record, resolution, [item["headword"]])
+        if doubt:
+            refused[sense_id] = doubt[0]
+            continue
+        usable[sense_id] = text.strip()
+    return usable, refused
+
+
+def apply_translations(folder: Path, items: list[dict[str, Any]], usable: dict[str, str], model: str,
+                       prompt: str) -> None:
+    """Each translated definition replaces the draft's, which keeps a record of what it replaced; the
+    replies are untouched. The match files carry the definition too, because import finds a match by
+    headword and definition (the plan's step 7)."""
+    at = now()
+    with WRITING:
+        for name in sorted({s["file"] for s in items if s["id"] in usable}):
+            path = folder / "compose" / name
+            composed = read_json(path)
+            for sense in composed["draft"]["senses"]:
+                if sense["id"] in usable:
+                    composed.setdefault("translations", []).append(
+                        {"sense": sense["id"], "from": sense["definition"], "to": usable[sense["id"]],
+                         "model": f"{PROVIDER}:{model}", "prompt": prompt, "at": at})
+                    sense["definition"] = usable[sense["id"]]
+            write_json(path, composed)
+        for path in sorted((folder / "match").glob("*.json")):
+            matched = read_json(path)
+            changed = False
+            for entry in matched["matches"]:
+                if entry["id"] in usable and entry["definition"] != usable[entry["id"]]:
+                    entry["definition"] = usable[entry["id"]]
+                    changed = True
+            if changed:
+                write_json(path, matched)
+
+
+def translate_job(caller: Caller, vocabulary: dict[str, Any], batch: str, items: list[dict[str, Any]],
+                  system: str, folder: Path) -> None:
+    user = translate_message(vocabulary, items)
+    tried: list[str] = []
+    answered_badly = False
+    for _ in MODELS:
+        try:
+            asked = caller.ask(system, user, step="translate", vocabulary=vocabulary["id"], item=batch, exclude=tried)
+        except NoModel:
+            return
+        except Failed as failure:
+            tried.append(failure.model)
+            continue
+        tried.append(asked.model)
+        try:
+            usable, refused = read_translations(asked.parsed, items, vocabulary)
+        except ValueError as why:
+            caller.note({"at": now(), "step": "translate", "vocabulary": vocabulary["id"], "item": batch,
+                         "model": asked.model, "unusable": str(why)})
+            answered_badly = True
+            continue
+        caller.succeeded()
+        apply_translations(folder, items, usable, asked.model, digest(system))
+        if refused:
+            caller.note({"at": now(), "step": "translate", "vocabulary": vocabulary["id"], "item": batch,
+                         "model": asked.model, "refused": refused})
+            count_attempts(folder, refused)
+        print(f"[{vocabulary['id']}] translate {batch}: {len(usable)} of {len(items)} definitions"
+              + (f"; {len(refused)} again next time" if refused else ""), flush=True)
+        return
+    if answered_badly:
+        # Every model answered and none could be read: an attempt, so a batch no model gets right is
+        # not asked every day. Failures to answer (a 503, a timeout) count for nothing.
+        count_attempts(folder, [s["id"] for s in items])
+        print(f"[{vocabulary['id']}] translate {batch}: no reply could be read", flush=True)
+
+
+def count_attempts(folder: Path, sense_ids: Iterable[str]) -> None:
+    with WRITING:
+        attempts = translate_attempts(folder)
+        for sense_id in sense_ids:
+            attempts[sense_id] = attempts.get(sense_id, 0) + 1
+        write_json(folder / "translate.failed.json", attempts)
 
 
 # ── the state of a vocabulary, read from its files ──────────────────────────
@@ -779,6 +957,7 @@ def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] |
     topics = [{"name": name} for name in topic_names.values()]
     headword_system = (BUILDER_PROMPTS / "headwords.md").read_text(encoding="utf-8")
     match_system = (BUILDER_PROMPTS / "match.md").read_text(encoding="utf-8")
+    translate_system = (BUILDER_PROMPTS / "translate.md").read_text(encoding="utf-8")
 
     if args.dry_run:
         first = chosen[0]
@@ -792,6 +971,14 @@ def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] |
                                         record_for(first), topics)
         reader = system[len(prompt_text(APP_PROMPTS, "acervo_compose")):].strip()
         print(f"── compose: {first['id']}, after the compose prompt ──\n{reader}\n\n{user}")
+        for vocabulary in chosen:
+            translations = translate_batches(out / vocabulary["id"], vocabulary, concepts) \
+                if (out / vocabulary["id"] / "compose").exists() else {}
+            if translations:
+                senses = sum(len(items) for items in translations.values())
+                print(f"\n── translate: {vocabulary['id']}, {senses} definitions in {len(translations)} calls ──")
+                if vocabulary is next(v for v in chosen if (out / v["id"] / "compose").exists()):
+                    print(translate_message(vocabulary, next(iter(translations.values()))))
         return 0
 
     try:
@@ -812,6 +999,7 @@ def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] |
           + f"; {args.parallel_keys} at a time, {workers} workers")
     write_json(out / "manifest.json", {"concepts": digest(CONCEPTS.read_text(encoding="utf-8")),
                                        "prompts": {"headwords": digest(headword_system), "match": digest(match_system),
+                                                   "translate": digest(translate_system),
                                                    "acervo_compose": digest(prompt_text(APP_PROMPTS, "acervo_compose"))}})
     asked = 0
     while True:
@@ -823,7 +1011,7 @@ def run(args: argparse.Namespace, *, out: Path = OUT, send: Callable[..., Any] |
             outcome = "spent"
         else:
             outcome = one_pass(caller, workers, args, out, chosen, concepts, topic_names, topics,
-                               headword_system, match_system)
+                               headword_system, match_system, translate_system)
             if outcome == "broken":
                 return 1
         asked += caller.calls
@@ -856,7 +1044,7 @@ def wait_for_reset(allowance: Allowance, clock: Callable[[], datetime], sleep: C
 
 def one_pass(caller: Caller, workers: int, args: argparse.Namespace, out: Path, chosen: list[dict[str, Any]],
              concepts: dict[str, list[Concept]], topic_names: dict[str, str], topics: list[dict[str, str]],
-             headword_system: str, match_system: str) -> str:
+             headword_system: str, match_system: str, translate_system: str) -> str:
     """The next work until it is done or the keys are spent: "idle", "spent", "limit" or "broken"."""
 
     def each(jobs: list[Callable[[], None]]) -> None:
@@ -901,6 +1089,17 @@ def one_pass(caller: Caller, workers: int, args: argparse.Namespace, out: Path, 
             state = state_of(vocabulary, out)
             if not state.composing_done:
                 continue
+            # Translated before matched, so the matcher reads every definition in one language. A
+            # sense whose translation is refused is counted, so the rounds end and matching follows.
+            for _ in range(GIVE_UP_AFTER):
+                translations = translate_batches(state.folder, vocabulary, concepts)
+                if not translations:
+                    break
+                each([lambda v=vocabulary, b=batch, i=items, f=state.folder:
+                      translate_job(caller, v, b, i, translate_system, f)
+                      for batch, items in translations.items()])
+            if translate_batches(state.folder, vocabulary, concepts):
+                continue
             batches = match_batches(state.folder, concepts, topic_names)
             each([lambda v=vocabulary, t=topic, c=cands, s=senses, f=state.folder:
                   match_job(caller, v, t, c, s, match_system, f)
@@ -919,7 +1118,7 @@ def status(args: argparse.Namespace, *, out: Path = OUT) -> int:
     vocabularies, _ = load_vocabularies()
     pictured = {c.id for items in concepts.values() for c in items if c.picture}
     print(f"\n{'vocabulary':10s} {'words':>11s} {'composed':>13s} {'demoted':>8s} {'failed':>7s} "
-          f"{'matched':>8s} {'no concept':>11s} {'uncovered':>10s}")
+          f"{'wrong lang':>10s} {'matched':>8s} {'no concept':>11s} {'uncovered':>10s}")
     for vocabulary in selected(vocabularies, getattr(args, "only", None)):
         state = state_of(vocabulary, out)
         if state.words is None:
@@ -932,9 +1131,12 @@ def status(args: argparse.Namespace, *, out: Path = OUT) -> int:
         unmatched = sum(1 for m in senses if not m["concept"])
         covered = {m["concept"] for m in senses if m["concept"]}
         uncovered = len(pictured - covered) if state.matched else "-"
+        # Definitions compose's check now doubts for their language: the translate step's work.
+        wrong = sum(len(misdefined(read_json(path), vocabulary)) for path in composed_files(state.folder)) \
+            if state.composed else "-"
         print(f"{vocabulary['id']:10s} {words:>11s} {len(state.composed):>6d}/{total:<6d} {state.demoted:>8d} "
-              f"{failed:>7d} {len(state.matched):>5d}/{len(concepts):<2d} {unmatched if senses else '-':>11} "
-              f"{uncovered:>10}")
+              f"{failed:>7d} {wrong:>10} {len(state.matched):>5d}/{len(concepts):<2d} "
+              f"{unmatched if senses else '-':>11} {uncovered:>10}")
     log = out / "calls.jsonl"
     if log.exists():
         lines = [json.loads(line) for line in log.read_text(encoding="utf-8").splitlines() if line.strip()]

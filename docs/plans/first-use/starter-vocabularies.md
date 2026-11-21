@@ -1,8 +1,12 @@
 # Starter vocabularies
 
 **Status:** the concept list ([`starter-concepts.yaml`](starter-concepts.yaml), 521 concepts in 16
-topics) was accepted unchanged on 20 Nov 2026. The builder (`scripts/starter/build.py`) is written;
-next is the owner's daily runs, starting with the word lists.
+topics) was accepted unchanged on 20 Nov 2026. All twenty word lists are reviewed, and twelve
+vocabularies are composed. Composing them found compose writing definitions in the word's own
+language instead of English (Flash Lite 3.5, 30–50% of its senses), now caught by compose's check
+([`../../features/capture.md`](../../features/capture.md), "Compose's checks"). The words already
+composed are repaired by the builder's translate step. Next: the daily runs compose the other eight,
+translate, and match.
 
 A new user opens an empty Acervo, and every word costs model calls, pictures and recordings before it
 is pleasant to study ([`other-users.md`](other-users.md), "Starting with words already there"). A few
@@ -153,7 +157,10 @@ whatever the default quota gives: about one picture a minute.
    asks and judges it with compose's own checks (`compose_parts`, [`../../features/capture.md`](../../features/capture.md),
    "Compose's checks"); resolve is skipped because the word list gives headword, lemma and part of
    speech, and the concept's meaning goes in as the learner's note. One or two vocabularies a day.
-4. **Match senses to concepts**, by the same runs once a vocabulary is composed: one call per topic.
+4. **Translate, then match senses to concepts**, by the same runs once a vocabulary is composed.
+   First, every definition compose's check doubts for its language is written again in English
+   (Spanish for English), seeing the word, its glosses and its other senses; the compose file keeps
+   what it replaced. Then one match call per topic.
    `build.py status` counts the senses with no concept and the concepts no sense covers. **The owner
    then decides** whether to draw pictures for the unmatched senses.
 5. **Judge and correct.** The checks already ran at compose. Then a judge from another family than

@@ -75,10 +75,12 @@ reply the same way. Each rule has one of five dispositions:
 | Not an object, no senses, a Chinese entry with no reading | refuse and demote |
 | Glosses (`primaryGloss`, `shortGloss`, `domain`, the first gloss language's terms) in a script `glossLangs[0]` is not written in | demote |
 | Notes (the word's and its examples') in a script `notesLang` is not written in, the word itself left out | demote |
+| A definition in a script `definitionLang` is not written in, the word itself left out | demote |
 | `primaryGloss` is one term: no `;`, `,` or `/` | coerce to the first term |
 | An emoji is one grapheme cluster | coerce to the first cluster |
 | `domain` is one or two lower-case words, distinct between the senses of one word | lower-case; drop the field if longer or repeated |
 | The word's `emotion` is 3–12 words, has no emoji, and does not repeat one of its examples' emotions | drop the field |
+| A definition a language identifier reads as another of the vocabulary's languages in the same script (the word's, the first gloss language, the notes'), with confidence 0.7 or more | demote softly |
 | A Mandarin `reading` against an installed dictionary's, Pinyin on both sides | demote softly on `neutral-only`, `tone-mismatch`, `mismatch`; pass `match` and `sandhi-only` |
 | `ipa` against a dictionary entry of the same form, any of its variants (not Mandarin, whose IPA is derived from the reading) | demote softly when the phone error rate is over 0.2 |
 | A noun's `gender` against the dictionary's genders | demote softly on a mismatch; no gender from the model passes |
@@ -92,6 +94,15 @@ reply the same way. Each rule has one of five dispositions:
   (`experiments/compose-lesson-line/`). A language's scripts come from its likeliest script in CLDR, so
   no language is listed by hand. Two languages written in one script are never told apart, so the check
   cannot fire for Spanish glossed into English.
+- **A definition's language is also read within one script.** The measured failure: Flash Lite 3.5
+  wrote 30–50% of its definitions in the word's own language for vocabularies that define in English
+  (Italian defined in Italian), which script cannot see. `lingua` chooses only among the vocabulary's
+  own languages, because asked among every language it knows, a short English definition spreads its
+  confidence too thinly to read. Of the 110 starter definitions between 0.5 and 0.95, read one by one,
+  every one at 0.7 or more was in another language, and English read as Italian reached 0.64; none of
+  the owner's 1,467 Spanish definitions was doubted
+  (`experiments/definition-language/`). An identifier can be wrong, so this demotes softly, like a
+  dictionary.
 - **A dictionary is asked, softly.** Compose reads every installed `fields` dictionary of the word's
   language once before the walk (`services/dictionaries/lookup.articles_for`), under the headword, the
   headword without its first word (`el asco`, `se va`) and the lemma. The comparisons are

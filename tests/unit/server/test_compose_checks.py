@@ -108,6 +108,56 @@ def test_no_notes_at_all_pass():
     checked(russian(notes=[]), TO_RUSSIAN)
 
 
+# ── definitions in `definitionLang` ─────────────────────────────────────────
+
+KOREAN = {"language": "ko", "headword": "옷", "lemma": "옷"}
+ITALIAN = {"language": "it", "headword": "la sedia", "lemma": "sedia"}
+FOR_ENGLISH = {"language": "it", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+
+
+def defined(definition, *more):
+    senses = [{"definition": text, "glosses": [{"lang": "en", "terms": ["chair"]}]} for text in (definition, *more)]
+    return {"headword": "la sedia", "primaryGloss": "chair", "shortGloss": "chair", "notes": [],
+            "senses": senses}
+
+
+def test_a_definition_in_another_script_passes_the_model_over():
+    with pytest.raises(Unusable) as refused:
+        checked({**defined("사람이 몸에 걸쳐 입는 물건의 총칭."), "headword": "옷"},
+                {**FOR_ENGLISH, "language": "ko"}, KOREAN)
+    assert str(refused.value) == "the definitions are in Hangul script, and the vocabulary defines its senses in English"
+
+
+def test_an_english_definition_quoting_the_word_in_its_own_script_passes():
+    checked({**defined("Clothing; what 옷 means in general."), "headword": "옷"}, {**FOR_ENGLISH, "language": "ko"},
+            KOREAN)
+
+
+def test_a_definition_in_the_words_language_is_doubted_and_kept_when_no_model_does_better():
+    answer = defined("A seat for one person, with a back.", "Mobile su cui ci si siede, con uno schienale.")
+    with pytest.raises(Demoted) as doubted:
+        checked(answer, FOR_ENGLISH, ITALIAN)
+    assert str(doubted.value) == ("a definition of la sedia reads as Italian, and the vocabulary defines "
+                                  "its senses in English")
+    assert doubted.value.by == "language"
+    assert doubted.value.checked.answer == answer
+
+
+def test_an_english_definition_in_a_vocabulary_defined_in_the_words_language_is_doubted():
+    with pytest.raises(Demoted) as doubted:
+        checked(article(sense={"definition": "A curved metal hook used to catch or hold things."}))
+    assert "reads as English, and the vocabulary defines its senses in Spanish" in str(doubted.value)
+
+
+@pytest.mark.parametrize("definition", ["A seat for one person, with a back.", "Fast.", "An adult male person."])
+def test_english_definitions_for_an_italian_word_pass_however_short(definition):
+    checked(defined(definition), FOR_ENGLISH, ITALIAN)
+
+
+def test_with_checks_off_a_definition_in_the_wrong_language_passes():
+    vet(FOR_ENGLISH, ITALIAN, checking=False)(defined("Mobile su cui ci si siede, con uno schienale."))
+
+
 # ── coercions ───────────────────────────────────────────────────────────────
 
 

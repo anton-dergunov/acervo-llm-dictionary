@@ -424,6 +424,45 @@ def test_a_dictionary_demotion_is_what_admin_log_shows_and_admin_calls_counts_wh
                for line in shown.splitlines()), shown
 
 
+def test_definitions_in_the_wrong_language_are_what_admin_log_shows_and_admin_calls_counts(
+        logs, server, capsys):
+    """A vocabulary defining a Spanish word in English: one pair defines it in Cyrillic and is passed
+    over, the other in Spanish and is doubted but kept. Both sentences reach `admin log --failed`."""
+    from test_capture import ARTICLE, CLOUDFLARE_MODEL, GEMINI_SECOND, RESOLUTION, WIRE_CLOUDFLARE, WIRE_SECOND
+    from provider_rows import CLOUDFLARE
+
+    from acervo.admin import call_timings
+    from acervo.settings import settings as read_settings
+
+    def defined(text):
+        return {**ARTICLE, "senses": [{**ARTICLE["senses"][0], "definition": text}]}
+
+    server.add_provider(CLOUDFLARE)
+    server.push({"vocabularies": [vocabulary(definitionLang="en")]})
+    server.client.put(f"{API}/models/selection", headers=server.auth, json={"chains": {"text": [
+        {"provider": "cloudflare", "model": CLOUDFLARE_MODEL},
+        {"provider": "gemini-api", "model": GEMINI_SECOND},
+    ]}})
+    server.model.resolution = dict(RESOLUTION)
+    server.model.articles = {WIRE_CLOUDFLARE: defined("Изогнутый металлический крюк для захвата вещей."),
+                             WIRE_SECOND: defined("Gancho de metal curvo que se usa para agarrar cosas.")}
+    assert server.capture().status_code == 200
+
+    lines(logs["call"])
+    failed = [text for _, _, _, text in activity.select(activity.entries(logs), failed=True)]
+    assert any(f"compose cloudflare:{CLOUDFLARE_MODEL} unusable" in text
+               and "the definitions are in Cyrillic script, and the vocabulary defines its senses in English" in text
+               for text in failed), failed
+    assert any(f"compose gemini-api:{GEMINI_SECOND} unusable" in text
+               and "a definition of el garfio reads as Spanish, and the vocabulary defines its senses in English"
+               in text for text in failed), failed
+
+    assert call_timings(read_settings()) == 0
+    shown = capsys.readouterr().out
+    assert any(f"gemini-api:{GEMINI_SECOND}" in line and "kept language ×1" in line
+               for line in shown.splitlines()), shown
+
+
 def test_a_mandarin_word_saved_without_ipa_is_what_admin_log_failed_shows(logs, server):
     """A reading that is not Pinyin leaves the derived IPA empty: the line says which word and why."""
     from test_capture import ARTICLE, RESOLUTION, chinese

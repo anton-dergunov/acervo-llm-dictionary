@@ -20,10 +20,16 @@
 # clusters (`\X`), so a flag or a skin-toned emoji is one emoji, and Unicode script properties
 # (`\p{sc=Cyrl}`), so a gloss in the wrong script is caught for any language. The stdlib `re` has
 # neither. Named rather than left to arrive with LiteLLM's tokeniser. Apache-2.0.
+# `lingua-language-detector` tells two languages written in one script apart, so compose's check
+# catches a definition written in the word's language when the vocabulary defines in the learner's
+# (Italian for English speakers defined in Italian). Script cannot, and a stopword count misread
+# English definitions with no function words. Chosen for its accuracy on a few words, measured in
+# `experiments/definition-language/`; it is asked only among the vocabulary's own languages. Apache-2.0.
 PyYAML
 babel
 langcodes
 language-data
+lingua-language-detector
 google-auth
 google-genai
 httpx
