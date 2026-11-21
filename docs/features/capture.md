@@ -102,7 +102,8 @@ reply the same way. Each rule has one of five dispositions:
   every one at 0.7 or more was in another language, and English read as Italian reached 0.64; none of
   the owner's 1,467 Spanish definitions was doubted
   (`experiments/definition-language/`). An identifier can be wrong, so this demotes softly, like a
-  dictionary.
+  dictionary. The prompt now says it too: reworded, it took 3.5 Flash-Lite from 60% of words with a
+  definition in the wrong language to 2%, the rest left for this check.
 - **A dictionary is asked, softly.** Compose reads every installed `fields` dictionary of the word's
   language once before the walk (`services/dictionaries/lookup.articles_for`), under the headword, the
   headword without its first word (`el asco`, `se va`) and the lemma. The comparisons are

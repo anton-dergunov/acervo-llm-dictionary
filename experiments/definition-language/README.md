@@ -46,7 +46,36 @@ word itself", and "a definition is short and formulaic, so it is left in the lan
   (defined in English) are left to the script check, which passes them all. Counts only; no words
   are copied here.
 
-## Prompt arms (run 1, not yet run)
+## Prompt arms (run 1, 21 Nov 2026)
+
+**Result: the rewording fixes it, and naming the languages adds nothing.** On the 105 sample words,
+3.5 Flash-Lite put a definition in the wrong language in **63 words (60%) with the shipped prompt, 2
+(2%) with the reworded one** (62 fixed, 1 broken; exact McNemar p = 1.4e-17). Naming the languages
+also gives 2 (61 fixed, 0 broken), so the user message stays as it is. 3.1 Flash-Lite gets 0 of 105
+with either. The Spanish control, defined in Spanish, stays in Spanish (0 of 30 with either arm).
+585 calls on Vertex, all answered, $1.22.
+
+| Set | Model | Arm | Words | Senses | Wrong senses (certain) | Words with one wrong |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| sample | 3.5 Flash-Lite | before | 105 | 176 | 109 (27) | 63 (60%) |
+| sample | 3.5 Flash-Lite | after | 105 | 183 | 5 (0) | 2 (2%) |
+| sample | 3.5 Flash-Lite | named | 105 | 177 | 4 (0) | 2 (2%) |
+| sample | 3.1 Flash-Lite | after / named | 105 | 172 / 170 | 0 | 0 |
+| control | 3.5 Flash-Lite | after / named | 30 | 53 / 49 | 0 | 0 |
+
+- **The baseline re-ran at 60%, not 100%**, though every sample word had failed once: the failure is
+  a coin the model tosses per word, which is why one stored draft cannot say whether a prompt fixed it.
+- **Before, every vocabulary failed** (de-DE 8/15, es-ES 12, fr-FR 7, it-IT 10, ko-KR 10, pt-BR 12,
+  ru 4). **After, only es-ES** (Castilian) still does, on four words in either arm (*la carne*, *la
+  estación*, *el huevo*, *joven*), and each is defined wholly in Spanish. None is in another script, so
+  compose's check demotes it softly and the next model is asked; 3.1 Flash-Lite never failed.
+- **The definitions read as a learner's dictionary should.** Read side by side on a sample: *gratis*
+  "Che non costa nulla, che viene dato senza richiedere alcun pagamento." → "Costing nothing; provided
+  without payment."; 배우다 "지식이나 기술을 익히다." → "To get knowledge or a skill through study,
+  experience, or being taught." None of the dozen pairs read got vaguer.
+- Full numbers, per vocabulary and paired: [`runs/1/report.md`](runs/1/report.md).
+
+### Method
 
 `run.py` re-sends the builder's stored requests, rebuilt by `compose_parts` (checked equal to what the
 builder sent, system prompt digest included), changing only the prompt or the language lines:
