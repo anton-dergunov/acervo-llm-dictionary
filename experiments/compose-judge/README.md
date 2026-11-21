@@ -107,6 +107,16 @@ cd experiments/compose-judge
 ../../.venv/bin/python apply.py --run full --dry-run      # then without --dry-run
 ```
 
+Run on 21 Nov 2026: two rounds, $26.67, 10,152 of 10,177 articles judged (25 left for a third round).
+Six replies came back `MALFORMED_RESPONSE`, with no text; their articles are asked again.
+`runs/full/report.md` is the inventory. 29% of articles have a severity-3 fault, but without IPA and
+reading faults every vocabulary falls between 14% and 24%. The judge lists far more than serious
+faults (`note.filler` in 51% of articles, nearly all severity 2), so rank kinds by their severity-3
+count, not by weight. The report compares the two composers only within vocabularies where both
+composed, because which model composed a word depends on the vocabulary. What it asks for (checks,
+prompt lines, how to measure them) is the plan
+[`docs/plans/quality/compose-prompt-round.md`](../../docs/plans/quality/compose-prompt-round.md).
+
 ## Files
 
 - `runs/<run>/`: `manifest.json` (settings and rubric digest), `results.json` (per article, faults

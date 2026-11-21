@@ -26,6 +26,7 @@ what it said.
 **Quality** — the research track: whether what the models write is right.
 
 - [`quality/article-quality.md`](quality/article-quality.md) — the research programme for word articles.
+- [`quality/compose-prompt-round.md`](quality/compose-prompt-round.md) — the compose checks and prompt lines the judge's inventory asks for, and how to measure them.
 - [`quality/story-quality.md`](quality/story-quality.md) — whether the stories are worth reading.
 - [`quality/clip-selection.md`](quality/clip-selection.md) — tuning the clip-selection prompt, then curating its picks.
 - [`quality/translation-completeness-check.md`](quality/translation-completeness-check.md) — catching a translation that stopped early.
