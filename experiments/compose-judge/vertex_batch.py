@@ -62,7 +62,8 @@ def request_json(system: str, user: str, thinking: str | None, temperature: floa
 
 
 def response_text(response: dict[str, Any]) -> str:
-    parts = response["candidates"][0]["content"]["parts"]
+    # A candidate ending MALFORMED_RESPONSE carries no parts; its articles are asked again.
+    parts = response["candidates"][0].get("content", {}).get("parts", [])
     return "".join(part.get("text", "") for part in parts if not part.get("thought"))
 
 

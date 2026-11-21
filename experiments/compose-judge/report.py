@@ -22,6 +22,22 @@ from typing import Any
 import judge
 
 EXAMPLES = 6
+# A model is compared with another only inside vocabularies where each composed this many articles:
+# which model composed a word depends on the vocabulary, so the pooled rates mix languages.
+BOTH_MODELS = 100
+
+
+def kind(fault: dict[str, Any]) -> str:
+    """The fault's category, with a `new:` name that is a closed-set kind under other words
+    (`new: field.ipa`, `new:reading`, `new:pos`) counted as that kind."""
+    category = str(fault.get("category")).strip()
+    if category.startswith("new:"):
+        name = category.removeprefix("new:").strip()
+        for candidate in (name, f"field.{name}"):
+            if candidate in judge.CATEGORIES:
+                return candidate
+        return f"new:{name}"
+    return category
 
 
 def load(run: str) -> list[dict[str, Any]]:
@@ -50,7 +66,7 @@ def report(run: str) -> tuple[str, dict[str, Any]]:
     for article in articles:
         seen = set()
         for fault in article["faults"]:
-            category = str(fault.get("category"))
+            category = kind(fault)
             severity = fault.get("severity") if fault.get("severity") in (2, 3) else 2
             weight[category] += severity
             severe[category] += severity == 3
@@ -89,6 +105,23 @@ def report(run: str) -> tuple[str, dict[str, Any]]:
                      f"{100 * sum(any(f.get('severity') == 3 for f in a['faults']) for a in mine) / len(mine):.0f}%",
                      f"{sum(len(a['faults']) for a in mine) / len(mine):.2f}"])
     lines += table(["model", "articles", "with a 3", "faults an article"], rows)
+
+    shared = sorted(v for v in per_vocabulary
+                    if all(sum(1 for a in articles if a["vocabulary"] == v and a["composer"] == m) >= BOTH_MODELS
+                           for m in per_model))
+    if len(per_model) > 1 and shared:
+        within = [a for a in articles if a["vocabulary"] in shared]
+        top = [c for c, _ in weight.most_common() if not c.startswith("new:")][:8]
+        lines += ["", f"Which model composed a word depends on the vocabulary, so the table above mixes languages. "
+                      f"Within the {len(shared)} vocabularies where each model composed at least {BOTH_MODELS} articles "
+                      f"({', '.join(shared)}), the share of articles with each kind:", ""]
+        rows = []
+        for model in sorted(per_model):
+            mine = [a for a in within if a["composer"] == model]
+            rows.append([model, len(mine),
+                         f"{100 * sum(any(f.get('severity') == 3 for f in a['faults']) for a in mine) / len(mine):.0f}%"]
+                        + [f"{100 * sum(any(kind(f) == c for f in a['faults']) for a in mine) / len(mine):.1f}%" for c in top])
+        lines += table(["model", "articles", "with a 3"] + [f"`{c}`" for c in top], rows)
 
     ranked = [c for c, _ in weight.most_common()]
     known = [c for c in ranked if not c.startswith("new:")]
