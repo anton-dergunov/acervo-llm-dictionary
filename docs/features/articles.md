@@ -86,7 +86,10 @@ opens the sheet for practising the word's characters stroke by stroke
 ([`writing.md`](writing.md)). It sits beside the heading, never inside it, for the reason the columns
 are generated content: the heading's text is the word.
 
-Any other language's reading is shown as written. What other scripts would gain from the same
+Any other language's reading is shown as written. Compose writes a reading only for Chinese and
+Japanese: a Japanese one is the whole word in hiragana, for a word with kanji. Every other language gets
+none until its reading is designed, and compose's check drops one a model writes anyway
+([`capture.md`](capture.md), "Compose's checks"). What other scripts would gain from the same
 treatment is [`../plans/languages/readings.md`](../plans/languages/readings.md).
 
 ## The document

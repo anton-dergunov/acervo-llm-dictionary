@@ -64,8 +64,13 @@ def test_an_answer_no_draft_could_be_built_from_passes_the_model_over(answer, re
     assert refused.value.refusal is not None and refused.value.refusal.code == "llm_unusable"
 
 
+def chinese(**overrides):
+    return article(**{"headword": "钩子", "reading": "gōu zi",
+                      "sense": {"examples": [{"text": "墙上有一个钩子。"}]}, **overrides})
+
+
 def test_a_chinese_entry_with_a_reading_passes():
-    checked({**article(), "reading": "gōu zi"}, resolution=CHINESE)
+    checked(chinese(), resolution=CHINESE)
 
 
 # ── demotions, by script ────────────────────────────────────────────────────
@@ -93,8 +98,7 @@ def test_a_second_gloss_language_is_not_held_to_the_first_ones_script():
 
 
 def test_notes_in_the_notes_language_pass_even_when_they_quote_the_word():
-    checked({**article(), "reading": "gōu zi", "notes": ["Not 钩子 but 钩, in writing: 钩子 is spoken."]},
-            resolution=CHINESE)
+    checked(chinese(notes=["Not 钩子 but 钩, in writing: 钩子 is spoken."]), resolution=CHINESE)
 
 
 def test_notes_in_another_script_pass_the_model_over():
@@ -253,7 +257,8 @@ def judged(answer, entries, resolution=ASCO, vocabulary=TO_ENGLISH, checking=Tru
 
 
 def chinese_article(reading, **overrides):
-    return article(**{"headword": "麻烦", "reading": reading, "ipa": "/ma˧˥ fan/", **overrides})
+    return article(**{"headword": "麻烦", "reading": reading, "ipa": "/ma˧˥ fan/",
+                      "sense": {"examples": [{"text": "真麻烦。"}]}, **overrides})
 
 
 def test_a_mandarin_reading_off_by_a_tone_is_demoted_naming_the_dictionary():
@@ -314,7 +319,8 @@ def test_with_no_dictionary_installed_nothing_is_compared():
 
 def test_a_demoted_answer_carries_what_the_check_corrected():
     with pytest.raises(Demoted) as doubted:
-        judged(article(gender="feminine", primaryGloss="hook; gaff"), found(genders=["masculine"]))
+        judged(article(headword="el asco", gender="feminine", primaryGloss="hook; gaff"),
+               found(genders=["masculine"]))
     assert doubted.value.checked.answer["primaryGloss"] == "hook"
     assert doubted.value.checked.fixed == ["primaryGloss"]
 
@@ -334,3 +340,140 @@ def test_with_checks_off_an_answer_no_draft_could_be_built_from_is_still_refused
     with pytest.raises(Unusable) as refused:
         judged({"headword": "el garfio", "senses": []}, [], SPANISH, checking=False)
     assert "no meanings" in refused.value.refusal.message
+
+
+# ── a word in two scripts, an example in another script ─────────────────────
+
+GREEK = {"language": "el", "headword": "το σπίτι", "lemma": "σπίτι", "pos": "noun"}
+GREEK_TO_ENGLISH = {"language": "el", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+
+
+def greek(text="Είναι ώρα να πάμε σπίτι.", **overrides):
+    return article(**{"headword": "το σπίτι", "notes": [],
+                      "sense": {"definition": "A building where people live.",
+                                "glosses": [{"lang": "en", "terms": ["house", "home"]}],
+                                "examples": [{"text": text, "translation": "It is time to go home."}]},
+                      **overrides})
+
+
+def test_greek_written_in_greek_passes():
+    checked(greek(), GREEK_TO_ENGLISH, GREEK)
+
+
+@pytest.mark.parametrize("text, word", [
+    ("Είναι ώρα να πάμε σπίti.", "σπίti"),        # measured: 3.5 Flash-Lite, a fifth of its Greek
+    ("Λαtrεύω την ελληνική κουζίνα.", "Λαtrεύω"),
+])
+def test_a_word_written_in_two_scripts_passes_the_model_over(text, word):
+    with pytest.raises(Unusable) as refused:
+        checked(greek(text), GREEK_TO_ENGLISH, GREEK)
+    assert str(refused.value) == f"an example has {word!r}, a word written in two scripts"
+
+
+@pytest.mark.parametrize("text", ["Tシャツを着る。", "時々図書館へ行く。", "スーパーで買い物をした。"])
+def test_japanese_mixes_its_own_scripts_in_one_word(text):
+    resolution = {"language": "ja", "headword": "時々", "lemma": "時々"}
+    vocabulary = {"language": "ja", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+    checked(article(headword="時々", notes=[], sense={"examples": [{"text": text}]}), vocabulary, resolution)
+
+
+def test_an_example_in_another_script_than_the_words_passes_the_model_over():
+    with pytest.raises(Unusable) as refused:
+        checked(greek("The learner did not provide a sentence for this."), GREEK_TO_ENGLISH, GREEK)
+    assert str(refused.value) == "an example is in Latin script, and το σπίτι is Greek"
+
+
+def test_a_russian_stress_mark_typed_as_a_latin_vowel_is_made_cyrillic():
+    resolution = {"language": "ru", "headword": "писать", "lemma": "писать", "pos": "verb"}
+    vocabulary = {"language": "ru", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+    answer = article(headword="писать", notes=["The stress falls on the second syllable: писáть."],
+                     sense={"definition": "To write.", "examples": [{"text": "Я люблю писать."}]})
+    vetted = checked(answer, vocabulary, resolution)
+    assert vetted.answer["notes"] == ["The stress falls on the second syllable: писа\u0301ть."]
+    assert vetted.fixed == ["stress"]
+
+
+def test_a_headword_compose_rewrote_is_put_back_as_resolve_settled_it():
+    """Measured: Hindi जानना came back as جاننا, in Urdu's script, and देना as denā."""
+    resolution = {"language": "hi", "headword": "देना", "lemma": "देना", "pos": "verb"}
+    vocabulary = {"language": "hi", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+    answer = article(headword="denā", notes=[],
+                     sense={"definition": "To give.", "examples": [{"text": "मुझे पानी दो।"}]})
+    vetted = checked(answer, vocabulary, resolution)
+    assert vetted.answer["headword"] == "देना" and vetted.fixed == ["headword"]
+
+
+# ── reading, transcription and gender as the language has them ──────────────
+
+JAPANESE = {"language": "ja", "headword": "同僚", "lemma": "同僚", "pos": "noun"}
+FOR_JAPANESE = {"language": "ja", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+
+
+def japanese(reading, headword="同僚"):
+    return article(headword=headword, reading=reading, notes=[],
+                   sense={"definition": "A person you work with.", "examples": [{"text": "同僚と話す。"}]})
+
+
+@pytest.mark.parametrize("reading, kept, field", [
+    ("どうりょう", "どうりょう", None),
+    ("どう りょう", "どうりょう", "fixed"),        # spaced
+    ("ドウリョウ", "どうりょう", "fixed"),         # katakana
+    ("dō ryō", None, "dropped"),                  # measured: 58% of starter readings were romaji
+])
+def test_a_japanese_reading_is_the_word_in_hiragana(reading, kept, field):
+    vetted = checked(japanese(reading), FOR_JAPANESE, JAPANESE)
+    assert vetted.answer["reading"] == kept
+    assert (vetted.fixed, vetted.dropped) == {None: ([], []), "fixed": (["reading"], []),
+                                              "dropped": ([], ["reading"])}[field]
+
+
+def test_a_japanese_word_with_no_kanji_has_no_reading():
+    vetted = checked(japanese("すーぱー", headword="スーパー"), FOR_JAPANESE,
+                     {**JAPANESE, "headword": "スーパー", "lemma": "スーパー"})
+    assert vetted.answer["reading"] is None
+
+
+def test_a_reading_in_a_language_that_has_none_yet_is_dropped():
+    """Measured: Korean romanised with tone marks it does not have (`mā si da`)."""
+    resolution = {"language": "ko", "headword": "마시다", "lemma": "마시다", "pos": "verb"}
+    vocabulary = {"language": "ko", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+    answer = article(headword="마시다", reading="mā si da", notes=[],
+                     sense={"definition": "To drink.", "examples": [{"text": "물을 마셔요."}]})
+    vetted = checked(answer, vocabulary, resolution)
+    assert vetted.answer["reading"] is None and vetted.dropped == ["reading"]
+
+
+def test_a_chinese_reading_is_left_to_the_dictionary():
+    assert checked(chinese(), resolution=CHINESE).answer["reading"] == "gōu zi"
+
+
+@pytest.mark.parametrize("ipa, kept", [
+    ("/deːɐ̯ ʃtɛʁn/", "/ʃtɛʁn/"),
+    ("/ʃtɛʁn/", "/ʃtɛʁn/"),
+    ("[deːɐ̯ ʃtɛʁn]", "[ʃtɛʁn]"),
+])
+def test_the_transcription_is_of_the_lemma_not_the_article(ipa, kept):
+    resolution = {"language": "de", "headword": "der Stern", "lemma": "Stern", "pos": "noun"}
+    vocabulary = {"language": "de", "definitionLang": "en", "glossLangs": ["en"], "notesLang": "en"}
+    answer = article(headword="der Stern", lemma="Stern", ipa=ipa, gender="masculine", notes=[],
+                     sense={"definition": "A point of light in the night sky.",
+                            "examples": [{"text": "Der Stern leuchtet."}]})
+    vetted = checked(answer, vocabulary, resolution)
+    assert vetted.answer["ipa"] == kept
+    assert vetted.fixed == ([] if ipa == kept else ["ipa"])
+
+
+@pytest.mark.parametrize("language, pos, gender, kept", [
+    ("en", "noun", "neuter", None),          # measured: 58 English nouns had a gender
+    ("es", "adj", "masculine", None),        # an adjective agrees, it has no gender of its own
+    ("es", "noun", "common", "common"),      # el / la estudiante
+    ("nl", "noun", "masculine", "common"),   # a de-word
+    ("nl", "noun", "neuter", "neuter"),
+    ("it", "noun", "neuter", None),
+    ("xx", "noun", "neuter", "neuter"),      # a language CLDR does not list keeps what it was given
+])
+def test_a_gender_is_kept_only_as_the_language_has_it(language, pos, gender, kept):
+    resolution = {"language": language, "headword": "el garfio", "lemma": "garfio", "pos": pos}
+    vocabulary = {"language": language, "definitionLang": "es", "glossLangs": ["en"], "notesLang": "en"}
+    vetted = checked(article(gender=gender, pos=pos), vocabulary, resolution)
+    assert vetted.answer["gender"] == kept

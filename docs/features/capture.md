@@ -76,6 +76,13 @@ reply the same way. Each rule has one of five dispositions:
 | Glosses (`primaryGloss`, `shortGloss`, `domain`, the first gloss language's terms) in a script `glossLangs[0]` is not written in | demote |
 | Notes (the word's and its examples') in a script `notesLang` is not written in, the word itself left out | demote |
 | A definition in a script `definitionLang` is not written in, the word itself left out | demote |
+| A word written in two scripts anywhere in the article (`σπίti`), except kanji, kana and Latin together and Hangul with hanja | demote |
+| An example mostly in a script the word's language is not written in | demote |
+| The headword differs from the one resolve settled | coerce to resolve's |
+| A Russian stress mark typed as a Latin accented vowel (`писáть`) | coerce to the Cyrillic vowel and U+0301 |
+| `reading` outside Chinese and Japanese; a Japanese one not in kana, or for a word with no kanji | drop the field; katakana and spaces are coerced to plain hiragana |
+| `ipa` that transcribes the article as well as the lemma (`der Stern /deːɐ̯ ʃtɛʁn/`) | coerce to the lemma's |
+| `gender` on a part of speech that has none (only a noun, phrase or idiom has one), or one the language does not have, by CLDR's grammatical features (`acervo/grammatical_gender.py`) | drop the field; a Dutch, Danish or Swedish masculine or feminine is coerced to `common` |
 | `primaryGloss` is one term: no `;`, `,` or `/` | coerce to the first term |
 | An emoji is one grapheme cluster | coerce to the first cluster |
 | `domain` is one or two lower-case words, distinct between the senses of one word | lower-case; drop the field if longer or repeated |
@@ -106,6 +113,14 @@ reply the same way. Each rule has one of five dispositions:
   definition in the wrong language to 2%, and saying what setup its Spanish example is written for
   took the rest to none, whether the vocabulary defines in English, in the word's own language, in
   Russian or in Spanish.
+- **What the starter corpus showed** (`experiments/compose-audit/`, 10,177 articles in twenty
+  languages). 3.5 Flash-Lite wrote Greek with Latin letters inside the words in a fifth of its Greek
+  articles (3.1: none), and Thai, Hindi and Dutch the same less often; Thai got an English sentence as
+  an example and Hindi examples in Urdu's script. Readings came in half a dozen romanisations, some
+  with tone marks the language does not have; 384 transcriptions included the article; 470 genders
+  sat on English nouns, adjectives or verbs. A word in two scripts is never right, so that check
+  needs no threshold. The language facts are read, never listed by hand: scripts from CLDR's likeliest
+  script, genders from CLDR's grammatical features, and a language CLDR does not list keeps its gender.
 - **A dictionary is asked, softly.** Compose reads every installed `fields` dictionary of the word's
   language once before the walk (`services/dictionaries/lookup.articles_for`), under the headword, the
   headword without its first word (`el asco`, `se va`) and the lemma. The comparisons are

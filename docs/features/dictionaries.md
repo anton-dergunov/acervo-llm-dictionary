@@ -31,8 +31,8 @@ what is still to do is [`../plans/dictionaries.md`](../plans/dictionaries.md).
 
 ## The catalogue
 
-`dictionaries/catalogue.json` is tracked and ships the **list, never the data**: 58 rows across a dozen
-languages — 46 offline, 2 online, 10 link-outs — each with id, name, kind, tier, format, languages,
+`dictionaries/catalogue.json` is tracked and ships the **list, never the data**: 68 rows across over twenty
+languages — 56 offline, 2 online, 10 link-outs — each with id, name, kind, tier, format, languages,
 source URL, licence, attribution, approximate size and a note, enough to render the Settings pane with
 nothing fetched. It is a starting list, **not an allow-list**: a server can compile a dictionary nobody
 wrote a row for, and an installed artifact carries its own name, licence and languages, so the pane and

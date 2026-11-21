@@ -7,6 +7,7 @@
     .venv/bin/python scripts/starter/build.py run --dry-run      # print what would be asked, call nothing
     .venv/bin/python scripts/starter/build.py status
     .venv/bin/python scripts/starter/build.py review es-MX       # mark a word list reviewed, so it is composed
+    .venv/bin/python scripts/starter/build.py revet [--dry-run]  # compose's current checks over what is composed
 
 The plan is `docs/plans/first-use/starter-vocabularies.md`; the concepts are
 `docs/plans/first-use/starter-concepts.yaml`, the vocabularies `scripts/starter/vocabularies.yaml`.
@@ -52,6 +53,7 @@ and `calls.jsonl`, one line per call. Prices in it are list prices: the free key
 from __future__ import annotations
 
 import argparse
+import collections
 import hashlib
 import json
 import os
@@ -83,7 +85,8 @@ from acervo.models.pacing import Pace  # noqa: E402
 from acervo.models.providers import DocumentError, parse as parse_provider  # noqa: E402
 from acervo.services.capture.compose import compose_parts  # noqa: E402
 from acervo.services.capture.draft import draft_from  # noqa: E402
-from acervo.services.capture.vet import definition_doubt  # noqa: E402
+from acervo.pinyin import is_mandarin  # noqa: E402
+from acervo.services.capture.vet import definition_doubt, restressed  # noqa: E402
 from acervo.services.models import Demoted, Unusable  # noqa: E402
 from acervo.services.prompts import prompt_text  # noqa: E402
 
@@ -611,6 +614,120 @@ def compose_job(caller: Caller, vocabulary: dict[str, Any], word: dict[str, Any]
     failure_path.unlink(missing_ok=True)
     print(f"[{vocabulary['id']}] compose {word['headword']}: {len(draft['senses'])} senses, "
           f"{'passed' if passed else 'demoted'} on {asked.model}", flush=True)
+
+
+# ── revet: compose's current checks over what is already composed ───────────
+
+# The draft's fields compose's coercions may change, word-level ones copied from the checked answer.
+REVETTED_FIELDS = ("headword", "reading", "ipa", "gender", "emotion", "primaryGloss", "emoji")
+
+
+def chosen_reply(composed: dict[str, Any]) -> dict[str, Any] | None:
+    """The reply the draft was built from: the one that passed, else the first demoted one."""
+    replies = composed.get("replies") or []
+    for outcome in ("passed", "demoted"):
+        for reply in replies:
+            if (reply.get("verdict") or {}).get("outcome") == outcome:
+                return reply
+    return None
+
+
+def revetted(composed: dict[str, Any], vocabulary: dict[str, Any]) -> tuple[str, list[str]]:
+    """Run compose's current check on the stored reply and apply what it coerces to the draft.
+
+    Returns `("refused", [why])` when the check now passes the reply over, else `("kept", changed)`
+    with the draft's fields that changed. The definitions are checked as the draft now has them,
+    since a translation (`translations`) already replaced the ones the check refuses for their
+    language; sense ids, examples and matches are never touched.
+    """
+    reply = chosen_reply(composed)
+    if reply is None:
+        return "refused", ["no reply passed or was demoted"]
+    try:
+        parsed = json.loads(reply["text"])
+    except ValueError:
+        return "refused", ["the reply is not JSON"]
+    resolution = composed["request"]["resolution"]
+    draft = composed["draft"]
+    senses = [raw for raw in parsed.get("senses") or [] if isinstance(raw, dict) and str(raw.get("definition") or "").strip()]
+    if len(senses) == len(draft["senses"]):
+        for raw, sense in zip(senses, draft["senses"]):
+            raw["definition"] = sense["definition"]
+    _, _, check = compose_parts(APP_PROMPTS, DICTIONARIES, resolution, composed["request"]["request"],
+                                record_for(vocabulary), [])
+    try:
+        answer = check(parsed).answer
+    except Demoted as doubt:
+        answer = doubt.checked.answer
+    except Unusable as refusal:
+        return "refused", [str(refusal)]
+    # Built by the draft's own code, so every field is normalised exactly as compose stores it.
+    fresh = draft_from(answer, resolution, composed["request"]["request"], record_for(vocabulary), [],
+                       composed["model"])
+    changed = []
+    for name in REVETTED_FIELDS:
+        if draft.get(name) != fresh.get(name):
+            draft[name] = fresh.get(name)
+            changed.append(name)
+    texts = [(draft, "notes")] if isinstance(draft.get("notes"), list) else []
+    for holder, key in texts:
+        fixed = [restressed(note) for note in holder[key]]
+        if fixed != holder[key]:
+            holder[key] = fixed
+            changed.append("stress")
+    for sense in draft["senses"]:
+        for example in sense.get("examples") or []:
+            for key in ("text", "note"):
+                if isinstance(example.get(key), str) and restressed(example[key]) != example[key]:
+                    example[key] = restressed(example[key])
+                    changed.append("stress")
+    return "kept", sorted(set(changed))
+
+
+def revet(args: argparse.Namespace, *, out: Path = OUT) -> int:
+    """Apply compose's current checks to every composed word.
+
+    What the check coerces lands in the draft, with no call. A word whose reply the check now passes
+    over is set aside under `compose.replaced/`, kept as the raw layer, together with its home topic's
+    match file under `match.replaced/`, so the next `run` composes the word again, translates it if it
+    must, and matches that topic again.
+    """
+    concepts = load_concepts()
+    by_id = {c.id: c for items in concepts.values() for c in items}
+    vocabularies, _ = load_vocabularies()
+    for vocabulary in selected(vocabularies, getattr(args, "only", None)):
+        folder = out / vocabulary["id"]
+        kept, refused, fields = 0, [], collections.Counter()
+        topics: set[str] = set()
+        for path in composed_files(folder):
+            composed = read_json(path)
+            outcome, detail = revetted(composed, vocabulary)
+            if outcome == "refused":
+                refused.append((path, composed, detail[0]))
+                topics.add(by_id[composed["word"]["concepts"][0]].topic)
+                continue
+            if detail:
+                kept += 1
+                fields.update(detail)
+                if not args.dry_run:
+                    write_json(path, composed)
+        print(f"[{vocabulary['id']}] {kept} drafts corrected ({', '.join(f'{k} {n}' for k, n in fields.most_common()) or 'nothing'}); "
+              f"{len(refused)} to compose again", flush=True)
+        for path, composed, why in refused:
+            print(f"    {composed['word']['headword']}: {why}", flush=True)
+            if not args.dry_run:
+                (folder / "compose.replaced").mkdir(exist_ok=True)
+                path.replace(folder / "compose.replaced" / path.name)
+        for topic in sorted(topics):
+            match = folder / "match" / f"{topic}.json"
+            if match.exists():
+                print(f"    match {topic}: to do again", flush=True)
+                if not args.dry_run:
+                    (folder / "match.replaced").mkdir(exist_ok=True)
+                    match.replace(folder / "match.replaced" / match.name)
+    if args.dry_run:
+        print("\n(dry run: nothing was written)")
+    return 0
 
 
 # ── step 3: match ───────────────────────────────────────────────────────────
@@ -1188,8 +1305,11 @@ def main(argv: list[str] | None = None) -> int:
     showing.add_argument("--only")
     marking = commands.add_parser("review", help="mark a vocabulary's word list reviewed")
     marking.add_argument("vocabulary")
+    revetting = commands.add_parser("revet", help="apply compose's current checks to every composed word")
+    revetting.add_argument("--only")
+    revetting.add_argument("--dry-run", action="store_true", help="say what would change; write nothing")
     args = parser.parse_args(argv)
-    return {"run": run, "status": status, "review": review}[args.command](args)
+    return {"run": run, "status": status, "review": review, "revet": revet}[args.command](args)
 
 
 if __name__ == "__main__":

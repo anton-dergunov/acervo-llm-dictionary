@@ -126,3 +126,10 @@ Caddyfile
 # and the processed copies (all regenerable), and its own environment for the denoiser.
 /experiments/ipa-sounds/out/
 /experiments/ipa-sounds/.venv/
+
+# The compose judge's batch rounds: state.json names the Google Cloud project, bucket and job (a
+# private deployment detail), and input.jsonl and output/ are large and rebuilt from the corpus.
+# Each round's replies.jsonl and the run's faults.json are the results and stay tracked.
+/experiments/compose-judge/runs/*/r*/state.json
+/experiments/compose-judge/runs/*/r*/input.jsonl
+/experiments/compose-judge/runs/*/r*/output/

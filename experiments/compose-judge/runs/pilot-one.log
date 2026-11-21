@@ -1,0 +1,81 @@
+Direct use of automatic function calling (AFC) in Models.generate_content is not recommended. Instead, we recommend to use AFC in Chat.send_message. Similarly, direct use of AFC in Models.generate_content_stream is not recommended. Instead, we recommend to use AFC in Chat.send_message_stream.
+Direct use of automatic function calling (AFC) in Models.generate_content is not recommended. Instead, we recommend to use AFC in Chat.send_message. Similarly, direct use of AFC in Models.generate_content_stream is not recommended. Instead, we recommend to use AFC in Chat.send_message_stream.
+pilot-one: 72 requests, 72 articles; ceiling $1.45
+  en-US:beer-noun-92c59eb4:1: RuntimeError: Cannot send a request, as the client has been closed.
+  en-US:box-noun-fb138ba4:1: RuntimeError: Cannot send a request, as the client has been closed.
+  de-DE:das-dach-noun-7cb119f4:1: RuntimeError: Cannot send a request, as the client has been closed.
+  de-DE:stellen-verb-3ddeeb2a:1: RuntimeError: Cannot send a request, as the client has been closed.
+  en-US:ask-verb-1acc9c10:1: RuntimeError: Cannot send a request, as the client has been closed.
+  en-US:busy-adj-c3c2275e:1: 3 faults in 1 articles; 0 thinking; $0.0066
+  en-US:beer-noun-92c59eb4:1: 0 faults in 1 articles; 0 thinking; $0.0044
+  en-US:ask-verb-1acc9c10:1: 1 faults in 1 articles; 0 thinking; $0.0055
+  de-DE:stellen-verb-3ddeeb2a:1: 2 faults in 1 articles; 0 thinking; $0.0059
+  de-DE:das-dach-noun-7cb119f4:1: 4 faults in 1 articles; 0 thinking; $0.0069
+  en-US:door-noun-39cd983e:1: 1 faults in 1 articles; 0 thinking; $0.0053
+  en-US:box-noun-fb138ba4:1: 3 faults in 1 articles; 0 thinking; $0.0074
+  en-US:letter-noun-ea13e543:1: 2 faults in 1 articles; 0 thinking; $0.0064
+  en-US:laugh-verb-67b08ddd:1: 1 faults in 1 articles; 0 thinking; $0.0051
+  en-US:hair-noun-ebe4b0af:1: 3 faults in 1 articles; 0 thinking; $0.0075
+  en-US:call-verb-724aa94d:1: 4 faults in 1 articles; 0 thinking; $0.0084
+  en-US:museum-noun-13e50ed9:1: 1 faults in 1 articles; 0 thinking; $0.0055
+  en-US:cough-noun-7995d2db:1: 1 faults in 1 articles; 0 thinking; $0.0061
+  en-US:line-noun-f3348969:1: 4 faults in 1 articles; 0 thinking; $0.0082
+  en-US:police-officer-noun-5528c620:1: 0 faults in 1 articles; 0 thinking; $0.0044
+  en-US:name-noun-a25a0089:1: 5 faults in 1 articles; 0 thinking; $0.0087
+  en-US:snake-noun-d1d756ef:1: 2 faults in 1 articles; 0 thinking; $0.0064
+  en-US:smell-verb-908c9ead:1: 3 faults in 1 articles; 0 thinking; $0.0074
+  en-US:spring-noun-5b622de6:1: 4 faults in 1 articles; 0 thinking; $0.0075
+  es-ES:a-veces-adv-566ce858:1: 1 faults in 1 articles; 0 thinking; $0.0048
+  en-US:train-noun-a4d69b7d:1: 3 faults in 1 articles; 0 thinking; $0.0075
+  es-ES:aqui-adv-8f6c5614:1: 0 faults in 1 articles; 0 thinking; $0.0042
+  en-US:stomach-noun-e0b3137c:1: 1 faults in 1 articles; 0 thinking; $0.0055
+  en-US:tall-adj-9bc90422:1: 3 faults in 1 articles; 0 thinking; $0.0067
+  es-ES:debil-adj-3af279b9:1: 2 faults in 1 articles; 0 thinking; $0.0059
+  es-ES:amar-verb-953e673e:1: 3 faults in 1 articles; 0 thinking; $0.0067
+  es-ES:el-dinero-noun-3c721e6e:1: 3 faults in 1 articles; 0 thinking; $0.0071
+  es-ES:dar-verb-7cb7de0d:1: 4 faults in 1 articles; 0 thinking; $0.0081
+  es-ES:el-tomate-noun-f75defb5:1: 0 faults in 1 articles; 0 thinking; $0.0044
+  es-ES:el-reloj-noun-3427c7b1:1: 2 faults in 1 articles; 0 thinking; $0.0060
+  es-ES:el-museo-noun-1ed8aff0:1: 2 faults in 1 articles; 0 thinking; $0.0058
+  es-ES:el-minuto-noun-92bc424a:1: 2 faults in 1 articles; 0 thinking; $0.0058
+  es-ES:la-oreja-noun-fb0d9b65:1: 0 faults in 1 articles; 0 thinking; $0.0043
+  es-ES:el-vestido-noun-ed96fc14:1: 2 faults in 1 articles; 0 thinking; $0.0062
+  es-ES:la-familia-noun-b7e359b9:1: 3 faults in 1 articles; 0 thinking; $0.0070
+  es-ES:la-primavera-noun-8de86356:1: 1 faults in 1 articles; 0 thinking; $0.0052
+  es-ES:la-universidad-noun-23f53449:1: 1 faults in 1 articles; 0 thinking; $0.0051
+  es-ES:lleno-adj-066a8598:1: 2 faults in 1 articles; 0 thinking; $0.0062
+  es-ES:la-vaca-noun-69bae734:1: 0 faults in 1 articles; 0 thinking; $0.0043
+  es-ES:el-hermano-noun-93401bb9:1: 2 faults in 1 articles; 0 thinking; $0.0059
+  es-ES:no-expression-d81d4edd:1: 2 faults in 1 articles; 0 thinking; $0.0063
+  es-ES:tarde-adv-d70fcb11:1: 2 faults in 1 articles; 0 thinking; $0.0060
+  es-MX:caro-adj-b40d396d:1: 1 faults in 1 articles; 0 thinking; $0.0054
+  es-ES:rico-adj-44bbcf17:1: 1 faults in 1 articles; 0 thinking; $0.0051
+  es-MX:la-manana-noun-87f1c2a0:1: 2 faults in 1 articles; 0 thinking; $0.0056
+  ru:adj-0eff005c:1: 4 faults in 1 articles; 0 thinking; $0.0077
+  ru:adj-2eb76e52:1: 1 faults in 1 articles; 0 thinking; $0.0050
+  ru:adj-342a5dda:1: 1 faults in 1 articles; 0 thinking; $0.0049
+  es-ES:la-ducha-noun-0f208a60:1: 1 faults in 1 articles; 0 thinking; $0.0052
+  ru:noun-50664da7:1: 0 faults in 1 articles; 0 thinking; $0.0043
+  ru:noun-0a176f48:1: 1 faults in 1 articles; 0 thinking; $0.0048
+  en-US:juice-noun-ba520c0a:1: 4 faults in 1 articles; 0 thinking; $0.0081
+  ru:noun-06b6922b:1: 2 faults in 1 articles; 0 thinking; $0.0061
+  ru:noun-63b38367:1: 1 faults in 1 articles; 0 thinking; $0.0051
+  ru:noun-0488de66:1: 0 faults in 1 articles; 0 thinking; $0.0042
+  ru:noun-83a7e7c6:1: 1 faults in 1 articles; 0 thinking; $0.0051
+  ru:noun-91420c9c:1: 1 faults in 1 articles; 0 thinking; $0.0049
+  ru:noun-980d1ea3:1: 1 faults in 1 articles; 0 thinking; $0.0054
+  ru:noun-e020a647:1: 1 faults in 1 articles; 0 thinking; $0.0054
+  ru:noun-c32f2ada:1: 1 faults in 1 articles; 0 thinking; $0.0054
+  ru:noun-d65f1aed:1: 1 faults in 1 articles; 0 thinking; $0.0052
+  ru:noun-f29d6dec:1: 1 faults in 1 articles; 0 thinking; $0.0054
+  ru:verb-62298af6:1: 1 faults in 1 articles; 0 thinking; $0.0055
+  ru:verb-d97247f1:1: 1 faults in 1 articles; 0 thinking; $0.0055
+  tr-TR:bakmak-verb-3fe06595:1: 3 faults in 1 articles; 0 thinking; $0.0072
+  ru:verb-0851f175:1: 5 faults in 1 articles; 0 thinking; $0.0087
+  tr-TR:uyumak-verb-56fff049:1: 4 faults in 1 articles; 0 thinking; $0.0075
+  ru:noun-6a6386e1:1: 0 faults in 1 articles; 0 thinking; $0.0042
+  ru:noun-8c1fb7b7:1: 1 faults in 1 articles; 0 thinking; $0.0053
+  ru:verb-ac9e5c2f:1: 1 faults in 1 articles; 0 thinking; $0.0053
+  zh-CN:verb-843f487d:1: 3 faults in 1 articles; 0 thinking; $0.0072
+  pl-PL:kupowac-verb-781f5553:1: 1 faults in 1 articles; 0 thinking; $0.0054
+pilot-one: 72 articles judged; spent so far $1.16

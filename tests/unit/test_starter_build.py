@@ -422,3 +422,36 @@ def test_wait_sleeps_to_the_reset_and_then_carries_on(setup: tuple[Path, Model],
     assert build.run(args, out=out, send=send, clock=lambda: moment[0], sleep=sleep) == 0
     assert sum(slept) >= 12 * 3600 and max(slept) <= 30.0
     assert (out / "ru" / "words.json").exists(), "after the reset the words were asked for"
+
+
+def _stored_reply(path: Path, **fields: Any) -> dict[str, Any]:
+    """Rewrite a composed word's stored reply, as if the model had answered with `fields`."""
+    composed = json.loads(path.read_text())
+    reply = build.chosen_reply(composed)
+    reply["text"] = json.dumps({**json.loads(reply["text"]), **fields}, ensure_ascii=False)
+    path.write_text(json.dumps(composed, ensure_ascii=False))
+    return composed
+
+
+def test_revet_corrects_drafts_in_place_and_sets_a_refused_word_aside_to_compose_again(
+        setup: tuple[Path, Model]) -> None:
+    out, model = setup
+    assert run(out, model) == 0
+    build.review(argparse.Namespace(vocabulary="ru"), out=out)
+    assert run(out, model) == 0
+    paths = {json.loads(p.read_text())["word"]["headword"]: p for p in (out / "ru" / "compose").glob("*.json")}
+    mother = _stored_reply(paths["мать"], reading="mat'", gender="neuter", pos="adj")
+    ids = [sense["id"] for sense in mother["draft"]["senses"]]
+    _stored_reply(paths["рука"], notes=["Not рукa, with a Latin a."])   # a word in two scripts
+
+    build.revet(argparse.Namespace(only="ru", dry_run=False), out=out)
+    corrected = json.loads(paths["мать"].read_text())["draft"]
+    assert corrected["reading"] is None and corrected["gender"] is None
+    assert [sense["id"] for sense in corrected["senses"]] == ids, "matches name sense ids, which stay"
+    assert not paths["рука"].exists() and (out / "ru" / "compose.replaced" / paths["рука"].name).exists()
+    assert (out / "ru" / "match.replaced" / "body.json").exists()
+
+    asked = len(model.calls)
+    assert run(out, model) == 0
+    assert paths["рука"].exists() and (out / "ru" / "match" / "body.json").exists()
+    assert len(model.calls) == asked + 2, "one compose and the one topic's match"

@@ -49,14 +49,17 @@ English. Yours may be set up differently: write each field in the language your 
 
 Field rules:
 
-- `reading` — only for languages that need one (pinyin for Chinese, where it is REQUIRED).
-  `null` for Spanish, English, Russian and the like. Pinyin is written with tone marks, never
+- `reading` — only for Chinese and Japanese. Chinese: pinyin, REQUIRED. Japanese: the whole word in
+  hiragana, no spaces and no romaji (`同僚` → `どうりょう`), and `null` when the word has no kanji.
+  `null` for every other language, including Korean, Thai, Hindi, Arabic and Russian: do not write
+  a romanisation. Pinyin is written with tone marks, never
   digits: one syllable for each character, separated by spaces (`图书馆` → `tú shū guǎn`); a
   neutral-tone syllable has no mark (`妈妈` → `mā ma`); the `儿` of erhua is an `r` on the syllable
   before it (`好玩儿` → `hǎo wánr`). Write each syllable's own dictionary tone, not the tone it
   changes to in speech (`一` is `yī`, `不` is `bù`).
-- `ipa` — the broad transcription, or `null` if you are not confident. `null` for Mandarin Chinese:
-  its transcription is derived from the reading.
+- `ipa` — the broad transcription of the `lemma`, without the article (`el disfraz` → `/disˈfɾaθ/`,
+  `der Stern` → `/ʃtɛʁn/`), or `null` if you are not confident. `null` for Mandarin Chinese: its
+  transcription is derived from the reading.
 - `pos` — exactly one of: noun, verb, adj, adv, phrase, idiom, expression.
 - `gender` — masculine, feminine, common, neuter, or `null` where the language has no gender or the
   part of speech does not carry one.

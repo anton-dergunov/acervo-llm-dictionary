@@ -40,9 +40,10 @@ from typing import Any, Callable
 
 import regex
 
-from acervo.domain.validation import GENDER_VALUES
+from acervo.domain.validation import GENDER_VALUES, POS_VALUES
+from acervo.grammatical_gender import gender_for
 from acervo.pinyin import is_mandarin
-from acervo.services.capture.coerce import language_or_none, pick_optional_choice, trimmed
+from acervo.services.capture.coerce import language_or_none, pick_choice, pick_optional_choice, trimmed
 from acervo.services.capture.dictionary_check import (
     attested, gender_verdict, ipa_verdict, reading_verdict, transcription_to_judge, variants,
 )
@@ -65,6 +66,10 @@ COMPOSITE_SCRIPTS = {
 
 DOMAIN_WORDS = 2
 EMOTION_WORDS = (3, 12)
+
+# The parts of speech a gender belongs to: a noun, or a phrase or idiom standing for one
+# (`el día de la madre`). An adjective agrees with its noun and has none of its own.
+GENDERED_POS = ("noun", "phrase", "idiom")
 
 # How sure the language identifier must be that a definition is in another of the vocabulary's
 # languages before it doubts it. Measured on 5,763 Latin-script starter definitions and 1,467 of the
@@ -156,6 +161,102 @@ def wrong_script(text: str, language: str | None) -> str | None:
     return _name_of_script(text)
 
 
+_WORD = regex.compile(r"[\p{L}\p{M}]+")
+
+# Scripts one word may legitimately mix: Japanese writes kanji, kana and Latin letters in one word
+# (`Tシャツ`, `時々`), Chinese a Latin letter in a few (`T恤衫`), Korean Hangul with hanja.
+MIXABLE = (frozenset({"Han", "Kana", "Latin"}), frozenset({"Hangul", "Han"}))
+
+
+def _script_of_letter(letter: str) -> str | None:
+    """A letter's script by its Unicode name ("GREEK SMALL LETTER PI" → Greek), as `_name_of_script`
+    reads it; the ideographs and their marks are Han, both kana are Kana, modifier letters none."""
+    words = unicodedata.name(letter, "").split(" ")
+    if words[0] in ("FULLWIDTH", "HALFWIDTH") and len(words) > 1:
+        words = words[1:]
+    head = words[0]
+    if not head or head == "MODIFIER":
+        return None
+    if head in ("CJK", "IDEOGRAPHIC"):
+        return "Han"
+    if head in ("HIRAGANA", "KATAKANA", "KATAKANA-HIRAGANA"):
+        return "Kana"
+    return head.title()
+
+
+def garbled(text: str) -> str | None:
+    """The first word of `text` written in two scripts, or `None`.
+
+    The measured failure (`experiments/compose-audit/`): 3.5 Flash-Lite wrote Greek with Latin letters
+    inside the words (`σπίti`, `Λαtrεύω`) in a fifth of its Greek articles, and Thai, Hindi and Dutch
+    the same less often. No language writes a word that way, so nothing needs to be measured to know
+    it is wrong; only the mixes in `MIXABLE` are real.
+    """
+    for word in _WORD.findall(text or ""):
+        scripts = {_script_of_letter(letter) for letter in word if letter.isalpha()} - {None}
+        if len(scripts) > 1 and not any(scripts <= allowed for allowed in MIXABLE):
+            return word
+    return None
+
+
+# A Russian stress mark typed as a Latin accented vowel (`писáть`): the Cyrillic vowel and U+0301.
+_CYRILLIC_STRESS = {"á": "а́", "é": "е́", "ó": "о́", "ý": "у́"}
+_IN_CYRILLIC = regex.compile(r"[\p{sc=Cyrillic}\p{M}]*[áéóý][\p{sc=Cyrillic}\p{M}áéóý]*")
+
+
+def restressed(text: str) -> str:
+    """`text` with a stressed vowel inside a Cyrillic word written as Cyrillic plus the acute mark."""
+    def fix(found: regex.Match[str]) -> str:
+        word = found.group(0)
+        if not regex.search(r"\p{sc=Cyrillic}", word):
+            return word
+        return "".join(_CYRILLIC_STRESS.get(letter, letter) for letter in word)
+    return _IN_CYRILLIC.sub(fix, text)
+
+
+_KANA = regex.compile(r"[\p{sc=Hiragana}\p{sc=Katakana}ー]+")
+_HAN = regex.compile(r"\p{sc=Han}")
+
+
+def reading_for(language: str | None, headword: str, reading: str | None) -> str | None:
+    """The `reading` a word of `language` keeps (`docs/features/articles.md`, "Readings").
+
+    Chinese keeps its own (Pinyin, checked elsewhere). Japanese keeps the whole word in hiragana, and
+    only when the headword has a kanji for it to read; a reading in romaji says nothing a learner can
+    line up with the kanji. Every other language has no reading yet
+    (`docs/plans/languages/readings.md`): what models wrote there was half a dozen romanisations,
+    some with tone marks the language does not have.
+    """
+    value = trimmed(reading)
+    if not value:
+        return None
+    base = (language or "").split("-", 1)[0].lower()
+    if base == "zh":
+        return value
+    if base != "ja" or not _HAN.search(headword):
+        return None
+    joined = "".join(value.split())
+    if not _KANA.fullmatch(joined):
+        return None
+    return "".join(chr(ord(char) - 0x60) if "ァ" <= char <= "ヶ" else char for char in joined)
+
+
+def ipa_of_lemma(headword: str, lemma: str, ipa: str | None) -> str | None:
+    """`ipa` without the article's transcription when the headword is the article and the lemma
+    (`der Stern` → `/ʃtɛʁn/`): the prompt's own example transcribes `el disfraz` as the lemma only."""
+    value = trimmed(ipa)
+    words, lemma_words = headword.split(), lemma.split()
+    if not value or len(words) != len(lemma_words) + 1 or words[1:] != lemma_words:
+        return value or None
+    opening, closing = value[:1], value[-1:]
+    delimited = opening in "/[" and closing in "/]"
+    spoken = (value[1:-1] if delimited else value).split()
+    if len(spoken) != len(words):
+        return value
+    rest = " ".join(spoken[1:])
+    return f"{opening}{rest}{closing}" if delimited else rest
+
+
 def _base(language: str | None) -> str | None:
     """`zh-Hans` → `zh`: the language a language identifier can name, or `None`."""
     import langcodes
@@ -241,6 +342,52 @@ def _without(text: str, quoted: list[str]) -> str:
     for item in sorted({item for item in quoted if item}, key=len, reverse=True):
         text = text.replace(item, " ")
     return text
+
+
+def _written(answer: dict[str, Any], senses: list[dict[str, Any]]):
+    """Every prose field of an answer, with what it is called in a sentence."""
+    yield "the headword", trimmed(answer.get("headword"))
+    notes = answer.get("notes")
+    for note in notes if isinstance(notes, list) else []:
+        yield "a note", trimmed(note)
+    for sense in senses:
+        yield "a definition", trimmed(sense.get("definition"))
+        for gloss in sense.get("glosses") or []:
+            if isinstance(gloss, dict):
+                for term in gloss.get("terms") or []:
+                    yield "a gloss", trimmed(term)
+        for example in sense.get("examples") or []:
+            if isinstance(example, dict):
+                yield "an example", trimmed(example.get("text"))
+                yield "an example's translation", trimmed(example.get("translation"))
+                yield "an example's note", trimmed(example.get("note"))
+
+
+def _restress_all(answer: dict[str, Any], senses: list[dict[str, Any]]) -> bool:
+    """Apply `restressed` to the notes, definitions and examples; whether anything changed."""
+    changed = False
+
+    def fix(holder: Any, key: Any) -> None:
+        nonlocal changed
+        value = holder[key]
+        if isinstance(value, str):
+            fixed = restressed(value)
+            if fixed != value:
+                holder[key] = fixed
+                changed = True
+
+    if isinstance(answer.get("notes"), list):
+        for index in range(len(answer["notes"])):
+            fix(answer["notes"], index)
+    for sense in senses:
+        if "definition" in sense:
+            fix(sense, "definition")
+        for example in sense.get("examples") or []:
+            if isinstance(example, dict):
+                for key in ("text", "note"):
+                    if key in example:
+                        fix(example, key)
+    return changed
 
 
 def _holding(found: list[Found], value: str | None, which: int) -> str:
@@ -352,6 +499,31 @@ def vet(vocabulary: dict[str, Any], resolution: dict[str, Any], found: list[Foun
                 raise Unusable(doubt[0])
             misdefined = misdefined or (doubt[0] if doubt else None)
 
+        # ── coerce: the headword resolve settled, a stress mark typed in Latin ─
+        settled = trimmed(resolution.get("headword"))
+        written = trimmed(answer.get("headword"))
+        if settled and written and unicodedata.normalize("NFC", " ".join(written.split())) != \
+                unicodedata.normalize("NFC", settled):
+            answer["headword"] = settled  # resolve chose it; compose rewrote it into another script
+            fixed.append("headword")
+        if _restress_all(answer, senses):
+            fixed.append("stress")
+
+        # ── demote: a word in two scripts, an example in another script ─────
+        for where, text in _written(answer, senses):
+            word = garbled(text)
+            if word:
+                raise Unusable(f"{where} has {word!r}, a word written in two scripts")
+        language = str(resolution.get("language") or "")
+        for sense in senses:
+            for example in sense.get("examples") or []:
+                if not isinstance(example, dict):
+                    continue
+                script = wrong_script(trimmed(example.get("text")), language)
+                if script:
+                    raise Unusable(f"an example is in {script} script, and "
+                                   f"{settled or 'the word'} is {_language_name(language)}")
+
         # ── coerce: one term, one emoji ─────────────────────────────────────
         primary = trimmed(answer.get("primaryGloss"))
         if primary and first_term(primary) != primary:
@@ -362,6 +534,27 @@ def vet(vocabulary: dict[str, Any], resolution: dict[str, Any], found: list[Foun
             if emoji and first_grapheme(emoji) != emoji:
                 holder["emoji"] = first_grapheme(emoji)
                 fixed.append(name)
+
+        # ── coerce: reading, transcription and gender as the language has them ─
+        headword = trimmed(answer.get("headword")) or settled
+        lemma = trimmed(answer.get("lemma")) or trimmed(resolution.get("lemma")) or headword
+        if trimmed(answer.get("reading")):
+            reading = reading_for(language, headword, answer.get("reading"))
+            if reading != trimmed(answer.get("reading")):
+                answer["reading"] = reading
+                (fixed if reading else dropped).append("reading")
+        if trimmed(answer.get("ipa")) and not is_mandarin(language):
+            ipa = ipa_of_lemma(headword, lemma, answer.get("ipa"))
+            if ipa != trimmed(answer.get("ipa")):
+                answer["ipa"] = ipa
+                fixed.append("ipa")
+        gender = pick_optional_choice(answer.get("gender"), GENDER_VALUES)
+        if gender:
+            pos = pick_choice(answer.get("pos"), POS_VALUES, resolution.get("pos"))
+            kept = gender_for(language, gender) if pos is None or pos in GENDERED_POS else None
+            if kept != gender:
+                answer["gender"] = kept
+                (fixed if kept else dropped).append("gender")
 
         # ── drop the field, keep the record ─────────────────────────────────
         seen: set[str] = set()

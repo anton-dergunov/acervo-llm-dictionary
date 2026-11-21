@@ -163,6 +163,10 @@ whatever the default quota gives: about one picture a minute.
    what it replaced. Then one match call per topic.
    `build.py status` counts the senses with no concept and the concepts no sense covers. **The owner
    then decides** whether to draw pictures for the unmatched senses.
+   When compose's checks change, `build.py revet` applies them to what is already composed: their
+   coercions land in the drafts, and a word whose reply they now refuse is set aside with its topic's
+   match file, to be composed and matched again by the next run. Run on 21 Nov 2026 after
+   `experiments/compose-audit/`: 85 words set aside.
 5. **Judge and correct.** The checks already ran at compose. Then a judge from another family than
    the composer flags words against fixed rubric items: wrong gloss, wrong gender, unnatural
    example, above the level, a sense that misses its concept. It gives no score (in
